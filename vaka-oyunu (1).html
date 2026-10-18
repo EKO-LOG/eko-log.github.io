@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vaka Oyunu · Eko-Log</title>
+<style>
+:root{--bg:#0b1020;--card:#141b34;--line:#26304f;--ink:#f1f5f9;--mut:#94a3b8;--k:#d9342b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 80% -10%,color-mix(in srgb,var(--k) 35%,transparent),transparent),var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.w{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+a{color:inherit}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px;font-size:14px;color:var(--mut)}.top a{text-decoration:none}
+h1{font-size:clamp(26px,6vw,38px);line-height:1.15;margin:6px 0 10px}h2{font-size:20px;margin:0 0 14px}
+.pill{display:inline-block;padding:3px 12px;border-radius:999px;background:color-mix(in srgb,var(--k) 30%,transparent);font-weight:700;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin-bottom:16px}
+.btn{display:inline-block;border:0;cursor:pointer;border-radius:999px;padding:13px 24px;background:var(--k);color:#fff;font:700 16px system-ui;text-decoration:none}.btn.g{background:#26304f}
+.opt{display:block;width:100%;text-align:left;background:#0f1630;border:1px solid var(--line);color:var(--ink);border-radius:16px;padding:14px 16px;margin:10px 0;font:600 16px system-ui;cursor:pointer}.opt:hover:not(:disabled){border-color:var(--k)}.opt:disabled{cursor:default;opacity:.55}.opt.sel{opacity:1;border-color:var(--k);background:color-mix(in srgb,var(--k) 22%,#0f1630)}
+.m{margin:12px 0}.m .l{display:flex;justify-content:space-between;font-size:14px;color:var(--mut)}.m .b{height:10px;border-radius:99px;background:#0f1630;overflow:hidden;margin-top:5px}.m .b i{display:block;height:100%;background:var(--k);border-radius:99px;transition:width .6s}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip{font-size:13px;font-weight:700;padding:3px 10px;border-radius:99px;background:#0f1630}.up{color:#34d399}.dn{color:#fb7185}
+.pr{font-size:13px;color:var(--mut);margin-bottom:6px}.big{font-size:44px;font-weight:800;margin:4px 0}.g2{display:grid;gap:12px}
+.lst a{display:block;text-decoration:none;margin:10px 0}.lst .card{margin:0;border-left:5px solid var(--k)}.lst h3{margin:6px 0 4px;font-size:18px}.lst p{margin:0;color:var(--mut);font-size:14px}
+.note{font-size:13px;color:var(--mut);margin-top:26px}
+</style></head><body><div class="w" id="app"></div>
+<script>
+const S={
+stag:{t:'Stagflasyon ikilemi',c:'makro',i:'Enflasyon yükseliyor, büyüme duruyor, işsizlik artıyor. Merkez bankası ve hükümetle birlikte karar veriyorsun.',s:[
+['Enflasyon %40, büyüme sıfıra yakın. İlk adımın ne olur?',[['Faizi sert artır','Enflasyon beklentisi düşer ama krediler pahalanır.',15,-12,-5],['Faizi sabit tut, açıklamayla bekle','Beklenti yönetimi sınırlı kalır.',-5,3,0],['Faizi indir, büyümeyi destekle','Büyüme nefes alır, fiyat baskısı artar.',-18,12,3]]],
+['Enerji fiyatları yükseldi, maliyet baskısı sürüyor. Ne yaparsın?',[['Hedefli enerji desteği ver','Maliyet şoku hafifler, bütçeye yük biner.',8,5,10],['Fiyat tavanı koy','Fiyat kısa sürede düşer, arz daralabilir.',5,-8,5],['Piyasaya bırak','Şok hızla yansır, düşük gelirliler zorlanır.',-5,-3,-12]]],
+['İşsizlik yükseldi. Son hamlen?',[['Üretimi destekleyen yatırım teşviki','Orta vadede istihdam ve arz artar.',5,12,8],['Kamu harcamasını artır','İstihdam artar, talep baskısı enflasyonu besler.',-8,8,6],['Sıkı politikayı sürdür','Enflasyon yavaş düşer, işsizlik kalıcı olabilir.',10,-8,-8]]]],
+n:'Stagflasyonda tek araçla hem enflasyonu hem büyümeyi çözmek zordur. Arz taraflı önlemler ve güvenilir iletişim birlikte gerekir.'},
+borc:{t:'Kamu borcu sürdürülebilir mi?',c:'makro',i:'Kamu borcu hızla arttı ve borçlanma faizleri yükseliyor. Maliye politikasını sen belirliyorsun.',s:[
+['Bütçe açığı büyüdü. İlk adımın?',[['Harcamaları kıs','Açık küçülür, büyüme yavaşlar.',6,-10,-8],['Vergi tabanını genişlet','Gelir artar, uyum maliyeti doğar.',5,-3,-2],['Borçlanmaya devam et','Kısa vadede sorun görünmez, faiz yükü büyür.',-8,6,2]]],
+['Borçlanma faizleri yükseldi. Ne yaparsın?',[['Borcu uzun vadeye çevir','Yeniden finansman riski azalır.',2,4,4],['Mali kural ilan et','Güven artar, hareket alanı daralır.',6,3,-2],['Merkez bankasından finansman iste','Para basmak enflasyonu körükler.',-18,5,-3]]],
+['Ekonomi yavaşlıyor. Son hamlen?',[['Verimli yatırımlara öncelik ver','Büyüme potansiyeli artar.',3,12,8],['Sosyal transferleri artır','Refah artar, bütçe baskısı sürer.',-3,4,12],['Hiçbir şey yapma','Açık ve borç oranı bozulabilir.',-5,-10,-8]]]],
+n:'Borç sürdürülebilirliği yalnızca borç oranına değil, faiz ile büyüme farkına ve güvene de bağlıdır.'},
+ucret:{t:'Asgari ücret artışının etkileri',c:'makro',i:'Hükümet asgari ücret için karar arıyor. Karşında işçiler, işverenler ve enflasyon var.',s:[
+['Enflasyon yüksek, ücretlilerin alım gücü düştü. Artış miktarı?',[['Enflasyon kadar artır','Alım gücü korunur, maliyet baskısı yükselir.',-6,3,12],['Düşük artış yap','Maliyet baskısı az, yoksulluk riski artar.',6,-3,-12],['Kademeli artış yap','Etki yayılır, memnuniyet karışık kalır.',2,2,4]]],
+['Küçük işletmeler artışı karşılamakta zorlanıyor. Ne yaparsın?',[['Prim desteği ver','İstihdam korunur, bütçeye yük biner.',3,8,6],['Destek verme','Bazı işletmeler kayıt dışına kayar.',-2,-8,-6],['Sektöre göre farklı destek ver','Hedefli ama uygulaması zor.',2,5,4]]],
+['Fiyat artışları başladı. Son hamlen?',[['Rekabeti ve denetimi artır','Fahiş fiyatlar baskılanır.',10,2,5],['Fiyat tavanı koy','Kısa vadede iyi, arz sorunu doğar.',6,-6,2],['İzle ve bekle','Fiyat-ücret sarmalı hızlanabilir.',-10,-2,-4]]]],
+n:'Ücret artışının etkisi işgücü piyasasının yapısına, verimliliğe ve beklentilere göre değişir.'},
+kripto:{t:'Kripto varlıklar: balon mu?',c:'finans',i:'Bir kripto varlığın fiyatı birkaç ayda on katına çıktı. Düzenleyici kurumun başındasın.',s:[
+['Küçük yatırımcılar yoğun alıyor. İlk adımın?',[['Uyarı ve eğitim kampanyası yap','Farkındalık artar, piyasa sakin kalır.',4,4,10],['Alım satımı yasakla','Risk azalır, işlem yeraltına kayabilir.',-6,6,4],['Müdahale etme','Yenilik serbest kalır, risk yüksektir.',3,-10,-12]]],
+['Platformlarda şeffaflık sorunu var. Ne yaparsın?',[['Lisans ve denetim zorunlu kıl','Güven artar, yenilik yavaşlar.',8,8,10],['Gönüllü kurallar iste','Uygulama zayıf kalır.',0,-3,-4],['Sadece büyük platformları denetle','Koruma kısmi kalır.',3,3,4]]],
+['Fiyat ani düştü, panik başladı. Son hamlen?',[['Sakinleştirici bilgilendirme yap','Panik sınırlanır.',8,6,4],['Yatırımcılar için kurtarma fonu kur','Güven artar, ahlaki risk doğar.',6,-5,8],['Sessiz kal','Panik yayılır.',-12,-8,-8]]]],
+n:'Düzenleme, yeniliği boğmadan yatırımcıyı korumak ve sistemik riski izlemek arasında denge kurmaktır.'},
+not:{t:'Kredi derecelendirme notları',c:'finans',i:'Uluslararası bir kuruluş ülkenin notunu düşürme sinyali verdi. Hazine yetkilisisin.',s:[
+['Not indirimi bekleniyor. İlk adımın?',[['Kuruluşla şeffaf görüş','Beklentiler yönetilir.',8,3,4],['Notu kamuoyunda itibarsızlaştır','Güven zedelenir.',-10,-3,0],['Reform takvimi açıkla','Güven artar, söz verilmiş olur.',10,5,2]]],
+['Tahvil faizleri yükseldi. Ne yaparsın?',[['Yurt içi yatırımcıya tahvil çıkar','Dış baskı azalır.',4,6,4],['Döviz cinsi borçlan','Kısa süre rahatlatır, kur riski artar.',3,-8,-2],['Borç ödemelerini ertele','Güven sert düşer.',-16,-10,-4]]],
+['Not indirildi. Son hamlen?',[['İstikrar paketi aç','Piyasa toparlar.',8,10,6],['Suçu dış etkenlere at','Sonuç değişmez.',-6,-4,0],['Bekle','Toparlanma gecikir.',-4,-4,-2]]]],
+n:'Notlar geriden gelebilir. Yine de yatırımcı beklentilerini ve borçlanma maliyetini etkiler.'},
+bilanco:{t:'Bilanço küçültme politikası',c:'finans',i:'Merkez bankası varlıklarını azaltıyor. Piyasalar bu karara çok hassas.',s:[
+['Küçültme hızını seç.',[['Hızlı küçült','Fiyat baskısı azalır, piyasa oynak olur.',-6,-12,-4],['Yavaş ve takvimli küçült','Piyasalar uyum sağlar.',8,8,4],['Sadece bir kısmını küçült','Etkisi sınırlı kalır.',2,2,0]]],
+['Piyasada likidite daraldı. Ne yaparsın?',[['Geçici likidite desteği ver','Panik önlenir.',6,10,4],['Hiçbir şey yapma','Fiyatlar sert hareket eder.',-8,-12,-4],['Kuralları sıkılaştır','Güvenlik artar, işlem hacmi düşer.',-2,4,8]]],
+['Piyasa açıklamayı yanlış anladı. Son hamlen?',[['Net iletişim ve rehberlik sun','Belirsizlik azalır.',10,6,4],['Karışık mesajlar ver','Belirsizlik artar.',-10,-6,-2],['Sessiz kal','Spekülasyon yayılır.',-6,-4,-2]]]],
+n:'Bilanço küçültmede zamanlama ve iletişim, kararın kendisi kadar önemlidir.'},
+sbt:{t:'Serbest ticaret anlaşmaları',c:'dis',i:'Bir ticaret anlaşması imzalanmak üzere. Bazı sektörler kazanacak, bazıları zorlanacak.',s:[
+['Anlaşmanın kapsamını seç.',[['Tüm ürünlerde gümrüğü kaldır','Ticaret hacmi artar, bazı sanayiler zorlanır.',10,4,-8],['Seçili sektörlerde indirim yap','Dengeli ama kazanç sınırlı.',4,4,2],['Anlaşmayı reddet','Koruma sağlanır, rekabet zayıflar.',-4,-8,4]]],
+['Yerel üreticiler endişeli. Ne yaparsın?',[['Geçiş süresi ve eğitim programı ver','Uyum kolaylaşır.',2,8,8],['Sübvansiyon ver','Kısa süre rahatlık, bütçe yükü.',-2,-3,6],['Hiçbir şey yapma','İşler kaybolabilir.',2,0,-10]]],
+['İthalat arttı, cari açık büyüdü. Son hamlen?',[['İhracatı destekle','Denge toparlanır.',10,8,4],['İthalata ek vergi koy','Anlaşmayla çelişir, misilleme riski doğar.',3,-8,2],['Bekle','Açık kalıcı olabilir.',-8,-2,-2]]]],
+n:'Serbest ticaret toplam refahı artırabilir. Kaybedenler için geçiş politikaları kritiktir.'},
+tedarik:{t:'Küresel tedarik zinciri krizi',c:'dis',i:'Kritik bir ara malı tek bir ülkeden geliyordu ve sevkiyat durdu.',s:[
+['Üretim aksıyor. İlk adımın?',[['Alternatif tedarikçi bul','Zaman alır ama riski dağıtır.',2,4,10],['Yüksek fiyatla acil alım yap','Üretim sürer, maliyet artar.',-6,-6,8],['Üretimi durdur','Maliyet sınırlı, pazar kaybı büyür.',0,-10,-12]]],
+['Orta vadeli stratejin ne olur?',[['Tedarik çeşitlendirme ve stok','Dayanıklılık artar, maliyet yükselir.',0,4,12],['Yerli üretime yatırım yap','Uzun vadeli kazanç sağlar.',6,6,10],['Aynı tedarikçiye dön','Ucuz ama riskli.',3,3,-8]]],
+['Kriz sürüyor. Son hamlen?',[['Ortak alım ve işbirliği kur','Maliyet paylaşılır.',4,6,6],['İhracatı kısıtla','İç arz korunur, ticaret ortakları tepki verir.',-4,-8,6],['Bekle','Aksama uzar.',-4,-4,-6]]]],
+n:'Verimlilik ile dayanıklılık arasında denge vardır. Tek tedarikçiye bağımlılık risktir.'},
+yaptirim:{t:'Yaptırımlar ve ticaret',c:'dis',i:'Önemli bir ticaret ortağına yaptırım kararı alınacak. Ülkenin ticareti de etkilenecek.',s:[
+['Yaptırımlara katılır mısın?',[['Tam katıl','Müttefiklerle uyum sağlanır, ticaret kaybedilir.',-8,-4,-4],['Kısmen katıl','Dengeli ama belirsizlik sürer.',-2,0,0],['Katılma','Ticaret sürer, ikincil yaptırım riski doğar.',4,-4,2]]],
+['Enerji ve hammadde tedariği etkilendi. Ne yaparsın?',[['Yeni tedarik anlaşmaları yap','Bağımlılık azalır.',2,4,8],['Stok yap','Kısa vadeli güvence, maliyet artar.',-4,0,6],['Hiçbir şey yapma','Aksama büyür.',-6,-6,-8]]],
+['İhracatçılar yeni pazar arıyor. Son hamlen?',[['Yeni pazar destek paketi hazırla','Çeşitlenme güçlenir.',10,8,4],['Döviz desteği ver','Kısa süre rahatlık sağlar.',2,-2,2],['Bekle','Kayıplar sürer.',-6,-4,-4]]]],
+n:'Yaptırımlar hem uygulayana hem hedef ülkeye maliyet getirir. Etkisi ortaklıklara ve alternatiflere bağlıdır.'},
+turizm:{t:'Turizm ve cari işlemler dengesi',c:'dis',i:'Turizm gelirleri cari açığı büyük ölçüde kapatıyor ama gelir mevsimsel ve dış şoklara açık.',s:[
+['Sezon uzatılacak. İlk adımın?',[['Kış ve kültür turizmini teşvik et','Gelir yıla yayılır.',8,6,4],['Sadece yaz yatırımı yap','Bağımlılık sürer.',4,-2,0],['Fiyatları düşür, hacmi artır','Gelir artışı sınırlı, kalite riski doğar.',2,-6,2]]],
+['Kur dalgalandı. Ne yaparsın?',[['Döviz geliri koruma araçları sun','Gelir istikrarı artar.',6,4,4],['Müdahale etme','Dalgalanma sürer.',-4,-2,-2],['Kuru sabitlemeye çalış','Rezervleri eritir.',-10,-6,-2]]],
+['Bir bölgede kriz çıktı, rezervasyonlar düştü. Son hamlen?',[['Pazar çeşitlendirme ve kampanya yap','Risk dağılır.',8,8,4],['Yerli turisti teşvikle çek','Kısmi telafi sağlar.',2,4,6],['Bekle','Kayıp büyür.',-8,-6,-4]]]],
+n:'Tek gelir kaynağına bağımlılık risklidir. Çeşitlendirme ve döviz gelirini korumak önemlidir.'}
+};
+
+const MT={makro:['Enflasyon kontrolü','Büyüme','Halkın refahı'],finans:['Piyasa güveni','Finansal istikrar','Yatırımcı koruma'],dis:['Dış denge','Rekabet gücü','Yerel üretim']};
+const CL={makro:'#d9342b',finans:'#0e9aa7',dis:'#6d3fd8'},CN={makro:'Makroekonomi',finans:'Finans',dis:'Dış ticaret'};
+const $=document.getElementById('app'),id=new URLSearchParams(location.search).get('v'),V=S[id];
+const clamp=x=>Math.max(0,Math.min(100,x)),sg=n=>(n>0?'+':'')+n;
+const tp='<a href="index.html#/vaka">← Vaka Analizi</a><a href="vaka-oyunu.html">Tüm oyunlar</a>';
+function menu(){document.title='Vaka Oyunları · Eko-Log';$.innerHTML='<div class="top">'+tp+'</div><h1>Vaka Oyunları</h1><p style="color:var(--mut)">Bir vaka seç, karar ver ve sonucunu gör. Her oyun üç karardan oluşur.</p><div class="lst">'+Object.keys(S).map(k=>{const v=S[k];return '<a href="?v='+k+'"><div class="card" style="--k:'+CL[v.c]+'"><span class="pill" style="--k:'+CL[v.c]+'">'+CN[v.c]+'</span><h3>'+v.t+'</h3><p>'+v.i+'</p></div></a>'}).join('')+'</div><p class="note">Bu oyunlar eğitim amaçlıdır. Gerçek ekonomik ya da yatırım tavsiyesi değildir.</p>'}
+if(!V){menu()}else{
+document.documentElement.style.setProperty('--k',CL[V.c]);document.title=V.t+' · Eko-Log';
+let st=0,sc=[50,50,50],ch=[];
+const meters=()=>MT[V.c].map((n,i)=>'<div class="m"><div class="l"><span>'+n+'</span><b>'+sc[i]+'</b></div><div class="b"><i style="width:'+sc[i]+'%"></i></div></div>').join('');
+const head='<div class="top">'+tp+'</div>';
+function intro(){$.innerHTML=head+'<span class="pill">'+CN[V.c]+'</span><h1>'+V.t+'</h1><div class="card"><p style="margin:0">'+V.i+'</p></div><div class="card"><b>Göstergelerin</b>'+meters()+'</div><button class="btn" id="go">Başla</button>';document.getElementById('go').onclick=()=>step()}
+function step(){const s=V.s[st];$.innerHTML=head+'<div class="pr">Karar '+(st+1)+' / '+V.s.length+'</div><div class="card">'+meters()+'</div><div class="card"><h2>'+s[0]+'</h2><div id="o">'+s[1].map((o,i)=>'<button class="opt" data-i="'+i+'">'+o[0]+'</button>').join('')+'</div><div id="fb"></div></div>';
+$.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.i))}
+function pick(i){const o=V.s[st][1][i];ch.push([V.s[st][0],o[0]]);const d=[o[2],o[3],o[4]];sc=sc.map((v,k)=>clamp(v+d[k]));
+$.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===i)b.classList.add('sel')});
+document.getElementById('fb').innerHTML='<p>'+o[1]+'</p><div class="chips">'+d.map((x,k)=>'<span class="chip '+(x>0?'up':x<0?'dn':'')+'">'+MT[V.c][k]+' '+sg(x)+'</span>').join('')+'</div><button class="btn" id="nx">'+(st<V.s.length-1?'Devam →':'Sonucu gör')+'</button>';
+document.querySelector('.m')&&0;document.getElementById('nx').onclick=()=>{st++;st<V.s.length?step():end()}}
+function end(){const a=Math.round((sc[0]+sc[1]+sc[2])/3),r=a>=70?['Başarılı','Dengeli ve isabetli kararlar verdin.']:a>=50?['Orta','Bazı kararların işe yaradı, bazıları bedel getirdi.']:['Zayıf','Kararların göstergelerini aşağı çekti. Tekrar dene.'];
+$.innerHTML=head+'<span class="pill">Sonuç</span><h1>'+V.t+'</h1><div class="card"><div class="big">'+a+' / 100</div><b>'+r[0]+'</b><p style="margin:6px 0 0">'+r[1]+'</p>'+meters()+'</div><div class="card"><b>Kararların</b>'+ch.map((c,i)=>'<p style="margin:10px 0 0"><span style="color:var(--mut)">'+(i+1)+'. '+c[0]+'</span><br>→ '+c[1]+'</p>').join('')+'</div><div class="card"><b>Dersin özeti</b><p style="margin:6px 0 0">'+V.n+'</p></div><button class="btn" onclick="location.reload()">Tekrar oyna</button> <a class="btn g" href="vaka-oyunu.html">Diğer vakalar</a><p class="note">Bu oyun eğitim amaçlıdır. Gerçek ekonomik ya da yatırım tavsiyesi değildir.</p>'}
+intro()}
+</script></body></html>
