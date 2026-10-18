@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Central Bank Crisis Simulator v10.0 - Bloomberg Terminal</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Phosphor Icons CDN -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        term: {
+                            bg: '#070a12',
+                            card: '#0e1526',
+                            cardHover: '#151f38',
+                            border: '#1c2842',
+                            accent: '#f59e0b',
+                            cyan: '#06b6d4',
+                            red: '#f43f5e',
+                            green: '#10b981',
+                            purple: '#a855f7',
+                            blue: '#3b82f6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Financial Scrollbar & Terminal Aesthetics */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070a12; }
+        ::-webkit-scrollbar-thumb { background: #1c2842; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+        .glow-amber { box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+        .glow-red { box-shadow: 0 0 20px rgba(244, 63, 94, 0.25); }
+        .glow-cyan { box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+        .glow-green { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
+        .ticker-move { display: inline-block; animation: ticker 50s linear infinite; }
+        .ticker-move:hover { animation-play-state: paused; }
+    </style>
+</head>
+<body class="bg-term-bg text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+
+    <!-- GLOBAL TERMINAL HEADER -->
+    <header class="bg-term-card border-b border-term-border px-4 py-3 sticky top-0 z-40 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xl glow-amber">
+                    <i class="ph ph-bank"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-extrabold text-sm md:text-base tracking-widest text-slate-100 font-mono">REUTERS / BLOOMBERG EIKON</h1>
+                        <span class="bg-amber-500/20 text-amber-300 text-[10px] px-2 py-0.5 rounded border border-amber-500/40 font-mono font-bold">GLOBAL SIM v10.0</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">Küresel Merkez Bankaları Kriz Laboratuvarı (25 Senaryo)</p>
+                </div>
+            </div>
+
+            <!-- Active Status Box -->
+            <div id="headerStatusBox" class="hidden md:flex items-center gap-3 bg-slate-900/90 px-4 py-2 rounded-xl border border-term-border font-mono text-xs">
+                <span class="text-slate-400">ÜLKE/SENARYO:</span>
+                <span class="text-amber-400 font-bold" id="headerScenarioName">Seçilmedi</span>
+                <span class="text-slate-600">|</span>
+                <span class="text-slate-400">DÖNEM:</span>
+                <span class="text-cyan-400 font-bold" id="headerTurnText">-- / --</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button onclick="openCustomBuilderModal()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs px-3.5 py-2 rounded-xl border border-purple-400/30 transition flex items-center gap-1.5 font-mono font-bold shadow-lg shadow-purple-500/20">
+                    <i class="ph ph-plus-circle text-base"></i>
+                    <span>Özel Senaryo Kur</span>
+                </button>
+                <button onclick="switchScreen('select')" id="btnReturnSelect" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-2 rounded-xl border border-slate-700 transition flex items-center gap-1.5 font-mono">
+                    <i class="ph ph-squares-four"></i>
+                    <span>Senaryolar</span>
+                </button>
+                <button onclick="openHelpModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2 rounded-xl border border-slate-700 transition" title="Kılavuz">
+                    <i class="ph ph-question text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl w-full mx-auto p-3 md:p-6 flex-grow">
+
+        <!-- ========================================== -->
+        <!-- SCREEN 1: SCENARIO SELECTION               -->
+        <!-- ========================================== -->
+        <section id="screenSelect" class="space-y-6">
+            
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-slate-950 via-term-card to-slate-950 border border-term-border rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-2xl">
+                <div class="absolute -right-12 -bottom-10 opacity-10 text-9xl font-mono select-none">BIS</div>
+                <div class="max-w-3xl space-y-3 relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold">
+                        <i class="ph ph-globe-hemisphere-west"></i> 25 Tarihsel Dünya Krizi + Özel Sandbox Modu
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-slate-100 tracking-tight">
+                        Dünya Ekonomi Tarihini Değiştiren Kararlar Sizin Elinizde!
+                    </h2>
+                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed">
+                        1923 Weimar Hiperenflasyonundan 1992 Soros Sterlin Atağına, 1929 Fed Büyük Buhranından 2011 İtalya Borç Krizine, Çin Devalüasyonlarından 2021 TCMB Yeni Ekonomi Modeline kadar dünya tarihinin tüm kritik krizlerinde Merkez Bankası Başkanı olun!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Country Filter Tabs -->
+            <div class="flex items-center gap-1.5 border-b border-term-border pb-3 overflow-x-auto">
+                <button onclick="filterCountry('ALL')" id="tabCountryALL" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-bold transition shrink-0">
+                    🌍 Tümü (25)
+                </button>
+                <button onclick="filterCountry('TR')" id="tabCountryTR" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇹🇷 Türkiye (4)
+                </button>
+                <button onclick="filterCountry('DE')" id="tabCountryDE" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇩🇪 Almanya (3)
+                </button>
+                <button onclick="filterCountry('FR')" id="tabCountryFR" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇫🇷 Fransa (2)
+                </button>
+                <button onclick="filterCountry('IT')" id="tabCountryIT" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇮🇹 İtalya (2)
+                </button>
+                <button onclick="filterCountry('UK')" id="tabCountryUK" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇬🇧 İngiltere (3)
+                </button>
+                <button onclick="filterCountry('CN')" id="tabCountryCN" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇨🇳 Çin (3)
+                </button>
+                <button onclick="filterCountry('JP')" id="tabCountryJP" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇯🇵 Japonya (2)
+                </button>
+                <button onclick="filterCountry('US')" id="tabCountryUS" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🇺🇸 ABD (3)
+                </button>
+                <button onclick="filterCountry('OTHER')" id="tabCountryOTHER" class="country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0">
+                    🌐 Diğer (3)
+                </button>
+            </div>
+
+            <!-- Scenario Cards Grid -->
+            <div id="scenarioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Populated Dynamically -->
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 2: ACTIVE GAME TERMINAL             -->
+        <!-- ========================================== -->
+        <section id="screenGame" class="hidden space-y-6">
+
+            <!-- 6 CORE METRIC CARDS + CDS -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                
+                <!-- 1. Politika Faizi -->
+                <div class="bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span>Politika Faizi</span>
+                        <i class="ph ph-percent text-amber-400"></i>
+                    </div>
+                    <div class="my-1.5">
+                        <div class="text-2xl font-black font-mono text-amber-400" id="mRate">--%</div>
+                    </div>
+                    <div class="text-[11px] text-slate-400 flex justify-between">
+                        <span>Reel Faiz:</span>
+                        <span id="mRealRate" class="font-mono font-bold text-rose-400">--%</span>
+                    </div>
+                </div>
+
+                <!-- 2. Yıllık Enflasyon -->
+                <div class="bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span>Yıllık Enflasyon</span>
+                        <i class="ph ph-trend-up text-rose-400"></i>
+                    </div>
+                    <div class="my-1.5">
+                        <div class="text-2xl font-black font-mono text-rose-400" id="mInflation">--%</div>
+                    </div>
+                    <div class="text-[11px] text-slate-400 flex justify-between">
+                        <span>Hedef Sapma:</span>
+                        <span id="mInflationSub" class="font-mono text-slate-300">--%</span>
+                    </div>
+                </div>
+
+                <!-- 3. Döviz Kuru -->
+                <div class="bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span id="mCurrLabel">Döviz Kuru</span>
+                        <i class="ph ph-currency-dollar text-cyan-400"></i>
+                    </div>
+                    <div class="my-1.5">
+                        <div class="text-2xl font-black font-mono text-cyan-400" id="mFx">--</div>
+                    </div>
+                    <div class="text-[11px] text-slate-400 flex justify-between">
+                        <span>Son Değişim:</span>
+                        <span id="mFxSub" class="font-mono text-slate-300">%0.0</span>
+                    </div>
+                </div>
+
+                <!-- 4. Net Döviz Rezervleri -->
+                <div class="bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span>Net FX Rezervi</span>
+                        <i class="ph ph-vault text-emerald-400"></i>
+                    </div>
+                    <div class="my-1.5">
+                        <div class="text-2xl font-black font-mono text-emerald-400" id="mReserves">--</div>
+                    </div>
+                    <div class="text-[11px] text-slate-400 flex justify-between">
+                        <span>CDS Primi:</span>
+                        <span id="mCds" class="font-mono font-bold text-amber-400">-- bps</span>
+                    </div>
+                </div>
+
+                <!-- 5. Piyasa Güven Endeksi -->
+                <div class="bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span>Piyasa Güveni</span>
+                        <i class="ph ph-shield-check text-purple-400"></i>
+                    </div>
+                    <div class="my-1.5">
+                        <div class="text-2xl font-black font-mono text-purple-400" id="mTrust">--%</div>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div id="mTrustBar" class="bg-purple-500 h-1.5 rounded-full transition-all duration-300" style="width: 50%"></div>
+                    </div>
+                </div>
+
+                <!-- 6. Siyasi Baskı Seviyesi -->
+                <div id="cardPressure" class="bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between transition-all">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span>Siyasi Baskı</span>
+                        <i class="ph ph-warning-circle text-amber-500"></i>
+                    </div>
+                    <div class="my-1.5">
+                        <div class="text-2xl font-black font-mono text-amber-500" id="mPressure">--%</div>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div id="mPressureBar" class="bg-amber-500 h-1.5 rounded-full transition-all duration-300" style="width: 20%"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MAIN CONTROLS & EVENT DASHBOARD GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- LEFT CONTROL PANEL (5 COLS) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-term-card border border-term-border rounded-2xl p-5 shadow-xl relative overflow-hidden space-y-5">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-amber-500"></div>
+
+                        <div class="flex items-center justify-between border-b border-term-border pb-3">
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-sliders text-amber-400 text-xl"></i>
+                                <h3 class="font-bold text-slate-100 text-sm font-mono tracking-wider">İCRAAT & POLİTİKA PANELİ</h3>
+                            </div>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded border border-slate-700 font-mono" id="turnIndicatorBadge">1 / 6 Dönem</span>
+                        </div>
+
+                        <!-- 1. INTEREST RATE SETTING -->
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <label class="text-xs font-bold text-slate-200 font-mono uppercase tracking-wide">
+                                    1. Politika Faizi Belirleme
+                                </label>
+                                <span class="text-xs font-mono bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30" id="rateSelectionText">
+                                    %0.00
+                                </span>
+                            </div>
+
+                            <!-- Quick Step Adjustment -->
+                            <div class="grid grid-cols-4 gap-1.5 text-xs font-mono">
+                                <button onclick="adjustRateBps(-500)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-rose-950 text-rose-300 border border-rose-900/40 font-bold transition">-500 bps</button>
+                                <button onclick="adjustRateBps(-250)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-rose-950 text-rose-300 border border-rose-900/40 font-bold transition">-250 bps</button>
+                                <button onclick="adjustRateBps(-100)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-rose-950 text-rose-300 border border-rose-900/40 font-bold transition">-100 bps</button>
+                                <button onclick="resetRateToCurrent()" class="px-2 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-200 border border-slate-600 font-bold transition">Sabit</button>
+                                <button onclick="adjustRateBps(100)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-emerald-950 text-emerald-300 border border-emerald-900/40 font-bold transition">+100 bps</button>
+                                <button onclick="adjustRateBps(250)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-emerald-950 text-emerald-300 border border-emerald-900/40 font-bold transition">+250 bps</button>
+                                <button onclick="adjustRateBps(500)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-emerald-950 text-emerald-300 border border-emerald-900/40 font-bold transition">+500 bps</button>
+                                <button onclick="adjustRateBps(1000)" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-emerald-950 text-emerald-300 border border-emerald-900/40 font-bold transition">+1000 bps</button>
+                            </div>
+
+                            <!-- Slider -->
+                            <div class="pt-1">
+                                <input type="range" id="inputRateSlider" min="0" max="100" step="0.5" value="15" 
+                                       oninput="onRateSliderInput(this.value)"
+                                       class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                            </div>
+                        </div>
+
+                        <!-- 2. FX & LIQUIDITY TOOLS -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-200 font-mono uppercase tracking-wide block">
+                                2. Döviz & Likidite Müdahalesi
+                            </label>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="setFxAction('NONE')" id="btnFxNONE" class="fx-btn p-2 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-300 text-xs font-bold font-mono transition">
+                                    🚫 Müdahale Yok
+                                </button>
+                                <button type="button" onclick="setFxAction('SELL_FX')" id="btnFxSELL_FX" class="fx-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold font-mono transition hover:text-slate-200">
+                                    📉 FX Satışı / Müdahale
+                                </button>
+                                <button type="button" onclick="setFxAction('SWAP_KKM')" id="btnFxSWAP_KKM" class="fx-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold font-mono transition hover:text-slate-200">
+                                    🔄 Örtülü Swap / Kontrol
+                                </button>
+                                <button type="button" onclick="setFxAction('BUY_FX')" id="btnFxBUY_FX" class="fx-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold font-mono transition hover:text-slate-200">
+                                    📈 Rezerv Biriktir
+                                </button>
+                            </div>
+
+                            <!-- Zorunlu Karşılık (RRR) Slider -->
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-term-border space-y-1">
+                                <div class="flex justify-between text-[11px] font-mono">
+                                    <span class="text-slate-300">Zorunlu Karşılık Oranı (RRR):</span>
+                                    <span class="text-cyan-400 font-bold" id="rrrDisplay">%10.0</span>
+                                </div>
+                                <input type="range" id="inputRrrSlider" min="1" max="40" step="1" value="10"
+                                       oninput="document.getElementById('rrrDisplay').innerText = '%' + parseFloat(this.value).toFixed(1)"
+                                       class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+                            </div>
+                        </div>
+
+                        <!-- 3. VERBAL GUIDANCE (TONE) -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-200 font-mono uppercase tracking-wide block">
+                                3. Sözlü Yönlendirme (Söylem Tonu)
+                            </label>
+                            <div class="grid grid-cols-3 gap-2 text-center font-mono">
+                                <button type="button" onclick="setTone('HAWKISH')" id="btnToneHawkish" class="tone-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold transition">
+                                    🦅 Şahin
+                                </button>
+                                <button type="button" onclick="setTone('NEUTRAL')" id="btnToneNeutral" class="tone-btn p-2 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-300 text-xs font-bold transition">
+                                    ⚖️ Nötr
+                                </button>
+                                <button type="button" onclick="setTone('DOVISH')" id="btnToneDovish" class="tone-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold transition">
+                                    🕊️ Güvercin
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 4. POLITICAL STANCE -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-200 font-mono uppercase tracking-wide block">
+                                4. Hükümet Baskısına Karşı Tutum
+                            </label>
+                            <div class="grid grid-cols-3 gap-2 text-center font-mono">
+                                <button type="button" onclick="setPoliticalStance('RESIST')" id="btnStanceResist" class="stance-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-[11px] font-bold transition">
+                                    🛡️ Diren (Baskı +)
+                                </button>
+                                <button type="button" onclick="setPoliticalStance('COMPROMISE')" id="btnStanceCompromise" class="stance-btn p-2 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-300 text-[11px] font-bold transition">
+                                    📜 Müzakere Et
+                                </button>
+                                <button type="button" onclick="setPoliticalStance('COMPLY')" id="btnStanceComply" class="stance-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-[11px] font-bold transition">
+                                    🤝 Uyum Sağla
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- EXECUTE TURN BUTTON -->
+                        <button onclick="executeTurn()" id="btnExecuteTurn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs md:text-sm tracking-wider uppercase shadow-lg shadow-amber-500/20 active:scale-[0.99] transition flex items-center justify-center gap-2">
+                            <span>DÖNEM KARARLARINI AÇIKLA & İLERLE</span>
+                            <i class="ph ph-arrow-circle-right text-lg"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT EVENT ENGINE & BREAKING NEWS PANEL (7 COLS) -->
+                <div class="lg:col-span-7 space-y-5">
+
+                    <!-- HISTORICAL EVENT FLASH CARD -->
+                    <div class="bg-gradient-to-br from-slate-950 to-term-card border border-amber-500/50 rounded-2xl p-5 shadow-xl space-y-4 relative overflow-hidden">
+                        
+                        <div class="flex items-center justify-between border-b border-term-border pb-2.5">
+                            <div class="flex items-center gap-2 text-amber-400 font-bold text-xs font-mono">
+                                <span class="animate-ping w-2 h-2 rounded-full bg-amber-400"></span>
+                                <span>FLASH / TARİHSEL KRİZ ŞOKU</span>
+                            </div>
+                            <span class="text-[11px] font-mono text-slate-400" id="eventQuarterText">--</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-base md:text-lg font-bold text-slate-100" id="eventTitle">--</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mt-2" id="eventDesc">--</p>
+                        </div>
+
+                        <!-- EVENT CHOICES / DILEMMAS -->
+                        <div class="space-y-2 pt-1" id="eventOptionsContainer">
+                            <!-- Populated Dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- REAL-TIME CHART TERMINAL -->
+                    <div class="bg-term-card border border-term-border rounded-2xl p-5 shadow-xl space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-chart-line-up text-cyan-400 text-lg"></i>
+                                <h4 class="font-bold text-xs text-slate-200 font-mono uppercase tracking-wider">Makroekonomik Zaman Serisi Grafiği</h4>
+                            </div>
+                            <div class="flex items-center gap-2 text-[10px] font-mono">
+                                <span class="flex items-center gap-1 text-rose-400"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Enflasyon</span>
+                                <span class="flex items-center gap-1 text-amber-400"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Faiz</span>
+                                <span class="flex items-center gap-1 text-cyan-400"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Kur/Değer</span>
+                            </div>
+                        </div>
+
+                        <div class="h-60 w-full relative">
+                            <canvas id="gameChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- DECISION HISTORY LOG TABLE -->
+            <div class="bg-term-card border border-term-border rounded-2xl p-5 shadow-xl space-y-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-list-dashes text-amber-400 text-lg"></i>
+                        <h4 class="font-bold text-xs text-slate-200 font-mono uppercase tracking-wider">Dönemsel Karar ve Piyasa Tepki Kayıtları</h4>
+                    </div>
+                    <span class="text-[11px] text-slate-400 font-mono" id="logCountText">0 Dönem Kaydedildi</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs font-mono">
+                        <thead>
+                            <tr class="border-b border-term-border text-slate-400 bg-slate-900/50">
+                                <th class="py-2 px-3">Dönem</th>
+                                <th class="py-2 px-3">Faiz</th>
+                                <th class="py-2 px-3">Enflasyon</th>
+                                <th class="py-2 px-3">Döviz Kuru</th>
+                                <th class="py-2 px-3">Rezerv</th>
+                                <th class="py-2 px-3">CDS</th>
+                                <th class="py-2 px-3">Güven</th>
+                                <th class="py-2 px-3">Baskı</th>
+                                <th class="py-2 px-3">Tarihsel Tercih ve Sonuç</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gameLogBody" class="divide-y divide-term-border/60 text-slate-300">
+                            <tr>
+                                <td colspan="9" class="py-4 text-center text-slate-500 font-sans italic">Henüz karar alınmadı. Paneli kullanarak ilk dönemi simüle edin.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 3: END-GAME REPORT & COMPARISON     -->
+        <!-- ========================================== -->
+        <section id="screenReport" class="hidden space-y-6">
+            
+            <div class="bg-term-card border border-amber-500/50 rounded-2xl p-6 md:p-8 shadow-2xl relative space-y-6">
+                
+                <div class="text-center space-y-3">
+                    <div class="text-6xl" id="reportEmoji">🏆</div>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-100 tracking-tight" id="reportTitle">SİMÜLASYON TAMAMLANDI</h2>
+                    <p class="text-xs text-amber-400 font-mono tracking-widest uppercase" id="reportSubtitle">GÖREV DEĞERLENDİRME KARNESİ</p>
+                </div>
+
+                <!-- Grade Badge & Title Box -->
+                <div class="bg-slate-900/90 border border-term-border rounded-xl p-5 text-center space-y-2">
+                    <div class="text-xs text-slate-400 font-mono">KAZANILAN UNVAN VE KARNE NOTU</div>
+                    <div class="flex items-center justify-center gap-3">
+                        <span class="text-4xl font-black font-mono text-amber-400" id="reportGrade">A+</span>
+                        <span class="text-xl md:text-2xl font-extrabold text-slate-100" id="reportBadge">"Görkemli Şahin"</span>
+                    </div>
+                    <p class="text-xs text-slate-300 italic max-w-xl mx-auto pt-1" id="reportDescription">
+                        Tarihi kriz döneminde aldığınız kararlarla makroekonomik istikrarı yeniden tesis ettiniz.
+                    </p>
+                </div>
+
+                <!-- 3-WAY COMPARISON MATRIX TABLE -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold font-mono text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <i class="ph ph-arrows-left-right text-amber-400"></i>
+                        3 Taraf Karşılaştırması: Sizin Sonucunuz vs. Gerçek Tarihsel Sonuç vs. Optimal Hedef
+                    </h3>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs font-mono">
+                            <thead>
+                                <tr class="border-b border-term-border text-slate-400 bg-slate-900/80">
+                                    <th class="py-3 px-4">Metrik</th>
+                                    <th class="py-3 px-4 text-amber-400 font-bold">🎮 Sizin Sonucunuz</th>
+                                    <th class="py-3 px-4 text-rose-400 font-bold">📜 Gerçek Tarihsel Sonuç</th>
+                                    <th class="py-3 px-4 text-emerald-400 font-bold">🎯 Optimal Teorik Hedef</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-term-border/60 text-slate-200">
+                                <tr>
+                                    <td class="py-3 px-4 font-sans font-semibold">Son Enflasyon (%)</td>
+                                    <td class="py-3 px-4 font-bold text-amber-400" id="cmpPlayerInf">--%</td>
+                                    <td class="py-3 px-4 text-rose-400" id="cmpHistInf">--%</td>
+                                    <td class="py-3 px-4 text-emerald-400" id="cmpOptInf">--%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-sans font-semibold">Son Döviz Kuru</td>
+                                    <td class="py-3 px-4 font-bold text-amber-400" id="cmpPlayerFx">--</td>
+                                    <td class="py-3 px-4 text-rose-400" id="cmpHistFx">--</td>
+                                    <td class="py-3 px-4 text-emerald-400" id="cmpOptFx">--</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-sans font-semibold">Son Net FX Rezervleri</td>
+                                    <td class="py-3 px-4 font-bold text-amber-400" id="cmpPlayerRes">--</td>
+                                    <td class="py-3 px-4 text-rose-400" id="cmpHistRes">--</td>
+                                    <td class="py-3 px-4 text-emerald-400" id="cmpOptRes">--</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-sans font-semibold">Piyasa Güven Endeksi</td>
+                                    <td class="py-3 px-4 font-bold text-amber-400" id="cmpPlayerTrust">--%</td>
+                                    <td class="py-3 px-4 text-rose-400" id="cmpHistTrust">--%</td>
+                                    <td class="py-3 px-4 text-emerald-400" id="cmpOptTrust">--%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex flex-col md:flex-row items-center gap-3 pt-2">
+                    <button onclick="switchScreen('select')" class="w-full md:w-1/2 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-xs font-mono transition border border-slate-700 flex items-center justify-center gap-2">
+                        <i class="ph ph-squares-four text-lg"></i>
+                        <span>BAŞKA SENARYO SEÇ</span>
+                    </button>
+                    <button onclick="restartCurrentScenario()" class="w-full md:w-1/2 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs font-mono transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
+                        <i class="ph ph-arrows-counter-clockwise text-lg"></i>
+                        <span>TEKRAR OYNA</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER TICKER -->
+    <footer class="bg-[#03050a] border-t border-term-border py-2 px-4 z-30">
+        <div class="max-w-7xl mx-auto flex items-center gap-3">
+            <div class="flex items-center gap-1.5 bg-rose-600/20 text-rose-400 border border-rose-500/40 text-[10px] font-bold px-2 py-0.5 rounded shrink-0 font-mono">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                <span>REUTERS LIVE TERMINAL</span>
+            </div>
+            <div class="ticker-wrap text-xs font-mono text-slate-300">
+                <div class="ticker-move" id="tickerText">
+                    +++ Global Central Bank Simulator Ready +++ BIS & IMF Piyasaları Takip Ediyor +++ Enflasyon ve Faiz Kararları Bekleniyor +++
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CUSTOM SCENARIO BUILDER MODAL -->
+    <div id="customBuilderModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-term-card border border-purple-500/50 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-term-border pb-3">
+                <h3 class="font-bold text-base text-slate-100 font-mono flex items-center gap-2">
+                    <i class="ph ph-plus-circle text-purple-400 text-xl"></i>
+                    Özel Kriz Senaryosu Oluşturucu (Custom Sandbox)
+                </h3>
+                <button onclick="closeCustomBuilderModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+            </div>
+
+            <form id="customScenarioForm" onsubmit="handleCustomScenarioSubmit(event)" class="space-y-4 text-xs font-mono">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 mb-1">Ülke / Kurum Adı</label>
+                        <input type="text" id="custCountryName" required placeholder="ör. Hayali Cumhuriyet MB" class="w-full bg-slate-900 border border-term-border rounded-lg p-2.5 text-slate-100 focus:border-purple-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Bayrak / Sembol (Emoji)</label>
+                        <input type="text" id="custFlag" required placeholder="ör. 🏴‍☠️ veya 🏰" class="w-full bg-slate-900 border border-term-border rounded-lg p-2.5 text-slate-100 focus:border-purple-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 mb-1">Senaryo Başlığı</label>
+                    <input type="text" id="custTitle" required placeholder="ör. 2027 Küresel Enerji & Borç Şoku" class="w-full bg-slate-900 border border-term-border rounded-lg p-2.5 text-slate-100 focus:border-purple-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 mb-1">Para Birimi Sembolü</label>
+                    <input type="text" id="custCurrencySymbol" required placeholder="ör. TL, $, €, Peso, £" class="w-full bg-slate-900 border border-term-border rounded-lg p-2.5 text-slate-100 focus:border-purple-500 outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 bg-slate-900/60 p-3 rounded-xl border border-term-border">
+                    <div>
+                        <label class="block text-slate-400 text-[10px] mb-1">Başlangıç Enflasyonu (%)</label>
+                        <input type="number" step="0.1" id="custInflation" required value="25.0" class="w-full bg-slate-800 border border-term-border rounded p-2 text-rose-400 font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] mb-1">Başlangıç Faizi (%)</label>
+                        <input type="number" step="0.1" id="custRate" required value="15.0" class="w-full bg-slate-800 border border-term-border rounded p-2 text-amber-400 font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] mb-1">Başlangıç Kuru</label>
+                        <input type="number" step="0.1" id="custFx" required value="10.0" class="w-full bg-slate-800 border border-term-border rounded p-2 text-cyan-400 font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] mb-1">Net Rezerv ($B)</label>
+                        <input type="number" step="0.1" id="custReserves" required value="20.0" class="w-full bg-slate-800 border border-term-border rounded p-2 text-emerald-400 font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] mb-1">Başlangıç Güveni (%)</label>
+                        <input type="number" id="custTrust" required value="50" class="w-full bg-slate-800 border border-term-border rounded p-2 text-purple-400 font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] mb-1">Siyasi Baskı (%)</label>
+                        <input type="number" id="custPressure" required value="40" class="w-full bg-slate-800 border border-term-border rounded p-2 text-amber-500 font-bold">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-purple-500/20">
+                        🚀 Özel Senaryoyu Başlat
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- HELP MODAL -->
+    <div id="helpModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-term-card border border-term-border rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-4 text-xs leading-relaxed text-slate-300">
+            <div class="flex items-center justify-between border-b border-term-border pb-3">
+                <h3 class="font-bold text-sm text-slate-100 font-mono flex items-center gap-2">
+                    <span>🏛️</span> Kriz Simülatörü Rehberi & Karar Mekanizmaları
+                </h3>
+                <button onclick="closeHelpModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+            </div>
+            
+            <div class="space-y-2.5 font-sans">
+                <p><strong class="text-amber-400">Amaç:</strong> Seçtiğiniz tarihi veya özel kriz döneminde Merkez Bankası'nı yönlendirerek enflasyon, kur, rezerv ve güven parametrelerini dengeye kavuşturmaktır.</p>
+                
+                <p><strong class="text-cyan-400">Temel Mekanizmalar:</strong></p>
+                <ul class="list-disc pl-4 space-y-1 text-slate-400">
+                    <li><strong class="text-slate-200">Reel Faiz:</strong> Politika Faizi - Enflasyon. Negatif reel faiz kura ve enflasyona baskı yapar, pozitif reel faiz dezenflasyon sağlar.</li>
+                    <li><strong class="text-slate-200">CDS Risk Primi:</strong> Güvensizlik ve eksi rezerv arttıkça CDS yükselir, sermaye kaçışını tetikler.</li>
+                    <li><strong class="text-slate-200">Siyasi Baskı:</strong> Faizi artırmak veya siyasete direnç göstermek siyasi baskıyı tırmandırır. Baskı %100 olursa görevden alınabilirsiniz!</li>
+                </ul>
+
+                <p><strong class="text-rose-400">Kaybetme Koşulları:</strong> Güven %10'un altına düşerse, Siyasi Baskı %100 olursa veya hiperenflasyon patlarsa görevden alınırsınız!</p>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="closeHelpModal()" class="w-full py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition font-mono">
+                    Anladım, Terminale Dön
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN GAME LOGIC ENGINE SCRIPT -->
+    <script>
+        // ==========================================
+        // 25 HISTORICAL CRISIS SCENARIOS DATABASE
+        // ==========================================
+        const SCENARIOS = {
+            // --- TÜRKİYE (4) ---
+            "tr-1994": {
+                id: "tr-1994", country: "TR", countryName: "Türkiye", flag: "🇹🇷",
+                title: "1994 - Çiller Krizi & 5 Nisan Kararları", year: "1994",
+                subtitle: "Hazine faizlerini zorla düşürme denemesi, devalüasyon, süper bono ve 5 Nisan İstikrar Paketi.",
+                difficulty: "Zor", currencySymbol: "TL", totalTurns: 6,
+                initial: { rate: 50.0, inflation: 70.0, fx: 15.0, reserves: 6.5, trust: 40, pressure: 70, rrr: 16.0 },
+                historicalResult: { inflation: 125.0, fx: 38.0, reserves: 3.0, trust: 25 },
+                optimalTarget: { inflation: 40.0, fx: 22.0, reserves: 8.0, trust: 80 },
+                events: [
+                    { turn: 1, title: "Hazine İhalelerinin İptali & Dövize Hücum!", desc: "Hükümet faiz ödememek için Hazine ihalelerini iptal etti. Likidite dövize kaçıyor!", options: [
+                        { text: "Gecelik faizleri %1000'e fırlatarak döviz kaçışını kes!", effect: { rateDelta: 30, inflation: -5, trust: 10, pressure: 20 }, log: "Şok faiz döviz talebini bıçak gibi kesti." },
+                        { text: "Piyasayı fonlamak için emisyonu aç.", effect: { inflation: 25, fxPct: 35, trust: -15 }, log: "Dolar kuru uçuşa geçti!" }
+                    ]},
+                    { turn: 2, title: "5 Nisan İstikrar Paketi Açıklandı!", desc: "Devalüasyon, %400 faizli Süper Bono ve ek vergiler masada.", options: [
+                        { text: "%400 faizli Süper Bono ihracını destekle.", effect: { rateDelta: 40, inflation: -15, trust: 20, pressure: 15 }, log: "Süper bono piyasadan TL çekti." },
+                        { text: "Sadece kur ayarlaması yap.", effect: { inflation: 20, fxPct: 15, trust: -10 }, log: "Enflasyon patladı." }
+                    ]},
+                    { turn: 3, title: "%100 Mevduat Güvencesi", desc: "Bankacılık krizini önlemek için mevduat garantisi geldi.", options: [
+                        { text: "Likidite desteği ver, ZK oranını düşür.", effect: { rrrDelta: -4, trust: 5 }, log: "Bankalar rahatladı." },
+                        { text: "Sıkı kal.", effect: { trust: -5 }, log: "Sıkışıklık sürdü." }
+                    ]},
+                    { turn: 4, title: "Kredi Notu Düşüşü", desc: "Rating kuruluşları Türkiye'yi 'junk' seviyesine indirdi.", options: [
+                        { text: "IMF ile Stand-By imzala.", effect: { trust: 15, reserves: 1.5 }, log: "IMF kredisi rezervi takviye etti." },
+                        { text: "IMF'yi reddet.", effect: { trust: -10 }, log: "Yalnızlaşma." }
+                    ]},
+                    { turn: 5, title: "Enflasyon %125 ile Zirvede", desc: "Fiyatlama davranışları bozuldu.", options: [
+                        { text: "Sıkı duruşu koru.", effect: { inflation: -10, trust: 10 }, log: "Ateş düşüyor." },
+                        { text: "Erken faiz indir.", effect: { inflation: 15 }, log: "Kriz tekrarladı." }
+                    ]},
+                    { turn: 6, title: "Final: 1994 Bilançosu", desc: "1994 krizi ağır devalüasyonla atlatıldı.", options: [
+                        { text: "Dengelenmeyi tescille.", effect: { trust: 10 }, log: "Tamamlandı." },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "tr-2001": {
+                id: "tr-2001", country: "TR", countryName: "Türkiye", flag: "🇹🇷",
+                title: "2001 - Anayasa Kitapçığı & Bankacılık Çöküşü", year: "2001",
+                subtitle: "%7500 gecelik faiz, batan bankalar, dalgalı kura geçiş ve Kemal Derviş reformları.",
+                difficulty: "Çok Zor", currencySymbol: "TL", totalTurns: 6,
+                initial: { rate: 60.0, inflation: 55.0, fx: 0.68, reserves: 18.0, trust: 35, pressure: 70, rrr: 15.0 },
+                historicalResult: { inflation: 88.0, fx: 1.45, reserves: 12.0, trust: 30 },
+                optimalTarget: { inflation: 30.0, fx: 0.95, reserves: 22.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "Anayasa Kitapçığı Fırlatıldı! (%7500 Faiz)", desc: "MGK krizinde yabancı sermaye kaçıyor. Rezervler eriyor!", options: [
+                        { text: "Sabit kur rejimini derhal terk et ve dalgalı kuru açıkla!", effect: { fxPct: 45, inflation: 20, trust: -10, pressure: 10 }, log: "Dalgalı kura geçildi, kur fırladı ama rezerv korundu." },
+                        { text: "Rezerv satarak kuru sabitlemeye çalış.", effect: { reserves: -8.0, fxPct: 15, trust: -25 }, log: "Rezerv bitti, bankalar battı!" }
+                    ]},
+                    { turn: 2, title: "Kemal Derviş Reform Paketleri", desc: "TCMB Bağımsızlık Yasası TBMM gündeminde.", options: [
+                        { text: "TCMB Bağımsızlık Yasasını kabul et ve IMF şartlarına uy.", effect: { trust: 25, reserves: 5.0, inflation: -8, pressure: 20 }, log: "TCMB bağımsız oldu! Güven geldi." },
+                        { text: "Taahhütleri esnet.", effect: { trust: -20, reserves: -2.0 }, log: "IMF desteği kesildi." }
+                    ]},
+                    { turn: 3, title: "Kamu Bankaları Görev Zararları", desc: "Ziraat ve Halkbank zararları temizleniyor.", options: [
+                        { text: "Özel DİBS ihracıyla bilançoyu şeffaflaştır.", effect: { trust: 15, inflation: -3 }, log: "Bankacılık temizlendi." },
+                        { text: "Etele.", effect: { trust: -10 }, log: "Risk sürdü." }
+                    ]},
+                    { turn: 4, title: "Arjantin Bulaşma Riski", desc: "Arjantin temerrüdü piyasaları vurdu.", options: [
+                        { text: "Sıkı duruşla negatif ayrış.", effect: { trust: 10, fxPct: -3 }, log: "Güven pekişti." },
+                        { text: "Gevşe.", effect: { fxPct: 10 }, log: "Dalga vurdu." }
+                    ]},
+                    { turn: 5, title: "Örtük Enflasyon Hedeflemesi", desc: "Enflasyon hedeflemesi altyapısı kuruluyor.", options: [
+                        { text: "Şeffaf iletişim yürüt.", effect: { trust: 12, inflation: -8 }, log: "Enflasyon kırıldı." },
+                        { text: "Eski yöntemde kal.", effect: { trust: -5 }, log: "Atalet sürdü." }
+                    ]},
+                    { turn: 6, title: "Final: Dezenflasyon Patikası", desc: "2001 reformları meyvesini verdi.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15, inflation: -10 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "tr-2018": {
+                id: "tr-2018", country: "TR", countryName: "Türkiye", flag: "🇹🇷",
+                title: "2018 - Rahip Brunson Şoku & Kur Patlaması", year: "2018",
+                subtitle: "ABD yaptırım tweetleri, Dolar/TL'nin fırlaması ve Eylül PPK'da faizin %24'e çıkarılması.",
+                difficulty: "Zor", currencySymbol: "TL", totalTurns: 6,
+                initial: { rate: 12.75, inflation: 11.0, fx: 4.10, reserves: 35.0, trust: 60, pressure: 65, rrr: 10.5 },
+                historicalResult: { inflation: 25.2, fx: 6.80, reserves: 22.0, trust: 35 },
+                optimalTarget: { inflation: 12.0, fx: 4.80, reserves: 42.0, trust: 80 },
+                events: [
+                    { turn: 1, title: "Trump Tweeti & Kur Şoku!", desc: "ABD yaptırım açıkladı. Dolar/TL 7.00'ye fırladı!", options: [
+                        { text: "Eylül PPK'da şok faiz artışı yap (%17.75'ten %24'e çıkar)!", effect: { rateDelta: 6.25, fxPct: -10, inflation: -3, trust: 20, pressure: 25 }, log: "Tarihi faiz artışı kura fren yaptırdı!" },
+                        { text: "Faize dokunma.", effect: { fxPct: 25, inflation: 10, trust: -22, pressure: -10 }, log: "Kur kontrolden çıktı!" }
+                    ]},
+                    { turn: 2, title: "Swap Kısıtlamaları", desc: "Yurtdışı TL swap imkanları sınırlandı.", options: [
+                        { text: "Şeffaf iletişime dön.", effect: { trust: 8, fxPct: -2 }, log: "Ortodoks mesaj." },
+                        { text: "Daha da kısıtla.", effect: { trust: -12, fxPct: 5 }, log: "Yabancı kaçtı." }
+                    ]},
+                    { turn: 3, title: "Enflasyon %25.2 Zirvesinde", desc: "Enflasyonla mücadele programı masada.", options: [
+                        { text: "Faizi %24'te tut.", effect: { trust: 12, inflation: -5 }, log: "Enflasyon düştü." },
+                        { text: "Erken indirim yap.", effect: { trust: -15, fxPct: 6 }, log: "Kazanım eridi." }
+                    ]},
+                    { turn: 4, title: "Brunson'ın Serbest Bırakılması", desc: "Diplomatik kriz çözüldü.", options: [
+                        { text: "Döviz alıp rezerv yap.", effect: { reserves: 5.0, trust: 5 }, log: "Rezerv güçlendi." },
+                        { text: "Hemen faiz indir.", effect: { rateDelta: -3, fxPct: 4 }, log: "Erken gevşeme." }
+                    ]},
+                    { turn: 5, title: "Cari Fazla Verilmesi", desc: "İthalatın çökmesiyle cari fazla oluştu.", options: [
+                        { text: "Ölçülü faiz indir.", effect: { rateDelta: -2.0, trust: 6 }, log: "Rasyonel indirim." },
+                        { text: "Faizi %10'a düşür.", effect: { rateDelta: -8.0, fxPct: 10, trust: -12 }, log: "Yeni kur şoku." }
+                    ]},
+                    { turn: 6, title: "Final: Dengelenme", desc: "2018 şoku faiz artışıyla dizginlendi.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 12 }, log: "Tamamlandı." },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "tr-2021": {
+                id: "tr-2021", country: "TR", countryName: "Türkiye", flag: "🇹🇷",
+                title: "2021-2023 - 'Yeni Ekonomi Modeli', KKM ve Rasyonelleşme", year: "2021",
+                subtitle: "Sıradışı faiz indirimleri, KKM ihracı, rekor enflasyon, eksi net rezervler ve rasyonel dönüş.",
+                difficulty: "Çok Zor", currencySymbol: "TL", totalTurns: 6,
+                initial: { rate: 19.0, inflation: 19.2, fx: 8.50, reserves: -35.0, trust: 45, pressure: 80, rrr: 15.0 },
+                historicalResult: { inflation: 85.0, fx: 27.0, reserves: -60.0, trust: 20 },
+                optimalTarget: { inflation: 15.0, fx: 12.0, reserves: 10.0, trust: 80 },
+                events: [
+                    { turn: 1, title: "Çekirdek Enflasyon & Faiz İndirimi!", desc: "Enflasyon %19.2 iken faiz indirimi talimatı geldi.", options: [
+                        { text: "Faizi indirme (%19'da tut).", effect: { rateDelta: 1.0, pressure: 35, trust: 20, fxPct: -3 }, log: "Siyasete direnildi, TL korundu." },
+                        { text: "Faizi indir (%19 -> %14).", effect: { rateDelta: -3.0, fxPct: 20, inflation: 15, trust: -25, pressure: -20 }, log: "Dolar 18'e fırladı, enflasyon patladı!" }
+                    ]},
+                    { turn: 2, title: "Kur Korumalı Mevduat (KKM) İcadı!", desc: "Dolar 18.40 TL oldu. KKM duyuruldu.", options: [
+                        { text: "KKM'yi geçici fren olarak kullan, rezerv yakmayı kes.", effect: { reserves: -2.0, fxPct: -15, trust: -5 }, log: "KKM geçici fren oldu." },
+                        { text: "Milyarlarca dolar satarak kuru tut.", effect: { reserves: -15.0, fxPct: -20, trust: -20 }, log: "Net rezervler rekor eksiye düştü!" }
+                    ]},
+                    { turn: 3, title: "Savaş Şoku ve Enflasyon Zirvesi (%85)", desc: "Petrol 120$'ı aştı. Enflasyon rekor kırdı.", options: [
+                        { text: "Ortodoks politikalara dön.", effect: { rateDelta: 10.0, trust: 18, inflation: -6 }, log: "Rasyonel dönüş sinyali." },
+                        { text: "Faizi %9'a düşür.", effect: { rateDelta: -3.0, inflation: 20, trust: -15 }, log: "Enflasyon %85 zirvesine çıktı." }
+                    ]},
+                    { turn: 4, title: "Eksi $60B Net Rezerv Rekoru", desc: "Seçim öncesi rezervler dibi gördü.", options: [
+                        { text: "Kuru serbest bırak.", effect: { fxPct: 12, reserves: 0, trust: 5 }, log: "Rezerv erimesi durdu." },
+                        { text: "Rezerv yakmaya devam et.", effect: { reserves: -12.0, trust: -15 }, log: "Rezervler tükendi." }
+                    ]},
+                    { turn: 5, title: "Rasyonel Politikalara Dönüş!", desc: "Yeni ekonomi yönetimi iş başında.", options: [
+                        { text: "Faizleri %40'a fırlat!", effect: { rateDelta: 20.0, trust: 25, inflation: -8, pressure: 10 }, log: "Rasyonel dönüş güven sağladı!" },
+                        { text: "Cılız artış yap.", effect: { rateDelta: 3.0, trust: -8 }, log: "Piyasa ikna olmadı." }
+                    ]},
+                    { turn: 6, title: "Final: KKM Tasfiyesi", desc: "Rasyonel zemin kuruluyor.", options: [
+                        { text: "Dezenflasyonu tescil et.", effect: { trust: 20, inflation: -10 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- ALMANYA (3) ---
+            "de-1923": {
+                id: "de-1923", country: "DE", countryName: "Almanya (Reichsbank)", flag: "🇩🇪",
+                title: "1923 - Weimar Hiperenflasyonu", year: "1923",
+                subtitle: "Ruhr işgali, matbaanın sınırsız çalışması, 1 ekmeğin milyarlarca Mark olması ve Rentenmark reformu.",
+                difficulty: "Aşırı Zor", currencySymbol: "Mark", totalTurns: 6,
+                initial: { rate: 30.0, inflation: 500.0, fx: 100.0, reserves: 0.1, trust: 10, pressure: 90, rrr: 5.0 },
+                historicalResult: { inflation: 10000.0, fx: 1000000.0, reserves: 0.0, trust: 5 },
+                optimalTarget: { inflation: 10.0, fx: 500.0, reserves: 2.0, trust: 80 },
+                events: [
+                    { turn: 1, title: "Ruhr Bölgesi İşgal Edildi & Grev Maaşları!", desc: "Fransız ordusu Ruhr'u işgal etti. Alman Hükümeti grevdeki işçilerin maaşını para basarak ödüyor!", options: [
+                        { text: "Para basımını derhal durdur ve para reformu (Rentenmark) ilan et!", effect: { inflation: -400, trust: 30, pressure: 30 }, log: "Sınırsız para basımı kesildi, Rentenmark duyuruldu!" },
+                        { text: "Hükümetin talebiyle matbaayı çalıştırmaya devam et.", effect: { inflation: 2000, fxPct: 500, trust: -10 }, log: "1 ekmek 1 milyar Mark oldu!" }
+                    ]},
+                    { turn: 2, title: "Rentenmark Para Reformu", desc: "Toprak ve sanayi ipoteğine dayalı yeni para birimi piyasada.", options: [
+                        { text: "Bütçe açıklarını kesin olarak sıfırla.", effect: { trust: 25, inflation: -50 }, log: "Hiperenflasyon mucizevi şekilde durdu." },
+                        { text: "Eski Mark ile devam et.", effect: { inflation: 1000 }, log: "Para çöp oldu." }
+                    ]},
+                    { turn: 3, title: "Reichsbank Bağımsızlığı Yasası", desc: "Yabancı alacaklılar Reichsbank'ın bağımsızlığını istiyor.", options: [
+                        { text: "Bağımsızlığı kabul et.", effect: { trust: 20, reserves: 0.5 }, log: "Uluslararası itibar geldi." },
+                        { text: "Reddet.", effect: { trust: -15 }, log: "Ambargo." }
+                    ]},
+                    { turn: 4, title: "Dawes Planı Yardım Paketi", desc: "ABD kredileri Almanya'ya akmaya başladı.", options: [
+                        { text: "Kredileri altın rezervine dönüştür.", effect: { reserves: 1.5, trust: 10 }, log: "Altın rezervi birikti." },
+                        { text: "Hemen bütçeye harca.", effect: { inflation: 10 }, log: "Enflasyonist risk." }
+                    ]},
+                    { turn: 5, title: "Fiyat İstikrarının Yeniden Tesis Edilmesi", desc: "Yeni Mark istikrar kazandı.", options: [
+                        { text: "Sıkı para politikasını sürdür.", effect: { trust: 10 }, log: "İstikrar oturdu." },
+                        { text: "Gevşe.", effect: { inflation: 5 }, log: "Risk." }
+                    ]},
+                    { turn: 6, title: "Final: Hiperenflasyon Mucizesi", desc: "Tarihin en büyük hiperenflasyonu para reformuyla yenildi.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "de-1973": {
+                id: "de-1973", country: "DE", countryName: "Almanya (Bundesbank)", flag: "🇩🇪",
+                title: "1973 - OPEC Petrol Şoku & Şahin Bundesbank", year: "1973",
+                subtitle: "OPEC ambargosu, %7+ enflasyon sıçraması ve Bundesbank'ın hükümete rağmen sert sıkılaşması.",
+                difficulty: "Orta", currencySymbol: "DM", totalTurns: 6,
+                initial: { rate: 3.0, inflation: 7.5, fx: 2.60, reserves: 30.0, trust: 80, pressure: 40, rrr: 8.0 },
+                historicalResult: { inflation: 2.5, fx: 2.10, reserves: 38.0, trust: 92 },
+                optimalTarget: { inflation: 2.0, fx: 2.20, reserves: 40.0, trust: 95 },
+                events: [
+                    { turn: 1, title: "OPEC Petrol Ambargosu & Fiyat Sıçraması!", desc: "Petrol fiyatları 4 katına çıktı. Almanya'da pazar günleri araba kullanma yasağı geldi. Enflasyon tırmanıyor!", options: [
+                        { text: "Hükümetin işsizlik uyarılarına rağmen faizleri sert artır (%7'ye çıkar)!", effect: { rateDelta: 4.0, inflation: -2, trust: 15, pressure: 25 }, log: "Bundesbank şahin duruşuyla enflasyon beklentilerini kırdı!" },
+                        { text: "Büyümeyi korumak için faiz artırma.", effect: { inflation: 6, trust: -15, pressure: -10 }, log: "Stagflasyon başladı!" }
+                    ]},
+                    { turn: 2, title: "Sendikalarla Ücret-Fiyat Sarmalı Tırmanışı", desc: "Alman sendikaları %11 ücret artışı istiyor.", options: [
+                        { text: "Parasal hedefleme (Monetary Targeting) açıkla ve para arzını kısıtla.", effect: { trust: 12, inflation: -2 }, log: "Para arzı hedeflemesi güven verdi." },
+                        { text: "Taviz ver.", effect: { inflation: 4, trust: -10 }, log: "Ücret-fiyat sarmalı azdı." }
+                    ]},
+                    { turn: 3, title: "D-Mark'ın Aşırı Değerlenmesi", desc: "Sermaye güvenli liman D-Mark'a kaçıyor.", options: [
+                        { text: "Sterilizasyon yap, faizi koru.", effect: { trust: 8 }, log: "Almanya enflasyonda dünyadan pozitif ayrıştı." },
+                        { text: "Faiz indir.", effect: { rateDelta: -2, inflation: 2 }, log: "Erken indirim." }
+                    ]},
+                    { turn: 4, title: "İkinci Petrol Şoku Dalgası (1979)", desc: "İran devrimiyle petrol yeniden fırladı.", options: [
+                        { text: "Şahin duruşu kararlılıkla sürdür.", effect: { trust: 10, inflation: -1 }, log: "Bundesbank efsaneleşti." },
+                        { text: "Gevşe.", effect: { inflation: 3 }, log: "Hata." }
+                    ]},
+                    { turn: 5, title: "Küresel Dezenflasyon Liderliği", desc: "Almanya Avrupa'nın en düşük enflasyonlu ülkesi oldu.", options: [
+                        { text: "Nötr faize geç.", effect: { trust: 5 }, log: "Dengeli seyir." },
+                        { text: "Pasif kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: Bundesbank Şahinliği", desc: "Bundesbank bağımsız ve tavizsiz duruşuyla ECB'ye modellik etti.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "de-1990": {
+                id: "de-1990", country: "DE", countryName: "Almanya (Bundesbank)", flag: "🇩🇪",
+                title: "1990 - Doğu-Batı Birleşme Şoku (Reunification)", year: "1990",
+                subtitle: "1:1 Ostmark/D-Mark dönüşümü, devasa bütçe açıkları, enflasyonist baskı ve Avrupa'yı sarsan faiz artışları.",
+                difficulty: "Zor", currencySymbol: "DM", totalTurns: 6,
+                initial: { rate: 6.0, inflation: 2.8, fx: 1.65, reserves: 60.0, trust: 85, pressure: 50, rrr: 6.0 },
+                historicalResult: { inflation: 5.1, fx: 1.50, reserves: 75.0, trust: 80 },
+                optimalTarget: { inflation: 2.2, fx: 1.55, reserves: 80.0, trust: 92 },
+                events: [
+                    { turn: 1, title: "1:1 Ostmark Dönüşüm Kararı & Kamu Harcamaları Patlaması!", desc: "Politikacılar Doğu Alman Markı'nı birebir Batı Markı'na çevirdi. Piyasa para saçıldı!", options: [
+                        { text: "Enflasyonu önlemek için politika faizini %8.75'e fırlat!", effect: { rateDelta: 2.75, inflation: -1, trust: 10, pressure: 30 }, log: "Bundesbank faiz artırdı, Avrupa döviz mekanizması (ERM) sarsıldı!" },
+                        { text: "Politikacılara uyup faizi sabit tut.", effect: { inflation: 4, trust: -12, pressure: -10 }, log: "Almanya'da enflasyon patladı!" }
+                    ]},
+                    { turn: 2, title: "Avrupa Müttefiklerinden 'Faiz İndir' Baskısı", desc: "İngiltere ve Fransa yüksek Alman faizi yüzünden resesyonda. İndirim istiyorlar.", options: [
+                        { text: "Dış baskıyı reddet, önceliği Alman D-Mark'ının istikrarına ver!", effect: { trust: 15, pressure: 20 }, log: "Bundesbank bağımsızlığını tüm dünyaya kanıtladı." },
+                        { text: "Avrupa için faiz indir.", effect: { rateDelta: -2, inflation: 3, trust: -10 }, log: "İç enflasyon fırladı." }
+                    ]},
+                    { turn: 3, title: "Doğu Eyaletlerinde Yapısal Dönüşüm", desc: "Doğu Almanya sanayisi kapatılıyor, işsizlik var.", options: [
+                        { text: "Sıkı duruşu bozma.", effect: { trust: 8, inflation: -1 }, log: "Enflasyon kontrol altına alındı." },
+                        { text: "Para bas.", effect: { inflation: 5 }, log: "Risk." }
+                    ]},
+                    { turn: 4, title: "Maastricht Antlaşması İmzalandı", desc: "Euro bir para birimine doğru adımlar atılıyor.", options: [
+                        { text: "Euro için Bundesbank kriterlerini (sıkı bütçe) şart koş.", effect: { trust: 10 }, log: "Euro kriterleri şekillendi." },
+                        { text: "Esnek ol.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 5, title: "Enflasyonun %2 Seviyesine Gerilemesi", desc: "Yüksek faiz meyvesini verdi.", options: [
+                        { text: "Kademeli faiz indir.", effect: { rateDelta: -1.5, trust: 5 }, log: "Yumuşak iniş." },
+                        { text: "Sabit kal.", effect: { trust: 0 }, log: "Sıkı duruş." }
+                    ]},
+                    { turn: 6, title: "Final: Birleşme Mucizesi", desc: "Almanya birleşme maliyetini enflasyona ezdirmeden atlattı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- FRANSA (2) ---
+            "fr-1981": {
+                id: "fr-1981", country: "FR", countryName: "Fransa (Banque de France)", flag: "🇫🇷",
+                title: "1981 - Mitterrand Sol Deneyi & Frank Devalüasyonu", year: "1981",
+                subtitle: "Sosyalist kamulaştırmalar, Keynesyen genişleme, Frank üzerinde sermaye kaçışı ve Franc Fort dönüşü.",
+                difficulty: "Zor", currencySymbol: "Fr", totalTurns: 6,
+                initial: { rate: 10.0, inflation: 13.5, fx: 5.20, reserves: 25.0, trust: 50, pressure: 75, rrr: 8.0 },
+                historicalResult: { inflation: 9.0, fx: 8.00, reserves: 18.0, trust: 55 },
+                optimalTarget: { inflation: 5.0, fx: 6.00, reserves: 30.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "Mitterrand'ın Kamulaştırma ve Genişleme Programı!", desc: "Yeni hükümet bankaları kamulaştırdı, asgari ücreti %20 artırdı. Fransız Frankı çakılıyor, sermaye İsviçre'ye kaçıyor!", options: [
+                        { text: "Sermaye kontrolleri getir ve faizleri %18'e fırlatarak kaçışı engelle!", effect: { rateDelta: 8.0, fxPct: -5, trust: 10, pressure: 25 }, log: "Faiz artışı ve kambiyo kontrolü Frank erimesini durdurdu." },
+                        { text: "Hükümetin genişlemeci programına boyun eğ.", effect: { fxPct: 25, inflation: 8, trust: -20 }, log: "Frank devasa devalüasyona uğradı!" }
+                    ]},
+                    { turn: 2, title: "ERM İçinde Üst Üste Devalüasyon Talepleri", desc: "Frank D-Mark karşısında sürekli eriyor.", options: [
+                        { text: "Hükümeti uyar ve 'Franc Fort' (Güçlü Frank / Kemer Sıkma) politikasına zorla!", effect: { trust: 20, inflation: -4, pressure: 20 }, log: "Mitterrand kemer sıkmayı kabul etti, U dönüşü yapıldı!" },
+                        { text: "Devalüasyona devam et.", effect: { fxPct: 15, inflation: 6, trust: -15 }, log: "Enflasyon kronikleşti." }
+                    ]},
+                    { turn: 3, title: "Kemer Sıkma (Rigueur) Paketinin Açıklanması", desc: "Fransa Keynesyen modeli terk edip sıkı paraya geçiyor.", options: [
+                        { text: "Sıkı para politikasını tavizsiz uygula.", effect: { trust: 12, inflation: -3 }, log: "Fransız Frankı güven kazandı." },
+                        { text: "Gevşe.", effect: { inflation: 4 }, log: "Sermaye kaçışı." }
+                    ]},
+                    { turn: 4, title: "Alman Bundesbank ile İttifak", desc: "Frank D-Mark'a çıpalandı.", options: [
+                        { text: "D-Mark paritesini koru.", effect: { trust: 10, fxPct: -2 }, log: "Enflasyon Almanya seviyesine düştü." },
+                        { text: "Çıpadan çık.", effect: { fxPct: 8 }, log: "Devalüasyon." }
+                    ]},
+                    { turn: 5, title: "Enflasyonda Tek Hane", desc: "Fransa'da enflasyon %5'e geriledi.", options: [
+                        { text: "Faizleri kademeli indir.", effect: { rateDelta: -2.0, trust: 8 }, log: "Normalleşme." },
+                        { text: "Sabit tut.", effect: { trust: 0 }, log: "Sıkı." }
+                    ]},
+                    { turn: 6, title: "Final: Güçlü Frank Zaferi", desc: "Fransa sol deneyin ardından disiplinli para politikasına döndü.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "fr-1992": {
+                id: "fr-1992", country: "FR", countryName: "Fransa (Banque de France)", flag: "🇫🇷",
+                title: "1992 - ERM Spekülatif Saldırı Krizi", year: "1992",
+                subtitle: "Piyasa spekülatörlerinin Frank'a saldırması, Bundesbank ile gizli anlaşma ve Frank'ın savunulması.",
+                difficulty: "Zor", currencySymbol: "Fr", totalTurns: 6,
+                initial: { rate: 9.5, inflation: 2.8, fx: 3.35, reserves: 30.0, trust: 70, pressure: 40, rrr: 5.0 },
+                historicalResult: { inflation: 2.1, fx: 3.40, reserves: 28.0, trust: 75 },
+                optimalTarget: { inflation: 1.8, fx: 3.30, reserves: 35.0, trust: 88 },
+                events: [
+                    { turn: 1, title: "Spekülatörler Frank'a Karşı Devasa Açığa Satış Başlattı!", desc: "Sterlin ve Lira çöktükten sonra spekülatörler Frank'ı hedef aldı. Rezerv eriyor!", options: [
+                        { text: "Bundesbank Başkanı Schlesinger ile gizli anlaşma yapıp ortak sınırsız D-Mark/Frank müdahalesi açıkla!", effect: { reserves: 10.0, fxPct: -3, trust: 25 }, log: "Fransa ve Almanya spekülatörlerin belini kırdı!" },
+                        { text: "Tek başına rezerv sat.", effect: { reserves: -15.0, fxPct: 5, trust: -15 }, log: "Rezervler tükendi, Frank sarsıldı!" }
+                    ]},
+                    { turn: 2, title: "ERM Bant Genişliğinin %15'e Çıkarılması", desc: "Avrupa Merkez Bankaları bantları esnetti.", options: [
+                        { text: "Faizleri yüksek tutarak güven mesajı ver.", effect: { trust: 10, inflation: -1 }, log: "Frank bandın üst kısmına döndü." },
+                        { text: "Hemen faiz indir.", effect: { fxPct: 6, trust: -10 }, log: "Spekülatörler geri döndü." }
+                    ]},
+                    { turn: 3, title: "Fransa-Almanya Moneter Ekseni", desc: "Euro için Fransa-Almanya ortaklığı güçleniyor.", options: [
+                        { text: "Ortak politikaya tam uyum sağla.", effect: { trust: 12 }, log: "Euro'nun temeli atıldı." },
+                        { text: "Bağımsız hareket et.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 4, title: "Fransa Merkez Bankası'nın Tam Bağımsızlığı (1993)", desc: "Banque de France hükümetten tamamen bağımsızlaştırıldı.", options: [
+                        { text: "Bağımsızlık yasasını kutla ve enflasyon hedefini düşür.", effect: { trust: 15, inflation: -0.5 }, log: "Tam bağımsızlık tescillendi." },
+                        { text: "Pasif kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 5, title: "Normalleşme ve Faiz İndirimleri", desc: "Fırtına dindi, faizler makul seviyeye çekiliyor.", options: [
+                        { text: "Kademeli indir.", effect: { rateDelta: -1.5, trust: 5 }, log: "Dengeli." },
+                        { text: "Sabit tut.", effect: { trust: 0 }, log: "Sıkı." }
+                    ]},
+                    { turn: 6, title: "Final: Frank'ın Zaferi", desc: "Fransa Sterlin'in aksine Frank'ı spekülatörlere yedirmedi.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- İTALYA (2) ---
+            "it-1992": {
+                id: "it-1992", country: "IT", countryName: "İtalya (Banca d'Italia)", flag: "🇮🇹",
+                title: "1992 - Lira'nın ERM Çöküşü & Soros Saldırısı", year: "1992",
+                subtitle: "Devasa bütçe açıkları, Lira'ya spekülatif saldırı, rezerv tükenmesi ve Lira'nın %20 devalüe olması.",
+                difficulty: "Çok Zor", currencySymbol: "Lira", totalTurns: 6,
+                initial: { rate: 12.0, inflation: 5.5, fx: 1150.0, reserves: 20.0, trust: 45, pressure: 65, rrr: 10.0 },
+                historicalResult: { inflation: 4.2, fx: 1600.0, reserves: 10.0, trust: 40 },
+                optimalTarget: { inflation: 2.5, fx: 1300.0, reserves: 25.0, trust: 80 },
+                events: [
+                    { turn: 1, title: "Spekülatörler Lira'yı Kıskaca Aldı!", desc: "İtalya'nın borcu GDP'nin %100'ünü aştı. Lira ERM tabanına yapıştı!", options: [
+                        { text: "Rezervleri heba etme! Lira'yı ERM'den çıkar ve serbest devalüasyona bırak!", effect: { fxPct: 20, inflation: 3, trust: 10, reserves: 0 }, log: "Lira devalue oldu ancak rezerv erimesi durdu." },
+                        { text: "Son dolara kadar D-Mark satarak Lira'yı savun.", effect: { reserves: -12.0, fxPct: 5, trust: -20 }, log: "Rezerv bitti, zorunlu devalüasyon geldi!" }
+                    ]},
+                    { turn: 2, title: "Gecelik Mevduatlara %0.6 Olağanüstü Vergi", desc: "Hükümet gece yarısı tüm banka hesaplarından vergi kesti. Halk sokakta!", options: [
+                        { text: "Sıkı para politikası ve %15 faizle güveni geri kazan.", effect: { rateDelta: 3.0, trust: 10, inflation: -1 }, log: "Sıkı para politikası güven tazeledi." },
+                        { text: "Para bas.", effect: { inflation: 10, trust: -20 }, log: "Hiperenflasyon riski!" }
+                    ]},
+                    { turn: 3, title: "İtalyan Sanayisinin Devalüasyon İhracat Hamlesi", desc: "Düşük Lira Fiat ve tekstil ihracatını patlattı.", options: [
+                        { text: "Enflasyon geçişkenliğini önlemek için faizi yüksek tut.", effect: { trust: 8, inflation: -1 }, log: "Enflasyon kontrol edildi." },
+                        { text: "Faiz indir.", effect: { inflation: 4 }, log: "Enflasyonist baskı." }
+                    ]},
+                    { turn: 4, title: "Maliye Disiplini & Euro Hazırlığı", desc: "Euro'ya katılabilmek için bütçe açığı düşürülüyor.", options: [
+                        { text: "Hükümetin kemer sıkma paketini destekle.", effect: { trust: 12 }, log: "İtalya Euro kriterlerine yaklaştı." },
+                        { text: "Destekleme.", effect: { trust: -8 }, log: "Risk." }
+                    ]},
+                    { turn: 5, title: "Lira'nın ERM'ye Yeniden Katılımı (1996)", desc: "Lira istikrarlı kurdan ERM'ye geri döndü.", options: [
+                        { text: "Yeni kuru tescil et.", effect: { trust: 10 }, log: "Euro kapısı açıldı." },
+                        { text: "Pasif kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: Lira'nın Euro Yolculuğu", desc: "1992 fırtınasının ardından İtalya Euro kurucu üyesi olmayı başardı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "it-2011": {
+                id: "it-2011", country: "IT", countryName: "İtalya (Banca d'Italia / ECB)", flag: "🇮🇹",
+                title: "2011 - Euro Bölgesi Borç Krizi & BTP Spread Patlaması", year: "2011",
+                subtitle: "İtalyan tahvil getirilerinin %7'ye fırlaması, Berlusconi'nin istifası ve Draghi'nin 'Whatever It Takes' çıkışı.",
+                difficulty: "Çok Zor", currencySymbol: "€", totalTurns: 6,
+                initial: { rate: 1.5, inflation: 2.8, fx: 1.35, reserves: 120.0, trust: 30, pressure: 75, rrr: 2.0 },
+                historicalResult: { inflation: 1.2, fx: 1.28, reserves: 130.0, trust: 75 },
+                optimalTarget: { inflation: 1.8, fx: 1.30, reserves: 140.0, trust: 90 },
+                events: [
+                    { turn: 1, title: "10 Yıllık İtalyan Tahvil Getirisi %7.5 ile Rekor Kırdı!", desc: "İtalya borcunu çeviremiyor. Euro Bölgesi dağılma tehlikesiyle karşı karşıya!", options: [
+                        { text: "Mario Draghi tarzı 'Whatever It Takes' (Sınırsız Tahvil Alımı) ilan et!", effect: { trust: 35, inflation: 1, pressure: -20 }, log: "Tarihi çıkış piyasa faizlerini çökertti, Euro kurtuldu!" },
+                        { text: "Almanya'nın kemer sıkma dayatmasını bekle.", effect: { trust: -20, pressure: 20 }, log: "İtalya iflasın eşiğine geldi!" }
+                    ]},
+                    { turn: 2, title: "Teknokrat Hükümet (Mario Monti) Göreve Geldi", desc: "Emeklilik ve vergi reformları TBMM'de.", options: [
+                        { text: "Reformları desteklemek için Likidite Pencerelerini (LTRO) aç.", effect: { trust: 15, inflation: 0 }, log: "Bankalara $1 Trilyon ucuz likidite sağlandı." },
+                        { text: "Likiditeyi kısıtla.", effect: { trust: -10 }, log: "Kredi kilitlendi." }
+                    ]},
+                    { turn: 3, title: "OMT (Outright Monetary Transactions) Mekanizması", desc: "ECB sınırsız tahvil alma yetkisi tanımlıyor.", options: [
+                        { text: "OMT mekanizmasını resmileştir.", effect: { trust: 12 }, log: "Risk primleri tamamen eridi." },
+                        { text: "Geri adım at.", effect: { trust: -15 }, log: "Piyasa sarsıldı." }
+                    ]},
+                    { turn: 4, title: "Avrupa Bankacılık Birliği Adımları", desc: "Bankaların denetimi ECB'ye devrediliyor.", options: [
+                        { text: "Banka denetimlerini sıkılaştır.", effect: { trust: 10 }, log: "Sistemik risk düştü." },
+                        { text: "Diren.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 5, title: "İtalyan BTP Spread'lerinin 100 bps'e Gerilemesi", desc: "Borç krizi tamamen yatıştı.", options: [
+                        { text: "Politikayı normale döndür.", effect: { trust: 8 }, log: "İstikrar sağlandı." },
+                        { text: "Pasif kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: Euro'nun Kurtarılması", desc: "2011 İtalya krizi kararlı merkez bankacılığıyla çözüldü.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 20 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- İNGİLTERE (3) ---
+            "uk-1976": {
+                id: "uk-1976", country: "UK", countryName: "İngiltere (Bank of England)", flag: "🇬🇧",
+                title: "1976 - Sterlin Krizi & IMF Kurtarma Paketi", year: "1976",
+                subtitle: "%24 enflasyon, bütçe açığı, Sterlin'in çöküşü ve gelişmiş bir ülkenin tarihindeki en büyük IMF yardımı.",
+                difficulty: "Zor", currencySymbol: "£", totalTurns: 6,
+                initial: { rate: 11.5, inflation: 24.0, fx: 2.00, reserves: 7.0, trust: 30, pressure: 75, rrr: 12.0 },
+                historicalResult: { inflation: 15.0, fx: 1.70, reserves: 12.0, trust: 60 },
+                optimalTarget: { inflation: 8.0, fx: 1.85, reserves: 15.0, trust: 80 },
+                events: [
+                    { turn: 1, title: "Sterlin Çöküyor! IMF Masaya Çağrıldı!", desc: "İngiltere'de enflasyon %24. Rezervler bitti, Hükümet IMF'den $3.9B kredi istiyor!", options: [
+                        { text: "IMF'nin kamu harcamalarını kesme şartını kabul et ve faizi %15'e çıkar!", effect: { rateDelta: 3.5, trust: 20, inflation: -4, pressure: 20 }, log: "Tarihi IMF paketi kabul edildi, Sterlin erimesi durdu." },
+                        { text: "IMF şartlarını reddet ve para bas.", effect: { inflation: 15, fxPct: -20, trust: -25 }, log: "İngiltere hiperenflasyon eşiğine geldi!" }
+                    ]},
+                    { turn: 2, title: "Para Arzı Sınırlaması (M3 Targeting)", desc: "BoE ilk kez para arzına sıkı tavan getiriyor.", options: [
+                        { text: "Para arzı hedeflerini tavizsiz uygula.", effect: { trust: 15, inflation: -3 }, log: "Monetarist politika güven verdi." },
+                        { text: "Gevşet.", effect: { inflation: 5, trust: -10 }, log: "Sermaye kaçtı." }
+                    ]},
+                    { turn: 3, title: "Kuzey Denizi Petrolünün Devreye Girmesi", desc: "İngiltere petrol ihraç eden ülke haline geliyor.", options: [
+                        { text: "Petrol gelirleriyle rezervleri güçlendir.", effect: { reserves: 4.0, trust: 10 }, log: "Rezervler takviye edildi." },
+                        { text: "Hemen bütçede harca.", effect: { inflation: 3 }, log: "Enflasyonist risk." }
+                    ]},
+                    { turn: 4, title: "İşçi Sendikalarıyla Gerilim (Winter of Discontent)", desc: "Ücret artış kısıtlamaları grevlere yol açtı.", options: [
+                        { text: "Sıkı duruşu koru.", effect: { trust: 8, inflation: -2 }, log: "Disiplin sürdü." },
+                        { text: "Taviz ver.", effect: { inflation: 6 }, log: "Sarmal başladı." }
+                    ]},
+                    { turn: 5, title: "Thatcher Döneminin Başlaması (1979)", desc: "Serbest piyasa ve sıkı para politikası iktidarda.", options: [
+                        { text: "Dezenflasyon programını kararlılıkla sürdür.", effect: { trust: 12, inflation: -4 }, log: "Enflasyon tek haneye geriledi." },
+                        { text: "Gevşe.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: IMF Krizinden Çıkış", desc: "İngiltere tarihinin en ağır finansal krizini disiplinle geride bıraktı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "uk-1992": {
+                id: "uk-1992", country: "UK", countryName: "İngiltere (Bank of England)", flag: "🇬🇧",
+                title: "1992 - Kara Çarşamba (Black Wednesday)", year: "1992",
+                subtitle: "George Soros'un $10B spekülatif atağı, faizlerin %15'e çıkarılması ve ERM'den hezimetle çıkış.",
+                difficulty: "Çok Zor", currencySymbol: "£", totalTurns: 6,
+                initial: { rate: 10.0, inflation: 4.5, fx: 2.78, reserves: 40.0, trust: 60, pressure: 50, rrr: 8.0 },
+                historicalResult: { inflation: 2.5, fx: 2.40, reserves: 25.0, trust: 40 },
+                optimalTarget: { inflation: 2.0, fx: 2.50, reserves: 45.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "Soros Sterlin'e Karşı $10B Pozisyon Açtı!", desc: "George Soros Sterlin'in çöküşüne oynuyor. Sterlin fırtınada!", options: [
+                        { text: "Faizi %10'dan %12'ye, sonra %15'e fırlat ve $15B sat!", effect: { rateDelta: 5.0, reserves: -15.0, fxPct: -2, trust: -10, pressure: 20 }, log: "Milyarlarca dolar satıldı ama Soros pes etmedi!" },
+                        { text: "ERM'den çekil ve Sterlin'i serbest dalgalanmaya bırak.", effect: { fxPct: -12, trust: 15, reserves: 0 }, log: "ERM'den çıkıldı, Sterlin eridi ama faiz baskısı bitti." }
+                    ]},
+                    { turn: 2, title: "Kara Çarşamba Hezimetinin Ardından", desc: "BoE pes etti, ERM'den çıkıldı. Soros $1B kazandı.", options: [
+                        { text: "Açık Enflasyon Hedeflemesi rejimini ilan et.", effect: { trust: 20, inflation: -1 }, log: "Modern enflasyon hedeflemesi doğdu." },
+                        { text: "Kararsız kal.", effect: { trust: -15 }, log: "Prestij kaybı." }
+                    ]},
+                    { turn: 3, title: "Düşük Sterlin ile Rekabet Gücü", desc: "Devalüasyon İngiltere imalatını canlandırdı.", options: [
+                        { text: "Faizleri kademeli indir.", effect: { rateDelta: -2.0, trust: 10 }, log: "Ekonomik büyüme başladı." },
+                        { text: "Sıkı kal.", effect: { trust: 0 }, log: "Yavaş." }
+                    ]},
+                    { turn: 4, title: "Şeffaf Enflasyon Raporları", desc: "BoE dünyada ilk kez Enflasyon Raporu yayınlıyor.", options: [
+                        { text: "İletişim şeffaflığını artır.", effect: { trust: 10 }, log: "Güven yükseldi." },
+                        { text: "Gizlilik koru.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 5, title: "İngiltere Ekonomisinin Altın Çağı", desc: "ERM'den çıkış uzun süreli büyüme getirdi.", options: [
+                        { text: "Nötr faizde kal.", effect: { trust: 10 }, log: "İstikrar." },
+                        { text: "Gevşe.", effect: { inflation: 2 }, log: "Enflasyon." }
+                    ]},
+                    { turn: 6, title: "Final: Kara Çarşamba Mirası", desc: "BoE hezimetten bağımsızlık ve enflasyon hedeflemesi çıkardı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "uk-2022": {
+                id: "uk-2022", country: "UK", countryName: "İngiltere (Bank of England)", flag: "🇬🇧",
+                title: "2022 - Liz Truss Mini-Bütçe Şoku & LDI Emeklilik Krizi", year: "2022",
+                subtitle: "Liz Truss'ın teminatsız vergi indirimleri, İngiliz tahvillerinde (Gilts) çöküş ve acil $65B alım müdahalesi.",
+                difficulty: "Zor", currencySymbol: "£", totalTurns: 6,
+                initial: { rate: 2.25, inflation: 10.1, fx: 1.12, reserves: 100.0, trust: 65, pressure: 70, rrr: 5.0 },
+                historicalResult: { inflation: 4.0, fx: 1.25, reserves: 110.0, trust: 75 },
+                optimalTarget: { inflation: 2.0, fx: 1.28, reserves: 120.0, trust: 90 },
+                events: [
+                    { turn: 1, title: "Liz Truss Vergi İndirimi İlan Etti! Tahviller Çöktü!", desc: "Teminatsız £45B vergi indirimi sonrası Sterlin $1.03'e çakıldı, emeklilik fonları (LDI) batıyor!", options: [
+                        { text: "Finansal istikrar için acil £65B Tahvil Alımı ilan et ve faizi artır!", effect: { rateDelta: 1.0, trust: 15, fxPct: 5, pressure: 20 }, log: "Acil müdahale emeklilik fonlarını iflastan kurtardı!" },
+                        { text: "Müdahale etme, piyasanın dengelenmesini bekle.", effect: { trust: -25, fxPct: -10 }, log: "Emeklilik fonları zincirleme çöktü!" }
+                    ]},
+                    { turn: 2, title: "Liz Truss İstifa Etti (44 Günlük İktidar)", desc: "Piyasa baskısıyla Hükümet çöktü, Rishi Sunak geldi.", options: [
+                        { text: "Sıkı para ve maliye uyumunu destekle.", effect: { trust: 15, inflation: -1 }, log: "Piyasa sular duruldu." },
+                        { text: "Gevşe.", effect: { trust: -10 }, log: "Güvensizlik." }
+                    ]},
+                    { turn: 3, title: "Çift Haneli Enflasyonla Mücadele", desc: "Gıda ve enerji fiyatları halkı zorluyor.", options: [
+                        { text: "Faiz artış döngüsünü %5.25'e kadar sürdür.", effect: { rateDelta: 2.0, inflation: -3, trust: 10 }, log: "Enflasyon belini kırdı." },
+                        { text: "Faizi durdur.", effect: { inflation: 3 }, log: "Enflasyon çakıldı." }
+                    ]},
+                    { turn: 4, title: "Niceliksel Sıkılaşma (QT - Tahvil Satışı)", desc: "BoE bilançosundaki tahvilleri piyasaya satıyor.", options: [
+                        { text: "QT programını sakince yürüt.", effect: { trust: 8 }, log: "Bilanço küçüldü." },
+                        { text: "Hızlı sat.", effect: { trust: -5 }, log: "Tahvil baskısı." }
+                    ]},
+                    { turn: 5, title: "Enflasyonda %4 Seviyesine İniş", desc: "Sıkılaştırma sonuç verdi.", options: [
+                        { text: "Faiz indirim sinyali ver.", effect: { trust: 8 }, log: "Yumuşak iniş." },
+                        { text: "Sıkı kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: Mini-Bütçe Şokunun Atlatılması", desc: "BoE bağımsızlığıyla İngiliz finans sistemini korudu.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- ÇİN (3) ---
+            "cn-1994": {
+                id: "cn-1994", country: "CN", countryName: "Çin (PBoC)", flag: "🇨🇳",
+                title: "1994 - Döviz Unifikasyonu & Yuan Devalüasyonu", year: "1994",
+                subtitle: "İkili kur sisteminin kaldırılması, Yuan'ın tek gecede %33 devalüe edilerek ihracat patlamasının başlatılması.",
+                difficulty: "Orta", currencySymbol: "¥", totalTurns: 6,
+                initial: { rate: 10.0, inflation: 24.1, fx: 5.80, reserves: 21.0, trust: 60, pressure: 50, rrr: 13.0 },
+                historicalResult: { inflation: 8.0, fx: 8.30, reserves: 105.0, trust: 80 },
+                optimalTarget: { inflation: 5.0, fx: 8.00, reserves: 120.0, trust: 90 },
+                events: [
+                    { turn: 1, title: "İkili Kur Sistemi Kaldırıldı! Yuan %33 Devalue Edildi!", desc: "Resmi kur ile takas kuru birleştirildi. Yuan $1=8.70 seviyesine çekildi!", options: [
+                        { text: "Devalüasyon sonrası ihracat hamlesini destekle ve tight likidite uygula!", effect: { fxPct: 33, inflation: -5, reserves: 15.0, trust: 15 }, log: "Çin ihracat patlaması başladı, rezervler coştu!" },
+                        { text: "Devalüasyonu ertele.", effect: { reserves: -5.0, trust: -10 }, log: "Döviz kıtlığı yaşandı." }
+                    ]},
+                    { turn: 2, title: "Enflasyon %24 ile Zirve Yaptı", desc: "Hızlı büyüme fiyatları patlattı.", options: [
+                        { text: "Kredi kotalarını sıkılaştır ve faizi yükselt.", effect: { rateDelta: 2.0, inflation: -8, trust: 10 }, log: "Çin ekonomisi yumuşak iniş yaptı." },
+                        { text: "Kredileri serbest bırak.", effect: { inflation: 12 }, log: "Hiperenflasyon riski." }
+                    ]},
+                    { turn: 3, title: "Devasa Döviz Rezerv Birikimi", desc: "İhracat patlamasıyla Çin'e milyarlarca dolar akıyor.", options: [
+                        { text: "Rezervleri ABD Hazine Tahviline yatır.", effect: { reserves: 25.0, trust: 10 }, log: "Çin rezerv devine dönüştü." },
+                        { text: "Piyasaya TL/Yuan bas.", effect: { inflation: 5 }, log: "Lokal balona sebep oldu." }
+                    ]},
+                    { turn: 4, title: "1997 Asya Finansal Krizi Sınavı", desc: "Tüm Asya paraları çökerken Çin Yuan'ı sabitlemek istiyor.", options: [
+                        { text: "Yuan'ı $1=8.28'e sabitle ve devalue etme!", effect: { trust: 20, fxPct: 0 }, log: "Çin Asya'nın çıpası oldu, küresel takdir kazandı." },
+                        { text: "Asya ile devalüasyon yarışına gir.", effect: { fxPct: 20, trust: -15 }, log: "Bölgesel çöküş." }
+                    ]},
+                    { turn: 5, title: "WTO (Dünya Ticaret Örgütü) Üyeliği Hazırlığı", desc: "Çin küresel ticaretin merkezine yerleşiyor.", options: [
+                        { text: "Finansal sistemi kademeli dışa aç.", effect: { trust: 12 }, log: "WTO üyeliği tescillendi." },
+                        { text: "Kapalı kal.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: İhracat Mucizesi", desc: "1994 kararları Çin'i dünyanın fabrikasına dönüştürdü.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 20 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "cn-2015": {
+                id: "cn-2015", country: "CN", countryName: "Çin (PBoC)", flag: "🇨🇳",
+                title: "2015 - Borsa Çöküşü & Şok Yuan Devalüasyonu", year: "2015",
+                subtitle: "Çin borsasında $3 Trilyon buharlaşma, PBoC'nin sürpriz %2 devalüasyonu ve küresel piyasa depremi.",
+                difficulty: "Zor", currencySymbol: "¥", totalTurns: 6,
+                initial: { rate: 4.85, inflation: 1.4, fx: 6.20, reserves: 3650.0, trust: 70, pressure: 60, rrr: 18.5 },
+                historicalResult: { inflation: 2.0, fx: 6.90, reserves: 3000.0, trust: 65 },
+                optimalTarget: { inflation: 2.0, fx: 6.50, reserves: 3400.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "PBoC'den Gece Yarısı Sürpriz Yuan Devalüasyonu!", desc: "PBoC kuru tek gecede %2 değersizleştirdi. Dow Jones 1000 puan çöktü, küresel panik!", options: [
+                        { text: "Sermaye kaçışını önlemek için $500B rezerv yakarak kuru sabitle!", effect: { reserves: -300.0, fxPct: 2, trust: -10, pressure: 10 }, log: "Devasa rezerv yakılarak sermaye kaçışı frenlendi." },
+                        { text: "Devalüasyona devam et.", effect: { fxPct: 10, trust: -25 }, log: "Küresel finansal kriz tetiklendi!" }
+                    ]},
+                    { turn: 2, title: "Borsa Çöküşünü Önlemek İçin State Fund Müdahalesi", desc: "Şanghay borsası çakılıyor.", options: [
+                        { text: "Borsaya likidite enjekte et ve açığa satışı yasakla.", effect: { trust: 10, reserves: -50.0 }, log: "Borsa çöküşü durduruldu." },
+                        { text: "Müdahale etme.", effect: { trust: -15 }, log: "Panik derinleşti." }
+                    ]},
+                    { turn: 3, title: "Sermaye Kontrollerinin Sıkılaştırılması", desc: "Yurtdışına döviz çıkarma limitleri getirildi.", options: [
+                        { text: "Sermaye çıkış kurallarını katılaştır.", effect: { trust: 5, reserves: 50.0 }, log: "Rezerv kanaması durdu." },
+                        { text: "Serbest bırak.", effect: { reserves: -200.0 }, log: "Rezervler tükendi." }
+                    ]},
+                    { turn: 4, title: "IMF SDR Sepetine Yuan'ın Eklenmesi", desc: "Yuan küresel rezerv para birimi unvanı kazanıyor.", options: [
+                        { text: "Kuru sepet bazlı şeffaf yönetime geçir.", effect: { trust: 15 }, log: "Yuan SDR sepetine girdi." },
+                        { text: "Reddet.", effect: { trust: -10 }, log: "İtibar kaybı." }
+                    ]},
+                    { turn: 5, title: "Ekonomik Büyümenin Stabilize Edilmesi", desc: "Çin %6.7 büyüme patikasına oturdu.", options: [
+                        { text: "Ölçülü genişleme yap.", effect: { trust: 8 }, log: "Denge sağlandı." },
+                        { text: "Pasif kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: 2015 Şokunun Atlatılması", desc: "Çin $1 Trilyon rezerv yakarak sistemik çöküşü önledi.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "cn-2021": {
+                id: "cn-2021", country: "CN", countryName: "Çin (PBoC)", flag: "🇨🇳",
+                title: "2021-2023 - Evergrande & Deflasyon Sarmalı", year: "2021",
+                subtitle: "$300B borçlu Evergrande'nin çöküşü, gayrimenkul krizi, genç işsizliği ve deflasyonist baskı.",
+                difficulty: "Zor", currencySymbol: "¥", totalTurns: 6,
+                initial: { rate: 3.85, inflation: 0.8, fx: 6.45, reserves: 3200.0, trust: 60, pressure: 50, rrr: 12.0 },
+                historicalResult: { inflation: -0.3, fx: 7.20, reserves: 3230.0, trust: 55 },
+                optimalTarget: { inflation: 2.0, fx: 6.80, reserves: 3400.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "Evergrande Borç Temerrüdü & Gayrimenkul Depremi!", desc: "Çin'in en büyük emlak devi battı. Evini alamayan halk ipotek ödemelerini durdurdu!", options: [
+                        { text: "Seçici likidite ver, tamamlanmamış konut projelerini tamamla!", effect: { trust: 15, inflation: 0.5, reserves: -20.0 }, log: "Sosyal patlama ve sistemik kriz önlendi." },
+                        { text: "Serbest piyasa desinler, Evergrande'yi tamamen batır.", effect: { trust: -25, inflation: -1.5 }, log: "Gayrimenkul sektörü zincirleme çöktü!" }
+                    ]},
+                    { turn: 2, title: "Çin Deflasyona Girdi (Tüketici Fiyatları Düşüyor)", desc: "İç talep çöktü, halk harcamıyor.", options: [
+                        { text: "Zorunlu karşılıkları (RRR) indir ve faiz kır.", effect: { rrrDelta: -1.0, rateDelta: -0.3, trust: 10 }, log: "Piyasaya trilyonlarca Yuan pompalandı." },
+                        { text: "Deflasyonu izle.", effect: { inflation: -1.0, trust: -10 }, log: "Japonya tipi Kayıp On Yıl başladı!" }
+                    ]},
+                    { turn: 3, title: "ABD İle Çip & Teknoloji Savaşları", desc: "ABD yüksek teknoloji ihracatını engelliyor.", options: [
+                        { text: "Yerli teknoloji fonlarını finansal olarak destekle.", effect: { trust: 10 }, log: "Teknolojik bağımsızlık hamlesi." },
+                        { text: "Pasif kal.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 4, title: "Yuan Üzerindeki Değer Loss Baskısı", desc: "Fed faiz artırırken Çin indiriyor, Yuan zayıflıyor.", options: [
+                        { text: "Devlet bankalarına örtülü Dolar sattır.", effect: { reserves: -30.0, fxPct: -2 }, log: "Yuan zayıflaması kontrol altında." },
+                        { text: "Kuru serbest bırak.", effect: { fxPct: 8 }, log: "Sermaye kaçışı." }
+                    ]},
+                    { turn: 5, title: "Büyüme Destek Paketleri", desc: "%5 büyüme hedefine ulaşmak için teşvikler.", options: [
+                        { text: "Ekonomi paketini büyüt.", effect: { trust: 8, inflation: 1.0 }, log: "Deflasyondan çıkış sinyali." },
+                        { text: "Cılız kal.", effect: { trust: -5 }, log: "Durgunluk." }
+                    ]},
+                    { turn: 6, title: "Final: Deflasyon Mücadelesi", desc: "Çin gayrimenkul balonunu deflasyona girmeden yumuşatmaya çalışıyor.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- JAPONYA (2) ---
+            "jp-1990": {
+                id: "jp-1990", country: "JP", countryName: "Japonya (BoJ)", flag: "🇯🇵",
+                title: "1990 - Varlık Balonunun Patlaması & Kayıp On Yıl", year: "1990",
+                subtitle: "Nikkei ve emlak balonu çöküşü, deflasyon sarmalı, sıfır faiz (ZIRP) ve QE doğuşu.",
+                difficulty: "Zor", currencySymbol: "¥", totalTurns: 6,
+                initial: { rate: 2.50, inflation: 2.0, fx: 140.0, reserves: 80.0, trust: 80, pressure: 30, rrr: 4.0 },
+                historicalResult: { inflation: -0.5, fx: 110.0, reserves: 120.0, trust: 45 },
+                optimalTarget: { inflation: 1.5, fx: 125.0, reserves: 100.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "Nikkei 39,000 Zirvesi ve Devasa Gayrimenkul Balonu!", desc: "Tokyo Sarayı arsası tüm California'dan pahalı! BoJ Başkanı Mieno şok faiz kararı alıyor.", options: [
+                        { text: "Balonu patlatma pahasına faizi sert artır (%6.0'ya çıkar)!", effect: { rateDelta: 3.5, inflation: -2, trust: -10, pressure: 25 }, log: "Faiz artışı balonları patlattı! Kayıp On Yıl başladı." },
+                        { text: "Faizi düşük tut, balona göz yum.", effect: { inflation: 4, trust: -15 }, log: "Patlama riski felakete dönüştü." }
+                    ]},
+                    { turn: 2, title: "Borsa %50 Çöktü & Batık Krediler (NPL)", desc: "Bankalar batık gayrimenkul kredileriyle kilitlendi.", options: [
+                        { text: "Faizleri sıfıra indir (ZIRP) ve bankalara likidite pompala.", effect: { rateDelta: -4.0, trust: 5, inflation: -1 }, log: "Sıfır faiz dönemine geçildi." },
+                        { text: "Yavaş faiz indir.", effect: { trust: -10, inflation: -3 }, log: "Borç-deflasyon spirali başladı!" }
+                    ]},
+                    { turn: 3, title: "Dünyanın İlk Miktarsal Genişlemesi (QE)", desc: "BoJ deflasyonu kırmak için QE başlatıyor.", options: [
+                        { text: "Devlet tahvili alımları yap.", effect: { trust: 10, inflation: 1 }, log: "Dünyanın ilk QE'si başlatıldı." },
+                        { text: "Geleneksel kal.", effect: { inflation: -2 }, log: "Deflasyon derinleşti." }
+                    ]},
+                    { turn: 4, title: "Aşırı Değerli Yen Baskısı", desc: "Sermaye Japonya'ya dönüyor, Yen fırlıyor.", options: [
+                        { text: "Yen satarak müdahale et.", effect: { reserves: 10.0, fxPct: 5 }, log: "Yen müdahalesi yapıldı." },
+                        { text: "Pasif kal.", effect: { fxPct: -8 }, log: "İhracatçı sarsıldı." }
+                    ]},
+                    { turn: 5, title: "Helikopter Para & Altyapı Harcamaları", desc: "Hükümet devasa bütçe açıkları veriyor.", options: [
+                        { text: "Maliye ile parasal uyum sağla.", effect: { trust: 8 }, log: "Koordinasyon." },
+                        { text: "Diren.", effect: { trust: -5 }, log: "Kilitlenme." }
+                    ]},
+                    { turn: 6, title: "Final: Kayıp On Yıl Bilançosu", desc: "Japonya onlarca yıl sürecek deflasyonist döneme girdi.", options: [
+                        { text: "Stabilizasyonu tescille.", effect: { trust: 10 }, log: "Tamamlandı." },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "jp-2013": {
+                id: "jp-2013", country: "JP", countryName: "Japonya (BoJ)", flag: "🇯🇵",
+                title: "2013 - Abenomics & QQE Negatif Faiz", year: "2013",
+                subtitle: "Shinzo Abe'nin Üç Ok stratejisi, Haruhiko Kuroda'nın QQE bazukası, negatif faiz ve Getiri Eğrisi Kontrolü (YCC).",
+                difficulty: "Orta", currencySymbol: "¥", totalTurns: 6,
+                initial: { rate: 0.10, inflation: -0.2, fx: 80.0, reserves: 1200.0, trust: 65, pressure: 50, rrr: 1.0 },
+                historicalResult: { inflation: 1.0, fx: 110.0, reserves: 1300.0, trust: 75 },
+                optimalTarget: { inflation: 2.0, fx: 105.0, reserves: 1350.0, trust: 88 },
+                events: [
+                    { turn: 1, title: "Kuroda'nın Parasal Bazuka Açıklaması (QQE)!", desc: "BoJ parasal tabanı 2 yılda 2 katına çıkaracağını duyurdu! Yen çöktü, borsa patladı!", options: [
+                        { text: "Sınırsız ETF ve Devlet Tahvili Alımı (QQE) başlat!", effect: { trust: 20, inflation: 1.5, fxPct: 15 }, log: "Siyah bazuka patlatıldı! Nikkei fırladı, Yen ucuzladı." },
+                        { text: "Ölçülü genişleme yap.", effect: { trust: -10 }, log: "Piyasa tatmin olmadı." }
+                    ]},
+                    { turn: 2, title: "Negatif Faiz Politikasına Geçiş (-%0.1)", desc: "Deflasyonu tamamen yok etmek için negatif faiz ilan ediliyor.", options: [
+                        { text: "Mevduatlara eksi faiz uygula.", effect: { rateDelta: -0.2, trust: 5, fxPct: 5 }, log: "Japonya negatif faiz kulübüne girdi." },
+                        { text: "Sıfırda kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 3, title: "Getiri Eğrisi Kontrolü (YCC - Yield Curve Control)", desc: "10 yıllık tahvil faizi %0'a sabitleniyor.", options: [
+                        { text: "YCC mekanizmasını resmen duyur.", effect: { trust: 15 }, log: "10 yıllık tahvil faizi %0'a çivilendi." },
+                        { text: "Serbest bırak.", effect: { trust: -5 }, log: "Oynaklık arttı." }
+                    ]},
+                    { turn: 4, title: "Tüketim Vergisi Artışı Şoku", desc: "Hükümet vergiyi %8'e çıkardı, iç talep düştü.", options: [
+                        { text: "QQE alımlarını daha da artır.", effect: { trust: 8, inflation: 0.5 }, log: "Şok yumuşatıldı." },
+                        { text: "Pasif kal.", effect: { inflation: -1.0 }, log: "Yeniden deflasyon riski." }
+                    ]},
+                    { turn: 5, title: "Küresel Enflasyon Dalgası (2022)", desc: "Dünya faiz artırırken BoJ YCC'yi koruyor.", options: [
+                        { text: "YCC bandını esnet.", effect: { trust: 10, fxPct: -5 }, log: "Yen üzerindeki baskı hafifledi." },
+                        { text: "İnat et.", effect: { fxPct: 15, trust: -10 }, log: "Yen $1=150 seviyesine çöktü!" }
+                    ]},
+                    { turn: 6, title: "Final: Abenomics Bilançosu", desc: "Japonya onlarca yıllık kronik deflasyonu kırmayı başardı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- ABD (3) ---
+            "us-1929": {
+                id: "us-1929", country: "US", countryName: "ABD (Fed)", flag: "🇺🇸",
+                title: "1929 - Büyük Buhran & Altın Standardı Yanılgısı", year: "1929",
+                subtitle: "Wall Street çöküşü, Fed'in yanlış para kısıtlaması, binlerce bankanın batması ve %25 işsizlik.",
+                difficulty: "Çok Zor", currencySymbol: "$", totalTurns: 6,
+                initial: { rate: 6.0, inflation: 0.0, fx: 1.0, reserves: 200.0, trust: 70, pressure: 50, rrr: 10.0 },
+                historicalResult: { inflation: -10.0, fx: 1.0, reserves: 180.0, trust: 15 },
+                optimalTarget: { inflation: 2.0, fx: 1.0, reserves: 250.0, trust: 85 },
+                events: [
+                    { turn: 1, title: "Kara Salı! Wall Street Çöktü!", desc: "Borsa %80 çakıldı. Bankalar önünde devasa kuyruklar var. Parasal taban daralıyor!", options: [
+                        { text: "Altın standardı kısıtlamasını takma! Likidite musluklarını aç ve bankaları kurtar!", effect: { rateDelta: -4.0, trust: 25, inflation: 3 }, log: "Fed son kredi mercii (Lender of Last Resort) oldu, Büyük Buhran önlendi!" },
+                        { text: "Altın rezervini korumak için faizi artır ve batan bankaları izle.", effect: { rateDelta: 1.0, inflation: -8, trust: -30 }, log: "10,000 banka battı, Büyük Buhran derinleşti!" }
+                    ]},
+                    { turn: 2, title: "Borç-Deflasyon Spirali (Fisher Spirali)", desc: "Fiyatlar düşüyor, reel borç yükü katlanıyor.", options: [
+                        { text: "Açık piyasa işlemleriyle piyasadan devasa tahvil al.", effect: { trust: 15, inflation: 4 }, log: "Deflasyon kabusu kırıldı." },
+                        { text: "Geleneksel kal.", effect: { inflation: -10, trust: -20 }, log: "Sanayi üretimi %50 düştü!" }
+                    ]},
+                    { turn: 3, title: "Roosevelt'in 'New Deal' ve Altın Kamulaştırması", desc: "Doların altın karşılığı devalue ediliyor.", options: [
+                        { text: "Roosevelt'in dolar devalüasyonunu destekle ($20 -> $35/ons).", effect: { trust: 20, inflation: 5 }, log: "Dolar devalüasyonu ihracatı ve fiyatları canlandırdı." },
+                        { text: "Karşı çık.", effect: { trust: -15 }, log: "Kilitlenme." }
+                    ]},
+                    { turn: 4, title: "Federal Mevduat Sigortası (FDIC) Kuruluşu", desc: "Mevduat kaçışını önlemek için devlet garantisi.", options: [
+                        { text: "FDIC sistemini entegre et.", effect: { trust: 15 }, log: "Banka hücumları bıçak gibi kesildi." },
+                        { text: "Reddet.", effect: { trust: -10 }, log: "Panik sürdü." }
+                    ]},
+                    { turn: 5, title: "Ekonominin Canlanması", desc: "Sınai üretim yeniden artışa geçti.", options: [
+                        { text: "Genişlemeci duruşu koru.", effect: { trust: 10 }, log: "İyileşme." },
+                        { text: "Erken sıkılaş (1937 hatası).", effect: { inflation: -4, trust: -15 }, log: "Yeniden resesyon!" }
+                    ]},
+                    { turn: 6, title: "Final: Büyük Buhran Dersi", desc: "1929 Fed hatası modern merkez bankacılığının en büyük dersi oldu.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "us-1979": {
+                id: "us-1979", country: "US", countryName: "ABD (Fed)", flag: "🇺🇸",
+                title: "1979 - Volcker Şoku & Stagflasyon Mücadelesi", year: "1979",
+                subtitle: "Paul Volcker'ın faizleri %20'ye fırlatması, resesyon pahasına çift haneli enflasyonu yok etmesi.",
+                difficulty: "Orta", currencySymbol: "$", totalTurns: 6,
+                initial: { rate: 11.0, inflation: 12.5, fx: 1.0, reserves: 150.0, trust: 50, pressure: 60, rrr: 12.0 },
+                historicalResult: { inflation: 3.8, fx: 1.0, reserves: 160.0, trust: 90 },
+                optimalTarget: { inflation: 2.5, fx: 1.0, reserves: 180.0, trust: 95 },
+                events: [
+                    { turn: 1, title: "Paul Volcker Fed Başkanı Oldu!", desc: "ABD enflasyonu %13. Dolar çöp oluyor. Volcker radikal sıkılaşma ilan ediyor.", options: [
+                        { text: "Para arzını kısıtla ve faizi %20'ye fırlat!", effect: { rateDelta: 8.0, inflation: -3, trust: 20, pressure: 35 }, log: "Volcker Şoku! Piyasa sarsıldı ama enflasyon kırıldı." },
+                        { text: "Yumuşak artır.", effect: { rateDelta: 1.5, inflation: 5, trust: -15 }, log: "Stagflasyon derinleşti." }
+                    ]},
+                    { turn: 2, title: "Traktörlü Çiftçi Protestoları & Resesyon", desc: "Yüksek faiz nedeniyle inşaat ve oto durdu. Çiftçiler Fed'i kuşattı!", options: [
+                        { text: "Sıkı duruşu tavizsiz koru!", effect: { trust: 15, pressure: 20, inflation: -4 }, log: "Demir irade güven yarattı." },
+                        { text: "Baskıya dayanamayıp faiz indir.", effect: { rateDelta: -4, inflation: 6, trust: -25 }, log: "Kazanımlar yok oldu." }
+                    ]},
+                    { turn: 3, title: "Süper Dolar & Latin Amerika Borç Krizi", desc: "ABD faizi %20 olunca tüm para Amerika'ya aktı. Meksika battı.", options: [
+                        { text: "Önceliği ABD enflasyonuna ver.", effect: { trust: 10, inflation: -3 }, log: "ABD enflasyonu %6'ya düştü." },
+                        { text: "Dünyayı kurtarmak için faiz indir.", effect: { rateDelta: -3, inflation: 3 }, log: "Enflasyon nüksetti." }
+                    ]},
+                    { turn: 4, title: "Reaganomiks Bütçe Açıkları", desc: "Reagan vergi indirerek bütçe açığını büyütüyor.", options: [
+                        { text: "Sıkı para politikasını sürdür.", effect: { trust: 8, inflation: -2 }, log: "Denge korundu." },
+                        { text: "Gevşe.", effect: { inflation: 4 }, log: "Risk." }
+                    ]},
+                    { turn: 5, title: "Enflasyon %4 Seviyesinde", desc: "Acı ilaç meyvesini verdi.", options: [
+                        { text: "Faizleri kademeli indir.", effect: { rateDelta: -2.0, trust: 10 }, log: "Kalıcı dezenflasyon." },
+                        { text: "Hemen eski faize dön.", effect: { rateDelta: -6.0, inflation: 4 }, log: "Hata." }
+                    ]},
+                    { turn: 6, title: "Final: Volcker Zaferi", desc: "Volcker zaferi modern merkez bankacılığının altın kuralı oldu.", options: [
+                        { text: "Zaferi tescille.", effect: { trust: 20 }, log: "Efsanevi başarı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "us-2008": {
+                id: "us-2008", country: "US", countryName: "ABD (Fed)", flag: "🇺🇸",
+                title: "2008 - Lehman Brothers & Subprime Küresel Kriz", year: "2008",
+                subtitle: "Lehman Brothers'ın iflası, mortgage çöküşü, sıfır faiz ve Ben Bernanke'nin QE1 helikopter parası.",
+                difficulty: "Zor", currencySymbol: "$", totalTurns: 6,
+                initial: { rate: 5.25, inflation: 3.8, fx: 1.0, reserves: 50.0, trust: 75, pressure: 50, rrr: 10.0 },
+                historicalResult: { inflation: -0.4, fx: 1.0, reserves: 60.0, trust: 70 },
+                optimalTarget: { inflation: 2.0, fx: 1.0, reserves: 80.0, trust: 92 },
+                events: [
+                    { turn: 1, title: "15 Eylül 2008: Lehman Brothers İflas Etti!", desc: "158 yıllık dev battı. Küresel bankalararası kredi piyasası tamamen dondu!", options: [
+                        { text: "Acil ZIRP (Sıfır Faiz) ilan et ve $700B AIG/MBS kurtarma paketi (QE1) duyur!", effect: { rateDelta: -5.0, trust: 20, inflation: -1 }, log: "Helikopter Ben sahnede! Küresel finansal çöküş önlendi." },
+                        { text: "Moral hazard var diyerek kimseyi kurtarma.", effect: { trust: -35, inflation: -5 }, log: "Tüm finans sistemi domino gibi çöktü!" }
+                    ]},
+                    { turn: 2, title: "AIG Sigorta Devinin Devlet Tarafından Kamulaştırılması", desc: "CDS türev piyasası patladı.", options: [
+                        { text: "Fed bilançosunu ipotekli varlıklarla (MBS) genişlet.", effect: { trust: 15, inflation: 1 }, log: "Piyasa likiditeye doydu." },
+                        { text: "Reddet.", effect: { trust: -20 }, log: "Sistemik çöküş." }
+                    ]},
+                    { turn: 3, title: "Sıfır Faiz Alt Sınırı (Zero Lower Bound)", desc: "Geleneksel faiz aracı tükendi.", options: [
+                        { text: "Sözlü yönlendirme (Forward Guidance) başlat.", effect: { trust: 10 }, log: "Uzun vadeli faizler düştü." },
+                        { text: "Pasif kal.", effect: { trust: -5 }, log: "Nötr." }
+                    ]},
+                    { turn: 4, title: "Küresel Bulaşma Efekti (Avrupa ve Gelişen Piyasalar)", desc: "Tüm dünya resesyona girdi.", options: [
+                        { text: "Küresel MB'ler ile Swap Hatları (Swap Lines) aç.", effect: { trust: 15 }, log: "Küresel Dolar likiditesi sağlandı." },
+                        { text: "Doları kapatsınlar.", effect: { trust: -10 }, log: "Küresel kriz." }
+                    ]},
+                    { turn: 5, title: "QE2 ve Bilanço Büyümesi", desc: "ABD ekonomisi yavaş toparlanıyor.", options: [
+                        { text: "İkinci varlık alım paketini duyur.", effect: { trust: 8, inflation: 1.0 }, log: "Büyüme desteklendi." },
+                        { text: "Erken çıkış yap.", effect: { inflation: -2, trust: -10 }, log: "Çift dip resesyon!" }
+                    ]},
+                    { turn: 6, title: "Final: 2008 Krizinin Mirası", desc: "Fed dünyayı İkinci Büyük Buhran'dan kurtardı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 20 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            // --- DİĞER ÜLKELER (3) ---
+            "ch-2015": {
+                id: "ch-2015", country: "OTHER", countryName: "İsviçre (SNB)", flag: "🇨🇭",
+                title: "2015 - EUR/CHF Tsunami & Negatif Faiz", year: "2015",
+                subtitle: "1.20 tavan kur kapağının aniden kaldırılması, Frank'ın %30 fırlaması ve -%0.75 negatif faiz.",
+                difficulty: "Orta", currencySymbol: "CHF", totalTurns: 6,
+                initial: { rate: -0.25, inflation: -0.5, fx: 1.20, reserves: 480.0, trust: 85, pressure: 20, rrr: 5.0 },
+                historicalResult: { inflation: -1.1, fx: 0.98, reserves: 550.0, trust: 80 },
+                optimalTarget: { inflation: 0.5, fx: 1.05, reserves: 500.0, trust: 90 },
+                events: [
+                    { turn: 1, title: "SNB 1.20 Taban Kuru Aniden Kaldırdı!", desc: "SNB Avro tutma sınırını patlattı! CHF %30 fırladı, küresel brokerlar battı!", options: [
+                        { text: "Taban kuru kaldır ve faizi eksiya göm (-%0.75 Negatif Faiz yap)!", effect: { rateDelta: -0.50, fxPct: -18, inflation: -1.5, trust: 10, pressure: 10 }, log: "Taban kur kaldırıldı! CHF fırladı ancak SNB devasa zarardan kurtuldu." },
+                        { text: "Sınırsız Avro alarak 1.20 tabanını korumaya devam et.", effect: { reserves: 150.0, fxPct: 0, trust: -20 }, log: "SNB bilançosu patlama noktasına geldi!" }
+                    ]},
+                    { turn: 2, title: "Negatif Faizlerin Finansal Sektöre Etkisi", desc: "Mevduat sahipleri negatif faizden şikayetçi.", options: [
+                        { text: "Negatif faizi koruyarak CHF'yi zayıflat.", effect: { trust: 5, fxPct: 2 }, log: "Sermaye girişi yavaşladı." },
+                        { text: "Sıfır faize dön.", effect: { fxPct: -5, trust: -5 }, log: "CHF yeniden fırladı." }
+                    ]},
+                    { turn: 3, title: "Devasa Yabancı Para Rezerv Yönetimi", desc: "SNB bilançosu milli geliri aştı! SNB hisse alıyor.", options: [
+                        { text: "Rezervleri küresel hisse senedi ve altına yatır.", effect: { reserves: 20.0, trust: 8 }, log: "Rezerv getirisi arttı." },
+                        { text: "Sadece nakit tut.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 4, title: "İsviçre İhracatçıları Şokta", desc: "Aşırı değerli CHF ihracatı zorluyor.", options: [
+                        { text: "Sözlü müdahale yap.", effect: { trust: 5 }, log: "Sözlü yönlendirme." },
+                        { text: "Pasif kal.", effect: { trust: -2 }, log: "İhracatçı tepkili." }
+                    ]},
+                    { turn: 5, title: "ECB Normalleşme Sinyalleri", desc: "Avrupa'da faizler yükseliyor.", options: [
+                        { text: "Negatif faizden çıkış hazırlığı yap.", effect: { trust: 8 }, log: "Normalleşme." },
+                        { text: "Negatif faizde kal.", effect: { trust: -4 }, log: "Risk." }
+                    ]},
+                    { turn: 6, title: "Final: Tsunami Sonrası İsviçre", desc: "SNB cesur bir kararla finansal tarih yazdı.", options: [
+                        { text: "Dengelenmeyi tescille.", effect: { trust: 15 }, log: "Tamamlandı." },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "ar-2001": {
+                id: "ar-2001", country: "OTHER", countryName: "Arjantin (BCRA)", flag: "🇦🇷",
+                title: "2001 - Konvertibilite Çöküşü & Corralito", year: "2001",
+                subtitle: "1 Peso = 1 Dolar sabit kurunun çöküşü, banka hesaplarının dondurulması (Corralito) ve hiperenflasyon.",
+                difficulty: "Aşırı Zor", currencySymbol: "Peso", totalTurns: 6,
+                initial: { rate: 25.0, inflation: 0.0, fx: 1.0, reserves: 14.0, trust: 25, pressure: 85, rrr: 20.0 },
+                historicalResult: { inflation: 200.0, fx: 3.8, reserves: 8.0, trust: 10 },
+                optimalTarget: { inflation: 20.0, fx: 1.8, reserves: 18.0, trust: 70 },
+                events: [
+                    { turn: 1, title: "Corralito! Banka Hesapları Donduruldu!", desc: "Nakit çekimi sınırladı. Sokaklar karıştı!", options: [
+                        { text: "1=1 sabit kurunu terk et ve Pesoyu serbest devalue et!", effect: { fxPct: 180, inflation: 50, trust: -10, pressure: 10 }, log: "Konvertibilite çöktü, Pesoylaşma başladı." },
+                        { text: "Son dolara kadar 1=1 kurunu savun.", effect: { reserves: -8.0, trust: -25, pressure: 15 }, log: "Rezerv bitti, devlet temerrüde düştü!" }
+                    ]},
+                    { turn: 2, title: "$100B Temerrüt & 5 Başkan Değişimi", desc: "Arjantin dış borçlarını ödeyemiyor.", options: [
+                        { text: "Yeni bağımsız Para Konseyi kur.", effect: { trust: 15, inflation: -10 }, log: "Yeniden yapılanma." },
+                        { text: "Para basarak bütçeyi kapat.", effect: { inflation: 100, fxPct: 60, trust: -20 }, log: "Hiperenflasyon başladı!" }
+                    ]},
+                    { turn: 3, title: "Paralel Paralar (Patacones)", desc: "Eyaletler borç ödemek için kendi parasını basıyor.", options: [
+                        { text: "Paralel paraları yasakla.", effect: { trust: 12, inflation: -10 }, log: "Moneter birlik sağlandı." },
+                        { text: "Göz yum.", effect: { inflation: 30, trust: -15 }, log: "Kaos derinleşti." }
+                    ]},
+                    { turn: 4, title: "IMF İlişkilerinin Kopması", desc: "IMF desteği kesti.", options: [
+                        { text: "Sıkı duruşu koru.", effect: { trust: 10 }, log: "Disiplin." },
+                        { text: "Dış dünyayı suçla.", effect: { trust: -5 }, log: "İzolasyon." }
+                    ]},
+                    { turn: 5, title: "Emtia İhracatı Rüzgarı", desc: "Soya fasulyesi fiyatları artıyor.", options: [
+                        { text: "Döviz rezerv biriktir.", effect: { reserves: 4.0, trust: 5 }, log: "Rezervler toparlandı." },
+                        { text: "Hemen harca.", effect: { reserves: -2.0 }, log: "Eritildi." }
+                    ]},
+                    { turn: 6, title: "Final: Enkazın Ardından", desc: "Arjantin tarihinin en ağır krizini geride bıraktı.", options: [
+                        { text: "Dengelenmeyi tescil et.", effect: { trust: 12 }, log: "Tamamlandı." },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            },
+
+            "ru-1998": {
+                id: "ru-1998", country: "OTHER", countryName: "Rusya (CBR)", flag: "🇷🇺",
+                title: "1998 - Rubel Default & Asya Kriz Bulaşması", year: "1998",
+                subtitle: "Asya krizinin vurması, çöküşteki petrol fiyatları, Ruble devalüasyonu ve iç borç ödemelerinin durdurulması (GKO Default).",
+                difficulty: "Çok Zor", currencySymbol: "₽", totalTurns: 6,
+                initial: { rate: 60.0, inflation: 11.0, fx: 6.20, reserves: 12.0, trust: 30, pressure: 80, rrr: 15.0 },
+                historicalResult: { inflation: 84.0, fx: 21.0, reserves: 8.0, trust: 20 },
+                optimalTarget: { inflation: 20.0, fx: 12.0, reserves: 20.0, trust: 75 },
+                events: [
+                    { turn: 1, title: "Rusya İç Borçlarında (GKO) Temerrüt İlan Etti!", desc: "Petrol $10'a düştü. Rusya iç borçlarını ödeyemiyor, Ruble çöktü!", options: [
+                        { text: "Ruble'yi devalue et ve borç yapılandırmasını açıkla!", effect: { fxPct: 150, inflation: 40, trust: -10, pressure: 10 }, log: "Rubel devalue edildi, LTCM fonu battı!" },
+                        { text: "Son Ruble'ye kadar borç ödemek için para bas.", effect: { inflation: 200, fxPct: 300, trust: -25 }, log: "Hiperenflasyon patladı!" }
+                    ]},
+                    { turn: 2, title: "LTCM Dev Hedge Fonunun İflası", desc: "Rusya temerrüdü Wall Street devini batırdı.", options: [
+                        { text: "Sıkı para politikasına dön ve kuru dalgalanmaya bırak.", effect: { trust: 15, inflation: -10 }, log: "Piyasa zemin buldu." },
+                        { text: "Kapan.", effect: { trust: -15 }, log: "Kaos." }
+                    ]},
+                    { turn: 3, title: "Petrol Fiyatlarının Toparlanması (1999)", desc: "Petrol $20'ye yükseliyor.", options: [
+                        { text: "Döviz rezerv biriktir.", effect: { reserves: 5.0, trust: 10 }, log: "Rezervler güçlendi." },
+                        { text: "Hemen harca.", effect: { inflation: 10 }, log: "Risk." }
+                    ]},
+                    { turn: 4, title: "Yeni Bütçe Disiplini", desc: "Hükümet vergi reformu yapıyor.", options: [
+                        { text: "Vergi reformunu destekle.", effect: { trust: 12 }, log: "Bütçe fazla verdi." },
+                        { text: "Pasif kal.", effect: { trust: 0 }, log: "Nötr." }
+                    ]},
+                    { turn: 5, title: "Enflasyonda Tek Hane Hedeflemesi", desc: "Ruble istikrara kavuştu.", options: [
+                        { text: "Faizleri düşür.", effect: { rateDelta: -20.0, trust: 10 }, log: "Kredi akışı başladı." },
+                        { text: "Faizleri %50'de tut.", effect: { trust: -5 }, log: "Durgunluk." }
+                    ]},
+                    { turn: 6, title: "Final: Rubel Default Bilançosu", desc: "Rusya 1998 enkazından petrol desteğiyle güçlü çıktı.", options: [
+                        { text: "Başarıyı tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            }
+        };
+
+        // ==========================================
+        // GAME STATE MANAGEMENT
+        // ==========================================
+        let state = {
+            currentScreen: 'select',
+            activeScenarioId: null,
+            scenario: null,
+            turn: 1,
+            maxTurns: 6,
+            
+            rate: 15.0,
+            inflation: 20.0,
+            fx: 1.0,
+            reserves: 10.0,
+            trust: 50,
+            pressure: 20,
+            cds: 250,
+            rrr: 10.0,
+
+            selectedRate: 15.0,
+            selectedFxAction: 'NONE',
+            selectedTone: 'NEUTRAL',
+            selectedPoliticalStance: 'COMPROMISE',
+            selectedEventOptionIndex: 0,
+
+            logs: [],
+            chartData: { labels: [], inflation: [], rate: [], fx: [] },
+            gameOver: false,
+            filterCountry: 'ALL'
+        };
+
+        let chartInstance = null;
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        window.onload = function() {
+            renderScenarioGrid();
+            initChart();
+        };
+
+        function switchScreen(screenName) {
+            state.currentScreen = screenName;
+            document.getElementById('screenSelect').classList.add('hidden');
+            document.getElementById('screenGame').classList.add('hidden');
+            document.getElementById('screenReport').classList.add('hidden');
+
+            document.getElementById('btnReturnSelect').classList.add('hidden');
+            document.getElementById('headerStatusBox').classList.add('hidden');
+
+            if (screenName === 'select') {
+                document.getElementById('screenSelect').classList.remove('hidden');
+            } else if (screenName === 'game') {
+                document.getElementById('screenGame').classList.remove('hidden');
+                document.getElementById('btnReturnSelect').classList.remove('hidden');
+                document.getElementById('headerStatusBox').classList.remove('hidden');
+            } else if (screenName === 'report') {
+                document.getElementById('screenReport').classList.remove('hidden');
+                document.getElementById('btnReturnSelect').classList.remove('hidden');
+            }
+        }
+
+        function filterCountry(code) {
+            state.filterCountry = code;
+            document.querySelectorAll('.country-tab').forEach(btn => {
+                btn.className = "country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:text-slate-200 transition shrink-0";
+            });
+            const activeBtn = document.getElementById(`tabCountry${code}`);
+            if (activeBtn) {
+                activeBtn.className = "country-tab font-mono text-xs px-3.5 py-2 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-bold transition shrink-0";
+            }
+            renderScenarioGrid();
+        }
+
+        function renderScenarioGrid() {
+            const grid = document.getElementById('scenarioGrid');
+            grid.innerHTML = '';
+
+            Object.keys(SCENARIOS).forEach(key => {
+                const sc = SCENARIOS[key];
+                
+                if (state.filterCountry !== 'ALL' && sc.country !== state.filterCountry) return;
+
+                let diffBadge = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+                if (sc.difficulty === "Zor" || sc.difficulty === "Çok Zor") diffBadge = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+                if (sc.difficulty === "Aşırı Zor") diffBadge = "bg-purple-500/20 text-purple-300 border-purple-500/40";
+
+                const cardHtml = `
+                    <div class="bg-term-card border border-term-border rounded-2xl p-5 flex flex-col justify-between hover:border-amber-500/50 transition duration-300 shadow-xl group relative overflow-hidden">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between border-b border-term-border pb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-2xl">${sc.flag}</span>
+                                    <div>
+                                        <h3 class="font-bold text-slate-100 text-sm font-mono">${sc.countryName} (${sc.year})</h3>
+                                        <p class="text-[10px] text-slate-400 font-mono">${sc.totalTurns} Dönem Senaryosu</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded border font-mono font-bold ${diffBadge}">${sc.difficulty}</span>
+                            </div>
+
+                            <h4 class="font-extrabold text-slate-100 text-base group-hover:text-amber-400 transition">${sc.title}</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">${sc.subtitle}</p>
+
+                            <div class="grid grid-cols-3 gap-2 pt-2 text-[11px] font-mono bg-slate-900/80 p-2.5 rounded-xl border border-term-border/80">
+                                <div>
+                                    <span class="text-slate-400 block text-[9px]">ENFLASYON</span>
+                                    <span class="text-rose-400 font-bold">%${sc.initial.inflation}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block text-[9px]">FAİZ</span>
+                                    <span class="text-amber-400 font-bold">%${sc.initial.rate}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block text-[9px]">REZERV</span>
+                                    <span class="text-emerald-400 font-bold">${sc.initial.reserves}B</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-5">
+                            <button onclick="startScenario('${sc.id}')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-amber-500 hover:text-black text-slate-200 font-bold text-xs font-mono transition border border-slate-700 flex items-center justify-center gap-2">
+                                <span>SENARYOYU OYNA</span>
+                                <i class="ph ph-play text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // ==========================================
+        // CUSTOM SCENARIO BUILDER LOGIC
+        // ==========================================
+        function openCustomBuilderModal() {
+            document.getElementById('customBuilderModal').classList.remove('hidden');
+        }
+
+        function closeCustomBuilderModal() {
+            document.getElementById('customBuilderModal').classList.add('hidden');
+        }
+
+        function handleCustomScenarioSubmit(e) {
+            e.preventDefault();
+
+            const cName = document.getElementById('custCountryName').value;
+            const cFlag = document.getElementById('custFlag').value;
+            const cTitle = document.getElementById('custTitle').value;
+            const cCurr = document.getElementById('custCurrencySymbol').value;
+            const cInf = parseFloat(document.getElementById('custInflation').value);
+            const cRate = parseFloat(document.getElementById('custRate').value);
+            const cFx = parseFloat(document.getElementById('custFx').value);
+            const cRes = parseFloat(document.getElementById('custReserves').value);
+            const cTrust = parseInt(document.getElementById('custTrust').value);
+            const cPress = parseInt(document.getElementById('custPressure').value);
+
+            const customId = "cust-" + Date.now();
+
+            const customScenario = {
+                id: customId,
+                country: "OTHER",
+                countryName: cName,
+                flag: cFlag,
+                title: cTitle,
+                year: "2026+",
+                subtitle: `Özel Senaryo: Makroekonomik istikrar ve para politikası mücadelesi.`,
+                difficulty: "Özel",
+                currencySymbol: cCurr,
+                totalTurns: 6,
+                initial: { rate: cRate, inflation: cInf, fx: cFx, reserves: cRes, trust: cTrust, pressure: cPress, rrr: 10.0 },
+                historicalResult: { inflation: cInf * 1.5, fx: cFx * 1.8, reserves: cRes * 0.5, trust: 30 },
+                optimalTarget: { inflation: 5.0, fx: cFx * 1.1, reserves: cRes * 1.5, trust: 85 },
+                events: [
+                    { turn: 1, title: "1. Dönem Şoku!", desc: `${cName} ekonomisinde piyasalar dalgalanıyor. Dış şok ve enflasyonist baskılar devrede.`, options: [
+                        { text: "Kararlı sıkılaşma ve faiz artışı yap.", effect: { rateDelta: 4.0, inflation: -2, trust: 15, pressure: 15 }, log: "Sıkı duruş kararlılığı güven verdi." },
+                        { text: "Gevşek kal ve likidite sağla.", effect: { rateDelta: -2.0, inflation: 8, fxPct: 15, trust: -15 }, log: "Gevşeme kuru patlattı!" }
+                    ]},
+                    { turn: 2, title: "2. Dönem: Piyasa Tepkisi", desc: "Piyasalar Merkez Bankası'nın ilk kararlarını sindiriyor.", options: [
+                        { text: "Sıkılaşmayı koru.", effect: { trust: 10, inflation: -3 }, log: "İstikrar sağlandı." },
+                        { text: "Erken faiz indir.", effect: { rateDelta: -3, inflation: 6 }, log: "Risk büyüdü." }
+                    ]},
+                    { turn: 3, title: "3. Dönem: Dış Borç ve Rezerv Baskısı", desc: "Uluslararası finans çevreleri rezerv seviyesini izliyor.", options: [
+                        { text: "Döviz rezerv biriktir.", effect: { reserves: 3.0, trust: 5 }, log: "Rezerv arttı." },
+                        { text: "Rezerv sat.", effect: { reserves: -4.0, fxPct: -2 }, log: "Rezerv eritildi." }
+                    ]},
+                    { turn: 4, title: "4. Dönem: Siyasi Baskı Tırmanıyor", desc: "Hükümet büyüme oranlarını artırmak için faiz indirimi istiyor.", options: [
+                        { text: "Siyasete diren.", effect: { pressure: 20, trust: 10 }, log: "Bağımsızlık vurgulandı." },
+                        { text: "Uyum sağla.", effect: { pressure: -15, trust: -12 }, log: "Güven zedelendi." }
+                    ]},
+                    { turn: 5, title: "5. Dönem: Enflasyon Hedeflemesi", desc: "Enflasyon beklentilerini kalıcı olarak kıracak adım bekleniyor.", options: [
+                        { text: "Şeffaf enflasyon raporu açıkla.", effect: { trust: 10, inflation: -4 }, log: "Beklentiler iyileşti." },
+                        { text: "Pasif kal.", effect: { trust: -2 }, log: "Nötr." }
+                    ]},
+                    { turn: 6, title: "Final: Özel Senaryo Bilançosu", desc: `${cName} ekonomisinin geleceği kararlarınızla şekillendi.`, options: [
+                        { text: "Kararları tescille.", effect: { trust: 15 }, log: "Tamamlandı!" },
+                        { text: "Kapanış.", effect: { trust: 0 }, log: "Bitti." }
+                    ]}
+                ]
+            };
+
+            SCENARIOS[customId] = customScenario;
+            closeCustomBuilderModal();
+            startScenario(customId);
+        }
+
+        // ==========================================
+        // START SCENARIO
+        // ==========================================
+        function startScenario(id) {
+            const sc = SCENARIOS[id];
+            if (!sc) return;
+
+            state.activeScenarioId = id;
+            state.scenario = sc;
+            state.turn = 1;
+            state.maxTurns = sc.totalTurns;
+
+            state.rate = sc.initial.rate;
+            state.inflation = sc.initial.inflation;
+            state.fx = sc.initial.fx;
+            state.reserves = sc.initial.reserves;
+            state.trust = sc.initial.trust;
+            state.pressure = sc.initial.pressure;
+            state.cds = Math.round(Math.max(50, 400 - (state.trust * 3) + (state.pressure * 2)));
+            state.rrr = sc.initial.rrr || 10.0;
+
+            state.selectedRate = sc.initial.rate;
+            state.selectedFxAction = 'NONE';
+            state.selectedTone = 'NEUTRAL';
+            state.selectedPoliticalStance = 'COMPROMISE';
+            state.selectedEventOptionIndex = 0;
+
+            state.logs = [];
+            state.gameOver = false;
+
+            state.chartData = {
+                labels: ['Başlangıç'],
+                inflation: [state.inflation],
+                rate: [state.rate],
+                fx: [state.fx]
+            };
+
+            const slider = document.getElementById('inputRateSlider');
+            slider.max = state.rate > 40 ? "500" : "80";
+            slider.value = state.rate;
+
+            if (chartInstance) {
+                chartInstance.data.labels = state.chartData.labels;
+                chartInstance.data.datasets[0].data = state.chartData.inflation;
+                chartInstance.data.datasets[1].data = state.chartData.rate;
+                chartInstance.data.datasets[2].data = state.chartData.fx;
+                chartInstance.update();
+            }
+
+            document.getElementById('headerScenarioName').innerText = `${sc.flag} ${sc.title}`;
+            document.getElementById('mCurrLabel').innerText = `Kur (${sc.currencySymbol})`;
+
+            renderGameUI();
+            renderEventCard();
+            switchScreen('game');
+        }
+
+        function restartCurrentScenario() {
+            if (state.activeScenarioId) startScenario(state.activeScenarioId);
+        }
+
+        // ==========================================
+        // RENDER GAME UI
+        // ==========================================
+        function renderGameUI() {
+            document.getElementById('headerTurnText').innerText = `${state.turn} / ${state.maxTurns} Dönem`;
+            document.getElementById('turnIndicatorBadge').innerText = `${state.turn} / ${state.maxTurns} Dönem`;
+
+            document.getElementById('mRate').innerText = `%${state.rate.toFixed(2)}`;
+            document.getElementById('mInflation').innerText = `%${state.inflation.toFixed(1)}`;
+            
+            let fxStr = state.fx.toFixed(2);
+            if (state.fx > 1000) fxStr = Math.round(state.fx).toLocaleString();
+            document.getElementById('mFx').innerText = `${fxStr} ${state.scenario.currencySymbol}`;
+
+            document.getElementById('mReserves').innerText = `${state.reserves >= 0 ? '$' : '-$'}${Math.abs(state.reserves).toFixed(1)}B`;
+            document.getElementById('mCds').innerText = `${state.cds} bps`;
+
+            document.getElementById('mTrust').innerText = `%${Math.round(state.trust)}`;
+            document.getElementById('mTrustBar').style.width = `${Math.min(100, Math.max(0, state.trust))}%`;
+
+            document.getElementById('mPressure').innerText = `%${Math.round(state.pressure)}`;
+            document.getElementById('mPressureBar').style.width = `${Math.min(100, Math.max(0, state.pressure))}%`;
+
+            const realRate = (state.rate - state.inflation).toFixed(1);
+            const realEl = document.getElementById('mRealRate');
+            if (realRate >= 0) {
+                realEl.innerText = `+${realRate}% (Pozitif)`;
+                realEl.className = "font-mono font-bold text-emerald-400";
+            } else {
+                realEl.innerText = `${realRate}% (Negatif)`;
+                realEl.className = "font-mono font-bold text-rose-400";
+            }
+
+            const cardP = document.getElementById('cardPressure');
+            if (state.pressure >= 80) {
+                cardP.className = "bg-rose-950/40 border border-rose-500 rounded-xl p-3.5 flex flex-col justify-between glow-red animate-pulse";
+            } else {
+                cardP.className = "bg-term-card border border-term-border rounded-xl p-3.5 flex flex-col justify-between";
+            }
+
+            updateRateSelectionText();
+            document.getElementById('inputRrrSlider').value = state.rrr;
+            document.getElementById('rrrDisplay').innerText = `%${parseFloat(state.rrr).toFixed(1)}`;
+
+            renderLogTable();
+        }
+
+        function adjustRateBps(bps) {
+            let newRate = state.selectedRate + (bps / 100);
+            if (newRate < 0) newRate = 0;
+            state.selectedRate = Math.round(newRate * 100) / 100;
+            document.getElementById('inputRateSlider').value = state.selectedRate;
+            updateRateSelectionText();
+        }
+
+        function resetRateToCurrent() {
+            state.selectedRate = state.rate;
+            document.getElementById('inputRateSlider').value = state.selectedRate;
+            updateRateSelectionText();
+        }
+
+        function onRateSliderInput(val) {
+            state.selectedRate = parseFloat(val);
+            updateRateSelectionText();
+        }
+
+        function updateRateSelectionText() {
+            const diff = Math.round((state.selectedRate - state.rate) * 100) / 100;
+            const diffBps = Math.round(diff * 100);
+            
+            let txt = `Yeni Faiz: %${state.selectedRate.toFixed(2)}`;
+            if (diffBps > 0) txt += ` (+${diffBps} bps)`;
+            else if (diffBps < 0) txt += ` (${diffBps} bps)`;
+            else txt += ` (Sabit)`;
+
+            document.getElementById('rateSelectionText').innerText = txt;
+        }
+
+        function setFxAction(action) {
+            state.selectedFxAction = action;
+            ['NONE', 'SELL_FX', 'SWAP_KKM', 'BUY_FX'].forEach(act => {
+                const btn = document.getElementById(`btnFx${act}`);
+                if (act === action) {
+                    btn.className = "fx-btn p-2 rounded-xl border border-amber-500 bg-amber-500/20 text-amber-300 text-xs font-bold font-mono transition glow-amber";
+                } else {
+                    btn.className = "fx-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold font-mono transition hover:text-slate-200";
+                }
+            });
+        }
+
+        function setTone(tone) {
+            state.selectedTone = tone;
+            ['Hawkish', 'Neutral', 'Dovish'].forEach(t => {
+                const btn = document.getElementById(`btnTone${t}`);
+                if (t.toUpperCase() === tone) {
+                    btn.className = "tone-btn p-2 rounded-xl border border-amber-500 bg-amber-500/20 text-amber-300 text-xs font-bold font-mono transition glow-amber";
+                } else {
+                    btn.className = "tone-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-xs font-bold font-mono transition hover:text-slate-200";
+                }
+            });
+        }
+
+        function setPoliticalStance(stance) {
+            state.selectedPoliticalStance = stance;
+            ['Resist', 'Compromise', 'Comply'].forEach(s => {
+                const btn = document.getElementById(`btnStance${s}`);
+                if (s.toUpperCase() === stance) {
+                    btn.className = "stance-btn p-2 rounded-xl border border-amber-500 bg-amber-500/20 text-amber-300 text-[11px] font-bold font-mono transition glow-amber";
+                } else {
+                    btn.className = "stance-btn p-2 rounded-xl border border-term-border bg-slate-900 text-slate-400 text-[11px] font-bold font-mono transition hover:text-slate-200";
+                }
+            });
+        }
+
+        function selectEventOption(idx) {
+            state.selectedEventOptionIndex = idx;
+            const currentEvt = getCurrentEvent();
+            if (!currentEvt) return;
+
+            currentEvt.options.forEach((_, i) => {
+                const optEl = document.getElementById(`evtOptionCard_${i}`);
+                if (optEl) {
+                    if (i === idx) {
+                        optEl.className = "p-3 rounded-xl border-2 border-amber-500 bg-amber-500/10 text-slate-100 cursor-pointer transition flex items-start gap-3";
+                    } else {
+                        optEl.className = "p-3 rounded-xl border border-term-border bg-slate-900/60 text-slate-400 hover:border-slate-700 cursor-pointer transition flex items-start gap-3";
+                    }
+                }
+            });
+        }
+
+        function getCurrentEvent() {
+            if (!state.scenario || !state.scenario.events) return null;
+            return state.scenario.events[state.turn - 1] || state.scenario.events[state.scenario.events.length - 1];
+        }
+
+        function renderEventCard() {
+            const evt = getCurrentEvent();
+            if (!evt) return;
+
+            state.selectedEventOptionIndex = 0;
+            document.getElementById('eventQuarterText').innerText = `${state.scenario.year} - ${state.turn}. Dönem Şoku`;
+            document.getElementById('eventTitle').innerText = evt.title;
+            document.getElementById('eventDesc').innerText = evt.desc;
+
+            const container = document.getElementById('eventOptionsContainer');
+            container.innerHTML = '';
+
+            evt.options.forEach((opt, idx) => {
+                const isSelected = idx === 0;
+                const borderClass = isSelected ? "border-2 border-amber-500 bg-amber-500/10 text-slate-100" : "border border-term-border bg-slate-900/60 text-slate-400 hover:border-slate-700";
+
+                const html = `
+                    <div id="evtOptionCard_${idx}" onclick="selectEventOption(${idx})" class="${borderClass} p-3 rounded-xl cursor-pointer transition flex items-start gap-3">
+                        <div class="mt-0.5 font-mono text-xs font-bold w-5 h-5 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
+                            ${idx + 1}
+                        </div>
+                        <p class="text-xs font-semibold leading-snug">${opt.text}</p>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // ==========================================
+        // SIMULATION EXECUTION ENGINE
+        // ==========================================
+        function executeTurn() {
+            if (state.gameOver) return;
+
+            const prevRate = state.rate;
+            const prevInflation = state.inflation;
+
+            state.rate = state.selectedRate;
+            state.rrr = parseFloat(document.getElementById('inputRrrSlider').value);
+
+            const evt = getCurrentEvent();
+            const chosenOption = evt.options[state.selectedEventOptionIndex] || evt.options[0];
+            const evtEffect = chosenOption.effect || {};
+
+            const realRate = state.rate - state.inflation;
+
+            // 1. FX Calculation
+            let fxPctChange = (state.inflation - 3.0) * 0.10;
+            fxPctChange -= (realRate * 0.20);
+            fxPctChange += (state.cds / 250);
+
+            if (state.selectedFxAction === 'SELL_FX') {
+                fxPctChange -= 3.5;
+                state.reserves -= 3.0;
+            } else if (state.selectedFxAction === 'BUY_FX') {
+                fxPctChange += 2.0;
+                state.reserves += 3.0;
+            } else if (state.selectedFxAction === 'SWAP_KKM') {
+                fxPctChange -= 1.8;
+                state.reserves -= 1.0;
+            }
+
+            if (state.selectedTone === 'HAWKISH') fxPctChange -= 0.8;
+            if (state.selectedTone === 'DOVISH') fxPctChange += 1.5;
+
+            if (state.selectedPoliticalStance === 'RESIST') fxPctChange -= 0.5;
+            if (state.selectedPoliticalStance === 'COMPLY') fxPctChange += 2.0;
+
+            if (evtEffect.fxPct) fxPctChange += evtEffect.fxPct;
+
+            let newFx = state.fx * (1 + (fxPctChange / 100));
+            if (newFx < 0.01) newFx = 0.01;
+            state.fx = newFx;
+
+            // 2. Inflation Calculation
+            const fxPassThrough = Math.max(-5, fxPctChange) * 0.20;
+            let inflationDelta = fxPassThrough;
+
+            if (realRate > 0) {
+                inflationDelta -= (realRate * 0.20);
+            } else {
+                inflationDelta += Math.abs(realRate) * 0.25;
+            }
+
+            if (state.rrr > 15) inflationDelta -= 0.3;
+            if (evtEffect.inflation) inflationDelta += evtEffect.inflation;
+
+            let newInflation = state.inflation + inflationDelta;
+            if (newInflation < -5) newInflation = -5;
+            state.inflation = Math.round(newInflation * 10) / 10;
+
+            // 3. Reserves
+            if (evtEffect.reserves) state.reserves += evtEffect.reserves;
+
+            // 4. Political Pressure
+            let pressureDelta = 0;
+            if (state.rate > prevRate) pressureDelta += (state.rate - prevRate) * 0.6;
+            if (state.selectedPoliticalStance === 'RESIST') pressureDelta += 12;
+            if (state.selectedPoliticalStance === 'COMPLY') pressureDelta -= 15;
+            if (evtEffect.pressure) pressureDelta += evtEffect.pressure;
+
+            let newPressure = state.pressure + pressureDelta;
+            if (newPressure < 0) newPressure = 0;
+            if (newPressure > 100) newPressure = 100;
+            state.pressure = Math.round(newPressure);
+
+            // 5. Market Trust
+            let trustDelta = 0;
+            if (state.inflation < prevInflation) trustDelta += 4;
+            else trustDelta -= 5;
+
+            if (realRate > 0) trustDelta += 4;
+            else trustDelta -= 5;
+
+            if (state.selectedPoliticalStance === 'RESIST') trustDelta += 5;
+            if (state.selectedPoliticalStance === 'COMPLY') trustDelta -= 8;
+
+            if (evtEffect.trust) trustDelta += evtEffect.trust;
+
+            let newTrust = state.trust + trustDelta;
+            if (newTrust > 100) newTrust = 100;
+            if (newTrust < 0) newTrust = 0;
+            state.trust = Math.round(newTrust);
+
+            // 6. CDS Risk Premium Calculation
+            state.cds = Math.round(Math.max(40, (state.inflation * 4) - (state.trust * 2.5) + (state.pressure * 2) + (state.reserves < 0 ? 100 : 0)));
+
+            if (evtEffect.rateDelta) {
+                state.rate += evtEffect.rateDelta;
+                state.selectedRate = state.rate;
+            }
+
+            // Save Log
+            state.logs.unshift({
+                turn: state.turn,
+                rate: state.rate.toFixed(2),
+                inflation: state.inflation.toFixed(1),
+                fx: state.fx > 1000 ? Math.round(state.fx) : state.fx.toFixed(2),
+                reserves: state.reserves.toFixed(1),
+                cds: state.cds,
+                trust: Math.round(state.trust),
+                pressure: Math.round(state.pressure),
+                eventTitle: evt.title,
+                chosenLog: chosenOption.log || chosenOption.text
+            });
+
+            // Update Chart Data
+            state.chartData.labels.push(`${state.turn}. Dönem`);
+            state.chartData.inflation.push(state.inflation);
+            state.chartData.rate.push(state.rate);
+            state.chartData.fx.push(state.fx);
+            chartInstance.update();
+
+            if (checkEndGameConditions()) return;
+
+            state.turn++;
+            state.selectedFxAction = 'NONE';
+            setFxAction('NONE');
+
+            renderGameUI();
+            renderEventCard();
+            updateNewsTicker();
+        }
+
+        function renderLogTable() {
+            const body = document.getElementById('gameLogBody');
+            document.getElementById('logCountText').innerText = `${state.logs.length} Dönem Kaydedildi`;
+            if (state.logs.length === 0) return;
+
+            let html = '';
+            state.logs.forEach(item => {
+                html += `
+                    <tr class="hover:bg-slate-800/40 transition">
+                        <td class="py-2.5 px-3 font-bold text-slate-100">${item.turn}. Dönem</td>
+                        <td class="py-2.5 px-3 text-amber-400">%${item.rate}</td>
+                        <td class="py-2.5 px-3 text-rose-400">%${item.inflation}</td>
+                        <td class="py-2.5 px-3 text-cyan-400">${item.fx} ${state.scenario.currencySymbol}</td>
+                        <td class="py-2.5 px-3 text-emerald-400">${item.reserves}B</td>
+                        <td class="py-2.5 px-3 text-amber-400">${item.cds} bps</td>
+                        <td class="py-2.5 px-3 text-purple-400">%${item.trust}</td>
+                        <td class="py-2.5 px-3 text-amber-500">%${item.pressure}</td>
+                        <td class="py-2.5 px-3 text-slate-300 font-sans text-[11px]">${item.chosenLog}</td>
+                    </tr>
+                `;
+            });
+            body.innerHTML = html;
+        }
+
+        function updateNewsTicker() {
+            const sc = state.scenario;
+            const headlines = [
+                `+++ ${sc.countryName} Reuters Terminali: ${state.turn}. Dönem Kararları Açıklandı +++`,
+                `+++ Enflasyon %${state.inflation.toFixed(1)} | Politika Faizi %${state.rate.toFixed(2)} +++`,
+                `+++ Kur: ${state.fx.toFixed(2)} ${sc.currencySymbol} | CDS Risk Primi: ${state.cds} bps +++`,
+                `+++ Piyasa Güven Endeksi: %${Math.round(state.trust)} | Net Rezervler: $${state.reserves.toFixed(1)}B +++`
+            ];
+            document.getElementById('tickerText').innerText = headlines.join(' ');
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('gameChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Başlangıç'],
+                    datasets: [
+                        { label: 'Enflasyon (%)', data: [20.0], borderColor: '#f43f5e', backgroundColor: 'rgba(244, 63, 94, 0.1)', borderWidth: 2.5, tension: 0.3, fill: true },
+                        { label: 'Faiz (%)', data: [15.0], borderColor: '#f59e0b', borderWidth: 2.5, tension: 0.2 },
+                        { label: 'Döviz Kuru', data: [1.0], borderColor: '#06b6d4', borderWidth: 2, borderDash: [4, 4], tension: 0.3 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        // ==========================================
+        // END GAME CHECK
+        // ==========================================
+        function checkEndGameConditions() {
+            let isEnd = false;
+            let title = "", emoji = "", grade = "", badge = "", desc = "";
+
+            if (state.pressure >= 100) {
+                isEnd = true; emoji = "🚨"; grade = "F"; title = "GÖREVDEN ALINDINIZ!";
+                badge = "Gece Yarısı Kararnamesiyle Alınan Guvernör";
+                desc = "Siyasi irade ile yaşanan şiddetli faiz anlaşmazlığı nedeniyle gece yarısı kararnamesiyle görevden alındınız!";
+            } else if (state.trust <= 10) {
+                isEnd = true; emoji = "📉"; grade = "F"; title = "PİYASA VE GÜVEN ÇÖKÜŞÜ!";
+                badge = "Enflasyon Canavarına Yem Olan Guvernör";
+                desc = "Piyasa güveni sıfırlandı. Sermaye kaçışı durdurulamadı, finansal sistem felç oldu.";
+            } else if (state.turn >= state.maxTurns) {
+                isEnd = true; emoji = "🏆"; title = "SİMÜLASYON BAŞARIYLA COMPLETED!";
+                if (state.trust >= 70 && state.inflation <= state.scenario.optimalTarget.inflation + 5) {
+                    grade = "A+"; badge = "Küresel Ekonominin Kurtarıcısı & Sarsılmaz Şahin";
+                    desc = "Mükemmel yönetim! Tarihin en zorlu krizlerinden birinde makroekonomik istikrarı yeniden kurdunuz.";
+                } else if (state.trust >= 50) {
+                    grade = "B"; badge = "Denge Stabilizatörü";
+                    desc = "Başarılı performans. Yüksek türbülansa rağmen felaketi önlediniz.";
+                } else {
+                    grade = "C"; badge = "Kırılgan Kriz Atlatıcısı";
+                    desc = "Krizi tamamladınız ancak riskler yüksek kalmaya devam ediyor.";
+                }
+            }
+
+            if (isEnd) {
+                state.gameOver = true;
+                renderReportScreen(title, emoji, grade, badge, desc);
+                switchScreen('report');
+                if (grade === "A+" || grade === "B") {
+                    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+                }
+                return true;
+            }
+            return false;
+        }
+
+        function renderReportScreen(title, emoji, grade, badge, desc) {
+            document.getElementById('reportTitle').innerText = title;
+            document.getElementById('reportEmoji').innerText = emoji;
+            document.getElementById('reportGrade').innerText = grade;
+            document.getElementById('reportBadge').innerText = badge;
+            document.getElementById('reportDescription').innerText = desc;
+
+            const sc = state.scenario;
+            const hist = sc.historicalResult;
+            const opt = sc.optimalTarget;
+
+            document.getElementById('cmpPlayerInf').innerText = `%${state.inflation.toFixed(1)}`;
+            document.getElementById('cmpPlayerFx').innerText = `${state.fx > 1000 ? Math.round(state.fx) : state.fx.toFixed(2)} ${sc.currencySymbol}`;
+            document.getElementById('cmpPlayerRes').innerText = `${state.reserves >= 0 ? '$' : '-$'}${Math.abs(state.reserves).toFixed(1)}B`;
+            document.getElementById('cmpPlayerTrust').innerText = `%${Math.round(state.trust)}`;
+
+            document.getElementById('cmpHistInf').innerText = `%${hist.inflation}`;
+            document.getElementById('cmpHistFx').innerText = `${hist.fx} ${sc.currencySymbol}`;
+            document.getElementById('cmpHistRes').innerText = `$${hist.reserves}B`;
+            document.getElementById('cmpHistTrust').innerText = `%${hist.trust}`;
+
+            document.getElementById('cmpOptInf').innerText = `%${opt.inflation}`;
+            document.getElementById('cmpOptFx').innerText = `${opt.fx} ${sc.currencySymbol}`;
+            document.getElementById('cmpOptRes').innerText = `$${opt.reserves}B`;
+            document.getElementById('cmpOptTrust').innerText = `%${opt.trust}`;
+        }
+
+        function openHelpModal() { document.getElementById('helpModal').classList.remove('hidden'); }
+        function closeHelpModal() { document.getElementById('helpModal').classList.add('hidden'); }
+    </script>
+</body>
+</html>
