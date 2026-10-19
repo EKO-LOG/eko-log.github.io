@@ -1,4 +1,8 @@
 {
+  "fb": {
+    "db": "",
+    "key": ""
+  },
   "f": {
     "cur": "40",
     "k": "0.25",
@@ -201,6 +205,7 @@
   },
   "b": {
     "on": true,
-    "text": "EKO-LOG YAYIN HAYATINA BAŞLADI"
-  }
+    "text": "EKO-LOG YAYIN HAYATINA BAŞLADI\nYATAY BAKIŞ RANDEVULARI BAŞLADI"
+  },
+  "ar": []
 }
