@@ -1,7 +1,7 @@
 {
   "fb": {
-    "db": "",
-    "key": ""
+    "db": "https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app",
+    "key": "AIzaSyDNwfakrjOuMx0YlonGfOBvk1_hAWiUyk0"
   },
   "f": {
     "cur": "40",
@@ -185,9 +185,86 @@
       "title": "KAMPÜSTE GÜNDEM YATAY BAKIŞ İLE MASAYA YATIRILIYOR",
       "text": "Öğrencileri gündemin izleyicisi değil, üretken birer öznesi olmaya davet eden interaktif tartışma platformu \"Yatay Bakış\" başlıyor.\n\nEkonomi, siyaset, küresel gelişmeler, spor ve magazin başlıklarının iki koordinatör eşliğinde ele alınacağı etkinlikte, klasik sunum kalıplarının dışına çıkılarak söz tamamen öğrencilere bırakılacak. Çok sesliliği ve analitik düşünceyi merkeze alan platform, kampüs içindeki entelektüel etkileşimi güçlendirmeyi amaçlıyor.\n\nFarklı perspektiflerin özgürce paylaşılacağı bu dinamik fikir alışverişi ortamı, güncellemeleri yakından takip eden tüm gençleri bekliyor.\n\nYer: İİBF Konferans Salonu \nSaat: 16.00",
       "img": "images/179243691547202.jpg"
+    },
+    {
+      "id": "slotn1",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn2",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn3",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn4",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn5",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn6",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn7",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slotn8",
+      "kind": "Haber",
+      "title": "",
+      "text": "",
+      "img": ""
     }
   ],
-  "d": [],
+  "d": [
+    "b8",
+    "b9",
+    "b10",
+    "g1",
+    "g2",
+    "g3",
+    "g4",
+    "g5",
+    "e1",
+    "e2",
+    "e3",
+    "e4",
+    "e5",
+    "e6",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5",
+    "a6"
+  ],
   "e": [
     {
       "id": "179243486193801",
@@ -196,16 +273,114 @@
       "place": "İİBF Konferans Salonu ",
       "text": "🌿 Yatay Bakış: Fikirlerin Dolaşımda Olduğu Özgür Tartışma Platformu!\nDünyada, Türkiye’de ve gündemde neler oluyor? Olaylara hep aynı pencereden mi bakıyoruz, yoksa gerçeğin farklı tonlarını görmek ister miyiz?\n\nFikirlerin ekolojisini güçlendirmek, çok sesliliği savunmak ve kampüste entelektüel bir rüzgar estirmek için \"Yatay Bakış\" interaktif tartışma platformunda bir araya geliyoruz!\n\n📌 Etkinlikte Neler Bulacaksınız?\n\nGeniş Bir Gündem Yelpazesi: Son bir ayın en çok konuşulan ekonomi, siyaset, küresel gelişmeler, spor ve magazin başlıkları.\n\nİki Koordinatör Eşliğinde Çerçeve: Gündem maddelerinin aktarımıyla başlayan dinamik bir başlangıç.\n\nSözün Tam Sahibi Sizsiniz: Kısıtlamalara yer olmayan; herkesin dilediği konuda özgürce konuşabildiği, tartışabildiği ve ortak akıl üretebildiği açık bir kürsü.\n\n🎯 Amacımız Ne?\n\nPasif birer dinleyici olmak yerine; güncel olaylara dair farkındalığı yüksek, analitik düşünebilen, farklı bakış açılarına saygı duyan ve kendini topluluk önünde cesurca ifade edebilen aktif bireylerden oluşan bir zemin kurmak.\n\nKampüsün en üretken fikir ekosisteminde yerini almak, gündemi kendi cümlelerinle yorumlamak istiyorsan bu buluşmayı kaçırma!",
       "img": "images/179243498118102.jpg"
+    },
+    {
+      "id": "slote1",
+      "date": "",
+      "title": "",
+      "place": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slote2",
+      "date": "",
+      "title": "",
+      "place": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slote3",
+      "date": "",
+      "title": "",
+      "place": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slote4",
+      "date": "",
+      "title": "",
+      "place": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slote5",
+      "date": "",
+      "title": "",
+      "place": "",
+      "text": "",
+      "img": ""
+    },
+    {
+      "id": "slote6",
+      "date": "",
+      "title": "",
+      "place": "",
+      "text": "",
+      "img": ""
     }
   ],
   "c": {
     "team": [],
     "gallery": [],
-    "archive": []
+    "archive": [
+      {
+        "id": "slota1",
+        "t": "",
+        "s": "",
+        "x": "",
+        "img": "",
+        "pdf": ""
+      },
+      {
+        "id": "slota2",
+        "t": "",
+        "s": "",
+        "x": "",
+        "img": "",
+        "pdf": ""
+      },
+      {
+        "id": "slota3",
+        "t": "",
+        "s": "",
+        "x": "",
+        "img": "",
+        "pdf": ""
+      },
+      {
+        "id": "slota4",
+        "t": "",
+        "s": "",
+        "x": "",
+        "img": "",
+        "pdf": ""
+      },
+      {
+        "id": "slota5",
+        "t": "",
+        "s": "",
+        "x": "",
+        "img": "",
+        "pdf": ""
+      },
+      {
+        "id": "slota6",
+        "t": "",
+        "s": "",
+        "x": "",
+        "img": "",
+        "pdf": ""
+      }
+    ]
   },
   "b": {
     "on": true,
-    "text": "EKO-LOG YAYIN HAYATINA BAŞLADI\nYATAY BAKIŞ RANDEVULARI BAŞLADI"
+    "text": "EKO-LOG YAYIN HAYATINA BAŞLADI YATAY BAKIŞ RANDEVULARI BAŞLADI"
   },
-  "ar": []
+  "ar": [],
+  "sd": 1
 }
