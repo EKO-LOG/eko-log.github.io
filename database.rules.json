@@ -1,0 +1,66 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "joins": {
+      ".read": "auth != null",
+      "$id": {
+        ".write": "auth != null || !data.exists()",
+        ".validate": "newData.hasChildren(['e','n','d'])",
+        "n": {
+          ".validate": "(newData.isString() && newData.val().length < 300)"
+        },
+        "c": {
+          ".validate": "(newData.isString() && newData.val().length < 300)"
+        },
+        "b": {
+          ".validate": "(newData.isString() && newData.val().length < 300)"
+        },
+        "s": {
+          ".validate": "(newData.isString() && newData.val().length < 300)"
+        },
+        "e": {
+          ".validate": "(newData.isString() && newData.val().length < 300)"
+        }
+      }
+    },
+    "comments": {
+      ".read": true,
+      ".indexOn": [
+        ".key"
+      ],
+      "$id": {
+        ".write": "auth != null || !data.exists()",
+        ".validate": "newData.hasChildren(['p','n','t','d'])",
+        "t": {
+          ".validate": "newData.isString() && newData.val().length < 1000"
+        },
+        "n": {
+          ".validate": "(newData.isString() && newData.val().length < 300)"
+        }
+      }
+    },
+    "count": {
+      ".read": true,
+      ".write": "auth != null",
+      "$e": {
+        ".write": "auth != null || (newData.isNumber() && newData.val() >= 0 && (data.val() == null ? newData.val() == 1 : (newData.val() == data.val() + 1 || newData.val() == data.val() - 1)))"
+      }
+    },
+    "quota": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "poll": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "pv": {
+      ".read": true,
+      ".write": "auth != null",
+      "$i": {
+        ".write": "auth != null || (newData.isNumber() && (data.val() == null ? newData.val() == 1 : newData.val() == data.val() + 1))"
+      }
+    }
+  }
+}
