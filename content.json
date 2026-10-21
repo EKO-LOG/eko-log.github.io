@@ -416,11 +416,29 @@
       },
       "Politika faizi": {
         "ad": "Politika faizi",
-        "api": "json:veri.json#politika_faizi",
-        "deger": "",
-        "tarih": "",
+        "api": "",
+        "deger": "37,00",
+        "tarih": "Eylül 2026",
         "kaynak": "TCMB",
         "url": "https://www.tcmb.gov.tr",
+        "gizli": false
+      },
+      "Büyüme (son çeyrek, yıllık)": {
+        "ad": "Büyüme (son çeyrek, yıllık)",
+        "api": "",
+        "deger": "2,3",
+        "tarih": "2026 2. Çeyrek ",
+        "kaynak": "TÜİK",
+        "url": "https://www.tuik.gov.tr",
+        "gizli": false
+      },
+      "İşsizlik oranı": {
+        "ad": "İşsizlik oranı",
+        "api": "",
+        "deger": "7,8",
+        "tarih": "Ağustos 2026",
+        "kaynak": "TÜİK",
+        "url": "https://www.tuik.gov.tr",
         "gizli": false
       }
     }
