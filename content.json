@@ -382,5 +382,43 @@
     "text": "EKO-LOG YAYIN HAYATINA BAŞLADI  YATAY BAKIŞ BAŞVURULARI BAŞLADI"
   },
   "ar": [],
-  "sd": 1
+  "sd": 1,
+  "show": {
+    "ex": true,
+    "gs": true
+  },
+  "sz": {
+    "add": [],
+    "del": [],
+    "edit": {}
+  },
+  "ms": {
+    "add": [],
+    "del": [],
+    "edit": {}
+  },
+  "ex": {
+    "add": [],
+    "del": [],
+    "edit": {}
+  },
+  "gs": {
+    "add": [],
+    "del": [],
+    "edit": {
+      "Yıllık TÜFE": {
+        "ad": "Yıllık TÜFE",
+        "api": "json:veri.json#yillik_tufe",
+        "deger": "",
+        "tarih": "",
+        "kaynak": "TÜİK",
+        "url": "https://www.tuik.gov.tr"
+      }
+    }
+  },
+  "hk": {
+    "add": [],
+    "del": [],
+    "edit": {}
+  }
 }
