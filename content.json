@@ -413,6 +413,15 @@
         "tarih": "",
         "kaynak": "TÜİK",
         "url": "https://www.tuik.gov.tr"
+      },
+      "Politika faizi": {
+        "ad": "Politika faizi",
+        "api": "json:veri.json#politika_faizi",
+        "deger": "",
+        "tarih": "",
+        "kaynak": "TCMB",
+        "url": "https://www.tcmb.gov.tr",
+        "gizli": false
       }
     }
   },
