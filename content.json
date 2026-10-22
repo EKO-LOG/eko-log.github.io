@@ -384,7 +384,7 @@
   "ar": [],
   "sd": 1,
   "show": {
-    "ex": true,
+    "ex": false,
     "gs": true
   },
   "sz": {
