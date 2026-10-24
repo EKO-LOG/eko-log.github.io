@@ -180,6 +180,13 @@
   "i": {},
   "n": [
     {
+      "id": "179283832275904",
+      "kind": "EKO-LOG Sözlük",
+      "title": "EKOLOG SÖZLÜK",
+      "text": "Fırsat Maliyeti (Opportunity Cost)\n\nBir seçimi yaparken vazgeçtiğiniz en iyi ikinci alternatifin değeridir.\n\nİktisatta kaynaklar sınırlı olduğu için her tercih bir vazgeçiştir. Örneğin, cebinizdeki son parayla sinemaya gitmeyi seçtiğinizde fırsat maliyetiniz, o parayla alabileceğiniz ve size en çok keyif verecek olan kitaptır. Kısacası fırsat maliyeti, harcadığınız paradan ziyade vazgeçtiğiniz potansiyel faydadır.",
+      "img": "images/179283838785206.jpg"
+    },
+    {
       "id": "179283813985001",
       "kind": "Haber",
       "title": "Batık Maliyet Yanılgısı",
