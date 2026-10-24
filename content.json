@@ -180,6 +180,13 @@
   "i": {},
   "n": [
     {
+      "id": "179283813985001",
+      "kind": "Haber",
+      "title": "Batık Maliyet Yanılgısı",
+      "text": "Günümüz iş ve günlük yaşam felsefesinin en popüler konularından biri haline gelen \"Batık Maliyet Yanılgısı\" (Sunk Cost Fallacy), bireylerin ve kurumların geçmişte harcadıkları zaman, emek veya para yüzünden zararda olduklarını bildikleri halde bir işe devam etme eğilimidir. İktisat teorisindeki rasyonel insan (Homo Economicus) modeline göre, geleceğe yönelik kararlar alınırken geçmişte kalan ve geri döndürülemeyecek olan maliyetler hesaba katılmamalıdır. Ancak davranışsal iktisat, insan psikolojisinin her zaman bu kadar rasyonel işlemediğini gösterir.\n\nBu yanılgının temelinde kayıptan kaçınma hissi ve kabullenme korkusu yatar. Örneğin; sinema bileti alıp salona giren bir izleyici, filmin ilk yarısında berbat olduğunu anlasa bile sırf bilet parası ödediği için salonda kalmaya devam eder. Oysa ödenen para zaten geri alınamaz bir \"batık maliyet\"tir; salonda kalarak kaybedilen şey ise zamanın kendisidir. Benzer şekilde, kâr etme umudu kalmayan projelere sürdürülebilirlik adı altında ek sermaye yatırmak veya kişiye zarar veren yatırımları \"zaten çok harcama yaptık\" diyerek elden çıkarmamak da bu yanılgının doğrudan sonuçlarıdır.\n\nBatık maliyet yanılgısı, piyasalarda ve bireysel finans yönetiminde doğru karar almanın önündeki en büyük engellerden biridir. Bir yatırımın veya projenin gelecekte sağlayacağı fayda, geçmişte ona harcanan kaynaktan bağımsız değerlendirilmelidir. Geçmişteki kayıpları kabullenip zararın neresinden dönülürse kârdır anlayışıyla hareket etmek, daha büyük iktisadi ve zamansal kayıpların önüne geçmenin tek yoludur.",
+      "img": "images/179283822361103.jpg"
+    },
+    {
       "id": "179283726872701",
       "kind": "Üye Yazısı",
       "title": "Kripto Paralar Gerçekten Para Mı?",
