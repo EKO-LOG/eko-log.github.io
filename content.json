@@ -180,6 +180,13 @@
   "i": {},
   "n": [
     {
+      "id": "179283891605708",
+      "kind": "Haber",
+      "title": "Kobra Etkisi: Yanlış Teşviklerin İktisadi Felaketi",
+      "text": "İktisatta ve kamu politikasında \"Kobra Etkisi\" (Cobra Effect), bir sorunu çözmek amacıyla uygulanan bir teşvik veya kuralın, beklenenin tam aksi bir sonuç vererek sorunu daha da derinleştirmesi durumunu ifade eder.\n\nBu ilginç kavram, İngiliz sömürge yönetimi altındaki Hindistan’ın Delhi şehrinde yaşanan gerçek bir olaya dayanır. O dönemde şehirdeki zehirli kobra yılanlarının sayısı aşırı artınca, İngiliz yetkililer pratik bir iktisadi çözüm bulduklarını düşündüler: Getirilen her ölü kobra için halka parasal bir ödül verilecekti. Plan ilk başlarda harika işledi; halk ölü yılanları getirip ödülünü aldı ve kobra nüfusu belirgin şekilde azaldı.\n\nAncak piyasa mekanizması ve insan davranışı beklenmedik bir yön aldı. Girişimci ruha sahip bazı yerliler, tarlada veya sokakta kobra avlamak yerine evlerinde kobra üretip çoğaltmaya başladılar. Sırf devletin koyduğu ödülü almak için kobra çiftlikleri kurulmuştu. Durumu fark eden İngiliz yönetimi ödül sistemini aniden iptal etti. Ödülün kaldırıldığını gören üreticiler ise ellerindeki değersizleşen binlerce canlı kobrayı sokaklara saldı. Sonuç? Şehirdeki kobra sayısı, teşvik politikası başlamadan önceki seviyenin katbekat üzerine çıktı.\n\nKobra Etkisi, iktisatta \"beklenmeyen sonuçlar yasası\"nın ve bilgi asimetrisinin en somut örneğidir. Bir iktisat politikası tasarlanırken, bireylerin o kuralı kendi çıkarları doğrultusunda nasıl manipüle edebileceği hesaba katılmazsa, çözümün kendisi sorunun en büyük kaynağı haline gelir.",
+      "img": "images/179283897997909.jpg"
+    },
+    {
       "id": "179283883308707",
       "kind": "Haber",
       "title": "John Maynard Keynes ve “Uzun Vadede Hepimiz Öleceğiz” Sözünün Gerçek Anlamı",
