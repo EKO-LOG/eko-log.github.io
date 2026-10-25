@@ -1,0 +1,25 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>update-data.yml</title>
+<style>body{font:15px system-ui;margin:0;background:#f6f7f9;color:#111}header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 20px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0}b{font-size:16px}button{padding:8px 16px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-size:15px;cursor:pointer}pre{margin:0;padding:20px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre}small{color:#555}</style></head><body>
+<header><div><b>update-data.yml</b><br><small>GitHub'a bu adla kaydet: .github/workflows/update-data.yml</small></div><button onclick="navigator.clipboard.writeText(document.getElementById('c').textContent).then(()=>this.textContent='Kopyalandı ✓')">Kopyala</button></header>
+<pre id="c">name: Parite verilerini güncelle
+on:
+  schedule:
+    - cron: &#x27;30 4 * * *&#x27;   # her gün 07:30 (Türkiye saati)
+  workflow_dispatch: {}      # elle de çalıştırılabilir
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node fetch-data.mjs
+      - name: Değişiklik varsa kaydet
+        run: |
+          git config user.name &quot;github-actions&quot;
+          git config user.email &quot;actions@github.com&quot;
+          git add data
+          git diff --cached --quiet || (git commit -m &quot;Parite verilerini güncelle&quot; &amp;&amp; git push)
+</pre></body></html>

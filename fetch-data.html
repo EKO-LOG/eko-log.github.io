@@ -1,0 +1,54 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>fetch-data.mjs</title>
+<style>body{font:15px system-ui;margin:0;background:#f6f7f9;color:#111}header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 20px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0}b{font-size:16px}button{padding:8px 16px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-size:15px;cursor:pointer}pre{margin:0;padding:20px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre}small{color:#555}</style></head><body>
+<header><div><b>fetch-data.mjs</b><br><small>GitHub'a bu adla kaydet: fetch-data.mjs</small></div><button onclick="navigator.clipboard.writeText(document.getElementById('c').textContent).then(()=>this.textContent='Kopyalandı ✓')">Kopyala</button></header>
+<pre id="c">// Parite verilerini çekip data/*.json olarak yazar. Çalıştır: node fetch-data.mjs
+import { mkdir, writeFile } from &#x27;node:fs/promises&#x27;;
+const DAYS = 1900, UA = { &#x27;User-Agent&#x27;: &#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36&#x27; };
+const YAHOO = { XAU:&#x27;GC=F&#x27;,XAG:&#x27;SI=F&#x27;,XPT:&#x27;PL=F&#x27;,XPD:&#x27;PA=F&#x27;,BRENT:&#x27;BZ=F&#x27;,WTI:&#x27;CL=F&#x27;,NG:&#x27;NG=F&#x27;,TTF:&#x27;TTF=F&#x27;,HO:&#x27;HO=F&#x27;,RB:&#x27;RB=F&#x27;,
+  XCU:&#x27;HG=F&#x27;,ALU:&#x27;ALI=F&#x27;,REMX:&#x27;REMX&#x27;,LIT:&#x27;LIT&#x27;,URA:&#x27;URA&#x27;,WHEAT:&#x27;ZW=F&#x27;,CORN:&#x27;ZC=F&#x27;,SOY:&#x27;ZS=F&#x27;,COFFEE:&#x27;KC=F&#x27;,SUGAR:&#x27;SB=F&#x27;,COTTON:&#x27;CT=F&#x27;,COCOA:&#x27;CC=F&#x27;,
+  BTC:&#x27;BTC-USD&#x27;,ETH:&#x27;ETH-USD&#x27;,BNB:&#x27;BNB-USD&#x27;,SOL:&#x27;SOL-USD&#x27;,XRP:&#x27;XRP-USD&#x27;,ADA:&#x27;ADA-USD&#x27;,DOGE:&#x27;DOGE-USD&#x27; };
+const FIAT = &#x27;EUR GBP TRY JPY CHF CNY CAD AUD NZD SEK NOK DKK PLN CZK HUF RON ISK BRL MXN ZAR INR KRW SGD HKD ILS IDR MYR PHP THB&#x27;.split(&#x27; &#x27;);
+const iso = d =&gt; d.toISOString().slice(0, 10), sleep = ms =&gt; new Promise(r =&gt; setTimeout(r, ms));
+async function get(url, tries = 4) {
+  let err;
+  for (let i = 0; i &lt; tries; i++) {
+    try { const r = await fetch(url, { headers: UA }); if (r.ok) return await r.json(); err = new Error(&#x27;HTTP &#x27; + r.status); }
+    catch (e) { err = e; }
+    await sleep(1500 * (i + 1));
+  }
+  throw err;
+}
+async function yahoo(sym) {
+  const t1 = Math.floor(Date.now() / 1e3), t0 = t1 - DAYS * 86400;
+  for (const h of [&#x27;query1&#x27;, &#x27;query2&#x27;]) {
+    try {
+      const j = await get(`https://${h}.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?period1=${t0}&amp;period2=${t1}&amp;interval=1d`, 2);
+      const r = j.chart.result[0], q = r.indicators.quote[0].close, o = [];
+      r.timestamp.forEach((t, i) =&gt; { if (q[i] &gt; 0) o.push([iso(new Date(t * 1e3)), +q[i].toFixed(6)]); });
+      if (o.length &gt; 1) return o;
+    } catch (e) {}
+  }
+  throw new Error(&#x27;yahoo &#x27; + sym);
+}
+async function fiat() {
+  const out = {}, end = new Date();
+  for (let y = 0; y &lt; 6; y++) { // 1&#x27;er yıllık parçalar
+    const e = new Date(end.getTime() - y * 365 * 864e5), s = new Date(e.getTime() - 365 * 864e5);
+    const j = await get(`https://api.frankfurter.dev/v1/${iso(s)}..${iso(e)}?base=USD&amp;symbols=${FIAT.join(&#x27;,&#x27;)}`);
+    Object.assign(out, j.rates);
+  }
+  return out;
+}
+await mkdir(&#x27;data&#x27;, { recursive: true });
+let ok = 0, fail = [];
+const stamp = new Date().toISOString();
+try { await writeFile(&#x27;data/fiat.json&#x27;, JSON.stringify({ u: stamp, r: await fiat() })); ok++; console.log(&#x27;fiat ok&#x27;); }
+catch (e) { fail.push(&#x27;fiat&#x27;); console.error(&#x27;fiat&#x27;, e.message); }
+for (const [code, sym] of Object.entries(YAHOO)) {
+  try { await writeFile(`data/${code}.json`, JSON.stringify({ u: stamp, d: await yahoo(sym) })); ok++; console.log(code, &#x27;ok&#x27;); }
+  catch (e) { fail.push(code); console.error(code, e.message); }
+  await sleep(700);
+}
+console.log(`tamam: ${ok}, hata: ${fail.join(&#x27;, &#x27;) || &#x27;-&#x27;}`);
+if (!ok) process.exit(1);
+</pre></body></html>

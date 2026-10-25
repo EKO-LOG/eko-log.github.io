@@ -1,0 +1,20 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>yahoo-worker.js</title>
+<style>body{font:15px system-ui;margin:0;background:#f6f7f9;color:#111}header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 20px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0}b{font-size:16px}button{padding:8px 16px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-size:15px;cursor:pointer}pre{margin:0;padding:20px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre}small{color:#555}</style></head><body>
+<header><div><b>yahoo-worker.js</b><br><small>GitHub'a bu adla kaydet: yahoo-worker.js</small></div><button onclick="navigator.clipboard.writeText(document.getElementById('c').textContent).then(()=>this.textContent='Kopyalandı ✓')">Kopyala</button></header>
+<pre id="c">// Cloudflare Worker: Yahoo Finance için kendi küçük aracın.
+export default {
+  async fetch(req) {
+    const u = new URL(req.url);
+    if (!u.pathname.startsWith(&#x27;/v8/finance/chart/&#x27;)) return new Response(&#x27;not found&#x27;, { status: 404 });
+    const r = await fetch(&#x27;https://query1.finance.yahoo.com&#x27; + u.pathname + u.search, {
+      headers: { &#x27;User-Agent&#x27;: &#x27;Mozilla/5.0&#x27; },
+      cf: { cacheTtl: 3600, cacheEverything: true }
+    });
+    return new Response(r.body, { status: r.status, headers: {
+      &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+      &#x27;Access-Control-Allow-Origin&#x27;: &#x27;*&#x27;,
+      &#x27;Cache-Control&#x27;: &#x27;public, max-age=3600&#x27;
+    }});
+  }
+}
+</pre></body></html>
