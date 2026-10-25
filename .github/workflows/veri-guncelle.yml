@@ -19,6 +19,7 @@ jobs:
           EVDS_KEY: ${{ secrets.EVDS_KEY }}
       - name: Parite verileri
         if: ${{ !cancelled() }}
+        timeout-minutes: 12
         run: |
           node --input-type=module - <<'EOF'
           // Parite verilerini çekip data/*.json olarak yazar. Çalıştır: node fetch-data.mjs
@@ -32,7 +33,7 @@ jobs:
           async function get(url, tries = 4) {
             let err;
             for (let i = 0; i < tries; i++) {
-              try { const r = await fetch(url, { headers: UA }); if (r.ok) return await r.json(); err = new Error('HTTP ' + r.status); }
+              try { const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(20000) }); if (r.ok) return await r.json(); err = new Error('HTTP ' + r.status); }
               catch (e) { err = e; }
               await sleep(1500 * (i + 1));
             }
@@ -55,7 +56,7 @@ jobs:
           async function stooq(code) {
             const t = STOOQ[code]; if (!t) throw new Error('stooq yok');
             const d1 = iso(new Date(Date.now() - DAYS * 864e5)).replace(/-/g, ''), d2 = iso(new Date()).replace(/-/g, '');
-            const r = await fetch(`https://stooq.com/q/d/l/?s=${t}&i=d&d1=${d1}&d2=${d2}`, { headers: UA });
+            const r = await fetch(`https://stooq.com/q/d/l/?s=${t}&i=d&d1=${d1}&d2=${d2}`, { headers: UA, signal: AbortSignal.timeout(20000) });
             const txt = await r.text(), o = [];
             for (const l of txt.trim().split('\n').slice(1)) { const c = l.split(','); const v = +c[4]; if (/^\d{4}-/.test(c[0]) && v > 0) o.push([c[0], v]); }
             if (o.length < 2) throw new Error('stooq bos');
@@ -81,7 +82,7 @@ jobs:
             XCU:['PCOPPUSDM',1/2204.62], ALU:['PALUMUSDM',1], COCOA:['PCOCOUSDM',1] };
           async function fred(code) {
             const f = FRED[code]; if (!f) throw new Error('fred yok');
-            const r = await fetch(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${f[0]}&cosd=${iso(new Date(Date.now() - DAYS * 864e5))}`, { headers: UA });
+            const r = await fetch(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${f[0]}&cosd=${iso(new Date(Date.now() - DAYS * 864e5))}`, { headers: UA, signal: AbortSignal.timeout(20000) });
             if (!r.ok) throw new Error('fred HTTP ' + r.status);
             const o = [];
             for (const l of (await r.text()).trim().split('\n').slice(1)) { const c = l.split(','); const v = parseFloat(c[1]); if (/^\d{4}-/.test(c[0]) && v > 0) o.push([c[0], +(v * f[1]).toFixed(6)]); }
