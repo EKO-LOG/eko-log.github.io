@@ -510,5 +510,39 @@
     "add": [],
     "del": [],
     "edit": {}
+  },
+  "se": {
+    "add": [],
+    "del": [],
+    "edit": {}
+  },
+  "ki": {
+    "add": [],
+    "del": [],
+    "edit": {
+      "İbn Haldun": {
+        "ad": "İbn Haldun",
+        "unvan": "Tarih, toplum ve iktisat düşünürü",
+        "yil": "1332–1406",
+        "dogum": "27 Mayıs 1332 · Tunus",
+        "olum": "17 Mart 1406 · Kahire",
+        "ulke": "Tunus doğumlu; Kuzey Afrika ve Mısır",
+        "ekol": "Erken dönem",
+        "ozet": "Toplumların yükseliş ve çöküşünü iktisadi nedenlerle açıklayan ilk büyük düşünürlerden biri.",
+        "hayat": "Tunus’ta doğdu; Kuzey Afrika’daki sultanlıklarda memurluk ve elçilik yaptı, siyasi çekişmeler yüzünden birçok kez yer değiştirdi. Sonraki yıllarını Kahire’de geçirdi, burada kadılık ve hocalık yaptı. Dünya tarihi yazma işine girişirken önsöz olarak yazdığı Mukaddime, asıl eseri hâline geldi.",
+        "detay": "Mukaddime’de iktisadi olguları tek tek olaylar olarak değil, toplumun işleyişinin parçası olarak inceledi. Üretim, emek, şehirleşme, vergi ve fiyatlar gibi konular, devletlerin ve toplulukların ömrünü anlatan genel bir kuramın içinde yer alır. Eser Avrupa’da 19. yüzyılda çevirilerle tanındı; Osmanlı tarih yazımında Kâtip Çelebi ve Naima gibi isimlerin onu okuduğu belirtilir.",
+        "zaman": "1332: Tunus’ta doğdu.\n1354: Fas’ta Merinî sultanının sarayında göreve başladı.\n1375–1378: Cezayir’deki Kal’at İbn Selâme’de inzivaya çekilip Mukaddime’yi yazdı.\n1382: Kahire’ye yerleşti, ders vermeye başladı.\n1384: Mısır’da Maliki başkadılığına atandı; sonraki yıllarda bu göreve birkaç kez getirilip alındı.\n1401: Şam kuşatması sırasında Timur’la görüştü.\n1406: Kahire’de öldü.",
+        "eserler": "Mukaddime (1377)\nKitâbü’l-İber (evrensel tarih; Mukaddime bunun girişidir)",
+        "fikirler": "İş bölümü ve işbirliği: Üretimin artması, insanların bir arada yaşayıp iş bölümü yapmasına bağlıdır.\nDevlet ve vergi: Vergiler ağırlaştıkça üretim isteği düşer, toplam gelir azalabilir. Bu fikir bugün Laffer eğrisiyle anılır.\nUmran ve devir: Toplumlar bir yaşam döngüsünden geçer; zenginlik ve lüks artarken dayanışma (asabiyye) zayıflar, devlet çöker.",
+        "etki": "Tarih, sosyoloji ve iktisat arasında köprü kuran ilk sistemli denemelerden biri sayılır; Türkiye’de iktisat ve sosyoloji derslerinde sık anılır.",
+        "foto": "https://www.google.com/search?client=ms-android-telpa-trev2&hs=LtXB&sca_esv=475bfda34a172af1&sxsrf=APpeQnvMsuDS7Bibv6jED0AolT-Kjiy8xA:1792931931770&udm=2&fbs=ABfTbFWfPazdQeYYSro3Hgtr2dRUpkYGOFLxtczpiPPMonK6b0atUYHgVRjjy_HDAjTEFQciuwTQKpVgnnQz3avXeGK_vWyFpX6c6qFFljJKXFX6nQAHXGDKLL83AE2nfVGegQ2Ol3J1PoTq_rUumyP2iosAcJuczYMd8JuCGkoqHcYcsSdt5ui25qsiJn1QzSJy-s1pt1S9q0gT28-33ND4dtsAQPfs1HeH_F3k4sP8nW5-Ps-4o-Hh0O5zdNijoq1c4czVBfqR&q=ibn+Haldun+1080x1350&sa=X&ved=2ahUKEwiZ2Zj3l9WXAxWu9AIHHaaHHVIQtKgLegQIFRAB&biw=360&bih=688&dpr=3",
+        "wikitr": "İbn_Haldun",
+        "wiki": "Ibn_Khaldun",
+        "brit": "Ibn-Khaldun",
+        "nobel": "",
+        "kaynak": "",
+        "gizli": false
+      }
+    }
   }
 }
