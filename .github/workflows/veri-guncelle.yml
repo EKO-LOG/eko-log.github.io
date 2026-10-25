@@ -13,14 +13,105 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node veri-guncelle.mjs
+      - name: TCMB / EVDS verisi
+        run: node veri-guncelle.mjs
         env:
           EVDS_KEY: ${{ secrets.EVDS_KEY }}
+      - name: Parite verileri
+        if: ${{ !cancelled() }}
+        run: |
+          node --input-type=module - <<'EOF'
+          // Parite verilerini çekip data/*.json olarak yazar.
+          import { mkdir, writeFile } from 'node:fs/promises';
+          const DAYS = 1900, UA = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36' };
+          const YAHOO = { XAU:'GC=F',XAG:'SI=F',XPT:'PL=F',XPD:'PA=F',BRENT:'BZ=F',WTI:'CL=F',NG:'NG=F',TTF:'TTF=F',HO:'HO=F',RB:'RB=F',
+            XCU:'HG=F',ALU:'ALI=F',REMX:'REMX',LIT:'LIT',URA:'URA',WHEAT:'ZW=F',CORN:'ZC=F',SOY:'ZS=F',COFFEE:'KC=F',SUGAR:'SB=F',COTTON:'CT=F',COCOA:'CC=F',
+            BTC:'BTC-USD',ETH:'ETH-USD',BNB:'BNB-USD',SOL:'SOL-USD',XRP:'XRP-USD',ADA:'ADA-USD',DOGE:'DOGE-USD' };
+          const FIAT = 'EUR GBP TRY JPY CHF CNY CAD AUD NZD SEK NOK DKK PLN CZK HUF RON ISK BRL MXN ZAR INR KRW SGD HKD ILS IDR MYR PHP THB'.split(' ');
+          const iso = d => d.toISOString().slice(0, 10), sleep = ms => new Promise(r => setTimeout(r, ms));
+          async function get(url, tries = 4) {
+            let err;
+            for (let i = 0; i < tries; i++) {
+              try { const r = await fetch(url, { headers: UA }); if (r.ok) return await r.json(); err = new Error('HTTP ' + r.status); }
+              catch (e) { err = e; }
+              await sleep(1500 * (i + 1));
+            }
+            throw err;
+          }
+          async function yahoo(sym) {
+            const t1 = Math.floor(Date.now() / 1e3), t0 = t1 - DAYS * 86400;
+            for (const h of ['query1', 'query2']) {
+              try {
+                const j = await get(`https://${h}.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?period1=${t0}&period2=${t1}&interval=1d`, 2);
+                const r = j.chart.result[0], q = r.indicators.quote[0].close, o = [];
+                r.timestamp.forEach((t, i) => { if (q[i] > 0) o.push([iso(new Date(t * 1e3)), +q[i].toFixed(6)]); });
+                if (o.length > 1) return o;
+              } catch (e) {}
+            }
+            throw new Error('yahoo ' + sym);
+          }
+          const STOOQ = { XAU:'xauusd',XAG:'xagusd',XPT:'xptusd',XPD:'xpdusd',BRENT:'cb.f',WTI:'cl.f',NG:'ng.f',HO:'ho.f',RB:'rb.f',
+            XCU:'hg.f',WHEAT:'zw.f',CORN:'zc.f',SOY:'zs.f',COFFEE:'kc.f',SUGAR:'sb.f',COTTON:'ct.f',COCOA:'cc.f',REMX:'remx.us',LIT:'lit.us',URA:'ura.us' };
+          async function stooq(code) {
+            const t = STOOQ[code]; if (!t) throw new Error('stooq yok');
+            const d1 = iso(new Date(Date.now() - DAYS * 864e5)).replace(/-/g, ''), d2 = iso(new Date()).replace(/-/g, '');
+            const r = await fetch(`https://stooq.com/q/d/l/?s=${t}&i=d&d1=${d1}&d2=${d2}`, { headers: UA });
+            const txt = await r.text(), o = [];
+            for (const l of txt.trim().split('\n').slice(1)) { const c = l.split(','); const v = +c[4]; if (/^\d{4}-/.test(c[0]) && v > 0) o.push([c[0], v]); }
+            if (o.length < 2) throw new Error('stooq bos');
+            return o;
+          }
+          const BIN = { BTC:'BTCUSDT',ETH:'ETHUSDT',BNB:'BNBUSDT',SOL:'SOLUSDT',XRP:'XRPUSDT',ADA:'ADAUSDT',DOGE:'DOGEUSDT' };
+          async function binance(code) {
+            const sym = BIN[code]; if (!sym) throw new Error('binance yok');
+            let start = Date.now() - DAYS * 864e5; const o = [];
+            for (let n = 0; n < 4 && start < Date.now(); n++) {
+              let j, e2;
+              for (const h of ['https://data-api.binance.vision', 'https://api.binance.com']) { try { j = await get(`${h}/api/v3/klines?symbol=${sym}&interval=1d&startTime=${start}&limit=1000`, 2); break; } catch (e) { e2 = e; } }
+              if (!j) throw e2;
+              if (!j.length) break;
+              j.forEach(k => { if (+k[4] > 0) o.push([iso(new Date(k[0])), +k[4]]); });
+              start = j[j.length - 1][0] + 864e5;
+              if (j.length < 1000) break;
+            }
+            if (o.length < 2) throw new Error('binance bos');
+            return o;
+          }
+          async function series(code) {
+            const order = BIN[code] ? [() => binance(code), () => yahoo(YAHOO[code])] : [() => yahoo(YAHOO[code]), () => stooq(code)];
+            let last;
+            for (const f of order) { try { return await f(); } catch (e) { last = e; } }
+            throw last;
+          }
+          async function fiat() {
+            const out = {}, end = new Date();
+            for (let y = 0; y < 6; y++) {
+              const e = new Date(end.getTime() - y * 365 * 864e5), s = new Date(e.getTime() - 365 * 864e5);
+              const j = await get(`https://api.frankfurter.dev/v1/${iso(s)}..${iso(e)}?base=USD&symbols=${FIAT.join(',')}`);
+              Object.assign(out, j.rates);
+            }
+            return out;
+          }
+          await mkdir('data', { recursive: true });
+          let ok = 0, fail = [];
+          const stamp = new Date().toISOString();
+          try { await writeFile('data/fiat.json', JSON.stringify({ u: stamp, r: await fiat() })); ok++; console.log('fiat ok'); }
+          catch (e) { fail.push('fiat'); console.error('fiat', e.message); }
+          for (const [code, sym] of Object.entries(YAHOO)) {
+            try { await writeFile(`data/${code}.json`, JSON.stringify({ u: stamp, d: await series(code) })); ok++; console.log(code, 'ok'); }
+            catch (e) { fail.push(code); console.error(code, e.message); }
+            await sleep(700);
+          }
+          await writeFile('data/status.json', JSON.stringify({ u: stamp, ok, hata: fail }));
+          console.log(`tamam: ${ok}, hata: ${fail.join(', ') || '-'}`);
+          if (!ok) process.exit(1);
+          EOF
       - name: Değiştiyse kaydet
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "veri-bot"
           git config user.email "veri-bot@users.noreply.github.com"
-          git add veri.json
+          git add veri.json data
           if ! git diff --cached --quiet; then
             git commit -m "Veri güncellendi"
             git push
