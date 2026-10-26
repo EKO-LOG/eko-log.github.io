@@ -48,19 +48,25 @@ def eia_cek(route, seriler, ad_map):
 def evds_cek(seri, ad):
     d1 = pd.Timestamp(BASLANGIC).strftime("%d-%m-%Y")
     d2 = pd.Timestamp(BITIS).strftime("%d-%m-%Y")
+    # Eski evds2 adresi kapandi; yeni adres evds3
     url = (
-        "https://evds2.tcmb.gov.tr/service/evds/"
+        "https://evds3.tcmb.gov.tr/igmevdsms-dis/"
         f"series={seri}&startDate={d1}&endDate={d2}&type=json"
     )
     r = requests.get(url, headers={"key": EVDS_KEY.strip()}, timeout=30)
     r.raise_for_status()
-    items = r.json().get("items", [])
+    try:
+        veri = r.json()
+    except ValueError:
+        raise ValueError("EVDS JSON yerine HTML dondurdu (anahtar/adres sorunu)")
+    items = veri.get("items", [])
     if not items:
-        raise ValueError(f"{seri} için veri yok")
+        raise ValueError(f"{seri} icin veri yok")
     df = pd.DataFrame(items)
-    kolon = seri.replace(".", "_")
-    if kolon not in df.columns:
-        raise ValueError(f"{seri} kolonu bulunamadı")
+    kolonlar = [c for c in df.columns if c not in ("Tarih", "UNIXTIME")]
+    if not kolonlar:
+        raise ValueError(f"{seri} veri kolonu bulunamadi")
+    kolon = kolonlar[0]
     df["Tarih"] = pd.to_datetime(df["Tarih"], format="%d-%m-%Y")
     df[kolon] = pd.to_numeric(df[kolon], errors="coerce")
     return df.set_index("Tarih")[[kolon]].rename(columns={kolon: ad})
