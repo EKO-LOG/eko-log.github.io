@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: veri-guncelle
+  cancel-in-progress: false
 jobs:
   guncelle:
     runs-on: ubuntu-latest
@@ -124,6 +127,122 @@ jobs:
           await writeFile('data/status.json', JSON.stringify({ u: stamp, ok, hata: fail }));
           console.log(`tamam: ${ok}, hata: ${fail.join(', ') || '-'}`);
           if (!ok) process.exit(1);
+          EOF
+      - name: Altın ve değerli maden verileri (TCMB)
+        if: ${{ !cancelled() }}
+        timeout-minutes: 10
+        env:
+          EVDS_KEY: ${{ secrets.EVDS_KEY }}
+          ALTIN_SERILER: ${{ vars.ALTIN_SERILER }}
+        run: |
+          node --input-type=module - <<'EOF'
+          // TCMB EVDS3'ten altın (ve varsa değerli maden) verisini çekip data/altin-tcmb.json olarak yazar.
+          import { mkdir, readFile, writeFile } from 'node:fs/promises';
+          const KEY = process.env.EVDS_KEY;
+          const PIN = (process.env.ALTIN_SERILER || '').split(',').map(s => s.trim()).filter(Boolean); // örn: TP.XXX.YYY:gram:XAU:TL
+          const BASE = 'https://evds3.tcmb.gov.tr/igmevdsms-dis/', DAYS = 1900, OZ = 31.1034768;
+          const AYAR = 0.916, COIN = { ceyrek: 1.804, yarim: 3.608, tam: 7.216 }; // Cumhuriyet altını brüt gramajı, 22 ayar
+          const sleep = ms => new Promise(r => setTimeout(r, ms));
+          const tr = s => String(s || '').toLocaleLowerCase('tr-TR');
+          const pad = n => String(n).padStart(2, '0');
+          const dmy = d => `${pad(d.getUTCDate())}-${pad(d.getUTCMonth() + 1)}-${d.getUTCFullYear()}`;
+          const stamp = new Date().toISOString();
+          const KW = /altın|gümüş|platin|paladyum|külçe|kıymetli/;
+
+          async function evds(path, tries = 3) {
+            let err;
+            for (let i = 0; i < tries; i++) {
+              try {
+                const r = await fetch(BASE + path, { headers: { key: KEY, 'User-Agent': 'veri-bot' }, signal: AbortSignal.timeout(30000) });
+                const t = await r.text();
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                if (t.trimStart().startsWith('<')) throw new Error('JSON yerine HTML geldi (adres veya anahtar hatalı olabilir)');
+                return JSON.parse(t);
+              } catch (e) { err = e; await sleep(1500 * (i + 1)); }
+            }
+            throw err;
+          }
+
+          // Serileri EVDS'in kendi listesinden bulur; seri kodu tahmin edilmez.
+          async function discover() {
+            const groups = (await evds('datagroups/mode=0&type=json')).filter(g => KW.test(tr(g.DATAGROUP_NAME)));
+            const out = [];
+            for (const g of groups) {
+              try {
+                for (const s of await evds(`serieList/type=json&code=${g.DATAGROUP_CODE}`)) out.push({ kod: s.SERIE_CODE, ad: s.SERIE_NAME, grup: g.DATAGROUP_NAME });
+              } catch (e) { console.error('grup', g.DATAGROUP_CODE, e.message); }
+              await sleep(300);
+            }
+            return out;
+          }
+
+          function sinif(s) {
+            const n = tr(`${s.ad} ${s.grup}`);
+            return { ...s,
+              metal: /gümüş/.test(n) ? 'XAG' : /platin/.test(n) ? 'XPT' : /paladyum/.test(n) ? 'XPD' : 'XAU',
+              birim: /usd|dolar|\$/.test(n) ? 'USD' : 'TL',
+              tur: /ons/.test(n) ? 'ons' : /çeyrek/.test(n) ? 'ceyrek' : /yarım/.test(n) ? 'yarim' : /cumhuriyet|tam altın/.test(n) ? 'tam' : 'gram',
+              bol: /\bkg\b|kilogram/.test(n) ? 1000 : 1 };
+          }
+
+          async function veri(s) {
+            const rows = new Map(), end = Date.now(), start = end - DAYS * 864e5;
+            for (let a = start; a < end; a += 800 * 864e5) {
+              const b = Math.min(a + 800 * 864e5, end);
+              try {
+                const j = await evds(`series=${s.kod}&startDate=${dmy(new Date(a))}&endDate=${dmy(new Date(b))}&type=json`);
+                for (const it of j.items || []) {
+                  const m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(it.Tarih || ''); // yalnızca günlük veri
+                  const v = parseFloat(it[s.kod.replace(/\./g, '_')]) / s.bol;
+                  if (m && v > 0) rows.set(`${m[3]}-${m[2]}-${m[1]}`, +v.toFixed(4));
+                }
+              } catch (e) { console.error('veri', s.kod, e.message); }
+              await sleep(400);
+            }
+            return [...rows.entries()].sort((x, y) => (x[0] < y[0] ? -1 : 1));
+          }
+
+          // TCMB'de gram serisi yoksa: ons altın (USD) × USD/TRY ÷ 31,1035
+          async function yedekGram() {
+            const xau = new Map(JSON.parse(await readFile('data/XAU.json', 'utf8')).d);
+            const fx = JSON.parse(await readFile('data/fiat.json', 'utf8')).r;
+            const out = [];
+            for (const d of Object.keys(fx).sort()) { const t = fx[d]?.TRY; if (t && xau.has(d)) out.push([d, +(xau.get(d) / OZ * t).toFixed(2)]); }
+            if (out.length < 2) throw new Error('yedek hesap için yeterli veri yok');
+            return out;
+          }
+
+          const sonuc = { u: stamp, kaynak: 'TCMB EVDS', altin: {}, maden: {}, notlar: [] };
+          await mkdir('data', { recursive: true });
+          try {
+            if (!KEY) throw new Error('EVDS_KEY tanımlı değil');
+            const liste = PIN.length
+              ? PIN.map(p => { const [kod, tur = 'gram', metal = 'XAU', birim = 'TL'] = p.split(':'); return { kod, ad: kod, grup: '', tur, metal, birim, bol: 1 }; })
+              : (await discover()).map(sinif);
+            await writeFile('data/altin-seriler.json', JSON.stringify({ u: stamp, seriler: liste }, null, 1));
+            console.log(`bulunan seri: ${liste.length}`);
+            for (const s of liste) {
+              const d = await veri(s);
+              if (d.length < 2) { console.log('veri yok:', s.kod, s.ad); continue; }
+              if (s.metal === 'XAU' && (s.tur === 'ons' ? s.birim === 'USD' : s.birim === 'TL')) sonuc.altin[s.tur] = { d, kod: s.kod, ad: s.ad, kaynak: 'tcmb' };
+              else if (s.metal !== 'XAU' && (s.tur === 'gram' || s.tur === 'ons')) sonuc.maden[s.metal] = { d, kod: s.kod, ad: s.ad, birim: s.birim, tur: s.tur };
+              console.log('ok:', s.kod, s.metal, s.tur, s.birim, d.length);
+            }
+          } catch (e) { console.error('TCMB altın:', e.message); sonuc.notlar.push('TCMB: ' + e.message); }
+
+          if (!sonuc.altin.gram) {
+            try { sonuc.altin.gram = { d: await yedekGram(), kaynak: 'hesap: ons × USD/TRY' }; sonuc.notlar.push('Gram altın TCMB’den alınamadı; ons × USD/TRY ile hesaplandı.'); }
+            catch (e) { sonuc.notlar.push('Yedek: ' + e.message); }
+          }
+          if (sonuc.altin.gram) { // gram fiyatından türetilenler (işçilik/prim yok)
+            const x = k => sonuc.altin.gram.d.map(([d, v]) => [d, +(v * k).toFixed(2)]);
+            const T = { ayar22: AYAR, ayar18: 0.75, ayar14: 0.585, ceyrek: COIN.ceyrek * AYAR, yarim: COIN.yarim * AYAR, tam: COIN.tam * AYAR };
+            for (const [k, c] of Object.entries(T)) if (!sonuc.altin[k]) sonuc.altin[k] = { d: x(c), kaynak: 'hesap: gram × has altın oranı' };
+          }
+          sonuc.son = Object.fromEntries([...Object.entries(sonuc.altin), ...Object.entries(sonuc.maden)].map(([k, v]) => [k, v.d[v.d.length - 1]]));
+          await writeFile('data/altin-tcmb.json', JSON.stringify(sonuc));
+          if (!Object.keys(sonuc.altin).length) console.log('::warning::Altın verisi yazılamadı: ' + sonuc.notlar.join(' | '));
+          console.log('altın:', Object.keys(sonuc.altin).join(', ') || '-', '| maden:', Object.keys(sonuc.maden).join(', ') || '-');
           EOF
       - name: Değiştiyse kaydet
         if: ${{ !cancelled() }}
