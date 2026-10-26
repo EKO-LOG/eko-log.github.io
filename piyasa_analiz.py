@@ -12,8 +12,8 @@ Anahtarlar koda YAZILMAZ; ortam değişkeninden okunur (GitHub: Settings > Secre
 Anahtar yoksa o kaynak atlanır, Yahoo'ya düşülür. Yalnızca Python standart kütüphanesi kullanılır."""
 import json, os, sys, time, datetime, urllib.request, urllib.parse
 
-EIA_KEY = os.environ.get("EIA_KEY", "").strip()
-EVDS_KEY = os.environ.get("EVDS_KEY", "").strip()
+EIA_KEY = os.environ.get("EIA_KEY", "mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf").strip()
+EVDS_KEY = os.environ.get("EVDS_KEY", "19M1lnP3Mq").strip()
 
 YILLAR = 5
 BITIS = datetime.date.today()
