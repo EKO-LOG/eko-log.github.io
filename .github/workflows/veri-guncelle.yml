@@ -1,256 +1,45 @@
-name: Veri güncelle
+name: Parite verisini güncelle
 on:
   schedule:
-    - cron: '0 6 * * *'
-  workflow_dispatch:
+    # Her gün 23:00 UTC (02:00 TSİ): ABD vadeli işlem günlük mumları kapandıktan sonra.
+    # Kripto hafta sonu da işlem gördüğü için hafta içi/sonu ayrımı yok.
+    - cron: "0 23 * * *"
+  workflow_dispatch:           # Actions sekmesinden elle de çalıştırılabilir
 permissions:
   contents: write
 concurrency:
-  group: veri-guncelle
+  group: parite-guncelle       # Aynı anda iki çalışma birbirinin push'unu bozmasın
   cancel-in-progress: false
 jobs:
   guncelle:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: 20
-      - name: TCMB / EVDS verisi
-        run: node veri-guncelle.mjs
+          python-version: "3.12"
+      - name: Veriyi üret
         env:
+          PYTHONUTF8: "1"
+          # TCMB EVDS anahtarı: index.html'deki gram/çeyrek/yarım altın için GRAMTL serisi.
+          # Yoksa site bu üçünü ons fiyatı x USD/TRY'den hesaplar.
           EVDS_KEY: ${{ secrets.EVDS_KEY }}
-      - name: Parite verileri
-        if: ${{ !cancelled() }}
-        timeout-minutes: 12
         run: |
-          node --input-type=module - <<'EOF'
-          // Parite verilerini çekip data/*.json olarak yazar. Çalıştır: node fetch-data.mjs
-          import { mkdir, writeFile } from 'node:fs/promises';
-          const DAYS = 1900, UA = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36' };
-          const YAHOO = { XAU:'GC=F',XAG:'SI=F',XPT:'PL=F',XPD:'PA=F',BRENT:'BZ=F',WTI:'CL=F',NG:'NG=F',TTF:'TTF=F',HO:'HO=F',RB:'RB=F',
-            XCU:'HG=F',ALU:'ALI=F',REMX:'REMX',LIT:'LIT',URA:'URA',WHEAT:'ZW=F',CORN:'ZC=F',SOY:'ZS=F',COFFEE:'KC=F',SUGAR:'SB=F',COTTON:'CT=F',COCOA:'CC=F',
-            BTC:'BTC-USD',ETH:'ETH-USD',BNB:'BNB-USD',SOL:'SOL-USD',XRP:'XRP-USD',ADA:'ADA-USD',DOGE:'DOGE-USD' };
-          const FIAT = 'EUR GBP TRY JPY CHF CNY CAD AUD NZD SEK NOK DKK PLN CZK HUF RON ISK BRL MXN ZAR INR KRW SGD HKD ILS IDR MYR PHP THB'.split(' ');
-          const iso = d => d.toISOString().slice(0, 10), sleep = ms => new Promise(r => setTimeout(r, ms));
-          async function get(url, tries = 4) {
-            let err;
-            for (let i = 0; i < tries; i++) {
-              try { const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(20000) }); if (r.ok) return await r.json(); err = new Error('HTTP ' + r.status); }
-              catch (e) { err = e; }
-              await sleep(1500 * (i + 1));
-            }
-            throw err;
-          }
-          async function yahoo(sym) {
-            const t1 = Math.floor(Date.now() / 1e3), t0 = t1 - DAYS * 86400;
-            for (const h of ['query1', 'query2']) {
-              try {
-                const j = await get(`https://${h}.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?period1=${t0}&period2=${t1}&interval=1d`, 2);
-                const r = j.chart.result[0], q = r.indicators.quote[0].close, o = [];
-                r.timestamp.forEach((t, i) => { if (q[i] > 0) o.push([iso(new Date(t * 1e3)), +q[i].toFixed(6)]); });
-                if (o.length > 1) return o;
-              } catch (e) {}
-            }
-            throw new Error('yahoo ' + sym);
-          }
-          const STOOQ = { XAU:'xauusd',XAG:'xagusd',XPT:'xptusd',XPD:'xpdusd',BRENT:'cb.f',WTI:'cl.f',NG:'ng.f',HO:'ho.f',RB:'rb.f',
-            XCU:'hg.f',WHEAT:'zw.f',CORN:'zc.f',SOY:'zs.f',COFFEE:'kc.f',SUGAR:'sb.f',COTTON:'ct.f',COCOA:'cc.f',REMX:'remx.us',LIT:'lit.us',URA:'ura.us' };
-          async function stooq(code) {
-            const t = STOOQ[code]; if (!t) throw new Error('stooq yok');
-            const d1 = iso(new Date(Date.now() - DAYS * 864e5)).replace(/-/g, ''), d2 = iso(new Date()).replace(/-/g, '');
-            const r = await fetch(`https://stooq.com/q/d/l/?s=${t}&i=d&d1=${d1}&d2=${d2}`, { headers: UA, signal: AbortSignal.timeout(20000) });
-            const txt = await r.text(), o = [];
-            for (const l of txt.trim().split('\n').slice(1)) { const c = l.split(','); const v = +c[4]; if (/^\d{4}-/.test(c[0]) && v > 0) o.push([c[0], v]); }
-            if (o.length < 2) throw new Error('stooq bos');
-            return o;
-          }
-          const BIN = { BTC:'BTCUSDT',ETH:'ETHUSDT',BNB:'BNBUSDT',SOL:'SOLUSDT',XRP:'XRPUSDT',ADA:'ADAUSDT',DOGE:'DOGEUSDT' };
-          async function binance(code) {
-            const sym = BIN[code]; if (!sym) throw new Error('binance yok');
-            let start = Date.now() - DAYS * 864e5; const o = [];
-            for (let n = 0; n < 4 && start < Date.now(); n++) {
-              let j, e2;
-              for (const h of ['https://data-api.binance.vision', 'https://api.binance.com']) { try { j = await get(`${h}/api/v3/klines?symbol=${sym}&interval=1d&startTime=${start}&limit=1000`, 2); break; } catch (e) { e2 = e; } }
-              if (!j) throw e2;
-              if (!j.length) break;
-              j.forEach(k => { if (+k[4] > 0) o.push([iso(new Date(k[0])), +k[4]]); });
-              start = j[j.length - 1][0] + 864e5;
-              if (j.length < 1000) break;
-            }
-            if (o.length < 2) throw new Error('binance bos');
-            return o;
-          }
-          const FRED = { BRENT:['DCOILBRENTEU',1], WTI:['DCOILWTICO',1], NG:['DHHNGSP',1], HO:['DHOILNYH',1], RB:['DGASNYH',1],
-            XCU:['PCOPPUSDM',1/2204.62], ALU:['PALUMUSDM',1], COCOA:['PCOCOUSDM',1] };
-          async function fred(code) {
-            const f = FRED[code]; if (!f) throw new Error('fred yok');
-            const r = await fetch(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${f[0]}&cosd=${iso(new Date(Date.now() - DAYS * 864e5))}`, { headers: UA, signal: AbortSignal.timeout(20000) });
-            if (!r.ok) throw new Error('fred HTTP ' + r.status);
-            const o = [];
-            for (const l of (await r.text()).trim().split('\n').slice(1)) { const c = l.split(','); const v = parseFloat(c[1]); if (/^\d{4}-/.test(c[0]) && v > 0) o.push([c[0], +(v * f[1]).toFixed(6)]); }
-            if (o.length < 2) throw new Error('fred bos');
-            if (/^P/.test(f[0])) o.m = true; // aylık veri
-            return o;
-          }
-          async function paxg() { // altın için: Binance PAXG (altına endeksli token)
-            const j = await get(`https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=1d&startTime=${Date.now() - 1000 * 864e5}&limit=1000`, 2);
-            const o = j.map(k => [iso(new Date(k[0])), +k[4]]).filter(p => p[1] > 0);
-            if (o.length < 2) throw new Error('paxg bos');
-            return o;
-          }
-          async function series(code) {
-            const order = BIN[code] ? [() => binance(code), () => yahoo(YAHOO[code])] : [() => yahoo(YAHOO[code]), () => stooq(code), () => fred(code), ...(code === 'XAU' ? [paxg] : [])];
-            let last;
-            for (const f of order) { try { return await f(); } catch (e) { last = e; } }
-            throw last;
-          }
-          async function fiat() {
-            const out = {}, end = new Date();
-            for (let y = 0; y < 6; y++) { // 1'er yıllık parçalar
-              const e = new Date(end.getTime() - y * 365 * 864e5), s = new Date(e.getTime() - 365 * 864e5);
-              const j = await get(`https://api.frankfurter.dev/v1/${iso(s)}..${iso(e)}?base=USD&symbols=${FIAT.join(',')}`);
-              Object.assign(out, j.rates);
-            }
-            return out;
-          }
-          await mkdir('data', { recursive: true });
-          let ok = 0, fail = [];
-          const stamp = new Date().toISOString();
-          try { await writeFile('data/fiat.json', JSON.stringify({ u: stamp, r: await fiat() })); ok++; console.log('fiat ok'); }
-          catch (e) { fail.push('fiat'); console.error('fiat', e.message); }
-          for (const [code, sym] of Object.entries(YAHOO)) {
-            try { await writeFile(`data/${code}.json`, JSON.stringify(await (async () => { const d = await series(code); return { u: stamp, d, m: d.m ? 1 : 0 }; })())); ok++; console.log(code, 'ok'); }
-            catch (e) { fail.push(code); console.error(code, 'HATA:', e.message); }
-            await sleep(700);
-          }
-          await writeFile('data/status.json', JSON.stringify({ u: stamp, ok, hata: fail }));
-          console.log(`tamam: ${ok}, hata: ${fail.join(', ') || '-'}`);
-          if (!ok) process.exit(1);
-          EOF
-      - name: Altın ve değerli maden verileri (TCMB)
-        if: ${{ !cancelled() }}
-        timeout-minutes: 10
-        env:
-          EVDS_KEY: ${{ secrets.EVDS_KEY }}
-          ALTIN_SERILER: ${{ vars.ALTIN_SERILER }}
+          mkdir -p data
+          python scripts/parite_guncelle.py
+      - name: Değişiklik varsa kaydet
         run: |
-          node --input-type=module - <<'EOF'
-          // TCMB EVDS3'ten altın (ve varsa değerli maden) verisini çekip data/altin-tcmb.json olarak yazar.
-          import { mkdir, readFile, writeFile } from 'node:fs/promises';
-          const KEY = process.env.EVDS_KEY;
-          const PIN = (process.env.ALTIN_SERILER || '').split(',').map(s => s.trim()).filter(Boolean); // örn: TP.XXX.YYY:gram:XAU:TL
-          const BASE = 'https://evds3.tcmb.gov.tr/igmevdsms-dis/', DAYS = 1900, OZ = 31.1034768;
-          const AYAR = 0.916, COIN = { ceyrek: 1.804, yarim: 3.608, tam: 7.216 }; // Cumhuriyet altını brüt gramajı, 22 ayar
-          const sleep = ms => new Promise(r => setTimeout(r, ms));
-          const tr = s => String(s || '').toLocaleLowerCase('tr-TR');
-          const pad = n => String(n).padStart(2, '0');
-          const dmy = d => `${pad(d.getUTCDate())}-${pad(d.getUTCMonth() + 1)}-${d.getUTCFullYear()}`;
-          const stamp = new Date().toISOString();
-          const KW = /altın|gümüş|platin|paladyum|külçe|kıymetli/;
-
-          async function evds(path, tries = 3) {
-            let err;
-            for (let i = 0; i < tries; i++) {
-              try {
-                const r = await fetch(BASE + path, { headers: { key: KEY, 'User-Agent': 'veri-bot' }, signal: AbortSignal.timeout(30000) });
-                const t = await r.text();
-                if (!r.ok) throw new Error('HTTP ' + r.status);
-                if (t.trimStart().startsWith('<')) throw new Error('JSON yerine HTML geldi (adres veya anahtar hatalı olabilir)');
-                return JSON.parse(t);
-              } catch (e) { err = e; await sleep(1500 * (i + 1)); }
-            }
-            throw err;
-          }
-
-          // Serileri EVDS'in kendi listesinden bulur; seri kodu tahmin edilmez.
-          async function discover() {
-            const groups = (await evds('datagroups/mode=0&type=json')).filter(g => KW.test(tr(g.DATAGROUP_NAME)));
-            const out = [];
-            for (const g of groups) {
-              try {
-                for (const s of await evds(`serieList/type=json&code=${g.DATAGROUP_CODE}`)) out.push({ kod: s.SERIE_CODE, ad: s.SERIE_NAME, grup: g.DATAGROUP_NAME });
-              } catch (e) { console.error('grup', g.DATAGROUP_CODE, e.message); }
-              await sleep(300);
-            }
-            return out;
-          }
-
-          function sinif(s) {
-            const n = tr(`${s.ad} ${s.grup}`);
-            return { ...s,
-              metal: /gümüş/.test(n) ? 'XAG' : /platin/.test(n) ? 'XPT' : /paladyum/.test(n) ? 'XPD' : 'XAU',
-              birim: /usd|dolar|\$/.test(n) ? 'USD' : 'TL',
-              tur: /ons/.test(n) ? 'ons' : /çeyrek/.test(n) ? 'ceyrek' : /yarım/.test(n) ? 'yarim' : /cumhuriyet|tam altın/.test(n) ? 'tam' : 'gram',
-              bol: /\bkg\b|kilogram/.test(n) ? 1000 : 1 };
-          }
-
-          async function veri(s) {
-            const rows = new Map(), end = Date.now(), start = end - DAYS * 864e5;
-            for (let a = start; a < end; a += 800 * 864e5) {
-              const b = Math.min(a + 800 * 864e5, end);
-              try {
-                const j = await evds(`series=${s.kod}&startDate=${dmy(new Date(a))}&endDate=${dmy(new Date(b))}&type=json`);
-                for (const it of j.items || []) {
-                  const m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(it.Tarih || ''); // yalnızca günlük veri
-                  const v = parseFloat(it[s.kod.replace(/\./g, '_')]) / s.bol;
-                  if (m && v > 0) rows.set(`${m[3]}-${m[2]}-${m[1]}`, +v.toFixed(4));
-                }
-              } catch (e) { console.error('veri', s.kod, e.message); }
-              await sleep(400);
-            }
-            return [...rows.entries()].sort((x, y) => (x[0] < y[0] ? -1 : 1));
-          }
-
-          // TCMB'de gram serisi yoksa: ons altın (USD) × USD/TRY ÷ 31,1035
-          async function yedekGram() {
-            const xau = new Map(JSON.parse(await readFile('data/XAU.json', 'utf8')).d);
-            const fx = JSON.parse(await readFile('data/fiat.json', 'utf8')).r;
-            const out = [];
-            for (const d of Object.keys(fx).sort()) { const t = fx[d]?.TRY; if (t && xau.has(d)) out.push([d, +(xau.get(d) / OZ * t).toFixed(2)]); }
-            if (out.length < 2) throw new Error('yedek hesap için yeterli veri yok');
-            return out;
-          }
-
-          const sonuc = { u: stamp, kaynak: 'TCMB EVDS', altin: {}, maden: {}, notlar: [] };
-          await mkdir('data', { recursive: true });
-          try {
-            if (!KEY) throw new Error('EVDS_KEY tanımlı değil');
-            const liste = PIN.length
-              ? PIN.map(p => { const [kod, tur = 'gram', metal = 'XAU', birim = 'TL'] = p.split(':'); return { kod, ad: kod, grup: '', tur, metal, birim, bol: 1 }; })
-              : (await discover()).map(sinif);
-            await writeFile('data/altin-seriler.json', JSON.stringify({ u: stamp, seriler: liste }, null, 1));
-            console.log(`bulunan seri: ${liste.length}`);
-            for (const s of liste) {
-              const d = await veri(s);
-              if (d.length < 2) { console.log('veri yok:', s.kod, s.ad); continue; }
-              if (s.metal === 'XAU' && (s.tur === 'ons' ? s.birim === 'USD' : s.birim === 'TL')) sonuc.altin[s.tur] = { d, kod: s.kod, ad: s.ad, kaynak: 'tcmb' };
-              else if (s.metal !== 'XAU' && (s.tur === 'gram' || s.tur === 'ons')) sonuc.maden[s.metal] = { d, kod: s.kod, ad: s.ad, birim: s.birim, tur: s.tur };
-              console.log('ok:', s.kod, s.metal, s.tur, s.birim, d.length);
-            }
-          } catch (e) { console.error('TCMB altın:', e.message); sonuc.notlar.push('TCMB: ' + e.message); }
-
-          if (!sonuc.altin.gram) {
-            try { sonuc.altin.gram = { d: await yedekGram(), kaynak: 'hesap: ons × USD/TRY' }; sonuc.notlar.push('Gram altın TCMB’den alınamadı; ons × USD/TRY ile hesaplandı.'); }
-            catch (e) { sonuc.notlar.push('Yedek: ' + e.message); }
-          }
-          if (sonuc.altin.gram) { // gram fiyatından türetilenler (işçilik/prim yok)
-            const x = k => sonuc.altin.gram.d.map(([d, v]) => [d, +(v * k).toFixed(2)]);
-            const T = { ayar22: AYAR, ayar18: 0.75, ayar14: 0.585, ceyrek: COIN.ceyrek * AYAR, yarim: COIN.yarim * AYAR, tam: COIN.tam * AYAR };
-            for (const [k, c] of Object.entries(T)) if (!sonuc.altin[k]) sonuc.altin[k] = { d: x(c), kaynak: 'hesap: gram × has altın oranı' };
-          }
-          sonuc.son = Object.fromEntries([...Object.entries(sonuc.altin), ...Object.entries(sonuc.maden)].map(([k, v]) => [k, v.d[v.d.length - 1]]));
-          await writeFile('data/altin-tcmb.json', JSON.stringify(sonuc));
-          if (!Object.keys(sonuc.altin).length) console.log('::warning::Altın verisi yazılamadı: ' + sonuc.notlar.join(' | '));
-          console.log('altın:', Object.keys(sonuc.altin).join(', ') || '-', '| maden:', Object.keys(sonuc.maden).join(', ') || '-');
-          EOF
-      - name: Değiştiyse kaydet
-        if: ${{ !cancelled() }}
-        run: |
-          git config user.name "veri-bot"
-          git config user.email "veri-bot@users.noreply.github.com"
-          git add veri.json data
-          if ! git diff --cached --quiet; then
-            git commit -m "Veri güncellendi"
-            git push
+          git config user.name "parite-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/parite-veri.json
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok"
+            exit 0
           fi
+          git commit -m "Parite verisi güncellendi"
+          for i in 1 2 3; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            sleep 5
+          done
+          exit 1
