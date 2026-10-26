@@ -1,147 +1,167 @@
-"""
-EIA (ABD) enerji + TCMB EVDS altın -> analiz ve grafik
-Google Colab'da çalışır. Önce:  !pip install requests pandas matplotlib
-"""
-import requests
-import pandas as pd
-import matplotlib.pyplot as plt
+#!/usr/bin/env python3
+"""Pariteler için veriyi sunucu tarafında çeker ve data/parite-veri.json dosyasına yazar.
+Site bu dosyayı bulursa internete hiç çıkmadan grafikleri anında gösterir.
 
-# ====== SADECE BU İKİ SATIRI DEĞİŞTİR ======
-EIA_KEY = "mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf"
-EVDS_KEY = "19M1lnP3Mq"
-# ===========================================
+Kaynaklar:
+  - EIA (ABD Enerji Bilgi İdaresi): Brent, WTI, Henry Hub doğalgaz, mazot, benzin
+  - TCMB EVDS: gram altın (TL)  -> GRAMTL
+  - Yahoo Finance: geri kalan her şey (maden, sanayi, tarım, BIST 100) ve EIA/EVDS çalışmazsa yedek
 
-BASLANGIC = "2024-01-01"
-BITIS = pd.Timestamp.today().strftime("%Y-%m-%d")
+Anahtarlar koda YAZILMAZ; ortam değişkeninden okunur (GitHub: Settings > Secrets > Actions):
+  EIA_KEY, EVDS_KEY
+Anahtar yoksa o kaynak atlanır, Yahoo'ya düşülür. Yalnızca Python standart kütüphanesi kullanılır."""
+import json, os, sys, time, datetime, urllib.request, urllib.parse
 
-# Altın için sırayla denenecek EVDS seri kodları (ilk çalışan kullanılır)
-ALTIN_ADAYLAR = ["TP.MK.KUL.YTL", "TP.MK.CUM.YTL"]
-USD_SERI = "TP.DK.USD.A.YTL"
+EIA_KEY = os.environ.get("EIA_KEY", "").strip()
+EVDS_KEY = os.environ.get("EVDS_KEY", "").strip()
+
+YILLAR = 5
+BITIS = datetime.date.today()
+BASLANGIC = BITIS - datetime.timedelta(days=365 * YILLAR + 2)
+UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"}
+
+# kod -> Yahoo sembolü (index.html içindeki ASSETS ile aynı)
+YAHOO = {
+    "XAU": "GC=F", "XAG": "SI=F", "XPT": "PL=F", "XPD": "PA=F",
+    "BRENT": "BZ=F", "WTI": "CL=F", "NG": "NG=F", "TTF": "TTF=F", "HO": "HO=F", "RB": "RB=F",
+    "XCU": "HG=F", "ALU": "ALI=F", "REMX": "REMX", "LIT": "LIT", "URA": "URA",
+    "WHEAT": "ZW=F", "CORN": "ZC=F", "SOY": "ZS=F", "COFFEE": "KC=F", "SUGAR": "SB=F",
+    "COTTON": "CT=F", "COCOA": "CC=F",
+    "BIST100": "XU100.IS",
+}
+# kod -> (EIA rotası, seri kodu)
+EIA = {
+    "BRENT": ("petroleum/pri/spt", "RBRTE"),
+    "WTI": ("petroleum/pri/spt", "RWTC"),
+    "NG": ("natural-gas/pri/fut", "RNGWHHD"),
+    "HO": ("petroleum/pri/spt", "EER_EPD2F_PF4_Y35NY_DPG"),
+    "RB": ("petroleum/pri/spt", "EER_EPMRU_PF4_Y35NY_DPG"),
+}
+# EVDS: gram altın (TL). İlk çalışan kod kullanılır.
+EVDS_ALTIN = ["TP.MK.KUL.YTL"]
 
 
-def eia_cek(route, seriler, ad_map):
-    url = f"https://api.eia.gov/v2/{route}/data/"
-    params = {
-        "api_key": EIA_KEY.strip(),
-        "frequency": "daily",
-        "data[0]": "value",
-        "start": BASLANGIC,
-        "end": BITIS,
-        "sort[0][column]": "period",
-        "sort[0][direction]": "asc",
-        "length": 5000,
+def get_json(url, headers=None, timeout=40):
+    req = urllib.request.Request(url, headers=headers or UA)
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.load(r)
+
+
+def yahoo(sym):
+    for host in ("query1", "query2"):
+        url = "https://%s.finance.yahoo.com/v8/finance/chart/%s?range=%dy&interval=1d" % (
+            host, urllib.parse.quote(sym), YILLAR)
+        try:
+            res = get_json(url)["chart"]["result"][0]
+            out = []
+            for t, c in zip(res["timestamp"], res["indicators"]["quote"][0]["close"]):
+                if c and c > 0:
+                    d = datetime.datetime.fromtimestamp(t, datetime.timezone.utc).strftime("%Y-%m-%d")
+                    out.append([d, round(c, 4)])
+            if len(out) > 1:
+                return out
+        except Exception as e:
+            print("  Yahoo hata", sym, host, e, file=sys.stderr)
+    return None
+
+
+def eia(route, seri):
+    if not EIA_KEY:
+        return None
+    q = {
+        "api_key": EIA_KEY, "frequency": "daily", "data[0]": "value",
+        "start": BASLANGIC.isoformat(), "end": BITIS.isoformat(),
+        "facets[series][0]": seri,
+        "sort[0][column]": "period", "sort[0][direction]": "asc", "length": "5000",
     }
-    for i, s in enumerate(seriler):
-        params[f"facets[series][{i}]"] = s
-    r = requests.get(url, params=params, timeout=30)
-    r.raise_for_status()
-    veri = r.json()["response"]["data"]
-    if not veri:
-        raise ValueError("EIA boş veri döndü")
-    df = pd.DataFrame(veri)
-    df["period"] = pd.to_datetime(df["period"])
-    df["value"] = pd.to_numeric(df["value"], errors="coerce")
-    df = df.pivot_table(index="period", columns="series", values="value")
-    return df.rename(columns=ad_map)
-
-
-def evds_cek(seri, ad):
-    d1 = pd.Timestamp(BASLANGIC).strftime("%d-%m-%Y")
-    d2 = pd.Timestamp(BITIS).strftime("%d-%m-%Y")
-    # Eski evds2 adresi kapandi; yeni adres evds3
-    url = (
-        "https://evds3.tcmb.gov.tr/igmevdsms-dis/"
-        f"series={seri}&startDate={d1}&endDate={d2}&type=json"
-    )
-    r = requests.get(url, headers={"key": EVDS_KEY.strip()}, timeout=30)
-    r.raise_for_status()
     try:
-        veri = r.json()
-    except ValueError:
-        raise ValueError("EVDS JSON yerine HTML dondurdu (anahtar/adres sorunu)")
-    items = veri.get("items", [])
-    if not items:
-        raise ValueError(f"{seri} icin veri yok")
-    df = pd.DataFrame(items)
-    kolonlar = [c for c in df.columns if c not in ("Tarih", "UNIXTIME")]
-    if not kolonlar:
-        raise ValueError(f"{seri} veri kolonu bulunamadi")
-    kolon = kolonlar[0]
-    df["Tarih"] = pd.to_datetime(df["Tarih"], format="%d-%m-%Y")
-    df[kolon] = pd.to_numeric(df[kolon], errors="coerce")
-    return df.set_index("Tarih")[[kolon]].rename(columns={kolon: ad})
-
-
-def dene(ad, fonksiyon):
-    """Bir kaynak hata verirse diğerlerini durdurma."""
-    try:
-        df = fonksiyon()
-        print(f"[OK] {ad}: {len(df)} satır")
-        return df
+        veri = get_json("https://api.eia.gov/v2/%s/data/?%s" % (route, urllib.parse.urlencode(q)))["response"]["data"]
+        out = []
+        for r in veri:
+            try:
+                v = float(r["value"])
+            except (TypeError, ValueError):
+                continue
+            if v > 0:
+                out.append([r["period"], round(v, 4)])
+        return out if len(out) > 1 else None
     except Exception as e:
-        print(f"[HATA] {ad}: {e}")
+        print("  EIA hata", seri, e, file=sys.stderr)
         return None
 
 
-# --- Veri çekme ---
-parcalar = []
+def evds(seri):
+    if not EVDS_KEY:
+        return None
+    d1 = BASLANGIC.strftime("%d-%m-%Y")
+    d2 = BITIS.strftime("%d-%m-%Y")
+    url = "https://evds3.tcmb.gov.tr/igmevdsms-dis/series=%s&startDate=%s&endDate=%s&type=json" % (seri, d1, d2)
+    try:
+        items = get_json(url, headers={"key": EVDS_KEY, **UA}).get("items", [])
+        out = []
+        for it in items:
+            kol = [k for k in it if k not in ("Tarih", "UNIXTIME")]
+            if not kol:
+                continue
+            try:
+                v = float(it[kol[0]])
+            except (TypeError, ValueError):
+                continue
+            d = datetime.datetime.strptime(it["Tarih"], "%d-%m-%Y").strftime("%Y-%m-%d")
+            if v > 0:
+                out.append([d, round(v, 4)])
+        return out if len(out) > 1 else None
+    except Exception as e:
+        print("  EVDS hata", seri, e, file=sys.stderr)
+        return None
 
-p = dene("Petrol (WTI, Brent)", lambda: eia_cek(
-    "petroleum/pri/spt", ["RWTC", "RBRTE"], {"RWTC": "WTI", "RBRTE": "Brent"}))
-if p is not None:
-    parcalar.append(p)
 
-g = dene("Henry Hub doğalgaz", lambda: eia_cek(
-    "natural-gas/pri/fut", ["RNGWHHD"], {"RNGWHHD": "HenryHub"}))
-if g is not None:
-    parcalar.append(g)
+def main():
+    path = os.path.join("data", "parite-veri.json")
+    eski = {}
+    if os.path.exists(path):
+        try:
+            eski = json.load(open(path, encoding="utf-8")).get("series", {})
+        except Exception:
+            eski = {}
 
-altin = None
-for kod in ALTIN_ADAYLAR:
-    altin = dene(f"Altın ({kod})", lambda k=kod: evds_cek(k, "Altin_TL_gr"))
-    if altin is not None:
-        parcalar.append(altin)
-        break
+    seri = {}
+    kodlar = list(YAHOO.keys())
+    for kod in kodlar:
+        s, kaynak = None, ""
+        if kod in EIA:
+            s = eia(*EIA[kod]); kaynak = "EIA"
+        if not s:
+            s = yahoo(YAHOO[kod]); kaynak = "Yahoo"
+        if s:
+            seri[kod] = s
+            print("tamam", kod, kaynak, len(s))
+        elif kod in eski:
+            seri[kod] = eski[kod]
+            print("eski veri korundu", kod)
+        time.sleep(0.5)
 
-usd = dene("USD/TRY", lambda: evds_cek(USD_SERI, "USDTRY"))
-if usd is not None:
-    parcalar.append(usd)
+    # TCMB gram altın (TL)
+    g = None
+    for kod in EVDS_ALTIN:
+        g = evds(kod)
+        if g:
+            print("tamam GRAMTL EVDS", kod, len(g))
+            break
+    if g:
+        seri["GRAMTL"] = g
+    elif "GRAMTL" in eski:
+        seri["GRAMTL"] = eski["GRAMTL"]
+        print("eski veri korundu GRAMTL")
 
-if not parcalar:
-    raise SystemExit("Hiç veri çekilemedi. Yukarıdaki [HATA] satırlarına bak.")
+    if not seri:
+        sys.exit("hiç veri alınamadı")
+    os.makedirs("data", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"updated": datetime.datetime.now(datetime.timezone.utc).isoformat(), "series": seri},
+                  f, separators=(",", ":"), ensure_ascii=False)
 
-df = pd.concat(parcalar, axis=1).sort_index().ffill()
 
-# Altını dolar cinsine çevir (gram başına USD)
-if "Altin_TL_gr" in df and "USDTRY" in df:
-    df["Altin_USD_gr"] = df["Altin_TL_gr"] / df["USDTRY"]
-
-df.to_csv("piyasa_verisi.csv")
-
-# --- Analiz ---
-print("\nSon değerler:\n", df.tail().round(2))
-getiri = df.pct_change().dropna(how="all")
-print("\nKorelasyon (günlük getiri):\n", getiri.corr().round(2))
-print("\nDönem getirisi (%):\n",
-      ((df.ffill().iloc[-1] / df.bfill().iloc[0] - 1) * 100).round(1))
-
-# --- Grafik (olan veriye göre) ---
-paneller = []
-if {"WTI", "Brent"} & set(df.columns):
-    paneller.append((["WTI", "Brent"], "Petrol (USD/varil) - EIA"))
-if "HenryHub" in df:
-    paneller.append((["HenryHub"], "Henry Hub Doğalgaz (USD/MMBtu) - EIA"))
-if "Altin_TL_gr" in df:
-    paneller.append((["Altin_TL_gr"], "Altın (TL/gr) - TCMB"))
-if "Altin_USD_gr" in df:
-    paneller.append((["Altin_USD_gr"], "Altın (USD/gr) - TCMB altın / USDTRY"))
-
-fig, axes = plt.subplots(len(paneller), 1, figsize=(10, 3.2 * len(paneller)),
-                         sharex=True, squeeze=False)
-for ax, (kolonlar, baslik) in zip(axes[:, 0], paneller):
-    mevcut = [k for k in kolonlar if k in df.columns]
-    df[mevcut].plot(ax=ax, title=baslik)
-    ax.grid(alpha=0.3)
-plt.tight_layout()
-plt.savefig("piyasa_grafik.png", dpi=150)
-plt.show()
+if __name__ == "__main__":
+    main()
+    
