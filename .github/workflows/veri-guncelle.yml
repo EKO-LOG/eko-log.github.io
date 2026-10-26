@@ -13,7 +13,7 @@ concurrency:
 jobs:
   guncelle:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30        # Script kendi süre bütçesini (20 dk) aşınca eldekini yazıp biter
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,12 +22,21 @@ jobs:
       - name: Veriyi üret
         env:
           PYTHONUTF8: "1"
-          # TCMB EVDS anahtarı: index.html'deki gram/çeyrek/yarım altın için GRAMTL serisi.
-          # Yoksa site bu üçünü ons fiyatı x USD/TRY'den hesaplar.
-          EVDS_KEY: ${{ secrets.EVDS_KEY }}
+          PARITE_BUTCE_SN: "1200"
+          # Anahtarlar: Settings > Secrets and variables > Actions
+          EIA_KEY: ${{ secrets.EIA_KEY }}      # enerji serileri (yoksa Yahoo'ya düşer)
+          EVDS_KEY: ${{ secrets.EVDS_KEY }}    # gram/çeyrek/yarım altın için GRAMTL (yoksa ons x kur)
         run: |
           mkdir -p data
-          python scripts/parite_guncelle.py
+          for f in scripts/piyasa_analiz.py scripts/parite_guncelle.py; do
+            if [ -f "$f" ]; then
+              echo "Çalıştırılıyor: $f"
+              python "$f"
+              exit $?
+            fi
+          done
+          echo "::error::scripts/ altında piyasa_analiz.py ya da parite_guncelle.py bulunamadı"
+          exit 1
       - name: Değişiklik varsa kaydet
         run: |
           git config user.name "parite-bot"
