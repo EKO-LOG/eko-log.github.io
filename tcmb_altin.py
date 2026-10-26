@@ -21,7 +21,7 @@ import pandas as pd
 import requests
 
 # --- Ayarlar -----------------------------------------------------------
-API_KEY = os.getenv("EVDS_API_KEY", "ANAHTARINIZ")
+API_KEY = os.getenv("EVDS_API_KEY", "19M1lnP3Mq")
 
 # Altın serisi kodu. EVDS'de seri sayfasından doğrulayın;
 # farklı bir seri kullanacaksanız sadece burayı değiştirmeniz yeterli.
