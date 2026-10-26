@@ -1,31 +1,28 @@
 """
-EIA (ABD) enerji verileri + TCMB EVDS altın verisi -> analiz ve grafik
-
-Kurulum:  pip install requests pandas matplotlib
-API anahtarları:
-  EIA  : https://www.eia.gov/opendata/  (ücretsiz)
-  EVDS : https://evds2.tcmb.gov.tr/     (Profil -> API Anahtarı)
+EIA (ABD) enerji + TCMB EVDS altın -> analiz ve grafik
+Google Colab'da çalışır. Önce:  !pip install requests pandas matplotlib
 """
-import os
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 
-EIA_KEY = os.getenv("EIA_API_KEY", "mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf")
-EVDS_KEY = os.getenv("EVDS_API_KEY", "19M1lnP3Mq")
+# ====== SADECE BU İKİ SATIRI DEĞİŞTİR ======
+EIA_KEY = "mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf"
+EVDS_KEY = "19M1lnP3Mq"
+# ===========================================
 
 BASLANGIC = "2024-01-01"
 BITIS = pd.Timestamp.today().strftime("%Y-%m-%d")
 
-# EVDS altın seri kodu: EVDS'de "Külçe Altın" araması yapıp kodu doğrula
-ALTIN_SERI = "TP.MK.KUL.YTL"
+# Altın için sırayla denenecek EVDS seri kodları (ilk çalışan kullanılır)
+ALTIN_ADAYLAR = ["TP.MK.KUL.YTL", "TP.MK.CUM.YTL"]
+USD_SERI = "TP.DK.USD.A.YTL"
 
 
 def eia_cek(route, seriler, ad_map):
-    """EIA API v2 günlük seri çeker."""
     url = f"https://api.eia.gov/v2/{route}/data/"
     params = {
-        "api_key": EIA_KEY,
+        "api_key": EIA_KEY.strip(),
         "frequency": "daily",
         "data[0]": "value",
         "start": BASLANGIC,
@@ -38,59 +35,107 @@ def eia_cek(route, seriler, ad_map):
         params[f"facets[series][{i}]"] = s
     r = requests.get(url, params=params, timeout=30)
     r.raise_for_status()
-    df = pd.DataFrame(r.json()["response"]["data"])
+    veri = r.json()["response"]["data"]
+    if not veri:
+        raise ValueError("EIA boş veri döndü")
+    df = pd.DataFrame(veri)
     df["period"] = pd.to_datetime(df["period"])
     df["value"] = pd.to_numeric(df["value"], errors="coerce")
     df = df.pivot_table(index="period", columns="series", values="value")
     return df.rename(columns=ad_map)
 
 
-def evds_cek(seri, bas, bit):
-    """TCMB EVDS günlük seri çeker (anahtar header ile gönderilir)."""
-    d1 = pd.Timestamp(bas).strftime("%d-%m-%Y")
-    d2 = pd.Timestamp(bit).strftime("%d-%m-%Y")
+def evds_cek(seri, ad):
+    d1 = pd.Timestamp(BASLANGIC).strftime("%d-%m-%Y")
+    d2 = pd.Timestamp(BITIS).strftime("%d-%m-%Y")
     url = (
         "https://evds2.tcmb.gov.tr/service/evds/"
         f"series={seri}&startDate={d1}&endDate={d2}&type=json"
     )
-    r = requests.get(url, headers={"key": EVDS_KEY}, timeout=30)
+    r = requests.get(url, headers={"key": EVDS_KEY.strip()}, timeout=30)
     r.raise_for_status()
-    df = pd.DataFrame(r.json()["items"])
-    df["Tarih"] = pd.to_datetime(df["Tarih"], format="%d-%m-%Y")
+    items = r.json().get("items", [])
+    if not items:
+        raise ValueError(f"{seri} için veri yok")
+    df = pd.DataFrame(items)
     kolon = seri.replace(".", "_")
+    if kolon not in df.columns:
+        raise ValueError(f"{seri} kolonu bulunamadı")
+    df["Tarih"] = pd.to_datetime(df["Tarih"], format="%d-%m-%Y")
     df[kolon] = pd.to_numeric(df[kolon], errors="coerce")
-    return df.set_index("Tarih")[[kolon]].rename(columns={kolon: "Altin_TL_gr"})
+    return df.set_index("Tarih")[[kolon]].rename(columns={kolon: ad})
+
+
+def dene(ad, fonksiyon):
+    """Bir kaynak hata verirse diğerlerini durdurma."""
+    try:
+        df = fonksiyon()
+        print(f"[OK] {ad}: {len(df)} satır")
+        return df
+    except Exception as e:
+        print(f"[HATA] {ad}: {e}")
+        return None
 
 
 # --- Veri çekme ---
-petrol = eia_cek(
-    "petroleum/pri/spt", ["RWTC", "RBRTE"],
-    {"RWTC": "WTI", "RBRTE": "Brent"},
-)
-gaz = eia_cek(
-    "natural-gas/pri/fut", ["RNGWHHD"],
-    {"RNGWHHD": "HenryHub"},
-)
-altin = evds_cek(ALTIN_SERI, BASLANGIC, BITIS)
+parcalar = []
 
-df = petrol.join(gaz, how="outer").join(altin, how="outer").sort_index().ffill()
+p = dene("Petrol (WTI, Brent)", lambda: eia_cek(
+    "petroleum/pri/spt", ["RWTC", "RBRTE"], {"RWTC": "WTI", "RBRTE": "Brent"}))
+if p is not None:
+    parcalar.append(p)
+
+g = dene("Henry Hub doğalgaz", lambda: eia_cek(
+    "natural-gas/pri/fut", ["RNGWHHD"], {"RNGWHHD": "HenryHub"}))
+if g is not None:
+    parcalar.append(g)
+
+altin = None
+for kod in ALTIN_ADAYLAR:
+    altin = dene(f"Altın ({kod})", lambda k=kod: evds_cek(k, "Altin_TL_gr"))
+    if altin is not None:
+        parcalar.append(altin)
+        break
+
+usd = dene("USD/TRY", lambda: evds_cek(USD_SERI, "USDTRY"))
+if usd is not None:
+    parcalar.append(usd)
+
+if not parcalar:
+    raise SystemExit("Hiç veri çekilemedi. Yukarıdaki [HATA] satırlarına bak.")
+
+df = pd.concat(parcalar, axis=1).sort_index().ffill()
+
+# Altını dolar cinsine çevir (gram başına USD)
+if "Altin_TL_gr" in df and "USDTRY" in df:
+    df["Altin_USD_gr"] = df["Altin_TL_gr"] / df["USDTRY"]
+
 df.to_csv("piyasa_verisi.csv")
 
 # --- Analiz ---
+print("\nSon değerler:\n", df.tail().round(2))
 getiri = df.pct_change().dropna(how="all")
-print("Son değerler:\n", df.tail(), "\n")
-print("Korelasyon (günlük getiri):\n", getiri.corr().round(2), "\n")
-print("Dönem getirisi (%):\n", ((df.iloc[-1] / df.iloc[0] - 1) * 100).round(1))
+print("\nKorelasyon (günlük getiri):\n", getiri.corr().round(2))
+print("\nDönem getirisi (%):\n",
+      ((df.ffill().iloc[-1] / df.bfill().iloc[0] - 1) * 100).round(1))
 
-# --- Grafikler ---
-fig, ax = plt.subplots(3, 1, figsize=(10, 11), sharex=True)
+# --- Grafik (olan veriye göre) ---
+paneller = []
+if {"WTI", "Brent"} & set(df.columns):
+    paneller.append((["WTI", "Brent"], "Petrol (USD/varil) - EIA"))
+if "HenryHub" in df:
+    paneller.append((["HenryHub"], "Henry Hub Doğalgaz (USD/MMBtu) - EIA"))
+if "Altin_TL_gr" in df:
+    paneller.append((["Altin_TL_gr"], "Altın (TL/gr) - TCMB"))
+if "Altin_USD_gr" in df:
+    paneller.append((["Altin_USD_gr"], "Altın (USD/gr) - TCMB altın / USDTRY"))
 
-df[["WTI", "Brent"]].plot(ax=ax[0], title="Petrol (USD/varil) - EIA")
-df["HenryHub"].plot(ax=ax[1], color="tab:green", title="Henry Hub Doğalgaz (USD/MMBtu) - EIA")
-df["Altin_TL_gr"].plot(ax=ax[2], color="goldenrod", title="Altın (TL/gr) - TCMB")
-
-for a in ax:
-    a.grid(alpha=0.3)
+fig, axes = plt.subplots(len(paneller), 1, figsize=(10, 3.2 * len(paneller)),
+                         sharex=True, squeeze=False)
+for ax, (kolonlar, baslik) in zip(axes[:, 0], paneller):
+    mevcut = [k for k in kolonlar if k in df.columns]
+    df[mevcut].plot(ax=ax, title=baslik)
+    ax.grid(alpha=0.3)
 plt.tight_layout()
 plt.savefig("piyasa_grafik.png", dpi=150)
 plt.show()
