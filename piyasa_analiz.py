@@ -11,8 +11,8 @@ import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 
-EIA_KEY = os.getenv("EIA_API_KEY", "BURAYA_EIA_ANAHTARI")
-EVDS_KEY = os.getenv("EVDS_API_KEY", "BURAYA_EVDS_ANAHTARI")
+EIA_KEY = os.getenv("EIA_API_KEY", "mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf")
+EVDS_KEY = os.getenv("EVDS_API_KEY", "19M1lnP3Mq")
 
 BASLANGIC = "2024-01-01"
 BITIS = pd.Timestamp.today().strftime("%Y-%m-%d")
