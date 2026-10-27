@@ -1,4 +1,4 @@
-    #!/usr/bin/env python3
+#!/usr/bin/env python3
 """Pariteler için veriyi sunucu tarafında çeker ve data/parite-veri.json dosyasına yazar.
 Site bu dosyayı bulursa internete hiç çıkmadan grafikleri anında gösterir.
 
@@ -11,7 +11,12 @@ Anahtarlar koda YAZILMAZ; ortam değişkeninden okunur (GitHub: Settings > Secre
   EIA_KEY, EVDS_KEY
 Anahtar yoksa o kaynak atlanır, Yahoo'ya düşülür. Yalnızca Python standart kütüphanesi kullanılır.
 
+Yahoo notu: GitHub sunucularından düz Python isteği (urllib) Yahoo tarafından ilk istekte 429 ile
+reddediliyor. Bu yüzden kuruluysa curl_cffi ile gerçek Chrome taklidi yapılır (workflow `pip install
+curl_cffi` çalıştırır). Kurulu değilse eski yönteme düşülür.
+
 Dayanıklılık:
+  - Yahoo ilk 4 istekte de reddederse (IP engeli) kalan Yahoo istekleri atlanır, iş dakikalarca sürmez.
   - Geçici hatalarda (429, 5xx, zaman aşımı, JSON olmayan yanıt) artan bekleme ile yeniden dener.
   - Veri alınamayan seri için eski dosyadaki veri korunur; hiç verisi olmayan seriler
     sıranın başına alınır ki sınırlı süre bütçesinde önce onlar denensin.
@@ -58,6 +63,17 @@ EVDS_ALTIN = ["TP.MK.KUL.YTL"]
 OPENER = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
 
 
+try:
+    from curl_cffi import requests as _cffi
+    SESS = _cffi.Session(impersonate="chrome")  # Chrome'un TLS/HTTP2 parmak izi
+except Exception:  # kurulu değil ya da bu sürümde desteklenmiyor
+    SESS = None
+
+YAHOO_ENGELLI = False
+_yahoo_ok = 0
+_yahoo_seri_hata = 0
+
+
 class Hata(Exception):
     pass
 
@@ -66,7 +82,20 @@ def butce_bitti():
     return time.time() - T0 > BUTCE_SN
 
 
-def istek(url, headers=None, deneme=3, timeout=25):
+def _al(url, headers, timeout, tarayici):
+    """(durum kodu, gövde baytları, başlıklar) döndürür."""
+    if tarayici and SESS is not None:
+        r = SESS.get(url, timeout=timeout)
+        return r.status_code, r.content, r.headers
+    req = urllib.request.Request(url, headers=headers or UA)
+    try:
+        with OPENER.open(req, timeout=timeout) as r:
+            return r.status, r.read(), r.headers
+    except urllib.error.HTTPError as e:
+        return e.code, b"", e.headers
+
+
+def istek(url, headers=None, deneme=3, timeout=25, tarayici=False):
     """JSON döndürür. Geçici hatalarda artan beklemeyle yeniden dener, kalıcı hatada Hata fırlatır."""
     son = "bilinmiyor"
     for i in range(deneme):
@@ -74,17 +103,18 @@ def istek(url, headers=None, deneme=3, timeout=25):
             raise Hata("süre bütçesi bitti")
         bekle = min(45, 4 * 2 ** i) + random.random() * 2
         try:
-            req = urllib.request.Request(url, headers=headers or UA)
-            with OPENER.open(req, timeout=timeout) as r:
-                return json.load(r)
-        except urllib.error.HTTPError as e:
-            son = "HTTP %d" % e.code
-            if e.code in (400, 401, 403, 404):  # yeniden denemek işe yaramaz
+            kod, govde, hdr = _al(url, headers, timeout, tarayici)
+            if kod == 200:
+                return json.loads(govde)
+            son = "HTTP %d" % kod
+            if kod in (400, 401, 403, 404):  # yeniden denemek işe yaramaz
                 raise Hata(son)
-            ra = e.headers.get("Retry-After") if e.headers else None
-            if ra and ra.isdigit():
+            ra = hdr.get("Retry-After") if hdr else None
+            if ra and str(ra).isdigit():
                 bekle = min(60, int(ra)) + random.random()
-        except Exception as e:  # zaman aşımı, bağlantı kopması, JSON olmayan ("Too Many Requests") yanıt
+        except Hata:
+            raise
+        except Exception as e:  # zaman aşımı, bağlantı kopması, JSON olmayan yanıt
             son = "%s %s" % (type(e).__name__, str(e)[:80])
         if i < deneme - 1:
             time.sleep(bekle)
@@ -94,7 +124,10 @@ def istek(url, headers=None, deneme=3, timeout=25):
 def yahoo_isin():
     """Yahoo çerezi alır (404 döner ama çerez yerleşir). Başarısız olsa da devam edilir."""
     try:
-        OPENER.open(urllib.request.Request("https://fc.yahoo.com", headers=UA), timeout=15).read()
+        if SESS is not None:
+            SESS.get("https://fc.yahoo.com", timeout=15)
+        else:
+            OPENER.open(urllib.request.Request("https://fc.yahoo.com", headers=UA), timeout=15).read()
     except urllib.error.HTTPError:
         pass
     except Exception as e:
@@ -102,18 +135,23 @@ def yahoo_isin():
 
 
 def yahoo(sym):
+    global YAHOO_ENGELLI, _yahoo_ok, _yahoo_seri_hata
+    if YAHOO_ENGELLI:
+        return None
     son = "bilinmiyor"
     for host in ("query1", "query2"):
         url = "https://%s.finance.yahoo.com/v8/finance/chart/%s?range=%dy&interval=1d" % (
             host, urllib.parse.quote(sym), YILLAR)
         try:
-            res = istek(url, deneme=3)["chart"]["result"][0]
+            res = istek(url, deneme=2, tarayici=True)["chart"]["result"][0]
             out = []
             for t, c in zip(res["timestamp"], res["indicators"]["quote"][0]["close"]):
                 if c and c > 0:
                     d = datetime.datetime.fromtimestamp(t, datetime.timezone.utc).strftime("%Y-%m-%d")
                     out.append([d, round(c, 4)])
             if len(out) > 1:
+                _yahoo_ok += 1
+                _yahoo_seri_hata = 0
                 return out
             son = "%s boş veri" % host
         except Hata as e:
@@ -121,6 +159,11 @@ def yahoo(sym):
         except (KeyError, IndexError, TypeError) as e:
             son = "%s beklenmeyen yanıt (%s)" % (host, type(e).__name__)
     print("  Yahoo başarısız %s: %s" % (sym, son), file=sys.stderr)
+    _yahoo_seri_hata += 1
+    if _yahoo_ok == 0 and _yahoo_seri_hata >= 4:
+        YAHOO_ENGELLI = True
+        print("::warning::Yahoo ilk %d istekte de veri vermedi (büyük olasılıkla IP engeli, curl_cffi %s). "
+              "Kalan Yahoo istekleri atlanıyor." % (_yahoo_seri_hata, "kullanıldı" if SESS else "KURULU DEĞİL"))
     return None
 
 
@@ -149,6 +192,15 @@ def eia(route, seri):
         return None
 
 
+def _tarih(t):
+    for f in ("%d-%m-%Y", "%Y-%m-%d", "%Y-%m"):
+        try:
+            return datetime.datetime.strptime(str(t), f).strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return None
+
+
 def evds(seri):
     if not EVDS_KEY:
         return None
@@ -166,11 +218,14 @@ def evds(seri):
                 v = float(it[kol[0]])
             except (TypeError, ValueError):
                 continue
-            d = datetime.datetime.strptime(it["Tarih"], "%d-%m-%Y").strftime("%Y-%m-%d")
-            if v > 0:
+            d = _tarih(it.get("Tarih"))
+            if d and v > 0:
                 out.append([d, round(v, 4)])
-        return out if len(out) > 1 else None
-    except (Hata, AttributeError, KeyError, ValueError) as e:
+        if len(out) < 200:  # 5 yıllık günlük seri ~1300 kayıt; aylık/haftalık seri günlük grafiğe uymaz
+            print("  EVDS serisi günlük değil (%d kayıt): %s, GRAMTL atlandı" % (len(out), seri), file=sys.stderr)
+            return None
+        return out
+    except (Hata, AttributeError, KeyError, TypeError) as e:
         print("  EVDS hata %s: %s" % (seri, e), file=sys.stderr)
         return None
 
@@ -240,4 +295,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-  
+                            
