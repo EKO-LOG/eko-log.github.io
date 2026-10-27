@@ -28,15 +28,16 @@ jobs:
           EVDS_KEY: ${{ secrets.EVDS_KEY }}    # gram/çeyrek/yarım altın için GRAMTL (yoksa ons x kur)
         run: |
           mkdir -p data
-          for f in piyasa_analiz.py scripts/piyasa_analiz.py scripts/parite_guncelle.py; do
-            if [ -f "$f" ]; then
-              echo "Çalıştırılıyor: $f"
-              python "$f"
-              exit $?
-            fi
-          done
-          echo "::error::piyasa_analiz.py (ana dizin ya da scripts/) bulunamadı"
-          exit 1
+          echo "--- Depodaki dosyalar ---"
+          ls -la
+          # Dosya adına bağlı kalma: parite-veri.json yazan .py dosyasını bul
+          f=$(grep -l "parite-veri.json" ./*.py scripts/*.py 2>/dev/null | head -1)
+          if [ -z "$f" ]; then
+            echo "::error::parite-veri.json yazan bir .py dosyası bulunamadı (yukarıdaki listeye bak)"
+            exit 1
+          fi
+          echo "Çalıştırılıyor: $f"
+          python "$f"
       - name: Değişiklik varsa kaydet
         run: |
           git config user.name "parite-bot"
