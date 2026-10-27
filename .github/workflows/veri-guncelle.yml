@@ -28,14 +28,14 @@ jobs:
           EVDS_KEY: ${{ secrets.EVDS_KEY }}    # gram/çeyrek/yarım altın için GRAMTL (yoksa ons x kur)
         run: |
           mkdir -p data
-          for f in scripts/piyasa_analiz.py scripts/parite_guncelle.py; do
+          for f in piyasa_analiz.py scripts/piyasa_analiz.py scripts/parite_guncelle.py; do
             if [ -f "$f" ]; then
               echo "Çalıştırılıyor: $f"
               python "$f"
               exit $?
             fi
           done
-          echo "::error::scripts/ altında piyasa_analiz.py ya da parite_guncelle.py bulunamadı"
+          echo "::error::piyasa_analiz.py (ana dizin ya da scripts/) bulunamadı"
           exit 1
       - name: Değişiklik varsa kaydet
         run: |
