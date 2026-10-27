@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Yahoo için tarayıcı taklidi kur
+        run: pip install curl_cffi || echo "::warning::curl_cffi kurulamadı, standart istek kullanılacak"
       - name: Veriyi üret
         env:
           PYTHONUTF8: "1"
