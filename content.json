@@ -1144,6 +1144,90 @@
           "finans",
           "hukuk"
         ]
+      },
+      "Uluslararası kuruluşlar · Genç Profesyonel Programları": {
+        "org": "Uluslararası Kuruluşlar",
+        "title": "Genç Profesyonel Programları",
+        "desc": "BM, Dünya Bankası, IMF ve OECD gibi kuruluşlar genç meslek sahipleri için düzenli programlar açar. Güçlü yabancı dil ve çoğunlukla lisansüstü eğitim aranır.",
+        "proc": "Kuruma Göre Değişir (başvuru + yazılı + mülakat)",
+        "sart": "",
+        "gorev": "BM, Dünya Bankası, IMF, OECD gibi kuruluşlarda ilk deneyim: analiz, saha ve program destek görevleri.",
+        "yol": "Genç profesyonel → uzman → kıdemli uzman/program yöneticisi. Programlar belirli yaş ve deneyim şartıyla açılır.",
+        "nitelik": "Mükemmel İngilizce (ek dil artı), lisansüstü eğitim, uluslararası deneyim ve motivasyon.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "ui",
+          "sb",
+          "ekonometri",
+          "finans"
+        ]
+      },
+      "Üniversiteler · Araştırma Görevlisi": {
+        "org": "Devlet Üniversiteleri ve Vakıf Üniversiteleri",
+        "title": "Araştırma Görevlisi (Öğretim Yardımcısı)",
+        "desc": "Üniversitelerin fakülte, enstitü ve yüksekokullarında bilimsel araştırma ve geliştirme faaliyetlerini yürütmek, ders ve laboratuvar uygulamalarında öğretim elemanlarına yardımcı olmak, lisansüstü eğitim (yüksek lisans ve doktora) süreciyle akademik kariyer basamaklarını tırmanmak amacıyla istihdam edilen temel akademik unvandır.",
+        "proc": "ÖSYM Akademik Personel ve Lisansüstü Eğitimi Giriş Sınavı (ALES) puanı, YÖKDİL veya YDS gibi yabancı dil puanı, lisans mezuniyet not ortalaması (AGNO) ile kurum tarafından yapılan yazılı bilim sınavı ve/veya mülakat aşamalarından oluşur.",
+        "sart": "Devlet kadrolarında 2547 sayılı Kanun gereği 35 yaşını doldurmamış olmak gerekir (ÖYP veya bazı özel kadrolarda değişebilir). ALES'ten ilgili puan türünden en az 70 (lisansüstü eğitim için aranan taban puanlar ilana göre değişebilir), yabancı dilden ise genellikle en az 50 puan almış olmak şarttır. Kontenjanlar her üniversitenin departman ihtiyaçlarına göre YÖK onayıyla ilan edilir.",
+        "gorev": "Akademik araştırmalar yapar, makaleler yazar ve bilimsel projelere katılır; lisans derslerinde pratik çalışmalara, sınav gözetmenliğine ve ödev değerlendirmelerine destek olur; kürsü veya anabilim dalının idari ve akademik işleyişini yürütür; kendi yüksek lisans ve doktora tez çalışmalarını sürdürür.",
+        "yol": "Araştırma Görevlisi -> Doktor Öğretim Üyesi (Yardımcı Doçent) -> Doçent -> Profesör. (Öğretim üyesi kadrolarına geçiş için doktora unvanının tamamlanması, makale yayınlanması ve doçentlik sınavlarının geçilmesi gerekir.)",
+        "nitelik": "Güçlü akademik altyapı, analitik ve eleştirel düşünme, akademik makale okuma/yazma becerisi, yüksek düzeyde yabancı dil (literatür takibi için) ve bilimsel etik bilinci.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Adalet Bakanlığı · Hâkim / Savcı Adayı": {
+        "org": "Adalet Bakanlığı",
+        "title": "Hâkim / Savcı Adayı",
+        "desc": "Türk adalet sisteminde yargı yetkisini kullanmak üzere adli yargıda hâkimlik veya savcılık, idari yargıda ise idare veya vergi mahkemelerinde hâkimlik görevlerini üstlenmek üzere mesleğe kabul edilen adayların başlangıç kariyer basamağıdır. Adaylık dönemi, Adalet Akademisi eğitimi, adliye/mahkeme stajları ve mülakat/kurul ataması süreçlerinin ardından asıl unvanlar (Hâkim / Cumhuriyet Savcısı) kazanılır.\n\nİİBF Bölümleri İdari Yargıya başvuru yapabilir.",
+        "proc": "ÖSYM tarafından ÖSYM/Adalet Bakanlığı iş birliğiyle yapılan Adli Yargı / İdari Yargı Yazılı Yarışma Sınavı, ardından mülakat (sözlü sınav) ve ÖSYM/Bakanlık duyurularına göre belirlenen taban puan barajı süreçlerinden oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak, ilgili ÖSYM sınavında başarılı olmak ve hukuk (veya idari yargı için gerekli iktisat, işletme, kamu yönetimi vb.) fakültesi mezunu olmak şarttır. Kontenjanlar Adalet Bakanlığının yıllık yargı teşkilatı ihtiyaçlarına göre belirlenir.",
+        "gorev": "Adaylık sürecinde kıdemli hâkim ve savcıların nezaretinde duruşmalara katılır, dosya inceler, karar taslakları hazırlar ve adli/idari soruşturma süreçlerini öğrenir. Asalete atandıktan sonra ise davalara bakar, iddianame düzenler, hukuki uyuşmazlıkları çözer veya idari işlemlerin hukuka uygunluğunu denetler.",
+        "yol": "Hâkim/Savcı Adayı -> Hâkim / Cumhuriyet Savcısı -> Kıdemli Hâkim / Ağır Ceza Mahkemesi Başkanı / Başsavcı / Yargıtay veya Danıştay Üyeliği. Ülke genelindeki adliyelerde, bölge idare mahkemelerinde ve yüksek yargı organlarında görev yapılır.",
+        "nitelik": "Türk Ceza Kanunu, Medeni Kanun, Borçlar Kanunu, İdare ve Anayasa hukuku başta olmak üzere kapsamlı mevzuat bilgisi; yüksek düzeyde hukuki muhakeme, tarafsızlık, adalet bilinci, etik değerlere bağlılık ve güçlü ifade/yazım yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Hazine ve Maliye Bakanlığı · Sigorta ve Emeklilik · Sigorta Denetmen Yardımcısı": {
+        "org": "T.C. Hazine ve Maliye Bakanlığı (Sigortacılık ve Özel Emeklilik Düzenleme ve Denetleme Kurumu - SEDDK / ya da ilgili denetim birimleri)",
+        "title": "Sigorta Denetmen Yardımcısı",
+        "desc": "Sigortacılık sektörünün ve özel emeklilik sisteminin güvenli, istikrarlı ve şeffaf bir şekilde gelişmesini sağlamak; sigorta şirketlerinin, reasürans şirketlerinin ve aracı kurumların mali bünyelerini, teknik karşılıklarını ve işlemlerini denetlemek amacıyla istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, yetki sınavı, teftiş stajı ve yeterlik sınavı süreçlerinin ardından Sigorta Denetmeni unvanı kazanılır.",
+        "proc": "ÖSYM Kamu Personel Seçme Sınavı (KPSS) taban puanı, kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) kurumun belirlediği ilgili puan türünden (genellikle P48 veya benzeri alan puanları) taban puanı almış olmak şarttır. Kontenjanlar sektörün denetim ve gözetim ihtiyacına göre dönemsel olarak belirlenir.",
+        "gorev": "Sigorta ve emeklilik şirketlerinin mali yapısı, aktüeryal hesaplamaları ve mevzuata uyumunun denetimi.",
+        "yol": "Denetmen yardımcısı → denetmen → başdenetmen.",
+        "nitelik": "Sigortacılık, finans ve muhasebe bilgisi; analitik düşünme.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
       }
     }
   },
