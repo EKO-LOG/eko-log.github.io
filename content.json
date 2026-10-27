@@ -620,6 +620,139 @@
           "finans",
           "hukuk"
         ]
+      },
+      "Sosyal Güvenlik Kurumu · Sosyal Güvenlik Denetmen Yardımcısı": {
+        "org": "Sosyal Güvenlik Kurumu",
+        "title": "Sosyal Güvenlik Denetmen Yardımcısı",
+        "desc": "Sosyal güvenlik mevzuatının uygulanmasını denetlemek, sigorta primleri ve işlemlerini incelemek, kayıt dışı istihdamla mücadele etmek ve kurumun denetim görevlerini yürütmek üzere istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, yetki sınavı ve yeterlik sınavı aşamalarının ardından Sosyal Güvenlik Denetmeni unvanı kazanılır.",
+        "proc": "KPSS puan barajı, kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen ilgili puan türünden taban puanı almış olmak şarttır.",
+        "gorev": "İş yerlerinde sosyal güvenlik mevzuatına uyulup uyulmadığını denetler, kayıt dışı çalışanları tespit eder, sigortalıların hak ve yükümlülüklerine ilişkin incelemeler yapar ve teftiş raporları hazırlar.",
+        "yol": "Sosyal Güvenlik Denetmen Yardımcısı -> Sosyal Güvenlik Denetmeni -> Kıdemli Sosyal Güvenlik Denetmeni. Kurumun merkez ve taşra teşkilatlarında görev yapılır.",
+        "nitelik": "Sosyal güvenlik hukuku, iş hukuku, borçlar hukuku, muhasebe ve kamu maliyesi bilgisi; titiz inceleme, denetim ve raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "sb",
+          "calisma",
+          "hukuk"
+        ]
+      },
+      "Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı · Uzman Yardımcısı (Strateji ve Planlama)": {
+        "org": "Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı",
+        "title": "Uzman Yardımcısı (Strateji ve Planlama)",
+        "desc": "Kalkınma planlarını, yıllık programları hazırlamak, kamu kesimi bütçe tekliflerini koordine etmek ve stratejik planlama çalışmalarını yürütmek üzere istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, tez hazırlama ve yeterlik sınavı süreçlerinin ardından Strateji ve Bütçe Uzmanı unvanı kazanılır.",
+        "proc": "KPSS puan barajı, kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen ilgili puan türünden taban puanı almış olmak şarttır.",
+        "gorev": "Ülkenin kalkınma planlarını ve stratejilerini hazırlar, kamu yatırımlarını izler, bütçe politikalarını yönlendirir ve ekonomik analizler yaparak makro düzeyde politika önerileri geliştirir.",
+        "yol": "Strateji ve Bütçe Uzman Yardımcısı -> Strateji ve Bütçe Uzmanı -> Kıdemli Uzman / Daire Başkanı. Cumhurbaşkanlığı merkez teşkilatında görev yapılır.",
+        "nitelik": "Makro iktisat, kamu maliyesi, istatistiksel analiz, planlama teknikleri ve stratejik yönetim bilgisi; ileri düzeyde araştırma, modelleme ve raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ekonometri",
+          "finans"
+        ]
+      },
+      "Ticaret Bakanlığı · Ticaret Uzman Yardımcısı / Müfettiş Yardımcısı": {
+        "org": "Ticaret Bakanlığı",
+        "title": "Ticaret Uzman Yardımcısı / Müfettiş Yardımcısı",
+        "desc": "Dış ticaret politikalarını geliştirmek, iç ticaret ve tüketici haklarını denetlemek ya da bakanlık faaliyetlerini teftiş etmek amacıyla istihdam edilen kariyer mesleklerin ilk basamağıdır. Yetiştirme programı, tez veya yetki süreci ve yeterlik sınavı başarıldıktan sonra Ticaret Uzmanı veya Ticaret Müfettişi unvanı kazanılır.",
+        "proc": "KPSS puan barajı, kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen ilgili puan türünden taban puanı almış olmak şarttır.",
+        "gorev": "İhracat, ithalat ve gümrük politikalarını düzenler ve denetler; iç piyasa dengelerini gözetir, haksız rekabeti önlemeye yönelik incelemeler yapar ve bakanlık görev alanındaki sektörel analizleri yürütür.",
+        "yol": "Ticaret Uzman Yardımcısı / Müfettiş Yardımcısı -> Ticaret Uzmanı / Ticaret Müfettişi -> Kıdemli Uzman / Başmüfettiş. Bakanlık merkez teşkilatı ve taşra/grup başkanlıklarında görev yapılır.",
+        "nitelik": "Dış ticaret rejimi, uluslararası iktisat, ticaret hukuku ve maliye bilgisi; analitik düşünme, piyasa analizi ve denetim yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ui",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Türkiye Cumhuriyet Merkez Bankası · Uzman Yardımcısı": {
+        "org": "Türkiye Cumhuriyet Merkez Bankası",
+        "title": "Uzman Yardımcısı",
+        "desc": "Para politikasını formüle etmek, ekonomik ve finansal gelişmeleri analiz etmek, finansal istikrarı izlemek ve bankacılık işlemlerini yürütmek amacıyla TCMB merkez teşkilatında istihdam edilen kariyer mesleğin ilk basamağıdır. Uzmanlık eğitimi, tez hazırlama ve yeterlik sınavı süreçlerinin ardından Merkez Bankası Uzmanı unvanı kazanılır.",
+        "proc": "Kurum tarafından gerçekleştirilen yabancı dil sınavı, yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 30 yaşını doldurmamış olmak ve TCMB tarafından belirlenen mezuniyet ile yabancı dil barajı şartlarını sağlamak gerekir.",
+        "gorev": "Para ve kur politikası uygulamalarını tasarlar, makroekonomik göstergeleri ve finansal piyasaları analiz eder, ekonomik araştırma raporları hazırlar ve bankacık operasyonlarını yürütür.",
+        "yol": "Uzman Yardımcısı -> Uzman -> Kıdemli Uzman / Müdür / Müdür Yardımcısı. Bankanın merkez teşkilatında görev yapılır.",
+        "nitelik": "İleri düzeyde makro ve mikro iktisat, ekonometri, para teorisi ve politikası bilgisi; güçlü analitik düşünme, modelleme ve İngilizce dil yetkinliği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ekonometri",
+          "finans"
+        ]
+      },
+      "Sermaye Piyasası Kurulu · Uzman Yardımcısı": {
+        "org": "Sermaye Piyasası Kurulu",
+        "title": "Sermaye Piyasası Uzman Yardımcısı",
+        "desc": "Sermaye piyasalarının güven açıklığı, adil ve verimli çalışmasını sağlamak, yatırımcıların hak ve menfaatlerini korumak amacıyla Kurul bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme programı, uzmanlık tezi ve yeterlik sınavı aşamalarının ardından Sermaye Piyasası Uzmanı unvanı kazanılır.",
+        "proc": "KPSS puan barajı, kurum tarafından gerçekleştirilen yabancı dil sınavı, yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak, ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen taban puanı almış olmak ve Kurul tarafından aranan yabancı dil şartını sağlamak gerekir.",
+        "gorev": "Sermaye piyasası kurumlarının ve halka açık ortaklıkların faaliyetlerini denetler, ihraç edilecek sermaye piyasası araçlarını inceler, piyasa dolandırıcılığı ve usulsüzlükleri araştırarak düzenleyici işlemler geliştirir.",
+        "yol": "Sermaye Piyasası Uzman Yardımcısı -> Sermaye Piyasası Uzmanı -> Kıdemli Uzman / Daire Başkanı. Kurulun Ankara merkez teşkilatı ile İstanbul temsilciliğinde görev yapılır.",
+        "nitelik": "Finans, sermaye piyasası mevzuatı, muhasebe, ticaret hukuku ve ekonomi bilgisi; analitik düşünme, piyasa izleme ve değerlendirme yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Bankacılık Düzenleme ve Denetleme Kurumu · Bankacılık Uzman Yardımcısı": {
+        "org": "Bankacılık Düzenleme ve Denetleme Kurumu",
+        "title": "Bankacılık Uzman Yardımcısı",
+        "desc": "Bankacılık sisteminin güven ve istikrar içinde işleymesini sağlamak, tasarruf sahiplerinin hak ve menfaatlerini korumak amacıyla kurum bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Uzmanlık eğitimi, tez hazırlama ve yeterlik sınavı süreçlerinin ardından Bankacılık Uzmanı unvanı kazanılır.",
+        "proc": "KPSS puan barajı, kurum tarafından gerçekleştirilen yabancı dil sınavı, yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak, ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen taban puanı almış olmak ve Kurum tarafından aranan yabancı dil şartını sağlamak gerekir.",
+        "gorev": "Bankaların mali bünyelerini, risk yönetim sistemlerini ve iç kontrol yapılarını denetler; bankacılık mevzuatına uyumu izler, finansal piyasaları analiz eder ve düzenleyici denetim raporları hazırlar.",
+        "yol": "Bankacılık Uzman Yardımcısı -> Bankacılık Uzmanı -> Kıdemli Uzman / Daire Başkanı. Kurumun merkez teşkilatında (Ankara/İstanbul) görev yapılır.",
+        "nitelik": "Bankacılık mevzuatı, finans, muhasebe, iktisat ve borçlar hukuku bilgisi; güçlü analitik inceleme, denetim ve risk değerlendirme yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Rekabet Kurumu · Rekabet Uzman Yardımcısı": {
+        "org": "Rekabet Kurumu",
+        "title": "Rekabet Uzman Yardımcısı",
+        "desc": "Mal ve hizmet piyasalarındaki rekabeti engelleyici, bozucu veya kısıtlayıcı anlaşma, karar ve uygulamaları önlemek ve piyasanın sağlıklı işleyişini gözetmek üzere kurum bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, uzmanlık tezi ve yeterlik sınavı süreçlerinin ardından Rekabet Uzmanı unvanı kazanılır.",
+        "proc": "KPSS puan barajı, kurum tarafından gerçekleştirilen yabancı dil sınavı, yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak, ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen taban puanı almış olmak ve Kurum tarafından aranan yabancı dil şartını sağlamak gerekir.",
+        "gorev": "Teşebbüslerin rekabeti ihlal edip etmediğini (kartel, hakim durumun kötüye kullanılması vb.) araştırır, birleşme ve devralma işlemlerini inceler, sektör incelemeleri yapar ve rekabet hukuku ihlallerine yönelik soruşturma raporları hazırlar.",
+        "yol": "Rekabet Uzman Yardımcısı -> Rekabet Uzmanı -> Kıdemli Uzman / Daire Başkanı. Kurumun Ankara merkez teşkilatında görev yapılır.",
+        "nitelik": "Rekabet hukuku, iktisat (özellikle endüstri iktisadı), ticaret hukuku ve mikro iktisat bilgisi; derinlemesine piyasa analizi, soruşturma yürütme ve raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ekonometri",
+          "hukuk"
+        ]
       }
     }
   },
