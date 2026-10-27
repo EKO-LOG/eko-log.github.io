@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+    #!/usr/bin/env python3
 """Pariteler için veriyi sunucu tarafında çeker ve data/parite-veri.json dosyasına yazar.
 Site bu dosyayı bulursa internete hiç çıkmadan grafikleri anında gösterir.
 
@@ -21,8 +21,8 @@ import json, os, sys, time, random, datetime
 import http.cookiejar
 import urllib.request, urllib.parse, urllib.error
 
-EIA_KEY = os.environ.get("EIA_KEY", "").strip()
-EVDS_KEY = os.environ.get("EVDS_KEY", "").strip()
+EIA_KEY = os.environ.get("EIA_KEY", "mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf").strip()
+EVDS_KEY = os.environ.get("EVDS_KEY", "19M1lnP3Mq").strip()
 
 YILLAR = 5
 BITIS = datetime.date.today()
@@ -240,3 +240,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+  
