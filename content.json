@@ -983,6 +983,167 @@
           "finans",
           "hukuk"
         ]
+      },
+      "Kamu bankaları · Müfettiş Yardımcısı": {
+        "org": "Kamu Bankaları (Ziraat Bankası, Halkbank, Vakıfbank vb.)",
+        "title": "Müfettiş Yardımcısı (Bankacılık Müfettiş Yardımcısı / İç Denetçi Yardımcısı)",
+        "desc": "Kamu sermayeli bankaların yurt içi ve yurt dışı şubeleri ile genel müdürlük birimlerinin işlemlerini denetlemek, bankacılık mevzuatına, iç kontrol sistemlerine ve risk politikalarına uygunluğu gözetmek, usulsüzlükleri önlemek ve bankanın finansal güvenliğini denetim yoluyla sağlamak amacıyla istihdam edilen prestijli kariyer mesleğin ilk basamağıdır. Belirli bir yetiştirme programı, teftiş stajı ve yetki sınavının ardından müfettiş unvanı kazanılır.",
+        "proc": "Bankaların kendi bünyelerinde veya ortak koordinasyonla düzenledikleri yazılı yarışma sınavı (genellikle genel kültür, genel yetenek, alan bilgisi ve yabancı dil testleri) ile mülakat aşamalarından oluşur.",
+        "sart": "Genellikle sınavın yapıldığı yılın Ocak ayının ilk günü itibarıyla 30 veya 35 yaşını doldurmamış olmak, bankanın belirlediği KPSS taban puanını sağlamak (veya doğrudan bankanın kendi yazılı sınavına girmek) ve lisans derecesine sahip olmak gerekir. Kontenjanlar bankaların dönemsel teftiş kurulu ihtiyaçlarına göre belirlenir.",
+        "gorev": "Şubelerin nakit, kredi, muhasebe ve operasyonel işlemlerini denetler; bankacılık risklerini analiz eder; kredi tahsis ve kullandırım süreçlerinin mevzuata uygunluğunu inceler; teftiş raporları hazırlar ve iç kontrol sistemlerinin etkinliğini değerlendirir.",
+        "yol": "Müfettiş Yardımcısı -> Müfettiş -> Baş Müfettiş -> Teftiş Kurulu Başkan Yardımcısı / Başkan / Banka Genel Müdürlüğünde Üst Düzey Yönetici / Şube Müdürü. Merkez teşkilatına bağlı olarak yoğun seyahatli bir çalışma düzeniyle (ülke genelindeki şubeleri denetleme amacıyla) yürütülür.",
+        "nitelik": "Bankacılık mevzuatı, muhasebe, finans, borçlar hukuku ve ticaret hukuku bilgisi; yüksek seyahat esnekliği, analitik düşünme, kusursuz raporlama becerisi, tarafsızlık ve güçlü gözlem yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Kalkınma ajansları · Uzman Personel": {
+        "org": "Kalkınma Ajansları (Fırat Kalkınma Ajansı vb.)",
+        "title": "Uzman / Uzman Personel (Proje Uzmanı / Planlama Uzmanı)",
+        "desc": "Bölgelerin kalkınmasını hızlandırmak, sürdürülebilir gelişmeyi sağlamak, kamu, özel kesim ve sivil toplum kuruluşları arasındaki iş birliğini geliştirmek ve kaynakların yerinde kullanımını koordine etmek amacıyla kalkınma ajansları bünyesinde istihdam edilen nitelikli profesyonel kadrodur. Diğer kamu kurumlarındaki klasik \"uzman yardımcılığı\" sisteminden farklı olarak, doğrudan sözleşmeli uzman statüsüyle istihdam edilirler.",
+        "proc": "Sanayi ve Teknoloji Bakanlığı koordinasyonunda ajansların kendi bünyelerinde açtığı ilanlar üzerinden; KPSS şartı (veya doğrudan kurum sınavı şartları ilana göre değişebilir), yabancı dil yeterliliği, özgeçmiş/kriter değerlendirmesi, yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Genellikle sınavın yapıldığı yılın Ocak ayının ilk günü itibarıyla 50 yaşını doldurmamış olmak (kurumlara göre yaş sınırları esneyebilir), belirli bir KPSS taban puanına sahip olmak veya doğrudan ajansın ilan ettiği mezuniyet/yabancı dil şartlarını karşılamak gerekir. Kontenjanlar her ajansın bölge planı ve bütçe imkânlarına göre yıllık olarak belirlenir.",
+        "gorev": "Bölgesel plan ve programlar hazırlar; KOBİ'lere, kooperatiflere ve yerel yönetimlere yönelik mali destek programları (hibe ve destekler) tasarlar ve yürütür; yatırım destek ofisleri (YDO) aracılığıyla bölgeye yatırımcı çekilmesi çalışmalarını koordine eder; projelere teknik ve mali destek sağlar, izleme ve değerlendirme faaliyetlerini yürütür.",
+        "yol": "Uzman Personel -> Kıdemli Uzman -> Birim Başkanı / Genel Sekreter. Ajansın merkez ofisinde veya bölgedeki illerde bulunan Yatırım Destek Ofislerinde (YDO) görev yapılır.",
+        "nitelik": "Bölgesel iktisat, proje döngü yönetimi (PCM), kalkınma teorileri, kamu maliyesi ve stratejik planlama bilgisi; güçlü analitik düşünme, raporlama, saha çalışması, ihale/hibe yönetimi ve iletişim yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Türkiye Büyük Millet Meclisi · Uzman Yardımcısı": {
+        "org": "Türkiye Büyük Millet Meclisi (TBMM) Başkanlığı",
+        "title": "TBMM Uzman Yardımcısı (Yasama Uzman Yardımcısı / Bütçe Uzman Yardımcısı)",
+        "desc": "Milletvekillerine, komisyonlara ve TBMM Başkanlığına yasama, denetleme ve bütçe süreçlerinde hukuki, teknik ve analitik destek sağlamak; kanun tekliflerini incelemek ve karşılaştırmalı parlamento araştırmaları yapmak amacıyla Meclis bünyesinde istihdam edilen prestijli kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, uzmanlık tezi ve yeterlik sınavı süreçlerinin ardından TBMM Uzmanı unvanı kazanılır.",
+        "proc": "ÖSYM Kamu Personel Seçme Sınavı (KPSS) taban puanı, TBMM tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) Meclis tarafından belirlenen ilgili puan türünden taban puanı almış olmak şarttır. Kontenjanlar Meclis komisyonlarının ve birimlerinin dönemsel uzman ihtiyaçlarına göre belirlenir.",
+        "gorev": "Kanun tasarı ve tekliflerini Anayasa ve içtüzük açısından inceler, komisyon raporlarını hazırlar, ulusal ve uluslararası parlamento çalışmalarını takip eder, bütçe kanun tekliflerinin mali analizini yapar ve milletvekillerine yasama çalışmaları için bilgi notları hazırlar.",
+        "yol": "TBMM Uzman Yardımcısı -> TBMM Uzmanı -> Kıdemli Uzman / Komisyon Uzmanı / Müdür / Daire Başkanı. TBMM'nin Ankara'daki merkez teşkilatında ve Meclis komisyonlarında görev yapılır.",
+        "nitelik": "Anayasa hukuku, idare hukuku, içtüzük, kamu maliyesi, iktisat ve siyaset bilimi bilgisi; üst düzey mevzuat analizi, hukuki muhakeme, hızlı araştırma yapma, tarafsızlık ve kusursuz raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Kamu Denetçiliği Kurumu · Uzman Yardımcısı": {
+        "org": "Kamu Denetçiliği Kurumu (KDK / Ombudsmanlık)",
+        "title": "Kamu Denetçiliği Uzman Yardımcısı / Ombudsmanlık Uzman Yardımcısı",
+        "desc": "İdarenin işleyişiyle ilgili şikâyet üzerine, idarenin her türlü eylem ve işlemleri ile tutum ve davranışlarını; hukuka ve hakkaniyete uygunluk yönlerinden incelemek, araştırmak ve önerilerde bulunmak üzere Kamu Denetçiliği Kurumu bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, uzmanlık tezi ve yeterlik sınavı süreçlerinin ardından Kamu Denetçiliği Uzmanı unvanı kazanılır.",
+        "proc": "ÖSYM Kamu Personel Seçme Sınavı (KPSS) taban puanı, Kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) Kurum tarafından belirlenen ilgili puan türünden taban puanı almış olmak şarttır. Kontenjanlar Kurumun denetim ve inceleme birimlerinin ihtiyaçlarına göre belirlenir.",
+        "gorev": "Vatandaşların idari kurumlarla yaşadığı uyuşmazlıklara dair Kuruma gelen şikâyet başvurularını inceler; hukuki ve idari açıdan dosya analizi yaparak tavsiye kararı veya dostane çözüm taslakları hazırlar; insan hakları, iyi yönetim ilkeleri ve idarenin denetimi üzerine incelemeler yürütür.",
+        "yol": "Kamu Denetçiliği Uzman Yardımcısı -> Kamu Denetçiliği Uzmanı -> Kıdemli Uzman / Birim Sorumlusu / Daire Başkanı. Kurumun Ankara merkez teşkilatında görev yapılır.",
+        "nitelik": "İdare hukuku, insan hakları hukuku, medeni haklar, idari yargı ve kamu yönetimi bilgisi; güçlü hukuki muhakeme, tarafsızlık, dosya inceleme ve hakkaniyet odaklı raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Bilgi Teknolojileri ve İletişim Kurumu · Uzman Yardımcısı": {
+        "org": "Bilgi Teknolojileri ve İletişim Kurumu (BTK)",
+        "title": "Bilişim Uzman Yardımcısı",
+        "desc": "Elektronik haberleşme, bilgi teknolojileri, internet, spektrum yönetimi ve posta sektörlerinde serbest rekabet ortamını oluşturmak, düzenlemek, denetlemek ve tüketici haklarını korumak amacıyla kurum bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, uzmanlık tezi ve yeterlik sınavı süreçlerinin ardından Bilişim Uzmanı unvanı kazanılır.",
+        "proc": "ÖSYM Kamu Personel Seçme Sınavı (KPSS) taban puanı, Kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) Kurum tarafından belirlenen ilgili puan türünden taban puanı almış olmak şarttır. Kontenjanlar Kurumun teknolojik, hukuki ve ekonomik düzenleme ihtiyaçlarına göre belirlenir.",
+        "gorev": "Elektronik haberleşme ve bilgi teknolojileri piyasasındaki işletmecilerin yükümlülüklerini denetler, tüketici şikâyetlerini çözer, spektrum (frekans) planlaması ve tahsisi yapar, siber güvenlik politikalarına katkı sağlar, rekabet ve tarife düzenlemeleri ile ilgili incelemeler yürütür.",
+        "yol": "Bilişim Uzman Yardımcısı -> Bilişim Uzmanı -> Kıdemli Uzman / Daire Başkanı / Kurul Danışmanı. Kurumun Ankara merkez teşkilatında görev yapılır.",
+        "nitelik": "Telekomünikasyon mevzuatı, idare hukuku, rekabet hukuku, iktisat ve temel teknolojik/bilişim altyapısı bilgisi; analitik düşünme, hızlı dijital dönüşümü takip etme ve teknik-hukuki raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Savunma Sanayii Başkanlığı · Uzman Yardımcısı": {
+        "org": "Savunma Sanayii Başkanlığı (SSB)",
+        "title": "Savunma Sanayii Uzman Yardımcısı",
+        "desc": "Türk savunma sanayiinin dışa bağımlılığını azaltmak, modern teknolojilerin geliştirilmesini koordine etmek, savunma projelerini planlamak, bütçelendirmek ve Türk Silahlı Kuvvetlerinin ihtiyaç duyduğu sistemlerin tedarik süreçlerini yönetmek amacıyla Başkanlık bünyesinde istihdam edilen prestijli kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, uzmanlık tezi ve yeterlik sınavı süreçlerinin ardından Savunma Sanayii Uzmanı unvanı kazanılır.",
+        "proc": "ÖSYM Kamu Personel Seçme Sınavı (KPSS) taban puanı, Kurum tarafından gerçekleştirilen yabancı dil sınavı, yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak, ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen taban puanı almış olmak ve Kurumun aradığı yabancı dil (İngilizce vb.) barajını sağlamak şarttır. Kontenjanlar Başkanlığın teknoloji, proje ve idari ihtiyaçlarına göre belirlenir.",
+        "gorev": "Savunma sanayi projelerinin Ar-Ge, sözleşme, tedarik, bütçe ve maliyet yönetimini yürütür; yerlileştirme ve millileştirme stratejilerine katkı sağlar; uluslararası savunma sanayi iş birliklerini ve offset anlaşmalarını koordine eder; savunma sanayi firmalarının projelerini finansal ve hukuki açıdan denetler.",
+        "yol": "Savunma Sanayii Uzman Yardımcısı -> Savunma Sanayii Uzmanı -> Kıdemli Uzman / Proje Müdürü / Daire Başkanı. Kurumun Ankara merkez teşkilatında görev yapılır.",
+        "nitelik": "Savunma teknolojileri, proje döngü yönetimi, teknoloji yönetimi, sözleşmeler hukuku, kamu maliyesi ve stratejik planlama bilgisi; ileri düzeyde yabancı dil, yüksek analitik düşünme, kriz yönetimi ve gizlilik bilinciyle raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Göç İdaresi Başkanlığı · Göç Uzman Yardımcısı": {
+        "org": "T.C. İçişleri Bakanlığı (Göç İdaresi Başkanlığı)",
+        "title": "Göç Uzman Yardımcısı",
+        "desc": "Ülke genelindeki düzensiz göçle mücadele etmek, uluslararası koruma, geçici koruma ve insan ticaretiyle mücadele süreçlerini yürütmek, yabancıların ülkeye giriş, kalış ve çıkış işlemlerine ilişkin politika ve stratejileri uygulamak amacıyla Başkanlık bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme eğitimi, uzmanlık tezi ve yeterlik sınavı süreçlerinin ardından Göç Uzmanı unvanı kazanılır.",
+        "proc": "ÖSYM Kamu Personel Seçme Sınavı (KPSS) taban puanı, Kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) Başkanlık tarafından belirlenen ilgili puan türünden taban puanı almış olmak şarttır. Kontenjanlar Başkanlığın merkez ve taşra teşkilatının norm kadro ihtiyaçlarına göre belirlenir.",
+        "gorev": "Uluslararası göç ve iltica mevzuatını uygular, yabancıların statü belirleme işlemlerini yürütür, geri gönderme merkezleri ile geçici barınma merkezlerinin operasyonlarını ve denetimini koordine eder; göç yönetimi konusunda ulusal stratejiler geliştirir ve uluslararası kuruluşlarla yürütülen ortak projelerde görev alır.",
+        "yol": "Göç Uzman Yardımcısı -> Göç Uzmanı -> Kıdemli Uzman / Şube Müdürü / Daire Başkanı / İl Göç İdaresi Müdürü. Başkanlığın Ankara merkez teşkilatı ile ülke genelindeki il göç idaresi müdürlüklerinde ve geri gönderme merkezlerinde görev yapılır.",
+        "nitelik": "İdare hukuku, uluslararası kamu hukuku, insan hakları hukuku, göç sosyolojisi ve uluslararası ilişkiler bilgisi; güçlü kriz yönetimi, yabancı dil becerisi, analitik düşünme ve insan odaklı raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
       }
     }
   },
