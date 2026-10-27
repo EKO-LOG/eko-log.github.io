@@ -485,7 +485,143 @@
   "ms": {
     "add": [],
     "del": [],
-    "edit": {}
+    "edit": {
+      "İçişleri Bakanlığı · Kaymakam Adayı": {
+        "org": "İçişleri Bakanlığı",
+        "title": "Kaymakam Adayı",
+        "desc": "1700 sayılı Dâhiliye Memurları Kanunu ve 657 sayılı Devlet Memurları Kanunu hükümleri çerçevesinde mülki idare amirliği kariyerinin ilk basamağıdır. Adaylık, il stajı, teftiş stajı, kaymakam refikliği ve yurt dışı stajı süreçlerini kapsayan kapsamlı bir yetiştirme döneminin ardından asaleten kaymakam olarak atanılır.",
+        "proc": "KPSS sınavında A Grubu sınavına girdikten sonra ÖSYM tarafından, ilgili fakülte mezuniyet şartlarıyla düzenlenen Kaymakamlık Adaylığı Giriş Sınavı (Yazılı sınav) ve akabinde gerçekleştirilen mülakat aşamalarından oluşur.",
+        "sart": "Genellikle sınavın yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak şartı aranır. ÖSYM tarafından uygulanan yazılı sınavda 100 üzerinden en az 70 puan alma şartı bulunmakta olup, bu barajı geçen adaylar arasından ilan edilen kadro kontenjanının (genellikle 4 katı kadar) aday mülakat aşamasına çağrılır. Puanlama ve kontenjan koşulları her yıl yayımlanan resmî ilana göre değişiklik gösterebilir.",
+        "gorev": "5442 sayılı İl İdaresi Kanunu ve ilgili mevzuat uyarınca; ilçede devletin ve hükümetin temsilcisi sıfatıyla genel idareyi yürütür. Kamu hizmetlerinin eşgüdümünü sağlar, asayiş ve güvenliği koordine eder, ekonomik ve sosyal kalkınma projelerini yönetir, afet ve acil durum süreçlerinde mülki amir olarak yetki kullanır.",
+        "yol": "Kaymakam adayı -> Kaymakam -> Vali yardımcısı -> Vali. Ülke genelindeki ilçelerde ve illerde mülki idare hizmetleri sınıfına bağlı olarak kademe kademe ilerlenir.",
+        "nitelik": "Anayasa hukuku, idare hukuku (özellikle 5442 sayılı İl İdaresi Kanunu), kamu yönetimi bilgisi; stratejik karar alma, kriz yönetimi, liderlik ve temsil yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Dışişleri Bakanlığı · Aday Meslek Memuru (Diplomat)": {
+        "org": "Dışişleri Bakanlığı",
+        "title": "Aday Meslek Memuru (Diplomat)",
+        "desc": "Türk dış politikasını biçimlendirmek, uluslararası alanda Türkiye'yi temsil etmek ve dış ilişkileri yürütmek üzere Dışişleri Bakanlığı bünyesinde istihdam edilen meslek memurluğunun ilk basamağıdır. Adaylık eğitimini ve staj dönemini başarıyla tamamlayanlar diplomat unvanıyla merkezde ve yurt dışı temsilciliklerde görev yaparlar.",
+        "proc": "ÖSYM tarafından düzenlenen Yabancı Dil Bilgisi Seviye Tespit Sınavı (YDS/e-YDS) şartı, kurum tarafından yapılan yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Sınavın yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak şartı aranır. ÖSYM yabancı dil barajı ve kurum sınavında başarılı olan adaylar, ilan edilen kontenjan doğrultusunda sıralamaya alınır.",
+        "gorev": "Türkiye'nin dış ilişkilerini yürütür, uluslararası anlaşmaları takip eder, dış politika analizleri yapar, uluslararası kuruluşlarda ülkeyi temsil eder ve yurt dışındaki Türk vatandaşlarının hak ve menfaatlerini korur.",
+        "yol": "Aday Meslek Memuru -> Meslek Memuru (İkinci Kâtip / Başkâtip) -> Konsolos / Müsteşar -> Elçi / Büyükelçi. Merkez teşkilatı ile yurt dışındaki büyükelçilikler, daimi temsilcilikler ve başkonsolosluklar arasında dönüştürülürek görev yapılır.",
+        "nitelik": "Çok iyi düzeyde yabancı dil bilgisi (İngilizce başta olmak üzere ikinci dil avantajı), uluslararası hukuk, uluslararası ilişkiler teorileri, Türk dış politikası tarihi ve analitik düşünme yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "hukuk"
+        ]
+      },
+      "Hazine ve Maliye Bakanlığı · Vergi Denetim Kurulu · Vergi Müfettiş Yardımcısı": {
+        "org": "Hazine ve Maliye Bakanlığı · Vergi Denetim Kurulu",
+        "title": "Vergi Müfettiş Yardımcısı",
+        "desc": "Vergi denetimini yürütmek, vergi kayıp ve kaçağını önlemek ve vergi incelemeleri yapmak üzere Hazine ve Maliye Bakanlığı bünyesinde istihdam edilen denetmenlik kariyerinin ilk basamağıdır. Yetiştirme dönemi, yetki sınavı ve yeterlik sınavı süreçlerinin ardından Vergi Müfettişi olarak atanılır.",
+        "proc": "KPSS (P48 puan türü) barajı, kurum tarafından yapılan yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM tarafından yapılan Kamu Personel Seçme Sınavı'nda (KPSS) ilgili puan türünden (genellikle P48) yeterli taban puanı almış olmak şarttır.",
+        "gorev": "Vergi incelemeleri, teftişler ve soruşturmalar yürütür; mükelleflerin hesap ve işlemlerini denetler, vergi kanunlarına uyumu kontrol eder ve raporlar düzenler.",
+        "yol": "Vergi Müfettiş Yardımcısı -> Vergi Müfettişi -> Başmüfettiş. Merkez ve grup başkanlıkları bünyesinde görev yapılır.",
+        "nitelik": "Muhasebe, vergi hukuku, maliye, iktisat ve borçlar hukuku bilgisi; analitik inceleme yeteneği ve tarafsızlık.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Hazine ve Maliye Bakanlığı · Teftiş Başkanlığı · Hazine ve Maliye Müfettiş Yardımcısı": {
+        "org": "Hazine ve Maliye Bakanlığı · Teftiş Başkanlığı",
+        "title": "Hazine ve Maliye Müfettiş Yardımcısı",
+        "desc": "Bakanlığın merkez ve taşra teşkilatı ile bağlı kuruluşlarının faaliyet, işlem ve hesaplarını teftiş etmek, incelemek ve soruşturmak üzere istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme programı, yetki sınavı ve yeterlik sınavı başarıldıktan sonra Hazine ve Maliye Müfettişi unvanı kazanılır.",
+        "proc": "KPSS (P48 puan türü) barajı, kurum tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen taban puanı (genellikle P48) almış olmak gerekir.",
+        "gorev": "Kamu kaynaklarının etkili, ekonomik ve verimli kullanılıp kullanılmadığını denetler; mali mevzuata uygunluk incelemeleri yapar, yolsuzluk veya usulsüzlük iddialarını soruşturarak rapor hazırlar.",
+        "yol": "Hazine ve Maliye Müfettiş Yardımcısı -> Hazine ve Maliye Müfettişi -> Başmüfettiş. Bakanlık merkez teşkilatına bağlı olarak görev yapılır.",
+        "nitelik": "İktisat, maliye, muhasebe, borçlar hukuku ve idare hukuku alanlarında derinlemesine bilgi; yüksek denetim ve inceleme becerisi.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Sayıştay · Denetçi Yardımcısı": {
+        "org": "Sayıştay",
+        "title": "Denetçi Yardımcısı",
+        "desc": "Kamu idarelerinin hesap ve işlemlerini Türkiye Büyük Millet Meclisi (TBMM) adına denetlemek, kesin hükme bağlamak ve sorumluların hesap ve işlemlerini yargılamak üzere Sayıştay bünyesinde istihdam edilen kariyer mesleğin ilk basamağıdır. Staj dönemi ve eğitimlerin ardından yapılan yeterlik sınavını başarıyla geçenler Sayıştay Denetçisi unvanını alırlar.",
+        "proc": "ÖSYM tarafından yapılan Kamu Personel Seçme Sınavı (KPSS) taban puanı, Sayıştay tarafından düzenlenen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen ilgili puan türünden taban puanı almış olmak şarttır.",
+        "gorev": "Merkezi yönetim bütçesindeki kamu idarelerinin, sosyal güvenlik kurumlarının ve mahallî idarelerin hesap, işlem ve faaliyetlerini denetler; kamu kaynaklarının etkili, ekonomik, verimli ve hukuka uygun kullanılıp kullanılmadığını inceleyerek raporlar düzenler.",
+        "yol": "Sayıştay Denetçi Yardımcısı -> Sayıştay Denetçisi -> Başdenetçi. Sayıştay Başkanlığı merkez teşkilatında görev yapılır.",
+        "nitelik": "Kamu maliyesi, muhasebe, idare hukuku, borçlar hukuku ve iktisat bilgisi; yüksek düzeyde analitik inceleme, denetim ve raporlama becerisi.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      },
+      "Çalışma ve Sosyal Güvenlik Bakanlığı · İş Müfettişi Yardımcısı": {
+        "org": "Çalışma ve Sosyal Güvenlik Bakanlığı",
+        "title": "İş Müfettişi Yardımcısı",
+        "desc": "​İş yerlerinde iş sağlığı ve güvenliği şartlarının denetlenmesi, çalışma hayatındaki mevzuata uyulup uyulmadığının kontrol edilmesi ve işçi-işveren ilişkilerinin incelenmesi amacıyla istihdam edilen kariyer mesleğin ilk basamağıdır. Yetiştirme programı ve yeterlik sınavı sonrasında İş Müfettişi unvanı kazanılır.",
+        "proc": "KPSS puan barajı, Çalışma ve Sosyal Güvenlik Bakanlığı tarafından gerçekleştirilen yazılı yarışma sınavı ve mülakat aşamalarından oluşur.",
+        "sart": "Giriş sınavının yapıldığı yılın Ocak ayının ilk günü itibarıyla 35 yaşını doldurmamış olmak ve ÖSYM Kamu Personel Seçme Sınavı'nda (KPSS) belirlenen ilgili puan türünden taban puanı almış olmak gerekir.",
+        "gorev": "​İş yerlerinde çalışma koşullarını, iş sağlığı ve güvenliği tedbirlerini denetler; iş kanunları ve ilgili mevzuatın uygulanmasını gözetir, iş teftişleri yapar ve raporlar hazırlar.",
+        "yol": "İş Müfettiş Yardımcısı -> İş Müfettişi -> Baş iş Müfettişi. Bakanlık merkez teşkilatı ile grup başkanlıkları bünyesinde görev yapılır.",
+        "nitelik": "İş hukuku, borçlar hukuku, çalışma ekonomisi ve sosyal güvenlik mevzuatı bilgisi; saha denetimi yapabilme ve tarafsız raporlama yeteneği.",
+        "url": "",
+        "tags": [
+          "iktisat",
+          "isletme",
+          "maliye",
+          "ky",
+          "ui",
+          "sb",
+          "calisma",
+          "ekonometri",
+          "finans",
+          "hukuk"
+        ]
+      }
+    }
   },
   "ex": {
     "add": [],
