@@ -503,7 +503,7 @@
   "ar": [],
   "sd": 1,
   "show": {
-    "ex": false,
+    "ex": true,
     "gs": true,
     "kt": false
   },
@@ -1680,7 +1680,29 @@
     }
   },
   "ex": {
-    "add": [],
+    "add": [
+      {
+        "id": "179320528940903",
+        "ad": "KPSS A Grubu 2. Gün ",
+        "tarih": "2027-09-19",
+        "basvuru": "",
+        "url": "https://www.osym.gov.tr"
+      },
+      {
+        "id": "179320527282402",
+        "ad": "KPSS A Grubu 1. Gün",
+        "tarih": "2027-09-18",
+        "basvuru": "",
+        "url": "https://www.osym.gov.tr"
+      },
+      {
+        "id": "179320524478601",
+        "ad": "KPSS Genel Kültür Genel Yetenek",
+        "tarih": "2027-09-12",
+        "basvuru": "",
+        "url": "https://www.osym.gov.tr"
+      }
+    ],
     "del": [],
     "edit": {}
   },
