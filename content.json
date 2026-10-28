@@ -180,6 +180,13 @@
   "i": {},
   "n": [
     {
+      "id": "slotn1",
+      "kind": "Manşet",
+      "title": "Eko-log İlk Sayısıyla Yayında: Ekonomi ve Diyalog Topluluğu’ndan Yeni Bir Soluk",
+      "text": "İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu’nun yayın organı Eko-log, iktisat dünyasını ve güncel ekonomik gelişmeleri farklı bir perspektifle ele almak üzere yayın hayatına başladı.\n\nÖğrenciler arasında akademik diyaloğu güçlendirmeyi, ekonomi politikalarını analitik bir süzgeçten geçirmeyi ve küresel finans trendlerini yakından takip etmeyi hedefleyen Eko-log; makaleler, söyleşiler ve analiz yazılarıyla okurlarıyla buluşuyor.\n\nGenç iktisatçıların sesini kampüse ve dijital dünyaya duyurmayı amaçlayan yayın; teorik bilgiyi güncel pratiklerle birleştirerek ekonomi meraklıları için kapsamlı bir bilgi platformu olmayı vaat ediyor.",
+      "img": "images/179287594394602.jpg"
+    },
+    {
       "id": "179317720148201",
       "kind": "Haber",
       "title": "Moskova'da 8. GECF Zirvesi: Enerjide İş Birliği ve \"Avrupa\" Eleştirisi",
@@ -260,13 +267,6 @@
       "title": "KAMPÜSTE GÜNDEM YATAY BAKIŞ İLE MASAYA YATIRILIYOR",
       "text": "Öğrencileri gündemin izleyicisi değil, üretken birer öznesi olmaya davet eden interaktif tartışma platformu \"Yatay Bakış\" başlıyor.\n\nEkonomi, siyaset, küresel gelişmeler, spor ve magazin başlıklarının iki koordinatör eşliğinde ele alınacağı etkinlikte, klasik sunum kalıplarının dışına çıkılarak söz tamamen öğrencilere bırakılacak. Çok sesliliği ve analitik düşünceyi merkeze alan platform, kampüs içindeki entelektüel etkileşimi güçlendirmeyi amaçlıyor.\n\nFarklı perspektiflerin özgürce paylaşılacağı bu dinamik fikir alışverişi ortamı, güncellemeleri yakından takip eden tüm gençleri bekliyor.\n\nYer: İİBF Konferans Salonu \nTarih: 26 Ekim 2026\nSaat: 16.00",
       "img": "images/179287587380301.jpg"
-    },
-    {
-      "id": "slotn1",
-      "kind": "Manşet",
-      "title": "Eko-log İlk Sayısıyla Yayında: Ekonomi ve Diyalog Topluluğu’ndan Yeni Bir Soluk",
-      "text": "İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu’nun yayın organı Eko-log, iktisat dünyasını ve güncel ekonomik gelişmeleri farklı bir perspektifle ele almak üzere yayın hayatına başladı.\n\nÖğrenciler arasında akademik diyaloğu güçlendirmeyi, ekonomi politikalarını analitik bir süzgeçten geçirmeyi ve küresel finans trendlerini yakından takip etmeyi hedefleyen Eko-log; makaleler, söyleşiler ve analiz yazılarıyla okurlarıyla buluşuyor.\n\nGenç iktisatçıların sesini kampüse ve dijital dünyaya duyurmayı amaçlayan yayın; teorik bilgiyi güncel pratiklerle birleştirerek ekonomi meraklıları için kapsamlı bir bilgi platformu olmayı vaat ediyor.",
-      "img": "images/179287594394602.jpg"
     },
     {
       "id": "slotn2",
