@@ -1682,16 +1682,9 @@
   "ex": {
     "add": [
       {
-        "id": "179320528940903",
-        "ad": "KPSS A Grubu 2. Gün ",
-        "tarih": "2027-09-19",
-        "basvuru": "",
-        "url": "https://www.osym.gov.tr"
-      },
-      {
         "id": "179320527282402",
-        "ad": "KPSS A Grubu 1. Gün",
-        "tarih": "2027-09-18",
+        "ad": "KPSS A Grubu ",
+        "tarih": "18-19 Eylül 2027",
         "basvuru": "",
         "url": "https://www.osym.gov.tr"
       },
