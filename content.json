@@ -180,6 +180,13 @@
   "i": {},
   "n": [
     {
+      "id": "slotn1",
+      "kind": "Manşet",
+      "title": "Eko-log İlk Sayısıyla Yayında: Ekonomi ve Diyalog Topluluğu’ndan Yeni Bir Soluk",
+      "text": "İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu’nun yayın organı Eko-log, iktisat dünyasını ve güncel ekonomik gelişmeleri farklı bir perspektifle ele almak üzere yayın hayatına başladı.\n\nÖğrenciler arasında akademik diyaloğu güçlendirmeyi, ekonomi politikalarını analitik bir süzgeçten geçirmeyi ve küresel finans trendlerini yakından takip etmeyi hedefleyen Eko-log; makaleler, söyleşiler ve analiz yazılarıyla okurlarıyla buluşuyor.\n\nGenç iktisatçıların sesini kampüse ve dijital dünyaya duyurmayı amaçlayan yayın; teorik bilgiyi güncel pratiklerle birleştirerek ekonomi meraklıları için kapsamlı bir bilgi platformu olmayı vaat ediyor.",
+      "img": "images/179287594394602.jpg"
+    },
+    {
       "id": "179328341804001",
       "kind": "Haber",
       "title": "Sanal Dünyada Gerçek Krizler: Küresel Tedarik Zincirleri ve Dijital Oyun Sektörü",
@@ -188,13 +195,6 @@
       "by": "",
       "dt": "",
       "img": "images/179328345254202.jpg"
-    },
-    {
-      "id": "slotn1",
-      "kind": "Manşet",
-      "title": "Eko-log İlk Sayısıyla Yayında: Ekonomi ve Diyalog Topluluğu’ndan Yeni Bir Soluk",
-      "text": "İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu’nun yayın organı Eko-log, iktisat dünyasını ve güncel ekonomik gelişmeleri farklı bir perspektifle ele almak üzere yayın hayatına başladı.\n\nÖğrenciler arasında akademik diyaloğu güçlendirmeyi, ekonomi politikalarını analitik bir süzgeçten geçirmeyi ve küresel finans trendlerini yakından takip etmeyi hedefleyen Eko-log; makaleler, söyleşiler ve analiz yazılarıyla okurlarıyla buluşuyor.\n\nGenç iktisatçıların sesini kampüse ve dijital dünyaya duyurmayı amaçlayan yayın; teorik bilgiyi güncel pratiklerle birleştirerek ekonomi meraklıları için kapsamlı bir bilgi platformu olmayı vaat ediyor.",
-      "img": "images/179287594394602.jpg"
     },
     {
       "id": "179321998532803",
