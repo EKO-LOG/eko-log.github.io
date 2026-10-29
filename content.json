@@ -1843,5 +1843,23 @@
         "gizli": false
       }
     }
+  },
+  "xt": [],
+  "xp": {
+    "x-yol": true,
+    "x-takvim": true,
+    "x-etkinlik": true,
+    "x-mentor": false,
+    "x-notlar": true,
+    "x-panel": true,
+    "x-veri": true,
+    "x-v-atolye": true,
+    "x-v-sql": true,
+    "x-v-hesap": true,
+    "x-v-quiz": true,
+    "x-v-gorev": true,
+    "x-v-ders": true,
+    "x-v-port": true,
+    "x-bildirim": true
   }
 }
