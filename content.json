@@ -1867,10 +1867,16 @@
   },
   "xt": [],
   "xp": {
+    "ilanlar": false,
+    "cv": false,
     "x-yol": true,
     "x-takvim": true,
+    "tahmin": true,
+    "profil": true,
+    "paylas": true,
     "x-etkinlik": true,
     "x-mentor": false,
+    "kavram": true,
     "x-notlar": true,
     "x-panel": true,
     "x-veri": true,
@@ -1908,5 +1914,12 @@
     "linkText": "",
     "img": "",
     "imgs": []
+  },
+  "pg": {
+    "etkinlik": true,
+    "fikir": true,
+    "fikir-canli": true,
+    "fikir-etkinlik": true,
+    "fikir-turler": true
   }
 }
