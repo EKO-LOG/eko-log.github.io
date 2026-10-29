@@ -1903,7 +1903,7 @@
     "edit": {}
   },
   "yb": {
-    "on": true,
+    "on": false,
     "title": "Yatay Bakış",
     "kisa": "",
     "intro": "",
