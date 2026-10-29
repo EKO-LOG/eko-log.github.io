@@ -1903,10 +1903,10 @@
     "edit": {}
   },
   "yb": {
-    "on": false,
+    "on": true,
     "title": "Yatay Bakış",
-    "kisa": "",
-    "intro": "",
+    "kisa": "Kürsünün öğrencilere bırakıldığı, ezber bozan interaktif tartışma platformu",
+    "intro": "Gündemi sadece takip eden değil; sorgulayan, analiz eden ve fikirlerini doğrudan kürsüden paylaşan çok sesli bir entelektüel buluşma noktası",
     "body": "",
     "date": "",
     "place": "",
