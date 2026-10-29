@@ -512,6 +512,7 @@
       "img": ""
     }
   ],
+  "fme": [],
   "c": {
     "team": [],
     "gallery": [],
@@ -1881,5 +1882,31 @@
     "x-v-ders": true,
     "x-v-port": true,
     "x-bildirim": true
+  },
+  "fm": {
+    "add": [],
+    "del": [],
+    "edit": {},
+    "pin": {
+      "2965": "m12"
+    }
+  },
+  "kb": {
+    "add": [],
+    "del": [],
+    "edit": {}
+  },
+  "yb": {
+    "on": true,
+    "title": "Yatay Bakış",
+    "kisa": "",
+    "intro": "",
+    "body": "",
+    "date": "",
+    "place": "",
+    "link": "",
+    "linkText": "",
+    "img": "",
+    "imgs": []
   }
 }
