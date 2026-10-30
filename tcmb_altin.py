@@ -36,8 +36,8 @@ BASE_URL = "https://evds2.tcmb.gov.tr/service/evds/"
 
 
 def altin_verisi_cek() -> pd.DataFrame:
-    if API_KEY == "ANAHTARINIZ":
-        sys.exit("Lütfen EVDS API anahtarınızı girin (EVDS_API_KEY).")
+    if API_KEY == "19M1lnP3Mq"":
+        sys.exit("Lütfen EVDS API anahtarınızı girin (19M1lnP3Mq").")
 
     url = (
         f"{BASE_URL}series={SERI_KODU}"
