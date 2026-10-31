@@ -28,8 +28,8 @@ jobs:
           PYTHONUTF8: "1"
           PARITE_BUTCE_SN: "1200"
           # Anahtarlar: Settings > Secrets and variables > Actions
-          EIA_KEY: ${{ mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf }}      # enerji serileri (yoksa Yahoo'ya düşer)
-          EVDS_KEY: ${{ 19M1lnP3Mq }}    # gram/çeyrek/yarım altın için GRAMTL (yoksa ons x kur)
+          EIA_KEY: ${{mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf}}      # enerji serileri (yoksa Yahoo'ya düşer)
+          EVDS_KEY: ${{19M1lnP3Mq}}    # gram/çeyrek/yarım altın için GRAMTL (yoksa ons x kur)
         run: |
           mkdir -p data
           echo "--- Depodaki dosyalar ---"
