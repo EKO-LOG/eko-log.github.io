@@ -1,0 +1,59 @@
+name: Parite verisini güncelle
+on:
+  schedule:
+    # Günde iki kez. Kripto hafta sonu da işlem gördüğü için hafta içi/sonu ayrımı yok.
+    # Sabah 06:00 UTC (09:00 TSİ): bir önceki günün ABD vadeli ve kripto kapanışları tamamlanmış olur.
+    - cron: "0 6 * * *"
+    # Akşam 16:00 UTC (19:00 TSİ): BIST 100 ve Avrupa (TTF) gün sonu kapanışı oturmuş olur.
+    - cron: "0 16 * * *"
+  workflow_dispatch:           # Actions sekmesinden elle de çalıştırılabilir
+permissions:
+  contents: write
+concurrency:
+  group: parite-guncelle       # Aynı anda iki çalışma birbirinin push'unu bozmasın
+  cancel-in-progress: false
+jobs:
+  guncelle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30        # Script kendi süre bütçesini (20 dk) aşınca eldekini yazıp biter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Yahoo için tarayıcı taklidi kur
+        run: pip install curl_cffi || echo "::warning::curl_cffi kurulamadı, standart istek kullanılacak"
+      - name: Veriyi üret
+        env:
+          PYTHONUTF8: "1"
+          PARITE_BUTCE_SN: "1200"
+          # Anahtarlar: Settings > Secrets and variables > Actions
+          EIA_KEY: ${{ mK8CmLrkN8JgQgckd8HpnF8h8tKkDNTB69hmBkJf }}      # enerji serileri (yoksa Yahoo'ya düşer)
+          EVDS_KEY: ${{ 19M1lnP3Mq }}    # gram/çeyrek/yarım altın için GRAMTL (yoksa ons x kur)
+        run: |
+          mkdir -p data
+          echo "--- Depodaki dosyalar ---"
+          ls -la
+          # Dosya adına bağlı kalma: parite-veri.json yazan .py dosyasını bul
+          f=$(grep -l "parite-veri.json" ./*.py scripts/*.py 2>/dev/null | head -1)
+          if [ -z "$f" ]; then
+            echo "::error::parite-veri.json yazan bir .py dosyası bulunamadı (yukarıdaki listeye bak)"
+            exit 1
+          fi
+          echo "Çalıştırılıyor: $f"
+          python "$f"
+      - name: Değişiklik varsa kaydet
+        run: |
+          git config user.name "parite-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/parite-veri.json
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok"
+            exit 0
+          fi
+          git commit -m "Parite verisi güncellendi"
+          for i in 1 2 3; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            sleep 5
+          done
+          exit 1
