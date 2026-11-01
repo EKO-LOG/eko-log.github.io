@@ -950,7 +950,9 @@ VIEWS.links=()=>{
 </script>
 <script>
 /* ---------- site dosyasını oku (metinler ve örnek içerikler için) ---------- */
-const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
+const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
+const ENC_PAGES=['ansiklopedi','sozluk','anatomi','efsane','kisiler','quiz','olay'];
+const siteUrl=p=>(ENC_PAGES.includes(String(p).split('/')[0])?'ansiklopedi.html':'index.html')+'#/'+p;
 function loadSite(){
   if(S.site)return Promise.resolve(S.site);
   if(S.siteP)return S.siteP;
@@ -962,9 +964,16 @@ function loadSite(){
     }
     if(!html||html.indexOf('data-k=')<0)throw new Error('index.html okunamadı');
     const doc=new DOMParser().parseFromString(html,'text/html');
+    /* Ansiklopedi ayrı dosyada (ansiklopedi.html): metinleri ve Anatomi/Efsane listesini oradan da oku */
+    let html2=null;
+    try{const r=await fetch('ansiklopedi.html',{cache:'no-store'});if(r.ok)html2=await r.text()}catch(e){}
+    if(!html2||html2.indexOf('data-k=')<0){try{const r=await gh('contents/ansiklopedi.html?ref='+encodeURIComponent(S.cfg.branch),{raw:true});if(r.ok)html2=await r.text()}catch(e){}}
+    if(html2&&html2.indexOf('data-k=')<0)html2=null;
+    const doc2=html2?new DOMParser().parseFromString(html2,'text/html'):null;
+    const k1=new Set([...doc.querySelectorAll('[data-k]')].map(e=>e.dataset.k));
     const pageOf=el=>{const p=el.closest('.page');return p?p.id.replace(/^p-/,''):'_'};
     const lastSec={};
-    const texts=[...doc.querySelectorAll('[data-k]')].map(el=>{
+    const texts=[...doc.querySelectorAll('[data-k]'),...(doc2?[...doc2.querySelectorAll('[data-k]')].filter(e=>!k1.has(e.dataset.k)):[])].map(el=>{
       const page=pageOf(el);
       let sec;
       if(el.closest('.banner'))sec='Sayfa başlığı alanı';
@@ -979,7 +988,7 @@ function loadSite(){
     });
     let sz=[];try{const m=html.match(/const D0?=rows\(`([\s\S]*?)`\)/);if(m)sz=m[1].trim().split('\n').map(l=>l.split('|')).filter(a=>a.length>=3).map(a=>({t:a[0],d:a[1],c:a[2],e:a[3]||''}))}catch(e){}
     const ms=[...doc.querySelectorAll('#ms-jobs .ms-job')].map(e=>{const q=s=>(e.querySelector(s)||{}).textContent||'';const fd=k=>q('[data-f="'+k+'"]').trim();const ln=e.querySelector('a[data-f="url"]');return{org:q('.ms-org'),title:q('h4'),desc:q('p:not(.ms-meta)'),proc:q('.ms-meta').replace(/^\s*Süreç:\s*/,''),sart:fd('sart'),gorev:fd('gorev'),yol:fd('yol'),nitelik:fd('nitelik'),url:ln?(ln.getAttribute('href')||''):'',tags:(e.dataset.t||'').split(' ').filter(Boolean)}});
-    const jarr=n=>{try{const m=html.match(new RegExp('window\\.'+n+'=(\\[[\\s\\S]*?\\]);'));return m?JSON.parse(m[1]):[]}catch(e){return[]}};
+    const jarr=(n,src)=>{try{const m=(src||html).match(new RegExp('window\\.'+n+'=(\\[[\\s\\S]*?\\]);'));return m?JSON.parse(m[1]):[]}catch(e){return[]}};
     const ex=jarr('EKO_SINAV'),gs=jarr('EKO_GOST');
     const hk=[...doc.querySelectorAll('#hk-grid details')].map(d=>({ad:(d.querySelector('.ms-dt')||{}).textContent||'',text:[...d.querySelectorAll('.ms-db>p')].map(p=>p.textContent).join('\n\n'),etiket:[...d.querySelectorAll('.ms-tag')].map(t=>t.textContent).join(', ')}));
     let fm=[];try{const m=html.match(/const TOPICS=(\[[\s\S]*?\n\]);/);if(m)fm=(new Function('return '+m[1]))().map(t=>({id:String(t.id),c:String(t.c||''),x:String(t.x||''),ys:(t.y||[]).join('\n'),ns:(t.n||[]).join('\n')}))}catch(e){}
@@ -987,7 +996,7 @@ function loadSite(){
     try{const m=html.match(/window\.EKO_DUSUNUR=(\[[\s\S]*?\n\]);/);if(m)ki=(new Function('return '+m[1]))().map(t=>({ad:String(t.ad||''),unvan:t.unvan||'',ekol:t.ekol||'',yil:t.yil||'',ulke:t.ulke||'',dogum:t.dogum||'',olum:t.olum||'',ozet:t.ozet||'',hayat:t.hayat||'',detay:t.detay||'',zaman:[].concat(t.zaman||[]).join('\n'),eserler:[].concat(t.eserler||[]).join('\n'),fikirler:[].concat(t.fikirler||[]).join('\n'),etki:t.etki||'',wikitr:t.wikitr||'',wiki:t.wiki||'',brit:t.brit||'',foto:t.foto||'',kaynak:[].concat(t.kaynak||[]).join('\n')}))}catch(e){}
     try{const m=html.match(/const BOOKS=(\[[\s\S]*?\n\]);/),f=html.match(/featuredBooks:(\[[^\]]*\])/);
       if(m){const feat=f?(new Function('return '+f[1]))():[];kb=(new Function('return '+m[1]))().map(b=>({id:String(b.id),t:String(b.t||''),a:String(b.a||''),y:String(b.y==null?'':b.y),k:b.k||'Kitap',n:String(b.n||''),oz:feat.includes(b.id)?'1':'0'}))}}catch(e){}
-    S.site={texts,blocks,sim,sz,ms,ex,gs,hk,fm,ki,kb,ka:jarr('EKO_ANATOMI'),se:jarr('EKO_EFSANE')};return S.site;
+    S.site={texts,blocks,sim,sz,ms,ex,gs,hk,fm,ki,kb,ka:jarr('EKO_ANATOMI',html2||html),se:jarr('EKO_EFSANE',html2||html)};return S.site;
   })();
   S.siteP.catch(()=>{S.siteP=null});
   return S.siteP;
@@ -998,7 +1007,7 @@ function withSite(build){
   const box=h('div',null,h('div',{class:'skel'}),h('div',{class:'skel'}),h('div',{class:'skel'}));
   loadSite().then(()=>{if(S.view===v)render()}).catch(()=>{
     box.replaceChildren(h('div',{class:'empty'},h('b',{text:'Site dosyası okunamadı'}),
-      h('span',{text:'Bu sayfa, admin.html ile index.html aynı klasörde olduğunda çalışır. Dosyaları aynı yere koyup tekrar dene.'}),
+      h('span',{text:'Bu sayfa, admin.html ile index.html ve ansiklopedi.html aynı klasörde olduğunda çalışır. Dosyaları aynı yere koyup tekrar dene.'}),
       h('button',{class:'btn solid',type:'button',onclick:()=>{render()},text:'Tekrar dene'})));
   });
   return box;
@@ -1691,7 +1700,7 @@ const TAGL={H2:'Sayfa başlığı',H3:'Bölüm başlığı',H4:'Kart başlığı
 function pageEditor(page,title,desc,extra){
   return withSite(site=>{
     const root=h('div',{class:'stack'},pageHead(title,desc));
-    const open=h('a',{class:'btn sm',href:'index.html#/'+page,target:'_blank',rel:'noopener',text:'Sayfayı sitede aç'});
+    const open=h('a',{class:'btn sm',href:siteUrl(page),target:'_blank',rel:'noopener',text:'Sayfayı sitede aç'});
     root.append(h('div',{class:'row'},open,h('span',{class:'hint',text:'Değiştirdiğin metinler turuncu çizgiyle işaretlenir. Yayınlayana kadar sitede görünmez.'})));
     if(extra)root.append(extra());
     const items=site.texts.filter(t=>t.page===page&&!t.crumb);
@@ -1739,7 +1748,7 @@ function pageEditorV2(page,title,desc,labels){
     const stat=h('span',{class:'pe-stat'});
     const jump=h('div',{class:'pe-jump'});
     bar.append(h('div',{class:'row'},q,h('label',{class:'switch',style:'font-weight:500;font-size:14px'},onlyC,h('span',{class:'tr'}),'Sadece değişenler'),
-      h('a',{class:'btn sm',href:'index.html#/'+page,target:'_blank',rel:'noopener',text:'Sitede aç ↗'})),stat,jump);
+      h('a',{class:'btn sm',href:siteUrl(page),target:'_blank',rel:'noopener',text:'Sitede aç ↗'})),stat,jump);
     const list=h('div');
     root.append(bar,list);
     const counters=[];
@@ -2350,7 +2359,7 @@ function customView(cfg){
     const o=S.work[cfg.store],base=cfg.base(site);
     S.cv=S.cv||{};const V=S.cv[cfg.store]=S.cv[cfg.store]||{q:'',cat:'',editing:null,w:null,limit:40};
     const root=h('div',{class:'stack'},pageHead(cfg.title,cfg.desc));
-    if(!base.length&&!cfg.noBase)root.append(h('div',{class:'hint',text:'Not: sitedeki hazır liste okunamadı; yalnızca eklediklerin yönetilebilir. admin.html ile index.html aynı klasörde olmalı.'}));
+    if(!base.length&&!cfg.noBase)root.append(h('div',{class:'hint',text:'Not: sitedeki hazır liste okunamadı; yalnızca eklediklerin yönetilebilir. admin.html ile index.html ve ansiklopedi.html aynı klasörde olmalı.'}));
 
     const draft=cfg.blank();
     const addP=h('div',{class:'panel'},h('h3',{text:cfg.addTitle}));
