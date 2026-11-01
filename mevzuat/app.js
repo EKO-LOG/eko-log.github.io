@@ -32,7 +32,7 @@ const hero=(inner,sm)=>`<div class="aurora hero${sm?" sm":""}"><i></i><i></i><i>
 let hq="";
 function home(){document.title="Mevzuat · Eko-Log";
  const gs=MZ.groups.map((g,i)=>`<section><div class="wrap"><h2>${esc(g)}</h2><div class="grid">`+MZ.index.filter(x=>x.g===i).map(x=>`<a class="card" href="#/${esc(x.no)}"><b>${esc(x.kisa)}</b><span>${esc(x.ad)}</span><small>${x.n} madde · ${esc(x.no)} sayılı · ${esc(x.rg)}</small></a>`).join("")+"</div></div></section>").join("");
- app.innerHTML=hero(`<h1 class="rise">Mevzuat</h1><p class="rise">İdari yargı ve kamu hukuku mevzuatı; metinler, dipnotlar ve tablolarıyla birlikte, mevzuat.gov.tr kaynağından.</p><div class="rise"><input id="hq" type="search" placeholder="Tüm kanunlarda ara: kelime veya madde no…" autocomplete="off" value="${esc(hq)}"></div>`)+`<div id="res" class="wrap" hidden><div class="cnt" id="rc"></div><div id="rl"></div></div><div id="gs">${gs}</div>`;
+ app.innerHTML=hero(`<h1 class="rise">Mevzuat</h1><p class="rise">İdari yargı ve kamu hukuku mevzuatı; metinler, dipnotlar ve tablolarıyla birlikte, mevzuat.gov.tr kaynağından.</p><div class="rise"><a class="btn line" href="#/sure">⏱ Süre hesaplama aracı</a></div><div class="rise"><input id="hq" type="search" placeholder="Tüm kanunlarda ara: kelime veya madde no…" autocomplete="off" value="${esc(hq)}"></div>`)+`<div id="res" class="wrap" hidden><div class="cnt" id="rc"></div><div id="rl"></div></div><div id="gs">${gs}</div>`;
  $("#hq").oninput=e=>{clearTimeout(tm);tm=setTimeout(()=>{hq=e.target.value.trim();gsearch()},250)};if(hq)gsearch()}
 async function gsearch(){const res=$("#res"),gs=$("#gs");if(!hq){res.hidden=true;gs.hidden=false;return}
  gs.hidden=true;res.hidden=false;$("#rc").textContent="Yükleniyor…";
@@ -48,8 +48,58 @@ async function law(no,openSlug){const meta=MZ.index.find(x=>x.no===no);if(!meta)
  draw();if(openSlug){const e=document.getElementById("a-"+no+"-"+openSlug);if(e)setTimeout(()=>e.scrollIntoView({block:"start"}),60)}
  $("#q").oninput=e=>{clearTimeout(tm);tm=setTimeout(()=>{term=e.target.value.trim();lim=40;openSlug=null;draw()},200)};
  app.onclick=ev=>{if(ev.target.closest("[data-more]")){lim+=40;draw()}}}
+
+/* ---- süre hesaplama aracı: kurallar ve tatiller content.json → ts (Yayın masası) ---- */
+const TS_SEED={ara:{bas:"07-20",bit:"08-31",uzama:7},tatil:[],kurallar:[
+ {id:"s1",ad:"İdari dava açma süresi (idare mahkemesi, Danıştay)",dayanak:"2577 sayılı İYUK m. 7/1, m. 8",olay:"Tebliğ, yayın veya ilan tarihi",n:60,birim:"gun",adli:true,not:"Özel kanunda ayrı süre varsa o süre uygulanır."},
+ {id:"s2",ad:"Vergi davası açma süresi (vergi mahkemesi)",dayanak:"2577 sayılı İYUK m. 7/1, m. 8",olay:"Tebliğ tarihi",n:30,birim:"gun",adli:true,not:"Vergi uyuşmazlıklarında süre, ilgili vergi kanunundaki başlangıç kuralına göre değişebilir."},
+ {id:"s3",ad:"İstinaf başvuru süresi",dayanak:"2577 sayılı İYUK m. 45, m. 8",olay:"Kararın tebliğ tarihi",n:30,birim:"gun",adli:true,not:"Kesin kararlar için istinaf yolu yoktur."},
+ {id:"s4",ad:"Temyiz başvuru süresi (Danıştay)",dayanak:"2577 sayılı İYUK m. 46, m. 8",olay:"Kararın tebliğ tarihi",n:30,birim:"gun",adli:true,not:""},
+ {id:"s5",ad:"İdareye başvuru: zımni ret ve ardından dava süresi",dayanak:"2577 sayılı İYUK m. 10, m. 7, m. 8",olay:"İdareye başvuru tarihi",n:60,birim:"gun",adli:false,z:{n:60,birim:"gun",ad:"Zımni retten sonra dava açma süresi",adli:true},not:"60 gün içinde cevap verilmezse istek reddedilmiş sayılır. İdare kısmi ya da ara cevap verdiyse süreler değişebilir."}
+]};
+let TS=null;
+const isoD=d=>d.toISOString().slice(0,10),pD=t=>{const a=String(t).split("-").map(Number);return new Date(Date.UTC(a[0],a[1]-1,a[2]))};
+const addD=(d,n)=>new Date(d.getTime()+n*864e5);
+const addM=(d,n)=>{const y=d.getUTCFullYear(),m=d.getUTCMonth()+n,last=new Date(Date.UTC(y,m+1,0)).getUTCDate();return new Date(Date.UTC(y,m,Math.min(d.getUTCDate(),last)))};
+const plus=(d,n,b)=>b==="ay"?addM(d,n):b==="yil"?addM(d,n*12):addD(d,n);
+const fD=d=>d.toLocaleDateString("tr-TR",{timeZone:"UTC",day:"numeric",month:"long",year:"numeric",weekday:"long"});
+const BIR={gun:"gün",ay:"ay",yil:"yıl"};
+const okMD=t=>/^\d{2}-\d{2}$/.test(String(t||""));
+function normTS(j){const o=j&&typeof j==="object"?j:{};
+ const ara=Object.assign({},TS_SEED.ara,o.ara);if(!okMD(ara.bas))ara.bas=TS_SEED.ara.bas;if(!okMD(ara.bit))ara.bit=TS_SEED.ara.bit;ara.uzama=Math.max(0,Math.min(60,Math.floor(+ara.uzama)||0));
+ const tatil=(Array.isArray(o.tatil)?o.tatil:[]).filter(x=>x&&/^\d{4}-\d{2}-\d{2}$/.test(x.bas||"")).map(x=>({ad:String(x.ad||"Tatil"),bas:x.bas,bit:/^\d{4}-\d{2}-\d{2}$/.test(x.bit||"")&&x.bit>=x.bas?x.bit:x.bas}));
+ let k=(Array.isArray(o.kurallar)?o.kurallar:[]).filter(r=>r&&r.ad&&+r.n>0&&BIR[r.birim]);
+ if(!Array.isArray(o.kurallar))k=TS_SEED.kurallar;
+ return{ara,tatil,kurallar:k}}
+async function loadTS(){if(TS)return TS;let j=null;try{const r=await fetch("../content.json?v="+Date.now(),{cache:"no-store"});if(r.ok)j=(await r.json()).ts}catch(e){}TS=normTS(j);return TS}
+function offSet(ts){const s=new Set();ts.tatil.forEach(x=>{for(let d=pD(x.bas),e=pD(x.bit),i=0;d<=e&&i<40;d=addD(d,1),i++)s.add(isoD(d))});return s}
+function stage(ev,n,b,adli,ts,off,steps,warn){
+ let end=plus(ev,n,b);steps.push("Başlangıç olayı: "+fD(ev)+". Süre ertesi günden işlemeye başlar.");steps.push(n+" "+BIR[b]+" sonra: "+fD(end)+".");
+ if(adli&&ts.ara.uzama>0){const y=end.getUTCFullYear(),a=pD(y+"-"+ts.ara.bas),z=pD(y+"-"+ts.ara.bit);
+  if(end>=a&&end<=z){end=addD(z,ts.ara.uzama);steps.push("Son gün çalışmaya ara verme dönemine ("+ts.ara.bas.split("-").reverse().join(".")+"–"+ts.ara.bit.split("-").reverse().join(".")+") denk geldi; süre ara vermenin bittiği günden itibaren "+ts.ara.uzama+" gün uzar: "+fD(end)+".")}}
+ let k=0;while((end.getUTCDay()===0||end.getUTCDay()===6||off.has(isoD(end)))&&k<60){const why=off.has(isoD(end))?"resmî tatil":"hafta sonu";steps.push(fD(end)+" "+why+" olduğu için süre ertesi güne uzar.");end=addD(end,1);k++}
+ if(!ts.tatil.some(x=>x.bas.slice(0,4)===String(end.getUTCFullYear())))warn.add(end.getUTCFullYear()+" yılı için tatil listesi girilmemiş; yalnızca hafta sonları dikkate alındı. Resmî tatilleri ayrıca kontrol et.");
+ return end}
+function hesapla(r,ymd,ts){const steps=[],warn=new Set(),off=offSet(ts),ev=pD(ymd);let res={};
+ if(r.z){let e1=plus(ev,r.n,r.birim);steps.push("İdareye başvuru: "+fD(ev)+". "+r.n+" "+BIR[r.birim]+" içinde cevap verilmezse istek reddedilmiş sayılır.");steps.push("Zımni ret tarihi (bekleme süresinin sonu): "+fD(e1)+".");res.ara=e1;
+  const e2=stage(e1,r.z.n,r.z.birim,r.z.adli,ts,off,steps,warn);res.son=e2;res.etiket=r.z.ad||"Son gün"}
+ else{res.son=stage(ev,r.n,r.birim,r.adli,ts,off,steps,warn);res.etiket="Son gün"}
+ res.steps=steps;res.warn=[...warn];return res}
+async function sure(){document.title="Süre hesaplama · Mevzuat · Eko-Log";
+ app.innerHTML=hero(`<span class="pill">Araç</span><h1 class="rise">Süre hesaplama</h1><p class="rise">Dava, itiraz ve başvuru sürelerinin son gününü hesapla.</p><a class="btn line" href="#/">← Kanunlar</a>`,1)+`<div class="wrap"><div class="card" id="sr" style="max-width:720px;margin:0 auto;display:grid;gap:12px"><p>Yükleniyor…</p></div></div>`;
+ const ts=await loadTS(),box=$("#sr");if(!ts.kurallar.length){box.innerHTML="<p>Henüz süre türü tanımlanmadı.</p>";return}
+ const IS="width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:13px 14px;border-radius:14px;border:2px solid var(--line,#ccc);background:var(--bg,transparent);color:var(--ink,inherit)";
+ box.innerHTML=`<label for="sr-k"><b>Süre türü</b></label><select id="sr-k" style="${IS}">${ts.kurallar.map((r,i)=>`<option value="${i}">${esc(r.ad)}</option>`).join("")}</select><div id="sr-i" class="cnt" style="margin:0"></div><label for="sr-d" id="sr-l"><b></b></label><input id="sr-d" type="date" style="${IS}"><button class="btn grad" id="sr-b" type="button">Hesapla</button><div id="sr-o" aria-live="polite"></div><p class="cnt" style="margin:6px 0 0">Bu araç bilgilendirme amaçlıdır; sonuç hukuki danışmanlık yerine geçmez. Süre kuralları kanun ve özel mevzuata göre değişebilir. Kesin süre için resmî metne bak, gerekirse avukata danış.</p>`;
+ const sel=$("#sr-k"),inp=$("#sr-d"),out=$("#sr-o");
+ const info=()=>{const r=ts.kurallar[+sel.value];$("#sr-i").innerHTML=`<b>${r.n} ${BIR[r.birim]}</b>${r.z?` + ${r.z.n} ${BIR[r.z.birim]}`:""} · ${esc(r.dayanak||"")}${r.not?`<br>${esc(r.not)}`:""}`;$("#sr-l").firstChild.textContent=r.olay||"Başlangıç tarihi";out.textContent=""};
+ const run=()=>{const r=ts.kurallar[+sel.value];if(!inp.value){out.innerHTML='<p class="empty">Tarihi seç.</p>';return}
+  const x=hesapla(r,inp.value,ts),now=new Date(),t=pD(now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0")),kalan=Math.round((x.son-t)/864e5);
+  const txt=x.etiket+": "+fD(x.son);
+  out.innerHTML=`<div class="note" style="margin:0"><b style="font-size:1.25em">${esc(x.etiket)}: ${esc(fD(x.son))}</b><br>${kalan>=0?`Bugünden itibaren ${kalan} gün kaldı.`:`Bu süre ${-kalan} gün önce dolmuş.`}${x.ara?`<br>Zımni ret tarihi: ${esc(fD(x.ara))}`:""}</div>${x.warn.map(w=>`<p class="note" style="margin:8px 0 0">⚠ ${esc(w)}</p>`).join("")}<details style="margin-top:10px"><summary>Hesap adımları</summary><ol>${x.steps.map(z=>`<li>${esc(z)}</li>`).join("")}</ol></details><button class="btn sm" id="sr-c" type="button" style="margin-top:10px">Sonucu kopyala</button>`;
+  $("#sr-c").onclick=()=>{const m=(ts.kurallar[+sel.value].ad)+" | "+(ts.kurallar[+sel.value].olay||"Başlangıç")+": "+fD(pD(inp.value))+" | "+txt+" (Eko-Log Mevzuat süre hesaplama; bilgilendirme amaçlıdır)";navigator.clipboard&&navigator.clipboard.writeText(m).then(()=>toast("Sonuç kopyalandı"))}};
+ sel.onchange=info;$("#sr-b").onclick=run;inp.onchange=()=>{if(inp.value)run()};info()}
 function route(){const p=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);scrollTo(0,0);
- if(!p.length)home();else law(p[0],p[1]?decodeURIComponent(p[1]):null)}
+ if(p[0]==="sure")sure();else if(!p.length)home();else law(p[0],p[1]?decodeURIComponent(p[1]):null)}
 document.addEventListener("click",e=>{
  const c=e.target.closest("[data-cp]");if(c){navigator.clipboard&&navigator.clipboard.writeText(c.dataset.cp).then(()=>toast("Atıf kopyalandı"));return}
  const l=e.target.closest("[data-ln]");if(l){const u=location.href.split("#")[0]+l.dataset.ln;navigator.clipboard&&navigator.clipboard.writeText(u).then(()=>toast("Bağlantı kopyalandı"));return}
