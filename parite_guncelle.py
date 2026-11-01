@@ -25,6 +25,9 @@ YAHOO = {
  "XRP":"XRP-USD","ADA":"ADA-USD","DOGE":"DOGE-USD",
 }
 BINANCE = {k: k + "USDT" for k in ["BTC","ETH","BNB","SOL","XRP","ADA","DOGE"]}
+# Sikke altınlar: brüt ağırlık (gr). Fiyat = gram altın x ağırlık x 0,916 (22 ayar saflık)
+SIKKE = {"CEYREK": 1.754, "YARIM": 3.508, "TAM": 7.016, "CUMHURIYET": 7.216}
+AYAR22 = 0.916
 EIA = {"BRENT":("petroleum/pri/spt","RBRTE"),"WTI":("petroleum/pri/spt","RWTC"),
        "NG":("natural-gas/pri/fut","RNGWHHD")}
 
@@ -162,6 +165,12 @@ def main():
         basarili.append("GRAMTL"); log("OK   GRAMTL", s[-1])
     except Exception as e:
         log("UYARI GRAMTL:", e)
+
+    # Çeyrek, yarım, tam, Cumhuriyet: gram altından hesaplanır (kuyumcu işçilik/makası dahil değil)
+    if seri.get("GRAMTL"):
+        for kod, agirlik in SIKKE.items():
+            seri[kod] = [[t, round(v * agirlik * AYAR22, 2)] for t, v in seri["GRAMTL"]]
+        log("OK   sikke altinlar", ", ".join(SIKKE), "son=", seri["CEYREK"][-1])
 
     # Dosyayı sadece en az yarı seri yenilendiyse 'güncel' işaretle
     if len(basarili) < max(5, len(kodlar) // 2):
