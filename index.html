@@ -5960,7 +5960,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (()=>{
 const KEYS=["ekstra", "kavram", "ilanlar", "cv", "profil", "tahmin", "paylas", "x-yol", "x-takvim", "x-etkinlik", "x-yoklama", "x-notlar", "x-mentor", "x-panel", "x-bildirim", "x-veri", "x-v-atolye", "x-v-sql", "x-v-hesap", "x-v-quiz", "x-v-gorev", "x-v-ders", "x-v-port"];
 const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
-const cur=()=>location.hash.replace(/^#\/?/,'').split('/')[0]||'ekstra';
+const cur=()=>location.hash.replace(/^#\/?/,'').split('/')[0];
 const sync=()=>{
   const on=isMember();
   document.body.classList.toggle('uye-ok',on);
