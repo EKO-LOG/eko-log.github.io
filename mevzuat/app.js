@@ -75,10 +75,31 @@ async function verify(){const S=rdS();if(!S||!S.uid||!S.r)return"none";
  }catch(e){return"net"}}
 const MSG={none:["Üye girişi gerekli","Mevzuat bölümü yalnızca onaylı Eko-Log üyelerine açıktır. Giriş yaptıktan sonra bu sayfaya dön."],wait:["Onay bekleniyor","Üyeliğin henüz yönetici tarafından onaylanmadı."],verify:["E-posta doğrulaması gerekli","Kullanabilmek için e-postana gelen doğrulama bağlantısına tıkla, sonra tekrar kontrol et."],red:["Başvuru onaylanmadı","Sorular için topluluğa yazabilirsin."],net:["Bağlantı sorunu","Üyelik kontrol edilemedi. İnternetini kontrol edip tekrar dene."]};
 const gh=t=>hero(`<h1 class="rise">Mevzuat</h1><p class="rise">${t}</p>`);
-function showGate(st){const m=MSG[st]||MSG.net;app.innerHTML=gh("Eko-Log üyelerine özel.")+`<div class="wrap"><div class="card gate"><h2>🔒 ${m[0]}</h2><p>${m[1]}</p><div class="acts"><a class="btn grad" href="../#/lab">Üye girişi yap</a><button class="btn sm" id="gr">Giriş yaptım, kontrol et</button></div></div></div>`;$("#gr").onclick=start}
+const LOGIN="../eko-plus/#/lab";
+const FERR={EMAIL_NOT_FOUND:"Bu e-posta ile kayıtlı üye bulunamadı.",INVALID_PASSWORD:"Şifre hatalı.",INVALID_LOGIN_CREDENTIALS:"E-posta veya şifre hatalı.",USER_DISABLED:"Bu hesap devre dışı bırakılmış.",INVALID_EMAIL:"Geçerli bir e-posta yaz.",TOO_MANY_ATTEMPTS_TRY_LATER:"Çok fazla deneme yapıldı, biraz sonra tekrar dene.",MISSING_PASSWORD:"Şifreni yaz."};
+const ferr=j=>{const c=String((j&&j.error&&j.error.message)||"").split(" ")[0];return FERR[c]||"Giriş yapılamadı. Bilgilerini kontrol edip tekrar dene."};
+async function signIn(em,pw){
+ const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+encodeURIComponent(KEY),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,password:pw,returnSecureToken:true})});
+ const j=await r.json().catch(()=>({}));if(!r.ok||!j.idToken)throw new Error(ferr(j));
+ const S={uid:j.localId,e:j.email||em,r:j.refreshToken,t:j.idToken,exp:Date.now()+(Number(j.expiresIn||3600)-90)*1e3};
+ try{localStorage.setItem("eko_uye",JSON.stringify(S));sessionStorage.removeItem("mz_ok")}catch(e){}return S}
+async function resetPw(em){
+ const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key="+encodeURIComponent(KEY),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({requestType:"PASSWORD_RESET",email:em})});
+ const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(ferr(j))}
+const IS='width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:13px 14px;border-radius:14px;border:2px solid var(--line,#2f2340);background:var(--bg,transparent);color:var(--ink,inherit)';
+function loginForm(){app.innerHTML=gh("Eko-Log üyelerine özel.")+`<div class="wrap"><form class="card gate" id="lf" novalidate style="max-width:460px;margin:30px auto;display:grid;gap:12px"><h2 style="margin:0">🔐 Üye girişi</h2><p style="margin:0">Mevzuat bölümü yalnızca onaylı Eko-Log üyelerine açıktır. Eko-Plus ile aynı hesabı kullanırsın.</p><input id="lm" type="email" placeholder="E-posta" autocomplete="email" required style="${IS}"><input id="lp" type="password" placeholder="Şifre" autocomplete="current-password" required style="${IS}"><div id="le" role="alert" style="color:#e5484d;font-size:14.5px;min-height:1px"></div><button class="btn grad" id="lb" type="submit">Giriş yap</button><div class="acts"><button class="btn sm" type="button" id="lr">Şifremi unuttum</button><a class="btn sm" href="${LOGIN}" id="lg">Üye ol / Eko-Plus'ta giriş</a></div></form></div>`;
+ const f=$("#lf"),er=$("#le");
+ f.onsubmit=async e=>{e.preventDefault();const em=$("#lm").value.trim(),pw=$("#lp").value;er.textContent="";if(!em||!pw){er.textContent="E-posta ve şifreni yaz.";return}
+  const b=$("#lb");b.disabled=true;b.textContent="Giriş yapılıyor…";
+  try{await signIn(em,pw);started=false;start()}catch(x){er.textContent=x.message;b.disabled=false;b.textContent="Giriş yap"}};
+ $("#lr").onclick=async()=>{const em=$("#lm").value.trim();if(!em){er.textContent="Önce e-postanı yaz.";return}er.style.color="";try{await resetPw(em);er.style.color="#2ea44f";er.textContent="Şifre sıfırlama bağlantısı e-postana gönderildi."}catch(x){er.style.color="#e5484d";er.textContent=x.message}};
+ $("#lg").onclick=e=>{e.preventDefault();try{sessionStorage.setItem("eko_ret","../mevzuat/")}catch(x){}location.href=LOGIN}}
+function showGate(st){if(st==="none"){loginForm();return}
+ const m=MSG[st]||MSG.net;app.innerHTML=gh("Eko-Log üyelerine özel.")+`<div class="wrap"><div class="card gate"><h2>🔒 ${m[0]}</h2><p>${m[1]}</p><div class="acts"><button class="btn sm" id="gr">Tekrar kontrol et</button><button class="btn sm" id="go">Farklı hesapla giriş yap</button></div></div></div>`;
+ $("#gr").onclick=start;$("#go").onclick=()=>{try{localStorage.removeItem("eko_uye");localStorage.removeItem("eko_uye_ok");sessionStorage.removeItem("mz_ok")}catch(e){}loginForm()}}
 let started=false,busy=false;
 async function start(){if(started||busy)return;busy=true;app.innerHTML=gh("Üyeliğin kontrol ediliyor…");const st=await verify();busy=false;
- if(st==="ok"){started=true;addEventListener("hashchange",route);route()}else showGate(st)}
+ if(st==="ok"){try{const S=rdS();if(S&&S.uid)localStorage.setItem("eko_uye_ok",S.uid)}catch(e){}started=true;addEventListener("hashchange",route);route()}else showGate(st)}
 addEventListener("focus",()=>{if(!started)start()});
 addEventListener("storage",e=>{if(e.key!=="eko_uye")return;if(started&&!e.newValue){try{sessionStorage.removeItem("mz_ok")}catch(x){}location.reload()}else if(!started)start()});
 start();
