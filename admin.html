@@ -331,9 +331,17 @@ const XP_IDS=XPG.flatMap(g=>g.items.map(i=>i[0]));
 const XP_NAME=Object.fromEntries(XPG.flatMap(g=>g.items.map(i=>[i[0],i[1]])));
 /* Etkinlikler sayfaları: her biri için sitede aç/kapa anahtarı (content.json → pg; Yatay Bakış yb.on ile ortak) */
 const EVG=[
-  {g:'Etkinlikler',items:[['etkinlik','Etkinlik listesi','Etkinlik kartları ve katılım. Kapatırsan kartlar gizlenir; aşağıdaki sayfaların kutuları kendi anahtarlarıyla görünmeye devam eder.'],['yatay','Yatay Bakış','Sayfanın içeriğini “Yatay Bakış” bölümünden düzenlersin. Açık/kapalı durumu burayla ortaktır.']]},
+  {g:'Etkinlikler',items:[['etkinlik','Etkinlik listesi','Etkinlik kartları ve katılım. Kapatırsan kartlar gizlenir; aşağıdaki sayfaların kutuları kendi anahtarlarıyla görünmeye devam eder.'],['yatay','Yatay Bakış','Sayfanın içeriğini “Yatay Bakış” bölümünden düzenlersin. Açık/kapalı durumu burayla ortaktır.'],['projeler','Proje ve Araştırma Grupları','Grup listesi, başvuru ve fikir önerisi formu. Grupları “Proje grupları” bölümünden yönetirsin.']]},
   {g:'Fikir Muharebesi',items:[['fikir','Fikir Muharebesi (ana sayfa)','Haftanın iddiası. Kapatırsan aşağıdaki alt sayfaların hepsi de kapanır.'],['fikir-canli','Canlı muharebe','Gerçek zamanlı muharebe sayfası. Oturumu açıp kapatmak ayrıdır: “Canlı muharebe” bölümünden yapılır.'],['fikir-etkinlik','Yapılan etkinlikler','Geçmiş muharebe etkinlikleri, fotoğrafları ve özetleri.'],['fikir-turler','Münazara çeşitleri','Karl Popper, Lincoln–Douglas, Kamu Forumu, Parlamenter ve diğer formatların tanıtımı.']]}
 ];
+const TS_SEED={ara:{bas:'07-20',bit:'08-31',uzama:7},tatil:[],kurallar:[
+ {id:'s1',ad:'İdari dava açma süresi (idare mahkemesi, Danıştay)',dayanak:'2577 sayılı İYUK m. 7/1, m. 8',olay:'Tebliğ, yayın veya ilan tarihi',n:60,birim:'gun',adli:true,not:'Özel kanunda ayrı süre varsa o süre uygulanır.'},
+ {id:'s2',ad:'Vergi davası açma süresi (vergi mahkemesi)',dayanak:'2577 sayılı İYUK m. 7/1, m. 8',olay:'Tebliğ tarihi',n:30,birim:'gun',adli:true,not:'Vergi uyuşmazlıklarında süre, ilgili vergi kanunundaki başlangıç kuralına göre değişebilir.'},
+ {id:'s3',ad:'İstinaf başvuru süresi',dayanak:'2577 sayılı İYUK m. 45, m. 8',olay:'Kararın tebliğ tarihi',n:30,birim:'gun',adli:true,not:'Kesin kararlar için istinaf yolu yoktur.'},
+ {id:'s4',ad:'Temyiz başvuru süresi (Danıştay)',dayanak:'2577 sayılı İYUK m. 46, m. 8',olay:'Kararın tebliğ tarihi',n:30,birim:'gun',adli:true,not:''},
+ {id:'s5',ad:'İdareye başvuru: zımni ret ve ardından dava süresi',dayanak:'2577 sayılı İYUK m. 10, m. 7, m. 8',olay:'İdareye başvuru tarihi',n:60,birim:'gun',adli:false,z:{n:60,birim:'gun',ad:'Zımni retten sonra dava açma süresi',adli:true},not:'60 gün içinde cevap verilmezse istek reddedilmiş sayılır. İdare kısmi ya da ara cevap verdiyse süreler değişebilir.'}]};
+const TS_B={gun:'gün',ay:'ay',yil:'yıl'};
+const PA_DURUM=['Başvuru açık','Devam ediyor','Tamamlandı'];
 const EV_ALL=EVG.flatMap(g=>g.items.map(i=>i[0]));
 const EV_IDS=EV_ALL.filter(k=>k!=='yatay');
 const EV_NAME=Object.fromEntries(EVG.flatMap(g=>g.items.map(i=>[i[0],i[1]])));
@@ -403,6 +411,17 @@ function norm(src){
   ['n','dg','e','d','fme'].forEach(k=>{if(!Array.isArray(x[k]))x[k]=[]});
   ['w','ig','li'].forEach(k=>x[k]=String(x[k]||''));
   [...x.n,...x.dg,...x.e,...x.fme,...x.c.gallery,...x.c.archive].forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
+  {const m=Object.assign({on:false,list:[]},s.mr),ss=v=>String(v==null?'':v);m.on=m.on===true;
+   m.list=(Array.isArray(m.list)?m.list:[]).filter(it=>it&&typeof it==='object').map(it=>({id:ss(it.id||uid()),ad:ss(it.ad),mezun:ss(it.mezun),gorev:ss(it.gorev),ozet:ss(it.ozet),qa:(Array.isArray(it.qa)?it.qa:[]).filter(Array.isArray).map(a=>[ss(a[0]),ss(a[1])])}));x.mr=m;
+   const p=Object.assign({list:[]},s.pa);
+   p.list=(Array.isArray(p.list)?p.list:[]).filter(it=>it&&typeof it==='object').map(it=>({id:ss(it.id||uid()),baslik:ss(it.baslik),alan:ss(it.alan),ozet:ss(it.ozet),lider:ss(it.lider),takvim:ss(it.takvim),kontenjan:ss(it.kontenjan),cikti:ss(it.cikti),durum:PA_DURUM.includes(it.durum)?it.durum:PA_DURUM[0]}));x.pa=p}
+  {const t=s.ts&&typeof s.ts==='object'?s.ts:null,md=v=>/^\d{2}-\d{2}$/.test(String(v||'')),dd=v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v||''));
+   const ara=Object.assign({},TS_SEED.ara,t&&t.ara);if(!md(ara.bas))ara.bas=TS_SEED.ara.bas;if(!md(ara.bit))ara.bit=TS_SEED.ara.bit;ara.uzama=Math.max(0,Math.min(60,Math.floor(+ara.uzama)||0));
+   const tatil=(t&&Array.isArray(t.tatil)?t.tatil:[]).filter(q=>q&&dd(q.bas)).map(q=>({id:String(q.id||uid()),ad:String(q.ad||'Tatil'),bas:q.bas,bit:dd(q.bit)&&q.bit>=q.bas?q.bit:q.bas}));
+   const src=t&&Array.isArray(t.kurallar)?t.kurallar:clone(TS_SEED.kurallar);
+   const kurallar=src.filter(r=>r&&typeof r==='object').map(r=>{const o={id:String(r.id||uid()),ad:String(r.ad||''),dayanak:String(r.dayanak||''),olay:String(r.olay||''),n:Math.max(1,Math.floor(+r.n)||1),birim:TS_B[r.birim]?r.birim:'gun',adli:r.adli===true,not:String(r.not||'')};
+     if(r.z&&typeof r.z==='object')o.z={n:Math.max(1,Math.floor(+r.z.n)||1),birim:TS_B[r.z.birim]?r.z.birim:'gun',ad:String(r.z.ad||''),adli:r.z.adli===true};return o});
+   x.ts={ara,tatil,kurallar}}
   x.ks=ksNorm(s.ks,i=>'k'+uid()+i);
   return x;
 }
@@ -554,7 +573,7 @@ const COLS={
 };
 
 /* ---------- değişiklik özeti ---------- */
-const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],xptakvim:w=>w.xt,fm:w=>w.fm};
+const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],mezun:w=>w.mr,projeler:w=>w.pa,sure:w=>w.ts,xptakvim:w=>w.xt,fm:w=>w.fm};
 function diffList(a,b){
   const am=new Map(a.map(x=>[String(x.id),x])),bm=new Map(b.map(x=>[String(x.id),x]));
   return{add:b.filter(x=>!am.has(String(x.id))),del:a.filter(x=>!bm.has(String(x.id))),
@@ -573,6 +592,9 @@ function summarize(){
   }
   if(a.b.on!==b.b.on)out.push(b.b.on?'Duyuru şeridi açıldı':'Duyuru şeridi kapatıldı');
   if(a.b.text!==b.b.text)out.push('Duyuru metni değişti');
+  if(!same(a.mr,b.mr)){if(a.mr.on!==b.mr.on)out.push(b.mr.on?'Mezun röportajları sitede açıldı':'Mezun röportajları sitede kapatıldı');if(!same(a.mr.list,b.mr.list))out.push('Mezun röportajları düzenlendi ('+b.mr.list.length+' kayıt)')}
+  if(!same(a.ts,b.ts))out.push('Süre hesaplama: tatiller veya süre türleri düzenlendi ('+b.ts.tatil.length+' tatil, '+b.ts.kurallar.length+' süre türü)');
+  if(!same(a.pa,b.pa))out.push('Proje ve araştırma grupları düzenlendi ('+b.pa.list.length+' grup)');
   const tk=new Set([...Object.keys(a.t),...Object.keys(b.t)]);let tc=0;tk.forEach(k=>{if(a.t[k]!==b.t[k])tc++});
   if(tc)out.push(`${tc} site metni değişti`);
   [['w','WhatsApp grup bağlantısı'],['ig','Instagram bağlantısı'],['li','LinkedIn bağlantısı']].forEach(([k,n])=>{if(a[k]!==b[k])out.push(n+' değişti')});
@@ -658,13 +680,13 @@ function validate(){
 const NAV=[
   {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['yarisma','Bilgi Yarışması'],['poll','Anket']]},
   {g:'Simülasyon Merkezi',items:[['sims','Simülasyon fotoğrafları'],['pmulakat','Mülakat sayfası'],['borsa','Borsa oyunu kayıtları']]},
-  {g:'Meslekler',items:[['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['ex','Sınav takvimi']]},
+  {g:'Meslekler',items:[['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['mezun','Mezun röportajları'],['ex','Sınav takvimi']]},
   {g:'İktisadi Ansiklopedi',items:[['ansiklopedi','İktisadi Ansiklopedi']]},
   {g:'Veri ve Pariteler',items:[['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri'],['itab','Gelen tablolar']]},
   {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['pmakale','Gelen makaleler'],['gallery','Galeri'],['comments','Yorumlar']]},
-  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
+  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['projeler','Proje grupları'],['pproje','Proje başvuruları'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
   {g:'Üyelere Özel',items:[['members','Üyelik başvuruları'],['teachers','Hocalar']]},
-  {g:'Eko-Plus modülleri',items:[['xplus','Sayfa anahtarları'],['xpetk','Etkinlik Araçları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Sınav Takvimi (resmî)']]},
+  {g:'Eko-Plus modülleri',items:[['xplus','Sayfa anahtarları'],['xpetk','Etkinlik Araçları'],['xpmentor','Mezun ve Mentor'],['sure','Mevzuat: süre hesaplama'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Sınav Takvimi (resmî)']]},
   {g:'Site',items:[['texts','Site metinleri'],['blocks','Örnek içerikler'],['stats','İstatistikler'],['links','Bağlantılar'],['settings','Ayarlar ve yedek']]}
 ];
 const VIEWS={};
@@ -950,9 +972,7 @@ VIEWS.links=()=>{
 </script>
 <script>
 /* ---------- site dosyasını oku (metinler ve örnek içerikler için) ---------- */
-const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
-const ENC_PAGES=['ansiklopedi','sozluk','anatomi','efsane','kisiler','quiz','olay'];
-const siteUrl=p=>(ENC_PAGES.includes(String(p).split('/')[0])?'ansiklopedi.html':'index.html')+'#/'+p;
+const PAGE_NAMES={mezun:'Mezun Röportajları',projeler:'Proje ve Araştırma Grupları',home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
 function loadSite(){
   if(S.site)return Promise.resolve(S.site);
   if(S.siteP)return S.siteP;
@@ -964,16 +984,9 @@ function loadSite(){
     }
     if(!html||html.indexOf('data-k=')<0)throw new Error('index.html okunamadı');
     const doc=new DOMParser().parseFromString(html,'text/html');
-    /* Ansiklopedi ayrı dosyada (ansiklopedi.html): metinleri ve Anatomi/Efsane listesini oradan da oku */
-    let html2=null;
-    try{const r=await fetch('ansiklopedi.html',{cache:'no-store'});if(r.ok)html2=await r.text()}catch(e){}
-    if(!html2||html2.indexOf('data-k=')<0){try{const r=await gh('contents/ansiklopedi.html?ref='+encodeURIComponent(S.cfg.branch),{raw:true});if(r.ok)html2=await r.text()}catch(e){}}
-    if(html2&&html2.indexOf('data-k=')<0)html2=null;
-    const doc2=html2?new DOMParser().parseFromString(html2,'text/html'):null;
-    const k1=new Set([...doc.querySelectorAll('[data-k]')].map(e=>e.dataset.k));
     const pageOf=el=>{const p=el.closest('.page');return p?p.id.replace(/^p-/,''):'_'};
     const lastSec={};
-    const texts=[...doc.querySelectorAll('[data-k]'),...(doc2?[...doc2.querySelectorAll('[data-k]')].filter(e=>!k1.has(e.dataset.k)):[])].map(el=>{
+    const texts=[...doc.querySelectorAll('[data-k]')].map(el=>{
       const page=pageOf(el);
       let sec;
       if(el.closest('.banner'))sec='Sayfa başlığı alanı';
@@ -988,7 +1001,7 @@ function loadSite(){
     });
     let sz=[];try{const m=html.match(/const D0?=rows\(`([\s\S]*?)`\)/);if(m)sz=m[1].trim().split('\n').map(l=>l.split('|')).filter(a=>a.length>=3).map(a=>({t:a[0],d:a[1],c:a[2],e:a[3]||''}))}catch(e){}
     const ms=[...doc.querySelectorAll('#ms-jobs .ms-job')].map(e=>{const q=s=>(e.querySelector(s)||{}).textContent||'';const fd=k=>q('[data-f="'+k+'"]').trim();const ln=e.querySelector('a[data-f="url"]');return{org:q('.ms-org'),title:q('h4'),desc:q('p:not(.ms-meta)'),proc:q('.ms-meta').replace(/^\s*Süreç:\s*/,''),sart:fd('sart'),gorev:fd('gorev'),yol:fd('yol'),nitelik:fd('nitelik'),url:ln?(ln.getAttribute('href')||''):'',tags:(e.dataset.t||'').split(' ').filter(Boolean)}});
-    const jarr=(n,src)=>{try{const m=(src||html).match(new RegExp('window\\.'+n+'=(\\[[\\s\\S]*?\\]);'));return m?JSON.parse(m[1]):[]}catch(e){return[]}};
+    const jarr=n=>{try{const m=html.match(new RegExp('window\\.'+n+'=(\\[[\\s\\S]*?\\]);'));return m?JSON.parse(m[1]):[]}catch(e){return[]}};
     const ex=jarr('EKO_SINAV'),gs=jarr('EKO_GOST');
     const hk=[...doc.querySelectorAll('#hk-grid details')].map(d=>({ad:(d.querySelector('.ms-dt')||{}).textContent||'',text:[...d.querySelectorAll('.ms-db>p')].map(p=>p.textContent).join('\n\n'),etiket:[...d.querySelectorAll('.ms-tag')].map(t=>t.textContent).join(', ')}));
     let fm=[];try{const m=html.match(/const TOPICS=(\[[\s\S]*?\n\]);/);if(m)fm=(new Function('return '+m[1]))().map(t=>({id:String(t.id),c:String(t.c||''),x:String(t.x||''),ys:(t.y||[]).join('\n'),ns:(t.n||[]).join('\n')}))}catch(e){}
@@ -996,7 +1009,7 @@ function loadSite(){
     try{const m=html.match(/window\.EKO_DUSUNUR=(\[[\s\S]*?\n\]);/);if(m)ki=(new Function('return '+m[1]))().map(t=>({ad:String(t.ad||''),unvan:t.unvan||'',ekol:t.ekol||'',yil:t.yil||'',ulke:t.ulke||'',dogum:t.dogum||'',olum:t.olum||'',ozet:t.ozet||'',hayat:t.hayat||'',detay:t.detay||'',zaman:[].concat(t.zaman||[]).join('\n'),eserler:[].concat(t.eserler||[]).join('\n'),fikirler:[].concat(t.fikirler||[]).join('\n'),etki:t.etki||'',wikitr:t.wikitr||'',wiki:t.wiki||'',brit:t.brit||'',foto:t.foto||'',kaynak:[].concat(t.kaynak||[]).join('\n')}))}catch(e){}
     try{const m=html.match(/const BOOKS=(\[[\s\S]*?\n\]);/),f=html.match(/featuredBooks:(\[[^\]]*\])/);
       if(m){const feat=f?(new Function('return '+f[1]))():[];kb=(new Function('return '+m[1]))().map(b=>({id:String(b.id),t:String(b.t||''),a:String(b.a||''),y:String(b.y==null?'':b.y),k:b.k||'Kitap',n:String(b.n||''),oz:feat.includes(b.id)?'1':'0'}))}}catch(e){}
-    S.site={texts,blocks,sim,sz,ms,ex,gs,hk,fm,ki,kb,ka:jarr('EKO_ANATOMI',html2||html),se:jarr('EKO_EFSANE',html2||html)};return S.site;
+    S.site={texts,blocks,sim,sz,ms,ex,gs,hk,fm,ki,kb,ka:jarr('EKO_ANATOMI'),se:jarr('EKO_EFSANE')};return S.site;
   })();
   S.siteP.catch(()=>{S.siteP=null});
   return S.siteP;
@@ -1007,7 +1020,7 @@ function withSite(build){
   const box=h('div',null,h('div',{class:'skel'}),h('div',{class:'skel'}),h('div',{class:'skel'}));
   loadSite().then(()=>{if(S.view===v)render()}).catch(()=>{
     box.replaceChildren(h('div',{class:'empty'},h('b',{text:'Site dosyası okunamadı'}),
-      h('span',{text:'Bu sayfa, admin.html ile index.html ve ansiklopedi.html aynı klasörde olduğunda çalışır. Dosyaları aynı yere koyup tekrar dene.'}),
+      h('span',{text:'Bu sayfa, admin.html ile index.html aynı klasörde olduğunda çalışır. Dosyaları aynı yere koyup tekrar dene.'}),
       h('button',{class:'btn solid',type:'button',onclick:()=>{render()},text:'Tekrar dene'})));
   });
   return box;
@@ -1187,7 +1200,7 @@ function rulesText(email){
     apps:{'.read':A,'.write':A,'$id':{
       '.write':`${A} || (!data.exists() && newData.exists())`,
       '.validate':"newData.hasChildren(['g','n','d'])",
-      g:{'.validate':"newData.val() === 'mulakat' || newData.val() === 'makale'"},
+      g:{'.validate':"newData.val() === 'mulakat' || newData.val() === 'makale' || newData.val() === 'proje'"},
       n:{'.validate':str(80)},b:{'.validate':opt(80)},s:{'.validate':opt(40)},c:{'.validate':opt(120)},t:{'.validate':opt(2000)},
       st:{'.validate':opt(30)},dt:{'.validate':opt(60)},no:{'.validate':opt(2000)},no2:{'.validate':opt(2000)},tx:{'.validate':opt(3000000)},f:{'.validate':opt(300)},fn:{'.validate':opt(120)},
       fz:{'.validate':'newData.isNumber()'},d:{'.validate':'newData.isNumber()'},u:{'.validate':'newData.isNumber()'},
@@ -1700,7 +1713,7 @@ const TAGL={H2:'Sayfa başlığı',H3:'Bölüm başlığı',H4:'Kart başlığı
 function pageEditor(page,title,desc,extra){
   return withSite(site=>{
     const root=h('div',{class:'stack'},pageHead(title,desc));
-    const open=h('a',{class:'btn sm',href:siteUrl(page),target:'_blank',rel:'noopener',text:'Sayfayı sitede aç'});
+    const open=h('a',{class:'btn sm',href:'index.html#/'+page,target:'_blank',rel:'noopener',text:'Sayfayı sitede aç'});
     root.append(h('div',{class:'row'},open,h('span',{class:'hint',text:'Değiştirdiğin metinler turuncu çizgiyle işaretlenir. Yayınlayana kadar sitede görünmez.'})));
     if(extra)root.append(extra());
     const items=site.texts.filter(t=>t.page===page&&!t.crumb);
@@ -1748,7 +1761,7 @@ function pageEditorV2(page,title,desc,labels){
     const stat=h('span',{class:'pe-stat'});
     const jump=h('div',{class:'pe-jump'});
     bar.append(h('div',{class:'row'},q,h('label',{class:'switch',style:'font-weight:500;font-size:14px'},onlyC,h('span',{class:'tr'}),'Sadece değişenler'),
-      h('a',{class:'btn sm',href:siteUrl(page),target:'_blank',rel:'noopener',text:'Sitede aç ↗'})),stat,jump);
+      h('a',{class:'btn sm',href:'index.html#/'+page,target:'_blank',rel:'noopener',text:'Sitede aç ↗'})),stat,jump);
     const list=h('div');
     root.append(bar,list);
     const counters=[];
@@ -1845,6 +1858,10 @@ const REC={
     topicL:'Makale başlığı',topicPh:'Makalenin başlığı',dateL:'Gönderim tarihi',datePh:'Örn. 3 Kasım 2026',
     stats:['Yeni','İnceleniyor','Düzeltme istendi','Yayınlandı','Red'],file:'Dosya (Word, PDF)',txL:'Makale metni',txPh:'Makaleyi buraya yaz ya da yapıştır…'}
 };
+REC.proje={title:'Proje grubu başvuruları ve fikir önerileri',
+    desc:'Sitedeki Proje ve Araştırma Grupları sayfasından gelen başvurular ve proje fikirleri. Bilgiler yalnızca yönetici hesabınla okunur, siteye yayınlanmaz. Kaydet dediğin anda saklanır; “Yayınla” gerekmez.',
+    topicL:'Grup / proje fikri',topicPh:'Örn. Faiz kararları grubu',dateL:'Görüşme tarihi',datePh:'Örn. 20 Kasım 2026',
+    stats:['Yeni','Görüşüldü','Gruba alındı','Beklemede','Red'],file:'Dosya (taslak, not)',txL:'Başvuru metni / notlar',txPh:'Neden katılmak istiyor, fikri nedir…'};
 const MAXF=2*1024*1024;
 const fileB64=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=rej;r.readAsDataURL(f)});
 const kb=n=>n>1048576?(n/1048576).toFixed(1).replace('.',',')+' MB':Math.max(1,Math.round(n/1024))+' KB';
@@ -2359,7 +2376,7 @@ function customView(cfg){
     const o=S.work[cfg.store],base=cfg.base(site);
     S.cv=S.cv||{};const V=S.cv[cfg.store]=S.cv[cfg.store]||{q:'',cat:'',editing:null,w:null,limit:40};
     const root=h('div',{class:'stack'},pageHead(cfg.title,cfg.desc));
-    if(!base.length&&!cfg.noBase)root.append(h('div',{class:'hint',text:'Not: sitedeki hazır liste okunamadı; yalnızca eklediklerin yönetilebilir. admin.html ile index.html ve ansiklopedi.html aynı klasörde olmalı.'}));
+    if(!base.length&&!cfg.noBase)root.append(h('div',{class:'hint',text:'Not: sitedeki hazır liste okunamadı; yalnızca eklediklerin yönetilebilir. admin.html ile index.html aynı klasörde olmalı.'}));
 
     const draft=cfg.blank();
     const addP=h('div',{class:'panel'},h('h3',{text:cfg.addTitle}));
@@ -3793,6 +3810,120 @@ VIEWS.xptakvim=()=>{
   draw();return root;
 };
 
+/* ---------- Mezun röportajları ve Proje grupları (content.json → mr, pa) ---------- */
+(()=>{
+const fl=(t,i)=>h('div',{class:'fld',style:'margin:0'},h('label',{text:t}),i);
+const inp=(v,ph,max)=>h('input',{type:'text',maxlength:String(max||200),value:v||'',placeholder:ph||''});
+const area=(v,ph,max)=>{const a=h('textarea',{rows:3,maxlength:String(max||600),placeholder:ph||''});a.value=v||'';return a};
+VIEWS.mezun=()=>{
+  const w=S.work;if(!w.mr)w.mr={on:false,list:[]};
+  const root=h('div',{class:'stack'}),list=h('div',{class:'panel'});
+  root.append(pageHead('Mezun röportajları','Mezunlarla yapılan kısa röportajlar. Sayfa varsayılan olarak KAPALIDIR; hazır olunca aşağıdaki anahtarla açarsın. Kapalıyken ziyaretçiler Meslekler sayfasında kutuyu görmez. Değişiklikler “Gözden geçir ve yayınla” ile sitede görünür.'));
+  const sw=h('input',{type:'checkbox',checked:w.mr.on===true,'aria-label':'Mezun röportajları sayfası'}),st=h('span',{class:'xp-st'});
+  const setSt=()=>{st.textContent=w.mr.on?'Açık':'Kapalı';st.className='xp-st '+(w.mr.on?'on':'off')};setSt();
+  sw.addEventListener('change',()=>{w.mr.on=sw.checked;setSt();touch();toast(w.mr.on?'Açıldı. Yayınlayınca sitede görünür.':'Kapatıldı. Yayınlayınca sitede gizlenir.')});
+  root.append(h('div',{class:'panel'},h('div',{class:'xp-row'},h('div',{class:'xp-txt'},h('b',{text:'Sitede göster'}),h('small',{text:'Kapalıyken yönetici olarak (?admin) sitede yine görürsün.'}),h('code',{text:'#/mezun'})),h('label',{class:'switch'},sw,h('span',{class:'tr'}),st))));
+  const f={ad:inp('','Ad soyad',80),mezun:inp('','Bölüm ve mezuniyet yılı, örn. İktisat, 2021',80),gorev:inp('','Görevi ve kurumu',120),ozet:area('','Tek cümlelik tanıtım',300)};
+  root.append(h('div',{class:'panel'},h('h3',{text:'Yeni röportaj'}),fl('Ad soyad',f.ad),fl('Bölüm ve yıl',f.mezun),fl('Görev ve kurum',f.gorev),fl('Tanıtım',f.ozet),
+    h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Ekle',onclick:()=>{
+      const ad=xclip(f.ad.value,80);if(!ad){toast('Ad soyad gerekli.');return}
+      w.mr.list.unshift({id:uid(),ad,mezun:xclip(f.mezun.value,80),gorev:xclip(f.gorev.value,120),ozet:xclip(f.ozet.value,300),qa:[]});
+      f.ad.value=f.mezun.value=f.gorev.value=f.ozet.value='';touch();draw();toast('Eklendi. Sorularını aşağıdan yaz.')}}))),list);
+  function draw(){
+    list.replaceChildren(h('h3',{text:'Röportajlar ('+w.mr.list.length+')'}));
+    if(!w.mr.list.length){list.append(xempty('Henüz röportaj yok','Yukarıdan ekle; sorular ve cevaplar kartın içinde düzenlenir.'));return}
+    w.mr.list.forEach(x=>{
+      const ad=inp(x.ad,'Ad soyad',80),mz=inp(x.mezun,'Bölüm ve yıl',80),go=inp(x.gorev,'Görev ve kurum',120),oz=area(x.ozet,'Tanıtım',300),qa=h('div',{style:'display:grid;gap:10px'});
+      const sync=()=>{x.ad=xclip(ad.value,80);x.mezun=xclip(mz.value,80);x.gorev=xclip(go.value,120);x.ozet=xclip(oz.value,300);touch()};
+      [ad,mz,go,oz].forEach(i=>i.addEventListener('change',sync));
+      const drawQ=()=>{qa.replaceChildren(...x.qa.map((a,i)=>{
+        const q=inp(a[0],'Soru',200),c=area(a[1],'Cevap',1500);
+        const s2=()=>{x.qa[i]=[xclip(q.value,200),xclip(c.value,1500)];touch()};q.addEventListener('change',s2);c.addEventListener('change',s2);
+        return h('div',{style:'display:grid;gap:6px;padding:10px;border:1px solid var(--line);border-radius:12px'},q,c,h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Soruyu sil',onclick:()=>{x.qa.splice(i,1);touch();drawQ()}})))}))};
+      drawQ();
+      list.append(h('details',{style:'padding:10px 0;border-top:1px solid var(--line)'},h('summary',{style:'cursor:pointer;font-weight:700',text:(x.ad||'(adsız)')+(x.mezun?' · '+x.mezun:'')}),
+        h('div',{style:'display:grid;gap:8px;margin-top:10px'},fl('Ad soyad',ad),fl('Bölüm ve yıl',mz),fl('Görev ve kurum',go),fl('Tanıtım',oz),h('b',{text:'Röportaj soruları'}),qa,
+          h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'+ Soru ekle',onclick:()=>{x.qa.push(['','']);touch();drawQ()}}),
+            h('button',{class:'btn sm ghost danger',type:'button',text:'Röportajı sil',onclick:async()=>{if(!(await ask('Röportajı sil','“'+(x.ad||'Adsız')+'” silinsin mi? Yayınlayana kadar geri alınabilir.','Sil',true)))return;w.mr.list=w.mr.list.filter(z=>z.id!==x.id);touch();draw()}})))))})}
+  draw();return root};
+VIEWS.projeler=()=>{
+  const w=S.work;if(!w.pa)w.pa={list:[]};
+  const root=h('div',{class:'stack'}),list=h('div',{class:'panel'});
+  root.append(pageHead('Proje ve araştırma grupları','Etkinlikler altındaki Proje ve Araştırma Grupları sayfasında görünen gruplar. Sayfanın kendisini “Sayfa anahtarları”ndan açıp kapatırsın. Gelen başvuru ve fikirler “Proje başvuruları” bölümüne düşer. Değişiklikler “Gözden geçir ve yayınla” ile sitede görünür.'));
+  const f={baslik:inp('','Grubun konusu',140),alan:inp('','Alan, örn. Para politikası',80),ozet:area('','Kısa açıklama',400),lider:inp('','Lider',80),takvim:inp('','Takvim, örn. Kasım–Ocak, haftada bir',120),kontenjan:inp('','Kontenjan, örn. 6 kişi',60),cikti:inp('','Beklenen çıktı, örn. 10 sayfalık rapor',160),durum:h('select',{'aria-label':'Durum'},PA_DURUM.map(d=>h('option',{value:d,text:d})))};
+  root.append(h('div',{class:'panel'},h('h3',{text:'Yeni grup'}),fl('Konu',f.baslik),fl('Alan',f.alan),fl('Açıklama',f.ozet),fl('Lider',f.lider),fl('Takvim',f.takvim),fl('Kontenjan',f.kontenjan),fl('Beklenen çıktı',f.cikti),fl('Durum',f.durum),
+    h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Ekle',onclick:()=>{
+      const b=xclip(f.baslik.value,140);if(!b){toast('Konu gerekli.');return}
+      w.pa.list.unshift({id:uid(),baslik:b,alan:xclip(f.alan.value,80),ozet:xclip(f.ozet.value,400),lider:xclip(f.lider.value,80),takvim:xclip(f.takvim.value,120),kontenjan:xclip(f.kontenjan.value,60),cikti:xclip(f.cikti.value,160),durum:f.durum.value});
+      ['baslik','alan','ozet','lider','takvim','kontenjan','cikti'].forEach(k=>f[k].value='');touch();draw();toast('Eklendi. Yayınlayınca sitede görünür.')}}))),list);
+  function draw(){
+    list.replaceChildren(h('h3',{text:'Gruplar ('+w.pa.list.length+')'}));
+    if(!w.pa.list.length){list.append(xempty('Henüz grup yok','Yukarıdan ekle. Grup yokken sitede yalnızca fikir önerisi formu görünür.'));return}
+    w.pa.list.forEach(x=>{
+      const F={baslik:inp(x.baslik,'Konu',140),alan:inp(x.alan,'Alan',80),ozet:area(x.ozet,'Açıklama',400),lider:inp(x.lider,'Lider',80),takvim:inp(x.takvim,'Takvim',120),kontenjan:inp(x.kontenjan,'Kontenjan',60),cikti:inp(x.cikti,'Çıktı',160),durum:h('select',{'aria-label':'Durum'},PA_DURUM.map(d=>h('option',{value:d,text:d})))};F.durum.value=x.durum;
+      const lim={baslik:140,alan:80,ozet:400,lider:80,takvim:120,kontenjan:60,cikti:160};
+      Object.keys(F).forEach(k=>F[k].addEventListener('change',()=>{x[k]=k==='durum'?F.durum.value:xclip(F[k].value,lim[k]);touch()}));
+      list.append(h('details',{style:'padding:10px 0;border-top:1px solid var(--line)'},h('summary',{style:'cursor:pointer;font-weight:700',text:x.baslik+' · '+x.durum}),
+        h('div',{style:'display:grid;gap:8px;margin-top:10px'},fl('Konu',F.baslik),fl('Alan',F.alan),fl('Açıklama',F.ozet),fl('Lider',F.lider),fl('Takvim',F.takvim),fl('Kontenjan',F.kontenjan),fl('Beklenen çıktı',F.cikti),fl('Durum',F.durum),
+          h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Grubu sil',onclick:async()=>{if(!(await ask('Grubu sil','“'+x.baslik+'” silinsin mi?','Sil',true)))return;w.pa.list=w.pa.list.filter(z=>z.id!==x.id);touch();draw()}})))))})}
+  draw();return root};
+VIEWS.pproje=()=>recView('proje');
+})();
+
+
+/* ---------- Mevzuat süre hesaplama: tatiller, ara verme dönemi, süre türleri (content.json → ts) ---------- */
+(()=>{
+const fl=(t,i)=>h('div',{class:'fld',style:'margin:0'},h('label',{text:t}),i);
+const inp=(v,ph,max,type)=>h('input',{type:type||'text',maxlength:String(max||200),value:v==null?'':String(v),placeholder:ph||''});
+const trd=d=>{const[a,b,c]=String(d).split('-');return c+'.'+b+'.'+a};
+VIEWS.sure=()=>{
+  const w=S.work;if(!w.ts)w.ts=clone(TS_SEED);const ts=w.ts;
+  const root=h('div',{class:'stack'});
+  root.append(pageHead('Mevzuat: süre hesaplama','Mevzuat sayfasındaki Süre hesaplama aracının tatil günlerini, çalışmaya ara verme dönemini ve süre türlerini buradan yönetirsin. Araç hesaplarken hafta sonlarını ve burada girdiğin tatilleri “tatil günü” sayar. Değişiklikler “Gözden geçir ve yayınla” ile sitede görünür.'));
+  /* tatiller */
+  const tl=h('div',{class:'panel'}),fa=inp('','Örn. Kurban Bayramı',60),fb=inp('','',10,'date'),fc=inp('','',10,'date');
+  root.append(h('div',{class:'panel'},h('h3',{text:'Yeni tatil'}),
+    h('p',{class:'hint',text:'Yalnızca TAM GÜN tatilleri gir (bayramın arife günü yarım gün olduğu için girilmez). Çok günlü tatillerde bitiş tarihini de yaz. Resmî Gazete’deki tatil duyurusuna ve idari tatil kararlarına göre her yıl güncelle.'}),
+    fl('Ad',fa),fl('Başlangıç',fb),fl('Bitiş (tek günse boş bırak)',fc),
+    h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Ekle',onclick:()=>{
+      if(!fb.value){toast('Başlangıç tarihi gerekli.');return}const bit=fc.value&&fc.value>=fb.value?fc.value:fb.value;
+      ts.tatil.push({id:uid(),ad:xclip(fa.value,60)||'Tatil',bas:fb.value,bit});fa.value=fb.value=fc.value='';touch();drawT();toast('Eklendi. Yayınlayınca sitede etkili olur.')}}))),tl);
+  function drawT(){
+    const L=[...ts.tatil].sort((a,b)=>a.bas.localeCompare(b.bas));
+    tl.replaceChildren(h('h3',{text:'Tatil günleri ('+L.length+')'}),L.length?L.map(x=>h('div',{class:'row',style:'justify-content:space-between;padding:8px 0;border-top:1px solid var(--line)'},
+      h('span',{text:x.ad+' · '+trd(x.bas)+(x.bit!==x.bas?' – '+trd(x.bit):'')}),
+      h('button',{class:'btn sm ghost danger',type:'button',text:'Sil',onclick:()=>{ts.tatil=ts.tatil.filter(z=>z.id!==x.id);touch();drawT()}}))):xempty('Henüz tatil girilmedi','Tatil girilmezse araç yalnızca hafta sonlarını dikkate alır ve kullanıcıya uyarı gösterir.'))}
+  drawT();
+  /* ara verme dönemi */
+  const ab=inp(ts.ara.bas,'AA-GG',5),az=inp(ts.ara.bit,'AA-GG',5),au=inp(ts.ara.uzama,'',3,'number');
+  const sa=()=>{const ok=v=>/^\d{2}-\d{2}$/.test(v);if(ok(ab.value.trim()))ts.ara.bas=ab.value.trim();if(ok(az.value.trim()))ts.ara.bit=az.value.trim();ts.ara.uzama=Math.max(0,Math.min(60,Math.floor(+au.value)||0));touch()};
+  [ab,az,au].forEach(i=>i.addEventListener('change',sa));
+  root.append(h('div',{class:'panel'},h('h3',{text:'Çalışmaya ara verme (adli tatil) dönemi'}),
+    h('p',{class:'hint',text:'İYUK m. 8: sürenin son günü bu döneme denk gelirse süre, dönemin bittiği günden itibaren belirtilen gün kadar uzar. Tarihleri AA-GG biçiminde yaz (örn. 07-20 ve 08-31). Dönem veya uzama gün sayısı mevzuatta değişirse buradan güncelle.'}),
+    fl('Başlangıç (AA-GG)',ab),fl('Bitiş (AA-GG)',az),fl('Uzama (gün)',au)));
+  /* süre türleri */
+  const kl=h('div',{class:'panel'});
+  const nb=()=>h('select',{'aria-label':'Birim'},Object.entries(TS_B).map(([k,t])=>h('option',{value:k,text:t})));
+  root.append(h('div',{class:'panel'},h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'+ Yeni süre türü',onclick:()=>{ts.kurallar.push({id:uid(),ad:'Yeni süre türü',dayanak:'',olay:'Tebliğ tarihi',n:30,birim:'gun',adli:false,not:''});touch();drawK();toast('Eklendi. Açıp düzenle.')}}),
+    h('button',{class:'btn sm',type:'button',text:'Varsayılan süre türlerini geri yükle',onclick:async()=>{if(!(await ask('Varsayılanları geri yükle','Mevcut tüm süre türleri silinir, varsayılan beş tür gelir. Tatiller etkilenmez.','Geri yükle',true)))return;ts.kurallar=clone(TS_SEED.kurallar);touch();drawK()}}))),kl);
+  function drawK(){
+    kl.replaceChildren(h('h3',{text:'Süre türleri ('+ts.kurallar.length+')'}),h('p',{class:'hint',text:'Her tür için süre ve dayanak maddeyi resmî metinden doğrula. “Ardışık süre” doluysa önce bekleme süresi (ör. 60 günde zımni ret), sonra ikinci süre (dava açma) hesaplanır.'}));
+    if(!ts.kurallar.length){kl.append(xempty('Süre türü yok','Aracın açılması için en az bir tür gerekir.'));return}
+    ts.kurallar.forEach(r=>{
+      const f={ad:inp(r.ad,'Ad',120),dayanak:inp(r.dayanak,'Örn. 2577 sayılı İYUK m. 7',160),olay:inp(r.olay,'Örn. Tebliğ tarihi',80),n:inp(r.n,'',4,'number'),birim:nb(),adli:h('input',{type:'checkbox',checked:r.adli===true,'aria-label':'Ara verme dönemi uzatması uygulansın'}),not:inp(r.not,'Kullanıcıya gösterilecek not',300),
+        zOn:h('input',{type:'checkbox',checked:!!r.z,'aria-label':'Ardışık süre var'}),zad:inp(r.z&&r.z.ad,'Ardışık sürenin adı',120),zn:inp(r.z?r.z.n:60,'',4,'number'),zb:nb(),zadli:h('input',{type:'checkbox',checked:!!(r.z&&r.z.adli),'aria-label':'Ardışık süre için ara verme uzatması'})};
+      f.birim.value=r.birim;f.zb.value=(r.z&&r.z.birim)||'gun';
+      const sync=()=>{r.ad=xclip(f.ad.value,120);r.dayanak=xclip(f.dayanak.value,160);r.olay=xclip(f.olay.value,80);r.n=Math.max(1,Math.floor(+f.n.value)||1);r.birim=f.birim.value;r.adli=f.adli.checked;r.not=xclip(f.not.value,300);
+        if(f.zOn.checked)r.z={n:Math.max(1,Math.floor(+f.zn.value)||1),birim:f.zb.value,ad:xclip(f.zad.value,120),adli:f.zadli.checked};else delete r.z;touch()};
+      Object.values(f).forEach(i=>i.addEventListener('change',sync));
+      kl.append(h('details',{style:'padding:10px 0;border-top:1px solid var(--line)'},h('summary',{style:'cursor:pointer;font-weight:700',text:(r.ad||'(adsız)')+' · '+r.n+' '+TS_B[r.birim]+(r.z?' + '+r.z.n+' '+TS_B[r.z.birim]:'')}),
+        h('div',{style:'display:grid;gap:8px;margin-top:10px'},fl('Ad',f.ad),fl('Dayanak (kanun ve madde)',f.dayanak),fl('Başlangıç olayı (kullanıcıya sorulan tarih)',f.olay),
+          h('div',{class:'row'},fl('Süre',f.n),fl('Birim',f.birim)),h('label',{class:'row',style:'gap:8px'},f.adli,h('span',{text:'Ara verme dönemi uzatması uygulansın'})),fl('Not',f.not),
+          h('label',{class:'row',style:'gap:8px'},f.zOn,h('span',{text:'Ardışık (ikinci) süre var'})),fl('Ardışık sürenin adı',f.zad),h('div',{class:'row'},fl('Ardışık süre',f.zn),fl('Birim',f.zb)),h('label',{class:'row',style:'gap:8px'},f.zadli,h('span',{text:'Ardışık süre için ara verme uzatması uygulansın'})),
+          h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Süre türünü sil',onclick:async()=>{if(!(await ask('Süre türünü sil','“'+(r.ad||'Adsız')+'” silinsin mi?','Sil',true)))return;ts.kurallar=ts.kurallar.filter(z=>z.id!==r.id);touch();drawK()}})))))})}
+  drawK();return root};
+})();
+
 VIEWS.vtab=()=>fbGate('Tablo arşivi (eski)','Veri Tablosu aracı sitede artık gizli, yeni tablo gelmez; bu ekran eski kayıtlar içindir. Sitedeki Veri Tablosu sayfasından “Onaya gönder” ile gelen tablolar burada bekler. İncele, gerekirse başlığı düzelt, “Onayla ve yayınla” de; tablo Veri Tablosu sayfasında herkese görünür ve yoruma açılır. Yayınlama ve kaldırma anında sitede geçerli olur, “Yayınla” gerekmez.',root=>{
   const st={rows:[],pub:{},cm:{},sel:null,s:'',q:''};
   const q=h('input',{type:'search',placeholder:'Başlık, hazırlayan ya da kaynakta ara','aria-label':'Ara'});
@@ -3931,7 +4062,7 @@ render=function(){_render1();if(!_vtPoll&&FB.sess()){_vtPoll=true;pollVt();setIn
 (()=>{
 const KS_TARGETS=[
  ['Ana sayfalar',[['#/','Ana sayfa'],['#/merkez','Simülasyon Merkezi'],['#/meslekler','Meslekler'],['#/ansiklopedi','İktisadi Ansiklopedi'],['#/piyasa','Veri ve Pariteler'],['#/yayin','Gazete ve Dergi'],['#/etkinlik','Etkinlikler'],['#/katil','Katıl']]],
- ['Alt sayfalar',[['#/mulakat','Mülakat'],['#/kadrolar','Kariyer Kadroları'],['#/meslek','Meslek Tanıtımı'],['#/quiz','Terim Quiz'],['#/sozluk','Ekonomi Sözlüğü'],['#/anatomi','Kavramın Anatomisi'],['#/efsane','Şehir Efsaneleri'],['#/kisiler','İktisat Düşünürleri'],['#/kitaplik','Kitaplık'],['#/pariteler','Pariteler'],['#/veri','İktisat Grafikleri'],['#/hesap','Hesaplayıcılar'],['#/kaynak','Kaynaklar'],['#/gazete','Diyalog Gazetesi'],['#/dergi','İktisadi Kalkınma Dergisi'],['#/makale','Makale Yazımı'],['#/arsiv','Arşiv'],['#/fikir','Fikir Muharebesi'],['#/yatay','Yatay Bakış'],['#/yarisma','Bilgi Yarışması']]],
+ ['Alt sayfalar',[['#/mulakat','Mülakat'],['#/kadrolar','Kariyer Kadroları'],['#/meslek','Meslek Tanıtımı'],['#/quiz','Terim Quiz'],['#/sozluk','Ekonomi Sözlüğü'],['#/anatomi','Kavramın Anatomisi'],['#/efsane','Şehir Efsaneleri'],['#/kisiler','İktisat Düşünürleri'],['#/kitaplik','Kitaplık'],['#/pariteler','Pariteler'],['#/veri','İktisat Grafikleri'],['#/hesap','Hesaplayıcılar'],['#/kaynak','Kaynaklar'],['#/mezun','Mezun Röportajları'],['#/projeler','Proje ve Araştırma Grupları'],['#/gazete','Diyalog Gazetesi'],['#/dergi','İktisadi Kalkınma Dergisi'],['#/makale','Makale Yazımı'],['#/arsiv','Arşiv'],['#/fikir','Fikir Muharebesi'],['#/yatay','Yatay Bakış'],['#/yarisma','Bilgi Yarışması']]],
  ['Simülasyonlar',[['#/vaka','Vaka Analizi'],['#/ppk','Başkan Simülasyonu'],['#/borsa','Borsa Simülasyonu'],['#/bakan','Bakanlık Simülasyonu'],['#/girisim','Girişimci'],['#/kur','Dış Ticaret'],['#/burokrat','Kamu Bürokratı'],['#/muzakere','Müzakere Masası'],['#/ihale','Kamu İhalesi'],['#/hakimlik','Hâkimlik Simülasyonu'],['#/valilik','Kaymakamlık ve Valilik'],['#/smmm','Mali Müşavirlik']]],
  ['Ayrı sayfalar',[['eko-plus/','Eko-Plus'],['eko-plus/#/forum','Soru-Cevap (Eko-Plus)'],['eko-plus/#/kavram','Günün Kavramı (Eko-Plus)'],['eko-plus/#/ilanlar','Staj ve Burs Panosu (Eko-Plus)'],['eko-plus/#/cv','CV ve Niyet Mektubu (Eko-Plus)'],['eko-plus/#/tahmin','Haftalık Tahmin (Eko-Plus)'],['eko-plus/#/profil','Üye Profili (Eko-Plus)'],['a-grubu/','A Grubu Makam Simülasyonu'],['mevzuat/','Mevzuat']]]
 ];
