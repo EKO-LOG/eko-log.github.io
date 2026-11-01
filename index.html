@@ -4429,12 +4429,14 @@ async function getAsset(code,range){
 function netAsset(code,range,key,c){return INF[key]||(INF[key]=doAsset(code,range,key,c).finally(()=>{delete INF[key]}))}
 async function doAsset(code,range,key,c){
  const a=ASSETS[code],days=RG.find(r=>r[0]===range)[2],wk=days>=1000;
- const end=Date.now(),start=end-days*864e5;let last;
+ const end=Date.now(),start=end-days*864e5;let last,LS=null;
+ /* yerel veri dosyası yalnızca güncelse (son 2 gün) kullanılır; eskiyse önce canlı kaynaklar denenir, onlar da olmazsa eski veri gösterilir */
  try{const L=await local();const ser=L&&L.series&&L.series[code];if(Array.isArray(ser)&&ser.length>1){const d0=iso(new Date(start)),sl=ser.filter(p=>p[0]>=d0&&p[1]>0);
-  if(sl.length>1){const s2=sl.map(p=>[p[0],p[1]*(a.k||1)]);if(Date.now()-Date.parse(L.updated||0)>4*864e5)stale=true;MEM[key]=s2;lsSet(key,s2);return s2}}}catch(e){}
+  if(sl.length>1){const s2=sl.map(p=>[p[0],p[1]*(a.k||1)]);if(Date.now()-Date.parse(L.updated||0)<=2*864e5){MEM[key]=s2;lsSet(key,s2);return s2}LS=s2}}}catch(e){}
  /* tüm kaynaklar aynı anda denenir, ilk başarılı olan kazanır */
  const fs=[a.b&&(()=>binance(a.b,start,end,wk)),EIAMAP[code]&&(()=>eiaF(code,start,end)),a.y&&(()=>yahoo(a.y,start,end,wk)),FZ[code]&&(()=>fawaz(code,days))].filter(Boolean);
  try{const s=await first(fs.map(f=>f().then(x=>x.map(p=>[p[0],p[1]*(a.k||1)]))));MEM[key]=s;lsSet(key,s);return s}catch(e){last=e}
+ if(LS){MEM[key]=LS;stale=true;return LS}
  if(c){MEM[key]=c.d;stale=true;return c.d}
  const er=new Error('x');er.why=why(last);throw er}
 const cv=(s,F)=>{let j=0,y=null;const o=[];for(const[d,v]of s){while(j<F.length&&F[j][0]<=d)y=F[j++][1];if(y>0)o.push([d,v*y])}return o};
@@ -4444,7 +4446,7 @@ async function getAll(range,pairs,onP){
  let GT=null;
  if(assets.some(c=>ASSETS[c].d)){try{const L=await local(),g=L&&L.series&&L.series.GRAMTL;
   if(Array.isArray(g)&&g.length>1){const d0=iso(new Date(Date.now()-RG.find(r=>r[0]===range)[2]*864e5)),sl=g.filter(p=>p[0]>=d0&&p[1]>0);
-   if(sl.length>1){GT=sl;fx.add('TRY');if(Date.now()-Date.parse(L.updated||0)>4*864e5)stale=true}}}catch(e){}}
+   if(sl.length>1&&Date.now()-Date.parse(L.updated||0)<=2*864e5){GT=sl;fx.add('TRY')}}}catch(e){}}
  const need=new Set(assets);if(!GT)assets.forEach(c=>{const d=ASSETS[c].d;if(d)need.add(d)});
  need.forEach(c=>{const q=ASSETS[c].q;if(q&&q!=='USD')fx.add(q)});
  const V={},err={};let tm=null;
