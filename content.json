@@ -1887,6 +1887,8 @@
     "x-v-gorev": true,
     "x-v-ders": true,
     "x-v-port": true,
+    "a-grubu": true,
+    "mevzuat": true,
     "x-bildirim": true
   },
   "fm": {
@@ -1933,5 +1935,139 @@
     "cagda": true,
     "dquiz": true,
     "dkart": true
+  },
+  "ks": {
+    "on": true,
+    "title": "Eko-Log’u keşfet",
+    "lead": "Topluluğumuzun ne yaptığını, sitede neler bulabileceğini ve nereden başlayabileceğini tek sayfada gör.",
+    "cardsTitle": "Sitede neler var?",
+    "cardsLead": "Bir kutuya dokun, ilgili sayfaya geç.",
+    "secs": [
+      {
+        "id": "s1",
+        "h": "Eko-Log nedir?",
+        "p": "Eko-Log, İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu. Ekonomiyi ezberleyerek değil; konuşarak, tartışarak ve deneyerek öğrenmek isteyen öğrencilerin buluştuğu bir topluluğuz. Vaka çözüyor, kurul kuruyor, makale yazıyor ve Diyalog Gazetesi’ni çıkarıyoruz."
+      },
+      {
+        "id": "s2",
+        "h": "Bu sitede neler yapabilirsin?",
+        "p": "Merkez bankası kurulunda, borsada ya da bakanlıkta karar vermeyi simülasyonlarla deneyebilir, mesleklere ve mülakatlara hazırlanabilir, ekonomi sözlüğünde terim arayabilir, güncel pariteleri ve grafikleri takip edebilirsin."
+      },
+      {
+        "id": "s3",
+        "h": "Kimler katılabilir?",
+        "p": "Hangi bölümden olursan ol, merak etmen yeterli. Duyuruları ve etkinlikleri WhatsApp grubumuzdan paylaşıyoruz. Aramıza katılmak için Katıl sayfasına bakabilirsin."
+      }
+    ],
+    "cards": [
+      {
+        "id": "c1",
+        "on": true,
+        "k": "12 simülasyon",
+        "t": "Simülasyon Merkezi",
+        "d": "Vaka, Başkan, Borsa, Bakanlık, Girişimci, Dış Ticaret, Müzakere, Kamu İhalesi, Hâkimlik, Valilik ve Mali Müşavirlik simülasyonlarını dene.",
+        "b": "Simülasyonlara git",
+        "h": "#/merkez",
+        "c": 0
+      },
+      {
+        "id": "c2",
+        "on": true,
+        "k": "Kariyer ve hazırlık",
+        "t": "Meslekler",
+        "d": "Meslek tanıtımları, kariyer kadroları, sınav takvimi ve mülakat prova modu.",
+        "b": "Mesleklere bak",
+        "h": "#/meslekler",
+        "c": 1
+      },
+      {
+        "id": "c3",
+        "on": true,
+        "k": "Terim ve kavram",
+        "t": "İktisadi Ansiklopedi",
+        "d": "Ekonomi sözlüğü, kavramın anatomisi, şehir efsaneleri ve iktisat düşünürleri.",
+        "b": "Ansiklopediyi aç",
+        "h": "#/ansiklopedi",
+        "c": 2
+      },
+      {
+        "id": "c4",
+        "on": true,
+        "k": "Piyasa ve veri",
+        "t": "Veri ve Pariteler",
+        "d": "Pariteler, iktisat grafikleri, hesaplayıcılar, iktisat laboratuvarı ve kaynaklar.",
+        "b": "Verilere git",
+        "h": "#/piyasa",
+        "c": 3
+      },
+      {
+        "id": "c5",
+        "on": true,
+        "k": "Yayın",
+        "t": "Gazete ve Dergi",
+        "d": "Diyalog Gazetesi, İktisadi Kalkınma Dergisi, makale yazımı ve arşiv.",
+        "b": "Yayınları oku",
+        "h": "#/yayin",
+        "c": 4
+      },
+      {
+        "id": "c6",
+        "on": true,
+        "k": "Takvim",
+        "t": "Etkinlikler",
+        "d": "Söyleşiler, Para Politikası Kurulu oturumu, Fikir Muharebesi, atölyeler ve paneller.",
+        "b": "Etkinliklere bak",
+        "h": "#/etkinlik",
+        "c": 5
+      },
+      {
+        "id": "c7",
+        "on": true,
+        "k": "Soru çöz, puan topla",
+        "t": "Bilgi Yarışması",
+        "d": "Bilgini sına, puan topla ve sıralamada yerini gör.",
+        "b": "Yarışmaya katıl",
+        "h": "#/yarisma",
+        "c": 6
+      },
+      {
+        "id": "c8",
+        "on": true,
+        "k": "Üyelere özel",
+        "t": "Eko-Plus",
+        "d": "Laboratuvar, simülasyonlar, mevzuat, öğrenme, kariyer ve topluluk araçları tek yerde.",
+        "b": "Eko-Plus’a git",
+        "h": "#/ekstra",
+        "c": 7
+      },
+      {
+        "id": "c9",
+        "on": true,
+        "k": "Topluluk",
+        "t": "Soru-Cevap",
+        "d": "Bir şey mi takıldı? Sor, bilen yanıtlasın.",
+        "b": "Soru sor",
+        "h": "#/forum",
+        "c": 8
+      },
+      {
+        "id": "c10",
+        "on": true,
+        "k": "Topluluk",
+        "t": "Katıl",
+        "d": "WhatsApp grubuna katıl, sık sorulanlara bak, bizimle iletişime geç.",
+        "b": "Aramıza katıl",
+        "h": "#/katil",
+        "c": 9
+      }
+    ],
+    "cta": {
+      "h": "Sıra sende",
+      "p": "Bir simülasyonla başla, bir terim ara ya da doğrudan topluluğa katıl.",
+      "b1t": "Aramıza katıl",
+      "b1h": "#/katil",
+      "b2t": "Ana sayfaya dön",
+      "b2h": "#/"
+    }
   }
 }
