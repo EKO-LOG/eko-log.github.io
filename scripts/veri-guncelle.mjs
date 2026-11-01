@@ -6,20 +6,11 @@ const KEY = (process.env.EVDS_KEY || '').trim(); // secret'a yapıştırırken k
 if (!KEY) { console.error('EVDS_KEY tanımlı değil: GitHub > Settings > Secrets and variables > Actions'); process.exit(1); }
 
 const BASE = 'https://evds3.tcmb.gov.tr/igmevdsms-dis/';
-
-// id: admin'deki "json:veri.json#id" ile eşleşir.
-// formul: 0 = düzey, 3 = yıllık yüzde değişim
-// seri kodu SERI_ ile başlayan satır atlanır; "ara" varsa log'a aday seriler yazılır (otomatik seçilmez).
-const SERILER = [
-  { id: 'politika_faizi', seri: 'SERI_KODUNU_YAZ', formul: 0, kaynak: 'TCMB', ara: /politika faizi|(bir|1) hafta vadeli repo/ },
-  { id: 'yillik_tufe',    seri: 'TP.FG.J0',        formul: 3, kaynak: 'TCMB EVDS',
-    ara: /tüfe|tüketici fiyat/, grup: /tüfe|tüketici fiyat|enflasyon/, haric: /[iı]mf|oecd|eurostat|dünya|ülke|uluslararası/ }, // veri bayatsa log'a aday seriler yazılır
-];
-
 const gg = (d) => `${String(d.getDate()).padStart(2,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${d.getFullYear()}`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const tr = (s) => String(s || '').toLocaleLowerCase('tr-TR');
 const bitis = new Date(), baslangic = new Date(bitis.getTime() - 400 * 864e5);
+const BAYAT_GUN = 120; // son veri bundan eskiyse seri güncel sayılmaz
 
 class HataKod extends Error { constructor(msg, kod) { super(msg); this.kod = kod; } }
 
@@ -41,24 +32,6 @@ async function evds(yol, tries = 3) {
   throw err;
 }
 
-// Seri kodu bilinmeyen/bayat satırlar için: EVDS'in seri listesinde aday arar, yalnızca log'a yazar.
-// grupRe: aranacak veri grupları, haricRe: dışlanacak gruplar (ör. IMF'nin yabancı ülke serileri)
-async function adaylar(re, grupRe = /faiz|repo|para politikası/, haricRe = null) {
-  let say = 0;
-  try {
-    const gruplar = (await evds('datagroups/mode=0&type=json'))
-      .filter((g) => grupRe.test(tr(g.DATAGROUP_NAME)) && !(haricRe && haricRe.test(tr(g.DATAGROUP_NAME))))
-      .slice(0, 15);
-    console.log('  taranan gruplar:', gruplar.map((g) => `${g.DATAGROUP_CODE} (${g.DATAGROUP_NAME})`).join(' ; '));
-    for (const g of gruplar) {
-      for (const s of await evds(`serieList/type=json&code=${g.DATAGROUP_CODE}`)) {
-        if (say < 80 && re.test(tr(s.SERIE_NAME))) { say++; console.log(`  aday: ${s.SERIE_CODE} | ${s.SERIE_NAME} | ${g.DATAGROUP_NAME}`); }
-      }
-      await sleep(300);
-    }
-  } catch (e) { console.log('  aday araması yapılamadı:', e.message); }
-}
-
 // EVDS tarihini ("2026-9" ya da "30-10-2026") Date'e çevirir; tanınmazsa null.
 function tarihDate(t) {
   const a = String(t).match(/^(\d{4})-(\d{1,2})$/);
@@ -66,44 +39,83 @@ function tarihDate(t) {
   const b = String(t).match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/);
   return b ? new Date(+b[3], +b[2] - 1, +b[1]) : null;
 }
-const BAYAT_GUN = 120; // son veri bundan eskiyse seri güncel sayılmaz
+const taze = (t) => { const d = tarihDate(t); return !d || (bitis - d) / 864e5 <= BAYAT_GUN; };
+
+// Serinin dolu kayıtlarını ve sonuncusunu döndürür. formul: 0 = düzey, 3 = yıllık % değişim
+async function seriOku(kod, formul) {
+  const j = await evds(`series=${kod}&startDate=${gg(baslangic)}&endDate=${gg(bitis)}&type=json&aggregationTypes=last&formulas=${formul}`);
+  const items = j.items || [];
+  const kol = Object.keys(items[0] || {}).find((k) => k !== 'Tarih' && k !== 'UNIXTIME');
+  const dolu = items.filter((x) => kol && x[kol] != null && x[kol] !== '' && !isNaN(Number(x[kol])));
+  if (!dolu.length) throw new Error('veri yok');
+  return { dolu, kol, son: dolu[dolu.length - 1] };
+}
+// Eski TÜFE kodu bayatlayınca güncel seriyi EVDS'te kendisi bulur.
+// TÜİK baz yılını değiştirirken oranların değişmediğini açıkladığı için, eski serinin son değeri
+// doğrulama ölçüsüdür: yeni seri aynı ayda aynı yıllık değişimi vermeli, yoksa seçilmez.
+async function tufeBul(ankaTarih, ankaDeger) {
+  const sec = (strict) => (g) => {
+    const a = tr(g.DATAGROUP_NAME);
+    return /tüketici fiyat|tüfe/.test(a) && (!strict || /2025/.test(a)) && !/mevsim|arındırılmış|[iı]mf|oecd|eurostat|ülke|sabit vergi/.test(a);
+  };
+  const tum = await evds('datagroups/mode=0&type=json');
+  let gruplar = tum.filter(sec(true));
+  if (!gruplar.length) gruplar = tum.filter(sec(false));
+  console.log('  TÜFE grupları:', gruplar.map((g) => `${g.DATAGROUP_CODE} (${g.DATAGROUP_NAME})`).join(' ; ') || '(yok)');
+  const adaylar = [];
+  for (const g of gruplar.slice(0, 6)) {
+    for (const s of await evds(`serieList/type=json&code=${g.DATAGROUP_CODE}`)) {
+      const a = tr(s.SERIE_NAME);
+      if (/mevsim|arındırılmış|sabit vergi|hariç|çekirdek|ağırlık/.test(a)) continue;
+      adaylar.push({ kod: s.SERIE_CODE, ad: s.SERIE_NAME, puan: /genel/.test(a) ? 0 : 1 });
+    }
+    await sleep(300);
+  }
+  adaylar.sort((x, y) => x.puan - y.puan);
+  console.log(`  ${adaylar.length} aday seri var, ilk 40'ı denenecek (ölçü: ${ankaTarih} ayında ${ankaDeger})`);
+  for (const a of adaylar.slice(0, 40)) {
+    for (const formul of [3, 0]) {
+      try {
+        const o = await seriOku(a.kod, formul);
+        const x = o.dolu.find((r) => r.Tarih === ankaTarih);
+        if (x && Math.abs(Number(x[o.kol]) - ankaDeger) < 0.06 && taze(o.son.Tarih)) {
+          console.log(`  BULUNDU: ${a.kod} | ${a.ad} | formül ${formul}`);
+          return o;
+        }
+      } catch {}
+      await sleep(200);
+    }
+  }
+  return null;
+}
 
 let out = {};
 try { out = JSON.parse(fs.readFileSync('veri.json', 'utf8')); } catch {}
+let tamam = 0, yetki = false;
+const uyari = [];
+const yaz = (id, o, kaynak) => {
+  out[id] = { deger: '%' + Number(o.son[o.kol]).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), tarih: o.son.Tarih, kaynak };
+  tamam++;
+  console.log('tamam:', id, out[id].deger, o.son.Tarih);
+};
 
-let tamam = 0, denenen = 0, yetki = false;
-for (const s of SERILER) {
-  if (s.seri.startsWith('SERI_')) {
-    console.log('atlandı (kod yok):', s.id);
-    if (s.ara) { console.log('  EVDS’te bulunan aday seriler (doğru olanın kodunu SERILER içine yaz):'); await adaylar(s.ara); }
-    continue;
+try { // Yıllık TÜFE
+  const eski = await seriOku('TP.FG.J0', 3);
+  console.log('  TP.FG.J0 son kayıtlar:', eski.dolu.slice(-3).map((x) => `${x.Tarih}=${x[eski.kol]}`).join(' | '));
+  if (taze(eski.son.Tarih)) yaz('yillik_tufe', eski, 'TCMB EVDS');
+  else {
+    console.log(`TP.FG.J0 güncel değil (son kayıt ${eski.son.Tarih}), güncel seri aranıyor...`);
+    const yeni = await tufeBul(eski.son.Tarih, Number(eski.son[eski.kol]));
+    if (yeni) yaz('yillik_tufe', yeni, 'TCMB EVDS');
+    else uyari.push('TÜFE için güncel seri bulunamadı, veri.json eski kaldı');
   }
-  denenen++;
-  try {
-    const j = await evds(`series=${s.seri}&startDate=${gg(baslangic)}&endDate=${gg(bitis)}&type=json&aggregationTypes=last&formulas=${s.formul}`);
-    const items = j.items || [];
-    const kol = Object.keys(items[0] || {}).find((k) => k !== 'Tarih' && k !== 'UNIXTIME');
-    const son = [...items].reverse().find((x) => kol && x[kol] != null && x[kol] !== '');
-    if (!son) throw new Error('veri yok');
-    console.log('  son kayıtlar:', items.slice(-3).map((x) => `${x.Tarih}=${x[kol]}`).join(' | '));
-    const d = tarihDate(son.Tarih);
-    if (d && (bitis - d) / 864e5 > BAYAT_GUN) {
-      console.error(`ESKİ VERİ ${s.id}: EVDS'te son kayıt ${son.Tarih}. Seri kodu (${s.seri}) güncel olmayabilir (TÜFE 2025=100 geçişi gibi).`);
-      if (s.ara) { console.log('  EVDS’te bulunan aday seriler (güncel olanın kodunu SERILER içine yaz):'); await adaylar(s.ara, s.grup, s.haric); }
-      continue;
-    }
-    out[s.id] = {
-      deger: '%' + Number(son[kol]).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-      tarih: son.Tarih,
-      kaynak: s.kaynak,
-    };
-    tamam++;
-        console.log('tamam:', s.id, out[s.id].deger);
-  } catch (e) {
-    console.error('HATA', s.id, e.message);
-    if (e.kod === 401 || e.kod === 403) yetki = true;
-  }
+} catch (e) {
+  console.error('HATA yillik_tufe', e.message);
+  if (e.kod === 401 || e.kod === 403) yetki = true; else uyari.push('TÜFE alınamadı: ' + e.message);
+  if (e.kod === 401 || e.kod === 403) yetki = true; else uyari.push('TÜFE alınamadı: ' + e.message);
 }
+
 if (tamam) out.guncelleme = bitis.toISOString(); // hiçbir seri yenilenmediyse tarih de eski kalsın
 fs.writeFileSync('veri.json', JSON.stringify(out, null, 1));
-if (denenen && !tamam) { console.error(yetki ? 'Hiçbir seri alınamadı: anahtar sorunu.' : 'Hiçbir seri alınamadı.'); process.exitCode = 1; }
+uyari.forEach((m) => console.log(`::warning::${m}`));
+if (yetki) { console.error('EVDS anahtarı reddedildi: EVDS_KEY secret’ını yenile.'); process.exitCode = 1; }
