@@ -67,3 +67,10 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
 .btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
 .gate{max-width:560px;margin:36px auto 0;text-align:center;padding:30px;cursor:default}.gate:hover{transform:none}.gate h2{font-size:28px;margin-bottom:10px}.gate p{margin:0 0 18px;color:var(--mut)}.gate .acts{justify-content:center}
 @media (max-width:700px){.hero{padding:120px 0 44px}.hero.sm{padding:112px 0 30px}.gate{margin-top:26px}}
+.brand-txt{display:none}
+@media (max-width:1099px){.brand-txt{display:inline-flex;align-items:center;flex:none;margin:0 4px 0 -4px;padding:6px 4px;text-decoration:none;white-space:nowrap;font:800 clamp(19px,5.2vw,24px)/1 "Bricolage Grotesque","Trebuchet MS",sans-serif;letter-spacing:-.03em;background:linear-gradient(120deg,#c4202e 10%,#f0561f 70%,#ff8a3d);-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform .25s,filter .25s}
+.brand-txt:hover{transform:translateY(-1px);filter:brightness(1.12)}
+.brand-txt::after{content:"";width:6px;height:6px;border-radius:50%;margin:6px 0 0 4px;background:#ff8a3d;flex:none}
+header nav{min-width:0}}
+@media (max-width:1099px) and (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand-txt{background-image:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371)}}
+@media (max-width:1099px){:root[data-theme="dark"] .brand-txt{background-image:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371)}}
