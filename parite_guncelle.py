@@ -45,7 +45,13 @@ def get(url, headers=None, timeout=25):
 
 def tarih(ts): return dt.datetime.fromtimestamp(ts, dt.timezone.utc).strftime("%Y-%m-%d")
 
+YAHOO_OK = 0
+YAHOO_HATA = 0
+
 def yahoo(sym):
+    global YAHOO_OK, YAHOO_HATA
+    if YAHOO_OK == 0 and YAHOO_HATA >= 4:
+        raise RuntimeError("yahoo engelli, atlandi")
     son = None
     for host in ("query1", "query2"):
         for deneme in range(3):
@@ -57,10 +63,13 @@ def yahoo(sym):
                 s = {}
                 for t, c in zip(r["timestamp"], kapanis):
                     if c and c > 0: s[tarih(t)] = round(float(c), 6)
-                if len(s) > 10: return sorted(s.items())
+                if len(s) > 10:
+                    YAHOO_OK += 1
+                    return sorted(s.items())
                 raise RuntimeError("bos")
             except Exception as e:
                 son = e; time.sleep(2 + deneme * 3)
+    YAHOO_HATA += 1
     raise son
 
 def binance(sym):
@@ -98,21 +107,23 @@ def gram_tl():
     if not key: raise RuntimeError("EVDS_KEY yok")
     bas = dt.datetime.fromtimestamp(T0, dt.timezone.utc).strftime("%d-%m-%Y")
     bit = BUGUN.strftime("%d-%m-%Y")
-    # TP.MK.KUL.YTL = TCMB gram altın (TL/gr)
-    for ana in ("https://evds2.tcmb.gov.tr/service/evds/", "https://evds3.tcmb.gov.tr/igmevdsms-dis/"):
+    # TP.MK.KUL.YTL = TCMB gram altın (TL/gr). Önce yeni adres (evds3), olmazsa eskisi.
+    for ana in ("https://evds3.tcmb.gov.tr/igmevdsms-dis/", "https://evds2.tcmb.gov.tr/service/evds/"):
         try:
             u = (f"{ana}series=TP.MK.KUL.YTL&startDate={bas}&endDate={bit}&type=json")
             d = json.loads(get(u, headers={"key": key}))["items"]
             s = []
             for r in d:
-                v = r.get("TP_MK_KUL_YTL")
+                kol = [k for k in r if k not in ("Tarih", "UNIXTIME")]
+                v = r.get(kol[0]) if kol else None
                 if v in (None, ""): continue
                 g, a, y = r["Tarih"].split("-")
                 s.append((f"{y}-{a}-{g}", float(v)))
             if len(s) > 10: return sorted(s)
+            log("  EVDS", ana, "-> az veri:", len(s))
         except Exception as e:
             log("  EVDS", ana, "->", e)
-    raise RuntimeError("EVDS basarisiz")
+    raise RuntimeError("EVDS basarisiz (anahtar/adres kontrol et)")
 
 def mevcut():
     try:
