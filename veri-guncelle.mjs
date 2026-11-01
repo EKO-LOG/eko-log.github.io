@@ -55,7 +55,6 @@ async function adaylar(re) {
 
 let out = {};
 try { out = JSON.parse(fs.readFileSync('veri.json', 'utf8')); } catch {}
-out.guncelleme = bitis.toISOString();
 
 let tamam = 0, denenen = 0, yetki = false;
 for (const s of SERILER) {
@@ -66,22 +65,4 @@ for (const s of SERILER) {
   }
   denenen++;
   try {
-    const j = await evds(`series=${s.seri}&startDate=${gg(baslangic)}&endDate=${gg(bitis)}&type=json&aggregationTypes=last&formulas=${s.formul}`);
-    const items = j.items || [];
-    const kol = Object.keys(items[0] || {}).find((k) => k !== 'Tarih' && k !== 'UNIXTIME');
-    const son = [...items].reverse().find((x) => kol && x[kol] != null && x[kol] !== '');
-    if (!son) throw new Error('veri yok');
-    out[s.id] = {
-      deger: '%' + Number(son[kol]).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-      tarih: son.Tarih,
-      kaynak: s.kaynak,
-    };
-    tamam++;
-    console.log('tamam:', s.id, out[s.id].deger);
-  } catch (e) {
-    console.error('HATA', s.id, e.message);
-    if (e.kod === 401 || e.kod === 403) yetki = true;
-  }
-}
-fs.writeFileSync('veri.json', JSON.stringify(out, null, 1));
-if (denenen && !tamam) { console.error(yetki ? 'Hiçbir seri alınamadı: anahtar sorunu.' : 'Hiçbir seri alınamadı.'); process.exitCode = 1; }
+    const j = await evds(`series=${s.seri}&startDate=${gg(baslangic)}&endDate=${gg(bitis)}&type=json&aggregationTypes=last
