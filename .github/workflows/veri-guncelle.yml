@@ -1,10 +1,8 @@
 name: Parite verisini güncelle
 on:
   schedule:
-    # Sabah 06:00 UTC (09:00 TSİ)
-    - cron: "0 6 * * *"
-    # Akşam 16:00 UTC (19:00 TSİ)
-    - cron: "0 16 * * *"
+    - cron: "0 6 * * *"    # 09:00 TSİ
+    - cron: "0 16 * * *"   # 19:00 TSİ
   workflow_dispatch:
 permissions:
   contents: write
@@ -20,37 +18,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Yahoo için tarayıcı taklidi kur
-        run: pip install curl_cffi || echo "::warning::curl_cffi kurulamadı, standart istek kullanılacak"
+      - name: Tarayıcı taklidi (Yahoo için)
+        run: pip install curl_cffi || echo "::warning::curl_cffi kurulamadı"
       - name: Veriyi üret
         env:
           PYTHONUTF8: "1"
-          PARITE_BUTCE_SN: "1200"
           EIA_KEY: ${{ secrets.EIA_KEY }}
           EVDS_KEY: ${{ secrets.EVDS_KEY }}
-        run: |
-          mkdir -p data
-          echo "--- Depodaki dosyalar ---"
-          ls -la
-          f=$(grep -l "parite-veri.json" ./*.py scripts/*.py 2>/dev/null | head -1)
-          if [ -z "$f" ]; then
-            echo "::error::parite-veri.json yazan bir .py dosyası bulunamadı (yukarıdaki listeye bak)"
-            exit 1
-          fi
-          echo "Çalıştırılıyor: $f"
-          python "$f"
+        run: python scripts/parite_guncelle.py
       - name: Değişiklik varsa kaydet
-        run: |
-          git config user.name "parite-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/parite-veri.json
-          if git diff --cached --quiet; then
-            echo "Değişiklik yok"
-            exit 0
-          fi
-          git commit -m "Parite verisi güncellendi"
-          for i in 1 2 3; do
-            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
-            sleep 5
-          done
-          exit 1
+        run: | git config user.name "parite-bot" git config user.email "actions@users.noreply.github.com" git add data/parite-veri.json if git diff --cached --quiet; then echo "Değişiklik yok"; exit 0; fi git commit -m "Parite verisi güncellendi" for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0 sleep 5 done exit 1
