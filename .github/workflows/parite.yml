@@ -1,0 +1,16 @@
+name: Parite verisi
+on:
+  schedule: [{cron: '30 6,15,19 * * 1-5'}]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  guncelle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/parite_guncelle.py
+      - run: |
+          git config user.name "parite-bot"; git config user.email "bot@users.noreply.github.com"
+          git add data/parite-veri.json
+          git diff --cached --quiet || (git commit -m "Parite verisi güncellendi" && git push)
