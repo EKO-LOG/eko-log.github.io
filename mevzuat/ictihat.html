@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İçtihatlar · Eko-Log</title>
+<meta name="description" content="Kanun maddelerine bağlı yargı kararları ve içtihatlar.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" href="../favicon.png">
+<link rel="stylesheet" href="mevzuat.css?v=3">
+<style>
+header nav{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}header nav::-webkit-scrollbar{display:none}
+header nav a{white-space:nowrap}
+.ic-tools{display:grid;gap:10px;margin:8px 0 6px}
+.ic-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:600px){.ic-row{grid-template-columns:1fr}}
+.ic-tools select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--surf);border:1.5px solid var(--line);border-radius:999px;padding:12px 18px}
+.ic-tools select:focus{outline:0;border-color:var(--g2);box-shadow:0 0 0 4px rgba(255,122,69,.2)}
+.ic-meta{color:var(--mut);font-size:14px;margin:0 0 .7em}
+.ic-tag{display:inline-block;font:600 12px "Instrument Sans",sans-serif;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin:0 6px 8px 0}
+.ic-link{font-weight:600;color:var(--red);text-decoration:none}.ic-link:hover{text-decoration:underline}
+</style>
+</head><body>
+<header><div class="bar">
+<a class="brand" href="../#/"><img src="../favicon.png" alt="Eko-Log logosu"><span>Eko-Log</span></a>
+<nav aria-label="Ana menü"><a href="../#/merkez">Simülasyon Merkezi</a><a href="../#/meslekler">Meslekler</a><a href="../#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../#/piyasa">Veri ve Pariteler</a><a href="../#/yayin">Gazete ve Dergi</a><a href="../#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="./" class="on">Mevzuat</a><a href="../#/katil">Katıl</a></nav>
+</div></header>
+<main id="app"></main>
+<footer><div class="wrap"><span>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span>Üyelere özel · Kararlar resmî kaynaklardan derlenmiştir; kesin metin için kaynağa bakınız.</span></div></footer>
+<noscript><p style="padding:120px 22px">Bu sayfa JavaScript gerektirir.</p></noscript>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),app=$("#app");
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const hero=(inner,sm)=>`<div class="aurora hero${sm?" sm":""}"><i></i><i></i><i></i><div class="wrap">${inner}</div></div>`;
+
+/* ---- Üye kapısı: mevzuat sayfasındaki ile aynı kontrol (eko_uye oturumu + Firebase onay durumu) ---- */
+const DBU="https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app",KEY="AIzaSyDNwfakrjOuMx0YlonGfOBvk1_hAWiUyk0";
+const rdS=()=>{try{return JSON.parse(localStorage.getItem("eko_uye")||"null")}catch(e){return null}};
+async function tok(S){if(S.t&&Date.now()<S.exp)return S.t;const r=await fetch("https://securetoken.googleapis.com/v1/token?key="+encodeURIComponent(KEY),{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(S.r||"")});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error("auth");S.t=j.id_token;S.r=j.refresh_token||S.r;S.exp=Date.now()+(Number(j.expires_in||3600)-90)*1e3;try{localStorage.setItem("eko_uye",JSON.stringify(S))}catch(e){}return S.t}
+async function dbg(p,t,q){const r=await fetch(DBU+"/"+p+".json?"+(q?q+"&":"")+"auth="+encodeURIComponent(t),{cache:"no-store"});if(r.status===401||r.status===403)throw new Error("perm");if(!r.ok)throw new Error("net");return r.json()}
+async function verify(){const S=rdS();if(!S||!S.uid||!S.r)return"none";
+ try{const c=JSON.parse(sessionStorage.getItem("mz_ok")||"null");if(c&&c.u===S.uid&&Date.now()-c.t<18e5)return"ok"}catch(e){}
+ let t;try{t=await tok(S)}catch(e){return e.message==="auth"?"none":"net"}
+ const ok=()=>{try{sessionStorage.setItem("mz_ok",JSON.stringify({u:S.uid,t:Date.now()}))}catch(e){}return"ok"};
+ try{
+  try{await dbg("uyeler",t,"shallow=true");return ok()}catch(e){if(e.message!=="perm")throw e}
+  const hk=String(S.e||"").trim().toLowerCase().replace(/\./g,",");
+  try{if(await dbg("hoca/"+hk,t))return ok()}catch(e){if(e.message!=="perm")throw e}
+  const lk=await(await fetch("https://identitytoolkit.googleapis.com/v1/accounts:lookup?key="+encodeURIComponent(KEY),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idToken:t})})).json();
+  const ver=!!(lk.users&&lk.users[0]&&lk.users[0].emailVerified),rec=await dbg("uyeler/"+S.uid,t);
+  if(rec&&rec.s==="onay"&&ver)return ok();
+  if(rec&&rec.s==="red")return"red";
+  return ver?"wait":"verify"
+ }catch(e){return"net"}}
+const MSG={none:["Üye girişi gerekli","İçtihatlar yalnızca onaylı Eko-Log üyelerine açıktır. Mevzuat sayfasından giriş yaptıktan sonra bu sayfaya dön."],wait:["Onay bekleniyor","Üyeliğin henüz yönetici tarafından onaylanmadı."],verify:["E-posta doğrulaması gerekli","Kullanabilmek için e-postana gelen doğrulama bağlantısına tıkla, sonra tekrar kontrol et."],red:["Başvuru onaylanmadı","Sorular için topluluğa yazabilirsin."],net:["Bağlantı sorunu","Üyelik kontrol edilemedi. İnternetini kontrol edip tekrar dene."]};
+function gate(st){const M=MSG[st]||MSG.net;
+ app.innerHTML=hero(`<h1 class="rise">İçtihatlar</h1><p class="rise">Eko-Log üyelerine özel.</p>`)+`<div class="wrap"><div class="card gate"><h2>🔒 ${esc(M[0])}</h2><p>${esc(M[1])}</p><div class="acts"><a class="btn grad" href="./">Mevzuat sayfasında giriş yap</a><button class="btn sm" id="gr">Tekrar kontrol et</button></div></div></div>`;
+ $("#gr").onclick=start}
+
+/* ---- İçtihat listesi ---- */
+const fmtT=t=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(t||"");return m?`${m[3]}.${m[2]}.${m[1]}`:(t||"")};
+function show(){
+ const D=(window.ICTIHAT||[]).slice(),P=new URLSearchParams(location.search);
+ const st={q:"",k:P.get("kanun")||"",m:"",madde:P.get("madde")||""};
+ const kanunlar=[...new Map(D.map(d=>[d.kanun,d.kanunAdi||d.kanun])).entries()];
+ if(st.k&&!kanunlar.some(([n])=>n===st.k))kanunlar.push([st.k,st.k]);
+ const mahk=[...new Set(D.map(d=>d.mahkeme).filter(Boolean))];
+ const ad=(kanunlar.find(([n])=>n===st.k)||[])[1];
+ const title=st.k?`${ad||st.k}${st.madde?" · m. "+st.madde:""}`:"İçtihat Kararları";
+ document.title=title+" · İçtihatlar · Eko-Log";
+ app.innerHTML=hero(`<span class="pill">İçtihatlar</span><h1 class="rise">${esc(title)}</h1><p class="rise">Kanun maddelerine bağlı yargı kararları. Karar metni için kaynak bağlantısına bakınız.</p><a class="btn line" href="${st.k?"./#/"+encodeURIComponent(st.k):"./"}">‹ ${st.k?"Kanuna dön":"Mevzuat"}</a>`,1)
+ +`<div class="wrap"><div class="sbar"><div class="ic-tools"><input id="q" type="search" placeholder="Ara: özet, daire, esas/karar no…" aria-label="İçtihatlarda ara"><div class="ic-row"><select id="fk" aria-label="Kanun"><option value="">Tüm kanunlar</option>${kanunlar.map(([n,a])=>`<option value="${esc(n)}">${esc(n)} · ${esc(a)}</option>`).join("")}</select><select id="fm" aria-label="Mahkeme"><option value="">Tüm mahkemeler</option>${mahk.map(m=>`<option>${esc(m)}</option>`).join("")}</select></div></div></div><div class="cnt" id="say"></div><div id="liste"></div></div>`;
+ $("#fk").value=st.k;
+ const draw=()=>{
+  const q=st.q.toLocaleLowerCase("tr");
+  let r=D.filter(d=>(!st.k||d.kanun===st.k)&&(!st.m||d.mahkeme===st.m)&&(!st.madde||String(d.madde)===st.madde));
+  if(q)r=r.filter(d=>[d.mahkeme,d.daire,d.esas,d.karar,d.ozet,d.kanunAdi,d.kanun,d.madde].join(" ").toLocaleLowerCase("tr").includes(q));
+  r.sort((a,b)=>String(b.tarih||"").localeCompare(String(a.tarih||"")));
+  $("#say").textContent=r.length+" karar";
+  $("#liste").innerHTML=r.length?r.map(d=>{
+   const kunye=[d.mahkeme,d.daire].filter(Boolean).join(" · "),no=[d.esas&&"E. "+d.esas,d.karar&&"K. "+d.karar,fmtT(d.tarih)].filter(Boolean).join(" · ");
+   return `<details class="case"><summary><span class="no">${esc(d.kanun)}${d.madde?" · m. "+esc(d.madde):""}${d.ornek?" · ÖRNEK KAYIT":""}</span><span class="bs">${esc(kunye)}</span><span class="am">${esc(no)}</span></summary><div class="body">${d.kanunAdi?`<span class="ic-tag">${esc(d.kanunAdi)}</span>`:""}<p>${esc(d.ozet)}</p>${d.link?`<a class="ic-link" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer">Kaynağa git →</a>`:""}</div></details>`}).join(""):'<div class="empty">Bu seçime uygun içtihat kararı bulunamadı.</div>'};
+ $("#q").addEventListener("input",e=>{st.q=e.target.value;draw()});
+ $("#fk").addEventListener("change",e=>{st.k=e.target.value;st.madde="";draw()});
+ $("#fm").addEventListener("change",e=>{st.m=e.target.value;draw()});
+ draw()}
+
+let busy=false;
+async function start(){
+ if(busy)return;busy=true;
+ app.innerHTML=hero(`<h1 class="rise">İçtihatlar</h1><p class="rise">Üyeliğin kontrol ediliyor…</p>`);
+ const s=await verify();busy=false;
+ if(s!=="ok"){gate(s);return}
+ if(window.ICTIHAT){show();return}
+ const sc=document.createElement("script");sc.src="data/ictihat.js?v=1";
+ sc.onload=show;sc.onerror=()=>{window.ICTIHAT=[];show()};document.head.appendChild(sc)}
+window.addEventListener("focus",()=>{if(!window.ICTIHAT&&!busy&&!document.querySelector("#liste"))start()});
+start();
+})();
+</script>
+</body></html>

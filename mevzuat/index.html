@@ -50,4 +50,34 @@ document.addEventListener('DOMContentLoaded',()=>{const a=document.getElementByI
 setTimeout(go,300);setTimeout(go,1200);
 })();
 </script>
+<script id="mz-ictihat">
+/* "İçtihat kararları" düğmeleri: ana sayfaya, her kanunun başlığına ve her maddeye eklenir. app.js'e dokunmaz. */
+(()=>{
+const PAGE="ictihat.html";
+const known=id=>{try{return !!(window.MZ&&MZ.indeks&&MZ.indeks.some(x=>x.HAYIR===id))}catch(e){return false}};
+const route=()=>{const m=/^#\/([^\/?#]+)/.exec(location.hash);try{return m?decodeURIComponent(m[1]):""}catch(e){return""}};
+const mk=(href,txt,cls)=>{const a=document.createElement("a");a.className=cls;a.href=href;a.textContent=txt;a.setAttribute("data-ic","1");return a};
+const go=()=>{try{
+  const app=document.getElementById("app");if(!app)return;
+  const id=route(),hero=app.querySelector(".hero .wrap");
+  const isHome=!!app.querySelector("#hq"),isLaw=!!id&&known(id)&&!!app.querySelector("#C,#l");
+  if(hero&&!hero.querySelector("[data-ic]")){
+    if(isLaw){const back=hero.querySelector("a.btn.line"),b=mk(PAGE+"?kanun="+encodeURIComponent(id),"İçtihat kararları","btn line");b.style.marginLeft="8px";back?back.after(b):hero.appendChild(b)}
+    else if(isHome&&!id){const b=mk(PAGE,"İçtihat kararları","btn line");b.style.marginTop="14px";hero.appendChild(b)}
+  }
+  if(isLaw){
+    const pre="a-"+id+"-";
+    app.querySelectorAll("details.case:not([data-ic])").forEach(d=>{
+      d.setAttribute("data-ic","1");
+      const slug=(d.id||"").indexOf(pre)===0?d.id.slice(pre.length):"";
+      let u=PAGE+"?kanun="+encodeURIComponent(id);if(/^\d+$/.test(slug))u+="&madde="+slug;
+      const host=d.querySelector(".acts")||d.querySelector(".body")||d;
+      host.appendChild(mk(u,"İçtihat kararları","btn sm"));
+    });
+  }
+}catch(e){}};
+document.addEventListener("DOMContentLoaded",()=>{const a=document.getElementById("app");if(a)new MutationObserver(go).observe(a,{childList:true,subtree:true});go()});
+setTimeout(go,300);setTimeout(go,1200);
+})();
+</script>
 </body></html>
