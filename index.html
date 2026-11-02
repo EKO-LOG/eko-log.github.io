@@ -958,7 +958,7 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <div class="wrap content"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px">
 <a class="tile" href="#/parite" style="display:none;--bg1:#1d4ed8;--bg2:#0e9aa7"><span class="go">→</span><small>Hepsi bir arada</small><h3>Tüm Pariteler</h3><p>Döviz, maden, enerji, tarım ve kripto paritelerinin hepsi tek sayfada. Dönemi seç, karşılaştır.</p></a>
 <a class="tile" href="#/parite-doviz" style="--bg1:#1d4ed8;--bg2:#06b6d4"><span class="go">→</span><small>Piyasa</small><h3>Döviz Pariteleri</h3><p>Dolar, avro, sterlin, yen, frank ve diğer para birimleri; TL karşılıkları.</p></a>
-<a class="tile" href="#/parite-maden" style="display:none;--bg1:#b45309;--bg2:#eab308"><span class="go">→</span><small>Piyasa</small><h3>Değerli Madenler</h3><p>Altın, gümüş, platin, paladyum; gram, çeyrek ve yarım altın.</p></a>
+<a class="tile" href="#/parite-maden" style="display:none;--bg1:#b45309;--bg2:#eab308"><span class="go">→</span><small>Piyasa</small><h3>Değerli Madenler</h3><p>Altın, gümüş, platin, paladyum; gram, çeyrek, yarım, tam ve Cumhuriyet altını.</p></a>
 <a class="tile" href="#/parite-enerji" style="display:none;--bg1:#0f172a;--bg2:#c4202e"><span class="go">→</span><small>Piyasa</small><h3>Enerji Pariteleri</h3><p>Brent ve WTI petrol, ABD ve Avrupa doğalgazı, benzin ve ısınma yağı.</p></a>
 <a class="tile" href="#/parite-sanayi" style="display:none;--bg1:#6d3fd8;--bg2:#0e7490"><span class="go">→</span><small>Piyasa</small><h3>Sanayi ve Stratejik Metaller</h3><p>Bakır, alüminyum, nadir toprak elementleri, lityum ve uranyum.</p></a>
 <a class="tile" href="#/parite-tarim" style="display:none;--bg1:#15803d;--bg2:#84cc16"><span class="go">→</span><small>Piyasa</small><h3>Tarım Ürünleri</h3><p>Buğday, mısır, soya, kahve, şeker, pamuk ve kakao.</p></a>
@@ -4409,7 +4409,7 @@ const CATS=[['fx','Döviz'],['metal','Değerli Madenler'],['enerji','Enerji'],['
 const A=(c,n,u,y,o)=>Object.assign({c,n,u,y},o||{});
 const ASSETS={
 XAU:A('metal','Altın','ons','GC=F'),XAG:A('metal','Gümüş','ons','SI=F'),XPT:A('metal','Platin','ons','PL=F'),XPD:A('metal','Paladyum','ons','PA=F'),
-GRAM:A('metal','Gram Altın','','',{d:'XAU',gr:1,g:1/31.1035}),CEYREK:A('metal','Çeyrek Altın','','',{d:'XAU',gr:1.603,g:1.603/31.1035}),YARIM:A('metal','Yarım Altın','','',{d:'XAU',gr:3.206,g:3.206/31.1035}),
+GRAM:A('metal','Gram Altın','','',{d:'XAU',gr:1,g:1/31.1035}),CEYREK:A('metal','Çeyrek Altın','','',{d:'XAU',gr:1.603,g:1.603/31.1035}),YARIM:A('metal','Yarım Altın','','',{d:'XAU',gr:3.206,g:3.206/31.1035}),TAM:A('metal','Tam Altın','','',{d:'XAU',gr:6.412,g:6.412/31.1035}),ATA:A('metal','Cumhuriyet (Ata) Altını','','',{d:'XAU',gr:6.595,g:6.595/31.1035}),
 BIST100:A('borsa','BIST 100 Endeksi','','XU100.IS',{q:'TRY'}),
 BRENT:A('enerji','Brent Petrol','varil','BZ=F'),WTI:A('enerji','WTI Ham Petrol','varil','CL=F'),NG:A('enerji','Doğalgaz (ABD, Henry Hub)','MMBtu','NG=F'),TTF:A('enerji','Doğalgaz (Avrupa, TTF)','MWh','TTF=F',{q:'EUR'}),HO:A('enerji','Isınma Yağı (Mazot)','galon','HO=F'),RB:A('enerji','Benzin','galon','RB=F'),
 XCU:A('sanayi','Bakır','libre','HG=F'),ALU:A('sanayi','Alüminyum','ton','ALI=F'),REMX:A('sanayi','Nadir Toprak Elementleri (REMX ETF)','pay','REMX'),LIT:A('sanayi','Lityum ve Pil Metalleri (LIT ETF)','pay','LIT'),URA:A('sanayi','Uranyum (URA ETF)','pay','URA'),
@@ -4430,6 +4430,10 @@ const lsSet=(k,d)=>{try{localStorage.setItem(k,JSON.stringify({t:Date.now(),d}))
 async function getFiat(range,list){
  const days=RG.find(r=>r[0]===range)[2],end=new Date(),start=new Date(end.getTime()-days*864e5),syms=[...list].sort().join(','),key='eko_pr_'+range+'_'+syms;
  if(MEM[key])return MEM[key];const c=lsGet(key);if(c&&Date.now()-c.t<36e5)return MEM[key]=c.d;
+ /* önce sitenin kendi veri dosyasındaki günlük kurlar (aynı alan adı, iş akışı her gün günceller); olmazsa Frankfurter */
+ try{const L=await local(),FX=L&&L.fx;if(FX&&Date.now()-Date.parse(L.updated||0)<=3*864e5){const d0=iso(start),o={};
+  Object.keys(FX).forEach(d=>{if(d>=d0&&FX[d]){const row={};list.forEach(k=>{const v=FX[d][k];if(v>0)row[k]=v});if(Object.keys(row).length)o[d]=row}});
+  if(Object.keys(o).length>1){MEM[key]=o;lsSet(key,o);return o}}}catch(e){}
  const q=iso(start)+'..'+iso(end)+'?base=USD&symbols='+syms;let last=0;
  for(const u of ['https://api.frankfurter.dev/v1/','https://api.frankfurter.app/']){
   try{const r=await tf(u+q,{},7000);if(!r.ok){last=r.status;continue}const j=await r.json();if(!j||!j.rates||!Object.keys(j.rates).length){last='bos';continue}
@@ -4480,7 +4484,10 @@ async function getAsset(code,range){
  if(MEM[key])return MEM[key];const c=lsGet(key),age=c?Date.now()-c.t:0;
  if(c&&age<36e5)return MEM[key]=c.d;
  /* eski önbellek varsa hemen göster, yenisini arka planda getir */
- if(c&&age<6048e5){MEM[key]=c.d;if(age>864e5)stale=true;netAsset(code,range,key,null).catch(()=>{});return c.d}
+ if(c&&age<6048e5){
+  let taze=false;try{const L=await local();taze=!!(L&&L.series&&Array.isArray(L.series[code])&&Date.now()-Date.parse(L.updated||0)<=2*864e5)}catch(e){}
+  if(taze)return netAsset(code,range,key,c);   /* yerel dosya güncel: eski önbelleği gösterme */
+  MEM[key]=c.d;if(age>864e5)stale=true;netAsset(code,range,key,null).catch(()=>{});return c.d}
  return netAsset(code,range,key,c)}
 function netAsset(code,range,key,c){return INF[key]||(INF[key]=doAsset(code,range,key,c).finally(()=>{delete INF[key]}))}
 async function doAsset(code,range,key,c){
@@ -4538,9 +4545,9 @@ const okP=PE.okP;
 try{mine=(JSON.parse(localStorage.getItem(MK)||'[]')||[]).filter(okP).slice(0,MAXM)}catch(e){}
 const saveMine=()=>{try{localStorage.setItem(MK,JSON.stringify(mine))}catch(e){}};
 const PGS={all:null,doviz:'fx',maden:'metal',enerji:'enerji',sanayi:'sanayi',tarim:'tarim',kripto:'kripto'};
-const PGT={all:['Tüm Pariteler','Döviz, değerli maden, enerji, sanayi metalleri, tarım ürünleri ve kripto paraların seçtiğin döneme ait çizgi grafikleri. Grafiğin üstünde gezinerek günlük değeri gör.'],doviz:['Döviz Pariteleri','Dolar, avro, sterlin ve diğer para birimlerinin seçtiğin döneme ait çizgi grafikleri.'],maden:['Değerli Madenler','Altın, gümüş, platin ve paladyum; gram, çeyrek ve yarım altın. Gram, çeyrek ve yarım altın ons fiyatından hesaplanan teorik (saf altın) değerdir; kuyumcu satış fiyatı işçilik ve makas nedeniyle daha yüksektir.'],enerji:['Enerji Pariteleri','Brent ve WTI petrol, ABD ve Avrupa doğalgazı, benzin ve ısınma yağı fiyatları.'],sanayi:['Sanayi ve Stratejik Metaller','Bakır, alüminyum ile nadir toprak elementleri, lityum ve uranyum (ETF vekilleri).'],tarim:['Tarım Ürünleri','Buğday, mısır, soya, kahve, şeker, pamuk ve kakao fiyatları.'],kripto:['Kripto Paralar','Bitcoin, Ethereum ve diğer kripto paraların dolar ve lira karşılıkları.']};
+const PGT={all:['Tüm Pariteler','Döviz, değerli maden, enerji, sanayi metalleri, tarım ürünleri ve kripto paraların seçtiğin döneme ait çizgi grafikleri. Grafiğin üstünde gezinerek günlük değeri gör.'],doviz:['Döviz Pariteleri','Dolar, avro, sterlin ve diğer para birimlerinin seçtiğin döneme ait çizgi grafikleri.'],maden:['Değerli Madenler','Altın, gümüş, platin ve paladyum; gram, çeyrek, yarım, tam ve Cumhuriyet altını. Gram, çeyrek, yarım, tam ve Cumhuriyet altını ons fiyatından hesaplanan teorik (saf altın) değerdir; kuyumcu satış fiyatı işçilik ve makas nedeniyle daha yüksektir.'],enerji:['Enerji Pariteleri','Brent ve WTI petrol, ABD ve Avrupa doğalgazı, benzin ve ısınma yağı fiyatları.'],sanayi:['Sanayi ve Stratejik Metaller','Bakır, alüminyum ile nadir toprak elementleri, lityum ve uranyum (ETF vekilleri).'],tarim:['Tarım Ürünleri','Buğday, mısır, soya, kahve, şeker, pamuk ve kakao fiyatları.'],kripto:['Kripto Paralar','Bitcoin, Ethereum ve diğer kripto paraların dolar ve lira karşılıkları.']};
 PGS.borsa='borsa';PGT.borsa=['Borsa (BIST 100)','Borsa İstanbul BIST 100 endeksi; puan ve dolar karşılığıyla.'];
-const CATDEF={borsa:['BIST100/TRY','BIST100/USD'],fx:['USD/TRY','EUR/TRY','GBP/TRY','CHF/TRY','JPY/TRY','EUR/USD','GBP/USD','USD/JPY','USD/CHF','EUR/GBP','USD/CNY','USD/CAD'],metal:['XAU/USD','XAU/TRY','GRAM/TRY','CEYREK/TRY','YARIM/TRY','XAU/EUR','XAG/USD','XAG/TRY','XPT/USD','XPD/USD'],enerji:['BRENT/USD','BRENT/TRY','WTI/USD','NG/USD','TTF/USD','HO/USD','RB/USD'],sanayi:['XCU/USD','ALU/USD','REMX/USD','LIT/USD','URA/USD'],tarim:['WHEAT/USD','CORN/USD','SOY/USD','COFFEE/USD','SUGAR/USD','COTTON/USD','COCOA/USD'],kripto:['BTC/USD','BTC/TRY','ETH/USD','ETH/TRY','BNB/USD','SOL/USD','XRP/USD','ADA/USD','DOGE/USD','ETH/BTC']};
+const CATDEF={borsa:['BIST100/TRY','BIST100/USD'],fx:['USD/TRY','EUR/TRY','GBP/TRY','CHF/TRY','JPY/TRY','EUR/USD','GBP/USD','USD/JPY','USD/CHF','EUR/GBP','USD/CNY','USD/CAD'],metal:['XAU/USD','XAU/TRY','GRAM/TRY','CEYREK/TRY','YARIM/TRY','TAM/TRY','ATA/TRY','XAU/EUR','XAG/USD','XAG/TRY','XPT/USD','XPD/USD'],enerji:['BRENT/USD','BRENT/TRY','WTI/USD','NG/USD','TTF/USD','HO/USD','RB/USD'],sanayi:['XCU/USD','ALU/USD','REMX/USD','LIT/USD','URA/USD'],tarim:['WHEAT/USD','CORN/USD','SOY/USD','COFFEE/USD','SUGAR/USD','COTTON/USD','COCOA/USD'],kripto:['BTC/USD','BTC/TRY','ETH/USD','ETH/TRY','BNB/USD','SOL/USD','XRP/USD','ADA/USD','DOGE/USD','ETH/BTC']};
 let curKey='all';const hashKey=()=>{const m=location.hash.match(/^#\/parite-([a-z]+)/);return m&&PGS[m[1]]?m[1]:'all'},pageKey=()=>curKey;
 const on=c=>cfg.cats.includes(c),inCat=(p,c)=>c?PE.catOf(p)===c:on(PE.catOf(p));
 const basePairs=c=>{const L=cfg.pairs.filter(p=>inCat(p,c));(c?CATDEF[c]:PE.CATS.filter(x=>on(x[0])).flatMap(x=>CATDEF[x[0]])).forEach(p=>{if(!L.includes(p))L.push(p)});return L};
