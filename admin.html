@@ -331,13 +331,9 @@ const XP_IDS=XPG.flatMap(g=>g.items.map(i=>i[0]));
 const XP_NAME=Object.fromEntries(XPG.flatMap(g=>g.items.map(i=>[i[0],i[1]])));
 /* Etkinlikler sayfaları: her biri için sitede aç/kapa anahtarı (content.json → pg; Yatay Bakış yb.on ile ortak) */
 const EVG=[
-  {g:'Etkinlikler',items:[['etkinlik','Etkinlik listesi','Etkinlik kartları ve katılım. Kapatırsan kartlar gizlenir; aşağıdaki sayfaların kutuları kendi anahtarlarıyla görünmeye devam eder.'],['yatay','Yatay Bakış','Sayfanın içeriğini “Yatay Bakış” bölümünden düzenlersin. Açık/kapalı durumu burayla ortaktır.'],['projeler','Proje ve Araştırma Grupları','Grup listesi, başvuru ve fikir önerisi formu. Grupları “Proje grupları” bölümünden yönetirsin.']]},
+  {g:'Etkinlikler',items:[['etkinlik','Etkinlik listesi','Etkinlik kartları ve katılım. Kapatırsan kartlar gizlenir; aşağıdaki sayfaların kutuları kendi anahtarlarıyla görünmeye devam eder.'],['yatay','Yatay Bakış','Sayfanın içeriğini “Yatay Bakış” bölümünden düzenlersin. Açık/kapalı durumu burayla ortaktır.'],['konferanslar','Konferanslar','Yapılan konferansların listesi. İçeriği “Konferanslar” bölümünden düzenlersin.']]},
   {g:'Fikir Muharebesi',items:[['fikir','Fikir Muharebesi (ana sayfa)','Haftanın iddiası. Kapatırsan aşağıdaki alt sayfaların hepsi de kapanır.'],['fikir-canli','Canlı muharebe','Gerçek zamanlı muharebe sayfası. Oturumu açıp kapatmak ayrıdır: “Canlı muharebe” bölümünden yapılır.'],['fikir-etkinlik','Yapılan etkinlikler','Geçmiş muharebe etkinlikleri, fotoğrafları ve özetleri.'],['fikir-turler','Münazara çeşitleri','Karl Popper, Lincoln–Douglas, Kamu Forumu, Parlamenter ve diğer formatların tanıtımı.']]}
 ];
-const TS_SEED={ara:{bas:'07-20',bit:'08-31',uzama:7},mali:{bas:'07-01',bit:'07-20',uzama:7},tatil:[],kurallar:[{"id": "s1", "kat": "İdari yargı: dava ve kanun yolları", "ad": "İdari dava açma süresi (idare mahkemesi, Danıştay)", "dayanak": "2577 sayılı İYUK m. 7/1, m. 8", "olay": "Tebliğ, yayın veya ilan tarihi", "n": 60, "birim": "gun", "adli": true, "not": "Özel kanunda ayrı süre varsa o süre uygulanır."}, {"id": "s2", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Vergi davası açma süresi (vergi mahkemesi)", "dayanak": "2577 sayılı İYUK m. 7/1, m. 8; 5604 sayılı Mali Tatil Kanunu m. 1", "olay": "Tebliğ tarihi", "n": 30, "birim": "gun", "adli": true, "not": "Vergiyle ilgili işlemlerde dava açma süresi mali tatilde (1–20 Temmuz) işlemez; hesap bunu uygular. Vergi uyuşmazlıklarında başlangıç, ilgili vergi kanunundaki kurala göre değişebilir; 5604 sayılı Kanun m. 1'deki istisnaları da kontrol et.", "mali": "dur", "v": 2}, {"id": "s3", "kat": "İdari yargı: dava ve kanun yolları", "ad": "İstinaf başvuru süresi", "dayanak": "2577 sayılı İYUK m. 45, m. 8", "olay": "Kararın tebliğ tarihi", "n": 30, "birim": "gun", "adli": true, "not": "Kesin kararlar için istinaf yolu yoktur."}, {"id": "s4", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Temyiz başvuru süresi (Danıştay)", "dayanak": "2577 sayılı İYUK m. 46, m. 8", "olay": "Kararın tebliğ tarihi", "n": 30, "birim": "gun", "adli": true, "not": ""}, {"id": "s5", "kat": "İdari yargı: dava ve kanun yolları", "ad": "İdareye başvuru: zımni ret ve ardından dava süresi", "dayanak": "2577 sayılı İYUK m. 10, m. 7, m. 8", "olay": "İdareye başvuru tarihi", "n": 30, "birim": "gun", "adli": false, "not": "30 gün içinde cevap verilmezse istek reddedilmiş sayılır (7331 sayılı Kanunla 60 günden 30 güne indirildi; 14.07.2021 öncesi başvurularda 60 gün uygulanır). Vergi mahkemesi davası için ayrı kuralı kullan. İdare kısmi ya da ara cevap verdiyse süreler değişebilir.", "z": {"n": 60, "birim": "gun", "ad": "Zımni retten sonra dava açma süresi", "adli": true}, "v": 2}, {"id": "s5v", "kat": "İdari yargı: dava ve kanun yolları", "ad": "İdareye başvuru: zımni ret ve ardından vergi davası süresi", "dayanak": "2577 sayılı İYUK m. 10, m. 7, m. 8; 5604 sayılı Kanun m. 1", "olay": "İdareye başvuru tarihi", "n": 30, "birim": "gun", "adli": false, "not": "30 gün içinde cevap verilmezse istek reddedilmiş sayılır; ardından vergi mahkemesinde dava açma süresi 30 gündür ve mali tatilde işlemez.", "z": {"n": 30, "birim": "gun", "ad": "Zımni retten sonra vergi davası açma süresi", "adli": true}, "mali": "dur"}, {"id": "s6", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Kesin olmayan cevap: kesin cevabı bekleme (4 ay) ve dava süresi", "dayanak": "2577 sayılı İYUK m. 10", "olay": "İdareye başvuru tarihi", "n": 4, "birim": "ay", "adli": false, "not": "30 gün içinde verilen cevap kesin değilse ilgili, cevabı ret sayıp dava açabilir veya kesin cevabı bekleyebilir. Bekleme üst sınırı 4 aydır (eskiden 6 ay). Başlangıç ve kapsam için m. 10'u kontrol et.", "z": {"n": 60, "birim": "gun", "ad": "Zımni retten sonra dava açma süresi", "adli": true}, "dogrula": true}, {"id": "s7", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Üst makama başvuru: dava açma süresinin durması (idari dava)", "dayanak": "2577 sayılı İYUK m. 11, m. 7, m. 8", "olay": "İşlemin tebliğ tarihi", "n": 60, "birim": "gun", "adli": true, "not": "Başvuru, işlemeye başlamış dava açma süresini durdurur. 30 gün cevap verilmezse istek reddedilmiş sayılır; ret veya zımni retten sonra süre kaldığı yerden işler. Güvenli tarafta kalmak için başvuru günü geçen süreye sayılır.", "tur": "durma", "bekle": 30, "olay2": "Üst makama (yoksa işlemi yapan makama) başvuru tarihi", "olay3": "Ret cevabının tebliğ tarihi (yoksa boş bırak)"}, {"id": "s7v", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Üst makama başvuru: dava açma süresinin durması (vergi davası)", "dayanak": "2577 sayılı İYUK m. 11, m. 7, m. 8; 5604 sayılı Kanun m. 1", "olay": "İşlemin tebliğ tarihi", "n": 30, "birim": "gun", "adli": true, "not": "Vergi mahkemesinde dava açma süresi 30 gündür. Başvuru süreyi durdurur; ret veya zımni retten sonra kalan süre işler. Başvuru günü geçen süreye sayılır.", "tur": "durma", "bekle": 30, "mali": "dur", "olay2": "Üst makama (yoksa işlemi yapan makama) başvuru tarihi", "olay3": "Ret cevabının tebliğ tarihi (yoksa boş bırak)"}, {"id": "s8", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Tam yargı davası: idareye başvuru süresi (öğrenmeden itibaren 1 yıl)", "dayanak": "2577 sayılı İYUK m. 13/1, m. 8", "olay": "Eylemi yazılı bildirimle veya başka suretle öğrenme tarihi", "n": 1, "birim": "yil", "adli": true, "not": "Her halde eylem tarihinden itibaren 5 yıl geçmeden de başvurulmalıdır; ikisini ayrı hesapla ve erken olanı esas al."}, {"id": "s9", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Tam yargı davası: idareye başvuru süresi (eylemden itibaren en çok 5 yıl)", "dayanak": "2577 sayılı İYUK m. 13/1, m. 8", "olay": "Eylem tarihi", "n": 5, "birim": "yil", "adli": true, "not": "Öğrenme tarihinden itibaren 1 yıllık süreyi de ayrıca hesapla; erken olan geçerlidir."}, {"id": "s10", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Tam yargı davası: idareye başvuru, zımni ret ve dava süresi", "dayanak": "2577 sayılı İYUK m. 13/1, m. 7, m. 8", "olay": "İdareye başvuru tarihi", "n": 30, "birim": "gun", "adli": false, "not": "30 gün içinde cevap verilmezse istek reddedilmiş sayılır (7331 sayılı Kanunla 60 günden 30 güne indirildi). Açık ret cevabı verilirse dava süresi cevabın tebliğini izleyen günden işler.", "z": {"n": 60, "birim": "gun", "ad": "Zımni retten sonra dava açma süresi", "adli": true}}, {"id": "s11", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Zımni ret sonrası idarenin sonradan verdiği cevap: dava süresi", "dayanak": "2577 sayılı İYUK m. 10, m. 8", "olay": "Cevabın tebliğ tarihi", "n": 60, "birim": "gun", "adli": true, "not": "Zımni ret üzerine dava açılmamışsa veya açılan dava süreden reddedilmişse, idarenin 30 gün geçtikten sonra verdiği cevabın tebliğinden itibaren 60 gün içinde dava açılabilir."}, {"id": "s12", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Dava dilekçesine ve tebliğlere cevap süresi", "dayanak": "2577 sayılı İYUK m. 16/3, m. 8", "olay": "Dilekçenin veya tebliğin tarihi", "n": 30, "birim": "gun", "adli": true, "not": "Haklı sebeple, bir defaya mahsus ve en çok 30 gün uzatılabilir; süre geçtikten sonra yapılan uzatma talepleri kabul edilmez."}, {"id": "s13", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Yürütmenin durdurulması kararına itiraz süresi", "dayanak": "2577 sayılı İYUK m. 27, m. 8", "olay": "Kararın tebliğ tarihi", "n": 7, "birim": "gun", "adli": true, "not": "İvedi yargılamada yürütmenin durdurulması kararlarına itiraz edilemez (m. 20/A)."}, {"id": "s14", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Mahkeme kararının idarece uygulanma süresi", "dayanak": "Anayasa m. 138; 2577 sayılı İYUK m. 28/1", "olay": "Kararın idareye tebliğ tarihi", "n": 30, "birim": "gun", "adli": false, "not": "İdare, karar gereğini gecikmeksizin ve en geç kararın tebliğinden itibaren 30 gün içinde yerine getirmek zorundadır."}, {"id": "s15", "kat": "İdari yargı: dava ve kanun yolları", "ad": "İvedi yargılama: dava açma süresi", "dayanak": "2577 sayılı İYUK m. 20/A/II-a", "olay": "Tebliğ, yayın veya ilan tarihi", "n": 30, "birim": "gun", "adli": true, "not": "İhale işlemleri (ihaleden yasaklama hariç), acele kamulaştırma, özelleştirme kararları gibi işlemlerde uygulanır; m. 11 (üst makama başvuru) uygulanmaz. Ara verme dönemindeki uzama için m. 8 ve m. 20/A'yı ayrıca kontrol et."}, {"id": "s16", "kat": "İdari yargı: dava ve kanun yolları", "ad": "İvedi yargılama: temyiz süresi", "dayanak": "2577 sayılı İYUK m. 20/A/II", "olay": "Kararın tebliğ tarihi", "n": 15, "birim": "gun", "adli": true, "not": "Kanun yolu düzenindeki sonraki değişiklikleri m. 20/A metninden kontrol et.", "dogrula": true}, {"id": "s17", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Merkezî sınav davaları (MEB, ÖSYM): dava açma süresi", "dayanak": "2577 sayılı İYUK m. 20/B", "olay": "Sınav işleminin veya sonucunun tebliğ/ilan tarihi", "n": 10, "birim": "gun", "adli": true, "not": "m. 11 (üst makama başvuru) uygulanmaz."}, {"id": "s18", "kat": "İdari yargı: dava ve kanun yolları", "ad": "Merkezî sınav davaları: temyiz süresi", "dayanak": "2577 sayılı İYUK m. 20/B", "olay": "Kararın tebliğ tarihi", "n": 5, "birim": "gun", "adli": true, "not": "", "dogrula": true}, {"id": "v1", "kat": "Vergi ve amme alacağı", "ad": "Ödeme emrine karşı dava açma süresi", "dayanak": "6183 sayılı Kanun m. 58 (7061 sayılı Kanunla 7 günden 15 güne çıkarıldı); İYUK m. 8", "olay": "Ödeme emrinin tebliğ tarihi", "n": 15, "birim": "gun", "adli": true, "not": "İtiraz sebepleri sınırlıdır: borcun olmaması, kısmen ödenmiş olması, zamanaşımı. Dava, tahsil işlemlerini kendiliğinden durdurmaz. Vergiyle ilgili dava süreleri mali tatilde işlemez.", "mali": "dur"}, {"id": "v2", "kat": "Vergi ve amme alacağı", "ad": "Ödeme emri: ödeme süresi", "dayanak": "6183 sayılı Kanun m. 55", "olay": "Ödeme emrinin tebliğ tarihi", "n": 15, "birim": "gun", "adli": false, "not": "Süre içinde ödenmezse cebren tahsil (haciz) yoluna gidilir."}, {"id": "v3", "kat": "Vergi ve amme alacağı", "ad": "Tarh zamanaşımı (5 yıl)", "dayanak": "213 sayılı VUK m. 114", "olay": "Vergiyi doğuran olayın gerçekleştiği tarih", "n": 5, "birim": "yil", "adli": false, "not": "Süre, vergi alacağının doğduğu takvim yılını izleyen yılın başında başlar ve beşinci yılın sonunda dolar. Başlangıç, vergi türüne göre değişebilir.", "tur": "yilsonu", "tatilsiz": true}, {"id": "v4", "kat": "Vergi ve amme alacağı", "ad": "Tahsil zamanaşımı (5 yıl)", "dayanak": "6183 sayılı Kanun m. 102", "olay": "Amme alacağının vade tarihi", "n": 5, "birim": "yil", "adli": false, "not": "Süre, vadenin rastladığı takvim yılını izleyen yılın başından işler ve beşinci yılın sonunda dolar.", "tur": "yilsonu", "tatilsiz": true}, {"id": "v5", "kat": "Vergi ve amme alacağı", "ad": "Uzlaşma talebi süresi (tarhiyat sonrası)", "dayanak": "213 sayılı VUK Ek m. 1", "olay": "Vergi/ceza ihbarnamesinin tebliğ tarihi", "n": 30, "birim": "gun", "adli": false, "not": "Talep vergi dairesine yazılı yapılır; uzlaşmanın dava açma süresiyle ilişkisi Ek m. 1'de ayrıca düzenlenmiştir.", "dogrula": true}, {"id": "k1", "kat": "Kamu ihale (4734)", "ad": "İhale: idareye şikâyet süresi", "dayanak": "4734 sayılı Kamu İhale Kanunu m. 55", "olay": "Şikâyete konu işlemin öğrenildiği (farkına varıldığı) tarih", "n": 10, "birim": "gun", "adli": false, "not": "Bazı ihale usullerinde ve ilan/doküman şikâyetlerinde farklı süre ve sınırlar vardır (m. 55 ve İhalelere Yönelik Başvurular Hakkında Yönetmelik).", "dogrula": true}, {"id": "k2", "kat": "Kamu ihale (4734)", "ad": "İhale: idarenin şikâyete karar verme süresi", "dayanak": "4734 sayılı Kamu İhale Kanunu m. 55", "olay": "Şikâyet başvuru tarihi", "n": 10, "birim": "gun", "adli": false, "not": "İdare, gerekli incelemeyi yaparak 10 gün içinde gerekçeli karar alır."}, {"id": "k3", "kat": "Kamu ihale (4734)", "ad": "İhale: idare kararına karşı Kuruma itirazen şikâyet", "dayanak": "4734 sayılı Kamu İhale Kanunu m. 56", "olay": "İdare kararının bildirim tarihi", "n": 10, "birim": "gun", "adli": false, "not": "", "dogrula": true}, {"id": "k4", "kat": "Kamu ihale (4734)", "ad": "İhale: idare karar vermezse Kuruma itirazen şikâyet", "dayanak": "4734 sayılı Kamu İhale Kanunu m. 55, m. 56", "olay": "İdareye şikâyet tarihi", "n": 10, "birim": "gun", "adli": false, "not": "İdarenin karar verme süresi (10 gün) bittikten sonra itirazen şikâyet süresi işler.", "z": {"n": 10, "birim": "gun", "ad": "Kuruma itirazen şikâyet son günü", "adli": false}, "dogrula": true}, {"id": "k5", "kat": "Kamu ihale (4734)", "ad": "İhale iptal kararına karşı doğrudan Kuruma itirazen şikâyet", "dayanak": "4734 sayılı Kamu İhale Kanunu m. 56/1", "olay": "İptal kararının bildirim tarihi", "n": 5, "birim": "gun", "adli": false, "not": "", "dogrula": true}, {"id": "k6", "kat": "Kamu ihale (4734)", "ad": "İhale işlemlerine karşı dava (ivedi yargılama)", "dayanak": "2577 sayılı İYUK m. 20/A; 4734 sayılı Kanun m. 54–56", "olay": "Kurul kararının veya işlemin tebliğ tarihi", "n": 30, "birim": "gun", "adli": true, "not": "Dava açmadan önce zorunlu idari başvuru yolları (şikâyet, itirazen şikâyet) tüketilmelidir.", "dogrula": true}, {"id": "m1", "kat": "Memur disiplini (657)", "ad": "Disiplin: savunma süresi (en az 7 gün)", "dayanak": "657 sayılı DMK m. 130", "olay": "Savunma isteminin tebliğ tarihi", "n": 7, "birim": "gun", "adli": false, "not": "Verilecek süre 7 günden az olamaz; süresinde savunma verilmezse savunma hakkından vazgeçilmiş sayılır."}, {"id": "m2", "kat": "Memur disiplini (657)", "ad": "Disiplin cezasına itiraz süresi", "dayanak": "657 sayılı DMK m. 135", "olay": "Cezanın tebliğ tarihi", "n": 7, "birim": "gun", "adli": false, "not": "İtiraz isteğe bağlı bir idari başvuru yoludur; itiraz edilmezse ceza kesinleşir. Doğrudan dava süresi için “İdari dava açma süresi” kuralına bak."}, {"id": "m3", "kat": "Memur disiplini (657)", "ad": "Disiplin itirazı: 30 günlük karar süresi ve sonrasında dava", "dayanak": "657 sayılı DMK m. 135; İYUK m. 7", "olay": "İtiraz tarihi", "n": 30, "birim": "gun", "adli": false, "not": "İtiraz mercii 30 gün içinde karar verir. Açık ret cevabı tebliğ edilirse dava süresi tebliğden itibaren işler.", "z": {"n": 60, "birim": "gun", "ad": "Disiplin cezasına karşı dava açma son günü", "adli": true}, "dogrula": true}, {"id": "m4", "kat": "Memur disiplini (657)", "ad": "Disiplin soruşturmasına başlama (uyarma, kınama, aylıktan kesme, kademe)", "dayanak": "657 sayılı DMK m. 127", "olay": "Fiilin öğrenildiği tarih", "n": 1, "birim": "ay", "adli": false, "not": "Ayrıca fiilin işlendiği tarihten itibaren işleyen zamanaşımı süreleri vardır (m. 127).", "tatilsiz": true, "dogrula": true}, {"id": "m5", "kat": "Memur disiplini (657)", "ad": "Disiplin kovuşturmasına başlama (devlet memurluğundan çıkarma)", "dayanak": "657 sayılı DMK m. 127", "olay": "Fiilin öğrenildiği tarih", "n": 6, "birim": "ay", "adli": false, "not": "", "tatilsiz": true, "dogrula": true}, {"id": "t1", "kat": "Tebliğ ve ilan", "ad": "Elektronik tebligat: tebliğ edilmiş sayılma tarihi", "dayanak": "7201 sayılı Tebligat Kanunu m. 7/a; 213 sayılı VUK m. 107/A", "olay": "Tebligatın elektronik adrese ulaştığı tarih", "n": 5, "birim": "gun", "adli": false, "not": "Tebligat, ulaştığı tarihi izleyen beşinci günün sonunda yapılmış sayılır; okunma tarihi önemli değildir.", "tur": "tebligat", "tatilsiz": true}, {"id": "t2", "kat": "Tebliğ ve ilan", "ad": "İlanen tebligat: tebliğ edilmiş sayılma tarihi", "dayanak": "7201 sayılı Tebligat Kanunu (ilanen tebligat); VUK m. 94", "olay": "İlan tarihi", "n": 15, "birim": "gun", "adli": false, "not": "Kanundaki ilan şekline ve özel sürelere göre değişebilir.", "tur": "tebligat", "tatilsiz": true, "dogrula": true}, {"id": "b1", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "Dilekçe hakkı: cevap süresi", "dayanak": "3071 sayılı Kanun m. 6", "olay": "Dilekçe tarihi", "n": 30, "birim": "gun", "adli": false, "not": "İdareye başvuruda zımni ret ve dava süresi için “İdareye başvuru” kurallarına bak."}, {"id": "b2", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "Bilgi edinme: cevap süresi", "dayanak": "4982 sayılı Kanun m. 11", "olay": "Başvuru tarihi", "n": 15, "birim": "isgunu", "adli": false, "not": "Hafta sonu ve resmî tatiller sayılmaz. Bilgi başka birimden sağlanacaksa süre 30 iş gününe çıkar (sonraki kural).", "dogrula": true}, {"id": "b3", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "Bilgi edinme: ek süreli cevap", "dayanak": "4982 sayılı Kanun m. 11", "olay": "Başvuru tarihi", "n": 30, "birim": "isgunu", "adli": false, "not": "", "dogrula": true}, {"id": "b4", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "Bilgi edinme: Kurula itiraz süresi", "dayanak": "4982 sayılı Kanun m. 13", "olay": "Ret kararının tebliğ tarihi", "n": 15, "birim": "gun", "adli": false, "not": "", "dogrula": true}, {"id": "b5", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "KVKK: veri sorumlusunun başvuruya cevap süresi", "dayanak": "6698 sayılı Kanun m. 13", "olay": "Başvuru tarihi", "n": 30, "birim": "gun", "adli": false, "not": "", "dogrula": true}, {"id": "b6", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "KVKK: Kurula şikâyet süresi", "dayanak": "6698 sayılı Kanun m. 14", "olay": "Cevabın öğrenildiği tarih", "n": 30, "birim": "gun", "adli": false, "not": "Her halde başvuru tarihinden itibaren 60 gün içinde şikâyet edilmelidir; ikisini ayrı hesapla.", "dogrula": true}, {"id": "b7", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "Anayasa Mahkemesi: iptal davası açma süresi", "dayanak": "Anayasa m. 151", "olay": "Resmî Gazete'de yayım tarihi", "n": 60, "birim": "gun", "adli": false, "not": "", "dogrula": true}, {"id": "b8", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "Anayasa Mahkemesi: bireysel başvuru süresi", "dayanak": "6216 sayılı Kanun m. 47", "olay": "Kesinleşen kararın tebliğ veya öğrenme tarihi", "n": 30, "birim": "gun", "adli": false, "not": "", "dogrula": true}, {"id": "b9", "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı", "ad": "İdari para cezasına itiraz (sulh ceza hâkimliği)", "dayanak": "5326 sayılı Kabahatler Kanunu m. 27", "olay": "Kararın tebliğ tarihi", "n": 15, "birim": "gun", "adli": false, "not": "", "dogrula": true}]};
-const TS_B={gun:'gün',hafta:'hafta',ay:'ay',yil:'yıl',isgunu:'iş günü'};
-const TS_TATIL=[{"id": "rt20260101", "ad": "Yılbaşı", "bas": "2026-01-01", "bit": "2026-01-01"}, {"id": "rt20260320", "ad": "Ramazan Bayramı", "bas": "2026-03-20", "bit": "2026-03-22"}, {"id": "rt20260423", "ad": "Ulusal Egemenlik ve Çocuk Bayramı", "bas": "2026-04-23", "bit": "2026-04-23"}, {"id": "rt20260501", "ad": "Emek ve Dayanışma Günü", "bas": "2026-05-01", "bit": "2026-05-01"}, {"id": "rt20260519", "ad": "Atatürk’ü Anma, Gençlik ve Spor Bayramı", "bas": "2026-05-19", "bit": "2026-05-19"}, {"id": "rt20260527", "ad": "Kurban Bayramı", "bas": "2026-05-27", "bit": "2026-05-30"}, {"id": "rt20260715", "ad": "Demokrasi ve Milli Birlik Günü", "bas": "2026-07-15", "bit": "2026-07-15"}, {"id": "rt20260830", "ad": "Zafer Bayramı", "bas": "2026-08-30", "bit": "2026-08-30"}, {"id": "rt20261029", "ad": "Cumhuriyet Bayramı", "bas": "2026-10-29", "bit": "2026-10-29"}, {"id": "rt20270101", "ad": "Yılbaşı", "bas": "2027-01-01", "bit": "2027-01-01"}, {"id": "rt20270309", "ad": "Ramazan Bayramı", "bas": "2027-03-09", "bit": "2027-03-11"}, {"id": "rt20270423", "ad": "Ulusal Egemenlik ve Çocuk Bayramı", "bas": "2027-04-23", "bit": "2027-04-23"}, {"id": "rt20270501", "ad": "Emek ve Dayanışma Günü", "bas": "2027-05-01", "bit": "2027-05-01"}, {"id": "rt20270516", "ad": "Kurban Bayramı (19 Mayıs dahil)", "bas": "2027-05-16", "bit": "2027-05-19"}, {"id": "rt20270715", "ad": "Demokrasi ve Milli Birlik Günü", "bas": "2027-07-15", "bit": "2027-07-15"}, {"id": "rt20270830", "ad": "Zafer Bayramı", "bas": "2027-08-30", "bit": "2027-08-30"}, {"id": "rt20271029", "ad": "Cumhuriyet Bayramı", "bas": "2027-10-29", "bit": "2027-10-29"}];
-const PA_DURUM=['Başvuru açık','Devam ediyor','Tamamlandı'];
 const EV_ALL=EVG.flatMap(g=>g.items.map(i=>i[0]));
 const EV_IDS=EV_ALL.filter(k=>k!=='yatay');
 const EV_NAME=Object.fromEntries(EVG.flatMap(g=>g.items.map(i=>[i[0],i[1]])));
@@ -354,6 +350,7 @@ function isBlank(k,x){
   const e=v=>!String(v||'').trim();
   if(k==='n'||k==='dg')return e(x.title)&&e(x.text)&&e(x.body)&&e(x.img);
   if(k==='e')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.text)&&e(x.img);
+  if(k==='konf')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.speaker)&&e(x.text)&&e(x.body)&&e(x.img)&&!(x.imgs&&x.imgs.length);
   if(k==='fme')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.text)&&e(x.body)&&e(x.img)&&!(x.imgs&&x.imgs.length);
   if(k==='archive')return e(x.t)&&e(x.s)&&e(x.x)&&e(x.img)&&e(x.pdf);
   return e(x.t)&&e(x.s)&&e(x.img);
@@ -377,7 +374,7 @@ o.cards=Array.isArray(s.cards)?s.cards.filter(x=>x&&typeof x==='object').map((x,
 const c=s.cta&&typeof s.cta==='object'?s.cta:{};o.cta={};['h','p','b1t','b1h','b2t','b2h'].forEach(k=>o.cta[k]=ksStr(c[k],d.cta[k]));
 return o}
 const ksHrefOK=u=>{u=String(u||'').trim();return /^#\/[a-z0-9\-]*$/i.test(u)||/^https:\/\/\S+$/i.test(u)};
-const DEF=()=>({fb:{db:'https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app',key:'AIzaSyDNwfakrjOuMx0YlonGfOBvk1_hAWiUyk0'},f:{cur:'40',k:'0.25',rows:[]},w:'',ig:'',li:'',t:{},i:{},n:[],dg:[],d:[],e:[],fme:[],c:{team:[],gallery:[],archive:[]},b:{on:false,text:''}});
+const DEF=()=>({fb:{db:'https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app',key:'AIzaSyDNwfakrjOuMx0YlonGfOBvk1_hAWiUyk0'},f:{cur:'40',k:'0.25',rows:[]},w:'',ig:'',li:'',t:{},i:{},n:[],dg:[],d:[],e:[],fme:[],konf:[],c:{team:[],gallery:[],archive:[]},b:{on:false,text:''}});
 function norm(src){
   const s=src&&typeof src==='object'?src:{},x=DEF();
   for(const k of Object.keys(s))x[k]=s[k];
@@ -404,27 +401,9 @@ function norm(src){
   {const y=Object.assign({on:true,title:'Yatay Bakış',kisa:'',intro:'',body:'',date:'',place:'',link:'',linkText:''},s.yb);
    ['title','kisa','intro','body','date','place','link','linkText'].forEach(k=>y[k]=String(y[k]==null?'':y[k]));y.on=y.on!==false;y.img=String(y.img||'');y.imgs=Array.isArray(y.imgs)?y.imgs.filter(Boolean).map(String):[];x.yb=y}
   ['t','i'].forEach(k=>{if(!x[k]||typeof x[k]!=='object'||Array.isArray(x[k]))x[k]={}});
-  ['n','dg','e','d','fme'].forEach(k=>{if(!Array.isArray(x[k]))x[k]=[]});
+  ['n','dg','e','d','fme','konf'].forEach(k=>{if(!Array.isArray(x[k]))x[k]=[]});
   ['w','ig','li'].forEach(k=>x[k]=String(x[k]||''));
-  [...x.n,...x.dg,...x.e,...x.fme,...x.c.gallery,...x.c.archive].forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
-  {const m=Object.assign({on:false,list:[]},s.mr),ss=v=>String(v==null?'':v);m.on=m.on===true;
-   m.list=(Array.isArray(m.list)?m.list:[]).filter(it=>it&&typeof it==='object').map(it=>({id:ss(it.id||uid()),ad:ss(it.ad),mezun:ss(it.mezun),gorev:ss(it.gorev),ozet:ss(it.ozet),qa:(Array.isArray(it.qa)?it.qa:[]).filter(Array.isArray).map(a=>[ss(a[0]),ss(a[1])])}));x.mr=m;
-   const p=Object.assign({list:[]},s.pa);
-   p.list=(Array.isArray(p.list)?p.list:[]).filter(it=>it&&typeof it==='object').map(it=>({id:ss(it.id||uid()),baslik:ss(it.baslik),alan:ss(it.alan),ozet:ss(it.ozet),lider:ss(it.lider),takvim:ss(it.takvim),kontenjan:ss(it.kontenjan),cikti:ss(it.cikti),durum:PA_DURUM.includes(it.durum)?it.durum:PA_DURUM[0]}));x.pa=p}
-  {const t=s.ts&&typeof s.ts==='object'?s.ts:null,md=v=>/^\d{2}-\d{2}$/.test(String(v||'')),dd=v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v||'')),ss=v=>String(v==null?'':v);
-   const dr=(src,def)=>{const a=Object.assign({},def,src);if(!md(a.bas))a.bas=def.bas;if(!md(a.bit))a.bit=def.bit;a.uzama=Math.max(0,Math.min(60,Math.floor(+a.uzama)||0));return a};
-   const ara=dr(t&&t.ara,TS_SEED.ara),mali=dr(t&&t.mali,TS_SEED.mali);
-   const tatil=(t?(Array.isArray(t.tatil)?t.tatil:[]):clone(TS_TATIL)).filter(q=>q&&dd(q.bas)).map(q=>({id:String(q.id||uid()),ad:String(q.ad||'Tatil'),bas:q.bas,bit:dd(q.bit)&&q.bit>=q.bas?q.bit:q.bas}));
-   const clR=r=>{const o={id:ss(r.id||uid()),kat:ss(r.kat).slice(0,60),ad:ss(r.ad),dayanak:ss(r.dayanak),olay:ss(r.olay),n:Math.max(1,Math.floor(+r.n)||1),birim:TS_B[r.birim]?r.birim:'gun',adli:r.adli===true,not:ss(r.not)};
-     if(r.tur==='yilsonu'||r.tur==='tebligat'||r.tur==='durma')o.tur=r.tur;if(r.mali==='dur')o.mali='dur';if(r.tatilsiz===true)o.tatilsiz=true;if(r.dogrula===true)o.dogrula=true;if(+r.v>0)o.v=Math.floor(+r.v);
-     if(r.olay2)o.olay2=ss(r.olay2);if(r.olay3)o.olay3=ss(r.olay3);if(+r.bekle>0)o.bekle=Math.min(365,Math.floor(+r.bekle));
-     if(r.z&&typeof r.z==='object')o.z={n:Math.max(1,Math.floor(+r.z.n)||1),birim:TS_B[r.z.birim]?r.z.birim:'gun',ad:ss(r.z.ad),adli:r.z.adli===true};return o};
-   const silinen=(t&&Array.isArray(t.silinen)?t.silinen:[]).map(ss);
-   const own=(t&&Array.isArray(t.kurallar)?t.kurallar:[]).filter(r=>r&&typeof r==='object').map(clR);
-   const by=new Map(own.map(r=>[r.id,r])),seedIds=new Set(TS_SEED.kurallar.map(r=>r.id)),kurallar=[];
-   TS_SEED.kurallar.forEach(q=>{if(silinen.includes(q.id))return;const m=by.get(q.id);kurallar.push(m&&(m.v||0)>=(q.v||0)?m:clR(q))});
-   own.forEach(r=>{if(!seedIds.has(r.id))kurallar.push(r)});
-   x.ts={ara,mali,tatil,kurallar,silinen}}
+  [...x.n,...x.dg,...x.e,...x.fme,...x.konf,...x.c.gallery,...x.c.archive].forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
   x.ks=ksNorm(s.ks,i=>'k'+uid()+i);
   return x;
 }
@@ -563,6 +542,17 @@ const COLS={
     label:x=>x.t,sub:x=>x.s,img:1,imgReq:1,
     empty:'Galeri boş. Etkinliklerden fotoğraf ekle.',
     note:'Fotoğraflar 1200 piksel genişliğe küçültülerek yüklenir.'},
+  konf:{title:'Konferanslar',noun:'Konferans',nav:'Konferanslar',get:w=>w.konf,
+    make:()=>({id:uid(),date:'',title:'',place:'',speaker:'',text:'',body:'',img:''}),
+    fields:[{k:'date',l:'Tarih',ph:'12 Kasım 2026'},
+            {k:'title',l:'Konferans adı',req:1,ph:'Türkiye Ekonomisinde Yeni Dönem'},
+            {k:'speaker',l:'Konuşmacı (isteğe bağlı)',ph:'Prof. Dr. Ad Soyad'},
+            {k:'place',l:'Yer (isteğe bağlı)',ph:'Konferans Salonu'},
+            {k:'text',l:'Kısa özet',area:1,rows:3,hint:'Kartta başlığın altında görünür.'},
+            {k:'body',l:'Konferansın anlatımı',area:1,rows:12,hint:'Kartta “Ayrıntılar ve fotoğraflar” düğmesine basınca açılır. Paragrafları boş satırla ayır. “## ” ara başlık, “> ” alıntı, “- ” madde listesi olur.'}],
+    label:x=>x.title,sub:x=>x.date,img:1,imgs:1,imgsLabel:'Konferans fotoğrafları',imgsHint:'Ayrıntılar açılınca görünür. Metnin içinde “[foto 1]” yazan boş bir satır, o fotoğrafı tam o yere koyar. Büyütmek için fotoğrafa basılır.',
+    empty:'Henüz kayıt yok. Yaptığınız konferansları fotoğraflarıyla buraya ekle.',
+    note:'Etkinlikler sayfasındaki “Konferanslar” kutusundan açılır. Listenin en üstündeki kayıt sitede de en üstte durur. “Yayınla” dediğinde sitede görünür.'},
   fme:{title:'Muharebe etkinlikleri',noun:'Muharebe etkinliği',nav:'Muharebe etkinlikleri',get:w=>w.fme,
     make:()=>({id:uid(),date:'',title:'',place:'',text:'',body:'',img:''}),
     fields:[{k:'date',l:'Tarih',ph:'12 Kasım 2026'},
@@ -576,7 +566,7 @@ const COLS={
 };
 
 /* ---------- değişiklik özeti ---------- */
-const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],mezun:w=>w.mr,projeler:w=>w.pa,sure:w=>w.ts,xptakvim:w=>w.xt,fm:w=>w.fm};
+const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,konf:w=>w.konf,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],xptakvim:w=>w.xt,fm:w=>w.fm};
 function diffList(a,b){
   const am=new Map(a.map(x=>[String(x.id),x])),bm=new Map(b.map(x=>[String(x.id),x]));
   return{add:b.filter(x=>!am.has(String(x.id))),del:a.filter(x=>!bm.has(String(x.id))),
@@ -587,7 +577,7 @@ function summarize(){
   if(!S.remote||!S.work)return[];
   const a=S.remote.data,b=S.work,out=[];
   const nm=(C,x)=>'“'+((C.label(x)||'').trim()||'başlıksız')+'”';
-  for(const k of['n','dg','e','fme','archive','gallery']){
+  for(const k of['n','dg','e','fme','konf','archive','gallery']){
     const C=COLS[k],d=diffList(C.get(a),C.get(b));
     const push=(arr,verb)=>{arr.slice(0,5).forEach(x=>out.push(`${C.noun} ${verb}: ${nm(C,x)}`));if(arr.length>5)out.push(`${C.noun} ${verb}: ${arr.length-5} kayıt daha`)};
     push(d.add,'eklendi');push(d.edit,'düzenlendi');push(d.del,'silindi');
@@ -595,9 +585,6 @@ function summarize(){
   }
   if(a.b.on!==b.b.on)out.push(b.b.on?'Duyuru şeridi açıldı':'Duyuru şeridi kapatıldı');
   if(a.b.text!==b.b.text)out.push('Duyuru metni değişti');
-  if(!same(a.mr,b.mr)){if(a.mr.on!==b.mr.on)out.push(b.mr.on?'Mezun röportajları sitede açıldı':'Mezun röportajları sitede kapatıldı');if(!same(a.mr.list,b.mr.list))out.push('Mezun röportajları düzenlendi ('+b.mr.list.length+' kayıt)')}
-  if(!same(a.ts,b.ts))out.push('Süre hesaplama: tatiller veya süre türleri düzenlendi ('+b.ts.tatil.length+' tatil, '+b.ts.kurallar.length+' süre türü)');
-  if(!same(a.pa,b.pa))out.push('Proje ve araştırma grupları düzenlendi ('+b.pa.list.length+' grup)');
   const tk=new Set([...Object.keys(a.t),...Object.keys(b.t)]);let tc=0;tk.forEach(k=>{if(a.t[k]!==b.t[k])tc++});
   if(tc)out.push(`${tc} site metni değişti`);
   [['w','WhatsApp grup bağlantısı'],['ig','Instagram bağlantısı'],['li','LinkedIn bağlantısı']].forEach(([k,n])=>{if(a[k]!==b[k])out.push(n+' değişti')});
@@ -646,7 +633,7 @@ const evShort=t=>{const p=evParse(t);return p?{day:String(p.day),mon:EVAY[p.mo]}
 const httpsOK=s=>!s||/^https:\/\/\S+$/.test(s);
 function validate(){
   const w=S.work,p=[];
-  for(const k of['n','dg','e','fme','archive','gallery']){
+  for(const k of['n','dg','e','fme','konf','archive','gallery']){
     const C=COLS[k];
     C.get(w).forEach(x=>{
       if(isBlank(k,x))return;
@@ -683,13 +670,13 @@ function validate(){
 const NAV=[
   {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['yarisma','Bilgi Yarışması'],['poll','Anket']]},
   {g:'Simülasyon Merkezi',items:[['sims','Simülasyon fotoğrafları'],['pmulakat','Mülakat sayfası'],['borsa','Borsa oyunu kayıtları']]},
-  {g:'Meslekler',items:[['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['mezun','Mezun röportajları'],['ex','Sınav takvimi']]},
+  {g:'Meslekler',items:[['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['ex','Sınav takvimi']]},
   {g:'İktisadi Ansiklopedi',items:[['ansiklopedi','İktisadi Ansiklopedi']]},
   {g:'Veri ve Pariteler',items:[['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri'],['itab','Gelen tablolar']]},
   {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['pmakale','Gelen makaleler'],['gallery','Galeri'],['comments','Yorumlar']]},
-  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['projeler','Proje grupları'],['pproje','Proje başvuruları'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
+  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['konf','Konferanslar'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
   {g:'Üyelere Özel',items:[['members','Üyelik başvuruları'],['teachers','Hocalar']]},
-  {g:'Eko-Plus modülleri',items:[['xplus','Sayfa anahtarları'],['xpetk','Etkinlik Araçları'],['xpmentor','Mezun ve Mentor'],['sure','Mevzuat: süre hesaplama'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Sınav Takvimi (resmî)']]},
+  {g:'Eko-Plus modülleri',items:[['xplus','Sayfa anahtarları'],['xpetk','Etkinlik Araçları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Sınav Takvimi (resmî)']]},
   {g:'Site',items:[['texts','Site metinleri'],['blocks','Örnek içerikler'],['stats','İstatistikler'],['links','Bağlantılar'],['settings','Ayarlar ve yedek']]}
 ];
 const VIEWS={};
@@ -954,7 +941,7 @@ function collView(key){
   }
   root.append(detail);wrap.append(root);return wrap;
 }
-['n','dg','e','fme','archive','gallery'].forEach(k=>VIEWS[k]=()=>collView(k));
+['n','dg','e','fme','konf','archive','gallery'].forEach(k=>VIEWS[k]=()=>collView(k));
 
 /* ---------- bağlantılar ---------- */
 VIEWS.links=()=>{
@@ -975,7 +962,10 @@ VIEWS.links=()=>{
 </script>
 <script>
 /* ---------- site dosyasını oku (metinler ve örnek içerikler için) ---------- */
-const PAGE_NAMES={mezun:'Mezun Röportajları',projeler:'Proje ve Araştırma Grupları',home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
+const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
+const ENC_PAGES=['ansiklopedi','sozluk','anatomi','efsane','kisiler','quiz','olay'];
+const SIM_PAGES=['merkez','vaka','ppk','borsa','bakan','girisim','kur','burokrat','muzakere','ihale','hakimlik','valilik','smmm'];
+const siteUrl=p=>{const k=String(p).split('/')[0],S=window.EKO_SPLIT||{};return((ENC_PAGES.includes(k)&&S.ans)?'ansiklopedi.html':(SIM_PAGES.includes(k)&&S.sim)?'simulasyon.html':'index.html')+'#/'+p};
 function loadSite(){
   if(S.site)return Promise.resolve(S.site);
   if(S.siteP)return S.siteP;
@@ -987,16 +977,30 @@ function loadSite(){
     }
     if(!html||html.indexOf('data-k=')<0)throw new Error('index.html okunamadı');
     const doc=new DOMParser().parseFromString(html,'text/html');
+    /* Ansiklopedi ayrı dosyada (ansiklopedi.html): metinleri ve Anatomi/Efsane listesini oradan da oku */
+    let html2=null;
+    try{const r=await fetch('ansiklopedi.html',{cache:'no-store'});if(r.ok)html2=await r.text()}catch(e){}
+    if(!html2||html2.indexOf('data-k=')<0){try{const r=await gh('contents/ansiklopedi.html?ref='+encodeURIComponent(S.cfg.branch),{raw:true});if(r.ok)html2=await r.text()}catch(e){}}
+    if(html2&&html2.indexOf('data-k=')<0)html2=null;
+    const doc2=html2?new DOMParser().parseFromString(html2,'text/html'):null;
+    /* Simülasyon Merkezi ayrı dosyada (simulasyon.html): metinleri ve kutu görsellerini oradan oku */
+    let html3=null;
+    try{const r=await fetch('simulasyon.html',{cache:'no-store'});if(r.ok)html3=await r.text()}catch(e){}
+    if(!html3||html3.indexOf('data-k=')<0){try{const r=await gh('contents/simulasyon.html?ref='+encodeURIComponent(S.cfg.branch),{raw:true});if(r.ok)html3=await r.text()}catch(e){}}
+    if(html3&&html3.indexOf('data-k=')<0)html3=null;
+    const doc3=html3?new DOMParser().parseFromString(html3,'text/html'):null;
+    window.EKO_SPLIT={ans:!!html2,sim:!!html3};
+    const k1=new Set([...doc.querySelectorAll('[data-k]')].map(e=>e.dataset.k));
     const pageOf=el=>{const p=el.closest('.page');return p?p.id.replace(/^p-/,''):'_'};
     const lastSec={};
-    const texts=[...doc.querySelectorAll('[data-k]')].map(el=>{
+    const texts=[...doc.querySelectorAll('[data-k]'),...(doc2?[...doc2.querySelectorAll('[data-k]')].filter(e=>!k1.has(e.dataset.k)):[]),...(doc3?[...doc3.querySelectorAll('[data-k]')].filter(e=>!k1.has(e.dataset.k)):[])].map(el=>{
       const page=pageOf(el);
       let sec;
       if(el.closest('.banner'))sec='Sayfa başlığı alanı';
       else{if(el.tagName==='H3')lastSec[page]=el.textContent.trim();sec=lastSec[page]||'Sayfa içeriği'}
       return{k:el.dataset.k,orig:el.textContent,page,tag:el.tagName,sec,crumb:!!el.closest('.crumb')};
     });
-    let sim={};try{const m=html.match(/const SI=(\{[\s\S]*?\});document\.querySelectorAll/);if(m)sim=JSON.parse(m[1])}catch(e){}
+    let sim={};try{const m=(html3||html).match(/const SI=(\{[\s\S]*?\});document\.querySelectorAll/);if(m)sim=JSON.parse(m[1])}catch(e){}
     const cnt={};doc.querySelectorAll('[data-b]').forEach(e=>cnt[e.dataset.b]=(cnt[e.dataset.b]||0)+1);
     const blocks=[...doc.querySelectorAll('article[data-b]')].filter(e=>cnt[e.dataset.b]===1).map(e=>{
       const kick=e.querySelector('.kick'),tt=e.querySelector('h4')||e.querySelector('p');
@@ -1004,7 +1008,7 @@ function loadSite(){
     });
     let sz=[];try{const m=html.match(/const D0?=rows\(`([\s\S]*?)`\)/);if(m)sz=m[1].trim().split('\n').map(l=>l.split('|')).filter(a=>a.length>=3).map(a=>({t:a[0],d:a[1],c:a[2],e:a[3]||''}))}catch(e){}
     const ms=[...doc.querySelectorAll('#ms-jobs .ms-job')].map(e=>{const q=s=>(e.querySelector(s)||{}).textContent||'';const fd=k=>q('[data-f="'+k+'"]').trim();const ln=e.querySelector('a[data-f="url"]');return{org:q('.ms-org'),title:q('h4'),desc:q('p:not(.ms-meta)'),proc:q('.ms-meta').replace(/^\s*Süreç:\s*/,''),sart:fd('sart'),gorev:fd('gorev'),yol:fd('yol'),nitelik:fd('nitelik'),url:ln?(ln.getAttribute('href')||''):'',tags:(e.dataset.t||'').split(' ').filter(Boolean)}});
-    const jarr=n=>{try{const m=html.match(new RegExp('window\\.'+n+'=(\\[[\\s\\S]*?\\]);'));return m?JSON.parse(m[1]):[]}catch(e){return[]}};
+    const jarr=(n,src)=>{try{const m=(src||html).match(new RegExp('window\\.'+n+'=(\\[[\\s\\S]*?\\]);'));return m?JSON.parse(m[1]):[]}catch(e){return[]}};
     const ex=jarr('EKO_SINAV'),gs=jarr('EKO_GOST');
     const hk=[...doc.querySelectorAll('#hk-grid details')].map(d=>({ad:(d.querySelector('.ms-dt')||{}).textContent||'',text:[...d.querySelectorAll('.ms-db>p')].map(p=>p.textContent).join('\n\n'),etiket:[...d.querySelectorAll('.ms-tag')].map(t=>t.textContent).join(', ')}));
     let fm=[];try{const m=html.match(/const TOPICS=(\[[\s\S]*?\n\]);/);if(m)fm=(new Function('return '+m[1]))().map(t=>({id:String(t.id),c:String(t.c||''),x:String(t.x||''),ys:(t.y||[]).join('\n'),ns:(t.n||[]).join('\n')}))}catch(e){}
@@ -1012,7 +1016,7 @@ function loadSite(){
     try{const m=html.match(/window\.EKO_DUSUNUR=(\[[\s\S]*?\n\]);/);if(m)ki=(new Function('return '+m[1]))().map(t=>({ad:String(t.ad||''),unvan:t.unvan||'',ekol:t.ekol||'',yil:t.yil||'',ulke:t.ulke||'',dogum:t.dogum||'',olum:t.olum||'',ozet:t.ozet||'',hayat:t.hayat||'',detay:t.detay||'',zaman:[].concat(t.zaman||[]).join('\n'),eserler:[].concat(t.eserler||[]).join('\n'),fikirler:[].concat(t.fikirler||[]).join('\n'),etki:t.etki||'',wikitr:t.wikitr||'',wiki:t.wiki||'',brit:t.brit||'',foto:t.foto||'',kaynak:[].concat(t.kaynak||[]).join('\n')}))}catch(e){}
     try{const m=html.match(/const BOOKS=(\[[\s\S]*?\n\]);/),f=html.match(/featuredBooks:(\[[^\]]*\])/);
       if(m){const feat=f?(new Function('return '+f[1]))():[];kb=(new Function('return '+m[1]))().map(b=>({id:String(b.id),t:String(b.t||''),a:String(b.a||''),y:String(b.y==null?'':b.y),k:b.k||'Kitap',n:String(b.n||''),oz:feat.includes(b.id)?'1':'0'}))}}catch(e){}
-    S.site={texts,blocks,sim,sz,ms,ex,gs,hk,fm,ki,kb,ka:jarr('EKO_ANATOMI'),se:jarr('EKO_EFSANE')};return S.site;
+    S.site={texts,blocks,sim,sz,ms,ex,gs,hk,fm,ki,kb,ka:jarr('EKO_ANATOMI',html2||html),se:jarr('EKO_EFSANE',html2||html)};return S.site;
   })();
   S.siteP.catch(()=>{S.siteP=null});
   return S.siteP;
@@ -1023,7 +1027,7 @@ function withSite(build){
   const box=h('div',null,h('div',{class:'skel'}),h('div',{class:'skel'}),h('div',{class:'skel'}));
   loadSite().then(()=>{if(S.view===v)render()}).catch(()=>{
     box.replaceChildren(h('div',{class:'empty'},h('b',{text:'Site dosyası okunamadı'}),
-      h('span',{text:'Bu sayfa, admin.html ile index.html aynı klasörde olduğunda çalışır. Dosyaları aynı yere koyup tekrar dene.'}),
+      h('span',{text:'Bu sayfa, admin.html ile index.html (varsa ansiklopedi.html ve simulasyon.html) aynı klasörde olduğunda çalışır. Dosyaları aynı yere koyup tekrar dene.'}),
       h('button',{class:'btn solid',type:'button',onclick:()=>{render()},text:'Tekrar dene'})));
   });
   return box;
@@ -1203,7 +1207,7 @@ function rulesText(email){
     apps:{'.read':A,'.write':A,'$id':{
       '.write':`${A} || (!data.exists() && newData.exists())`,
       '.validate':"newData.hasChildren(['g','n','d'])",
-      g:{'.validate':"newData.val() === 'mulakat' || newData.val() === 'makale' || newData.val() === 'proje'"},
+      g:{'.validate':"newData.val() === 'mulakat' || newData.val() === 'makale'"},
       n:{'.validate':str(80)},b:{'.validate':opt(80)},s:{'.validate':opt(40)},c:{'.validate':opt(120)},t:{'.validate':opt(2000)},
       st:{'.validate':opt(30)},dt:{'.validate':opt(60)},no:{'.validate':opt(2000)},no2:{'.validate':opt(2000)},tx:{'.validate':opt(3000000)},f:{'.validate':opt(300)},fn:{'.validate':opt(120)},
       fz:{'.validate':'newData.isNumber()'},d:{'.validate':'newData.isNumber()'},u:{'.validate':'newData.isNumber()'},
@@ -1716,7 +1720,7 @@ const TAGL={H2:'Sayfa başlığı',H3:'Bölüm başlığı',H4:'Kart başlığı
 function pageEditor(page,title,desc,extra){
   return withSite(site=>{
     const root=h('div',{class:'stack'},pageHead(title,desc));
-    const open=h('a',{class:'btn sm',href:'index.html#/'+page,target:'_blank',rel:'noopener',text:'Sayfayı sitede aç'});
+    const open=h('a',{class:'btn sm',href:siteUrl(page),target:'_blank',rel:'noopener',text:'Sayfayı sitede aç'});
     root.append(h('div',{class:'row'},open,h('span',{class:'hint',text:'Değiştirdiğin metinler turuncu çizgiyle işaretlenir. Yayınlayana kadar sitede görünmez.'})));
     if(extra)root.append(extra());
     const items=site.texts.filter(t=>t.page===page&&!t.crumb);
@@ -1764,7 +1768,7 @@ function pageEditorV2(page,title,desc,labels){
     const stat=h('span',{class:'pe-stat'});
     const jump=h('div',{class:'pe-jump'});
     bar.append(h('div',{class:'row'},q,h('label',{class:'switch',style:'font-weight:500;font-size:14px'},onlyC,h('span',{class:'tr'}),'Sadece değişenler'),
-      h('a',{class:'btn sm',href:'index.html#/'+page,target:'_blank',rel:'noopener',text:'Sitede aç ↗'})),stat,jump);
+      h('a',{class:'btn sm',href:siteUrl(page),target:'_blank',rel:'noopener',text:'Sitede aç ↗'})),stat,jump);
     const list=h('div');
     root.append(bar,list);
     const counters=[];
@@ -1861,10 +1865,6 @@ const REC={
     topicL:'Makale başlığı',topicPh:'Makalenin başlığı',dateL:'Gönderim tarihi',datePh:'Örn. 3 Kasım 2026',
     stats:['Yeni','İnceleniyor','Düzeltme istendi','Yayınlandı','Red'],file:'Dosya (Word, PDF)',txL:'Makale metni',txPh:'Makaleyi buraya yaz ya da yapıştır…'}
 };
-REC.proje={title:'Proje grubu başvuruları ve fikir önerileri',
-    desc:'Sitedeki Proje ve Araştırma Grupları sayfasından gelen başvurular ve proje fikirleri. Bilgiler yalnızca yönetici hesabınla okunur, siteye yayınlanmaz. Kaydet dediğin anda saklanır; “Yayınla” gerekmez.',
-    topicL:'Grup / proje fikri',topicPh:'Örn. Faiz kararları grubu',dateL:'Görüşme tarihi',datePh:'Örn. 20 Kasım 2026',
-    stats:['Yeni','Görüşüldü','Gruba alındı','Beklemede','Red'],file:'Dosya (taslak, not)',txL:'Başvuru metni / notlar',txPh:'Neden katılmak istiyor, fikri nedir…'};
 const MAXF=2*1024*1024;
 const fileB64=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=rej;r.readAsDataURL(f)});
 const kb=n=>n>1048576?(n/1048576).toFixed(1).replace('.',',')+' MB':Math.max(1,Math.round(n/1024))+' KB';
@@ -2379,7 +2379,7 @@ function customView(cfg){
     const o=S.work[cfg.store],base=cfg.base(site);
     S.cv=S.cv||{};const V=S.cv[cfg.store]=S.cv[cfg.store]||{q:'',cat:'',editing:null,w:null,limit:40};
     const root=h('div',{class:'stack'},pageHead(cfg.title,cfg.desc));
-    if(!base.length&&!cfg.noBase)root.append(h('div',{class:'hint',text:'Not: sitedeki hazır liste okunamadı; yalnızca eklediklerin yönetilebilir. admin.html ile index.html aynı klasörde olmalı.'}));
+    if(!base.length&&!cfg.noBase)root.append(h('div',{class:'hint',text:'Not: sitedeki hazır liste okunamadı; yalnızca eklediklerin yönetilebilir. admin.html ile index.html (varsa ansiklopedi.html ve simulasyon.html) aynı klasörde olmalı.'}));
 
     const draft=cfg.blank();
     const addP=h('div',{class:'panel'},h('h3',{text:cfg.addTitle}));
@@ -3043,7 +3043,7 @@ for(const [k,l] of [['ex','Sınav takvimi']]){
 /* ---------- yayınlama ---------- */
 function collectRefs(w){
   const s=new Set();
-  [...w.n,...(w.dg||[]),...w.e,...(w.fme||[]),...w.c.gallery,...w.c.archive,...w.c.team].forEach(x=>{if(x&&x.img)s.add(x.img);if(x&&x.pdf)s.add(x.pdf);if(x&&Array.isArray(x.imgs))x.imgs.forEach(q=>q&&s.add(q))});
+  [...w.n,...(w.dg||[]),...w.e,...(w.fme||[]),...(w.konf||[]),...w.c.gallery,...w.c.archive,...w.c.team].forEach(x=>{if(x&&x.img)s.add(x.img);if(x&&x.pdf)s.add(x.pdf);if(x&&Array.isArray(x.imgs))x.imgs.forEach(q=>q&&s.add(q))});
   if(w.yb){if(w.yb.img)s.add(w.yb.img);(w.yb.imgs||[]).forEach(q=>q&&s.add(q))}
   Object.values(w.i).forEach(p=>p&&s.add(p));
   return[...s].filter(isSafePath);
@@ -3420,7 +3420,7 @@ VIEWS.yarisma=()=>fbGate('Bilgi Yarışması','Ana sayfadaki yarışmayı burada
 });
 
 /* ---- Iktisat Grafikleri yonetimi (sitedeki #/veri sayfasi) ---- */
-const IGL=[['arz','Arz ve Talep','Talep ya da arz kayınca denge fiyatı ve miktarı nasıl değişir?'],['uis','Üretim İmkânları Sınırı','Sınır üzerindeki noktayı kaydır: X’i artırmanın fırsat maliyetini gör.'],['maliyet','Maliyet Eğrileri','MC, ortalama maliyet eğrilerini en düşük noktalarında keser.'],['adas','Toplam Talep – Toplam Arz','AD ve AS kayınca çıktı, fiyat düzeyi ve potansiyel çıktıdan sapma.'],['islm','IS–LM','Genişletici maliye ya da para politikası gelir ve faizi nasıl etkiler?'],['phillips','Phillips Eğrisi','İşsizlik düşünce enflasyon artar; beklenen enflasyon eğriyi yukarı taşır.'],['laffer','Laffer Eğrisi','Vergi oranı belli bir noktadan sonra artarsa vergi geliri düşer.'],['lorenz','Lorenz Eğrisi ve Gini','Eğri tam eşitlik doğrusundan uzaklaştıkça gelir dağılımı bozulur.'],['keynes','Keynesyen Çarpan (45° Doğrusu)','Denge gelir, AE eğrisinin 45° doğrusunu kestiği yerdir.'],['tuketici','Tüketici Dengesi','Bütçe doğrusu kayıtsızlık eğrisine teğet olduğunda fayda en yüksektir.'],['tekel','Tekel (Monopol)','Tekel MR = MC noktasında üretir; rekabetçi çıktıya göre daha az üretir, daha yüksek fiyat koyar.'],['para','Para Piyasası','Para arzı artınca faiz düşer; para talebi artınca faiz yükselir.'],['tarife','Dış Ticaret ve Tarife','Gümrük vergisi yerli üretimi artırır, ithalatı ve tüketimi azaltır; toplumsal kayıp doğurur.'],['solow','Solow Büyüme Modeli','Kişi başına yatırım, amortismanı karşıladığında ekonomi durağan duruma ulaşır.'],['esneklik','Talep Esnekliği ve Hasılat','Fiyat değiştikçe talebin esnekliği ve toplam hasılat nasıl değişir?']];
+const IGL=[['arz','Arz ve Talep','Talep ya da arz kayınca denge fiyatı ve miktarı nasıl değişir?'],['uis','Üretim İmkânları Sınırı','Sınır üzerindeki noktayı kaydır: X’i artırmanın fırsat maliyetini gör.'],['maliyet','Maliyet Eğrileri','MC, ortalama maliyet eğrilerini en düşük noktalarında keser.'],['adas','Toplam Talep – Toplam Arz','AD ve AS kayınca çıktı, fiyat düzeyi ve potansiyel çıktıdan sapma.'],['islm','IS–LM','Genişletici maliye ya da para politikası gelir ve faizi nasıl etkiler?'],['phillips','Phillips Eğrisi','İşsizlik düşünce enflasyon artar; beklenen enflasyon eğriyi yukarı taşır.'],['laffer','Laffer Eğrisi','Vergi oranı belli bir noktadan sonra artarsa vergi geliri düşer.'],['lorenz','Lorenz Eğrisi ve Gini','Eğri tam eşitlik doğrusundan uzaklaştıkça gelir dağılımı bozulur.'],['keynes','Keynesyen Çarpan (45° Doğrusu)','Denge gelir, AE eğrisinin 45° doğrusunu kestiği yerdir.'],['tuketici','Tüketici Dengesi','Bütçe doğrusu kayıtsızlık eğrisine teğet olduğunda fayda en yüksektir.'],['tekel','Tekel (Monopol)','Tekel MR = MC noktasında üretir; rekabetçi çıktıya göre daha az üretir, daha yüksek fiyat koyar.'],['para','Para Piyasası','Para arzı artınca faiz düşer; para talebi artınca faiz yükselir.'],['tarife','Dış Ticaret ve Tarife','Gümrük vergisi yerli üretimi artırır, ithalatı ve tüketimi azaltır; toplumsal kayıp doğurur.'],['solow','Solow Büyüme Modeli','Kişi başına yatırım, amortismanı karşıladığında ekonomi durağan duruma ulaşır.'],['esneklik','Talep Esnekliği ve Hasılat','Fiyat değiştikçe talebin esnekliği ve toplam hasılat nasıl değişir?'],['taylor','Taylor Kuralı','Merkez bankası enflasyon hedefin üstüne çıktıkça ve üretim potansiyelin üstüne geçtikçe politika faizini artırır.'],['fisher','Fisher Etkisi','Enflasyon beklentisi artınca yatırımcı daha yüksek nominal faiz ister; reel getiri yaklaşık sabit kalır.'],['reelkur','Reel Döviz Kuru','Yurt içi enflasyon yurt dışından yüksekse, nominal kur aynı hızda artmazsa para reel olarak değerlenir.']];
 VIEWS.igraf=()=>fbGate('İktisat Grafikleri','Sitedeki “İktisat Grafikleri” sayfasında hangi grafiklerin görüneceğini, sırasını ve kısa açıklamasını belirle. Kaydet dediğin anda sitede geçerli olur, “Yayınla” gerekmez.',root=>{
   let items=IGL.map(([id])=>({id,on:true,d:''}));const list=h('div');
   const fail=e=>{if(e&&e.message==='auth'){FB.out();render();return}
@@ -3813,128 +3813,6 @@ VIEWS.xptakvim=()=>{
   draw();return root;
 };
 
-/* ---------- Mezun röportajları ve Proje grupları (content.json → mr, pa) ---------- */
-(()=>{
-const fl=(t,i)=>h('div',{class:'fld',style:'margin:0'},h('label',{text:t}),i);
-const inp=(v,ph,max)=>h('input',{type:'text',maxlength:String(max||200),value:v||'',placeholder:ph||''});
-const area=(v,ph,max)=>{const a=h('textarea',{rows:3,maxlength:String(max||600),placeholder:ph||''});a.value=v||'';return a};
-VIEWS.mezun=()=>{
-  const w=S.work;if(!w.mr)w.mr={on:false,list:[]};
-  const root=h('div',{class:'stack'}),list=h('div',{class:'panel'});
-  root.append(pageHead('Mezun röportajları','Mezunlarla yapılan kısa röportajlar. Sayfa varsayılan olarak KAPALIDIR; hazır olunca aşağıdaki anahtarla açarsın. Kapalıyken ziyaretçiler Meslekler sayfasında kutuyu görmez. Değişiklikler “Gözden geçir ve yayınla” ile sitede görünür.'));
-  const sw=h('input',{type:'checkbox',checked:w.mr.on===true,'aria-label':'Mezun röportajları sayfası'}),st=h('span',{class:'xp-st'});
-  const setSt=()=>{st.textContent=w.mr.on?'Açık':'Kapalı';st.className='xp-st '+(w.mr.on?'on':'off')};setSt();
-  sw.addEventListener('change',()=>{w.mr.on=sw.checked;setSt();touch();toast(w.mr.on?'Açıldı. Yayınlayınca sitede görünür.':'Kapatıldı. Yayınlayınca sitede gizlenir.')});
-  root.append(h('div',{class:'panel'},h('div',{class:'xp-row'},h('div',{class:'xp-txt'},h('b',{text:'Sitede göster'}),h('small',{text:'Kapalıyken yönetici olarak (?admin) sitede yine görürsün.'}),h('code',{text:'#/mezun'})),h('label',{class:'switch'},sw,h('span',{class:'tr'}),st))));
-  const f={ad:inp('','Ad soyad',80),mezun:inp('','Bölüm ve mezuniyet yılı, örn. İktisat, 2021',80),gorev:inp('','Görevi ve kurumu',120),ozet:area('','Tek cümlelik tanıtım',300)};
-  root.append(h('div',{class:'panel'},h('h3',{text:'Yeni röportaj'}),fl('Ad soyad',f.ad),fl('Bölüm ve yıl',f.mezun),fl('Görev ve kurum',f.gorev),fl('Tanıtım',f.ozet),
-    h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Ekle',onclick:()=>{
-      const ad=xclip(f.ad.value,80);if(!ad){toast('Ad soyad gerekli.');return}
-      w.mr.list.unshift({id:uid(),ad,mezun:xclip(f.mezun.value,80),gorev:xclip(f.gorev.value,120),ozet:xclip(f.ozet.value,300),qa:[]});
-      f.ad.value=f.mezun.value=f.gorev.value=f.ozet.value='';touch();draw();toast('Eklendi. Sorularını aşağıdan yaz.')}}))),list);
-  function draw(){
-    list.replaceChildren(h('h3',{text:'Röportajlar ('+w.mr.list.length+')'}));
-    if(!w.mr.list.length){list.append(xempty('Henüz röportaj yok','Yukarıdan ekle; sorular ve cevaplar kartın içinde düzenlenir.'));return}
-    w.mr.list.forEach(x=>{
-      const ad=inp(x.ad,'Ad soyad',80),mz=inp(x.mezun,'Bölüm ve yıl',80),go=inp(x.gorev,'Görev ve kurum',120),oz=area(x.ozet,'Tanıtım',300),qa=h('div',{style:'display:grid;gap:10px'});
-      const sync=()=>{x.ad=xclip(ad.value,80);x.mezun=xclip(mz.value,80);x.gorev=xclip(go.value,120);x.ozet=xclip(oz.value,300);touch()};
-      [ad,mz,go,oz].forEach(i=>i.addEventListener('change',sync));
-      const drawQ=()=>{qa.replaceChildren(...x.qa.map((a,i)=>{
-        const q=inp(a[0],'Soru',200),c=area(a[1],'Cevap',1500);
-        const s2=()=>{x.qa[i]=[xclip(q.value,200),xclip(c.value,1500)];touch()};q.addEventListener('change',s2);c.addEventListener('change',s2);
-        return h('div',{style:'display:grid;gap:6px;padding:10px;border:1px solid var(--line);border-radius:12px'},q,c,h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Soruyu sil',onclick:()=>{x.qa.splice(i,1);touch();drawQ()}})))}))};
-      drawQ();
-      list.append(h('details',{style:'padding:10px 0;border-top:1px solid var(--line)'},h('summary',{style:'cursor:pointer;font-weight:700',text:(x.ad||'(adsız)')+(x.mezun?' · '+x.mezun:'')}),
-        h('div',{style:'display:grid;gap:8px;margin-top:10px'},fl('Ad soyad',ad),fl('Bölüm ve yıl',mz),fl('Görev ve kurum',go),fl('Tanıtım',oz),h('b',{text:'Röportaj soruları'}),qa,
-          h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'+ Soru ekle',onclick:()=>{x.qa.push(['','']);touch();drawQ()}}),
-            h('button',{class:'btn sm ghost danger',type:'button',text:'Röportajı sil',onclick:async()=>{if(!(await ask('Röportajı sil','“'+(x.ad||'Adsız')+'” silinsin mi? Yayınlayana kadar geri alınabilir.','Sil',true)))return;w.mr.list=w.mr.list.filter(z=>z.id!==x.id);touch();draw()}})))))})}
-  draw();return root};
-VIEWS.projeler=()=>{
-  const w=S.work;if(!w.pa)w.pa={list:[]};
-  const root=h('div',{class:'stack'}),list=h('div',{class:'panel'});
-  root.append(pageHead('Proje ve araştırma grupları','Etkinlikler altındaki Proje ve Araştırma Grupları sayfasında görünen gruplar. Sayfanın kendisini “Sayfa anahtarları”ndan açıp kapatırsın. Gelen başvuru ve fikirler “Proje başvuruları” bölümüne düşer. Değişiklikler “Gözden geçir ve yayınla” ile sitede görünür.'));
-  const f={baslik:inp('','Grubun konusu',140),alan:inp('','Alan, örn. Para politikası',80),ozet:area('','Kısa açıklama',400),lider:inp('','Lider',80),takvim:inp('','Takvim, örn. Kasım–Ocak, haftada bir',120),kontenjan:inp('','Kontenjan, örn. 6 kişi',60),cikti:inp('','Beklenen çıktı, örn. 10 sayfalık rapor',160),durum:h('select',{'aria-label':'Durum'},PA_DURUM.map(d=>h('option',{value:d,text:d})))};
-  root.append(h('div',{class:'panel'},h('h3',{text:'Yeni grup'}),fl('Konu',f.baslik),fl('Alan',f.alan),fl('Açıklama',f.ozet),fl('Lider',f.lider),fl('Takvim',f.takvim),fl('Kontenjan',f.kontenjan),fl('Beklenen çıktı',f.cikti),fl('Durum',f.durum),
-    h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Ekle',onclick:()=>{
-      const b=xclip(f.baslik.value,140);if(!b){toast('Konu gerekli.');return}
-      w.pa.list.unshift({id:uid(),baslik:b,alan:xclip(f.alan.value,80),ozet:xclip(f.ozet.value,400),lider:xclip(f.lider.value,80),takvim:xclip(f.takvim.value,120),kontenjan:xclip(f.kontenjan.value,60),cikti:xclip(f.cikti.value,160),durum:f.durum.value});
-      ['baslik','alan','ozet','lider','takvim','kontenjan','cikti'].forEach(k=>f[k].value='');touch();draw();toast('Eklendi. Yayınlayınca sitede görünür.')}}))),list);
-  function draw(){
-    list.replaceChildren(h('h3',{text:'Gruplar ('+w.pa.list.length+')'}));
-    if(!w.pa.list.length){list.append(xempty('Henüz grup yok','Yukarıdan ekle. Grup yokken sitede yalnızca fikir önerisi formu görünür.'));return}
-    w.pa.list.forEach(x=>{
-      const F={baslik:inp(x.baslik,'Konu',140),alan:inp(x.alan,'Alan',80),ozet:area(x.ozet,'Açıklama',400),lider:inp(x.lider,'Lider',80),takvim:inp(x.takvim,'Takvim',120),kontenjan:inp(x.kontenjan,'Kontenjan',60),cikti:inp(x.cikti,'Çıktı',160),durum:h('select',{'aria-label':'Durum'},PA_DURUM.map(d=>h('option',{value:d,text:d})))};F.durum.value=x.durum;
-      const lim={baslik:140,alan:80,ozet:400,lider:80,takvim:120,kontenjan:60,cikti:160};
-      Object.keys(F).forEach(k=>F[k].addEventListener('change',()=>{x[k]=k==='durum'?F.durum.value:xclip(F[k].value,lim[k]);touch()}));
-      list.append(h('details',{style:'padding:10px 0;border-top:1px solid var(--line)'},h('summary',{style:'cursor:pointer;font-weight:700',text:x.baslik+' · '+x.durum}),
-        h('div',{style:'display:grid;gap:8px;margin-top:10px'},fl('Konu',F.baslik),fl('Alan',F.alan),fl('Açıklama',F.ozet),fl('Lider',F.lider),fl('Takvim',F.takvim),fl('Kontenjan',F.kontenjan),fl('Beklenen çıktı',F.cikti),fl('Durum',F.durum),
-          h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Grubu sil',onclick:async()=>{if(!(await ask('Grubu sil','“'+x.baslik+'” silinsin mi?','Sil',true)))return;w.pa.list=w.pa.list.filter(z=>z.id!==x.id);touch();draw()}})))))})}
-  draw();return root};
-VIEWS.pproje=()=>recView('proje');
-})();
-
-
-/* ---------- Mevzuat süre hesaplama: tatiller, ara verme dönemi, süre türleri (content.json → ts) ---------- */
-(()=>{
-const fl=(t,i)=>h('div',{class:'fld',style:'margin:0'},h('label',{text:t}),i);
-const inp=(v,ph,max,type)=>h('input',{type:type||'text',maxlength:String(max||200),value:v==null?'':String(v),placeholder:ph||''});
-const trd=d=>{const[a,b,c]=String(d).split('-');return c+'.'+b+'.'+a};
-VIEWS.sure=()=>{
-  const w=S.work;if(!w.ts)w.ts=clone(TS_SEED);const ts=w.ts;if(!ts.mali)ts.mali=clone(TS_SEED.mali);if(!Array.isArray(ts.silinen))ts.silinen=[];
-  const root=h('div',{class:'stack'});
-  root.append(pageHead('Mevzuat: süre hesaplama','Mevzuat sayfasındaki Süre hesaplama aracının tatil günlerini, adli ve mali tatil dönemlerini ve süre türlerini buradan yönetirsin. Araç hesaplarken hafta sonlarını ve burada girdiğin tatilleri “tatil günü” sayar. Hazır katalogdaki süre türleri otomatik gelir; sildiklerin geri gelmez, “Varsayılanları geri yükle” ile döner. “Resmî metinden doğrula” işaretli süreleri kontrol edip işareti kaldır. Değişiklikler “Gözden geçir ve yayınla” ile sitede görünür.'));
-  const tl=h('div',{class:'panel'}),fa=inp('','Örn. Kurban Bayramı',60),fb=inp('','',10,'date'),fc=inp('','',10,'date');
-  root.append(h('div',{class:'panel'},h('h3',{text:'Yeni tatil'}),
-    h('p',{class:'hint',text:'Yalnızca TAM GÜN tatilleri gir (bayramın arife günü yarım gün olduğu için girilmez). Çok günlü tatillerde bitiş tarihini de yaz. Resmî Gazete’deki tatil duyurusuna ve idari tatil kararlarına göre her yıl güncelle.'}),
-    fl('Ad',fa),fl('Başlangıç',fb),fl('Bitiş (tek günse boş bırak)',fc),
-    h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'2026–2027 resmî tatillerini ekle',onclick:()=>{let n=0;TS_TATIL.forEach(x=>{if(!ts.tatil.some(z=>z.bas===x.bas)){ts.tatil.push(clone(x));n++}});touch();drawT();toast(n?n+' tatil eklendi. Yayınlayınca sitede etkili olur.':'Hepsi zaten ekli.')}}),h('button',{class:'btn sm solid',type:'button',text:'Ekle',onclick:()=>{
-      if(!fb.value){toast('Başlangıç tarihi gerekli.');return}const bit=fc.value&&fc.value>=fb.value?fc.value:fb.value;
-      ts.tatil.push({id:uid(),ad:xclip(fa.value,60)||'Tatil',bas:fb.value,bit});fa.value=fb.value=fc.value='';touch();drawT();toast('Eklendi. Yayınlayınca sitede etkili olur.')}}))),tl);
-  function drawT(){
-    const L=[...ts.tatil].sort((a,b)=>a.bas.localeCompare(b.bas));
-    tl.replaceChildren(h('h3',{text:'Tatil günleri ('+L.length+')'}),L.length?L.map(x=>h('div',{class:'row',style:'justify-content:space-between;padding:8px 0;border-top:1px solid var(--line)'},
-      h('span',{text:x.ad+' · '+trd(x.bas)+(x.bit!==x.bas?' – '+trd(x.bit):'')}),
-      h('button',{class:'btn sm ghost danger',type:'button',text:'Sil',onclick:()=>{ts.tatil=ts.tatil.filter(z=>z.id!==x.id);touch();drawT()}}))):xempty('Henüz tatil girilmedi','Tatil girilmezse araç yalnızca hafta sonlarını dikkate alır ve kullanıcıya uyarı gösterir.'))}
-  drawT();
-  const dönem=(key,title,hint)=>{const o=ts[key],ab=inp(o.bas,'AA-GG',5),az=inp(o.bit,'AA-GG',5),au=inp(o.uzama,'',3,'number');
-    const sa=()=>{const ok=v=>/^\d{2}-\d{2}$/.test(v);if(ok(ab.value.trim()))o.bas=ab.value.trim();if(ok(az.value.trim()))o.bit=az.value.trim();o.uzama=Math.max(0,Math.min(60,Math.floor(+au.value)||0));touch()};
-    [ab,az,au].forEach(i=>i.addEventListener('change',sa));
-    return h('div',{class:'panel'},h('h3',{text:title}),h('p',{class:'hint',text:hint}),fl('Başlangıç (AA-GG)',ab),fl('Bitiş (AA-GG)',az),fl('Uzama (gün)',au))};
-  root.append(dönem('ara','Çalışmaya ara verme (adli tatil) dönemi','İYUK m. 8/3: sürenin son günü bu döneme denk gelirse süre, dönemin bittiği günü izleyen günden itibaren belirtilen gün kadar uzar. Tarihleri AA-GG biçiminde yaz (örn. 07-20 ve 08-31).'));
-  root.append(dönem('mali','Mali tatil dönemi','5604 sayılı Kanun: vergiyle ilgili dava açma süreleri bu dönemde işlemez (“Mali tatilde süre işlemesin” işaretli türler); beyan ve ödeme sürelerinin son günü bu döneme denk gelirse belirtilen gün kadar uzar (örn. 07-01 ve 07-20, 7 gün).'));
-  const kl=h('div',{class:'panel'});
-  const nb=()=>h('select',{'aria-label':'Birim'},Object.entries(TS_B).map(([k,t])=>h('option',{value:k,text:t})));
-  const TUR=[['','Normal (başlangıçtan n birim sonra)'],['yilsonu','Takvim yılı sonu (zamanaşımı)'],['tebligat','Tebliğ edilmiş sayılma tarihi'],['durma','Süre durması (üç tarihli, İYUK m. 11)']];
-  const cb=(on,l)=>h('input',{type:'checkbox',checked:!!on,'aria-label':l});
-  root.append(h('div',{class:'panel'},h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'+ Yeni süre türü',onclick:()=>{ts.kurallar.push({id:uid(),kat:'Diğer',ad:'Yeni süre türü',dayanak:'',olay:'Tebliğ tarihi',n:30,birim:'gun',adli:false,not:''});touch();drawK();toast('Eklendi. Açıp düzenle.')}}),
-    h('button',{class:'btn sm',type:'button',text:'Varsayılan süre türlerini geri yükle',onclick:async()=>{if(!(await ask('Varsayılanları geri yükle','Mevcut tüm süre türleri silinir (eklediklerin dahil), hazır katalog geri gelir. Tatiller etkilenmez.','Geri yükle',true)))return;ts.kurallar=clone(TS_SEED.kurallar);ts.silinen=[];touch();drawK()}}))),kl);
-  function drawK(){
-    kl.replaceChildren(h('h3',{text:'Süre türleri ('+ts.kurallar.length+')'}),h('p',{class:'hint',text:'Her tür için süre ve dayanak maddeyi resmî metinden doğrula. “Ardışık süre” doluysa önce bekleme süresi (ör. 30 günde zımni ret), sonra ikinci süre (dava açma) hesaplanır.'}));
-    if(!ts.kurallar.length){kl.append(xempty('Süre türü yok','Aracın açılması için en az bir tür gerekir.'));return}
-    let son=null;
-    ts.kurallar.forEach(r=>{
-      if((r.kat||'Diğer')!==son){son=r.kat||'Diğer';kl.append(h('h4',{style:'margin:18px 0 4px',text:son}))}
-      const f={kat:inp(r.kat||'','Grup adı',60),ad:inp(r.ad,'Ad',120),dayanak:inp(r.dayanak,'Örn. 2577 sayılı İYUK m. 7',160),olay:inp(r.olay,'Örn. Tebliğ tarihi',80),n:inp(r.n,'',4,'number'),birim:nb(),tur:h('select',{'aria-label':'Hesap türü'},TUR.map(([k,t])=>h('option',{value:k,text:t}))),
-        adli:cb(r.adli,'Ara verme dönemi uzatması'),mali:cb(r.mali==='dur','Mali tatilde süre işlemesin'),tatilsiz:cb(r.tatilsiz,'Hafta sonu/tatil uzaması uygulanmasın'),dogrula:cb(r.dogrula,'Resmî metinden doğrula'),
-        olay2:inp(r.olay2||'','İkinci tarihin adı',100),olay3:inp(r.olay3||'','Üçüncü tarihin adı',100),bekle:inp(r.bekle||30,'',3,'number'),not:inp(r.not,'Kullanıcıya gösterilecek not',400),
-        zOn:cb(!!r.z,'Ardışık süre var'),zad:inp(r.z&&r.z.ad,'Ardışık sürenin adı',120),zn:inp(r.z?r.z.n:60,'',4,'number'),zb:nb(),zadli:cb(r.z&&r.z.adli,'Ardışık süre için ara verme uzatması')};
-      f.birim.value=r.birim;f.zb.value=(r.z&&r.z.birim)||'gun';f.tur.value=r.tur||'';
-      const sync=()=>{r.kat=xclip(f.kat.value,60);r.ad=xclip(f.ad.value,120);r.dayanak=xclip(f.dayanak.value,160);r.olay=xclip(f.olay.value,80);r.n=Math.max(1,Math.floor(+f.n.value)||1);r.birim=f.birim.value;r.adli=f.adli.checked;r.not=xclip(f.not.value,400);
-        if(f.tur.value)r.tur=f.tur.value;else delete r.tur;if(f.mali.checked)r.mali='dur';else delete r.mali;if(f.tatilsiz.checked)r.tatilsiz=true;else delete r.tatilsiz;if(f.dogrula.checked)r.dogrula=true;else delete r.dogrula;
-        r.olay2=xclip(f.olay2.value,100);r.olay3=xclip(f.olay3.value,100);r.bekle=Math.max(1,Math.min(365,Math.floor(+f.bekle.value)||30));
-        if(f.zOn.checked)r.z={n:Math.max(1,Math.floor(+f.zn.value)||1),birim:f.zb.value,ad:xclip(f.zad.value,120),adli:f.zadli.checked};else delete r.z;touch()};
-      Object.values(f).forEach(i=>i.addEventListener('change',sync));
-      const row=(...a)=>h('label',{class:'row',style:'gap:8px'},...a);
-      kl.append(h('details',{style:'padding:10px 0;border-top:1px solid var(--line)'},h('summary',{style:'cursor:pointer;font-weight:700',text:(r.dogrula?'⚠ ':'')+(r.ad||'(adsız)')+' · '+r.n+' '+TS_B[r.birim]+(r.z?' + '+r.z.n+' '+TS_B[r.z.birim]:'')}),
-        h('div',{style:'display:grid;gap:8px;margin-top:10px'},fl('Grup',f.kat),fl('Ad',f.ad),fl('Dayanak (kanun ve madde)',f.dayanak),fl('Başlangıç olayı (kullanıcıya sorulan tarih)',f.olay),fl('Hesap türü',f.tur),
-          h('div',{class:'row'},fl('Süre',f.n),fl('Birim',f.birim)),row(f.adli,h('span',{text:'Ara verme dönemi (adli tatil) uzatması uygulansın'})),row(f.mali,h('span',{text:'Mali tatilde (1–20 Temmuz) süre işlemesin (vergi dava süreleri)'})),
-          row(f.tatilsiz,h('span',{text:'Hafta sonu / resmî tatil uzaması uygulanmasın (zamanaşımı, tebliğ sayılma)'})),row(f.dogrula,h('span',{text:'Resmî metinden doğrula uyarısı gösterilsin'})),fl('Not',f.not),
-          h('p',{class:'hint',text:'Aşağıdaki üç alan yalnızca “Süre durması” türünde kullanılır.'}),fl('İkinci tarihin adı (başvuru tarihi)',f.olay2),fl('Üçüncü tarihin adı (ret cevabı)',f.olay3),fl('Cevap bekleme süresi (gün)',f.bekle),
-          row(f.zOn,h('span',{text:'Ardışık (ikinci) süre var'})),fl('Ardışık sürenin adı',f.zad),h('div',{class:'row'},fl('Ardışık süre',f.zn),fl('Birim',f.zb)),row(f.zadli,h('span',{text:'Ardışık süre için ara verme uzatması uygulansın'})),
-          h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Süre türünü sil',onclick:async()=>{if(!(await ask('Süre türünü sil','“'+(r.ad||'Adsız')+'” silinsin mi?','Sil',true)))return;if(TS_SEED.kurallar.some(z=>z.id===r.id)&&!ts.silinen.includes(r.id))ts.silinen.push(r.id);ts.kurallar=ts.kurallar.filter(z=>z.id!==r.id);touch();drawK()}})))))})}
-  drawK();return root};
-})();
-
 VIEWS.vtab=()=>fbGate('Tablo arşivi (eski)','Veri Tablosu aracı sitede artık gizli, yeni tablo gelmez; bu ekran eski kayıtlar içindir. Sitedeki Veri Tablosu sayfasından “Onaya gönder” ile gelen tablolar burada bekler. İncele, gerekirse başlığı düzelt, “Onayla ve yayınla” de; tablo Veri Tablosu sayfasında herkese görünür ve yoruma açılır. Yayınlama ve kaldırma anında sitede geçerli olur, “Yayınla” gerekmez.',root=>{
   const st={rows:[],pub:{},cm:{},sel:null,s:'',q:''};
   const q=h('input',{type:'search',placeholder:'Başlık, hazırlayan ya da kaynakta ara','aria-label':'Ara'});
@@ -4073,7 +3951,7 @@ render=function(){_render1();if(!_vtPoll&&FB.sess()){_vtPoll=true;pollVt();setIn
 (()=>{
 const KS_TARGETS=[
  ['Ana sayfalar',[['#/','Ana sayfa'],['#/merkez','Simülasyon Merkezi'],['#/meslekler','Meslekler'],['#/ansiklopedi','İktisadi Ansiklopedi'],['#/piyasa','Veri ve Pariteler'],['#/yayin','Gazete ve Dergi'],['#/etkinlik','Etkinlikler'],['#/katil','Katıl']]],
- ['Alt sayfalar',[['#/mulakat','Mülakat'],['#/kadrolar','Kariyer Kadroları'],['#/meslek','Meslek Tanıtımı'],['#/quiz','Terim Quiz'],['#/sozluk','Ekonomi Sözlüğü'],['#/anatomi','Kavramın Anatomisi'],['#/efsane','Şehir Efsaneleri'],['#/kisiler','İktisat Düşünürleri'],['#/kitaplik','Kitaplık'],['#/pariteler','Pariteler'],['#/veri','İktisat Grafikleri'],['#/hesap','Hesaplayıcılar'],['#/kaynak','Kaynaklar'],['#/mezun','Mezun Röportajları'],['#/projeler','Proje ve Araştırma Grupları'],['#/gazete','Diyalog Gazetesi'],['#/dergi','İktisadi Kalkınma Dergisi'],['#/makale','Makale Yazımı'],['#/arsiv','Arşiv'],['#/fikir','Fikir Muharebesi'],['#/yatay','Yatay Bakış'],['#/yarisma','Bilgi Yarışması']]],
+ ['Alt sayfalar',[['#/mulakat','Mülakat'],['#/kadrolar','Kariyer Kadroları'],['#/meslek','Meslek Tanıtımı'],['#/quiz','Terim Quiz'],['#/sozluk','Ekonomi Sözlüğü'],['#/anatomi','Kavramın Anatomisi'],['#/efsane','Şehir Efsaneleri'],['#/kisiler','İktisat Düşünürleri'],['#/kitaplik','Kitaplık'],['#/pariteler','Pariteler'],['#/veri','İktisat Grafikleri'],['#/hesap','Hesaplayıcılar'],['#/kaynak','Kaynaklar'],['#/gazete','Diyalog Gazetesi'],['#/dergi','İktisadi Kalkınma Dergisi'],['#/makale','Makale Yazımı'],['#/arsiv','Arşiv'],['#/fikir','Fikir Muharebesi'],['#/yatay','Yatay Bakış'],['#/yarisma','Bilgi Yarışması']]],
  ['Simülasyonlar',[['#/vaka','Vaka Analizi'],['#/ppk','Başkan Simülasyonu'],['#/borsa','Borsa Simülasyonu'],['#/bakan','Bakanlık Simülasyonu'],['#/girisim','Girişimci'],['#/kur','Dış Ticaret'],['#/burokrat','Kamu Bürokratı'],['#/muzakere','Müzakere Masası'],['#/ihale','Kamu İhalesi'],['#/hakimlik','Hâkimlik Simülasyonu'],['#/valilik','Kaymakamlık ve Valilik'],['#/smmm','Mali Müşavirlik']]],
  ['Ayrı sayfalar',[['eko-plus/','Eko-Plus'],['eko-plus/#/forum','Soru-Cevap (Eko-Plus)'],['eko-plus/#/kavram','Günün Kavramı (Eko-Plus)'],['eko-plus/#/ilanlar','Staj ve Burs Panosu (Eko-Plus)'],['eko-plus/#/cv','CV ve Niyet Mektubu (Eko-Plus)'],['eko-plus/#/tahmin','Haftalık Tahmin (Eko-Plus)'],['eko-plus/#/profil','Üye Profili (Eko-Plus)'],['a-grubu/','A Grubu Makam Simülasyonu'],['mevzuat/','Mevzuat']]]
 ];
