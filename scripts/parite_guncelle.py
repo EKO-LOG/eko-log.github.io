@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """data/parite-veri.json uretir. Hizli pes eder (Yahoo engelliyse 30 sn icinde birakir) ve hatalari dosyadaki 'diag' alanina yazar."""
-import json, time, csv, io, datetime as dt, urllib.request, urllib.parse, sys
+import os, json, time, csv, io, datetime as dt, urllib.request, urllib.parse, sys
 UA={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36','Accept':'*/*'}
 Y={'BIST100':'XU100.IS','XAU':'GC=F','XAG':'SI=F','XPT':'PL=F','XPD':'PA=F','BRENT':'BZ=F','WTI':'CL=F','NG':'NG=F','TTF':'TTF=F','HO':'HO=F','RB':'RB=F',
 'XCU':'HG=F','ALU':'ALI=F','REMX':'REMX','LIT':'LIT','URA':'URA','WHEAT':'ZW=F','CORN':'ZC=F','SOY':'ZS=F','COFFEE':'KC=F','SUGAR':'SB=F','COTTON':'CT=F','COCOA':'CC=F',
@@ -9,9 +9,22 @@ STQ={'BIST100':['^xu100','xu100.tr','xu100'],'XAU':['xauusd'],'XAG':['xagusd']}
 diag={}
 def raw(u,t=12):
     return urllib.request.urlopen(urllib.request.Request(u,headers=UA),timeout=t).read().decode()
+PROXY=os.environ.get('PROXY_URL','').strip().rstrip('/')
+def yf_get(sym):
+    try:
+        import yfinance as yf
+        h=yf.Ticker(sym).history(period='5y',interval='1d',auto_adjust=False)
+        s=[[i.strftime('%Y-%m-%d'),round(float(c),6)] for i,c in h['Close'].dropna().items() if c>0]
+        if len(s)>1: return s
+        diag[f'yfinance {sym}']='bos'
+    except Exception as e: diag[f'yfinance {sym}']=str(e)[:120]
 def yahoo(sym):
-    for h in ('query1','query2'):
-        u=f'https://{h}.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?range=5y&interval=1d'
+    s=yf_get(sym)
+    if s: return s
+    now=int(time.time()); urls=[]
+    if PROXY: urls.append(('worker',f'{PROXY}/yahoo?symbol={urllib.parse.quote(sym)}&period1={now-1830*86400}&period2={now}&interval=1d'))
+    urls+= [(h,f'https://{h}.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?range=5y&interval=1d') for h in ('query1','query2')]
+    for h,u in urls:
         try:
             r=json.loads(raw(u))['chart']['result'][0]; q=r['indicators']['quote'][0]['close']
             return [[dt.datetime.fromtimestamp(t,dt.timezone.utc).strftime('%Y-%m-%d'),round(c,6)] for t,c in zip(r['timestamp'],q) if c and c>0]
