@@ -297,7 +297,7 @@ body.rdopen{overflow:hidden}
 body.xon .x-langfab{display:flex}
 .x-langfab button{border:0;background:none;color:var(--ink);font:700 13.5px "Instrument Sans",sans-serif;padding:7px 13px;border-radius:999px;cursor:pointer}
 .x-langfab button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
-.x-hubd{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;margin-bottom:10px}
+.x-hubd{display:grid!important;grid-template-columns:1.2fr 1fr;gap:20px;margin-bottom:10px}.x-hubd.pg-hide,.x-hubd>.pg-hide,.x-hubd .panel,.x-hubd .card{display:block!important}
 @media(max-width:760px){.xp .x-g2,.x-hubd{grid-template-columns:1fr}.xp .x-paper{padding:24px 20px}.xp .x-ans{margin-left:14px}}
 @media print{
 body.xprint header,body.xprint footer,body.xprint .xp .banner,body.xprint .xp .wave,body.xprint .xp .x-np,body.xprint #toast,body.xprint .x-langfab,body.xprint .xp .next{display:none!important}
@@ -5671,7 +5671,7 @@ const XP={};let XT=[];   /* yönetimin eklediği resmî sınav tarihleri (conten
 const xpKey=id=>id==='x-yoklama'?'x-etkinlik':id;
 const pageOn=id=>{id=xpKey(id);if(!id)return true;if(HOST.pageOn)return HOST.pageOn(id)!==false;if(id.startsWith('x-v-')&&XP['x-veri']===false)return false;return XP[id]!==false};
 const applyXP=c=>{if(c&&Array.isArray(c.xt))XT=c.xt.filter(x=>x&&x.title&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')).map(x=>({id:'o_'+x.id,title:String(x.title),date:x.date,type:x.type||'diger',link:/^https?:\/\//i.test(x.link||'')?x.link:'',note:String(x.note||''),done:false,official:true}));
-  if(c&&c.xp&&typeof c.xp==='object')Object.keys(c.xp).forEach(k=>{XP[k]=c.xp[k]!==false})};
+  if(c&&c.xp&&typeof c.xp==='object')Object.keys(c.xp).forEach(k=>{XP[k]=k==='kavram'?true:c.xp[k]!==false})};
 const syncNav=()=>document.querySelectorAll('#x2nav a').forEach(a=>{const id=a.getAttribute('href').replace(/^#\/?/,'');if(!id)return;const on=pageOn(id);a.hidden=!on&&!prev();a.style.opacity=on?'':'.55';a.title=on?'':'Sitede kapalı (yalnızca yönetici görür)'});
 const uid=()=>{const a=new Uint8Array(6);crypto.getRandomValues(a);return Array.from(a,b=>b.toString(36).padStart(2,'0')).join('').slice(0,10)};
 const el=(t,a,...k)=>{const e=document.createElement(t);if(a)for(const[x,v]of Object.entries(a)){if(v==null||v===false)continue;if(x==='class')e.className=v;else if(x==='text')e.textContent=v;else if(x==='value')e.value=v;else if(x==='style')e.style.cssText=v;else if(x.startsWith('on'))e.addEventListener(x.slice(2),v);else e.setAttribute(x,v===true?'':v)}k.flat(Infinity).forEach(c=>{if(c==null||c===false)return;e.append(c.nodeType?c:document.createTextNode(String(c)))});return e};
@@ -8511,7 +8511,7 @@ if(ready)on();else setTimeout(()=>{if(!ready){ready=true;on()}},4000);
 (()=>{
 const EV=['etkinlik','fikir','fikir-canli','fikir-etkinlik','fikir-turler','yatay'],EP=['kavram','ilanlar','cv','tahmin','profil','paylas','a-grubu','mevzuat'],XL={'a-grubu':'a-grubu/','mevzuat':'mevzuat/'},FIK=['fikir-canli','fikir-etkinlik','fikir-turler'];
 const C=()=>window.EKO_C||{},adm=()=>document.body.classList.contains('adm');
-const raw=id=>{const c=C();if(id==='yatay')return!(c.yb&&c.yb.on===false);if(EV.includes(id))return!(c.pg&&c.pg[id]===false);if(EP.includes(id))return!(c.xp&&c.xp[id]===false);return true};
+const raw=id=>{const c=C();if(id==='yatay')return!(c.yb&&c.yb.on===false);if(EV.includes(id))return!(c.pg&&c.pg[id]===false);if(id==='kavram')return true;if(EP.includes(id))return!(c.xp&&c.xp[id]===false);return true};
 const on=id=>raw(id)&&(FIK.includes(id)?raw('fikir'):true);
 function shut(id,closed){
   const p=document.getElementById('p-'+id),c=p&&p.querySelector('.content');if(!c)return;
