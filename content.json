@@ -187,6 +187,16 @@
       "img": "images/179287594394602.jpg"
     },
     {
+      "id": "179363008335501",
+      "kind": "Haber",
+      "title": "BİM'den Stratejik Hamle: Perakende Devinden Yazılım, Yapay Zeka ve Fintek Sektörüne Dev Adım",
+      "text": "BİM, Şaşırtmaya Devam Ediyor... Banka Sonrasında Yapay Zeka ",
+      "body": "Türkiye’nin en yaygın perakende zincirlerinden biri olan BİM Birleşik Mağazalar A.Ş., perakende ve finansal hizmetlerin ardından teknoloji alanında da büyüme vitesini yükseltti. Şirket; yazılım, yapay zeka, siber güvenlik ve finansal teknoloji (fintek) alanlarında faaliyet göstermek üzere yeni bir şirket kurma kararı aldı.\n\nGeleneksel perakende modelinin ötesine geçerek dijitalleşme süreçlerine ağırlık veren BİM, Kamuyu Aydınlatma Platformu’na (KAP) yaptığı açıklamada yeni bir iştirak sürecinin başlatıldığını duyurdu. Tamamı BİM’e ait olacak olan yeni şirketin kuruluş sermayesi 250 bin TL olarak belirlenirken, faaliyet alanlarının genişliği dikkat çekti.\n\nOdak Noktasında Yapay Zeka, Siber Güvenlik ve Dijital Bankacılık Var\nSon yıllarda perakende sektöründe yaşanan dijital dönüşüm rüzgarını arkasına alan perakende devi, kuracağı bu yeni teknoloji şirketi ile pek çok kritik alanda Ar-Ge, mühendislik ve danışmanlık hizmetleri sunmayı hedefliyor. Yeni şirketin ana faaliyet başlıkları arasında şunlar yer alıyor:\n\nYazılım ve Yapay Zeka: Bilgisayar programlama, özgün yazılım geliştirme ve yapay zeka tabanlı çözümler.\n\nFinansal Teknolojiler (Fintek) ve Ödeme Sistemleri: Dijital bankacılık altyapıları, ödeme hizmetleri ve POS terminalleri, ATM cihazları gibi donanım/yazılım entegrasyonları.\n\nİleri Teknoloji Çözümleri: Büyük veri analitiği, bulut bilişim ve siber güvenlik alanlarında stratejik geliştirmeler.\n\nE-Ticaret ve Dijital Platformlar: Dijital pazaryeri ve platform hizmetlerinin sunulması.\n\nTeknoloji Geliştirme Bölgelerinde Yer Alacak\n\nAlınan yönetim kurulu kararına göre yeni şirket, sadece grup içi ihtiyaçları karşılamakla kalmayacak; aynı zamanda teknoloji geliştirme bölgelerinde (Ar-Ge merkezleri/teknokentler) projeler yürütecek ve sektörel iş birliklerine imza atacak.\n\nBİM'in perakende ağındaki devasa veri gücünü yapay zeka ve finansal teknolojilerle harmanlayacak olması, iş dünyasında ve finans çevrelerinde \"perakendenin dijital geleceği\" adına önemli bir eşik olarak değerlendiriliyor. Kuruluş ve tescil süreçleri devam eden şirketin, önümüzdeki dönemde hem BİM’in kendi operasyonel verimliliğini artırması hem de dış pazarlara teknoloji ihraç etmesi bekleniyor.",
+      "by": "",
+      "dt": "",
+      "img": "images/179363022701002.jpg"
+    },
+    {
       "id": "179360689546201",
       "kind": "Haber",
       "title": "Tarihin En Büyük Kripto Soygununda Perde Aralandı: FBI, Binance Hack Olayının Arkasında Kuzey Kore Var",
@@ -523,6 +533,7 @@
     }
   ],
   "fme": [],
+  "konf": [],
   "c": {
     "team": [],
     "gallery": [],
@@ -1929,7 +1940,7 @@
   },
   "pg": {
     "etkinlik": true,
-    "projeler": true,
+    "konferanslar": true,
     "fikir": true,
     "fikir-canli": true,
     "fikir-etkinlik": true,
