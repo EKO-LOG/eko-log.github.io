@@ -180,6 +180,16 @@
   "i": {},
   "n": [
     {
+      "id": "179360689546201",
+      "kind": "Haber",
+      "title": "Tarihin En Büyük Kripto Soygununda Perde Aralandı: FBI, Binance Hack Olayının Arkasında Kuzey Kore Var",
+      "text": "Binance'da Akıl Almaz Dolandırıcılık ",
+      "body": "Dünyanın en büyük kripto para borsası Binance, kripto tarihinin en büyük dijital soygunlarından biriyle sarsıldı. Yaklaşık 6.3 milyar doların ele geçirildiği devasa siber saldırının ardından ABD Federal Soruşturma Bürosu (FBI), olayla ilgili net bir açıklama yaparak saldırının arkasında Kuzey Kore bağlantılı hackerların olduğunu duyurdu.\n\nSadece 20 Dakikada 6.3 Milyar Dolarlık Vurgun\n\nBlokzincir istihbarat firmalarının ve yetkililerin raporlarına göre; saldırganlar son derece organize ve profesyonel bir yöntem izledi. Binance cüzdanlarından yaklaşık 10 farklı blokzincir ağı üzerinden toplamda 6.36 milyar dolar değerinde kripto varlık transfer edildi. Şoke edici vurgunun, sadece 20 dakika gibi kısa bir süre içinde gerçekleştirildiği belirtildi.\nSiber güvenlik uzmanları ve blockchain analiz firmaları, saldırının arkasında Kuzey Kore devlet destekli \"TraderTraitor\" (Lazarus Grubu ile bağlantılı olduğu bilinen) adlı hacker ünitesinin bulunduğunu yüksek bir güven oran horário ile raporladı. FBI da yayımladığı resmi bildiriyle bu bulguları teyit ederek, özel sektör kuruluşlarını ve kripto borsalarını TraderTraitor aktörlerinin fonları aklamak için kullandığı cüzdan adreslerine karşı dikkatli olmaları ve işlemleri engellemeleri konusunda uyardı.\n\nSaldırının Detayları: Gizli Deliller Yok Edildi\n\nBinance Ortak CEO'su Richard Teng, olayın ardından yaptığı açıklamalarda saldırının karmaşık yapısına dikkat çekti. İlk bulgulara göre bir Binance mühendisinin dizüstü bilgisayarının hedef alınarak sızıldığını belirten Teng, saldırganların sistemde delilleri ve izleri yok etmek için özel bir \"kendi kendini imha\" (self-destruct) mekanizması kullandığını, bunun da incelemeleri zorlaştırdığını ifade etti.\n\nBinance'ten Hızlı Müdahale: \"Kayıpların %90'ı Karşılandı\"\n\nKripto dünyasında büyük bir panik yaratan olay sonrasında Binance yönetimi kullanıcıların mağduriyetini önlemek için acil adımlar attı. Borsadan yapılan resmi açıklamalarda, şirket hazinesinden ve finansal rezervlerden sağlanan kaynaklarla çalınan varlıkların %90'lık kısmının yerine konulduğu duyuruldu.\nKalan %10'luk daha az likit varlığın da en kısa sürede tedarik edilerek kullanıcıların kayıplarının tamamen telafi edileceği ve müşterilerin fonlarının bire bir oranında güvence altında olduğu vurgulandı. Geçici olarak askıya alınan para çekme ve yatırma işlemlerinin ise güvenlik incelemelerinin tamamlanmasının ardından kademeli olarak yeniden açıldığı bildirildi.\n\nKripto Piyasalarında ve Siyasette Yankıları\n\nYaşanan bu rekor soygun, küresel kripto piyasalarında kısa süreli bir dalgalanmaya ve Bitcoin başta olmak üzere major altcoinlerde sert fiyat hareketlerine yol açtı. Diğer yandan olay, uluslararası politikaya da yansıdı. ABD Başkanı Donald Trump, Kuzey Kore'nin sorumluluğu hakkında henüz ellerinde kesin neticeler olduğunu, konuyu incelediklerini belirterek durumun diplomatik boyutuna dair temkinli bir yaklaşım sergiledi.\nSiber suçların devlet destekli bir endüstri haline geldiğini gösteren bu olay, kripto para borsalarının ve merkeziyetçi platformların güvenlik mimarilerini bir kez daha küresel çapta en üst düzey masaya yatırmasına neden oldu.",
+      "by": "",
+      "dt": "",
+      "img": "images/179360701397602.jpg"
+    },
+    {
       "id": "slotn1",
       "kind": "Manşet",
       "title": "Eko-log İlk Sayısıyla Yayında: Ekonomi ve Diyalog Topluluğu’ndan Yeni Bir Soluk",
@@ -1919,6 +1929,7 @@
   },
   "pg": {
     "etkinlik": true,
+    "projeler": true,
     "fikir": true,
     "fikir-canli": true,
     "fikir-etkinlik": true,
@@ -2069,5 +2080,729 @@
       "b2t": "Ana sayfaya dön",
       "b2h": "#/"
     }
+  },
+  "mr": {
+    "on": false,
+    "list": []
+  },
+  "pa": {
+    "list": []
+  },
+  "ts": {
+    "ara": {
+      "bas": "07-20",
+      "bit": "08-31",
+      "uzama": 7
+    },
+    "mali": {
+      "bas": "07-01",
+      "bit": "07-20",
+      "uzama": 7
+    },
+    "tatil": [
+      {
+        "id": "rt20260101",
+        "ad": "Yılbaşı",
+        "bas": "2026-01-01",
+        "bit": "2026-01-01"
+      },
+      {
+        "id": "rt20260320",
+        "ad": "Ramazan Bayramı",
+        "bas": "2026-03-20",
+        "bit": "2026-03-22"
+      },
+      {
+        "id": "rt20260423",
+        "ad": "Ulusal Egemenlik ve Çocuk Bayramı",
+        "bas": "2026-04-23",
+        "bit": "2026-04-23"
+      },
+      {
+        "id": "rt20260501",
+        "ad": "Emek ve Dayanışma Günü",
+        "bas": "2026-05-01",
+        "bit": "2026-05-01"
+      },
+      {
+        "id": "rt20260519",
+        "ad": "Atatürk’ü Anma, Gençlik ve Spor Bayramı",
+        "bas": "2026-05-19",
+        "bit": "2026-05-19"
+      },
+      {
+        "id": "rt20260527",
+        "ad": "Kurban Bayramı",
+        "bas": "2026-05-27",
+        "bit": "2026-05-30"
+      },
+      {
+        "id": "rt20260715",
+        "ad": "Demokrasi ve Milli Birlik Günü",
+        "bas": "2026-07-15",
+        "bit": "2026-07-15"
+      },
+      {
+        "id": "rt20260830",
+        "ad": "Zafer Bayramı",
+        "bas": "2026-08-30",
+        "bit": "2026-08-30"
+      },
+      {
+        "id": "rt20261029",
+        "ad": "Cumhuriyet Bayramı",
+        "bas": "2026-10-29",
+        "bit": "2026-10-29"
+      },
+      {
+        "id": "rt20270101",
+        "ad": "Yılbaşı",
+        "bas": "2027-01-01",
+        "bit": "2027-01-01"
+      },
+      {
+        "id": "rt20270309",
+        "ad": "Ramazan Bayramı",
+        "bas": "2027-03-09",
+        "bit": "2027-03-11"
+      },
+      {
+        "id": "rt20270423",
+        "ad": "Ulusal Egemenlik ve Çocuk Bayramı",
+        "bas": "2027-04-23",
+        "bit": "2027-04-23"
+      },
+      {
+        "id": "rt20270501",
+        "ad": "Emek ve Dayanışma Günü",
+        "bas": "2027-05-01",
+        "bit": "2027-05-01"
+      },
+      {
+        "id": "rt20270516",
+        "ad": "Kurban Bayramı (19 Mayıs dahil)",
+        "bas": "2027-05-16",
+        "bit": "2027-05-19"
+      },
+      {
+        "id": "rt20270715",
+        "ad": "Demokrasi ve Milli Birlik Günü",
+        "bas": "2027-07-15",
+        "bit": "2027-07-15"
+      },
+      {
+        "id": "rt20270830",
+        "ad": "Zafer Bayramı",
+        "bas": "2027-08-30",
+        "bit": "2027-08-30"
+      },
+      {
+        "id": "rt20271029",
+        "ad": "Cumhuriyet Bayramı",
+        "bas": "2027-10-29",
+        "bit": "2027-10-29"
+      }
+    ],
+    "kurallar": [
+      {
+        "id": "s1",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "İdari dava açma süresi (idare mahkemesi, Danıştay)",
+        "dayanak": "2577 sayılı İYUK m. 7/1, m. 8",
+        "olay": "Tebliğ, yayın veya ilan tarihi",
+        "n": 60,
+        "birim": "gun",
+        "adli": true,
+        "not": "Özel kanunda ayrı süre varsa o süre uygulanır."
+      },
+      {
+        "id": "s2",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Vergi davası açma süresi (vergi mahkemesi)",
+        "dayanak": "2577 sayılı İYUK m. 7/1, m. 8; 5604 sayılı Mali Tatil Kanunu m. 1",
+        "olay": "Tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": "Vergiyle ilgili işlemlerde dava açma süresi mali tatilde (1–20 Temmuz) işlemez; hesap bunu uygular. Vergi uyuşmazlıklarında başlangıç, ilgili vergi kanunundaki kurala göre değişebilir; 5604 sayılı Kanun m. 1'deki istisnaları da kontrol et.",
+        "mali": "dur",
+        "v": 2
+      },
+      {
+        "id": "s3",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "İstinaf başvuru süresi",
+        "dayanak": "2577 sayılı İYUK m. 45, m. 8",
+        "olay": "Kararın tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": "Kesin kararlar için istinaf yolu yoktur."
+      },
+      {
+        "id": "s4",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Temyiz başvuru süresi (Danıştay)",
+        "dayanak": "2577 sayılı İYUK m. 46, m. 8",
+        "olay": "Kararın tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": ""
+      },
+      {
+        "id": "s5",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "İdareye başvuru: zımni ret ve ardından dava süresi",
+        "dayanak": "2577 sayılı İYUK m. 10, m. 7, m. 8",
+        "olay": "İdareye başvuru tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "30 gün içinde cevap verilmezse istek reddedilmiş sayılır (7331 sayılı Kanunla 60 günden 30 güne indirildi; 14.07.2021 öncesi başvurularda 60 gün uygulanır). Vergi mahkemesi davası için ayrı kuralı kullan. İdare kısmi ya da ara cevap verdiyse süreler değişebilir.",
+        "v": 2,
+        "z": {
+          "n": 60,
+          "birim": "gun",
+          "ad": "Zımni retten sonra dava açma süresi",
+          "adli": true
+        }
+      },
+      {
+        "id": "s5v",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "İdareye başvuru: zımni ret ve ardından vergi davası süresi",
+        "dayanak": "2577 sayılı İYUK m. 10, m. 7, m. 8; 5604 sayılı Kanun m. 1",
+        "olay": "İdareye başvuru tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "30 gün içinde cevap verilmezse istek reddedilmiş sayılır; ardından vergi mahkemesinde dava açma süresi 30 gündür ve mali tatilde işlemez.",
+        "mali": "dur",
+        "z": {
+          "n": 30,
+          "birim": "gun",
+          "ad": "Zımni retten sonra vergi davası açma süresi",
+          "adli": true
+        }
+      },
+      {
+        "id": "s6",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Kesin olmayan cevap: kesin cevabı bekleme (4 ay) ve dava süresi",
+        "dayanak": "2577 sayılı İYUK m. 10",
+        "olay": "İdareye başvuru tarihi",
+        "n": 4,
+        "birim": "ay",
+        "adli": false,
+        "not": "30 gün içinde verilen cevap kesin değilse ilgili, cevabı ret sayıp dava açabilir veya kesin cevabı bekleyebilir. Bekleme üst sınırı 4 aydır (eskiden 6 ay). Başlangıç ve kapsam için m. 10'u kontrol et.",
+        "dogrula": true,
+        "z": {
+          "n": 60,
+          "birim": "gun",
+          "ad": "Zımni retten sonra dava açma süresi",
+          "adli": true
+        }
+      },
+      {
+        "id": "s7",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Üst makama başvuru: dava açma süresinin durması (idari dava)",
+        "dayanak": "2577 sayılı İYUK m. 11, m. 7, m. 8",
+        "olay": "İşlemin tebliğ tarihi",
+        "n": 60,
+        "birim": "gun",
+        "adli": true,
+        "not": "Başvuru, işlemeye başlamış dava açma süresini durdurur. 30 gün cevap verilmezse istek reddedilmiş sayılır; ret veya zımni retten sonra süre kaldığı yerden işler. Güvenli tarafta kalmak için başvuru günü geçen süreye sayılır.",
+        "tur": "durma",
+        "olay2": "Üst makama (yoksa işlemi yapan makama) başvuru tarihi",
+        "olay3": "Ret cevabının tebliğ tarihi (yoksa boş bırak)",
+        "bekle": 30
+      },
+      {
+        "id": "s7v",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Üst makama başvuru: dava açma süresinin durması (vergi davası)",
+        "dayanak": "2577 sayılı İYUK m. 11, m. 7, m. 8; 5604 sayılı Kanun m. 1",
+        "olay": "İşlemin tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": "Vergi mahkemesinde dava açma süresi 30 gündür. Başvuru süreyi durdurur; ret veya zımni retten sonra kalan süre işler. Başvuru günü geçen süreye sayılır.",
+        "tur": "durma",
+        "mali": "dur",
+        "olay2": "Üst makama (yoksa işlemi yapan makama) başvuru tarihi",
+        "olay3": "Ret cevabının tebliğ tarihi (yoksa boş bırak)",
+        "bekle": 30
+      },
+      {
+        "id": "s8",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Tam yargı davası: idareye başvuru süresi (öğrenmeden itibaren 1 yıl)",
+        "dayanak": "2577 sayılı İYUK m. 13/1, m. 8",
+        "olay": "Eylemi yazılı bildirimle veya başka suretle öğrenme tarihi",
+        "n": 1,
+        "birim": "yil",
+        "adli": true,
+        "not": "Her halde eylem tarihinden itibaren 5 yıl geçmeden de başvurulmalıdır; ikisini ayrı hesapla ve erken olanı esas al."
+      },
+      {
+        "id": "s9",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Tam yargı davası: idareye başvuru süresi (eylemden itibaren en çok 5 yıl)",
+        "dayanak": "2577 sayılı İYUK m. 13/1, m. 8",
+        "olay": "Eylem tarihi",
+        "n": 5,
+        "birim": "yil",
+        "adli": true,
+        "not": "Öğrenme tarihinden itibaren 1 yıllık süreyi de ayrıca hesapla; erken olan geçerlidir."
+      },
+      {
+        "id": "s10",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Tam yargı davası: idareye başvuru, zımni ret ve dava süresi",
+        "dayanak": "2577 sayılı İYUK m. 13/1, m. 7, m. 8",
+        "olay": "İdareye başvuru tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "30 gün içinde cevap verilmezse istek reddedilmiş sayılır (7331 sayılı Kanunla 60 günden 30 güne indirildi). Açık ret cevabı verilirse dava süresi cevabın tebliğini izleyen günden işler.",
+        "z": {
+          "n": 60,
+          "birim": "gun",
+          "ad": "Zımni retten sonra dava açma süresi",
+          "adli": true
+        }
+      },
+      {
+        "id": "s11",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Zımni ret sonrası idarenin sonradan verdiği cevap: dava süresi",
+        "dayanak": "2577 sayılı İYUK m. 10, m. 8",
+        "olay": "Cevabın tebliğ tarihi",
+        "n": 60,
+        "birim": "gun",
+        "adli": true,
+        "not": "Zımni ret üzerine dava açılmamışsa veya açılan dava süreden reddedilmişse, idarenin 30 gün geçtikten sonra verdiği cevabın tebliğinden itibaren 60 gün içinde dava açılabilir."
+      },
+      {
+        "id": "s12",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Dava dilekçesine ve tebliğlere cevap süresi",
+        "dayanak": "2577 sayılı İYUK m. 16/3, m. 8",
+        "olay": "Dilekçenin veya tebliğin tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": "Haklı sebeple, bir defaya mahsus ve en çok 30 gün uzatılabilir; süre geçtikten sonra yapılan uzatma talepleri kabul edilmez."
+      },
+      {
+        "id": "s13",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Yürütmenin durdurulması kararına itiraz süresi",
+        "dayanak": "2577 sayılı İYUK m. 27, m. 8",
+        "olay": "Kararın tebliğ tarihi",
+        "n": 7,
+        "birim": "gun",
+        "adli": true,
+        "not": "İvedi yargılamada yürütmenin durdurulması kararlarına itiraz edilemez (m. 20/A)."
+      },
+      {
+        "id": "s14",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Mahkeme kararının idarece uygulanma süresi",
+        "dayanak": "Anayasa m. 138; 2577 sayılı İYUK m. 28/1",
+        "olay": "Kararın idareye tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "İdare, karar gereğini gecikmeksizin ve en geç kararın tebliğinden itibaren 30 gün içinde yerine getirmek zorundadır."
+      },
+      {
+        "id": "s15",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "İvedi yargılama: dava açma süresi",
+        "dayanak": "2577 sayılı İYUK m. 20/A/II-a",
+        "olay": "Tebliğ, yayın veya ilan tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": "İhale işlemleri (ihaleden yasaklama hariç), acele kamulaştırma, özelleştirme kararları gibi işlemlerde uygulanır; m. 11 (üst makama başvuru) uygulanmaz. Ara verme dönemindeki uzama için m. 8 ve m. 20/A'yı ayrıca kontrol et."
+      },
+      {
+        "id": "s16",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "İvedi yargılama: temyiz süresi",
+        "dayanak": "2577 sayılı İYUK m. 20/A/II",
+        "olay": "Kararın tebliğ tarihi",
+        "n": 15,
+        "birim": "gun",
+        "adli": true,
+        "not": "Kanun yolu düzenindeki sonraki değişiklikleri m. 20/A metninden kontrol et.",
+        "dogrula": true
+      },
+      {
+        "id": "s17",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Merkezî sınav davaları (MEB, ÖSYM): dava açma süresi",
+        "dayanak": "2577 sayılı İYUK m. 20/B",
+        "olay": "Sınav işleminin veya sonucunun tebliğ/ilan tarihi",
+        "n": 10,
+        "birim": "gun",
+        "adli": true,
+        "not": "m. 11 (üst makama başvuru) uygulanmaz."
+      },
+      {
+        "id": "s18",
+        "kat": "İdari yargı: dava ve kanun yolları",
+        "ad": "Merkezî sınav davaları: temyiz süresi",
+        "dayanak": "2577 sayılı İYUK m. 20/B",
+        "olay": "Kararın tebliğ tarihi",
+        "n": 5,
+        "birim": "gun",
+        "adli": true,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "v1",
+        "kat": "Vergi ve amme alacağı",
+        "ad": "Ödeme emrine karşı dava açma süresi",
+        "dayanak": "6183 sayılı Kanun m. 58 (7061 sayılı Kanunla 7 günden 15 güne çıkarıldı); İYUK m. 8",
+        "olay": "Ödeme emrinin tebliğ tarihi",
+        "n": 15,
+        "birim": "gun",
+        "adli": true,
+        "not": "İtiraz sebepleri sınırlıdır: borcun olmaması, kısmen ödenmiş olması, zamanaşımı. Dava, tahsil işlemlerini kendiliğinden durdurmaz. Vergiyle ilgili dava süreleri mali tatilde işlemez.",
+        "mali": "dur"
+      },
+      {
+        "id": "v2",
+        "kat": "Vergi ve amme alacağı",
+        "ad": "Ödeme emri: ödeme süresi",
+        "dayanak": "6183 sayılı Kanun m. 55",
+        "olay": "Ödeme emrinin tebliğ tarihi",
+        "n": 15,
+        "birim": "gun",
+        "adli": false,
+        "not": "Süre içinde ödenmezse cebren tahsil (haciz) yoluna gidilir."
+      },
+      {
+        "id": "v3",
+        "kat": "Vergi ve amme alacağı",
+        "ad": "Tarh zamanaşımı (5 yıl)",
+        "dayanak": "213 sayılı VUK m. 114",
+        "olay": "Vergiyi doğuran olayın gerçekleştiği tarih",
+        "n": 5,
+        "birim": "yil",
+        "adli": false,
+        "not": "Süre, vergi alacağının doğduğu takvim yılını izleyen yılın başında başlar ve beşinci yılın sonunda dolar. Başlangıç, vergi türüne göre değişebilir.",
+        "tur": "yilsonu",
+        "tatilsiz": true
+      },
+      {
+        "id": "v4",
+        "kat": "Vergi ve amme alacağı",
+        "ad": "Tahsil zamanaşımı (5 yıl)",
+        "dayanak": "6183 sayılı Kanun m. 102",
+        "olay": "Amme alacağının vade tarihi",
+        "n": 5,
+        "birim": "yil",
+        "adli": false,
+        "not": "Süre, vadenin rastladığı takvim yılını izleyen yılın başından işler ve beşinci yılın sonunda dolar.",
+        "tur": "yilsonu",
+        "tatilsiz": true
+      },
+      {
+        "id": "v5",
+        "kat": "Vergi ve amme alacağı",
+        "ad": "Uzlaşma talebi süresi (tarhiyat sonrası)",
+        "dayanak": "213 sayılı VUK Ek m. 1",
+        "olay": "Vergi/ceza ihbarnamesinin tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "Talep vergi dairesine yazılı yapılır; uzlaşmanın dava açma süresiyle ilişkisi Ek m. 1'de ayrıca düzenlenmiştir.",
+        "dogrula": true
+      },
+      {
+        "id": "k1",
+        "kat": "Kamu ihale (4734)",
+        "ad": "İhale: idareye şikâyet süresi",
+        "dayanak": "4734 sayılı Kamu İhale Kanunu m. 55",
+        "olay": "Şikâyete konu işlemin öğrenildiği (farkına varıldığı) tarih",
+        "n": 10,
+        "birim": "gun",
+        "adli": false,
+        "not": "Bazı ihale usullerinde ve ilan/doküman şikâyetlerinde farklı süre ve sınırlar vardır (m. 55 ve İhalelere Yönelik Başvurular Hakkında Yönetmelik).",
+        "dogrula": true
+      },
+      {
+        "id": "k2",
+        "kat": "Kamu ihale (4734)",
+        "ad": "İhale: idarenin şikâyete karar verme süresi",
+        "dayanak": "4734 sayılı Kamu İhale Kanunu m. 55",
+        "olay": "Şikâyet başvuru tarihi",
+        "n": 10,
+        "birim": "gun",
+        "adli": false,
+        "not": "İdare, gerekli incelemeyi yaparak 10 gün içinde gerekçeli karar alır."
+      },
+      {
+        "id": "k3",
+        "kat": "Kamu ihale (4734)",
+        "ad": "İhale: idare kararına karşı Kuruma itirazen şikâyet",
+        "dayanak": "4734 sayılı Kamu İhale Kanunu m. 56",
+        "olay": "İdare kararının bildirim tarihi",
+        "n": 10,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "k4",
+        "kat": "Kamu ihale (4734)",
+        "ad": "İhale: idare karar vermezse Kuruma itirazen şikâyet",
+        "dayanak": "4734 sayılı Kamu İhale Kanunu m. 55, m. 56",
+        "olay": "İdareye şikâyet tarihi",
+        "n": 10,
+        "birim": "gun",
+        "adli": false,
+        "not": "İdarenin karar verme süresi (10 gün) bittikten sonra itirazen şikâyet süresi işler.",
+        "dogrula": true,
+        "z": {
+          "n": 10,
+          "birim": "gun",
+          "ad": "Kuruma itirazen şikâyet son günü",
+          "adli": false
+        }
+      },
+      {
+        "id": "k5",
+        "kat": "Kamu ihale (4734)",
+        "ad": "İhale iptal kararına karşı doğrudan Kuruma itirazen şikâyet",
+        "dayanak": "4734 sayılı Kamu İhale Kanunu m. 56/1",
+        "olay": "İptal kararının bildirim tarihi",
+        "n": 5,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "k6",
+        "kat": "Kamu ihale (4734)",
+        "ad": "İhale işlemlerine karşı dava (ivedi yargılama)",
+        "dayanak": "2577 sayılı İYUK m. 20/A; 4734 sayılı Kanun m. 54–56",
+        "olay": "Kurul kararının veya işlemin tebliğ tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": true,
+        "not": "Dava açmadan önce zorunlu idari başvuru yolları (şikâyet, itirazen şikâyet) tüketilmelidir.",
+        "dogrula": true
+      },
+      {
+        "id": "m1",
+        "kat": "Memur disiplini (657)",
+        "ad": "Disiplin: savunma süresi (en az 7 gün)",
+        "dayanak": "657 sayılı DMK m. 130",
+        "olay": "Savunma isteminin tebliğ tarihi",
+        "n": 7,
+        "birim": "gun",
+        "adli": false,
+        "not": "Verilecek süre 7 günden az olamaz; süresinde savunma verilmezse savunma hakkından vazgeçilmiş sayılır."
+      },
+      {
+        "id": "m2",
+        "kat": "Memur disiplini (657)",
+        "ad": "Disiplin cezasına itiraz süresi",
+        "dayanak": "657 sayılı DMK m. 135",
+        "olay": "Cezanın tebliğ tarihi",
+        "n": 7,
+        "birim": "gun",
+        "adli": false,
+        "not": "İtiraz isteğe bağlı bir idari başvuru yoludur; itiraz edilmezse ceza kesinleşir. Doğrudan dava süresi için “İdari dava açma süresi” kuralına bak."
+      },
+      {
+        "id": "m3",
+        "kat": "Memur disiplini (657)",
+        "ad": "Disiplin itirazı: 30 günlük karar süresi ve sonrasında dava",
+        "dayanak": "657 sayılı DMK m. 135; İYUK m. 7",
+        "olay": "İtiraz tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "İtiraz mercii 30 gün içinde karar verir. Açık ret cevabı tebliğ edilirse dava süresi tebliğden itibaren işler.",
+        "dogrula": true,
+        "z": {
+          "n": 60,
+          "birim": "gun",
+          "ad": "Disiplin cezasına karşı dava açma son günü",
+          "adli": true
+        }
+      },
+      {
+        "id": "m4",
+        "kat": "Memur disiplini (657)",
+        "ad": "Disiplin soruşturmasına başlama (uyarma, kınama, aylıktan kesme, kademe)",
+        "dayanak": "657 sayılı DMK m. 127",
+        "olay": "Fiilin öğrenildiği tarih",
+        "n": 1,
+        "birim": "ay",
+        "adli": false,
+        "not": "Ayrıca fiilin işlendiği tarihten itibaren işleyen zamanaşımı süreleri vardır (m. 127).",
+        "tatilsiz": true,
+        "dogrula": true
+      },
+      {
+        "id": "m5",
+        "kat": "Memur disiplini (657)",
+        "ad": "Disiplin kovuşturmasına başlama (devlet memurluğundan çıkarma)",
+        "dayanak": "657 sayılı DMK m. 127",
+        "olay": "Fiilin öğrenildiği tarih",
+        "n": 6,
+        "birim": "ay",
+        "adli": false,
+        "not": "",
+        "tatilsiz": true,
+        "dogrula": true
+      },
+      {
+        "id": "t1",
+        "kat": "Tebliğ ve ilan",
+        "ad": "Elektronik tebligat: tebliğ edilmiş sayılma tarihi",
+        "dayanak": "7201 sayılı Tebligat Kanunu m. 7/a; 213 sayılı VUK m. 107/A",
+        "olay": "Tebligatın elektronik adrese ulaştığı tarih",
+        "n": 5,
+        "birim": "gun",
+        "adli": false,
+        "not": "Tebligat, ulaştığı tarihi izleyen beşinci günün sonunda yapılmış sayılır; okunma tarihi önemli değildir.",
+        "tur": "tebligat",
+        "tatilsiz": true
+      },
+      {
+        "id": "t2",
+        "kat": "Tebliğ ve ilan",
+        "ad": "İlanen tebligat: tebliğ edilmiş sayılma tarihi",
+        "dayanak": "7201 sayılı Tebligat Kanunu (ilanen tebligat); VUK m. 94",
+        "olay": "İlan tarihi",
+        "n": 15,
+        "birim": "gun",
+        "adli": false,
+        "not": "Kanundaki ilan şekline ve özel sürelere göre değişebilir.",
+        "tur": "tebligat",
+        "tatilsiz": true,
+        "dogrula": true
+      },
+      {
+        "id": "b1",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "Dilekçe hakkı: cevap süresi",
+        "dayanak": "3071 sayılı Kanun m. 6",
+        "olay": "Dilekçe tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "İdareye başvuruda zımni ret ve dava süresi için “İdareye başvuru” kurallarına bak."
+      },
+      {
+        "id": "b2",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "Bilgi edinme: cevap süresi",
+        "dayanak": "4982 sayılı Kanun m. 11",
+        "olay": "Başvuru tarihi",
+        "n": 15,
+        "birim": "isgunu",
+        "adli": false,
+        "not": "Hafta sonu ve resmî tatiller sayılmaz. Bilgi başka birimden sağlanacaksa süre 30 iş gününe çıkar (sonraki kural).",
+        "dogrula": true
+      },
+      {
+        "id": "b3",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "Bilgi edinme: ek süreli cevap",
+        "dayanak": "4982 sayılı Kanun m. 11",
+        "olay": "Başvuru tarihi",
+        "n": 30,
+        "birim": "isgunu",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "b4",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "Bilgi edinme: Kurula itiraz süresi",
+        "dayanak": "4982 sayılı Kanun m. 13",
+        "olay": "Ret kararının tebliğ tarihi",
+        "n": 15,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "b5",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "KVKK: veri sorumlusunun başvuruya cevap süresi",
+        "dayanak": "6698 sayılı Kanun m. 13",
+        "olay": "Başvuru tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "b6",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "KVKK: Kurula şikâyet süresi",
+        "dayanak": "6698 sayılı Kanun m. 14",
+        "olay": "Cevabın öğrenildiği tarih",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "Her halde başvuru tarihinden itibaren 60 gün içinde şikâyet edilmelidir; ikisini ayrı hesapla.",
+        "dogrula": true
+      },
+      {
+        "id": "b7",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "Anayasa Mahkemesi: iptal davası açma süresi",
+        "dayanak": "Anayasa m. 151",
+        "olay": "Resmî Gazete'de yayım tarihi",
+        "n": 60,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "b8",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "Anayasa Mahkemesi: bireysel başvuru süresi",
+        "dayanak": "6216 sayılı Kanun m. 47",
+        "olay": "Kesinleşen kararın tebliğ veya öğrenme tarihi",
+        "n": 30,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      },
+      {
+        "id": "b9",
+        "kat": "Başvuru, bilgi edinme, kişisel veri, anayasa yargısı",
+        "ad": "İdari para cezasına itiraz (sulh ceza hâkimliği)",
+        "dayanak": "5326 sayılı Kabahatler Kanunu m. 27",
+        "olay": "Kararın tebliğ tarihi",
+        "n": 15,
+        "birim": "gun",
+        "adli": false,
+        "not": "",
+        "dogrula": true
+      }
+    ],
+    "silinen": []
   }
 }
