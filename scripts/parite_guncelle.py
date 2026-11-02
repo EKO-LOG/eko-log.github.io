@@ -21,11 +21,24 @@ def yahoo(sym):
             return [[dt.datetime.fromtimestamp(t,dt.timezone.utc).strftime('%Y-%m-%d'),round(c,6)] for t,c in zip(r['timestamp'],q) if c and c>0]
         except Exception as e: print('yahoo',sym,h,e,file=sys.stderr)
     return None
+def stooq(sym):
+    import csv,io
+    try:
+        r=urllib.request.urlopen(urllib.request.Request(f'https://stooq.com/q/d/l/?s={sym}&i=d',headers=UA),timeout=30).read().decode()
+        rows=[x for x in csv.DictReader(io.StringIO(r)) if x.get('Close') not in (None,'','null')]
+        cut=(dt.date.today()-dt.timedelta(days=1830)).isoformat()
+        return [[x['Date'],float(x['Close'])] for x in rows if x['Date']>=cut and float(x['Close'])>0]
+    except Exception as e: print('stooq',sym,e,file=sys.stderr); return None
+STQ={'BIST100':['^xu100','xu100.tr'],'XAU':['xauusd'],'XAG':['xagusd']}
 out={'updated':dt.datetime.now(dt.timezone.utc).isoformat(),'series':{},'fx':{}}
 for code,sym in Y.items():
     s=yahoo(sym)
     if s and len(s)>1: out['series'][code]=s
-    else: print('YOK',code,file=sys.stderr)
+    else:
+        print('YOK',code,file=sys.stderr)
+        for q in STQ.get(code,[]):
+            t=stooq(q)
+            if t and len(t)>1: out['series'][code]=t; print('stooq ile alindi',code,q); break
     time.sleep(.4)
 try:
     end=dt.date.today(); start=end-dt.timedelta(days=1830)
@@ -34,4 +47,5 @@ try:
 except Exception as e: print('frankfurter',e,file=sys.stderr)
 if not out['series'].get('BIST100') and not out['fx']: sys.exit('veri alinamadi, dosya degistirilmedi')
 json.dump(out,open('data/parite-veri.json','w'),separators=(',',':'))
+if 'BIST100' not in out['series']: print('UYARI: BIST100 alinamadi',file=sys.stderr)
 print('tamam',len(out['series']),'seri,',len(out['fx']),'gun doviz')
