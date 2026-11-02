@@ -26,6 +26,395 @@ header nav a{white-space:nowrap}
 <main id="app"></main>
 <footer><div class="wrap"><span>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span>Üyelere özel · Kararlar resmî kaynaklardan derlenmiştir; kesin metin için kaynağa bakınız.</span></div></footer>
 <noscript><p style="padding:120px 22px">Bu sayfa JavaScript gerektirir.</p></noscript>
+<script id="veri">
+/* İçtihat verisi — yeni karar eklemek için diziye bir nesne ekleyin. Alanlar: kanun, kanunAdi, madde, mahkeme, daire, esas, karar, tarih (YYYY-AA-GG), ozet, link */
+window.ICTIHAT = [
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "10",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2004/26",
+    "karar": "2004/51",
+    "tarih": "2004-04-15",
+    "ozet": "İYUK m. 10/2, 11/2, 11/3 ve 13/1'deki zımni ret ve cevap verilmemesine ilişkin ibarelere yönelik itiraz, Mahkemenin yetkisizliği nedeniyle oybirliğiyle reddedilmiştir. Yalnızca gerekçenin öğrenilmesine yönelik bir başvuru, iptal davasına konu olabilecek kesin ve yürütülmesi gereken bir işlem sayılmadığından zımni ret doğurmaz; bu nedenle itiraz konusu kurallar davada uygulanacak nitelikte değildir. Resmî Gazete: 11.08.2004, 25550.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2004-51-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "31",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2004/103",
+    "karar": "2008/121",
+    "tarih": "2008-06-12",
+    "ozet": "İYUK m. 31/1'in, hukuk yargılamasındaki ıslah kurumuna yollama yapmaması nedeniyle yapılan itiraz oyçokluğuyla reddedilmiştir (üç karşı oy). Mahkeme, bunu yasa koyucunun usul kurallarını belirlemedeki takdir yetkisi içinde görmüş; idari yargılamanın kendiliğinden inceleme esasına dayandığını, bu nedenle davacı ile davalının durumunun hukuk yargılamasındakiyle aynı olmadığını belirtmiştir. Resmî Gazete: 23.12.2008, 27089.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2008-121-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "7",
+    "mahkeme": "Danıştay",
+    "daire": "İdari Dava Daireleri Kurulu",
+    "esas": "2007/140",
+    "karar": "2010/5",
+    "tarih": "2010-01-14",
+    "ozet": "Yönetmelik kuralı, kapsamındaki kişilere devamlı olarak uygulandığı için davanın süre yönünden reddi kararı bozuldu (İYUK m. 7/4, düzenleyici işlemlerde dava açma süresi). Karar oyçokluğuyla verilmiş, karşı oy vardır. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.memurlar.net/haber/226281/suregelen-islemlerde-yonetmelige-her-zaman-dava-acilabilecegine-dair-danistay-karari.html"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "7",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2006/23",
+    "karar": "2010/27",
+    "tarih": "2010-02-04",
+    "ozet": "Malatya Vergi Mahkemesi, İYUK m. 7/1'deki \"vergi mahkemelerinde otuz gündür\" ibaresinin iptalini istemiştir. Mahkeme, dava açma süresini belirlemenin yasa koyucunun takdirinde olduğunu, vergi davalarının teknik niteliği ve kamu hizmetlerinin aksamadan yürütülmesi nedeniyle 30 günlük sürenin Anayasa'ya aykırı olmadığını belirterek itirazı oyçokluğuyla reddetmiştir. Resmî Gazete: 02.12.2010, 27773.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2010-27-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "7",
+    "mahkeme": "Danıştay",
+    "daire": "İdari Dava Daireleri Kurulu",
+    "esas": "2015/527",
+    "karar": "2017/1554",
+    "tarih": "2017-04-05",
+    "ozet": "Parasal ve özlük haklarına ilişkin idari işlemlerde, ilgilinin her yeni başvurusu üzerine tesis edilen işleme karşı, o işlemin tebliğinden itibaren genel dava açma süresi (60 gün) içinde dava açılabilir. Davayı süre aşımından reddeden daire kararı bozuldu. Karar İYUK m. 7 ve m. 10'a dayanır. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.memurlar.net/haber/703100/danistay-parasal-haklarda-her-basvuruyla-birlikte-dava-acma-suresi-yeniden-baslar.html"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "27",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2022/14",
+    "karar": "2022/70",
+    "tarih": "2022-06-01",
+    "ozet": "İYUK m. 27'deki, vergi kanunları uyarınca iadesi talep edilen vergilere ilişkin davalarda dava konusu tutarın %50'si oranında teminat alınmadan yürütmenin durdurulması kararı verilemeyeceğine dair kural iptal edilmiştir. İptalin Resmî Gazete'de 01.07.2022'de yayımlandığı belirtilmektedir. (Künye ve sonuç, kararı aktaran sayfadan alınmıştır; gerekçe için kararın kendisine bakınız.)",
+    "link": "https://www.hukukihaber.net/vergi-ihtilaflarinda-yurutmenin-durdurulmasi-karari-icin-teminat-zorunlulugu-kaldirilmistir/amp"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "45",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2022/48",
+    "karar": "2022/93",
+    "tarih": "2022-07-20",
+    "ozet": "İYUK m. 45/2 birinci cümle ve m. 48/7'deki \"…ve 6 ncı…\" ibaresi, istinaf talebinin kanuni süre geçtikten sonra yapılması hâli yönünden oyçokluğuyla iptal edilmiştir. Süre aşımı nedeniyle istinaf talebinin ilk kez bölge idare mahkemesince reddedilmesi ve bu kararın kesin olması, yargı yolunu kapattığı için Anayasa'nın 36. ve 40. maddelerine aykırı bulunmuştur; diğer itirazlar yetkisizlik nedeniyle reddedilmiştir. Resmî Gazete: 17.08.2022, 31926.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2022-93-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "45",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2022/89",
+    "karar": "2022/129",
+    "tarih": "2022-10-26",
+    "ozet": "İYUK m. 45/5 birinci cümledeki, bölge idare mahkemesinin istinaf başvurusunu haklı bulması hâlinde işin esasını kendisinin karara bağlamasına ilişkin kısım için yapılan itiraz oybirliğiyle reddedilmiştir. Dosyanın ilk derece mahkemesine geri gönderilip gönderilmeyeceği hukuk politikası meselesidir; temyize tabi kararlar Danıştay denetimine açık olduğundan adil yargılanma ve kanuni hâkim güvencesine aykırılık görülmemiştir. Resmî Gazete: 29.12.2022, 32058.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2022-129-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "2",
+    "mahkeme": "Danıştay",
+    "daire": "İdari Dava Daireleri Kurulu",
+    "esas": "2024/414",
+    "karar": "2024/1826",
+    "tarih": "2024-09-30",
+    "ozet": "Maden Yönetmeliğinde yapılan değişikliğin iptali istemiyle açılan davada, davacının kendi adına zeytinlik kayıtlı taşınmazı bulunmaması ve zeytincilik faaliyeti yürütmemesi nedeniyle menfaat ilişkisi aranarak dava ehliyeti yönünden ret kararı verilmişti. Kurul, İYUK m. 2, 14, 15 ve 49'u dikkate alarak temyizi reddetti ve kararı oyçokluğuyla onadı; karşı oy, vatandaş sıfatıyla menfaat ilgisinin bulunduğu yönündedir. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.hukukihaber.net/danistay-iddknun-2024414-e-20241826-k-sayili-karari"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "28",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2024/164",
+    "karar": "2025/13",
+    "tarih": "2025-01-16",
+    "ozet": "İYUK m. 28/2'de (6352 sayılı Kanunla değişik), para ödenmesini gerektiren kararlarda hükmedilen tutar, vekâlet ücreti ve yargılama giderlerinin bildirilen hesaba otuz gün içinde yatırılması, aksi hâlde genel hükümlere göre icra yoluna gidilmesi öngörülür. Mahkeme, kuralın idareye makul süre tanıyıp icra yolunu koruduğunu belirterek Anayasa'nın 36. maddesine aykırı olmadığına ve itirazın reddine oybirliğiyle karar vermiştir. Resmî Gazete: 26.03.2025, 32853.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2025-13-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "20/B",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "İkinci Bölüm · Bireysel başvuru",
+    "esas": "",
+    "karar": "",
+    "tarih": "2025-02-04",
+    "ozet": "Başvurucu, merkezî sınavlara ilişkin İYUK m. 20/B'deki özel dava açma süresinin (on gün) uygulanarak iptal davasının süre aşımından reddedilmesinin mahkemeye erişim hakkını (Anayasa m. 36) ihlal ettiğini ileri sürmüştür. Anayasa Mahkemesi, oybirliğiyle hak ihlali kararı vermiş; dosyayı yeniden yargılama için Ankara 12. İdare Mahkemesine göndermiş, tazminat talebini reddetmiştir. Başvuru No: 2020/19217; Resmî Gazete: 31.12.2025, 33124. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.hukukihaber.net/aymnin-202019217-basvuru-numarali-karari"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "Ek 1",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2025/39",
+    "karar": "2025/35",
+    "tarih": "2025-02-11",
+    "ozet": "İYUK Ek 1. madde (2) fıkra birinci cümledeki \"…ilk derece mahkemesi veya bölge idare mahkemesince nihai kararın verildiği…\" ibaresi ve buna bağlı ibare oybirliğiyle iptal edilmiştir. Kanun yoluna başvuruda karar tarihindeki parasal sınırın esas alınması, dava değeri enflasyona göre güncellenmediği için taraflara orantısız yük getirdiğinden Anayasa'nın 13. ve 36. maddelerine aykırı bulunmuş; iptal kararının yürürlüğü, doğacak boşluk nedeniyle yayımından dokuz ay sonraya bırakılmıştır. Resmî Gazete: 06.03.2025, 32833.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararWord/2025-35-nrm.docx"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "45",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2024/189",
+    "karar": "2025/83",
+    "tarih": "2025-03-27",
+    "ozet": "İYUK m. 45/6 birinci cümle, \"istinaf başvurusunun kısmen veya tümden kabulü hali\" yönünden oybirliğiyle iptal edilmiştir. Bölge idare mahkemesinin ilk derece kararını kaldırıp esas hakkında yeni karar verdiği durumlarda temyiz yolunun tümüyle kapatılması, Anayasa'nın 13. ve 36. maddelerine aykırı bulunmuştur. Resmî Gazete: 26.06.2025, 32938.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2025-83-nrm.pdf"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "3",
+    "mahkeme": "Danıştay",
+    "daire": "10. Daire",
+    "esas": "2025/384",
+    "karar": "2025/4034",
+    "tarih": "2025-09-24",
+    "ozet": "İstisnai yolla kazanılan Türk vatandaşlığının iptaline ilişkin Cumhurbaşkanı Kararı'nın iptali istemiyle açılan davada daire, dava dilekçesini İYUK m. 3 yönünden incelemiş; davacı, konu ve sonuç-istem kısımlarının birbiriyle çeliştiği, davacının kim olduğunun açık olmadığı sonucuna varmıştır. Eş ve çocuklara ilişkin işlemler ikincil nitelikte olduğundan ayrı vekâletnameyle dava konusu edilmesi gerektiği belirtilmiş; dilekçe m. 15/1-d uyarınca reddedilmiş, davacılara 30 gün içinde düzenleyerek yeniden dava açma imkânı tanınmıştır. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.hukukihaber.net/danistay-10-dairesinin-2025384-e-20254034-k-sayili-karari"
+  },
+  {
+    "kanun": "2577",
+    "kanunAdi": "İdari Yargılama Usulü Kanunu",
+    "madde": "2",
+    "mahkeme": "Danıştay",
+    "daire": "12. Daire",
+    "esas": "2025/4415",
+    "karar": "2025/4805",
+    "tarih": "2025-11-04",
+    "ozet": "Bir Baro Başkanlığı, Milli Eğitim Bakanlığı Disiplin Amirleri Yönetmeliği'ndeki değişikliğin iptalini ve yürütmesinin durdurulmasını istemiştir. İYUK m. 2/1-a kapsamında menfaat ihlali koşulu incelenmiş; düzenleme baronun veya üyelerinin hak ve menfaatlerini doğrudan etkilemediği ve avukatlık mesleğine ilişkin olmadığı için dava ehliyet yönünden reddedilmiştir (m. 15/1-b). (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://hukukihaber.net/danistay-12-dairenin-20254415-e-20254805-k-sayili-karari/amp"
+  },
+  {
+    "kanun": "213",
+    "kanunAdi": "Vergi Usul Kanunu",
+    "madde": "Mükerrer 355",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2009/21",
+    "karar": "2011/16",
+    "tarih": "2011-01-13",
+    "ozet": "VUK mükerrer 355/1'in (mükerrer 257. madde yönünden) Anayasa'ya aykırı olmadığına oyçokluğuyla karar verilmiştir (dört karşı oy). Çoğunluğa göre cezaya konu fiil yeterince belirlenmiş, Maliye Bakanlığı'na verilen yetki yasayla sınırlandırılmıştır; beyannamenin süresinde ve süresinden sonra verilmesi farklı fiiller olduğundan cezaların farklı olması eşitliğe aykırı değildir. Karşı oylarda cezalı fiilin idari düzenlemelere bırakılmasının suçta kanunilik ve belirlilik ilkelerine aykırı olduğu savunulmuştur. Resmî Gazete: 02.04.2011, 27893.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2011-16-nrm.pdf"
+  },
+  {
+    "kanun": "2575",
+    "kanunAdi": "Danıştay Kanunu",
+    "madde": "8",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2014/11",
+    "karar": "2014/24",
+    "tarih": "2014-02-11",
+    "ozet": "Danıştay üyesi seçilebilmek için hâkimlik ve savcılık mesleğinde yirmi yıl çalışmış olma şartını getiren 8/2 son cümleye yönelik itiraz, başvuran mahkemenin yetkisizliği nedeniyle oyçokluğuyla reddedilmiştir. Danıştay üyeliği için hazırlanan kesin liste HSYK işlemi sayıldığından, Anayasa m. 159/10 uyarınca bu işleme karşı yargı yoluna başvurulamayacağı belirtilmiştir.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2014-24-nrm.pdf"
+  },
+  {
+    "kanun": "2575",
+    "kanunAdi": "Danıştay Kanunu",
+    "madde": "52/A",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2015/18",
+    "karar": "2016/12",
+    "tarih": "2016-02-10",
+    "ozet": "6572 sayılı Kanunla Danıştay Kanunu'nda yapılan değişikliklerin (daire ve üyelerin yerleri, iş bölümü, kurul oluşumu vb.) çoğuna ilişkin iptal talebi reddedilmiştir. Madde 52/A'nın (2) fıkrası ise, Başkanlık Kurulu kararlarının kesin olup yargı yoluna kapatılması hukuk devleti ve hak arama özgürlüğüyle bağdaşmadığı için Anayasa'nın 2., 36. ve 125. maddelerine aykırı bulunarak iptal edilmiştir. Resmî Gazete: 17.05.2016, 29715.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2016-12-nrm.pdf"
+  },
+  {
+    "kanun": "2576",
+    "kanunAdi": "Bölge İdare Mahkemeleri, İdare Mahkemeleri ve Vergi Mahkemelerinin Kuruluşu ve Görevleri Hakkında Kanun",
+    "madde": "3/D",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2017/158",
+    "karar": "2018/89",
+    "tarih": "2018-09-06",
+    "ozet": "7035 sayılı Kanunla 2576 sayılı Kanun m. 3/D(3)'e getirilen düzenleme (bölge idare mahkemelerindeki daireler arası iş bölümü ile ilk derece mahkemeleri arasındaki iş dağılımının HSK tarafından belirlenmesi) Anayasa'ya aykırı bulunmamış, iptal talepleri oybirliğiyle reddedilmiştir. İş bölümünün mahkemelerin kanunla belirlenmiş görev alanlarını değiştirmediği ve yargı bağımsızlığını ihlal etmediği belirtilmiştir. Resmî Gazete: 27.11.2018, 30608.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2018-89-nrm.pdf"
+  },
+  {
+    "kanun": "4721",
+    "kanunAdi": "Türk Medeni Kanunu",
+    "madde": "187",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2022/155",
+    "karar": "2023/38",
+    "tarih": "2023-02-22",
+    "ozet": "TMK m. 187 birinci cümle (evlenen kadının kocasının soyadını alması) oyçokluğuyla iptal edilmiştir. Kadının evlenmeden önceki soyadını tek başına kullanamaması, erkeğin aynı hakka sahip olmasıyla karşılaştırıldığında cinsiyete dayalı farklı muamele oluşturur ve nesnel, makul bir dayanağı yoktur; Anayasa'nın 10. maddesindeki eşitlik ilkesi ihlal edilmiştir. Kararın, Resmî Gazete'de yayımından (28.04.2023) dokuz ay sonra yürürlüğe gireceği belirtilmektedir. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.erdem-erdem.av.tr/bilgi-bankasi/kadinin-esinin-soyadini-almasini-zorunlu-kilan-kanun-hukmu-kaldirildi-anayasa-mahkemesinin-22022023-tarihli-karari"
+  },
+  {
+    "kanun": "5237",
+    "kanunAdi": "Türk Ceza Kanunu",
+    "madde": "52",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2024/13",
+    "karar": "2025/37",
+    "tarih": "2025-02-11",
+    "ozet": "TCK m. 52/2'deki \"en az yirmi ve en fazla yüz Türk Lirası\" ibaresine (bir gün karşılığı adli para cezası) yönelik itiraz oyçokluğuyla reddedilmiştir (iki karşı oy). Mahkeme, alt ve üst sınır arasında miktarın failin ekonomik durumuna göre hâkimce belirlenmesini kanunilik ve ölçülülük ilkelerine uygun bulmuştur. Karşı oyda, paranın değer kaybı nedeniyle bu miktarların caydırıcılığını yitirdiği savunulmuştur. Resmî Gazete: 27.05.2025, 32912.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2025-37-nrm.pdf"
+  },
+  {
+    "kanun": "6098",
+    "kanunAdi": "Türk Borçlar Kanunu",
+    "madde": "55",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2014/94",
+    "karar": "2014/160",
+    "tarih": "2014-10-22",
+    "ozet": "TBK m. 55/2'ye (BK hükümlerine yollama yoluyla ölüm ve bedensel zararlarda tazminatın hesaplanması) yönelik itiraz oybirliğiyle reddedilmiştir. Mahkeme, atfın yalnızca zararın miktarının hesaplanmasıyla sınırlı olduğunu, idarenin sorumluluk esaslarını değiştirmediğini; yargı kolları arasında tazminat hesabında birlik amacının kanun koyucunun takdirinde kaldığını belirtmiştir. Resmî Gazete: 04.03.2015, 29285.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2014-160-nrm.pdf"
+  },
+  {
+    "kanun": "6098",
+    "kanunAdi": "Türk Borçlar Kanunu",
+    "madde": "347",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2015/102",
+    "karar": "2016/151",
+    "tarih": "2016-09-07",
+    "ozet": "TBK m. 347/1 üçüncü cümle (kiraya verenin on yıllık uzama süresi sonunda gerekçe göstermeden sözleşmeyi sona erdirebilmesi) ve 6101 sayılı Kanun m. 1/1'deki \"sona erme\" ibaresi oybirliğiyle Anayasa'ya aykırı bulunmamıştır; Mahkeme bunu kiracının korunması ile sözleşme özgürlüğü arasında makul bir denge saymıştır. 6101 sayılı Kanun Geçici 2. maddenin \"on yıllık uzama süresi dolmuş olanlar\" bölümü oyçokluğuyla reddedilmiş, TBK m. 347/2 ve Geçici 2. maddenin \"beş yıl\" bölümü ise Mahkemenin yetkisizliği nedeniyle reddedilmiştir. Resmî Gazete: 18.10.2016, 29861.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2016-151-nrm.pdf"
+  },
+  {
+    "kanun": "6098",
+    "kanunAdi": "Türk Borçlar Kanunu",
+    "madde": "55",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2019/34",
+    "karar": "2019/97",
+    "tarih": "2019-12-25",
+    "ozet": "TBK m. 55/1 üçüncü cümle (hesaplanan tazminatın yalnızca miktara dayanılarak artırılamaması ve azaltılamaması) oyçokluğuyla Anayasa'ya aykırı bulunmamıştır (bir karşı oy). Mahkeme, tazminatın gerçek zararla sınırlı olduğunu, kuralın zarar görenin ve zarar verenin mülkiyet haklarını dengelediğini ve bilirkişi raporu hâkimi bağlamadığı için hâkimin bağımsızlığının ihlal edilmediğini belirtmiştir. Resmî Gazete: 11.02.2020, 31036.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2019-97-nrm.pdf"
+  },
+  {
+    "kanun": "6100",
+    "kanunAdi": "Hukuk Muhakemeleri Kanunu",
+    "madde": "3",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2011/35",
+    "karar": "2012/23",
+    "tarih": "2012-02-16",
+    "ozet": "HMK m. 3/1 birinci cümle, idari eylem ve işlemlerden doğan bedensel zarar ve ölüm tazminatı davalarını idari yargı yerine asliye hukuk mahkemelerine verdiği için çoğunlukla Anayasa'nın 125., 155. ve 157. maddelerine aykırı bulunarak oybirliğiyle iptal edilmiştir; ikinci ve üçüncü cümleler de uygulanma olanağını yitirdiğinden iptal edilmiştir. Bazı üyeler iptal nedenini yalnızca 157. maddeye dayandırmıştır. Resmî Gazete: 19.05.2012, 28297.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2012-23-nrm.pdf"
+  },
+  {
+    "kanun": "6102",
+    "kanunAdi": "Türk Ticaret Kanunu",
+    "madde": "5",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2018/143",
+    "karar": "2019/39",
+    "tarih": "2019-05-15",
+    "ozet": "TTK m. 5/1'deki \"dava olunan şeyin değerine veya tutarına bakılmaksızın\" ibaresi ile 5235 sayılı Kanun m. 5/3'ün 4. ve 5. cümlelerine yönelik itiraz oybirliğiyle reddedilmiştir. Mahkeme, ticari davaların uzmanlığa dayalı mahkemelerde ve tek hâkimle görülmesini davaların süratli ve etkin sonuçlanmasına hizmet eden, kanun koyucunun takdirinde bir düzenleme saymış; hak arama hürriyetini engellemediğini belirtmiştir. Resmî Gazete: 12.07.2019, 30829.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2019-39-nrm.pdf"
+  },
+  {
+    "kanun": "6102",
+    "kanunAdi": "Türk Ticaret Kanunu",
+    "madde": "62",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2021/24",
+    "karar": "2021/79",
+    "tarih": "2021-11-04",
+    "ozet": "TTK m. 62/a, atıfla belirlenen haksız rekabet fiilleri (m. 55/1-c-1 ve alt bentleri) için yapılan itiraz oybirliğiyle reddedilmiştir; kural Anayasa'nın 38. maddesine aykırı bulunmamıştır. Mahkeme, başkasının iş ürününden yetkisiz yararlanmanın genel bir kavram olmakla birlikte belirsiz olmadığını, fiilin, failin ve yaptırımın açıkça belirlendiğini, uygulamadaki sorunların yorumla çözüleceğini belirtmiştir. Resmî Gazete: 14.12.2021, 31689.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2021-79-nrm.pdf"
+  },
+  {
+    "kanun": "6102",
+    "kanunAdi": "Türk Ticaret Kanunu",
+    "madde": "Geçici 7",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2023/33",
+    "karar": "2023/117",
+    "tarih": "2023-06-22",
+    "ozet": "TTK Geçici 7. maddenin (15) numaralı fıkrasının beşinci cümlesindeki \"…silinme tarihinden itibaren beş yıl içinde…\" ibaresi oybirliğiyle iptal edilmiştir. Ticaret sicilinden silinen şirketin ihyası için sürenin, alacaklının haberdar olması gözetilmeden silinme tarihinden başlaması, ihya yolunu işlevsiz kıldığı için Anayasa'nın 35. ve 40. maddelerine aykırı bulunmuştur. Resmî Gazete: 15.09.2023, 32310.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2023-117-nrm.pdf"
+  },
+  {
+    "kanun": "657",
+    "kanunAdi": "Devlet Memurları Kanunu",
+    "madde": "I sayılı Cetvel",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2006/97",
+    "karar": "2006/74",
+    "tarih": "2006-06-27",
+    "ozet": "527 sayılı KHK m. 3 ile 657 sayılı Kanuna eklenen I sayılı Cetvel'deki \"GAP İdaresi Başkan Yardımcısı\" ibaresi oybirliğiyle iptal edilmiştir. KHK'nin dayandığı 3990 sayılı Yetki Yasası 1994'te Anayasa Mahkemesi tarafından iptal edildiğinden KHK anayasal dayanaktan yoksun kalmış; ibare Anayasa'nın 2., 6. ve 91. maddelerine aykırı bulunmuştur. Doğacak hukuki boşluk nedeniyle iptal, yayımından bir yıl sonra yürürlüğe girecektir. Resmî Gazete: 01.11.2006, 26333.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2006-74-nrm.pdf"
+  },
+  {
+    "kanun": "657",
+    "kanunAdi": "Devlet Memurları Kanunu",
+    "madde": "135",
+    "mahkeme": "Danıştay",
+    "daire": "İdari Dava Daireleri Kurulu",
+    "esas": "2008/853",
+    "karar": "2009/2845",
+    "tarih": "2009-12-10",
+    "ozet": "Maliye Bakanlığı Disiplin Amirleri Yönetmeliği'ndeki değişikliğin Resmî Gazete'de yayımlanmayan iç onaylarla yapılması sonucu verilen aylıktan kesme cezası hukuka aykırı bulunmuştur. Kınama cezasına karşı açılan iptal istemi ise 657 sayılı Kanun'un 135 ve 136. maddeleri ile Anayasa'nın 129. maddesi uyarınca uyarma ve kınama cezalarının kesinliği nedeniyle esas yönünden incelenmemiştir. Kurul, temyiz isteklerini reddederek Danıştay 12. Dairesi'nin kararını oyçokluğuyla onamıştır. (Künye, kararı aktaran sayfadan alınmıştır.)",
+    "link": "https://www.memurlar.net/haber/208265/resmi-gazetede-yayimlanmayan-ic-onaya-dayanarak-disiplin-cezasi-verilemez.html"
+  },
+  {
+    "kanun": "657",
+    "kanunAdi": "Devlet Memurları Kanunu",
+    "madde": "4",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2010/46",
+    "karar": "2011/60",
+    "tarih": "2011-03-30",
+    "ozet": "DMK m. 4/C (geçici personel) ve 5429 sayılı Kanun m. 49/2'deki geçici personel ücretlerine ilişkin kural oyçokluğuyla Anayasa'ya aykırı bulunmamıştır (bir karşı oy). Geçici personel, sözleşmeyle çalıştırılan özel bir istihdam türüdür; çerçevenin kanunla çizilip ayrıntının Bakanlar Kurulu'na bırakılması yetki devri sayılmamıştır. Resmî Gazete: 21.10.2011, 28091.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2011-60-nrm.pdf"
+  },
+  {
+    "kanun": "657",
+    "kanunAdi": "Devlet Memurları Kanunu",
+    "madde": "152",
+    "mahkeme": "Anayasa Mahkemesi",
+    "daire": "Norm denetimi",
+    "esas": "2022/82",
+    "karar": "2022/113",
+    "tarih": "2022-09-28",
+    "ozet": "DMK m. 152, II-G (Adalet Hizmetleri Tazminatı) kuralının Hâkimler ve Savcılar Kurulu personelini kapsam dışında bırakması, itiraz yoluyla oyçokluğuyla Anayasa'ya aykırı bulunmamıştır (dört karşı oy). Çoğunluğa göre HSK'nın görev ve niteliği diğer kurumlardan farklıdır ve kural kanun koyucunun takdirindedir. Karşı oylarda bu dışlamanın objektif dayanağı olmadığı savunulmuştur. Resmî Gazete: 07.12.2022, 32036.",
+    "link": "https://normkararlarbilgibankasi.anayasa.gov.tr/Dosyalar/Kararlar/KararPDF/2022-113-nrm.pdf"
+  }
+];
+</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s),app=$("#app");
@@ -90,10 +479,8 @@ async function start(){
  app.innerHTML=hero(`<h1 class="rise">İçtihatlar</h1><p class="rise">Üyeliğin kontrol ediliyor…</p>`);
  const s=await verify();busy=false;
  if(s!=="ok"){gate(s);return}
- if(window.ICTIHAT){show();return}
- const sc=document.createElement("script");sc.src="data/ictihat.js?v=1";
- sc.onload=show;sc.onerror=()=>{window.ICTIHAT=[];show()};document.head.appendChild(sc)}
-window.addEventListener("focus",()=>{if(!window.ICTIHAT&&!busy&&!document.querySelector("#liste"))start()});
+ show()}
+window.addEventListener("focus",()=>{if(!busy&&document.querySelector(".gate"))start()});
 start();
 })();
 </script>
