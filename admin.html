@@ -272,6 +272,68 @@ dialog::backdrop{background:rgba(8,12,28,.55)}
 .blk{display:grid;gap:10px;width:100%}.blk-c{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:12px;display:grid;gap:10px}.blk-h{display:flex;align-items:center;gap:6px}
 .blk-ph{border:1.5px dashed var(--line);border-radius:10px;min-height:120px;display:grid;place-items:center;text-align:center;padding:16px;color:var(--mut);background:var(--soft)}.blk-ph.v{min-height:90px}
 .blk-img{max-width:100%;max-height:260px;border-radius:10px;border:1px solid var(--line);justify-self:start}.blk-ins{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--mut)}.blk textarea,.blk input[type=text]{width:100%}
+
+/* ===== yeniden tasarım: kenar çubuğu, üst çubuk, sayfa düzeni ===== */
+:root{--railbg:#14204f;--railink:#e9edfb;--railmut:#9eaedd;--railline:rgba(255,255,255,.12);--hov:rgba(255,255,255,.08)}
+@media(prefers-color-scheme:dark){:root{--railbg:#0c1230}}
+#app{grid-template-columns:276px minmax(0,1fr)}
+#rail{background:var(--railbg);color:var(--railink);border-right:0;padding:20px 12px 12px;gap:14px;scrollbar-width:thin;scrollbar-color:var(--railline) transparent}
+.brand{padding:2px 8px 0;display:grid;gap:3px}
+.brand b{color:#fff;font-size:26px}
+.brand span{color:var(--railmut)}
+.navsearch{padding:0 2px}
+.navsearch input{width:100%;min-height:38px;border-radius:10px;border:1px solid var(--railline);background:rgba(255,255,255,.07);color:#fff;padding:7px 12px}
+.navsearch input::placeholder{color:var(--railmut)}
+.navsearch input:focus{background:rgba(255,255,255,.12);outline-color:#fff}
+nav.menu{display:grid;gap:2px;align-content:start}
+nav.menu a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:9px;color:var(--railink);text-decoration:none;font-weight:500;font-size:14.5px}
+nav.menu a:hover{background:var(--hov)}
+nav.menu a[aria-current=page]{background:#fff;color:#14204f;font-weight:700}
+nav.menu .cnt{color:var(--railmut)}
+nav.menu a[aria-current=page] .cnt{color:#14204f;opacity:.7}
+.ng-home{margin-bottom:6px}
+.ng-home a{font-weight:600}
+details.ng{border-top:1px solid var(--railline)}
+details.ng>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 10px;border-radius:9px;font-weight:700;font-size:14px;color:var(--railmut)}
+details.ng>summary::-webkit-details-marker{display:none}
+details.ng>summary:hover{background:var(--hov);color:#fff}
+details.ng[open]>summary{color:#fff}
+details.ng>summary .gs::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s;margin-left:4px}
+details.ng[open]>summary .gs::after{transform:rotate(45deg)}
+details.ng[open]>summary .gs .dot,details.ng[open]>summary .gs .newbadge{display:none}
+.ni{display:grid;gap:1px;padding:0 0 8px 8px;margin-left:10px;border-left:1px solid var(--railline)}
+.ng-none{padding:10px;color:var(--railmut)}
+.railfoot{border-top-color:var(--railline);color:var(--railmut)}
+.railfoot b{color:#fff}
+#top{min-height:58px;padding:10px 32px;background:color-mix(in srgb,var(--bg) 85%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#top h1{font:700 17px/1.2 var(--sans);letter-spacing:0;display:flex;gap:8px;align-items:center}
+#top h1 span{overflow:hidden;text-overflow:ellipsis}
+#top .crumb{color:var(--mut);font-weight:500;flex:none}
+#top .sep{color:var(--mut);flex:none}
+@media(min-width:901px){#top h1{visibility:visible}}
+#main{padding:30px 36px 96px;max-width:1180px}
+.pagehead{margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.pagehead h2{font-size:32px}
+.panel{border-radius:14px;padding:24px}
+.panel+.panel{margin-top:20px}
+.btn{border-radius:10px}
+.split{gap:24px}
+.listcol{top:76px;border-radius:14px}
+.pe-bar{top:57px}
+.tabs{display:inline-flex;background:var(--soft);border:0;padding:4px;border-radius:12px;gap:2px;margin-bottom:22px;max-width:100%}
+.tabs .btn{border:0;background:transparent;min-height:34px}
+.tabs .btn:hover{background:color-mix(in srgb,var(--surf) 55%,transparent)}
+.tabs .btn[aria-pressed=true]{background:var(--surf);color:var(--ink);box-shadow:0 1px 3px rgba(15,25,54,.18)}
+@media(max-width:900px){
+  #rail{width:min(320px,88vw);padding-top:16px}
+  #top{padding:8px 12px;min-height:54px}
+  #top h1{font-size:15.5px}
+  #main{padding:18px 14px 96px}
+  .pagehead h2{font-size:26px}
+  .pe-bar{top:53px}
+  .tabs{display:flex;overflow-x:auto}
+  nav.menu a,details.ng>summary{min-height:44px}
+}
 </style>
 </head>
 <body>
@@ -281,7 +343,8 @@ dialog::backdrop{background:rgba(8,12,28,.55)}
 <div id="app" hidden>
   <aside id="rail" aria-label="Bölümler">
     <div class="brand"><b>Eko-Log</b><span>Yayın masası</span></div>
-    <nav class="menu" id="menu"></nav>
+    <div class="navsearch"><input type="search" id="navq" placeholder="Sayfa ara…" aria-label="Sayfa ara" autocomplete="off"></div>
+    <nav class="menu" id="menu" aria-label="Sayfalar"></nav>
     <div class="railfoot">
       <div class="conn"><i></i><span id="connTxt">Bağlı</span></div>
       <span id="railState"></span>
@@ -290,7 +353,7 @@ dialog::backdrop{background:rgba(8,12,28,.55)}
   <div id="scrim"></div>
   <div id="stage">
     <header id="top">
-      <button class="btn sm" id="menuBtn" type="button" aria-label="Menüyü aç">Menü</button>
+      <button class="btn sm" id="menuBtn" type="button" aria-label="Menüyü aç">☰ Menü</button>
       <h1 id="vtitle">Yayın masası</h1>
       <button class="btn pub" id="pubBtn" type="button"><span class="publbl">Gözden geçir ve yayınla</span><span class="publbl" hidden></span><span id="pubShort">Yayınla</span><span class="badge" id="pubCnt" hidden>0</span></button>
     </header>
@@ -1875,21 +1938,42 @@ const VIEWS={};
 const ANK=['sozluk','ka','se','ki','kb'];
 const viewTitle=k=>{if(ANK.includes(k))k='ansiklopedi';for(const g of NAV)for(const[id,t]of g.items)if(id===k)return t;return'Genel bakış'};
 
+const NGOPEN=new Set();
+function curGroup(){const v=ANK.includes(S.view)?'ansiklopedi':S.view;for(const g of NAV)if(g.items.some(([id])=>id===v))return g.g;return null}
 function drawNav(){
-  const secDirty=new Set(dirtySecs()),menu=$('#menu');menu.replaceChildren();
+  const secDirty=new Set(dirtySecs()),menu=$('#menu'),qi=$('#navq'),tr=x=>x.toLocaleLowerCase('tr'),q=tr((qi.value||'').trim()),cur=curGroup();
+  menu.replaceChildren();
+  if(!menu._b){menu._b=1;menu.addEventListener('toggle',e=>{const d=e.target;if(!d.dataset||!d.dataset.g||d.dataset.q)return;if(d.open){NGOPEN.clear();NGOPEN.add(d.dataset.g)}else NGOPEN.delete(d.dataset.g)},true)}
+  if(!qi._b){qi._b=1;qi.addEventListener('input',drawNav);qi.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=$('#menu .ni a');if(a){location.hash=a.getAttribute('href');qi.value=''}}if(e.key==='Escape'){qi.value='';drawNav()}})}
+  const link=(id,t)=>{
+    const C=COLS[id],cnt=C?filledN(id):null;
+    return h('a',{href:'#/'+id,'aria-current':(S.view===id||(id==='ansiklopedi'&&ANK.includes(S.view)))?'page':null},
+      h('span',{text:t}),
+      h('span',{class:'row',style:'gap:8px;flex-wrap:nowrap'},
+        secDirty.has(id)?h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}):null,
+        (id==='pmakale'&&S.newArt>0)?h('span',{class:'newbadge',title:'Yeni gelen makale',text:S.newArt+' yeni'}):null,
+        (id==='itab'&&S.newVt>0)?h('span',{class:'newbadge',title:'Yeni gelen tablo',text:S.newVt+' yeni'}):null,
+        cnt!=null?h('span',{class:'cnt',text:cnt}):null));
+  };
+  if(!q)menu.append(h('div',{class:'ng-home'},link('home','Genel bakış')));
+  let found=0;
   for(const g of NAV){
-    menu.append(h('div',null,h('h3',{text:g.g}),
-      g.items.map(([id,t])=>{
-        const C=COLS[id],cnt=C?filledN(id):null;
-        return h('a',{href:'#/'+id,'aria-current':(S.view===id||(id==='ansiklopedi'&&ANK.includes(S.view)))?'page':null},
-          h('span',{text:t}),
-          h('span',{class:'row',style:'gap:8px;flex-wrap:nowrap'},
-            secDirty.has(id)?h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}):null,
-            (id==='pmakale'&&S.newArt>0)?h('span',{class:'newbadge',title:'Yeni gelen makale',text:S.newArt+' yeni'}):null,
-            (id==='itab'&&S.newVt>0)?h('span',{class:'newbadge',title:'Yeni gelen tablo',text:S.newVt+' yeni'}):null,
-            cnt!=null?h('span',{class:'cnt',text:cnt}):null));
-      })));
+    const items=g.items.filter(([id,t])=>id!=='home'&&(!q||tr(t).includes(q)||tr(g.g).includes(q)));
+    if(!items.length)continue;found++;
+    const nw=items.reduce((n,[id])=>n+(id==='pmakale'?S.newArt||0:id==='itab'?S.newVt||0:0),0);
+    const d=h('details',{class:'ng'},
+      h('summary',null,h('span',{text:g.g}),
+        h('span',{class:'row gs',style:'gap:6px;flex-wrap:nowrap'},
+          items.some(([id])=>secDirty.has(id))?h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}):null,
+          nw>0?h('span',{class:'newbadge',text:nw+' yeni'}):null)),
+      h('div',{class:'ni'},items.map(([id,t])=>link(id,t))));
+    d.dataset.g=g.g;if(q)d.dataset.q='1';
+    d.open=!!q||g.g===cur||NGOPEN.has(g.g);
+    menu.append(d);
   }
+  if(q&&!found)menu.append(h('p',{class:'ng-none',text:'Eşleşen sayfa yok.'}));
+  const vt=viewTitle(S.view),vEl=$('#vtitle');
+  vEl.replaceChildren(...(cur&&S.view!=='home'&&vt!==cur?[h('span',{class:'crumb',text:cur}),h('span',{class:'sep',text:'›'})]:[]),h('span',{text:vt}));
 }
 function refreshChrome(){
   if(!S.work)return;
@@ -1906,6 +1990,7 @@ function refreshChrome(){
     if(!ds.has(id)&&has)has.remove();
     const C=COLS[id],c=a.querySelector('.cnt');if(C&&c)c.textContent=filledN(id);
   });
+  $$('#menu details.ng').forEach(d=>{const gs=d.querySelector('.gs'),any=d.querySelector('.ni .dot'),gd=gs.querySelector('.dot');if(any&&!gd)gs.prepend(h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}));if(!any&&gd)gd.remove()});
 }
 function render(){
   const v=VIEWS[S.view]||VIEWS.home;
