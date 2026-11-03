@@ -4402,8 +4402,8 @@ function xroute(){
   $$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+k));
   $$('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+k));
   document.title='Eko-Log · '+(TITLES[k]||'Eko-Plus');scrollTo(0,0)}
- if(mine&&REFRESH[k])REFRESH[k]();
- if(mine)applyLang();
+ if((mine||STANDALONE)&&REFRESH[k])REFRESH[k]();
+ if(mine||STANDALONE)applyLang();
 }
 function mount(){
  const host=$('main')||document.body;
@@ -4419,6 +4419,9 @@ function mount(){
 }
 window.EkoPlus={dailyHTML,stats,conOf,version:'1.0'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+/* Günün kavramı / Hızlı bakış boş kalırsa (adreste # yoksa) yeniden doldur */
+const fillHub=()=>{try{const r=document.getElementById('p-ekstra'),h=r&&r.querySelector('#xhd');if(h&&!h.innerHTML.trim()&&REFRESH.ekstra)REFRESH.ekstra()}catch(e){}};
+[300,1200,3000].forEach(t=>setTimeout(fillHub,t));addEventListener('load',fillHub);addEventListener('focus',fillHub);
 })();
 
 
