@@ -330,6 +330,13 @@ body.xprint{background:#fff}
 .x-qs b{display:block;font:800 30px/1 "Bricolage Grotesque",sans-serif;color:var(--g1)}
 .x-qs span{display:block;margin-top:6px;font-size:12.5px;line-height:1.25;color:var(--mut)}
 @media(max-width:760px){.x-daily{padding:24px}}
+
+/* Mavi ekranı kaldır: dokunma parlaması + Eko-Plus sayfalarındaki lacivert paneller */
+html,body,a,button,.tile,.btn,summary,label{-webkit-tap-highlight-color:transparent}
+.xp .panel{background:linear-gradient(135deg,var(--g1),var(--g2))!important}
+.xp .panel::before{background:#fff!important;opacity:.16!important}
+.xp .panel::after{background:#3b0a14!important;opacity:.14!important}
+a.tile:active{transform:scale(.98)}
 </style>
 <style id="ekoplus-gate-css">
 /* Eko-Plus yalnızca onaylı üyelere: üye değilse sayfalar hiç görünmez */
