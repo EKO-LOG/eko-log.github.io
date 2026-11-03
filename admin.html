@@ -272,69 +272,144 @@ dialog::backdrop{background:rgba(8,12,28,.55)}
 .blk{display:grid;gap:10px;width:100%}.blk-c{border:1px solid var(--line);border-radius:12px;background:var(--surf);padding:12px;display:grid;gap:10px}.blk-h{display:flex;align-items:center;gap:6px}
 .blk-ph{border:1.5px dashed var(--line);border-radius:10px;min-height:120px;display:grid;place-items:center;text-align:center;padding:16px;color:var(--mut);background:var(--soft)}.blk-ph.v{min-height:90px}
 .blk-img{max-width:100%;max-height:260px;border-radius:10px;border:1px solid var(--line);justify-self:start}.blk-ins{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--mut)}.blk textarea,.blk input[type=text]{width:100%}
-
-/* ===== yeniden tasarım: kenar çubuğu, üst çubuk, sayfa düzeni ===== */
-:root{--railbg:#14204f;--railink:#e9edfb;--railmut:#9eaedd;--railline:rgba(255,255,255,.12);--hov:rgba(255,255,255,.08)}
-@media(prefers-color-scheme:dark){:root{--railbg:#0c1230}}
-#app{grid-template-columns:276px minmax(0,1fr)}
-#rail{background:var(--railbg);color:var(--railink);border-right:0;padding:20px 12px 12px;gap:14px;scrollbar-width:thin;scrollbar-color:var(--railline) transparent}
-.brand{padding:2px 8px 0;display:grid;gap:3px}
-.brand b{color:#fff;font-size:26px}
-.brand span{color:var(--railmut)}
-.navsearch{padding:0 2px}
-.navsearch input{width:100%;min-height:38px;border-radius:10px;border:1px solid var(--railline);background:rgba(255,255,255,.07);color:#fff;padding:7px 12px}
-.navsearch input::placeholder{color:var(--railmut)}
-.navsearch input:focus{background:rgba(255,255,255,.12);outline-color:#fff}
-nav.menu{display:grid;gap:2px;align-content:start}
-nav.menu a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:9px;color:var(--railink);text-decoration:none;font-weight:500;font-size:14.5px}
-nav.menu a:hover{background:var(--hov)}
-nav.menu a[aria-current=page]{background:#fff;color:#14204f;font-weight:700}
-nav.menu .cnt{color:var(--railmut)}
-nav.menu a[aria-current=page] .cnt{color:#14204f;opacity:.7}
-.ng-home{margin-bottom:6px}
-.ng-home a{font-weight:600}
-details.ng{border-top:1px solid var(--railline)}
-details.ng>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 10px;border-radius:9px;font-weight:700;font-size:14px;color:var(--railmut)}
-details.ng>summary::-webkit-details-marker{display:none}
-details.ng>summary:hover{background:var(--hov);color:#fff}
-details.ng[open]>summary{color:#fff}
-details.ng>summary .gs::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s;margin-left:4px}
-details.ng[open]>summary .gs::after{transform:rotate(45deg)}
-details.ng[open]>summary .gs .dot,details.ng[open]>summary .gs .newbadge{display:none}
-.ni{display:grid;gap:1px;padding:0 0 8px 8px;margin-left:10px;border-left:1px solid var(--railline)}
-.ng-none{padding:10px;color:var(--railmut)}
-.railfoot{border-top-color:var(--railline);color:var(--railmut)}
-.railfoot b{color:#fff}
-#top{min-height:58px;padding:10px 32px;background:color-mix(in srgb,var(--bg) 85%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-#top h1{font:700 17px/1.2 var(--sans);letter-spacing:0;display:flex;gap:8px;align-items:center}
-#top h1 span{overflow:hidden;text-overflow:ellipsis}
-#top .crumb{color:var(--mut);font-weight:500;flex:none}
-#top .sep{color:var(--mut);flex:none}
-@media(min-width:901px){#top h1{visibility:visible}}
-#main{padding:30px 36px 96px;max-width:1180px}
-.pagehead{margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--line)}
-.pagehead h2{font-size:32px}
-.panel{border-radius:14px;padding:24px}
-.panel+.panel{margin-top:20px}
-.btn{border-radius:10px}
-.split{gap:24px}
-.listcol{top:76px;border-radius:14px}
-.pe-bar{top:57px}
-.tabs{display:inline-flex;background:var(--soft);border:0;padding:4px;border-radius:12px;gap:2px;margin-bottom:22px;max-width:100%}
-.tabs .btn{border:0;background:transparent;min-height:34px}
-.tabs .btn:hover{background:color-mix(in srgb,var(--surf) 55%,transparent)}
-.tabs .btn[aria-pressed=true]{background:var(--surf);color:var(--ink);box-shadow:0 1px 3px rgba(15,25,54,.18)}
-@media(max-width:900px){
-  #rail{width:min(320px,88vw);padding-top:16px}
-  #top{padding:8px 12px;min-height:54px}
-  #top h1{font-size:15.5px}
-  #main{padding:18px 14px 96px}
-  .pagehead h2{font-size:26px}
-  .pe-bar{top:53px}
-  .tabs{display:flex;overflow-x:auto}
-  nav.menu a,details.ng>summary{min-height:44px}
-}
 </style>
+<style id="adm-redesign">
+/* ===== Yayın masası: yenilenmiş tasarım (site ile aynı dil) ===== */
+:root{
+  --bg:#f3f5fb;--surf:#ffffff;--ink:#0e1530;--mut:#58637f;--line:#e0e5f0;--soft:#edf1f9;
+  --g1:#1d4ed8;--g2:#06b6d4;--navy:#1d4ed8;--red:#c4202e;--ok:#0f7a56;--warn:#9a5200;--bad:#b42318;
+  --acc:linear-gradient(120deg,var(--g1),var(--g2));
+  --pub:linear-gradient(110deg,#c4202e,#e8541f);
+  --r:18px;--sh:0 1px 2px rgba(14,21,48,.05),0 16px 34px -22px rgba(14,21,48,.35);
+  --serif:"Bricolage Grotesque","Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#080d1e;--surf:#101830;--ink:#eef1fb;--mut:#9aa6c8;--line:#222d52;--soft:#18213f;
+  --g1:#5b8cff;--g2:#22d3ee;--navy:#8fb0ff;--red:#ff6a5e;
+  --sh:0 1px 2px rgba(0,0,0,.3),0 18px 38px -22px rgba(0,0,0,.7);
+}}
+*{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--mut) 40%,transparent) transparent}
+html{scroll-behavior:smooth}
+body{font:15.5px/1.55 var(--sans);background:radial-gradient(900px 360px at 85% -8%,color-mix(in srgb,var(--g2) 13%,transparent),transparent 70%),radial-gradient(700px 320px at -5% 0%,color-mix(in srgb,var(--g1) 9%,transparent),transparent 70%),var(--bg);background-attachment:fixed}
+h1,h2,h3{letter-spacing:-.02em}
+::selection{background:color-mix(in srgb,var(--g1) 30%,transparent)}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--g1) 55%,transparent);outline-offset:2px}
+
+/* giriş */
+#login{background:radial-gradient(900px 500px at 15% 10%,color-mix(in srgb,var(--g1) 22%,transparent),transparent 65%),radial-gradient(800px 500px at 90% 90%,color-mix(in srgb,var(--red) 16%,transparent),transparent 65%),var(--bg)}
+.lcard{border-radius:26px;box-shadow:var(--sh);padding:34px 30px;backdrop-filter:blur(8px)}
+.lcard h1{font-size:38px;background:var(--acc);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* sol menü */
+#rail{background:color-mix(in srgb,var(--surf) 94%,transparent);padding:20px 12px 14px;gap:16px}
+.brand{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:12px;align-items:center;padding:2px 8px 4px}
+.brand::before{content:"E";grid-row:1/3;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--acc);color:#fff;font:800 22px var(--serif);box-shadow:0 10px 22px -10px var(--g1)}
+.brand b{font:800 23px/1.05 var(--serif);letter-spacing:-.03em}
+.brand b{align-self:end}
+.brand span{display:block;margin-top:2px;font-size:12.5px;color:var(--mut);align-self:start}
+#menuSearch{width:100%;margin:0 0 2px;border-radius:12px;background:var(--soft);border-color:transparent;padding:9px 12px 9px 36px;min-height:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2358637f' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='m11 11 3.5 3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px 50%}
+#menuSearch:focus{background-color:var(--surf);border-color:var(--g1);box-shadow:0 0 0 4px color-mix(in srgb,var(--g1) 16%,transparent);outline:0}
+nav.menu{gap:14px}
+nav.menu h3{font:700 11.5px var(--sans);text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:0 12px 6px}
+nav.menu a{padding:8px 12px;border-radius:11px;font-weight:550;transition:background .12s,transform .12s}
+nav.menu a:hover{background:var(--soft)}
+nav.menu a[aria-current=page]{background:var(--acc);color:#fff;box-shadow:0 12px 22px -14px var(--g1)}
+nav.menu a[aria-current=page] .dot{box-shadow:0 0 0 2px #fff}
+.railfoot{border-top:1px solid var(--line);padding:14px 10px 2px}
+.conn i{box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 22%,transparent)}
+
+/* üst çubuk ve sayfa başlığı */
+#top{padding:12px 30px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px)}
+#top h1{font-size:22px;font-weight:800}
+@media(min-width:901px){#top h1{visibility:visible}}
+#main{padding:28px 30px 90px;max-width:1180px}
+.pagehead{margin-bottom:22px;gap:8px}
+.pagehead h2{font-size:clamp(28px,3.4vw,38px);font-weight:800;letter-spacing:-.03em}
+.pagehead h2::after{content:"";display:block;width:54px;height:5px;border-radius:99px;background:var(--acc);margin-top:10px}
+.pagehead p{font-size:16px}
+
+/* düğmeler */
+.btn{border-radius:12px;font-weight:650;transition:transform .1s,box-shadow .15s,background .15s,filter .15s;box-shadow:0 1px 0 rgba(14,21,48,.04)}
+.btn:hover{background:var(--soft)}
+.btn:active{transform:translateY(1px)}
+.btn.solid{background:var(--acc);border-color:transparent;color:#fff;box-shadow:0 12px 22px -14px var(--g1)}
+.btn.solid:hover{opacity:1;filter:brightness(1.07);background:var(--acc)}
+.btn.pub{border-radius:999px;padding:9px 20px;box-shadow:0 14px 26px -14px #c4202e}
+.btn.danger:hover{background:color-mix(in srgb,var(--bad) 10%,var(--surf))}
+.tabs{gap:8px;border-bottom:0;padding-bottom:0}
+.tabs .btn{border-radius:999px}
+.tabs .btn[aria-pressed=true],.pe-jump button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:transparent}
+
+/* formlar */
+input[type=text],input[type=password],input[type=search],input[type=url],textarea,select{border-radius:12px;padding:10px 13px;background:var(--surf);transition:border-color .12s,box-shadow .12s}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--g1);box-shadow:0 0 0 4px color-mix(in srgb,var(--g1) 16%,transparent)}
+.fld>label,.lab{font-size:14px;letter-spacing:.01em}
+.switch .tr{width:46px;height:27px}
+.switch input:checked+.tr{background:var(--acc)}
+
+/* paneller ve kartlar */
+.panel,.listcol,.reader,details.acc,.pcard,.bk,.tx,.blk-c{border-radius:var(--r);box-shadow:var(--sh)}
+.panel{padding:22px 24px}
+.panel h3{font-size:20px;margin-bottom:12px}
+.panel .panel{box-shadow:none;background:color-mix(in srgb,var(--soft) 60%,var(--surf))}
+.pcard{box-shadow:none}
+.tblwrap{border-radius:var(--r);box-shadow:var(--sh);background:var(--surf)}
+table.ppk th{background:var(--soft);text-transform:uppercase;font-size:11.5px;letter-spacing:.06em}
+.index td:nth-child(2){font-family:var(--serif)}
+.empty{border-radius:var(--r);background:color-mix(in srgb,var(--soft) 55%,transparent);border-color:color-mix(in srgb,var(--mut) 30%,var(--line))}
+.empty b{font-family:var(--serif)}
+.chip{padding:4px 12px;border:1px solid transparent}
+.chip.ok{border-color:color-mix(in srgb,var(--ok) 25%,transparent)}
+.badge{background:#fff;color:#c4202e}
+.xp-row{padding:14px 0}
+
+/* liste + ayrıntı */
+.listcol{overflow:hidden}
+.listhead{background:color-mix(in srgb,var(--soft) 55%,var(--surf))}
+.it{border-left-width:4px;transition:background .1s}
+.it[aria-current=true]{background:color-mix(in srgb,var(--g1) 9%,var(--surf));border-left-color:var(--g1)}
+.thumb{border-radius:12px}
+details.acc>summary{font-family:var(--serif)}
+details.acc[open]>summary{background:color-mix(in srgb,var(--soft) 55%,var(--surf))}
+.inbox .item{border-radius:14px}
+.inbox .item[aria-current=true]{border-color:var(--g1);box-shadow:0 0 0 3px color-mix(in srgb,var(--g1) 18%,transparent)}
+.tx.chg,.pf.chg textarea{border-color:#e8741f}
+
+/* pencereler ve bildirimler */
+dialog{border-radius:24px;box-shadow:0 40px 90px -30px rgba(8,12,28,.7)}
+.dfoot{border-radius:0 0 24px 24px}
+dialog::backdrop{backdrop-filter:blur(4px)}
+.toast{border-radius:14px;box-shadow:0 18px 40px -14px rgba(8,12,28,.55)}
+.prog i,.pbar i{background:var(--acc)}
+.skel{border-radius:14px}
+
+/* dar ekran */
+@media(max-width:900px){
+  #top{padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+  #main{padding:20px 14px 100px}
+  .btn{min-height:44px}.btn.sm{min-height:38px}
+  .panel{padding:18px 16px}
+  #rail{border-radius:0 24px 24px 0}
+}
+
+/* menü: daraltılabilir gruplar */
+nav.menu{gap:6px}
+nav.menu .grp{display:grid;gap:2px;padding-bottom:6px}
+nav.menu .grp+.grp{border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent);padding-top:8px}
+nav.menu h3{padding:0}
+.grph{width:100%;display:flex;align-items:center;gap:8px;background:none;border:0;cursor:pointer;padding:6px 12px;border-radius:10px;font:700 11.5px var(--sans);text-transform:uppercase;letter-spacing:.09em;color:var(--mut);text-align:left}
+.grph:hover{background:var(--soft);color:var(--ink)}
+.grph span:first-child{flex:1}
+.grph .chev{width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-right:3px;transition:transform .15s;flex:none}
+.grp.closed .chev{transform:rotate(-45deg)}
+.grp.closed>a{display:none}
+#menu.searching .grp.closed>a{display:flex}
+#menu.searching .grp.closed .chev{transform:rotate(45deg)}
+nav.menu .gdot{margin:0}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 </head>
 <body>
 
@@ -343,8 +418,7 @@ details.ng[open]>summary .gs .dot,details.ng[open]>summary .gs .newbadge{display
 <div id="app" hidden>
   <aside id="rail" aria-label="Bölümler">
     <div class="brand"><b>Eko-Log</b><span>Yayın masası</span></div>
-    <div class="navsearch"><input type="search" id="navq" placeholder="Sayfa ara…" aria-label="Sayfa ara" autocomplete="off"></div>
-    <nav class="menu" id="menu" aria-label="Sayfalar"></nav>
+    <nav class="menu" id="menu"></nav>
     <div class="railfoot">
       <div class="conn"><i></i><span id="connTxt">Bağlı</span></div>
       <span id="railState"></span>
@@ -353,7 +427,7 @@ details.ng[open]>summary .gs .dot,details.ng[open]>summary .gs .newbadge{display
   <div id="scrim"></div>
   <div id="stage">
     <header id="top">
-      <button class="btn sm" id="menuBtn" type="button" aria-label="Menüyü aç">☰ Menü</button>
+      <button class="btn sm" id="menuBtn" type="button" aria-label="Menüyü aç">Menü</button>
       <h1 id="vtitle">Yayın masası</h1>
       <button class="btn pub" id="pubBtn" type="button"><span class="publbl">Gözden geçir ve yayınla</span><span class="publbl" hidden></span><span id="pubShort">Yayınla</span><span class="badge" id="pubCnt" hidden>0</span></button>
     </header>
@@ -1923,57 +1997,48 @@ function validate(){
 <script>
 /* ---------- gezinme ve çerçeve ---------- */
 const NAV=[
-  {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['yarisma','Bilgi Yarışması'],['poll','Anket']]},
-  {g:'Simülasyon Merkezi',items:[['sims','Simülasyon fotoğrafları'],['pmulakat','Mülakat sayfası'],['borsa','Borsa oyunu kayıtları']]},
-  {g:'Meslekler',items:[['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['ex','Sınav takvimi']]},
-  {g:'İktisadi Ansiklopedi',items:[['ansiklopedi','İktisadi Ansiklopedi']]},
-  {g:'Veri ve Pariteler',items:[['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri'],['itab','Gelen tablolar']]},
-  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['pmakale','Gelen makaleler'],['gallery','Galeri'],['comments','Yorumlar']]},
-  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['xpetk','Etkinlik Araçları'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['konf','Konferanslar'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
-  {g:'Üyelere Özel',items:[['members','Üyelik başvuruları'],['teachers','Hocalar']]},
-  {g:'Eko-Plus modülleri',items:[['xplus','Sayfa anahtarları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Sınav Takvimi (resmî)']]},
+  {g:'Gelenler',items:[['pmakale','Gelen makaleler'],['members','Üyelik başvuruları'],['comments','Yorumlar'],['itab','Gelen tablolar'],['joins','Katılımcılar']]},
+  {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['poll','Anket']]},
+  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['gallery','Galeri']]},
+  {g:'Etkinlikler',items:[['e','Etkinlikler ve QR araçları'],['quota','Etkinlik kontenjanı'],['konf','Konferanslar'],['yb','Yatay Bakış'],['etkpg','Sayfa anahtarları']]},
+  {g:'Fikir Muharebesi',items:[['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['fmarg','Muharebe argümanları']]},
+  {g:'Simülasyon ve Meslekler',items:[['sims','Simülasyon fotoğrafları'],['pmulakat','Mülakat sayfası'],['borsa','Borsa oyunu kayıtları'],['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['ex','Sınav takvimi']]},
+  {g:'Bilgi ve Veri',items:[['ansiklopedi','İktisadi Ansiklopedi'],['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri']]},
+  {g:'Eko-Plus',items:[['teachers','Hocalar'],['xplus','Sayfa anahtarları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Resmî sınav takvimi']]},
   {g:'Site',items:[['texts','Site metinleri'],['blocks','Örnek içerikler'],['stats','İstatistikler'],['links','Bağlantılar'],['settings','Ayarlar ve yedek']]}
 ];
 const VIEWS={};
 const ANK=['sozluk','ka','se','ki','kb'];
 const viewTitle=k=>{if(ANK.includes(k))k='ansiklopedi';for(const g of NAV)for(const[id,t]of g.items)if(id===k)return t;return'Genel bakış'};
 
-const NGOPEN=new Set();
-function curGroup(){const v=ANK.includes(S.view)?'ansiklopedi':S.view;for(const g of NAV)if(g.items.some(([id])=>id===v))return g.g;return null}
 function drawNav(){
-  const secDirty=new Set(dirtySecs()),menu=$('#menu'),qi=$('#navq'),tr=x=>x.toLocaleLowerCase('tr'),q=tr((qi.value||'').trim()),cur=curGroup();
-  menu.replaceChildren();
-  if(!menu._b){menu._b=1;menu.addEventListener('toggle',e=>{const d=e.target;if(!d.dataset||!d.dataset.g||d.dataset.q)return;if(d.open){NGOPEN.clear();NGOPEN.add(d.dataset.g)}else NGOPEN.delete(d.dataset.g)},true)}
-  if(!qi._b){qi._b=1;qi.addEventListener('input',drawNav);qi.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=$('#menu .ni a');if(a){location.hash=a.getAttribute('href');qi.value=''}}if(e.key==='Escape'){qi.value='';drawNav()}})}
-  const link=(id,t)=>{
-    const C=COLS[id],cnt=C?filledN(id):null;
-    return h('a',{href:'#/'+id,'aria-current':(S.view===id||(id==='ansiklopedi'&&ANK.includes(S.view)))?'page':null},
-      h('span',{text:t}),
-      h('span',{class:'row',style:'gap:8px;flex-wrap:nowrap'},
-        secDirty.has(id)?h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}):null,
-        (id==='pmakale'&&S.newArt>0)?h('span',{class:'newbadge',title:'Yeni gelen makale',text:S.newArt+' yeni'}):null,
-        (id==='itab'&&S.newVt>0)?h('span',{class:'newbadge',title:'Yeni gelen tablo',text:S.newVt+' yeni'}):null,
-        cnt!=null?h('span',{class:'cnt',text:cnt}):null));
-  };
-  if(!q)menu.append(h('div',{class:'ng-home'},link('home','Genel bakış')));
-  let found=0;
+  const secDirty=new Set(dirtySecs()),menu=$('#menu');menu.replaceChildren();
+  let closed=new Set();try{closed=new Set(JSON.parse(localStorage.getItem('adm_nav_closed')||'[]'))}catch(e){}
+  const saveClosed=()=>{try{localStorage.setItem('adm_nav_closed',JSON.stringify([...closed]))}catch(e){}};
   for(const g of NAV){
-    const items=g.items.filter(([id,t])=>id!=='home'&&(!q||tr(t).includes(q)||tr(g.g).includes(q)));
-    if(!items.length)continue;found++;
-    const nw=items.reduce((n,[id])=>n+(id==='pmakale'?S.newArt||0:id==='itab'?S.newVt||0:0),0);
-    const d=h('details',{class:'ng'},
-      h('summary',null,h('span',{text:g.g}),
-        h('span',{class:'row gs',style:'gap:6px;flex-wrap:nowrap'},
-          items.some(([id])=>secDirty.has(id))?h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}):null,
-          nw>0?h('span',{class:'newbadge',text:nw+' yeni'}):null)),
-      h('div',{class:'ni'},items.map(([id,t])=>link(id,t))));
-    d.dataset.g=g.g;if(q)d.dataset.q='1';
-    d.open=!!q||g.g===cur||NGOPEN.has(g.g);
-    menu.append(d);
+    const here=g.items.some(([id])=>S.view===id||(id==='ansiklopedi'&&ANK.includes(S.view)));
+    const shut=closed.has(g.g)&&!here;
+    const dirtyG=g.items.some(([id])=>secDirty.has(id));
+    const grp=h('div',{class:'grp'+(shut?' closed':'')});
+    const btn=h('button',{class:'grph',type:'button','aria-expanded':String(!shut),onclick:()=>{
+      const c=grp.classList.toggle('closed');btn.setAttribute('aria-expanded',String(!c));
+      if(c)closed.add(g.g);else closed.delete(g.g);saveClosed()}},
+      h('span',{text:g.g}),
+      dirtyG?h('i',{class:'dot gdot',title:'Bu grupta yayınlanmamış değişiklik var'}):null,
+      h('i',{class:'chev','aria-hidden':'true'}));
+    grp.append(h('h3',null,btn),
+      g.items.map(([id,t])=>{
+        const C=COLS[id],cnt=C?filledN(id):null;
+        return h('a',{href:'#/'+id,'aria-current':(S.view===id||(id==='ansiklopedi'&&ANK.includes(S.view)))?'page':null},
+          h('span',{text:t}),
+          h('span',{class:'row',style:'gap:8px;flex-wrap:nowrap'},
+            secDirty.has(id)?h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}):null,
+            (id==='pmakale'&&S.newArt>0)?h('span',{class:'newbadge',title:'Yeni gelen makale',text:S.newArt+' yeni'}):null,
+            (id==='itab'&&S.newVt>0)?h('span',{class:'newbadge',title:'Yeni gelen tablo',text:S.newVt+' yeni'}):null,
+            cnt!=null?h('span',{class:'cnt',text:cnt}):null));
+      }));
+    menu.append(grp);
   }
-  if(q&&!found)menu.append(h('p',{class:'ng-none',text:'Eşleşen sayfa yok.'}));
-  const vt=viewTitle(S.view),vEl=$('#vtitle');
-  vEl.replaceChildren(...(cur&&S.view!=='home'&&vt!==cur?[h('span',{class:'crumb',text:cur}),h('span',{class:'sep',text:'›'})]:[]),h('span',{text:vt}));
 }
 function refreshChrome(){
   if(!S.work)return;
@@ -1990,7 +2055,6 @@ function refreshChrome(){
     if(!ds.has(id)&&has)has.remove();
     const C=COLS[id],c=a.querySelector('.cnt');if(C&&c)c.textContent=filledN(id);
   });
-  $$('#menu details.ng').forEach(d=>{const gs=d.querySelector('.gs'),any=d.querySelector('.ni .dot'),gd=gs.querySelector('.dot');if(any&&!gd)gs.prepend(h('i',{class:'dot',title:'Yayınlanmamış değişiklik'}));if(!any&&gd)gd.remove()});
 }
 function render(){
   const v=VIEWS[S.view]||VIEWS.home;
@@ -2668,6 +2732,8 @@ function rulesText(email){
       att:{'$ev':{'$u':{'.read':true,'.write':'!data.exists() && newData.exists()','.validate':"newData.hasChildren(['ad','t'])",ad:{'.validate':str(60)},no:{'.validate':opt(12)},t:{'.validate':'newData.isNumber()'},'$other':{'.validate':false}}}},
       votes:{'$ev':{'.read':true,'$p':{'$u':{'.write':'!data.exists() && newData.isNumber() && newData.val() >= 0 && newData.val() < 6'}}}},
       fb:{'$ev':{'.read':true,'$u':{'.write':'newData.exists()','.validate':"newData.hasChildren(['s','t'])",s:{'.validate':'newData.isNumber() && newData.val() >= 1 && newData.val() <= 5'},c:{'.validate':opt(500)},t:{'.validate':'newData.isNumber()'},'$other':{'.validate':false}}}},
+      q:{'$ev':{'.read':true,'$id':{'.write':`${A} || (!data.exists() && newData.exists())`,'.validate':"newData.hasChildren(['t','at'])",t:{'.validate':str(280)},n:{'.validate':opt(60)},u:{'.validate':opt(40)},at:{'.validate':'newData.isNumber()'},h:{'.validate':A},a:{'.validate':A},'$other':{'.validate':false}}}},
+      qv:{'$ev':{'.read':true,'$q':{'$u':{'.write':'!data.exists() && newData.val() === 1'}}}},
       notes:{'.read':true,'$id':{'.write':`${A} || (!data.exists() && newData.child('durum').val() === 'bekliyor')`,'.validate':"newData.hasChildren(['ders','b','durum','ts'])"}},
       likes:{'.read':true,'$n':{'$u':{'.write':'true'}}},
       mreq:{'$id':{'.write':`${A} || (!data.exists() && newData.exists())`}},
@@ -4923,7 +4989,7 @@ const xdate=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?new Dat
 
 /* ---------- Etkinlik Araçları: QR üretimi ve QR yükleme ---------- */
 const xjoinBase=()=>{let v='';try{v=localStorage.getItem('ekx2_joinbase')||''}catch(e){}return v||(location.origin+location.pathname.replace(/[^/]*$/,''))};
-const xjoin=k=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik-araclari/yoklama/'+k;
+const xjoin=k=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik/yoklama/'+k;
 const xqrOk=d=>/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(String(d||''));
 /* QR'ın içeriği: özel bağlantı varsa o, yoksa sitedeki yoklama bağlantısı */
 const xqrTarget=ev=>xurl(ev.qrUrl)||xjoin(ev.kod||'');
@@ -4966,7 +5032,7 @@ function xqrFull(ev){
     h('div',{style:'font:700 clamp(20px,3.4vw,34px) system-ui,sans-serif',text:ev.ad||'Etkinlik'}),
     q||h('p',{text:'QR üretilemedi.'}),
     ev.kod?h('div',{style:'font:800 clamp(34px,7vw,72px) ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em',text:ev.kod}):null,
-    h('div',{style:'font:15px system-ui,sans-serif;color:#56617f;max-width:90vw;word-break:break-all',text:'QR’ı okut ya da Etkinlik Araçları sayfasında kodu gir'}));
+    h('div',{style:'font:15px system-ui,sans-serif;color:#56617f;max-width:90vw;word-break:break-all',text:'QR’ı okut ya da Etkinlikler sayfasında kodu gir'}));
   document.addEventListener('keydown',esc);document.body.append(ov);
 }
 /* yüklenen QR görselini küçültüp (en çok 640 px) güvenli bir data adresine çevirir */
@@ -4986,6 +5052,25 @@ function xqrRead(file,cb){
   fr.readAsDataURL(file);
 }
 
+
+/* Sorular: salon ekranı */
+function xqScreen(ev){
+  const old=document.getElementById('xqscreen');if(old)old.remove();
+  let tm=null;
+  const close=()=>{clearInterval(tm);ov.remove();document.removeEventListener('keydown',esc)};
+  const esc=e=>{if(e.key==='Escape')close()};
+  const list=h('div',{style:'width:100%;max-width:1100px;display:grid;gap:14px'});
+  const ov=h('div',{id:'xqscreen',role:'dialog','aria-label':'Sorular',style:'position:fixed;inset:0;z-index:9999;background:#0f1936;color:#fff;overflow:auto;padding:70px 20px 28px;display:flex;flex-direction:column;align-items:center;gap:18px'},
+    h('button',{class:'btn',type:'button',text:'Kapat (Esc)',style:'position:fixed;top:14px;right:14px',onclick:close}),
+    h('div',{style:'font:700 clamp(22px,3.6vw,40px) system-ui,sans-serif;text-align:center',text:(ev.ad||'Etkinlik')+' · Sorular'}),list);
+  const load=async()=>{try{
+    const a=await Promise.all([xget('q/'+ev.id),xget('qv/'+ev.id)]),vs=a[1]||{};
+    const rows=xvals(a[0]).filter(q=>!q.h&&!q.a).map(q=>Object.assign(q,{v:vs[q.id]&&typeof vs[q.id]==='object'?Object.keys(vs[q.id]).length:0})).sort((x,y)=>y.v-x.v||(y.at||0)-(x.at||0)).slice(0,8);
+    list.replaceChildren(...(rows.length?rows.map(q=>h('div',{style:'background:#ffffff14;border-radius:18px;padding:18px 22px;display:flex;gap:18px;align-items:center;justify-content:space-between'},
+      h('div',{style:'font:600 clamp(18px,2.6vw,30px) system-ui,sans-serif',text:q.t}),h('b',{style:'font:800 clamp(20px,3vw,34px) system-ui,sans-serif;white-space:nowrap',text:'👍 '+q.v}))):[h('p',{style:'opacity:.7;font-size:22px;text-align:center',text:'Henüz soru yok.'})]));
+  }catch(e){}};
+  load();tm=setInterval(load,4000);document.addEventListener('keydown',esc);document.body.append(ov);
+}
 /* ---------- Etkinlik Araçları ---------- */
 VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfasındaki etkinlikleri, QR yoklamayı, canlı oylamaları ve geri bildirimleri buradan yönet. Değişiklikler anında sitede geçerli olur, “Yayınla” gerekmez.',root=>{
   const st={evs:[],id:null,tab:'yoklama'};
@@ -5025,9 +5110,9 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
         h('button',{class:'btn sm',type:'button',text:'Yoklama bağlantısını kopyala',onclick:async()=>{try{await navigator.clipboard.writeText(link);toast('Bağlantı kopyalandı.')}catch(e){toast(link)}}}),
         h('button',{class:'btn sm ghost danger',type:'button',text:'Etkinliği sil',onclick:()=>xrun(async()=>{
           if(!(await ask('Etkinliği sil','“'+ev.ad+'” etkinliği; yoklama, oylama ve geri bildirim kayıtlarıyla birlikte silinir.','Sil',true)))return;
-          await Promise.all(['events','att','polls','votes','fb'].map(k=>xdel(k+'/'+ev.id)));st.id=null;toast('Etkinlik silindi.');load()})})),
+          await Promise.all(['events','att','polls','votes','fb','q','qv'].map(k=>xdel(k+'/'+ev.id)));st.id=null;toast('Etkinlik silindi.');load()})})),
       h('p',{class:'hint',text:'Yoklama bağlantısı: '+link}));
-    const tabs=xtabs([['yoklama','Yoklama'],['oylama','Canlı oylama'],['geri','Geri bildirim']],st.tab,k=>{st.tab=k;drawBody()});
+    const tabs=xtabs([['yoklama','Yoklama'],['soru','Sorular'],['oylama','Canlı oylama'],['geri','Geri bildirim']],st.tab,k=>{st.tab=k;drawBody()});
     const hasImg=xqrOk(ev.qrImg),target=xqrTarget(ev),qrCv=xqrNode(ev,300);
     const baseIn=h('input',{type:'text',value:xjoinBase(),placeholder:'https://eko-log.github.io/',inputmode:'url'});
     const qUrl=h('input',{type:'text',value:ev.qrUrl||'',placeholder:'https://forms.gle/… (boş bırakırsan site yoklaması)',inputmode:'url',maxlength:'300'});
@@ -5049,6 +5134,11 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
           let kod,t=0;do{kod=xcode();t++}while(st.evs.some(x=>x.kod===kod)&&t<20);
           if(!(await ask('Yeni kod üret','Eski kod ve eski QR çalışmaz olur. Basılmış afişlerdeki QR’ı yenilemen gerekir.','Yeni kod üret',true)))return;
           await xput('events/'+ev.id,Object.assign({},ev,{kod,id:undefined}));toast('Yeni kod: '+kod);load()})})),
+      h('div',{class:'panel',style:'margin-top:14px;background:var(--soft)'},h('h3',{text:'QR okutunca ne olur?'}),
+        h('p',{class:'hint',text:'QR okutan üyenin yoklaması otomatik alınır (Yoklama sekmesinde görünür) ve sitedeki Etkinlikler sayfasında yalnızca ona özel “Soru Sor” paneli açılır. Soruları Sorular sekmesinden yönetirsin.'}),
+        h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},
+          h('button',{class:'btn sm'+(ev.soru===false?'':' solid'),type:'button','aria-pressed':String(ev.soru!==false),text:'Soru Sor paneli: '+(ev.soru===false?'Kapalı':'QR ile açılır'),onclick:()=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{soru:ev.soru===false?undefined:false,id:undefined}));load()})}),
+          h('button',{class:'btn sm'+(ev.sk===true?'':' solid'),type:'button','aria-pressed':String(ev.sk!==true),text:'Yeni soru: '+(ev.sk===true?'Alınmıyor':'Alınıyor'),disabled:ev.soru===false,onclick:()=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{sk:ev.sk===true?undefined:true,id:undefined}));load()})}))),
       h('div',{class:'panel',style:'margin-top:14px;background:var(--soft)'},h('h3',{text:'Kendi QR’ını koy'}),
         xfld('Hazır QR görseli yükle (PNG ya da JPG)',upl,'Örneğin Google Form ya da başka bir yoklama sisteminin QR görseli. Yüklenince otomatik QR yerine bu gösterilir.'),
         hasImg?h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Yüklenen görseli kaldır',onclick:()=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{qrImg:undefined,id:undefined}));toast('Görsel kaldırıldı, QR yeniden otomatik üretilecek.');load()})})):null,
@@ -5056,10 +5146,10 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
         h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Bağlantıyı kaydet',onclick:()=>xrun(async()=>{
           const v=qUrl.value.trim();if(v&&!xurl(v)){toast('Bağlantı https:// ile başlamalı.');return}
           await xput('events/'+ev.id,Object.assign({},ev,{qrUrl:v||undefined,id:undefined}));toast(v?'Bağlantı kaydedildi.':'Özel bağlantı kaldırıldı.');load()})}))),
-      xfld('Site adresi',baseIn,'Otomatik QR bu adresteki Etkinlik Araçları sayfasına gider. Site farklı bir adresteyse buraya yaz.'),
+      xfld('Site adresi',baseIn,'Otomatik QR bu adresteki Etkinlikler sayfasına gider. Site farklı bir adresteyse buraya yaz.'),
       h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Adresi kaydet',onclick:()=>{const v=baseIn.value.trim();if(v&&!/^https?:\/\/\S+$/i.test(v)){toast('Adres https:// ile başlamalı.');return}try{if(v)localStorage.setItem('ekx2_joinbase',v);else localStorage.removeItem('ekx2_joinbase')}catch(e){}toast('Adres kaydedildi.');drawBody()}})));
     body.replaceChildren(edit,qrp,tabs,pane);
-    ({yoklama:paneAtt,oylama:panePoll,geri:paneFb})[st.tab](pane,ev);
+    ({yoklama:paneAtt,soru:paneSoru,oylama:panePoll,geri:paneFb})[st.tab](pane,ev);
   }
   async function paneAtt(pane,ev){
     pane.replaceChildren(h('div',{class:'skel'}));
@@ -5097,6 +5187,27 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
       pane.replaceChildren(form,...list);
     }catch(e){dbFail(pane,e,()=>panePoll(pane,ev))}
   }
+
+  async function paneSoru(pane,ev){
+    pane.replaceChildren(h('div',{class:'skel'}));
+    try{
+      const a=await Promise.all([xget('q/'+ev.id),xget('qv/'+ev.id)]),qs=a[0],vs=a[1]||{};
+      const rows=xvals(qs).map(q=>Object.assign(q,{v:vs[q.id]&&typeof vs[q.id]==='object'?Object.keys(vs[q.id]).length:0})).sort((x,y)=>y.v-x.v||(y.at||0)-(x.at||0));
+      const save=(q,patch)=>xrun(async()=>{const rec={t:q.t,at:q.at};if(q.n)rec.n=q.n;if(q.u)rec.u=q.u;if(q.h)rec.h=true;if(q.a)rec.a=true;Object.assign(rec,patch);Object.keys(rec).forEach(k=>{if(rec[k]===false)delete rec[k]});await xput('q/'+ev.id+'/'+q.id,rec);paneSoru(pane,ev)});
+      pane.replaceChildren(h('div',{class:'panel'},
+        h('div',{class:'row',style:'justify-content:space-between;gap:8px;flex-wrap:wrap'},h('h3',{text:rows.length?rows.length+' soru':'Henüz soru yok'}),
+          h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},
+            h('button',{class:'btn sm',type:'button',text:'Yenile',onclick:()=>paneSoru(pane,ev)}),
+            h('button',{class:'btn sm solid',type:'button',text:'Ekrana yansıt',onclick:()=>xqScreen(ev)}),
+            h('button',{class:'btn sm',type:'button',text:'CSV indir',disabled:!rows.length,onclick:()=>xdl('sorular-'+(ev.kod||'etkinlik')+'.csv',xcsv([['Soru','Soran','Oy','Durum','Zaman'],...rows.map(r=>[r.t,r.n||'Anonim',r.v,r.h?'Gizli':(r.a?'Yanıtlandı':'Açık'),fmtTs(r.at)])]),'text/csv')}))),
+        h('p',{class:'hint',text:'Sorular yalnızca QR okutanlara görünür. Gizlediğin soru panelden kalkar, yanıtladığın en alta iner.'}),
+        rows.map(q=>xrow(h('div',null,h('b',{text:q.t}),h('div',{class:'mut',text:(q.n||'Anonim')+' · '+q.v+' oy · '+fmtTs(q.at)+(q.h?' · Gizli':'')+(q.a?' · Yanıtlandı':'')})),
+          h('div',{class:'row',style:'gap:6px;flex-wrap:wrap'},
+            h('button',{class:'btn sm',type:'button',text:q.a?'Açık yap':'Yanıtlandı',onclick:()=>save(q,{a:!q.a})}),
+            h('button',{class:'btn sm',type:'button',text:q.h?'Göster':'Gizle',onclick:()=>save(q,{h:!q.h})}),
+            h('button',{class:'btn sm ghost danger',type:'button',text:'Sil',onclick:()=>xrun(async()=>{await Promise.all([xdel('q/'+ev.id+'/'+q.id),xdel('qv/'+ev.id+'/'+q.id)]);paneSoru(pane,ev)})}))))));
+    }catch(e){dbFail(pane,e,()=>paneSoru(pane,ev))}
+  }
   async function paneFb(pane,ev){
     pane.replaceChildren(h('div',{class:'skel'}));
     try{
@@ -5112,50 +5223,9 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
   load();
 });
 
-/* Etkinlik Araçları artık ayrı sayfa (menüde “Etkinlikler” grubu). Etkinlik düzenlerken: QR ile paylaş paneli */
-const evLink=ev=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik/'+encodeURIComponent(ev.id);
-function evPoster(ev,url){return new Promise(res=>{
-  const q=xqrCanvas(url,900);if(!q){res(null);return}
-  const W=900,pad=60,qs=W-2*pad,c=document.createElement('canvas'),g=c.getContext('2d'),lines=[];
-  g.font='800 46px system-ui,sans-serif';
-  let ln='';String(ev.title||'Etkinlik').split(/\s+/).forEach(w=>{const t=ln?ln+' '+w:w;if(g.measureText(t).width>W-2*pad&&ln){lines.push(ln);ln=w}else ln=t});if(ln)lines.push(ln);
-  const L=lines.slice(0,3),head=70+L.length*56,sub=[ev.date,ev.place].filter(Boolean).join(' · '),H=head+qs+100+(sub?50:0);
-  c.width=W;c.height=H;g.fillStyle='#fff';g.fillRect(0,0,W,H);g.textAlign='center';
-  g.fillStyle='#c4202e';g.font='800 26px system-ui,sans-serif';g.fillText('EKO-LOG · ETKİNLİK',W/2,52);
-  g.fillStyle='#0f1936';g.font='800 46px system-ui,sans-serif';L.forEach((t,k)=>g.fillText(t,W/2,70+56*(k+1)-14,W-2*pad));
-  g.imageSmoothingEnabled=false;g.drawImage(q,pad,head,qs,qs);
-  let y=head+qs+50;
-  if(sub){g.fillStyle='#56617f';g.font='600 30px system-ui,sans-serif';g.fillText(sub,W/2,y,W-2*pad);y+=50}
-  g.fillStyle='#56617f';g.font='500 24px system-ui,sans-serif';g.fillText('QR kodu okutarak etkinlik sayfasını aç',W/2,y+10,W-2*pad);
-  c.toBlob(b=>res(b),'image/png');
-})}
-function evQrPanel(ev){
-  const url=evLink(ev),pub=!!(S.remote&&S.remote.data&&(S.remote.data.e||[]).some(x=>String(x.id)===String(ev.id)));
-  const txt=()=>(ev.title||'Etkinlik')+(ev.date?' · '+ev.date:'')+(ev.place?' · '+ev.place:'');
-  let file=null;evPoster(ev,url).then(b=>{if(b)file=new File([b],'etkinlik-qr.png',{type:'image/png'})});
-  const cv=xqrCanvas(url,520);if(cv){cv.style.cssText='width:220px;max-width:100%;height:auto;image-rendering:pixelated;border:1px solid var(--line);border-radius:12px'}
-  const send=()=>{
-    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:ev.title||'Etkinlik',text:txt()+'\n'+url}).catch(()=>{});return}
-    if(navigator.share){navigator.share({title:ev.title||'Etkinlik',text:txt(),url}).catch(()=>{});return}
-    window.open('https://wa.me/?text='+encodeURIComponent(txt()+' '+url),'_blank','noopener');
-  };
-  const dl=()=>{if(!file){toast('QR görseli hazırlanıyor, bir saniye sonra tekrar dene.');return}const x=h('a',{href:URL.createObjectURL(file),download:'etkinlik-qr.png'});document.body.append(x);x.click();setTimeout(()=>{URL.revokeObjectURL(x.href);x.remove()},500)};
-  const copy=()=>{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(()=>toast('Bağlantı kopyalandı.'),()=>toast(url));else toast(url)};
-  return h('div',{class:'panel',style:'margin-top:18px'},
-    h('h3',{text:'QR ile paylaş'}),
-    h('p',{class:'hint',text:'Bu etkinliğin sayfasına giden QR kodu. Afişe koyabilir, WhatsApp’tan ya da e-postayla gönderebilirsin.'}),
-    h('span',{class:'chip '+(pub?'ok':''),text:pub?'Etkinlik yayında: QR çalışır':'Henüz yayınlanmadı: QR, “Gözden geçir ve yayınla” sonrası çalışır'}),
-    h('div',{style:'margin:14px 0'},cv||h('p',{text:'QR üretilemedi.'})),
-    h('p',{class:'hint',style:'word-break:break-all',text:url}),
-    h('div',{class:'row'},
-      h('button',{class:'btn sm solid',type:'button',text:'Gönder / Paylaş',onclick:send}),
-      h('button',{class:'btn sm',type:'button',text:'PNG indir',onclick:dl}),
-      h('button',{class:'btn sm',type:'button',text:'WhatsApp',onclick:()=>window.open('https://wa.me/?text='+encodeURIComponent(txt()+' '+url),'_blank','noopener')}),
-      h('button',{class:'btn sm',type:'button',text:'E-posta',onclick:()=>{location.href='mailto:?subject='+encodeURIComponent(ev.title||'Etkinlik')+'&body='+encodeURIComponent(txt()+'\n\n'+url)}}),
-      h('button',{class:'btn sm ghost',type:'button',text:'Bağlantıyı kopyala',onclick:copy})));
-}
+/* Etkinlik Araçları, Etkinlikler sayfasının en altında (yalnızca liste görünümünde) */
 {const f=VIEWS.e;VIEWS.e=()=>{const v=f();
-  if((S.mode.e||'list')==='detail'){const ev=(S.work.e||[]).find(x=>String(x.id)===String(S.sel.e));if(ev)v.append(evQrPanel(ev))}
+  if((S.mode.e||'list')==='list'){const sec=h('div',{class:'stack',style:'margin-top:36px;padding-top:24px;border-top:2px solid var(--line)'});sec.append(VIEWS.xpetk());v.append(sec)}
   return v}}
 
 /* ---------- Mezun ve Mentor ---------- */
@@ -5551,6 +5621,21 @@ VIEWS.kesfet=()=>{
     }})));
   return root;
 };
+})();
+</script>
+<script id="adm-menusearch">
+(()=>{const menu=document.getElementById('menu');if(!menu||!menu.parentNode)return;
+const box=document.createElement('input');box.type='search';box.id='menuSearch';box.placeholder='Menüde ara…  ( / )';box.setAttribute('aria-label','Menüde ara');box.autocomplete='off';
+menu.parentNode.insertBefore(box,menu);
+const norm=t=>String(t||'').toLocaleLowerCase('tr');
+const apply=()=>{const q=norm(box.value.trim());menu.classList.toggle('searching',!!q);
+  menu.querySelectorAll(':scope>div').forEach(g=>{let any=false;
+    g.querySelectorAll('a').forEach(a=>{const ok=!q||norm(a.textContent).includes(q)||norm(g.querySelector('h3')&&g.querySelector('h3').textContent).includes(q);a.hidden=!ok;if(ok)any=true});
+    g.hidden=!any})};
+box.addEventListener('input',apply);
+box.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=menu.querySelector('a:not([hidden])');if(a){a.click();box.blur()}}if(e.key==='Escape'){box.value='';apply();box.blur()}});
+new MutationObserver(apply).observe(menu,{childList:true});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')&&!(document.activeElement&&document.activeElement.isContentEditable)){e.preventDefault();document.getElementById('rail')&&document.getElementById('rail').classList.add('open');box.focus()}});
 })();
 </script>
 </body>
