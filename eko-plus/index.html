@@ -4403,9 +4403,9 @@ const KEYS=Object.keys(TITLES);
 function currentKey(){return location.hash.replace(/^#\/?/,'').split('/')[0]}
 const STANDALONE=document.body.hasAttribute('data-xstandalone');
 function xroute(){
- let k=currentKey();const mine=KEYS.includes(k);
+ let k=currentKey();const mine=KEYS.includes(k)||(STANDALONE&&!!k&&!!document.getElementById('p-'+k));
  document.body.classList.toggle('xon',mine);
- if(STANDALONE){if(!mine&&k!=='lab'&&k!=='uyeler')k='ekstra';
+ if(STANDALONE){if(!mine&&k!=='lab'&&k!=='uyeler'&&!document.getElementById('p-'+k))k='ekstra';
   $$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+k));
   $$('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+k));
   document.title='Eko-Log · '+(TITLES[k]||'Eko-Plus');scrollTo(0,0)}
@@ -8731,6 +8731,17 @@ function search(){if($('#pl-b'))return;const b=el('button','','🔍 Ara');b.id='
 const go=()=>{ay();search();saved();harita();cmpBox();tlBox();sharePlus();watch();flags();if(/^#\/kaydedilenler/.test(location.hash)){try{route()}catch(e){}}};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
 document.addEventListener('eko:ready',()=>{flags();const a=$('#pl-ay');if(a)a.remove();const c=$('#pl-cmw'),r=$('#pl-sr');if(c)c.remove();if(r)r.remove();ay();sb()});
+})();
+</script>
+<script id="xp-linkfix">
+/* Eko-Plus bağımsız sayfa: bu dosyada olmayan "#/..." bağlantılarını ana siteye ("../#/...") yönlendirir; sayfası olanlar yerinde açılır */
+(()=>{
+document.addEventListener('click',e=>{
+ if(e.defaultPrevented||e.button>0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+ const a=e.target.closest&&e.target.closest('a[href^="#/"]');if(!a)return;
+ const h=a.getAttribute('href');const k=h.replace(/^#\/?/,'').split('/')[0];
+ if(k===''||!document.getElementById('p-'+k)){e.preventDefault();location.href='../'+h}
+},true);
 })();
 </script>
 </body></html>
