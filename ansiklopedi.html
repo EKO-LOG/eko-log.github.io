@@ -3285,7 +3285,7 @@ function sb(){const r=$('#pl-sr');if(!r)return;r.textContent='';r.className='';c
 const IC={Kitap:'📖',Belgesel:'🎬',Film:'🎞️',Dizi:'📺'};
 function cm2(){const w=$('#pl-cmw');if(!w)return;let d;try{d=window.EKO_BOOKS&&window.EKO_BOOKS()}catch(e){}if(!d)return;
  const L=(d.f&&d.f.length?d.b.filter(b=>d.f.includes(b.id)):d.b).filter(b=>b&&b.t);w.textContent='';if(!L.length)return;
- const wk=Math.floor(Date.now()/6048e5),b=L[wk%L.length],a=el('a','pl-cm');a.href='index.html#/kitaplik';
+ const wk=Math.floor(Date.now()/6048e5),b=L[wk%L.length],a=el('a','pl-cm');a.href='#/kitaplik';
  const t=el('div');t.append(el('small','','TOPLULUK BU HAFTA '+(b.k==='Kitap'?'BUNU OKUYOR':'BUNU İZLİYOR')),el('h3','',b.t),el('p','',[b.a,b.y].filter(Boolean).join(' · ')),el('p','',b.n||''));
  a.append(el('div','ic',IC[b.k]||'📖'),t);w.append(a)}
 addEventListener('storage',sb);addEventListener('hashchange',()=>{if(location.hash===''||location.hash==='#/')sb()});
