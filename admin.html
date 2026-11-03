@@ -1866,7 +1866,7 @@ const NAV=[
   {g:'İktisadi Ansiklopedi',items:[['ansiklopedi','İktisadi Ansiklopedi']]},
   {g:'Veri ve Pariteler',items:[['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri'],['itab','Gelen tablolar']]},
   {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['pmakale','Gelen makaleler'],['gallery','Galeri'],['comments','Yorumlar']]},
-  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['konf','Konferanslar'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
+  {g:'Etkinlikler',items:[['etkpg','Sayfa anahtarları'],['e','Etkinlikler'],['xpetk','Etkinlik Araçları'],['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['konf','Konferanslar'],['canli','Canlı muharebe'],['yb','Yatay Bakış'],['fmarg','Muharebe argümanları'],['quota','Etkinlik kontenjanı'],['joins','Katılımcılar']]},
   {g:'Üyelere Özel',items:[['members','Üyelik başvuruları'],['teachers','Hocalar']]},
   {g:'Eko-Plus modülleri',items:[['xplus','Sayfa anahtarları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Sınav Takvimi (resmî)']]},
   {g:'Site',items:[['texts','Site metinleri'],['blocks','Örnek içerikler'],['stats','İstatistikler'],['links','Bağlantılar'],['settings','Ayarlar ve yedek']]}
@@ -4838,7 +4838,7 @@ const xdate=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?new Dat
 
 /* ---------- Etkinlik Araçları: QR üretimi ve QR yükleme ---------- */
 const xjoinBase=()=>{let v='';try{v=localStorage.getItem('ekx2_joinbase')||''}catch(e){}return v||(location.origin+location.pathname.replace(/[^/]*$/,''))};
-const xjoin=k=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik/yoklama/'+k;
+const xjoin=k=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik-araclari/yoklama/'+k;
 const xqrOk=d=>/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(String(d||''));
 /* QR'ın içeriği: özel bağlantı varsa o, yoksa sitedeki yoklama bağlantısı */
 const xqrTarget=ev=>xurl(ev.qrUrl)||xjoin(ev.kod||'');
@@ -4881,7 +4881,7 @@ function xqrFull(ev){
     h('div',{style:'font:700 clamp(20px,3.4vw,34px) system-ui,sans-serif',text:ev.ad||'Etkinlik'}),
     q||h('p',{text:'QR üretilemedi.'}),
     ev.kod?h('div',{style:'font:800 clamp(34px,7vw,72px) ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em',text:ev.kod}):null,
-    h('div',{style:'font:15px system-ui,sans-serif;color:#56617f;max-width:90vw;word-break:break-all',text:'QR’ı okut ya da Etkinlikler sayfasında kodu gir'}));
+    h('div',{style:'font:15px system-ui,sans-serif;color:#56617f;max-width:90vw;word-break:break-all',text:'QR’ı okut ya da Etkinlik Araçları sayfasında kodu gir'}));
   document.addEventListener('keydown',esc);document.body.append(ov);
 }
 /* yüklenen QR görselini küçültüp (en çok 640 px) güvenli bir data adresine çevirir */
@@ -4971,7 +4971,7 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
         h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Bağlantıyı kaydet',onclick:()=>xrun(async()=>{
           const v=qUrl.value.trim();if(v&&!xurl(v)){toast('Bağlantı https:// ile başlamalı.');return}
           await xput('events/'+ev.id,Object.assign({},ev,{qrUrl:v||undefined,id:undefined}));toast(v?'Bağlantı kaydedildi.':'Özel bağlantı kaldırıldı.');load()})}))),
-      xfld('Site adresi',baseIn,'Otomatik QR bu adresteki Etkinlikler sayfasına gider. Site farklı bir adresteyse buraya yaz.'),
+      xfld('Site adresi',baseIn,'Otomatik QR bu adresteki Etkinlik Araçları sayfasına gider. Site farklı bir adresteyse buraya yaz.'),
       h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Adresi kaydet',onclick:()=>{const v=baseIn.value.trim();if(v&&!/^https?:\/\/\S+$/i.test(v)){toast('Adres https:// ile başlamalı.');return}try{if(v)localStorage.setItem('ekx2_joinbase',v);else localStorage.removeItem('ekx2_joinbase')}catch(e){}toast('Adres kaydedildi.');drawBody()}})));
     body.replaceChildren(edit,qrp,tabs,pane);
     ({yoklama:paneAtt,oylama:panePoll,geri:paneFb})[st.tab](pane,ev);
@@ -5027,9 +5027,50 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
   load();
 });
 
-/* Etkinlik Araçları, Etkinlikler sayfasının en altında (yalnızca liste görünümünde) */
+/* Etkinlik Araçları artık ayrı sayfa (menüde “Etkinlikler” grubu). Etkinlik düzenlerken: QR ile paylaş paneli */
+const evLink=ev=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik/'+encodeURIComponent(ev.id);
+function evPoster(ev,url){return new Promise(res=>{
+  const q=xqrCanvas(url,900);if(!q){res(null);return}
+  const W=900,pad=60,qs=W-2*pad,c=document.createElement('canvas'),g=c.getContext('2d'),lines=[];
+  g.font='800 46px system-ui,sans-serif';
+  let ln='';String(ev.title||'Etkinlik').split(/\s+/).forEach(w=>{const t=ln?ln+' '+w:w;if(g.measureText(t).width>W-2*pad&&ln){lines.push(ln);ln=w}else ln=t});if(ln)lines.push(ln);
+  const L=lines.slice(0,3),head=70+L.length*56,sub=[ev.date,ev.place].filter(Boolean).join(' · '),H=head+qs+100+(sub?50:0);
+  c.width=W;c.height=H;g.fillStyle='#fff';g.fillRect(0,0,W,H);g.textAlign='center';
+  g.fillStyle='#c4202e';g.font='800 26px system-ui,sans-serif';g.fillText('EKO-LOG · ETKİNLİK',W/2,52);
+  g.fillStyle='#0f1936';g.font='800 46px system-ui,sans-serif';L.forEach((t,k)=>g.fillText(t,W/2,70+56*(k+1)-14,W-2*pad));
+  g.imageSmoothingEnabled=false;g.drawImage(q,pad,head,qs,qs);
+  let y=head+qs+50;
+  if(sub){g.fillStyle='#56617f';g.font='600 30px system-ui,sans-serif';g.fillText(sub,W/2,y,W-2*pad);y+=50}
+  g.fillStyle='#56617f';g.font='500 24px system-ui,sans-serif';g.fillText('QR kodu okutarak etkinlik sayfasını aç',W/2,y+10,W-2*pad);
+  c.toBlob(b=>res(b),'image/png');
+})}
+function evQrPanel(ev){
+  const url=evLink(ev),pub=!!(S.remote&&S.remote.data&&(S.remote.data.e||[]).some(x=>String(x.id)===String(ev.id)));
+  const txt=()=>(ev.title||'Etkinlik')+(ev.date?' · '+ev.date:'')+(ev.place?' · '+ev.place:'');
+  let file=null;evPoster(ev,url).then(b=>{if(b)file=new File([b],'etkinlik-qr.png',{type:'image/png'})});
+  const cv=xqrCanvas(url,520);if(cv){cv.style.cssText='width:220px;max-width:100%;height:auto;image-rendering:pixelated;border:1px solid var(--line);border-radius:12px'}
+  const send=()=>{
+    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:ev.title||'Etkinlik',text:txt()+'\n'+url}).catch(()=>{});return}
+    if(navigator.share){navigator.share({title:ev.title||'Etkinlik',text:txt(),url}).catch(()=>{});return}
+    window.open('https://wa.me/?text='+encodeURIComponent(txt()+' '+url),'_blank','noopener');
+  };
+  const dl=()=>{if(!file){toast('QR görseli hazırlanıyor, bir saniye sonra tekrar dene.');return}const x=h('a',{href:URL.createObjectURL(file),download:'etkinlik-qr.png'});document.body.append(x);x.click();setTimeout(()=>{URL.revokeObjectURL(x.href);x.remove()},500)};
+  const copy=()=>{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(()=>toast('Bağlantı kopyalandı.'),()=>toast(url));else toast(url)};
+  return h('div',{class:'panel',style:'margin-top:18px'},
+    h('h3',{text:'QR ile paylaş'}),
+    h('p',{class:'hint',text:'Bu etkinliğin sayfasına giden QR kodu. Afişe koyabilir, WhatsApp’tan ya da e-postayla gönderebilirsin.'}),
+    h('span',{class:'chip '+(pub?'ok':''),text:pub?'Etkinlik yayında: QR çalışır':'Henüz yayınlanmadı: QR, “Gözden geçir ve yayınla” sonrası çalışır'}),
+    h('div',{style:'margin:14px 0'},cv||h('p',{text:'QR üretilemedi.'})),
+    h('p',{class:'hint',style:'word-break:break-all',text:url}),
+    h('div',{class:'row'},
+      h('button',{class:'btn sm solid',type:'button',text:'Gönder / Paylaş',onclick:send}),
+      h('button',{class:'btn sm',type:'button',text:'PNG indir',onclick:dl}),
+      h('button',{class:'btn sm',type:'button',text:'WhatsApp',onclick:()=>window.open('https://wa.me/?text='+encodeURIComponent(txt()+' '+url),'_blank','noopener')}),
+      h('button',{class:'btn sm',type:'button',text:'E-posta',onclick:()=>{location.href='mailto:?subject='+encodeURIComponent(ev.title||'Etkinlik')+'&body='+encodeURIComponent(txt()+'\n\n'+url)}}),
+      h('button',{class:'btn sm ghost',type:'button',text:'Bağlantıyı kopyala',onclick:copy})));
+}
 {const f=VIEWS.e;VIEWS.e=()=>{const v=f();
-  if((S.mode.e||'list')==='list'){const sec=h('div',{class:'stack',style:'margin-top:36px;padding-top:24px;border-top:2px solid var(--line)'});sec.append(VIEWS.xpetk());v.append(sec)}
+  if((S.mode.e||'list')==='detail'){const ev=(S.work.e||[]).find(x=>String(x.id)===String(S.sel.e));if(ev)v.append(evQrPanel(ev))}
   return v}}
 
 /* ---------- Mezun ve Mentor ---------- */
