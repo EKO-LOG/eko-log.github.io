@@ -2026,8 +2026,7 @@ function drawNav(){
       h('span',{text:g.g}),
       dirtyG?h('i',{class:'dot gdot',title:'Bu grupta yayınlanmamış değişiklik var'}):null,
       h('i',{class:'chev','aria-hidden':'true'}));
-    grp.append(h('h3',null,btn),
-      g.items.map(([id,t])=>{
+    grp.append(h('h3',null,btn),...g.items.map(([id,t])=>{
         const C=COLS[id],cnt=C?filledN(id):null;
         return h('a',{href:'#/'+id,'aria-current':(S.view===id||(id==='ansiklopedi'&&ANK.includes(S.view)))?'page':null},
           h('span',{text:t}),
