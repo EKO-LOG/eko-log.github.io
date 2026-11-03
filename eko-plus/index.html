@@ -4426,7 +4426,7 @@ const KEYS=Object.keys(TITLES);
 function currentKey(){return location.hash.replace(/^#\/?/,'').split('/')[0]}
 const STANDALONE=document.body.hasAttribute('data-xstandalone');
 function xroute(){
- let k=currentKey();const mine=KEYS.includes(k)||(STANDALONE&&!!k&&!!document.getElementById('p-'+k));
+ let k=currentKey();if(STANDALONE&&k==='x-yoklama')k='x-etkinlik';const mine=KEYS.includes(k)||(STANDALONE&&!!k&&!!document.getElementById('p-'+k));
  document.body.classList.toggle('xon',mine);
  if(STANDALONE){if(!mine&&k!=='lab'&&k!=='uyeler'&&!document.getElementById('p-'+k))k='ekstra';
   $$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+k));
@@ -6131,7 +6131,7 @@ mkPage('x-etkinlik','Etkinlik Araçları','Yoklamayı QR ile al, salonda canlı 
   ({yoklama:paneAtt,oylama:panePoll,geri:paneFb})[evState.tab](pane,cur,m);
 });
 async function paneAtt(pane,ev,m){
-  const url=joinUrl(ev.kod),nm=nameField(),no=el('input',{type:'text',inputmode:'numeric',maxlength:'12',placeholder:'Öğrenci numarası'});
+  const url=(ev.qrUrl&&/^https?:\/\//i.test(ev.qrUrl))?ev.qrUrl:joinUrl(ev.kod),nm=nameField(),no=el('input',{type:'text',inputmode:'numeric',maxlength:'12',placeholder:'Öğrenci numarası'});
   const mineBox=el('div',{});
   const list=el('div',{});
   const mine=async()=>{const a=await DB.get('att/'+ev.id+'/'+m.id);
@@ -6147,7 +6147,7 @@ async function paneAtt(pane,ev,m){
       rows.length?el('table',{class:'x2-t'},el('thead',{},el('tr',{},['#','Ad Soyad','No','Saat',''].map(h=>el('th',{text:h})))),el('tbody',{},rows.map((r,i)=>el('tr',{},el('td',{text:i+1}),el('td',{text:r.ad}),el('td',{text:r.no}),el('td',{text:new Date(r.t).toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}),el('td',{},el('button',{class:'btn',type:'button','aria-label':'Sil',onclick:()=>guard(async()=>{await DB.del('att/'+ev.id+'/'+r.id);adminList()})},'🗑')))))):el('p',{text:'Henüz katılımcı yok.'})))};
   fill(pane,el('div',{class:'x2-two'},
     card(el('h3',{text:ev.ad}),el('p',{text:(fmtD(ev.tarih)||'')+' · Yoklama kodu:'}),el('div',{class:'x2-code',text:ev.kod}),
-      el('div',{class:'x2-row',style:'margin-top:12px'},el('div',{class:'x2-qr'},drawQR(url,240)),
+      el('div',{class:'x2-row',style:'margin-top:12px'},el('div',{class:'x2-qr'},(ev.qrImg&&/^data:image\/(png|jpeg);base64,[A-Za-z0-9+\/=]+$/.test(ev.qrImg))?el('img',{src:ev.qrImg,alt:'Yoklama QR',style:'width:240px;max-width:100%;height:auto;image-rendering:pixelated;display:block'}):drawQR(url,240)),
         el('div',{class:'x2-stack',style:'gap:8px'},el('span',{class:'x2-mut',text:'QR\'ı perdeye yansıt veya bağlantıyı paylaş.'}),el('button',{class:'btn',type:'button',onclick:()=>navigator.clipboard?.writeText(url).then(()=>toast('Bağlantı kopyalandı'),()=>toast(url))},'🔗 Bağlantıyı kopyala')))),
     card(el('h3',{text:'Yoklamam'}),el('div',{style:'height:8px'}),mineBox)));
   pane.append(list);
@@ -8763,7 +8763,7 @@ document.addEventListener('click',e=>{
  if(e.defaultPrevented||e.button>0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
  const a=e.target.closest&&e.target.closest('a[href^="#/"]');if(!a)return;
  const h=a.getAttribute('href');const k=h.replace(/^#\/?/,'').split('/')[0];
- if(k===''||!document.getElementById('p-'+k)){e.preventDefault();location.href='../'+h}
+ if(k===''||(k!=='x-yoklama'&&!document.getElementById('p-'+k))){e.preventDefault();location.href='../'+h}
 },true);
 })();
 </script>
