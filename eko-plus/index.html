@@ -306,6 +306,30 @@ body.xprint .x-g2{display:block}body.xprint .x-paper{box-shadow:none;border:0;pa
 body.xprint{background:#fff}
 }
 
+
+/* Eko-Plus: Günün kavramı + Hızlı bakış + Günün Kavramı sayfası (düzenlendi) */
+.x-hubd{align-items:stretch}
+.x-hubd .panel#xhd,#p-kavram .panel{background:linear-gradient(135deg,var(--g1),var(--g2))!important;border-radius:28px;box-shadow:0 22px 44px -26px var(--g1);padding:0}
+.x-hubd .panel#xhd::before,#p-kavram .panel::before{background:#fff!important;opacity:.16!important;filter:blur(40px)}
+.x-hubd .panel#xhd::after,#p-kavram .panel::after{background:#3b0a14!important;opacity:.14!important;filter:blur(46px)}
+#p-kavram .panel{padding:30px}
+#p-kavram .panel>div>small{display:inline-block;background:rgba(255,255,255,.2);border-radius:999px;padding:4px 14px;font-weight:700;font-size:13.5px}
+#p-kavram .x-term{text-shadow:0 2px 18px rgba(0,0,0,.18)}
+#p-kavram .x-ex{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.16);backdrop-filter:blur(6px)}
+.x-daily{display:flex;flex-direction:column;gap:8px;height:100%;box-sizing:border-box;padding:28px;text-decoration:none;color:#fff}
+.x-dk{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 14px;font:700 13px/1.2 "Instrument Sans",system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.x-dk i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.3)}
+.x-dt{display:block;font:800 clamp(30px,5vw,40px)/1.05 "Bricolage Grotesque",sans-serif;margin:6px 0 0;text-shadow:0 2px 16px rgba(0,0,0,.2)}
+.x-dd{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:16px;line-height:1.55;color:rgba(255,255,255,.92);max-width:52ch}
+.x-dgo{margin-top:auto;padding-top:8px;font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:6px}
+.x-dgo em{font-style:normal;transition:transform .25s}.x-daily:hover .x-dgo em{transform:translateX(5px)}
+.x-hubd>.card{display:flex!important;flex-direction:column;justify-content:center;border-radius:28px;padding:26px}
+.x-hubd>.card h3{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-family:"Instrument Sans",system-ui,sans-serif;font-weight:700}
+.x-qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.x-qs{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:14px 10px;text-align:center;min-width:0}
+.x-qs b{display:block;font:800 30px/1 "Bricolage Grotesque",sans-serif;color:var(--g1)}
+.x-qs span{display:block;margin-top:6px;font-size:12.5px;line-height:1.25;color:var(--mut)}
+@media(max-width:760px){.x-daily{padding:24px}}
 </style>
 <style id="ekoplus-gate-css">
 /* Eko-Plus yalnızca onaylı üyelere: üye değilse sayfalar hiç görünmez */
@@ -4023,7 +4047,7 @@ const BADGES=[
 
 /* ---------- 1) GÜNÜN KAVRAMI ---------- */
 function conOf(d=new Date()){return CON[((dnum(d)%CON.length)+CON.length)%CON.length]}
-function dailyHTML(){const c=conOf(),done=rd('learn',[]).includes(TODAY());return '<a href="#/kavram" style="display:block;text-decoration:none"><small>Günün kavramı</small><b style="display:block;font:800 26px/1.1 \'Bricolage Grotesque\',sans-serif;margin:4px 0">'+esc(c[0])+'</b><span>'+esc(c[1])+'</span>'+(done?' ✓':'')+'</a>'}
+function dailyHTML(){const c=conOf(),done=rd('learn',[]).includes(TODAY());return '<a href="#/kavram" class="x-daily"><span class="x-dk"><i></i>Günün kavramı'+(done?' · öğrenildi ✓':'')+'</span><b class="x-dt">'+esc(c[0])+'</b><span class="x-dd">'+esc(c[1])+'</span><span class="x-dgo">Örneği gör <em>→</em></span></a>'}
 function renderKavram(){
  const r=$('#p-kavram');if(!r)return;const c=conOf(),L=rd('learn',[]),done=L.includes(TODAY()),st=streakOf(L),box=$('#xk',r);
  const en=rd('lang','tr')==='en';
@@ -4279,9 +4303,9 @@ const TILES=[
 ['Ayarlar',[['x-bildirim','Bildirimler','Hatırlatıcılar ve ana ekrana ekleme.','#7a1f2b','#1b2a41']]]
 ];
 page('ekstra','Eko-Plus','Üyelere özel: laboratuvar, simülasyonlar, öğrenme, kariyer ve topluluk araçları tek yerde.',['#d9342b','#ff9a3d','#6d3fd8'],
- '<div class="x-hubd"><div class="panel" id="xhd"></div><div class="card"><h3>Hızlı bakış</h3><div id="xhs" style="display:grid;gap:10px;margin-top:10px"></div></div></div>'+
+ '<div class="x-hubd"><div class="panel" id="xhd"></div><div class="card"><h3>Hızlı bakış</h3><div id="xhs" class="x-qgrid"></div></div></div>'+
  TILES.map(([h,items])=>'<h3 class="sec">'+h+'</h3><div class="xhub">'+items.map(([id,t,d,a,b])=>'<a class="tile" href="#/'+id+'" style="--bg1:'+a+';--bg2:'+b+'"><span class="go">→</span><small>'+h+'</small><h3>'+t+'</h3><p>'+d+'</p></a>').join('')+'</div>').join(''),
- ()=>{const r=$('#p-ekstra');$('#xhd',r).innerHTML=dailyHTML();const s=stats();$('#xhs',r).innerHTML=[['Puan',s.pts],['Gün serisi',s.streak],['Kaydedilen ilan',s.saved]].map(([k,v])=>'<div class="x-row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px"><span class="x-muted">'+k+'</span><b style="font:800 22px \'Bricolage Grotesque\',sans-serif">'+v+'</b></div>').join('');applyLang()});
+ ()=>{const r=$('#p-ekstra');$('#xhd',r).innerHTML=dailyHTML();const s=stats();$('#xhs',r).innerHTML=[['Puan',s.pts],['Gün serisi',s.streak],['Kaydedilen ilan',s.saved]].map(([k,v])=>'<div class="x-qs"><b>'+v+'</b><span>'+k+'</span></div>').join('');applyLang()});
 
 /* ---------- DİL (TR/EN) ---------- */
 let LANG=rd('lang','tr');
