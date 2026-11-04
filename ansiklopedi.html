@@ -2306,10 +2306,10 @@ const slug=s=>tl(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/
 const key1=x=>slug(x.t)||encodeURIComponent(x.t);
 const paras=x=>(x.m||'').split('¶').map(t=>t.trim()).filter(Boolean);
 let szY=0;
-function szMore(e,x){const p=document.createElement('p');p.className='sz-m';p.textContent=paras(x)[0]||x.e||'';const a=document.createElement('a');a.className='sz-more';a.href='#/olay/'+key1(x);a.textContent='Devamını oku →';a.onclick=ev=>{szY=window.scrollY;ev.preventDefault();try{history.pushState(null,'',a.getAttribute('href'))}catch(_){}route(key1(x))};if(p.textContent)e.append(p);e.append(a)}
+function szMore(e,x){const p=document.createElement('p');p.className='sz-m';p.textContent=paras(x)[0]||x.e||'';const a=document.createElement('button');a.type='button';a.className='sz-more btn';a.textContent='Devamını oku →';a.onclick=()=>{szY=window.scrollY;route(key1(x))};if(p.textContent)e.append(p);e.append(a)}
 function route(fk){if(fk===undefined&&!/^#\/?(sozluk|olay)(\/|$)/.test(location.hash))return;const m=fk===undefined?location.hash.match(/^#\/olay\/(.+)$/):(fk?[0,fk]:null),V=$('#sz-view'),O=$('#olay-view');
  if(m){const key=decodeURIComponent(m[1]),x=D.find(r=>key1(r)===m[1]||slug(r.t)===key);
-  if(x){O.textContent='';const back=document.createElement('a');back.className='btn';back.href='#/sozluk';back.onclick=ev=>{ev.preventDefault();try{history.pushState(null,'','#/sozluk')}catch(_){}route('')};back.textContent='← Sözlüğe dön';
+  if(x){O.textContent='';const back=document.createElement('a');back.className='btn';back.href='#/sozluk';back.onclick=ev=>{ev.preventDefault();route('')};back.textContent='← Sözlüğe dön';
    const k=document.createElement('span');k.className='sz-k';k.textContent=CAT[x.c];const t=document.createElement('h3');t.className='ol-t';t.textContent=x.t;
    const lead=document.createElement('p');lead.className='ol-lead';lead.textContent=x.d;
    const b=document.createElement('div');b.className='ol-b';(()=>{const ps=paras(x);if(!ps.length&&x.e)ps.push('Örnek: '+x.e);return ps})().forEach(s=>{const q=document.createElement('p');const mt=s.match(/^(Ne işe yarar|Gerçek ekonomide|Basit simülasyon):\s*([\s\S]*)$/);if(mt){const lb=document.createElement('b');lb.textContent=mt[1];q.append(lb,document.createElement('br'),mt[2]);if(mt[1]==='Basit simülasyon'){q.className='ol-sim'}}else q.textContent=s;b.append(q)});
