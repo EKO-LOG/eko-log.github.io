@@ -22,7 +22,7 @@ header nav a{white-space:nowrap}header nav a.opt{display:inline-block!important}
 </head><body>
 <header><div class="bar">
 <a class="brand" href="../#/"><img src="../favicon.png" alt="Eko-Log logosu"><span>Eko-Log</span></a>
-<nav aria-label="Ana menü"><a href="../#/merkez">Simülasyon Merkezi</a><a href="../#/meslekler">Meslekler</a><a href="../#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../#/piyasa">Veri ve Pariteler</a><a href="../#/yayin">Gazete ve Dergi</a><a href="../#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="./" class="on">Mevzuat</a><a href="ictihat.html">İçtihatlar</a><a href="../#/katil">Katıl</a></nav>
+<nav aria-label="Ana menü"><a href="../#/merkez">Simülasyon Merkezi</a><a href="../#/meslekler">Meslekler</a><a href="../#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../#/piyasa">Veri ve Pariteler</a><a href="../#/yayin">Gazete ve Dergi</a><a href="../#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="./" class="on">Mevzuat</a><a href="../#/katil">Katıl</a></nav>
 </div></header>
 <main id="app"></main>
 <footer><div class="wrap"><span>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span>Üyelere özel · Metinler mevzuat.gov.tr kaynaklıdır; resmî metin için kaynağa bakınız.</span></div></footer>
@@ -31,21 +31,29 @@ header nav a{white-space:nowrap}header nav a.opt{display:inline-block!important}
 <script src="data/index.js?v=3"></script>
 <script src="app.js?v=5"></script>
 <script id="mz-ictihat-btn">
-/* İçtihatlar düğmesi: ictihat.html'e gider; kanun/madde sayfasındaysa o kanuna (ve maddeye) filtreli açar. */
+/* Mevzuat sayfasının içine "İçtihatlar" düğmesi koyar; ictihat.html'i açar (kanun/madde sayfasındaysa filtreli). */
 (()=>{
 const css=document.createElement('style');
-css.textContent='#mz-ic{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font:700 15px "Instrument Sans",system-ui,sans-serif;color:#fff;text-decoration:none;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45));box-shadow:0 14px 30px -12px rgba(196,32,46,.8)}#mz-ic:hover{filter:brightness(1.08)}';
+css.textContent='#mz-ic{display:inline-flex;align-items:center;gap:8px;margin:18px 0 6px;padding:13px 22px;border-radius:999px;font:700 16px "Instrument Sans",system-ui,sans-serif;color:#fff;text-decoration:none;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45));box-shadow:0 12px 28px -12px rgba(196,32,46,.8)}#mz-ic:hover{filter:brightness(1.08)}';
 document.head.appendChild(css);
-const a=document.createElement('a');a.id='mz-ic';a.href='ictihat.html';a.textContent='⚖ İçtihatlar';
-const upd=()=>{
+const href=()=>{
   let p=[];try{p=decodeURIComponent(location.hash.replace(/^#\/?/,'')).split('/').filter(Boolean)}catch(e){}
-  const k=p[0]||'';
   let u='ictihat.html';
-  if(/^\d+$/.test(k)){u+='?kanun='+encodeURIComponent(k);if(p[1])u+='&madde='+encodeURIComponent(p[1].replace(/^m\.?/i,''))}
-  a.href=u;
+  if(/^\d+$/.test(p[0]||'')){u+='?kanun='+encodeURIComponent(p[0]);if(p[1])u+='&madde='+encodeURIComponent(p[1].replace(/^m\.?/i,''))}
+  return u;
 };
-document.body.appendChild(a);
-window.addEventListener('hashchange',upd);upd();
+const put=()=>{
+  const app=document.getElementById('app');if(!app)return;
+  let a=document.getElementById('mz-ic');
+  if(app.querySelector('.mzg-card')||/Üye girişi gerekli/.test(app.textContent)){if(a)a.remove();return}
+  if(!a||!app.contains(a)){
+    a=document.createElement('a');a.id='mz-ic';a.textContent='⚖ İçtihatlar';
+    const w=app.querySelector('.wrap');(w||app).prepend(a);
+  }
+  const h=href();if(a.getAttribute('href')!==h)a.setAttribute('href',h);
+};
+document.addEventListener('DOMContentLoaded',()=>{const app=document.getElementById('app');if(app)new MutationObserver(put).observe(app,{childList:true,subtree:true});put()});
+window.addEventListener('hashchange',put);
 })();
 </script>
 <script id="mz-gate-ui">
