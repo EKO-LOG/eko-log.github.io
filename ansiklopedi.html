@@ -2306,7 +2306,7 @@ const slug=s=>tl(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/
 const key1=x=>slug(x.t)||encodeURIComponent(x.t);
 const paras=x=>(x.m||'').split('¶').map(t=>t.trim()).filter(Boolean);
 let szY=0;
-function szMore(e,x){const p=document.createElement('p');p.className='sz-m';p.textContent=paras(x)[0]||x.e||'';const a=document.createElement('button');a.type='button';a.className='sz-more btn';a.textContent='Devamını oku →';a.onclick=()=>{szY=window.scrollY;route(key1(x))};if(p.textContent)e.append(p);e.append(a)}
+function szMore(e,x){const p=document.createElement('p');p.className='sz-m';p.textContent=paras(x)[0]||x.e||'';const a=document.createElement('button');a.type='button';a.className='sz-more btn';a.textContent='Devamını oku →';a.onclick=()=>{szY=window.scrollY;route(key1(x))};if(p.textContent)e.append(p);e.append(a);const hh=e.querySelector('h4');if(hh){hh.style.cursor='pointer';hh.tabIndex=0;hh.setAttribute('role','link');hh.onkeydown=ev=>{if(ev.key==='Enter'){szY=window.scrollY;route(key1(x))}}}e.style.cursor='pointer';e.addEventListener('click',ev=>{if(ev.target.closest('button,a,input,select,textarea,[role=button]'))return;szY=window.scrollY;route(key1(x))})}
 function route(fk){if(fk===undefined&&!/^#\/?(sozluk|olay)(\/|$)/.test(location.hash))return;const m=fk===undefined?location.hash.match(/^#\/olay\/(.+)$/):(fk?[0,fk]:null),V=$('#sz-view'),O=$('#olay-view');
  if(m){const key=decodeURIComponent(m[1]),x=D.find(r=>key1(r)===m[1]||slug(r.t)===key);
   if(x){O.textContent='';const back=document.createElement('a');back.className='btn';back.href='#/sozluk';back.onclick=ev=>{ev.preventDefault();route('')};back.textContent='← Sözlüğe dön';
