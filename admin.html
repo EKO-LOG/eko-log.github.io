@@ -1852,12 +1852,13 @@ const COLS={
     empty:'Henüz dergi yazısı yok. İktisadi Kalkınma Dergisi sayfasında görünecek ilk yazıyı ekle.',
     note:'İktisadi Kalkınma Dergisi sayfasında Google Haberler tarzı kartlar olarak görünür; karta basınca yazı tam sayfa açılır ve altında yorum bölümü bulunur.'},
   e:{title:'Etkinlikler',noun:'Etkinlik',nav:'Etkinlikler',get:w=>w.e,
-    make:()=>({id:uid(),date:'',title:'',place:'',text:'',img:''}),
-    fields:[{k:'date',l:'Tarih ve saat',ph:'15 Kasım 2026 18:30',cal:1,hint:'Kartta tarih, “21 gün kaldı” gibi durum etiketi ve takvim düğmesi bu alandan gelir. Saati de yaz.'},
+    make:()=>({id:uid(),kind:'',date:'',title:'',place:'',text:'',img:''}),
+    fields:[{k:'kind',l:'Tür (etiket)',ph:'Söyleşi, Kurul, Vaka günü, Mülakat, Atölye, Panel',hint:'Kartta başlığın üstünde küçük etiket olarak görünür. Etkinlikler sayfasının üstündeki filtre, yazdığın türlere göre kendiliğinden oluşur.'},
+            {k:'date',l:'Tarih ve saat',ph:'15 Kasım 2026 18:30',cal:1,hint:'Kartta tarih, “21 gün kaldı” gibi durum etiketi ve takvim düğmesi bu alandan gelir. Saati de yaz.'},
             {k:'title',l:'Etkinlik adı',req:1,hint:'Kartta fotoğrafın altında, tam sayfada en üstte görünür.'},
             {k:'place',l:'Yer',hint:'Kartta 📍 ile, tam sayfada “Yer” kutusunda görünür.'},
             {k:'text',l:'Açıklama',area:1,rows:8,hint:'Karta basılınca açılan tam sayfada gösterilir. Paragrafları boş satırla ayır; “## ” ile başlayan satır ara başlık, “> ” alıntı, “- ” madde listesi olur.'}],
-    label:x=>x.title,sub:x=>x.date,img:1,
+    label:x=>x.title,sub:x=>[x.kind,x.date].filter(Boolean).join(' · '),img:1,
     empty:'Henüz etkinlik yok. Yaklaşan bir buluşmayı ekleyerek başla.',
     note:'Etkinlik sitede Gazete ve Dergi gibi Google Haberler tarzı kart olarak görünür; karta basınca tam sayfa açılır. Tam sayfada tarih ve yer kutuları, katılım formu ve yorumlar kendiliğinden gelir. Fotoğraf eklemezsen kartta büyük bir tarih görseli çıkar. Listenin en üstündeki etkinlik sitede de en üstte görünür.'},
   archive:{title:'Gazete arşivi',noun:'Arşiv kaydı',nav:'Gazete arşivi',get:w=>w.c.archive,
@@ -5223,7 +5224,17 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
 });
 
 /* Etkinlik Araçları, Etkinlikler sayfasının en altında (yalnızca liste görünümünde) */
+const EV_SEED=[['Söyleşi','Konuk akademisyenle ekonomi söyleşisi','Tarih ve yer yakında duyurulacak.'],['Kurul','Para Politikası Kurulu oturumu','Faiz kararını rollerimizle birlikte tartışıyoruz.'],['Vaka günü','Ekip vaka sunumları','Ekipler vakaları jüriye sunuyor, birlikte değerlendiriyoruz.'],['Mülakat','Prova mülakat günü','Kurum mülakatlarına hazırlık için deneme mülakatları.'],['Atölye','Finansal okuryazarlık atölyesi','Bütçe, tasarruf ve yatırım temelleri uygulamalı olarak işlenecek.'],['Panel','Ekonomi ve gençlik paneli','Genç ekonomistler güncel gelişmeleri birlikte tartışıyor.']];
 {const f=VIEWS.e;VIEWS.e=()=>{const v=f();
+  if((S.mode.e||'list')==='list'){
+    const miss=EV_SEED.filter(([k,t])=>!S.work.e.some(x=>String(x.title||'').trim()===t));
+    if(miss.length&&v.firstElementChild)v.firstElementChild.after(h('div',{class:'panel',style:'margin-bottom:16px'},
+      h('h3',{text:'Sitedeki hazır etkinlikleri ekle'}),
+      h('p',{class:'hint',text:'Etkinlikler sayfasında örnek olarak duran '+miss.length+' etkinlik (Söyleşi, Kurul, Vaka günü, Mülakat, Atölye, Panel) henüz bu listede yok. Eklersen Gazete ve Dergi gibi kart olurlar; tarih, yer, fotoğraf ve açıklamayı kendin doldurur, QR ve yoklama araçlarını bunlarla kullanırsın.'}),
+      h('div',{class:'row',style:'margin-top:10px'},h('button',{class:'btn solid',type:'button',text:'Hazır etkinlikleri ekle ('+miss.length+')',onclick:()=>{
+        miss.forEach(([kind,title,text])=>S.work.e.push({id:uid(),kind,date:'',title,place:'',text,img:''}));
+        touch();toast(miss.length+' etkinlik eklendi. Tarih ve yer bilgilerini doldurup yayınla.');render()}}))));
+  }
   if((S.mode.e||'list')==='list'){const sec=h('div',{class:'stack',style:'margin-top:36px;padding-top:24px;border-top:2px solid var(--line)'});sec.append(VIEWS.xpetk());v.append(sec)}
   return v}}
 
