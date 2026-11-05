@@ -1650,6 +1650,10 @@ function h(tag,props,...kids){
   return el;
 }
 const clone=o=>JSON.parse(JSON.stringify(o));
+/* Sayfa içerikleri (content.json → xc) */
+const XCK=['ulke','urun','turkiye','grafik','ceviri','ceviri_t','arastirma'];
+const XCT={ulke:'Ülke Karşılaştırması',urun:'Bir Ürünün Hikâyesi',turkiye:'Türkiye Ekonomisi Dosyaları',grafik:'Grafik Okuma Okulu',ceviri:'Çeviri Köşesi kartları',ceviri_t:'Çeviri Köşesi terimleri',arastirma:'Ortak Araştırma Projeleri'};
+function normXc(v){const o={};XCK.forEach(k=>{o[k]=v&&Array.isArray(v[k])?v[k].filter(e=>e&&typeof e==='object'):[]});o.arastirma_hide=!!(v&&v.arastirma_hide);return o}
 /* Eko-Plus yeni modül sayfaları: her biri için sitede aç/kapa anahtarı (content.json → xp) */
 const XPG=[
   {g:'Kariyer',items:[['ilanlar','Staj ve Burs Panosu','Resmî kaynaklara giden staj, burs ve program ilanları.'],['cv','CV ve Niyet Mektubu','Formu doldur, anında önizle, PDF olarak kaydet.'],['x-yol','Kariyer Yol Haritası','40 soruluk test ve hedef mesleğe göre adım adım plan.'],['x-takvim','Sınav Takvimi','KPSS, SMMM, burs ve staj tarihleri; geri sayım ve hatırlatıcı.']]},
@@ -1657,6 +1661,7 @@ const XPG=[
   {g:'Öğren',items:[['kavram','Günün Kavramı','Her gün tek bir kavram, tek bir örnek; seri yap, birikimi gör.'],['x-notlar','Not Paylaşımı','Üye özetleri, yönetici onayıyla yayında.'],['x-panel','Panelim','Haftalık ilerleme, seri ve hedef.']]},
   {g:'Veri Analizi',items:[['x-veri','Veri Analizi (ana sayfa)','Kapatırsan aşağıdaki alt sayfaların hepsi de kapanır.'],['x-v-atolye','Veri Atölyesi','CSV yükle, özetle, grafik çiz, ilişkiyi bul.'],['x-v-sql','SQL ve Pivot','Tarayıcıda SQL ve pivot tablo.'],['x-v-hesap','Hesaplayıcılar','Güven aralığı, t-testi, korelasyon ve diğerleri.'],['x-v-quiz','Grafik Okuma Quizi','Yanıltıcı grafikleri yakalama quizi.'],['x-v-gorev','Haftalık Veri Görevi','Seviyeli görevler, ipuçları ve yorum paylaşımı.'],['x-v-ders','Mini Dersler','Kısa, örnekli veri okuryazarlığı dersleri.'],['x-v-port','Portföy ve Beceriler','Kaydedilen analizler ve beceri seviyesi.']]},
   {g:'Ayrı sayfalar',items:[['a-grubu','A Grubu Makam Simülasyonu','Ayrı sayfa (a-grubu/). Kapatırsan ana sitedeki ve Eko-Plus’taki kutu ve menü bağlantısı kalkar.'],['mevzuat','Mevzuat','Ayrı sayfa (mevzuat/). Ana sayfa ve Keşfet’teki Mevzuat kutusu ile Eko-Plus bağlantısı bu anahtara bağlıdır; kapatırsan hepsi kalkar.']]},
+  {g:'Veri ve yayın sayfaları',items:[['ulke','Ülke Karşılaştırması','Ülkeleri yan yana karşılaştır. Kapatırsan Veri ve Pariteler’deki kutu da kalkar.'],['turkiye','Türkiye Ekonomisi Dosyaları','Enflasyon, cari açık, faiz ve kur, bütçe, işgücü, dış ticaret, büyüme, rezervler.'],['grafikokuma','Grafik Okuma Okulu','12 dersle grafiklerin nasıl yanıltabileceğini öğreten sayfa.'],['urun','Bir Ürünün Hikâyesi (Fiyatın Anatomisi)','20 üründe maliyet, kâr ve vergi kalemlerini açan sayfa.'],['ceviri','Çeviri Köşesi','Gazete ve Dergi altındaki çeviri sayfası.'],['arastirma','Ortak Araştırma Projeleri','Gazete ve Dergi ile Etkinlikler’deki ortak araştırma sayfası.']]},
   {g:'Ayarlar',items:[['x-bildirim','Bildirimler','Hatırlatıcılar ve ana ekrana ekleme.']]}
 ];
 const XP_IDS=XPG.flatMap(g=>g.items.map(i=>i[0]));
@@ -1720,6 +1725,7 @@ function norm(src){
   x.xt=(Array.isArray(s.xt)?s.xt:[]).filter(it=>it&&typeof it==='object').map(it=>({id:String(it.id||uid()),title:String(it.title||''),date:String(it.date||''),type:String(it.type||'diger'),link:String(it.link||''),note:String(it.note||'')}));
   x.xp={};XP_IDS.forEach(k=>{x.xp[k]=!(s.xp&&s.xp[k]===false)});
   x.pg={};EV_IDS.forEach(k=>{x.pg[k]=!(s.pg&&s.pg[k]===false)});
+  x.xc=normXc(s.xc);
   x.b=Object.assign({on:false,text:''},s.b);x.b.on=!!x.b.on;x.b.text=String(x.b.text||'');
   ['sz','ms','ex','gs','hk','ka','se','fm','ki','kb'].forEach(k=>{
     const v=Object.assign({add:[],del:[],edit:{}},s[k]);
@@ -1896,7 +1902,7 @@ const COLS={
 };
 
 /* ---------- değişiklik özeti ---------- */
-const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,konf:w=>w.konf,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],xptakvim:w=>w.xt,fm:w=>w.fm};
+const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,konf:w=>w.konf,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],xptakvim:w=>w.xt,'xc-ulke':w=>w.xc.ulke,'xc-urun':w=>w.xc.urun,'xc-turkiye':w=>w.xc.turkiye,'xc-grafik':w=>w.xc.grafik,'xc-ceviri':w=>[w.xc.ceviri,w.xc.ceviri_t],'xc-arastirma':w=>[w.xc.arastirma,w.xc.arastirma_hide],'xc-arastirma2':w=>[w.xc.arastirma,w.xc.arastirma_hide],fm:w=>w.fm};
 function diffList(a,b){
   const am=new Map(a.map(x=>[String(x.id),x])),bm=new Map(b.map(x=>[String(x.id),x]));
   return{add:b.filter(x=>!am.has(String(x.id))),del:a.filter(x=>!bm.has(String(x.id))),
@@ -1928,6 +1934,7 @@ function summarize(){
    d.add.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi eklendi: '+nm(x)));d.edit.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi düzenlendi: '+nm(x)));d.del.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi silindi: '+nm(x)));}
   XP_IDS.forEach(k=>{if(a.xp[k]!==b.xp[k])out.push('Eko-Plus “'+XP_NAME[k]+'” sayfası '+(b.xp[k]?'sitede açılacak':'sitede kapatılacak'))});
   EV_IDS.forEach(k=>{if(a.pg[k]!==b.pg[k])out.push('Etkinlikler “'+EV_NAME[k]+'” sayfası '+(b.pg[k]?'sitede açılacak':'sitede kapatılacak'))});
+  XCK.forEach(k=>{if(!same(a.xc[k],b.xc[k]))out.push('“'+XCT[k]+'” içeriği değişti')});if(a.xc.arastirma_hide!==b.xc.arastirma_hide)out.push('Ortak Araştırma örnek ilanları '+(b.xc.arastirma_hide?'gizlenecek':'gösterilecek'));
   custDiff(out,'Fikir Muharebesi iddiası',a.fm,b.fm,x=>x.c);
   custDiff(out,'İktisat düşünürü',a.ki,b.ki,x=>x.ad);
   custDiff(out,'Kitaplık kaydı',a.kb,b.kb,x=>x.t);
@@ -2000,11 +2007,11 @@ function validate(){
 const NAV=[
   {g:'Gelenler',items:[['pmakale','Gelen makaleler'],['members','Üyelik başvuruları'],['comments','Yorumlar'],['itab','Gelen tablolar'],['joins','Katılımcılar']]},
   {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['poll','Anket']]},
-  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['gallery','Galeri']]},
-  {g:'Etkinlikler',items:[['e','Etkinlikler ve QR araçları'],['quota','Etkinlik kontenjanı'],['konf','Konferanslar'],['yb','Yatay Bakış'],['etkpg','Sayfa anahtarları']]},
+  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['gallery','Galeri'],['xc-ceviri','Çeviri Köşesi'],['xc-arastirma','Ortak Araştırma Projeleri']]},
+  {g:'Etkinlikler',items:[['e','Etkinlikler ve QR araçları'],['quota','Etkinlik kontenjanı'],['konf','Konferanslar'],['yb','Yatay Bakış'],['xc-arastirma2','Proje Araştırma Grupları'],['etkpg','Sayfa anahtarları']]},
   {g:'Fikir Muharebesi',items:[['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['fmarg','Muharebe argümanları']]},
   {g:'Simülasyon ve Meslekler',items:[['sims','Simülasyon fotoğrafları'],['pmulakat','Mülakat sayfası'],['borsa','Borsa oyunu kayıtları'],['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['ex','Sınav takvimi']]},
-  {g:'Bilgi ve Veri',items:[['ansiklopedi','İktisadi Ansiklopedi'],['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri']]},
+  {g:'Bilgi ve Veri',items:[['ansiklopedi','İktisadi Ansiklopedi'],['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri'],['xc-ulke','Ülke Karşılaştırması'],['xc-turkiye','Türkiye Ekonomisi Dosyaları'],['xc-grafik','Grafik Okuma Okulu'],['xc-urun','Bir Ürünün Hikâyesi']]},
   {g:'Eko-Plus',items:[['teachers','Hocalar'],['xplus','Sayfa anahtarları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Resmî sınav takvimi']]},
   {g:'Site',items:[['texts','Site metinleri'],['blocks','Örnek içerikler'],['stats','İstatistikler'],['links','Bağlantılar'],['settings','Ayarlar ve yedek']]}
 ];
@@ -2394,7 +2401,7 @@ VIEWS.links=()=>{
 </script>
 <script>
 /* ---------- site dosyasını oku (metinler ve örnek içerikler için) ---------- */
-const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
+const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',ulke:'Ülke Karşılaştırması',turkiye:'Türkiye Ekonomisi Dosyaları',grafikokuma:'Grafik Okuma Okulu',urun:'Bir Ürünün Hikâyesi',ceviri:'Çeviri Köşesi',arastirma:'Ortak Araştırma Projeleri',veri:'İktisadi Tablolar',parite:'Pariteler',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',_:'Menü ve alt bilgi'};
 const ENC_PAGES=['ansiklopedi','sozluk','anatomi','efsane','kisiler','quiz','olay'];
 const SIM_PAGES=['merkez','vaka','ppk','borsa','bakan','girisim','kur','burokrat','muzakere','ihale','hakimlik','valilik','smmm'];
 const siteUrl=p=>{const k=String(p).split('/')[0],S=window.EKO_SPLIT||{};return((ENC_PAGES.includes(k)&&S.ans)?'ansiklopedi.html':(SIM_PAGES.includes(k)&&S.sim)?'simulasyon.html':'index.html')+'#/'+p};
@@ -4924,6 +4931,42 @@ VIEWS.xplus=()=>{
   upd();return root;
 };
 
+/* ---- Sayfa içerikleri: ülke, ürün, Türkiye dosyaları, grafik dersi, çeviri, araştırma ---- */
+const XCF={
+ulke:{lab:e=>(e.n||e.k||'Yeni ülke')+(e.h?' (gizli)':''),def:()=>({}),f:[['k','Ülke kodu (hazır ülkeyle aynı kodu yazarsan onu değiştirir)','text'],['n','Ülke adı','text'],['g','GSYH (milyar $)','num'],['p','Nüfus (milyon)','num'],['c','Kişi başı GSYH ($)','num'],['i','Enflasyon (%)','num'],['u','İşsizlik (%)','num'],['h','Sitede gizle (aynı kodlu hazır ülkeyi listeden kaldırır)','check']]},
+urun:{lab:e=>e.ad||e.id||'Yeni ürün',hide:e=>!!e.h,def:()=>({kdv:'20',otvT:'yok',it:[['Hammadde','hammadde','10','0.1'],['İşçilik','işçilik','3','0'],['Perakende payı','perakende','4','0']]}),f:[['id','Kısa kod, küçük harf ve rakam (hazır ürünle aynı kodu yazarsan o ürünü değiştirir)','text'],['ad','Ürün adı','text'],['kdv','KDV oranı (%)','select',['20','10','1','0']],['otvT','ÖTV türü','select',['yok','maktu','oran']],['otvMax','ÖTV üst sınırı','num'],['otvDef','ÖTV varsayılan değeri','num'],['it','Maliyet kalemleri: her satır “Kalem | kategori | tutar | kur duyarlılığı (0–1)”. Kategori: hammadde, işçilik, enerji, lojistik, kâr, perakende','rows']]},
+turkiye:{lab:e=>e.t||'Yeni dosya',def:()=>({sc:'1'}),f:[['t','Dosya başlığı (hazır dosyayla aynı yazarsan dolu alanlar onun metnini değiştirir)','text'],['ic','Simge (emoji)','text'],['ozet','Özet','area'],['nasil','Nasıl ölçülür, kim açıklar?','area'],['dikkat','Okurken dikkat et (her satır bir madde)','lines'],['terim','Temel kavramlar (her satır “Kavram | açıklama”)','rows'],['oku','Bir veriyi nasıl yorumlarsın? (her satır bir adım)','lines'],['kaynak','Kaynaklar (her satır “Ad | https://…”)','rows'],['soru','Mini soru','text'],['s1','Şık 1','text'],['s2','Şık 2','text'],['s3','Şık 3','text'],['sc','Doğru şık','select',['1','2','3']],['sa','Doğru cevap açıklaması','area']]},
+grafik:{lab:e=>e.t||'Yeni ders',def:()=>({tip:'Çubuk',c:'1'}),f:[['t','Ders adı','text'],['veri','Veri açıklaması (kaynak, birim)','text'],['tip','Grafik türü','select',['Çubuk','Çizgi']],['v','Veri (her satır “Etiket | değer”)','rows'],['q','Soru','text'],['o','Şıklar (her satır bir şık, en az 2)','lines'],['c','Doğru şık sırası','select',['1','2','3','4']],['e','Doğru cevap açıklaması','area'],['d1','“Grafikte ne değişiyor?” ilk görünüm','area'],['d2','“Grafikte ne değişiyor?” eksen 0’dan başlayınca','area']]},
+ceviri:{lab:e=>e.b||'Yeni çeviri kartı',def:()=>({}),f:[['b','Başlık','text'],['k','Kaynak adı','text'],['c','Çeviren','text'],['t','Tarih','text'],['z','Özet (en çok 120 kelime, kendi cümlelerinle)','area'],['l','Kaynak bağlantısı','text']]},
+ceviri_t:{lab:e=>(e.en||'Yeni terim')+(e.tr?' → '+e.tr:''),def:()=>({}),f:[['en','İngilizce terim','text'],['tr','Türkçe karşılığı','text'],['ac','Kısa açıklama','text']]},
+arastirma:{lab:e=>e.b||'Yeni proje',def:()=>({a:'Makro',s:'Lisans',st:'Açık'}),f:[['b','Proje başlığı','text'],['a','Alan','select',['Makro','Mikro','Ekonometri','Finans','Kamu','İktisat düşüncesi']],['d','Açıklama','area'],['r','Aranan beceriler (her satır bir beceri)','lines'],['u','Süre (örn. 3 ay)','text'],['s','Seviye','select',['Lisans','Lisansüstü','Karma']],['st','Durum','select',['Açık','Ekip tamam','Kapalı']],['i','İletişim','text']]}};
+const XCBUILT=[['ekmek','Ekmek'],['tisort','Pamuklu tişört'],['yakit','Akaryakıt'],['telefon','Akıllı telefon'],['sut','Süt'],['domates','Domates'],['ayakkabi','Spor ayakkabı'],['laptop','Dizüstü bilgisayar'],['buzdolabi','Buzdolabı'],['otomobil','Otomobil'],['makarna','Makarna'],['yumurta','Yumurta'],['zeytinyagi','Zeytinyağı'],['tavuk','Tavuk eti'],['cay','Çay'],['kot','Kot pantolon'],['kitap','Kitap'],['televizyon','Televizyon'],['camasir','Çamaşır makinesi'],['bisiklet','Dağ bisikleti']];
+function xcSection(key){
+  const c=XCF[key],arr=()=>S.work.xc[key],box=h('div',{class:'panel'}),list=h('div',{class:'stack'});let fresh=null;
+  const mkF=(it,[k,l,t,o])=>{let inp;const v=it[k];
+    if(t==='area'||t==='lines'||t==='rows'){inp=h('textarea',{rows:t==='area'?4:5});inp.value=t==='lines'?(Array.isArray(v)?v.join('\n'):''):t==='rows'?(Array.isArray(v)?v.map(r=>r.join(' | ')).join('\n'):''):(v||'')}
+    else if(t==='select'){inp=h('select',{},o.map(x=>h('option',{value:x,text:x})));inp.value=o.includes(String(v))?String(v):o[0];if(v==null)it[k]=inp.value}
+    else if(t==='check'){inp=h('input',{type:'checkbox'});inp.checked=!!v}
+    else{inp=h('input',{type:t==='num'?'number':'text'});if(t==='num')inp.step='any';inp.value=v==null?'':v}
+    inp.addEventListener(t==='check'||t==='select'?'change':'input',()=>{it[k]=t==='check'?inp.checked:t==='lines'?inp.value.split('\n').map(s=>s.trim()).filter(Boolean):t==='rows'?inp.value.split('\n').map(s=>s.split('|').map(x=>x.trim())).filter(r=>r[0]):inp.value;touch()});
+    return xfld(l,inp)};
+  const draw=()=>{const items=arr().filter(e=>!(c.hide&&c.hide(e)));
+    list.replaceChildren(...(items.length?items.map(it=>{const d=h('details',{class:'panel'},h('summary',{text:c.lab(it)}),...c.f.map(f=>mkF(it,f)),
+      h('div',{class:'row'},h('button',{class:'btn sm ghost danger',type:'button',text:'Sil',onclick:async()=>{if(!(await ask('Sil','“'+c.lab(it)+'” silinsin mi?','Sil',true)))return;arr().splice(arr().indexOf(it),1);touch();draw()}})));
+      if(it===fresh)d.open=true;return d}):[h('p',{class:'hint',text:'Henüz eklenmiş kayıt yok. Hazır içerik sitede olduğu gibi görünmeye devam eder.'})]))};
+  box.append(h('h3',{text:XCT[key]}),list,h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'+ Yeni ekle',onclick:()=>{fresh=c.def();arr().push(fresh);touch();draw()}})));
+  draw();return box}
+function xcPage(title,intro,keys,extra){const root=h('div',{class:'stack'});root.append(pageHead(title,intro));if(extra)root.append(extra());keys.forEach(k=>root.append(xcSection(k)));
+  root.append(h('p',{class:'hint',text:'Değişiklikler “Gözden geçir ve yayınla” ile content.json dosyasına yazılır. Eksik alanı olan kayıtları site atlar.'}));return root}
+VIEWS['xc-ulke']=()=>xcPage('Ülke Karşılaştırması','Veri ve Pariteler › Ülke Karşılaştırması. Yeni ülke ekle, mevcut ülkenin verisini aynı kodla yeniden gir ya da ülkeyi gizle.',['ulke']);
+VIEWS['xc-urun']=()=>xcPage('Bir Ürünün Hikâyesi','Veri ve Pariteler › Fiyatın Anatomisi. Yeni ürün ekle, hazır ürünü aynı kodla değiştir ya da gizle.',['urun'],()=>{const p=h('div',{class:'panel'},h('h3',{text:'Hazır ürünler (sitede göster)'}));
+  XCBUILT.forEach(([id,ad])=>{const cb=h('input',{type:'checkbox'});cb.checked=!S.work.xc.urun.some(e=>e.id===id&&e.h);cb.addEventListener('change',()=>{const a=S.work.xc.urun,i=a.findIndex(e=>e.id===id&&e.h);if(cb.checked){if(i>=0)a.splice(i,1)}else if(i<0)a.push({id,h:true});touch()});p.append(h('label',{style:'display:inline-flex;gap:6px;margin:4px 14px 4px 0;align-items:center'},cb,h('span',{text:ad})))});return p});
+VIEWS['xc-turkiye']=()=>xcPage('Türkiye Ekonomisi Dosyaları','Veri ve Pariteler › Türkiye Ekonomisi Dosyaları. Yeni dosya ekle ya da hazır bir dosyanın metinlerini aynı başlıkla değiştir.',['turkiye']);
+VIEWS['xc-grafik']=()=>xcPage('Grafik Okuma Okulu','Veri ve Pariteler › Grafik Okuma Okulu. Çubuk ya da çizgi grafikli yeni ders ekle; sorusu, şıkları ve “ne değişiyor” anlatımı sende.',['grafik']);
+VIEWS['xc-ceviri']=()=>xcPage('Çeviri Köşesi','Gazete ve Dergi › Çeviri Köşesi. Çeviri özet kartları ve terim sözlüğü.',['ceviri','ceviri_t']);
+VIEWS['xc-arastirma']=()=>xcPage('Ortak Araştırma Projeleri','Gazete ve Dergi ile Etkinlikler › Proje Araştırma Grupları. İlanları buradan yönet.',['arastirma'],()=>{const cb=h('input',{type:'checkbox'});cb.checked=!!S.work.xc.arastirma_hide;cb.addEventListener('change',()=>{S.work.xc.arastirma_hide=cb.checked;touch()});return h('div',{class:'panel'},h('label',{style:'display:flex;gap:8px;align-items:center'},cb,h('span',{text:'Hazır örnek ilanları gizle'})))});
+VIEWS['xc-arastirma2']=VIEWS['xc-arastirma'];
+
 /* ---- Etkinlikler: her sayfa için aç/kapa anahtarı ---- */
 VIEWS.etkpg=()=>{
   const w=S.work;if(!w.pg)w.pg={};EV_IDS.forEach(k=>{if(typeof w.pg[k]!=='boolean')w.pg[k]=true});
@@ -5548,7 +5591,7 @@ render=function(){_render1();if(!_vtPoll&&FB.sess()){_vtPoll=true;pollVt();setIn
 /* ---------- Keşfet sayfası ---------- */
 (()=>{
 const KS_TARGETS=[
- ['Ana sayfalar',[['#/','Ana sayfa'],['#/merkez','Simülasyon Merkezi'],['#/meslekler','Meslekler'],['#/ansiklopedi','İktisadi Ansiklopedi'],['#/piyasa','Veri ve Pariteler'],['#/yayin','Gazete ve Dergi'],['#/etkinlik','Etkinlikler'],['#/katil','Katıl']]],
+ ['Ana sayfalar',[['#/','Ana sayfa'],['#/merkez','Simülasyon Merkezi'],['#/meslekler','Meslekler'],['#/ansiklopedi','İktisadi Ansiklopedi'],['#/piyasa','Veri ve Pariteler'],['#/yayin','Gazete ve Dergi'],['#/etkinlik','Etkinlikler'],['#/katil','Katıl'],['#/ulke','Ülke Karşılaştırması'],['#/turkiye','Türkiye Ekonomisi Dosyaları'],['#/grafikokuma','Grafik Okuma Okulu'],['#/urun','Bir Ürünün Hikâyesi'],['#/ceviri','Çeviri Köşesi'],['#/arastirma','Ortak Araştırma Projeleri']]],
  ['Alt sayfalar',[['#/mulakat','Mülakat'],['#/kadrolar','Kariyer Kadroları'],['#/meslek','Meslek Tanıtımı'],['#/quiz','Terim Quiz'],['#/sozluk','Ekonomi Sözlüğü'],['#/anatomi','Kavramın Anatomisi'],['#/efsane','Şehir Efsaneleri'],['#/kisiler','İktisat Düşünürleri'],['#/kitaplik','Kitaplık'],['#/pariteler','Pariteler'],['#/veri','İktisat Grafikleri'],['#/hesap','Hesaplayıcılar'],['#/kaynak','Kaynaklar'],['#/gazete','Diyalog Gazetesi'],['#/dergi','İktisadi Kalkınma Dergisi'],['#/makale','Makale Yazımı'],['#/arsiv','Arşiv'],['#/fikir','Fikir Muharebesi'],['#/yatay','Yatay Bakış'],['#/yarisma','Bilgi Yarışması']]],
  ['Simülasyonlar',[['#/vaka','Vaka Analizi'],['#/ppk','Başkan Simülasyonu'],['#/borsa','Borsa Simülasyonu'],['#/bakan','Bakanlık Simülasyonu'],['#/girisim','Girişimci'],['#/kur','Dış Ticaret'],['#/burokrat','Kamu Bürokratı'],['#/muzakere','Müzakere Masası'],['#/ihale','Kamu İhalesi'],['#/hakimlik','Hâkimlik Simülasyonu'],['#/valilik','Kaymakamlık ve Valilik'],['#/smmm','Mali Müşavirlik']]],
  ['Ayrı sayfalar',[['eko-plus/','Eko-Plus'],['eko-plus/#/forum','Soru-Cevap (Eko-Plus)'],['eko-plus/#/kavram','Günün Kavramı (Eko-Plus)'],['eko-plus/#/ilanlar','Staj ve Burs Panosu (Eko-Plus)'],['eko-plus/#/cv','CV ve Niyet Mektubu (Eko-Plus)'],['eko-plus/#/tahmin','Haftalık Tahmin (Eko-Plus)'],['eko-plus/#/profil','Üye Profili (Eko-Plus)'],['a-grubu/','A Grubu Makam Simülasyonu'],['mevzuat/','Mevzuat']]]
