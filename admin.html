@@ -4993,6 +4993,7 @@ const xjoin=k=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik/yoklama/'+k;
 const xqrOk=d=>/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(String(d||''));
 /* QR'ın içeriği: özel bağlantı varsa o, yoksa sitedeki yoklama bağlantısı */
 const xqrTarget=ev=>xurl(ev.qrUrl)||xjoin(ev.kod||'');
+const xpub=e=>!!e&&e.yayin!==false&&(e.yayin===true||!!e.qrImg||!!e.qrUrl);
 function xqrCanvas(text,size){
   const c=document.createElement('canvas');
   try{
@@ -5072,7 +5073,7 @@ function xqScreen(ev){
   load();tm=setInterval(load,4000);document.addEventListener('keydown',esc);document.body.append(ov);
 }
 /* ---------- Etkinlik Araçları ---------- */
-VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfasındaki etkinlikleri, QR yoklamayı, canlı oylamaları ve geri bildirimleri buradan yönet. Değişiklikler anında sitede geçerli olur, “Yayınla” gerekmez.',root=>{
+VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfasındaki etkinlikleri, QR yoklamayı, canlı oylamaları ve geri bildirimleri buradan yönet. Üyelik gerekmez: etkinlik oluşturunca taslak kalır, “QR’ı yayınla” dendiğinde sitedeki Etkinlik Araçları herkese açılır.',root=>{
   const st={evs:[],id:null,tab:'yoklama'};
   const head=h('div',{class:'stack'}),body=h('div',{class:'stack'});root.append(head,body);
   const cur=()=>st.evs.find(e=>e.id===st.id)||null;
@@ -5084,13 +5085,13 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
     catch(e){dbFail(body,e,load)}
   }
   function drawHead(){
-    const sel=h('select',{'aria-label':'Etkinlik seç',onchange:e=>{st.id=e.target.value;drawHead();drawBody()}},st.evs.map(e=>h('option',{value:e.id,text:e.ad+(e.tarih?' · '+xdate(e.tarih):'')})));
+    const sel=h('select',{'aria-label':'Etkinlik seç',onchange:e=>{st.id=e.target.value;drawHead();drawBody()}},st.evs.map(e=>h('option',{value:e.id,text:e.ad+(e.tarih?' · '+xdate(e.tarih):'')+(xpub(e)?' · yayında':' · taslak')})));
     if(st.id)sel.value=st.id;
     head.replaceChildren(
       h('div',{class:'panel'},h('h3',{text:'Yeni etkinlik'}),xfld('Etkinlik adı',nAd),xfld('Tarih',nTr),
-        h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Etkinlik oluştur',onclick:()=>xrun(async()=>{
+        h('div',{class:'row'},h('button',{class:'btn sm solid',type:'button',text:'Etkinlik oluştur (taslak)',onclick:()=>xrun(async()=>{
           const ad=xclip(nAd.value,80);if(!ad){toast('Etkinlik adı gerekli.');return}
-          const id=xid();await xput('events/'+id,{ad,tarih:nTr.value,kod:xcode(),by:'admin',t:Date.now()});
+          const id=xid();await xput('events/'+id,{ad,tarih:nTr.value,kod:xcode(),yayin:false,by:'admin',t:Date.now()});
           nAd.value='';st.id=id;toast('Etkinlik oluşturuldu.');load()})}))),
       st.evs.length?h('div',{class:'panel'},h('h3',{text:'Etkinlik seç'}),sel):null);
   }
@@ -5117,7 +5118,14 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
     const baseIn=h('input',{type:'text',value:xjoinBase(),placeholder:'https://eko-log.github.io/',inputmode:'url'});
     const qUrl=h('input',{type:'text',value:ev.qrUrl||'',placeholder:'https://forms.gle/… (boş bırakırsan site yoklaması)',inputmode:'url',maxlength:'300'});
     const upl=h('input',{type:'file',accept:'image/png,image/jpeg','aria-label':'Hazır QR görseli yükle',onchange:e=>{const f=e.target.files&&e.target.files[0];xqrRead(f,d=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{qrImg:d,id:undefined}));toast('QR görseli yüklendi. Sitede de bu görsel görünür.');load()}))}});
+    const pubd=xpub(ev);
     const qrp=h('div',{class:'panel'},h('h3',{text:'QR ve kod'}),
+      h('div',{class:'panel',style:'margin:10px 0;background:var(--soft)'},h('h3',{text:'Yayın durumu'}),
+        h('span',{class:'chip '+(pubd?'ok':''),text:pubd?'Yayında: Etkinlik Araçları katılımcılara açık':'Taslak: katılımcılar Etkinlik Araçları’nı görmez'}),
+        h('p',{class:'hint',text:'QR’ı hazırladıktan sonra yayınla. Yayınlanınca sitedeki Etkinlikler sayfasında yoklama, oylama, geri bildirim ve Soru Sor açılır; üyelik gerekmez. Yayından kaldırınca herkese kapanır (yöneticiye açık kalır).'}),
+        h('div',{class:'row'},h('button',{class:'btn sm'+(pubd?'':' solid'),type:'button',text:pubd?'Yayından kaldır':'QR’ı yayınla',onclick:()=>xrun(async()=>{
+          if(!pubd&&!ev.kod){toast('Önce etkinlik kodu belirle.');return}
+          await xput('events/'+ev.id,Object.assign({},ev,{yayin:!pubd,id:undefined}));toast(pubd?'Yayından kaldırıldı.':'QR yayınlandı, araçlar açıldı.');load()})}))),
       h('p',{class:'hint',text:'QR’ı burada hem oluşturabilir hem de kendi hazır QR görselini koyabilirsin. Hangisi varsa etkinlik sayfasında (sitede ve Eko-Plus’ta) katılımcılara o gösterilir.'}),
       h('div',{style:'display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:12px 0'},
         h('div',{style:'background:#fff;padding:8px;border-radius:12px;border:1px solid var(--line)'},qrCv||h('p',{class:'mut',text:'Önce etkinlik kodu belirle.'})),
@@ -5135,7 +5143,7 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
           if(!(await ask('Yeni kod üret','Eski kod ve eski QR çalışmaz olur. Basılmış afişlerdeki QR’ı yenilemen gerekir.','Yeni kod üret',true)))return;
           await xput('events/'+ev.id,Object.assign({},ev,{kod,id:undefined}));toast('Yeni kod: '+kod);load()})})),
       h('div',{class:'panel',style:'margin-top:14px;background:var(--soft)'},h('h3',{text:'QR okutunca ne olur?'}),
-        h('p',{class:'hint',text:'QR okutan üyenin yoklaması otomatik alınır (Yoklama sekmesinde görünür) ve sitedeki Etkinlikler sayfasında yalnızca ona özel “Soru Sor” paneli açılır. Soruları Sorular sekmesinden yönetirsin.'}),
+        h('p',{class:'hint',text:'QR okutan kişinin yoklaması (ad yazarak) alınır (Yoklama sekmesinde görünür) ve sitedeki Etkinlikler sayfasında yalnızca ona özel “Soru Sor” paneli açılır. Soruları Sorular sekmesinden yönetirsin.'}),
         h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},
           h('button',{class:'btn sm'+(ev.soru===false?'':' solid'),type:'button','aria-pressed':String(ev.soru!==false),text:'Soru Sor paneli: '+(ev.soru===false?'Kapalı':'QR ile açılır'),onclick:()=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{soru:ev.soru===false?undefined:false,id:undefined}));load()})}),
           h('button',{class:'btn sm'+(ev.sk===true?'':' solid'),type:'button','aria-pressed':String(ev.sk!==true),text:'Yeni soru: '+(ev.sk===true?'Alınmıyor':'Alınıyor'),disabled:ev.soru===false,onclick:()=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{sk:ev.sk===true?undefined:true,id:undefined}));load()})}))),
