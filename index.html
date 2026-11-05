@@ -6947,6 +6947,7 @@ const DB=(()=>{
 })();
 const guard=async(fn)=>{try{return await fn()}catch(e){toast('Bağlantı hatası, tekrar dene');return undefined}};
 const vals=o=>o?Object.entries(o).map(([id,v])=>Object.assign({id},v)):[];
+const pub=e=>!!e&&e.yayin!==false&&(e.yayin===true||!!e.qrImg||!!e.qrUrl);
 let liveT=null;
 const stopLive=()=>{clearInterval(liveT);liveT=null};
 const live=fn=>{stopLive();liveT=setInterval(()=>{if(!document.hidden)fn()},3000)};
@@ -6993,7 +6994,8 @@ function certPNG(name,ev,date){
 const evState={tab:'yoklama'};
 mkPage('x-etkinlik','Etkinlik Araçları','Yoklamayı QR ile al, salonda canlı oylama yap, etkinlik sonunda geri bildirim topla.',['#2a2d8f','#12b5c4','#7c3aed'],async body=>{
   stopLive();
-  const evs=await guard(async()=>vals(await DB.get('events')));if(!evs){return}
+  let evs=await guard(async()=>vals(await DB.get('events')));if(!evs){return}
+  if(!isAdmin())evs=evs.filter(e=>pub(e)&&!expired(e));
   evs.sort((a,b)=>(b.tarih||'').localeCompare(a.tarih||''));
   let joinMsg=null;
   if(ctx.kod){const f=evs.find(e=>e.kod===ctx.kod.toUpperCase());if(f){wr('curEv',f.id);evState.tab='yoklama'}else joinMsg='“'+ctx.kod+'” kodlu etkinlik bulunamadı.';ctx.kod=null}
@@ -7006,9 +7008,11 @@ mkPage('x-etkinlik','Etkinlik Araçları','Yoklamayı QR ile al, salonda canlı 
   const nAd=el('input',{class:'x2-in',type:'text',maxlength:'80',placeholder:'Etkinlik adı'}),nTarih=el('input',{class:'x2-in',type:'date',value:dstr(new Date()),style:'max-width:180px'});
   const create=el('div',{class:'x2-row adm-only',style:'margin-top:12px;padding-top:12px;border-top:1px solid var(--line)'},nAd,nTarih,
     el('button',{class:'btn grad',type:'button',onclick:()=>guard(async()=>{if(!clip(nAd.value,80)){toast('Etkinlik adı gerekli');return}
-      const id=uid();await DB.put('events/'+id,{ad:clip(nAd.value,80),tarih:nTarih.value,kod:mkCode(),by:m.id,t:Date.now()});wr('curEv',id);toast('Etkinlik oluşturuldu');rerender('x-etkinlik')})},'+ Etkinlik oluştur'));
+      const id=uid();await DB.put('events/'+id,{ad:clip(nAd.value,80),tarih:nTarih.value,kod:mkCode(),by:m.id,t:Date.now()});wr('curEv',id);toast('Etkinlik oluşturuldu');rerender('x-etkinlik')})},'+ Etkinlik oluştur (taslak)'));
+  const pubBtn=cur?el('button',{class:'btn grad',type:'button',onclick:()=>guard(async()=>{const was=pub(cur);await DB.put('events/'+cur.id+'/yayin',!was);toast(was?'Yayından kaldırıldı':"QR yayınlandı, Etkinlik Araçları herkese açıldı");rerender('x-etkinlik')})},pub(cur)?'⏸ Yayından kaldır':"📣 QR'ı yayınla"):null;
+  const pubInfo=cur?el('span',{class:'x2-mut',text:pub(cur)?'Durum: Yayında, katılımcılara açık.':'Durum: Taslak. QR yayınlanana kadar katılımcılar bu bölümü görmez.'}):null;
   const head=card(el('div',{class:'x2-row'},evs.length?sel:el('span',{class:'x2-mut',text:'Henüz etkinlik yok.'}),codeIn,goBtn),joinMsg?el('div',{class:'x2-msg',style:'margin-top:10px',text:joinMsg}):null,create,
-    cur&&isAdmin()?el('div',{class:'x2-row adm-only',style:'margin-top:10px'},el('button',{class:'btn',type:'button',onclick:()=>guard(async()=>{if(!confirm('Etkinlik ve tüm verileri silinsin mi?'))return;await Promise.all(['events','att','polls','votes','fb'].map(k=>DB.del(k+'/'+cur.id)));rerender('x-etkinlik')})},'🗑 Bu etkinliği sil')):null);
+    cur&&isAdmin()?el('div',{class:'x2-row adm-only',style:'margin-top:10px'},pubBtn,pubInfo,el('button',{class:'btn',type:'button',onclick:()=>guard(async()=>{if(!confirm('Etkinlik ve tüm verileri silinsin mi?'))return;await Promise.all(['events','att','polls','votes','fb'].map(k=>DB.del(k+'/'+cur.id)));rerender('x-etkinlik')})},'🗑 Bu etkinliği sil')):null);
   const tabs=chipRow([['yoklama','📋 Yoklama (QR)'],['oylama','🗳️ Canlı oylama'],['geri','⭐ Geri bildirim']],evState.tab,v=>{evState.tab=v;rerender('x-etkinlik')});
   const pane=el('div',{});
   fill(body,el('div',{class:'x2-stack'},head,evs.length?tabs:null,pane));
@@ -7102,15 +7106,14 @@ async function roomInit(kod){
     let saved=rd('room',null);
     if(kod){
       kod=kod.toUpperCase();
-      if(!isMember()){roomSec.hidden=false;fill(roomSec,rbox(el('p',{style:'margin:0 0 12px',text:'QR ile yoklamaya katılmak ve soru sormak için önce üye girişi yap, sonra QR’ı yeniden okut.'}),el('a',{class:'btn grad',href:'eko-plus/#/lab'},'Giriş yap / üye ol')));return}
       const ev=vals(await DB.get('events')).find(x=>String(x.kod||'').toUpperCase()===kod);
-      if(!ev){roomSec.hidden=false;fill(roomSec,rbox(el('p',{style:'margin:0',text:'Bu kodla bir etkinlik bulunamadı. QR’ı yeniden okut ya da kodu kontrol et.'})));return}
+      if(!ev||!pub(ev)){roomSec.hidden=false;fill(roomSec,rbox(el('p',{style:'margin:0',text:'Bu kodla bir etkinlik bulunamadı. QR’ı yeniden okut ya da kodu kontrol et.'})));return}
       saved={id:ev.id,kod};wr('room',saved);
     }
     if(!saved||!saved.id){roomSec.hidden=true;return}
     if(room&&room.id===saved.id&&roomT)return;
     const ev=await DB.get('events/'+saved.id);
-    if(!ev||expired(ev)){roomClose();return}
+    if(!ev||expired(ev)||!pub(ev)){roomClose();return}
     ev.id=saved.id;room=ev;roomSec.hidden=false;
     await roomAttend();roomDraw();
     if(kod)setTimeout(()=>roomSec.scrollIntoView({behavior:'smooth',block:'start'}),300);
@@ -7165,15 +7168,18 @@ const sec=document.getElementById('xp-etk-sec');
 const active=()=>/^#\/etkinlik(\/|$)/.test(location.hash);
 const pageOn=()=>{const xp=(window.EKO_C&&window.EKO_C.xp)||{};return xp['x-etkinlik']!==false};
 let late=false,tm=null;
-function showTools(){
+async function showTools(){
   if(!active()){stopLive();roomStop();return}
   if(!pageOn()&&!isAdmin()){sec.hidden=true;if(roomSec)roomSec.hidden=true;return}
-  sec.hidden=false;
+  if(!isAdmin())sec.hidden=true;
   const m=/^#\/etkinlik\/yoklama\/([A-Za-z0-9]{3,8})/.exec(location.hash);
-  if(!window.EKO_C&&!late){fill(BODY,el('div',{class:'x2-empty',text:'Yükleniyor…'}));clearTimeout(tm);tm=setTimeout(()=>{late=true;showTools()},4000);return}
+  if(!window.EKO_C&&!late){clearTimeout(tm);tm=setTimeout(()=>{late=true;showTools()},4000);return}
   roomInit(m&&m[1]);
-  if(!isMember()){stopLive();fill(BODY,el('div',{class:'x2-empty'},el('p',{style:'margin:0 0 12px',text:'Etkinlik Araçları (kodla yoklama, canlı oylama, geri bildirim) onaylı üyelere açıktır.'}),el('a',{class:'btn grad',href:'eko-plus/#/lab'},'Giriş yap / üye ol')));return}
-  rerender('x-etkinlik');
+  let ok=isAdmin();
+  if(!ok){try{ok=vals(await DB.get('events')).some(e=>pub(e)&&!expired(e))}catch(e){ok=false}}
+  if(!active())return;
+  if(!ok){stopLive();sec.hidden=true;return}
+  sec.hidden=false;rerender('x-etkinlik');
 }
 addEventListener('hashchange',showTools);
 document.addEventListener('eko:ready',showTools);
@@ -7333,7 +7339,31 @@ const DS=[
  dikkat:['Dış ticaret açığı ile cari açık aynı şey değildir; hizmet (turizm, taşımacılık) ve gelir kalemleri farkı yaratır.','Reel efektif döviz kuru (REÇ) rekabetçiliği ölçer; TCMB yayımlar. Enflasyon kurdan hızlı artıyorsa reel değerlenme olur.','İhracatta fiyat ve miktar etkisini ayır: fiyat artışı ile hacim artışı farklı şeyler anlatır.','Ana ticaret ortaklarının talebi ve emtia fiyatları ihracat ve ithalat değerini belirler.'],
  calc:{t:'Karşılama oranı',f:[['x','İhracat (milyar $)',22,0.5],['m','İthalat (milyar $)',30,0.5]],fn:v=>[['Dış ticaret dengesi (milyar $)',nf(v.x-v.m,1)],['İhracatın ithalatı karşılama oranı','%'+nf(Q(v.x,v.m)*100,1)]]},
  soru:['İhracat 22 milyar $, ithalat 30 milyar $ ise karşılama oranı yaklaşık kaçtır?',['%73','%136','%27'],0,'22 ÷ 30 = 0,733 → %73. Aradaki 8 milyar $ dış ticaret açığıdır.'],
- kaynak:[['Ticaret Bakanlığı','https://ticaret.gov.tr'],['Türkiye İhracatçılar Meclisi','https://tim.org.tr'],['TÜİK','https://www.tuik.gov.tr']]}];
+ kaynak:[['Ticaret Bakanlığı','https://ticaret.gov.tr'],['Türkiye İhracatçılar Meclisi','https://tim.org.tr'],['TÜİK','https://www.tuik.gov.tr']]},
+{t:'Büyüme ve GSYH',ic:'📊',
+ ozet:'GSYH, bir ülkede belirli bir dönemde üretilen nihai mal ve hizmetlerin toplam piyasa değeridir. Büyüme, bu değerin reel (fiyatlardan arındırılmış) artışıdır.',
+ nasil:'TÜİK GSYH’yi üç ayda bir üretim, harcama ve gelir yöntemleriyle yayımlar. Büyüme oranı sabit fiyatlı GSYH’deki yıllık veya çeyreklik değişimdir. Kişi başına GSYH, toplam büyümenin nüfus artışından arındırılmış halidir.',
+ dikkat:['Yıllık büyüme ile çeyreklik büyüme (mevsim ve takvim etkisinden arındırılmış) farklı şeyleri anlatır.','Büyümenin kaynağına bak: tüketim, yatırım, kamu harcaması veya net ihracat.','Nominal GSYH enflasyonla şişer; karşılaştırmada sabit fiyatlı seri kullanılır.','GSYH refahın tam ölçüsü değildir; gelir dağılımı ve kayıt dışılık dışarıda kalır.'],
+ calc:{t:'Büyüme ve kişi başı büyüme',f:[['a','Geçen yıl reel GSYH',1000,10],['b','Bu yıl reel GSYH',1050,10],['n','Nüfus artışı (%)',1,0.1]],fn:v=>{const g=(Q(v.b,v.a)-1)*100;return[['Reel büyüme','%'+nf(g,1)],['Kişi başına büyüme (yaklaşık)','%'+nf(((1+g/100)/(1+v.n/100)-1)*100,1)]]}},
+ soru:['GSYH 1000’den 1050’ye çıkıyor, nüfus %1 artıyor. Kişi başına büyüme yaklaşık kaçtır?',['%5','%3,96','%6'],1,'1,05 ÷ 1,01 − 1 ≈ %3,96. Nüfus artışı kişi başına büyümeyi aşağı çeker.'],
+ kaynak:[['TÜİK','https://www.tuik.gov.tr'],['Dünya Bankası','https://data.worldbank.org/country/turkiye']]},
+{t:'Rezervler ve para',ic:'🏦',
+ ozet:'Merkez bankası rezervleri, ülkenin dış ödeme ve kur istikrarı için elindeki döviz ve altın varlıklarıdır. Brüt rezerv kısa vadeli yükümlülükler düşülmeden, net rezerv düşüldükten sonra bakılan göstergedir.',
+ nasil:'TCMB rezervleri haftalık yayımlar. Rezerv yeterliliği çoğu zaman ithalat ayı (rezerv ÷ aylık ithalat) ve kısa vadeli dış borca oranla ölçülür. Para arzı (M1, M2, M3) bankacılık verileriyle izlenir.',
+ dikkat:['Brüt rezerv, swap ve bankaların zorunlu karşılıklarını içerebilir; net rezerv daha sert bir ölçüdür.','Rezerv artışı borçlanmadan mı yoksa cari fazladan mı geliyor, ayırt et.','Parasal büyüme ile enflasyon arasındaki ilişki gecikmeli ve dolaylıdır.','Altın fiyat hareketi rezerv değerini kurdan bağımsız oynatır.'],
+ calc:{t:'İthalat ayı cinsinden rezerv',f:[['r','Brüt rezerv (milyar $)',100,1],['i','Aylık ithalat (milyar $)',22,0.5]],fn:v=>[['Rezerv yeterliliği (ay)',nf(Q(v.r,v.i),1)]]},
+ soru:['Rezerv 100 milyar $, aylık ithalat 25 milyar $ ise rezerv kaç aylık ithalatı karşılar?',['4 ay','2,5 ay','10 ay'],0,'100 ÷ 25 = 4 ay. Yaygın eşik, en az 3 aylık ithalat karşılamasıdır.'],
+ kaynak:[['TCMB','https://www.tcmb.gov.tr'],['EVDS veri sistemi','https://evds2.tcmb.gov.tr']]}];
+const EX={
+'Enflasyon':{terim:[['Çekirdek enflasyon','Enerji, gıda gibi oynak kalemler dışarıda bırakılmış fiyat artışı.'],['Baz etkisi','Geçen yılın aynı ayındaki artışın yıllık orana yansıması.'],['Enflasyon beklentisi','Hane, firma ve piyasa katılımcılarının gelecek fiyat tahmini.']],oku:['Önce aylık değişime, sonra yıllık orana bak.','Gıda ve enerjiyi ayırarak çekirdek eğilimi kontrol et.','Beklentiler hedeften uzaksa dezenflasyon daha yavaş olur.']},
+'Cari açık':{terim:[['Cari işlemler dengesi','Mal, hizmet, gelir ve transfer akımlarının toplam dengesi.'],['Doğrudan yatırım','Yabancının kalıcı ortaklık amaçlı sermaye girişi.'],['Portföy yatırımı','Hisse ve tahvile giren, çabuk çıkabilen kısa vadeli sermaye.']],oku:['Açığı GSYH’ye oranla.','Enerji ve altın hariç dengeyi ayrıca incele.','Finansmanın kalıcı kalemlerden gelip gelmediğine bak.']},
+'Faiz ve kur':{terim:[['Reel faiz','Nominal faizden enflasyonun arındırılmış hali.'],['Kur geçişkenliği','Kur artışının tüketici fiyatlarına yansıma oranı.'],['Carry trade','Düşük faizle borçlanıp yüksek faizli varlığa yatırma stratejisi.']],oku:['Önce reel faizin işaretine bak.','Kuru tek başına değil, reel efektif kurla birlikte oku.','Karar metnindeki ileriye dönük yönlendirmeyi izle.']},
+'Bütçe ve borç':{terim:[['Faiz dışı denge','Faiz ödemeleri hariç bütçe dengesi.'],['Borç stoku','Geçmiş açıkların birikmiş toplamı.'],['Maastricht ölçütleri','Bütçe açığı %3, borç %60 GSYH referansı (AB).']],oku:['Açık bir akım, borç bir stoktur; ikisini karıştırma.','Faiz ile büyüme farkı borç oranının yönünü belirler.','Gelir yapısındaki dolaylı vergi payına bak.']},
+'İşgücü':{terim:[['İşgücüne katılım','İşgücünün 15+ yaş nüfusa oranı.'],['Atıl işgücü','İşsiz, potansiyel işgücü ve eksik istihdamın toplamı.'],['Kayıt dışı istihdam','Sosyal güvenlik kaydı olmayan çalışma.']],oku:['İşsizlik oranını katılım ve istihdam oranıyla birlikte oku.','Geniş tanımlı göstergeyi dar orana karşı koy.','Mevsimsellikten arındırılmış seriyi kullan.']},
+'Dış ticaret':{terim:[['Karşılama oranı','İhracatın ithalatı karşılama yüzdesi.'],['Reel efektif kur','Ticaret ortaklarına göre enflasyondan arındırılmış kur.'],['Ara malı ithalatı','Üretimde kullanılan, nihai olmayan ithal girdi.']],oku:['Fiyat ve miktar etkisini ayır.','Enerji ve altını hariç tutarak çekirdek dengeye bak.','Ortak ülke talebinin seyrini izle.']},
+'Büyüme ve GSYH':{terim:[['Reel GSYH','Sabit fiyatlarla ölçülen üretim.'],['Potansiyel büyüme','Enflasyonu hızlandırmadan sürdürülebilir büyüme hızı.'],['Çıktı açığı','Gerçek ile potansiyel GSYH arasındaki fark.']],oku:['Çeyreklik, mevsimden arındırılmış veriye bak.','Büyümenin harcama kalemlerini ayrıştır.','Kişi başı büyümeyi nüfusla karşılaştır.']},
+'Rezervler ve para':{terim:[['Brüt rezerv','Yükümlülükler düşülmeden toplam döviz ve altın.'],['Net rezerv','Brüt rezervden kısa vadeli yükümlülüklerin çıkarılmış hali.'],['Zorunlu karşılık','Bankaların merkez bankasında tutmak zorunda olduğu pay.']],oku:['Brüt ve net rezervi ayrı oku.','Rezerv değişiminin kaynağını (cari fazla mı, borç mu) araştır.','İthalat ayı ve kısa vadeli dış borca oranla yeterliliği ölç.']}};
+DS.forEach(d=>Object.assign(d,EX[d.t]||{}));
 let cur=0;
 $('#tabs').innerHTML=DS.map((d,i)=>`<button class="chip" data-i="${i}" aria-pressed="${i===0}">${d.ic} ${d.t}</button>`).join('');
 $('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;cur=+b.dataset.i;show()};
@@ -7343,6 +7373,7 @@ function show(){
  $('#pn').innerHTML=`<div class="box"><span class="tag">Dosya ${cur+1} / ${DS.length}</span><h2 style="font-size:28px;margin:8px 0">${d.ic} ${d.t}</h2><p>${d.ozet}</p>
  <h3 style="${h}">Nasıl ölçülür, kim açıklar?</h3><p>${d.nasil}</p>
  <h3 style="${h}">Okurken dikkat et</h3><ul class="ul">${d.dikkat.map(x=>`<li>${x}</li>`).join('')}</ul>
+ ${d.terim?`<h3 style="${h}">Temel kavramlar</h3><table>${d.terim.map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td></tr>`).join('')}</table>`:''}${d.oku?`<h3 style="${h}">Bir veriyi nasıl yorumlarsın?</h3><ol class="ul">${d.oku.map(x=>`<li>${x}</li>`).join('')}</ol>`:''}
  <h3 style="${h}">Hesapla: ${d.calc.t}</h3><div class="row" id="cf">${d.calc.f.map(f=>`<div class="f"><label for="c_${f[0]}">${f[1]}</label><input id="c_${f[0]}" type="number" step="${f[3]}" value="${f[2]}" inputmode="decimal"></div>`).join('')}</div><div id="cr"></div>
  <h3 style="${h}">Mini soru</h3><p><b>${d.soru[0]}</b></p><div id="so">${d.soru[1].map((o,k)=>`<button class="btn" data-k="${k}" style="display:block;width:100%;text-align:left;margin:6px 0;border-radius:14px">${o}</button>`).join('')}</div><div id="sf" class="msg" hidden></div>
  <h3 style="${h}">Veri nereden bulunur?</h3><p>${d.kaynak.map(k=>`<a href="${k[1]}" target="_blank" rel="noopener">${k[0]}</a>`).join(' · ')}</p></div>`;
@@ -7405,11 +7436,60 @@ const LS=[
   const an=[];for(let j=0;j<12;j++){let p=1;for(let k=j+1;k<=j+12;k++)p*=1+all[k]/100;an.push((p-1)*100)}
   return bars(an,mo,0,40,['#c4202e'],v=>nf(v,0),true,8)+lab('Yıllık enflasyon (%), bu yıl',L+4,T+8,'start')},
  q:'Yıllık enflasyon 6. aydan 7. aya %36,8’den %26,8’e düşüyor, oysa aylık artış hâlâ %2. Neden?',o:['Fiyatlar 7. ayda geriledi','Geçen yılın 7. ayındaki yüksek artış yıllık hesabın dışına çıktı (baz etkisi)','İstatistik kurumu yöntem değiştirdi'],c:1,
- e:'Yıllık enflasyon son 12 ayın birikimidir. Geçen yıl 7. ayda %10’luk bir sıçrama olduysa bu ay hesaptan çıkar ve yıllık oran, bugünkü fiyat artışı değişmese de belirgin biçimde düşer. Eğilimi görmek için aylık veriye de bakmak gerekir.'}];
+ e:'Yıllık enflasyon son 12 ayın birikimidir. Geçen yıl 7. ayda %10’luk bir sıçrama olduysa bu ay hesaptan çıkar ve yıllık oran, bugünkü fiyat artışı değişmese de belirgin biçimde düşer. Eğilimi görmek için aylık veriye de bakmak gerekir.'},
+{t:'Arz–talep kayması',veri:'Kurgusal piyasa: fiyat (TL) ve miktar (adet)',tg:'Talep artışını göster',
+ draw:s=>{const XS=v=>L+(W-L-Rr)*v/100,P=(q,p)=>XS(q)+','+Y(p,0,100),pl=(a,b,c)=>`<polyline fill="none" stroke="${c}" stroke-width="2.6" points="${P(a[0],a[1])} ${P(b[0],b[1])}"/>`;
+  let o=ax(0,100)+pl([0,10],[100,90],'#3478c9')+pl([0,90],[100,10],'#c4202e')+lab('Arz (mavi)',XS(80),Y(80,0,100)-6)+lab('Talep (kırmızı)',XS(8),Y(88,0,100)-6,'start')+lab('Miktar',(L+W-Rr)/2,H-6)+`<circle cx="${XS(50)}" cy="${Y(50,0,100)}" r="5" fill="#16836b"/>`+lab('Denge: 50 TL, 50 adet',XS(50)+8,Y(50,0,100)+14,'start');
+  if(s)o+=pl([25,90],[100,30],'#c4202e').replace('stroke-width="2.6"','stroke-width="2.6" stroke-dasharray="5 4"')+`<circle cx="${XS(62.5)}" cy="${Y(60,0,100)}" r="5" fill="#ff7a45"/>`+lab('Yeni denge: 60 TL, 62,5 adet',XS(62.5)+8,Y(60,0,100)-8,'start');return o},
+ q:'Talep eğrisi sağa kayarsa denge fiyat ve miktar nasıl değişir?',o:['Fiyat da miktar da artar','Fiyat artar, miktar azalır','Yalnızca miktar artar'],c:0,
+ e:'Arz eğrisi yukarı eğimli olduğundan talep artışı eğri boyunca hareketi tetikler: fiyat 50’den 60’a, miktar 50’den 62,5’e çıkar. Eğri üzerinde hareket ile eğrinin kaymasını ayırmak grafik okumanın temelidir.'},
+{t:'Lorenz eğrisi',veri:'Kurgusal gelir dağılımı (kümülatif nüfus ve gelir payı)',tg:'Vergi sonrası eğriyi göster',
+ draw:s=>{const XS=v=>L+(W-L-Rr)*v,pts=(p)=>Array.from({length:11},(_,j)=>XS(j/10)+','+Y(Math.pow(j/10,p),0,1)).join(' '),pl=(p,c,d)=>`<polyline fill="none" stroke="${c}" stroke-width="2.6" ${d?'stroke-dasharray="5 4"':''} points="${pts(p)}"/>`;
+  let o=ax(0,1,v=>'%'+nf(v*100,0))+`<line x1="${XS(0)}" y1="${Y(0,0,1)}" x2="${XS(1)}" y2="${Y(1,0,1)}" stroke="var(--mut)" stroke-dasharray="3 3"/>`+pl(2.2,'#c4202e')+lab('Eşitlik doğrusu (kesikli)',L+4,T+8,'start')+lab('Vergi öncesi, Gini ≈ 0,38',L+4,T+20,'start')+lab('Nüfusun kümülatif payı',(L+W-Rr)/2,H-6);
+  return s?o+pl(1.7,'#16836b',1)+lab('Vergi sonrası, Gini ≈ 0,26',L+4,T+32,'start'):o},
+ q:'Lorenz eğrisi eşitlik doğrusundan uzaklaştıkça ne olur?',o:['Gelir eşitsizliği artar','Ortalama gelir artar','Nüfus azalır'],c:0,
+ e:'Eğri ile köşegen arasındaki alan büyüdükçe Gini katsayısı yükselir. Vergi ve transferler en alttaki grupların payını artırınca eğri köşegene yaklaşır ve Gini düşer. Gini ortalama geliri değil, dağılımı ölçer.'},
+{t:'Logaritmik eksen',veri:'Kurgusal fiyat endeksi: yılda %30 artış',tg:'Logaritmik eksen',
+ draw:s=>{const v=Array.from({length:10},(_,j)=>100*Math.pow(1.3,j)),yl=v.map((_,j)=>2015+j);
+  return s?ax(2,3.1,x=>nf(Math.pow(10,x),0))+xl(yl)+line(v.map(Math.log10),2,3.1,'#c4202e')+lab('Log ölçek: düz doğru',L+4,T+8,'start'):ax(0,1100)+xl(yl)+line(v,0,1100,'#c4202e')+lab('Doğrusal ölçek: eğri yukarı kıvrılır',L+4,T+8,'start')},
+ q:'Logaritmik eksende düz bir doğru ne anlama gelir?',o:['Sabit mutlak artış','Sabit yüzde (oransal) artış','Değişimin durması'],c:1,
+ e:'Log eksende eşit aralıklar eşit oranları gösterir. Yılda %30 artış doğrusal eksende gittikçe dikleşir, log eksende düz çizgi olur. Uzun dönemli büyüme ve enflasyon serilerinde oranları karşılaştırmak için log ölçek kullanılır.'},
+{t:'Ortalama ve medyan',veri:'Kurgusal hane geliri dağılımı (bin TL aralıkları)',tg:'Medyanı göster',
+ draw:s=>{const v=[30,24,16,10,7,5,4,4],nm=['0-10','10-20','20-30','30-40','40-50','50-60','60-70','70+'],X=f=>L+(W-L-Rr)*(f+.5)/8;
+  let o=bars(v,nm,0,36,['#3478c9'],x=>nf(x,0),true,9)+`<line x1="${X(2.3)}" x2="${X(2.3)}" y1="${T}" y2="${H-Bt}" stroke="#c4202e" stroke-width="2"/>`+lab('Ortalama',X(2.3)+4,T+10,'start');
+  return s?o+`<line x1="${X(1.1)}" x2="${X(1.1)}" y1="${T}" y2="${H-Bt}" stroke="#16836b" stroke-width="2"/>`+lab('Medyan',X(1.1)-4,T+10,'end'):o},
+ q:'Sağa çarpık bir gelir dağılımında ortalama, medyana göre nasıldır?',o:['Daha büyüktür','Daha küçüktür','Aynıdır'],c:0,
+ e:'Çok yüksek gelirler ortalamayı yukarı çeker; medyan ise hanelerin tam ortasındaki değerdir. Çoğu hane ortalamanın altında kazanır. Dağılımı çarpık olan veride “ortalama gelir” tek başına yanıltıcıdır.'},
+{t:'Büyüme oranı ve düzey',veri:'Kurgusal reel GSYH endeksi',tg:'Büyüme oranını göster',
+ draw:s=>{const lv=[100,110,119,127,134,140],yl=['Y1','Y2','Y3','Y4','Y5','Y6'];
+  return s?bars([10,9.1,6.7,5.5,4.5],['Y2','Y3','Y4','Y5','Y6'],0,12,['#16836b'],x=>nf(x,1)):ax(80,160)+xl(yl)+line(lv,80,160,'#3478c9')+lab('Reel GSYH endeksi: sürekli artıyor',L+4,T+8,'start')},
+ q:'GSYH düzeyi her yıl artıyor ama büyüme oranı düşüyor. Ne söylenir?',o:['Ekonomi küçülüyor','Ekonomi büyüyor ama yavaşlıyor','Durgunluk var'],c:1,
+ e:'Düzey yükselirken büyüme oranı %10’dan %4,5’e iner: üretim artmaya devam eder, artış hızı düşer. Küçülme, ancak oranın sıfırın altına inmesiyle (düzeyin düşmesiyle) olur.'},
+{t:'Stok ve akış',veri:'Kurgusal bütçe açığı (akış) ve kamu borcu (stok), GSYH payı olarak',tg:'Borç stokunu göster',
+ draw:s=>{const yl=['Y1','Y2','Y3','Y4','Y5','Y6'];return s?ax(0,80)+xl(yl)+line([50,54,59,63,66,68],0,80,'#c4202e')+lab('Borç stoku (% GSYH)',L+4,T+8,'start'):bars([3,4,5,4,3,2],yl,0,8,['#3478c9'],x=>nf(x,0))+lab('Yıllık bütçe açığı (% GSYH)',L+4,T+8,'start')},
+ q:'Bütçe açığı küçülürken borç stoku ne yapar?',o:['Açık sürdükçe artmaya devam eder','Hemen azalır','Sabit kalır'],c:0,
+ e:'Açık bir akımdır, borç ise biriken stoktur. Açık küçülse de sıfırın üstünde kaldıkça stok artar: 50’den 68’e çıkar. Borç oranı, ancak nominal büyüme faiz maliyetini aştığında veya fazla verildiğinde gerilemeye başlar.'},
+{t:'Seçilmiş dönem',veri:'Kurgusal endeks, 20 dönem',tg:'Tüm dönemi göster',
+ draw:s=>{const v=[100,103,108,112,118,121,119,115,111,108,107,110,116,123,130,138,145,150,158,165];
+  return s?ax(90,170)+xl(v.map((_,j)=>j%4?'':2005+j))+line(v,90,170,'#3478c9'):ax(104,124)+xl(v.slice(6,12).map((_,j)=>2011+j))+line(v.slice(6,12),104,124,'#c4202e')+lab('Seçilen dönem: düşüş',L+4,T+8,'start')},
+ q:'Yalnızca düşüşteki dönemi gösteren grafik hangi riski taşır?',o:['Verinin eksik dönemle yanlış yorumlanması','Eksen hatası','Ölçü birimi hatası'],c:0,
+ e:'Dar pencere genel eğilimi gizler. Tüm dönem bakıldığında seri 100’den 165’e yükselir; düşüş kısa bir duraklamadır. Grafik okurken zaman aralığının neden seçildiğini ve seçimin sonucu belirleyip belirlemediğini sor.'}];
+const DT={'Kırpılmış eksen':['Eksen 94’ten başlıyor: 96 ile 100 çubukları arasındaki fark yaklaşık üç kat gibi görünür; gerçek fark yalnızca 4 puandır.','Eksen 0’dan başlıyor: çubuklar 96 ve 100 olarak orantılı çıkar, fark küçük ve gerçek büyüklüğüyle okunur.'],
+'Nominal ve reel':['Maaş endeksi 100’den 320’ye, fiyat endeksi 600’e çıkıyor; iki çizgi arasındaki makas açıldıkça alım gücü eriyor.','Maaş fiyata bölününce reel maaş endeksi yaklaşık 53’e iniyor: nominal artış alım gücü kaybını gizliyordu.'],
+'Çift eksen':['İhracat sol, enflasyon sağ eksene bağlı; çizgiler kesişiyor ve bir ilişki izlenimi doğuyor.','Tek eksende çizgiler kesişmiyor: ihracat yavaş artıyor, enflasyon düşüyor. Kesişim ölçek seçiminin ürünüydü.'],
+'Korelasyon ve nedensellik':['Noktalar gri: dondurma ve boğulma birlikte artıyor, doğrudan neden-sonuç varmış gibi görünüyor.','Renk sıcaklığı gösterince ikisinin de sıcak aylarda yükseldiği görülür; ortak neden hava sıcaklığıdır.'],
+'Baz etkisi':['Yıllık enflasyon çubukları: 6. ayda %36,8, 7. ayda %26,8; aylık artış %2’de kalırken yıllık oran düşüyor.','Aylık değişimler: yalnızca geçen yılın 7. ayında %10’luk sıçrama var; bu sıçrama hesaptan çıkınca yıllık oran düşüyor.'],
+'Arz–talep kayması':['Başlangıç dengesi: arz ve talep 50 TL ve 50 adette kesişiyor.','Talep eğrisi sağa kayıyor: yeni denge 60 TL ve 62,5 adet; fiyat %20, miktar %25 artıyor.'],
+'Lorenz eğrisi':['Eğri köşegenden uzak: en yoksul yarı gelirin küçük bir payını alıyor (Gini ≈ 0,38).','Vergi sonrası eğri köşegene yaklaşıyor: en alttakilerin payı artıyor, Gini ≈ 0,26’ya iniyor.'],
+'Logaritmik eksen':['Doğrusal eksende yılda %30 artış gittikçe dikleşen bir eğri çizer; son yıllar aşırı hızlı görünür.','Log eksende aynı veri düz bir doğrudur: büyüme oranı sabittir, “hızlanma” görsel bir yanılsamadır.'],
+'Ortalama ve medyan':['Çubuklar hane sayısını gösterir; kırmızı çizgi ortalama gelir olup dağılımın sağ kuyruğuna doğru kaymıştır.','Yeşil çizgi medyanı gösterir: haneler ortalamanın solunda yığıldığı için medyan ortalamadan belirgin biçimde küçüktür.'],
+'Büyüme oranı ve düzey':['Düzey grafiğinde GSYH 100’den 140’a çıkar, her yıl artış vardır.','Aynı veride büyüme oranı %10’dan %4,5’e düşer: ekonomi büyür ama yavaşlar.'],
+'Stok ve akış':['Yıllık bütçe açığı 3, 4, 5, 4, 3, 2 olarak seyreder ve son yıllarda küçülür.','Borç stoku açıklar biriktikçe 50’den 68’e yükselir; açığın küçülmesi stokun düşmesi demek değildir.'],
+'Seçilmiş dönem':['Yalnızca 2011–2016 gösterilir: seri 121’den 107’ye düşer ve genel bir düşüş izlenimi doğar.','Tüm dönemde seri 100’den 165’e çıkar; düşüş geçici bir duraklamadır.']};
 let i=0;const tg=[],an=[];
 function show(){const l=LS[i];$('#lt').textContent=`${i+1}/${LS.length} · ${l.t}`;$('#ch').innerHTML=l.draw(!!tg[i]);$('#vr').textContent=l.veri;
  const b=$('#tgb');b.textContent=(tg[i]?'✓ ':'')+l.tg;b.setAttribute('aria-pressed',!!tg[i]);
- $('#q').textContent=l.q;$('#op').innerHTML=l.o.map((x,k)=>`<button class="btn" data-k="${k}" style="display:block;width:100%;text-align:left;margin:6px 0;border-radius:14px">${esc(x)}</button>`).join('');
+ let d=$('#dt');if(!d){d=document.createElement('div');d.id='dt';d.className='msg';$('#tgb').after(d)}d.innerHTML='<b>Grafikte ne değişiyor?</b><br>'+((DT[l.t]||['',''])[tg[i]?1:0]);$('#q').textContent=l.q;$('#op').innerHTML=l.o.map((x,k)=>`<button class="btn" data-k="${k}" style="display:block;width:100%;text-align:left;margin:6px 0;border-radius:14px">${esc(x)}</button>`).join('');
  an[i]!=null?mark(an[i]):($('#fb').hidden=true);
  $('#pv').disabled=i===0;$('#nx').disabled=i===LS.length-1;
  $('#sc').textContent=LS.filter((x,k)=>an[k]===x.c).length+' / '+LS.length+' doğru'}
@@ -7441,6 +7521,16 @@ const P={
  ayakkabi:{ad:'Spor ayakkabı',kdv:10,otv:null,it:[['Malzeme (sentetik, kauçuk)','h',450,.5],['İşçilik','i',300,0],['Enerji','e',30,.1],['Nakliye ve dağıtım','l',60,.2],['Marka ve üretici kârı','k',700,0],['Mağaza payı (kira, personel, kâr)','m',900,0]]},
  laptop:{ad:'Dizüstü bilgisayar',kdv:20,otv:null,it:[['İthal cihaz bedeli','h',24000,1],['Montaj ve işçilik','i',500,0],['Lojistik ve garanti','l',1200,.2],['Distribütör kârı','k',2500,0],['Perakende payı','m',2000,0]]},
  buzdolabi:{ad:'Buzdolabı',kdv:20,otv:null,it:[['Sac, kompresör ve parçalar','h',14000,.5],['İşçilik','i',2500,0],['Enerji (üretim)','e',1000,0],['Nakliye ve dağıtım','l',1200,.1],['Üretici kârı','k',3000,0],['Bayi payı','m',2500,0]]},
+ makarna:{ad:'Makarna (500 g)',kdv:1,otv:null,it:[['Buğday ve irmik','h',14,.1],['Ambalaj','h',2,.4],['İşçilik','i',3,0],['Enerji (kurutma)','e',2,0],['Nakliye ve dağıtım','l',2,.1],['Üretici kârı','k',3,0],['Market payı','m',4,0]]},
+ yumurta:{ad:'Yumurta (30’luk)',kdv:1,otv:null,it:[['Yem ve civciv','h',90,.3],['İşçilik','i',25,0],['Enerji (kümes)','e',12,0],['Nakliye ve dağıtım','l',15,.1],['Üretici kârı','k',20,0],['Market payı','m',28,0]]},
+ zeytinyagi:{ad:'Zeytinyağı (1 L)',kdv:1,otv:null,it:[['Zeytin','h',200,.05],['Şişe ve ambalaj','h',30,.4],['İşçilik','i',40,0],['Enerji','e',15,0],['Nakliye ve dağıtım','l',15,.1],['Üretici kârı','k',40,0],['Market payı','m',60,0]]},
+ tavuk:{ad:'Tavuk eti (1 kg)',kdv:1,otv:null,it:[['Yem ve civciv','h',55,.3],['İşçilik','i',12,0],['Enerji','e',8,0],['Nakliye ve soğuk zincir','l',6,.1],['Üretici kârı','k',10,0],['Market payı','m',22,0]]},
+ cay:{ad:'Çay (500 g)',kdv:10,otv:null,it:[['Yaş çay ve işleme','h',110,.05],['İşçilik','i',25,0],['Enerji','e',10,0],['Ambalaj ve nakliye','l',15,.2],['Üretici kârı','k',20,0],['Market payı','m',30,0]]},
+ kot:{ad:'Kot pantolon',kdv:10,otv:null,it:[['Pamuk ve denim kumaş','h',180,.4],['İşçilik','i',120,0],['Enerji, boya, yıkama','e',30,.2],['Nakliye ve dağıtım','l',40,.1],['Marka ve üretici kârı','k',90,0],['Mağaza payı','m',340,0]]},
+ kitap:{ad:'Kitap (300 sayfa)',kdv:0,otv:null,it:[['Kâğıt ve baskı malzemesi','h',60,.2],['Dizgi ve baskı işçiliği','i',20,0],['Enerji','e',5,0],['Nakliye ve dağıtım','l',10,.1],['Yayınevi payı (telif dahil)','k',25,0],['Kitabevi payı','m',80,0]]},
+ televizyon:{ad:'Televizyon (55")',kdv:20,otv:null,it:[['İthal panel ve elektronik','h',18000,1],['Montaj ve işçilik','i',700,0],['Lojistik ve garanti','l',1000,.2],['Üretici ve distribütör kârı','k',3000,0],['Perakende payı','m',2500,0]]},
+ camasir:{ad:'Çamaşır makinesi',kdv:20,otv:null,it:[['Sac, motor ve elektronik','h',11000,.5],['İşçilik','i',2000,0],['Enerji (üretim)','e',800,0],['Nakliye ve dağıtım','l',1000,.1],['Üretici kârı','k',2500,0],['Bayi payı','m',2200,0]]},
+ bisiklet:{ad:'Dağ bisikleti',kdv:20,otv:null,it:[['Çerçeve ve vites parçaları','h',8000,.8],['Montaj işçiliği','i',800,0],['Lojistik ve gümrük','l',700,.5],['Marka ve üretici kârı','k',1500,0],['Bayi payı','m',1500,0]]},
  otomobil:{ad:'Otomobil',kdv:20,otv:{t:'oran',max:220,def:50,l:'ÖTV oranı (%)'},it:[['İthal parça ve donanım','h',520000,.8],['Montaj işçiliği','i',60000,0],['Enerji ve fabrika giderleri','e',20000,.1],['Lojistik ve gümrük','l',40000,.5],['Üretici kârı','k',110000,0],['Bayi payı','m',50000,0]]}};
 const CL={h:['#c4202e','Hammadde'],i:['#ff7a45','İşçilik'],e:['#e3b04b','Enerji'],l:['#3478c9','Lojistik'],k:['#16836b','Kâr'],m:['#8154c7','Perakende'],o:['#6a5f76','ÖTV'],v:['#12b5c4','KDV']};
 const df=k=>({kur:0,gir:0,isc:0,kdv:P[k].kdv,otv:P[k].otv?P[k].otv.def:0});
@@ -7453,7 +7543,7 @@ const sl=(id,l,mn,mx,v)=>`<div class="f"><label for="${id}">${l}: <b id="${id}v"
 function ctl(){const p=P[k];
  $('#sl').innerHTML=sl('kur','Kur artışı (%)',0,100,S.kur)+sl('gir','Girdi (hammadde, enerji) fiyat değişimi (%)',-20,100,S.gir)+sl('isc','İşçilik maliyeti değişimi (%)',-20,100,S.isc)
   +(p.otv?sl('otv',p.otv.l,0,p.otv.max,S.otv):'')
-  +`<div class="f"><label for="kdv">KDV oranı</label><select id="kdv">${[1,10,20].map(x=>`<option value="${x}" ${x===S.kdv?'selected':''}>%${x}</option>`).join('')}</select><p class="hint" style="margin-top:4px">Güncel oranı Gelir İdaresi’nden kontrol et.</p></div>`;
+  +`<div class="f"><label for="kdv">KDV oranı</label><select id="kdv">${[0,1,10,20].map(x=>`<option value="${x}" ${x===S.kdv?'selected':''}>%${x}</option>`).join('')}</select><p class="hint" style="margin-top:4px">Güncel oranı Gelir İdaresi’nden kontrol et.</p></div>`;
  $('#sl').oninput=e=>{const t=e.target;S[t.id]=+t.value;const v=$('#'+t.id+'v');if(v)v.textContent=t.value;draw()}}
 function draw(){const p=P[k],r=calc(k,S),b=calc(k,df(k)),ch=(r.tot/b.tot-1)*100;
  $('#nm').textContent=p.ad;$('#raf').textContent=nf(r.tot,r.tot<100?2:0)+' TL';
