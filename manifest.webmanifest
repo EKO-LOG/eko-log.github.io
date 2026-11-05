@@ -1,1 +1,20 @@
-{"name": "Eko-Log", "short_name": "Eko-Log", "start_url": "./index.html", "scope": "./", "display": "standalone", "background_color": "#1a0b1f", "theme_color": "#1a0b1f", "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"}, {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}]}
+{
+  "name": "Eko-Log",
+  "short_name": "Eko-Log",
+  "lang": "tr",
+  "description": "İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1a0b1f",
+  "theme_color": "#1a0b1f",
+  "icons": [
+    { "src": "ikon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "ikon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Etkinlikler", "url": "./index.html#/etkinlik" },
+    { "name": "Gazete ve Dergi", "url": "./index.html#/yayin" },
+    { "name": "İktisadi Ansiklopedi", "url": "./ansiklopedi.html#/ansiklopedi" }
+  ]
+}
