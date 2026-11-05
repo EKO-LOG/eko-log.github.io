@@ -1,5 +1,7 @@
-/* Eko-Log çevrimdışı mod: sayfalar önce ağdan gelir, ağ yoksa önbellekten açılır */
-const V = 'eko-v2';
+/* Eko-Log çevrimdışı mod
+   - Sayfalar ve içerik verisi: önce ağ (kısa zaman aşımıyla), ağ yavaşsa/yoksa önbellek
+   - Diğer dosyalar (görsel, font vb.): önbellekten hemen ver, arkadan tazele */
+const V = 'eko-v3';
 const CORE = ['./', 'index.html', 'ansiklopedi.html', 'simulasyon-merkezi.html', 'manifest.webmanifest', 'favicon.png', 'ikon-192.png', 'ikon-512.png'];
 
 self.addEventListener('install', e => {
@@ -18,21 +20,37 @@ self.addEventListener('activate', e => {
   );
 });
 
+/* Ağ önce; ms içinde cevap gelmezse önbellekteki kopya verilir, ağ cevabı yine de önbelleği tazeler */
+function networkFirst(r, key, ms, isPage) {
+  return new Promise(resolve => {
+    let done = false;
+    const give = x => { if (!done) { done = true; resolve(x); } };
+    const t = setTimeout(() => {
+      caches.match(key).then(x => { if (x) give(x); });
+    }, ms);
+    fetch(r).then(x => {
+      clearTimeout(t);
+      if (x && x.ok) { const c = x.clone(); caches.open(V).then(h => h.put(key, c)); }
+      give(x);
+    }).catch(() => {
+      clearTimeout(t);
+      caches.match(key)
+        .then(x => x || (isPage ? caches.match('index.html') : null))
+        .then(x => give(x || Response.error()));
+    });
+  });
+}
+
 self.addEventListener('fetch', e => {
   const r = e.request;
-  if (r.method !== 'GET' || new URL(r.url).origin !== location.origin) return;
+  const u = new URL(r.url);
+  if (r.method !== 'GET' || u.origin !== location.origin) return;
   const isPage = r.mode === 'navigate' || (r.headers.get('accept') || '').includes('text/html');
-  if (isPage) {
-    /* sayfalar: önce ağ, olmazsa önbellek, o da yoksa ana sayfa */
-    e.respondWith(
-      fetch(r).then(x => {
-        const c = x.clone();
-        caches.open(V).then(h => h.put(r, c));
-        return x;
-      }).catch(() => caches.match(r).then(x => x || caches.match('index.html')))
-    );
+  const isData = /\/(content|[^/]+)\.json$/.test(u.pathname);
+  if (isPage || isData) {
+    /* sorgu parametresi (?v=...) önbelleği şişirmesin diye anahtar sadece yol */
+    e.respondWith(networkFirst(r, u.origin + u.pathname, isData ? 6000 : 4000, isPage));
   } else {
-    /* diğer dosyalar: önbellekten hemen ver, arkadan tazele */
     e.respondWith(
       caches.match(r).then(hit => {
         const net = fetch(r).then(x => {

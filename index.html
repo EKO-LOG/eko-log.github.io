@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="tr"><head><script>(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<html lang="tr"><head><script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
 <meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
@@ -1342,7 +1344,7 @@ body.hasann header{top:calc(54px + env(safe-area-inset-top,0px))}body.hasann mai
 const O=location.hostname.split('.')[0],R=location.pathname.split('/')[1]||'',API='https://api.github.com/repos/'+O+'/'+R+'/contents/';
 const ANN_VARSAYILAN='Yeni dönem çalışma grupları açılıyor | Aramıza katılmak için WhatsApp grubumuza gel | Duyurular ve etkinlikler burada';
 let C={fb:{db:'',key:''},f:{cur:'40',k:'0.25',rows:[]},w:'',ig:'',li:'',t:{},i:{},n:[],d:[],e:[],c:{team:[],gallery:[],archive:[]},b:{on:true,text:ANN_VARSAYILAN}};
-try{const r=await fetch('content.json?v='+Date.now(),{cache:'no-store'});if(r.ok)C=Object.assign(C,await r.json())}catch(e){}
+try{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);const r=await fetch('content.json',{cache:'no-cache',signal:ac.signal});clearTimeout(tm);if(r.ok)C=Object.assign(C,await r.json())}catch(e){}
 if(!C.b||!String(C.b.text||'').trim())C.b={on:true,text:ANN_VARSAYILAN};
 const $=(s,p=document)=>p.querySelector(s),$$=(s,p=document)=>[...p.querySelectorAll(s)];
 function img(el,src){let m=$(':scope>img.cimg',el);if(!m){m=document.createElement('img');m.className='cimg';el.prepend(m)}m.src=src;m.dataset.p=src;return m}
@@ -1570,7 +1572,7 @@ document.addEventListener('click',e=>{
 });
 deco();
 const pg=document.getElementById('p-etkinlik');
-if(pg)new MutationObserver(deco).observe(pg,{childList:true,subtree:true});
+if(pg)new MutationObserver(__dbo(deco)).observe(pg,{childList:true,subtree:true});
 })()</script>
 <style id="simimg-css">
 .hub .tile{background:#1d1d24}
@@ -1722,7 +1724,7 @@ function deco(){
 window.EKO_CMT={mount(host,key,opt){for(let i=ext.length-1;i>=0;i--)if(!ext[i][1].isConnected)ext.splice(i,1);const c={dataset:{b:key},o:opt||{},classList:{contains:()=>false}},p=document.createElement('div');p.className='cmt';host.append(p);ext.push([c,p]);draw(c,p);if(state==='idle')load()}};
 deco();
 const pg=document.getElementById('p-gazete');
-if(pg)new MutationObserver(deco).observe(pg,{childList:true,subtree:true});
+if(pg)new MutationObserver(__dbo(deco)).observe(pg,{childList:true,subtree:true});
 ['p-dergi','p-etkinlik'].forEach(id=>{const e=document.getElementById(id);if(e)new MutationObserver(badges).observe(e,{childList:true,subtree:true})});
 badges();
 document.addEventListener('eko:ready',()=>{state='idle';load()});
@@ -1910,7 +1912,7 @@ addEventListener('hashchange',sync);
 addEventListener('popstate',()=>{});
 const upd=()=>{avatar();decoAll();sync()};
 document.addEventListener('eko:ready',()=>{upd();setTimeout(upd,400)});
-const mo=new MutationObserver(()=>{decoAll()});
+const mo=new MutationObserver(__dbo(decoAll));
 ['p-gazete','p-dergi','p-etkinlik'].forEach(id=>{const p=document.getElementById(id);if(p)mo.observe(p,{childList:true,subtree:true})});
 avatar();decoAll();
 })();
@@ -3927,7 +3929,7 @@ function cmp(){const L=jobs().filter(e=>sel.has(keyOf(e))).map(inf),o=$('#ms-cou
 const tb=el('table'),h=el('tr');h.append(el('th','','')); L.forEach(j=>h.append(el('th','',j.t)));tb.append(h);
 [['Kurum',j=>j.org],['Süreç',j=>j.p],['Uygun bölümler',j=>j.tags.map(k=>TLb[k]||k).join(', ')],['Görev',j=>j.d]].forEach(([a,f])=>{const r=el('tr');r.append(el('th','',a));L.forEach(j=>r.append(el('td','',f(j))));tb.append(r)});o.append(tb);o.scrollIntoView({behavior:'smooth',block:'start'})}
 function deco(){jobs().forEach(e=>{if(e.querySelector('.ms-cmp-l'))return;const l=el('label','ms-cmp-l'),i=document.createElement('input');i.type='checkbox';i.checked=sel.has(keyOf(e));i.onchange=()=>{const k=keyOf(e);if(i.checked){if(sel.size>=3){i.checked=false;toastMsg('En fazla 3 kadro karşılaştırabilirsin');return}sel.add(k)}else sel.delete(k);bars()};l.append(i,document.createTextNode(' Karşılaştır'));e.append(l)})}
-if(G){new MutationObserver(deco).observe(G,{childList:true,subtree:true});deco();const g=$('#mf-go');if(g)g.onclick=find}
+if(G){new MutationObserver(__dbo(deco)).observe(G,{childList:true,subtree:true});deco();const g=$('#mf-go');if(g)g.onclick=find}
 document.addEventListener('eko:ready',()=>{gun();deco()});
 const cb=()=>document.body.classList.toggle('on-kad',location.hash==='#/kadrolar');addEventListener('hashchange',()=>{cb();if(location.hash==='#/quiz')menu()});cb();
 gun();if(location.hash==='#/quiz')menu();else if(Q)menu();
@@ -4429,7 +4431,7 @@ const dec=v=>v>=100?2:v>=10?3:v>=1?4:v>=.01?5:8;
 const RG=[['1a','1 ay',30],['3a','3 ay',91],['6a','6 ay',182],['1y','1 yıl',365],['3y','3 yıl',1095],['5y','5 yıl',1826]];
 const iso=d=>d.toISOString().slice(0,10),MEM={};let stale=false;
 const tf=(u,o,ms)=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms||10000);return fetch(u,Object.assign({signal:c.signal},o||{})).finally(()=>clearTimeout(t))};
-const jget=async u=>{const r=await tf(u,{},20000);if(!r.ok)throw new Error('http'+r.status);return r.json()};
+const jget=async u=>{const r=await tf(u,{},8000);if(!r.ok)throw new Error('http'+r.status);return r.json()};
 const why=e=>e&&e.why?e.why:e&&e.name==='AbortError'?'zaman':e&&/^http\d+/.test(e.message||'')?e.message.slice(4):e&&e.message==='bos'?'bos':'ag';
 const lsGet=k=>{try{const c=JSON.parse(localStorage.getItem(k));return c&&c.d?c:null}catch(e){return null}};
 const lsSet=(k,d)=>{try{localStorage.setItem(k,JSON.stringify({t:Date.now(),d}))}catch(e){}};
