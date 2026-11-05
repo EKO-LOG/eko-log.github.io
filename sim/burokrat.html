@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÜROKRAT: Kamu Kanatlarında</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#111827',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Merriweather', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+        ::-webkit-scrollbar-thumb { background: rgba(51, 65, 85, 0.8); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(71, 85, 105, 1); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950 overflow-x-hidden">
+
+    <!-- Audio FX Synthesizer -->
+    <script>
+        const SoundFX = {
+            ctx: null,
+            init() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            },
+            playClick() {
+                if (!this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(750, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(350, this.ctx.currentTime + 0.05);
+                    gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.05);
+                } catch(e){}
+            },
+            playCrisis() {
+                if (!this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(300, this.ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(600, this.ctx.currentTime + 0.15);
+                    osc.frequency.linearRampToValueAtTime(200, this.ctx.currentTime + 0.35);
+                    gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.35);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.35);
+                } catch(e){}
+            }
+        };
+        document.addEventListener('click', () => SoundFX.init(), { once: true });
+    </script>
+
+    <!-- APP ROOT -->
+    <div id="app" class="flex-1 flex flex-col min-h-screen"></div>
+
+    <script>
+        // 20 KAMU KURUMU VE NİTELİKLERİ
+        const INSTITUTIONS = {
+            1: { id: 1, name: "Vergi Denetim Kurulu (VDK)", title: "Vergi Müfettiş Yardımcısı", type: "INSPECTION", icon: "fa-file-invoice-dollar" },
+            2: { id: 2, name: "Rekabet Kurumu", title: "Rekabet Uzman Yardımcısı", type: "MARKET", icon: "fa-scale-balanced" },
+            3: { id: 3, name: "Sermaye Piyasası Kurulu (SPK)", title: "SPK Uzman Yardımcısı", type: "MARKET", icon: "fa-chart-line" },
+            4: { id: 4, name: "Hazine ve Maliye Bakanlığı", title: "Hazine Uzman Yardımcısı", type: "MARKET", icon: "fa-vault" },
+            5: { id: 5, name: "Türkiye Cumhuriyet Merkez Bankası (TCMB)", title: "TCMB Uzman Yardımcısı", type: "MARKET", icon: "fa-building-columns" },
+            6: { id: 6, name: "Bankacılık Düzenleme ve Denetleme Kurumu (BDDK)", title: "Bankalar Yeminli Murakıp Yardımcısı", type: "MARKET", icon: "fa-piggy-bank" },
+            7: { id: 7, name: "Ticaret Bakanlığı", title: "Ticaret Uzman Yardımcısı", type: "MARKET", icon: "fa-ship" },
+            8: { id: 8, name: "Çalışma ve Sosyal Güvenlik Bakanlığı", title: "İş Müfettiş Yardımcısı", type: "INSPECTION", icon: "fa-users-gear" },
+            9: { id: 9, name: "Cumhurbaşkanlığı Strateji ve Bütçe Başkanlığı (SBB)", title: "Strateji ve Bütçe Uzman Yardımcısı", type: "INSPECTION", icon: "fa-sitemap" },
+            10: { id: 10, name: "Sayıştay Başkanlığı", title: "Sayıştay Denetçi Yardımcısı", type: "INSPECTION", icon: "fa-gavel" },
+            11: { id: 11, name: "Sosyal Güvenlik Kurumu (SGK)", title: "SGK Müfettiş Yardımcısı", type: "INSPECTION", icon: "fa-heart-pulse" },
+            12: { id: 12, name: "Türkiye İstatistik Kurumu (TÜİK)", title: "TÜİK Uzman Yardımcısı", type: "MARKET", icon: "fa-chart-pie" },
+            13: { id: 13, name: "Kamu İhale Kurumu (KİK)", title: "Kamu İhale Uzman Yardımcısı", type: "INSPECTION", icon: "fa-file-contract" },
+            14: { id: 14, name: "Enerji Piyasası Düzenleme Kurumu (EPDK)", title: "EPDK Uzman Yardımcısı", type: "MARKET", icon: "fa-bolt" },
+            15: { id: 15, name: "İçişleri Bakanlığı - Mülkiye", title: "Mülkiye Müfettiş Yardımcısı", type: "INSPECTION", icon: "fa-shield-halved" },
+            16: { id: 16, name: "İçişleri Bakanlığı - Mülki İdare", title: "Kaymakam Adayı", type: "INSPECTION", icon: "fa-landmark-flag" },
+            17: { id: 17, name: "Dışişleri Bakanlığı", title: "Aday Meslek Memuru / Diplomat", type: "DIPLOMACY", icon: "fa-passport" },
+            18: { id: 18, name: "Sanayi ve Teknoloji Bakanlığı", title: "Sanayi ve Teknoloji Uzman Yardımcısı", type: "MARKET", icon: "fa-industry" },
+            19: { id: 19, name: "Bilgi Teknolojileri ve İletişim Kurumu (BTK)", title: "BTK Uzman Yardımcısı", type: "MARKET", icon: "fa-tower-cell" },
+            20: { id: 20, name: "Türkiye İş Kurumu (İŞKUR)", title: "İstihdam Uzman Yardımcısı", type: "INSPECTION", icon: "fa-briefcase" }
+        };
+
+        // OYUN DURUMU
+        const gameState = {
+            characterCreated: false,
+            activeTab: 'cases', // 'cases', 'module', 'report'
+            player: {
+                name: "Berat Yılmaz",
+                gender: "M",
+                instId: 1,
+                day: 1,
+                prestige: 50,
+                influence: 50,
+                stress: 20,
+                energy: 100
+            },
+            currentEvent: null,
+            eventResolvedToday: false,
+            moduleData: {
+                inspectionsCount: 0,
+                lastReportTitle: "",
+                reportsSubmitted: 0
+            },
+            historyLogs: [],
+            resolvedCount: 0
+        };
+
+        function getEventForDay(instId, day) {
+            const inst = INSTITUTIONS[instId];
+
+            if (day === 15 || day === 30 || day === 45 || day === 60) {
+                return getCrisisEvent(instId, day);
+            }
+
+            return {
+                isCrisis: false,
+                title: `${inst.name} — İhbar ve İnceleme Dosyası #${day}`,
+                desc: `${inst.name} yetki alanındaki operasyonel süreçlerde mevzuata ve kamu yararına aykırılık teşkil eden şüpheli işlem ihbarı sisteminize düştü. Ayrıntılı tetkik bekleniyor.`,
+                choices: [
+                    {
+                        text: "1. DERİN TEKNİK/HUKUKİ İNCELEME: Tüm veri kayıtlarını ve resmi belgeleri çapraz sorguya al.",
+                        effect: { prestige: +4, influence: +2, stress: +4, energy: -10 },
+                        log: "Derinlemesine veri incelemesi yürütüldü."
+                    },
+                    {
+                        text: "2. SAHA BİRİMLERİNE TALİMAT / YERİNDE TEFTİŞ: Ekip görevlendirerek yerinde tespit yapın.",
+                        effect: { prestige: +5, influence: +3, stress: +6, energy: -15 },
+                        log: "Saha baskını ve yerinde teftiş gerçekleştirildi."
+                    },
+                    {
+                        text: "3. SERT İDARİ CEZA VE YAPTIRIM: Mevzuatın öngördüğü azami idari yaptırımı anında uygula.",
+                        effect: { prestige: +3, influence: +5, stress: +5, energy: -10 },
+                        log: "Kanuni idari yaptırım tatbik edildi."
+                    },
+                    {
+                        text: "4. YÜKSEK MAKAM / BAKANLIK SUNUMU: Dosyayı resmi bilgi notu ile üst makama arz et.",
+                        effect: { prestige: +6, influence: -1, stress: +7, energy: -15 },
+                        log: "Makama resmi soruşturma raporu sunuldu."
+                    },
+                    {
+                        text: "5. STRATEJİK İZLEME VE İHTAR: Kuruma eksiklikleri gidermesi için süre verip izlemeye al.",
+                        effect: { prestige: +1, influence: +4, stress: -2, energy: -5 },
+                        log: "İdari ihtar yazısı tebliğ edilip takip başlatıldı."
+                    }
+                ]
+            };
+        }
+
+        function getCrisisEvent(instId, day) {
+            const inst = INSTITUTIONS[instId];
+            return {
+                isCrisis: true,
+                title: `🚨 BÜYÜK KRİZ (${day}. GÜN): ${inst.name.toUpperCase()} SEKTÖREL KRİZ ALARMI`,
+                desc: `${inst.name} görev sahasında ulusal basına, kamuoyuna ve piyasalara yansıyan, kamu yararını doğrudan tehdit eden kırmızı alarm seviyesinde olay meydana geldi.`,
+                choices: [
+                    {
+                        text: "1. TAM YETKİ SAHA VE TEFTİŞ BASKINI: Tüm teftiş kadrosunu sahaya sür ve idari kilit vur.",
+                        effect: { prestige: +15, influence: +5, stress: +20, energy: -20 },
+                        log: "Büyük kriz sahasında tam teftiş uygulandı."
+                    },
+                    {
+                        text: "2. ACİL KAMUOYU VE MEVZUAT YAPTIRIMI: En ağır para cezasını kesip faaliyetleri durdur.",
+                        effect: { prestige: +12, influence: +8, stress: +15, energy: -15 },
+                        log: "En ağır yaptırım kamuoyuna açıklandı."
+                    },
+                    {
+                        text: "3. DİPLOMATİK / BÜROKRATİK KRİZ MASASI: Kurul üyelerini ve sektör temsilcilerini toplantıya çağır.",
+                        effect: { prestige: +8, influence: +15, stress: +10, energy: -15 },
+                        log: "Kriz masasında idari uzlaşma kurgulandı."
+                    },
+                    {
+                        text: "4. CUMHURBAŞKANLIĞI / BAKANLIK BİLGİ NOTU: Dosyayı acil koduyla doğrudan Cumhurbaşkanlığına sevk et.",
+                        effect: { prestige: +20, influence: -5, stress: +25, energy: -25 },
+                        log: "Kriz dosyası Cumhurbaşkanlığına sevk edildi."
+                    },
+                    {
+                        text: "5. GEÇİCİ MAKRO-İHTİYATİ / İDARİ TEDBİR: Piyasa sarsıntısını önlemek için geçici düzenleme yayımla.",
+                        effect: { prestige: +5, influence: +12, stress: -5, energy: -10 },
+                        log: "Geçici idari düzenleme ile kriz baskılandı."
+                    }
+                ]
+            };
+        }
+
+        function initializeGame() {
+            gameState.currentEvent = getEventForDay(gameState.player.instId, gameState.player.day);
+            gameState.eventResolvedToday = false;
+        }
+
+        function advanceDay() {
+            if (gameState.player.day >= 60) return;
+
+            SoundFX.playClick();
+            gameState.player.day += 1;
+            gameState.player.energy = Math.min(100, gameState.player.energy + 15);
+            gameState.player.stress = Math.max(0, gameState.player.stress - 5);
+
+            gameState.currentEvent = getEventForDay(gameState.player.instId, gameState.player.day);
+            gameState.eventResolvedToday = false;
+
+            if (gameState.currentEvent.isCrisis) {
+                SoundFX.playCrisis();
+            }
+
+            render();
+        }
+
+        function handleChoice(choiceIndex) {
+            const ev = gameState.currentEvent;
+            if (!ev || gameState.eventResolvedToday) return;
+
+            const choice = ev.choices[choiceIndex];
+            if (choice) {
+                SoundFX.playClick();
+                const p = gameState.player;
+
+                if (choice.effect.prestige) p.prestige = Math.max(0, Math.min(100, p.prestige + choice.effect.prestige));
+                if (choice.effect.influence) p.influence = Math.max(0, Math.min(100, p.influence + choice.effect.influence));
+                if (choice.effect.stress) p.stress = Math.max(0, Math.min(100, p.stress + choice.effect.stress));
+                if (choice.effect.energy) p.energy = Math.max(0, Math.min(100, p.energy + choice.effect.energy));
+
+                gameState.historyLogs.unshift({
+                    day: p.day,
+                    title: ev.title,
+                    action: choice.text,
+                    log: choice.log,
+                    isCrisis: ev.isCrisis
+                });
+
+                gameState.resolvedCount += 1;
+                gameState.eventResolvedToday = true;
+            }
+
+            render();
+        }
+
+        function switchTab(tab) {
+            SoundFX.playClick();
+            gameState.activeTab = tab;
+            render();
+        }
+
+        function submitReport() {
+            const titleInput = document.getElementById('report-title');
+            const bodyInput = document.getElementById('report-body');
+            if (titleInput && titleInput.value.trim()) {
+                SoundFX.playClick();
+                gameState.moduleData.reportsSubmitted += 1;
+                gameState.moduleData.lastReportTitle = titleInput.value.trim();
+                gameState.player.prestige = Math.min(100, gameState.player.prestige + 5);
+                gameState.player.influence = Math.min(100, gameState.player.influence + 4);
+                alert("Resmi Rapor Sayın Bakana/Başkanlığa Sevk Edildi (+5 Saygınlık, +4 Nüfuz)");
+                titleInput.value = "";
+                if (bodyInput) bodyInput.value = "";
+                render();
+            }
+        }
+
+        function executeModuleAction() {
+            SoundFX.playClick();
+            gameState.moduleData.inspectionsCount += 1;
+            gameState.player.prestige = Math.min(100, gameState.player.prestige + 3);
+            gameState.player.stress = Math.min(100, gameState.player.stress + 4);
+            gameState.player.energy = Math.max(0, gameState.player.energy - 10);
+            render();
+        }
+
+        // RENDER LOGIC
+        function render() {
+            const app = document.getElementById('app');
+            if (!gameState.characterCreated) {
+                app.innerHTML = renderSetupScreen();
+                bindSetupEvents();
+            } else {
+                app.innerHTML = renderMainDashboard();
+                bindDashboardEvents();
+            }
+        }
+
+        function renderSetupScreen() {
+            return `
+            <div class="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+                <div class="max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden my-6">
+                    <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-amber-950 p-6 md:p-8 border-b border-slate-800 text-center">
+                        <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-semibold uppercase tracking-widest">
+                            KPSS A Kariyer & Bürokrasi Simülasyonu
+                        </span>
+                        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-100 font-serif tracking-tight mt-2 mb-2">
+                            BÜROKRAT: Kamu Kanatlarında
+                        </h1>
+                        <p class="text-slate-400 max-w-xl mx-auto text-xs md:text-sm">
+                            20 Kamu Kurumu, 5 Farklı Detaylı Karar Seçeneği, Özel Teftiş/Piyasa/Diplomasi Panelleri ve Resmi Raporlama.
+                        </p>
+                    </div>
+
+                    <div class="p-6 md:p-8 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Adınız ve Soyadınız</label>
+                                <input type="text" id="setup-name" value="${gameState.player.name}" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-amber-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Cinsiyet ve Hitap</label>
+                                <select id="setup-gender" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-amber-500 text-sm">
+                                    <option value="M" ${gameState.player.gender==='M'?'selected':''}>Erkek (Berat Bey)</option>
+                                    <option value="F" ${gameState.player.gender==='F'?'selected':''}>Kadın (Berat Hanım)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                                <h2 class="text-sm font-bold text-amber-400 flex items-center gap-2">
+                                    <i class="fa-solid fa-building-columns"></i> Atanacağınız Kamu Kurumunu Seçin (20 Kadro)
+                                </h2>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-h-[320px] overflow-y-auto pr-1">
+                                ${Object.keys(INSTITUTIONS).map(id => {
+                                    const inst = INSTITUTIONS[id];
+                                    const isSelected = gameState.player.instId == id;
+                                    return `
+                                    <div data-inst-id="${inst.id}" class="inst-card cursor-pointer border rounded-xl p-3 transition-all ${isSelected ? 'border-amber-500 bg-amber-500/10 ring-1 ring-amber-500' : 'border-slate-800 bg-slate-950/60 hover:border-slate-700'}">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-slate-800 text-amber-400 font-bold text-sm shrink-0">
+                                                <i class="fa-solid ${inst.icon}"></i>
+                                            </div>
+                                            <div class="min-w-0 flex-1">
+                                                <div class="font-bold text-slate-100 text-xs truncate">${inst.name}</div>
+                                                <div class="text-[11px] text-amber-400 truncate">${inst.title}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        <div class="pt-2 flex justify-end">
+                            <button id="btn-start" class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 text-slate-950 font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                                <span>GÖREVE BAŞLA (GÜN 1 / 60)</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        function bindSetupEvents() {
+            document.querySelectorAll('.inst-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    SoundFX.playClick();
+                    gameState.player.instId = parseInt(card.getAttribute('data-inst-id'));
+                    render();
+                });
+            });
+
+            const btnStart = document.getElementById('btn-start');
+            if (btnStart) {
+                btnStart.addEventListener('click', () => {
+                    const nameInput = document.getElementById('setup-name').value.trim();
+                    if (nameInput) gameState.player.name = nameInput;
+                    gameState.player.gender = document.getElementById('setup-gender').value;
+                    gameState.characterCreated = true;
+                    initializeGame();
+                    render();
+                });
+            }
+        }
+
+        function renderMainDashboard() {
+            const p = gameState.player;
+            const inst = INSTITUTIONS[p.instId];
+            const ev = gameState.currentEvent;
+
+            return `
+            <div class="min-h-screen bg-slate-950 flex flex-col">
+                <!-- TOP STATUS BAR -->
+                <header class="bg-slate-900 border-b border-slate-800 px-4 py-3 sticky top-0 z-30 shadow-md">
+                    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-lg shrink-0">
+                                <i class="fa-solid ${inst.icon}"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-extrabold text-slate-100 text-sm md:text-base">${p.name}</h1>
+                                <div class="text-xs text-amber-400 font-semibold">${inst.name} — <span class="text-slate-300 font-normal">${inst.title}</span></div>
+                            </div>
+                        </div>
+
+                        <!-- NAVIGATION TABS & DAY BUTTON -->
+                        <div class="flex items-center gap-3">
+                            <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+                                <button onclick="switchTab('cases')" class="px-3 py-1.5 rounded-lg font-bold transition ${gameState.activeTab==='cases'?'bg-amber-500 text-slate-950':'text-slate-400 hover:text-slate-200'}">
+                                    <i class="fa-solid fa-folder-open mr-1"></i> İhbarlar
+                                </button>
+                                <button onclick="switchTab('module')" class="px-3 py-1.5 rounded-lg font-bold transition ${gameState.activeTab==='module'?'bg-amber-500 text-slate-950':'text-slate-400 hover:text-slate-200'}">
+                                    <i class="fa-solid ${inst.type==='DIPLOMACY'?'fa-earth-americas':inst.type==='MARKET'?'fa-chart-line':'fa-magnifying-glass'} mr-1"></i> ${inst.type==='DIPLOMACY'?'Diplomasi Masası':inst.type==='MARKET'?'Piyasa Takibi':'Saha Teftiş'}
+                                </button>
+                                <button onclick="switchTab('report')" class="px-3 py-1.5 rounded-lg font-bold transition ${gameState.activeTab==='report'?'bg-amber-500 text-slate-950':'text-slate-400 hover:text-slate-200'}">
+                                    <i class="fa-solid fa-file-pen mr-1"></i> Rapor Yaz
+                                </button>
+                            </div>
+
+                            <div class="bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-center">
+                                <div class="text-[9px] text-slate-400 uppercase font-bold tracking-wider">Takvim</div>
+                                <div class="font-mono text-sm font-extrabold text-amber-400">GÜN ${p.day} / 60</div>
+                            </div>
+
+                            ${p.day < 60 ? `
+                                <button onclick="advanceDay()" ${!gameState.eventResolvedToday ? 'disabled title="Önce bugünkü ihbarı karara bağlamalısınız."' : ''} class="px-4 py-2 rounded-xl font-extrabold text-xs transition flex items-center gap-2 ${gameState.eventResolvedToday ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-lg cursor-pointer' : 'bg-slate-800 text-slate-500 cursor-not-allowed'}">
+                                    <span>GÜNÜ BİTİR</span>
+                                    <i class="fa-solid fa-circle-chevron-right"></i>
+                                </button>
+                            ` : `
+                                <span class="px-3 py-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-xl font-bold text-xs">
+                                    60 GÜN TAMAMLANDI
+                                </span>
+                            `}
+                        </div>
+                    </div>
+                </header>
+
+                <!-- MAIN WORKSPACE -->
+                <div class="max-w-7xl mx-auto w-full flex-1 p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- LEFT SIDEBAR -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+                            <div class="border-b border-slate-800 pb-3">
+                                <div class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">GÖREVLİ KAMU UZMANI</div>
+                                <div class="text-xl font-extrabold text-slate-100 font-serif mt-0.5">${p.name}</div>
+                                <div class="text-xs font-semibold text-slate-400 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-landmark text-amber-500"></i> ${inst.name}
+                                </div>
+                            </div>
+
+                            <!-- STATS BARS -->
+                            <div class="space-y-3.5">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-slate-400 font-medium">Saygınlık Puanı</span>
+                                        <span class="font-bold text-amber-400">%${p.prestige}</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                                        <div class="h-full bg-amber-500 transition-all duration-300" style="width: ${p.prestige}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-slate-400 font-medium">Bürokratik Nüfuz</span>
+                                        <span class="font-bold text-blue-400">%${p.influence}</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                                        <div class="h-full bg-blue-500 transition-all duration-300" style="width: ${p.influence}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-slate-400 font-medium">Stres Seviyesi</span>
+                                        <span class="font-bold text-red-400">%${p.stress}</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                                        <div class="h-full bg-red-500 transition-all duration-300" style="width: ${p.stress}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="text-slate-400 font-medium">Enerji Seviyesi</span>
+                                        <span class="font-bold text-emerald-400">%${p.energy}</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                                        <div class="h-full bg-emerald-500 transition-all duration-300" style="width: ${p.energy}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HISTORY LOG -->
+                        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl">
+                            <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider border-b border-slate-800 pb-2">
+                                Sicil & Karar Günlüğü (${gameState.resolvedCount} Vaka)
+                            </h3>
+                            <div class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                                ${gameState.historyLogs.length === 0 ? `
+                                    <p class="text-xs text-slate-500 italic">Henüz karara bağlanan vaka bulunmuyor.</p>
+                                ` : gameState.historyLogs.map(log => `
+                                    <div class="bg-slate-950 p-2.5 rounded-lg border ${log.isCrisis ? 'border-red-500/40' : 'border-slate-800'} text-xs space-y-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="font-mono text-amber-400 font-bold text-[11px]">Gün ${log.day}</span>
+                                            ${log.isCrisis ? '<span class="text-[9px] font-bold text-red-400 bg-red-500/20 px-1.5 py-0.2 rounded">KRİZ</span>' : ''}
+                                        </div>
+                                        <div class="font-bold text-slate-200">${log.title}</div>
+                                        <div class="text-emerald-400 text-[11px]"><i class="fa-solid fa-check text-[9px] mr-1"></i>${log.log}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT MAIN PANEL: ACTIVE TAB CONTENT -->
+                    <div class="lg:col-span-8 space-y-6">
+                        ${renderTabContent(inst, ev)}
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        function renderTabContent(inst, ev) {
+            if (gameState.activeTab === 'module') {
+                return renderSpecializedModule(inst);
+            }
+            if (gameState.activeTab === 'report') {
+                return renderReportWritingModule(inst);
+            }
+            // DEFAULT: 'cases'
+            if (gameState.player.day >= 60 && gameState.eventResolvedToday) {
+                return renderFinalScoreCard();
+            }
+            return renderIncidentPanel(ev);
+        }
+
+        function renderIncidentPanel(ev) {
+            if (!ev) return '';
+
+            return `
+            <div class="bg-slate-900 border ${ev.isCrisis ? 'border-red-500/60 ring-2 ring-red-500/20' : 'border-slate-800'} rounded-2xl p-6 md:p-8 space-y-6 shadow-2xl animate-fade-in">
+                <div class="flex flex-wrap justify-between items-start gap-2 border-b border-slate-800 pb-4">
+                    <div class="space-y-1">
+                        <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${ev.isCrisis ? 'bg-red-500/20 text-red-400 border border-red-500/40' : 'bg-amber-500/20 text-amber-400 border border-amber-500/40'}">
+                            ${ev.isCrisis ? '🚨 15 GÜNLÜK BÜYÜK KRİZ' : `GÜNLÜK İHBAR / GÜN ${gameState.player.day}`}
+                        </span>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-100 font-serif mt-2">${ev.title}</h2>
+                    </div>
+                    ${gameState.eventResolvedToday ? `
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold rounded-lg flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i> KARARA BAĞLANDI
+                        </span>
+                    ` : `
+                        <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-bold rounded-lg animate-pulse">
+                            GÖREV BEKLİYOR
+                        </span>
+                    `}
+                </div>
+
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">Gelen İhbar & İnceleme Notu:</div>
+                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed">${ev.desc}</p>
+                </div>
+
+                <!-- 5 SEÇENEK -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Verilecek Bürokratik Talimat (5 Detaylı Seçenek)</h3>
+
+                    <div class="space-y-2.5">
+                        ${ev.choices.map((choice, idx) => `
+                            <button onclick="handleChoice(${idx})" ${gameState.eventResolvedToday ? 'disabled' : ''} class="w-full text-left p-3.5 rounded-xl border transition-all flex items-start gap-3.5 ${gameState.eventResolvedToday ? 'bg-slate-950 border-slate-800 opacity-60 cursor-not-allowed' : 'bg-slate-950 border-slate-800 hover:border-amber-500/60 hover:bg-slate-800/60 group cursor-pointer'}">
+                                <div class="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 font-extrabold text-xs flex items-center justify-center shrink-0 group-hover:bg-amber-500 group-hover:text-slate-950">
+                                    ${idx + 1}
+                                </div>
+                                <div class="space-y-1 flex-1">
+                                    <div class="text-xs md:text-sm font-semibold text-slate-200 group-hover:text-amber-300 leading-snug">
+                                        ${choice.text}
+                                    </div>
+                                    <div class="text-[11px] text-slate-500 flex items-center gap-3 pt-0.5">
+                                        ${choice.effect.prestige ? `<span class="${choice.effect.prestige>0?'text-amber-400':'text-red-400'}">Saygınlık: ${choice.effect.prestige>0?'+':''}${choice.effect.prestige}</span>` : ''}
+                                        ${choice.effect.influence ? `<span class="${choice.effect.influence>0?'text-blue-400':'text-red-400'}">Nüfuz: ${choice.effect.influence>0?'+':''}${choice.effect.influence}</span>` : ''}
+                                        ${choice.effect.stress ? `<span class="text-red-400">Stres: +${choice.effect.stress}</span>` : ''}
+                                    </div>
+                                </div>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                ${gameState.eventResolvedToday ? `
+                    <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center space-y-1">
+                        <div class="text-xs font-bold text-emerald-400">Bugünkü Karar Kaydedildi!</div>
+                        <p class="text-xs text-slate-300">Bir sonraki güne geçmek için üstteki <b>"GÜNÜ BİTİR"</b> butonuna tıklayabilirsiniz.</p>
+                    </div>
+                ` : ''}
+            </div>
+            `;
+        }
+
+        function renderSpecializedModule(inst) {
+            if (inst.type === 'DIPLOMACY') {
+                return `
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-2xl animate-fade-in">
+                    <div class="border-b border-slate-800 pb-4">
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-400 border border-blue-500/40 text-[10px] font-bold rounded-full uppercase">
+                            DIŞİŞLERİ BAKANLIĞI
+                        </span>
+                        <h2 class="text-2xl font-extrabold text-slate-100 font-serif mt-2">Uluslararası İlişkiler & Diplomatik Takibat Masası</h2>
+                        <p class="text-xs text-slate-400">Sınır aşan sular, uluslararası anlaşmalar, konsolosluk ve dış temsilcilik kriz takibi.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="text-xs font-bold text-amber-400 uppercase">Diplomatik Nota & Telgraf Akışı</div>
+                            <div class="text-xs text-slate-300 space-y-2">
+                                <div class="p-2 bg-slate-900 rounded border border-slate-800">
+                                    <span class="text-amber-400 font-mono text-[10px]">[KABUL TELGRAFI]</span> Birleşmiş Milletler Güvenlik Konseyi Bildirimi.
+                                </div>
+                                <div class="p-2 bg-slate-900 rounded border border-slate-800">
+                                    <span class="text-blue-400 font-mono text-[10px]">[ANLAŞMA DRAFT]</span> Kıyıdaş Devletler Ortak Su Protokolü Taslağı.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                            <div class="text-xs font-bold text-amber-400 uppercase">Diplomatik Müdahale İcrası</div>
+                            <p class="text-xs text-slate-400">Muhatap büyükelçiliğe resmi şifahi nota göndererek ikili temas başlatabilirsiniz.</p>
+                            <button onclick="executeModuleAction()" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition">
+                                Diplomatik Nota Düzenle & İlet (+3 Saygınlık)
+                            </button>
+                            <div class="text-[11px] text-slate-500 text-center">Yapılan Diplomatik Temas: ${gameState.moduleData.inspectionsCount}</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }
+
+            if (inst.type === 'MARKET') {
+                return `
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-2xl animate-fade-in">
+                    <div class="border-b border-slate-800 pb-4">
+                        <span class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-bold rounded-full uppercase">
+                            PİYASA & SEKTÖR DÜZENLEME
+                        </span>
+                        <h2 class="text-2xl font-extrabold text-slate-100 font-serif mt-2">Canlı Piyasa & Sektör Takip Paneli</h2>
+                        <p class="text-xs text-slate-400">${inst.name} yetki alanındaki borsa, kur, likidite, kapsama oranı ve pazar yoğunluk endeksleri (HHI).</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                            <div class="text-[10px] text-slate-500 uppercase">Pazar Yoğunluğu (HHI)</div>
+                            <div class="text-lg font-mono font-bold text-amber-400">2,450</div>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                            <div class="text-[10px] text-slate-500 uppercase">Sektörel Ceza Oranı</div>
+                            <div class="text-lg font-mono font-bold text-red-400">%3.8</div>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                            <div class="text-[10px] text-slate-500 uppercase">Piyasa Risk İndeksi</div>
+                            <div class="text-lg font-mono font-bold text-blue-400">YÜKSEK</div>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                            <div class="text-[10px] text-slate-500 uppercase">Denetim Sayısı</div>
+                            <div class="text-lg font-mono font-bold text-emerald-400">${gameState.moduleData.inspectionsCount}</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <div class="text-xs font-bold text-amber-400 uppercase">Piyasa Tarama ve Algoritma Denetimi</div>
+                        <p class="text-xs text-slate-400">Sektördeki fiyat manipülasyonlarını veya usulsüzlükleri anlık olarak sorgulatabilirsiniz.</p>
+                        <button onclick="executeModuleAction()" class="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl transition">
+                            Piyasa Taraması Yap ve Risk Haritası Çıkar (+3 Saygınlık)
+                        </button>
+                    </div>
+                </div>
+                `;
+            }
+
+            // INSPECTION MODULE
+            return `
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-2xl animate-fade-in">
+                <div class="border-b border-slate-800 pb-4">
+                    <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-bold rounded-full uppercase">
+                        DENETİM & TEFTİŞ
+                    </span>
+                    <h2 class="text-2xl font-extrabold text-slate-100 font-serif mt-2">Saha TeftİŞ & Tutanak Paneli</h2>
+                    <p class="text-xs text-slate-400">${inst.name} bünyesinde yerinde teftiş, tutanak tutma ve dijital veri toplama modülü.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <div class="text-xs font-bold text-amber-400 uppercase">Saha İnceleme Tutanakları</div>
+                        <div class="text-xs text-slate-300 space-y-1.5">
+                            <div class="p-2 bg-slate-900 rounded border border-slate-800 flex justify-between">
+                                <span>Şüpheli İşlem Tutanağı #104</span>
+                                <span class="text-emerald-400 font-bold">ONAYLANDI</span>
+                            </div>
+                            <div class="p-2 bg-slate-900 rounded border border-slate-800 flex justify-between">
+                                <span>Yerinde İnceleme Zaptı #105</span>
+                                <span class="text-amber-400 font-bold">BEKLİYOR</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <div class="text-xs font-bold text-amber-400 uppercase">Ani Saha Teftişi Başlat</div>
+                        <p class="text-xs text-slate-400">Gözlem ekibini sahaya sürerek delil ve resmi tutanak toplayabilirsiniz.</p>
+                        <button onclick="executeModuleAction()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl transition">
+                            Saha Teftişi Görev Emri Çıkar (+3 Saygınlık)
+                        </button>
+                        <div class="text-[11px] text-slate-500 text-center">Toplam Yapılan Teftiş: ${gameState.moduleData.inspectionsCount}</div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        function renderReportWritingModule(inst) {
+            return `
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-2xl animate-fade-in">
+                <div class="border-b border-slate-800 pb-4">
+                    <span class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-bold rounded-full uppercase">
+                        RESMİ BÜROKRATİK YAZIŞMA
+                    </span>
+                    <h2 class="text-2xl font-extrabold text-slate-100 font-serif mt-2">Resmİ Rapor Düzenleme & Makama Sunum</h2>
+                    <p class="text-xs text-slate-400">${inst.name} Makamına veya İlgili Bakanlığa Resmi Denetim/İnceleme Raporu Sunun.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Rapor Konusu ve Başlığı</label>
+                        <input type="text" id="report-title" placeholder="Örn: Bintür Kimya A.Ş. İnceleme Raporu / Piyasa Risk Raporu" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-xs focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Resmi Rapor İçeriği & Kanaat Bölümü</label>
+                        <textarea id="report-body" rows="4" placeholder="Mevzuat maddeleri, tespit edilen hususlar ve uygulanması istenen idari yaptırım teklifi..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 text-slate-100 text-xs focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2">
+                        <div class="text-xs text-amber-400 font-bold">
+                            Sunulan Toplam Rapor: ${gameState.moduleData.reportsSubmitted}
+                        </div>
+                        <button onclick="submitReport()" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg transition">
+                            RAPORU BAKANLIĞA / MAKAMA SEVK ET
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        function renderFinalScoreCard() {
+            const p = gameState.player;
+            const inst = INSTITUTIONS[p.instId];
+
+            return `
+            <div class="bg-slate-900 border-2 border-amber-500 rounded-2xl p-8 text-center space-y-6 shadow-2xl animate-fade-in">
+                <div class="w-20 h-20 bg-amber-500/10 border border-amber-500/30 rounded-full flex items-center justify-center mx-auto text-amber-400 text-3xl">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div class="space-y-2">
+                    <span class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-extrabold rounded-full uppercase">
+                        60 GÜNLÜK BÜROKRATİK SİCİL RUSTESİ
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-slate-100 font-serif">${p.name} — Performans Karnesi</h2>
+                    <p class="text-xs text-amber-400 font-semibold">${inst.name} (${inst.title})</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 py-4 border-y border-slate-800">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="text-[10px] text-slate-400 uppercase">Saygınlık</div>
+                        <div class="text-lg font-extrabold text-amber-400">%${p.prestige}</div>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="text-[10px] text-slate-400 uppercase">Nüfuz</div>
+                        <div class="text-lg font-extrabold text-blue-400">%${p.influence}</div>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="text-[10px] text-slate-400 uppercase">Stres</div>
+                        <div class="text-lg font-extrabold text-red-400">%${p.stress}</div>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="text-[10px] text-slate-400 uppercase">Çözülen Vaka</div>
+                        <div class="text-lg font-extrabold text-emerald-400">${gameState.resolvedCount}</div>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="location.reload()" class="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg transition">
+                        YENİDEN BAŞLA / BAŞKA KURUM SEÇ
+                    </button>
+                </div>
+            </div>
+            `;
+        }
+
+        function bindDashboardEvents() {}
+
+        window.onload = function() {
+            render();
+        };
+    </script>
+</body>
+</html>

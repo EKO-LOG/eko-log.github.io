@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-950 text-slate-100 antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İİBF Girişimcilik & İşletme Simülasyonu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .tab-btn-active {
+            background-color: #10b981 !important;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 1rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- ZENGİN İLK GİRİŞ MODALI / KURULUM EKRANI -->
+    <div id="setup-modal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-auto">
+            <div class="border-b border-slate-800 pb-4 text-center sm:text-left">
+                <div class="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 text-emerald-400 mb-2">
+                    <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight">İİBF Girişimcilik & İşletme Simülasyonu</h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">Akademik altyapınız, sermaye stratejiniz ve sektör tercihinizle kendi girişim hikayenizi yazın.</p>
+            </div>
+
+            <div class="space-y-5">
+                <!-- Şirket ve Kurucu Bilgileri -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">Şirket Unvanı</label>
+                        <input type="text" id="setup-company-name" value="Anadolu Strateji A.Ş." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">Kurucu / Yönetici</label>
+                        <input type="text" id="setup-founder-name" value="Ahmet Yılmaz" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <!-- İİBF Bölüm Seçimi (Uzmanlık Avantajı) -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">İİBF Mezuniyet Bölümü (Uzmanlık Bonusu)</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div onclick="setup.selectBg('isletme')" id="bg-opt-isletme" class="opt-card cursor-pointer bg-slate-950 border border-emerald-500 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-emerald-400 flex items-center gap-1.5">
+                                <i data-lucide="briefcase" class="w-4 h-4"></i> İşletme
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-1.5 leading-snug">%10 sabit operasyonel maliyet tasarrufu ve verimlilik avantajı.</div>
+                        </div>
+                        <div onclick="setup.selectBg('iktisat')" id="bg-opt-iktisat" class="opt-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-slate-200 flex items-center gap-1.5">
+                                <i data-lucide="trending-up" class="w-4 h-4"></i> İktisat
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-1.5 leading-snug">Pazar esnekliğini daha iyi yönetme, reklam harcamalarında +%15 ekstra talep etkisi.</div>
+                        </div>
+                        <div onclick="setup.selectBg('maliye')" id="bg-opt-maliye" class="opt-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-slate-200 flex items-center gap-1.5">
+                                <i data-lucide="file-check-2" class="w-4 h-4"></i> Maliye
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-1.5 leading-snug">Vergi muafiyetlerinde öncelik, Kurumlar Vergisi oranında %20 indirim avantajı.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sektör ve İş Modeli -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">İş Modeli ve Sektör</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div onclick="setup.selectSector('kafe')" id="sec-opt-kafe" class="opt-sec-card cursor-pointer bg-slate-950 border border-emerald-500 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-emerald-400 flex items-center gap-1.5"><i data-lucide="coffee" class="w-4 h-4"></i> Kitap-Kafe & Çalışma Alanı</div>
+                            <div class="text-[11px] text-slate-400 mt-1">Kira yüksek, günlük sıcak nakit akışı ve müşteri sadakati yüksek.</div>
+                        </div>
+                        <div onclick="setup.selectSector('eticaret')" id="sec-opt-eticaret" class="opt-sec-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-slate-200 flex items-center gap-1.5"><i data-lucide="shopping-cart" class="w-4 h-4"></i> E-Ticaret & Niş Marka</div>
+                            <div class="text-[11px] text-slate-400 mt-1">Kira düşük, dijital reklam ve kargo operasyonu odaklı.</div>
+                        </div>
+                        <div onclick="setup.selectSector('danismanlik')" id="sec-opt-danismanlik" class="opt-sec-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-slate-200 flex items-center gap-1.5"><i data-lucide="award" class="w-4 h-4"></i> Danışmanlık Bürosu</div>
+                            <div class="text-[11px] text-slate-400 mt-1">Hammadde stok derdi yok; nitelikli uzman personel odaklı.</div>
+                        </div>
+                        <div onclick="setup.selectSector('uretim')" id="sec-opt-uretim" class="opt-sec-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition">
+                            <div class="font-bold text-xs text-slate-200 flex items-center gap-1.5"><i data-lucide="factory" class="w-4 h-4"></i> Üretim & İhracat Tesisi</div>
+                            <div class="text-[11px] text-slate-400 mt-1">Yüksek sermaye gerektirir, ihracat ve döviz girdisi imkanı sunar.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Başlangıç Finansman Yapısı (UZUN DİKDÖRTGEN KARTLAR) -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">Başlangıç Finansman Yapısı</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div onclick="setup.selectCapital(200000)" id="cap-opt-200000" class="opt-cap-card cursor-pointer bg-slate-950 border border-emerald-500 p-3.5 rounded-2xl hover:border-emerald-500 transition flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-4 h-4 rounded-full border border-emerald-500 flex items-center justify-center">
+                                    <div id="radio-dot-200000" class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-xs text-emerald-400">₺200.000 Özsermaye</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Tamamen kendi birikiminiz. Borç veya kredi maliyeti yoktur.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div onclick="setup.selectCapital(350000)" id="cap-opt-350000" class="opt-cap-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-4 h-4 rounded-full border border-slate-600 flex items-center justify-center">
+                                    <div id="radio-dot-350000" class="w-2 h-2 rounded-full bg-emerald-500 hidden"></div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-xs text-slate-200">₺350.000 (₺250k Özsermaye + ₺100k Banka Kredisi)</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Daha yüksek likidite sağlar ancak aylık faiz ve taksit yükü getirir.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div onclick="setup.selectCapital(500000)" id="cap-opt-500000" class="opt-cap-card cursor-pointer bg-slate-950 border border-slate-800 p-3.5 rounded-2xl hover:border-emerald-500 transition flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-4 h-4 rounded-full border border-slate-600 flex items-center justify-center">
+                                    <div id="radio-dot-500000" class="w-2 h-2 rounded-full bg-emerald-500 hidden"></div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-xs text-slate-200">₺500.000 Melek Yatırımcı Destekli</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Yüksek başlangıç gücü, marka prestijine +10 ekstra bonus katkı.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="setup.startGame()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl transition text-sm shadow-xl shadow-emerald-600/20 flex items-center justify-center gap-2">
+                <span>Girişimi Kur ve Başlat</span>
+                <i data-lucide="rocket" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN GAME HEADER (STICKY KPI BAR) -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-30 px-4 sm:px-6 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            
+            <!-- Company & Date Info -->
+            <div class="flex items-center justify-between md:justify-start gap-4">
+                <div>
+                    <h1 id="hdr-company-name" class="font-bold text-base sm:text-lg text-slate-100 leading-tight">Şirket Yükleniyor...</h1>
+                    <div class="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
+                        <span id="hdr-founder" class="text-emerald-400 font-medium">Kurucu</span>
+                        <span>•</span>
+                        <span id="hdr-sector">Sektör</span>
+                        <span>•</span>
+                        <span id="hdr-date" class="font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">1. Gün (1. Ay)</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 md:hidden">
+                    <button onclick="game.nextDay()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                        <span>+1 Gün</span>
+                    </button>
+                    <button onclick="game.passMonth()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <span>30 Gün</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live KPI Counters -->
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 text-center font-mono text-xs">
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-500 uppercase block font-sans">Kasa (TL)</span>
+                    <span id="kpi-cash" class="text-emerald-400 font-bold">₺0</span>
+                </div>
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-500 uppercase block font-sans">Günlük Kâr</span>
+                    <span id="kpi-daily-profit" class="text-slate-200 font-bold">₺0</span>
+                </div>
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-500 uppercase block font-sans">Kredi Notu</span>
+                    <span id="kpi-credit" class="text-purple-400 font-bold">720</span>
+                </div>
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-500 uppercase block font-sans">Prestij</span>
+                    <span id="kpi-reputation" class="text-amber-400 font-bold">50</span>
+                </div>
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-500 uppercase block font-sans">Enflasyon</span>
+                    <span id="kpi-inflation" class="text-rose-400 font-bold">%38</span>
+                </div>
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-500 uppercase block font-sans">USD/TRY</span>
+                    <span id="kpi-usd" class="text-sky-400 font-bold">₺34.5</span>
+                </div>
+            </div>
+
+            <!-- Advance Time Controls -->
+            <div class="hidden md:flex items-center gap-2 shrink-0">
+                <button onclick="game.nextDay()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-emerald-600/20">
+                    <span>1 Gün İlerle</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+                <button onclick="game.passMonth()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2.5 rounded-xl text-xs font-semibold transition" title="30 Gün Hızlı İlerle">
+                    <span>Ay Sonu Yap (30 Gün)</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="bg-slate-900/80 border-b border-slate-800 px-4 sm:px-6 py-2 overflow-x-auto">
+        <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs font-medium">
+            <button onclick="ui.switchTab('general')" id="tab-btn-general" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition tab-btn-active flex items-center gap-2 shrink-0">
+                <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Genel Bakış
+            </button>
+            <button onclick="ui.switchTab('operations')" id="tab-btn-operations" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition flex items-center gap-2 shrink-0">
+                <i data-lucide="store" class="w-4 h-4"></i> Dükkan & Operasyon
+            </button>
+            <button onclick="ui.switchTab('hr')" id="tab-btn-hr" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition flex items-center gap-2 shrink-0">
+                <i data-lucide="users" class="w-4 h-4"></i> İnsan Kaynakları
+            </button>
+            <button onclick="ui.switchTab('grants')" id="tab-btn-grants" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition flex items-center gap-2 shrink-0">
+                <i data-lucide="landmark" class="w-4 h-4"></i> Devlet Destekleri
+            </button>
+            <button onclick="ui.switchTab('financials')" id="tab-btn-financials" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition flex items-center gap-2 shrink-0">
+                <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Finans & Bilanço
+            </button>
+            <button onclick="ui.switchTab('export')" id="tab-btn-export" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-slate-800 transition flex items-center gap-2 shrink-0">
+                <i data-lucide="globe" class="w-4 h-4"></i> Pazar & İhracat
+            </button>
+        </div>
+    </nav>
+
+    <!-- DYNAMIC MAIN WORKSPACE -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+        
+        <!-- TAB 1: GENEL BAKIŞ -->
+        <div id="view-general" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="custom-card p-4">
+                    <div class="text-xs text-slate-400 mb-1">Günlük Satış Ciro</div>
+                    <div id="dash-daily-revenue" class="text-xl font-bold font-mono text-emerald-400">₺0</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Bugün Satılan: <span id="dash-sales-qty" class="text-slate-300">0 Adet</span></div>
+                </div>
+                <div class="custom-card p-4">
+                    <div class="text-xs text-slate-400 mb-1">Günlük Hammadde Gideri</div>
+                    <div id="dash-daily-cogs" class="text-xl font-bold font-mono text-rose-400">₺0</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Birim Maliyet: <span id="dash-unit-cost" class="text-slate-300">₺35</span></div>
+                </div>
+                <div class="custom-card p-4">
+                    <div class="text-xs text-slate-400 mb-1">Başabaş Noktası (Aylık BEP)</div>
+                    <div id="dash-bep" class="text-xl font-bold font-mono text-amber-400">0 Adet</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Gerekli Aylık Satış Hacmi</div>
+                </div>
+                <div class="custom-card p-4">
+                    <div class="text-xs text-slate-400 mb-1">Net İşletme Sermayesi</div>
+                    <div id="dash-net-working-cap" class="text-xl font-bold font-mono text-purple-400">₺0</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Kasa + Stok - Borçlar</div>
+                </div>
+            </div>
+
+            <!-- Charts & Action Panel -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 custom-card p-5 space-y-3">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="line-chart" class="w-4 h-4 text-emerald-400"></i> Günlük Finansal Durum
+                    </h2>
+                    <div class="h-64">
+                        <canvas id="chart-financial-history"></canvas>
+                    </div>
+                </div>
+
+                <div class="custom-card p-5 space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Hızlı Strateji Kontrolü</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Birim Satış Fiyatı (₺)</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="quick-price" value="120" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono w-full focus:outline-none focus:border-emerald-500">
+                                    <button onclick="game.updatePrice()" class="bg-slate-800 hover:bg-slate-700 text-xs px-3 py-2 rounded-xl font-semibold">Güncelle</button>
+                                </div>
+                            </div>
+                            <hr class="border-slate-800">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Aylık Dijital Reklam Bütçesi (₺)</label>
+                                <input type="range" id="quick-ad-range" min="0" max="150000" step="5000" value="10000" oninput="game.updateAdBudget(this.value)" class="w-full accent-emerald-500">
+                                <div class="flex justify-between text-xs font-mono text-slate-400 mt-1">
+                                    <span>₺0</span>
+                                    <span id="quick-ad-val" class="text-emerald-400 font-bold">₺10,000</span>
+                                    <span>₺150k</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1">
+                        <span class="font-bold text-emerald-400 flex items-center gap-1"><i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> Zaman Dönüşümü</span>
+                        <p class="text-[11px] leading-relaxed">Oyunda her 30 gün 1 aya denk gelir. Maaş, Kira, SGK ve Banka borç taksitleri her 30 günde bir otomatik tahsil edilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: DÜKKAN & OPERASYON -->
+        <div id="view-operations" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Inventory Purchasing -->
+                <div class="custom-card p-5 space-y-4">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="package" class="w-4 h-4 text-emerald-400"></i> Stok & Hammadde Satın Alım
+                    </h2>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Depodaki Hammadde:</span>
+                            <span id="op-raw-stock" class="font-bold text-amber-400">0 Birim</span>
+                        </div>
+                        <div class="flex justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Mamül Ürün Stok:</span>
+                            <span id="op-finished-stock" class="font-bold text-emerald-400">0 Birim</span>
+                        </div>
+                        <div class="flex justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Günlük Üretim Kapasitesi:</span>
+                            <span id="op-daily-capacity" class="font-bold text-slate-200">20 Birim</span>
+                        </div>
+                    </div>
+                    <hr class="border-slate-800">
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-slate-300">Toptan Hammadde Siparişi</h3>
+                        <button onclick="game.buyRawMaterial(300)" class="w-full flex justify-between items-center bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-xs transition">
+                            <span>300 Birim Standart Sipariş</span>
+                            <span id="cost-raw-300" class="font-mono text-emerald-400 font-bold">₺10,500</span>
+                        </button>
+                        <button onclick="game.buyRawMaterial(1500)" class="w-full flex justify-between items-center bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-xs transition">
+                            <span>1.500 Birim (%15 Toplu Alım İskontosu)</span>
+                            <span id="cost-raw-1500" class="font-mono text-emerald-400 font-bold">₺44,625</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Location & Fixed Costs -->
+                <div class="custom-card p-5 space-y-4">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="building" class="w-4 h-4 text-amber-400"></i> İşyeri Sabit Maliyetleri (Aylık)
+                    </h2>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Aylık İşyeri Kirası:</span>
+                            <span id="op-rent" class="font-bold text-slate-200">₺25,000</span>
+                        </div>
+                        <div class="flex justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Kira Stopaj Vergisi (%20):</span>
+                            <span id="op-rent-tax" class="font-bold text-rose-400">₺5,000</span>
+                        </div>
+                        <div class="flex justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Genel İdare ve Faturalar:</span>
+                            <span id="op-bills" class="font-bold text-slate-200">₺6,000</span>
+                        </div>
+                    </div>
+                    <button onclick="game.relocateStore()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 py-3 rounded-xl text-xs font-semibold transition">
+                        Merkezi Prestijli Lokasyona Taşın (₺60,000)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: İNSAN KAYNAKLARI -->
+        <div id="view-hr" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-sm font-bold text-slate-100">İnsan Kaynakları ve İstihdam</h2>
+                    <p class="text-xs text-slate-400">Maaşlar her 30 günde bir (Ay sonu) SGK işveren payıyla (%22.5) birlikte ödenir.</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono">
+                    Toplam Kadro: <span id="hr-total-staff" class="text-emerald-400 font-bold">1</span> Çalışan
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Sales Rep -->
+                <div class="custom-card p-5 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-xs text-slate-200">Satış & Pazarlama Uzmanı</h3>
+                        <span id="hr-count-sales" class="font-mono text-xs text-slate-400">0 Kişi</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">Günlük pazar talebini ve satış hacmini gözle görülür şekilde artırır.</p>
+                    <div class="text-xs font-mono text-slate-300">Aylık Maaş + SGK: ₺38.000</div>
+                    <div class="flex gap-2 pt-2">
+                        <button onclick="game.hire('sales')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-semibold">İşe Al</button>
+                        <button onclick="game.fire('sales')" class="bg-rose-950 border border-rose-800 text-rose-300 px-3 py-2 rounded-xl text-xs">Çıkar</button>
+                    </div>
+                </div>
+
+                <!-- Production Worker -->
+                <div class="custom-card p-5 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-xs text-slate-200">Üretim & İmalat Elemanı</h3>
+                        <span id="hr-count-prod" class="font-mono text-xs text-slate-400">1 Kişi</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">Günlük üretim kapasitesini +10 birim artırır.</p>
+                    <div class="text-xs font-mono text-slate-300">Aylık Maaş + SGK: ₺30.000</div>
+                    <div class="flex gap-2 pt-2">
+                        <button onclick="game.hire('prod')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-semibold">İşe Al</button>
+                        <button onclick="game.fire('prod')" class="bg-rose-950 border border-rose-800 text-rose-300 px-3 py-2 rounded-xl text-xs">Çıkar</button>
+                    </div>
+                </div>
+
+                <!-- Specialist / Accountant -->
+                <div class="custom-card p-5 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-xs text-slate-200">Mali Müşavir / Ar-Ge</h3>
+                        <span id="hr-count-rd" class="font-mono text-xs text-slate-400">0 Kişi</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">Teşvik onay oranını yükseltir, imalat firesini azaltır.</p>
+                    <div class="text-xs font-mono text-slate-300">Aylık Maaş + SGK: ₺70.000</div>
+                    <div class="flex gap-2 pt-2">
+                        <button onclick="game.hire('rd')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-semibold">İşe Al</button>
+                        <button onclick="game.fire('rd')" class="bg-rose-950 border border-rose-800 text-rose-300 px-3 py-2 rounded-xl text-xs">Çıkar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: DEVLET DESTEKLERİ -->
+        <div id="view-grants" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- KOSGEB Grant -->
+                <div class="custom-card p-5 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider">KOSGEB İleri Girişimci Desteği</h3>
+                            <span id="grant-badge-kosgeb" class="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded">Başvurulmadı</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Makine ve teçhizat kurulumu için nakit hibe desteği.</p>
+                        <div class="bg-slate-950 p-3 rounded-xl text-xs font-mono text-emerald-400">
+                            Geri Ödemesiz Nakit Hibe: ₺150.000
+                        </div>
+                    </div>
+                    <button id="btn-grant-kosgeb" onclick="game.applyKosgeb()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-semibold transition">
+                        Başvuru Yap
+                    </button>
+                </div>
+
+                <!-- Youth Entrepreneur Exemption -->
+                <div class="custom-card p-5 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider">Genç Girişimci Teşviki (GVK 20/A)</h3>
+                            <span id="grant-badge-youth" class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded">Pasif</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">1 yıl boyunca Bağ-Kur prim muafiyeti ve ₺75.000 Gelir Vergisi istisnası.</p>
+                        <div class="bg-slate-950 p-3 rounded-xl text-xs font-mono text-emerald-400">
+                            Aylık Tasarruf: ~₺7.500 SGK İndirimi
+                        </div>
+                    </div>
+                    <button id="btn-grant-youth" onclick="game.applyYouth()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-semibold transition">
+                        Teşviki Etkinleştir
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: FINANS & BİLANÇO -->
+        <div id="view-financials" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="text-sm font-bold text-slate-100">Resmi Mali Tablolar (Gelir Tablosu & Bilanço)</h2>
+                <div class="flex gap-2">
+                    <button onclick="ui.toggleStatement('pnl')" id="btn-stmt-pnl" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white">Gelir Tablosu (P&L)</button>
+                    <button onclick="ui.toggleStatement('bs')" id="btn-stmt-bs" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">Bilanço</button>
+                </div>
+            </div>
+
+            <!-- P&L Statement -->
+            <div id="stmt-pnl" class="custom-card p-5 font-mono text-xs space-y-3">
+                <div class="flex justify-between pb-2 border-b border-slate-800 font-bold text-slate-500">
+                    <span>HESAP KALEMİ</span>
+                    <span>TUTAR (₺)</span>
+                </div>
+                <div class="flex justify-between text-emerald-400 font-bold">
+                    <span>BRÜT SATIŞ HASILATI</span>
+                    <span id="pnl-gross-sales">₺0</span>
+                </div>
+                <div class="flex justify-between text-rose-400 pl-4">
+                    <span>(-) Satılan Malın Maliyeti (SMM)</span>
+                    <span id="pnl-cogs">₺0</span>
+                </div>
+                <div class="flex justify-between pt-2 border-t border-slate-800 font-bold text-slate-200">
+                    <span>BRÜT SATIŞ KÂRI</span>
+                    <span id="pnl-gross-profit">₺0</span>
+                </div>
+                <div class="space-y-1 pl-4 text-slate-400">
+                    <div class="flex justify-between">
+                        <span>(-) Personel Maaşları & SGK Tahakkuku</span>
+                        <span id="pnl-salaries">₺0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>(-) İşyeri Kirası & Stopaj</span>
+                        <span id="pnl-rent">₺0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>(-) Dijital Reklam & Pazarlama</span>
+                        <span id="pnl-ads">₺0</span>
+                    </div>
+                </div>
+                <div class="flex justify-between pt-2 border-t border-slate-800 font-bold text-slate-200">
+                    <span>FAALİYET KÂRI (FAVÖK / EBITDA)</span>
+                    <span id="pnl-ebitda">₺0</span>
+                </div>
+                <div class="flex justify-between text-rose-400 pl-4">
+                    <span>(-) Tahakkuk Eden Kurumlar Vergisi</span>
+                    <span id="pnl-tax">₺0</span>
+                </div>
+                <div class="flex justify-between pt-3 border-t border-slate-700 font-bold text-sm text-emerald-400">
+                    <span>DÖNEM NET KÂRI / ZARARI</span>
+                    <span id="pnl-net-profit">₺0</span>
+                </div>
+            </div>
+
+            <!-- Balance Sheet -->
+            <div id="stmt-bs" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+                <div class="custom-card p-5 space-y-3">
+                    <h3 class="font-bold text-slate-200 border-b border-slate-800 pb-2">AKTİF (VARLIKLAR)</h3>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">100 Kasa & Banka Hesabı</span>
+                        <span id="bs-cash" class="text-emerald-400 font-bold">₺0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">150 Stoklar (Hammadde + Mamül)</span>
+                        <span id="bs-inventory" class="text-slate-200">₺0</span>
+                    </div>
+                    <div class="flex justify-between pt-3 border-t border-slate-800 font-bold text-slate-200">
+                        <span>TOPLAM AKTİF</span>
+                        <span id="bs-total-assets">₺0</span>
+                    </div>
+                </div>
+
+                <div class="custom-card p-5 space-y-3">
+                    <h3 class="font-bold text-slate-200 border-b border-slate-800 pb-2">PASİF (KAYNAKLAR)</h3>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">300 Banka Kredileri</span>
+                        <span id="bs-loans" class="text-rose-400 font-bold">₺0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">500 Ödenmiş Sermaye & Birikmiş Kârlar</span>
+                        <span id="bs-capital" class="text-slate-200">₺0</span>
+                    </div>
+                    <div class="flex justify-between pt-3 border-t border-slate-800 font-bold text-slate-200">
+                        <span>TOPLAM PASİF</span>
+                        <span id="bs-total-liabilities">₺0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Loans -->
+            <div class="custom-card p-5 space-y-3">
+                <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider">Ticari Banka Kredisi Kullanımı</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Kredi Tutarı (Aylık %2.8 Faiz)</label>
+                        <input type="number" id="loan-amount-input" value="100000" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-100 w-full focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <button onclick="game.takeBankLoan()" class="bg-amber-600 hover:bg-amber-500 text-white py-2.5 rounded-xl text-xs font-semibold transition">Ticari Kredi Çek</button>
+                    <div class="text-xs font-mono text-slate-400">Mevcut Banka Borcu: <span id="loan-current-balance" class="text-rose-400 font-bold">₺0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: PAZAR & İHRACAT -->
+        <div id="view-export" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="custom-card p-5 space-y-3">
+                    <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider">Yurt İçi Pazar Analizi</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">TL bazlı iç pazar dinamikleri. Müşteri talebi birim fiyat, reklam harcamaları ve işletme itibarından doğrudan etkilenir.</p>
+                </div>
+
+                <div class="custom-card p-5 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider">Dış Ticaret & İhracat Pazarı</h3>
+                        <span id="export-status-badge" class="text-[10px] bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full">Kapalı</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Yurt dışı pazarlara dövizli satış yaparak kur yükselişlerini avantaja çevirin.</p>
+                    <button id="btn-unlock-export" onclick="game.unlockExport()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-semibold transition">
+                        İhracat Lisansı ve Yetkilendirme (₺35.000)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- LOG NOTIFICATIONS FOOTER PANEL -->
+    <footer class="bg-slate-900 border-t border-slate-800 p-4 shrink-0">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs">
+            <span class="text-slate-400 flex items-center gap-1.5">
+                <i data-lucide="info" class="w-4 h-4 text-emerald-400"></i>
+                <span id="footer-status-log">Girişim faaliyete hazır. "1 Gün İlerle" butonuna basarak gün gün yönetin.</span>
+            </span>
+            <span class="text-slate-500 font-mono">İİBF Girişimcilik Simülasyonu v3.0</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT SIMULATION ENGINE -->
+    <script>
+        // GLOBAL GAME STATE
+        const state = {
+            started: false,
+            day: 1,
+            month: 1,
+            year: 2026,
+            companyName: "",
+            founderName: "",
+            bgKey: "isletme",
+            secKey: "kafe",
+
+            cash: 200000,
+            initialCapital: 200000,
+            bankLoan: 0,
+            creditScore: 720,
+            reputation: 50,
+
+            rentCost: 25000,
+            unitRawCost: 35,
+            unitPrice: 120,
+            adBudget: 10000,
+
+            rawStock: 300,
+            finishedStock: 50,
+            dailyCapacity: 20,
+
+            exportUnlocked: false,
+            exportPriceUSD: 12,
+            usdRate: 34.50,
+
+            staff: { sales: 0, prod: 1, rd: 0 },
+            grants: { kosgebApplied: false, kosgebApproved: false, youthActive: false },
+
+            // Accounting Accruals
+            accruedGrossSales: 0,
+            accruedCogs: 0,
+            dailyLastRevenue: 0,
+            dailyLastCogs: 0,
+            dailyLastProfit: 0,
+
+            history: []
+        };
+
+        const SECTORS = {
+            kafe: { title: "Kitap-Kafe", rent: 25000, rawCost: 30, price: 110, cap: 25 },
+            eticaret: { title: "E-Ticaret Markası", rent: 8000, rawCost: 25, price: 130, cap: 40 },
+            danismanlik: { title: "Danışmanlık Bürosu", rent: 15000, rawCost: 10, price: 250, cap: 15 },
+            uretim: { title: "İmalat & İhracat Tesisi", rent: 45000, rawCost: 40, price: 160, cap: 80 }
+        };
+
+        // SETUP CONTROLLER
+        const setup = {
+            selectBg(bg) {
+                state.bgKey = bg;
+                document.querySelectorAll('.opt-card').forEach(el => {
+                    el.classList.remove('border-emerald-500');
+                    el.classList.add('border-slate-800');
+                    const title = el.querySelector('.font-bold');
+                    if (title) title.className = 'font-bold text-xs text-slate-200 flex items-center gap-1.5';
+                });
+                const selected = document.getElementById(`bg-opt-${bg}`);
+                selected.classList.remove('border-slate-800');
+                selected.classList.add('border-emerald-500');
+                const selTitle = selected.querySelector('.font-bold');
+                if (selTitle) selTitle.className = 'font-bold text-xs text-emerald-400 flex items-center gap-1.5';
+            },
+            selectSector(sec) {
+                state.secKey = sec;
+                document.querySelectorAll('.opt-sec-card').forEach(el => {
+                    el.classList.remove('border-emerald-500');
+                    el.classList.add('border-slate-800');
+                    const title = el.querySelector('.font-bold');
+                    if (title) title.className = 'font-bold text-xs text-slate-200 flex items-center gap-1.5';
+                });
+                const selected = document.getElementById(`sec-opt-${sec}`);
+                selected.classList.remove('border-slate-800');
+                selected.classList.add('border-emerald-500');
+                const selTitle = selected.querySelector('.font-bold');
+                if (selTitle) selTitle.className = 'font-bold text-xs text-emerald-400 flex items-center gap-1.5';
+            },
+            selectCapital(capVal) {
+                state.initialCapital = capVal;
+                state.cash = capVal;
+                state.bankLoan = capVal === 350000 ? 100000 : 0;
+
+                const options = [200000, 350000, 500000];
+                options.forEach(val => {
+                    const card = document.getElementById(`cap-opt-${val}`);
+                    const dot = document.getElementById(`radio-dot-${val}`);
+                    const title = card.querySelector('.font-bold');
+
+                    if (val === capVal) {
+                        card.classList.remove('border-slate-800');
+                        card.classList.add('border-emerald-500');
+                        dot.classList.remove('hidden');
+                        if (title) title.className = 'font-bold text-xs text-emerald-400';
+                    } else {
+                        card.classList.remove('border-emerald-500');
+                        card.classList.add('border-slate-800');
+                        dot.classList.add('hidden');
+                        if (title) title.className = 'font-bold text-xs text-slate-200';
+                    }
+                });
+            },
+            startGame() {
+                state.companyName = document.getElementById('setup-company-name').value.trim() || "Anadolu Strateji A.Ş.";
+                state.founderName = document.getElementById('setup-founder-name').value.trim() || "Ahmet Yılmaz";
+
+                if (state.initialCapital === 500000) {
+                    state.reputation += 10;
+                }
+
+                const sec = SECTORS[state.secKey];
+                state.rentCost = sec.rent;
+                state.unitRawCost = sec.rawCost;
+                state.unitPrice = sec.price;
+                state.dailyCapacity = sec.cap;
+
+                document.getElementById('setup-modal').classList.add('hidden');
+                state.started = true;
+
+                ui.initChart();
+                game.updateUI();
+            }
+        };
+
+        // GAME CONTROLLER (DAILY MECHANICS)
+        const game = {
+            nextDay() {
+                if (!state.started) return;
+
+                // 1. Günlük Üretim
+                const capacity = state.dailyCapacity + (state.staff.prod * 10);
+                const processed = Math.min(state.rawStock, capacity);
+                state.rawStock -= processed;
+                state.finishedStock += processed;
+
+                // 2. Günlük Talep ve Satış
+                const dailyAdBudget = state.adBudget / 30;
+                const adEffect = Math.sqrt(dailyAdBudget) * (state.bgKey === 'iktisat' ? 1.5 : 1.2);
+                const priceElasticity = Math.max(0.1, (220 - state.unitPrice) / 100);
+                let dailyDemand = Math.floor((5 + (state.staff.sales * 6) + adEffect) * priceElasticity);
+                
+                let domesticSold = Math.min(state.finishedStock, dailyDemand);
+                state.finishedStock -= domesticSold;
+
+                let exportSold = 0;
+                let exportRevenueTL = 0;
+                if (state.exportUnlocked) {
+                    exportSold = Math.min(state.finishedStock, 5 + state.staff.sales * 3);
+                    state.finishedStock -= exportSold;
+                    exportRevenueTL = exportSold * (state.exportPriceUSD * state.usdRate);
+                }
+
+                const totalQtySold = domesticSold + exportSold;
+                const dailyRevenue = (domesticSold * state.unitPrice) + exportRevenueTL;
+                const dailyCogs = totalQtySold * state.unitRawCost;
+
+                // Günlük Nakit Girişi
+                const dailyNetProfit = dailyRevenue - dailyCogs;
+                state.cash += dailyNetProfit;
+
+                // Bilanço birikimleri
+                state.accruedGrossSales += dailyRevenue;
+                state.accruedCogs += dailyCogs;
+
+                state.dailyLastRevenue = dailyRevenue;
+                state.dailyLastCogs = dailyCogs;
+                state.dailyLastProfit = dailyNetProfit;
+
+                // 3. Ay Sonu Kontrolü (Her 30 günde bir)
+                let monthEventLog = "";
+                if (state.day % 30 === 0) {
+                    monthEventLog = this.processMonthlyAccounting();
+                    state.month++;
+                }
+
+                state.day++;
+                state.history.push({ day: `${state.day - 1}. Gün`, cash: Math.round(state.cash), profit: Math.round(dailyNetProfit) });
+
+                this.updateUI();
+                ui.updateChart();
+
+                const statusText = monthEventLog 
+                    ? `${state.day - 1}. Gün tamamlandı. 30. GÜN AY SONU KESİNTİLERİ: ${monthEventLog}`
+                    : `${state.day - 1}. Gün tamamlandı. Günlük Hasılat: ₺${Math.round(dailyRevenue).toLocaleString()} | Günlük Net: ₺${Math.round(dailyNetProfit).toLocaleString()}`;
+                
+                document.getElementById('footer-status-log').innerText = statusText;
+            },
+
+            passMonth() {
+                for (let i = 0; i < 30; i++) {
+                    this.nextDay();
+                }
+            },
+
+            processMonthlyAccounting() {
+                let salaries = (state.staff.sales * 38000) + (state.staff.prod * 30000) + (state.staff.rd * 70000);
+                if (state.grants.youthActive) salaries = Math.max(0, salaries - 7500);
+
+                const rentAndTax = (state.rentCost * 1.2) * (state.bgKey === 'isletme' ? 0.9 : 1.0);
+                const interest = state.bankLoan * 0.028;
+                const adExpense = state.adBudget;
+
+                const totalMonthlyFixedExpenses = salaries + rentAndTax + interest + adExpense;
+                
+                const ebitda = state.accruedGrossSales - state.accruedCogs - totalMonthlyFixedExpenses;
+                const taxRate = state.bgKey === 'maliye' ? 0.20 : 0.25;
+                const tax = ebitda > 0 ? ebitda * taxRate : 0;
+
+                const totalDeductions = totalMonthlyFixedExpenses + tax;
+                state.cash -= totalDeductions;
+
+                return `Aylık Maaş/SGK: ₺${salaries.toLocaleString()}, Kira: ₺${rentAndTax.toLocaleString()}, Reklam: ₺${adExpense.toLocaleString()}, Vergi: ₺${Math.round(tax).toLocaleString()} kesildi.`;
+            },
+
+            updatePrice() {
+                const val = parseFloat(document.getElementById('quick-price').value);
+                if (val > 0) state.unitPrice = val;
+                this.updateUI();
+            },
+
+            updateAdBudget(val) {
+                state.adBudget = parseFloat(val);
+                document.getElementById('quick-ad-val').innerText = `₺${state.adBudget.toLocaleString()}`;
+            },
+
+            buyRawMaterial(qty) {
+                const cost = qty * state.unitRawCost * (qty >= 1500 ? 0.85 : 1.0);
+                if (state.cash >= cost) {
+                    state.cash -= cost;
+                    state.rawStock += qty;
+                    this.updateUI();
+                }
+            },
+
+            relocateStore() {
+                if (state.cash >= 60000) {
+                    state.cash -= 60000;
+                    state.reputation = Math.min(100, state.reputation + 15);
+                    this.updateUI();
+                }
+            },
+
+            hire(role) {
+                state.staff[role]++;
+                this.updateUI();
+            },
+
+            fire(role) {
+                if (state.staff[role] > 0) {
+                    state.staff[role]--;
+                    this.updateUI();
+                }
+            },
+
+            applyKosgeb() {
+                state.grants.kosgebApplied = true;
+                document.getElementById('grant-badge-kosgeb').innerText = "Onaylandı (+₺150.000)";
+                document.getElementById('grant-badge-kosgeb').className = "text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded";
+                state.cash += 150000;
+                state.grants.kosgebApproved = true;
+                this.updateUI();
+            },
+
+            applyYouth() {
+                state.grants.youthActive = true;
+                document.getElementById('grant-badge-youth').innerText = "Aktif";
+                document.getElementById('grant-badge-youth').className = "text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded";
+                this.updateUI();
+            },
+
+            takeBankLoan() {
+                const amt = parseFloat(document.getElementById('loan-amount-input').value);
+                if (amt > 0) {
+                    state.cash += amt;
+                    state.bankLoan += amt;
+                    this.updateUI();
+                }
+            },
+
+            unlockExport() {
+                if (state.cash >= 35000) {
+                    state.cash -= 35000;
+                    state.exportUnlocked = true;
+                    document.getElementById('export-status-badge').innerText = "Aktif";
+                    document.getElementById('export-status-badge').className = "text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full";
+                    document.getElementById('btn-unlock-export').classList.add('hidden');
+                    this.updateUI();
+                }
+            },
+
+            updateUI() {
+                document.getElementById('hdr-company-name').innerText = state.companyName;
+                document.getElementById('hdr-founder').innerText = `${state.founderName} (${state.bgKey.toUpperCase()})`;
+                document.getElementById('hdr-sector').innerText = SECTORS[state.secKey].title;
+                document.getElementById('hdr-date').innerText = `${state.day}. Gün (${state.month}. Ay)`;
+
+                document.getElementById('kpi-cash').innerText = `₺${Math.round(state.cash).toLocaleString()}`;
+                document.getElementById('kpi-daily-profit').innerText = `₺${Math.round(state.dailyLastProfit).toLocaleString()}`;
+                document.getElementById('kpi-reputation').innerText = state.reputation;
+
+                document.getElementById('dash-daily-revenue').innerText = `₺${Math.round(state.dailyLastRevenue).toLocaleString()}`;
+                document.getElementById('dash-daily-cogs').innerText = `₺${Math.round(state.dailyLastCogs).toLocaleString()}`;
+                document.getElementById('dash-unit-cost').innerText = `₺${state.unitRawCost}`;
+
+                const margin = Math.max(1, state.unitPrice - state.unitRawCost);
+                const monthlyFixed = state.rentCost + (state.staff.sales * 38000 + state.staff.prod * 30000) + state.adBudget;
+                document.getElementById('dash-bep').innerText = `${Math.ceil(monthlyFixed / margin).toLocaleString()} Adet`;
+
+                const invVal = (state.rawStock * state.unitRawCost) + (state.finishedStock * state.unitRawCost);
+                document.getElementById('dash-net-working-cap').innerText = `₺${Math.round(state.cash + invVal - state.bankLoan).toLocaleString()}`;
+
+                document.getElementById('op-raw-stock').innerText = `${state.rawStock} Birim`;
+                document.getElementById('op-finished-stock').innerText = `${state.finishedStock} Birim`;
+                document.getElementById('op-daily-capacity').innerText = `${state.dailyCapacity + (state.staff.prod * 10)} Birim`;
+
+                document.getElementById('hr-total-staff').innerText = state.staff.sales + state.staff.prod + state.staff.rd;
+                document.getElementById('hr-count-sales').innerText = `${state.staff.sales} Kişi`;
+                document.getElementById('hr-count-prod').innerText = `${state.staff.prod} Kişi`;
+                document.getElementById('hr-count-rd').innerText = `${state.staff.rd} Kişi`;
+
+                // Financial Statements
+                const salaries = (state.staff.sales * 38000) + (state.staff.prod * 30000) + (state.staff.rd * 70000);
+                const rentAndTax = (state.rentCost * 1.2) * (state.bgKey === 'isletme' ? 0.9 : 1.0);
+
+                document.getElementById('pnl-gross-sales').innerText = `₺${Math.round(state.accruedGrossSales).toLocaleString()}`;
+                document.getElementById('pnl-cogs').innerText = `₺${Math.round(state.accruedCogs).toLocaleString()}`;
+                document.getElementById('pnl-gross-profit').innerText = `₺${Math.round(state.accruedGrossSales - state.accruedCogs).toLocaleString()}`;
+                document.getElementById('pnl-salaries').innerText = `₺${Math.round(salaries).toLocaleString()}`;
+                document.getElementById('pnl-rent').innerText = `₺${Math.round(rentAndTax).toLocaleString()}`;
+                document.getElementById('pnl-ads').innerText = `₺${Math.round(state.adBudget).toLocaleString()}`;
+                
+                const ebitda = state.accruedGrossSales - state.accruedCogs - (salaries + rentAndTax + state.adBudget);
+                const tax = ebitda > 0 ? ebitda * (state.bgKey === 'maliye' ? 0.20 : 0.25) : 0;
+                document.getElementById('pnl-ebitda').innerText = `₺${Math.round(ebitda).toLocaleString()}`;
+                document.getElementById('pnl-tax').innerText = `₺${Math.round(tax).toLocaleString()}`;
+                document.getElementById('pnl-net-profit').innerText = `₺${Math.round(ebitda - tax).toLocaleString()}`;
+
+                document.getElementById('bs-cash').innerText = `₺${Math.round(state.cash).toLocaleString()}`;
+                document.getElementById('bs-inventory').innerText = `₺${Math.round(invVal).toLocaleString()}`;
+                document.getElementById('bs-total-assets').innerText = `₺${Math.round(state.cash + invVal).toLocaleString()}`;
+                document.getElementById('bs-loans').innerText = `₺${Math.round(state.bankLoan).toLocaleString()}`;
+                document.getElementById('loan-current-balance').innerText = `₺${Math.round(state.bankLoan).toLocaleString()}`;
+                document.getElementById('bs-capital').innerText = `₺${Math.round(state.initialCapital).toLocaleString()}`;
+                document.getElementById('bs-total-liabilities').innerText = `₺${Math.round(state.cash + invVal).toLocaleString()}`;
+            }
+        };
+
+        // UI TAB SWITCHER
+        const ui = {
+            chartInstance: null,
+
+            switchTab(tabKey) {
+                const tabs = ['general', 'operations', 'hr', 'grants', 'financials', 'export'];
+                tabs.forEach(t => {
+                    document.getElementById(`view-${t}`).classList.add('hidden');
+                    const btn = document.getElementById(`tab-btn-${t}`);
+                    if (btn) btn.classList.remove('tab-btn-active');
+                });
+                document.getElementById(`view-${tabKey}`).classList.remove('hidden');
+                document.getElementById(`tab-btn-${tabKey}`).classList.add('tab-btn-active');
+            },
+
+            toggleStatement(type) {
+                if (type === 'pnl') {
+                    document.getElementById('stmt-pnl').classList.remove('hidden');
+                    document.getElementById('stmt-bs').classList.add('hidden');
+                    document.getElementById('btn-stmt-pnl').className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white";
+                    document.getElementById('btn-stmt-bs').className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300";
+                } else {
+                    document.getElementById('stmt-pnl').classList.add('hidden');
+                    document.getElementById('stmt-bs').classList.remove('hidden');
+                    document.getElementById('btn-stmt-bs').className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white";
+                    document.getElementById('btn-stmt-pnl').className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300";
+                }
+            },
+
+            initChart() {
+                const ctx = document.getElementById('chart-financial-history').getContext('2d');
+                this.chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1. Gün'],
+                        datasets: [
+                            { label: 'Kasa (₺)', data: [state.cash], borderColor: '#10b981', tension: 0.2 },
+                            { label: 'Günlük Kâr (₺)', data: [0], borderColor: '#3b82f6', tension: 0.2 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10 } } } },
+                        scales: { x: { grid: { color: '#1e293b' } }, y: { grid: { color: '#1e293b' } } }
+                    }
+                });
+            },
+
+            updateChart() {
+                if (!this.chartInstance) return;
+                const lastDays = state.history.slice(-15);
+                this.chartInstance.data.labels = ['1. Gün', ...lastDays.map(h => h.day)];
+                this.chartInstance.data.datasets[0].data = [state.initialCapital, ...lastDays.map(h => h.cash)];
+                this.chartInstance.data.datasets[1].data = [0, ...lastDays.map(h => h.profit)];
+                this.chartInstance.update();
+            }
+        };
+
+        window.onload = function() {
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>

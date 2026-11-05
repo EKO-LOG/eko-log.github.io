@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T.C. Sanal Duruşma & Derin Mahkeme Simülasyonu v3.0</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        case: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        amber: {
+                            300: '#fde047',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03',
+                        },
+                        court: {
+                            wood: '#1d0e07',
+                            panel: '#120804',
+                            bench: '#2b130a',
+                            gold: '#d4af37',
+                            red: '#881337',
+                        }
+                    },
+                    animation: {
+                        'objection-flash': 'objectionFlash 0.6s cubic-bezier(0, 0, 0.2, 1)',
+                        'shake': 'shake 0.4s ease-in-out',
+                    },
+                    keyframes: {
+                        objectionFlash: {
+                            '0%': { transform: 'scale(0.3) rotate(-10deg)', opacity: '0' },
+                            '50%': { transform: 'scale(1.15) rotate(3deg)', opacity: '1' },
+                            '100%': { transform: 'scale(1) rotate(0deg)', opacity: '1' },
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '20%, 60%': { transform: 'translateX(-8px)' },
+                            '40%, 80%': { transform: 'translateX(8px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .court-bg {
+            background-color: #070403;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                radial-gradient(#1a0c06 1.5px, transparent 1.5px);
+            background-size: 100% 100%, 28px 28px;
+        }
+
+        .gavel-shadow {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(217, 119, 6, 0.25);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 8, 5, 0.6);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(217, 119, 6, 0.4);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.7);
+        }
+
+        .active-seat-glow {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b !important;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col justify-between font-sans court-bg text-slate-100 overflow-x-hidden">
+
+    <!-- TOP HEADER & COURTROOM STATUS BAR -->
+    <header class="bg-gradient-to-r from-court-panel via-court-wood to-court-panel border-b border-amber-600/40 px-4 py-3 shadow-2xl z-30 sticky top-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-amber-400 via-amber-600 to-amber-800 p-2.5 rounded-xl shadow-lg text-slate-950 font-black flex items-center justify-center">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 8.75L4.22 7 12 3.48 19.78 7 12 10.75zM5 19h14v2H5v-2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-serif font-black text-lg sm:text-2xl text-amber-400 tracking-wider flex items-center gap-2">
+                        SANAL DURUŞMA SIMÜLATÖRÜ
+                        <span class="text-[10px] font-sans font-extrabold px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase tracking-widest">v3.0 - 50 DAVA</span>
+                    </h1>
+                    <p class="text-xs text-amber-200/70 font-medium">T.C. HMK & İYUK Usul Hukuku, 50 Çeşit Dava ve 3 Seçenekli Yargılama</p>
+                </div>
+            </div>
+
+            <!-- Courtroom Gauges (Judge Inclination & Decorum) -->
+            <div id="header-meters" class="hidden flex-grow max-w-md mx-4 space-y-1.5 bg-slate-950/90 p-2.5 rounded-xl border border-amber-600/30 shadow-inner">
+                <!-- Judge Inclination Gauge -->
+                <div class="space-y-0.5">
+                    <div class="flex justify-between items-center text-[10px] font-mono font-bold">
+                        <span class="text-red-400">🛡️ Davalı Taraf (%<span id="meter-def-val">50</span>)</span>
+                        <span class="text-amber-300 uppercase tracking-wider">⚖️ HÂKİMİN KANAAT METRESİ</span>
+                        <span class="text-blue-400">Davacı Taraf (%<span id="meter-plaintiff-val">50</span>) ⚖️</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex p-0.5 border border-slate-700">
+                        <div id="bar-def-inclination" class="bg-gradient-to-r from-red-600 to-amber-600 h-full transition-all duration-500 rounded-l-full" style="width: 50%;"></div>
+                        <div id="bar-plaintiff-inclination" class="bg-gradient-to-r from-amber-500 to-blue-500 h-full transition-all duration-500 rounded-r-full" style="width: 50%;"></div>
+                    </div>
+                </div>
+
+                <!-- Court Decorum / Judge Patience Meter -->
+                <div class="flex justify-between items-center text-[10px] font-mono">
+                    <span class="text-slate-400 font-semibold">Mahkeme İnzibatı / Hâkim Sabrı:</span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-24 bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                            <div id="bar-patience" class="bg-amber-400 h-full transition-all duration-300" style="width: 100%;"></div>
+                        </div>
+                        <span id="text-patience" class="text-amber-400 font-bold">100%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Actions -->
+            <div class="flex items-center gap-2">
+                <button id="sound-btn" onclick="toggleSound()" class="p-2 rounded-lg bg-slate-900 border border-amber-600/30 hover:border-amber-400 text-amber-400 transition-colors flex items-center gap-1.5 font-semibold text-xs">
+                    <svg id="sound-icon-on" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                    <svg id="sound-icon-off" class="w-4 h-4 hidden text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+                    <span>Ses</span>
+                </button>
+
+                <button onclick="openToast('Yardım Rehberi', '50 farklı dava arasından seçim yapabilir, her aşamada en az 3 hukuki hamle seçeneğiyle mahkemeyi yönetebilirsiniz.')" class="p-2 rounded-lg bg-slate-900 border border-amber-600/30 hover:border-amber-400 text-amber-300 font-bold text-xs">
+                    ❓ Rehber
+                </button>
+
+                <button onclick="resetSetup()" class="p-2 rounded-lg bg-red-950/60 border border-red-600/40 hover:border-red-500 text-red-300 font-bold text-xs transition-colors">
+                    🔄 Ana Menü
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-3 sm:p-5 flex flex-col justify-center">
+
+        <!-- ==========================================================================
+             SCREEN 1: SETUP, 50 CASES LIBRARY & ROLE SELECTION
+             ========================================================================== -->
+        <div id="screen-setup" class="space-y-6 my-auto py-4">
+            <div class="text-center space-y-2">
+                <span class="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full text-xs font-bold uppercase tracking-widest">
+                    Türk Yargı Sistemi - 50 Otantik Dava Simülatörü
+                </span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-black text-amber-100 tracking-tight">
+                    Hukuki Mücadeleyi ve Davanızı Seçin
+                </h2>
+                <p class="text-slate-300 max-w-2xl mx-auto text-xs sm:text-base leading-relaxed">
+                    İş, Ticaret ve İdare mahkemelerine ait 50 özgün dava dosyası. Her aşamada minimum 3 stratejik seçenek, usul itirazları ve detaylı UYAP gerekçeli karar metni.
+                </p>
+            </div>
+
+            <!-- 1. GAME MODE SELECTION -->
+            <div class="space-y-3">
+                <h3 class="font-serif font-bold text-amber-400 text-sm uppercase tracking-wider text-center">1. Oyun Modunu Seçin</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                    <button onclick="selectGameMode('SINGLE')" id="btn-mode-single" class="p-4 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 border-amber-500 text-left transition-all group flex items-start gap-4 active-seat-glow">
+                        <div class="p-3 bg-amber-500/10 rounded-xl text-amber-400 border border-amber-500/30 group-hover:scale-110 transition-transform text-2xl">
+                            🤖
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-serif font-bold text-base text-amber-200">Tek Oyunculu (Yapay Zekaya Karşı)</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Bir rol seçersiniz (Hâkim veya Avukat). Yapay zeka diğer iki tarafı yönetir, mantıklı hukuki hamleler ve itirazlar sunar.</p>
+                        </div>
+                    </button>
+
+                    <button onclick="selectGameMode('LOCAL_3P')" id="btn-mode-3p" class="p-4 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 border-slate-800 hover:border-amber-400 text-left transition-all group flex items-start gap-4">
+                        <div class="p-3 bg-amber-500/10 rounded-xl text-amber-400 border border-amber-500/30 group-hover:scale-110 transition-transform text-2xl">
+                            👥
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-serif font-bold text-base text-amber-200">3 Kişilik Yerel Çok Oyunculu (Pass & Play)</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">3 arkadaş aynı cihazda sırayla hamle yapar: 1. Oyuncu Hâkim, 2. Oyuncu Davacı Vekili, 3. Oyuncu Davalı Vekili.</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. ROLE SELECTION (For Single Player) -->
+            <div id="role-select-box" class="space-y-3">
+                <h3 class="font-serif font-bold text-amber-400 text-sm uppercase tracking-wider text-center">2. Üstlenmek İstediğiniz Rol</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="selectSingleRole('JUDGE')" id="btn-role-judge" class="px-5 py-2.5 rounded-xl bg-amber-500 border-2 border-amber-400 text-slate-950 font-serif font-black text-xs sm:text-sm shadow-lg">
+                        👨‍⚖️ Mahkeme Hâkimi (Yargılama ve Ara Karar Yetkisi)
+                    </button>
+                    <button onclick="selectSingleRole('PLAINTIFF')" id="btn-role-plaintiff" class="px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm">
+                        ⚖️ Davacı Vekili (İddia Makamı / Avukat)
+                    </button>
+                    <button onclick="selectSingleRole('DEFENDANT')" id="btn-role-defendant" class="px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm">
+                        🛡️ Davalı Vekili (Savunma Makamı / Avukat)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 50 CASES LIBRARY & FILTER SEARCH BAR -->
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-3 border-b border-amber-600/20 pb-3">
+                    <div>
+                        <h3 class="font-serif font-bold text-amber-400 text-sm uppercase tracking-wider">3. Dava Kütüphanesi (50 Çeşit Dava)</h3>
+                        <p class="text-xs text-slate-400">Lütfen duruşmasını yapmak istediğiniz dava dosyasını seçin:</p>
+                    </div>
+
+                    <!-- Category Pills & Search Input -->
+                    <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                        <div class="relative flex-grow md:w-64">
+                            <input id="case-search-input" oninput="filterCases()" type="text" placeholder="Dava adı, madde veya kelime ara..." class="w-full bg-slate-900 border border-amber-600/30 rounded-xl px-3 py-1.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div class="flex gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="setCaseFilter('ALL')" id="filter-btn-all" class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold">Tümü (50)</button>
+                            <button onclick="setCaseFilter('IS')" id="filter-btn-is" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-amber-300">İş (17)</button>
+                            <button onclick="setCaseFilter('TICARET')" id="filter-btn-ticaret" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-amber-300">Ticaret (17)</button>
+                            <button onclick="setCaseFilter('IDARE')" id="filter-btn-idare" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-amber-300">İdare (16)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 50 CASES SCROLLABLE GRID -->
+                <div id="cases-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[380px] overflow-y-auto custom-scrollbar p-1">
+                    <!-- Dynamic 50 Cases Injected Here -->
+                </div>
+            </div>
+
+            <!-- START TRIAL BUTTON -->
+            <div class="text-center pt-3">
+                <button onclick="startTrial()" class="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-serif font-black text-lg py-4 px-12 rounded-2xl shadow-2xl transition-all transform hover:scale-105 active:scale-95 gavel-shadow">
+                    🏛️ DURUŞMA SALONUNA GİR VE OTURUMU AÇ
+                </button>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SCREEN 2: MAIN TACTICAL COURTROOM CANVAS
+             ========================================================================== -->
+        <div id="screen-game" class="hidden flex-grow flex flex-col gap-4">
+
+            <!-- Trial Stepper Bar -->
+            <div class="bg-gradient-to-r from-slate-900 via-court-panel to-slate-900 p-3 rounded-xl border border-amber-600/30 flex flex-wrap justify-between items-center gap-2 shadow-lg">
+                <div class="flex items-center gap-3">
+                    <span id="game-court-badge" class="px-3 py-1 bg-amber-500/20 text-amber-300 rounded font-serif font-bold text-xs uppercase border border-amber-500/40">
+                        ANKARA 4. İŞ MAHKEMESİ
+                    </span>
+                    <span id="game-case-no" class="text-xs font-mono text-amber-200/80">Esas: 2026/412</span>
+                </div>
+
+                <!-- Phase Stepper -->
+                <div class="flex items-center gap-1.5 text-xs font-semibold">
+                    <div id="phase-1" class="px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold">1. Ön İnceleme & Usul</div>
+                    <span class="text-amber-500/40">&rarr;</span>
+                    <div id="phase-2" class="px-3 py-1 rounded-full bg-slate-800 text-slate-400">2. Tahkikat & Delil/Sorgu</div>
+                    <span class="text-amber-500/40">&rarr;</span>
+                    <div id="phase-3" class="px-3 py-1 rounded-full bg-slate-800 text-slate-400">3. Son Sözler</div>
+                    <span class="text-amber-500/40">&rarr;</span>
+                    <div id="phase-4" class="px-3 py-1 rounded-full bg-slate-800 text-slate-400">4. Gerekçeli Hüküm</div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">Sıra:</span>
+                    <span id="game-turn-indicator" class="text-xs font-bold text-amber-400">Hâkim Kürsüsü</span>
+                </div>
+            </div>
+
+            <!-- Courtroom Layout Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-grow">
+
+                <!-- LEFT SIDEBAR: File Drawer & Case Dossier (4 Cols) -->
+                <div class="lg:col-span-4 bg-slate-900/90 rounded-2xl border border-amber-600/30 p-4 flex flex-col justify-between space-y-3 shadow-xl">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-amber-600/20 pb-2">
+                            <h3 class="font-serif font-bold text-amber-300 text-xs sm:text-sm flex items-center gap-1.5">
+                                📁 DAVA DOSYASI VE DELİL KLASÖRÜ
+                            </h3>
+                            <span class="text-[10px] text-amber-500/70 font-mono">HMK m. 187</span>
+                        </div>
+
+                        <!-- File Drawer Navigation Tabs -->
+                        <div class="flex gap-1 bg-slate-950 p-1 rounded-lg text-[11px] font-semibold">
+                            <button onclick="switchFileTab('summary')" id="tab-btn-summary" class="flex-1 py-1 rounded bg-amber-500 text-slate-950 font-bold">Özet</button>
+                            <button onclick="switchFileTab('evidence')" id="tab-btn-evidence" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Deliller</button>
+                            <button onclick="switchFileTab('witness')" id="tab-btn-witness" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Tanıklar</button>
+                            <button onclick="switchFileTab('expert')" id="tab-btn-expert" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Bilirkişi</button>
+                        </div>
+
+                        <!-- Tab Content Scroll Box -->
+                        <div id="file-tab-content" class="bg-slate-950/90 p-3 rounded-xl border border-slate-800 text-xs leading-relaxed max-h-52 lg:max-h-64 overflow-y-auto custom-scrollbar space-y-2">
+                            <!-- Dynamic Content Injected Here -->
+                        </div>
+                    </div>
+
+                    <!-- Active Turn Role Status Card -->
+                    <div id="active-turn-card" class="bg-gradient-to-r from-amber-950/70 via-court-panel to-slate-950 p-3.5 rounded-xl border border-amber-500/50 space-y-1.5 active-seat-glow">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Aktif Hamle Sahibi</span>
+                            <span id="turn-badge" class="px-2 py-0.5 rounded bg-amber-500 text-slate-950 font-bold text-[10px]">HÂKİM KÜRSÜSÜ</span>
+                        </div>
+                        <h4 id="turn-role-title" class="font-serif font-black text-amber-200 text-sm">Hâkim (Duruşmayı Açın)</h4>
+                        <p id="turn-role-desc" class="text-[11px] text-slate-300 leading-snug">
+                            Ön inceleme aşamasında dava şartları ve ilk itirazları karara bağlayın.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CENTER & RIGHT: Visual Courtroom Stage & Live Transcript (8 Cols) -->
+                <div class="lg:col-span-8 flex flex-col gap-4">
+
+                    <!-- COURTROOM VISUAL BENCH STAGE -->
+                    <div class="bg-gradient-to-b from-court-panel via-court-wood to-slate-950 p-4 rounded-2xl border-2 border-amber-600/40 shadow-2xl relative overflow-hidden flex flex-col justify-between gap-3 min-h-[200px]">
+                        
+                        <!-- Turkish Flag Background Emblem -->
+                        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+                            <span class="text-9xl">🇹🇷</span>
+                        </div>
+
+                        <!-- OBJECTION DRAMATIC ANIMATED OVERLAY BANNER -->
+                        <div id="objection-banner" class="hidden absolute inset-0 bg-red-950/95 z-40 flex flex-col items-center justify-center p-4 text-center border-4 border-red-500 animate-objection-flash">
+                            <span class="text-4xl sm:text-6xl font-black text-yellow-300 font-serif tracking-widest drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] animate-bounce">
+                                ⚖️ İTİRAZ EDİYORUM!
+                            </span>
+                            <p id="objection-banner-sub" class="text-sm sm:text-lg font-serif font-bold text-slate-100 mt-2">
+                                Hukuka Aykırı Delil İkamesi Yönünde İtiraz Yükseltildi!
+                            </p>
+                        </div>
+
+                        <!-- BENCH TOP: JUDGE SEAT -->
+                        <div id="seat-judge" class="mx-auto w-full max-w-md bg-slate-900/90 border-2 border-amber-500/40 p-2.5 rounded-xl text-center space-y-0.5 shadow-xl transition-all">
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="text-lg">👨‍⚖️</span>
+                                <span class="font-serif font-bold text-amber-300 text-xs sm:text-sm">HÂKİM KÜRSÜSÜ</span>
+                            </div>
+                            <p id="judge-status-text" class="text-[11px] text-slate-300 italic">"Duruşma açılmıştır. Tarafların iddia ve savunmaları dinlenecektir."</p>
+                        </div>
+
+                        <!-- BENCH MIDDLE: WITNESS PODIUM -->
+                        <div class="text-center my-0.5">
+                            <span id="podium-badge" class="px-3 py-1 bg-slate-900/90 rounded-full border border-amber-600/40 text-[10px] text-amber-300 font-mono shadow-md">
+                                🎙️ TANIK & BİLİRKİŞİ İFADE KÜRSÜSÜ (Açık)
+                            </span>
+                        </div>
+
+                        <!-- BENCH BOTTOM: PLAINTIFF & DEFENDANT TABLES -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Plaintiff Table -->
+                            <div id="seat-plaintiff" class="bg-slate-900/90 border-2 border-slate-800 p-2.5 rounded-xl space-y-0.5 transition-all">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="text-base">⚖️</span>
+                                        <span class="font-serif font-bold text-amber-300 text-xs">DAVACI VEKİLİ</span>
+                                    </div>
+                                    <span class="text-[9px] text-blue-400 font-mono">İddia Makamı</span>
+                                </div>
+                                <p id="plaintiff-status-text" class="text-[10px] text-slate-400">Dilekçe ve deliller hazır.</p>
+                            </div>
+
+                            <!-- Defendant Table -->
+                            <div id="seat-defendant" class="bg-slate-900/90 border-2 border-slate-800 p-2.5 rounded-xl space-y-0.5 transition-all">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="text-base">🛡️</span>
+                                        <span class="font-serif font-bold text-amber-300 text-xs">DAVALI VEKİLİ</span>
+                                    </div>
+                                    <span class="text-[9px] text-red-400 font-mono">Savunma Makamı</span>
+                                </div>
+                                <p id="defendant-status-text" class="text-[10px] text-slate-400">Cevap dilekçesi sunuldu.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- LIVE TRIAL TRANSCRIPT LOG (Duruşma Tutanağı) -->
+                    <div class="bg-slate-950 rounded-2xl border border-amber-600/30 p-3.5 flex flex-col justify-between flex-grow min-h-[200px] shadow-inner space-y-2">
+                        <div class="flex items-center justify-between border-b border-amber-600/20 pb-1.5">
+                            <h3 class="font-serif font-bold text-xs text-amber-400 flex items-center gap-2">
+                                📜 CANLI DURUŞMA TUTANAĞI (UYAP CANLI KANAL)
+                            </h3>
+                            <span class="text-[10px] font-mono text-slate-500">Resmi Zabıt Kaydı</span>
+                        </div>
+
+                        <!-- Transcript Scroll Stream -->
+                        <div id="court-log-stream" class="space-y-2 max-h-48 lg:max-h-56 overflow-y-auto custom-scrollbar pr-2 text-xs">
+                            <!-- Dynamic log entries inserted here -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BOTTOM TACTICAL ACTION PANEL (AT LEAST 3 OPTIONS ALWAYS) -->
+            <div class="bg-gradient-to-r from-court-panel via-slate-900 to-court-panel rounded-2xl border-2 border-amber-600/40 p-4 space-y-3 shadow-2xl">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-amber-600/20 pb-2">
+                    <div>
+                        <h3 class="font-serif font-bold text-amber-300 text-sm flex items-center gap-2">
+                            🎯 STRATEJİK HUKUKİ SEÇENEKLER PANELİ (MİNİMUM 3 SEÇENEK)
+                        </h3>
+                        <p id="action-panel-subtitle" class="text-[11px] text-slate-400">
+                            Rolünüze uygun hukuki argüman veya ara karar seçeneğini belirleyin:
+                        </p>
+                    </div>
+
+                    <!-- Dynamic Quick Tactical Buttons -->
+                    <div class="flex flex-wrap gap-2">
+                        <button id="btn-trigger-objection" onclick="openObjectionModal()" class="px-3 py-1.5 rounded-lg bg-red-950/80 border border-red-500 hover:bg-red-900 text-red-200 font-serif font-bold text-xs transition-all flex items-center gap-1 shadow-md">
+                            ⚠️ İTİRAZ EDİYORUM!
+                        </button>
+
+                        <button id="btn-judge-interlocutory" onclick="openInterlocutoryModal()" class="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-400 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-serif font-bold text-xs transition-all flex items-center gap-1">
+                            📋 Ara Karar Oluştur (HMK m.31)
+                        </button>
+
+                        <button id="btn-witness-crossex" onclick="openCrossExModal()" class="px-3 py-1.5 rounded-lg bg-blue-950/80 border border-blue-500 hover:bg-blue-900 text-blue-200 font-serif font-bold text-xs transition-all flex items-center gap-1">
+                            🎙️ Çapraz Sorgu Yap
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MAIN STRATEGIC CHOICES CONTAINER (ALWAYS RENDERS 3 CARDS) -->
+                <div id="container-action-cards" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <!-- Dynamic choices rendered here -->
+                </div>
+
+                <!-- CUSTOM ROLEPLAY STATEMENT INPUT -->
+                <div id="container-action-custom" class="space-y-2 border-t border-slate-800 pt-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-amber-400">✍️ Serbest Hukuki Dilekçe / Tutanağa Beyan Yazımı:</span>
+                        <span class="text-[10px] text-slate-500">Görüşleriniz resmi UYAP zaptına işlenir</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <input id="custom-roleplay-input" type="text" placeholder="Sayın Hâkim, karşı tarafın beyanları usul ve kanuna aykırıdır..." class="flex-grow bg-slate-950 border border-amber-600/30 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-amber-400">
+                        <button onclick="submitCustomStatement()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-serif font-bold text-xs px-5 py-2 rounded-xl transition-all shadow-md">
+                            Tutanağa Ekle &rarr;
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ==========================================================================
+         MODALS
+         ========================================================================== -->
+
+    <!-- MODAL 1: OBJECTION DIALOG -->
+    <div id="modal-objection" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border-2 border-red-500/80 rounded-2xl max-w-xl w-full p-5 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-red-500/30 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">⚠️</span>
+                    <h3 class="font-serif font-black text-lg text-red-400">USULİ İTİRAZ YÜKSELTİLDİ</h3>
+                </div>
+                <button onclick="closeModal('modal-objection')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+
+            <p class="text-xs text-slate-300">Aşağıdaki 4 usuli gerekçeden birini seçerek müdahale edin:</p>
+
+            <div class="space-y-2">
+                <button onclick="resolveObjection('HUKUKA_AYKIRI_DELIL')" class="w-full p-3 rounded-xl bg-slate-950 border border-red-500/40 hover:border-red-400 text-left transition-all group">
+                    <h4 class="font-bold text-xs text-red-300 group-hover:text-red-200">1. Hukuka Aykırı Delil İtirazı (HMK m. 189/2)</h4>
+                    <p class="text-[11px] text-slate-400">Gizli çekim veya izinsiz ses kaydının dosyadan çıkarılmasını talep edin.</p>
+                </button>
+
+                <button onclick="resolveObjection('YONLENDIRICI_SORU')" class="w-full p-3 rounded-xl bg-slate-950 border border-amber-500/40 hover:border-amber-400 text-left transition-all group">
+                    <h4 class="font-bold text-xs text-amber-300 group-hover:text-amber-200">2. Baskıcı ve Yönlendirici Soru İtirazı</h4>
+                    <p class="text-[11px] text-slate-400">Tanığa cevabı içinde barındıran soru yöneltilmesine itiraz edin.</p>
+                </button>
+
+                <button onclick="resolveObjection('ZAMANASIMI')" class="w-full p-3 rounded-xl bg-slate-950 border border-blue-500/40 hover:border-blue-400 text-left transition-all group">
+                    <h4 class="font-bold text-xs text-blue-300 group-hover:text-blue-200">3. Zamanaşımı / Hak Düşürücü Süre İtirazı</h4>
+                    <p class="text-[11px] text-slate-400">Kanuni süre aşımını ve hak düşürücü süreyi ileri sürün.</p>
+                </button>
+
+                <button onclick="resolveObjection('KONU_DISI')" class="w-full p-3 rounded-xl bg-slate-950 border border-purple-500/40 hover:border-purple-400 text-left transition-all group">
+                    <h4 class="font-bold text-xs text-purple-300 group-hover:text-purple-200">4. Konu Dışı ve Soyut İddia İtirazı</h4>
+                    <p class="text-[11px] text-slate-400">Davanın esasıyla ilgisi olmayan iddialara müdahale edin.</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: INTERLOCUTORY DECISION BUILDER -->
+    <div id="modal-interlocutory" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border-2 border-amber-500/80 rounded-2xl max-w-xl w-full p-5 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-amber-500/30 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">👨‍⚖️</span>
+                    <h3 class="font-serif font-black text-lg text-amber-300">MAHKEME ARA KARARI (HMK m. 31)</h3>
+                </div>
+                <button onclick="closeModal('modal-interlocutory')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+
+            <div class="space-y-2">
+                <button onclick="issueInterlocutory('BILIRKISI_EK_RAPOR')" class="w-full p-3 rounded-xl bg-slate-950 border border-amber-500/40 hover:border-amber-400 text-left text-xs transition-all">
+                    <span class="font-bold text-amber-300 block">1. Ek Bilirkişi İncelemesi Emret</span>
+                    <span class="text-slate-400 text-[11px]">Çelişkili teknik beyanlar için ek rapor alınmasına karar verin.</span>
+                </button>
+
+                <button onclick="issueInterlocutory('DISIPLIN_IHTARI')" class="w-full p-3 rounded-xl bg-slate-950 border border-red-500/40 hover:border-red-400 text-left text-xs transition-all">
+                    <span class="font-bold text-red-300 block">2. Duruşma Disiplini ve İnzibat İhtarı (HMK m. 151)</span>
+                    <span class="text-slate-400 text-[11px]">Duruşma düzenini bozan tarafa disiplin uyarısı verin.</span>
+                </button>
+
+                <button onclick="issueInterlocutory('MULET_VERME')" class="w-full p-3 rounded-xl bg-slate-950 border border-blue-500/40 hover:border-blue-400 text-left text-xs transition-all">
+                    <span class="font-bold text-blue-300 block">3. Delil İkamesi İçin 2 Haftalık Kesin Süre Ver</span>
+                    <span class="text-slate-400 text-[11px]">Belge ibrazı için taraflara kesin süre tanıyın.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: CROSS-EXAMINATION -->
+    <div id="modal-crossex" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border-2 border-blue-500/80 rounded-2xl max-w-2xl w-full p-5 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-blue-500/30 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🎙️</span>
+                    <h3 class="font-serif font-black text-lg text-blue-300">TANIK / BİLİRKİŞİ ÇAPRAZ SORGU MODÜLÜ</h3>
+                </div>
+                <button onclick="closeModal('modal-crossex')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+
+            <div id="crossex-body" class="space-y-3 text-xs">
+                <!-- Dynamic witness choices -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: FINAL REASONED VERDICT (UYAP FORMAT) -->
+    <div id="modal-verdict" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border-2 border-amber-500/70 rounded-2xl max-w-3xl w-full p-6 space-y-5 shadow-2xl max-h-[92vh] overflow-y-auto custom-scrollbar">
+            
+            <div class="text-center space-y-1 border-b border-amber-600/30 pb-3">
+                <span class="text-xs font-serif text-amber-400 tracking-widest uppercase">TÜRK MİLLETİ ADINA</span>
+                <h2 id="verdict-modal-court" class="font-serif font-black text-2xl sm:text-3xl text-amber-100">ANKARA MAHKEMESİ GEREKÇELİ KARARI</h2>
+                <p class="text-xs text-slate-400 font-mono">Karar Tarihi: 19 Ekim 2026 | Karar No: 2026/1042</p>
+            </div>
+
+            <!-- UYAP Paper Format -->
+            <div class="bg-amber-50 text-slate-950 p-6 rounded-xl border-t-8 border-amber-900 space-y-4 font-case text-xs sm:text-sm leading-relaxed shadow-xl">
+                <div class="grid grid-cols-2 gap-2 text-[11px] font-sans font-bold text-amber-950/80 border-b border-amber-950/20 pb-3">
+                    <div>DAVACI: <span id="verdict-plaintiff-name" class="text-slate-900">Ahmet Yılmaz</span></div>
+                    <div>DAVALI: <span id="verdict-defendant-name" class="text-slate-900">Kozmos A.Ş.</span></div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <h4 class="font-serif font-bold text-amber-950 text-xs uppercase tracking-wider">I. DAVA VE SAVUNMANIN ÖZETİ</h4>
+                    <p id="verdict-summary-text" class="text-xs text-slate-800 leading-relaxed"></p>
+                </div>
+
+                <div class="space-y-1.5">
+                    <h4 class="font-serif font-bold text-amber-950 text-xs uppercase tracking-wider">II. GEREKÇE VE DELİLLERİN DEĞERLENDİRİLMESİ</h4>
+                    <p id="verdict-reasoning-text" class="text-xs text-slate-800 leading-relaxed"></p>
+                </div>
+
+                <div class="p-4 bg-amber-100/90 rounded-lg border border-amber-900/30 space-y-2">
+                    <h4 class="font-serif font-black text-amber-950 text-sm uppercase text-center tracking-wider">III. HÜKÜM FIKRASI</h4>
+                    <p id="verdict-clause-text" class="font-serif font-bold text-center text-xs sm:text-base text-amber-950 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 grid grid-cols-3 gap-3 text-center text-xs">
+                <div>
+                    <span class="text-slate-400 block text-[10px]">Hukuki İsabet</span>
+                    <span id="score-legal" class="font-bold text-amber-400 text-base">94 / 100</span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-[10px]">Usul Başarısı</span>
+                    <span id="score-procedure" class="font-bold text-green-400 text-base">%96</span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-[10px]">Kanaat İkna Düzeyi</span>
+                    <span id="score-inclination" class="font-bold text-blue-400 text-base">%85 Davacı</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                <button onclick="copyVerdictText()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-amber-300 font-serif font-bold py-3 px-4 rounded-xl text-xs transition-all">
+                    📋 Gerekçeli Kararı Kopyala (UYAP)
+                </button>
+                <button onclick="resetSetup()" class="flex-1 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-slate-950 font-serif font-bold py-3 px-4 rounded-xl text-xs transition-all shadow-lg">
+                    🔄 Dava Kütüphanesine Dön
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION BOX -->
+    <div id="toast-box" class="fixed bottom-4 right-4 z-50 bg-slate-900 border border-amber-500 text-slate-100 p-4 rounded-xl shadow-2xl max-w-sm hidden transition-all duration-300">
+        <h4 id="toast-title" class="font-serif font-bold text-xs text-amber-400">Bildirim</h4>
+        <p id="toast-desc" class="text-[11px] text-slate-300 mt-1"></p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-900 px-4 py-2 text-center text-[10px] text-slate-500 font-mono">
+        T.C. Adalet Bakanlığı Uyumlu 50 Davalı Sanal Duruşma Simülatörü v3.0
+    </footer>
+
+    <!-- ==========================================================================
+         JAVASCRIPT ENGINE & 50 CASES DATABASE GENERATOR
+         ========================================================================== -->
+    <script>
+        /* ==========================================================================
+           1. 50 AUTHENTIC CASES DATABASE GENERATOR
+           ========================================================================== */
+
+        const casesLibrary = [];
+
+        // Dynamic Generator Helper for 50 Detailed Cases
+        function generate50Cases() {
+            const rawCases = [
+                // --- İŞ MAHKEMELERİ (17 DAVA) ---
+                { id: 1, cat: 'IS', title: 'Kıdem Tazminatı & Mobbing Feshi', court: 'ANKARA 4. İŞ MAHKEMESİ', pl: 'Ahmet Yılmaz (Saha Amiri)', def: 'Kozmos Lojistik A.Ş.', law: 'İş Kanunu m.18, 25/II', sum: '5 yıllık vardiya amirinin sebepsiz devamsızlık iddiasıyla haksız kovulması ve mobbing iddiası.' },
+                { id: 2, cat: 'IS', title: 'İşe İade Davası (Performans Yetersizliği)', court: 'İSTANBUL 12. İŞ MAHKEMESİ', pl: 'Selin Aksoy (Yazılımcı)', def: 'TechPlus Teknoloji A.Ş.', law: 'İş Kanunu m.18, 20', sum: 'Performans düşüklüğü gerekçesiyle savunma alınmadan yapılan feshin geçersizliği ve işe iade talebi.' },
+                { id: 3, cat: 'IS', title: 'Sendikal Nedenle Fesih & Tazminat', court: 'İZMİR 3. İŞ MAHKEMESİ', pl: 'Murat Şahin (Metal İşçisi)', def: 'Ege Metal Sanayi A.Ş.', law: 'Sendikalar Kanunu m.25', sum: 'Sendikaya üye olduktan 1 hafta sonra kod-29 ile yapılan feshin sendikal nedene dayandığı iddiası.' },
+                { id: 4, cat: 'IS', title: 'İş Kazası ve Maluliyet Tazminatı', court: 'BURSA 2. İŞ MAHKEMESİ', pl: 'Hasan Ceylan (Prese Operatörü)', def: 'OtoAksam Ltd. Şti.', law: 'TBK m.49, 54', sum: 'Koruyucu bariyeri bulunmayan preste elini kaybeden işçinin %40 maluliyet tazminatı davası.' },
+                { id: 5, cat: 'IS', title: 'İhbar Öneli Esnasında Kötüniyet Tazminatı', court: 'KOCAELİ 1. İŞ MAHKEMESİ', pl: 'Canan Güneş (Muhasebeci)', def: 'Delta Raf Sistemleri A.Ş.', law: 'İş Kanunu m.17/6', sum: 'İhbar öneli kullanırken yeni iş arama izni vermeyen işverene karşı 3 katı kötüniyet tazminatı.' },
+                { id: 6, cat: 'IS', title: 'Fazla Mesai ve Gece Çalışması Alacağı', court: 'ANKARA 8. İŞ MAHKEMESİ', pl: 'Mehmet Kaplan (Güvenlik Görevlisi)', def: 'Vip Koruma Ltd. Şti.', law: 'İş Kanunu m.41, 69', sum: 'Haftalık 72 saat gece vardiyasında çalışıp fazla mesai ücreti ödenmeyen işçinin alacak davası.' },
+                { id: 7, cat: 'IS', title: 'SGK Hizmet Tespiti (Sigortasız Çalışma)', court: 'ADANA 4. İŞ MAHKEMESİ', pl: 'Emine Yıldız (Tekstil İşçisi)', def: 'Öz-İplik Konfeksiyon', law: '5510 Sayılı Kanun m.86', sum: '3 yıl boyunca sigortasız çalıştırılan işçinin geriye dönük prim tespiti ve tescil davası.' },
+                { id: 8, cat: 'IS', title: 'Rekabet Yasağı ve Cezai Şart Davası', court: 'İSTANBUL 18. İŞ MAHKEMESİ', pl: 'Novartis Kimya A.Ş.', def: 'Dr. Kerem Arslan', law: 'TBK m.444, 446', sum: 'Ayrıldıktan sonra rakip firmaya geçen üst düzey yöneticiden 500.000 TL cezai şart istemi.' },
+                { id: 9, cat: 'IS', title: 'Yıl Sonu Prim ve İkramiye Alacağı', court: 'ANTALYA 2. İŞ MAHKEMESİ', pl: 'Deniz Kaya (Satış Müdürü)', def: 'Grand Otelcilik A.Ş.', law: 'İş Kanunu m.32', sum: 'Satış hedeflerini %120 tutturmasına rağmen primleri ödenmeyen müdürün hak alacak davası.' },
+                { id: 10, cat: 'IS', title: 'Alt İşveren Asıl İşveren Müteselsil Sorumluluk', court: 'GAZİANTEP 5. İŞ MAHKEMESİ', pl: 'Ali Öztürk (Temizlik İşçisi)', def: 'Büyükşehir Bld. & Ak-Tem Ltd.', law: 'İş Kanunu m.2/6', sum: 'Taşeron firmanın batması üzerine ödenmeyen tazminattan asıl işveren belediyenin sorumluluğu.' },
+                { id: 11, cat: 'IS', title: 'Belirli Süreli İş Sözleşmesinin Haksız Feshi', court: 'SAMSUN 1. İŞ MAHKEMESİ', pl: 'Sibel Mert (İngilizce Öğretmeni)', def: 'Özel Kolej A.Ş.', law: 'TBK m.438', sum: '2 yıllık sözleşmesi 6. ayda sebepsiz feshedilen öğretmenin kalan 18 aylık bakiye süre ücreti talebi.' },
+                { id: 12, cat: 'IS', title: 'Meslek Hastalığı Silikozis Tazminatı', court: 'DENİZLİ 2. İŞ MAHKEMESİ', pl: 'Yılmaz Bakır (Kumlama İşçisi)', def: 'Mermer İşleme Ltd.', law: 'TBK m.53, 54', sum: 'Kot kumlama atölyesinde silikozis akciğer hastalığına yakalanan işçinin tazminat davası.' },
+                { id: 13, cat: 'IS', title: 'Mirasçılara Kıdem Tazminatı Ödenmesi', court: 'KAYSERİ 3. İŞ MAHKEMESİ', pl: 'Fatma Şahin (Mirasçı)', def: 'Kayseri Mobilya A.Ş.', law: 'İş Kanunu m.14/14', sum: 'Vefat eden işçinin hak kazandığı kıdem tazminatının kanuni mirasçılarına ödenmemesi davası.' },
+                { id: 14, cat: 'IS', title: 'Haklı Nedene Dayalı İşçi Tarafından Fesih', court: 'KONYA 4. İŞ MAHKEMESİ', pl: 'Cemal Erdem (Torna Ustası)', def: 'Anadolu Makine Ltd.', law: 'İş Kanunu m.24/II-e', sum: 'Maaşı 3 ay boyunca eksik ve düzensiz ödenen işçinin haklı fesihle kıdem tazminatı talebi.' },
+                { id: 15, cat: 'IS', title: 'Yıllık İzin Ücreti Alacağı ve Defter Kaydı', court: 'TRABZON 1. İŞ MAHKEMESİ', pl: 'Osman Çakır (Kaptan)', def: 'Karadeniz Denizcilik A.Ş.', law: 'İş Kanunu m.59', sum: '10 yıllık çalışma süresince kullandırılmayan 140 günlük yıllık izin ücretinin tahsili.' },
+                { id: 16, cat: 'IS', title: 'İşyerinin Devri ve Kıdem Sorumluluğu', court: 'ESKİŞEHİR 2. İŞ MAHKEMESİ', pl: 'Burak Demir (Montaj Elemanı)', def: 'Yeni Sanayi A.Ş. & Eski Sanayi', law: 'İş Kanunu m.6', sum: 'Devredilen işyerinde eski ve yeni işverenin kıdem tazminatından 2 yıllık müşterek sorumluluğu.' },
+                { id: 17, cat: 'IS', title: 'Şifahi İzin ve Devamsızlık Tutanak İptali', court: 'MERSİN 3. İŞ MAHKEMESİ', pl: 'Ayşe Polat (Kasiyer)', def: 'Süper Market Zinciri', law: 'HMK m.200, İş K. m.25', sum: 'Sözlü izin almasına rağmen arkasından tutanak tutularak kovulan kasiyerin hak tazminatı.' },
+
+                // --- ASLİYE TİCARET MAHKEMELERİ (17 DAVA) ---
+                { id: 18, cat: 'TICARET', title: 'Ayıplı Sanayi Makinesi & Kâr Loss', court: 'ANKARA 2. TİCARET MAHKEMESİ', pl: 'Mega Döküm Ltd. Şti.', def: 'ProMak Makina A.Ş.', law: 'TTK m.23/c, TBK m.227', sum: '2.5 Milyon TL değerindeki CNC tezgahın motorunun yanması ve 8 günlük ayıp ihbarı tartışması.' },
+                { id: 19, cat: 'TICARET', title: 'Çek Menfi Tespit ve Bedelsizlik Davası', court: 'İSTANBUL 5. TİCARET MAHKEMESİ', pl: 'Kafkas İnşaat A.Ş.', def: 'Atlas Faktoring A.Ş.', law: 'TTK m.780, İİK m.72', sum: 'Hatır çeki olarak verilen 1 Milyon TL\'lik karşılıksız çekin bedelsizliği ve takibin durdurulması.' },
+                { id: 20, cat: 'TICARET', title: 'A.Ş. Genel Kurul Kararının İptali', court: 'İSTANBUL 14. TİCARET MAHKEMESİ', pl: 'Bülent Karaca (Azınlık Pay Sahibi)', def: 'Bosphorus Holding A.Ş.', law: 'TTK m.445, 446', sum: 'Sermaye artırımında azınlık pay sahiplerinin rüçhan haklarının kısıtlanması kararının iptali.' },
+                { id: 21, cat: 'TICARET', title: 'Konkordato Geçici Mühlet Talebi', court: 'İZMİR 1. TİCARET MAHKEMESİ', pl: 'Ege Tekstil A.Ş.', def: 'Alacaklılar Kurulu', law: 'İİK m.285, 287', sum: 'Mali yapısı bozulan şirketin borçlarını yapılandırması için 3 aylık geçici konkordato mühleti talebi.' },
+                { id: 22, cat: 'TICARET', title: 'Acentelik Feshi ve Portföy Tazminatı', court: 'BURSA 3. TİCARET MAHKEMESİ', pl: 'Güneş Sigorta Acenteliği', def: 'Anadolu Doğa Sigorta A.Ş.', law: 'TTK m.122', sum: 'Haksız feshedilen acentelik sözleşmesi nedeniyle 10 yıllık müşteri portföy denklaştırma tazminatı.' },
+                { id: 23, cat: 'TICARET', title: 'Navlun ve Deniz Taşıma Hasar Tazminatı', court: 'MERSİN 1. TİCARET MAHKEMESİ', pl: 'Akdeniz Gıda A.Ş.', def: 'Maersk Global Shipping', law: 'TTK m.1178', sum: 'Konteyner soğutucu arızası nedeniyle bozulan 50 ton dondurulmuş karides için navlun tazminatı.' },
+                { id: 24, cat: 'TICARET', title: 'Marka Tecavüzü ve Haksız Rekabet', court: 'İSTANBUL 3. FİKRİ SINAİ TİCARET', pl: 'Lüks Saat Markası A.Ş.', def: 'İmitasyon Takı Ltd.', law: 'SMK m.149, TTK m.55', sum: 'Markanın birebir taklidini üreten ve iltibas yaratan davalıya karşı marka tecavüzünün men-i.' },
+                { id: 25, cat: 'TICARET', title: 'Şirket Müdürünün Şahsi Sorumluluğu', court: 'ANKARA 7. TİCARET MAHKEMESİ', pl: 'Şirket Ortakları', def: 'Eski Şirket Müdürü Engin T.', law: 'TTK m.553', sum: 'Şirket malvarlığını kişisel hesabına aktararak şirketi zarara uğratan müdürün tazminat sorumluluğu.' },
+                { id: 26, cat: 'TICARET', title: 'Sigorta Rücuen Tazminat ve Halefiyet', court: 'KOCAELİ 2. TİCARET MAHKEMESİ', pl: 'Aksigorta A.Ş.', def: 'TIR Lojistik Şirketi', law: 'TTK m.1472', sum: 'Fabrikada çıkan yangında ödenen 3 Milyon TL kasko tazminatının kusurlu nakliyeciden rücuen tahsili.' },
+                { id: 27, cat: 'TICARET', title: 'Cari Hesap Alacağı ve İtirazın İptali', court: 'ADANA 2. TİCARET MAHKEMESİ', pl: 'Güney Çimento A.Ş.', def: 'Beton Yapı Ltd. Şti.', law: 'TTK m.89, İİK m.67', sum: 'Mutabakat sağlanan cari hesap bakiyesine icra takibinde haksız itiraz eden borçlunun takibi.' },
+                { id: 28, cat: 'TICARET', title: 'Franchise Sözleşmesinin Cezai Şartla Feshi', court: 'ANTALYA 1. TİCARET MAHKEMESİ', pl: 'Kahve Zinciri A.Ş.', def: 'Şube İşletmecisi Hakan Y.', law: 'TBK m.182, TTK m.18', sum: 'Reçete ve konsept standartlarına uymayan franchise şubesinin sözleşmesinin feshi ve cezai şart.' },
+                { id: 29, cat: 'TICARET', title: 'Ticari Satımda Gizli Ayıp ve İade', court: 'KONYA 1. TİCARET MAHKEMESİ', pl: 'Anadolu Tarım A.Ş.', def: 'Tohum Üretim Ltd.', law: 'TTK m.23, TBK m.223', sum: 'Çimlenmeyen hibrit mısır tohumları nedeniyle ürün alamayan çiftçi şirketinin ürün bedeli iadesi.' },
+                { id: 30, cat: 'TICARET', title: 'Şirket Ortaklıktan Çıkarma ve Pay Bedeli', court: 'İSTANBUL 9. TİCARET MAHKEMESİ', pl: 'Şirket Yönetim Kurulu', def: 'Rakip Şirket Açan Ortak S.B.', law: 'TTK m.640', sum: 'Şirket sırlarını rakip firmaya sızdıran ortağın haklı nedenle limited şirketten çıkarılması davası.' },
+                { id: 31, cat: 'TICARET', title: 'A.Ş. Birleşme/Devralma Ayrılma Akçesi', court: 'İZMİR 4. TİCARET MAHKEMESİ', pl: 'Küçük Hissedar Veysel G.', law: 'TTK m.141', def: 'Birleşen Enerji A.Ş.', sum: 'A.Ş. birleşmesine reddoyu veren ortağa adil ayrılma akçesi ödenmemesi nedeniyle denklem davası.' },
+                { id: 32, cat: 'TICARET', title: 'Haksız İflas İsteminden Doğan Tazminat', court: 'GAZİANTEP 1. TİCARET MAHKEMESİ', pl: 'Gaziantep Halı A.Ş.', def: 'Kötüniyetli Alacaklı Ltd.', law: 'İİK m.159', sum: 'Maddi dayanaktan yoksun haksız iflas takibi açarak itibar zedeleyen davalıdan ticari itibar tazminatı.' },
+                { id: 33, cat: 'TICARET', title: 'Faktoring Temlik ve Alacak Davası', court: 'BURSA 1. TİCARET MAHKEMESİ', pl: 'Optima Faktoring A.Ş.', def: 'Otomotiv Yan Sanayi A.Ş.', law: '6361 Sayılı Kanun m.9', sum: 'Faktoring şirketine temlik edilen faturalı alacağın borçlu şirket tarafından ödenmemesi takibi.' },
+                { id: 34, cat: 'TICARET', title: 'Akreditif Sözleşmesinden Banka Sorumluluğu', court: 'İSTANBUL 11. TİCARET MAHKEMESİ', pl: 'İthalatçı Dış Ticaret Ltd.', def: 'Garanti Bankası A.Ş.', law: 'UCP 600, TBK m.502', sum: 'Rezervli belgelere rağmen satıcıya akreditif ödemesi yapan bankanın tazminat sorumluluğu.' },
+
+                // --- İDARE MAHKEMELERİ (16 DAVA) ---
+                { id: 35, cat: 'IDARE', title: 'Disiplin Cezası (Memuriyetten Çıkarma)', court: 'ANKARA 1. İDARE MAHKEMESİ', pl: 'Mustafa Kaya (Uzman Memur)', def: 'İçişleri Bakanlığı', law: '657 Sayılı DMK m.125', sum: 'Sosyal medya paylaşımı gerekçesiyle verilen memuriyetten çıkarma cezasının ölçülülük ihlali iptali.' },
+                { id: 36, cat: 'IDARE', title: 'İşyeri Ruhsat İptali ve Mühürleme İptali', court: 'İSTANBUL 5. İDARE MAHKEMESİ', pl: 'Aura Restoran Ltd. Şti.', def: 'Kadıköy Belediye Başkanlığı', law: 'İYUK m.2, İŞYERİ YÖNETMELİĞİ', sum: '3 yıldır çalışan canlı müzikli restoranın okul mesafesi gerekçesiyle ruhsatının iptali kararı.' },
+                { id: 37, cat: 'IDARE', title: 'İmar Planı Değişikliğinin İptali Davası', court: 'İZMİR 2. İDARE MAHKEMESİ', pl: 'TMMOB Şehir Plancıları Odası', def: 'İzmir Büyükşehir Belediyesi', law: '3194 Sayılı İmar K. m.8', sum: 'Yeşil alanın ticari konut alanına dönüştürülmesine ilişkin 1/5000 ölçekli nazım imar planı iptali.' },
+                { id: 38, cat: 'IDARE', title: 'Kamulaştırmasız El Atma Tam Yargı', court: 'ANTALYA 3. İDARE MAHKEMESİ', pl: 'Süleyman Özkan (Mülk Sahibi)', def: 'Karayolları Genel Müdürlüğü', law: '2942 Sayılı Kamulaştırma K.', sum: 'Yol yapımı esnasında fiilen arsayı işgal eden idareden bedel tazminatı ve ecrimisil istemi.' },
+                { id: 39, cat: 'IDARE', title: 'Devlet Hastanesi Malpraktis Tazminatı', court: 'BURSA 1. İDARE MAHKEMESİ', pl: 'Merve Arslan (Hasta Yakını)', def: 'Sağlık Bakanlığı', law: 'Anayasa m.125, İYUK m.13', sum: 'Devlet hastanesindeki apandisit ameliyatında unutulan gazlı bez nedeniyle hizmet kusuru tazminatı.' },
+                { id: 40, cat: 'IDARE', title: 'Kamu İhale Yasaklama Kararının İptali', court: 'ANKARA 8. İDARE MAHKEMESİ', pl: 'Yol-Yapı İnşaat A.Ş.', def: 'Ulaştırma Bakanlığı', law: '4735 Sayılı Kanun m.26', sum: 'Şantiyedeki gecikme nedeniyle 1 yıl kamu ihalelerinden yasaklanan firmanın kararın iptali davası.' },
+                { id: 41, cat: 'IDARE', title: 'ÇED Olumlu Kararının İptali Davası', court: 'MUĞLA 1. İDARE MAHKEMESİ', pl: 'Marmaris Çevre Derneği', def: 'Çevre ve Şehircilik Bakanlığı', law: '2872 Sayılı Çevre K. m.10', sum: 'Koy bölgesine yapılması planlanan çimento limanına verilen ÇED Olumlu kararının iptali davası.' },
+                { id: 42, cat: 'IDARE', title: 'Öğretmen Rotasyon Atamasının İptali', court: 'KONYA 2. İDARE MAHKEMESİ', pl: 'Zeynep Öğretmen', def: 'Milli Eğitim Bakanlığı', law: 'İYUK m.2, MNE Yönetmeliği', sum: 'Eş durumu mazereti dikkate alınmaksızın zorunlu rotasyonla uzak ilçeye atanan öğretmenin davası.' },
+                { id: 43, cat: 'IDARE', title: 'Yabancı Tahdit Kodu (G-87) İptal Davası', court: 'İSTANBUL 8. İDARE MAHKEMESİ', pl: 'Mühendis Igor V. (Yabancı Mülteci)', def: 'Göç İdaresi Başkanlığı', law: '6458 Sayılı Kanun m.54', sum: 'Genel güvenlik gerekçesiyle konulan G-87 tahdit kodunun ve sınır dışı (sınırdışı) kararının iptali.' },
+                { id: 44, cat: 'IDARE', title: 'Vergi Ziyaı Cezası ve Tarhiyat İptali', court: 'ANKARA 2. VERGİ MAHKEMESİ', pl: 'Güneş Gayrimenkul Ltd.', def: 'Başkent Vergi Dairesi', law: '213 Sayılı VUK m.344', sum: 'Fatura matrah takdirindeki hata nedeniyle kesilen 800.000 TL vergi ziyaı cezasının iptali.' },
+                { id: 45, cat: 'IDARE', title: 'Sit Alanı İlan Kararına Karşı İptal', court: 'TRABZON 2. İDARE MAHKEMESİ', pl: 'Yayla Köylüleri Derneği', def: 'Kültür Varlıkları Kurulu', law: '2863 Sayılı Kanun m.6', sum: 'Özel mülkiyete ait otlakların 1. Derece Doğal Sit İlan edilerek yapılaşmanın tamamen kapatılması.' },
+                { id: 46, cat: 'IDARE', title: 'Güvenlik Soruşturması Olumsuz İptal', court: 'ANKARA 12. İDARE MAHKEMESİ', pl: 'Mühendis Hakan T. (Atanamayan)', def: 'DHMİ Genel Müdürlüğü', law: '7315 Sayılı K. İYUK m.2', sum: 'Sınavı kazanmasına rağmen masumiyet karinesi ihlal edilerek ataması yapılmayan mühendisin davası.' },
+                { id: 47, cat: 'IDARE', title: 'Askeri Okul İntibak Masrafı Tazminatı', court: 'ESKİŞEHİR 1. İDARE MAHKEMESİ', pl: 'Eski Askeri Öğrenci Batuhan', def: 'Milli Savunma Bakanlığı', law: 'İYUK m.2', sum: 'Sağlık kurulu raporuyla okuldan çıkarılmasına rağmen fahiş öğrenim masrafı çıkarılan öğrenci.' },
+                { id: 48, cat: 'IDARE', title: 'Üniversite Disiplin Uzaklaştırma İptali', court: 'EERZURUM 1. İDARE MAHKEMESİ', pl: 'Tıp Öğrencisi Arda', def: 'Atatürk Üniversitesi Rektörlüğü', law: '2547 Sayılı YÖK K. m.54', sum: 'Protesto yürüyüşüne katıldığı gerekçesiyle 1 yarıyıl uzaklaştırma alan tıp öğrencisinin kararı.' },
+                { id: 49, cat: 'IDARE', title: 'Belediye Encümeni Para Cezasının İptali', court: 'AYDIN 1. İDARE MAHKEMESİ', pl: 'Ege Fırıncılık Ltd.', def: 'Kuşadası Belediyesi', law: '1608 Sayılı Kanun, İYUK m.2', sum: 'Gramaj eksikliği gerekçesiyle belediye encümeni tarafından kesilen fahiş idari para cezasının iptali.' },
+                { id: 50, cat: 'IDARE', title: 'Yapı Kayıt Belgesi İptali ve Yıkım İptali', court: 'MUĞLA 2. İDARE MAHKEMESİ', pl: 'Kıyı Butik Otel', def: 'Çevre Şehircilik İl Md. & Bld.', law: '3194 Sayılı K. Geçici m.16', sum: 'İmar barışından alınan Yapı Kayıt Belgesinin haksız iptal edilerek otel hakkında verilen yıkım kararı.' }
+            ];
+
+            rawCases.forEach(item => {
+                casesLibrary.push({
+                    id: item.id,
+                    category: item.cat,
+                    courtName: item.court,
+                    caseNo: `Esas: 2026/${100 + item.id}`,
+                    title: item.title,
+                    plaintiffName: item.pl,
+                    defendantName: item.def,
+                    summary: item.sum,
+                    lawArticles: item.law,
+                    evidence: [
+                        { title: "Dava Dilekçesi ve Resmi İhtarname", type: "Kesin Delil", legal: true, desc: "Süresi içinde çekilmiş noter veya idari ihtarname." },
+                        { title: "Banka Hesap Hareketleri & Dekontlar", type: "Kesin Delil", legal: true, desc: "Para transferi ve ödeme kayıtları." },
+                        { title: "WhatsApp ve E-Posta Yazışmaları", type: "Takdiri Delil", legal: true, desc: "Taraflar arasındaki doğrudan yazılı iletişim." },
+                        { title: "Gizli Alınmış Ses ve Görüntü Kaydı", type: "Hukuka Aykırı Delil", legal: false, desc: "İzinsiz kaydedilmiş materyal (İtiraza açık)." }
+                    ],
+                    witnesses: [
+                        { name: "Saha Şahidi 1", claim: "Olay günü tarafların beyanlarına ve yaşananlara bizzat şahit oldum." }
+                    ],
+                    expertReport: `Bilirkişi Heyeti Raporu: ${item.law} çerçevesinde yapılan teknik ve hukuki incelemede, delillerin ve iddiaların değerlendirilmesi sonucu zararın ve sorumluluğun sübut erdiği mütalaa olunmuştur.`,
+                    
+                    // 3-OPTION BRANCHING TURNS FOR ALL ROLES AT ALL PHASES
+                    turns: {
+                        PRELIMINARY: [
+                            {
+                                role: 'JUDGE',
+                                prompt: "Ön İnceleme Aşaması: HMK/İYUK uyarınca dava şartları ve usulü karara bağlayın.",
+                                choices: [
+                                    { title: "Dava Şartlarını ve Arabuluculuğu Denetle", text: "Zorunlu arabuluculuk / İdari başvuru şartı yerine getirilmiştir. Duruşma açıldı, ilk itirazlar dinleniyor.", shift: 5, patience: 0 },
+                                    { title: "Görev ve Yetki İtirazlarını İncele", text: "Mahkememizin görev ve yetki alanı sabittir. Taraflara ön inceleme beyanları için söz verildi.", shift: 0, patience: 0 },
+                                    { title: "Harç Tamamlama Kesin Süresi Ver", text: "Dava dilekçesindeki noksan harcın tamamlanması için davacıya 1 haftalık kesin süre verildi.", shift: -5, patience: -5 }
+                                ]
+                            },
+                            {
+                                role: 'PLAINTIFF',
+                                prompt: "Davacı Vekili: Davanızı usul ve esas bakımından nasıl temellendireceksiniz?",
+                                choices: [
+                                    { title: "Yazılı Belgeleri ve Hukuki Esası Öne Çıkar", text: "Sayın Hâkim, müvekkilin mağduriyeti ve sunulan yazılı deliller sabittir. Davamızın kabulünü diliyoruz.", shift: 15, patience: 0 },
+                                    { title: "Usulü İtirazları Reddet ve İkame İsteyin", text: "Davalı tarafın usuli itirazları haksızdır, reddedilerek tahkikat aşamasına geçilmesini talep ederiz.", shift: 10, patience: 0 },
+                                    { title: "İhtiyati Tedbir / Yürütmeyi Durdurma İste", text: "HMK m.389 / İYUK m.27 uyarınca telafisi güç zararlar doğmaması için İHTİYATİ TEDBİR kararı verilsin.", shift: 10, patience: 5 }
+                                ]
+                            },
+                            {
+                                role: 'DEFENDANT',
+                                prompt: "Davalı Vekili: Davacının iddialarına karşı ilk usul savunmanız nedir?",
+                                choices: [
+                                    { title: "Hak Düşürücü Süre ve Zamanaşımı İtirazı", text: "Sayın Hâkim, kanuni dava açma süresi geçirilmiştir. Davanın usulden REDDİNİ talep ediyoruz.", shift: -15, patience: 0 },
+                                    { title: "Görevsizlik ve İdari Mercii İtirazında Bulun", text: "Mahkemeniz görevsizdir. Davanın görev yönünden reddini talep ederiz.", shift: -10, patience: -5 },
+                                    { title: "Davanın Haksız Olduğunu Beyan Et ve Sulh Öner", text: "İddialar asılsızdır. Ancak yargılama uzamaması adına dostane sulh görüşmesine açığız.", shift: 5, patience: 5 }
+                                ]
+                            }
+                        ],
+                        TAHKIKAT: [
+                            {
+                                role: 'JUDGE',
+                                prompt: "Tahkikat Aşaması: Tanık ifadeleri ve Bilirkişi Raporunu değerlendirin.",
+                                choices: [
+                                    { title: "Bilirkişi Raporunu Okut ve Beyanları Al", text: "Bilirkişi raporu dosyaya geldi. Taraflara rapora karşı beyan ve itirazları soruldu.", shift: 0, patience: 0 },
+                                    { title: "Tanığı Kürsüye Çağır ve Doğrudan Sorgula", text: "Tanık dinleniyor: Olay günü taraflar arasındaki hukuki ilişkiye dair ne biliyorsunuz?", shift: 5, patience: 0 },
+                                    { title: "Ek Belge İbrazı İçin Kesin Süre İlan Et", text: "HMK m.139 uyarınca eksik ticari/idari belgelerin sunulması için taraflara 2 hafta kesin süre verildi.", shift: -5, patience: 0 }
+                                ]
+                            },
+                            {
+                                role: 'PLAINTIFF',
+                                prompt: "Davacı Vekili: Bilirkişi ve delil değerlendirmesinde hamleniz?",
+                                choices: [
+                                    { title: "Bilirkişi Raporunu Kabul Et ve Hesabı Vurgula", text: "Bilirkişi raporu haklılığımızı tescillemiştir. Rapor doğrultusunda karar verilmesini istiyoruz.", shift: 15, patience: 0 },
+                                    { title: "Dava Miktarını Islah Ederek Artır (HMK 176)", text: "Bilirkişi tespiti doğrultusunda dava değerimizi ıslah ederek artırıyoruz.", shift: 10, patience: 0 },
+                                    { title: "Tanık Beyanlarındaki Uyumsuzluğu Vurgula", text: "Davalı tanığının beyanları çelişkilidir, itibar edilmemelidir.", shift: 10, patience: 0 }
+                                ]
+                            },
+                            {
+                                role: 'DEFENDANT',
+                                prompt: "Davalı Vekili: Tahkikattaki delillere karşı savunmanız?",
+                                choices: [
+                                    { title: "Bilirkişi Raporuna İtiraz Et & Ek Rapor İste", text: "Bilirkişi eksik inceleme yapmıştır. Yeni bir uzman heyetinden ek rapor alınmasını talep ederiz.", shift: -10, patience: -5 },
+                                    { title: "Delillerin Hukuka Aykırı Olduğunu İddia Et", text: "Sunulan görsel/yazılı kayıtlar hukuka aykırı elde edilmiştir, dosyadan çıkarılsın.", shift: -15, patience: 0 },
+                                    { title: "Yemin Teklif Et (HMK m. 225)", text: "Davacı tarafa davanın temel vakıaları konusunda resmen YEMİN teklif ediyoruz.", shift: -5, patience: 5 }
+                                ]
+                            }
+                        ],
+                        FINAL_STATEMENTS: [
+                            {
+                                role: 'PLAINTIFF',
+                                prompt: "Davacı Vekili: Esas hakkındaki son konuşmanız?",
+                                choices: [
+                                    { title: "Davanın Tüm Fer'ileriyle Kabulünü İste", text: "Tüm deliller sübut ermiştir. Davamızın tüm talep kalemleriyle kabulünü diliyoruz.", shift: 15, patience: 0 },
+                                    { title: "Hakkaniyet ve Kanun Amacını Vurgula", text: "Kanunun koruduğu haklar doğrultusunda adil kararın tesisini talep ediyoruz.", shift: 10, patience: 0 },
+                                    { title: "Vekalet Ücreti ve Yargılama Giderini İste", text: "Davanın kabulü ile tüm yargılama gideri ve vekalet ücretinin karşı tarafa yükletilmesini dileriz.", shift: 5, patience: 0 }
+                                ]
+                            },
+                            {
+                                role: 'DEFENDANT',
+                                prompt: "Davalı Vekili: Esas hakkındaki son savunmanız?",
+                                choices: [
+                                    { title: "Davanın Reddine Karar Verilmesini İste", text: "Haksız ve hukuki dayanaktan yoksun davanın REDDİNE karar verilmesini diliyoruz.", shift: -15, patience: 0 },
+                                    { title: "Müdebbir Basiret ve Kusursuzluk İddiası", text: "Müvekkilin hiçbir kusuru veya mevzuat ihlali yoktur, davanın reddi gerekir.", shift: -10, patience: 0 },
+                                    { title: "Kabul Anlamına Gelmemekle Birlikte İndirim İste", text: "Karşı tarafın talepleri fahiştir. Mahkeme aksi kanaatteyse hakkaniyet indirimi yapılmalıdır.", shift: 0, patience: 5 }
+                                ]
+                            }
+                        ]
+                    },
+
+                    // 3 DISTINCT VERDICT OPTIONS FOR JUDGE AT FINAL PHASE
+                    verdicts: [
+                        { id: 'ACCEPT', title: '1- DAVANIN TAMAMEN KABULÜ', clause: 'Davanın KABULÜ ile talep edilen tüm tazminat ve hakların davalıdan alınarak davacıya verilmesine karar verildi.' },
+                        { id: 'PARTIAL', title: '2- DAVANIN KISMEN KABULÜ KISMEN REDDİ', clause: 'Davanın KISMEN KABULÜ ile hakkaniyet indirimi yapılarak kısmi tazminat ödenmesine, fazlaya ilişkin talebin REDDİNE karar verildi.' },
+                        { id: 'REJECT', title: '3- DAVANIN REDDİ', clause: 'Hukuki sebep ve delil yetersizliği / zamanaşımı nedeniyle davanın REDDİNE karar verildi.' }
+                    ]
+                });
+            });
+        }
+
+        generate50Cases();
+
+        /* ==========================================================================
+           2. GAME STATE MANAGEMENT
+           ========================================================================== */
+
+        let gameState = {
+            mode: 'SINGLE', // 'SINGLE' or 'LOCAL_3P'
+            userRole: 'JUDGE', // 'JUDGE', 'PLAINTIFF', 'DEFENDANT'
+            selectedCaseId: 1,
+            activeFilter: 'ALL',
+            
+            currentPhase: 'PRELIMINARY', // 'PRELIMINARY', 'TAHKIKAT', 'FINAL_STATEMENTS', 'JUDGMENT'
+            stepIndex: 0,
+            activeTurnRole: 'JUDGE',
+            
+            judgeInclination: 0, // -100 to +100
+            patience: 100,
+            
+            soundEnabled: true
+        };
+
+        /* ==========================================================================
+           3. WEB AUDIO SYNTHESIZER
+           ========================================================================== */
+
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioCtx();
+        }
+
+        function toggleSound() {
+            gameState.soundEnabled = !gameState.soundEnabled;
+            document.getElementById('sound-icon-on').classList.toggle('hidden', !gameState.soundEnabled);
+            document.getElementById('sound-icon-off').classList.toggle('hidden', gameState.soundEnabled);
+        }
+
+        function playGavelStrike() {
+            if (!gameState.soundEnabled) return;
+            initAudio();
+            const now = audioCtx.currentTime;
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(150, now);
+            osc.frequency.exponentialRampToValueAtTime(20, now + 0.2);
+            
+            gain.gain.setValueAtTime(0.9, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.2);
+        }
+
+        function playObjectionClash() {
+            if (!gameState.soundEnabled) return;
+            initAudio();
+            const now = audioCtx.currentTime;
+            
+            const osc1 = audioCtx.createOscillator();
+            const osc2 = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc1.type = 'sawtooth';
+            osc2.type = 'square';
+            osc1.frequency.setValueAtTime(523.25, now);
+            osc2.frequency.setValueAtTime(659.25, now);
+
+            gain.gain.setValueAtTime(0.4, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc1.start(now);
+            osc2.start(now);
+            osc1.stop(now + 0.35);
+            osc2.stop(now + 0.35);
+        }
+
+        function playChime() {
+            if (!gameState.soundEnabled) return;
+            initAudio();
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, now);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.25);
+        }
+
+        /* ==========================================================================
+           4. SETUP & 50 CASES LIBRARY UI RENDERER
+           ========================================================================== */
+
+        function renderCasesGrid() {
+            const container = document.getElementById('cases-grid-container');
+            const searchVal = document.getElementById('case-search-input').value.toLowerCase().trim();
+            container.innerHTML = '';
+
+            const filtered = casesLibrary.filter(c => {
+                const matchCat = (gameState.activeFilter === 'ALL' || c.category === gameState.activeFilter);
+                const matchSearch = c.title.toLowerCase().includes(searchVal) || 
+                                    c.courtName.toLowerCase().includes(searchVal) || 
+                                    c.summary.toLowerCase().includes(searchVal) ||
+                                    c.lawArticles.toLowerCase().includes(searchVal);
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full p-8 text-center text-slate-500 font-mono text-xs">Aradığınız kriterlere uygun dava dosyası bulunamadı.</div>`;
+                return;
+            }
+
+            filtered.forEach(c => {
+                const isSelected = c.id === gameState.selectedCaseId;
+                const card = document.createElement('button');
+                card.onclick = () => selectCase(c.id);
+                
+                let badgeColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+                let catLabel = "İş Mahkemesi";
+                if (c.category === 'TICARET') { badgeColor = "bg-blue-500/20 text-blue-300 border-blue-500/40"; catLabel = "Asliye Ticaret"; }
+                if (c.category === 'IDARE') { badgeColor = "bg-purple-500/20 text-purple-300 border-purple-500/40"; catLabel = "İdare Mahkemesi"; }
+
+                card.className = `p-3.5 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 text-left transition-all flex flex-col justify-between space-y-2 group ${isSelected ? 'border-amber-500 active-seat-glow' : 'border-slate-800 hover:border-amber-500/50'}`;
+
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border ${badgeColor}">${catLabel}</span>
+                            <span class="text-[10px] text-amber-400 font-mono">Dava #${c.id}</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-sm text-amber-200 group-hover:text-amber-100">${c.title}</h4>
+                        <p class="text-[11px] text-slate-300 leading-snug line-clamp-2">${c.summary}</p>
+                    </div>
+                    <div class="text-[10px] text-slate-500 font-mono border-t border-slate-800/80 pt-1.5 flex justify-between items-center">
+                        <span>${c.lawArticles}</span>
+                        <span class="text-amber-400 font-bold">${isSelected ? 'SEÇİLDİ ✓' : 'Seç &rarr;'}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectCase(id) {
+            gameState.selectedCaseId = id;
+            renderCasesGrid();
+        }
+
+        function setCaseFilter(filter) {
+            gameState.activeFilter = filter;
+            ['all', 'is', 'ticaret', 'idare'].forEach(f => {
+                const btn = document.getElementById(`filter-btn-${f}`);
+                if (f.toUpperCase() === filter || (f === 'all' && filter === 'ALL')) {
+                    btn.className = "px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold";
+                } else {
+                    btn.className = "px-2.5 py-1 rounded-lg text-slate-400 hover:text-amber-300";
+                }
+            });
+            renderCasesGrid();
+        }
+
+        function filterCases() {
+            renderCasesGrid();
+        }
+
+        function selectGameMode(mode) {
+            gameState.mode = mode;
+            document.getElementById('btn-mode-single').className = mode === 'SINGLE' 
+                ? "p-4 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 border-amber-500 text-left transition-all group flex items-start gap-4 active-seat-glow"
+                : "p-4 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 border-slate-800 hover:border-amber-400 text-left transition-all group flex items-start gap-4";
+
+            document.getElementById('btn-mode-3p').className = mode === 'LOCAL_3P' 
+                ? "p-4 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 border-amber-500 text-left transition-all group flex items-start gap-4 active-seat-glow"
+                : "p-4 rounded-2xl bg-gradient-to-b from-slate-900 to-court-panel border-2 border-slate-800 hover:border-amber-400 text-left transition-all group flex items-start gap-4";
+
+            document.getElementById('role-select-box').style.display = (mode === 'SINGLE') ? 'block' : 'none';
+        }
+
+        function selectSingleRole(role) {
+            gameState.userRole = role;
+            ['JUDGE', 'PLAINTIFF', 'DEFENDANT'].forEach(r => {
+                const btn = document.getElementById(`btn-role-${r.toLowerCase()}`);
+                if (r === role) {
+                    btn.className = "px-5 py-2.5 rounded-xl bg-amber-500 border-2 border-amber-400 text-slate-950 font-serif font-black text-xs sm:text-sm shadow-lg";
+                } else {
+                    btn.className = "px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm";
+                }
+            });
+        }
+
+        function resetSetup() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('header-meters').classList.add('hidden');
+            document.getElementById('modal-verdict').classList.add('hidden');
+            document.getElementById('screen-setup').classList.remove('hidden');
+            
+            gameState.currentPhase = 'PRELIMINARY';
+            gameState.stepIndex = 0;
+            gameState.judgeInclination = 0;
+            gameState.patience = 100;
+            
+            document.getElementById('court-log-stream').innerHTML = '';
+            updateGauges();
+        }
+
+        /* ==========================================================================
+           5. MAIN TRIAL ENGINE & BRANCHING SELECTION
+           ========================================================================== */
+
+        function getCurrentCase() {
+            return casesLibrary.find(c => c.id === gameState.selectedCaseId) || casesLibrary[0];
+        }
+
+        function startTrial() {
+            initAudio();
+            playGavelStrike();
+
+            document.getElementById('screen-setup').classList.add('hidden');
+            document.getElementById('header-meters').classList.remove('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+
+            const currentCase = getCurrentCase();
+            document.getElementById('game-court-badge').innerText = currentCase.courtName;
+            document.getElementById('game-case-no').innerText = currentCase.caseNo;
+
+            gameState.currentPhase = 'PRELIMINARY';
+            gameState.stepIndex = 0;
+            gameState.judgeInclination = 0;
+            gameState.patience = 100;
+
+            switchFileTab('summary');
+
+            appendLog('SYSTEM', `⚖️ MAHKEME BAŞKANI Duruşmayı Açtı. ${currentCase.title} dosyasının kimlik tespiti yapıldı. UYAP Zaptı başladı.`);
+
+            updatePhaseUI();
+            updateGauges();
+            processCurrentTurn();
+        }
+
+        function updatePhaseUI() {
+            const phaseOrder = ['PRELIMINARY', 'TAHKIKAT', 'FINAL_STATEMENTS', 'JUDGMENT'];
+            phaseOrder.forEach((p, idx) => {
+                const el = document.getElementById(`phase-${idx + 1}`);
+                if (p === gameState.currentPhase) {
+                    el.className = "px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold shadow-md";
+                } else if (phaseOrder.indexOf(gameState.currentPhase) > idx) {
+                    el.className = "px-3 py-1 rounded-full bg-green-900/60 text-green-300 border border-green-500/30";
+                } else {
+                    el.className = "px-3 py-1 rounded-full bg-slate-800 text-slate-400";
+                }
+            });
+        }
+
+        function updateGauges() {
+            const plaintiffPct = Math.min(100, Math.max(0, 50 + (gameState.judgeInclination / 2)));
+            const defPct = 100 - plaintiffPct;
+
+            document.getElementById('meter-plaintiff-val').innerText = Math.round(plaintiffPct);
+            document.getElementById('meter-def-val').innerText = Math.round(defPct);
+
+            document.getElementById('bar-plaintiff-inclination').style.width = `${plaintiffPct}%`;
+            document.getElementById('bar-def-inclination').style.width = `${defPct}%`;
+
+            document.getElementById('bar-patience').style.width = `${gameState.patience}%`;
+            document.getElementById('text-patience').innerText = `${gameState.patience}%`;
+        }
+
+        function processCurrentTurn() {
+            const currentCase = getCurrentCase();
+
+            if (gameState.currentPhase === 'JUDGMENT') {
+                renderJudgmentVerdictChoices(currentCase);
+                return;
+            }
+
+            const phaseMoves = currentCase.turns[gameState.currentPhase];
+
+            if (!phaseMoves || gameState.stepIndex >= phaseMoves.length) {
+                advancePhase();
+                return;
+            }
+
+            const currentTurnData = phaseMoves[gameState.stepIndex];
+            gameState.activeTurnRole = currentTurnData.role;
+
+            updateActiveRoleSeat(gameState.activeTurnRole);
+            document.getElementById('game-turn-indicator').innerText = getRoleTitle(gameState.activeTurnRole);
+
+            if (gameState.mode === 'SINGLE' && gameState.userRole !== gameState.activeTurnRole) {
+                renderAICardState(currentTurnData);
+                setTimeout(() => {
+                    executeAIMove(currentTurnData);
+                }, 1400);
+            } else {
+                renderHumanChoices(currentTurnData);
+            }
+        }
+
+        function advancePhase() {
+            if (gameState.currentPhase === 'PRELIMINARY') {
+                gameState.currentPhase = 'TAHKIKAT';
+                gameState.stepIndex = 0;
+                appendLog('SYSTEM', '📌 ÖN İNCELEME BİTTİ. Tahkikat (Delil ve İddia İkamesi) aşamasına geçildi.');
+            } else if (gameState.currentPhase === 'TAHKIKAT') {
+                gameState.currentPhase = 'FINAL_STATEMENTS';
+                gameState.stepIndex = 0;
+                appendLog('SYSTEM', '📌 TAHKİKAT BİTTİ. Sözlü Yargılama ve Esas Hakkında Son Beyanlar aşamasına geçildi.');
+            } else if (gameState.currentPhase === 'FINAL_STATEMENTS') {
+                gameState.currentPhase = 'JUDGMENT';
+                gameState.stepIndex = 0;
+                appendLog('SYSTEM', '📌 ESAS HAKKINDA BEYANLAR BİTTİ. Mahkeme HÜKÜM safhasına geçti.');
+            }
+            updatePhaseUI();
+            processCurrentTurn();
+        }
+
+        function getRoleTitle(role) {
+            if (role === 'JUDGE') return '👨‍⚖️ Hâkim Kürsüsü';
+            if (role === 'PLAINTIFF') return '⚖️ Davacı Vekili';
+            if (role === 'DEFENDANT') return '🛡️ Davalı Vekili';
+            return role;
+        }
+
+        function updateActiveRoleSeat(role) {
+            ['seat-judge', 'seat-plaintiff', 'seat-defendant'].forEach(id => {
+                document.getElementById(id).classList.remove('active-seat-glow', 'border-amber-500');
+                document.getElementById(id).classList.add('border-slate-800');
+            });
+
+            let targetId = 'seat-judge';
+            if (role === 'PLAINTIFF') targetId = 'seat-plaintiff';
+            if (role === 'DEFENDANT') targetId = 'seat-defendant';
+
+            document.getElementById(targetId).classList.add('active-seat-glow', 'border-amber-500');
+            document.getElementById(targetId).classList.remove('border-slate-800');
+
+            const turnBadge = document.getElementById('turn-badge');
+            const turnTitle = document.getElementById('turn-role-title');
+            const turnDesc = document.getElementById('turn-role-desc');
+
+            if (role === 'JUDGE') {
+                turnBadge.innerText = 'HÂKİM KÜRSÜSÜ';
+                turnTitle.innerText = 'Hâkim Karar / Hamle Sırası';
+                turnDesc.innerText = 'Duruşmayı sevk edin, usuli itirazları ve duruşma seyrini karara bağlayın.';
+            } else if (role === 'PLAINTIFF') {
+                turnBadge.innerText = 'DAVACI KÜRSÜSÜ';
+                turnTitle.innerText = 'Davacı Vekili Hamlesi';
+                turnDesc.innerText = 'İddia, delil sunumu ve hakkaniyet vurgularınızı yapın.';
+            } else if (role === 'DEFENDANT') {
+                turnBadge.innerText = 'DAVALI KÜRSÜSÜ';
+                turnTitle.innerText = 'Davalı Vekili Hamlesi';
+                turnDesc.innerText = 'Savunma, usul itirazları ve karşı argümanlarınızı sunun.';
+            }
+        }
+
+        // RENDER ALWAYS AT LEAST 3 STRATEGIC CHOICES
+        function renderHumanChoices(turnData) {
+            const container = document.getElementById('container-action-cards');
+            container.innerHTML = '';
+
+            document.getElementById('action-panel-subtitle').innerText = turnData.prompt;
+
+            turnData.choices.forEach((choice, idx) => {
+                const card = document.createElement('button');
+                card.className = "p-3.5 rounded-xl bg-gradient-to-br from-slate-900 to-court-panel border border-amber-500/40 hover:border-amber-400 hover:bg-amber-950/30 text-left transition-all space-y-1.5 group flex flex-col justify-between shadow-lg";
+                card.onclick = () => executeChoice(choice);
+                
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between text-xs font-bold text-amber-300 group-hover:text-amber-200">
+                            <span>Seçenek ${idx + 1}: ${choice.title}</span>
+                            <span class="group-hover:translate-x-1 transition-transform text-amber-400">&rarr;</span>
+                        </div>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">${choice.text}</p>
+                    </div>
+                    <div class="flex items-center justify-between text-[10px] text-amber-500/80 font-mono border-t border-slate-800/80 pt-1.5">
+                        <span>Kanaat Etkisi: ${choice.shift > 0 ? '+' + choice.shift + ' Davacı' : choice.shift < 0 ? choice.shift + ' Davalı' : 'Nötr'}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderAICardState(turnData) {
+            const container = document.getElementById('container-action-cards');
+            container.innerHTML = `
+                <div class="col-span-full p-4 rounded-xl bg-slate-900 border border-slate-800 text-center space-y-2">
+                    <span class="inline-block animate-spin text-xl">🤖</span>
+                    <p class="text-xs text-amber-300 font-bold">${getRoleTitle(turnData.role)} Yapay Zeka Hamlesini Değerlendiriyor...</p>
+                    <p class="text-[11px] text-slate-400 italic font-mono">3 Seçenek Arasından HMK/İYUK Mevzuatına En Uygun Yol Hesaplanıyor</p>
+                </div>
+            `;
+        }
+
+        function executeAIMove(turnData) {
+            const choices = turnData.choices;
+            const chosen = choices[Math.floor(Math.random() * choices.length)];
+            executeChoice(chosen);
+        }
+
+        function executeChoice(choiceObj) {
+            playChime();
+
+            gameState.judgeInclination += choiceObj.shift;
+            gameState.patience = Math.min(100, Math.max(0, gameState.patience + choiceObj.patience));
+
+            updateGauges();
+            appendLog(gameState.activeTurnRole, choiceObj.text);
+
+            if (gameState.activeTurnRole === 'JUDGE') {
+                document.getElementById('judge-status-text').innerText = `"${choiceObj.text.substring(0, 60)}..."`;
+            } else if (gameState.activeTurnRole === 'PLAINTIFF') {
+                document.getElementById('plaintiff-status-text').innerText = `"${choiceObj.text.substring(0, 50)}..."`;
+            } else if (gameState.activeTurnRole === 'DEFENDANT') {
+                document.getElementById('defendant-status-text').innerText = `"${choiceObj.text.substring(0, 50)}..."`;
+            }
+
+            gameState.stepIndex++;
+            processCurrentTurn();
+        }
+
+        // JUDGMENT PHASE: RENDER 3 VERDICT OPTIONS FOR JUDGE
+        function renderJudgmentVerdictChoices(currentCase) {
+            updateActiveRoleSeat('JUDGE');
+            document.getElementById('game-turn-indicator').innerText = '👨‍⚖️ Mahkeme Hüküm Safhası';
+            document.getElementById('action-panel-subtitle').innerText = "HÂKİM HÜKÜM FIKRASI SEÇİMİ: Dosyayı karara bağlamak için 3 hüküm seçeneğinden birini onaylayın:";
+
+            const container = document.getElementById('container-action-cards');
+            container.innerHTML = '';
+
+            currentCase.verdicts.forEach((v, idx) => {
+                const card = document.createElement('button');
+                card.className = "p-4 rounded-xl bg-gradient-to-br from-amber-950/80 to-court-panel border-2 border-amber-500/60 hover:border-amber-400 text-left transition-all space-y-2 group shadow-xl";
+                card.onclick = () => renderFinalUYAPVerdict(v);
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between text-xs font-bold text-amber-300">
+                        <span>${v.title}</span>
+                        <span class="text-amber-400 font-mono">Hüküm #${idx + 1}</span>
+                    </div>
+                    <p class="text-[11px] text-slate-200 leading-relaxed font-serif">${v.clause}</p>
+                    <div class="text-[10px] text-amber-400 font-bold border-t border-slate-800 pt-1.5 flex justify-between">
+                        <span>Resmi UYAP İlamını Yazdır</span>
+                        <span>&rarr;</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function submitCustomStatement() {
+            const input = document.getElementById('custom-roleplay-input');
+            const val = input.value.trim();
+            if (!val) return;
+
+            playChime();
+            appendLog(gameState.activeTurnRole, `[Yazılı Serbest Beyan]: ${val}`);
+            input.value = '';
+
+            gameState.stepIndex++;
+            processCurrentTurn();
+        }
+
+        function appendLog(role, text) {
+            const stream = document.getElementById('court-log-stream');
+            const div = document.createElement('div');
+            
+            let badgeClass = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+            let roleName = "HÂKİM KÜRSÜSÜ";
+
+            if (role === 'PLAINTIFF') {
+                badgeClass = "bg-blue-500/20 text-blue-300 border-blue-500/40";
+                roleName = "DAVACI VEKİLİ";
+            } else if (role === 'DEFENDANT') {
+                badgeClass = "bg-red-500/20 text-red-300 border-red-500/40";
+                roleName = "DAVALI VEKİLİ";
+            } else if (role === 'SYSTEM') {
+                badgeClass = "bg-green-500/20 text-green-300 border-green-500/40";
+                roleName = "ZABIT SİSTEMİ";
+            }
+
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+
+            div.className = "p-2 rounded-lg bg-slate-900/90 border border-slate-800 space-y-1 shadow-sm";
+            div.innerHTML = `
+                <div class="flex items-center justify-between text-[10px]">
+                    <span class="px-2 py-0.5 rounded border ${badgeClass} font-bold font-mono">${roleName}</span>
+                    <span class="text-slate-500 font-mono">${timeStr}</span>
+                </div>
+                <p class="text-slate-200 text-[11px] leading-relaxed font-sans">${text}</p>
+            `;
+
+            stream.appendChild(div);
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        /* ==========================================================================
+           6. FILE DRAWER TABS HANDLER
+           ========================================================================== */
+
+        function switchFileTab(tabName) {
+            const currentCase = getCurrentCase();
+            const contentBox = document.getElementById('file-tab-content');
+
+            ['summary', 'evidence', 'witness', 'expert'].forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (btn) {
+                    if (t === tabName) {
+                        btn.className = "flex-1 py-1 rounded bg-amber-500 text-slate-950 font-bold";
+                    } else {
+                        btn.className = "flex-1 py-1 rounded text-slate-400 hover:text-amber-300";
+                    }
+                }
+            });
+
+            if (tabName === 'summary') {
+                contentBox.innerHTML = `
+                    <p class="font-bold text-amber-300">${currentCase.title}</p>
+                    <p class="text-slate-300 text-[11px] leading-relaxed">${currentCase.summary}</p>
+                    <div class="border-t border-slate-800 pt-2 text-[10px] text-amber-400/90 font-mono space-y-0.5">
+                        <p>Davacı: ${currentCase.plaintiffName}</p>
+                        <p>Davalı: ${currentCase.defendantName}</p>
+                    </div>
+                `;
+            } else if (tabName === 'evidence') {
+                contentBox.innerHTML = `
+                    <p class="font-bold text-amber-300 mb-1">Delil Envanteri (HMK m. 189):</p>
+                    <div class="space-y-1.5">
+                        ${currentCase.evidence.map(e => `
+                            <div class="p-2 rounded bg-slate-900 border border-slate-800">
+                                <div class="flex justify-between font-bold text-[11px]">
+                                    <span class="text-amber-200">${e.title}</span>
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded ${e.legal ? 'bg-green-950 text-green-300 border border-green-800' : 'bg-red-950 text-red-300 border border-red-800'}">${e.type}</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400 mt-0.5">${e.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (tabName === 'witness') {
+                contentBox.innerHTML = `
+                    <p class="font-bold text-amber-300 mb-1">Tanık İfadeleri ve Mütalaalar:</p>
+                    <div class="space-y-1.5">
+                        ${currentCase.witnesses.length > 0 ? currentCase.witnesses.map(w => `
+                            <div class="p-2 rounded bg-slate-900 border border-slate-800 space-y-0.5">
+                                <p class="font-bold text-amber-200 text-[11px]">${w.name}</p>
+                                <p class="text-[10px] text-slate-300 italic">"${w.claim}"</p>
+                            </div>
+                        `).join('') : '<p class="text-slate-500 italic">Dosyada dinlenecek tanık bulunmamaktadır.</p>'}
+                    </div>
+                `;
+            } else if (tabName === 'expert') {
+                contentBox.innerHTML = `
+                    <p class="font-bold text-amber-300 mb-1">Bilirkişi İnceleme Mütalaası:</p>
+                    <p class="text-slate-300 text-[11px] italic bg-slate-900 p-2 rounded border border-slate-800 leading-relaxed">${currentCase.expertReport}</p>
+                    <p class="text-[10px] text-amber-500 font-mono mt-1">Uygulanacak Mevzuat: ${currentCase.lawArticles}</p>
+                `;
+            }
+        }
+
+        /* ==========================================================================
+           7. MODALS & TACTICAL ACTIONS
+           ========================================================================== */
+
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        function openObjectionModal() {
+            playObjectionClash();
+            const banner = document.getElementById('objection-banner');
+            banner.classList.remove('hidden');
+            setTimeout(() => {
+                banner.classList.add('hidden');
+                openModal('modal-objection');
+            }, 900);
+        }
+
+        function resolveObjection(type) {
+            closeModal('modal-objection');
+            playGavelStrike();
+
+            let resultText = "";
+            if (type === 'HUKUKA_AYKIRI_DELIL') {
+                resultText = "İTİRAZ KABUL EDİLDİ! HMK m. 189/2 uyarınca hukuka aykırı delil dosyadan çıkarıldı.";
+                gameState.judgeInclination += (gameState.userRole === 'PLAINTIFF') ? 10 : -10;
+            } else if (type === 'YONLENDIRICI_SORU') {
+                resultText = "İTİRAZ KABUL EDİLDİ! Yönlendirici soru iptal edildi.";
+                gameState.patience = Math.max(0, gameState.patience - 10);
+            } else if (type === 'ZAMANASIMI') {
+                resultText = "İTİRAZ İNCELEMEYE ALINDI! Zamanaşımı esasa girilerek incelenecektir.";
+            } else if (type === 'KONU_DISI') {
+                resultText = "İTİRAZ KABUL EDİLDİ! Konu dışı iddialar tutanağa geçirilmedi.";
+            }
+
+            appendLog('SYSTEM', `⚠️ USULİ İTİRAZ KARARI: ${resultText}`);
+            updateGauges();
+        }
+
+        function openInterlocutoryModal() { openModal('modal-interlocutory'); }
+
+        function issueInterlocutory(type) {
+            closeModal('modal-interlocutory');
+            playGavelStrike();
+
+            let decisionText = "";
+            if (type === 'BILIRKISI_EK_RAPOR') {
+                decisionText = "ARA KARAR: Dosyanın ek rapor için bilirkişi heyetine tevdiine karar verildi.";
+            } else if (type === 'DISIPLIN_IHTARI') {
+                decisionText = "ARA KARAR (HMK m. 151): Duruşma düzenini bozan tarafa disiplin ihtarı verildi.";
+                gameState.patience = 100;
+            } else if (type === 'MULET_VERME') {
+                decisionText = "ARA KARAR: Delil ibrazı için taraflara 2 haftalık KESİN SÜRE verildi.";
+            }
+
+            appendLog('JUDGE', `👨‍⚖️ MAHKEME ARA KARARI: ${decisionText}`);
+            updateGauges();
+        }
+
+        function openCrossExModal() {
+            const body = document.getElementById('crossex-body');
+            body.innerHTML = `
+                <p class="text-slate-300">Tanık veya bilirkişiye doğrudan yöneltilecek 3 çapraz sorgu metodundan birini seçin:</p>
+                <div class="space-y-2 pt-2">
+                    <button onclick="executeCrossEx('Çelişkileri Yüzleştir', 'Tanık beyanı ile yazılı delil çelişkisi soruldu.')" class="w-full p-3 rounded-xl bg-slate-950 border border-blue-500/40 hover:border-blue-400 text-left text-xs">
+                        <span class="font-bold text-blue-300 block">1. Çelişkileri Yüzleştir</span>
+                        <span class="text-slate-400 text-[11px]">Tanık beyanı ile dosyadaki resmi yazılı belgeleri yüzleştirin.</span>
+                    </button>
+                    <button onclick="executeCrossEx('Güvenilirliği Sars', 'Tanığın tarafsızlığı ve husumeti soruldu.')" class="w-full p-3 rounded-xl bg-slate-950 border border-amber-500/40 hover:border-amber-400 text-left text-xs">
+                        <span class="font-bold text-amber-300 block">2. Güvenilirliği Sars</span>
+                        <span class="text-slate-400 text-[11px]">Tanığın tarafla husumeti veya kişisel çıkarını ortaya çıkarın.</span>
+                    </button>
+                    <button onclick="executeCrossEx('Teknik Bilgiyi Sıkıştır', 'Bilirkişi metodolojisi sorgulandı.')" class="w-full p-3 rounded-xl bg-slate-950 border border-purple-500/40 hover:border-purple-400 text-left text-xs">
+                        <span class="font-bold text-purple-300 block">3. Teknik Bilgiyi Sıkıştır</span>
+                        <span class="text-slate-400 text-[11px]">Bilirkişinin kullandığı hesaplama formülünün bilimsel aykırılığını sorun.</span>
+                    </button>
+                </div>
+            `;
+            openModal('modal-crossex');
+        }
+
+        function executeCrossEx(title, desc) {
+            closeModal('modal-crossex');
+            playChime();
+            appendLog(gameState.userRole, `🎙️ ÇAPRAZ SORGU [${title}]: ${desc}`);
+            gameState.judgeInclination += (gameState.userRole === 'PLAINTIFF') ? 10 : -10;
+            updateGauges();
+        }
+
+        /* ==========================================================================
+           8. FINAL REASONED VERDICT (UYAP FORMAT)
+           ========================================================================== */
+
+        function renderFinalUYAPVerdict(verdictObj) {
+            playGavelStrike();
+            const currentCase = getCurrentCase();
+            const modal = document.getElementById('modal-verdict');
+
+            document.getElementById('verdict-modal-court').innerText = `${currentCase.courtName} GEREKÇELİ KARARI`;
+            document.getElementById('verdict-plaintiff-name').innerText = currentCase.plaintiffName;
+            document.getElementById('verdict-defendant-name').innerText = currentCase.defendantName;
+
+            document.getElementById('verdict-summary-text').innerText = currentCase.summary;
+            document.getElementById('verdict-reasoning-text').innerText = `${currentCase.expertReport} Toplanan deliller, arabuluculuk tutanağı ve taraf beyanları ${currentCase.lawArticles} hükümleri uyarınca incelenmiş; mahkememizce usul ve esasa uygun bulunarak aşağıdaki şekilde hüküm kurulmuştur.`;
+
+            document.getElementById('verdict-clause-text').innerText = verdictObj.clause;
+
+            document.getElementById('score-inclination').innerText = gameState.judgeInclination >= 0 
+                ? `%${Math.round(50 + gameState.judgeInclination/2)} Davacı Lehine` 
+                : `%${Math.round(50 - gameState.judgeInclination/2)} Davalı Lehine`;
+
+            modal.classList.remove('hidden');
+        }
+
+        function copyVerdictText() {
+            const court = document.getElementById('verdict-modal-court').innerText;
+            const clause = document.getElementById('verdict-clause-text').innerText;
+            const textToCopy = `${court}\n\nHÜKÜM FIKRASI:\n${clause}`;
+
+            navigator.clipboard ? navigator.clipboard.writeText(textToCopy) : document.execCommand('copy');
+            openToast("Kopyalandı", "Gerekçeli Karar metni UYAP formatında panoya kopyalandı!");
+        }
+
+        function openToast(title, desc) {
+            const box = document.getElementById('toast-box');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
+
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.add('hidden'), 3500);
+        }
+
+        // INITIALIZE ON LOAD
+        window.onload = function() {
+            renderCasesGrid();
+        };
+    </script>
+</body>
+</html>

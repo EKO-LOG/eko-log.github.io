@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mali Müşavir & YMM Simulator 4.0 - Hukuk & Mahkeme Eklentisi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #090d16; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+        .progress-bar-fill { transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans overflow-hidden antialiased bg-slate-950 text-slate-100 select-none">
+
+    <!-- HEADER / DASHBOARD KPI BAR -->
+    <header class="bg-slate-900/90 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shrink-0 shadow-xl z-20 backdrop-blur-md">
+        <!-- Title & Rank -->
+        <div class="flex items-center space-x-3">
+            <div class="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 p-2.5 rounded-xl shadow-lg shadow-blue-500/20 flex items-center justify-center">
+                <i data-lucide="scale" class="w-6 h-6 text-white"></i>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="font-black text-lg leading-tight tracking-wide bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-300 bg-clip-text text-transparent">
+                        Mali Müşavir & YMM Sim 4.0
+                    </h1>
+                    <span id="kpi-rank-badge" class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full">SMMM Unvanı</span>
+                </div>
+                <p id="office-name-display" class="text-xs text-slate-400 font-medium">Büro Seviyesi: Ev-Ofis (Seviye 1)</p>
+            </div>
+        </div>
+
+        <!-- KPI Indicators -->
+        <div class="flex items-center gap-2 sm:gap-3 text-xs font-semibold flex-wrap">
+            <!-- Tarih -->
+            <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <i data-lucide="calendar" class="w-4 h-4 text-cyan-400"></i>
+                <div>
+                    <div class="text-[9px] text-slate-500 uppercase tracking-wider font-bold">Tarih</div>
+                    <div id="kpi-date" class="font-mono text-cyan-200">01 Ocak 2026</div>
+                </div>
+            </div>
+
+            <!-- Bütçe (Kasa) -->
+            <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <i data-lucide="wallet" class="w-4 h-4 text-emerald-400"></i>
+                <div>
+                    <div class="text-[9px] text-slate-500 uppercase tracking-wider font-bold">Kasa</div>
+                    <div id="kpi-budget" class="font-mono text-emerald-400 font-bold">₺35.000</div>
+                </div>
+            </div>
+
+            <!-- Aktif Dava Sayısı -->
+            <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <i data-lucide="gavel" class="w-4 h-4 text-purple-400"></i>
+                <div>
+                    <div class="text-[9px] text-slate-500 uppercase tracking-wider font-bold">Dava Dosyası</div>
+                    <div id="kpi-cases-count" class="font-mono text-purple-300 font-bold">0 Aktif</div>
+                </div>
+            </div>
+
+            <!-- Vergi Riski Metresi -->
+            <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-rose-400"></i>
+                <div class="w-16 sm:w-20">
+                    <div class="flex justify-between text-[9px] text-slate-500 uppercase tracking-wider font-bold mb-0.5">
+                        <span>Risk</span>
+                        <span id="kpi-risk-val" class="text-rose-400 font-mono">10%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div id="kpi-risk-bar" class="bg-emerald-500 h-full rounded-full progress-bar-fill" style="width: 10%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İtibar -->
+            <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+                <div class="w-16 sm:w-20">
+                    <div class="flex justify-between text-[9px] text-slate-500 uppercase tracking-wider font-bold mb-0.5">
+                        <span>İtibar</span>
+                        <span id="kpi-rep-val" class="text-amber-300 font-mono">50%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div id="kpi-rep-bar" class="bg-amber-400 h-full rounded-full progress-bar-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stres -->
+            <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+                <i data-lucide="zap" class="w-4 h-4 text-purple-400"></i>
+                <div class="w-16 sm:w-20">
+                    <div class="flex justify-between text-[9px] text-slate-500 uppercase tracking-wider font-bold mb-0.5">
+                        <span>Stres</span>
+                        <span id="kpi-stress-val" class="text-purple-300 font-mono">15%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div id="kpi-stress-bar" class="bg-purple-500 h-full rounded-full progress-bar-fill" style="width: 15%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-2">
+            <button id="btn-pause" onclick="togglePause()" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition flex items-center gap-1 text-xs font-bold">
+                <i id="icon-pause" data-lucide="pause" class="w-4 h-4"></i>
+                <span id="text-pause" class="hidden md:inline">Durdur</span>
+            </button>
+            <button id="btn-speed" onclick="cycleSpeed()" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-400 rounded-lg border border-slate-700 transition text-xs font-bold flex items-center gap-1">
+                <i data-lucide="fast-forward" class="w-4 h-4"></i>
+                <span id="speed-text">1x</span>
+            </button>
+            <button onclick="takeBreak()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-emerald-600/20">
+                <i data-lucide="coffee" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Mola (₺200)</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-4 flex space-x-2 overflow-x-auto shrink-0 z-10">
+        <button onclick="switchTab('tab-overview')" id="nav-tab-overview" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-blue-500 text-blue-400 flex items-center gap-2 transition whitespace-nowrap">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Genel Bakış & Takvim
+        </button>
+        <button onclick="switchTab('tab-desk')" id="nav-tab-desk" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
+            <i data-lucide="file-search" class="w-4 h-4"></i> Evrak İşleme Terminali
+            <span id="badge-invoices" class="hidden bg-rose-500 text-white text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+        <button onclick="switchTab('tab-gib')" id="nav-tab-gib" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
+            <i data-lucide="landmark" class="w-4 h-4"></i> GİB Beyanname Portalı
+        </button>
+        <button onclick="switchTab('tab-clients')" id="nav-tab-clients" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
+            <i data-lucide="users" class="w-4 h-4"></i> Müşteriler & Tahsilat
+        </button>
+        <button onclick="switchTab('tab-court')" id="nav-tab-court" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-purple-400 hover:text-purple-300 flex items-center gap-2 transition whitespace-nowrap bg-purple-950/20">
+            <i data-lucide="gavel" class="w-4 h-4 text-purple-400"></i> Mahkeme & Dava Takip
+            <span id="badge-court-count" class="bg-purple-600 text-white text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+        <button onclick="switchTab('tab-finance')" id="nav-tab-finance" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
+            <i data-lucide="coins" class="w-4 h-4"></i> Finans, Banka & Bilirkişilik
+        </button>
+        <button onclick="switchTab('tab-office')" id="nav-tab-office" class="tab-btn px-4 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
+            <i data-lucide="building" class="w-4 h-4"></i> Ekip & YMM Kariyeri
+        </button>
+    </nav>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="flex-1 overflow-hidden relative p-4 bg-slate-950">
+
+        <!-- TAB 1: OVERVIEW & CALENDAR -->
+        <div id="tab-overview" class="tab-content h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                
+                <!-- Mali Takvim Card -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                        <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+                            <i data-lucide="calendar-days" class="w-4 h-4 text-cyan-400"></i> Bu Ayın Resmi Beyan Takvimi
+                        </h3>
+                        <span class="text-[11px] text-slate-400 font-mono" id="tax-period-label">Ocak Dönemi</span>
+                    </div>
+                    <div class="space-y-2 text-xs flex-1">
+                        <div id="cal-sgk" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
+                            <div>
+                                <span class="font-semibold text-slate-200">15'i: SGK APHB Bildirgeleri</span>
+                                <p class="text-[10px] text-slate-400">Çalışan Sigorta Prim Onayları</p>
+                            </div>
+                            <span id="status-sgk" class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950/80 text-amber-400 border border-amber-800/60">Bekliyor</span>
+                        </div>
+                        <div id="cal-kdv" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
+                            <div>
+                                <span class="font-semibold text-slate-200">24'ü: KDV1 Beyannameleri</span>
+                                <p class="text-[10px] text-slate-400">Aylık Katma Değer Vergisi</p>
+                            </div>
+                            <span id="status-kdv" class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950/80 text-amber-400 border border-amber-800/60">Bekliyor</span>
+                        </div>
+                        <div id="cal-muhtasar" class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
+                            <div>
+                                <span class="font-semibold text-slate-200">26'sı: Muhtasar & Damga V.</span>
+                                <p class="text-[10px] text-slate-400">Kira ve Stopaj Kesintileri</p>
+                            </div>
+                            <span id="status-muhtasar" class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950/80 text-amber-400 border border-amber-800/60">Bekliyor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Günlük Bekleyen Görevler -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                        <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+                            <i data-lucide="check-square" class="w-4 h-4 text-emerald-400"></i> Bekleyen Büro İşleri & Hukuk Bildirimleri
+                        </h3>
+                        <span id="pending-count-label" class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-mono">0 İş Var</span>
+                    </div>
+
+                    <div id="task-list" class="space-y-2 overflow-y-auto max-h-[200px] pr-1">
+                        <!-- Dynamic Tasks -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Finans ve Loglar -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
+                <!-- Finansal Durum -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-lg">
+                    <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2 border-b border-slate-800 pb-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-blue-400"></i> Bütçe & Tahmini Gelir/Gider Tablosu
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 my-3">
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-[11px] text-slate-400 block mb-1">Maktu Sözleşme Gelirleri</span>
+                            <span id="summary-income" class="text-lg font-extrabold font-mono text-emerald-400">₺0</span>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span class="text-[11px] text-slate-400 block mb-1">Ofis + Personel + Avukat Giderleri</span>
+                            <span id="summary-expenses" class="text-lg font-extrabold font-mono text-rose-400">₺0</span>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-400 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
+                        <span class="font-bold text-purple-400">⚖️ Mahkeme Sistemi:</span> Haksız ceza yediğinizde Vergi Mahkemesi veya Danıştay'da dava açıp avukat atayarak parayı geri tahsil edebilirsiniz.
+                    </div>
+                </div>
+
+                <!-- Günlük Log Akışı -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col shadow-lg">
+                    <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2 border-b border-slate-800 pb-2 mb-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-purple-400"></i> Büro İşlem Logları
+                    </h3>
+                    <div id="activity-log" class="text-xs space-y-1.5 overflow-y-auto flex-1 font-mono text-slate-400 pr-1 max-h-[160px]">
+                        <!-- Dynamic Logs -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: INVOICE & NAYLON TERMINAL -->
+        <div id="tab-desk" class="tab-content hidden h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                    <div>
+                        <h2 class="font-bold text-base text-slate-100 flex items-center gap-2">
+                            <i data-lucide="file-search" class="w-5 h-5 text-blue-400"></i> Evrak & Fatura İnceleme Terminali
+                        </h2>
+                        <p class="text-xs text-slate-400">Gelen faturaları inceleyin. Sahte/Naylon faturaları tespit edip **İptal Edin**, gerçek faturaları işleyin!</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400">Kalan Evrak:</span>
+                        <span id="invoices-processed-count" class="font-bold text-blue-400 font-mono text-sm">0/5</span>
+                    </div>
+                </div>
+
+                <!-- Active Invoice Box -->
+                <div id="invoice-card-container" class="max-w-2xl mx-auto bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-2xl relative">
+                    <div id="no-invoices-msg" class="hidden text-center py-10">
+                        <i data-lucide="check-circle-2" class="w-12 h-12 text-emerald-400 mx-auto mb-3"></i>
+                        <h3 class="font-bold text-slate-200 text-base">Masadaki Tüm Evraklar Temizlendi!</h3>
+                        <p class="text-xs text-slate-400 mt-1">Sisteme yeni fatura düşene kadar diğer büro veya mahkeme işleriyle ilgilenebilirsiniz.</p>
+                    </div>
+
+                    <div id="active-invoice-box">
+                        <div class="flex justify-between items-start border-b border-slate-800 pb-3 mb-4">
+                            <div>
+                                <span id="inv-type-badge" class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-blue-900/60 text-blue-300 border border-blue-700/50">Gider Faturası</span>
+                                <h3 id="inv-vendor" class="font-bold text-lg text-slate-100 mt-1">TeknoSoft A.Ş.</h3>
+                                <p id="inv-client" class="text-xs text-slate-400">Ait Olduğu Müşteri: Mahalle Bakkalı Ahsen Efendi</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400 block">Fatura Tutarı</span>
+                                <span id="inv-amount" class="text-xl font-bold font-mono text-emerald-400">₺15.000,00</span>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Item Details -->
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 mb-5 text-xs space-y-1 font-mono text-slate-300">
+                            <div class="flex justify-between"><span>Açıklama:</span> <span id="inv-desc" class="text-slate-100 font-sans">Danışmanlık ve Bilgisayar Alımı</span></div>
+                            <div class="flex justify-between"><span>Evrak No:</span> <span id="inv-no">GİB2026000129</span></div>
+                            <div class="flex justify-between"><span>Tarih:</span> <span id="inv-date">10.01.2026</span></div>
+                        </div>
+
+                        <!-- Mini Game Decision Controls -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">1. KDV Oranını Doğrulayın:</label>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <button type="button" onclick="selectKdv(1)" class="kdv-btn border border-slate-700 bg-slate-900 hover:bg-slate-800 p-2.5 rounded-xl text-xs font-bold transition">
+                                        %1 KDV
+                                    </button>
+                                    <button type="button" onclick="selectKdv(10)" class="kdv-btn border border-slate-700 bg-slate-900 hover:bg-slate-800 p-2.5 rounded-xl text-xs font-bold transition">
+                                        %10 KDV
+                                    </button>
+                                    <button type="button" onclick="selectKdv(20)" class="kdv-btn border border-slate-700 bg-slate-900 hover:bg-slate-800 p-2.5 rounded-xl text-xs font-bold transition">
+                                        %20 KDV
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 pt-2">
+                                <button onclick="rejectFakeInvoice()" class="py-3 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+                                    <i data-lucide="ban" class="w-4 h-4 text-rose-400"></i> Sahte / Naylon Fatura (İptal Et)
+                                </button>
+                                <button onclick="submitInvoiceProcess()" class="py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 text-xs transition flex items-center justify-center gap-1.5">
+                                    <i data-lucide="check" class="w-4 h-4"></i> Gerçek Fatura (Sisteme İşle)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: GİB E-BEYANNAME PORTAL -->
+        <div id="tab-gib" class="tab-content hidden h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex-1 flex flex-col shadow-lg">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-rose-600/20 text-rose-400 p-2 rounded-xl border border-rose-500/30">
+                            <i data-lucide="landmark" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-base text-slate-100">GİB E-Beyanname Portalı</h2>
+                            <p class="text-xs text-slate-400">Aylık ve dönemsel vergi paketlerini onaylayıp Vergi Dairesine iletin.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Submission Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <!-- SGK Card -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-slate-200">SGK APHB Bildirgesi</span>
+                                <span class="text-[10px] text-slate-400 font-mono">Son: 15'i</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">Tüm çalışanların aylık sigorta prim bildirim paketidir.</p>
+                        </div>
+                        <button id="btn-submit-sgk" onclick="submitTaxDeclaration('SGK')" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
+                            <i data-lucide="send" class="w-4 h-4"></i> SGK Bildirgelerini Onayla
+                        </button>
+                    </div>
+
+                    <!-- KDV Card -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-slate-200">KDV1 Beyannameleri</span>
+                                <span class="text-[10px] text-slate-400 font-mono">Son: 24'ü</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">Aylık Katma Değer Vergisi beyanname paketleri.</p>
+                        </div>
+                        <button id="btn-submit-kdv" onclick="submitTaxDeclaration('KDV')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
+                            <i data-lucide="send" class="w-4 h-4"></i> KDV Beyannamelerini Gönder
+                        </button>
+                    </div>
+
+                    <!-- Muhtasar Card -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-slate-200">Muhtasar & Stopaj</span>
+                                <span class="text-[10px] text-slate-400 font-mono">Son: 26'sı</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">Kira, muhtasar ve damga vergisi beyanları.</p>
+                        </div>
+                        <button id="btn-submit-muhtasar" onclick="submitTaxDeclaration('MUHTASAR')" class="w-full py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow">
+                            <i data-lucide="send" class="w-4 h-4"></i> Muhtasarları Onayla
+                        </button>
+                    </div>
+                </div>
+
+                <!-- History -->
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col">
+                    <h3 class="text-xs font-bold text-slate-300 mb-2 flex items-center gap-2">
+                        <i data-lucide="history" class="w-4 h-4 text-emerald-400"></i> GİB Beyanname Onay Geçmişi
+                    </h3>
+                    <div id="gib-history-list" class="space-y-2 text-xs overflow-y-auto flex-1 font-mono pr-1">
+                        <!-- Dynamic GIB Log -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: MÜŞTERİLER & TAHSİLAT -->
+        <div id="tab-clients" class="tab-content hidden h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                    <div>
+                        <h2 class="font-bold text-base text-slate-100 flex items-center gap-2">
+                            <i data-lucide="users" class="w-5 h-5 text-amber-400"></i> Müşteri Portföyü & Tahsilat Riski
+                        </h2>
+                        <p class="text-xs text-slate-400">Aksayan muhasebe ücretlerini tahsil edin veya ödemeyen müşterilere **İcra Takibi** başlatın!</p>
+                    </div>
+                    <button onclick="searchNewClient()" class="px-3 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i> Yeni Müşteri Arayışı (₺1.000)
+                    </button>
+                </div>
+
+                <div id="clients-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamic Client Cards -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: MAHKEME & DAVA TAKİP OTOMASYONU (NEW TAB) -->
+        <div id="tab-court" class="tab-content hidden h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                
+                <!-- Active Cases Dashboard (2 cols) -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                        <div>
+                            <h2 class="font-bold text-base text-purple-300 flex items-center gap-2">
+                                <i data-lucide="gavel" class="w-5 h-5 text-purple-400"></i> Dava Klasörü & Mahkeme Dosyaları
+                            </h2>
+                            <p class="text-xs text-slate-400">Vergi Mahkemesi, Danıştay, SGK ve İcra Davalarınızın duruşma ve karar takibi.</p>
+                        </div>
+                        <button onclick="openNewCaseModal()" class="px-3 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Yeni Dava Aç (₺5.000 Harç)
+                        </button>
+                    </div>
+
+                    <!-- Cases Grid -->
+                    <div id="cases-grid-container" class="space-y-3 overflow-y-auto max-h-[480px] pr-1">
+                        <!-- Dynamic Court Cases Cards -->
+                    </div>
+                </div>
+
+                <!-- Lawyer Roster & Legal Team (1 col) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-bold text-base text-slate-100 border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">
+                            <i data-lucide="user-check" class="w-5 h-5 text-indigo-400"></i> Anlaşmalı Hukuk Bürosu & Avukatlar
+                        </h2>
+                        <p class="text-xs text-slate-400 mb-4">Uzman avukatlar atayarak davaları kazanma şansınızı artırın.</p>
+
+                        <div id="lawyers-list" class="space-y-3">
+                            <!-- Dynamic Lawyers Roster -->
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-400 mt-4">
+                        <span class="font-bold text-amber-300">⚖️ Hukuki İpucu:</span> VUK 359 veya İYUK 27 maddelerine dayandırılmış güçlü savunma dilekçeleri duruşma kazanma oranını %35 artırır.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 6: FİNANS, BANKA & BİLİRKİŞİLİK -->
+        <div id="tab-finance" class="tab-content hidden h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                
+                <!-- Banka & Kredi Panel -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-bold text-base text-slate-100 border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">
+                            <i data-lucide="building-2" class="w-5 h-5 text-emerald-400"></i> Banka & Kredi Hesabı
+                        </h2>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 mb-4 text-xs font-mono">
+                            <div class="flex justify-between"><span>Findeks Kredi Notu:</span> <span id="credit-score-val" class="text-emerald-400 font-bold">1.450 (İyi)</span></div>
+                            <div class="flex justify-between"><span>Mevcut Kredi Borcu:</span> <span id="loan-debt-val" class="text-rose-400 font-bold">₺0</span></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <button onclick="takeBankLoan(25000)" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition">
+                            ₺25.000 İhtiyaç Kredisi Çek (%3 Aylık Faiz)
+                        </button>
+                        <button onclick="payBankLoan()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs transition border border-slate-700">
+                            Kredi Borcunu Kapat
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Borsa, Mevduat & Gayrimenkul Yatırımı -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-bold text-base text-slate-100 border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">
+                            <i data-lucide="coins" class="w-5 h-5 text-amber-400"></i> Mevduat & Borsa Portföyü
+                        </h2>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2 mb-4 text-xs font-mono">
+                            <div class="flex justify-between"><span>Mevduat Hesabı (%45 Faiz):</span> <span id="deposit-val" class="text-indigo-300 font-bold">₺0</span></div>
+                            <div class="flex justify-between"><span>Borsa / Altın Portföyü:</span> <span id="stocks-val" class="text-amber-300 font-bold">₺0</span></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="investDeposit(10000)" class="py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">
+                            ₺10.000 Mevduata Yatır
+                        </button>
+                        <button onclick="withdrawDeposit()" class="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs transition border border-slate-700">
+                            Mevduatı Çek
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Adliye Bilirkişilik Dosyaları -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-bold text-base text-slate-100 border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">
+                            <i data-lucide="scale" class="w-5 h-5 text-purple-400"></i> Adliye Bilirkişilik Görevleri
+                        </h2>
+                        <p class="text-xs text-slate-400 mb-4">Mahkemelerden gelen dava dosyalarını inceleyip bilirkişi raporu yazarak yüksek ek ücret kazanın.</p>
+                    </div>
+                    <button onclick="acceptExpertMission()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs transition shadow-lg shadow-purple-600/30 flex items-center justify-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> Bilirkişi Dosyası Üstlen (₺12.000 Gelir)
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 7: OFİS & YMM KARİYERİ -->
+        <div id="tab-office" class="tab-content hidden h-full flex flex-col gap-4 overflow-y-auto pr-1">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                
+                <!-- Kariyer & YMM Unvanı -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col">
+                    <h2 class="font-bold text-base text-slate-100 border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">
+                        <i data-lucide="award" class="w-5 h-5 text-amber-400"></i> SMMM & YMM Kariyer Yolu
+                    </h2>
+                    <div class="space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-300">Unvan Durumu:</span>
+                                <span id="career-title-display" class="text-xs font-extrabold text-blue-400 font-mono">SMMM</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-300">Ofis Tipi:</span>
+                                <span id="career-office-display" class="text-xs font-bold text-cyan-300">Ev-Ofis (Seviye 1)</span>
+                            </div>
+                        </div>
+
+                        <!-- Upgrade Office Level -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                            <h3 class="font-bold text-xs text-slate-200">Plazaya Taşın (Ofis Seviyesi 2)</h3>
+                            <p class="text-[11px] text-slate-400">Görkemli bir plaza katı prestijinizi ve müşteri kapasitenizi artırır.</p>
+                            <button id="btn-upgrade-office" onclick="upgradeOfficeLevel()" class="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs transition">
+                                Plazaya Taşın (₺50.000)
+                            </button>
+                        </div>
+
+                        <!-- YMM Exam Upgrade -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                            <h3 class="font-bold text-xs text-amber-300">YMM (Yeminli Mali Müşavir) Sınavı</h3>
+                            <p class="text-[11px] text-slate-400">Şartlar: En az %80 İtibar ve ₺100.000 Birikim. YMM olunca Tam Tasdik denetimleri açılır!</p>
+                            <button id="btn-pass-ymm" onclick="takeYMMExam()" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs transition">
+                                YMM Sınavına Gir (₺100.000)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personel Yönetimi -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col">
+                    <h2 class="font-bold text-base text-slate-100 border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">
+                        <i data-lucide="user-check" class="w-5 h-5 text-indigo-400"></i> Büro Ekibi & Uzman Kadrosu
+                    </h2>
+                    <div id="staff-container" class="space-y-3">
+                        <!-- Dynamic Staff List -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- PETITION DEFENSE BUILDER MODAL (MINIGAME) -->
+    <div id="petition-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-purple-500/50 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative overflow-hidden">
+            <div class="flex items-start justify-between border-b border-slate-800 pb-3 mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-purple-500/20 text-purple-400 rounded-xl border border-purple-500/30">
+                        <i data-lucide="file-text" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base text-slate-100">Savunma Dilekçesi Hazırlama Terminali</h3>
+                        <p class="text-xs text-slate-400">Mahkemeye sunulacak hukuki gerekçeleri seçerek kazanma şansınızı artırın.</p>
+                    </div>
+                </div>
+                <button onclick="closePetitionModal()" class="text-slate-400 hover:text-slate-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">1. Hukuki Gerekçe / Kanun Maddesi:</label>
+                    <select id="petition-ground" class="w-full bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl p-2.5 focus:border-purple-500 outline-none">
+                        <option value="vuk359">VUK 359: Kaçakçılık Suçu Unsuru Oluşmamıştır (Niyet Eksikliği)</option>
+                        <option value="iyuk27">İYUK 27: Yürütmenin Durdurulması Talebi (Telafisi Imkansız Zarar)</option>
+                        <option value="tbk117">TBK 117: Temerrüt İhtarı & Borçlu Kusursuzluğu</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">2. Delil Klasörü Ekleri:</label>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <label class="p-2.5 bg-slate-950 border border-slate-800 rounded-xl flex items-center gap-2 cursor-pointer hover:border-slate-700">
+                            <input type="checkbox" id="chk-evidence-bank" class="rounded bg-slate-900 border-slate-700 text-purple-600"> Banka Dekontları & Cari Ekstre
+                        </label>
+                        <label class="p-2.5 bg-slate-950 border border-slate-800 rounded-xl flex items-center gap-2 cursor-pointer hover:border-slate-700">
+                            <input type="checkbox" id="chk-evidence-expert" class="rounded bg-slate-900 border-slate-700 text-purple-600"> Bağımsız YMM Raporu
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-purple-950/30 border border-purple-800/40 p-3 rounded-xl text-xs text-purple-200 flex justify-between items-center">
+                    <span>Mevcut Tahmini Kazanma Şansı:</span>
+                    <span id="petition-win-rate" class="font-bold text-sm text-emerald-400 font-mono">%45</span>
+                </div>
+
+                <button onclick="submitPetition()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30">
+                    <i data-lucide="send" class="w-4 h-4"></i> Dilekçeyi Mahkemeye Sun ve Duruşmayı Başlat
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT & AUDIT DILEMMA MODAL -->
+    <div id="audit-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-rose-500/50 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95">
+            <div class="flex items-start gap-4 border-b border-slate-800 pb-4 mb-4">
+                <div class="p-3 bg-rose-500/20 text-rose-400 rounded-2xl border border-rose-500/40 shrink-0">
+                    <i data-lucide="shield-alert" class="w-8 h-8"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] uppercase font-extrabold tracking-wider text-rose-400 bg-rose-950/80 border border-rose-800 px-2 py-0.5 rounded-full">RESMİ DENETİM / KRİZ</span>
+                    <h3 id="audit-title" class="font-bold text-lg text-slate-100 mt-1">Vergi Müfettişi Kapıda!</h3>
+                </div>
+            </div>
+
+            <p id="audit-desc" class="text-sm text-slate-300 leading-relaxed mb-6">
+                Yüksek vergi riski veya şüpheli naylon fatura ihbarı nedeniyle Vergi Müfettişi denetime geldi. Defterleri ve yevmiye kayıtlarını talep ediyor!
+            </p>
+
+            <div id="audit-choices" class="space-y-3">
+                <!-- Dynamic Choices -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW CASE CREATION MODAL -->
+    <div id="new-case-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                <h3 class="font-bold text-base text-slate-100 flex items-center gap-2">
+                    <i data-lucide="gavel" class="w-5 h-5 text-purple-400"></i> Yeni Dava Dosyası Aç
+                </h3>
+                <button onclick="closeNewCaseModal()" class="text-slate-400 hover:text-slate-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Dava Türü:</label>
+                    <select id="select-case-type" class="w-full bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl p-2.5 outline-none">
+                        <option value="Vergi Mahkemesi Tarhiyat İptali">Vergi Mahkemesi - Usulsüzlük Tarhiyatı İptali</option>
+                        <option value="Danıştay Temyiz Başvurusu">Danıştay - Özelge Uyuşmazlığı Temyizi</option>
+                        <option value="SGK İdari Para Cezası İtirazı">SGK İş Mahkemesi - İdari Para Cezası İptali</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Dava Vekili Avukat:</label>
+                    <select id="select-case-lawyer" class="w-full bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl p-2.5 outline-none">
+                        <!-- Dynamic Lawyer Options -->
+                    </select>
+                </div>
+
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-400">
+                    <div class="flex justify-between mb-1"><span>Mahkeme Harç & Gideri:</span> <span class="font-bold text-rose-400">₺5.000</span></div>
+                    <div class="flex justify-between"><span>Kazanma Halinde İade:</span> <span class="font-bold text-emerald-400">₺35.000 + İtibar</span></div>
+                </div>
+
+                <button onclick="confirmCreateCase()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-xs transition">
+                    Davayı Resmi Olarak Aç (₺5.000 Harç Yatır)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME ENGINE SCRIPT -->
+    <script>
+        // --- SOUND SYNTHESIZER ---
+        class SoundFX {
+            constructor() { this.ctx = null; }
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); }
+            playClick() {
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(); osc.stop(this.ctx.currentTime + 0.05);
+            }
+            playSuccess() {
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523, now);
+                osc.frequency.setValueAtTime(659, now + 0.08);
+                osc.frequency.setValueAtTime(783, now + 0.16);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(); osc.stop(now + 0.3);
+            }
+            playError() {
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.setValueAtTime(150, now + 0.1);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(); osc.stop(now + 0.25);
+            }
+        }
+        const sfx = new SoundFX();
+
+        // --- GAME STATE ---
+        const gameState = {
+            day: 1,
+            month: 0,
+            year: 2026,
+            budget: 35000,
+            reputation: 50,
+            stress: 15,
+            taxRisk: 10,
+            isPaused: false,
+            speed: 1,
+            timer: null,
+            
+            rank: 'SMMM',
+            officeLevel: 1,
+
+            taxStatus: { sgk: false, kdv: false, muhtasar: false },
+
+            staff: { intern: 0, senior: 0, payroll: 0 },
+
+            clients: [
+                { id: 1, name: "Mahalle Bakkalı Ahsen", sector: "Esnaf", fee: 2000, unpaidMonths: 0 },
+                { id: 2, name: "Lezzet Pidesi & Döner", sector: "Esnaf", fee: 3000, unpaidMonths: 1 },
+                { id: 3, name: "TeknoSoft E-Ticaret Ltd.", sector: "E-Ticaret", fee: 8500, unpaidMonths: 0 },
+                { id: 4, name: "Akdeniz İnşaat A.Ş.", sector: "İnşaat", fee: 18000, unpaidMonths: 0 }
+            ],
+
+            invoices: [],
+            currentInvoiceIndex: 0,
+            selectedKdv: null,
+
+            // Finance & Investments
+            loanDebt: 0,
+            depositAccount: 0,
+            stocksAccount: 0,
+
+            // Lawyers Roster
+            lawyers: [
+                { id: 1, name: "Av. Mehmet Can (Vergi Hukukçusu)", winRateBonus: 25, retainerFee: 4000, isHired: true },
+                { id: 2, name: "Av. Selin Kaya (İcra & Borçlar)", winRateBonus: 20, retainerFee: 3000, isHired: false },
+                { id: 3, name: "Prof. Dr. Av. Onur Yılmaz (YMM/Hukukçu)", winRateBonus: 40, retainerFee: 8000, isHired: false }
+            ],
+
+            // Active Court Cases
+            courtCases: [
+                {
+                    id: 101,
+                    title: "Vergi Dairesi Özel Fatura Cezası İptali",
+                    type: "Vergi Mahkemesi",
+                    status: "Duruşma Günü", // Dava Açıldı, Bilirkişide, Duruşma Günü, Karar Aşaması
+                    lawyerId: 1,
+                    baseWinRate: 50,
+                    petitionDone: false,
+                    targetRefund: 40000
+                }
+            ],
+
+            activePetitionCaseId: null,
+            isAuditActive: false
+        };
+
+        const MONTH_NAMES = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            generateDailyInvoices();
+            updateUI();
+            startDayTimer();
+            logActivity("Mali Müşavir & YMM Simulator 4.0 - Hukuk & Mahkeme Modülü Yayında!");
+        });
+
+        function startDayTimer() {
+            if (gameState.timer) clearInterval(gameState.timer);
+            gameState.timer = setInterval(() => {
+                if (!gameState.isPaused && !gameState.isAuditActive) advanceDay();
+            }, 3000 / gameState.speed);
+        }
+
+        function togglePause() {
+            sfx.playClick();
+            gameState.isPaused = !gameState.isPaused;
+            document.getElementById('text-pause').textContent = gameState.isPaused ? "Devam Et" : "Durdur";
+        }
+
+        function cycleSpeed() {
+            sfx.playClick();
+            gameState.speed = gameState.speed === 1 ? 2 : (gameState.speed === 2 ? 4 : 1);
+            document.getElementById('speed-text').textContent = gameState.speed + 'x';
+            startDayTimer();
+        }
+
+        // --- MAIN TIME LOOP ---
+        function advanceDay() {
+            gameState.day += 1;
+
+            // Automation by staff
+            if (gameState.staff.intern > 0 && gameState.invoices.length > 0 && gameState.currentInvoiceIndex < gameState.invoices.length) {
+                gameState.currentInvoiceIndex++;
+                logActivity("Stajyer otomatik olarak 1 evrak işledi.");
+            }
+
+            // Court Case Progression
+            progressCourtCases();
+
+            // High Risk Check -> Inspector Audit Trigger
+            if (gameState.taxRisk >= 60 && Math.random() < 0.25) {
+                triggerInspectorAudit();
+            }
+
+            // Random Events
+            if (Math.random() < 0.04) {
+                triggerRandomCrisis();
+            }
+
+            // Deadlines check
+            checkDeadlines();
+
+            if (gameState.day > 30) endOfMonth();
+
+            updateUI();
+        }
+
+        function checkDeadlines() {
+            if (gameState.day === 16 && !gameState.taxStatus.sgk) applyTaxPenalty("SGK Bildirgesi Gecikti!", 4000);
+            if (gameState.day === 25 && !gameState.taxStatus.kdv) applyTaxPenalty("KDV1 Beyannamesi Verilmedi!", 6000);
+            if (gameState.day === 27 && !gameState.taxStatus.muhtasar) applyTaxPenalty("Muhtasar Beyannamesi Kaçırıldı!", 5000);
+        }
+
+        function applyTaxPenalty(msg, penalty) {
+            sfx.playError();
+            gameState.budget -= penalty;
+            gameState.reputation = Math.max(0, gameState.reputation - 8);
+            gameState.stress = Math.min(100, gameState.stress + 10);
+            logActivity(`🚨 CEZA: ${msg} (-₺${penalty})`, "text-rose-400 font-bold");
+        }
+
+        function endOfMonth() {
+            gameState.day = 1;
+            gameState.month = (gameState.month + 1) % 12;
+            if (gameState.month === 0) gameState.year += 1;
+
+            gameState.taxStatus = { sgk: false, kdv: false, muhtasar: false };
+
+            // Monthly interest from deposit
+            if (gameState.depositAccount > 0) {
+                let interest = Math.round(gameState.depositAccount * 0.035);
+                gameState.depositAccount += interest;
+                logActivity(`📈 MEVDUAT FAİZİ: ₺${interest} hesabınıza eklendi.`, "text-indigo-300 font-bold");
+            }
+
+            // Loan interest payment
+            if (gameState.loanDebt > 0) {
+                let loanInterest = Math.round(gameState.loanDebt * 0.03);
+                gameState.budget -= loanInterest;
+                logActivity(`🏦 KREDİ FAİZİ: ₺${loanInterest} banka tarafından kesildi.`, "text-rose-400");
+            }
+
+            // Retainer Lawyer Fees
+            let totalLawyerFees = 0;
+            gameState.lawyers.forEach(l => {
+                if (l.isHired) totalLawyerFees += l.retainerFee;
+            });
+
+            // Collections
+            let totalIncome = 0;
+            gameState.clients.forEach(c => {
+                if (Math.random() < 0.2) {
+                    c.unpaidMonths += 1;
+                    logActivity(`⚠️ TAHSİLAT SORUNU: ${c.name} bu ayki muhasebe ücretini ödemedi!`, "text-amber-400");
+                } else {
+                    totalIncome += c.fee;
+                }
+            });
+
+            // Expense calculations
+            let officeRent = gameState.officeLevel === 1 ? 10000 : 35000;
+            let staffSalary = (gameState.staff.intern * 6000) + (gameState.staff.senior * 20000) + (gameState.staff.payroll * 22000);
+            let totalExpenses = officeRent + staffSalary + totalLawyerFees;
+
+            let netProfit = totalIncome - totalExpenses;
+            gameState.budget += netProfit;
+
+            generateDailyInvoices();
+            sfx.playSuccess();
+            logActivity(`📅 AY SONU: Tahsil Edilen: ₺${totalIncome} | Giderler (Ofis+Avukat): ₺${totalExpenses} | Net: ₺${netProfit}`, "text-emerald-400 font-bold");
+        }
+
+        // --- COURT CASE ENGINE ---
+        function progressCourtCases() {
+            gameState.courtCases.forEach(c => {
+                // Random state transitions on certain days
+                if (gameState.day === 10 && c.status === "Dava Açıldı") {
+                    c.status = "Bilirkişi İncelemesinde";
+                    logActivity(`⚖️ MAHKEME: #${c.id} Dosyası Bilirkişi İncelemesine Gönderildi.`, "text-purple-300");
+                } else if (gameState.day === 20 && c.status === "Bilirkişi İncelemesinde") {
+                    c.status = "Duruşma Günü";
+                    logActivity(`⚖️ MAHKEME: #${c.id} Dosyasına Duruşma Günü Verildi!`, "text-amber-300 font-bold");
+                } else if (gameState.day === 28 && c.status === "Duruşma Günü") {
+                    c.status = "Karar Aşaması";
+                    resolveCourtVerdict(c);
+                }
+            });
+        }
+
+        function resolveCourtVerdict(courtCase) {
+            let lawyer = gameState.lawyers.find(l => l.id === courtCase.lawyerId);
+            let lawyerBonus = lawyer ? lawyer.winRateBonus : 0;
+            let finalWinRate = courtCase.baseWinRate + lawyerBonus + (courtCase.petitionDone ? 20 : 0);
+
+            let isWon = Math.random() * 100 < finalWinRate;
+
+            if (isWon) {
+                sfx.playSuccess();
+                gameState.budget += courtCase.targetRefund;
+                gameState.reputation = Math.min(100, gameState.reputation + 15);
+                gameState.taxRisk = Math.max(0, gameState.taxRisk - 15);
+                logActivity(`⚖️ DAVA KAZANILDI! #${courtCase.id} ${courtCase.title} - ₺${courtCase.targetRefund} Hazine İadesi Alındı!`, "text-emerald-400 font-bold");
+            } else {
+                sfx.playError();
+                gameState.budget -= 8000; // Litigation penalty
+                gameState.reputation = Math.max(0, gameState.reputation - 10);
+                logActivity(`❌ DAVA REDDEDİLDİ: #${courtCase.id} Dosyası Kaybedildi! (₺8.000 Yargılama Gideri)`, "text-rose-400 font-bold");
+            }
+
+            // Remove finished case
+            gameState.courtCases = gameState.courtCases.filter(c => c.id !== courtCase.id);
+        }
+
+        function openPetitionModal(caseId) {
+            sfx.playClick();
+            gameState.activePetitionCaseId = caseId;
+            document.getElementById('petition-modal').classList.remove('hidden');
+        }
+
+        function closePetitionModal() {
+            document.getElementById('petition-modal').classList.add('hidden');
+        }
+
+        function submitPetition() {
+            sfx.playClick();
+            const c = gameState.courtCases.find(item => item.id === gameState.activePetitionCaseId);
+            if (c) {
+                c.petitionDone = true;
+                sfx.playSuccess();
+                logActivity(`📄 HUKUK: #${c.id} Dosyası İçin Gerekçeli Savunma Dilekçesi Mahkemeye Verildi. (+%20 Kazanma Şansı)`, "text-purple-300 font-bold");
+            }
+            closePetitionModal();
+            updateUI();
+        }
+
+        function openNewCaseModal() {
+            sfx.playClick();
+            const selectLawyer = document.getElementById('select-case-lawyer');
+            selectLawyer.innerHTML = '';
+
+            gameState.lawyers.forEach(l => {
+                if (l.isHired) {
+                    selectLawyer.innerHTML += `<option value="${l.id}">${l.name} (+%${l.winRateBonus} Başarı)</option>`;
+                }
+            });
+
+            document.getElementById('new-case-modal').classList.remove('hidden');
+        }
+
+        function closeNewCaseModal() {
+            document.getElementById('new-case-modal').classList.add('hidden');
+        }
+
+        function confirmCreateCase() {
+            sfx.playClick();
+            if (gameState.budget < 5000) { alert("Yetersiz Bütçe!"); return; }
+
+            const type = document.getElementById('select-case-type').value;
+            const lawyerId = parseInt(document.getElementById('select-case-lawyer').value);
+
+            gameState.budget -= 5000;
+            const newCase = {
+                id: Math.floor(100 + Math.random() * 900),
+                title: type,
+                type: type.includes("SGK") ? "İş Mahkemesi" : "Vergi Mahkemesi",
+                status: "Dava Açıldı",
+                lawyerId: lawyerId,
+                baseWinRate: 45,
+                petitionDone: false,
+                targetRefund: 35000
+            };
+
+            gameState.courtCases.push(newCase);
+            sfx.playSuccess();
+            logActivity(`⚖️ YENİ DAVA AÇILDI: ${type} (#${newCase.id})`, "text-purple-300 font-bold");
+            closeNewCaseModal();
+            updateUI();
+        }
+
+        function launchExecutionProcedure(clientId) {
+            sfx.playClick();
+            const client = gameState.clients.find(c => c.id === clientId);
+            if (!client) return;
+
+            let debt = client.fee * client.unpaidMonths;
+            if (debt === 0) { alert("Bu müşterinin birikmiş borcu yok!"); return; }
+
+            // Execution process
+            gameState.budget += debt;
+            client.unpaidMonths = 0;
+            sfx.playSuccess();
+
+            logActivity(`🔨 İCRA TAKİBİ: ${client.name} firmasından ₺${debt} borç icra yoluyla tahsil edildi!`, "text-emerald-400 font-bold");
+
+            // 50% chance client cancels contract due to legal action
+            if (Math.random() < 0.5) {
+                gameState.clients = gameState.clients.filter(c => c.id !== clientId);
+                logActivity(`⚠️ Müşteri ${client.name}, icra takibi nedeniyle sözleşmeyi iptal etti!`, "text-rose-400");
+            }
+
+            updateUI();
+        }
+
+        function toggleHireLawyer(lawyerId) {
+            sfx.playClick();
+            const lawyer = gameState.lawyers.find(l => l.id === lawyerId);
+            if (!lawyer) return;
+
+            lawyer.isHired = !lawyer.isHired;
+            logActivity(`⚖️ HUKUK BÜROSU: ${lawyer.name} ${lawyer.isHired ? 'ekibe dahil edildi.' : 'sözleşmesi sonlandırıldı.'}`);
+            updateUI();
+        }
+
+        // --- INVOICE MINI-GAME ---
+        function generateDailyInvoices() {
+            const vendors = [
+                { name: "Selin Market", desc: "Ofis Malzemesi", amount: 1200, correctKdv: 10, isFake: false },
+                { name: "Hayali Naylon Ltd.", desc: "Danışmanlık Faturası (Şüpheli)", amount: 85000, correctKdv: 20, isFake: true },
+                { name: "Çelik Lojistik A.Ş.", desc: "Nakliye Faturası", amount: 14000, correctKdv: 20, isFake: false },
+                { name: "Sahte Demirbaş A.Ş.", desc: "Yüksek Tutarlı Demirbaş (Naylon)", amount: 120000, correctKdv: 20, isFake: true }
+            ];
+
+            gameState.invoices = vendors.map((v, i) => ({
+                id: i + 1,
+                vendor: v.name,
+                client: gameState.clients[i % gameState.clients.length].name,
+                amount: v.amount,
+                desc: v.desc,
+                no: `GİB2026${Math.floor(1000 + Math.random() * 9000)}`,
+                date: `${gameState.day}.${gameState.month + 1}.${gameState.year}`,
+                correctKdv: v.correctKdv,
+                isFake: v.isFake
+            }));
+
+            gameState.currentInvoiceIndex = 0;
+            updateInvoiceDisplay();
+        }
+
+        function selectKdv(rate) {
+            sfx.playClick();
+            gameState.selectedKdv = rate;
+            document.querySelectorAll('.kdv-btn').forEach(btn => {
+                if (btn.innerText.includes(`%${rate}`)) {
+                    btn.classList.add('border-blue-500', 'bg-blue-900/50', 'text-blue-300');
+                } else {
+                    btn.classList.remove('border-blue-500', 'bg-blue-900/50', 'text-blue-300');
+                }
+            });
+        }
+
+        function submitInvoiceProcess() {
+            const current = gameState.invoices[gameState.currentInvoiceIndex];
+            if (!current) return;
+
+            if (current.isFake) {
+                sfx.playError();
+                gameState.taxRisk = Math.min(100, gameState.taxRisk + 25);
+                gameState.reputation = Math.max(0, gameState.reputation - 5);
+                logActivity(`🚨 NAYLON FATURA İŞLENDİ! Vergi İnceleme Riskiniz +%25 Arttı!`, "text-rose-400 font-bold");
+            } else {
+                sfx.playSuccess();
+                gameState.budget += 200;
+                logActivity(`✅ Evrak Başarıyla İşlendi: ${current.vendor}`);
+            }
+
+            nextInvoice();
+        }
+
+        function rejectFakeInvoice() {
+            const current = gameState.invoices[gameState.currentInvoiceIndex];
+            if (!current) return;
+
+            if (current.isFake) {
+                sfx.playSuccess();
+                gameState.taxRisk = Math.max(0, gameState.taxRisk - 10);
+                gameState.reputation = Math.min(100, gameState.reputation + 3);
+                logActivity(`🛡️ SAHTE FATURA YAKALANDI! İptal Edildi. Risk -%10 Düştü.`, "text-emerald-400 font-bold");
+            } else {
+                sfx.playError();
+                logActivity(`⚠️ Gerçek Fatura Yanlışlıkla İptal Edildi!`, "text-amber-400");
+            }
+
+            nextInvoice();
+        }
+
+        function nextInvoice() {
+            gameState.selectedKdv = null;
+            gameState.currentInvoiceIndex++;
+            updateInvoiceDisplay();
+            updateUI();
+        }
+
+        function updateInvoiceDisplay() {
+            const container = document.getElementById('active-invoice-box');
+            const noMsg = document.getElementById('no-invoices-msg');
+            const countLabel = document.getElementById('invoices-processed-count');
+
+            countLabel.textContent = `${gameState.invoices.length - gameState.currentInvoiceIndex}`;
+
+            if (gameState.currentInvoiceIndex >= gameState.invoices.length) {
+                container.classList.add('hidden');
+                noMsg.classList.remove('hidden');
+            } else {
+                container.classList.remove('hidden');
+                noMsg.classList.add('hidden');
+
+                const inv = gameState.invoices[gameState.currentInvoiceIndex];
+                document.getElementById('inv-vendor').textContent = inv.vendor;
+                document.getElementById('inv-client').textContent = `Müşteri: ${inv.client}`;
+                document.getElementById('inv-amount').textContent = `₺${inv.amount.toLocaleString('tr-TR')},00`;
+                document.getElementById('inv-desc').textContent = inv.desc;
+                document.getElementById('inv-no').textContent = inv.no;
+                document.getElementById('inv-date').textContent = inv.date;
+            }
+        }
+
+        // --- CRISIS & AUDIT MODAL SYSTEM ---
+        function triggerInspectorAudit() {
+            gameState.isAuditActive = true;
+            sfx.playError();
+
+            const modal = document.getElementById('audit-modal');
+            const choices = document.getElementById('audit-choices');
+            choices.innerHTML = '';
+
+            document.getElementById('audit-title').textContent = "Vergi Müfettişi Kapıda!";
+            document.getElementById('audit-desc').textContent = "Yüksek vergi riski veya şüpheli naylon fatura ihbarı nedeniyle Vergi Müfettişi denetime geldi.";
+
+            const options = [
+                {
+                    text: "Defterleri Teslim Et & İşbirliği Yap (₺15.000 Ceza)",
+                    action: () => {
+                        gameState.taxRisk = 20;
+                        gameState.budget -= 15000;
+                        logActivity("VERGİ DENETİMİ: Defterler incelendi. ₺15.000 Usulsüzlük Cezası kesildi.", "text-amber-400");
+                    }
+                },
+                {
+                    text: "Uzlaşma Komisyonuna Git (Pazarlık Yap)",
+                    action: () => {
+                        gameState.taxRisk = 30;
+                        gameState.budget -= 7500;
+                        logActivity("UZLAŞMA: Vergi Dairesi ile uzlaşıldı. Ceza %50 indirildi (₺7.500).", "text-indigo-300");
+                    }
+                },
+                {
+                    text: "Vergi Mahkemesinde Dava Aç (₺5.000 Harç)",
+                    action: () => {
+                        gameState.budget -= 5000;
+                        gameState.courtCases.push({
+                            id: Math.floor(100 + Math.random() * 900),
+                            title: "Müfettiş Tarhiyatı İptal Davası",
+                            type: "Vergi Mahkemesi",
+                            status: "Dava Açıldı",
+                            lawyerId: 1,
+                            baseWinRate: 50,
+                            petitionDone: false,
+                            targetRefund: 30000
+                        });
+                        logActivity("HUKUK: Vergi Mahkemesinde dava dosyası açıldı!", "text-purple-400");
+                    }
+                }
+            ];
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl bg-slate-800 hover:bg-slate-700/80 border border-slate-700 transition text-xs font-bold text-slate-200 flex justify-between items-center";
+                btn.innerHTML = `<span>${opt.text}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>`;
+                btn.onclick = () => {
+                    opt.action();
+                    modal.classList.add('hidden');
+                    gameState.isAuditActive = false;
+                    updateUI();
+                };
+                choices.appendChild(btn);
+            });
+
+            lucide.createIcons();
+            modal.classList.remove('hidden');
+        }
+
+        function triggerRandomCrisis() {
+            gameState.isAuditActive = true;
+            sfx.playError();
+
+            const modal = document.getElementById('audit-modal');
+            const choices = document.getElementById('audit-choices');
+            choices.innerHTML = '';
+
+            document.getElementById('audit-title').textContent = "🚨 KRİZ: GİB Sunucuları Çöktü!";
+            document.getElementById('audit-desc').textContent = "Son beyanname saatlerinde GİB e-Beyanname portalı kilitlendi. Müşteriler panik halinde!";
+
+            const options = [
+                {
+                    text: "Gece Yarısına Kadar Açılmasını Bekle (Stres +25)",
+                    action: () => {
+                        gameState.stress = Math.min(100, gameState.stress + 25);
+                        logActivity("KRİZ: Sistem gece saatlerinde açıldı. Beyannameler son dakika yetiştirildi.");
+                    }
+                },
+                {
+                    text: "Nöbetçi Vergi Dairesine Elden Dilekçe Ver (₺2.000 Taksi/Masraf)",
+                    action: () => {
+                        gameState.budget -= 2000;
+                        logActivity("KRİZ: Dilekçe vergi dairesine fiziki teslim edildi.", "text-emerald-400");
+                    }
+                }
+            ];
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl bg-slate-800 hover:bg-slate-700/80 border border-slate-700 transition text-xs font-bold text-slate-200 flex justify-between items-center";
+                btn.innerHTML = `<span>${opt.text}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>`;
+                btn.onclick = () => {
+                    opt.action();
+                    modal.classList.add('hidden');
+                    gameState.isAuditActive = false;
+                    updateUI();
+                };
+                choices.appendChild(btn);
+            });
+
+            lucide.createIcons();
+            modal.classList.remove('hidden');
+        }
+
+        // --- BANKING & INVESTMENTS ---
+        function takeBankLoan(amount) {
+            sfx.playClick();
+            gameState.budget += amount;
+            gameState.loanDebt += amount;
+            logActivity(`🏦 BANKA: ₺${amount} tutarında kredi çekildi.`, "text-emerald-400 font-bold");
+            updateUI();
+        }
+
+        function payBankLoan() {
+            sfx.playClick();
+            if (gameState.budget < gameState.loanDebt) { alert("Yetersiz Bütçe!"); return; }
+            gameState.budget -= gameState.loanDebt;
+            gameState.loanDebt = 0;
+            logActivity("🏦 BANKA: Kredi borcu tamamen kapatıldı!", "text-emerald-400 font-bold");
+            updateUI();
+        }
+
+        function investDeposit(amount) {
+            sfx.playClick();
+            if (gameState.budget < amount) { alert("Yetersiz Bütçe!"); return; }
+            gameState.budget -= amount;
+            gameState.depositAccount += amount;
+            logActivity(`📈 MEVDUAT: ₺${amount} banka faizine yatırıldı.`, "text-indigo-300");
+            updateUI();
+        }
+
+        function withdrawDeposit() {
+            sfx.playClick();
+            gameState.budget += gameState.depositAccount;
+            gameState.depositAccount = 0;
+            logActivity("📈 MEVDUAT: Tüm birikim kasaya çekildi.");
+            updateUI();
+        }
+
+        function acceptExpertMission() {
+            sfx.playClick();
+            gameState.budget += 12000;
+            gameState.reputation = Math.min(100, gameState.reputation + 4);
+            logActivity("⚖️ BİLİRKİŞİLİK: Adliye dosyası tamamlandı. ₺12.000 gelir elde edildi!", "text-purple-300 font-bold");
+            updateUI();
+        }
+
+        // --- CLIENT ACTIONS ---
+        function collectDebt(clientId) {
+            sfx.playClick();
+            const client = gameState.clients.find(c => c.id === clientId);
+            if (!client || client.unpaidMonths === 0) return;
+
+            let debt = client.fee * client.unpaidMonths;
+            gameState.budget += debt;
+            client.unpaidMonths = 0;
+            sfx.playSuccess();
+            logActivity(`💰 TAHSİLAT: ${client.name} firmasından ₺${debt} borç tahsil edildi!`, "text-emerald-400 font-bold");
+            updateUI();
+        }
+
+        function cancelContract(clientId) {
+            sfx.playClick();
+            gameState.clients = gameState.clients.filter(c => c.id !== clientId);
+            logActivity("Müşteri sözleşmesi feshedildi.", "text-rose-400");
+            updateUI();
+        }
+
+        function searchNewClient() {
+            sfx.playClick();
+            if (gameState.budget < 1000) { alert("Yetersiz Bütçe!"); return; }
+            gameState.budget -= 1000;
+
+            const pool = [
+                { name: "Anadolu Lojistik", sector: "E-Ticaret", fee: 9000 },
+                { name: "Kule İnşaat A.Ş.", sector: "İnşaat", fee: 22000 },
+                { name: "Ege Restoran", sector: "Esnaf", fee: 3500 }
+            ];
+            const newC = pool[Math.floor(Math.random() * pool.length)];
+            newC.id = gameState.clients.length + 1;
+            newC.unpaidMonths = 0;
+
+            gameState.clients.push(newC);
+            sfx.playSuccess();
+            logActivity(`🎉 YENİ SÖZLEŞME: ${newC.name} portföye katıldı!`, "text-emerald-400 font-bold");
+            updateUI();
+        }
+
+        // --- GİB BEYANNAME FILING ---
+        function submitTaxDeclaration(type) {
+            sfx.playClick();
+            if (type === 'SGK') gameState.taxStatus.sgk = true;
+            if (type === 'KDV') gameState.taxStatus.kdv = true;
+            if (type === 'MUHTASAR') gameState.taxStatus.muhtasar = true;
+
+            sfx.playSuccess();
+            gameState.reputation = Math.min(100, gameState.reputation + 2);
+            logActivity(`✅ GİB PORTAL: ${type} Beyannameleri başarıyla onaylandı.`, "text-emerald-400");
+            updateUI();
+        }
+
+        // --- CAREER & UPGRADES ---
+        function upgradeOfficeLevel() {
+            sfx.playClick();
+            if (gameState.budget < 50000 || gameState.officeLevel >= 2) return;
+            gameState.budget -= 50000;
+            gameState.officeLevel = 2;
+            gameState.reputation += 20;
+            logActivity("🏰 BÜRO BÜYÜTÜLDÜ: Plaza Katına Taşınıldı! İtibar +20 Arttı.", "text-cyan-400 font-bold");
+            updateUI();
+        }
+
+        function takeYMMExam() {
+            sfx.playClick();
+            if (gameState.budget < 100000 || gameState.reputation < 80 || gameState.rank === 'YMM') {
+                alert("YMM Sınavı Şartları Sağlanmadı! (En az ₺100.000 Bütçe ve %80 İtibar gerekiyor)");
+                return;
+            }
+            gameState.budget -= 100000;
+            gameState.rank = 'YMM';
+            sfx.playSuccess();
+            logActivity("👑 TEBRİKLER! YMM (Yeminli Mali Müşavir) Sınavını Kazandınız!", "text-amber-300 font-bold");
+            updateUI();
+        }
+
+        function hireStaff(role) {
+            sfx.playClick();
+            if (role === 'intern' && gameState.budget >= 3000) {
+                gameState.budget -= 3000; gameState.staff.intern++;
+            } else if (role === 'senior' && gameState.budget >= 15000) {
+                gameState.budget -= 15000; gameState.staff.senior++;
+            } else if (role === 'payroll' && gameState.budget >= 18000) {
+                gameState.budget -= 18000; gameState.staff.payroll++;
+            }
+            updateUI();
+        }
+
+        function takeBreak() {
+            sfx.playClick();
+            if (gameState.budget < 200) return;
+            gameState.budget -= 200;
+            gameState.stress = Math.max(0, gameState.stress - 20);
+            logActivity("☕ Kahve Molası Verildi. Stres -20 Azaldı.");
+            updateUI();
+        }
+
+        // --- UI NAVIGATION & RENDER ---
+        function switchTab(tabId) {
+            sfx.playClick();
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'text-blue-400', 'border-purple-500', 'text-purple-300');
+                btn.classList.add('border-transparent', 'text-slate-400');
+            });
+
+            const active = document.getElementById(`nav-${tabId}`);
+            if (active) {
+                active.classList.remove('border-transparent', 'text-slate-400');
+                if (tabId === 'tab-court') {
+                    active.classList.add('border-purple-500', 'text-purple-300');
+                } else {
+                    active.classList.add('border-blue-500', 'text-blue-400');
+                }
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('kpi-date').textContent = `${gameState.day < 10 ? '0' + gameState.day : gameState.day} ${MONTH_NAMES[gameState.month]} ${gameState.year}`;
+            document.getElementById('kpi-budget').textContent = `₺${gameState.budget.toLocaleString('tr-TR')}`;
+            document.getElementById('kpi-cases-count').textContent = `${gameState.courtCases.length} Aktif`;
+
+            document.getElementById('kpi-risk-val').textContent = `${gameState.taxRisk}%`;
+            document.getElementById('kpi-risk-bar').style.width = `${gameState.taxRisk}%`;
+
+            document.getElementById('kpi-rep-val').textContent = `${Math.round(gameState.reputation)}%`;
+            document.getElementById('kpi-rep-bar').style.width = `${gameState.reputation}%`;
+
+            document.getElementById('kpi-stress-val').textContent = `${Math.round(gameState.stress)}%`;
+            document.getElementById('kpi-stress-bar').style.width = `${gameState.stress}%`;
+
+            document.getElementById('kpi-rank-badge').textContent = `${gameState.rank} Unvanı`;
+            document.getElementById('office-name-display').textContent = `Büro Seviyesi: ${gameState.officeLevel === 1 ? 'Ev-Ofis (Seviye 1)' : 'Plaza Katı (Seviye 2)'}`;
+
+            document.getElementById('badge-court-count').textContent = `${gameState.courtCases.length}`;
+
+            // Banking KPI
+            document.getElementById('loan-debt-val').textContent = `₺${gameState.loanDebt.toLocaleString('tr-TR')}`;
+            document.getElementById('deposit-val').textContent = `₺${gameState.depositAccount.toLocaleString('tr-TR')}`;
+
+            // Summaries
+            let income = gameState.clients.reduce((acc, c) => acc + c.fee, 0);
+            let rent = gameState.officeLevel === 1 ? 10000 : 35000;
+            let staff = (gameState.staff.intern * 6000) + (gameState.staff.senior * 20000) + (gameState.staff.payroll * 22000);
+            let lawyerRetainers = gameState.lawyers.filter(l => l.isHired).reduce((acc, l) => acc + l.retainerFee, 0);
+
+            document.getElementById('summary-income').textContent = `₺${income.toLocaleString('tr-TR')}`;
+            document.getElementById('summary-expenses').textContent = `₺${(rent + staff + lawyerRetainers).toLocaleString('tr-TR')}`;
+
+            renderClients();
+            renderStaff();
+            renderCourtCases();
+            renderLawyers();
+        }
+
+        function renderClients() {
+            const grid = document.getElementById('clients-grid');
+            grid.innerHTML = '';
+
+            gameState.clients.forEach(c => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-900 text-cyan-300 border border-slate-800">${c.sector}</span>
+                            <span class="text-xs font-mono font-bold text-emerald-400">₺${c.fee}/ay</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-100 mb-1">${c.name}</h4>
+                        ${c.unpaidMonths > 0 ? `<p class="text-xs text-rose-400 font-bold mb-2">⚠️ Ödenmemiş Borç: ${c.unpaidMonths} Ay (₺${c.fee * c.unpaidMonths})</p>` : `<p class="text-xs text-emerald-400 mb-2">Ödemeler Düzenli</p>`}
+                    </div>
+                    <div class="border-t border-slate-800/80 pt-3 flex items-center justify-between text-xs gap-1">
+                        ${c.unpaidMonths > 0 ? 
+                            `<button onclick="collectDebt(${c.id})" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-[10px] transition">Tahsil Et</button>
+                             <button onclick="launchExecutionProcedure(${c.id})" class="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg text-[10px] transition flex items-center gap-1"><i data-lucide="gavel" class="w-3 h-3"></i> İcra Yap</button>` :
+                            `<span class="text-[10px] text-slate-500">Aktif Sözleşme</span>`
+                        }
+                        <button onclick="cancelContract(${c.id})" class="text-rose-400 hover:text-rose-300 font-semibold text-[10px] transition">Feshet</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function renderCourtCases() {
+            const container = document.getElementById('cases-grid-container');
+            container.innerHTML = '';
+
+            if (gameState.courtCases.length === 0) {
+                container.innerHTML = '<div class="text-center py-10 bg-slate-950 rounded-2xl border border-slate-800"><i data-lucide="scale" class="w-10 h-10 text-slate-600 mx-auto mb-2"></i><p class="text-xs text-slate-400 font-mono">Aktif derdest dava dosyası yok. Mahkemeye gidin veya yeni dava açın.</p></div>';
+                lucide.createIcons();
+                return;
+            }
+
+            gameState.courtCases.forEach(c => {
+                let lawyer = gameState.lawyers.find(l => l.id === c.lawyerId);
+                let lawyerName = lawyer ? lawyer.name : "Avukat Atanmadı";
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-700/50">Dosya No: #${c.id}</span>
+                            <h4 class="font-bold text-sm text-slate-100 mt-1">${c.title}</h4>
+                            <p class="text-xs text-slate-400">Vekil: ${lawyerName}</p>
+                        </div>
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-900 border border-slate-700 text-amber-300">${c.status}</span>
+                    </div>
+
+                    <div class="flex items-center justify-between border-t border-slate-800/80 pt-3 text-xs">
+                        <div class="text-[11px] font-mono text-slate-400">
+                            Hedef İade: <span class="text-emerald-400 font-bold">₺${c.targetRefund.toLocaleString('tr-TR')}</span>
+                        </div>
+                        <div class="flex gap-2">
+                            ${!c.petitionDone ? `<button onclick="openPetitionModal(${c.id})" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg text-xs transition flex items-center gap-1"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> Dilekçe Yaz</button>` : `<span class="text-[10px] text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Dilekçe Hazır</span>`}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function renderLawyers() {
+            const container = document.getElementById('lawyers-list');
+            container.innerHTML = '';
+
+            gameState.lawyers.forEach(l => {
+                const el = document.createElement('div');
+                el.className = "p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between text-xs";
+                el.innerHTML = `
+                    <div>
+                        <h4 class="font-bold text-slate-200">${l.name}</h4>
+                        <p class="text-[10px] text-slate-400">Başarı Bonusu: +%${l.winRateBonus} | Ücret: ₺${l.retainerFee}/ay</p>
+                    </div>
+                    <button onclick="toggleHireLawyer(${l.id})" class="px-2.5 py-1.5 font-bold rounded-lg text-[11px] transition ${l.isHired ? 'bg-rose-600/20 text-rose-300 border border-rose-500/40 hover:bg-rose-600/30' : 'bg-indigo-600 hover:bg-indigo-500 text-white'}">
+                        ${l.isHired ? 'Ayrıl' : 'Anlaş'}
+                    </button>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function renderStaff() {
+            const container = document.getElementById('staff-container');
+            container.innerHTML = `
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-200">Stajyer Eleman (Mevcut: ${gameState.staff.intern})</h4>
+                        <p class="text-[11px] text-slate-400">Evrakları otomatik işler. Maaş: ₺6.000/ay</p>
+                    </div>
+                    <button onclick="hireStaff('intern')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">
+                        İşe Al (₺3.000)
+                    </button>
+                </div>
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-200">Kıdemli Muhasebeci (Mevcut: ${gameState.staff.senior})</h4>
+                        <p class="text-[11px] text-slate-400">Hataları önler ve stresi azaltır. Maaş: ₺20.000/ay</p>
+                    </div>
+                    <button onclick="hireStaff('senior')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">
+                        İşe Al (₺15.000)
+                    </button>
+                </div>
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-200">Bordro Uzmanı (Mevcut: ${gameState.staff.payroll})</h4>
+                        <p class="text-[11px] text-slate-400">SGK bildirgelerini otomatik süzgeçten geçirir. Maaş: ₺22.000/ay</p>
+                    </div>
+                    <button onclick="hireStaff('payroll')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">
+                        İşe Al (₺18.000)
+                    </button>
+                </div>
+            `;
+        }
+
+        function logActivity(text, customClass = "text-slate-300") {
+            const logBox = document.getElementById('activity-log');
+            const gibLogBox = document.getElementById('gib-history-list');
+
+            const timeStr = `${gameState.day < 10 ? '0' + gameState.day : gameState.day} ${MONTH_NAMES[gameState.month]}`;
+            const entry = document.createElement('div');
+            entry.className = `${customClass} border-b border-slate-800/40 pb-1`;
+            entry.textContent = `[${timeStr}] ${text}`;
+
+            logBox.insertBefore(entry, logBox.firstChild);
+
+            if (gibLogBox && (text.includes("GİB") || text.includes("Beyanname") || text.includes("SGK"))) {
+                const gibEntry = entry.cloneNode(true);
+                gibLogBox.insertBefore(gibEntry, gibLogBox.firstChild);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamu İhaleleri Simülasyonu · Eko-Log Simülasyon Merkezi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0b1020',
+                            950: '#070a14'
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+                        heading: ['"Bricolage Grotesque"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070a14; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-gold {
+            background: rgba(180, 83, 9, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+        }
+        .step-active {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-navy-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
+
+    <div id="app" class="flex-1 flex flex-col min-h-screen">
+
+        <!-- HEADER / NAVIGATION -->
+        <header class="bg-navy-900/90 backdrop-blur border-b border-slate-800/80 sticky top-0 z-30 px-4 py-3">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <button id="btn-back-to-list" onclick="app.goToView(1)" class="hidden w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-700 flex items-center justify-center transition-all" title="İhale Listesine Dön">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <div class="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-500">
+                        <i class="fa-solid fa-gavel text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[11px] font-bold text-amber-500 tracking-wider uppercase">4734 Sayılı KİK Simülasyon Portalı</span>
+                            <span id="nav-stage-badge" class="bg-amber-500/20 text-amber-300 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-amber-500/30">1. ADIM: İHALE SEÇİMİ</span>
+                        </div>
+                        <h1 class="text-base font-bold text-white font-heading leading-tight">Kamu İhaleleri ve Şeffaflık Simülasyonu</h1>
+                    </div>
+                </div>
+
+                <!-- HUD / STATS -->
+                <div class="hidden lg:flex items-center gap-6 bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-1.5">
+                    <div class="text-center">
+                        <div class="text-[10px] text-slate-400">Şirket Kasası</div>
+                        <div id="stat-budget" class="text-sm font-bold text-emerald-400 font-mono">₺245.000.000</div>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-slate-400">İhale Başarısı</div>
+                        <div id="stat-winrate" class="text-sm font-bold text-amber-400 font-mono">%68</div>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-slate-400">KİK İtibar Puanı</div>
+                        <div id="stat-reputation" class="text-sm font-bold text-sky-400 font-mono">88/100</div>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-slate-400">Etik & Şeffaflık</div>
+                        <div id="stat-ethics" class="text-sm font-bold text-indigo-400 font-mono">94/100</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- VIEW 1: İHALE SEÇİM EKRANI -->
+        <main id="view-1" class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row items-md-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-white font-heading">Aktif Kamu İhaleleri Havuzu</h2>
+                    <p class="text-xs text-slate-400 mt-1">Simüle etmek istediğiniz kamu ihalesini seçerek süreci başlatın.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="filter-type" onchange="app.renderTenderList()" class="bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                        <option value="ALL">Tüm İhale Türleri</option>
+                        <option value="Yapım İşleri">Yapım İşleri</option>
+                        <option value="Mal Alımı">Mal Alımı</option>
+                        <option value="Hizmet Alımı">Hizmet Alımı</option>
+                    </select>
+                    <div class="relative min-w-[240px]">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+                        <input type="text" id="filter-search" oninput="app.renderTenderList()" placeholder="İhale veya idare ara..." class="w-full bg-navy-950 border border-slate-700 rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- TENDERS GRID -->
+            <div id="tenders-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamic Tender Cards -->
+            </div>
+        </main>
+
+        <!-- VIEW 2: ROL SEÇİM EKRANI -->
+        <main id="view-2" class="hidden flex-1 max-w-5xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
+            <!-- SELECTED TENDER SUMMARY BANNER -->
+            <div class="glass-gold rounded-2xl p-6 border border-amber-500/30">
+                <div class="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i class="fa-solid fa-bookmark"></i> Seçilen İhale
+                </div>
+                <h2 id="v2-tender-title" class="text-xl font-bold text-white font-heading">...</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-amber-500/20 text-xs">
+                    <div>
+                        <span class="text-slate-400 block text-[10px]">İhale Makamı</span>
+                        <span id="v2-tender-dept" class="font-semibold text-slate-200">...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block text-[10px]">İhale Türü</span>
+                        <span id="v2-tender-type" class="font-semibold text-amber-400">...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block text-[10px]">Yaklaşık Maliyet</span>
+                        <span id="v2-tender-cost" class="font-bold font-mono text-emerald-400">...</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block text-[10px]">İşin Süresi</span>
+                        <span id="v2-tender-duration" class="font-semibold text-slate-200">...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROLE CARDS SELECTION -->
+            <div>
+                <h3 class="text-lg font-bold text-white font-heading mb-1">Simülasyon Rolünüzü Seçin</h3>
+                <p class="text-xs text-slate-400 mb-6">Bu ihalede hangi tarafın kararlarını ve sorumluluklarını yönetmek istersiniz?</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- ROLE 1: FIRMA -->
+                    <div onclick="app.selectRole('yüklenici')" id="role-card-yüklenici" class="glass-panel rounded-2xl p-6 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-building text-amber-400"></i>
+                            </div>
+                            <h4 class="text-base font-bold text-white mb-2">İstekli Yüklenici (Firma)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Şartnameyi inceleyin, alt yüklenici maliyetlerini optimize edin, rakip fiyat kırım oranlarını öngörerek kazanacak en iyi teklifi verin.
+                            </p>
+                            <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800 pt-3">
+                                <li><i class="fa-solid fa-check text-amber-500 mr-2"></i>Kar & Maliyet Analizi</li>
+                                <li><i class="fa-solid fa-check text-amber-500 mr-2"></i>E-Teklif & Teminat Mektubu</li>
+                                <li><i class="fa-solid fa-check text-amber-500 mr-2"></i>Aşırı Düşük Açıklaması</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold text-amber-400">
+                            <span>Bu Rolü Seç</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- ROLE 2: KAMU KOMİSYONU -->
+                    <div onclick="app.selectRole('ihale_komisyonu')" id="role-card-ihale_komisyonu" class="glass-panel rounded-2xl p-6 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-gavel text-emerald-400"></i>
+                            </div>
+                            <h4 class="text-base font-bold text-white mb-2">İhale Komisyon Başkanı</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Zarf açılışını yönetin, belgeleri 4734 sayılı kanuna göre denetleyin, usulsüz teklifleri eleyerek en avantajlı firmayı ilan edin.
+                            </p>
+                            <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800 pt-3">
+                                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>Zarf & Belge Kontrolü</li>
+                                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>Sınır Değer Hesabı</li>
+                                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>Kesinleşen Karar İlanı</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold text-emerald-400">
+                            <span>Bu Rolü Seç</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- ROLE 3: KİK MÜFETTİŞİ -->
+                    <div onclick="app.selectRole('kik_müfettişi')" id="role-card-kik_müfettişi" class="glass-panel rounded-2xl p-6 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-scale-balanced text-indigo-400"></i>
+                            </div>
+                            <h4 class="text-base font-bold text-white mb-2">KİK Müfettişi / Denetçi</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Şikayet dilekçelerini ve adrese teslim şartname iddialarını inceleyin. Kamu zararını önlemek için iptal veya düzeltme kararı verin.
+                            </p>
+                            <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800 pt-3">
+                                <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i>Adrese Teslim Şartname Tespiti</li>
+                                <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i>İtirazen Şikayet Kararları</li>
+                                <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i>Kamu Şeffaflığı Denetimi</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold text-indigo-400">
+                            <span>Bu Rolü Seç</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTON -->
+            <div class="flex justify-end pt-4">
+                <button onclick="app.startSimulation()" class="bg-amber-500 hover:bg-amber-600 text-black font-bold text-sm px-8 py-3.5 rounded-xl shadow-xl shadow-amber-500/20 transition-all flex items-center gap-2">
+                    <span>Simülasyonu Başlat</span>
+                    <i class="fa-solid fa-play"></i>
+                </button>
+            </div>
+        </main>
+
+        <!-- VIEW 3: 4-ADIMLI SİMÜLASYON EKRANI -->
+        <main id="view-3" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- LEFT PANEL: STEPS & WORKFLOW (8 COLS) -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+
+                <!-- TENDER HEADER CARD -->
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800 shadow-xl">
+                    <div class="flex flex-wrap items-start justify-between gap-4 mb-4 border-b border-slate-800 pb-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                <span id="sim-tender-id" class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded border border-slate-700">İHALE NO: ...</span>
+                                <span id="sim-tender-type" class="text-xs font-semibold bg-amber-500/10 text-amber-400 px-2.5 py-0.5 rounded border border-amber-500/30">...</span>
+                                <span id="sim-role-badge" class="text-xs font-semibold bg-indigo-500/10 text-indigo-300 px-2.5 py-0.5 rounded border border-indigo-500/30">ROL: ...</span>
+                            </div>
+                            <h2 id="sim-tender-title" class="text-xl font-bold text-white font-heading">...</h2>
+                            <p id="sim-tender-dept" class="text-xs text-slate-400 mt-1">İhale Makamı: ...</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-[11px] text-slate-400">Yaklaşık Maliyet</div>
+                            <div id="sim-tender-cost" class="text-lg font-extrabold text-amber-400 font-mono">₺0</div>
+                        </div>
+                    </div>
+
+                    <!-- 4-STEP INDICATOR -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6" id="sim-steps-bar">
+                        <div onclick="app.setSimStep(1)" id="step-btn-1" class="step-active cursor-pointer p-3 rounded-xl border border-slate-700 transition-all text-center">
+                            <div class="text-[10px] text-slate-400 font-semibold uppercase">1. Adım</div>
+                            <div class="text-xs font-bold text-white mt-0.5">Şartname İnceleme</div>
+                        </div>
+                        <div onclick="app.setSimStep(2)" id="step-btn-2" class="cursor-pointer p-3 rounded-xl border border-slate-800 hover:border-slate-700 transition-all text-center">
+                            <div class="text-[10px] text-slate-400 font-semibold uppercase">2. Adım</div>
+                            <div class="text-xs font-bold text-white mt-0.5">Teklif & Zarf İnceleme</div>
+                        </div>
+                        <div onclick="app.setSimStep(3)" id="step-btn-3" class="cursor-pointer p-3 rounded-xl border border-slate-800 hover:border-slate-700 transition-all text-center">
+                            <div class="text-[10px] text-slate-400 font-semibold uppercase">3. Adım</div>
+                            <div class="text-xs font-bold text-white mt-0.5">Zarf Açma & Eleme</div>
+                        </div>
+                        <div onclick="app.setSimStep(4)" id="step-btn-4" class="cursor-pointer p-3 rounded-xl border border-slate-800 hover:border-slate-700 transition-all text-center">
+                            <div class="text-[10px] text-slate-400 font-semibold uppercase">4. Adım</div>
+                            <div class="text-xs font-bold text-white mt-0.5">Karar & KİK İtirazı</div>
+                        </div>
+                    </div>
+
+                    <!-- STEP DYNAMIC CONTENT CONTAINER -->
+                    <div id="sim-step-content" class="bg-navy-900/90 rounded-xl p-5 border border-slate-800">
+                        <!-- Dynamic content per step and role -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT PANEL: CONTEXT & RISK MATRIX (4 COLS) -->
+            <div class="lg:col-span-4 flex flex-col gap-6">
+
+                <!-- ACTIVE ROLE CONTEXT -->
+                <div class="glass-gold rounded-2xl p-5 border border-amber-500/30 shadow-xl">
+                    <div class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider mb-2">
+                        <i class="fa-solid fa-user-shield"></i> Aktif Rol Yetkisi
+                    </div>
+                    <h3 id="panel-role-title" class="text-base font-bold text-white font-heading mb-1">...</h3>
+                    <p id="panel-role-desc" class="text-xs text-slate-300 leading-relaxed mb-4">...</p>
+
+                    <div class="bg-navy-950/80 rounded-xl p-3 border border-amber-500/20 space-y-2 text-xs">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Teknik Yeterlik Barajı:</span>
+                            <span id="panel-tech-score" class="font-bold text-sky-400 font-mono">75/100</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Geçici Teminat Oranı:</span>
+                            <span id="panel-guarantee-rate" class="font-bold text-amber-400 font-mono">%3</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Tahmini Kırım Hassasiyeti:</span>
+                            <span id="panel-risk-level" class="font-bold text-emerald-400 font-mono">Orta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPECIFICATIONS & RISK MATRIX -->
+                <div class="glass-panel rounded-2xl p-5 border border-slate-800">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3 flex items-center justify-between">
+                        <span><i class="fa-solid fa-file-contract text-amber-500 mr-2"></i>Teknik Şartname Riski</span>
+                    </h3>
+                    <div id="panel-risk-matrix" class="space-y-2.5 text-xs text-slate-300">
+                        <!-- Dynamic Risk Info -->
+                    </div>
+                </div>
+
+                <!-- QUICK RESET & RETURN BUTTONS -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 flex items-center justify-between gap-3">
+                    <button onclick="app.goToView(2)" class="flex-1 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 py-2.5 rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-user-gear"></i> Rolü Değiştir
+                    </button>
+                    <button onclick="app.goToView(1)" class="flex-1 text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 py-2.5 rounded-xl border border-amber-500/40 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-list"></i> İhale Listesi
+                    </button>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-navy-950 border-t border-slate-800/60 py-4 px-6 text-center text-xs text-slate-400">
+            <p>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu - Kamu İhaleleri Simülasyon Merkezi</p>
+        </footer>
+
+        <!-- SYSTEM MODAL -->
+        <div id="modal-dialog" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+            <div class="glass-panel max-w-md w-full rounded-2xl p-6 border border-slate-700 shadow-2xl space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <h3 id="modal-title" class="text-base font-bold text-white font-heading">Sistem Bildirimi</h3>
+                </div>
+                <p id="modal-body" class="text-xs text-slate-300 leading-relaxed">...</p>
+                <div class="flex justify-end pt-2">
+                    <button onclick="app.closeModal()" class="bg-amber-500 hover:bg-amber-600 text-black font-bold text-xs px-5 py-2.5 rounded-xl transition-all">
+                        Anladım
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        const app = {
+            currentView: 1, // 1: İhale Seçimi, 2: Rol Seçimi, 3: Simülasyon
+            selectedTender: null,
+            selectedRole: 'yüklenici', // yüklenici, ihale_komisyonu, kik_müfettişi
+            simStep: 1,
+
+            // Global stats
+            stats: {
+                budget: 245000000,
+                wins: 14,
+                total: 20,
+                reputation: 88,
+                ethics: 94
+            },
+
+            // ALL 11 REALISTIC PUBLIC TENDERS
+            tenders: [
+                {
+                    id: '2026/84920',
+                    title: 'İnönü Üniversitesi Akıllı Kampüs Yazılımı ve Altyapı Tedariği',
+                    dept: 'İnönü Üniversitesi Bilgi İşlem Daire Bşk.',
+                    type: 'Hizmet Alımı',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 12800000,
+                    userBid: 11500000,
+                    subcontractorCost: 8200000,
+                    guaranteeRate: 3,
+                    durationDays: 180,
+                    techScoreBar: 75,
+                    riskLevel: 'Orta',
+                    deadline: '28 Ekim 2026 - 14:00',
+                    location: 'Malatya',
+                    specIssueTitle: 'Madde 14.3: Özel Sunucu Markası Şartı',
+                    specIssueDesc: '"Kullanılacak sunucuların X-Brand v4 özel lisansı ile doğrudan uyumlu olması zorunludur." (Rekabeti kısıtlayıcı madde şüphesi)',
+                    risks: ['Teknoloji tedarik gecikmesi', 'Döviz kuru dalgalanması', 'Yazılım entegrasyon riski'],
+                    competitors: [
+                        { name: 'EkoTech A.Ş.', bid: 11200000, status: 'Geçerli', note: 'Aşırı Düşük Teklif Sınırında' },
+                        { name: 'Firmamız (Siz)', bid: 11500000, status: 'Geçerli', note: 'Optimum Fiyat & Tam Uyumluluk' },
+                        { name: 'Vadi Bilişim Ltd.', bid: 12600000, status: 'Geçerli', note: 'Maliyete Yakın' },
+                        { name: 'Kuruoğlu Yapı A.Ş.', bid: 9400000, status: 'Elendi', note: 'Geçici Teminat Mektubu Eksik' }
+                    ]
+                },
+                {
+                    id: '2026/10293',
+                    title: 'Malatya Akıllı Ulaşım Sistemleri (AUS) ve Kamera Kurulumu',
+                    dept: 'Malatya Büyükşehir Belediyesi Ulaşım Dairesi',
+                    type: 'Hizmet Alımı',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 45000000,
+                    userBid: 39500000,
+                    subcontractorCost: 29000000,
+                    guaranteeRate: 3,
+                    durationDays: 240,
+                    techScoreBar: 80,
+                    riskLevel: 'Yüksek',
+                    deadline: '02 Kasım 2026 - 10:30',
+                    location: 'Malatya',
+                    specIssueTitle: 'Madde 22.1: Plaka Tanıma Algoritması Patent Kısıtı',
+                    specIssueDesc: '"Kullanılacak kameraların Türkiye hakları tek bir yerli firmada bulunan patentli yazılımı taşıması zorunludur."',
+                    risks: ['Saha kazı izin gecikmeleri', 'Siber güvenlik test süreçleri', 'Fiber optik hat maaliyeti'],
+                    competitors: [
+                        { name: 'Sinyalizasyon A.Ş.', bid: 38200000, status: 'Geçerli', note: 'Aşırı Düşük Açıklaması İstenecek' },
+                        { name: 'Firmamız (Siz)', bid: 39500000, status: 'Geçerli', note: 'Dengeli Teklif' },
+                        { name: 'Kent Trafik Ltd.', bid: 43800000, status: 'Geçerli', note: 'Yüksek Fiyat' }
+                    ]
+                },
+                {
+                    id: '2026/22041',
+                    title: 'Üniversite Kampüsü Yenilenebilir Enerji ve GES Projesi',
+                    dept: 'Turgut Özal Üniversitesi Yapı İşleri Daire Bşk.',
+                    type: 'Yapım İşleri',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 85000000,
+                    userBid: 74800000,
+                    subcontractorCost: 55000000,
+                    guaranteeRate: 3,
+                    durationDays: 300,
+                    techScoreBar: 85,
+                    riskLevel: 'Orta',
+                    deadline: '15 Kasım 2026 - 11:00',
+                    location: 'Malatya',
+                    specIssueTitle: 'Madde 9.4: PV Panel Verimlilik Katsayısı',
+                    specIssueDesc: '"Güneş panellerinin en az %23.5 hücre verimliliğine sahip olması ve Tier-1 listede yer alması şarttır."',
+                    risks: ['Panel tedarik lojistiği', 'TEİAŞ şebeke bağlantı izni', 'Mevsimsel hava gecikmesi'],
+                    competitors: [
+                        { name: 'Firmamız (Siz)', bid: 74800000, status: 'Geçerli', note: 'En Avantajlı Teklif' },
+                        { name: 'Güneş Enerji A.Ş.', bid: 77200000, status: 'Geçerli', note: 'Geçerli Teklif' },
+                        { name: 'Anadolu Solar Ltd.', bid: 68000000, status: 'Elendi', note: 'İş Deneyim Belgesi Yetersiz' }
+                    ]
+                },
+                {
+                    id: '2026/33912',
+                    title: 'Şehir Hastanesi Medikal Cihaz ve Sarf Malzemesi Tedariki',
+                    dept: 'İl Sağlık Müdürlüğü / Şehir Hastanesi',
+                    type: 'Mal Alımı',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 62000000,
+                    userBid: 56000000,
+                    subcontractorCost: 42000000,
+                    guaranteeRate: 3,
+                    durationDays: 120,
+                    techScoreBar: 90,
+                    riskLevel: 'Düşük',
+                    deadline: '05 Kasım 2026 - 09:30',
+                    location: 'Malatya',
+                    specIssueTitle: 'Madde 18.2: FDA ve CE Medikal Sertifikasyonu',
+                    specIssueDesc: '"Tüm cihazların 2026 güncel MDR tüzüğüne tam uyumlu CE sertifikası taşıması zorunludur."',
+                    risks: ['Sterilizasyon denetimleri', 'Gümrük mevzuatı gecikmesi', 'Biyomedikal test standartları'],
+                    competitors: [
+                        { name: 'Medikal Grup A.Ş.', bid: 54500000, status: 'Geçerli', note: 'En Düşük Fiyat' },
+                        { name: 'Firmamız (Siz)', bid: 56000000, status: 'Geçerli', note: 'Yüksek Teknik Kalite' },
+                        { name: 'Saha Medikal Ltd.', bid: 61000000, status: 'Geçerli', note: 'Yüksek Teklif' }
+                    ]
+                },
+                {
+                    id: '2026/44109',
+                    title: 'Otoyol Tünel ve Viyadük Bakım-Onarım İhalesi',
+                    dept: 'Karayolları Genel Müdürlüğü 8. Bölge',
+                    type: 'Yapım İşleri',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 140000000,
+                    userBid: 121000000,
+                    subcontractorCost: 90000000,
+                    guaranteeRate: 3,
+                    durationDays: 450,
+                    techScoreBar: 85,
+                    riskLevel: 'Yüksek',
+                    deadline: '20 Kasım 2026 - 14:30',
+                    location: 'Elazığ / Malatya',
+                    specIssueTitle: 'Madde 31.5: Özel Püskürtme Beton Makinesi Şartı',
+                    specIssueDesc: '"Yüklenicinin en az 4 adet tünel tavan püskürtme beton makinesine sahip olduğunu belgelemesi istenmektedir."',
+                    risks: ['Otoyol trafik kapatma izinleri', 'Zemin kayma riskleri', 'İş güvenliği ve tünel gazları'],
+                    competitors: [
+                        { name: 'Firmamız (Siz)', bid: 121000000, status: 'Geçerli', note: 'Optimal Teklif' },
+                        { name: 'Ağır Yapı A.Ş.', bid: 128500000, status: 'Geçerli', note: 'Geçerli Teklif' },
+                        { name: 'Tünel-Yol İnşaat', bid: 105000000, status: 'Elendi', note: 'Aşırı Düşük Açıklaması Reddedildi' }
+                    ]
+                },
+                {
+                    id: '2026/55823',
+                    title: 'Yerel Yönetim Dijital Dönüşüm ve Veri Merkezi Yazılımı',
+                    dept: 'Büyükşehir Belediyesi Bilgi İşlem Daire Bşk.',
+                    type: 'Hizmet Alımı',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 28000000,
+                    userBid: 24500000,
+                    subcontractorCost: 17000000,
+                    guaranteeRate: 3,
+                    durationDays: 180,
+                    techScoreBar: 80,
+                    riskLevel: 'Orta',
+                    deadline: '10 Kasım 2026 - 15:00',
+                    location: 'Malatya',
+                    specIssueTitle: 'Madde 12.1: Veri Tabanı Mimarisi Sertifikası',
+                    specIssueDesc: '"Yazılım ekibinde en az 3 adet Master seviye bulut mimarı sertifikası aranmaktadır."',
+                    risks: ['Eski veri tabanı taşıma karmaşıklığı', 'KVKK mevzuat uyumluluğu', 'Kullanıcı eğitimi'],
+                    competitors: [
+                        { name: 'Yazılım Evi Ltd.', bid: 23800000, status: 'Geçerli', note: 'En Düşük Fiyat' },
+                        { name: 'Firmamız (Siz)', bid: 24500000, status: 'Geçerli', note: 'Yüksek Yetkinlik' },
+                        { name: 'Sistem A.Ş.', bid: 27100000, status: 'Geçerli', note: 'Maliyete Yakın' }
+                    ]
+                },
+                {
+                    id: '2026/66712',
+                    title: 'Devlet Demiryolları Sinyalizasyon ve Elektrifikasyon Yenileme',
+                    dept: 'TCDD Genel Müdürlüğü 5. Bölge',
+                    type: 'Yapım İşleri',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 320000000,
+                    userBid: 285000000,
+                    subcontractorCost: 210000000,
+                    guaranteeRate: 3,
+                    durationDays: 600,
+                    techScoreBar: 90,
+                    riskLevel: 'Yüksek',
+                    deadline: '01 Aralık 2026 - 11:30',
+                    location: 'Bölge Geneli',
+                    specIssueTitle: 'Madde 40.2: ERTMS Level 2 Uyum Şartı',
+                    specIssueDesc: '"Sinyalizasyonun Avrupa Demiryolu Trafik Yönetim Sistemi (ERTMS) Level 2 standardında olması şarttır."',
+                    risks: ['Tren sefer aksama cezaları', 'Yüksek gerilim iş güvenliği', 'İthal ekipman süresi'],
+                    competitors: [
+                        { name: 'Firmamız (Siz)', bid: 285000000, status: 'Geçerli', note: 'Teknik Yeterlik Tam' },
+                        { name: 'Raylı Sistemler A.Ş.', bid: 298000000, status: 'Geçerli', note: 'Geçerli Teklif' },
+                        { name: 'Demiryol Yapı Ltd.', bid: 250000000, status: 'Elendi', note: 'Sinyal Yetki Belgesi Eksik' }
+                    ]
+                },
+                {
+                    id: '2026/77190',
+                    title: 'Şehir İçi Toplu Taşıma İçin 50 Adet Elektrikli Otobüs Alımı',
+                    dept: 'MOTAŞ / Ulaşım Dairesi Başkanlığı',
+                    type: 'Mal Alımı',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 410000000,
+                    userBid: 368000000,
+                    subcontractorCost: 290000000,
+                    guaranteeRate: 3,
+                    durationDays: 150,
+                    techScoreBar: 85,
+                    riskLevel: 'Orta',
+                    deadline: '18 Kasım 2026 - 14:00',
+                    location: 'Malatya',
+                    specIssueTitle: 'Madde 15.4: Batarya Garanti ve Menzil Şartı',
+                    specIssueDesc: '"Otobüslerin kliması açık şekilde en az 350 km menzil yapması ve 8 yıl garanti sunması şarttır."',
+                    risks: ['Şarj istasyonu altyapı uyumu', 'Batarya degradasyon testleri', 'Yedek parça temin garantisi'],
+                    competitors: [
+                        { name: 'ElektroBus A.Ş.', bid: 355000000, status: 'Geçerli', note: 'En Düşük Teklif' },
+                        { name: 'Firmamız (Siz)', bid: 368000000, status: 'Geçerli', note: 'Güçlü Servis Ağı' },
+                        { name: 'Oto-Kent Ltd.', bid: 402000000, status: 'Geçerli', note: 'Yüksek Fiyat' }
+                    ]
+                },
+                {
+                    id: '2026/88301',
+                    title: 'Tarihi Restorasyon ve Kültürel Miras İhyası Projesi',
+                    dept: 'Vakıflar Genel Müdürlüğü Bölge Md.',
+                    type: 'Yapım İşleri',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 38000000,
+                    userBid: 33500000,
+                    subcontractorCost: 24000000,
+                    guaranteeRate: 3,
+                    durationDays: 360,
+                    techScoreBar: 90,
+                    riskLevel: 'Yüksek',
+                    deadline: '12 Kasım 2026 - 10:00',
+                    location: 'Malatya / Battalgazi',
+                    specIssueTitle: 'Madde 27.1: Mimar Restiratör Uzman Kadro Şartı',
+                    specIssueDesc: '"Şantiye şefinin en az 15 yıl ahşap ve taş restorasyon tecrübeli Yüksek Mimar olması zorunludur."',
+                    risks: ['Anıtlar Kurulu onay gecikmeleri', 'Özgün taş ustası bulunabilirliği', 'Gizli statik çatlaklar'],
+                    competitors: [
+                        { name: 'Firmamız (Siz)', bid: 33500000, status: 'Geçerli', note: 'En Avantajlı Teklif' },
+                        { name: 'Restorasyon Sanatı Ltd.', bid: 35200000, status: 'Geçerli', note: 'Geçerli Teklif' },
+                        { name: 'Eski Eser Yapı A.Ş.', bid: 29000000, status: 'Elendi', note: 'Kültür Bakanlığı Lisansı Eksik' }
+                    ]
+                },
+                {
+                    id: '2026/99415',
+                    title: 'Afet Bölgesi Kalıcı Konut ve Altyapı İnşaatı',
+                    dept: 'TOKİ / Çevre ve Şehircilik Bakanlığı',
+                    type: 'Yapım İşleri',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 520000000,
+                    userBid: 458000000,
+                    subcontractorCost: 350000000,
+                    guaranteeRate: 3,
+                    durationDays: 300,
+                    techScoreBar: 85,
+                    riskLevel: 'Yüksek',
+                    deadline: '25 Kasım 2026 - 11:00',
+                    location: 'Malatya / İkizce',
+                    specIssueTitle: 'Madde 35.3: Tünel Kalıp Kapasitesi Şartı',
+                    specIssueDesc: '"Günlük en az 4 daire beton döküm kapasitesine sahip tünel kalıp sisteminin şantiyede kurulması şarttır."',
+                    risks: ['Kış şartları şantiye duraklaması', 'Çimento ve demir tedarik krizleri', 'İş gücü temini'],
+                    competitors: [
+                        { name: 'Firmamız (Siz)', bid: 458000000, status: 'Geçerli', note: 'Optimal Teklif' },
+                        { name: 'Mega Konut İnşaat', bid: 475000000, status: 'Geçerli', note: 'Geçerli Teklif' },
+                        { name: 'Altyapı Grubu A.Ş.', bid: 410000000, status: 'Elendi', note: 'Sınır Değer Açıklaması Reddedildi' }
+                    ]
+                },
+                {
+                    id: '2026/00188',
+                    title: 'Tarımsal Sulama Göleti ve Kanal Sistemi Yapımı',
+                    dept: 'DSİ 9. Bölge Müdürlüğü',
+                    type: 'Yapım İşleri',
+                    method: 'Açık İhale Usulü',
+                    estimatedCost: 95000000,
+                    userBid: 83500000,
+                    subcontractorCost: 61000000,
+                    guaranteeRate: 3,
+                    durationDays: 400,
+                    techScoreBar: 80,
+                    riskLevel: 'Orta',
+                    deadline: '08 Aralık 2026 - 14:00',
+                    location: 'Malatya / Doğanşehir',
+                    specIssueTitle: 'Madde 19.8: HDPE Jeomembran Sızdırmazlık Standardı',
+                    specIssueDesc: '"Gölet taban kaplamasında kullanılacak membranların en az 2mm kalınlıkta ve UV dayanımlı olması zorunludur."',
+                    risks: ['Kamulaştırma ve mülkiyet davaları', 'Mevsimsel yağış su baskınları', 'Harfiyat döküm saha izinleri'],
+                    competitors: [
+                        { name: 'Su Yapıları Ltd.', bid: 81800000, status: 'Geçerli', note: 'En Düşük Teklif' },
+                        { name: 'Firmamız (Siz)', bid: 83500000, status: 'Geçerli', note: 'Düşük Risk' },
+                        { name: 'Baraj-Kanal A.Ş.', bid: 91000000, status: 'Geçerli', note: 'Yüksek Teklif' }
+                    ]
+                }
+            ],
+
+            init() {
+                this.renderStats();
+                this.renderTenderList();
+            },
+
+            renderStats() {
+                document.getElementById('stat-budget').textContent = '₺' + this.stats.budget.toLocaleString('tr-TR');
+                const winRate = Math.round((this.stats.wins / this.stats.total) * 100);
+                document.getElementById('stat-winrate').textContent = `%${winRate}`;
+                document.getElementById('stat-reputation').textContent = `${this.stats.reputation}/100`;
+                document.getElementById('stat-ethics').textContent = `${this.stats.ethics}/100`;
+            },
+
+            // STEP 1: RENDER TENDERS GRID
+            renderTenderList() {
+                const grid = document.getElementById('tenders-grid');
+                const filterType = document.getElementById('filter-type').value;
+                const filterSearch = document.getElementById('filter-search').value.toLowerCase();
+
+                grid.innerHTML = '';
+
+                const filtered = this.tenders.filter(t => {
+                    if (filterType !== 'ALL' && t.type !== filterType) return false;
+                    if (filterSearch && !t.title.toLowerCase().includes(filterSearch) && !t.dept.toLowerCase().includes(filterSearch)) return false;
+                    return true;
+                });
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-12 text-slate-400 text-sm">
+                            Aradığınız kriterlere uygun ihale bulunamadı.
+                        </div>
+                    `;
+                    return;
+                }
+
+                filtered.forEach(t => {
+                    const originalIndex = this.tenders.indexOf(t);
+                    const guarantee = Math.round(t.estimatedCost * (t.guaranteeRate / 100));
+
+                    const card = document.createElement('div');
+                    card.className = 'glass-panel rounded-2xl p-5 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between group shadow-lg';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="text-[10px] font-mono font-semibold bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">${t.id}</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded ${t.type === 'Yapım İşleri' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30' : t.type === 'Mal Alımı' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-sky-500/10 text-sky-400 border border-sky-500/30'}">${t.type}</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-2 leading-snug mb-1.5">${t.title}</h3>
+                            <p class="text-[11px] text-slate-400 line-clamp-1 mb-4"><i class="fa-solid fa-building text-slate-500 mr-1"></i>${t.dept}</p>
+
+                            <div class="bg-navy-950 p-3 rounded-xl border border-slate-800 space-y-1.5 text-xs mb-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-400 text-[11px]">Yaklaşık Maliyet:</span>
+                                    <span class="font-bold text-amber-400 font-mono">₺${t.estimatedCost.toLocaleString('tr-TR')}</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-400 text-[11px]">Geçici Teminat (%${t.guaranteeRate}):</span>
+                                    <span class="font-semibold text-slate-300 font-mono">₺${guarantee.toLocaleString('tr-TR')}</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-400 text-[11px]">Son Başvuru:</span>
+                                    <span class="text-slate-300 font-semibold text-[10px]"><i class="fa-regular fa-clock text-amber-500 mr-1"></i>${t.deadline}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="app.chooseTender(${originalIndex})" class="w-full text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-md">
+                            <span>İhaleyi Seç ve İlerle</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    `;
+                    grid.appendChild(card);
+                });
+            },
+
+            // NAVIGATE VIEWS
+            goToView(viewNum) {
+                this.currentView = viewNum;
+
+                document.getElementById('view-1').classList.add('hidden');
+                document.getElementById('view-2').classList.add('hidden');
+                document.getElementById('view-3').classList.add('hidden');
+
+                const backBtn = document.getElementById('btn-back-to-list');
+                const badge = document.getElementById('nav-stage-badge');
+
+                if (viewNum === 1) {
+                    document.getElementById('view-1').classList.remove('hidden');
+                    backBtn.classList.add('hidden');
+                    badge.textContent = '1. ADIM: İHALE SEÇİMİ';
+                    badge.className = 'bg-amber-500/20 text-amber-300 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-amber-500/30';
+                } else if (viewNum === 2) {
+                    document.getElementById('view-2').classList.remove('hidden');
+                    backBtn.classList.remove('hidden');
+                    badge.textContent = '2. ADIM: ROL SEÇİMİ';
+                    badge.className = 'bg-sky-500/20 text-sky-300 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-sky-500/30';
+                    this.renderView2();
+                } else if (viewNum === 3) {
+                    document.getElementById('view-3').classList.remove('hidden');
+                    backBtn.classList.remove('hidden');
+                    badge.textContent = '3. ADIM: CANLI SİMÜLASYON';
+                    badge.className = 'bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30';
+                    this.renderView3();
+                }
+            },
+
+            chooseTender(index) {
+                this.selectedTender = this.tenders[index];
+                this.goToView(2);
+            },
+
+            selectRole(role) {
+                this.selectedRole = role;
+
+                ['yüklenici', 'ihale_komisyonu', 'kik_müfettişi'].forEach(r => {
+                    const card = document.getElementById(`role-card-${r}`);
+                    if (r === role) {
+                        card.className = 'glass-panel rounded-2xl p-6 border-2 border-amber-500 bg-amber-500/10 cursor-pointer transition-all flex flex-col justify-between shadow-xl';
+                    } else {
+                        card.className = 'glass-panel rounded-2xl p-6 border border-slate-800 hover:border-amber-500/60 cursor-pointer transition-all flex flex-col justify-between group';
+                    }
+                });
+            },
+
+            renderView2() {
+                const t = this.selectedTender;
+                if (!t) return;
+
+                document.getElementById('v2-tender-title').textContent = t.title;
+                document.getElementById('v2-tender-dept').textContent = t.dept;
+                document.getElementById('v2-tender-type').textContent = t.type;
+                document.getElementById('v2-tender-cost').textContent = `₺${t.estimatedCost.toLocaleString('tr-TR')}`;
+                document.getElementById('v2-tender-duration').textContent = `${t.durationDays} Gün`;
+
+                this.selectRole(this.selectedRole);
+            },
+
+            startSimulation() {
+                this.goToView(3);
+            },
+
+            renderView3() {
+                const t = this.selectedTender;
+                if (!t) return;
+
+                document.getElementById('sim-tender-id').textContent = `İHALE NO: ${t.id}`;
+                document.getElementById('sim-tender-type').textContent = t.type;
+                document.getElementById('sim-tender-title').textContent = t.title;
+                document.getElementById('sim-tender-dept').textContent = `İhale Makamı: ${t.dept}`;
+                document.getElementById('sim-tender-cost').textContent = `₺${t.estimatedCost.toLocaleString('tr-TR')}`;
+
+                const roleTitles = {
+                    'yüklenici': 'İstekli Yüklenici (Firma)',
+                    'ihale_komisyonu': 'İhale Komisyon Başkanı',
+                    'kik_müfettişi': 'KİK Müfettişi / Denetçi'
+                };
+                const roleDescs = {
+                    'yüklenici': 'Maliyet hesabı yapın, kırım oranınızı belirleyin ve ihaleyi kazanacak en avantajlı teklifi sunun.',
+                    'ihale_komisyonu': 'Gelen zarfları açın, geçici teminat ve idari belgeleri denetleyin, mevzuata uygun kararı verin.',
+                    'kik_müfettişi': 'İtirazen şikayet başvurularını inceleyin, kısıtlayıcı teknik maddeleri ve kamu zararını önleyin.'
+                };
+
+                document.getElementById('sim-role-badge').textContent = `ROL: ${roleTitles[this.selectedRole]}`;
+                document.getElementById('panel-role-title').textContent = roleTitles[this.selectedRole];
+                document.getElementById('panel-role-desc').textContent = roleDescs[this.selectedRole];
+
+                document.getElementById('panel-tech-score').textContent = `${t.techScoreBar}/100`;
+                document.getElementById('panel-guarantee-rate').textContent = `%${t.guaranteeRate}`;
+                document.getElementById('panel-risk-level').textContent = t.riskLevel;
+
+                document.getElementById('panel-risk-matrix').innerHTML = `
+                    <div class="p-3 rounded-xl bg-navy-950 border border-slate-800 space-y-1">
+                        <div class="font-bold text-amber-400 text-xs">${t.specIssueTitle}</div>
+                        <div class="text-xs text-slate-400 leading-snug">${t.specIssueDesc}</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-navy-950 border border-slate-800 space-y-1">
+                        <div class="font-bold text-slate-200 text-xs">Saha Riskleri:</div>
+                        <ul class="list-disc list-inside text-[11px] text-slate-400 space-y-0.5">
+                            ${t.risks.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                this.setSimStep(1);
+            },
+
+            setSimStep(step) {
+                this.simStep = step;
+
+                for (let i = 1; i <= 4; i++) {
+                    const btn = document.getElementById(`step-btn-${i}`);
+                    if (i === step) {
+                        btn.className = 'step-active cursor-pointer p-3 rounded-xl border border-slate-700 transition-all text-center';
+                    } else {
+                        btn.className = 'cursor-pointer p-3 rounded-xl border border-slate-800 hover:border-slate-700 transition-all text-center';
+                    }
+                }
+
+                this.renderStepContent();
+            },
+
+            // STEP-BY-STEP SIMULATION CONTENT PER ROLE
+            renderStepContent() {
+                const container = document.getElementById('sim-step-content');
+                const t = this.selectedTender;
+                const role = this.selectedRole;
+
+                if (this.simStep === 1) {
+                    // ADIM 1: ŞARTNAME İNCELEME
+                    if (role === 'yüklenici') {
+                        container.innerHTML = `
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider"><i class="fa-solid fa-file-signature mr-2"></i>1. Adım: Şartname ve İdari Şartları İnceleme</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    İhaleye katılmadan önce teknik şartnamedeki kısıtlayıcı hususları tespit edin.
+                                </p>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-amber-500/30 space-y-2">
+                                    <div class="text-xs font-bold text-amber-400">${t.specIssueTitle}</div>
+                                    <p class="text-xs text-slate-300">${t.specIssueDesc}</p>
+                                </div>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="app.actionStep1('complain')" class="text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black px-4 py-2.5 rounded-xl transition-all">
+                                        <i class="fa-solid fa-flag mr-1.5"></i>İdareye Şikayet Başvurusu Yap (Zeyilname İstemi)
+                                    </button>
+                                    <button onclick="app.actionStep1('accept')" class="text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2.5 rounded-xl border border-slate-700 transition-all">
+                                        <i class="fa-solid fa-arrow-right mr-1.5"></i>Şartnameyi Olduğu Gibi Kabul Et
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    } else if (role === 'ihale_komisyonu') {
+                        container.innerHTML = `
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-wider"><i class="fa-solid fa-file-shield mr-2"></i>1. Adım: İhale İlanı ve Şartname Onayı</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    İhale komisyon başkanı olarak ilan metninde yer alan teknik şartname kriterlerinin 4734 Sayılı Kanun Madde 12'ye (Rekabeti Engelleme Yasağı) uygunluğunu onaylayın.
+                                </p>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                                    <div class="text-xs font-bold text-slate-200">Teknik Şartname Taslağı İncelemesi:</div>
+                                    <p class="text-xs text-slate-400">${t.specIssueDesc}</p>
+                                </div>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="app.actionStep1('approve')" class="text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl transition-all">
+                                        <i class="fa-solid fa-check mr-1.5"></i>Şartnameyi İlana Çıkar
+                                    </button>
+                                    <button onclick="app.actionStep1('revise')" class="text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black px-4 py-2.5 rounded-xl transition-all">
+                                        <i class="fa-solid fa-pen-to-square mr-1.5"></i>Kısıtlayıcı Maddeyi Revize Et
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    } else { // kik_müfettişi
+                        container.innerHTML = `
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-wider"><i class="fa-solid fa-microscope mr-2"></i>1. Adım: Ön Önlem ve Ön İnceleme</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    KİK müfettişi olarak ilan edilen ihale şartnamesinde rekabeti daraltan veya adrese teslim şüphesi doğuran maddeleri otomatik tarama ile belirleyin.
+                                </p>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-indigo-500/30 space-y-2">
+                                    <div class="text-xs font-bold text-indigo-300">Taranan İhale Şartnamesi Bulgusu:</div>
+                                    <p class="text-xs text-slate-300">${t.specIssueTitle}: ${t.specIssueDesc}</p>
+                                </div>
+                                <button onclick="app.setSimStep(2)" class="text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-xl transition-all">
+                                    <i class="fa-solid fa-arrow-right mr-1.5"></i>İnceleme Kaydını Oluştur ve İlerle
+                                </button>
+                            </div>
+                        `;
+                    }
+                } else if (this.simStep === 2) {
+                    // ADIM 2: TEKLİF & ZARF İNCELEME
+                    if (role === 'yüklenici') {
+                        container.innerHTML = `
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider"><i class="fa-solid fa-calculator mr-2"></i>2. Adım: Maliyet Analizi ve Teklif Hazırlığı</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-semibold text-slate-300">Teklif Fiyatınız (TL):</label>
+                                        <input type="number" id="input-bid-price" value="${t.userBid}" oninput="app.updateCalculations()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-amber-400 font-bold font-mono focus:outline-none focus:border-amber-500">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-semibold text-slate-300">Tedarikçi & Taşeron Kalitesi:</label>
+                                        <select id="select-subcontractor" onchange="app.updateSubcontractor(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                                            <option value="high">A-Kalite Premium (Yüksek Maliyet - Sıfır Risk)</option>
+                                            <option value="normal" selected>Standart Tedarikçi (Dengeli Maliyet)</option>
+                                            <option value="cheap">Ucuz Tedarikçi (KİK Denetim ve Gecikme Riski)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 grid grid-cols-3 gap-2 text-center text-xs">
+                                    <div>
+                                        <div class="text-[10px] text-slate-400">Beklenen Brüt Kar</div>
+                                        <div id="calc-profit" class="font-bold text-emerald-400 font-mono mt-1">₺0</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] text-slate-400">Kırım Oranı</div>
+                                        <div id="calc-discount" class="font-bold text-amber-400 font-mono mt-1">%0</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] text-slate-400">Aşırı Düşük Sınırı</div>
+                                        <div id="calc-threshold" class="font-bold text-slate-300 font-mono mt-1">₺0</div>
+                                    </div>
+                                </div>
+
+                                <button onclick="app.submitBid()" class="w-full text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-lock"></i> E-Teklifi İmzala ve EKAP'a Gönder
+                                </button>
+                            </div>
+                        `;
+                        this.updateCalculations();
+                    } else { // ihale_komisyonu or kik_müfettişi
+                        container.innerHTML = `
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-wider"><i class="fa-solid fa-envelope-open-text mr-2"></i>2. Adım: Gelen Teklif Zarflarının Kontrolü</h4>
+                                <p class="text-xs text-slate-300">İhaleye sunulan e-teklif zarflarının teminat mektubu geçerlilik süreleri ve imza doğrulamaları yapılmaktadır.</p>
+                                <div class="space-y-2">
+                                    ${t.competitors.map(c => `
+                                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+                                            <span class="font-bold text-white">${c.name}</span>
+                                            <span class="font-mono text-amber-400">₺${c.bid.toLocaleString('tr-TR')}</span>
+                                            <span class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-check mr-1"></i>Zarf Mühürlü & Geçerli</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <button onclick="app.setSimStep(3)" class="w-full text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black py-3 rounded-xl transition-all">
+                                    <i class="fa-solid fa-gavel mr-1.5"></i>Zarf Açma ve Eleme Aşamasına Geç
+                                </button>
+                            </div>
+                        `;
+                    }
+                } else if (this.simStep === 3) {
+                    // ADIM 3: ZARF AÇMA & ELEME
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider"><i class="fa-solid fa-box-open mr-2"></i>3. Adım: Canlı Zarf Açılışı ve Eleme Listesi</h4>
+                                <span class="text-xs text-amber-400 font-mono">Sınır Değer: ₺${Math.round(t.estimatedCost * 0.82).toLocaleString('tr-TR')}</span>
+                            </div>
+
+                            <div class="space-y-2">
+                                ${t.competitors.map(c => `
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+                                        <div>
+                                            <span class="font-bold text-white">${c.name}</span>
+                                            <span class="text-[10px] text-slate-400 ml-2">(${c.note})</span>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <span class="font-mono font-bold text-amber-400">₺${c.bid.toLocaleString('tr-TR')}</span>
+                                            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${c.status === 'Geçerli' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}">${c.status}</span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300">
+                                <strong>Komisyon Değerlendirme Notu:</strong> Teklifler 4734 Sayılı Kanun Madde 37/38 (Aşırı Düşük Teklifler) uyarınca puanlanmıştır. En düşük teklif veren firmalardan maliyet bileşen açıklaması istenecektir.
+                            </div>
+
+                            <button onclick="app.setSimStep(4)" class="w-full text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black py-3 rounded-xl transition-all">
+                                <i class="fa-solid fa-award mr-1.5"></i>Karar Aşamasına İlerle
+                            </button>
+                        </div>
+                    `;
+                } else if (this.simStep === 4) {
+                    // ADIM 4: KARAR & KİK İTİRAZI
+                    const profit = t.userBid - t.subcontractorCost;
+                    container.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider"><i class="fa-solid fa-trophy mr-2"></i>4. Adım: İhale Kararı & KİK Sonuç Raporu</h4>
+                                <span class="text-xs text-emerald-400 font-bold">Tamamlandı</span>
+                            </div>
+
+                            <div class="p-5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 space-y-2">
+                                <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm uppercase">
+                                    <i class="fa-solid fa-circle-check"></i> İhale Süreci Başarıyla Tamamlandı
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    İhale komisyonu kararı EKAP üzerinde yayımlanmıştır. Seçilen rolün kararlarına ve mevzuata uygunluk değerlendirmesine göre sonuçlaşma sağlanmıştır.
+                                </p>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block">Kazanan Teklif</span>
+                                    <span class="font-bold text-amber-400 font-mono mt-0.5 block">₺${t.userBid.toLocaleString('tr-TR')}</span>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block">Tahmini Brüt Kar</span>
+                                    <span class="font-bold text-emerald-400 font-mono mt-0.5 block">₺${profit.toLocaleString('tr-TR')}</span>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block">KİK İtiraz Riski</span>
+                                    <span class="font-bold text-sky-400 mt-0.5 block">Düşük (%10)</span>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block">Etik / Şeffaflık</span>
+                                    <span class="font-bold text-indigo-400 mt-0.5 block">98/100</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <button onclick="app.completeSimulation()" class="flex-1 text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black py-3 rounded-xl transition-all">
+                                    <i class="fa-solid fa-check-double mr-1.5"></i>Raporu Onayla ve Tamamla
+                                </button>
+                                <button onclick="app.goToView(1)" class="flex-1 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 py-3 rounded-xl border border-slate-700 transition-all">
+                                    <i class="fa-solid fa-list mr-1.5"></i>Yeni İhale Seç
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            },
+
+            actionStep1(type) {
+                if (type === 'complain') {
+                    this.stats.ethics += 2;
+                    this.stats.reputation += 3;
+                    this.renderStats();
+                    this.showModal('Zeyilname Talebi Alındı', 'İdareye yapılan şikayet başvurusu üzerine teknik şartnamede düzeltme zeyilnamesi yayımlandı.');
+                } else if (type === 'approve') {
+                    this.showModal('İlan Onaylandı', 'Teknik şartname onaylandı ve EKAP üzerinden resmi ilana çıkıldı.');
+                } else if (type === 'revise') {
+                    this.showModal('Şartname Revize Edildi', 'Kısıtlayıcı madde düzeltilerek daha fazla firmanın ihaleye katılımı sağlandı.');
+                } else {
+                    this.showModal('Şartname Onaylandı', 'Şartnameyi kabul ederek teklif hazırlama aşamasına geçtiniz.');
+                }
+                this.setSimStep(2);
+            },
+
+            updateCalculations() {
+                const t = this.selectedTender;
+                const priceInput = document.getElementById('input-bid-price');
+                if (!priceInput || !t) return;
+
+                const bid = parseFloat(priceInput.value) || 0;
+                t.userBid = bid;
+
+                const profit = bid - t.subcontractorCost;
+                const discountRate = (((t.estimatedCost - bid) / t.estimatedCost) * 100).toFixed(1);
+                const threshold = Math.round(t.estimatedCost * 0.82);
+
+                document.getElementById('calc-profit').textContent = `₺${profit.toLocaleString('tr-TR')}`;
+                document.getElementById('calc-discount').textContent = `%${discountRate}`;
+                document.getElementById('calc-threshold').textContent = `₺${threshold.toLocaleString('tr-TR')}`;
+            },
+
+            updateSubcontractor(type) {
+                const t = this.selectedTender;
+                if (!t) return;
+
+                const baseSub = t.estimatedCost * 0.65;
+                if (type === 'high') t.subcontractorCost = baseSub * 1.12;
+                else if (type === 'normal') t.subcontractorCost = baseSub;
+                else t.subcontractorCost = baseSub * 0.85;
+
+                this.updateCalculations();
+            },
+
+            submitBid() {
+                const t = this.selectedTender;
+                this.showModal('E-Teklif Gönderildi', `₺${t.userBid.toLocaleString('tr-TR')} tutarındaki teklifiniz e-imza ile EKAP sistemine iletildi.`);
+                this.setSimStep(3);
+            },
+
+            completeSimulation() {
+                const t = this.selectedTender;
+                const profit = t.userBid - t.subcontractorCost;
+                this.stats.budget += profit;
+                this.stats.wins += 1;
+                this.stats.total += 1;
+                this.renderStats();
+
+                this.showModal('Simülasyon Tamamlandı!', `${t.title} ihalesi simülasyonu başarıyla sonuçlandı ve bilançonuz güncellendi.`);
+                this.goToView(1);
+            },
+
+            showModal(title, body) {
+                document.getElementById('modal-title').textContent = title;
+                document.getElementById('modal-body').textContent = body;
+                document.getElementById('modal-dialog').classList.remove('hidden');
+            },
+
+            closeModal() {
+                document.getElementById('modal-dialog').classList.add('hidden');
+            }
+        };
+
+        window.onload = function() {
+            app.init();
+        };
+    </script>
+</body>
+</html>

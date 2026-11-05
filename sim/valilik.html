@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mülki İdare Âmirliği: Vali & Kaymakam Simülatörü 3.0 Ultra</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 800: '#0b132b', 900: '#060a17', 950: '#02040a' },
+                        crimson: { 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#881337', 900: '#450a0a' },
+                        gold: { 300: '#fde047', 400: '#facc15', 500: '#eab308', 600: '#ca8a04', 700: '#a16207' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #02040a;
+            color: #f1f5f9;
+            user-select: none;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(185, 28, 28, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(202, 138, 4, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(11, 19, 43, 0.6) 0px, transparent 100%);
+            background-attachment: fixed;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #060a17; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        .stat-bar-fill {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease;
+        }
+
+        .glass-panel {
+            background: rgba(11, 19, 43, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-panel-gold {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.1);
+        }
+
+        .stamp-box {
+            position: absolute;
+            top: 35%;
+            right: 8%;
+            transform: rotate(-12deg) scale(2.5);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 8px 24px;
+            font-weight: 900;
+            border-radius: 8px;
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            z-index: 40;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+        .stamp-active { opacity: 0.95; transform: rotate(-12deg) scale(1); }
+
+        .paper-bg {
+            background-color: #0b132b;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(2, 4, 10, 0.85), rgba(11, 19, 43, 0.98));
+            background-size: 20px 20px, 100% 100%;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 12px rgba(220, 38, 38, 0.2); }
+            50% { box-shadow: 0 0 22px rgba(220, 38, 38, 0.6); }
+        }
+        .audit-alert-glow { animation: pulseGlow 1.8s infinite; }
+
+        @keyframes phoneRing {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70% { transform: rotate(-8deg); }
+            20%, 40%, 60%, 80% { transform: rotate(8deg); }
+        }
+        .phone-ring-anim { animation: phoneRing 1.2s infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-100 overflow-x-hidden antialiased">
+
+    <!-- TOP EXECUTIVE HEADER BAR -->
+    <header class="border-b border-slate-800/80 bg-navy-950/90 sticky top-0 z-50 backdrop-blur-xl px-4 py-3 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            
+            <!-- OFFICIAL T.C. İÇİŞLERİ EMBLEM & TITLE -->
+            <div class="flex items-center gap-3.5">
+                <div class="relative group cursor-pointer" onclick="openPressRoom()">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-crimson-600 to-gold-500 rounded-full blur opacity-40 group-hover:opacity-80 transition duration-300"></div>
+                    <div class="relative w-12 h-12 rounded-full bg-navy-900 border-2 border-gold-500/80 flex items-center justify-center p-0.5 shadow-xl">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="46" fill="none" stroke="#ca8a04" stroke-width="2" stroke-dasharray="3 2" />
+                            <circle cx="50" cy="50" r="42" fill="#881337" stroke="#eab308" stroke-width="1.5" />
+                            <g fill="#facc15">
+                                <circle cx="50" cy="12" r="1.8" /><circle cx="64" cy="15" r="1.8" /><circle cx="76" cy="24" r="1.8" />
+                                <circle cx="85" cy="36" r="1.8" /><circle cx="88" cy="50" r="1.8" /><circle cx="85" cy="64" r="1.8" />
+                                <circle cx="76" cy="76" r="1.8" /><circle cx="64" cy="85" r="1.8" /><circle cx="50" cy="88" r="1.8" />
+                                <circle cx="36" cy="85" r="1.8" /><circle cx="24" cy="76" r="1.8" /><circle cx="15" cy="64" r="1.8" />
+                                <circle cx="12" cy="50" r="1.8" /><circle cx="15" cy="36" r="1.8" /><circle cx="24" cy="24" r="1.8" />
+                                <circle cx="36" cy="15" r="1.8" />
+                            </g>
+                            <path d="M 50 20 C 65 20, 75 25, 75 45 C 75 65, 50 80, 50 80 C 50 80, 25 65, 25 45 C 25 25, 35 20, 50 20 Z" fill="#dc2626" stroke="#fde047" stroke-width="1.2" />
+                            <path d="M 48 36 A 10 10 0 1 0 58 52 A 12 12 0 1 1 48 36 Z" fill="#ffffff" />
+                            <polygon points="57,41 59,45 63,45 60,47 61,51 57,48 53,51 54,47 51,45 55,45" fill="#ffffff" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div>
+                    <h1 class="text-sm sm:text-base font-extrabold text-slate-100 tracking-wider flex items-center gap-2">
+                        <span>T.C. İÇİŞLERİ BAKANLIĞI</span>
+                        <span id="rank-badge" class="px-2.5 py-0.5 text-[11px] font-extrabold rounded bg-gold-500/20 text-gold-400 border border-gold-500/40 shadow-inner">
+                            5. Sınıf Kaymakam
+                        </span>
+                    </h1>
+                    <p class="text-xs text-slate-400 font-medium flex items-center gap-2" id="location-name">
+                        <i class="fa-solid fa-building-flag text-crimson-500"></i> Yüksekova İlçesi Mülki İdaresi
+                    </p>
+                </div>
+            </div>
+
+            <!-- SYSTEM CONTROLS & HUD -->
+            <div class="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+                <!-- Treasury Vault -->
+                <div class="bg-navy-900/90 px-3 py-1.5 rounded-xl border border-slate-800 text-right shadow-inner">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Hazine Kasası</div>
+                    <div class="font-black font-mono text-gold-400 text-xs sm:text-sm" id="header-budget">₺1,500,000</div>
+                    <div class="text-[9px] font-mono text-emerald-400 font-bold" id="header-net-flow">+₺250,000 /ay</div>
+                </div>
+
+                <!-- Calendar & Tenure -->
+                <div class="bg-navy-900/90 px-3 py-1.5 rounded-xl border border-slate-800 text-right shadow-inner">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold flex items-center justify-end gap-1">
+                        <i class="fa-regular fa-calendar-days text-crimson-500"></i> Görev Süresi
+                    </div>
+                    <div class="font-extrabold text-slate-200 text-xs sm:text-sm" id="time-display">1. Yıl - 1. Ay</div>
+                    <div class="text-[9px] text-slate-400 font-semibold" id="career-progress">Terfiye: 12 Ay</div>
+                </div>
+
+                <!-- Action Hub Buttons -->
+                <button onclick="openPressRoom()" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700 shadow-md active:scale-95" title="Basın Toplantısı Düzenle">
+                    <i class="fa-solid fa-bullhorn text-cyan-400"></i>
+                </button>
+                <button onclick="triggerNightAlarm()" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700 shadow-md active:scale-95 relative" title="Gece Nöbet Telefonu">
+                    <i class="fa-solid fa-phone text-crimson-400 phone-ring-anim"></i>
+                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-crimson-500 rounded-full animate-ping"></span>
+                </button>
+                <button id="sound-toggle" onclick="toggleSound()" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-all border border-slate-700 shadow-md active:scale-95">
+                    <i class="fa-solid fa-volume-high text-gold-400" id="sound-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN DASHBOARD -->
+    <main class="max-w-7xl w-full mx-auto p-3 sm:p-5 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+        <!-- LEFT COLUMN: METRICS & DISPATCH MAP (4 COLS) -->
+        <section class="lg:col-span-4 flex flex-col gap-4">
+            
+            <!-- 10 METRICS PANEL -->
+            <div class="glass-panel rounded-2xl p-4 shadow-2xl border border-slate-800 space-y-2.5 relative overflow-hidden">
+                <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+                    <h2 class="text-xs font-black text-slate-200 uppercase tracking-widest flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-gold-400"></i> İdari Performans Metrikleri
+                    </h2>
+                    <span id="audit-alert-badge" class="hidden text-[10px] bg-crimson-600/20 text-crimson-400 border border-crimson-600/50 px-2 py-0.5 rounded font-extrabold audit-alert-glow cursor-pointer" onclick="triggerInspectorAudit()">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Müfettiş Riski!
+                    </span>
+                </div>
+
+                <div class="space-y-2 text-[11px]">
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-users text-blue-400 mr-1.5"></i> Halk Memnuniyeti</span><span class="font-bold font-mono" id="m-halk-val">65%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-halk-bar" class="stat-bar-fill bg-blue-500 h-1 rounded-full" style="width:65%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-building-columns text-amber-400 mr-1.5"></i> Devlet Saygınlığı</span><span class="font-bold font-mono" id="m-devlet-val">75%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-devlet-bar" class="stat-bar-fill bg-amber-500 h-1 rounded-full" style="width:75%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i> Asayiş & Huzur</span><span class="font-bold font-mono" id="m-asayis-val">70%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-asayis-bar" class="stat-bar-fill bg-emerald-500 h-1 rounded-full" style="width:70%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-user-tie text-indigo-400 mr-1.5"></i> Liyakat & Kadro</span><span class="font-bold font-mono" id="m-personel-val">60%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-personel-bar" class="stat-bar-fill bg-indigo-500 h-1 rounded-full" style="width:60%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-newspaper text-cyan-400 mr-1.5"></i> Medya & Basın İmajı</span><span class="font-bold font-mono" id="m-medya-val">55%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-medya-bar" class="stat-bar-fill bg-cyan-500 h-1 rounded-full" style="width:55%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-scale-balanced text-purple-400 mr-1.5"></i> Siyasi/STK Dengesi</span><span class="font-bold font-mono" id="m-siyaset-val">50%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-siyaset-bar" class="stat-bar-fill bg-purple-500 h-1 rounded-full" style="width:50%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-300 font-medium"><i class="fa-solid fa-chart-line text-orange-400 mr-1.5"></i> Yerel Ekonomik Güç</span><span class="font-bold font-mono" id="m-ekonomi-val">40%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-ekonomi-bar" class="stat-bar-fill bg-orange-500 h-1 rounded-full" style="width:40%"></div></div>
+                    </div>
+                    <div class="pt-1 border-t border-slate-800">
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-200 font-bold"><i class="fa-solid fa-gavel text-crimson-500 mr-1.5"></i> Sayıştay Risk Puanı</span><span class="font-bold font-mono text-crimson-400" id="m-sayistay-val">10%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-sayistay-bar" class="stat-bar-fill bg-crimson-600 h-1 rounded-full" style="width:10%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-0.5"><span class="text-slate-200 font-bold"><i class="fa-solid fa-biohazard text-gold-500 mr-1.5"></i> Genel Kriz Seviyesi</span><span class="font-bold font-mono text-gold-400" id="m-kriz-val">20%</span></div>
+                        <div class="w-full bg-navy-950 rounded-full h-1.5 p-0.5 border border-slate-800"><div id="m-kriz-bar" class="stat-bar-fill bg-gold-500 h-1 rounded-full" style="width:20%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE REGIONAL DISPATCH MAP CANVAS -->
+            <div class="glass-panel rounded-2xl p-3.5 shadow-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span class="text-xs font-black text-slate-200 uppercase tracking-widest flex items-center gap-1.5">
+                        <i class="fa-solid fa-map text-emerald-400"></i> İnteraktif Bölge & Sevk Haritası
+                    </span>
+                    <span class="text-[10px] text-slate-400 font-mono" id="map-active-incident">Sakin</span>
+                </div>
+                <div class="relative w-full h-48 bg-navy-950 rounded-xl overflow-hidden border border-slate-800">
+                    <canvas id="dispatchMapCanvas" class="w-full h-full cursor-pointer"></canvas>
+                </div>
+                <div class="grid grid-cols-3 gap-1.5 text-[10px]">
+                    <button onclick="dispatchUnit('AFAD')" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold border border-slate-700"><i class="fa-solid fa-kit-medical text-crimson-400 mr-1"></i> AFAD</button>
+                    <button onclick="dispatchUnit('Emniyet')" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold border border-slate-700"><i class="fa-solid fa-shield text-blue-400 mr-1"></i> Emniyet</button>
+                    <button onclick="dispatchUnit('Jandarma')" class="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold border border-slate-700"><i class="fa-solid fa-person-military-rifle text-emerald-400 mr-1"></i> Jandarma</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CENTER & RIGHT COLUMN: DECISIONS & MANAGEMENT TABS (8 COLS) -->
+        <section class="lg:col-span-8 flex flex-col gap-5">
+            
+            <!-- OFFICIAL DECISION / PAPERWORK CARD -->
+            <div class="glass-panel-gold rounded-2xl p-5 sm:p-6 shadow-2xl relative flex-1 flex flex-col justify-between paper-bg border border-gold-500/30">
+                
+                <div id="decision-stamp" class="stamp-box border-4 border-emerald-500 text-emerald-500">ONAYLANDI</div>
+
+                <div>
+                    <div class="flex flex-wrap items-center justify-between border-b border-slate-700/80 pb-3 mb-3 gap-2">
+                        <div class="flex items-center gap-2">
+                            <span id="event-tag" class="px-2.5 py-1 text-[11px] font-black rounded-lg bg-crimson-900/80 text-crimson-300 border border-crimson-700/80 uppercase tracking-widest">
+                                <i class="fa-solid fa-file-signature mr-1"></i> RESMİ KARAR
+                            </span>
+                            <span id="event-urgency" class="text-[11px] font-mono font-bold text-gold-400 bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/30">
+                                Aciliyet: Normal
+                            </span>
+                        </div>
+                        <div class="text-[11px] font-mono text-slate-400" id="event-source">
+                            Makam: İlçe Mülki İdaresi
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 id="event-title" class="text-base sm:text-xl font-black text-slate-100 font-serif leading-snug">
+                            Evrak Yükleniyor...
+                        </h3>
+                        <p id="event-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed bg-navy-950/90 p-3.5 rounded-xl border border-slate-800 shadow-inner">
+                            Resmi evrak incelenmek üzere masanıza getiriliyor...
+                        </p>
+                    </div>
+
+                    <div id="chain-warning" class="hidden mt-2 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-link text-amber-400"></i>
+                        <span>Geçmiş bir idari kararınızın zincirleme etkisi tetiklendi.</span>
+                    </div>
+                </div>
+
+                <div class="mt-4 space-y-2.5" id="event-options">
+                    <!-- Dynamic choices inserted via JS -->
+                </div>
+
+            </div>
+
+            <!-- MANAGEMENT TABS HUB -->
+            <div class="glass-panel rounded-2xl p-4 shadow-xl border border-slate-800 space-y-3">
+                
+                <!-- Navigation Tabs Header -->
+                <div class="flex border-b border-slate-800 gap-1 pb-2 overflow-x-auto text-xs scrollbar-none">
+                    <button onclick="switchHubTab('direktifler')" id="htab-direktifler" class="hub-tab-btn px-3 py-1.5 rounded-lg font-bold bg-slate-800 text-slate-200 border border-slate-700 shrink-0">
+                        <i class="fa-solid fa-sitemap text-sky-400 mr-1"></i> Aylık Direktifler
+                    </button>
+                    <button onclick="switchHubTab('mudurler')" id="htab-mudurler" class="hub-tab-btn px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:bg-slate-800/50 shrink-0">
+                        <i class="fa-solid fa-user-shield text-indigo-400 mr-1"></i> Şube Müdürleri
+                    </button>
+                    <button onclick="switchHubTab('projeler')" id="htab-projeler" class="hub-tab-btn px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:bg-slate-800/50 shrink-0">
+                        <i class="fa-solid fa-diagram-project text-amber-400 mr-1"></i> Mega İhaleler
+                    </button>
+                    <button onclick="switchHubTab('muhtarlar')" id="htab-muhtarlar" class="hub-tab-btn px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:bg-slate-800/50 shrink-0">
+                        <i class="fa-solid fa-comments text-emerald-400 mr-1"></i> Muhtar Kabul Günü
+                    </button>
+                </div>
+
+                <!-- Tab 1: Direktifler -->
+                <div id="hpanel-direktifler" class="hub-panel grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                    <div class="bg-navy-950/80 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-slate-200">Genişletilmiş Devriyeler</div>
+                            <div class="text-[10px] text-slate-400">Asayiş artar. (-₺30,000/ay)</div>
+                        </div>
+                        <button onclick="toggleDeptPolicy('devriye')" id="pol-devriye-btn" class="px-2.5 py-1 bg-slate-800 text-slate-300 font-bold rounded border border-slate-700">Pasif</button>
+                    </div>
+                    <div class="bg-navy-950/80 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-slate-200">Aşevi & Yardım Fonu</div>
+                            <div class="text-[10px] text-slate-400">Halk desteği sağlar. (-₺50,000/ay)</div>
+                        </div>
+                        <button onclick="toggleDeptPolicy('asevi')" id="pol-asevi-btn" class="px-2.5 py-1 bg-slate-800 text-slate-300 font-bold rounded border border-slate-700">Pasif</button>
+                    </div>
+                    <div class="bg-navy-950/80 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-slate-200">Köy Okulları Seferberliği</div>
+                            <div class="text-[10px] text-slate-400">Liyakati yükseltir. (-₺45,000/ay)</div>
+                        </div>
+                        <button onclick="toggleDeptPolicy('okul')" id="pol-okul-btn" class="px-2.5 py-1 bg-slate-800 text-slate-300 font-bold rounded border border-slate-700">Pasif</button>
+                    </div>
+                    <div class="bg-navy-950/80 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-slate-200">Sayıştay Tasarruf Rejimi</div>
+                            <div class="text-[10px] text-slate-400">Riski düşürür. (+₺60,000/ay)</div>
+                        </div>
+                        <button onclick="toggleDeptPolicy('tasarruf')" id="pol-tasarruf-btn" class="px-2.5 py-1 bg-slate-800 text-slate-300 font-bold rounded border border-slate-700">Pasif</button>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Müdürler Kadro Yönetimi -->
+                <div id="hpanel-mudurler" class="hub-panel hidden space-y-2 text-xs">
+                    <div id="department-heads-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <!-- Dynamic managers inserted via JS -->
+                    </div>
+                </div>
+
+                <!-- Tab 3: Mega Projeler & İhaleler -->
+                <div id="hpanel-projeler" class="hub-panel hidden space-y-2 text-xs">
+                    <div id="mega-projects-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <!-- Dynamic tenders inserted via JS -->
+                    </div>
+                </div>
+
+                <!-- Tab 4: Muhtar & STK Kabul Günü -->
+                <div id="hpanel-muhtarlar" class="hub-panel hidden space-y-2 text-xs">
+                    <div class="bg-navy-950/90 p-3 rounded-xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="font-bold text-slate-200" id="muhtar-title">Kuzey Köyleri Muhtarlar Heyeti</span>
+                            <span class="text-gold-400 font-mono font-bold">Talep Bütçesi: ₺120,000</span>
+                        </div>
+                        <p class="text-slate-300 leading-relaxed text-[11px]" id="muhtar-desc">
+                            "Sayın Mülki Amirim, köy yollarımız aşırı yağıştan tıkandı ve su borularımız eski. Acil destek bekliyoruz."
+                        </p>
+                        <div class="flex gap-2 pt-1">
+                            <button onclick="resolveMuhtarRequest(true)" class="flex-1 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-lg">Ödeneği Onayla (-₺120,000)</button>
+                            <button onclick="resolveMuhtarRequest(false)" class="flex-1 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg">Gelecek Yıla Ertele</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NEWS TICKER -->
+            <div class="glass-panel rounded-2xl p-3 shadow-md border border-slate-800 text-xs">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="font-black text-slate-200 uppercase tracking-widest flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-crimson-600 animate-ping"></span>
+                        Resmî Gazete & Basın Akışı
+                    </span>
+                </div>
+                <div id="news-ticker" class="font-mono bg-navy-950/90 p-2.5 rounded-xl border border-slate-800 text-slate-300 h-14 overflow-y-auto leading-relaxed text-[11px]">
+                    [SİSTEM] Mülki İdare Portalı 3.0 Ultra aktif. Tüm idari birimler bağlandı.
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-navy-950 text-center py-2 text-[11px] text-slate-500 font-mono">
+        T.C. İÇİŞLERİ BAKANLIĞI MÜLKİ İDARE ÂMİRLİĞİ SİMÜLATÖRÜ 3.0 ULTRA &copy; 2026
+    </footer>
+
+    <!-- PRESS ROOM MODAL -->
+    <div id="press-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel-gold max-w-lg w-full rounded-2xl p-5 border border-gold-500/50 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 class="text-base font-extrabold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-bullhorn text-cyan-400"></i> Valilik Basın Odası & Canlı Soru
+                </h3>
+                <button onclick="closePressRoom()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="bg-navy-950/90 p-3.5 rounded-xl border border-slate-800 space-y-2 text-xs">
+                <div class="text-cyan-400 font-bold" id="press-reporter">Anadolu Ajansı Muhabiri:</div>
+                <p class="text-slate-200 italic" id="press-question">"Efendim, ilçedeki Sayıştay iddiaları ve kriz bütçesi hakkında kamuoyuna ne açıklamak istersiniz?"</p>
+            </div>
+            <div class="space-y-2 text-xs" id="press-answers">
+                <!-- Dynamic answers inserted via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NIGHT ALARM 03:00 PHONE MODAL -->
+    <div id="night-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full rounded-2xl p-6 border border-crimson-600/60 shadow-2xl space-y-4 text-center">
+            <div class="w-16 h-16 bg-crimson-600/20 text-crimson-500 rounded-full flex items-center justify-center mx-auto text-2xl border border-crimson-500/40 phone-ring-anim">
+                <i class="fa-solid fa-phone-volume"></i>
+            </div>
+            <div class="text-xs font-mono font-bold text-crimson-400 uppercase tracking-widest">GECE NÖBETİ AKUT KRİZİ - SAAT 03:14</div>
+            <h3 class="text-lg font-black text-slate-100 font-serif" id="night-title">Sanayi Bölgesinde Yangın</h3>
+            <p class="text-xs text-slate-300 leading-relaxed bg-navy-950/90 p-3 rounded-xl border border-slate-800" id="night-desc">
+                "Sayın Mülki Amirim, Organize Sanayi Sitesindeki kütüphane ve depoda yangın çıktı! İtfaiye desteği ve AFAD sevki gerekiyor."
+            </p>
+            <div class="space-y-2 text-xs text-left" id="night-options">
+                <!-- Dynamic options -->
+            </div>
+        </div>
+    </div>
+
+    <!-- INSPECTOR AUDIT MODAL -->
+    <div id="inspector-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel-gold max-w-lg w-full rounded-2xl p-6 border border-amber-500/60 shadow-2xl space-y-4">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center text-xl border border-amber-500/40">
+                    <i class="fa-solid fa-user-ninja"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-black text-slate-100">Mülki İdare Müfettişi Geldi!</h3>
+                    <p class="text-xs text-slate-400">İçişleri Bakanlığı Teftiş Kurulu Başkanlığı</p>
+                </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed bg-navy-950/90 p-3 rounded-xl border border-slate-800">
+                "Sayın Âmirim, yüksek Sayıştay riski ve ihale duyumları üzerine makamınızı teftişe geldik. Tüm evrak ve evrak kayıt defterlerini masaya çıkarın."
+            </p>
+            <div class="space-y-2 text-xs" id="inspector-options">
+                <button onclick="resolveInspector('full')" class="w-full text-left p-3 rounded-xl bg-navy-950 hover:bg-slate-800 border border-slate-700 font-bold">
+                    Tüm hesapları şeffafça aç, müfettişle tam işbirliği yap (Sayıştay Riski -30%, Siyasi Denge -10%)
+                </button>
+                <button onclick="resolveInspector('cover')" class="w-full text-left p-3 rounded-xl bg-navy-950 hover:bg-slate-800 border border-slate-700 font-bold">
+                    Eksik evrakları tamamlamak için ek süre iste ve siyasi bağlantıları ara (Sayıştay Riski +15%, Maliyet: ₺50,000)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GENERAL PROMOTION / GAME OVER MODAL -->
+    <div id="modal-container" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel-gold max-w-lg w-full rounded-2xl p-6 shadow-2xl text-center space-y-4 border border-gold-500/50">
+            <div class="w-16 h-16 bg-gold-500/20 text-gold-400 border border-gold-500/50 rounded-full flex items-center justify-center mx-auto text-2xl shadow-xl">
+                <i class="fa-solid fa-award" id="modal-icon"></i>
+            </div>
+            <h2 class="text-xl font-black text-slate-100 font-serif" id="modal-title">Valiler Kararnamesi</h2>
+            <div class="text-xs sm:text-sm text-slate-300 leading-relaxed text-left bg-navy-950/90 p-3.5 rounded-xl border border-slate-800" id="modal-body">
+                Açıklama...
+            </div>
+            <button onclick="closeModal()" id="modal-btn" class="w-full py-3 bg-gradient-to-r from-gold-600 to-amber-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-widest shadow-lg">
+                Onayla
+            </button>
+        </div>
+    </div>
+
+    <!-- AUDIO & SIMULATION ENGINE JS -->
+    <script>
+        /* ==========================================================================
+           1. AUDIO SYNTHESIS ENGINE
+           ========================================================================== */
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                const now = ctx.currentTime;
+
+                if (type === 'stamp_approved') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(180, now);
+                    osc.frequency.exponentialRampToValueAtTime(35, now + 0.18);
+                    gain.gain.setValueAtTime(0.9, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+                    osc.start(now);
+                    osc.stop(now + 0.18);
+                } else if (type === 'stamp_rejected') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(110, now);
+                    osc.frequency.exponentialRampToValueAtTime(25, now + 0.22);
+                    gain.gain.setValueAtTime(0.85, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
+                    osc.start(now);
+                    osc.stop(now + 0.22);
+                } else if (type === 'siren') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(480, now);
+                    osc.frequency.linearRampToValueAtTime(800, now + 0.25);
+                    gain.gain.setValueAtTime(0.4, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'promote') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.12);
+                    osc.frequency.setValueAtTime(783.99, now + 0.24);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.36);
+                    gain.gain.setValueAtTime(0.6, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.75);
+                    osc.start(now);
+                    osc.stop(now + 0.75);
+                } else if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(500, now);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.04);
+                    osc.start(now);
+                    osc.stop(now + 0.04);
+                }
+            } catch (e) {
+                console.warn('Audio note:', e);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-gold-400';
+                playSound('click');
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-slate-500';
+            }
+        }
+
+        /* ==========================================================================
+           2. CAREER MAP & GAME STATE
+           ========================================================================== */
+        const gameState = {
+            rankLevel: 0,
+            year: 1,
+            month: 1,
+            
+            // 10 METRICS
+            halk: 65,
+            devlet: 75,
+            asayis: 70,
+            personel: 60,
+            medya: 55,
+            siyaset: 50,
+            ekonomi: 40,
+            sayistay: 10,
+            kriz: 20,
+            butce: 1500000,
+
+            policies: {
+                devriye: false,
+                asevi: false,
+                okul: false,
+                tasarruf: false
+            },
+
+            departmentHeads: [
+                { id: 'emniyet', title: 'İlçe Emniyet Müdürü', name: 'Ahmet Yılmaz', liyakat: 80, siyaset: 40 },
+                { id: 'sydv', title: 'SYDV Müdürü', name: 'Mehmet Demir', liyakat: 45, siyaset: 85 },
+                { id: 'saglik', title: 'İlçe Sağlık Müdürü', name: 'Dr. Ayşe Kaya', liyakat: 90, siyaset: 30 },
+                { id: 'egitim', title: 'İlçe Milli Eğitim Müdürü', name: 'Mustafa Çelik', liyakat: 50, siyaset: 75 }
+            ],
+
+            megaProjects: [
+                { id: 'osb', title: 'Organize Sanayi Bölgesi (OSB) Genişletme', cost: 400000, built: false, benefit: 'Ekonomi +15%' },
+                { id: 'hastane', title: '100 Yataklı Devlet Hastanesi Ek Binası', cost: 350000, built: false, benefit: 'Halk +12%' },
+                { id: 'baraj', title: 'İçme Suyu Barajı & Gölet', cost: 500000, built: false, benefit: 'Kriz -15%' }
+            ],
+
+            activeMapIncident: { x: 120, y: 70, type: 'Fabrika Yangını', active: true },
+            chainedEventsQueue: [],
+            isGameOver: false
+        };
+
+        const CAREER_KADEMELER = [
+            { rankTitle: "5. Sınıf Kaymakam", location: "Yüksekova İlçesi Mülki İdaresi", reqMonths: 12, baseIncome: 350000 },
+            { rankTitle: "3. Sınıf Kaymakam", location: "Merzifon İlçesi Mülki İdaresi", reqMonths: 24, baseIncome: 550000 },
+            { rankTitle: "1. Sınıf Metropol Kaymakamı", location: "Kadıköy İlçesi Mülki İdaresi", reqMonths: 36, baseIncome: 900000 },
+            { rankTitle: "Anadolu İlleri Valisi", location: "Malatya Valiliği Mülki İdaresi", reqMonths: 48, baseIncome: 1800000 },
+            { rankTitle: "Büyükşehir Valisi", location: "İstanbul Valiliği Mülki İdaresi", reqMonths: 60, baseIncome: 3500000 }
+        ];
+
+        /* ==========================================================================
+           3. EVENT DATABASE
+           ========================================================================== */
+        const eventDatabase = [
+            {
+                id: "EVT_01",
+                minRank: 0, maxRank: 2,
+                urgency: "Yüksek", source: "İlçe Jandarma Komutanlığı", tag: "Asayiş / Sınır",
+                title: "Sınır Köyünde Şüpheli Konvoy İhbarı",
+                desc: "Sınır hattındaki bir köyde kaçak mal taşıdığı iddia edilen araç grubu tespit edildi. Muhtar esnek olunmasını istiyor.",
+                options: [
+                    { text: "Kolluk kuvvetlerine operasyon emri ver (₺40,000)", cost: 40000, effects: { asayis: +12, devlet: +8, halk: -10, kriz: -5 }, press: "Sınırda kaçakçılık operasyonu yapıldı." },
+                    { text: "Arama noktalarını artır fakat diyalogla ilerle", cost: 15000, effects: { asayis: +3, halk: +6, kriz: +2 }, press: "Kaymakamlığın esnek tutumu gerginliği önledi." },
+                    { text: "Evrağı Göç İdaresine sevk et", cost: 0, effects: { devlet: -6, kriz: +6 }, press: "Yetki karmaşası yaşandı." }
+                ]
+            },
+            {
+                id: "EVT_02",
+                minRank: 0, maxRank: 4,
+                urgency: "KRİTİK", source: "SYDV Teftiş", tag: "Mali / Sayıştay",
+                title: "Kömür Yardım İhalesinde Usulsüzlük İddiası",
+                desc: "Yerel bir gazete ihalede akrabalık bağı olan bir firmanın korunduğunu iddia eden haber bastı.",
+                options: [
+                    { text: "Soruşturma aç, vakıf müdürünü açığa al (₺10,000)", cost: 10000, effects: { devlet: +12, sayistay: -12, siyaset: -8 }, press: "İhale iddiasına şeffaf soruşturma kararı." },
+                    { text: "Haberı yalanla ve görmezden gel", cost: 0, effects: { devlet: -8, sayistay: +15, medya: -12 }, press: "Basın özgürlüğü tartışması büyüyor." }
+                ]
+            }
+        ];
+
+        /* ==========================================================================
+           4. GAME CORE LOGIC
+           ========================================================================== */
+        function initGame() {
+            updateUI();
+            loadNextEvent();
+            initDispatchMap();
+            renderDepartmentHeads();
+            renderMegaProjects();
+        }
+
+        function calculateMonthlyNetBudget() {
+            const rank = CAREER_KADEMELER[gameState.rankLevel];
+            let income = rank.baseIncome;
+            let expense = 0;
+
+            if (gameState.policies.devriye) expense += 30000;
+            if (gameState.policies.asevi) expense += 50000;
+            if (gameState.policies.okul) expense += 45000;
+            if (gameState.policies.tasarruf) income += 60000;
+
+            return income - expense;
+        }
+
+        function processMonthlyTick() {
+            const net = calculateMonthlyNetBudget();
+            gameState.butce += net;
+
+            if (gameState.policies.devriye) gameState.asayis = Math.min(100, gameState.asayis + 1.5);
+            if (gameState.policies.asevi) gameState.halk = Math.min(100, gameState.halk + 2);
+            if (gameState.policies.okul) gameState.personel = Math.min(100, gameState.personel + 1.5);
+            if (gameState.policies.tasarruf) gameState.sayistay = Math.max(0, gameState.sayistay - 2.5);
+
+            if (gameState.sayistay >= 70) {
+                document.getElementById('audit-alert-badge').classList.remove('hidden');
+            } else {
+                document.getElementById('audit-alert-badge').classList.add('hidden');
+            }
+
+            gameState.month++;
+            if (gameState.month > 12) {
+                gameState.month = 1;
+                gameState.year++;
+                addNews(`[MALİ YIL BAŞI] ${gameState.year}. Hizmet Yılına girildi.`);
+            }
+
+            checkCareerStatus();
+        }
+
+        function updateUI() {
+            ['halk', 'devlet', 'asayis', 'personel', 'medya', 'siyaset', 'ekonomi', 'sayistay', 'kriz'].forEach(m => {
+                gameState[m] = Math.max(0, Math.min(100, gameState[m]));
+            });
+
+            document.getElementById('m-halk-val').innerText = Math.round(gameState.halk) + '%';
+            document.getElementById('m-devlet-val').innerText = Math.round(gameState.devlet) + '%';
+            document.getElementById('m-asayis-val').innerText = Math.round(gameState.asayis) + '%';
+            document.getElementById('m-personel-val').innerText = Math.round(gameState.personel) + '%';
+            document.getElementById('m-medya-val').innerText = Math.round(gameState.medya) + '%';
+            document.getElementById('m-siyaset-val').innerText = Math.round(gameState.siyaset) + '%';
+            document.getElementById('m-ekonomi-val').innerText = Math.round(gameState.ekonomi) + '%';
+            document.getElementById('m-sayistay-val').innerText = Math.round(gameState.sayistay) + '%';
+            document.getElementById('m-kriz-val').innerText = Math.round(gameState.kriz) + '%';
+
+            document.getElementById('m-halk-bar').style.width = gameState.halk + '%';
+            document.getElementById('m-devlet-bar').style.width = gameState.devlet + '%';
+            document.getElementById('m-asayis-bar').style.width = gameState.asayis + '%';
+            document.getElementById('m-personel-bar').style.width = gameState.personel + '%';
+            document.getElementById('m-medya-bar').style.width = gameState.medya + '%';
+            document.getElementById('m-siyaset-bar').style.width = gameState.siyaset + '%';
+            document.getElementById('m-ekonomi-bar').style.width = gameState.ekonomi + '%';
+            document.getElementById('m-sayistay-bar').style.width = gameState.sayistay + '%';
+            document.getElementById('m-kriz-bar').style.width = gameState.kriz + '%';
+
+            const currentRank = CAREER_KADEMELER[gameState.rankLevel];
+            document.getElementById('rank-badge').innerText = currentRank.rankTitle;
+            document.getElementById('location-name').innerHTML = `<i class="fa-solid fa-building-flag text-crimson-500"></i> ${currentRank.location}`;
+
+            document.getElementById('header-budget').innerText = '₺' + Math.round(gameState.butce).toLocaleString('tr-TR');
+            const netFlow = calculateMonthlyNetBudget();
+            document.getElementById('header-net-flow').innerText = (netFlow >= 0 ? '+' : '') + '₺' + netFlow.toLocaleString('tr-TR') + ' /ay';
+
+            document.getElementById('time-display').innerText = `${gameState.year}. Yıl - ${gameState.month}. Ay`;
+
+            const totalMonths = (gameState.year - 1) * 12 + gameState.month;
+            const remaining = Math.max(0, currentRank.reqMonths - totalMonths);
+            document.getElementById('career-progress').innerText = remaining > 0 ? `Terfiye: ${remaining} Ay` : "Terfiye Hazır!";
+        }
+
+        function loadNextEvent() {
+            if (gameState.isGameOver) return;
+            const available = eventDatabase.filter(e => e.minRank <= gameState.rankLevel && e.maxRank >= gameState.rankLevel);
+            const selectedEvent = available[Math.floor(Math.random() * available.length)];
+            if (!selectedEvent) return;
+
+            document.getElementById('event-tag').innerHTML = `<i class="fa-solid fa-file-signature mr-1"></i> ${selectedEvent.tag}`;
+            document.getElementById('event-urgency').innerText = `Aciliyet: ${selectedEvent.urgency}`;
+            document.getElementById('event-source').innerText = `Makam: ${selectedEvent.source}`;
+            document.getElementById('event-title').innerText = selectedEvent.title;
+            document.getElementById('event-desc').innerText = selectedEvent.desc;
+
+            const optionsContainer = document.getElementById('event-options');
+            optionsContainer.innerHTML = '';
+
+            selectedEvent.options.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl bg-navy-950/90 hover:bg-slate-800 border border-slate-700/80 hover:border-gold-500/60 transition-all flex flex-col gap-1.5 text-xs shadow-md";
+                btn.innerHTML = `
+                    <div class="flex items-start justify-between gap-2 font-bold text-slate-200">
+                        <span><i class="fa-solid fa-angle-right text-gold-400 mr-1.5"></i>${opt.text}</span>
+                        <span class="text-gold-400 font-mono">₺${opt.cost.toLocaleString('tr-TR')}</span>
+                    </div>
+                `;
+                btn.onclick = () => handleDecision(opt);
+                optionsContainer.appendChild(btn);
+            });
+
+            const stamp = document.getElementById('decision-stamp');
+            stamp.classList.remove('stamp-active');
+        }
+
+        function handleDecision(option) {
+            if (gameState.isGameOver) return;
+            if (option.cost > gameState.butce) {
+                playSound('siren');
+                alert("Yetersiz Hazine Bütçesi!");
+                return;
+            }
+
+            gameState.butce -= option.cost;
+            if (option.effects) {
+                Object.keys(option.effects).forEach(key => {
+                    if (gameState[key] !== undefined) gameState[key] += option.effects[key];
+                });
+            }
+
+            const stamp = document.getElementById('decision-stamp');
+            stamp.innerText = "ONAYLANDI";
+            stamp.classList.add('stamp-active');
+            playSound('stamp_approved');
+
+            if (option.press) addNews(option.press);
+
+            processMonthlyTick();
+            updateUI();
+
+            setTimeout(() => { loadNextEvent(); }, 600);
+        }
+
+        /* ==========================================================================
+           5. ADVANCED FEATURES: MAP, PRESS, INSPECTOR, MANAGERS, TENDERS
+           ========================================================================== */
+        
+        // CANAL / DISPATCH MAP
+        function initDispatchMap() {
+            const canvas = document.getElementById('dispatchMapCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            function drawMap() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#060a17';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Grid lines
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < canvas.width; x += 30) {
+                    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+                }
+                for (let y = 0; y < canvas.height; y += 30) {
+                    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+                }
+
+                // Incident Beacon
+                if (gameState.activeMapIncident.active) {
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.3)';
+                    ctx.beginPath();
+                    ctx.arc(gameState.activeMapIncident.x, gameState.activeMapIncident.y, 18, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#dc2626';
+                    ctx.beginPath();
+                    ctx.arc(gameState.activeMapIncident.x, gameState.activeMapIncident.y, 8, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '10px sans-serif';
+                    ctx.fillText(gameState.activeMapIncident.type, gameState.activeMapIncident.x + 12, gameState.activeMapIncident.y + 4);
+                }
+            }
+            drawMap();
+        }
+
+        function dispatchUnit(unitType) {
+            if (!gameState.activeMapIncident.active) {
+                alert("Şu anda aktif bir harita krizi bulunmuyor.");
+                return;
+            }
+            playSound('click');
+            gameState.kriz = Math.max(0, gameState.kriz - 8);
+            gameState.asayis = Math.min(100, gameState.asayis + 5);
+            addNews(`[HARİTA SEVKİ] ${unitType} birlikleri kriz bölgesine sevk edildi. Kriz kontrol altında.`);
+            gameState.activeMapIncident.active = false;
+            document.getElementById('map-active-incident').innerText = "Sakin";
+            initDispatchMap();
+            updateUI();
+        }
+
+        // PRESS ROOM
+        function openPressRoom() {
+            playSound('click');
+            const answersContainer = document.getElementById('press-answers');
+            answersContainer.innerHTML = `
+                <button onclick="answerPress('state')" class="w-full text-left p-2.5 rounded-lg bg-navy-950 hover:bg-slate-800 border border-slate-700 font-bold">"Devletimizin tüm birimleri görevinin başındadır, iddialar asılsızdır." (Devlet +5%, Medya -4%)</button>
+                <button onclick="answerPress('transparent')" class="w-full text-left p-2.5 rounded-lg bg-navy-950 hover:bg-slate-800 border border-slate-700 font-bold">"Soruşturmayı bizzat yürütüyorum, şeffaflıktan taviz verilmeyecektir." (Medya +8%, Halk +5%)</button>
+            `;
+            document.getElementById('press-modal').classList.remove('hidden');
+        }
+        function closePressRoom() { document.getElementById('press-modal').classList.add('hidden'); }
+        function answerPress(type) {
+            closePressRoom();
+            if (type === 'state') { gameState.devlet += 5; gameState.medya -= 4; }
+            else { gameState.medya += 8; gameState.halk += 5; }
+            addNews("[BASIN AÇIKLAMASI] Mülki Amir basın mensuplarının sorularını yanıtladı.");
+            updateUI();
+        }
+
+        // NIGHT ALARM
+        function triggerNightAlarm() {
+            playSound('siren');
+            const options = document.getElementById('night-options');
+            options.innerHTML = `
+                <button onclick="resolveNight('afad')" class="w-full text-left p-2.5 rounded-lg bg-navy-950 hover:bg-slate-800 border border-slate-700 font-bold">AFAD ve İtfaiyeyi Bizzat Arayıp Olay Yerine Git (Maliyet: ₺30,000, Halk +8%)</button>
+                <button onclick="resolveNight('sleep')" class="w-full text-left p-2.5 rounded-lg bg-navy-950 hover:bg-slate-800 border border-slate-700 font-bold">Nöbetçi Müdüriyete Talimat Verip Sabah Rapor İstet (Kriz +8%)</button>
+            `;
+            document.getElementById('night-modal').classList.remove('hidden');
+        }
+        function resolveNight(choice) {
+            document.getElementById('night-modal').classList.add('hidden');
+            if (choice === 'afad') { gameState.butce -= 30000; gameState.halk += 8; gameState.kriz -= 5; }
+            else { gameState.kriz += 8; }
+            addNews("[GECE KRİZİ] Saat 03:14 acil kriz müdahalesi tamamlandı.");
+            updateUI();
+        }
+
+        // INSPECTOR AUDIT
+        function triggerInspectorAudit() {
+            playSound('siren');
+            document.getElementById('inspector-modal').classList.remove('hidden');
+        }
+        function resolveInspector(choice) {
+            document.getElementById('inspector-modal').classList.add('hidden');
+            if (choice === 'full') {
+                gameState.sayistay = Math.max(0, gameState.sayistay - 30);
+                gameState.siyaset -= 10;
+                addNews("[TEFTİŞ] Mülki Müfettiş teftişi tamamlandı. Sayıştay riski temizlendi.");
+            } else {
+                gameState.butce -= 50000;
+                gameState.sayistay += 15;
+                addNews("[TEFTİŞ] Müfettiş incelemesine ek süre istendi.");
+            }
+            updateUI();
+        }
+
+        // MANAGERS & DEPARTMENT HEADS
+        function renderDepartmentHeads() {
+            const container = document.getElementById('department-heads-list');
+            container.innerHTML = '';
+            gameState.departmentHeads.forEach(head => {
+                const card = document.createElement('div');
+                card.className = "bg-navy-950/80 p-3 rounded-xl border border-slate-800 space-y-1.5";
+                card.innerHTML = `
+                    <div class="font-bold text-slate-200">${head.title}</div>
+                    <div class="text-[11px] text-slate-400">${head.name}</div>
+                    <div class="flex justify-between text-[10px] font-mono">
+                        <span class="text-indigo-400">Liyakat: %${head.liyakat}</span>
+                        <span class="text-purple-400">Siyasi Bağlantı: %${head.siyaset}</span>
+                    </div>
+                    <button onclick="reassignHead('${head.id}')" class="w-full mt-1 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded">Kadro Değiştir (₺20,000)</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+        function reassignHead(id) {
+            if (gameState.butce < 20000) return;
+            gameState.butce -= 20000;
+            const head = gameState.departmentHeads.find(h => h.id === id);
+            if (head) {
+                head.liyakat = Math.min(100, head.liyakat + 20);
+                head.siyaset = Math.max(0, head.siyaset - 15);
+                gameState.personel += 5;
+                addNews(`[KADRO] ${head.title} kadrosu yenilendi. Liyakat arttı.`);
+                renderDepartmentHeads();
+                updateUI();
+            }
+        }
+
+        // MEGA PROJECTS & TENDERS
+        function renderMegaProjects() {
+            const container = document.getElementById('mega-projects-list');
+            container.innerHTML = '';
+            gameState.megaProjects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = "bg-navy-950/80 p-3 rounded-xl border border-slate-800 space-y-1.5";
+                card.innerHTML = `
+                    <div class="font-bold text-slate-200">${proj.title}</div>
+                    <div class="text-[10px] text-emerald-400 font-mono">Fayda: ${proj.benefit}</div>
+                    <div class="flex justify-between items-center pt-1">
+                        <span class="text-gold-400 font-mono font-bold">₺${proj.cost.toLocaleString('tr-TR')}</span>
+                        ${proj.built 
+                            ? `<span class="px-2 py-1 bg-emerald-900/60 text-emerald-300 font-bold rounded text-[10px]">Tamamlandı</span>`
+                            : `<button onclick="buildProject('${proj.id}')" class="px-2.5 py-1 bg-gold-600 hover:bg-gold-500 text-slate-950 font-extrabold rounded">İhaleye Çık</button>`
+                        }
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        function buildProject(id) {
+            const proj = gameState.megaProjects.find(p => p.id === id);
+            if (!proj || proj.built) return;
+            if (gameState.butce < proj.cost) {
+                alert("Yetersiz Hazine Bütçesi!");
+                return;
+            }
+            gameState.butce -= proj.cost;
+            proj.built = true;
+
+            if (id === 'osb') gameState.ekonomi += 15;
+            if (id === 'hastane') gameState.halk += 12;
+            if (id === 'baraj') gameState.kriz -= 15;
+
+            addNews(`[YATIRIM] ${proj.title} ihalesi tamamlandı ve temeli atıldı!`);
+            renderMegaProjects();
+            updateUI();
+        }
+
+        // MUHTAR RECEPTION DAY
+        function resolveMuhtarRequest(approved) {
+            if (approved) {
+                if (gameState.butce < 120000) { alert("Yetersiz Bütçe!"); return; }
+                gameState.butce -= 120000;
+                gameState.halk += 10;
+                gameState.siyaset += 8;
+                addNews("[KABUL GÜNÜ] Muhtarlar heyetinin altyapı talebi onaylandı.");
+            } else {
+                gameState.halk -= 5;
+                addNews("[KABUL GÜNÜ] Muhtar talebi bütçe yetersizliğinden ertelendi.");
+            }
+            updateUI();
+        }
+
+        // UI TAB SWITCHER
+        function switchHubTab(tabName) {
+            playSound('click');
+            document.querySelectorAll('.hub-tab-btn').forEach(b => b.className = "hub-tab-btn px-3 py-1.5 rounded-lg font-bold text-slate-400 hover:bg-slate-800/50 shrink-0");
+            document.querySelectorAll('.hub-panel').forEach(p => p.classList.add('hidden'));
+
+            const activeTab = document.getElementById(`htab-${tabName}`);
+            const activePanel = document.getElementById(`hpanel-${tabName}`);
+            if (activeTab && activePanel) {
+                activeTab.className = "hub-tab-btn px-3 py-1.5 rounded-lg font-bold bg-slate-800 text-slate-200 border border-slate-700 shrink-0";
+                activePanel.classList.remove('hidden');
+            }
+        }
+
+        function toggleDeptPolicy(policyKey) {
+            gameState.policies[policyKey] = !gameState.policies[policyKey];
+            const btn = document.getElementById(`pol-${policyKey}-btn`);
+            if (gameState.policies[policyKey]) {
+                btn.innerText = "AKTİF";
+                btn.className = "px-2.5 py-1 bg-emerald-600 text-white font-bold rounded border border-emerald-400";
+            } else {
+                btn.innerText = "PASİF";
+                btn.className = "px-2.5 py-1 bg-slate-800 text-slate-300 font-bold rounded border border-slate-700";
+            }
+            playSound('click');
+            updateUI();
+        }
+
+        function checkCareerStatus() {
+            if (gameState.sayistay >= 95) {
+                triggerGameOver("Sayıştay Usulsüzlük Soruşturması", "İdari bütçedeki mali sapmalar ve denetim riskinin %95'i aşması sebebiyle merkeze çekildiniz.");
+                return;
+            }
+            if (gameState.kriz >= 95) {
+                triggerGameOver("Kriz Yönetimi Yetersizliği", "İl/İlçe genelindeki kamu düzeni bozulmaları engellenemediği için görevden alındınız.");
+                return;
+            }
+
+            const currentRank = CAREER_KADEMELER[gameState.rankLevel];
+            const totalMonths = (gameState.year - 1) * 12 + gameState.month;
+
+            if (totalMonths >= currentRank.reqMonths && gameState.rankLevel < CAREER_KADEMELER.length - 1) {
+                if (gameState.devlet >= 60 && gameState.sayistay < 50) {
+                    gameState.rankLevel++;
+                    const newRank = CAREER_KADEMELER[gameState.rankLevel];
+                    playSound('promote');
+                    showModal("VALİLER KARARNAMESİ YAYINLANDI!", `Üstün hizmetleriniz neticesinde **${newRank.rankTitle}** makamına atandınız.\n\nYeni Görev Yeriniz: **${newRank.location}**.`);
+                }
+            }
+        }
+
+        function triggerGameOver(title, reason) {
+            gameState.isGameOver = true;
+            playSound('siren');
+            showModal(`GÖREVDEN ALINMA: ${title}`, reason);
+        }
+
+        function addNews(text) {
+            const newsTicker = document.getElementById('news-ticker');
+            const timeStamp = `[${gameState.year}. Yıl / ${gameState.month}. Ay]`;
+            newsTicker.innerHTML = `<div class="mb-1"><span class="text-gold-400 font-bold">${timeStamp}</span> ${text}</div>` + newsTicker.innerHTML;
+        }
+
+        function showModal(title, body) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerText = body;
+            document.getElementById('modal-container').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            playSound('click');
+            document.getElementById('modal-container').classList.add('hidden');
+            if (gameState.isGameOver) location.reload();
+        }
+
+        window.onload = function() { initGame(); };
+    </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eko-Log — Müzakere Masası Simülasyonu</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --panel-bg: #1e293b;
+      --accent-gold: #d97706;
+      --accent-blue: #2563eb;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 2rem; display: flex; justify-content: center; align-items: center; }
+
+    .app-container { width: 100%; max-width: 900px; background: var(--panel-bg); border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    
+    /* Header */
+    header { background: linear-gradient(135deg, #0f172a, #d97706); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    header h1 { font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    header .badge { background: rgba(0,0,0,0.3); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+
+    .content { padding: 2rem; }
+    .hidden { display: none !important; }
+
+    /* 1. EKRAN: SENARYO VE NPC SEÇİMİ */
+    .selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 1rem; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; }
+    .card:hover { border-color: var(--accent-gold); transform: translateY(-4px); background: rgba(255,255,255,0.06); }
+    .card h3 { color: #fbbf24; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.4; }
+
+    /* 2. EKRAN: MÜZAKERE EKRANI */
+    .status-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 1rem; }
+    .bar-container { display: flex; flex-direction: column; gap: 0.5rem; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold; }
+    .progress-bg { background: rgba(255,255,255,0.1); height: 12px; border-radius: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 100%; transition: width 0.4s ease; }
+    .fill-user { background: var(--accent-blue); }
+    .fill-npc { background: var(--accent-gold); }
+
+    .chat-box { background: rgba(0,0,0,0.3); border-radius: 1rem; padding: 1rem; height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.05); }
+    .msg { padding: 0.75rem 1rem; border-radius: 0.75rem; max-width: 80%; font-size: 0.9rem; line-height: 1.4; }
+    .msg-system { background: rgba(255,255,255,0.1); color: #cbd5e1; align-self: center; text-align: center; font-size: 0.8rem; }
+    .msg-user { background: var(--accent-blue); align-self: flex-end; color: white; }
+    .msg-npc { background: #334155; align-self: flex-start; color: white; border-left: 3px solid var(--accent-gold); }
+
+    .controls { display: flex; gap: 0.75rem; }
+    .controls input { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; padding: 0.75rem 1rem; color: white; outline: none; }
+    .controls input:focus { border-color: var(--accent-gold); }
+    .btn { background: var(--accent-gold); color: black; font-weight: bold; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; transition: opacity 0.2s; }
+    .btn:hover { opacity: 0.9; }
+    .btn-reset { background: rgba(255,255,255,0.1); color: white; }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <header>
+    <h1>🤝 Müzakere Masası</h1>
+    <span class="badge" id="header-badge">Eko-Log Simülasyonu</span>
+  </header>
+
+  <!-- SAHNE 1: SENARYO VE NPC SEÇİMİ -->
+  <div id="scene-selection" class="content">
+    <h2>1. Müzakere Senaryosu Seçin</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">Masaya oturmak istediğiniz kriz ve rakip profilini belirleyin.</p>
+    
+    <div class="selection-grid">
+      <div class="card" onclick="selectScenario('is_sozlesmesi')">
+        <h3>🏢 Toplu İş Sözleşmesi</h3>
+        <p><strong>Rakip:</strong> Sert Sendika Lideri (Kemal Bey)</p>
+        <p>Enflasyonist ortamda zam oranı ve sosyal haklar pazarlığı yapın.</p>
+      </div>
+
+      <div class="card" onclick="selectScenario('ticaret_savasi')">
+        <h3>🌐 Uluslararası Ticaret</h3>
+        <p><strong>Rakip:</strong> Stratejik Ticaret Bakanı (Mr. Vance)</p>
+        <p>Gümrük vergileri ve ihrakat kotaları üzerine çetin bir pazarlık.</p>
+      </div>
+
+      <div class="card" onclick="selectScenario('yatirimci')">
+        <h3>🚀 Yatırımcı / Startup</h3>
+        <p><strong>Rakip:</strong> Rasyonel Melek Yatırımcı (Aysel Hanım)</p>
+        <p>Şirket değerlemesi ve hisse oranı üzerine agresif fonlama pazarlığı.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAHNE 2: İNTERAKTİF MÜZAKERE EKRANI -->
+  <div id="scene-game" class="content hidden">
+    <!-- Durum Barları -->
+    <div class="status-bars">
+      <div class="bar-container">
+        <div class="bar-label">
+          <span>Sizin Masadaki Gücünüz</span>
+          <span id="user-score">100%</span>
+        </div>
+        <div class="progress-bg">
+          <div id="user-bar" class="progress-fill fill-user"></div>
+        </div>
+      </div>
+      <div class="bar-container">
+        <div class="bar-label">
+          <span id="npc-name">NPC Sabrı</span>
+          <span id="npc-score">100%</span>
+        </div>
+        <div class="progress-bg">
+          <div id="npc-bar" class="progress-fill fill-npc"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mesajlaşma / Diyalog Alanı -->
+    <div class="chat-box" id="chat-box"></div>
+
+    <!-- Kontrol Alanı -->
+    <div class="controls" id="controls-area">
+      <input type="number" id="offer-input" placeholder="Teklifinizi girin (Örn: Zam Oranı %, Vergi %, Hisse %)...">
+      <button class="btn" onclick="makeOffer()">Teklif Ver</button>
+      <button class="btn btn-reset" onclick="resetGame()">Masadan Kalk</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SENARYO VERİLERİ VE NPC KİŞİLİKLERİ
+  const scenarios = {
+    is_sozlesmesi: {
+      title: "Toplu İş Sözleşmesi",
+      npc: "Sendika Lideri Kemal Bey",
+      npcType: "Agresif / Hak Arayıcı",
+      minAccept: 30, // %30 altı kızdırır
+      maxAccept: 45, // %45 üstü şirketi zorlar
+      unit: "% Zam Teklifi",
+      intro: "Masaya hoş geldiniz. İşçilerimizin talebi net: Enflasyon karşısında ezilmemek için en az %40 zam istiyoruz. Teklifiniz nedir?"
+    },
+    ticaret_savasi: {
+      title: "Uluslararası Ticaret Anlaşması",
+      npc: "Ticaret Bakanı Mr. Vance",
+      npcType: "Stratejik / Diplomat",
+      minAccept: 10, // %10 vergi altı kabul
+      maxAccept: 25, // %25 üstü masayı terk eder
+      unit: "% Gümrük Vergisi",
+      intro: "Ülkenizin ürünlerimize uyguladığı ek vergiler kabul edilemez. Vergileri makul bir seviyeye indirmedikçe limanlarınızı kapatırız. Vergi oranınız nedir?"
+    },
+    yatirimci: {
+      title: "Girişimci / Yatırımcı Pazarlığı",
+      npc: "Melek Yatırımcı Aysel Hanım",
+      npcType: "Analitik / Finansal",
+      minAccept: 15, // %15 hisse altına yatırım yapmaz
+      maxAccept: 30, // %30 üstüne girişimci kabul etmez
+      unit: "% Hisse Talebi",
+      intro: "Şirketinize 5 Milyon TL yatırmaya hazırım ancak büyüme potansiyeli riskli. Şirketinizden kaç hisse teklif ediyorsunuz?"
+    }
+  };
+
+  let activeScenario = null;
+  let userPower = 100;
+  let npcPatience = 100;
+  let turn = 1;
+
+  function selectScenario(key) {
+    activeScenario = scenarios[key];
+    userPower = 100;
+    npcPatience = 100;
+    turn = 1;
+
+    document.getElementById('scene-selection').classList.add('hidden');
+    document.getElementById('scene-game').classList.remove('hidden');
+    document.getElementById('header-badge').innerText = activeScenario.title;
+    document.getElementById('npc-name').innerText = activeScenario.npc;
+
+    const chatBox = document.getElementById('chat-box');
+    chatBox.innerHTML = '';
+    
+    addMessage('system', `Müzakere Başladı! Mod: ${activeScenario.title} | Karşı Taraf: ${activeScenario.npc}`);
+    addMessage('npc', activeScenario.intro);
+    updateBars();
+  }
+
+  function makeOffer() {
+    const input = document.getElementById('offer-input');
+    const val = parseFloat(input.value);
+
+    if (isNaN(val)) return alert("Lütfen geçerli bir sayı girin!");
+
+    addMessage('user', `Teklifim: ${val} ${activeScenario.unit}`);
+    input.value = '';
+
+    // NPC TEPKİ MANTIĞI (AI ALGORİTMASI)
+    setTimeout(() => {
+      if (activeScenario === scenarios.is_sozlesmesi) {
+        if (val < activeScenario.minAccept) {
+          npcPatience -= 30;
+          addMessage('npc', `%${val} mi? Bu işçimizle alay etmektir! Sabrımızı taşırmayın, greve gideriz!`);
+        } else if (val >= activeScenario.minAccept && val <= activeScenario.maxAccept) {
+          addMessage('npc', `%${val} makul bir aralık. Ancak detaylarda anlaşmamız lazım. Uzlaşmaya yakınız.`);
+          npcPatience += 5;
+        } else {
+          userPower -= 25;
+          addMessage('npc', `%${val} zam teklifini memnuniyetle kabul ederiz! (İşveren bütçesi ciddi zarar gördü)`);
+        }
+      } 
+      else if (activeScenario === scenarios.ticaret_savasi) {
+        if (val > activeScenario.maxAccept) {
+          npcPatience -= 35;
+          addMessage('npc', `%${val} gümrük vergisi bir ticaret savaşı ilanıdır! Yaptırımları başlatıyoruz.`);
+        } else {
+          addMessage('npc', `%${val} seviyesi diplomasi için kabul edilebilir. Ticaret koridorlarını açık tutacağız.`);
+        }
+      }
+      else if (activeScenario === scenarios.yatirimci) {
+        if (val < activeScenario.minAccept) {
+          npcPatience -= 25;
+          addMessage('npc', `%${val} hisse için bu sermayeyi riske atamam. Teklifinizi yükseltin.`);
+        } else {
+          addMessage('npc', `%${val} hisse karşılığında el sıkışabiliriz. Harika bir ortaklık olacak!`);
+        }
+      }
+
+      turn++;
+      checkGameStatus();
+      updateBars();
+    }, 600);
+  }
+
+  function addMessage(type, text) {
+    const chatBox = document.getElementById('chat-box');
+    const div = document.createElement('div');
+    div.className = `msg msg-${type}`;
+    div.innerText = text;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function updateBars() {
+    userPower = Math.max(0, Math.min(100, userPower));
+    npcPatience = Math.max(0, Math.min(100, npcPatience));
+
+    document.getElementById('user-score').innerText = userPower + '%';
+    document.getElementById('npc-score').innerText = npcPatience + '%';
+
+    document.getElementById('user-bar').style.width = userPower + '%';
+    document.getElementById('npc-bar').style.width = npcPatience + '%';
+  }
+
+  function checkGameStatus() {
+    if (npcPatience <= 0) {
+      addMessage('system', '❌ MÜZAKERE BİTTİ: Karşı taraf masadan kalktı! Anlaşma sağlama başarısız.');
+      document.getElementById('controls-area').innerHTML = `<button class="btn" onclick="resetGame()">Yeniden Başla</button>`;
+    } else if (userPower <= 0) {
+      addMessage('system', '⚠️ MÜZAKERE BİTTİ: Kaynaklarınız tükendi, iflas/kriz durumundasınız.');
+      document.getElementById('controls-area').innerHTML = `<button class="btn" onclick="resetGame()">Yeniden Başla</button>`;
+    }
+  }
+
+  function resetGame() {
+    document.getElementById('scene-game').classList.add('hidden');
+    document.getElementById('scene-selection').classList.remove('hidden');
+    document.getElementById('header-badge').innerText = "Eko-Log Simülasyonu";
+    document.getElementById('controls-area').innerHTML = `
+      <input type="number" id="offer-input" placeholder="Teklifinizi girin...">
+      <button class="btn" onclick="makeOffer()">Teklif Ver</button>
+      <button class="btn btn-reset" onclick="resetGame()">Masadan Kalk</button>
+    `;
+  }
+</script>
+
+</body>
+</html>

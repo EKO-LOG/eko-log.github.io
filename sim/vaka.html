@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaka Analizi · Eko-Log</title>
+<style>
+:root{--bg:#0b1020;--surface:#141b34;--ink:#f1f5f9;--muted:#94a3b8;--line:#26304f;--accent:#ff7a6e;--loss:#fb7185;--chip:#0f1630;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.bva{max-width:820px;margin:0 auto;padding:28px 16px 56px}
+.bva h1{font:700 1.9rem/1.2 Georgia,"Times New Roman",serif;margin:0 0 6px}
+.bva .lead{color:var(--muted);margin:0 0 20px}
+.bva-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.bva-filters button{font:inherit;font-size:.85rem;padding:6px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;cursor:pointer}
+.bva-filters button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.bva-filters button:focus-visible,.bva summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bva-case{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:12px}
+.bva summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline}
+.bva summary::-webkit-details-marker{display:none}
+.bva summary h2{font:700 1.2rem/1.3 Georgia,serif;margin:0}
+.bva summary .yr{font-weight:600;color:var(--accent)}
+.bva summary .sub{grid-column:1/-1;color:var(--muted);font-size:.9rem}
+.bva-case[open] summary{border-bottom:1px solid var(--line)}
+.bva-body{padding:16px 18px 20px}
+.bva-body h3{font-size:.95rem;margin:20px 0 6px;color:var(--accent)}
+.bva-body p{margin:0 0 8px}
+.bva-fig{display:flex;gap:10px;align-items:baseline;padding:10px 12px;margin:12px 0;border-left:4px solid var(--loss);background:var(--chip);border-radius:0 6px 6px 0}
+.bva-fig b{font-size:1.15rem;color:var(--loss)}
+.bva-tl{margin:0;padding:0;list-style:none;border-left:2px solid var(--line)}
+.bva-tl li{padding:0 0 10px 14px;position:relative}
+.bva-tl li::before{content:"";position:absolute;left:-6px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.bva-tl b{display:block;font-size:.85rem}
+.bva-body ul.pl{margin:0;padding-left:20px}
+.bva-q{margin-top:20px;padding:12px 14px;border:1px dashed var(--accent);border-radius:6px}
+.bva-q b{color:var(--accent)}
+@media (max-width:480px){.bva h1{font-size:1.5rem}.bva summary{grid-template-columns:1fr}}
+.bva-sim{margin-top:20px;padding:14px;border:2px solid var(--accent);border-radius:8px}
+.bva-sim h3{margin-top:0}
+.bva-sim button{display:block;width:100%;text-align:left;font:inherit;font-size:.92rem;padding:10px 12px;margin:0 0 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;cursor:pointer}
+.bva-sim button:hover{border-color:var(--accent)}
+.bva-sim button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bva-sim .v{font-weight:700}
+.bva-cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.bva-cmp>div{padding:10px 12px;border-radius:6px;background:var(--chip)}
+.bva-cmp .real{border-left:4px solid var(--loss)}
+.bva-cmp .you{border-left:4px solid var(--accent)}
+.bva-cmp p{margin:4px 0 0;font-size:.9rem}
+.bva-note{font-size:.8rem;color:var(--muted)}
+@media (max-width:560px){.bva-cmp{grid-template-columns:1fr}}
+.bva-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.bva-chips span{font-size:.82rem;padding:4px 10px;border-radius:999px;background:var(--chip)}
+.bva-act{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;cursor:pointer;font-size:.9rem}
+.bva-act:has(input:checked){border-color:var(--accent);background:var(--chip)}
+.bva-act input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.bva-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.bva-row i{font-style:normal;font-size:.78rem;padding:2px 8px;border-radius:999px;margin-left:4px;color:#fff}
+.bva-row i.you{background:var(--accent)}
+.bva-row i.real{background:var(--loss)}
+
+.bva-card{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;margin-bottom:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--ink);text-decoration:none}
+.bva-card:hover{border-color:var(--accent)}
+.bva-card:focus-visible,.bva-back:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bva-card b{font:700 1.1rem/1.3 Georgia,serif;display:block}
+.bva-card small{color:var(--muted)}
+.bva-card .yr{font-weight:600;color:var(--accent);white-space:nowrap}
+.bva-card .ok{color:var(--accent);font-size:.8rem;display:block;text-align:right}
+.bva-back{display:inline-block;margin-bottom:14px;color:var(--accent);text-decoration:none;font-size:.9rem}
+.bva-view-sec{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin-bottom:12px}
+.bva-big{font:700 2rem/1.1 Georgia,serif}
+.bva-cmp .you .bva-big{color:var(--accent)}.bva-cmp .real .bva-big{color:var(--loss)}
+.bva-m{margin:10px 0 2px;font-size:.88rem;font-weight:600}
+.bva-bar{position:relative;height:16px;background:var(--chip);border-radius:4px;margin-bottom:4px;overflow:hidden}
+.bva-bar i{position:absolute;left:0;top:0;bottom:0}
+.bva-bar i.you{background:var(--accent)}.bva-bar i.real{background:var(--loss)}
+.bva-bar em{position:absolute;right:6px;top:0;font-size:.72rem;font-style:normal;line-height:16px}
+.bva-sim .bva-sec-btn{width:auto;display:inline-block;margin-right:8px}
+.bva-view-sec details summary{display:block;padding:6px 0;font-weight:600;color:var(--accent)}
+.bva-sim textarea{display:block;width:100%;font:inherit;font-size:.95rem;line-height:1.5;padding:10px 12px;margin:8px 0;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);resize:vertical}
+.bva-sim textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bva-sim button[data-ok]{display:inline-block;width:auto;background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;padding:10px 20px}
+.bva-sim button[data-ok]:disabled{opacity:.4;cursor:not-allowed}
+.bva-sim button[data-ok]:disabled{opacity:.4;cursor:not-allowed}
+body{background:radial-gradient(900px 500px at 80% -10%,rgba(217,52,43,.35),transparent),var(--bg)}
+.bva-filters button[aria-pressed=true],.bva-sim button[data-ok],.bva-sim .bva-sec-btn{background:#d9342b;border-color:#d9342b;color:#fff}
+.bva-sim .bva-sec-btn{width:auto}
+.bva-card,.bva-case,.bva-view-sec,.bva-sim{border-radius:18px}
+.bva-bar i.you{background:#d9342b}
+</style>
+</head>
+<body>
+<main class="bva" id="bva">
+  <div id="bva-home">
+    <h1>Vaka Kütüphanesi: Banka Krizleri</h1>
+    <p class="lead">Bir olaya dokunun: önce vaka dosyasını okuyun, sonra 5 seçenekten kararınızı verin. "Bitir" dediğinizde seçiminiz gerçekte alınan kararlarla karşılaştırılır; simülasyon sonucu ve vakanın bıraktığı dersler görünür.</p>
+    <div class="bva-filters" id="bva-filters" role="group" aria-label="Tema filtresi"></div>
+    <div id="bva-list"></div>
+  </div>
+  <div id="bva-view" hidden></div>
+</main>
+
+<script>
+/* Entegrasyon: yalnızca BVA_DATA dizisini kendi sisteminize taşıyabilirsiniz. */
+let cur='';
+const fit=()=>{try{parent.postMessage({gh:document.documentElement.scrollHeight},'*')}catch(e){}};
+/* Entegrasyon: yalnızca BVA_DATA dizisini kendi sisteminize taşıyabilirsiniz. */
+const BVA_DATA = [
+{id:"continental-illinois",ad:"Continental Illinois",yil:1984,ulke:"ABD",tema:"Likidite",
+ ozet:"Chicago merkezli, dönemin yedinci büyük ABD bankası. Toptan fonlamaya bağımlılığı ve riskli kredi alımları, günler içinde süren bir mevduat kaçışına yol açtı.",
+ rakam:["~40 mlr $","varlık büyüklüğü; ~4,5 mlr $ FDIC kurtarma paketi"],
+ kron:[["1982","Penn Square Bank çöker; Continental, bu bankadan aldığı yaklaşık 1 mlr $ tutarındaki petrol ve gaz kredilerinde zarar yazar."],["Mayıs 1984","Bankanın sorunlu olduğu söylentileri yayılır; yabancı ve kurumsal fonlayıcılar günler içinde on milyarlarca dolar çeker."],["Temmuz 1984","FDIC, Fed ve Hazine koruma paketini açıklar; FDIC bankanın büyük bölümünün sahibi olur."]],
+ neden:["Perakende mevduat yerine sigortasız toptan ve yurt dışı fonlamaya aşırı bağımlılık","Üçüncü taraf bankadan kredi satın alırken zayıf kredi değerlendirmesi","Hızlı büyüme hedefi ve yetersiz iç kontrol"],
+ ders:["Sigortasız fonlama, güven kaybında saatler içinde kaybolabilir","\"Batmayacak kadar büyük\" (too big to fail) kavramı bu vakayla yaygınlaştı; ahlaki risk tartışması buradan başlar"],
+ soru:"Sistemik bir bankanın kurtarılması piyasa disiplinini nasıl etkiler? Alternatif çözüm ne olabilirdi?"},
+
+{id:"bcci",ad:"BCCI",yil:1991,ulke:"Pakistan / Lüksemburg / İngiltere",tema:"Dolandırıcılık",
+ ozet:"Lüksemburg'da kayıtlı holding çatısı altında 70'ten fazla ülkede faaliyet gösteren banka; sistematik sahtecilik, kara para aklama ve gizli zararlarla dolu bir yapıydı.",
+ rakam:["Milyarlarca $","tahmini kayıp; 5 Temmuz 1991'de eşzamanlı kapatma"],
+ kron:[["1972","Agha Hasan Abedi tarafından kurulur; hızla uluslararası ağ oluşturur."],["1988–1990","ABD'de kara para aklama soruşturmaları ve mahkûmiyetler gündeme gelir."],["Temmuz 1991","Bank of England raporu sonrası düzenleyiciler birçok ülkede bankayı aynı gün kapatır."]],
+ neden:["Tek bir düzenleyicinin tüm grubu denetleyemediği parçalı yapı","Gizli kayıtlar ve sahte işlemlerle zararların saklanması","Bağımsız denetimin yapıyı ve fonların kaynağını görememesi"],
+ ders:["Sınır ötesi gruplar için konsolide denetim şarttır","Karmaşık ve opak yapı, kendi başına bir kırmızı bayraktır","Sonuç: Basel Komitesi uluslararası denetim ilkelerini sıkılaştırdı"],
+ soru:"Ev sahibi ve ana ülke denetçileri arasındaki sorumluluk paylaşımı nasıl kurgulanmalı?"},
+
+{id:"socgen",ad:"Société Générale ve Jérôme Kerviel",yil:2008,ulke:"Fransa",tema:"Operasyonel risk",
+ ozet:"Bir türev ürünler tacirinin sahte karşı işlemlerle kontrolleri atlatarak devasa yönlü pozisyonlar açması, banka tarihinin en büyük bireysel işlem kaybına neden oldu.",
+ rakam:["4,9 mlr €","kayıp; pozisyon büyüklüğü yaklaşık 50 mlr €"],
+ kron:[["2005–2007","Kerviel, arka ofis bilgisini kullanarak sahte kapama işlemleri girer, gerçek pozisyonlarını gizler ve kontrolleri aşar."],["19–20 Ocak 2008","İç kontroller pozisyonu fark eder; yönetim durumu inceler."],["21–23 Ocak 2008","Piyasa düşerken pozisyonlar kapatılır; zarar açıklanır."]],
+ neden:["Ön ve arka ofis bilgisinin tek kişide toplanması; görevler ayrılığı zafiyeti","Uyarıların (marj çağrıları, işlem hacmi) sistematik takipsizliği","Kâr getiren tacire karşı kültürel hoşgörü"],
+ ders:["Limit ihlalleri ve kontrol uyarıları kâr beklentisine rağmen derhal incelenmelidir","Kontrollerin etkinliği, yalnızca varlığıyla değil, test edilmesiyle ölçülür"],
+ soru:"Bankanın sorumluluğu ile bireysel tacirin sorumluluğu arasındaki denge nerede durmalı?"},
+
+{id:"bear-stearns",ad:"Bear Stearns",yil:2008,ulke:"ABD",tema:"Likidite",
+ ozet:"Yatırım bankası, ipotek destekli menkul kıymetlerdeki zararlar ve kısa vadeli repo fonlamasına bağımlılık yüzünden günler içinde likidite krizine girdi.",
+ rakam:["~2 $","hisse başına ilk satın alma fiyatı; sonra 10 $'a çıktı"],
+ kron:[["Temmuz 2007","Bear Stearns'e ait iki ipotek ağırlıklı fon çöker."],["Mart 2008","Karşı taraflar repo fonlamasını yenilemez; likidite havuzu kısa sürede erir."],["16 Mart 2008","Fed desteğiyle JPMorgan satın almayı duyurur."]],
+ neden:["Çok yüksek kaldıraç ve ipotek varlıklarında yoğunlaşma","Gecelik repo fonlamasına bağımlılık","Güven kaybının piyasada hızla yayılması"],
+ ders:["Bankacılık dışı yatırım bankalarının da merkez bankası likiditesine ihtiyaç duyabileceği görüldü","Likidite tamponlarının stres altında gerçekten kullanılabilir olması gerekir"],
+ soru:"Fed'in müdahalesi sistemik risk yönetimi için doğru bir emsal mıydı?"},
+
+{id:"wamu",ad:"Washington Mutual",yil:2008,ulke:"ABD",tema:"Kredi riski",
+ ozet:"ABD'nin en büyük tasarruf kurumlarından biri, opsiyonlu değişken faizli ve yüksek riskli konut kredilerinin çökmesiyle mevduat kaçışına uğradı.",
+ rakam:["~307 mlr $","varlık; ABD tarihinin en büyük banka iflası"],
+ kron:[["2004–2007","Agresif konut kredisi büyümesi; riskli kredi payı artar."],["Eylül 2008","Lehman sonrası güven kaybı; kısa sürede on milyarlarca dolarlık mevduat çıkar."],["25 Eylül 2008","Kurum kapatılır, bankanın bankacılık faaliyetleri JPMorgan'a satılır."]],
+ neden:["Kredi standartlarının düşürülmesi, düşük belgelendirme","Konut fiyatlarına yoğun duyarlılık","Düzenleyici (OTS) denetiminin yumuşak kalması"],
+ ders:["Büyüme baskısı kredi kalitesini aşındırabilir","Sonuç: OTS Dodd-Frank ile kaldırıldı"],
+ soru:"Denetim kurumlarının rekabeti, gevşek denetime teşvik yaratır mı?"},
+
+{id:"iceland",ad:"İzlanda Bankaları: Glitnir, Landsbanki, Kaupthing",yil:2008,ulke:"İzlanda",tema:"Sistemik risk",
+ ozet:"Bankacılık sektörü ülke ekonomisinin kat kat üzerine çıkmıştı. Üç büyük banka çöktü; Landsbanki'nin Icesave mevduatları Birleşik Krallık ve Hollanda ile diplomatik kriz doğurdu.",
+ rakam:["~10×","bankacılık varlıklarının GSYH'ye oranı (kabaca)"],
+ kron:[["2003–2007","Özelleştirme sonrası bankalar yabancı borçla hızla büyür."],["Ekim 2008","Üç büyük banka birkaç gün içinde devlet kontrolüne geçer; kron değer kaybeder."],["2008–2009","Sermaye kontrolleri uygulanır; Icesave tartışması yıllarca sürer."]],
+ neden:["Ülkenin kurtarma kapasitesini aşan bankacılık sektörü büyüklüğü","Kısa vadeli yabancı para borçla finansman","Karşılıklı hisse sahipliği ve yüksek yoğunlaşma"],
+ ders:["Devlet, kendi ölçeğini aşan bankayı kurtaramaz","Sınır ötesi mevduat sigortası belirsizliği ciddi diplomatik maliyet doğurur"],
+ soru:"Küçük bir ülke büyük bir uluslararası bankacılık merkezi olmaya çalışmalı mı?"},
+
+{id:"bes",ad:"Banco Espírito Santo",yil:2014,ulke:"Portekiz",tema:"Yönetişim",
+ ozet:"Köklü aile grubunun bankası, grup şirketlerindeki gizlenmiş borçlar ve muhasebe usulsüzlükleri ortaya çıkınca çözümleme rejimine alındı.",
+ rakam:["~4,9 mlr €","Çözümleme Fonu'nun Novo Banco'ya aktardığı sermaye"],
+ kron:[["2013–2014","Grup şirketlerinde muhasebe sorunları ve borç gizleme iddiaları büyür."],["Temmuz 2014","Ana holdingin ödeme güçlüğü banka hisselerini çökertir."],["3 Ağustos 2014","Sağlıklı varlıklar Novo Banco'ya devredilir; kötü varlıklar eski bankada kalır."]],
+ neden:["Banka ile aile grubu arasındaki iç içe ve opak yapı","Yönetim kurulunda aile hâkimiyeti, zayıf bağımsız gözetim","Perakende müşterilere grup kâğıtlarının satılması"],
+ ders:["Banka yönetişimi, sahip ailenin çıkarından ayrışmalıdır","Çözümleme (resolution) araçlarının kamuoyuna etkisi dikkatle yönetilmelidir"],
+ soru:"Aile bankalarında yönetişim riskini en iyi hangi mekanizmalar azaltır?"},
+
+{id:"popular",ad:"Banco Popular",yil:2017,ulke:"İspanya",tema:"Likidite",
+ ozet:"Gayrimenkul kaynaklı sorunlu kredi yükü altındaki banka, mevduat çıkışı hızlanınca Avrupa çözümleme otoritesi tarafından resmî olarak çözümlendi.",
+ rakam:["1 €","Santander'in satın alma bedeli (Haziran 2017)"],
+ kron:[["2016–2017","Sorunlu gayrimenkul kredileri ve zayıf sermaye, güven sorunu yaratır."],["Haziran 2017","Mevduat çıkışı hızlanır; ECB 'başarısız veya başarısız olması muhtemel' tespitini yapar."],["7 Haziran 2017","SRB çözümleme kararı alır; banka Santander'e devredilir."]],
+ neden:["Gayrimenkul kredilerinde yoğunlaşma ve yetersiz karşılık","Sermaye artırımları sonrası güven eksikliği","Medya ve piyasa söylentileri sonrası hızlı mevduat kaçışı"],
+ ders:["Avrupa Bankacılık Birliği çözümleme mekanizmasının ilk büyük uygulaması","Hissedarlar ve ikincil sermaye sahipleri zararı üstlendi; kamu fonu kullanılmadı"],
+ soru:"Bail-in, yatırımcı güvenini ve gelecekteki sermaye maliyetini nasıl etkiler?"},
+
+{id:"first-republic",ad:"First Republic Bank",yil:2023,ulke:"ABD",tema:"Faiz riski",
+ ozet:"Zengin müşterilere hizmet veren banka, düşük sabit faizli konut kredileri ve sigortasız mevduatların yüksek payı yüzünden mart 2023 sonrası güven kaybı yaşadı.",
+ rakam:["~229 mlr $","varlık; ~100 mlr $ mevduat çıkışı (ilk çeyrek)"],
+ kron:[["Mart 2023","SVB ve Signature'ın çöküşü sonrası mevduat çıkışı hızlanır."],["16 Mart 2023","11 büyük banka toplam 30 mlr $ mevduat yatırır."],["1 Mayıs 2023","Kurum kapatılır, JPMorgan satın alır."]],
+ neden:["Düşük sabit faizli uzun vadeli kredilere karşı yükselen faizler","Sigortasız mevduat oranının yüksek olması","Tek bir müşteri segmentine yoğunlaşma"],
+ ders:["Faiz riski yönetimi ve mevduat istikrarı birlikte değerlendirilmeli","Sosyal medya çağında banka kaçışı çok daha hızlı gerçekleşir"],
+ soru:"Sigortasız mevduat için kapsamlı güvence hangi koşullarda gerekçelendirilebilir?"},
+
+{id:"danske",ad:"Danske Bank Estonya Şubesi",yil:2018,ulke:"Danimarka / Estonya",tema:"Uyum / Kara para",
+ ozet:"Estonya şubesi üzerinden, yerleşik olmayan müşteriler aracılığıyla yıllarca yüz milyarlarca euro şüpheli para geçti; en büyük kara para aklama skandallarından biri oldu.",
+ rakam:["~200 mlr €","şüpheli akış tahmini (2007–2015)"],
+ kron:[["2007–2015","Estonya şubesinde yerleşik olmayan müşteri portföyü hızla büyür."],["2014","İç uyarı (whistleblower) yönetime iletilir."],["Eylül 2018","Banka kendi soruşturma raporunu yayımlar; CEO istifa eder."]],
+ neden:["Kâr odaklı şube ile zayıf merkezî uyum denetimi","Uyarıların ciddiye alınmaması ve yetersiz müşteri tanıma","Ülkeler arası düzenleyici koordinasyon eksikliği"],
+ ders:["Uyum (compliance) fonksiyonu bağımsız ve yetkili olmalı","Şikâyet ve uyarı mekanizmaları gerçekten işlemelidir","Cezalar: ABD ile yaklaşık 2 mlr $ uzlaşma"],
+ soru:"Yurt dışı şubelerde kâr baskısı ile uyum arasındaki gerilim nasıl yönetilmeli?"},
+{id:"barings",ad:"Barings Bank ve Nick Leeson",yil:1995,ulke:"İngiltere / Singapur",tema:"Operasyonel risk",
+ ozet:"233 yıllık İngiliz yatırım bankası, Singapur'daki bir tacirin gizlediği vadeli işlem zararları yüzünden birkaç ayda çöktü. Tacir hem işlem yapıyor hem de kayıtları tutuyordu.",
+ rakam:["~827 mn £","kayıp; banka 1 £'a ING'ye satıldı"],
+ kron:[["1992–1994","Leeson, hata hesabı kullanarak zararları kayıtlardan saklar ve işlem pozisyonlarını büyütür."],["Ocak 1995","Kobe depremi sonrası Nikkei düşer; zarar katlanır, pozisyonlar daha da artırılır."],["26 Şubat 1995","Zarar fark edilir; banka idareye devredilir, günler sonra ING satın alır."]],
+ neden:["Ön ve arka ofis görevlerinin tek kişide toplanması","Merkezin yüksek kâr beyanlarını sorgulamaması ve fon ihtiyacını sorgusuz karşılaması","Zayıf iç denetim ve uyarıların takip edilmemesi"],
+ ders:["Görevler ayrılığı temel bir iç kontroldür","Beklenmedik derecede yüksek kâr, kırmızı bayraktır","Kurtarma yapılmadan da bulaşma kontrol altında tutulabilir"],
+ soru:"Merkezin, uzak bir şubenin kâr rakamlarına duyduğu güveni hangi kontroller dengelemeli?"},
+
+{id:"northern-rock",ad:"Northern Rock",yil:2007,ulke:"Birleşik Krallık",tema:"Likidite",
+ ozet:"İpotek ağırlıklı banka, fonlamasının büyük kısmını toptan piyasadan sağlıyordu. Piyasa donunca acil destek talep etti; haberin duyulması İngiltere'de yaklaşık 150 yıl sonra ilk klasik bankaya hücumu başlattı.",
+ rakam:["~150 yıl","İngiltere'de bu ölçekte ilk bankaya hücumdan bu yana (yaklaşık)"],
+ kron:[["Ağustos 2007","Küresel toptan piyasalar donar; Northern Rock fonlamayı yenileyemez."],["14 Eylül 2007","Bank of England'dan acil destek aldığı duyulur; şubelerde mevduat kuyrukları oluşur."],["Şubat 2008","Özel alıcı bulunamaz; banka geçici olarak kamulaştırılır."]],
+ neden:["Toptan fonlamaya aşırı bağımlılık, mevduat tabanının dar olması","Hızlı ipotek kredisi büyümesi","Mevduat güvencesinin sınırlı ve belirsiz olması"],
+ ders:["Toptan fonlama, güven kaybında hızla kurur","Mevduat sigortası kapsamı ve iletişimi güven için kritiktir","Sonuç: İngiltere'de bankacılık çözümleme rejimi yeniden yazıldı"],
+ soru:"Acil likidite desteği verildiğini kamuoyuna duyurmak güveni artırır mı, azaltır mı?"},
+
+{id:"lehman",ad:"Lehman Brothers",yil:2008,ulke:"ABD",tema:"Sistemik risk",
+ ozet:"ABD'nin dördüncü büyük yatırım bankası, ipotek varlıkları ve yüksek kaldıraç yüzünden fonlamasını yitirdi. Kamu desteği verilmedi ve banka iflas başvurusu yaptı.",
+ rakam:["~639 mlr $","varlık; ABD tarihinin en büyük iflaslarından biri"],
+ kron:[["Mart 2008","Bear Stearns krizi; yatırım bankalarına güven sarsılır."],["Eylül 2008","Alıcı arayışı sonuçsuz kalır; hafta sonu görüşmeleri çözüm üretmez."],["15 Eylül 2008","Lehman iflas başvurusu yapar; küresel kredi piyasaları sarsılır."]],
+ neden:["Çok yüksek kaldıraç ve ipotek varlıklarında yoğunlaşma","Kısa vadeli repo fonlamasına bağımlılık","Alıcı bulunamaması ve müdahale çerçevesinin belirsizliği"],
+ ders:["Büyük bir kurumun iflası, bulaşma etkisini öngörülenden büyük kılabilir","Bear Stearns ve Lehman'a farklı davranılması belirsizlik yarattı","Sonuç: Dodd-Frank ile çözümleme araçları güçlendirildi"],
+ soru:"Bir kuruma müdahale etmeme kararı, ahlaki riskle sistemik riski nasıl dengeler?"},
+
+{id:"turkiye-2001",ad:"Türkiye 2001 Bankacılık Krizi",yil:2001,ulke:"Türkiye",tema:"Sistemik risk",
+ ozet:"Kur çıpasına dayalı enflasyonla mücadele programı, zayıf sermayeli bankalar ve kamu bankalarının görev zararları bir araya geldi. Kasım 2000 ve Şubat 2001'deki iki dalga, kur çıpasının bırakılmasına ve kapsamlı bir yeniden yapılandırmaya yol açtı.",
+ rakam:["~47 mlr $","bankacılık yeniden yapılandırmasının tahmini kamu maliyeti (yaklaşık, GSYH'nin yaklaşık üçte biri)"],
+ kron:[["Kasım 2000","Bir bankanın fonlama sorunu piyasaya yayılır; gecelik faizler fırlar, rezervler erir."],["22 Şubat 2001","Kur çıpası bırakılır, lira hızla değer kaybeder."],["Mayıs 2001","Bankacılık Sektörü Yeniden Yapılandırma Programı ve güçlü bir ekonomi programı açıklanır."]],
+ neden:["Kamu bankalarında birikmiş görev zararları ve zayıf sermaye","Kısa vadeli borçla finanse edilen açık döviz pozisyonları","Zayıf denetim ve kur çıpasının kırılganlığı"],
+ ders:["Kur çıpası ile zayıf bankacılık sektörü birlikte tehlikelidir","Kamu bankalarının örtülü zararları sonunda bütçeye yüklenir","Bağımsız ve güçlü bir düzenleyici kurum güveni geri kazandırır"],
+ soru:"Kriz sonrası kurulan kurumların kalıcı olması için hangi güvenceler gerekir?"},
+
+{id:"svb",ad:"Silicon Valley Bank",yil:2023,ulke:"ABD",tema:"Faiz riski",
+ ozet:"Girişim ve teknoloji şirketlerinin mevduatıyla büyüyen banka, uzun vadeli tahvillere yatırım yapmıştı. Faizler yükselince zarar ortaya çıktı, sigortasız mevduat sahipleri günler içinde dijital kanaldan para çekti.",
+ rakam:["~209 mlr $","varlık; ABD tarihinin en büyük banka kapanışlarından biri"],
+ kron:[["2021–2022","Mevduat hızla artar; fazla kaynak uzun vadeli tahvillere yatırılır, faizler yükselince kayıp büyür."],["8–9 Mart 2023","Zarar ve sermaye artırımı duyurulur; mevduat sahipleri tek günde on milyarlarca dolar çekmek ister."],["10 Mart 2023","Düzenleyiciler bankayı kapatır; FDIC kayyum olarak atanır."]],
+ neden:["Faiz riskinin yeterince yönetilmemesi","Mevduatların küçük bir müşteri grubunda ve sigortasız olması","Hızlı dijital kaçışa hazırlıksız likidite yönetimi"],
+ ders:["Faiz riski ve mevduat yoğunlaşması birlikte ölümcül olabilir","Dijital bankacılık ve sosyal medya kaçış hızını artırır","Sigortasız mevduat güvencesi tartışması yeniden açıldı"],
+ soru:"Mevduat sigortası sınırı kaldırılmalı mı, yoksa piyasa disiplini mi korunmalı?"},
+{id:"turkiye-1994",ad:"Türkiye 1994 Krizi",yil:1994,ulke:"Türkiye",tema:"Sistemik risk",
+ ozet:"Yüksek kamu açığı, kısa vadeli borçlanma ve zayıf güven ortamı, derecelendirme notlarının düşmesiyle kur ve faiz krizine dönüştü. Nisan 1994'te istikrar tedbirleri açıklandı ve bazı bankalar kapatıldı.",
+ rakam:["~%5","1994'te ekonominin küçülmesi (yaklaşık)"],
+ kron:[["Ocak 1994","Derecelendirme kuruluşları notu düşürür; yabancı sermaye çıkışı ve kur baskısı artar."],["Nisan 1994","İstikrar tedbirleri açıklanır; üç banka kapatılır, mevduata güvence getirilir."],["1994–1995","Ekonomi sert küçülür; enflasyon yüksek kalır."]],
+ neden:["Yüksek kamu açığı ve merkez bankası kaynaklarıyla finansmanı","Kısa vadeli borçlanma ve yüksek reel faiz","Zayıf bankacılık denetimi ve kırılgan güven ortamı"],
+ ders:["Kamu açığı ile kısa vadeli borç birleşince kur şoku kaçınılmaz olur","Mevduat güvencesi bulaşmayı durdurur ancak ahlaki risk yaratır","Benzer yapısal zayıflıklar 2001 krizinde yeniden ortaya çıktı"],
+ soru:"Mevduat güvencesi, kriz sonrası kalıcı bir sigorta sistemine nasıl dönüştürülmeli?"},
+
+{id:"anglo-irish",ad:"Anglo Irish Bank ve İrlanda Garantisi",yil:2008,ulke:"İrlanda",tema:"Sistemik risk",
+ ozet:"Ticari gayrimenkul kredilerinde aşırı yoğunlaşan banka, konut balonu patlayınca çöktü. Hükümet altı büyük bankanın yükümlülüklerine genel garanti verince kayıplar kamu bütçesine yüklendi.",
+ rakam:["~30 mlr €","Anglo Irish'in kurtarılması için kullanılan kamu kaynağı (yaklaşık)"],
+ kron:[["2003–2007","Banka ticari gayrimenkul kredilerinde hızla büyür; yoğunlaşma artar."],["29 Eylül 2008","Hükümet, altı bankanın mevduat ve borçlarına iki yıllık genel garanti verir."],["Ocak 2009","Anglo Irish kamulaştırılır; sorunlu krediler sonradan kamu bir kuruluşa devredilir."]],
+ neden:["Gayrimenkul kredilerinde aşırı yoğunlaşma","Toptan ve yurt dışı fonlamaya bağımlılık","Zayıf denetim ve büyüme baskısı"],
+ ders:["Genel garanti kısa vadede paniği durdurur ama kayıpları devlete aktarır","Bankacılık sektörü ülke ekonomisinden çok büyükse garanti sürdürülemez","İrlanda 2010'da AB ve IMF programına girdi"],
+ soru:"Banka borçlarını kamu üstlenirse, bunun ahlaki riski nasıl azaltılır?"},
+
+{id:"kibris-2013",ad:"Kıbrıs Bankaları: Laiki ve Bank of Cyprus",yil:2013,ulke:"Kıbrıs",tema:"Sistemik risk",
+ ozet:"Bankacılık sektörü ekonominin kat kat üzerindeydi ve Yunan tahvilleri ile gayrimenkul kredilerinde büyük zarar yazdı. Kurtarma planı, mevduat sahiplerinin zarar görmesini ilk kez Avro Bölgesi'nde gündeme getirdi.",
+ rakam:["~10 mlr €","AB ve IMF'nin kurtarma paketi (2013)"],
+ kron:[["2012","Yunan devlet tahvili yeniden yapılandırması bankalarda büyük zarara yol açar."],["Mart 2013","İlk plan sigortalı mevduatı da vergilendirmeyi öngörür; parlamento reddeder."],["Mart 2013","Laiki çözümlenir; Bank of Cyprus'ta büyük mevduatlar dönüştürülür ve sermaye kontrolleri uygulanır."]],
+ neden:["Bankacılık sektörünün ekonomiden çok büyük olması","Yunan tahvilleri ve gayrimenkul kredisi zararları","Yoğun yabancı mevduat ve zayıf denetim"],
+ ders:["Sigortalı mevduata dokunmak güven için kırmızı çizgidir","Mevduat sahiplerinin zarara katıldığı çözümleme Avrupa'da emsal oldu","Sermaye kontrolleri 2015'te kaldırıldı"],
+ soru:"Sigortasız mevduat sahiplerinin zararı üstlenmesi adil midir, nasıl sınırlanmalı?"},
+
+{id:"arjantin-2001",ad:"Arjantin 2001: Corralito",yil:2001,ulke:"Arjantin",tema:"Kur ve mevduat",
+ ozet:"Peso dolara bire bir bağlıydı. Kamu borcu ve dış borç yükselince mevduat kaçışı başladı, hükümet nakit çekimine sınır koydu ve sonunda kur sabitlemesi bırakıldı.",
+ rakam:["250 peso","haftalık nakit çekim sınırı (Aralık 2001)"],
+ kron:[["1991–2001","Peso dolara sabitlenir; kamu ve dış borç artar."],["Aralık 2001","Mevduat kaçışı sonrası çekim sınırı konur; protestolar hükümeti düşürür."],["Ocak 2002","Sabit kur biter, peso serbest bırakılır; dolar mevduat ve krediler pesoya çevrilir."]],
+ neden:["Sabit kur rejimi ve artan kamu borcu","Dolar bazlı mevduat ve pesoyla gelir arasındaki uyumsuzluk","Siyasi belirsizlik ve güven kaybı"],
+ ders:["Sabit kur, zayıf bankacılıkla birleşince çıkışı zorlaştırır","Mevduat kısıtlaması güveni uzun süre zedeler","Para birimi uyumsuzluğunda kayıp paylaşımı siyasi bir meseleye dönüşür"],
+ soru:"Döviz mevduatı ve döviz kredisi olan bir sistemde kayıplar kimlere yüklenmeli?"},
+
+{id:"credit-suisse",ad:"Credit Suisse",yil:2023,ulke:"İsviçre",tema:"Yönetişim",
+ ozet:"Yıllarca süren risk ve kontrol skandalları ile güven kaybı, SVB sonrası mevduat çıkışlarını hızlandırdı. İsviçre makamlarının aracılığıyla banka UBS'ye devredildi.",
+ rakam:["~16 mlr CHF","tamamen silinen AT1 tahvilleri; UBS bankayı yaklaşık 3 mlr CHF'ye devraldı"],
+ kron:[["2021–2022","Art arda zararlar ve kontrol skandalları; müşteri çıkışları artar."],["Mart 2023","SVB sonrası güven sarsılır; büyük hissedar ek destek vermeyeceğini açıklar."],["19 Mart 2023","UBS'nin devralması duyurulur; merkez bankası ve devlet destek verir."]],
+ neden:["Art arda risk yönetimi ve kontrol skandalları","Kâr üretmeyen iş modeli ve süregelen güven kaybı","Müşteri varlıklarının hızlı çıkışı"],
+ ders:["Güven kaybı yıllar içinde birikir, tek bir tetikleyici yeter","AT1 ve hissedar sıralamasındaki belirsizlik piyasayı sarstı","Büyük bir küresel bankanın çözümlemesi hâlâ zordur"],
+ soru:"Sermaye araçlarında zarar sıralaması krizde esnetilebilir mi?"}
+];
+BVA_DATA.sort((a,b)=>a.yil-b.yil);
+
+const BVA_KARAR={
+"continental-illinois":{rol:"ABD Mevduat Sigorta Kurumu (FDIC) Başkanı",
+d:"Mayıs 1984. Banka yaklaşık 40 mlr $ varlıkla ABD'nin yedinci büyüğü. Fonlamasının büyük kısmı sigortasız toptan ve yurt dışı kaynaklı; fonlayıcılar vadeleri yenilemiyor.",
+g:[["Varlık","~40 mlr $"],["Sigortasız fonlama","Çok yüksek"],["Çıkış hızı","Günlerde on milyarlarca $"]],
+a:[["Bankayı kapat, sigorta sınırı içinde ödeme yap","Kamu maliyeti düşük, piyasa disiplini korunur","Sigortasız alacaklılar zarar görür, diğer bankalara bulaşma riski",0],
+["Fed'den likidite desteği sağla","Anlık nakit ihtiyacını karşılar","Sermaye açığını çözmez",1],
+["FDIC sermaye koysun, pay sahibi olsun, mevduat ve alacaklıları korusun","Bulaşmayı durdurur, güveni geri getirir","Ahlaki risk, kamu maliyeti",1],
+["Büyük bankalardan özel kredi hattı kur","Kamu kaynağı kullanmaz","Tek başına kaçışı durdurmayabilir",1],
+["Büyük bankaları zorunlu birleşmeye yönlendir","Çözüm hızlı olabilir","Rekabet kaygısı, alıcı bulunmayabilir",0]],
+s:"FDIC, Fed ve büyük bankalar birlikte devreye girdi. Mevduat sahipleri ve alacaklılar korundu, FDIC çoğunluk payını aldı, yönetim değişti. Banka 1991'de özel sektöre döndü, 1994'te BankAmerica tarafından satın alındı. Vaka 'too big to fail' kavramını yerleştirdi."},
+"bcci":{rol:"Bank of England denetim yetkilisi",
+d:"Haziran 1991. Denetçi raporu sistematik sahtecilik ve gizli zarar gösteriyor. Banka Lüksemburg merkezli holding altında 70'ten fazla ülkede faaliyette ve tek bir konsolide denetçisi yok.",
+g:[["Faaliyet","70+ ülke"],["Bulgu","Sahte kayıt, gizli zarar"],["Denetim","Parçalı"]],
+a:[["Sahibine düzeltme süresi ver, sessiz izle","Panik yaratmaz","Kayıp büyür, kanıtlar kaybolabilir",0],
+["Düzenleyicilerle bilgi paylaş, aynı gün kapatma planla","Varlık kaçışını sınırlar","Mevduat sahipleri anında zarar görür, tasfiye karmaşık",1],
+["Yalnızca İngiltere şubelerini kapat","Hızlı ve sınırlı","Varlıklar başka ülkelere kaydırılır",0],
+["Eşgüdümlü tasfiye yürüt, bağımsız soruşturma başlat","Alacaklı eşitliği ve hesap verebilirlik","Yıllar sürer",1],
+["Banka sahibine yeniden sermayelendirme şartı getir","Kamu maliyeti yok","Sahtecilik varken sermaye yeterli olmaz, zaman kaybedilir",0]],
+s:"5 Temmuz 1991'de birçok ülkede eş zamanlı kapatma yapıldı. Mevduat sahipleri ağır zarar gördü, tasfiye yıllarca sürdü. Bingham soruşturması İngiltere'deki denetim zafiyetini ortaya koydu; konsolide denetim ve uluslararası işbirliği kuralları sıkılaştı."},
+"socgen":{rol:"Société Générale CEO'su",
+d:"20 Ocak 2008. İç kontrol, bir tacirin sahte işlemlerle çok büyük bir yönlü pozisyon sakladığını buldu. Pozisyon yaklaşık 50 mlr €, piyasalar sert düşüşte.",
+g:[["Pozisyon","~50 mlr €"],["Piyasa","Sert düşüş"],["Süre","İlk işlem günleri"]],
+a:[["Pozisyonu tut, toparlanmayı bekle","Kapatma zararı yazılmaz","Zarar sınırsız büyüyebilir",0],
+["Pozisyonu birkaç günde, piyasayı yormadan kapat","Zararı sınırlar","Bilgi sızarsa fiyatlar aleyhe hareket eder",1],
+["Düzenleyicilere derhal bildir","Şeffaflık, itibar koruması","Kamuoyu paniği riski",1],
+["Hızlı hisse ihracıyla sermayeyi güçlendir","Güven ve sermaye tamponu","Seyrelme, hisse baskısı",1],
+["Zararı açıklamadan pozisyonu birkaç ay içinde kapat","İtibar kaybı ertelenir","Şeffaflık ve hukuki risk, bilginin sızması",0]],
+s:"Pozisyonlar 21–23 Ocak'ta düşen piyasada kapatıldı, yaklaşık 4,9 mlr € zarar açıklandı. Banka yaklaşık 5,5 mlr €'luk sermaye artırımı yaptı. Kerviel 2010'da hüküm giydi, tazminat kararı sonradan bozuldu ve belirgin biçimde düşürüldü."},
+"bear-stearns":{rol:"Fed ve Hazine yetkilisi",
+d:"13–16 Mart 2008. Repo karşı tarafları fonlamayı yenilemiyor, likidite havuzu günler içinde eriyor. Yatırım bankası yüksek kaldıraçlı ve ipotek varlıklarında yoğun.",
+g:[["Fonlama","Gecelik repo ağırlıklı"],["Kaldıraç","Çok yüksek"],["Süre","Bir hafta sonu"]],
+a:[["Müdahale etme, iflasa bırak","Ahlaki riski önler","Sistemik bulaşma riski",0],
+["Fed'den acil kredi ile süre kazan","Hafta sonu için zaman","Çözüm değil, ertelemedir",1],
+["JPMorgan satışını kolaylaştır, riskli varlıklara Fed finansmanı ver","Tam çöküşü önler","Kamu riski, emsal oluşturur",1],
+["Satış fiyatını düşük tutarak hissedara zarar yükle","Ahlaki riski azaltır","Dava ve satış zorluğu",1],
+["Hissedarlara ek bilgi vermeden satışı hızlandır","Zaman kazanılır","Dava ve güven riski",0]],
+s:"16 Mart 2008'de JPMorgan satın almayı açıkladı; Fed yaklaşık 29 mlr $ değerinde riskli varlık için finansman üstlendi. Hisse fiyatı önce 2 $, sonra 10 $ oldu. Müdahale krizi erteledi ve ahlaki risk tartışmasını başlattı; Eylül 2008'de Lehman için benzer müdahale yapılmadı."},
+"wamu":{rol:"ABD denetim otoritesi (OTS) ve FDIC yetkilisi",
+d:"Eylül 2008. Lehman sonrası on günde yaklaşık 17 mlr $ mevduat çıktı. Kurum yaklaşık 307 mlr $ varlıklı ve riskli konut kredisi ağırlıklı.",
+g:[["Varlık","~307 mlr $"],["Çıkış","~17 mlr $ / 10 gün"],["Portföy","Riskli konut kredileri"]],
+a:[["Özel sermaye arayışı için zaman tanı","Kamu maliyeti yok","Piyasa kapalı, çıkış hızlanır",0],
+["Kurumu kapat, mevduatları FDIC devralsın","Mevduat korunur","Büyük kurum ismi güveni sarsar",1],
+["Bankacılık faaliyetlerini ihaleyle tek alıcıya sat","Hızlı, düşük kamu maliyeti","Alıcı sayısı sınırlı",1],
+["Hissedar ve holding tahvil sahiplerine zarar yükle","Kamu fonu kullanılmaz","Piyasa güveni sarsılır",1],
+["Kısa satış yasağı getirerek hisse baskısını azalt","Hisse baskısı hafifler","Mevduat çıkışını durdurmaz",0]],
+s:"OTS 25 Eylül 2008'de kurumu kapattı; FDIC bankacılık faaliyetlerini 1,9 mlr $'a JPMorgan'a sattı. Mevduat sahipleri zarar görmedi, hissedarlar ve holding yatırımcıları zarar etti. OTS, Dodd-Frank ile kaldırıldı."},
+"iceland":{rol:"İzlanda hükümeti ve Merkez Bankası",
+d:"Ekim 2008. Üç büyük banka çöküşte; bankacılık varlıkları GSYH'nin kabaca 10 katı. Kron hızla değer kaybediyor, Icesave mevduatları İngiltere ve Hollanda ile gerilim yaratıyor.",
+g:[["Bankacılık/GSYH","~10×"],["Kur","Hızlı değer kaybı"],["Sorun","Yurt içi ve yurt dışı mevduat"]],
+a:[["Üç bankayı da kurtar","Güven korunur","Devletin kapasitesini aşar, temerrüt riski",0],
+["Yurt içi bankacılığı ayırıp yeni bankalar kur","Kritik hizmetler sürer","Yabancı alacaklılar zarar görür",1],
+["Sermaye kontrolleri uygula","Kur ve çıkış baskısını durdurur","Yatırım ve ticarete engel",1],
+["IMF programına başvur","Dış finansman ve güvenilirlik","Sıkı ekonomik şartlar",1],
+["Yabancı ülkelerden ikili acil kredi iste","Likidite sağlanabilir","Siyasi koşullar, erişim belirsizliği",0]],
+s:"Yeni bankalar kuruldu, yurt içi mevduat korundu, yabancı alacaklılar zarar gördü. Kasım 2008'de IMF programı ve sermaye kontrolleri geldi. Ekonomi sert daraldı, birkaç yıl içinde toparlanma başladı. Icesave tartışması yıllarca sürdü; EFTA Mahkemesi 2013'te İzlanda lehine karar verdi."},
+"bes":{rol:"Portekiz Merkez Bankası ve çözümleme otoritesi",
+d:"Temmuz-Ağustos 2014. Ana holding ödeme güçlüğünde. Banka muhasebe usulsüzlükleri ve hisse çöküşüyle karşı karşıya; perakende müşterilere grup kâğıtları satılmış.",
+g:[["Sorun","Grup içi borç, usulsüzlük"],["Piyasa","Hisse sert düşüş"],["Perakende","Grup kâğıtları satılmış"]],
+a:[["Aileden yeni sermaye iste","Kamu maliyeti yok","Aile kapasitesi sınırlı, kayıplar saklanır",0],
+["İyi ve kötü banka ayrımı yap","Kritik hizmetler sürer","Tahvil sahipleri ve hissedar zararı",1],
+["Çözümleme Fonu'ndan sermaye koy","Yeni banka sermayelendirilir","Sektör fonuna yük",1],
+["Yönetimi değiştir, soruşturma başlat","Hesap verebilirlik","Güveni kısa vadede sarsar",1],
+["Hisse işlemini durdurup sorunu gizli tut","Zaman kazanılır","Güven ve şeffaflık kaybı",0]],
+s:"3 Ağustos 2014'te Novo Banco kuruldu; Çözümleme Fonu yaklaşık 4,9 mlr € sermaye koydu, kötü varlıklar BES'te kaldı. Sonraki yıllarda tahvil sahibi ve perakende müşteri tartışmaları sürdü; eski başkan Ricardo Salgado hakkında dava açıldı."},
+"popular":{rol:"Avrupa Tek Çözümleme Kurulu (SRB)",
+d:"Haziran 2017. Banka gayrimenkul kaynaklı sorunlu kredi yükü altında; mevduat çıkışı hızlanıyor, likidite tükeniyor. ECB 'başarısız veya başarısız olması muhtemel' tespiti yapıyor.",
+g:[["Sorun","Gayrimenkul kredileri"],["Likidite","Hızla eriyor"],["Çerçeve","Yeni Avrupa çözümleme kuralları"]],
+a:[["ECB acil likiditesiyle süre kazan","Zaman satın alır","Sermaye açığı kapanmaz",0],
+["Kamu fonuyla kurtar","Hızlı","Bail-in kuralları ve siyasi maliyet",0],
+["Sermaye araçlarını sil veya dönüştür","Kamu fonu kullanılmaz","Yatırımcı davaları",1],
+["Bankayı tek hamlede bir alıcıya sat","Süreklilik sağlar","Alıcı koşulları kısıtlı",1],
+["Banka tatili ilan ederek çıkışı durdur","Geçici koruma sağlar","Güven kaybı, ekonomiye zarar",0]],
+s:"7 Haziran 2017'de banka 1 €'ya Santander'e geçti. Hissedarlar ve ikincil sermaye sahipleri zarar etti, kamu fonu kullanılmadı. Avrupa çözümleme çerçevesinin ilk büyük uygulamasıydı; sonrasında yatırımcılar dava açtı."},
+"first-republic":{rol:"FDIC ve ABD Hazinesi",
+d:"Nisan sonu 2023. Mart ortasında 11 banka 30 mlr $ mevduat koydu, yine de ilk çeyrekte yaklaşık 100 mlr $ mevduat çıktı. Hisse çöküyor, müşteriler yüksek gelirli ve sigortasız mevduat payı yüksek.",
+g:[["Varlık","~229 mlr $"],["Çıkış","~100 mlr $ (ilk çeyrek)"],["Mevduat","Sigortasız ağırlıklı"]],
+a:[["Daha fazla özel destek topla, zaman kazan","Kamu kaynağı yok","Çıkış sürer, belirsizlik artar",0],
+["Kamu kaynağıyla ayakta tut","Hızlı","Ahlaki risk ve siyasi tepki",0],
+["FDIC kapatsın, ihale ile satsın","Süreç hızlı, bulaşma kontrol altında","Kamu sigorta fonu maliyeti",1],
+["Sigortasız dahil tüm mevduatı koru","Güveni korur","Ahlaki risk",1],
+["Mevduat sahiplerine yüksek faiz teklif et","Çıkışı yavaşlatabilir","Maliyeti artırır, güven sorunu sürer",0]],
+s:"1 Mayıs 2023'te banka kapatıldı ve JPMorgan satın aldı; mevduatların tamamı JPMorgan'a geçti. FDIC'in tahmini maliyeti yaklaşık 13 mlr $ oldu. Vaka, bölgesel bankalarda faiz riski ve sigortasız mevduat yoğunlaşmasını gündeme getirdi."},
+"danske":{rol:"Danske Bank üst yönetimi",
+d:"2014. Bir iç uyarıcı, Estonya şubesinde yerleşik olmayan müşterilerden gelen şüpheli işlemleri bildirdi. Şube kârlı, merkezî uyum kontrolü zayıf.",
+g:[["Dönem","2007–2015"],["Şüpheli akış","~200 mlr €"],["Uyum","Zayıf, yerel"]],
+a:[["Portföyü derhal kapat, otoritelere bildir","Zararı erken keser","Gelir kaybı, soruşturma riski",0],
+["Sınırlı iç inceleme yap, portföyü kademeli küçült","Düşük kısa vadeli maliyet","İtibar ve hukuki risk sürer",1],
+["Uyarıyı dikkate alma, işe devam et","Kâr sürer","Sonradan çok daha ağır yaptırım",0],
+["Bağımsız dış denetim yaptır, sonuçları aç","En güvenilir yol","Kısa vadeli itibar maliyeti",0],
+["Uyarıcıyı görevden al ve sessizce devam et","Kısa vadeli maliyet düşük","Sonradan hukuki ve itibar yıkımı",0]],
+s:"Banka sınırlı incelemeler yaptı, portföy 2015'te kapatıldı. 2018'de soruşturma raporu yayımlandı ve CEO istifa etti. Banka, ABD makamlarıyla yaklaşık 2 mlr $ uzlaşma yaptı (2022). Bağımsız inceleme gibi adımlar gerçekte ancak skandal patladıktan sonra atıldı."},
+"barings":{rol:"Bank of England yetkilisi",
+d:"Şubat 1995 sonu. Singapur'da gizlenen vadeli işlem zararları ortaya çıktı; kayıp bankanın sermayesini aşıyor. Barings 233 yıllık bir İngiliz bankası, ancak sistemik bir kurum değil.",
+g:[["Zarar","Sermayeyi aşıyor"],["Kurum","Eski ama sistemik değil"],["Süre","Bir hafta sonu"]],
+a:[["Kamu parasıyla kurtarma paketi aç","Banka ayakta kalır","Kamu kaynağı kullanılır, ahlaki risk doğar",0],
+["Özel bankalarla kurtarma konsorsiyumu kurmayı dene","Kamu maliyeti yok","Zaman kısa, katılım zor",1],
+["Alıcı bul ve bankayı satışa çıkar","Faaliyetler sürer","Alıcı koşulları ağır olabilir",1],
+["Yönetici ata, müşteri işlemlerini kontrollü sürdür","Bulaşma sınırlanır","İtibar kaybı kalıcıdır",1],
+["Gizli pozisyonu hemen piyasada kapat","Zarar sınırlanır","Piyasa tepkisi, zararın çok yüksek olması",0]],
+s:"Bank of England kamu parasıyla kurtarmayı reddetti, özel konsorsiyum çabası sonuçsuz kaldı. Banka 26 Şubat 1995'te idareye devredildi ve 1 £'a ING'ye satıldı. Leeson 1995'te Singapur'da hüküm giydi. Sistemik bulaşma sınırlı kaldı."},
+"northern-rock":{rol:"Bank of England, Hazine ve düzenleyici yetkilisi",
+d:"Eylül 2007. Toptan piyasalar donmuş, Northern Rock fonlamasını yenileyemiyor. Bankanın acil destek aldığı haberi sızdı, şubelerde mevduat kuyrukları büyüyor.",
+g:[["Fonlama","Toptan ağırlıklı"],["Mevduat","Kuyruklar oluşuyor"],["Güvence","Sınırlı"]],
+a:[["Müdahale etme, piyasa disiplini işlesin","Ahlaki risk önlenir","Hücum yayılır, bulaşma riski",0],
+["Acil likidite desteği ver","Nakit ihtiyacı karşılanır","Sermaye sorununu çözmez",1],
+["Mevduat için devlet garantisi duyur","Hücumu durdurur","Kamu taahhüdü yüklenir",1],
+["Özel alıcı bul, bulunamazsa geçici kamulaştır","Süreklilik sağlanır","Kamu maliyeti ve siyasi tepki",1],
+["Yalnızca özel görüşmelerle ilerle, kamuya açıklama yapma","Panik görünmez","Güven daha da erir",0]],
+s:"Bank of England acil destek verdi, 17 Eylül 2007'de Hazine mevduatların güvence altında olduğunu açıkladı ve çıkışlar durdu. Özel alıcı bulunamadı; banka Şubat 2008'de geçici olarak kamulaştırıldı. Vaka, İngiltere'de mevduat sigortasının ve çözümleme rejiminin yeniden düzenlenmesine yol açtı."},
+"lehman":{rol:"Fed ve Hazine yetkilisi",
+d:"12–14 Eylül 2008. Lehman fonlamasını yitirdi, alıcı çıkmıyor. Aylar önce Bear Stearns'e müdahale edilmişti; piyasa bu hafta sonu için net bir cevap bekliyor.",
+g:[["Varlık","~639 mlr $"],["Alıcı","Bulunamadı"],["Piyasa","Gergin, belirsizlik yüksek"]],
+a:[["Kamu garantisi ver, kurumu kurtar","Panik önlenir","Kamu riski, ahlaki risk",0],
+["Wall Street bankalarından özel kurtarma konsorsiyumu ara","Kamu kaynağı yok","Katılımcılar kendi risklerinden çekinir",1],
+["Müdahale etme, iflas başvurusuna izin ver","Ahlaki riski önler","Sistemik bulaşma riski",1],
+["Yatırım bankaları için Fed likidite imkânlarını genişlet","Genel güveni destekler","Lehman'ın sorununu tek başına çözmez",1],
+["Alıcı bankaya kamu garantisi vererek satışı mümkün kıl","Satış tamamlanabilir","Kamu riski, siyasi tepki",0]],
+s:"Alıcı bulunamadı ve kamu desteği verilmedi. Lehman 15 Eylül 2008'de iflas başvurusu yaptı. Ertesi gün AIG kurtarıldı, para piyasası fonları sarsıldı ve küresel kredi piyasaları dondu. Ekim 2008'de TARP programı yasalaştı."},
+"turkiye-2001":{rol:"Hazine, Merkez Bankası ve bankacılık düzenleyicisi yetkilisi",
+d:"Şubat 2001. Kur çıpası altında rezervler hızla eriyor, gecelik faizler çok yüksek. Sorunlu özel bankalar var, kamu bankalarının görev zararları sermayeyi aşındırıyor.",
+g:[["Rezerv","Hızla eriyor"],["Faiz","Çok yüksek"],["Bankalar","Sermaye yetersiz"]],
+a:[["Kur çıpasını koru, rezerv satmaya devam et","Güven görünümü korunur","Rezerv tükenir, kırılma sertleşir",0],
+["Kuru dalgalanmaya bırak","Rezerv kaybı durur","Kısa vadede sert değer kaybı",1],
+["Sorunlu bankaları fona devret, kamu bankalarını sermayelendir","Bankacılık sistemi temizlenir","Kamu maliyeti çok yüksek",1],
+["Mevduat güvencesini sürdür, bağımsız denetim kurumunu güçlendir","Güveni destekler","Ahlaki risk, kurumsal dönüşüm zaman alır",1],
+["IMF ile ek destek ve program anlaşması yap","Dış finansman ve güvenilirlik","Sıkı şartlar, siyasi tartışma",1]],
+s:"22 Şubat 2001'de kur çıpası bırakıldı ve lira sert değer kaybetti. Mayıs 2001'de bankacılık yeniden yapılandırma programı ve güçlü bir ekonomi programı açıklandı. Sorunlu bankalar fona devredildi, kamu bankaları sermayelendirildi, bağımsız düzenleyici kurum güçlendirildi. 2001'de ekonomi sert küçüldü, ardından toparlanma başladı."},
+"svb":{rol:"FDIC, Fed ve ABD Hazinesi",
+d:"11–12 Mart 2023 hafta sonu. Silicon Valley Bank kapatıldı, sigortasız mevduat sahipleri paralarına ulaşamıyor. Başka bölgesel bankalarda da mevduat kaçışı korkusu var.",
+g:[["Varlık","~209 mlr $"],["Mevduat","Çoğu sigortasız"],["Risk","Bölgesel bankalara bulaşma"]],
+a:[["Sigorta sınırının üzerini koruma, piyasa disiplini işlesin","Ahlaki riski önler","Başka bankalarda kaçış tetiklenebilir",0],
+["Sistemik risk istisnasıyla tüm mevduatı koru","Bulaşmayı durdurur","Ahlaki risk, sigorta fonu maliyeti",1],
+["Bankalara yeni bir vadeli fonlama programı aç","Zarardaki tahviller satılmak zorunda kalmaz","Merkez bankasına risk yükler",1],
+["Yönetimi değiştir, bankayı FDIC kontrolünde yönet","Hesap verebilirlik sağlanır","Güven kaybı sürebilir",1],
+["Hissedarları koruyarak bankayı kamu kaynağıyla sermayelendir","Güveni destekler","Hissedara kamu aktarımı, ahlaki risk",0]],
+s:"12 Mart 2023'te sistemik risk istisnası ilan edildi, sigortasız mevduat sahipleri de korundu. Fed, Banka Vadeli Fonlama Programı'nı (BTFP) açtı. Hissedarlar ve tahvil sahipleri korunmadı. Signature Bank da kapatıldı; sonraki haftalarda First Republic ve Credit Suisse gerginliği sürdü."},
+"turkiye-1994":{rol:"Hazine ve Merkez Bankası yetkilisi",
+d:"Ocak-Nisan 1994. Derecelendirme notları düştü, yabancı sermaye çıkıyor, rezervler eriyor. Kamu açığı yüksek ve faizler sert yükseldi; bazı bankalar sıkıntıda.",
+g:[["Rezerv","Hızla eriyor"],["Kamu açığı","Yüksek"],["Bankalar","Sıkıntılı"]],
+a:[["Kuru korumak için rezerv satmaya devam et","Güven görünümü sürer","Rezerv tükenir, kırılma sertleşir",0],
+["Kuru dalgalanmaya bırak","Rezerv kaybı durur","Sert değer kaybı, enflasyon baskısı",1],
+["Sorunlu bankaları kapat, mevduata güvence ver","Bulaşma durur","Ahlaki risk ve kamu maliyeti",1],
+["Kamu açığını daraltan istikrar paketi açıkla","Güveni geri getirir","Vergi ve fiyat artışları sosyal maliyet yaratır",1],
+["Dış borç ödemelerini ertele ve yeniden yapılandır","Rezerv kaybı yavaşlar","Güven ve kredi notu daha da düşer",0]],
+s:"5 Nisan 1994'te istikrar tedbirleri açıklandı; vergi ve fiyat artışlarıyla kamu açığı daraltıldı, üç banka kapatıldı ve mevduata güvence verildi. TL hızla değer kaybetti, ekonomi 1994'te sert küçüldü. Benzer yapısal zayıflıklar 2001'de yeniden ortaya çıktı."},
+"anglo-irish":{rol:"İrlanda Hükümeti",
+d:"Eylül 2008. Konut balonu patladı, bankalar toptan fonlamayı yenileyemiyor. Anglo Irish başta olmak üzere altı büyük banka sıkıntıda, mevduat çıkışı korkusu var.",
+g:[["Sorun","Gayrimenkul kredileri"],["Fonlama","Toptan ağırlıklı"],["Banka sayısı","Altı büyük banka"]],
+a:[["Garanti verme, bankalar kendi çözümünü bulsun","Ahlaki risk önlenir","Panik ve bulaşma riski",0],
+["Altı bankanın mevduat ve borçlarına genel garanti ver","Paniği durdurur","Kayıplar kamuya yüklenir",1],
+["Yalnızca mevduatları garanti et","Maliyet sınırlı kalır","Toptan fonlama çöker",0],
+["Sorunlu bankayı kamulaştır, kötü varlıkları ayır","Sistem temizlenir","Çok yüksek kamu maliyeti",1],
+["Avrupa'dan acil mali yardım iste","Dış kaynak sağlanır","Egemenlik tartışması, zaman kaybı",0]],
+s:"29 Eylül 2008'de altı bankanın yükümlülüklerine iki yıllık genel garanti verildi. Anglo Irish 2009'da kamulaştırıldı, sorunlu kredilerin büyük kısmı kamu bir kuruluşa devredildi. Kamu maliyeti çok yüksek oldu ve İrlanda 2010'da AB ve IMF programına girdi."},
+"kibris-2013":{rol:"Kıbrıs Hükümeti ve Avro Bölgesi yetkilileri",
+d:"Mart 2013. Bankacılık sektörü ekonominin kat kat üzerinde ve Yunan tahvili zararlarıyla sermayesi eridi. Devletin kurtarma kapasitesi yok, dış finansman şart.",
+g:[["Sorun","Yunan tahvili ve kredi zararı"],["Sektör","Ekonominin kat kat üstünde"],["Finansman","Dışarıdan gerekli"]],
+a:[["Sigortalı olanlar dahil tüm mevduata tek seferlik vergi koy","Hızlı kaynak","Güven kırmızı çizgisi aşılır, tepki",0],
+["Laiki'yi çözümle, iyi ve kötü varlığı ayır","Sağlıklı kısım sürer","Büyük mevduat ve tahvil sahipleri zarar görür",1],
+["Büyük mevduatı hisseye dönüştür (bail-in)","Kamu kaynağı gerekmez","Mevduat sahibi tepkisi",1],
+["Geçici sermaye kontrolleri uygula","Çıkışı sınırlar","Ticaret ve güvene zarar",1],
+["Üçüncü bir ülkeden ek borç iste","Kaynak sağlanabilir","Siyasi bağımlılık, yetersiz kalabilir",0]],
+s:"İlk plan sigortalı mevduatı da vergilendirmeyi öngördü ve parlamento tarafından reddedildi. Sonrasında Laiki çözümlendi, Bank of Cyprus'ta büyük mevduatın önemli kısmı dönüştürüldü ve sermaye kontrolleri getirildi. AB ve IMF yaklaşık 10 mlr €'luk program verdi. Sermaye kontrolleri 2015'te kaldırıldı."},
+"arjantin-2001":{rol:"Arjantin Ekonomi Bakanlığı ve Merkez Bankası",
+d:"Aralık 2001. Peso dolara bire bir bağlı, ancak mevduat hızla çıkıyor, rezervler azalıyor. Kamu borcu ödenemez hale geliyor, sokaklarda gerginlik artıyor.",
+g:[["Kur","Dolara bire bir bağlı"],["Mevduat","Hızla çıkıyor"],["Borç","Sürdürülemez"]],
+a:[["Sabit kuru koru, kaçışı faiz artışıyla durdur","Kur güvencesi korunur","Ekonomi daha da daralır",0],
+["Nakit çekimine sınır getir","Çıkışı durdurur","Güven ve ekonomik faaliyet zarar görür",1],
+["Pesoyu dalgalanmaya bırak","Kur dengelenir","Sert değer kaybı, enflasyon",1],
+["Dolar mevduat ve kredileri pesoya çevir","Bilanço uyumsuzluğunu giderir","Mevduat sahibi kaybı, hukuki ihtilaflar",1],
+["IMF'den ek kaynak talep et","Dış finansman","Sıkı şartlar, siyasi tepki",0]],
+s:"Aralık 2001'de çekim sınırı getirildi, ardından hükümet düştü. Ocak 2002'de sabit kur sona erdi, peso sert değer kaybetti ve dolar mevduat ve krediler pesoya çevrildi. Ekonomi 2002'de derin daraldı, 2003'ten itibaren toparlandı."},
+"credit-suisse":{rol:"İsviçre Hükümeti, Merkez Bankası ve düzenleyicisi",
+d:"15–19 Mart 2023. SVB sonrası güven sarsıldı, Credit Suisse'ten mevduat ve müşteri varlığı çıkıyor. Büyük hissedar ek destek vermeyeceğini açıkladı, hisse sert düşüyor.",
+g:[["Çıkış","Hızlı ve yüksek"],["Hissedar","Ek destek yok"],["Piyasa","Gergin, SVB sonrası"]],
+a:[["Kamu fonuyla bağımsız kurtarma","Banka ayakta kalır","Kamu kaynağı ve ahlaki risk",0],
+["Merkez bankası likiditesiyle zaman kazan","Anlık nakit ihtiyacını karşılar","Güven sorununu çözmez",1],
+["UBS ile zorunlu birleşmeyi kolaylaştır","Hızlı, süreklilik sağlar","Devasa bir banka doğar, rekabet kaygısı",1],
+["Sermaye araçlarını silerek zararı yatırımcılara yükle","Kamu kaynağı kullanılmaz","Yatırımcı davaları, piyasa güveni",1],
+["Hissedar oylamasını bekleyerek zaman kazan","Hukuki süreç korunur","Zaman yok, çıkış sürer",0]],
+s:"İsviçre Merkez Bankası bankaya büyük bir likidite hattı açtı. 19 Mart 2023'te UBS, bankayı yaklaşık 3 mlr CHF'ye devralmayı kabul etti; devlet garantisi ve ek likidite desteği verildi. Yaklaşık 16 mlr CHF'lik AT1 tahvili tamamen silindi, hissedarlar ise bir miktar değer aldı; bu sıralama tartışması ve davalar doğurdu."}
+};
+const BVA_SEC={};
+/* Simülasyon modeli: her karar için [Güven, Süreklilik, Kamu kaynağı, Piyasa disiplini] etkisi. Başlangıç 50, üst sınır 100. */
+const BVA_EF={
+"continental-illinois":[[-25,-20,25,25],[10,10,5,0],[30,25,-20,-25],[10,5,15,10],[5,5,10,-5]],
+"bcci":[[-15,-5,0,-25],[5,-20,10,15],[-5,-10,5,-5],[10,-10,5,25],[-10,-10,5,-15]],
+"socgen":[[-20,-5,0,-25],[10,10,0,5],[10,0,0,20],[15,15,0,5],[-15,5,0,-25]],
+"bear-stearns":[[-30,-25,20,25],[5,5,-5,-5],[20,20,-15,-15],[0,10,10,20],[-5,5,0,-10]],
+"wamu":[[-20,-10,10,-5],[-5,10,-5,10],[15,20,10,10],[-5,10,15,25],[0,0,5,-5]],
+"iceland":[[5,15,-35,-20],[10,20,10,5],[10,5,15,-5],[15,10,5,5],[5,5,5,0]],
+"bes":[[-10,-10,15,-10],[15,20,10,15],[15,20,-5,0],[5,5,10,20],[-15,-5,5,-15]],
+"popular":[[0,0,5,-10],[10,15,-30,-25],[10,10,15,20],[15,20,15,15],[-10,-10,5,-10]],
+"first-republic":[[-10,-10,10,-5],[10,10,-25,-25],[15,20,-5,10],[20,15,-20,-25],[0,0,5,-5]],
+"danske":[[5,-5,5,25],[-10,5,5,-15],[-30,-10,0,-30],[10,5,0,30],[-20,-5,0,-30]],
+"barings":[[10,10,-25,-25],[5,5,5,10],[10,15,10,10],[5,10,10,15],[0,0,5,5]],
+"northern-rock":[[-30,-25,10,15],[10,10,-5,-5],[20,10,-10,-10],[10,20,-15,10],[-15,-10,5,-5]],
+"lehman":[[15,15,-30,-30],[5,5,5,10],[-35,-30,10,20],[10,10,-10,-5],[15,15,-20,-20]],
+"turkiye-2001":[[-25,-15,5,-20],[5,5,-5,10],[15,20,-30,15],[20,15,-15,20],[15,10,-5,10]],
+"svb":[[-35,-25,10,25],[25,20,-20,-20],[15,15,-5,-5],[5,10,-5,15],[10,10,-25,-25]],
+"turkiye-1994":[[-25,-15,5,-10],[5,5,-5,10],[15,15,-15,5],[10,10,10,15],[-20,-5,5,-5]],
+"anglo-irish":[[-30,-20,10,15],[20,20,-30,-20],[0,5,-5,5],[10,15,-20,10],[5,5,5,5]],
+"kibris-2013":[[-35,-25,5,-15],[10,15,-10,10],[5,10,10,20],[5,5,0,-10],[5,5,5,0]],
+"arjantin-2001":[[-25,-20,5,5],[-5,10,5,-5],[5,5,-5,10],[-10,10,5,-10],[5,0,5,5]],
+"credit-suisse":[[10,10,-30,-25],[10,10,-5,-5],[20,20,-15,0],[-5,5,15,15],[-15,-10,5,-5]]};
+const BVA_M=["Piyasa güveni","Hizmet sürekliliği","Kamu kaynağı korunumu","Piyasa disiplini"];
+const BVA_T=[["Piyasa güveni ve bulaşma kontrolü güçlü kalırdı.","Güven kısmen korunur, bulaşma riski sürerdi.","Güven kaybı büyür, bulaşma riski artardı."],
+["Kritik bankacılık hizmetleri kesintisiz sürerdi.","Hizmetlerde kısmi aksama olurdu.","Hizmetler ciddi biçimde kesintiye uğrardı."],
+["Kamu maliyeti düşük kalırdı.","Kamu maliyeti orta düzeyde olurdu.","Kamu kaynaklarına ağır yük binerdi."],
+["Ahlaki riski azaltan, caydırıcı bir emsal oluşurdu.","Emsal etkisi karışık olurdu.","Ahlaki risk ve kötü bir emsal doğardı."]];
+const BVA_LV=v=>v>=62?0:v>=40?1:2;
+const bvaSkor=(id,idx)=>{const m=[50,50,50,50];idx.forEach(i=>BVA_EF[id][i].forEach((x,j)=>m[j]+=x));return m.map(x=>Math.max(0,Math.min(100,x)))};
+const bvaAvg=a=>Math.round(a.reduce((x,y)=>x+y,0)/a.length);
+(function(){
+  const list=document.getElementById('bva-list'),fbox=document.getElementById('bva-filters'),view=document.getElementById('bva-view'),home=document.getElementById('bva-home');
+  const D=Object.fromEntries(BVA_DATA.map(v=>[v.id,v])),MAX=3;
+  let filt="Tümü";
+  const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+  function renderList(){
+    list.innerHTML=BVA_DATA.filter(v=>filt==="Tümü"||v.tema===filt).map(v=>`<a class="bva-card" href="#${v.id}"><span><b>${v.ad}</b><small>${v.ulke}, ${v.tema}</small></span><span><span class="yr">${v.yil}</span>${BVA_SEC[v.id]?'<span class="ok">Tamamlandı</span>':''}</span></a>`).join('');
+  }
+  const bars=(a,b)=>BVA_M.map((n,i)=>`<div class="bva-m">${n}</div><div class="bva-bar"><i class="you" style="width:${a[i]}%"></i><em>Siz ${a[i]}</em></div><div class="bva-bar"><i class="real" style="width:${b[i]}%"></i><em>Gerçek ${b[i]}</em></div>`).join('');
+  function show(id){
+    const v=D[id],k=BVA_KARAR[id];home.hidden=true;view.hidden=false;up();
+    const head=`<a class="bva-back" href="#">← Olaylara dön</a><h1>${v.ad}</h1><p class="lead">${v.yil} · ${v.ulke} · ${v.tema}</p>`;
+    const draw=()=>{
+      const c=BVA_SEC[id],ri=k.a.map((x,i)=>x[3]?i:-1).filter(i=>i>=0);
+      const dossier=`<section class="bva-view-sec"><h3 style="margin-top:0">Vaka dosyası</h3><p>${v.ozet}</p><div class="bva-fig"><b>${v.rakam[0]}</b><span>${v.rakam[1]}</span></div><h3>Olayların kronolojisi</h3><ul class="bva-tl">${v.kron.map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join('')}</ul><h3>Kök nedenler</h3><ul class="pl">${v.neden.map(x=>`<li>${x}</li>`).join('')}</ul></section>`;
+      if(!c){
+        view.innerHTML=head+dossier+`<section class="bva-sim"><h3>Rolünüz: ${k.rol}</h3><p>${k.d}</p><div class="bva-chips">${k.g.map(x=>`<span><b>${x[0]}:</b> ${x[1]}</span>`).join('')}</div><p><b>Kararınızı verin.</b> Bu durumda ilk ve en önemli adımınız hangisi olurdu? Tek bir seçenek işaretleyin.</p>`+
+        k.a.map((a,i)=>`<label class="bva-act"><input type="radio" name="bva-o" value="${i}"><span><b>${a[0]}</b><br>Artısı: ${a[1]}<br>Riski: ${a[2]}</span></label>`).join('')+
+        `<button type="button" data-ok="1" disabled>Bitir</button></section>`;
+      }else{
+        const ch=c[0],a=k.a[ch],ok=!!a[3],you=bvaSkor(id,c),rs=bvaSkor(id,ri),ya=bvaAvg(you),ra=bvaAvg(rs),weak=you.indexOf(Math.min(...you));
+        view.innerHTML=head+
+        `<section class="bva-view-sec"><h3 style="margin-top:0">Seçiminiz: ${a[0]}</h3><p><i class="${ok?'you':'real'}" style="font-style:normal;color:#fff;padding:2px 8px;border-radius:999px;font-size:.8rem;background:var(${ok?'--accent':'--loss'})">${ok?'Gerçekte de uygulandı':'Gerçekte uygulanmadı'}</i></p><p>Artısı: ${a[1]}<br>Riski: ${a[2]}</p></section>`+
+        `<section class="bva-view-sec"><h3 style="margin-top:0">Simülasyon sonucu</h3><div class="bva-cmp"><div class="you"><span>Seçiminiz</span><div class="bva-big">${ya}</div></div><div class="real"><span>Gerçekte uygulanan paket</span><div class="bva-big">${ra}</div></div></div>${BVA_M.map((n,i)=>`<div class="bva-m">${n}</div><div class="bva-bar"><i class="you" style="width:${you[i]}%"></i><em>Siz ${you[i]}</em></div><div class="bva-bar"><i class="real" style="width:${rs[i]}%"></i><em>Gerçek ${rs[i]}</em></div>`).join('')}<p class="bva-note">Skorlar 0-100 arasıdır; tek bir kararın etkisi, gerçekte uygulanan kararların toplam etkisiyle kıyaslanır. Basitleştirilmiş bir modeldir.</p><h3>Seçiminiz gerçekleşseydi</h3><ul class="pl">${you.map((x,i)=>`<li>${BVA_T[i][BVA_LV(x)]}</li>`).join('')}</ul><p>En kırılgan alan: <b>${BVA_M[weak]}</b>.</p></section>`+
+        `<section class="bva-view-sec"><h3 style="margin-top:0">Tüm seçenekler</h3>${k.a.map((x,i)=>`<div class="bva-row"><span><b>${x[0]}</b><br><small>Artısı: ${x[1]}. Riski: ${x[2]}.</small></span><span>${i===ch?'<i class="you">Seçiminiz</i>':''}${x[3]?'<i class="real">Gerçekte uygulandı</i>':''}</span></div>`).join('')}</section>`+
+        `<section class="bva-view-sec"><h3 style="margin-top:0">Gerçekte ne oldu</h3><p>${k.s}</p></section>`+
+        `<section class="bva-view-sec"><h3 style="margin-top:0">Gelecek: vakanın bıraktığı sonuçlar</h3><ul class="pl">${v.ders.map(x=>`<li>${x}</li>`).join('')}</ul><div class="bva-q"><b>Tartışma sorusu:</b> ${v.soru}</div></section>`+
+        `<div class="bva-sim" style="margin:0"><button type="button" class="bva-sec-btn" data-r="1">Yeniden dene</button></div>`;
+      }
+    };
+    view.onclick=e=>{const b=e.target.closest('button');if(!b)return;
+      if(b.dataset.r){delete BVA_SEC[id];draw();up();}
+      else if(b.dataset.ok){const r=view.querySelector('input[name="bva-o"]:checked');if(!r)return;BVA_SEC[id]=[+r.value];draw();up();}};
+    view.onchange=e=>{if(e.target.name==='bva-o'){const b=view.querySelector('[data-ok]');if(b)b.disabled=false;}};
+    draw();
+  }
+  function route(){
+    const id=cur;
+    if(D[id]&&BVA_KARAR[id])show(id);
+    else{view.hidden=true;view.innerHTML='';home.hidden=false;renderList();}
+  }
+  [...new Set(["Tümü",...BVA_DATA.map(v=>v.tema)])].forEach((t,i)=>{
+    const b=el('button','',t);b.type='button';b.setAttribute('aria-pressed',i===0);
+    b.onclick=()=>{filt=t;[...fbox.children].forEach(x=>x.setAttribute('aria-pressed',x===b));renderList()};
+    fbox.appendChild(b);
+  });
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;e.preventDefault();cur=decodeURIComponent(a.getAttribute('href').slice(1));route();fit();});
+  route();
+  new ResizeObserver(fit).observe(document.body);addEventListener('load',fit);fit();
+})();
+</script>
+</body>
+</html>

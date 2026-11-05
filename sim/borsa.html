@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borsa İstanbul (BIST) - Professional Financial Terminal & Macro Simulator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bist: {
+                            bg: '#080c14',
+                            panel: '#0f172a',
+                            border: '#1e293b',
+                            card: '#131d31',
+                            up: '#10b981',
+                            down: '#ef4444',
+                            amber: '#f59e0b',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                            cyan: '#06b6d4'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Menlo', 'Consolas', 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Bloomberg Terminal Scrollbars */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #080c14; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        .depth-bid { background: rgba(16, 185, 129, 0.12); }
+        .depth-ask { background: rgba(239, 68, 68, 0.12); }
+        .glow-green { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+        .glow-red { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+    </style>
+</head>
+<body class="bg-[#080c14] text-slate-200 font-sans antialiased min-h-screen flex flex-col select-none overflow-x-hidden">
+
+    <!-- TOP TICKER & MACRO BAR -->
+    <div class="bg-[#060911] border-b border-slate-800 text-xs py-1 px-4 flex items-center justify-between font-mono shrink-0">
+        <!-- Stock Watch Ticker Bar -->
+        <div class="flex items-center space-x-5 overflow-x-auto text-[11px] py-0.5" id="topTickerContainer">
+            <!-- Dynamic ticker items -->
+        </div>
+
+        <!-- Macro Economic Indicators & Controls -->
+        <div class="flex items-center space-x-4 text-slate-400 shrink-0 pl-4 border-l border-slate-800 text-[11px]">
+            <div class="hidden md:flex items-center space-x-3">
+                <span>TCMB FAİZ: <strong class="text-amber-400" id="macroRateText">%45.0</strong></span>
+                <span>USD/TRY: <strong class="text-emerald-400" id="macroUsdText">38.50</strong></span>
+                <span>TÜFE: <strong class="text-slate-200" id="macroCpiText">%62.4</strong></span>
+                <span>YABANCI PAYI: <strong class="text-cyan-400" id="macroForeignText">%38.2</strong></span>
+            </div>
+            <div class="flex items-center space-x-2 border-l border-slate-800 pl-3">
+                <button onclick="toggleAudio()" title="Ses Efektleri" class="hover:text-amber-400 transition">
+                    <i class="fa-solid fa-volume-high text-amber-500" id="audioIcon"></i>
+                </button>
+                <button onclick="toggleSpeed()" id="speedBtn" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold">
+                    Hız: 1x
+                </button>
+                <span class="text-amber-400 font-bold ml-1" id="marketClock">10:00:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="bg-[#0f172a] border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <!-- Logo & Active Role Badge -->
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 via-red-800 to-slate-900 flex items-center justify-center font-bold text-white shadow-lg border border-red-500/40">
+                <i class="fa-solid fa-chart-line text-xl"></i>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="font-bold text-sm tracking-wide text-slate-100">BORSA İSTANBUL</h1>
+                    <span id="roleBadge" class="text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold bg-amber-950 text-amber-400 border border-amber-800/60">
+                        Küçük Yatırımcı
+                    </span>
+                </div>
+                <p class="text-[11px] text-slate-400" id="roleSubtitle">Bireysel Finansal Özgürlük & Portföy Yönetimi</p>
+            </div>
+        </div>
+
+        <!-- Role Financial Metrics HUD -->
+        <div class="flex items-center space-x-4 bg-[#080c14] border border-slate-800 px-4 py-1.5 rounded-xl font-mono text-xs" id="roleMetricsHUD">
+            <!-- Dynamic Role HUD populated by JS -->
+        </div>
+
+        <!-- Navigation Tabs & Role Modal Trigger -->
+        <div class="flex items-center space-x-2">
+            <nav class="flex items-center space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800 text-xs">
+                <button onclick="switchTab('terminal')" id="tab-terminal" class="tab-btn px-3 py-1.5 rounded-md font-semibold bg-slate-800 text-amber-400 transition">
+                    <i class="fa-solid fa-desktop mr-1.5"></i>Terminal
+                </button>
+                <button onclick="switchTab('macro')" id="tab-macro" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-building-columns mr-1.5"></i>Makro & PPK
+                </button>
+                <button onclick="switchTab('ipo')" id="tab-ipo" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition relative">
+                    <i class="fa-solid fa-rocket mr-1.5"></i>Halka Arz (IPO)
+                    <span id="ipoBadge" class="w-2 h-2 bg-emerald-500 rounded-full absolute -top-0.5 -right-0.5 animate-ping hidden"></span>
+                </button>
+                <button onclick="switchTab('capital')" id="tab-capital" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-coins mr-1.5"></i>Temettü & Bedelsiz
+                </button>
+                <button onclick="switchTab('quests')" id="tab-quests" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-trophy mr-1.5"></i>Kariyer & Görevler
+                </button>
+            </nav>
+
+            <button onclick="openRoleModal()" class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold text-xs rounded-lg shadow transition flex items-center gap-1">
+                <i class="fa-solid fa-user-gear"></i> Rol / Bütçe
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTENT PANELS -->
+    <main class="flex-1 p-3 overflow-hidden flex flex-col">
+
+        <!-- ================= TAB 1: FINANCIAL TERMINAL ================= -->
+        <div id="panel-terminal" class="tab-panel flex-1 grid grid-cols-12 gap-3 h-full">
+            
+            <!-- Left Panel: Watchlist & Sector Gauges -->
+            <div class="col-span-12 lg:col-span-3 bg-[#0f172a] border border-slate-800 rounded-xl flex flex-col overflow-hidden">
+                <div class="p-2.5 border-b border-slate-800 bg-slate-900/60 flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-ul text-amber-500"></i> BIST Pay Piyasası
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-500">Canlı Veri</span>
+                </div>
+
+                <div class="flex-1 overflow-y-auto divide-y divide-slate-800/60" id="stockWatchlist">
+                    <!-- Stock list injected by JS -->
+                </div>
+
+                <!-- Macro Confidence & Risk Gauges -->
+                <div class="p-3 bg-slate-950/80 border-t border-slate-800 text-xs space-y-2 font-mono">
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400 text-[11px]">Piyasa Güven Endeksi:</span>
+                        <span class="font-bold text-emerald-400" id="gaugeConfidenceText">%85 (Yüksek)</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                        <div id="gaugeConfidenceBar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 85%"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-1">
+                        <span class="text-slate-400 text-[11px]">Gözetim Risk İndeksi:</span>
+                        <span class="font-bold text-slate-300" id="gaugeRiskText">%12 (Normal)</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                        <div id="gaugeRiskBar" class="bg-blue-500 h-full transition-all duration-500" style="width: 12%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Panel: Interactive Canvas Chart, Order Depth & KAP Stream -->
+            <div class="col-span-12 lg:col-span-6 flex flex-col space-y-3">
+                
+                <!-- Stock Header Banner -->
+                <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl font-black text-slate-100 font-mono tracking-wide" id="activeTickerCode">THYAO</div>
+                        <div>
+                            <div class="text-xs font-semibold text-slate-300" id="activeTickerName">Türk Hava Yolları A.O.</div>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded" id="activeTickerSector">Havacılık</span>
+                                <span class="text-[10px] bg-blue-950 text-blue-400 px-1.5 py-0.5 rounded border border-blue-800/40" id="activeTickerMarket">Yıldız Pazar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6 font-mono">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">SON FİYAT</span>
+                            <span class="text-xl font-bold text-emerald-400" id="activeTickerPrice">284.50 ₺</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">GÜNLÜK FARK</span>
+                            <span class="text-sm font-semibold text-emerald-400" id="activeTickerChange">+2.45%</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">HACİM</span>
+                            <span class="text-sm font-semibold text-slate-200" id="activeTickerVolume">1.42B ₺</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Canvas Chart -->
+                <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-3 flex-1 flex flex-col relative min-h-[300px]">
+                    <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-xs">
+                        <div class="flex items-center space-x-1 font-mono">
+                            <button onclick="setChartType('CANDLE')" id="btnChartCandle" class="px-2.5 py-1 rounded bg-slate-800 text-amber-400 font-semibold border border-slate-700">Mum (Candle)</button>
+                            <button onclick="setChartType('LINE')" id="btnChartLine" class="px-2.5 py-1 rounded text-slate-400 hover:text-slate-200">Çizgi (Line)</button>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-400 font-mono text-[11px]">
+                            <label class="flex items-center gap-1 cursor-pointer">
+                                <input type="checkbox" id="chkMA20" checked onchange="renderChart()" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0">
+                                <span>HO20</span>
+                            </label>
+                            <label class="flex items-center gap-1 cursor-pointer">
+                                <input type="checkbox" id="chkMA50" checked onchange="renderChart()" class="rounded bg-slate-900 border-slate-700 text-cyan-500 focus:ring-0">
+                                <span>HO50</span>
+                            </label>
+                            <label class="flex items-center gap-1 cursor-pointer">
+                                <input type="checkbox" id="chkVol" checked onchange="renderChart()" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0">
+                                <span>Hacim</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 w-full h-full relative">
+                        <canvas id="stockCanvas" class="w-full h-full block rounded"></canvas>
+                    </div>
+                </div>
+
+                <!-- 5-Level Depth Order Book & KAP Stream Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- Depth Order Book -->
+                    <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                                <i class="fa-solid fa-list-ol text-amber-500"></i> Derinlik (Matriks 5 Kademe)
+                            </span>
+                            <span class="text-[10px] text-slate-500 font-mono" id="depthVbtsStatus">Normal Seans</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 font-mono text-[11px]">
+                            <div class="bg-slate-950 p-1.5 rounded border border-slate-800/80">
+                                <div class="grid grid-cols-3 text-[10px] text-slate-500 border-b border-slate-800 pb-1 mb-1 font-sans">
+                                    <span>EMİR</span>
+                                    <span class="text-center">LOT</span>
+                                    <span class="text-right text-emerald-400 font-bold">ALIŞ</span>
+                                </div>
+                                <div id="bidRows" class="space-y-1"></div>
+                            </div>
+                            <div class="bg-slate-950 p-1.5 rounded border border-slate-800/80">
+                                <div class="grid grid-cols-3 text-[10px] text-slate-500 border-b border-slate-800 pb-1 mb-1 font-sans">
+                                    <span class="text-red-400 font-bold">SATIŞ</span>
+                                    <span class="text-center">LOT</span>
+                                    <span class="text-right">EMİR</span>
+                                </div>
+                                <div id="askRows" class="space-y-1"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KAP News Feed -->
+                    <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-3 flex flex-col">
+                        <div class="flex items-center justify-between mb-2 pb-1 border-b border-slate-800">
+                            <span class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                                <i class="fa-solid fa-bullhorn text-red-500"></i> KAP Canlı Bildirimleri
+                            </span>
+                            <button onclick="triggerManualKAPNews()" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
+                                + Manuel Bildirim
+                            </button>
+                        </div>
+                        <div class="flex-1 overflow-y-auto max-h-[160px] space-y-2 text-xs" id="kapNewsStream">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Panel: Role-Specific Action Controls & Audit Panels -->
+            <div class="col-span-12 lg:col-span-3 flex flex-col space-y-3">
+                
+                <!-- ROLE 1: KÜÇÜK YATIRIMCI DASHBOARD -->
+                <div id="rolePanel-1" class="role-panel bg-[#0f172a] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                            <i class="fa-solid fa-wallet text-amber-500"></i> Bireysel Emir Paneli
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-mono">T+2 Takas</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="setOrderSide('BUY')" id="btnOrderBuy" class="py-2 text-xs font-bold rounded bg-emerald-600 text-white shadow border border-emerald-500/50">ALIŞ (BUY)</button>
+                        <button onclick="setOrderSide('SELL')" id="btnOrderSell" class="py-2 text-xs font-bold rounded bg-slate-800 text-slate-400 border border-slate-700">SATIŞ (SELL)</button>
+                    </div>
+
+                    <div class="space-y-2 text-xs font-mono">
+                        <div>
+                            <label class="text-slate-400 block text-[11px] font-sans mb-1">Emir Tipi</label>
+                            <select id="retailOrderType" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200">
+                                <option value="MARKET">Piyasa Emri (Anında Eşleşme)</option>
+                                <option value="LIMIT">Limit Fiyatlı Emir</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-sans text-[11px] mb-1">
+                                <span class="text-slate-400">Lot Adedi</span>
+                                <span class="text-amber-400 cursor-pointer hover:underline" onclick="setRetailMaxLots()">Max Lot</span>
+                            </div>
+                            <input type="number" id="retailLotInput" min="1" value="10" oninput="calcRetailTotal()" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-[10px] text-slate-400 block font-sans mb-1">Stop-Loss (₺)</label>
+                                <input type="number" id="retailStopLoss" placeholder="Yok" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-200 text-[11px]">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block font-sans mb-1">Kâr-Al (₺)</label>
+                                <input type="number" id="retailTakeProfit" placeholder="Yok" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-200 text-[11px]">
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-2 rounded border border-slate-800 text-[11px] space-y-1">
+                            <div class="flex justify-between text-slate-400">
+                                <span>Tahmini Tutar:</span>
+                                <span class="text-slate-200 font-bold" id="retailEstTotal">2,845.00 ₺</span>
+                            </div>
+                            <div class="flex justify-between text-slate-400">
+                                <span>Komisyon (%0.05):</span>
+                                <span id="retailCommission">1.42 ₺</span>
+                            </div>
+                        </div>
+
+                        <button onclick="executeRetailOrder()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 font-sans font-bold text-white rounded shadow transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Emri Piyasaya İlet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ROLE 2: KURUMSAL PORTFÖY YÖNETİCİSİ DASHBOARD -->
+                <div id="rolePanel-2" class="role-panel hidden bg-[#0f172a] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                            <i class="fa-solid fa-briefcase text-blue-400"></i> Kurumsal Portföy Yönetimi
+                        </span>
+                        <span class="text-[10px] bg-blue-950 text-blue-400 px-1.5 py-0.5 rounded border border-blue-800">Etik & Yasal</span>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Piyasaya kurumsal likidite sağlayın, blok işlemler yürütün ve portföy riskini türev kontratlarla rehedge edin.
+                    </p>
+
+                    <div class="space-y-2">
+                        <button onclick="executeInstitutionalLiquidity('BUY')" class="w-full py-2.5 bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold text-xs rounded shadow transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> Kurumsal Alış Bloğu Koy (₺10M Likidite)
+                        </button>
+                        <button onclick="executeInstitutionalLiquidity('SELL')" class="w-full py-2.5 bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-slate-200 font-bold text-xs rounded shadow transition flex items-center justify-center gap-2 border border-slate-700">
+                            <i class="fa-solid fa-scale-balanced"></i> Portföy Dengeleme Satışı Yap (Rebalance)
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-1 font-mono text-xs">
+                        <button onclick="executeBlockTrade()" class="py-2 bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold rounded border border-amber-900/60 flex items-center justify-center gap-1">
+                            <i class="fa-solid fa-cubes"></i> OTC Blok İşlem
+                        </button>
+                        <button onclick="executeHedging()" class="py-2 bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold rounded border border-cyan-900/60 flex items-center justify-center gap-1">
+                            <i class="fa-solid fa-shield-halved"></i> VİOP Hedging
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ROLE 3: TVF YÖNETİCİSİ DASHBOARD -->
+                <div id="rolePanel-3" class="role-panel hidden bg-[#0f172a] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                            <i class="fa-solid fa-building-columns text-amber-400"></i> TVF Makro İstikrar Paneli
+                        </span>
+                        <span class="text-[10px] bg-amber-950 text-amber-400 px-1.5 py-0.5 rounded border border-amber-800">Kamu Fonu</span>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Siyah Kuğu şoklarında ve panik satışlarında kamu likiditesi sağlayarak BIST 100 endeksini destekleyin.
+                    </p>
+
+                    <button onclick="executeTVFMacroInject(5000000000)" class="w-full py-3 bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:to-amber-700 text-slate-950 font-black text-xs rounded shadow transition flex items-center justify-center gap-2 border border-amber-400/40">
+                        <i class="fa-solid fa-hand-holding-dollar text-base"></i> PİYASAYA ₺5 MİLYAR DESTEK ENJEKTE ET
+                    </button>
+
+                    <div class="space-y-2 pt-1 font-mono text-xs">
+                        <button onclick="executeTVFCompanyBuyback()" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded border border-slate-700 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-repeat text-amber-400"></i> Kamu Şirketi Pay Geri Alımı Yap (₺1B)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ROLE 4: SPK MÜFETTİŞİ DASHBOARD -->
+                <div id="rolePanel-4" class="role-panel hidden bg-[#0f172a] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                            <i class="fa-solid fa-gavel text-amber-500"></i> SPK Piyasa Gözetim Radarı
+                        </span>
+                        <span class="text-[10px] bg-blue-950 text-blue-400 px-1.5 py-0.5 rounded border border-blue-800">Düzenleyici</span>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Aşırı oynaklık tespiti durumunda Volatiliteye Dayalı Tedbir Sistemi (VBTS) tedbirlerini uygulayın.
+                    </p>
+
+                    <div class="space-y-2">
+                        <button onclick="applyVBTSMeasure('Brüt Takas')" class="w-full py-2 bg-amber-900/50 hover:bg-amber-900 text-amber-200 font-bold text-xs rounded border border-amber-700 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-ban"></i> Aktif Hissede Brüt Takas Uygula
+                        </button>
+                        <button onclick="applyVBTSMeasure('Kredili İşlem Yasağı')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs rounded border border-slate-700 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-lock"></i> Kredili İşlem Yasağı Getir
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-950 p-2 rounded-lg border border-slate-800 text-xs">
+                        <span class="text-[10px] font-bold text-slate-400 block mb-1">ŞÜPHELİ ANOMALİ RADARI</span>
+                        <div id="spkAuditQueue" class="space-y-1.5 max-h-[120px] overflow-y-auto">
+                            <!-- Dynamic SPK queue -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROLE 5: MASAK MÜFETTİŞİ DASHBOARD -->
+                <div id="rolePanel-5" class="role-panel hidden bg-[#0f172a] border border-slate-800 rounded-xl p-3.5 flex flex-col space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                            <i class="fa-solid fa-user-shield text-purple-400"></i> MASAK Mali Suç Denetimi
+                        </span>
+                        <span class="text-[10px] bg-purple-950 text-purple-400 px-1.5 py-0.5 rounded border border-purple-800">AML / ŞİB</span>
+                    </div>
+
+                    <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-xs space-y-2">
+                        <div class="flex justify-between items-center text-[11px]">
+                            <span class="text-slate-400 font-bold">ŞİB İNCELEME KUYRUĞU</span>
+                            <span class="text-purple-400 font-mono" id="masakPendingCount">2 Bekleyen</span>
+                        </div>
+                        <div id="masakAuditContainer" class="space-y-2">
+                            <!-- Dynamic MASAK items -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRANSACTION & ACTIVITY LOGS -->
+                <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-3 flex-1 flex flex-col min-h-[160px]">
+                    <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                            <i class="fa-solid fa-clock-rotate-left text-amber-500"></i> İşlem & Eylem Dökümü
+                        </span>
+                        <span class="text-[10px] font-mono text-slate-500" id="logCountText">0 kayıt</span>
+                    </div>
+
+                    <div class="flex-1 overflow-y-auto max-h-[180px] text-[11px] font-mono divide-y divide-slate-800/60" id="activityLogs">
+                        <div class="p-2 text-slate-500 italic text-center">Henüz bir işlem gerçekleştirilmedi.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= TAB 2: MACROECONOMY & PPK ENGINE ================= -->
+        <div id="panel-macro" class="tab-panel hidden flex-1 flex-col space-y-4 overflow-y-auto">
+            <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-5">
+                <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-4 mb-4 gap-4">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-amber-500"></i> TCMB Para Politikası Kurulu (PPK) & Makro Sürpriz Motoru
+                        </h2>
+                        <p class="text-xs text-slate-400">Faiz kararları, enflasyon beklentileri ve döviz kurları borsa hisse değerlemelerini doğrudan etkiler.</p>
+                    </div>
+                    <button onclick="triggerPPKMeeting()" class="px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold text-xs rounded-lg shadow">
+                        <i class="fa-solid fa-gavel mr-1.5"></i> Olağanüstü PPK Toplantısı Yap
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 font-mono">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400 block mb-1">TCMB Politika Faizi</span>
+                        <span class="text-2xl font-bold text-amber-400" id="macroTabRate">%45.00</span>
+                        <span class="text-[10px] text-slate-500 block mt-1">Son Değişim: 0 bps</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400 block mb-1">USD / TRY Kuru</span>
+                        <span class="text-2xl font-bold text-emerald-400" id="macroTabUsd">38.50 ₺</span>
+                        <span class="text-[10px] text-emerald-500 block mt-1">İhracatçıya Olumlu</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400 block mb-1">TÜFE Yıllık Enflasyon</span>
+                        <span class="text-2xl font-bold text-slate-100" id="macroTabCpi">%62.40</span>
+                        <span class="text-[10px] text-slate-400 block mt-1">Hedef: %35.00</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400 block mb-1">Yabancı Takas Payı</span>
+                        <span class="text-2xl font-bold text-cyan-400" id="macroTabForeign">%38.20</span>
+                        <span class="text-[10px] text-cyan-500 block mt-1">Giriş / Çıkış Takibi</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+                    <h3 class="text-xs font-bold text-slate-200 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-[#1e293b] fa-bolt text-red-500"></i> Siyah Kuğu & Jeopolitik Şok Simülatörü
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Beklenmedik makro krizler piyasada panik satışları tetikler ve Devre Kesicileri çalıştırır.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="triggerBlackSwan('GEOPOLITICAL')" class="px-3.5 py-2 bg-red-950 hover:bg-red-900 text-red-300 border border-red-800/60 rounded-lg text-xs font-semibold transition">
+                            <i class="fa-solid fa-plane-slash mr-1"></i> Jeopolitik Gerilim Şoku
+                        </button>
+                        <button onclick="triggerBlackSwan('CREDIT_RATING')" class="px-3.5 py-2 bg-cyan-950 hover:bg-cyan-900 text-cyan-300 border border-cyan-800/60 rounded-lg text-xs font-semibold transition">
+                            <i class="fa-solid fa-award mr-1"></i> Ülke Not Artırımı
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: HALKA ARZ (IPO) MARKET ================= -->
+        <div id="panel-ipo" class="tab-panel hidden flex-1 flex-col space-y-4 overflow-y-auto">
+            <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-rocket text-emerald-400"></i> BIST Halka Arz (IPO) Piyasası
+                        </h2>
+                        <p class="text-xs text-slate-400">Eşit dağıtım yöntemiyle talep toplayan yeni şirketleri inceleyin ve talep gönderin.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ipoCardsContainer">
+                    <!-- Dynamic IPO cards -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: CAPITAL ACTIONS & DIVIDENDS ================= -->
+        <div id="panel-capital" class="tab-panel hidden flex-1 flex-col space-y-4 overflow-y-auto">
+            <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-coins text-amber-500"></i> Sermaye Hareketleri & Temettü Takvimi
+                        </h2>
+                        <p class="text-xs text-slate-400">Nakit temettü ödemeleri (Ex-Dividend) ve Bedelsiz Sermaye Artırımı süreçleri.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Dividend Payouts -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                        <h3 class="text-xs font-bold text-slate-200 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-hand-holding-dollar text-emerald-400"></i> Yaklaşan Nakit Temettü Ödemeleri
+                        </h3>
+                        <div class="space-y-2 text-xs font-mono" id="dividendList">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Bonus Share Issues (Bedelsiz) -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                        <h3 class="text-xs font-bold text-slate-200 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-cyan-400"></i> Bedelsiz Sermaye Artırımları
+                        </h3>
+                        <div class="space-y-2 text-xs font-mono" id="bonusShareList">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 5: QUESTS & STORY MODE ================= -->
+        <div id="panel-quests" class="tab-panel hidden flex-1 flex-col space-y-4 overflow-y-auto">
+            <div class="bg-[#0f172a] border border-slate-800 rounded-xl p-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-trophy text-amber-500"></i> Rol Bazlı Kariyer Görevleri
+                        </h2>
+                        <p class="text-xs text-slate-400">Etik ve yasal sorumluluklarınızı yerine getirerek başarım rozetleri kazanın.</p>
+                    </div>
+                    <span class="text-xs font-mono font-bold text-amber-400" id="questProgressOverview">0 / 4 Tamamlandı</span>
+                </div>
+
+                <div class="space-y-3" id="roleQuestsContainer">
+                    <!-- Injected dynamically based on role -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ROLE & BUDGET SELECTOR MODAL -->
+    <div id="roleModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-[#0f172a] border border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                        <i class="fa-solid fa-users-gear text-amber-500"></i> Borsa İstanbul Ekosistem Rolü & Bütçe Seçimi
+                    </h2>
+                    <p class="text-xs text-slate-400">Etik kurallara uygun rolünüzü ve başlangıç sermayenizi belirleyin.</p>
+                </div>
+                <button onclick="closeRoleModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- Role 1 -->
+                <div onclick="selectModalRole(1)" id="cardRole-1" class="role-card p-3.5 rounded-xl border-2 border-amber-500 bg-slate-900/90 cursor-pointer hover:border-amber-400 transition">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xs text-slate-100">1. Küçük (Bireysel) Yatırımcı</h3>
+                            <span class="text-[10px] text-slate-400">Bireysel Portföy Yönetimi</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed mb-3">Disiplinli yatırım, temettü emekliliği ve risk dağıtımı ile hedeflerinize ulaşın.</p>
+                    <div class="space-y-1 font-mono text-[11px]" onclick="event.stopPropagation()">
+                        <label class="text-[10px] text-slate-400 font-sans block">Başlangıç Bütçesi:</label>
+                        <select id="budgetSelect-1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-200">
+                            <option value="25000">₺25.000 (Küçük Birikim)</option>
+                            <option value="150000" selected>₺150.000 (Maaşlı Çalışan)</option>
+                            <option value="1000000">₺1.000.000 (Varlıklı Bireysel)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Role 2 -->
+                <div onclick="selectModalRole(2)" id="cardRole-2" class="role-card p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 cursor-pointer hover:border-amber-400 transition">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xs text-slate-100">2. Kurumsal Portföy Yöneticisi</h3>
+                            <span class="text-[10px] text-slate-400">Yasal Etik Kurumsal Stratejiler</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed mb-3">Likidite sağlama, blok alım/satım, portföy rebalanslama ve VİOP hedging yürütün.</p>
+                    <div class="space-y-1 font-mono text-[11px]" onclick="event.stopPropagation()">
+                        <label class="text-[10px] text-slate-400 font-sans block">Başlangıç Bütçesi:</label>
+                        <select id="budgetSelect-2" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-200">
+                            <option value="100000000">₺100 Milyon Kurumsal Fon</option>
+                            <option value="500000000" selected>₺500 Milyon Likidite Fonu</option>
+                            <option value="2000000000">₺2 Milyar Dev Portföy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Role 3 -->
+                <div onclick="selectModalRole(3)" id="cardRole-3" class="role-card p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 cursor-pointer hover:border-amber-400 transition">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xs text-slate-100">3. Türkiye Varlık Fonu (TVF)</h3>
+                            <span class="text-[10px] text-slate-400">Kamu Sermayesi & Piyasa Desteği</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed mb-3">Siyah Kuğu krizlerinde piyasaya destek likiditesi verin ve BIST 100 istikrarını koruyun.</p>
+                    <div class="space-y-1 font-mono text-[11px]" onclick="event.stopPropagation()">
+                        <label class="text-[10px] text-slate-400 font-sans block">Başlangıç Bütçesi:</label>
+                        <select id="budgetSelect-3" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-200">
+                            <option value="25000000000">₺25 Milyar Kamu Fonu</option>
+                            <option value="100000000000" selected>₺100 Milyar Devlet Fonu</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Role 4 -->
+                <div onclick="selectModalRole(4)" id="cardRole-4" class="role-card p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 cursor-pointer hover:border-amber-400 transition">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-gavel"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xs text-slate-100">4. SPK Piyasa Gözetim Müfettişi</h3>
+                            <span class="text-[10px] text-slate-400">Gözetim & Yaptırım Otoritesi</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed mb-3">Anomalileri denetleyin, Volatiliteye Dayalı Tedbir Sistemi (VBTS) tedbirleri uygulayın.</p>
+                    <div class="text-[10px] text-blue-400 font-mono font-bold">Bütçe Yok (Kamu Denetim Yetkisi)</div>
+                </div>
+
+                <!-- Role 5 -->
+                <div onclick="selectModalRole(5)" id="cardRole-5" class="role-card p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 cursor-pointer hover:border-amber-400 transition md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xs text-slate-100">5. MASAK & Aracı Kurum İç Teftiş</h3>
+                            <span class="text-[10px] text-slate-400">Mali Suçlar & AML Denetimi</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">Şüpheli İşlem Bildirimlerini (ŞİB) inceleyin ve finansal uyum kararları uygulayın.</p>
+                </div>
+            </div>
+
+            <button onclick="confirmRoleAndStart()" class="w-full py-3 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-play"></i> Seçilen Rol İle Oyuna Başla
+            </button>
+        </div>
+    </div>
+
+    <!-- DEVRE KESİCİ OVERLAY MODAL -->
+    <div id="circuitBreakerModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-[#0f172a] border-2 border-red-600 rounded-2xl p-6 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-red-600 animate-pulse"></div>
+            
+            <div class="w-16 h-16 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-3 border border-red-500/40">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h2 class="text-lg font-bold text-white tracking-wide">DEVRE KESİCİ UYGULANDI</h2>
+            <p class="text-xs text-slate-300 mt-1" id="circuitModalStock">Aşırı volatilite tespit edildi.</p>
+
+            <div class="my-4 bg-slate-950 border border-slate-800 p-3 rounded-lg font-mono text-xs text-slate-300 space-y-1">
+                <div>Durum: <span class="text-amber-400 font-bold">Tek Fiyat Seansı (Emir Toplama)</span></div>
+                <div>Kalan Süre: <span class="text-red-400 font-bold text-sm" id="circuitCountdown">15 saniye</span></div>
+            </div>
+
+            <button onclick="closeCircuitModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-lg text-xs transition border border-slate-700">
+                Anlaşıldı (Terminali İzle)
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT APPLICATION ENGINE -->
+    <script>
+        /* ================= GAME STATE & ASSETS ================= */
+        let selectedModalRoleId = 1;
+
+        const gameState = {
+            roleId: 1, // 1: Retail, 2: Institutional, 3: TVF, 4: SPK, 5: MASAK
+            cash: 150000.00,
+            initialCash: 150000.00,
+            activeStock: 'THYAO',
+            chartType: 'CANDLE',
+            orderSide: 'BUY',
+            speedMultiplier: 1,
+            audioEnabled: true,
+            spkScore: 100,
+            masakPendingCount: 2,
+            simTime: new Date(2026, 3, 20, 10, 0, 0),
+            holdings: {},
+            activityLogs: [],
+            circuitBreakerActive: false,
+            circuitCountdown: 15,
+            circuitInterval: null,
+            macroConfidence: 85,
+            spkRiskLevel: 12,
+            
+            // Macro State
+            tcmbRate: 45.00,
+            usdTry: 38.50,
+            cpiInflation: 62.40,
+            foreignRatio: 38.20
+        };
+
+        const stocks = {
+            'THYAO': { name: 'Türk Hava Yolları A.O.', sector: 'Havacılık', market: 'Yıldız Pazar', price: 284.50, prevClose: 280.00, volume: 1420000000, history: [], candles: [], volatility: 0.008, vbts: null, isExporter: true },
+            'TCELL': { name: 'Turkcell İletişim', sector: 'İletişim', market: 'Yıldız Pazar', price: 96.20, prevClose: 95.00, volume: 680000000, history: [], candles: [], volatility: 0.006, vbts: null, isExporter: false },
+            'GARAN': { name: 'Garanti BBVA A.Ş.', sector: 'Bankacılık', market: 'Yıldız Pazar', price: 112.40, prevClose: 110.00, volume: 2100000000, history: [], candles: [], volatility: 0.009, vbts: null, isExporter: false },
+            'EREGL': { name: 'Ereğli Demir Çelik', sector: 'Sanayi', market: 'Ana Pazar', price: 53.10, prevClose: 54.00, volume: 540000000, history: [], candles: [], volatility: 0.007, vbts: 'Brüt Takas', isExporter: true },
+            'TUPRS': { name: 'Tüpraş Petrol Rafineleri', sector: 'Enerji', market: 'Yıldız Pazar', price: 178.90, prevClose: 176.00, volume: 1100000000, history: [], candles: [], volatility: 0.0085, vbts: null, isExporter: true },
+            'XU100': { name: 'BIST 100 Endeksi', sector: 'Endeks', market: 'Piyasa', price: 9840.50, prevClose: 9750.00, volume: 12500000000, history: [], candles: [], volatility: 0.004, vbts: null, isExporter: false }
+        };
+
+        const ipoList = [
+            { id: 'XYZ-TECH', name: 'XYZ Teknoloji A.Ş.', sector: 'Yazılım', price: 24.50, totalLots: 10000000, method: 'Eşit Dağıtım', desc: 'Yapay zeka ve bulut çözümleri geliştiren teknoloji şirketi.', applied: false },
+            { id: 'ABC-ENRG', name: 'ABC Yenilenebilir Enerji', sector: 'Enerji', price: 18.20, totalLots: 25000000, method: 'Eşit Dağıtım', desc: 'Güneş ve rüzgar santrali yatırımları.', applied: false }
+        ];
+
+        const dividends = [
+            { stock: 'TUPRS', amountPerShare: 10.50, date: '2026-04-25', status: 'Bekleniyor' },
+            { stock: 'GARAN', amountPerShare: 3.20, date: '2026-05-10', status: 'Bekleniyor' }
+        ];
+
+        const bonusShares = [
+            { stock: 'THYAO', ratioPct: 200, date: '2026-05-02', status: 'Sermaye Tescil Aşamasında' }
+        ];
+
+        const spkSuspiciousQueue = [
+            { id: 'ANOM-101', stock: 'EREGL', pattern: 'Ani Lot Yığılması', lots: 250000 },
+            { id: 'ANOM-102', stock: 'GARAN', pattern: 'Süreç İçi Hızlı Frekans', lots: 180000 }
+        ];
+
+        const masakAuditQueue = [
+            { id: 'MSK-701', account: 'Alpha Holdings (OTC Transf.)', sum: '₺65.000.000', detail: 'Yabancı saklama hesabından ani virman' },
+            { id: 'MSK-702', account: 'Kaya Yatırım Fonu', sum: '₺110.000.000', detail: 'Kaynağı açıklanmamış blok fon girişi' }
+        ];
+
+        const roleQuests = {
+            1: [
+                { id: 101, title: 'Temettü Portföyü Kur', desc: 'En az 1 adet temettü ödeyen hissedem pozisyon açın.', done: false },
+                { id: 102, title: 'Disiplinli Finansal Hedef', desc: 'Toplam portföy büyüklüğünüzü ₺200.000 üzerine çıkarın.', done: false }
+            ],
+            2: [
+                { id: 201, title: 'Kurumsal Likidite Sağla', desc: 'Piyasaya en az ₺10M kurumsal alım bloğu yerleştirin.', done: false },
+                { id: 202, title: 'VİOP Hedging', desc: 'Portföy riskini azaltmak için VİOP korunma işlemini uygulayın.', done: false }
+            ],
+            3: [
+                { id: 301, title: 'Piyasa Destek Enjeksiyonu', desc: 'Kamu likidite müdahalesi ile BIST 100 istikrarını destekleyin.', done: false }
+            ],
+            4: [
+                { id: 401, title: 'VBTS Tedbiri Uygula', desc: 'Aşırı oynaklık gösteren bir hisseye Brüt Takas getirin.', done: false }
+            ],
+            5: [
+                { id: 501, title: 'ŞİB İncelemesini Tamamla', desc: 'MASAK kuyruğundaki şüpheli hesap dosyasını karara bağlayın.', done: false }
+            ]
+        };
+
+        /* ================= SYNTHESIZED AUDIO ENGINE (WEB AUDIO API) ================= */
+        let audioCtx = null;
+        function playSound(type) {
+            if (!gameState.audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'buy') {
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'sell') {
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.12);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'gavel') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(130, now);
+                    osc.frequency.exponentialRampToValueAtTime(35, now + 0.22);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
+                    osc.start(now);
+                    osc.stop(now + 0.22);
+                } else if (type === 'alarm') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(750, now);
+                    osc.frequency.linearRampToValueAtTime(380, now + 0.28);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+                    osc.start(now);
+                    osc.stop(now + 0.28);
+                }
+            } catch(e) { console.error(e); }
+        }
+
+        function toggleAudio() {
+            gameState.audioEnabled = !gameState.audioEnabled;
+            const icon = document.getElementById('audioIcon');
+            icon.className = gameState.audioEnabled ? "fa-solid fa-volume-high text-amber-500" : "fa-solid fa-volume-xmark text-slate-500";
+            showToast(gameState.audioEnabled ? "Ses efektleri açık." : "Ses efektleri kapalı.", "info");
+        }
+
+        function toggleSpeed() {
+            if (gameState.speedMultiplier === 1) gameState.speedMultiplier = 2;
+            else if (gameState.speedMultiplier === 2) gameState.speedMultiplier = 5;
+            else gameState.speedMultiplier = 1;
+            document.getElementById('speedBtn').innerText = `Hız: ${gameState.speedMultiplier}x`;
+        }
+
+        /* ================= INITIALIZATION & TICK LOOP ================= */
+        window.onload = function() {
+            // Generate Candle Data History
+            Object.keys(stocks).forEach(ticker => {
+                let p = stocks[ticker].prevClose;
+                for (let i = 0; i < 40; i++) {
+                    let openP = p;
+                    let delta = (Math.random() - 0.49) * stocks[ticker].volatility * p;
+                    let closeP = parseFloat(Math.max(1.0, openP + delta).toFixed(2));
+                    let highP = Math.max(openP, closeP) + Math.random() * 0.3;
+                    let lowP = Math.min(openP, closeP) - Math.random() * 0.3;
+
+                    stocks[ticker].candles.push({ open: openP, high: highP, low: lowP, close: closeP });
+                    stocks[ticker].history.push(closeP);
+                    p = closeP;
+                }
+                stocks[ticker].price = p;
+            });
+
+            renderWatchlist();
+            renderDepthBook();
+            renderIPOCards();
+            renderDividendsAndBonus();
+            renderQuests();
+            renderSPKAuditQueue();
+            renderMASAKAuditQueue();
+            updateRoleHUD();
+
+            window.addEventListener('resize', renderChart);
+            setTimeout(renderChart, 100);
+
+            // Start Main Engine Loop (1 second tick)
+            setInterval(simulationTick, 1000);
+        };
+
+        function simulationTick() {
+            if (gameState.circuitBreakerActive) return;
+
+            // Increment Clock
+            gameState.simTime.setSeconds(gameState.simTime.getSeconds() + gameState.speedMultiplier);
+            document.getElementById('marketClock').innerText = gameState.simTime.toTimeString().split(' ')[0];
+
+            let xu100Sum = 0;
+            let stockCount = 0;
+
+            // Update Asset Prices
+            Object.keys(stocks).forEach(ticker => {
+                if (ticker === 'XU100') return;
+
+                const s = stocks[ticker];
+                let openP = s.price;
+                
+                // Macro Drift Adjustments
+                let macroDrift = 0;
+                if (s.isExporter && gameState.usdTry > 38.5) macroDrift += 0.001; // Exporter benefit
+                if (gameState.tcmbRate > 45) macroDrift -= 0.0012; // Rate pressure
+
+                let delta = (Math.random() - 0.488 + macroDrift) * s.volatility * s.price * (gameState.speedMultiplier * 0.8);
+                let closeP = parseFloat(Math.max(1.0, openP + delta).toFixed(2));
+                let highP = Math.max(openP, closeP) + Math.random() * 0.2;
+                let lowP = Math.min(openP, closeP) - Math.random() * 0.2;
+
+                s.price = closeP;
+                s.volume += Math.floor(Math.random() * 30000) * s.price;
+
+                s.candles.push({ open: openP, high: highP, low: lowP, close: closeP });
+                if (s.candles.length > 50) s.candles.shift();
+
+                s.history.push(s.price);
+                if (s.history.length > 80) s.history.shift();
+
+                // Circuit Breaker check (>7% drop in last 8 ticks)
+                if (s.history.length > 8) {
+                    const prev8 = s.history[s.history.length - 8];
+                    if (((prev8 - s.price) / prev8) > 0.07 && !s.circuitTriggered) {
+                        triggerCircuitBreaker(ticker);
+                    }
+                }
+
+                xu100Sum += ((s.price - s.prevClose) / s.prevClose);
+                stockCount++;
+            });
+
+            // Update Index XU100
+            const avgChange = xu100Sum / stockCount;
+            const xu = stocks['XU100'];
+            xu.price = parseFloat((xu.prevClose * (1 + avgChange)).toFixed(2));
+            xu.history.push(xu.price);
+            if (xu.history.length > 80) xu.history.shift();
+
+            // Refresh Interface
+            renderWatchlist();
+            renderTopTicker();
+            renderDepthBook();
+            updateActiveStockHeader();
+            renderChart();
+            updateRoleHUD();
+            checkQuestsProgress();
+        }
+
+        /* ================= UI RENDERING & TICKER ================= */
+        function renderTopTicker() {
+            const container = document.getElementById('topTickerContainer');
+            let html = '';
+            Object.keys(stocks).forEach(t => {
+                const s = stocks[t];
+                const diff = s.price - s.prevClose;
+                const pct = ((diff / s.prevClose) * 100).toFixed(2);
+                const color = diff >= 0 ? 'text-emerald-400' : 'text-red-400';
+
+                html += `
+                    <div class="inline-flex items-center space-x-1 cursor-pointer hover:bg-slate-800/60 px-1.5 py-0.5 rounded" onclick="selectStock('${t}')">
+                        <span class="font-bold text-slate-200">${t}</span>
+                        <span class="${color}">${s.price.toFixed(2)}</span>
+                        <span class="${color} text-[10px]">${diff >= 0 ? '+' : ''}${pct}%</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderWatchlist() {
+            const container = document.getElementById('stockWatchlist');
+            let html = '';
+            Object.keys(stocks).forEach(t => {
+                const s = stocks[t];
+                const diff = s.price - s.prevClose;
+                const pct = ((diff / s.prevClose) * 100).toFixed(2);
+                const isSelected = t === gameState.activeStock;
+                const activeBg = isSelected ? 'bg-slate-800/90 border-l-4 border-amber-500' : 'hover:bg-slate-800/40';
+                const color = diff >= 0 ? 'text-emerald-400' : 'text-red-400';
+
+                html += `
+                    <div onclick="selectStock('${t}')" class="p-2.5 transition cursor-pointer flex items-center justify-between ${activeBg}">
+                        <div>
+                            <div class="font-bold text-xs text-slate-100 flex items-center gap-1 font-mono">
+                                ${t}
+                                ${s.vbts ? `<span class="bg-amber-950 text-amber-400 text-[9px] px-1 rounded border border-amber-800/50">${s.vbts}</span>` : ''}
+                            </div>
+                            <div class="text-[10px] text-slate-400 truncate max-w-[120px]">${s.name}</div>
+                        </div>
+                        <div class="text-right font-mono">
+                            <div class="text-xs font-bold text-slate-200">${s.price.toFixed(2)} ₺</div>
+                            <div class="text-[10px] ${color} font-semibold">${diff >= 0 ? '+' : ''}${pct}%</div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function selectStock(ticker) {
+            gameState.activeStock = ticker;
+            renderWatchlist();
+            updateActiveStockHeader();
+            renderDepthBook();
+            renderChart();
+            calcRetailTotal();
+        }
+
+        function updateActiveStockHeader() {
+            const s = stocks[gameState.activeStock];
+            document.getElementById('activeTickerCode').innerText = gameState.activeStock;
+            document.getElementById('activeTickerName').innerText = s.name;
+            document.getElementById('activeTickerSector').innerText = s.sector;
+            document.getElementById('activeTickerMarket').innerText = s.market;
+
+            const diff = s.price - s.prevClose;
+            const pct = ((diff / s.prevClose) * 100).toFixed(2);
+            const color = diff >= 0 ? 'text-emerald-400' : 'text-red-400';
+
+            document.getElementById('activeTickerPrice').innerText = `${s.price.toFixed(2)} ₺`;
+            document.getElementById('activeTickerPrice').className = `text-xl font-bold ${color}`;
+            document.getElementById('activeTickerChange').innerText = `${diff >= 0 ? '+' : ''}${pct}%`;
+            document.getElementById('activeTickerChange').className = `text-sm font-semibold ${color}`;
+            document.getElementById('activeTickerVolume').innerText = `${(s.volume / 1000000).toFixed(1)}M ₺`;
+            document.getElementById('depthVbtsStatus').innerText = s.vbts ? `VBTS: ${s.vbts}` : "Normal Seans";
+        }
+
+        function renderDepthBook() {
+            const s = stocks[gameState.activeStock];
+            const bidContainer = document.getElementById('bidRows');
+            const askContainer = document.getElementById('askRows');
+
+            let bidHtml = '';
+            let askHtml = '';
+
+            for (let i = 1; i <= 5; i++) {
+                const bidP = (s.price - (i * 0.05)).toFixed(2);
+                const askP = (s.price + (i * 0.05)).toFixed(2);
+
+                bidHtml += `
+                    <div class="grid grid-cols-3 depth-bid p-1 rounded text-slate-300">
+                        <span class="text-slate-500">${Math.floor(Math.random()*6)+1}</span>
+                        <span class="text-center font-bold">${Math.floor(Math.random()*4000)+500}</span>
+                        <span class="text-right text-emerald-400 font-bold">${bidP}</span>
+                    </div>
+                `;
+
+                askHtml += `
+                    <div class="grid grid-cols-3 depth-ask p-1 rounded text-slate-300">
+                        <span class="text-red-400 font-bold">${askP}</span>
+                        <span class="text-center font-bold">${Math.floor(Math.random()*4000)+500}</span>
+                        <span class="text-right text-slate-500">${Math.floor(Math.random()*6)+1}</span>
+                    </div>
+                `;
+            }
+
+            bidContainer.innerHTML = bidHtml;
+            askContainer.innerHTML = askHtml;
+        }
+
+        /* ================= HTML5 CANVAS CHART ENGINE ================= */
+        function setChartType(type) {
+            gameState.chartType = type;
+            document.getElementById('btnChartCandle').className = type === 'CANDLE' ? "px-2.5 py-1 rounded bg-slate-800 text-amber-400 font-semibold border border-slate-700" : "px-2.5 py-1 rounded text-slate-400 hover:text-slate-200";
+            document.getElementById('btnChartLine').className = type === 'LINE' ? "px-2.5 py-1 rounded bg-slate-800 text-amber-400 font-semibold border border-slate-700" : "px-2.5 py-1 rounded text-slate-400 hover:text-slate-200";
+            renderChart();
+        }
+
+        function renderChart() {
+            const canvas = document.getElementById('stockCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const rect = canvas.parentElement.getBoundingClientRect();
+
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const s = stocks[gameState.activeStock];
+            const candles = s.candles;
+            if (!candles || candles.length < 2) return;
+
+            const paddingBottom = 25;
+            const paddingTop = 15;
+            const chartHeight = height - paddingBottom - paddingTop;
+
+            let minP = Math.min(...candles.map(c => c.low)) * 0.997;
+            let maxP = Math.max(...candles.map(c => c.high)) * 1.003;
+            let range = maxP - minP;
+
+            // Grid Lines
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 4]);
+
+            for (let i = 1; i <= 4; i++) {
+                const y = paddingTop + (chartHeight / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+
+                const val = maxP - (range / 4) * i;
+                ctx.fillStyle = '#64748b';
+                ctx.font = '10px monospace';
+                ctx.fillText(val.toFixed(2), width - 42, y - 3);
+            }
+            ctx.setLineDash([]);
+
+            const candleWidth = (width - 50) / candles.length;
+
+            if (gameState.chartType === 'CANDLE') {
+                for (let i = 0; i < candles.length; i++) {
+                    const c = candles[i];
+                    const x = i * candleWidth + candleWidth / 2;
+                    const isUp = c.close >= c.open;
+                    const color = isUp ? '#10b981' : '#ef4444';
+
+                    const yOpen = paddingTop + chartHeight - ((c.open - minP) / range) * chartHeight;
+                    const yClose = paddingTop + chartHeight - ((c.close - minP) / range) * chartHeight;
+                    const yHigh = paddingTop + chartHeight - ((c.high - minP) / range) * chartHeight;
+                    const yLow = paddingTop + chartHeight - ((c.low - minP) / range) * chartHeight;
+
+                    // Wick
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 1.2;
+                    ctx.beginPath();
+                    ctx.moveTo(x, yHigh);
+                    ctx.lineTo(x, yLow);
+                    ctx.stroke();
+
+                    // Body
+                    ctx.fillStyle = color;
+                    const bodyY = Math.min(yOpen, yClose);
+                    const bodyH = Math.max(2, Math.abs(yClose - yOpen));
+                    ctx.fillRect(x - (candleWidth * 0.35), bodyY, candleWidth * 0.7, bodyH);
+                }
+            } else {
+                ctx.beginPath();
+                for (let i = 0; i < candles.length; i++) {
+                    const x = i * candleWidth + candleWidth / 2;
+                    const y = paddingTop + chartHeight - ((candles[i].close - minP) / range) * chartHeight;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = candles[candles.length - 1].close >= candles[0].close ? '#10b981' : '#ef4444';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            // MA20
+            if (document.getElementById('chkMA20').checked && candles.length >= 5) {
+                ctx.beginPath();
+                ctx.strokeStyle = '#f59e0b';
+                ctx.lineWidth = 1.5;
+                for (let i = 4; i < candles.length; i++) {
+                    const maVal = (candles[i].close + candles[i-1].close + candles[i-2].close + candles[i-3].close + candles[i-4].close) / 5;
+                    const maY = paddingTop + chartHeight - ((maVal - minP) / range) * chartHeight;
+                    const maX = i * candleWidth + candleWidth / 2;
+                    if (i === 4) ctx.moveTo(maX, maY);
+                    else ctx.lineTo(maX, maY);
+                }
+                ctx.stroke();
+            }
+
+            // MA50
+            if (document.getElementById('chkMA50').checked && candles.length >= 10) {
+                ctx.beginPath();
+                ctx.strokeStyle = '#06b6d4';
+                ctx.lineWidth = 1.5;
+                for (let i = 9; i < candles.length; i++) {
+                    let sum = 0;
+                    for(let k=0; k<10; k++) sum += candles[i-k].close;
+                    const maVal = sum / 10;
+                    const maY = paddingTop + chartHeight - ((maVal - minP) / range) * chartHeight;
+                    const maX = i * candleWidth + candleWidth / 2;
+                    if (i === 9) ctx.moveTo(maX, maY);
+                    else ctx.lineTo(maX, maY);
+                }
+                ctx.stroke();
+            }
+        }
+
+        /* ================= ROLE HUD & MODAL SWITCHER ================= */
+        function selectModalRole(roleId) {
+            selectedModalRoleId = roleId;
+            document.querySelectorAll('.role-card').forEach(c => {
+                c.className = "role-card p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 cursor-pointer hover:border-amber-400 transition";
+            });
+            document.getElementById(`cardRole-${roleId}`).className = "role-card p-3.5 rounded-xl border-2 border-amber-500 bg-slate-900/90 cursor-pointer hover:border-amber-400 transition";
+        }
+
+        function openRoleModal() { document.getElementById('roleModal').classList.remove('hidden'); }
+        function closeRoleModal() { document.getElementById('roleModal').classList.add('hidden'); }
+
+        function confirmRoleAndStart() {
+            gameState.roleId = selectedModalRoleId;
+
+            if (gameState.roleId === 1) gameState.cash = parseFloat(document.getElementById('budgetSelect-1').value);
+            else if (gameState.roleId === 2) gameState.cash = parseFloat(document.getElementById('budgetSelect-2').value);
+            else if (gameState.roleId === 3) gameState.cash = parseFloat(document.getElementById('budgetSelect-3').value);
+            else gameState.cash = 0;
+
+            gameState.initialCash = gameState.cash;
+
+            document.querySelectorAll('.role-panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`rolePanel-${gameState.roleId}`).classList.remove('hidden');
+
+            updateRoleBadge();
+            updateRoleHUD();
+            renderQuests();
+            closeRoleModal();
+
+            showToast(`Rol Aktifleştirildi: ${getRoleName(gameState.roleId)}`, "success");
+            logActivity(`Rol seçildi: ${getRoleName(gameState.roleId)} (Bütçe: ₺${gameState.cash.toLocaleString()})`);
+        }
+
+        function getRoleName(id) {
+            return ['', 'Küçük Yatırımcı', 'Kurumsal Portföy Yöneticisi', 'TVF Yöneticisi', 'SPK Müfettişi', 'MASAK Denetçisi'][id] || '';
+        }
+
+        function updateRoleBadge() {
+            const badge = document.getElementById('roleBadge');
+            const sub = document.getElementById('roleSubtitle');
+
+            if (gameState.roleId === 1) {
+                badge.innerText = "Küçük Yatırımcı";
+                badge.className = "text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold bg-amber-950 text-amber-400 border border-amber-800/60";
+                sub.innerText = "Bireysel Finansal Özgürlük & Portföy Yönetimi";
+            } else if (gameState.roleId === 2) {
+                badge.innerText = "Kurumsal Yöneticisi";
+                badge.className = "text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold bg-blue-950 text-blue-400 border border-blue-800/60";
+                sub.innerText = "Yasal Kurumsal Stratejiler & Likidite Yönetimi";
+            } else if (gameState.roleId === 3) {
+                badge.innerText = "TVF Yöneticisi";
+                badge.className = "text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold bg-amber-900 text-amber-300 border border-amber-600";
+                sub.innerText = "Kamu Sermayesi & Piyasa Desteği";
+            } else if (gameState.roleId === 4) {
+                badge.innerText = "SPK Müfettişi";
+                badge.className = "text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold bg-blue-950 text-blue-400 border border-blue-800/60";
+                sub.innerText = "VBTS Gözetim & Düzenleme Otoritesi";
+            } else if (gameState.roleId === 5) {
+                badge.innerText = "MASAK Müfettişi";
+                badge.className = "text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold bg-purple-950 text-purple-400 border border-purple-800/60";
+                sub.innerText = "Mali Suçlar & AML İncelemeleri";
+            }
+        }
+
+        function updateRoleHUD() {
+            const container = document.getElementById('roleMetricsHUD');
+            let html = '';
+
+            if (gameState.roleId <= 3) {
+                let stockVal = 0;
+                Object.keys(gameState.holdings).forEach(t => { stockVal += gameState.holdings[t].lots * stocks[t].price; });
+                const totalEquity = gameState.cash + stockVal;
+                const profit = totalEquity - gameState.initialCash;
+
+                html = `
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">NAKİT BAKİYE</span>
+                        <span class="text-emerald-400 font-bold">₺${gameState.cash.toLocaleString('tr-TR', {maximumFractionDigits:0})}</span>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">TOPLAM VARLIK</span>
+                        <span class="text-slate-100 font-bold">₺${totalEquity.toLocaleString('tr-TR', {maximumFractionDigits:0})}</span>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">KÂR / ZARAR</span>
+                        <span class="${profit >= 0 ? 'text-emerald-400' : 'text-red-400'} font-bold">${profit >= 0 ? '+' : ''}₺${profit.toLocaleString('tr-TR', {maximumFractionDigits:0})}</span>
+                    </div>
+                `;
+            } else if (gameState.roleId === 4) {
+                html = `
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">GÖZETİM PRESTİJ PUANI</span>
+                        <span class="text-amber-400 font-bold text-sm">${gameState.spkScore} Puan</span>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">AKTİF VBTS TEDBİRİ</span>
+                        <span class="text-blue-400 font-bold">1 Şirket</span>
+                    </div>
+                `;
+            } else if (gameState.roleId === 5) {
+                html = `
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">BEKLEYEN ŞİB DOSYASI</span>
+                        <span class="text-purple-400 font-bold text-sm">${gameState.masakPendingCount} Dosya</span>
+                    </div>
+                    <div class="h-6 w-px bg-slate-800"></div>
+                    <div>
+                        <span class="text-slate-400 block text-[9px]">UYUM SKORU</span>
+                        <span class="text-emerald-400 font-bold">%99.1</span>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        /* ================= TRADING & ROLE ACTIONS ================= */
+        function setOrderSide(side) {
+            gameState.orderSide = side;
+            document.getElementById('btnOrderBuy').className = side === 'BUY' ? "py-2 text-xs font-bold rounded bg-emerald-600 text-white shadow border border-emerald-500/50" : "py-2 text-xs font-bold rounded bg-slate-800 text-slate-400 border border-slate-700";
+            document.getElementById('btnOrderSell').className = side === 'SELL' ? "py-2 text-xs font-bold rounded bg-red-600 text-white shadow border border-red-500/50" : "py-2 text-xs font-bold rounded bg-slate-800 text-slate-400 border border-slate-700";
+        }
+
+        function setRetailMaxLots() {
+            const stock = stocks[gameState.activeStock];
+            if (gameState.orderSide === 'BUY') {
+                const maxLots = Math.floor((gameState.cash * 0.99) / stock.price);
+                document.getElementById('retailLotInput').value = Math.max(1, maxLots);
+            } else {
+                const holding = gameState.holdings[gameState.activeStock];
+                document.getElementById('retailLotInput').value = holding ? holding.lots : 0;
+            }
+            calcRetailTotal();
+        }
+
+        function calcRetailTotal() {
+            const stock = stocks[gameState.activeStock];
+            const lots = parseInt(document.getElementById('retailLotInput').value) || 0;
+            const total = lots * stock.price;
+            const comm = total * 0.0005;
+
+            document.getElementById('retailEstTotal').innerText = `${total.toLocaleString('tr-TR', {minimumFractionDigits:2})} ₺`;
+            document.getElementById('retailCommission').innerText = `${comm.toFixed(2)} ₺`;
+        }
+
+        function executeRetailOrder() {
+            const ticker = gameState.activeStock;
+            const stock = stocks[ticker];
+            const lots = parseInt(document.getElementById('retailLotInput').value);
+
+            if (!lots || lots <= 0) { showToast("Geçerli bir lot miktarı giriniz.", "error"); return; }
+
+            const total = lots * stock.price;
+            const comm = total * 0.0005;
+
+            if (gameState.orderSide === 'BUY') {
+                if (gameState.cash < (total + comm)) { showToast("Yetersiz Nakit Bakiye!", "error"); return; }
+                gameState.cash -= (total + comm);
+
+                if (!gameState.holdings[ticker]) gameState.holdings[ticker] = { lots: 0, avgCost: 0 };
+                const curr = gameState.holdings[ticker];
+                const newLots = curr.lots + lots;
+                curr.avgCost = ((curr.lots * curr.avgCost) + total) / newLots;
+                curr.lots = newLots;
+
+                playSound('buy');
+                showToast(`${lots} Lot ${ticker} alındı.`, "success");
+                logActivity(`ALIŞ: ${lots} Lot ${ticker} @ ${stock.price.toFixed(2)} ₺`);
+            } else {
+                const curr = gameState.holdings[ticker];
+                if (!curr || curr.lots < lots) { showToast("Hesabınızda yeterli hisse yok!", "error"); return; }
+                curr.lots -= lots;
+                if (curr.lots === 0) delete gameState.holdings[ticker];
+
+                gameState.cash += (total - comm);
+                playSound('sell');
+                showToast(`${lots} Lot ${ticker} satıldı.`, "success");
+                logActivity(`SATIŞ: ${lots} Lot ${ticker} @ ${stock.price.toFixed(2)} ₺`);
+            }
+
+            updateRoleHUD();
+        }
+
+        // ROLE 2: INSTITUTIONAL ACTIONS
+        function executeInstitutionalLiquidity(side) {
+            const stock = stocks[gameState.activeStock];
+            const amount = 10000000; // 10M TL
+
+            if (side === 'BUY') {
+                if (gameState.cash < amount) { showToast("Kurumsal fon bakiyesi yetersiz!", "error"); return; }
+                gameState.cash -= amount;
+                stock.price = parseFloat((stock.price * 1.015).toFixed(2));
+                
+                playSound('buy');
+                showToast(`Kurumsal Likidite Alım Bloğu Koyuldu (₺10M).`, "success");
+                logActivity(`KURUMSAL ALIM: ${gameState.activeStock} tahtasına ₺10M likidite sağlandı.`);
+            } else {
+                stock.price = parseFloat((stock.price * 0.985).toFixed(2));
+                gameState.cash += amount;
+
+                playSound('sell');
+                showToast(`Portföy Rebalanslama Satışı Yapıldı.`, "info");
+                logActivity(`KURUMSAL SATIŞ: ${gameState.activeStock} portföy ağırlığı düşürüldü.`);
+            }
+
+            renderChart();
+            updateActiveStockHeader();
+            updateRoleHUD();
+        }
+
+        function executeBlockTrade() {
+            playSound('buy');
+            showToast("OTC Blok İşlem Takası Tamamlandı.", "success");
+            logActivity("OTC BLOK İŞLEM: 50.000 Lot Kurumsal Virman Gerçekleşti.");
+        }
+
+        function executeHedging() {
+            playSound('sell');
+            showToast("VİOP Endeks Kontratları ile Hedging Korunması Sağlandı.", "info");
+            logActivity("VİOP HEDGE: Portföy riski vadeli kontratlarla korumaya alındı.");
+        }
+
+        // ROLE 3: TVF ACTIONS
+        function executeTVFMacroInject(amount) {
+            Object.keys(stocks).forEach(t => {
+                if (t === 'XU100') return;
+                stocks[t].price = parseFloat((stocks[t].price * 1.03).toFixed(2));
+            });
+
+            gameState.macroConfidence = Math.min(100, gameState.macroConfidence + 12);
+            document.getElementById('gaugeConfidenceBar').style.width = `${gameState.macroConfidence}%`;
+
+            playSound('buy');
+            showToast("TVF ₺5 Milyar Kamu Desteği Enjekte Etti! Piyasa Canlandı.", "success");
+            logActivity("TVF MÜDAHALESİ: BIST 100 endeksine ₺5.000.000.000 kamu desteği aktarıldı.");
+
+            renderChart();
+            renderWatchlist();
+            updateActiveStockHeader();
+        }
+
+        function executeTVFCompanyBuyback() {
+            const publicStocks = ['THYAO', 'GARAN', 'TUPRS'];
+            const target = publicStocks[Math.floor(Math.random() * publicStocks.length)];
+            stocks[target].price = parseFloat((stocks[target].price * 1.035).toFixed(2));
+
+            playSound('buy');
+            showToast(`TVF ${target} hissesinde ₺1 Milyar Pay Geri Alımı Yaptı.`, "success");
+            logActivity(`TVF PAY GERİ ALIM: ₺1B ${target} alımı gerçekleştirildi.`);
+
+            renderChart();
+            updateActiveStockHeader();
+        }
+
+        // ROLE 4: SPK ACTIONS
+        function applyVBTSMeasure(measure) {
+            const stock = stocks[gameState.activeStock];
+            stock.vbts = measure;
+
+            playSound('gavel');
+            showToast(`${gameState.activeStock} hissesine SPK tarafından '${measure}' uygulandı.`, "info");
+            logActivity(`SPK YAPTIRIMI: ${gameState.activeStock} hissesine ${measure} tedbiri getirildi.`);
+
+            renderWatchlist();
+            updateActiveStockHeader();
+        }
+
+        function renderSPKAuditQueue() {
+            const container = document.getElementById('spkAuditQueue');
+            let html = '';
+            spkSuspiciousQueue.forEach((item, idx) => {
+                html += `
+                    <div class="p-1.5 bg-slate-900 rounded border border-slate-800 flex justify-between items-center text-[10px]">
+                        <div>
+                            <span class="font-bold text-amber-400">${item.stock}</span>
+                            <span class="text-slate-400">(${item.pattern})</span>
+                        </div>
+                        <button onclick="resolveSPKItem(${idx})" class="px-2 py-0.5 bg-blue-900 hover:bg-blue-800 text-white rounded">
+                            İncele & Onayla
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html || `<div class="text-slate-500 italic text-[10px]">Anomali bulunmuyor.</div>`;
+        }
+
+        function resolveSPKItem(idx) {
+            spkSuspiciousQueue.splice(idx, 1);
+            gameState.spkScore += 15;
+
+            playSound('gavel');
+            showToast("Piyasa Gözetim İncelemesi Tamamlandı. İlgili aracı kurum uyarıldı.", "success");
+            logActivity("SPK İNCELEMESİ: Şüpheli emir dalgası denetlendi.");
+
+            renderSPKAuditQueue();
+            updateRoleHUD();
+        }
+
+        // ROLE 5: MASAK ACTIONS
+        function renderMASAKAuditQueue() {
+            const container = document.getElementById('masakAuditContainer');
+            let html = '';
+            masakAuditQueue.forEach((item, idx) => {
+                html += `
+                    <div class="p-2 bg-slate-900 rounded border border-slate-800 space-y-1">
+                        <div class="flex justify-between font-bold text-slate-200">
+                            <span>${item.account}</span>
+                            <span class="text-purple-400 font-mono">${item.sum}</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400">${item.detail}</p>
+                        <div class="flex gap-2 pt-1">
+                            <button onclick="resolveMASAKItem(${idx}, true)" class="flex-1 py-1 bg-purple-900 hover:bg-purple-800 text-white text-[10px] rounded font-bold">
+                                ŞİB Onayla & Bloke Et
+                            </button>
+                            <button onclick="resolveMASAKItem(${idx}, false)" class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] rounded">
+                                Temiz
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function resolveMASAKItem(idx, freeze) {
+            const item = masakAuditQueue[idx];
+            masakAuditQueue.splice(idx, 1);
+            gameState.masakPendingCount = masakAuditQueue.length;
+            document.getElementById('masakPendingCount').innerText = `${gameState.masakPendingCount} Dosya`;
+
+            if (freeze) {
+                playSound('gavel');
+                showToast(`MASAK tarafından ${item.sum} tutarındaki şüpheli hesap donduruldu.`, "success");
+                logActivity(`MASAK BLOKESİ: ${item.account} hesabına el konuldu.`);
+            } else {
+                showToast("Dosya takipsizlikle kapatıldı.", "info");
+            }
+
+            renderMASAKAuditQueue();
+            updateRoleHUD();
+        }
+
+        /* ================= MACRO & PPK ENGINE ================= */
+        function triggerPPKMeeting() {
+            const options = [
+                { rateChange: 2.50, title: 'TCMB 250 bps Faiz Artırdı!', impactDesc: 'Borsa genelinde kâr satışı, mevduata kayış.' },
+                { rateChange: -2.00, title: 'TCMB 200 bps Faiz İndirdi!', impactDesc: 'Borsada güçlü ralli dalgası.' },
+                { rateChange: 0, title: 'TCMB Faizi Sabit Tuttu (%45.00)', impactDesc: 'Piyasa beklentilere paralel seyrediyor.' }
+            ];
+
+            const opt = options[Math.floor(Math.random() * options.length)];
+            gameState.tcmbRate = parseFloat((gameState.tcmbRate + opt.rateChange).toFixed(2));
+
+            document.getElementById('macroRateText').innerText = `%${gameState.tcmbRate.toFixed(1)}`;
+            document.getElementById('macroTabRate').innerText = `%${gameState.tcmbRate.toFixed(2)}`;
+
+            // Market reaction
+            Object.keys(stocks).forEach(t => {
+                if (t === 'XU100') return;
+                if (opt.rateChange > 0) stocks[t].price = parseFloat((stocks[t].price * 0.985).toFixed(2));
+                else if (opt.rateChange < 0) stocks[t].price = parseFloat((stocks[t].price * 1.025).toFixed(2));
+            });
+
+            playSound('alarm');
+            showToast(`PPK KARARI: ${opt.title}`, "info");
+            logActivity(`PPK KARARI: ${opt.title} - ${opt.impactDesc}`);
+
+            renderWatchlist();
+            updateActiveStockHeader();
+            renderChart();
+        }
+
+        function triggerBlackSwan(type) {
+            if (type === 'GEOPOLITICAL') {
+                Object.keys(stocks).forEach(t => {
+                    if (t === 'XU100') return;
+                    stocks[t].price = parseFloat((stocks[t].price * 0.94).toFixed(2)); // Sudden -6% drop
+                });
+                playSound('alarm');
+                showToast("SİYAH KUĞU: Jeopolitik Şok! Piyasa %6 geriledi.", "error");
+                logActivity("KAZA / ŞOK: Jeopolitik gerilim nedeniyle panik satışları başladı.");
+            } else {
+                gameState.foreignRatio = parseFloat((gameState.foreignRatio + 2.4).toFixed(2));
+                document.getElementById('macroForeignText').innerText = `%${gameState.foreignRatio}`;
+                document.getElementById('macroTabForeign').innerText = `%${gameState.foreignRatio}`;
+
+                Object.keys(stocks).forEach(t => {
+                    if (t === 'XU100') return;
+                    stocks[t].price = parseFloat((stocks[t].price * 1.04).toFixed(2));
+                });
+                playSound('buy');
+                showToast("SİYAH KUĞU: Ülke Kredi Notu Yükseltildi! Yabancı girişi başladı.", "success");
+                logActivity("MAKRO MÜJDE: Kredi notu artışı sonrası yabancı fon girişi gerçekleşti.");
+            }
+
+            renderWatchlist();
+            updateActiveStockHeader();
+            renderChart();
+        }
+
+        /* ================= IPO ENGINE ================= */
+        function renderIPOCards() {
+            const container = document.getElementById('ipoCardsContainer');
+            let html = '';
+            ipoList.forEach((ipo, idx) => {
+                html += `
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3 font-mono">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-emerald-400 text-sm">${ipo.id}</span>
+                            <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">${ipo.method}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-100 text-xs font-sans">${ipo.name}</h4>
+                        <p class="text-[11px] text-slate-400 font-sans leading-relaxed">${ipo.desc}</p>
+                        
+                        <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                            <div>Halka Arz Fiyatı: <strong class="text-slate-200">${ipo.price.toFixed(2)} ₺</strong></div>
+                            <div>Arz Edilen Lot: <strong class="text-slate-200">${ipo.totalLots.toLocaleString()}</strong></div>
+                        </div>
+
+                        <button onclick="applyIPO(${idx})" ${ipo.applied ? 'disabled' : ''} class="w-full py-2 ${ipo.applied ? 'bg-slate-800 text-slate-500' : 'bg-emerald-600 hover:bg-emerald-500 text-white'} font-bold rounded text-xs font-sans transition">
+                            ${ipo.applied ? 'Talep Gönderildi ✓' : 'Talep Gönder (Eşit Dağıtım)'}
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function applyIPO(idx) {
+            const ipo = ipoList[idx];
+            if (gameState.cash < (ipo.price * 100)) { showToast("Yetersiz Bakiye!", "error"); return; }
+
+            ipo.applied = true;
+            gameState.cash -= (ipo.price * 100);
+
+            playSound('buy');
+            showToast(`${ipo.id} Halka Arzına 100 Lot Talep Gönderildi.`, "success");
+            logActivity(`HALKA ARZ TALEBİ: ${ipo.id} arzına katılım sağlandı.`);
+
+            renderIPOCards();
+            updateRoleHUD();
+        }
+
+        /* ================= CAPITAL ACTIONS ================= */
+        function renderDividendsAndBonus() {
+            const divContainer = document.getElementById('dividendList');
+            let divHtml = '';
+            dividends.forEach(d => {
+                divHtml += `
+                    <div class="p-2.5 bg-slate-900 rounded-lg border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <span class="font-bold text-amber-400">${d.stock}</span>
+                            <span class="text-slate-400 text-[10px] block">Tarih: ${d.date}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-emerald-400">₺${d.amountPerShare.toFixed(2)} / Lot</span>
+                            <span class="text-[10px] text-slate-500 block">${d.status}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            divContainer.innerHTML = divHtml;
+
+            const bonusContainer = document.getElementById('bonusShareList');
+            let bonusHtml = '';
+            bonusShares.forEach(b => {
+                bonusHtml += `
+                    <div class="p-2.5 bg-slate-900 rounded-lg border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <span class="font-bold text-cyan-400">${b.stock}</span>
+                            <span class="text-slate-400 text-[10px] block">Bedelsiz Oranı: %${b.ratioPct}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-amber-400">${b.status}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            bonusContainer.innerHTML = bonusHtml;
+        }
+
+        /* ================= QUESTS & STORY MODE ================= */
+        function renderQuests() {
+            const container = document.getElementById('roleQuestsContainer');
+            const qList = roleQuests[gameState.roleId] || [];
+            let html = '';
+            let completedCount = 0;
+
+            qList.forEach(q => {
+                if (q.done) completedCount++;
+                html += `
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between font-sans">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full ${q.done ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-slate-800 text-slate-500'} flex items-center justify-center text-sm">
+                                <i class="fa-solid ${q.done ? 'fa-check' : 'fa-lock'}"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-100">${q.title}</h4>
+                                <p class="text-[11px] text-slate-400">${q.desc}</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono font-bold ${q.done ? 'text-emerald-400' : 'text-amber-500'}">
+                            ${q.done ? 'TAMAMLANDI' : 'DEVAM EDİYOR'}
+                        </span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('questProgressOverview').innerText = `${completedCount} / ${qList.length} Tamamlandı`;
+        }
+
+        function checkQuestsProgress() {
+            const qList = roleQuests[gameState.roleId] || [];
+
+            if (gameState.roleId === 1) {
+                // Check quest 101
+                if (gameState.holdings['TUPRS'] || gameState.holdings['GARAN']) qList[0].done = true;
+                let totalEquity = gameState.cash;
+                Object.keys(gameState.holdings).forEach(t => { totalEquity += gameState.holdings[t].lots * stocks[t].price; });
+                if (totalEquity >= 200000) qList[1].done = true;
+            }
+
+            renderQuests();
+        }
+
+        /* ================= CIRCUIT BREAKER MODAL ================= */
+        function triggerCircuitBreaker(ticker) {
+            gameState.circuitBreakerActive = true;
+            stocks[ticker].circuitTriggered = true;
+            playSound('alarm');
+
+            document.getElementById('circuitModalStock').innerText = `${ticker} - ${stocks[ticker].name} hissesinde aşırı oynaklık tespit edildi.`;
+            document.getElementById('circuitBreakerModal').classList.remove('hidden');
+
+            gameState.circuitCountdown = 15;
+            document.getElementById('circuitCountdown').innerText = "15 saniye";
+
+            gameState.circuitInterval = setInterval(() => {
+                gameState.circuitCountdown--;
+                document.getElementById('circuitCountdown').innerText = `${gameState.circuitCountdown} saniye`;
+                if (gameState.circuitCountdown <= 0) {
+                    closeCircuitModal();
+                }
+            }, 1000);
+        }
+
+        function closeCircuitModal() {
+            gameState.circuitBreakerActive = false;
+            clearInterval(gameState.circuitInterval);
+            document.getElementById('circuitBreakerModal').classList.add('hidden');
+            showToast("Devre Kesici tamamlandı. Tek Fiyat eşleşmesi sağlandı.", "info");
+        }
+
+        /* ================= UTILS & TAB SWITCHING ================= */
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.className = 'tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-slate-200 transition';
+            });
+
+            document.getElementById(`panel-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).className = 'tab-btn px-3 py-1.5 rounded-md font-semibold bg-slate-800 text-amber-400 transition';
+
+            if (tabName === 'terminal') {
+                setTimeout(renderChart, 50);
+            }
+        }
+
+        function triggerManualKAPNews() {
+            const newsList = [
+                { stock: 'THYAO', title: 'Yeni Yurt Dışı Uçuş Hattı Açılışı', impact: 0.02 },
+                { stock: 'GARAN', title: 'Sendikasyon Kredisi Yenilendi', impact: 0.015 }
+            ];
+
+            const item = newsList[Math.floor(Math.random() * newsList.length)];
+            stocks[item.stock].price = parseFloat((stocks[item.stock].price * (1 + item.impact)).toFixed(2));
+
+            const container = document.getElementById('kapNewsStream');
+            const newElem = document.createElement('div');
+            newElem.className = 'p-2 bg-slate-950 rounded border border-slate-800 space-y-1 font-sans';
+            newElem.innerHTML = `
+                <div class="flex justify-between items-center text-[10px]">
+                    <span class="font-bold text-amber-400 font-mono">${item.stock}</span>
+                    <span class="text-slate-500 font-mono">${gameState.simTime.toTimeString().split(' ')[0]}</span>
+                </div>
+                <div class="font-bold text-slate-200 text-[11px]">${item.title}</div>
+            `;
+            container.prepend(newElem);
+
+            playSound('buy');
+            showToast(`KAP Bildirimi: ${item.stock} - ${item.title}`, "info");
+            renderWatchlist();
+            updateActiveStockHeader();
+        }
+
+        function logActivity(text) {
+            const time = gameState.simTime.toTimeString().split(' ')[0];
+            gameState.activityLogs.unshift({ time, text });
+
+            const container = document.getElementById('activityLogs');
+            let html = '';
+            gameState.activityLogs.slice(0, 15).forEach(log => {
+                html += `
+                    <div class="p-1.5 hover:bg-slate-800/40 flex space-x-2">
+                        <span class="text-slate-500 font-mono">${log.time}</span>
+                        <span class="text-slate-200">${log.text}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            document.getElementById('logCountText').innerText = `${gameState.activityLogs.length} kayıt`;
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let icon = 'fa-circle-info text-blue-400';
+            let border = 'border-slate-700';
+
+            if (type === 'success') {
+                icon = 'fa-circle-check text-emerald-400';
+                border = 'border-emerald-800';
+            } else if (type === 'error') {
+                icon = 'fa-triangle-exclamation text-red-400';
+                border = 'border-red-800';
+            }
+
+            toast.className = `bg-slate-900/95 text-slate-100 text-xs p-3 rounded-xl border ${border} shadow-2xl flex items-center space-x-2.5 pointer-events-auto transform transition-all duration-300 translate-y-2 opacity-0 font-sans`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-sm"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => { toast.classList.remove('translate-y-2', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 350);
+            }, 3500);
+        }
+    </script>
+<script>
+(function(){
+const $=id=>document.getElementById(id),R=a=>a[Math.floor(Math.random()*a.length)];
+const add=(k,n,sec,p,v,ex)=>{stocks[k]={name:n,sector:sec,market:'Yıldız Pazar',price:p,prevClose:p,volume:5e8,history:[],candles:[],volatility:v,vbts:null,isExporter:!!ex}};
+add('ASELS','Aselsan','Savunma',165.4,.007);add('BIMAS','BİM Mağazalar','Perakende',540.2,.006);add('AKBNK','Akbank','Bankacılık',68.3,.007);add('KCHOL','Koç Holding','Holding',178.9,.006);add('FROTO','Ford Otosan','Otomotiv',1020.5,.007,1);add('SASA','SASA Polyester','Kimya',4.15,.011);add('XAUTRY','Gram Altın','Emtia',3250,.004);add('USDTRY','Dolar / TL','Döviz',38.5,.002);
+Object.keys(stocks).forEach(k=>stocks[k].base=stocks[k].volatility);
+const st=document.createElement('style');st.textContent='@keyframes xk{from{transform:translateX(100%)}to{transform:translateX(-100%)}}body{padding-bottom:40px}.xb{background:#1e293b;border:1px solid #334155;color:#e2e8f0;border-radius:999px;padding:6px 11px;font-size:11px;font-weight:700;cursor:pointer}.xb:hover{background:#334155}.xc{background:#131d31;border:1px solid #1e293b;border-radius:12px;padding:12px;margin-bottom:10px}@media(max-width:768px){header nav{overflow-x:auto;max-width:100%;white-space:nowrap}table{display:block;overflow-x:auto}#roleMetricsHUD{flex-wrap:wrap;gap:8px}#xtb{bottom:34px;flex-wrap:wrap}}';document.head.append(st);
+document.body.insertAdjacentHTML('beforeend','<div id="xtb" style="position:fixed;left:8px;bottom:34px;z-index:40;display:flex;gap:6px"><button class="xb" onclick="xOpen(\'heat\')">🔥 Isı Haritası</button><button class="xb" onclick="xOpen(\'pf\')">📊 Portföy</button><button class="xb" onclick="xOpen(\'ev\')">🎬 Olay & Senaryo</button><button class="xb" onclick="xOpen(\'cr\')">🏁 Karne</button></div><div id="xtk" style="position:fixed;left:0;right:0;bottom:0;height:28px;background:#060911;border-top:1px solid #1e293b;overflow:hidden;z-index:39;font-size:11px;line-height:28px;color:#fbbf24;font-family:monospace"></div><div id="xm" style="display:none;position:fixed;inset:0;z-index:60;background:rgba(2,6,15,.8);align-items:center;justify-content:center;padding:12px"><div style="background:#0f172a;border:1px solid #334155;border-radius:16px;max-width:640px;width:100%;max-height:85vh;overflow:auto;padding:16px;position:relative"><button class="xb" style="position:sticky;top:0;float:right" onclick="xClose()">✕ Kapat</button><div id="xmb"></div></div></div>');
+const tc=$('toastContainer');if(tc)tc.style.bottom='72px';
+let mode='',news=['Eko-Log Borsa: Olaylar rastgele gelir, hazırlıklı ol!','İpucu: Çeşitlendirme riski azaltır.','İpucu: Zarar kes (stop-loss) duygusal kararları önler.'],evLog=[],scn=false,diff=1,eqH=[],peak=0,mdd=0;
+function tk(){const t=news.slice(0,8).join('   •   ');$('xtk').innerHTML='<div style="display:inline-block;white-space:nowrap;animation:xk 70s linear infinite">'+t+'</div>'}tk();
+const _la=window.logActivity;window.logActivity=function(t){_la(t);news.unshift(t);tk()};
+const eq=()=>{let v=gameState.cash;if(gameState.roleId<=3)Object.keys(gameState.holdings).forEach(t=>{v+=gameState.holdings[t].lots*stocks[t].price});return v};
+setInterval(()=>{const e=eq();eqH.push(e);if(eqH.length>150)eqH.shift();peak=Math.max(peak,e);mdd=Math.max(mdd,peak?(peak-e)/peak*100:0)},2000);
+setInterval(()=>{const sp=gameState.stopPct;if(!sp||gameState.roleId>3)return;Object.keys(gameState.holdings).forEach(t=>{const h=gameState.holdings[t];if(h.lots>0&&h.avgCost>0&&stocks[t].price<=h.avgCost*(1-sp/100)){gameState.cash+=h.lots*stocks[t].price;logActivity('STOP-LOSS: '+t+' pozisyonu %'+sp+' zararda otomatik satıldı.');showToast(t+' stop-loss ile satıldı','error');h.lots=0;h.avgCost=0;try{updateRoleHUD()}catch(e){}}})},1000);
+function fx(f){if(!f)return;if(f.usd){gameState.usdTry=+(gameState.usdTry+f.usd).toFixed(2);$('macroUsdText').innerText=gameState.usdTry.toFixed(2)}if(f.rate){gameState.tcmbRate=+(gameState.tcmbRate+f.rate).toFixed(1);$('macroRateText').innerText='%'+gameState.tcmbRate.toFixed(1)}if(f.fgn){gameState.foreignRatio=+(gameState.foreignRatio+f.fgn).toFixed(1);$('macroForeignText').innerText='%'+gameState.foreignRatio}}
+function fire(e){Object.keys(stocks).forEach(t=>{if(t=='XU100')return;const s=stocks[t],p=e.eff[t]??e.eff['s:'+s.sector]??e.eff.ALL??0;s.price=Math.max(1,+(s.price*(1+p/100)).toFixed(s.price<10?3:2))});fx(e.fx);const neg=(e.eff.ALL||0)<0;try{playSound(neg?'alarm':'success')}catch(x){}showToast(e.t,neg?'error':'info');logActivity('OLAY: '+e.t);evLog.unshift({t:e.t,n:e.n,time:gameState.simTime.toTimeString().split(' ')[0]})}
+const EV=[{t:'Enflasyon verisi beklentinin üzerinde geldi.',eff:{ALL:-1.5,'s:Bankacılık':-3},n:'Yüksek enflasyon faiz indirimi beklentisini azaltır, bankaların maliyetini artırabilir.'},{t:'Kur şoku: Dolar/TL sert yükseldi.',eff:{ALL:-1,FROTO:4,THYAO:3,'s:Perakende':-3},fx:{usd:1.4},n:'İhracatçı şirketler döviz gelirleri sayesinde kurdan kazanır, ithalata bağımlı şirketler zarar eder.'},{t:'Merkez Bankası sürpriz faiz indirimi yaptı!',eff:{ALL:2.5,'s:Bankacılık':4},fx:{rate:-2.5},n:'Faiz indirimi borçlanmayı ucuzlatır, hisse senetlerini cazip hale getirir.'},{t:'Savunma sanayiinde büyük ihracat sözleşmesi.',eff:{ASELS:6,ALL:.5},n:'Sektörel haberler tek bir şirketi veya sektörü, tüm piyasadan bağımsız etkileyebilir.'},{t:'Petrol fiyatları sıçradı.',eff:{THYAO:-4,TUPRS:3,'s:Kimya':-2},n:'Petrol havayolunun maliyetini artırır, rafineri için marjı etkileyebilir.'},{t:'Siyasi belirsizlik arttı, yatırımcılar temkinli.',eff:{ALL:-3,XAUTRY:4},n:'Belirsizlikte yatırımcılar genellikle altına gibi güvenli limanlara yönelir.'},{t:'Bilanço sezonu: Bankalar güçlü kâr açıkladı.',eff:{'s:Bankacılık':3.5,KCHOL:2},n:'Bilançolar beklentiden iyi geldiğinde fiyatlar yükselir, kötü gelirse düşer.'},{t:'Yabancı yatırımcı girişi hızlandı.',eff:{ALL:2},fx:{fgn:2},n:'Yabancı payının artması genellikle talebi ve likiditeyi güçlendirir.'}];
+const SC=[{n:'2018 Kur Krizi (basitleştirilmiş)',s:[{t:'Dolar/TL hızla yükseliyor.',eff:{ALL:-3,'s:Bankacılık':-3,FROTO:2,XAUTRY:5},fx:{usd:3},n:'2018 yazında kur kısa sürede sert yükseldi ve borçlu şirketler zorlandı.'},{t:'Bankalar baskı altında, panik satışları.',eff:{ALL:-4,'s:Bankacılık':-3},n:'Kur ve borç yükü bankacılık hisselerini en çok vuran ikili oldu.'},{t:'Merkez Bankası faiz artırıyor.',eff:{ALL:1},fx:{rate:5},n:'Faiz artırımı kuru desteklemeyi hedefler ama borsa için kısa vadede baskı yaratabilir.'},{t:'Piyasa sakinleşiyor, toparlanma başlıyor.',eff:{ALL:3},n:'Krizlerden sonra fiyatlar genelde aşırı düşer, sonra kısmen toparlanır.'}]},{n:'2020 Pandemi Çöküşü (basitleştirilmiş)',s:[{t:'Küresel salgın korkusu piyasaları vurdu.',eff:{ALL:-6,THYAO:-4},n:'Salgın seyahati durdurdu, havayolu en çok etkilenen sektörlerden oldu.'},{t:'Sert düşüş: Devre kesici riski!',eff:{ALL:-7},n:'Ani düşüşlerde borsa işlemi durdurarak paniği sınırlar (devre kesici).'},{t:'Merkez bankaları destek paketi açıkladı.',eff:{ALL:4},fx:{rate:-2},n:'Para ve maliye politikaları yatırımcı güvenini hızla geri getirebilir.'},{t:'Toparlanma: Teknoloji ve iletişim öne çıkıyor.',eff:{TCELL:5,ALL:3},n:'Krizden sonra bazı sektörler daha hızlı toparlanır.'}]},{n:'Seçim Sonrası Dönem (basitleştirilmiş)',s:[{t:'Seçim sonuçları sonrası belirsizlik azalıyor.',eff:{ALL:2},n:'Belirsizliğin azalması riski ve risk primini düşürür.'},{t:'Yeni ekonomi yönetimi, sıkılaşma beklentisi.',eff:{'s:Bankacılık':-2,ALL:-1},fx:{rate:5},n:'Sıkı para politikası enflasyonu düşürmeyi hedefler, kısa vadede büyümeyi yavaşlatır.'},{t:'Yabancı girişleri başlıyor.',eff:{ALL:3,'s:Bankacılık':4},fx:{fgn:3},n:'Güven artınca yabancı yatırımcı geri dönebilir.'},{t:'Enflasyonda ilk yavaşlama sinyalleri.',eff:{ALL:2},n:'Enflasyonun düşmesi faiz indirimi beklentisini artırır.'}]}];
+setInterval(()=>{if(!scn&&!gameState.circuitBreakerActive&&Math.random()<(diff==2?.8:.45))fire(R(EV))},35000);
+window.xRun=i=>{if(scn)return;scn=true;showToast('Senaryo başladı: '+SC[i].n,'info');SC[i].s.forEach((e,j)=>setTimeout(()=>{fire(e);if(j==SC[i].s.length-1){scn=false;showToast('Senaryo bitti. Karneni kontrol et!','info')}},(j+1)*9000));xClose()};
+window.xDiff=d=>{diff=d;Object.keys(stocks).forEach(t=>stocks[t].volatility=stocks[t].base*[.7,1,1.6][d]);showToast('Zorluk: '+['Kolay','Normal','Kriz modu'][d],'info');draw()};
+window.xStop=v=>{gameState.stopPct=+v;showToast(v>0?'Stop-loss %'+v+' aktif':'Stop-loss kapalı','info')};
+function heat(){let h='<h3 style="font-weight:700;margin-bottom:8px">Isı Haritası</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px">';Object.keys(stocks).forEach(t=>{if(t=='XU100')return;const s=stocks[t],p=(s.price/s.prevClose-1)*100,a=Math.min(Math.abs(p)/4,1);h+='<div onclick="selectStock(\''+t+'\');xClose()" style="background:'+(p>=0?'rgba(16,185,129,':'rgba(239,68,68,')+(.25+a*.65)+');border-radius:10px;padding:9px;cursor:pointer"><b>'+t+'</b><div style="font-size:10px;opacity:.8">'+s.sector+'</div><div style="font-weight:700">'+(p>=0?'+':'')+p.toFixed(2)+'%</div></div>'});return h+'</div>'}
+function pf(){const cols=['#10b981','#3b82f6','#f59e0b','#8b5cf6','#ef4444','#06b6d4','#ec4899','#84cc16'];let parts=[['Nakit',gameState.cash]];if(gameState.roleId<=3)Object.keys(gameState.holdings).forEach(t=>{const v=gameState.holdings[t].lots*stocks[t].price;if(v>0)parts.push([t,v])});const tot=parts.reduce((a,b)=>a+b[1],0)||1;let acc=0,g=parts.map((p,i)=>{const s=acc/tot*100;acc+=p[1];return cols[i%8]+' '+s+'% '+acc/tot*100+'%'}).join(',');const lg=parts.map((p,i)=>'<div style="font-size:12px"><span style="color:'+cols[i%8]+'">●</span> '+p[0]+' %'+(p[1]/tot*100).toFixed(1)+'</div>').join('');let line='';if(eqH.length>1){const mn=Math.min(...eqH),mx=Math.max(...eqH)||1,r=(mx-mn)||1;line='<svg viewBox="0 0 300 80" style="width:100%;height:90px"><polyline fill="none" stroke="#10b981" stroke-width="2" points="'+eqH.map((v,i)=>(i/(eqH.length-1)*300).toFixed(1)+','+(75-(v-mn)/r*70).toFixed(1)).join(' ')+'"/></svg>'}return '<h3 style="font-weight:700;margin-bottom:8px">Portföyüm</h3><div class="xc" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><div style="width:110px;height:110px;border-radius:50%;background:conic-gradient('+g+')"></div><div>'+lg+'</div></div><div class="xc"><div style="font-size:12px;margin-bottom:4px">Toplam varlık: <b>₺'+eq().toLocaleString('tr-TR',{maximumFractionDigits:0})+'</b></div>'+line+'</div><div class="xc" style="font-size:12px">Otomatik stop-loss: <select onchange="xStop(this.value)" style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:3px"><option value="0">Kapalı</option><option value="5"'+(gameState.stopPct==5?' selected':'')+'>%5</option><option value="10"'+(gameState.stopPct==10?' selected':'')+'>%10</option></select></div>'}
+function ev(){let h='<h3 style="font-weight:700;margin-bottom:8px">Olay & Senaryo</h3><div class="xc"><div style="font-size:12px;margin-bottom:6px">Zorluk</div>'+['Kolay','Normal','Kriz'].map((n,i)=>'<button class="xb" style="margin-right:6px;'+(diff==i?'background:#d97706;color:#000':'')+'" onclick="xDiff('+i+')">'+n+'</button>').join('')+'</div><div class="xc"><div style="font-size:12px;margin-bottom:6px">Tarihsel senaryolar (basitleştirilmiş, eğitim amaçlı)</div>'+SC.map((s,i)=>'<button class="xb" style="display:block;margin-bottom:6px;width:100%;text-align:left" onclick="xRun('+i+')">▶ '+s.n+'</button>').join('')+'</div><div style="font-size:12px;margin:10px 0 6px">Olay günlüğü ve eğitim notları</div>';h+=evLog.length?evLog.slice(0,10).map(e=>'<div class="xc"><b style="font-size:12px">'+e.time+' · '+e.t+'</b><div style="font-size:12px;opacity:.8;margin-top:4px">📘 '+e.n+'</div></div>').join(''):'<div style="font-size:12px;opacity:.6">Henüz olay yok. Biraz bekle veya senaryo başlat.</div>';return h}
+function cr(){if(gameState.roleId>3)return '<h3 style="font-weight:700">Karne</h3><p style="font-size:13px;margin-top:8px">Karne yatırımcı rolleri (1-3) için hesaplanır.</p>';const e=eq(),r=(e/gameState.initialCash-1)*100;const ty=r>10&&mdd<8?'Soğukkanlı Stratejist':mdd>20?'Cesur Risk Sever':r<0?'Öğrenen Yatırımcı':'Dengeli Yatırımcı';window._kt='Eko-Log Borsa karnem: getiri %'+r.toFixed(1)+', en büyük düşüş %'+mdd.toFixed(1)+', tipim: '+ty+'. Sen ne kadar yaparsın? https://eko-log.github.io/#/borsa';return '<h3 style="font-weight:700;margin-bottom:8px">🏁 Karne</h3><div class="xc"><div>Toplam getiri: <b style="color:'+(r>=0?'#10b981':'#ef4444')+'">%'+r.toFixed(2)+'</b></div><div>En büyük düşüş: <b>%'+mdd.toFixed(1)+'</b></div><div>Son varlık: <b>₺'+e.toLocaleString('tr-TR',{maximumFractionDigits:0})+'</b></div><div style="margin-top:8px;font-size:15px">Yatırımcı tipin: <b style="color:#fbbf24">'+ty+'</b></div></div><button class="xb" onclick="navigator.share?navigator.share({text:_kt}).catch(()=>{}):window.open(\'https://wa.me/?text=\'+encodeURIComponent(_kt))">Karnemi paylaş</button>'}
+function draw(){if(mode)$('xmb').innerHTML=({heat:heat,pf:pf,ev:ev,cr:cr})[mode]()}
+window.xOpen=m=>{mode=m;$('xm').style.display='flex';draw()};window.xClose=()=>{mode='';$('xm').style.display='none'};
+setInterval(()=>{if(mode=='heat')draw()},1000);
+})();
+</script>
+</body>
+</html>

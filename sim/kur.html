@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Trade Tycoon - Daily Legal & Trade Edition</title>
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f17;
+            color: #e2e8f0;
+        }
+        .glass-card {
+            background: rgba(21, 28, 40, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.25);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Giriş Ekranı -->
+    <div id="companySetupModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl w-full max-w-2xl p-6 md:p-8 space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center mx-auto shadow-lg shadow-sky-500/30">
+                    <i class="fa-solid fa-building text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-white">İşletme Türünüzü Seçin</h2>
+                <p class="text-xs text-slate-400">Şirket modeliniz günlük operasyonlarınızı, risklerinizi ve özel avantajlarınızı belirler.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div onclick="selectCompanyType('exporter')" class="border border-slate-800 hover:border-sky-500 bg-slate-950/60 hover:bg-slate-800/40 p-5 rounded-2xl cursor-pointer transition-all space-y-3 group">
+                    <div class="flex justify-between items-center">
+                        <span class="p-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-plane-departure text-xl"></i>
+                        </span>
+                        <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">İhracat Odaklı</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base">İhracat İşletmesi</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Yerli ürünleri ihraç edersiniz. İhracat teşvikleri ile satış karı +%15 daha yüksektir.
+                    </p>
+                    <div class="text-[11px] font-semibold text-sky-400 flex items-center gap-1 pt-2">
+                        <i class="fa-solid fa-check text-xs"></i> Başlangıç Sermayesi: $120,000
+                    </div>
+                </div>
+
+                <div onclick="selectCompanyType('trader')" class="border border-slate-800 hover:border-indigo-500 bg-slate-950/60 hover:bg-slate-800/40 p-5 rounded-2xl cursor-pointer transition-all space-y-3 group">
+                    <div class="flex justify-between items-center">
+                        <span class="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-arrows-spin text-xl"></i>
+                        </span>
+                        <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">Serbest Ticaret</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Uluslararası Alım-Satım</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Hem ithalat hem ihracat yapabilirsiniz. Küresel pazarlardaki fiyat farklarından yararlanırsınız.
+                    </p>
+                    <div class="text-[11px] font-semibold text-indigo-400 flex items-center gap-1 pt-2">
+                        <i class="fa-solid fa-check text-xs"></i> Başlangıç Sermayesi: $100,000
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                    <i class="fa-solid fa-ship text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg text-white tracking-tight flex items-center gap-2">
+                        GLOBAL TRADE <span class="bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent">TYCOON</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 font-medium" id="companyBadgeText">Şirket Modeli Yükleniyor...</p>
+                </div>
+            </div>
+
+            <!-- Turn & Date Controller -->
+            <div class="flex items-center space-x-4">
+                <div class="bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2 flex items-center gap-3 shadow-inner">
+                    <i class="fa-regular fa-calendar-check text-sky-400 text-sm"></i>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Takvim</div>
+                        <div class="text-sm font-bold text-white"><span id="currentDay">1</span>. Gün</div>
+                    </div>
+                </div>
+                <button onclick="nextTurn()" class="group relative inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-sky-500/20 transition-all duration-200 active:scale-95">
+                    <span>Sonraki Gün</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Panel -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Sermaye / Bakiye</span>
+                    <span class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <i class="fa-solid fa-wallet text-base"></i>
+                    </span>
+                </div>
+                <div class="text-2xl font-black text-white tracking-tight" id="capital">$100,000</div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Depo Doluluk</span>
+                    <span class="p-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                        <i class="fa-solid fa-warehouse text-base"></i>
+                    </span>
+                </div>
+                <div class="text-2xl font-black text-white tracking-tight" id="warehouseCapacity">0 / 500</div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+                    <div id="warehouseProgressBar" class="bg-sky-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Aktif Sevkiyatlar</span>
+                    <span class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                        <i class="fa-solid fa-truck-fast text-base"></i>
+                    </span>
+                </div>
+                <div class="text-2xl font-black text-white tracking-tight" id="activeShipmentsCount">0</div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Hukuki Prestij</span>
+                    <span class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                        <i class="fa-solid fa-scale-balanced text-base"></i>
+                    </span>
+                </div>
+                <div class="text-2xl font-black text-white tracking-tight" id="reputation">⭐ 100</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-8 space-y-8">
+                <div class="glass-card rounded-2xl p-6 shadow-2xl">
+                    <div class="flex items-center justify-between pb-5 border-b border-slate-800">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-globe text-sky-400"></i> Dünya Emtia & Ticaret Borsası
+                        </h2>
+                    </div>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-800/60">
+                                    <th class="py-3 px-3">Emtia / Ürün</th>
+                                    <th class="py-3 px-3">Tedarik</th>
+                                    <th class="py-3 px-3">Maliyet</th>
+                                    <th class="py-3 px-3">Hedef Pazar</th>
+                                    <th class="py-3 px-3">Satış</th>
+                                    <th class="py-3 px-3 text-center">Marj</th>
+                                    <th class="py-3 px-3 text-right">Eylem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="marketTableBody" class="divide-y divide-slate-800/40 text-sm"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 shadow-2xl">
+                    <div class="flex items-center justify-between pb-5 border-b border-slate-800">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-boxes-packing text-amber-400"></i> Lojistik Sevkiyatlar & Risk Takibi
+                        </h2>
+                    </div>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-800/60">
+                                    <th class="py-3 px-3">Yük & Miktar</th>
+                                    <th class="py-3 px-3">Güzergah</th>
+                                    <th class="py-3 px-3">Taşıma / Sigorta</th>
+                                    <th class="py-3 px-3">Teslimat</th>
+                                    <th class="py-3 px-3 text-right">Durum</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipmentsTableBody" class="divide-y divide-slate-800/40 text-sm"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 space-y-8">
+                <div class="glass-card rounded-2xl p-6 shadow-2xl">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-boxes-stacked text-emerald-400"></i> Depo Envanteri
+                        </h2>
+                        <span class="text-xs text-slate-400 font-medium" id="inventoryCountBadge">0 Ürün</span>
+                    </div>
+                    <div id="inventoryList" class="mt-4 space-y-3 max-h-[320px] overflow-y-auto custom-scrollbar pr-1"></div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 shadow-2xl">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-gavel text-indigo-400"></i> Günlük Hukuk, Kaza & Olay Günlüğü
+                        </h2>
+                    </div>
+                    <div id="gameLogs" class="mt-4 space-y-2.5 max-h-[350px] overflow-y-auto custom-scrollbar pr-1">
+                        <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 leading-relaxed">
+                            <span class="text-sky-400 font-bold">[Sistem]</span> Günlük operasyon simülasyonuna hoş geldiniz.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="tradeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden transition-opacity duration-300 opacity-0">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all scale-95 duration-300" id="tradeModalBox">
+            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-slate-950/50">
+                <h3 class="font-bold text-white text-base" id="tradeModalTitle">Uluslararası Ticaret Sözleşmesi</h3>
+                <button onclick="closeTradeModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <input type="hidden" id="selectedGoodIndex">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Ürün ve Rota</label>
+                    <input type="text" id="modalGoodInfo" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm font-semibold text-sky-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Sipariş Miktarı (Adet)</label>
+                    <input type="number" id="tradeAmount" min="10" step="10" value="100" oninput="calculateTradeCost()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm font-semibold text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Lojistik Türü (Incoterms)</label>
+                    <select id="logisticsType" onchange="calculateTradeCost()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-200">
+                        <option value="sea" data-cost="6" data-time="15">🚢 Denizyolu - FOB (Süre: 15 Gün | Gemi Batma / Hasar Riski)</option>
+                        <option value="road" data-cost="12" data-time="7">🚛 Karayolu - CPT (Süre: 7 Gün | Tır Kazası / Gecikme Riski)</option>
+                        <option value="air" data-cost="28" data-time="2">✈️ Havayolu - CIP (Süre: 2 Gün | Hızlı / Düşük Risk)</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                    <div>
+                        <div class="text-xs font-bold text-white">Nakliyat Sigortası (ICC 'A')</div>
+                        <div class="text-[10px] text-slate-400">Kaza, batma veya ziya durumunda mal değerini %100 öder.</div>
+                    </div>
+                    <input type="checkbox" id="insuranceToggle" onchange="calculateTradeCost()" class="w-5 h-5 accent-amber-500">
+                </div>
+                <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800 space-y-2 text-xs">
+                    <div class="flex justify-between text-slate-400"><span>Ürün Maliyeti:</span><span id="modalGoodsCost" class="font-semibold text-white">$0</span></div>
+                    <div class="flex justify-between text-slate-400"><span>Lojistik:</span><span id="modalShippingCost" class="font-semibold text-white">$0</span></div>
+                    <div class="flex justify-between text-amber-400"><span>Sigorta Primi:</span><span id="modalInsuranceCost" class="font-semibold">$0</span></div>
+                    <div class="border-t border-slate-800 my-1"></div>
+                    <div class="flex justify-between font-bold text-sm text-sky-400"><span>Toplam Maliyet:</span><span id="modalTotalCost">$0</span></div>
+                    <div class="flex justify-between font-bold text-xs text-emerald-400"><span>Tahmini Gelir:</span><span id="modalExpectedRevenue">$0</span></div>
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-slate-950/50 border-t border-slate-800 flex justify-end gap-3">
+                <button onclick="closeTradeModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400">İptal</button>
+                <button onclick="executeTrade()" class="px-5 py-2 rounded-xl text-xs font-bold bg-sky-500 text-white">Sözleşmeyi İmzala</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Engine -->
+    <script>
+        let gameState = { companyType: 'trader', day: 1, capital: 100000, warehouseMax: 500, reputation: 100, inventory: {}, shipments: [], markets: [] };
+        const goodsData = [
+            { id: 'coffee', name: 'Kahve Çekirdeği', buyCountry: 'Brezilya', sellCountry: 'Almanya', baseBuy: 15, baseSell: 34, icon: 'fa-mug-hot', isExportGood: false, isBannedRisk: false },
+            { id: 'tech', name: 'Elektronik Parça', buyCountry: 'Çin', sellCountry: 'ABD', baseBuy: 120, baseSell: 230, icon: 'fa-microchip', isExportGood: false, isBannedRisk: true },
+            { id: 'textile', name: 'Yerli Tekstil & Deri', buyCountry: 'Türkiye', sellCountry: 'İngiltere', baseBuy: 20, baseSell: 52, icon: 'fa-shirt', isExportGood: true, isBannedRisk: false },
+            { id: 'boron', name: 'Bor & Maden Hammadde', buyCountry: 'Türkiye', sellCountry: 'Almanya', baseBuy: 40, baseSell: 95, icon: 'fa-cubes', isExportGood: true, isBannedRisk: false },
+            { id: 'chemical', name: 'Çift Kullanımlı Kimyasal', buyCountry: 'BAE', sellCountry: 'Hindistan', baseBuy: 80, baseSell: 190, icon: 'fa-flask', isExportGood: false, isBannedRisk: true }
+        ];
+
+        function selectCompanyType(type) {
+            gameState.companyType = type;
+            gameState.capital = type === 'exporter' ? 120000 : 100000;
+            document.getElementById('companyBadgeText').innerText = type === 'exporter' ? 'İhracat Odaklı İşletme' : 'Serbest Ticaret';
+            document.getElementById('companySetupModal').classList.add('hidden');
+            generateMarketPrices(); updateUI();
+            addLog(`Şirketiniz ${type === 'exporter' ? 'İhracat İşletmesi' : 'Serbest Ticaret'} olarak kuruldu.`, 'sky');
+        }
+
+        function generateMarketPrices() {
+            gameState.markets = goodsData.map(good => {
+                let currentBuy = Math.round(good.baseBuy * (1 + (Math.random() * 0.20 - 0.10)));
+                let currentSell = Math.round(good.baseSell * (1 + (Math.random() * 0.20 - 0.10)));
+                if (gameState.companyType === 'exporter' && good.isExportGood) currentSell = Math.round(currentSell * 1.15);
+                return { ...good, currentBuy, currentSell };
+            });
+        }
+
+        function updateUI() {
+            document.getElementById('capital').innerText = '$' + gameState.capital.toLocaleString();
+            document.getElementById('currentDay').innerText = gameState.day;
+            document.getElementById('reputation').innerText = '⭐ ' + gameState.reputation;
+            const usedSpace = Object.values(gameState.inventory).reduce((a, b) => a + b, 0);
+            document.getElementById('warehouseCapacity').innerText = `${usedSpace} / ${gameState.warehouseMax}`;
+            document.getElementById('warehouseProgressBar').style.width = Math.min((usedSpace / gameState.warehouseMax) * 100, 100) + '%';
+            document.getElementById('activeShipmentsCount').innerText = gameState.shipments.length;
+            renderMarkets(); renderShipments(); renderInventory();
+        }
+
+        function renderMarkets() {
+            const tbody = document.getElementById('marketTableBody'); tbody.innerHTML = '';
+            gameState.markets.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                const marginPercent = Math.round(((item.currentSell - item.currentBuy) / item.currentBuy) * 100);
+                tr.innerHTML = `
+                    <td class="py-3.5 px-3">
+                        <span class="font-bold text-white block">${item.name}</span>
+                        ${item.isBannedRisk ? '<span class="text-[9px] font-extrabold text-amber-400 bg-amber-500/10 px-1 py-0.2 rounded border border-amber-500/20">Ambargo / Yasaklılık Riski</span>' : ''}
+                    </td>
+                    <td class="py-3.5 px-3">${item.buyCountry}</td>
+                    <td class="py-3.5 px-3 text-rose-400">$${item.currentBuy}</td>
+                    <td class="py-3.5 px-3">${item.sellCountry}</td>
+                    <td class="py-3.5 px-3 text-emerald-400">$${item.currentSell}</td>
+                    <td class="py-3.5 px-3 text-center">+%${marginPercent}</td>
+                    <td class="py-3.5 px-3 text-right"><button onclick="openTradeModal(${index})" class="bg-sky-500/10 text-sky-400 px-3 py-1.5 rounded-xl">Sözleşme Yap</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderShipments() {
+            const tbody = document.getElementById('shipmentsTableBody'); tbody.innerHTML = '';
+            if (gameState.shipments.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-xs text-slate-500">Aktif sevkiyat yok.</td></tr>'; return; }
+            gameState.shipments.forEach(s => {
+                const tr = document.createElement('tr');
+                let statusText = s.isDelayed ? `<span class="text-amber-400 font-bold">Gümrükte Gecikti</span>` : 'Transit Yolda';
+                tr.innerHTML = `
+                    <td class="py-3.5 px-3">${s.goodName} (${s.amount} Adet)</td>
+                    <td class="py-3.5 px-3">${s.from} ➔ ${s.to}</td>
+                    <td class="py-3.5 px-3">${s.logisticsName} ${s.hasInsurance ? '(Sigortalı)' : ''}</td>
+                    <td class="py-3.5 px-3">${s.eta === 0 ? 'Limanda / Teslim' : s.eta + ' Gün'}</td>
+                    <td class="py-3.5 px-3 text-right">${statusText}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderInventory() {
+            const list = document.getElementById('inventoryList'); list.innerHTML = '';
+            const activeKeys = Object.keys(gameState.inventory).filter(k => gameState.inventory[k] > 0);
+            if (activeKeys.length === 0) { list.innerHTML = '<div class="py-4 text-center text-xs text-slate-500">Depo boş.</div>'; return; }
+            activeKeys.forEach(goodId => {
+                const qty = gameState.inventory[goodId];
+                const goodInfo = goodsData.find(g => g.id === goodId);
+                const div = document.createElement('div');
+                div.className = 'p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center';
+                div.innerHTML = `<div><div class="text-xs font-bold text-white">${goodInfo.name}</div></div><div><span class="me-2">${qty} Adet</span><button onclick="sellFromInventory('${goodId}')" class="bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded">Sat</button></div>`;
+                list.appendChild(div);
+            });
+        }
+
+        function openTradeModal(index) {
+            const good = gameState.markets[index];
+            document.getElementById('selectedGoodIndex').value = index;
+            document.getElementById('modalGoodInfo').value = `${good.name} (${good.buyCountry} ➔ ${good.sellCountry})`;
+            calculateTradeCost();
+            const modal = document.getElementById('tradeModal');
+            modal.classList.remove('hidden'); setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeTradeModal() {
+            const modal = document.getElementById('tradeModal');
+            modal.classList.add('opacity-0'); setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function calculateTradeCost() {
+            const index = document.getElementById('selectedGoodIndex').value;
+            const good = gameState.markets[index];
+            const amount = parseInt(document.getElementById('tradeAmount').value) || 0;
+            const selectedOpt = document.getElementById('logisticsType').options[document.getElementById('logisticsType').selectedIndex];
+            const hasInsurance = document.getElementById('insuranceToggle').checked;
+            const goodsCost = good.currentBuy * amount;
+            const shippingCost = parseFloat(selectedOpt.dataset.cost) * amount;
+            const insuranceCost = hasInsurance ? Math.round(goodsCost * 0.05) : 0;
+            document.getElementById('modalGoodsCost').innerText = '$' + goodsCost.toLocaleString();
+            document.getElementById('modalShippingCost').innerText = '$' + shippingCost.toLocaleString();
+            document.getElementById('modalInsuranceCost').innerText = '$' + insuranceCost.toLocaleString();
+            document.getElementById('modalTotalCost').innerText = '$' + (goodsCost + shippingCost + insuranceCost).toLocaleString();
+            document.getElementById('modalExpectedRevenue').innerText = '$' + (good.currentSell * amount).toLocaleString();
+        }
+
+        function executeTrade() {
+            const index = document.getElementById('selectedGoodIndex').value;
+            const good = gameState.markets[index];
+            const amount = parseInt(document.getElementById('tradeAmount').value) || 0;
+            const selectedOpt = document.getElementById('logisticsType').options[document.getElementById('logisticsType').selectedIndex];
+            const hasInsurance = document.getElementById('insuranceToggle').checked;
+            const type = document.getElementById('logisticsType').value;
+            const eta = parseInt(selectedOpt.dataset.time);
+            const goodsCost = good.currentBuy * amount;
+            const insuranceCost = hasInsurance ? Math.round(goodsCost * 0.05) : 0;
+            const totalCost = goodsCost + (parseFloat(selectedOpt.dataset.cost) * amount) + insuranceCost;
+
+            if (gameState.capital < totalCost) { alert('Yetersiz bakiye!'); return; }
+            gameState.capital -= totalCost;
+
+            if (eta === 0) {
+                addInventory(good.id, amount);
+                addLog(`${good.name} depoya ulaştı.`, 'emerald');
+            } else {
+                gameState.shipments.push({ goodId: good.id, goodName: good.name, amount, costValue: goodsCost, from: good.buyCountry, to: good.sellCountry, type, eta, hasInsurance, isDelayed: false, logisticsName: selectedOpt.text.split('(')[0].trim() });
+                addLog(`${good.name} yola çıktı. Tahmini Varış: ${eta} Gün.`, 'sky');
+            }
+            closeTradeModal(); updateUI();
+        }
+
+        function addInventory(goodId, amount) {
+            gameState.inventory[goodId] = (gameState.inventory[goodId] || 0) + amount;
+        }
+
+        function sellFromInventory(goodId) {
+            const marketInfo = gameState.markets.find(m => m.id === goodId);
+            const revenue = gameState.inventory[goodId] * marketInfo.currentSell;
+            gameState.capital += revenue;
+            gameState.inventory[goodId] = 0;
+            addLog(`Satış yapıldı: +$${revenue.toLocaleString()}`, 'emerald');
+            updateUI();
+        }
+
+        function nextTurn() {
+            gameState.day++;
+            addLog(`📅 ${gameState.day}. Gün başladı.`, 'indigo');
+
+            triggerDailyLegalEvents();
+
+            for (let i = gameState.shipments.length - 1; i >= 0; i--) {
+                let s = gameState.shipments[i];
+                const rand = Math.random();
+
+                const goodObj = goodsData.find(g => g.id === s.goodId);
+                if (goodObj && goodObj.isBannedRisk && rand < 0.04) {
+                    const penalty = Math.round(s.costValue * 0.3);
+                    gameState.capital = Math.max(0, gameState.capital - penalty);
+                    gameState.reputation -= 8;
+                    addLog(`⚖️ <strong>YASAKLI ÜRÜN / AMBARGO!</strong> ${s.goodName} gümrükte yasaklı listeye alındı. Kargo el konuldu ve <strong>-$${penalty.toLocaleString()}</strong> adli para cezası kesildi!`, 'rose');
+                    gameState.shipments.splice(i, 1);
+                    continue;
+                }
+
+                if (s.type === 'sea' && rand < 0.015) {
+                    if (s.hasInsurance) { gameState.capital += s.costValue; addLog(`🚨 <strong>GEMİ BATTI!</strong> ${s.goodName} battı. Sigorta <strong>+$${s.costValue.toLocaleString()}</strong> ödedi.`, 'amber'); }
+                    else { gameState.reputation -= 5; addLog(`💥 <strong>GEMİ BATTI!</strong> ${s.goodName} battı. Sigortasız zarar: <strong>-$${s.costValue.toLocaleString()}</strong>`, 'rose'); }
+                    gameState.shipments.splice(i, 1); continue;
+                }
+
+                if (s.type === 'road' && rand < 0.02) {
+                    if (s.hasInsurance) { gameState.capital += s.costValue; addLog(`🚨 <strong>TIR KAZASI!</strong> ${s.goodName} tırı kaza yaptı. Sigorta <strong>+$${s.costValue.toLocaleString()}</strong> ödedi.`, 'amber'); }
+                    else { gameState.reputation -= 3; addLog(`💥 <strong>TIR KAZASI!</strong> ${s.goodName} kaza yaptı. Sigortasız zarar: <strong>-$${s.costValue.toLocaleString()}</strong>`, 'rose'); }
+                    gameState.shipments.splice(i, 1); continue;
+                }
+
+                if (!s.isDelayed && rand > 0.92) {
+                    s.eta += 3;
+                    s.isDelayed = true;
+                    gameState.reputation -= 2;
+                    addLog(`⏳ <strong>GÜMRÜK DENETİMİ!</strong> ${s.goodName} gümrükte takıldı (+3 Gün gecikme).`, 'amber');
+                    continue;
+                }
+
+                s.eta -= 1;
+                if (s.eta <= 0) {
+                    if (s.isDelayed) {
+                        const compensation = Math.round(s.costValue * 0.10);
+                        gameState.capital = Math.max(0, gameState.capital - compensation);
+                        addLog(`⚖️ <strong>ZARAR TAZMİN CEZASI!</strong> ${s.goodName} alıcıya geç ulaştığı için <strong>-$${compensation.toLocaleString()}</strong> gecikme tazminatı ödendi.`, 'rose');
+                    }
+                    addInventory(s.goodId, s.amount);
+                    addLog(`📦 <strong>Sevkiyat Depoya İndi:</strong> ${s.goodName} (${s.amount} Adet)`, 'emerald');
+                    gameState.shipments.splice(i, 1);
+                }
+            }
+
+            if (gameState.day % 5 === 0) {
+                generateMarketPrices();
+                addLog(`📈 Küresel pazarlarda fiyatlar ve kurlar güncellendi.`, 'indigo');
+            }
+
+            updateUI();
+        }
+
+        function triggerDailyLegalEvents() {
+            const rand = Math.random();
+            if (rand < 0.12) {
+                const legalEvents = [
+                    { title: 'Antidamping Davası!', msg: 'İthalat borsasında haksız rekabet davası açıldı.', impact: () => { gameState.reputation -= 3; } },
+                    { title: 'Gümrük Muafiyeti!', msg: 'Uluslararası ticaret mahkemesi harçları düşürdü.', impact: () => { gameState.reputation += 3; gameState.capital += 1500; } },
+                    { title: 'Çevre Hukuku Cezası!', msg: 'Deniz nakliyesinde emisyon sınırı aşıldı.', impact: () => { gameState.capital = Math.max(0, gameState.capital - 2000); } },
+                    { title: 'Patent / Telif İncelemesi!', msg: 'Kargolarda lisans denetimi başlatıldı.', impact: () => { gameState.reputation -= 2; } }
+                ];
+                const evt = legalEvents[Math.floor(Math.random() * legalEvents.length)];
+                evt.impact();
+                addLog(`⚖️ <strong>GÜNLÜK HUKUKİ GELİŞME: ${evt.title}</strong> ${evt.msg}`, 'amber');
+            }
+        }
+
+        function addLog(msg, color = 'slate') {
+            const container = document.getElementById('gameLogs');
+            const item = document.createElement('div');
+            item.className = `p-2.5 rounded-xl border text-xs bg-slate-900 border-slate-800 text-slate-300 leading-relaxed`;
+            item.innerHTML = `<span class="font-bold opacity-75 me-1">[${gameState.day}. Gün]</span> ${msg}`;
+            container.insertBefore(item, container.firstChild);
+        }
+    </script>
+</body>
+</html>
