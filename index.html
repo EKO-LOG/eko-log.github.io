@@ -338,35 +338,41 @@ a[href="#/yarisma"]{display:none!important}
 .bento .fmh #fmhr{font-size:13.5px;opacity:.92}
 </style>
 <style id="ev-news-css">
+/* Arşiv: gazete düzeni */
+#p-arsiv .ev-bar{margin:6px 0 18px}
+#p-arsiv section[hidden]{display:none!important}
+#p-arsiv .ars-h{margin:26px 0 4px;font:800 13px system-ui;text-transform:uppercase;letter-spacing:.08em;color:var(--red)}
+#p-arsiv .sec{margin-top:18px}
+#p-arsiv .cbox.gallery{margin-top:12px}
 /* Etkinlikler: Gazete ve Dergi gibi gazete düzeni */
 .ev-intro{margin:0 0 26px;padding:24px 26px;border-radius:26px;background:linear-gradient(135deg,color-mix(in srgb,var(--g1) 10%,var(--surf)),color-mix(in srgb,var(--g2) 8%,var(--surf)));border:1px solid var(--line)}
 .ev-intro small{display:block;font:800 12px system-ui;letter-spacing:.09em;text-transform:uppercase;color:var(--g1)}
 .ev-intro h3{margin:6px 0 10px;font:800 clamp(24px,3.4vw,34px)/1.12 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
 .ev-intro p{margin:0 0 8px;max-width:70ch;color:var(--mut);font-size:16.5px;line-height:1.55}
 .ev-intro p:last-child{margin-bottom:0;color:var(--ink);font-weight:600}
-#p-etkinlik .wrap.content{max-width:1180px}
-#p-etkinlik .ev-bar{margin:6px 0 4px;padding:0}
-#p-etkinlik .np-nav{border-bottom-color:var(--g1)}
-#p-etkinlik .np-nav button[aria-pressed=true]{background:var(--g1)}
-#p-etkinlik .feed{max-width:none;grid-template-columns:repeat(12,1fr);gap:0 28px;align-items:start;margin:0}
-#p-etkinlik .feed>article{grid-column:span 12!important}
-@media(min-width:700px){#p-etkinlik .feed>article:is(.story,.evc){grid-column:span 6!important}}
-@media(min-width:1000px){#p-etkinlik .feed>article:is(.story,.evc){grid-column:span 4!important}}
-#p-etkinlik .feed>article:is(.story,.evc){border:0;border-top:1px solid var(--line);border-radius:0;background:none;padding:18px 0 22px;margin:0;overflow:visible}
-#p-etkinlik .feed>article:is(.story,.evc):hover{transform:none;box-shadow:none}
-#p-etkinlik .feed>article:hover h4{color:var(--g1)}
-#p-etkinlik .feed>article .kick,#p-etkinlik .feed>article .edate{display:block;order:3;align-self:flex-start;background:none;color:var(--g1);font:800 12px system-ui;text-transform:uppercase;letter-spacing:.08em;padding:12px 0 0}
-#p-etkinlik .feed>article .kick:empty{display:none}
-#p-etkinlik .feed>article .kick+.edate{padding-top:2px}
-#p-etkinlik .feed>article .edate:empty{display:none}
-#p-etkinlik .feed>article h4{order:4;padding:6px 0 0;font:800 clamp(19px,2vw,22px)/1.22 "Instrument Sans",system-ui,sans-serif}
-#p-etkinlik .feed>article p{display:-webkit-box;order:5;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--mut)}
-#p-etkinlik .feed>article .cimg{aspect-ratio:auto!important;height:auto!important;width:100%;max-height:320px;object-fit:contain;border-radius:2px}
-#p-etkinlik .feed>article:not(:has(>img.cimg))::after{aspect-ratio:3/2;border-radius:2px}
-#p-etkinlik .feed>article .ev-chips{padding:10px 0 0;margin:0}
-#p-etkinlik .feed>article.evc .ekayit,#p-etkinlik .feed>article.evc .ekdone,#p-etkinlik .feed>article .calb{margin-left:0;margin-right:0}
-#p-etkinlik .feed>article .cm-n{padding:12px 0 0;border-top:0}
-#p-etkinlik .feed>article[hidden]{display:none!important}
+:is(#p-etkinlik,#p-arsiv) .wrap.content{max-width:1180px}
+:is(#p-etkinlik,#p-arsiv) .ev-bar{margin:6px 0 4px;padding:0}
+:is(#p-etkinlik,#p-arsiv) .np-nav{border-bottom-color:var(--g1)}
+:is(#p-etkinlik,#p-arsiv) .np-nav button[aria-pressed=true]{background:var(--g1)}
+:is(#p-etkinlik,#p-arsiv) .feed{max-width:none;grid-template-columns:repeat(12,1fr);gap:0 28px;align-items:start;margin:0}
+:is(#p-etkinlik,#p-arsiv) .feed>article{grid-column:span 12!important}
+@media(min-width:700px){:is(#p-etkinlik,#p-arsiv) .feed>article:is(.story,.evc){grid-column:span 6!important}}
+@media(min-width:1000px){:is(#p-etkinlik,#p-arsiv) .feed>article:is(.story,.evc){grid-column:span 4!important}}
+:is(#p-etkinlik,#p-arsiv) .feed>article:is(.story,.evc){border:0;border-top:1px solid var(--line);border-radius:0;background:none;padding:18px 0 22px;margin:0;overflow:visible}
+:is(#p-etkinlik,#p-arsiv) .feed>article:is(.story,.evc):hover{transform:none;box-shadow:none}
+:is(#p-etkinlik,#p-arsiv) .feed>article:hover h4{color:var(--g1)}
+:is(#p-etkinlik,#p-arsiv) .feed>article .kick,:is(#p-etkinlik,#p-arsiv) .feed>article .edate{display:block;order:3;align-self:flex-start;background:none;color:var(--g1);font:800 12px system-ui;text-transform:uppercase;letter-spacing:.08em;padding:12px 0 0}
+:is(#p-etkinlik,#p-arsiv) .feed>article .kick:empty{display:none}
+:is(#p-etkinlik,#p-arsiv) .feed>article .kick+.edate{padding-top:2px}
+:is(#p-etkinlik,#p-arsiv) .feed>article .edate:empty{display:none}
+:is(#p-etkinlik,#p-arsiv) .feed>article h4{order:4;padding:6px 0 0;font:800 clamp(19px,2vw,22px)/1.22 "Instrument Sans",system-ui,sans-serif}
+:is(#p-etkinlik,#p-arsiv) .feed>article p{display:-webkit-box;order:5;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--mut)}
+:is(#p-etkinlik,#p-arsiv) .feed>article .cimg{aspect-ratio:auto!important;height:auto!important;width:100%;max-height:320px;object-fit:contain;border-radius:2px}
+:is(#p-etkinlik,#p-arsiv) .feed>article:not(:has(>img.cimg))::after{aspect-ratio:3/2;border-radius:2px}
+:is(#p-etkinlik,#p-arsiv) .feed>article .ev-chips{padding:10px 0 0;margin:0}
+:is(#p-etkinlik,#p-arsiv) .feed>article.evc .ekayit,:is(#p-etkinlik,#p-arsiv) .feed>article.evc .ekdone,:is(#p-etkinlik,#p-arsiv) .feed>article .calb{margin-left:0;margin-right:0}
+:is(#p-etkinlik,#p-arsiv) .feed>article .cm-n{padding:12px 0 0;border-top:0}
+:is(#p-etkinlik,#p-arsiv) .feed>article[hidden]{display:none!important}
 </style>
 </head><body>
 <header><div class="bar">
@@ -390,7 +396,7 @@ a[href="#/yarisma"]{display:none!important}
 <div class="bento">
 <a class="tile t14" href="simulasyon-merkezi.html"><span class="go">→</span><small data-k="ym80">12 simülasyon</small><h3 data-k="ym81">Simülasyon Merkezi</h3><p data-k="ym82">Vaka, Başkan, Borsa, Bakanlık, Girişimci, Dış Ticaret, Müzakere, Kamu İhalesi, Hâkimlik, Valilik ve Mali Müşavirlik simülasyonları.</p></a>
 <a class="tile t9" href="#/meslekler" data-b="b9"><span class="go">→</span><small data-k="ym83">Kariyer ve hazırlık</small><h3 data-k="ym84">Meslekler</h3><p data-k="ym85">Meslek Tanıtımı · Kariyer Kadroları · Sınav takvimi · Mülakat Prova Modu · Kurum mülakatı · Simülasyon başvurusu · Terim Quiz</p></a>
-<div class="tile fmh" id="fmh" style="--bg1:#c4202e;--bg2:#7c3aed"><small>Fikir Muharebesi · Bu hafta</small><h3>Fikir Muharebesi</h3><p id="fmhq"></p><div class="fmhb"><a class="btn" href="#/fikir">Tarafını seç</a><span id="fmhr"></span></div></div>
+
 <a style="--bg1:#0e7490;--bg2:#6d3fd8" class="tile " href="ansiklopedi.html#/ansiklopedi"><span class="go">→</span><small data-k="ym86">Terim ve kavram</small><h3 data-k="ym87">İktisadi Ansiklopedi</h3><p data-k="ym88">Ekonomi Sözlüğü: terim ara, rastgele terim, quiz · Kavramın Anatomisi: Klasik, Keynesyen ve Marksist yorum · Şehir Efsaneleri: doğru bilinen yanlışlar</p></a>
 <a style="--bg1:#1d4ed8;--bg2:#0e9aa7" class="tile " href="#/piyasa"><span class="go">→</span><small data-k="ym89">Piyasa ve veri</small><h3 data-k="ym90">Veri ve Pariteler</h3><p data-k="ym91">Pariteler · İktisat Grafikleri · Hesaplayıcılar · İktisat Laboratuvarı · Kaynaklar</p></a>
 <a class="tile t4" href="#/yayin" data-b="b4"><span class="go">→</span><small data-k="ym92">Yayın</small><h3 data-k="ym93">Gazete ve Dergi</h3><p data-k="ym94">Diyalog Gazetesi · İktisadi Kalkınma Dergisi · Makale Yazımı · Arşiv</p></a>
@@ -799,7 +805,7 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <div class="page" id="p-veri">
 <div class="aurora banner" style="--a1:#0e7490;--a2:#6d3fd8;--a3:#c4202e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/" data-k="k1406">Ana sayfa</a> / <a href="#/piyasa">Veri ve Pariteler</a> / İktisat Grafikleri</span><h2>İktisat Grafikleri</h2><p>Derslerde çizilen temel grafikler. Kaydırıcıyı oynat, eğrilerin nasıl kaydığını ve dengenin nasıl değiştiğini gör.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
-<div class="wrap content" style="--g1:#0e7490;--g2:#6d3fd8">
+<div class="wrap content" style="--g1:#0e7490;--g2:#6d3fd8"><nav class="fmx-tabs" aria-label="Grafik bölümleri"><a class="on" href="#/veri">İktisat Grafikleri</a><a href="#/grafikokuma">Grafik Okuma Okulu</a></nav>
 <div class="ig-g" id="ig-g"></div>
 <div id="vt-old" hidden>
 <textarea id="vt-in" spellcheck="false" aria-label="Veri" placeholder="Başlık satırıyla birlikte yapıştır. Ayırıcı: sekme, noktalı virgül ya da virgül."></textarea>
@@ -832,7 +838,7 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <div class="page" id="p-grafikokuma">
 <div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e7490;--a3:#c4202e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / <a href="#/piyasa">Veri ve Pariteler</a> / Grafik Okuma Okulu</span><h2>Grafik Okuma Okulu</h2><p>Haberlerde ve raporlarda karşına çıkan grafiklerin nasıl yanıltabileceğini beş kısa derste öğren. Grafiği çevir, soruyu cevapla.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
-<div class="wrap content" style="--g1:#6d3fd8;--g2:#0e7490"><div class="xp-host" data-xp="grafikokuma"></div><div class="next"><a class="btn" href="#/piyasa">← Veri ve Pariteler</a><a class="btn grad" href="#/urun">Bir Ürünün Hikâyesi →</a></div></div></div>
+<div class="wrap content" style="--g1:#6d3fd8;--g2:#0e7490"><nav class="fmx-tabs" aria-label="Grafik bölümleri"><a href="#/veri">İktisat Grafikleri</a><a class="on" href="#/grafikokuma">Grafik Okuma Okulu</a></nav><div class="xp-host" data-xp="grafikokuma"></div><div class="next"><a class="btn" href="#/piyasa">← Veri ve Pariteler</a><a class="btn grad" href="#/urun">Bir Ürünün Hikâyesi →</a></div></div></div>
 <div class="page" id="p-urun">
 <div class="aurora banner" style="--a1:#0e9aa7;--a2:#34d399;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / <a href="#/piyasa">Veri ve Pariteler</a> / Bir Ürünün Hikâyesi</span><h2>Bir Ürünün Hikâyesi</h2><p>Raftaki fiyatın içinde ne var? Hammaddeden vergiye kalemleri aç, kur ve maliyet şoklarının fiyata nasıl yansıdığını izle.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
@@ -850,9 +856,9 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px">
 <a class="tile" href="#/pariteler" style="--bg1:#1d4ed8;--bg2:#0e9aa7"><span class="go">→</span><small>Piyasa</small><h3>Pariteler</h3><p>Döviz, değerli maden, enerji, sanayi metalleri, tarım ve kripto; her biri ayrı sayfada, hepsi bir arada.</p></a>
-<a class="tile" href="#/veri" style="--bg1:#6d3fd8;--bg2:#0e7490"><span class="go">→</span><small>Ders</small><h3>İktisat Grafikleri</h3><p>Arz-talep, ÜİS, IS-LM, Phillips, Laffer ve diğer ders grafikleri. Kaydırıcıyla oynat.</p></a>
+<a class="tile" href="#/veri" style="--bg1:#6d3fd8;--bg2:#0e7490"><span class="go">→</span><small>Ders ve veri okuryazarlığı</small><h3>İktisat Grafikleri ve Grafik Okuma Okulu</h3><p>Arz-talep, ÜİS, IS-LM, Phillips, Laffer gibi ders grafiklerini kaydırıcıyla oynat; grafiklerin nasıl yanıltabileceğini kısa derslerle öğren.</p></a>
 <a class="tile" href="#/hesap" style="--bg1:#0f766e;--bg2:#34d399"><span class="go">→</span><small>Araçlar</small><h3>Hesaplayıcılar</h3><p>Basit hesaplama (reel faiz, CAGR, başabaş, NBD) ve karşılaştırma (iki senaryo, mevduat, kredi, alım gücü) tek sayfada.</p></a>
-<a class="tile" href="#/kaynak" style="--bg1:#0f766e;--bg2:#1d4ed8"><span class="go">→</span><small>Bağlantılar</small><h3>Kaynaklar</h3><p>Ekonomi göstergeleri ile resmî kurum, mevzuat ve sınav bağlantıları.</p></a><a class="tile" href="#/ulke" style="--bg1:#1d4ed8;--bg2:#12b5c4"><span class="go">→</span><small>Karşılaştırma</small><h3>Ülke Karşılaştırma</h3><p>İki ülkeyi seç; GSYH, enflasyon ve işsizliği yan yana oku.</p></a><a class="tile" href="#/turkiye" style="--bg1:#c4202e;--bg2:#ff7a45"><span class="go">→</span><small>Güncel konular</small><h3>Türkiye Ekonomisi Dosyaları</h3><p>Enflasyon, cari açık, faiz ve kur, bütçe, işgücü, dış ticaret, büyüme ve rezervler: kavram, hesaplayıcı ve kaynak.</p></a><a class="tile" href="#/grafikokuma" style="--bg1:#6d3fd8;--bg2:#0e7490"><span class="go">→</span><small>Veri okuryazarlığı</small><h3>Grafik Okuma Okulu</h3><p>Grafiklerin nasıl yanıltabileceğini 12 kısa derste öğren; arz-talep, Lorenz ve log eksen dahil.</p></a><a class="tile" href="#/urun" style="--bg1:#0f766e;--bg2:#34d399"><span class="go">→</span><small>Fiyatın anatomisi</small><h3>Bir Ürünün Hikâyesi</h3><p>Raf fiyatının içindeki maliyet, kâr ve vergi kalemlerini aç; 20 üründe kur şokunu izle.</p></a><a class="tile" href="#/hesap" style="--bg1:#0f766e;--bg2:#1d4ed8"><span class="go">→</span><small>Araçlar</small><h3>Karşılaştırma Hesaplayıcı</h3><p>İki seçeneği yan yana koy; fark ve oranı hesapla.</p></a>
+<a class="tile" href="#/kaynak" style="--bg1:#0f766e;--bg2:#1d4ed8"><span class="go">→</span><small>Bağlantılar</small><h3>Kaynaklar</h3><p>Ekonomi göstergeleri ile resmî kurum, mevzuat ve sınav bağlantıları.</p></a><a class="tile" href="#/ulke" style="--bg1:#1d4ed8;--bg2:#12b5c4"><span class="go">→</span><small>Karşılaştırma</small><h3>Ülke Karşılaştırma</h3><p>İki ülkeyi seç; GSYH, enflasyon ve işsizliği yan yana oku.</p></a><a class="tile" href="#/turkiye" style="--bg1:#c4202e;--bg2:#ff7a45"><span class="go">→</span><small>Güncel konular</small><h3>Türkiye Ekonomisi Dosyaları</h3><p>Enflasyon, cari açık, faiz ve kur, bütçe, işgücü, dış ticaret, büyüme ve rezervler: kavram, hesaplayıcı ve kaynak.</p></a><a class="tile" href="#/urun" style="--bg1:#0f766e;--bg2:#34d399"><span class="go">→</span><small>Fiyatın anatomisi</small><h3>Bir Ürünün Hikâyesi</h3><p>Raf fiyatının içindeki maliyet, kâr ve vergi kalemlerini aç; 20 üründe kur şokunu izle.</p></a>
 </div></div></div>
 <style id="ig-css">
 .ig-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
@@ -975,7 +981,7 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <div class="page" id="p-yayin">
 <div class="aurora banner" style="--a1:#c4202e;--a2:#ff5f8f;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Gazete ve Dergi</span><h2 data-k="ym50">Gazete ve Dergi</h2><p data-k="ym51">Gazete, dergi ve makale yazımı. Birini seç.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
-<div class="wrap content"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px"><a class="tile" href="#/gazete" style="--bg1:#c4202e;--bg2:#ff5f8f"><span class="go">→</span><small data-k="ym53">Gazete</small><h3 data-k="ym54">Diyalog Gazetesi</h3><p data-k="ym55">Topluluğun haberleri, söyleşileri ve üye yazıları bir arada.</p></a><a class="tile" href="#/dergi" style="--bg1:#1d4ed8;--bg2:#7c3aed"><span class="go">→</span><small data-k="ym56">Dergi</small><h3 data-k="ym57">İktisadi Kalkınma Dergisi</h3><p data-k="ym58">İktisat, kalkınma ve politika üzerine daha uzun yazılar.</p></a><a class="tile" href="#/makale" style="--bg1:#6d3fd8;--bg2:#0e7490"><span class="go">→</span><small data-k="ym70">Yazı</small><h3 data-k="ym71">Makale Yazımı</h3><p data-k="ym72">Yazını hazırla, kelime sayını izle ve editörlere gönder.</p></a><a class="tile" href="#/arsiv" style="--bg1:#9a3412;--bg2:#fbbf24"><span class="go">→</span><small>Geçmiş</small><h3>Arşiv</h3><p>Önceki gazete sayıları, kurul tutanakları ve etkinlik fotoğrafları.</p></a><a class="tile" href="#/ceviri" style="--bg1:#be185d;--bg2:#f472b6"><span class="go">→</span><small>Dünyadan okumalar</small><h3>Çeviri Köşesi</h3><p>Kurum ve yayınlardan özetler, terim sözlüğü ve çeviri gönderme formu.</p></a><a class="tile" href="#/arastirma" style="--bg1:#4338ca;--bg2:#a78bfa"><span class="go">→</span><small>Birlikte üret</small><h3>Ortak Araştırma Projeleri</h3><p>Ekip arkadaşı ara ya da açık bir araştırma projesine katıl.</p></a></div></div></div>
+<div class="wrap content"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px"><a class="tile" href="#/gazete" style="--bg1:#c4202e;--bg2:#ff5f8f"><span class="go">→</span><small data-k="ym53">Gazete</small><h3 data-k="ym54">Diyalog Gazetesi</h3><p data-k="ym55">Topluluğun haberleri, söyleşileri ve üye yazıları bir arada.</p></a><a class="tile" href="#/dergi" style="--bg1:#1d4ed8;--bg2:#7c3aed"><span class="go">→</span><small data-k="ym56">Dergi</small><h3 data-k="ym57">İktisadi Kalkınma Dergisi</h3><p data-k="ym58">İktisat, kalkınma ve politika üzerine daha uzun yazılar.</p></a><a class="tile" href="#/makale" style="--bg1:#6d3fd8;--bg2:#0e7490"><span class="go">→</span><small data-k="ym70">Yazı</small><h3 data-k="ym71">Makale Yazımı</h3><p data-k="ym72">Yazını hazırla, kelime sayını izle ve editörlere gönder.</p></a><a class="tile" href="#/ceviri" style="--bg1:#be185d;--bg2:#f472b6"><span class="go">→</span><small>Dünyadan okumalar</small><h3>Çeviri Köşesi</h3><p>Kurum ve yayınlardan özetler, terim sözlüğü ve çeviri gönderme formu.</p></a><a class="tile" href="#/arastirma" style="--bg1:#4338ca;--bg2:#a78bfa"><span class="go">→</span><small>Birlikte üret</small><h3>Ortak Araştırma Projeleri</h3><p>Ekip arkadaşı ara ya da açık bir araştırma projesine katıl.</p></a><a class="tile" href="#/arsiv" style="--bg1:#9a3412;--bg2:#fbbf24"><span class="go">→</span><small>Geçmiş</small><h3>Arşiv</h3><p>Önceki gazete sayıları, kurul tutanakları ve etkinlik fotoğrafları.</p></a></div></div></div>
 <div class="page" id="p-konferanslar">
 <div class="aurora banner" style="--a1:#6d28d9;--a2:#0e9aa7;--a3:#c4202e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / <a href="#/etkinlik">Etkinlikler</a> / Konferanslar</span><h2>Konferanslar</h2><p>Topluluğumuzun düzenlediği konferanslar, konuşmacılar ve etkinlik kareleri.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
@@ -1012,19 +1018,19 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <div class="np-bar"><div class="np-meta solo"><span data-npd></span><span>Dergi · Ücretsizdir</span></div></div>
 <div class="wrap content" style="--g1:#1d4ed8;--g2:#7c3aed"><h3 class="sec" style="margin-top:0" data-k="ym62">Sayılar</h3><div class="feed" id="dg-feed"></div><div class="card" id="dg-empty" style="border-left:6px solid var(--g2)"><h4 style="margin:0 0 6px" data-k="ym63">İlk sayı hazırlanıyor</h4><p style="margin:0" data-k="ym64">Yayımlanan sayılar burada listelenecek.</p></div><h3 class="sec" style="margin-top:34px" data-k="ym65">Yazı göndermek istiyorsan</h3><div class="card"><p style="margin:0 0 12px" data-k="ym66">Yazını Makale sayfasında hazırla: kelime sayını izle, hazır olunca editörlere gönder.</p><a class="btn grad" href="#/makale" data-k="ym67">Makale yaz</a></div><div class="next"><a class="btn" href="#/yayin" data-k="ym68">← Gazete ve Dergi</a><a class="btn grad" href="#/gazete" data-k="ym69">Diyalog Gazetesi →</a></div></div></div>
 <style id="gz-np-css">
-:is(#p-gazete,#p-dergi) .aurora.banner{background:none!important;color:var(--ink);padding:112px 0 0;overflow:visible;text-align:center;min-height:0}
-:is(#p-gazete,#p-dergi) .aurora.banner>i,:is(#p-gazete,#p-dergi)>svg.wave{display:none}
-:is(#p-gazete,#p-dergi) .aurora.banner .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-:is(#p-gazete,#p-dergi) .crumb{display:block;text-align:left;font-size:13px;color:var(--mut)}
-:is(#p-gazete,#p-dergi) .crumb a{color:inherit}
-:is(#p-gazete,#p-dergi) .banner h2{margin:6px 0 2px;font:900 clamp(40px,9vw,84px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.02em;color:var(--red)}
-:is(#p-gazete,#p-dergi) .banner p{max-width:none!important;width:100%;text-align:center;margin:0;padding:6px 0 10px;font:italic 15px Georgia,serif;color:var(--mut);border-bottom:4px double var(--ink)}
+:is(#p-gazete,#p-dergi,#p-arsiv) .aurora.banner{background:none!important;color:var(--ink);padding:112px 0 0;overflow:visible;text-align:center;min-height:0}
+:is(#p-gazete,#p-dergi,#p-arsiv) .aurora.banner>i,:is(#p-gazete,#p-dergi,#p-arsiv)>svg.wave{display:none}
+:is(#p-gazete,#p-dergi,#p-arsiv) .aurora.banner .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+:is(#p-gazete,#p-dergi,#p-arsiv) .crumb{display:block;text-align:left;font-size:13px;color:var(--mut)}
+:is(#p-gazete,#p-dergi,#p-arsiv) .crumb a{color:inherit}
+:is(#p-gazete,#p-dergi,#p-arsiv) .banner h2{margin:6px 0 2px;font:900 clamp(40px,9vw,84px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.02em;color:var(--red)}
+:is(#p-gazete,#p-dergi,#p-arsiv) .banner p{max-width:none!important;width:100%;text-align:center;margin:0;padding:6px 0 10px;font:italic 15px Georgia,serif;color:var(--mut);border-bottom:4px double var(--ink)}
 .np-bar{max-width:1180px;margin:0 auto;padding:0 16px}
 .np-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 0;font:600 13px system-ui;color:var(--mut);border-bottom:1px solid var(--line)}
 .np-nav{display:flex;justify-content:flex-start;overflow-x:auto;border-bottom:3px solid var(--red);scrollbar-width:none}
 .np-nav button{flex:none;border:0;background:none;color:var(--ink);font:700 14px system-ui;padding:12px 16px;cursor:pointer;text-transform:uppercase;letter-spacing:.03em}
 .np-nav button[aria-pressed=true]{background:var(--red);color:#fff}
-:is(#p-gazete,#p-dergi) .wrap.content{max-width:1180px;padding-top:22px}
+:is(#p-gazete,#p-dergi,#p-arsiv) .wrap.content{max-width:1180px;padding-top:22px}
 :is(#p-gazete,#p-dergi) .feed{max-width:none;grid-template-columns:repeat(12,1fr);gap:0 28px;align-items:start}
 :is(#p-gazete,#p-dergi) .feed>article{grid-column:span 12!important}
 @media(min-width:700px){:is(#p-gazete,#p-dergi) .feed>article.story{grid-column:span 6!important}}
@@ -1080,7 +1086,7 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <div class="page" id="p-etkinlik">
 <div class="aurora banner" style="--a1:#1d4ed8;--a2:#06b6d4;--a3:#7c3aed"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/" data-k="k205">Ana sayfa</a> <span data-k="k206">/ Etkinlikler</span></span><h2 data-k="k207">Etkinlikler</h2><p data-k="k208">Yaklaşan söyleşiler, kurul oturumları ve topluluk buluşmaları.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
-<div class="wrap content" style="--g1:#1d4ed8;--g2:#06b6d4"><section class="ev-intro" aria-label="Etkinliklere giriş"><small data-k="ek1">Etkinliklerimiz</small><h3 data-k="ek2">Birlikte öğrendiğimiz, tartıştığımız buluşmalar</h3><p data-k="ek3">Söyleşiler, Para Politikası Kurulu oturumları, vaka günleri, mülakat provaları, atölyeler ve paneller burada. Kartlara basarak tarih ve yer bilgisine ulaşabilir, takvimine ekleyebilir, etkinlik hakkında yorum bırakabilirsin.</p><p data-k="ek4">Etkinlikte gösterilen QR’ı okutursan yoklaman otomatik alınır ve o etkinliğe özel “Soru Sor” bölümü bu sayfada açılır.</p></section><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:26px"><a class="tile" href="#/fikir" style="--bg1:#1d4ed8;--bg2:#c4202e"><span class="go">→</span><small>Tartışma</small><h3>Fikir Muharebesi</h3><p>Haftanın iddiasına katılıyor musun? Tarafını seç, argümanını yaz.</p></a><a class="tile" id="yb-tile" href="#/yatay" style="--bg1:#0e7490;--bg2:#7c3aed"><span class="go">→</span><small>Etkinlik</small><h3>Yatay Bakış</h3><p>Etkinliğin ne olduğunu, ne zaman ve nerede yapılacağını öğren.</p></a><a class="tile" id="kf-tile" href="#/konferanslar" style="--bg1:#6d28d9;--bg2:#0e9aa7"><span class="go">→</span><small>Arşiv</small><h3>Konferanslar</h3><p>Şimdiye kadar yaptığımız konferanslar, konuşmacılar ve fotoğrafları.</p></a></div><section id="xp-room" hidden aria-label="Etkinlik odası"></section><div class="np-bar ev-bar" id="ev-bar" hidden><nav class="np-nav" id="ev-nav" aria-label="Etkinlik türleri"></nav></div><div id="evl" class="feed"></div><div class="mag feed" style="margin:14px auto 20px">
+<div class="wrap content" style="--g1:#1d4ed8;--g2:#06b6d4"><section class="ev-intro" aria-label="Etkinliklere giriş"><small data-k="ek1">Etkinliklerimiz</small><h3 data-k="ek2">Birlikte öğrendiğimiz, tartıştığımız buluşmalar</h3><p data-k="ek3">Söyleşiler, Para Politikası Kurulu oturumları, vaka günleri, mülakat provaları, atölyeler ve paneller burada. Kartlara basarak tarih ve yer bilgisine ulaşabilir, takvimine ekleyebilir, etkinlik hakkında yorum bırakabilirsin.</p><p data-k="ek4">Etkinlikte gösterilen QR’ı okutursan yoklaman otomatik alınır ve o etkinliğe özel “Soru Sor” bölümü bu sayfada açılır.</p></section><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:26px"><a class="tile" href="#/fikir" style="--bg1:#1d4ed8;--bg2:#c4202e"><span class="go">→</span><small>Tartışma</small><h3>Fikir Muharebesi</h3><p>Haftanın iddiasına katılıyor musun? Tarafını seç, argümanını yaz.</p></a><a class="tile" id="yb-tile" href="#/yatay" style="--bg1:#0e7490;--bg2:#7c3aed"><span class="go">→</span><small>Etkinlik</small><h3>Yatay Bakış</h3><p>Etkinliğin ne olduğunu, ne zaman ve nerede yapılacağını öğren.</p></a><a class="tile" id="kf-tile" href="#/konferanslar" style="--bg1:#6d28d9;--bg2:#0e9aa7"><span class="go">→</span><small>Etkinlik</small><h3>Konferanslar</h3><p>Şimdiye kadar yaptığımız konferanslar, konuşmacılar ve fotoğrafları.</p></a><a class="tile" href="#/arastirma" style="--bg1:#6d3fd8;--bg2:#0e9aa7"><span class="go">→</span><small>Topluluk</small><h3>Ortak Araştırma Projeleri</h3><p>Etkinliklerde ortaya çıkan konuları birlikte araştır; ekip kur, proje yürüt.</p></a></div><section id="xp-room" hidden aria-label="Etkinlik odası"></section><div class="np-bar ev-bar" id="ev-bar" hidden><nav class="np-nav" id="ev-nav" aria-label="Etkinlik türleri"></nav></div><div id="evl" class="feed"></div><div class="mag feed" style="margin:14px auto 20px">
 <article class="story" data-b="e1"><span class="kick" data-k="k901">Söyleşi</span><h4 data-k="k902">Konuk akademisyenle ekonomi söyleşisi</h4><p data-k="k903">Tarih ve yer yakında duyurulacak.</p></article>
 <article class="story" data-b="e2"><span class="kick" data-k="k904">Kurul</span><h4 data-k="k905">Para Politikası Kurulu oturumu</h4><p data-k="k906">Faiz kararını rollerimizle birlikte tartışıyoruz.</p></article>
 <article class="story" data-b="e3"><span class="kick" data-k="k907">Vaka günü</span><h4 data-k="k908">Ekip vaka sunumları</h4><p data-k="k909">Ekipler vakaları jüriye sunuyor, birlikte değerlendiriyoruz.</p></article>
@@ -1088,30 +1094,36 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 <article class="story" data-b="e5"><span class="kick" data-k="k1004">Atölye</span><h4 data-k="k1005">Finansal okuryazarlık atölyesi</h4><p data-k="k1006">Bütçe, tasarruf ve yatırım temelleri uygulamalı olarak işlenecek.</p></article>
 <article class="story" data-b="e6"><span class="kick" data-k="k1007">Panel</span><h4 data-k="k1008">Ekonomi ve gençlik paneli</h4><p data-k="k1009">Genç ekonomistler güncel gelişmeleri birlikte tartışıyor.</p></article>
 </div><p id="evempty" data-k="k209" style="color:var(--mut)">Şu an planlanmış etkinlik yok. Takipte kal, yakında duyuracağız.</p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:0 0 30px"><a class="tile" href="#/arastirma" style="--bg1:#6d3fd8;--bg2:#0e9aa7"><span class="go">→</span><small>Topluluk</small><h3>Ortak Araştırma Projeleri</h3><p>Etkinliklerde ortaya çıkan konuları birlikte araştır; ekip kur, proje yürüt.</p></a></div>
 <section id="xp-etk-sec" aria-label="Etkinlik Araçları"><h3 class="sec">Etkinlik Araçları</h3><p style="color:var(--mut);margin:0 0 16px">Etkinlikte QR ya da kodla yoklamaya katıl, canlı oylamaya oy ver, etkinlik sonunda geri bildirim bırak.</p><div id="xp-etk-body"></div></section>
 <div class="next"><a class="btn" href="#/gazete" data-k="k210">← Gazete</a><a class="btn grad" href="#/" data-k="k211">Ana sayfa</a></div></div></div>
 <div class="page" id="p-arsiv">
-<div class="aurora banner" style="--a1:#c4202e;--a2:#ff5f8f;--a3:#7c3aed"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/" data-k="k226">Ana sayfa</a> / <a href="#/yayin">Gazete ve Dergi</a> / Arşiv</span><h2 data-k="k228">Arşiv</h2><p data-k="k229">Gazetenin önceki sayıları ve etkinlik fotoğrafları.</p></div></div>
+<div class="aurora banner" style="--a1:#c4202e;--a2:#ff5f8f;--a3:#7c3aed"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/" data-k="k226">Ana sayfa</a> / <a href="#/yayin">Gazete ve Dergi</a> / Arşiv</span><h2 data-k="k228">Arşiv</h2><p data-k="k229">Gazete ve dergi sayıları, biten etkinlikler ve fotoğraflar.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
-<div class="wrap content"><h3 style="margin:0 0 14px" data-k="k301">Gazete sayıları</h3>
-<div class="mag" style="margin-bottom:20px">
+<div class="wrap content" style="--g1:#c4202e;--g2:#ff5f8f"><div class="np-bar ev-bar"><nav class="np-nav" id="ars-nav" aria-label="Arşiv bölümleri"><button type="button" data-s="" aria-pressed="true">Tümü</button><button type="button" data-s="g" aria-pressed="false">Gazete ve Dergi</button><button type="button" data-s="e" aria-pressed="false">Etkinlik</button></nav></div>
+<section id="ars-g" data-s="g" aria-label="Gazete ve dergi arşivi"><h3 class="sec" data-k="k301">Gazete ve Dergi Arşivi</h3>
+<h4 class="ars-h">Gazete</h4>
+<div class="mag feed" style="margin-bottom:0">
 <article class="story" data-b="a1"><span class="kick" data-k="k951">Sayı 1</span><h4 data-k="k952">Diyalog Gazetesi ilk sayı</h4><p data-k="k953">Manşet, söyleşi ve üye yazıları bu sayıda.</p></article>
 <article class="story" data-b="a2"><span class="kick" data-k="k954">Kurul</span><h4 data-k="k955">İlk kurul oturumu tutanağı</h4><p data-k="k956">Faiz kararında oylar ikiye bölündü.</p></article>
 <article class="story" data-b="a3"><span class="kick" data-k="k957">Söyleşi</span><h4 data-k="k958">Konuk akademisyen söyleşisi</h4><p data-k="k959">Kariyer ve araştırma üzerine sohbet.</p></article>
-<article class="story" data-b="a4"><span class="kick" data-k="k960">Fotoğraf</span><h4 data-k="k961">Etkinlik kareleri</h4><p data-k="k962">Topluluğun toplantı ve etkinliklerinden anılar.</p></article>
 <article class="story" data-b="a5"><span class="kick" data-k="k1013">Makale</span><h4 data-k="k1014">Seçilmiş üye yazıları</h4><p data-k="k1015">Önceki sayılarda yayımlanan en çok okunan yazılar.</p></article>
 <article class="story" data-b="a6"><span class="kick" data-k="k1016">Vaka</span><h4 data-k="k1017">Vaka günü özetleri</h4><p data-k="k1018">Ekiplerin sunduğu vakaların kısa özetleri.</p></article>
 </div>
-<h3 style="margin:18px 0 14px">Dergi</h3>
-<div class="cbox archive" id="ardg"></div><p class="cempty" data-for="archive-d" style="color:var(--mut)">Dergi sayıları burada görünecek.</p>
-<h3 style="margin:18px 0 14px">Gazete</h3>
-<div class="cbox archive" id="arcl"></div><p class="cempty" data-for="archive" data-k="k230" style="color:var(--mut)">Önceki sayılar yakında eklenecek.</p>
-<h3 style="margin:18px 0 14px">Etkinlik</h3>
-<div class="cbox archive" id="arce"></div><p class="cempty" data-for="archive-e" style="color:var(--mut)">Biten etkinlikler burada görünecek.</p>
-<h3 style="margin:18px 0 14px" data-k="k302">Fotoğraflar</h3>
+<div class="cbox archive feed" id="arcl"></div><p class="cempty" data-for="archive" data-k="k230" style="color:var(--mut)">Önceki sayılar yakında eklenecek.</p>
+<h4 class="ars-h">Dergi</h4>
+<div class="cbox archive feed" id="ardg"></div><p class="cempty" data-for="archive-d" style="color:var(--mut)">Dergi sayıları burada görünecek.</p>
+</section>
+<section id="ars-e" data-s="e" aria-label="Etkinlik arşivi"><h3 class="sec">Etkinlik Arşivi</h3>
+<h4 class="ars-h">Biten etkinlikler</h4>
+<div class="mag feed" style="margin-bottom:0">
+<article class="story" data-b="a4"><span class="kick" data-k="k960">Fotoğraf</span><h4 data-k="k961">Etkinlik kareleri</h4><p data-k="k962">Topluluğun toplantı ve etkinliklerinden anılar.</p></article>
+</div>
+<div class="cbox archive feed" id="arce"></div><p class="cempty" data-for="archive-e" style="color:var(--mut)">Biten etkinlikler burada görünecek.</p>
+<h4 class="ars-h" data-k="k302">Fotoğraflar</h4>
 <div class="cbox gallery" id="galy"></div><p class="cempty" data-for="gallery" data-k="k223" style="color:var(--mut)">Fotoğraflar yakında eklenecek.</p>
+</section>
 <div class="next"><a class="btn" href="#/yayin">← Gazete ve Dergi</a><a class="btn grad" href="#/" data-k="k232">Ana sayfa</a></div></div></div>
+<script>(function(){var n=document.getElementById("ars-nav");if(!n)return;n.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var k=b.dataset.s||"";n.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});document.querySelectorAll("#p-arsiv section[data-s]").forEach(function(c){c.hidden=!!k&&c.dataset.s!==k})})})();</script>
 <div class="page" id="p-katil">
 <div class="aurora banner" style="--a1:#128c7e;--a2:#25d366;--a3:#7c3aed"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/" data-k="k401">Ana sayfa</a> <span data-k="k402">/ Katıl</span></span><h2 data-k="k403">Aramıza Katıl</h2><p data-k="k404">Ekonomiyi birlikte konuşalım.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>

@@ -4299,6 +4299,7 @@ VIEWS.ansiklopedi=()=>{
       h('span',{style:'font-size:13.5px;opacity:.92',text:ankCount(D)+' kayıt'+(dirty?' · yayınlanmamış değişiklik var':''),'data-ankc':D.id})));
   });
   [['xc-tarih','Ekonomi Tarihi Çizelgesi','Kriz, teori ve politika olayları','#9a3412'],['xc-sektor','Sektör Dosyaları','Sektör yapısı ve şok etkileri','#15803d']].forEach(([id,t,ds,c])=>grid.append(h('a',{href:'#/'+id,style:'display:grid;gap:4px;padding:16px;border-radius:12px;text-decoration:none;color:#fff;background:linear-gradient(135deg,'+c+',color-mix(in srgb,'+c+' 55%,#000));border:3px solid transparent'},h('span',{style:'font-size:12.5px;opacity:.85',text:ds}),h('b',{style:'font:700 19px var(--serif)',text:t}),h('span',{style:'font-size:13.5px;opacity:.92',text:((S.work.xc[id.slice(3)]||[]).length)+' eklenen kayıt'}))));
+  {const kt=grid.querySelector('[data-ankc="kb"]');if(kt&&kt.parentElement)grid.append(kt.parentElement)}
   root.append(grid);
   root.append(h('p',{class:'hint',text:'Not: Terim Quiz artık Ansiklopedi’de değil, Meslekler › Mülakat sayfasında. Soruları sözlükteki tanımlardan otomatik üretildiği için ayrıca yönetilecek bir şey yok; terim ekledikçe sorular da artar.'}));
   const D=ANKDEF.find(x=>x.id===cur);
