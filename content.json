@@ -1834,8 +1834,8 @@
       "İşsizlik oranı": {
         "ad": "İşsizlik oranı",
         "api": "",
-        "deger": "7,8",
-        "tarih": "Ağustos 2026",
+        "deger": "8,4",
+        "tarih": "Eylül 2026",
         "kaynak": "TÜİK",
         "url": "https://www.tuik.gov.tr",
         "gizli": false
