@@ -4327,7 +4327,7 @@ page('paylas','Paylaşım Kartı','Terim, alıntı ya da quiz sonucunu Instagram
 
 /* ---------- HUB (Eko-Plus ana sayfası) ---------- */
 const TILES=[
-['Öğren',[['kavram','Günün Kavramı','Her gün bir kavram, bir örnek, bir seri.','#a3162a','#ff8a3d'],['x-veri','Veri Analizi','Veri Atölyesi, SQL ve pivot, hesaplayıcılar, grafik quizi, haftalık görev ve mini dersler.','#2a2d8f','#12b5c4'],['x-notlar','Not Paylaşımı','Üye özetleri, yönetici onayıyla yayında.','#0b8a4b','#1d4ed8'],['x-panel','Panelim','Haftalık ilerleme, seri ve hedef.','#c4202e','#ff7a45']]],
+['Öğren',[['kavram','Günün Kavramı','Her gün bir kavram, bir örnek, bir seri.','#a3162a','#ff8a3d'],['x-veri','Veri Analizi','Veri Atölyesi, SQL, pivot, Python ve R, hesaplayıcılar, grafik quizi, haftalık görev ve mini dersler.','#2a2d8f','#12b5c4'],['x-notlar','Not Paylaşımı','Üye özetleri, yönetici onayıyla yayında.','#0b8a4b','#1d4ed8'],['x-panel','Panelim','Haftalık ilerleme, seri ve hedef.','#c4202e','#ff7a45']]],
 ['Kariyer',[['ilanlar','Staj ve Burs Panosu','Resmî kaynaklara giden ilanlar.','#b45309','#f59e0b'],['cv','CV ve Niyet Mektubu','Doldur, önizle, PDF kaydet.','#831843','#ec4899'],['x-yol','Yol Haritası','40 soruluk kariyer testi + hedef mesleğine göre adım adım plan.','#a3162a','#ff8a3d'],['x-takvim','Sınav Takvimi','KPSS, SMMM, burs ve staj tarihleri; geri sayım ve hatırlatıcı.','#b45309','#f59e0b']]],
 ['Topluluk',[['tahmin','Haftalık Tahmin','Tahmin et, puan topla.','#2a2d8f','#38bdf8'],['profil','Üye Profili','Puan, rozet ve üye kartı.','#c4202e','#ff7a45'],['paylas','Paylaşım Kartı','Instagram’a uygun görsel üret.','#5b2bc4','#ff8a3d'],['x-etkinlik','Etkinlik Araçları','QR ile yoklama, canlı oylama, geri bildirim.','#2a2d8f','#12b5c4'],['x-mentor','Mezun ve Mentor','Mezunlara soru sor, söyleşi videolarını izle.','#5b2bc4','#e23fa5']]],
 ['Ayarlar',[['x-bildirim','Bildirimler','Hatırlatıcılar ve ana ekrana ekleme.','#7a1f2b','#1b2a41']]]
@@ -5811,7 +5811,7 @@ const TILES=[
   ['x-yol','Yol Haritası','40 soruluk kariyer testi + hedef mesleğine göre adım adım plan.','#a3162a','#ff8a3d','Kariyer'],
   ['x-takvim','Sınav Takvimi','KPSS, SMMM, burs ve staj tarihleri; geri sayım ve hatırlatıcı.','#b45309','#f59e0b','Kariyer'],
   ['x-etkinlik','Etkinlik Araçları','QR ile yoklama, canlı oylama, geri bildirim.','#2a2d8f','#12b5c4','Topluluk'],
-  ['x-veri','Veri Analizi','Veri Atölyesi, SQL ve pivot, hesaplayıcılar, grafik quizi, haftalık görev ve mini dersler.','#2a2d8f','#12b5c4','Öğren'],
+  ['x-veri','Veri Analizi','Veri Atölyesi, SQL, pivot, Python ve R, hesaplayıcılar, grafik quizi, haftalık görev ve mini dersler.','#2a2d8f','#12b5c4','Öğren'],
   ['x-notlar','Not Paylaşımı','Üye özetleri, yönetici onayıyla yayında.','#0b8a4b','#1d4ed8','Öğren'],
   ['x-mentor','Mezun ve Mentor','Mezunlara soru sor, söyleşi videolarını izle.','#5b2bc4','#e23fa5','Topluluk'],
   ['x-panel','Panelim','Haftalık ilerleme, seri ve hedef.','#c4202e','#ff7a45','Öğren'],
@@ -6426,7 +6426,7 @@ mkPage('x-bildirim','Bildirimler','Hatırlatıcıları ayarla, uygulamayı ana e
 (()=>{
 /* ════════════════════════════════════════════════════════════════
    VERİ ANALİZİ PAKETİ
-   Veri Atölyesi · SQL ve Pivot · Hesaplayıcılar · Grafik Okuma Quizi ·
+   Veri Atölyesi · SQL ve Pivot · Python ve R · Hesaplayıcılar · Grafik Okuma Quizi ·
    Haftalık Veri Görevi · Mini Dersler · Portföy ve Beceri Takibi
    Dış kütüphane yok: istatistik, grafik ve SQL motoru bu dosyada.
    ════════════════════════════════════════════════════════════════ */
@@ -8379,8 +8379,6 @@ mkPage('x-v-port','Portföy ve Beceriler','Kaydettiğin analizler ve veri beceri
       el('div',{class:'x2-empty',text:'Henüz kayıt yok. Veri Atölyesi’nde bir grafik veya regresyon oluşturup “Portföye kaydet” de.'})));
 });
 
-window.EKX3={TASKS,LESSONS,SQLEX,sqlFor,route,DB,runSQL,parseCSV,buildDS,loadBuiltin,allDatasets,tCdf,tInv,tP2,ols,pearson,mean,median,sd,wilson,rd,wr};   /* konsoldan / ana siteden erişim */
-})();
 
 /* ════════════════════════════════════════════════════════════════
    PYTHON VE R  (Pyodide + WebR · tarayıcıda çalışır, veri dışarı gönderilmez)
@@ -8621,6 +8619,9 @@ const LPV={tur:{r:'sehir',v:'adet',a:'sum'},out:{r:'il_grubu',v:'gelir',a:'avg'}
 const LSQ={out:`SELECT il_grubu, COUNT(*) AS hane, ROUND(AVG(gelir)) AS ort_gelir, MIN(gelir) AS en_az, MAX(gelir) AS en_cok FROM hane GROUP BY il_grubu`,yay:`SELECT bolum, ROUND(MIN(gano),2) AS en_dusuk, ROUND(AVG(gano),2) AS ort, ROUND(MAX(gano),2) AS en_yuksek FROM ogr GROUP BY bolum`,baz:`SELECT ay, enflasyon, faiz FROM makro WHERE ay IN ('2014-01','2019-12','2025-12') ORDER BY ay`,reel:`SELECT ay, faiz, enflasyon, ROUND(faiz-enflasyon,2) AS yaklasik_reel FROM makro ORDER BY ay DESC LIMIT 12`,ors:`SELECT bolum, COUNT(*) AS n, ROUND(AVG(gano),2) AS ort_gano FROM ogr GROUP BY bolum ORDER BY n`,gua:`SELECT COUNT(*) AS n, ROUND(AVG(gano),3) AS ort FROM ogr`,pde:`SELECT staj, COUNT(*) AS n, ROUND(AVG(gano),3) AS ort_gano FROM ogr GROUP BY staj`,kor:`SELECT ay, faiz, kur_endeksi FROM makro ORDER BY ay LIMIT 24`,sim:`SELECT sinif, staj, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano FROM ogr GROUP BY sinif, staj ORDER BY sinif, staj`,reg:`SELECT calisma_saat, ROUND(AVG(gano),2) AS ort_gano, COUNT(*) AS kisi FROM ogr GROUP BY calisma_saat ORDER BY calisma_saat`,grf:`SELECT kategori, ROUND(AVG(fiyat)) AS ort_fiyat FROM eticaret GROUP BY kategori ORDER BY ort_fiyat DESC`,ind:`SELECT ay, kur_endeksi FROM makro WHERE ay IN ('2014-01','2019-12','2025-12') ORDER BY ay`,bil:`SELECT ay, kur_endeksi FROM makro WHERE ay IN ('2014-01','2025-12') ORDER BY ay`,cey:`SELECT ilce, MIN(fiyat) AS en_az, ROUND(AVG(fiyat)) AS ort, MAX(fiyat) AS en_cok FROM konut GROUP BY ilce ORDER BY ort DESC`,nor:`SELECT sinif, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano FROM ogr GROUP BY sinif ORDER BY sinif`,tte:`SELECT staj, COUNT(*) AS n, ROUND(AVG(gano),3) AS ort_gano FROM ogr GROUP BY staj`,sel:`SELECT iade, COUNT(*) AS siparis, COUNT(puan) AS puanli FROM eticaret GROUP BY iade`,gor:`SELECT ay, kur_endeksi FROM makro ORDER BY ay LIMIT 36`,pan:`SELECT yil, ROUND(AVG(gsyh)) AS ort_gsyh, ROUND(AVG(issizlik),1) AS ort_issizlik FROM panel GROUP BY yil ORDER BY yil`,cok:`SELECT kategori, ROUND(AVG(puan),3) AS ort_puan, COUNT(puan) AS n FROM eticaret GROUP BY kategori ORDER BY ort_puan`,log:`SELECT bolge, MIN(gelir) AS en_az, ROUND(AVG(gelir)) AS ort, MAX(gelir) AS en_cok FROM ulke GROUP BY bolge ORDER BY ort DESC`,mev:`SELECT sehir, ROUND(AVG(tuketim)) AS ort_tuketim, ROUND(AVG(sicaklik),1) AS ort_sicaklik FROM enerji GROUP BY sehir ORDER BY ort_sicaklik`};
 TASKS.forEach(t=>{if(TPV[t.id]&&!t.pv)t.pv=Object.assign({ds:t.ds},TPV[t.id]);if(TSQ[t.id]&&!t.sql)t.sql=TSQ[t.id]});
 LESSONS.forEach(l=>{l.dene=l.dene||[];if(LPV[l.id]&&!l.dene.some(x=>x.pv))l.dene.push({t:'📊 Pivot’ta dene',pv:Object.assign({ds:LPR[l.id][0]},LPV[l.id])});if(LSQ[l.id]&&!l.dene.some(x=>x.sql))l.dene.push({t:'SQL’de dene',sql:LSQ[l.id]})});
+
+window.EKX3={TASKS,LESSONS,SQLEX,sqlFor,route,DB,runSQL,parseCSV,buildDS,loadBuiltin,allDatasets,tCdf,tInv,tP2,ols,pearson,mean,median,sd,wilson,rd,wr};   /* konsoldan / ana siteden erişim */
+})();
 
 /* ════════════════════════════════════════════════════════════════
    YÖNLENDİRİCİ
