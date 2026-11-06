@@ -4459,7 +4459,7 @@ const fillHub=()=>{try{const r=document.getElementById('p-ekstra'),h=r&&r.queryS
 <script id="ekoplus-gate-js">
 /* Eko-Plus üyelik kapısı: onaylı üye değilse giriş sayfasına (#/lab) yollar, girişten sonra geri getirir */
 (()=>{
-const KEYS=["ekstra", "kavram", "ilanlar", "cv", "profil", "tahmin", "paylas", "x-yol", "x-takvim", "x-etkinlik", "x-yoklama", "x-notlar", "x-mentor", "x-panel", "x-bildirim", "x-veri", "x-v-atolye", "x-v-sql", "x-v-hesap", "x-v-quiz", "x-v-gorev", "x-v-ders", "x-v-port"];
+const KEYS=["ekstra", "kavram", "ilanlar", "cv", "profil", "tahmin", "paylas", "x-yol", "x-takvim", "x-etkinlik", "x-yoklama", "x-notlar", "x-mentor", "x-panel", "x-bildirim", "x-veri", "x-v-atolye", "x-v-sql", "x-v-hesap", "x-v-quiz", "x-v-gorev", "x-v-ders", "x-v-port", "x-v-pyr"];
 const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
 const cur=()=>location.hash.replace(/^#\/?/,'').split('/')[0]||'ekstra';
 const sync=()=>{
@@ -6599,6 +6599,26 @@ const GEN={
       gec=r()<.06+.00018*km*(h==='Karlı'?3:h==='Yağmurlu'?1.6:1)?'Evet':'Hayır';raw.push([i,D[Math.floor(r()*5)],a[0],h,km,kg,sure,mal,gec])}
     return{names:['sevkiyat','depo','arac','hava','mesafe_km','agirlik_kg','sure_saat','maliyet','gecikme'],raw}}
 };
+GEN.otel=function(){const r=rng(171),S=[['İstanbul',1.15],['Antalya',1.05],['İzmir',.95],['Kapadokya',1.1],['Bodrum',1.3]],T=[['Butik',2600],['Resort',4200],['Şehir oteli',2000]],K=['Doğrudan','Acente','Platform'],raw=[];
+for(let i=1;i<=2500;i++){const s=S[Math.floor(r()*5)],t=T[Math.floor(r()*3)],k=K[Math.floor(r()*3)],g=clamp(1+Math.floor(Math.exp(1+gauss(r)*.55)-.5),1,14),f=Math.round(t[1]*s[1]*(k==='Doğrudan'?.93:1)*Math.exp(gauss(r)*.15)/10)*10;
+raw.push([i,s[0],t[0],k,g,f,r()<.1+(k==='Platform'?.12:0)+(g>5?.06:0)?'Evet':'Hayır'])}
+return{names:['no','sehir','tip','kanal','gece','gece_fiyat','iptal'],raw}};
+GEN.ulasim=function(){const r=rng(173),H=[['Metro',20,1,.5],['Otobüs',17,1.35,1.6],['Tramvay',17,1.1,.9],['Vapur',25,2.2,.7]],D=[['Sabah tepe',1.4],['Gün içi',1],['Akşam tepe',1.5],['Gece',.8]],raw=[];
+for(let i=1;i<=3000;i++){const h=H[Math.floor(r()*4)],d=D[Math.floor(r()*4)],km=clamp(+(Math.exp(1.6+gauss(r)*.55)).toFixed(1),.8,35),sure=Math.max(3,Math.round(km*h[2]*2.2*(d[1]>1.3?1.25:1)+5+gauss(r)*3)),gec=Math.max(0,Math.round(h[3]*d[1]*3+gauss(r)*2));
+raw.push([i,h[0],d[0],km,sure,Math.round(h[1]+km*.35),gec])}
+return{names:['no','hat','dilim','mesafe_km','sure_dk','ucret','gecikme_dk'],raw}};
+GEN.odeme=function(){const r=rng(179),K=[['Market',5.6],['Yemek',5.1],['Ulaşım',3.6],['Giyim',6.2],['Eğlence',5.4]],Y=['QR kod','Temassız kart','Mobil cüzdan'],A=['18-24','25-34','35-49','50+'],raw=[];
+for(let i=1;i<=4000;i++){const k=K[Math.floor(r()*5)],y=Y[Math.floor(r()*3)],a=Math.floor(r()*4);
+raw.push([i,k[0],y,A[a],Math.round(Math.exp(k[1]+gauss(r)*.7)),+clamp(1.2+(y==='QR kod'?1.1:0)+a*.25+gauss(r)*.5,.3,9).toFixed(1),r()<.025+(y==='QR kod'?.02:0)+(a===3?.015:0)?'Evet':'Hayır'])}
+return{names:['no','kategori','yontem','yas_grubu','tutar','sure_sn','basarisiz'],raw}};
+GEN.girisim=function(){const r=rng(181),S=['Fintek','Sağlık','Eğitim','Oyun','Tarım'],A=[['Tohum',2,4],['Seri A',12,30],['Seri B',45,90]],raw=[];
+for(let i=1;i<=600;i++){const a=Math.floor(Math.pow(r(),1.3)*3),c=Math.max(2,Math.round(A[a][2]*Math.exp(gauss(r)*.5))),y=+(A[a][1]*Math.exp(gauss(r)*.45)).toFixed(1),g=+(c*.18*Math.exp(gauss(r)*.5)).toFixed(1),h=r()<.82-.13*(2-a)-(y<A[a][1]*.6?.1:0)?'Evet':'Hayır';
+raw.push([i,S[Math.floor(r()*5)],A[a][0],c,y,r()<.05?'':g,h])}
+return{names:['no','sektor','asama','calisan','yatirim_mn','gelir_mn','hayatta'],raw}};
+GEN.gida=function(){const r=rng(191),P=[['Ekmek',8,1.9],['Süt',20,2.1],['Yumurta',2.5,2.4],['Domates',22,2.2],['Zeytinyağı',180,2.6],['Pirinç',30,1.7]],raw=[];
+P.forEach(p=>{let f=p[1];for(let t=0;t<60;t++){const m=t%12,deg=+(p[2]+(p[0]==='Domates'?3.5*Math.cos((m-7)/12*2*Math.PI):0)+gauss(r)*(p[0]==='Domates'?2.4:.9)).toFixed(2);f*=1+deg/100;raw.push([(2021+Math.floor(t/12))+'-'+pad2(m+1),p[0],+f.toFixed(2),deg])}});
+return{names:['ay','urun','fiyat','aylik_degisim'],raw}};
+
 const BUILTIN=[
   {id:'ogr',ad:'Öğrenci anketi',desc:'1.000 öğrenci: bölüm, cinsiyet, sınıf, burs, devamsızlık, haftalık çalışma saati, aylık harcama, GANO, staj durumu (bazı harcama değerleri boş).',gen:GEN.ogr},
   {id:'makro',ad:'Aylık makro göstergeler',desc:'144 aylık (2014–2025) enflasyon, faiz, kur endeksi, işsizlik, büyüme ve cari denge serisi.',gen:GEN.makro},
@@ -6621,6 +6641,21 @@ const BUILTIN=[
   {id:'gunluk',ad:'Günlük fiyatlar (3 varlık)',desc:'3 varlık × 500 gün = 1.500 gözlem: kapanış, günlük getiri, hacim. Tuzaklar: oynaklık kümelenmesi, fiyat düzeyi ile getiri farkı, sahte korelasyon.',gen:GEN.gunluk},
   {id:'lojistik',ad:'Lojistik: teslimat ve gecikme',desc:'3.000 sevkiyat: depo, araç tipi, hava, mesafe, ağırlık, süre, maliyet, gecikme. Tuzaklar: çok çarpık mesafe, birkaç uç süre, hava–mesafe etkileşimi.',gen:GEN.lojistik}
 ].map(b=>Object.assign(b,{kaynak:'Sentetik · eğitim amaçlı (gerçek veri değildir)',tarih:''}));
+
+BUILTIN.push(...[
+  {id:'otel',ad:'Otel rezervasyonları',desc:'2.500 rezervasyon: şehir, otel tipi, satış kanalı, gece sayısı, gecelik fiyat (TL), iptal. Tuzaklar: platform kanalında iptal daha sık, uzun konaklamada iptal riski artar.',gen:GEN.otel},
+  {id:'ulasim',ad:'Toplu ulaşım yolculukları',desc:'3.000 yolculuk: hat (metro, otobüs, tramvay, vapur), gün dilimi, mesafe, süre, ücret, gecikme (dk). Tuzaklar: tepe saat etkisi, hatlar arası ölçek farkı, çarpık mesafe.',gen:GEN.ulasim},
+  {id:'odeme',ad:'Mobil ödeme işlemleri',desc:'4.000 işlem: kategori, ödeme yöntemi, yaş grubu, tutar (TL), işlem süresi (sn), başarısızlık. Tuzaklar: çok çarpık tutar, nadir olay (başarısızlık), yöntem ve yaş etkileşimi.',gen:GEN.odeme},
+  {id:'girisim',ad:'Girişim yatırımları',desc:'600 girişim: sektör, yatırım aşaması, çalışan, yatırım (milyon TL), gelir (~%5 boş), hayatta kalma. Tuzak: hayatta kalma sapması (başarısızlar veride az görünür) ve uç değerler.',gen:GEN.girisim},
+  {id:'gida',ad:'Gıda fiyatları (aylık)',desc:'60 ay × 6 ürün = 360 gözlem: fiyat ve aylık değişim (%). Tuzaklar: ürünler arası ölçek farkı (ekmek ile zeytinyağı), domateste mevsimsellik, bileşik artış.',gen:GEN.gida}
+].map(b=>Object.assign(b,{kaynak:'Sentetik · eğitim amaçlı (gerçek veri değildir)',tarih:''})));
+const BEX={
+  otel:[['py','Kanala göre iptal oranı','print(df.assign(i=df.iptal=="Evet").groupby("kanal").i.mean().round(3))'],['r','Kanala göre iptal oranı','aggregate(I(iptal=="Evet")~kanal,df,mean)']],
+  ulasim:[['py','Hat × dilim: ortalama gecikme','print(df.pivot_table(index="hat",columns="dilim",values="gecikme_dk",aggfunc="mean").round(1))'],['r','Hat × dilim: ortalama gecikme','round(tapply(df$gecikme_dk,list(df$hat,df$dilim),mean),1)']],
+  odeme:[['py','Yönteme göre başarısızlık oranı','print(pd.crosstab(df.yontem,df.basarisiz,normalize="index").round(3))'],['r','Yönteme göre başarısızlık oranı','round(prop.table(table(df$yontem,df$basarisiz),1),3)']],
+  girisim:[['py','Aşamaya göre hayatta kalma','print(df.assign(h=df.hayatta=="Evet").groupby("asama").h.agg(["count","mean"]).round(2))'],['r','Aşamaya göre hayatta kalma','aggregate(I(hayatta=="Evet")~asama,df,mean)']],
+  gida:[['py','Ürüne göre aylık değişim','print(df.groupby("urun").aylik_degisim.agg(["mean","std"]).round(2))'],['r','Ürüne göre aylık değişim','aggregate(aylik_degisim~urun,df,function(x) round(c(ort=mean(x),sd=sd(x)),2))']]
+};
 const pk=(r,a)=>a[Math.floor(r()*a.length)];
 const GENX={
   ogr:{n:['cinsiyet','burs','devamsizlik'],f:(w,r)=>[r()<.5?'Kadın':'Erkek',r()<.22?'Var':'Yok',clamp(Math.round(8-1.5*(w[5]-2.5)+gauss(r)*4),0,40)]},
@@ -6633,7 +6668,7 @@ const GENX={
 };
 BUILTIN.forEach(b=>{const x=GENX[b.id];if(!x)return;const g0=b.gen;b.gen=()=>{const g=g0(),r=rng(900+b.id.length*7+b.id.charCodeAt(0));g.names.push(...x.n);g.raw.forEach(w=>w.push(...x.f(w,r)));return g}});
 const dsCache={};
-function loadBuiltin(id){if(dsCache[id])return dsCache[id];const b=BUILTIN.find(x=>x.id===id);if(!b)return null;const g=b.gen();return dsCache[id]=buildDS({id:b.id,ad:b.ad,kaynak:b.kaynak,tarih:b.tarih,desc:b.desc,tip:'hazir'},g.names,g.raw)}
+function loadBuiltin(id){if(dsCache[id])return dsCache[id];const b=BUILTIN.find(x=>x.id===id);if(!b)return null;const g=b.gen();return dsCache[id]=Object.assign(buildDS({id:b.id,ad:b.ad,kaynak:b.kaynak,tarih:b.tarih,desc:b.desc,tip:'hazir'},g.names,g.raw),{ex:(typeof BEX!=='undefined'&&BEX[b.id])||[]})}
 const slug=s=>String(s).toLowerCase().replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,24)||'veri';
 async function allDatasets(){
   const out=BUILTIN.map(b=>loadBuiltin(b.id));
@@ -6850,11 +6885,12 @@ const dsOptions=list=>list.map(d=>el('option',{value:d.id},d.ad));
    ════════════════════════════════════════════════════════════════ */
 const VT=[
   ['x-v-atolye','Veri Atölyesi','CSV yükle, satır ve belge ekle; özetle, grafik çiz, ilişkiyi bul.','#2a2d8f','#12b5c4','Uygula'],
-  ['x-v-sql','SQL ve Pivot','20 hazır tabloda 190’dan fazla örnek soru: Türkçe SQL yaz, pivot tablo kur, kendini dene.','#0b8a4b','#1d4ed8','Uygula'],
+  ['x-v-sql','SQL ve Pivot','25 hazır tabloda 210’dan fazla örnek soru: Türkçe SQL yaz, pivot tablo kur, kendini dene.','#0b8a4b','#1d4ed8','Uygula'],
+  ['x-v-pyr','Python ve R','Önce kendin yaz ya da hazır kodla başla; genel ve dile özel 35 ek veri seti.','#306998','#276dc3','Uygula'],
   ['x-v-hesap','Hesaplayıcılar','Güven aralığı, t-testi, korelasyon; sonuç yanında “bu ne demek?”.','#5b2bc4','#e23fa5','Uygula'],
   ['x-v-quiz','Grafik Okuma Quizi','Yanıltıcı grafikleri yakala, doğru yorumla.','#b45309','#f59e0b','Öğren'],
-  ['x-v-gorev','Haftalık Veri Görevi','41 görev, 3 seviye; kademeli ipucu, çözüm yolu ve yorum paylaşımı.','#c4202e','#ff7a45','Öğren'],
-  ['x-v-ders','Mini Dersler','35 kısa ders: istatistikten SQL’e; her derste deney, mini kontrol ve uygulama.','#7a1f2b','#1b2a41','Öğren'],
+  ['x-v-gorev','Haftalık Veri Görevi','41 görev, 3 seviye; kademeli ipucu, SQL, Python ve R çözümü, yorum paylaşımı.','#c4202e','#ff7a45','Öğren'],
+  ['x-v-ders','Mini Dersler','35 kısa ders: istatistikten SQL’e; her derste deney, mini kontrol, SQL, Python ve R uygulaması.','#7a1f2b','#1b2a41','Öğren'],
   ['x-v-port','Portföy ve Beceriler','Kaydettiğin analizler ve veri becerilerinin seviyesi.','#a3162a','#ff8a3d','Kariyer']
 ];
 mkPage('x-veri','Veri Analizi','Veriyi oku, analiz et, yorumla. Kurulum yok, hepsi tarayıcıda.',['#2a2d8f','#12b5c4','#7c3aed'],async body=>{
@@ -7411,6 +7447,53 @@ const PVEX_PLUS=[
 
 Object.keys(SQLEX_PLUS).forEach(k=>{SQLEX[k]=(SQLEX[k]||[]).concat(SQLEX_PLUS[k])});
 PVEX.push(...PVEX_PLUS);
+
+const SQLEX_NEW={
+  otel:[
+    ['Şehirlere göre ortalama gecelik fiyat ve rezervasyon sayısı?',`SELECT sehir, COUNT(*) AS rezervasyon, ROUND(AVG(gece_fiyat)) AS ort_fiyat FROM otel GROUP BY sehir ORDER BY ort_fiyat DESC`,'Şehirleri fiyat düzeyine göre sıralar. Fiyat farkı otel tipi bileşiminden de gelebilir.'],
+    ['Kanallara göre kaç rezervasyon iptal edilmiş?',`SELECT kanal, COUNT(*) AS iptal_sayisi FROM otel WHERE iptal = 'Evet' GROUP BY kanal ORDER BY iptal_sayisi DESC`,'Önce iptalleri süzer, sonra kanala göre sayar. Sayı, kanalın toplam büyüklüğüne bölünmeden oran sayılmaz.'],
+    ['Toplam tutarı (gece × fiyat) en yüksek 5 rezervasyon hangisi?',`SELECT no, sehir, tip, gece, gece_fiyat, gece*gece_fiyat AS toplam FROM otel ORDER BY toplam DESC, no LIMIT 5`,'Yeni bir sütunu işlemle üretir ve ona göre sıralar.'],
+    ['Otel tipine göre ortalama konaklama süresi ve fiyatı?',`SELECT tip, ROUND(AVG(gece),1) AS ort_gece, ROUND(AVG(gece_fiyat)) AS ort_fiyat FROM otel GROUP BY tip ORDER BY ort_fiyat DESC`,'Aynı sorguda iki ortalama: süre ile fiyatı birlikte okumak toplam geliri anlamaya yardım eder.']],
+  ulasim:[
+    ['Hatlara göre ortalama süre ve gecikme?',`SELECT hat, COUNT(*) AS yolculuk, ROUND(AVG(sure_dk),1) AS ort_sure, ROUND(AVG(gecikme_dk),1) AS ort_gecikme FROM ulasim GROUP BY hat ORDER BY ort_gecikme DESC`,'Hatların hizmet kalitesini yan yana koyar. Hat uzunlukları farklı olduğundan süreyi dikkatle yorumla.'],
+    ['Ortalama gecikmesi 3 dakikayı aşan hatlar hangileri?',`SELECT hat, ROUND(AVG(gecikme_dk),2) AS ort_gecikme FROM ulasim GROUP BY hat HAVING AVG(gecikme_dk) > 3 ORDER BY ort_gecikme DESC`,'Gruplanmış ortalamaya koşul koymak için GRUPTA kullanılır.'],
+    ['Akşam tepe saatinde en uzun süren 5 yolculuk?',`SELECT no, hat, mesafe_km, sure_dk FROM ulasim WHERE dilim = 'Akşam tepe' ORDER BY sure_dk DESC, no LIMIT 5`,'Önce dilimi süzer, sonra sıralar.'],
+    ['Kilometre başına ücret hatlara göre nasıl değişiyor?',`SELECT hat, ROUND(AVG(ucret/mesafe_km),2) AS km_ucreti FROM ulasim GROUP BY hat ORDER BY km_ucreti DESC`,'Ücreti mesafeye bölmek, kısa ve uzun yolculukları karşılaştırılabilir kılar.']],
+  odeme:[
+    ['Ödeme yöntemine göre işlem sayısı ve ortalama tutar?',`SELECT yontem, COUNT(*) AS islem, ROUND(AVG(tutar)) AS ort_tutar FROM odeme GROUP BY yontem ORDER BY islem DESC`,'Tutarlar çok çarpık olduğundan ortalama uç işlemlerden etkilenir.'],
+    ['Başarısız işlemler yönteme göre kaç tane?',`SELECT yontem, COUNT(*) AS basarisiz_sayi FROM odeme WHERE basarisiz = 'Evet' GROUP BY yontem ORDER BY basarisiz_sayi DESC`,'Nadir olayları sayarken toplam işlem sayısını da unutma; oran için pivot sekmesini dene.'],
+    ['En yüksek tutarlı 10 işlem hangi kategoride?',`SELECT no, kategori, yontem, tutar FROM odeme ORDER BY tutar DESC, no LIMIT 10`,'Uç değerlerin hangi kategoride yoğunlaştığına bak.'],
+    ['Yaş grubuna göre ortalama işlem süresi?',`SELECT yas_grubu, ROUND(AVG(sure_sn),2) AS ort_sure FROM odeme GROUP BY yas_grubu ORDER BY yas_grubu`,'Yaş grubu etiketleri metindir; sıralama alfabetik olur.']],
+  girisim:[
+    ['Sektöre göre girişim sayısı ve ortalama yatırım?',`SELECT sektor, COUNT(*) AS girisim, ROUND(AVG(yatirim_mn),1) AS ort_yatirim FROM girisim GROUP BY sektor ORDER BY ort_yatirim DESC`,'Yatırım tutarı aşamaya bağlıdır; sektör farkını aşama bileşiminden ayırmak için pivot kur.'],
+    ['Kaç girişimin gelir bilgisi eksik?',`SELECT COUNT(*) AS eksik_gelir FROM girisim WHERE gelir_mn IS NULL`,'Eksik değer eşittir işaretiyle değil BOŞTUR ile aranır.'],
+    ['Hayatta kalan girişimlerin aşamaya göre ortalama çalışan sayısı?',`SELECT asama, COUNT(*) AS girisim, ROUND(AVG(calisan)) AS ort_calisan FROM girisim WHERE hayatta = 'Evet' GROUP BY asama ORDER BY ort_calisan`,'Yalnızca hayatta kalanlara bakmak hayatta kalma sapmasına örnektir: başarısızlar veride görünmez.'],
+    ['En çok yatırım alan 5 girişim hangisi?',`SELECT no, sektor, asama, yatirim_mn, hayatta FROM girisim ORDER BY yatirim_mn DESC, no LIMIT 5`,'En yüksek yatırım alanların hepsi hayatta mı? Sonucu bu açıdan oku.']],
+  gida:[
+    ['Ürünlere göre ortalama fiyat ve aylık değişim?',`SELECT urun, ROUND(AVG(fiyat),1) AS ort_fiyat, ROUND(AVG(aylik_degisim),2) AS ort_degisim FROM gida GROUP BY urun ORDER BY ort_degisim DESC`,'Fiyat düzeyi ile artış hızı farklı şeylerdir; ucuz ürün hızlı artabilir.'],
+    ['Ortalama fiyatı 40 TL’yi aşan ürünler?',`SELECT urun, ROUND(AVG(fiyat),1) AS ort_fiyat FROM gida GROUP BY urun HAVING AVG(fiyat) > 40 ORDER BY ort_fiyat DESC`,'Gruplanmış ortalamaya koşul: GRUPTA.'],
+    ['2025 yılında fiyatı en yüksek 5 kayıt hangisi?',`SELECT ay, urun, fiyat FROM gida WHERE ay LIKE '2025%' ORDER BY fiyat DESC LIMIT 5`,'Yıl, kalıp (LIKE) ile süzülür.'],
+    ['Domatesin aylık değişimi hangi aylarda en yüksek oldu?',`SELECT ay, aylik_degisim FROM gida WHERE urun = 'Domates' ORDER BY aylik_degisim DESC, ay LIMIT 6`,'Mevsimsellik varsa en yüksek artışlar yılın hep aynı aylarında toplanır.']]
+};
+const PVEX_NEW=[
+  {ds:'otel',r:'sehir',c:'tip',v:'gece_fiyat',a:'avg',t:'Şehir × otel tipi: ortalama gecelik fiyat'},
+  {ds:'otel',r:'kanal',c:'iptal',v:'',a:'count',s:'row',t:'Kanal × iptal: iptal oranı (satır %)'},
+  {ds:'otel',r:'sehir',c:'',v:'gece',a:'avg',o:'yuksek',t:'Şehre göre ortalama konaklama süresi'},
+  {ds:'ulasim',r:'hat',c:'dilim',v:'gecikme_dk',a:'avg',t:'Hat × gün dilimi: ortalama gecikme'},
+  {ds:'ulasim',r:'hat',c:'',v:'ucret',a:'avg',o:'yuksek',t:'Hatta göre ortalama ücret'},
+  {ds:'ulasim',r:'dilim',c:'hat',v:'sure_dk',a:'avg',t:'Dilim × hat: ortalama süre'},
+  {ds:'odeme',r:'yontem',c:'basarisiz',v:'',a:'count',s:'row',t:'Yöntem × başarısızlık: oran (satır %)'},
+  {ds:'odeme',r:'kategori',c:'yontem',v:'tutar',a:'avg',t:'Kategori × yöntem: ortalama tutar'},
+  {ds:'odeme',r:'yas_grubu',c:'yontem',v:'sure_sn',a:'avg',t:'Yaş grubu × yöntem: ortalama işlem süresi'},
+  {ds:'girisim',r:'asama',c:'hayatta',v:'',a:'count',s:'row',t:'Aşama × hayatta kalma: oran (satır %)'},
+  {ds:'girisim',r:'sektor',c:'asama',v:'yatirim_mn',a:'avg',t:'Sektör × aşama: ortalama yatırım'},
+  {ds:'girisim',r:'sektor',c:'',v:'calisan',a:'avg',o:'yuksek',t:'Sektöre göre ortalama çalışan'},
+  {ds:'gida',r:'urun',c:'',v:'aylik_degisim',a:'avg',o:'yuksek',t:'Ürüne göre ortalama aylık değişim'},
+  {ds:'gida',r:'urun',c:'',v:'fiyat',a:'avg',o:'yuksek',t:'Ürüne göre ortalama fiyat'},
+  {ds:'gida',r:'ay',c:'urun',v:'fiyat',a:'avg',t:'Ay × ürün: fiyat'}
+];
+Object.keys(SQLEX_NEW).forEach(k=>{SQLEX[k]=(SQLEX[k]||[]).concat(SQLEX_NEW[k])});
+PVEX.push(...PVEX_NEW);
 const SQ={tab:'sql',lang:'tr',exT:'ogr',q:'',res:null,err:null,task:null,openI:null,dirI:null,ptask:null,pch:null,pv:{ds:'ogr',r:'',c:'',v:'',a:'avg',s:'val',o:'ad'}};
 const sqlFor=en=>{const p=prettySQL(en);return SQ.lang==='en'?p:toTR(p)};
 SQ.q=sqlFor(SQLEX.ogr[0][1]);
@@ -7976,13 +8059,14 @@ mkPage('x-v-gorev','Haftalık Veri Görevi','Her hafta yeni bir soru. Cevabını
   const hintBox=el('div',{class:'x2-stack',style:'gap:8px'}),hb=el('button',{class:'btn',type:'button'});
   const h2=el('div',{class:'x2-stack',style:'gap:8px'},el('b',{class:'x2-mut',text:T.sql?'Başlangıç sorgusu:':'Başlangıç adımları:'}),
     T.sql?el('div',{class:'x2-msg',text:'Başlangıç sorgusu hazır. Aşağıdaki düğmeyle sorgu kutusuna gönder, ▶ Çalıştır’a bas ve sonucu kendin yorumla.'}):el('div',{class:'x2-msg',text:T.steps.slice(0,2).map((s,i)=>(i+1)+'. '+s).join('\n'),style:'white-space:pre-line'}),
-    (T.sql||T.pv)?el('div',{class:'x2-row'},T.sql?el('button',{class:'btn',type:'button',onclick:()=>sendToSQL(T.sql)},'↑ SQL kutusuna gönder'):null,T.pv?el('button',{class:'btn',type:'button',onclick:()=>openPivot(T.pv)},'📊 Pivot’ta aç'):null):null);
+    (T.sql||T.pv||T.py)?el('div',{class:'x2-row'},T.sql?el('button',{class:'btn',type:'button',onclick:()=>sendToSQL(T.sql)},'↑ SQL kutusuna gönder'):null,T.pv?el('button',{class:'btn',type:'button',onclick:()=>openPivot(T.pv)},'📊 Pivot’ta aç'):null,T.py?el('button',{class:'btn',type:'button',onclick:()=>sendToPR('py',T.ds,'# '+T.q+'\n')},'🐍 Python’da başla'):null,T.r?el('button',{class:'btn',type:'button',onclick:()=>sendToPR('r',T.ds,'# '+T.q+'\n')},'📊 R’de başla'):null):null);
   const drawHint=()=>{const n=GV.h[key]||0;hb.textContent=n>=2?'İpucu kalmadı':'💡 İpucu ('+n+'/2)';hb.disabled=n>=2;fill(hintBox,n>=1?msgBox('💡 '+T.hint):null,n>=2?h2:null)};
   hb.addEventListener('click',()=>{GV.h[key]=(GV.h[key]||0)+1;drawHint()});drawHint();
   const ds=D(T.ds),showSol=!!(my&&my.ok)||!!GV.sol[key],canAsk=!!my&&!my.ok&&(my.tries||0)>=3&&!GV.sol[key];
   const solCard=showSol?card(el('h3',{text:'📖 Çözüm yolu'}),el('div',{class:'x2-stack',style:'gap:6px;margin:10px 0'},T.steps.map((s,i)=>el('div',{text:(i+1)+'. '+s,style:'color:var(--ink)'}))),
     el('div',{class:'x2-mut',text:'Formül: '+T.how}),
-    (T.sql||T.pv)?el('div',{class:'x2-row',style:'margin-top:10px'},T.sql?el('button',{class:'btn',type:'button',onclick:()=>sendToSQL(T.sql)},'↑ Sorguyu SQL kutusuna gönder'):null,T.pv?el('button',{class:'btn',type:'button',onclick:()=>openPivot(T.pv)},'📊 Pivot’ta aç'):null):null):null;
+    T.py?el('div',{class:'x2-stack',style:'gap:6px;margin-top:10px'},el('b',{class:'x2-mut',text:'🐍 Python çözümü'}),el('pre',{class:'x2-msg',style:'white-space:pre-wrap;margin:0;font:500 13px/1.5 ui-monospace,Menlo,Consolas,monospace',text:T.py}),el('b',{class:'x2-mut',text:'📊 R çözümü'}),el('pre',{class:'x2-msg',style:'white-space:pre-wrap;margin:0;font:500 13px/1.5 ui-monospace,Menlo,Consolas,monospace',text:T.r})):null,
+    (T.sql||T.pv||T.py)?el('div',{class:'x2-row',style:'margin-top:10px'},T.sql?el('button',{class:'btn',type:'button',onclick:()=>sendToSQL(T.sql)},'↑ Sorguyu SQL kutusuna gönder'):null,T.pv?el('button',{class:'btn',type:'button',onclick:()=>openPivot(T.pv)},'📊 Pivot’ta aç'):null,T.py?el('button',{class:'btn',type:'button',onclick:()=>sendToPR('py',T.ds,T.py)},'🐍 Python’da çalıştır'):null,T.r?el('button',{class:'btn',type:'button',onclick:()=>sendToPR('r',T.ds,T.r)},'📊 R’de çalıştır'):null):null):null;
   fill(body,el('div',{class:'x2-stack'},stats,el('div',{class:'x2-stack',style:'gap:10px'},el('b',{text:'Görevler'}),filt,grid),el('div',{class:'x2-two'},
     el('div',{class:'x2-stack'},card(el('div',{class:'x2-tags'},el('span',{class:'x2-pill',text:'Hafta '+wk.split('-W')[1]+' · '+(T.id===tw0.id?'bu haftanın görevi':'ek görev')}),el('span',{class:'x2-pill',style:'background:'+LVC[T.lvl]+';color:#fff',text:LVN3[T.lvl]}),el('span',{class:'x2-pill',text:T.tag}),el('span',{class:'x2-pill',text:'Veri: '+ds.ad})),
       el('h3',{text:T.q,style:'font-size:21px;margin:12px 0'}),
@@ -8252,7 +8336,7 @@ mkPage('x-v-ders','Veri Okuryazarlığı Mini Dersleri','Kısa, örnekli dersler
     return card(el('b',{text:'✅ Mini kontrol'}),el('p',{style:'margin:8px 0;color:var(--ink)',text:k.q}),
       el('div',{class:'x2-stack',style:'gap:6px'},k.o.map((o,i)=>el('button',{type:'button',class:'x2-vote',style:a===i?(i===k.c?'border:2px solid #0b8a4b':'border:2px solid #c4202e'):'',onclick:()=>{LS.ans[l.id]=i;if(i===k.c&&logOnce('vlesson',l.id))toast('Doğru! Ders tamamlandı +2 puan');rerender('x-v-ders')}},(a===i?(i===k.c?'✅ ':'❌ '):'')+o))),
       a!=null?msgBox((a===k.c?'Doğru. ':'Tam değil, tekrar dene. ')+(a===k.c?k.a:''),a===k.c?'':'bad'):null)};
-  const goBtn=x=>el('button',{class:'btn',type:'button',onclick:()=>{if(x.sql)sendToSQL(x.sql);else if(x.pv)openPivot(x.pv);else if(x.ds)openAtolye(x.ds);else if(x.go)goHash(x.go)}},x.t);
+  const goBtn=x=>el('button',{class:'btn',type:'button',onclick:()=>{if(x.pr){sendToPR(x.pr[0],x.pr[1],x.pr[2]);return}if(x.sql)sendToSQL(x.sql);else if(x.pv)openPivot(x.pv);else if(x.ds)openAtolye(x.ds);else if(x.go)goHash(x.go)}},x.t);
   fill(body,el('div',{class:'x2-stack'},
     card(el('div',{class:'x2-row x2-between'},el('b',{text:'İlerleme'}),el('b',{text:doneN+' / '+LESSONS.length})),el('div',{class:'x2-bar',style:'margin-top:8px'},el('i',{style:`width:${100*doneN/LESSONS.length}%`})),
       el('div',{class:'x2-tags',style:'margin-top:10px'},LTRK.map(t=>{const all=LESSONS.filter(l=>l.trk===t);return el('span',{class:'x2-pill'+(all.every(isRead)?' ok':''),text:t+' '+all.filter(isRead).length+'/'+all.length})})),
@@ -8297,6 +8381,246 @@ mkPage('x-v-port','Portföy ve Beceriler','Kaydettiğin analizler ve veri beceri
 
 window.EKX3={TASKS,LESSONS,SQLEX,sqlFor,route,DB,runSQL,parseCSV,buildDS,loadBuiltin,allDatasets,tCdf,tInv,tP2,ols,pearson,mean,median,sd,wilson,rd,wr};   /* konsoldan / ana siteden erişim */
 })();
+
+/* ════════════════════════════════════════════════════════════════
+   PYTHON VE R  (Pyodide + WebR · tarayıcıda çalışır, veri dışarı gönderilmez)
+   Runtime ilk çalıştırmada CDN'den indirilir; sonra bellekte kalır.
+   ════════════════════════════════════════════════════════════════ */
+const PR={lang:'py',mode:'hazir',init:0,ds:null,code:'',txt:'',imgs:[],busy:false,st:''};
+const RT={py:null,r:null};
+const csvOf=ds=>{const q=v=>v==null?'':/[",\n]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':String(v);return [ds.cols.map(c=>q(c.name)).join(','),...ds.rows.map(r=>ds.cols.map(c=>q(r[c.name])).join(','))].join('\n')};
+const loadPy=()=>RT.py||(RT.py=(async()=>{
+  if(!window.loadPyodide)await new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';s.onload=ok;s.onerror=()=>no(new Error('Python çalışma ortamı indirilemedi (internet bağlantısını kontrol et).'));document.head.append(s)});
+  const py=await window.loadPyodide();await py.loadPackage(['pandas','numpy']);return py})().catch(e=>{RT.py=null;throw e}));
+const loadR=()=>RT.r||(RT.r=(async()=>{
+  const {WebR}=await import('https://webr.r-wasm.org/latest/webr.mjs');const w=new WebR();await w.init();return w})().catch(e=>{RT.r=null;throw new Error('R çalışma ortamı indirilemedi (internet bağlantısını kontrol et).')}));
+/* ---- Python ve R sayfasına özel veri setleri (sentetik, eğitim amaçlı) ---- */
+const dGun=i=>new Date(Date.UTC(2024,0,1+i)).toISOString().slice(0,10);
+const PRB=[
+{id:'p_hane',lang:'both',ad:'Hanehalkı gelir ve tüketim',desc:'3.000 hane: bölge, hane büyüklüğü, gelir, tüketim, tasarruf oranı.',gen(){const r=rng(101),B=['Marmara','Ege','İç Anadolu','Karadeniz','Doğu','Güneydoğu'],raw=[];for(let i=0;i<3000;i++){const b=Math.floor(r()*6),n=1+Math.floor(r()*6),g=Math.round(Math.exp(9.3+.18*b+.12*n+gauss(r)*.45)/50)*50,t=Math.round(g*clamp(.62+.05*n/3-.02*Math.log(g/12000)+gauss(r)*.07,.4,1.05)/50)*50;raw.push([B[b],n,g,t,+((g-t)/g*100).toFixed(1)])}return{names:['bolge','hane_buyuklugu','gelir','tuketim','tasarruf_orani'],raw}},
+ ex:[['py','Engel eğrisi','import matplotlib.pyplot as plt\nplt.scatter(df.gelir,df.tuketim,s=8)\nplt.xlabel("gelir");plt.ylabel("tüketim")\nplt.show()'],['py','Bölgeye göre tasarruf','print(df.groupby("bolge").tasarruf_orani.describe().round(1))'],['r','Tüketim fonksiyonu','summary(lm(tuketim~gelir+hane_buyuklugu,data=df))']]},
+{id:'p_firma',lang:'both',ad:'Firma kârlılığı',desc:'2.000 firma: sektör, çalışan, ciro, kâr marjı, ihracatçı mı.',gen(){const r=rng(103),S=['Tekstil','Gıda','Makine','Kimya','Yazılım'],raw=[];for(let i=0;i<2000;i++){const s=Math.floor(r()*5),c=Math.round(Math.exp(3.6+gauss(r)*1.1)),ih=r()<.25+.1*s/4?'Evet':'Hayır',ci=+(c*(.08+.03*s)*(1+gauss(r)*.2)).toFixed(2);raw.push([S[s],c,ci,+clamp(6+s*1.5+(ih==='Evet'?2.2:0)+gauss(r)*3,-8,35).toFixed(1),ih])}return{names:['sektor','calisan','ciro_milyon','kar_marji','ihracatci'],raw}},
+ ex:[['py','İhracatçı farkı','print(df.groupby("ihracatci").kar_marji.agg(["count","mean","std"]).round(2))'],['r','İhracatçı farkı (t-testi)','t.test(kar_marji~ihracatci,data=df)']]},
+{id:'p_fiyat',lang:'both',ad:'Fiyat endeksi (grup bazında)',desc:'36 ay × 4 harcama grubu (gıda, konut, ulaşım, giyim) fiyat endeksi.',gen(){const r=rng(107),G=[['gida',1.9],['konut',2.4],['ulasim',2.1],['giyim',1.3]],raw=[];G.forEach(([g,m])=>{let e=100;for(let t=0;t<36;t++){e*=1+(m+gauss(r)*.6)/100;raw.push([(2024+Math.floor(t/12))+'-'+pad2(t%12+1),g,+e.toFixed(2)])}});return{names:['ay','grup','endeks'],raw}},
+ ex:[['py','Gruplara göre çizgi','import matplotlib.pyplot as plt\nfor g,d in df.groupby("grup"): plt.plot(d.ay,d.endeks,label=g)\nplt.legend();plt.xticks(range(0,36,6));plt.show()'],['r','Aylık değişim','df$deg<-ave(df$endeks,df$grup,FUN=function(x) c(NA,diff(x)/head(x,-1)*100))\naggregate(deg~grup,df,mean)']]},
+{id:'p_hisse',lang:'py',ad:'Günlük hisse getirisi (Python)',desc:'1.000 işlem günü: fiyat, günlük getiri (%), hacim; oynaklık kümelenmesi içerir.',gen(){const r=rng(109),raw=[];let p=100,v=1,e=0;for(let i=0;i<1000;i++){v=Math.sqrt(.05+.1*e*e+.85*v*v);e=gauss(r)*v;const g=e+.03;p*=1+g/100;raw.push([dGun(i),+p.toFixed(2),+g.toFixed(3),Math.round(1e6*(1+v+Math.abs(gauss(r))*.3))])}return{names:['tarih','fiyat','getiri','hacim'],raw}},
+ ex:[['py','Hareketli ortalama','import matplotlib.pyplot as plt\ndf["ma20"]=df.fiyat.rolling(20).mean()\nplt.plot(df.fiyat,label="fiyat");plt.plot(df.ma20,label="20 gün")\nplt.legend();plt.show()'],['py','Oynaklık (20 gün)','df["vol"]=df.getiri.rolling(20).std()\nprint(df[["getiri","vol"]].describe().round(3))']]},
+{id:'p_kredi',lang:'py',ad:'Kredi başvuruları (Python)',desc:'4.000 başvuru: gelir, borç oranı, yaş, kredi notu, temerrüt (0/1). Sınıflandırma için.',gen(){const r=rng(113),raw=[];for(let i=0;i<4000;i++){const g=Math.round(Math.exp(9.8+gauss(r)*.5)/100)*100,b=+clamp(.3+gauss(r)*.15,.02,.95).toFixed(2),y=Math.round(clamp(38+gauss(r)*10,20,70)),n=Math.round(clamp(650-220*b+gauss(r)*55,300,900)),z=-1.2+4*b-.012*(n-600)-.01*(y-38);raw.push([g,b,y,n,r()<1/(1+Math.exp(-z))?1:0])}return{names:['gelir','borc_orani','yas','kredi_notu','temerrut'],raw}},
+ ex:[['py','Lojistik regresyon (sklearn)','from sklearn.linear_model import LogisticRegression\nX=df[["gelir","borc_orani","yas","kredi_notu"]];y=df.temerrut\nm=LogisticRegression(max_iter=2000).fit((X-X.mean())/X.std(),y)\nprint(dict(zip(X.columns,m.coef_[0].round(2))))\nprint("doğruluk:",round(m.score((X-X.mean())/X.std(),y),3))'],['py','Temerrüt oranı','print(df.groupby(pd.cut(df.kredi_notu,[300,500,600,700,900])).temerrut.mean().round(3))']]},
+{id:'p_mevsim',lang:'py',ad:'Mevsimsel satış serisi (Python)',desc:'96 ay: trend + mevsimsellik + gürültü içeren satış serisi.',gen(){const r=rng(127),raw=[];for(let t=0;t<96;t++)raw.push([(2024+Math.floor(t/12))+'-'+pad2(t%12+1),Math.round(1000+9*t+160*Math.sin(2*Math.PI*(t%12)/12)+gauss(r)*45)]);return{names:['ay','satis'],raw}},
+ ex:[['py','Trend + mevsim ayrıştırma','import numpy as np\nt=np.arange(len(df));a,b=np.polyfit(t,df.satis,1)\nres=df.satis-(a*t+b)\nprint("aylık trend:",round(a,2))\nprint(res.groupby(t%12).mean().round(1))']]},
+{id:'p_okun',lang:'r',ad:'Okun yasası (R)',desc:'80 çeyrek: büyüme, işsizlik değişimi, enflasyon.',gen(){const r=rng(131),raw=[];for(let i=0;i<80;i++){const g=+(3+gauss(r)*2.2).toFixed(2);raw.push([2005+Math.floor(i/4)+'-Ç'+(i%4+1),g,+(-.4*(g-3)+gauss(r)*.35).toFixed(2),+(10+.6*(g-3)+gauss(r)*1.5).toFixed(1)])}return{names:['ceyrek','buyume','issizlik_degisimi','enflasyon'],raw}},
+ ex:[['r','Okun katsayısı','m<-lm(issizlik_degisimi~buyume,data=df)\nsummary(m)\nplot(df$buyume,df$issizlik_degisimi);abline(m)'],['r','Kalıntı kontrolü','m<-lm(issizlik_degisimi~buyume,data=df)\npar(mfrow=c(1,2));hist(resid(m),main="");qqnorm(resid(m));qqline(resid(m))']]},
+{id:'p_deney',lang:'r',ad:'Gübre deneyi (R)',desc:'120 parsel: gübre türü (Kontrol, A, B, C), blok ve verim.',gen(){const r=rng(137),G=[['Kontrol',0],['A',4],['B',7],['C',6]],raw=[];for(let i=0;i<120;i++){const g=i%4,b=1+Math.floor(i/4)%4;raw.push([G[g][0],b,+(50+G[g][1]+b*.8+gauss(r)*4).toFixed(1)])}return{names:['gubre','blok','verim'],raw}},
+ ex:[['r','Tek yönlü ANOVA','df$gubre<-factor(df$gubre)\nsummary(aov(verim~gubre,data=df))'],['r','Tukey karşılaştırması','TukeyHSD(aov(verim~factor(gubre),data=df))'],['r','Kutu grafiği','boxplot(verim~gubre,data=df)']]},
+{id:'p_panel',lang:'r',ad:'Ülke paneli (R)',desc:'15 ülke × 12 yıl: kişi başı GSYH, yatırım oranı, nüfus artışı, büyüme.',gen(){const r=rng(139),raw=[];for(let c=0;c<15;c++){const a=gauss(r)*1.2;let y=8000+c*1800;for(let t=0;t<12;t++){const i=+(22+gauss(r)*4+c*.4).toFixed(1),n=+clamp(1.2+gauss(r)*.5-c*.04,-.3,3).toFixed(2),g=+(a+.13*(i-22)-.5*n+gauss(r)*1.1).toFixed(2);y*=1+g/100;raw.push(['Ülke'+(c+1),2012+t,Math.round(y),i,n,g])}}return{names:['ulke','yil','gsyh_kisi','yatirim','nufus_artisi','buyume'],raw}},
+ ex:[['r','Havuzlanmış OLS','summary(lm(buyume~yatirim+nufus_artisi,data=df))'],['r','Ülke sabit etkili model','summary(lm(buyume~yatirim+nufus_artisi+factor(ulke),data=df))']]}
+,
+{id:'p_ihracat',lang:'both',ad:'Sektörel dış ticaret paneli',desc:'12 sektör × 10 yıl: ihracat, ithalat, dış ticaret dengesi, kur endeksi.',gen(){const r=rng(201),raw=[];for(let s=0;s<12;s++){let x=200+s*60,m=220+s*45;for(let t=0;t<10;t++){const k=+(100*Math.pow(1.12,t)*(1+gauss(r)*.03)).toFixed(1);x*=1+.05+.002*(k-100)/10+gauss(r)*.05;m*=1+.06+gauss(r)*.05;raw.push(['Sektör'+(s+1),2015+t,Math.round(x),Math.round(m),Math.round(x-m),k])}}return{names:['sektor','yil','ihracat','ithalat','denge','kur_endeksi'],raw}},
+ ex:[['py','Sektöre göre denge','print(df.groupby("sektor").denge.sum().sort_values().round(0))'],['r','Kur ve ihracat','summary(lm(log(ihracat)~log(kur_endeksi)+factor(sektor),data=df))']]},
+{id:'p_il',lang:'both',ad:'81 il işsizlik ve gelir',desc:'81 il: bölge, işsizlik, genç işsizliği, ortalama eğitim yılı, kişi başı gelir.',gen(){const r=rng(203),B=['Marmara','Ege','Akdeniz','İç Anadolu','Karadeniz','Doğu','Güneydoğu'],raw=[];for(let i=1;i<=81;i++){const b=i%7,e=+clamp(8+gauss(r)*1.2-(b>4?1.2:0),5,12).toFixed(1),g=Math.round(Math.exp(10+.12*e+gauss(r)*.2-(b>4?.2:0))/100)*100,u=+clamp(14-.7*e+gauss(r)*1.5+(b>4?1.5:0),3,25).toFixed(1);raw.push([i,B[b],u,+(u*1.9+gauss(r)).toFixed(1),e,g])}return{names:['il_no','bolge','issizlik','genc_issizlik','egitim_yili','gelir_kisi'],raw}},
+ ex:[['py','Bölge ortalamaları','print(df.groupby("bolge")[["issizlik","gelir_kisi"]].mean().round(1))'],['r','Eğitim ve işsizlik','cor.test(df$egitim_yili,df$issizlik)']]},
+{id:'p_butce',lang:'both',ad:'Kamu bütçesi çeyreklik',desc:'40 çeyrek: gelir, gider, faiz gideri, borç stoku (GSYH %).',gen(){const r=rng(207),raw=[];let b=38;for(let t=0;t<40;t++){const g=+(100+2.2*t+gauss(r)*4+10*(t%4===3)).toFixed(1),h=+(g*(.95+.06*Math.sin(t/5))+gauss(r)*3).toFixed(1),f=+(12+.15*t+gauss(r)).toFixed(1);b=+clamp(b+(h+f-g)/80*10*.1+gauss(r)*.4,20,80).toFixed(1);raw.push([2015+Math.floor(t/4)+'-Ç'+(t%4+1),g,h,f,b])}return{names:['ceyrek','gelir','gider','faiz_gideri','borc_stogu'],raw}},
+ ex:[['py','Açık ve borç','df["acik"]=df.gider+df.faiz_gideri-df.gelir\nprint(df[["acik","borc_stogu"]].corr().round(2))'],['r','Borç grafiği','plot(df$borc_stogu,type="l",xlab="çeyrek",ylab="borç stoku (%)")']]},
+{id:'p_guven',lang:'both',ad:'Tüketici güven anketi',desc:'500 kişi: yaş, eğitim, gelir grubu, güven endeksi, enflasyon beklentisi.',gen(){const r=rng(211),E=['Lise','Üniversite','Lisansüstü'],raw=[];for(let i=0;i<500;i++){const e=Math.floor(r()*3),gg=1+Math.floor(r()*5),y=Math.round(clamp(40+gauss(r)*13,18,80));raw.push([y,E[e],gg,+clamp(70+4*gg+3*e-.05*y+gauss(r)*8,20,120).toFixed(1),+clamp(35-2*gg-2*e+gauss(r)*7,5,80).toFixed(1)])}return{names:['yas','egitim','gelir_grubu','guven_endeksi','enflasyon_beklentisi'],raw}},
+ ex:[['py','Eğitime göre güven','print(df.groupby("egitim").guven_endeksi.describe().round(1))'],['r','Gelir grubu ve beklenti','boxplot(enflasyon_beklentisi~gelir_grubu,data=df)']]},
+{id:'p_siparis',lang:'py',ad:'E-ticaret siparişleri (Python)',desc:'5.000 sipariş: tarih, kategori, tutar, kargo süresi, müşteri yaşı, iade (0/1).',gen(){const r=rng(221),K=['Giyim','Elektronik','Kitap','Ev'],raw=[];for(let i=0;i<5000;i++){const k=Math.floor(r()*4),c=Math.round(8+r()*4+gauss(r)),t=Math.round(Math.exp([5.4,6.9,4.4,5.8][k]+gauss(r)*.5));raw.push([dGun(Math.floor(r()*365)),K[k],t,c,Math.round(clamp(34+gauss(r)*11,18,75)),r()<.05+.04*(k===0)+.01*c?1:0])}return{names:['tarih','kategori','tutar','kargo_gun','musteri_yasi','iade'],raw}},
+ ex:[['py','Aylık ciro','df["ay"]=pd.to_datetime(df.tarih).dt.to_period("M")\nprint(df.groupby("ay").tutar.sum().round(0))'],['py','İade oranı','print(df.groupby("kategori").iade.mean().round(3))']]},
+{id:'p_kume',lang:'py',ad:'Müşteri segmentasyonu (Python)',desc:'900 müşteri: yıllık harcama, ziyaret sayısı, ortalama sepet (3 gizli küme).',gen(){const r=rng(223),C=[[2000,10,200],[9000,30,300],[25000,12,2000]],raw=[];for(let i=0;i<900;i++){const c=C[i%3];raw.push([Math.round(c[0]*(1+gauss(r)*.2)),Math.round(c[1]*(1+gauss(r)*.25)),Math.round(c[2]*(1+gauss(r)*.2))])}return{names:['yillik_harcama','ziyaret','sepet'],raw}},
+ ex:[['py','K-means (3 küme)','from sklearn.cluster import KMeans\nX=(df-df.mean())/df.std()\ndf["kume"]=KMeans(3,n_init=10,random_state=0).fit_predict(X)\nprint(df.groupby("kume").mean().round(0))']]},
+{id:'p_varlik',lang:'py',ad:'Varlık getirileri (Python)',desc:'1.000 gün: hisse, altın ve döviz günlük getirileri.',gen(){const r=rng(227),raw=[];for(let i=0;i<1000;i++){const m=gauss(r);raw.push([dGun(i),+(.9*m+gauss(r)*.6).toFixed(3),+(-.25*m+gauss(r)*.5).toFixed(3),+(.2*m+gauss(r)*.4).toFixed(3)])}return{names:['tarih','hisse','altin','doviz'],raw}},
+ ex:[['py','Korelasyon matrisi','print(df[["hisse","altin","doviz"]].corr().round(2))'],['py','Portföy riski','import numpy as np\nR=df[["hisse","altin","doviz"]];w=np.array([.5,.3,.2])\nprint("günlük risk:",round(float(np.sqrt(w@R.cov().values@w)),3))']]},
+{id:'p_arz',lang:'py',ad:'Talep tahmini (Python)',desc:'1.000 gözlem: fiyat, ikame mal fiyatı, gelir, talep miktarı (log-log ilişki).',gen(){const r=rng(229),raw=[];for(let i=0;i<1000;i++){const p=+(5+r()*15).toFixed(2),s=+(5+r()*15).toFixed(2),g=Math.round(8000+r()*20000);raw.push([p,s,g,Math.round(Math.exp(6-1.2*Math.log(p)+.6*Math.log(s)+.5*Math.log(g/10000)+gauss(r)*.12))])}return{names:['fiyat','ikame_fiyat','gelir','talep'],raw}},
+ ex:[['py','Esneklikler (log-log)','import numpy as np\nX=np.column_stack([np.ones(len(df)),np.log(df.fiyat),np.log(df.ikame_fiyat),np.log(df.gelir)])\nb=np.linalg.lstsq(X,np.log(df.talep),rcond=None)[0]\nprint(dict(zip(["sabit","fiyat","ikame","gelir"],b.round(2))))']]},
+{id:'p_phillips',lang:'r',ad:'Phillips eğrisi (R)',desc:'100 çeyrek: işsizlik, enflasyon beklentisi, enflasyon.',gen(){const r=rng(231),raw=[];for(let t=0;t<100;t++){const u=+clamp(8+2*Math.sin(t/9)+gauss(r)*.6,3,15).toFixed(2),b=+(15+gauss(r)*2+t*.02).toFixed(2);raw.push([2000+Math.floor(t/4)+'-Ç'+(t%4+1),u,b,+(.8*b-.9*(u-8)+gauss(r)*1.1).toFixed(2)])}return{names:['ceyrek','issizlik','beklenti','enflasyon'],raw}},
+ ex:[['r','Beklentiyle genişletilmiş Phillips','summary(lm(enflasyon~issizlik+beklenti,data=df))'],['r','Serbest görünüm','plot(df$issizlik,df$enflasyon);abline(lm(enflasyon~issizlik,data=df))']]},
+{id:'p_ucret',lang:'r',ad:'Eğitim ve ücret (R, Mincer)',desc:'3.000 çalışan: eğitim yılı, deneyim, cinsiyet, saatlik ücret.',gen(){const r=rng(233),raw=[];for(let i=0;i<3000;i++){const e=Math.round(clamp(11+gauss(r)*3,5,22)),d=Math.round(clamp(12+gauss(r)*8,0,40)),c=r()<.45?'K':'E';raw.push([e,d,c,+Math.exp(1.6+.09*e+.035*d-.0006*d*d-.08*(c==='K')+gauss(r)*.3).toFixed(2)])}return{names:['egitim','deneyim','cinsiyet','ucret'],raw}},
+ ex:[['r','Mincer denklemi','summary(lm(log(ucret)~egitim+deneyim+I(deneyim^2)+cinsiyet,data=df))'],['r','Eğitim getirisi grafiği','plot(df$egitim,log(df$ucret));abline(lm(log(ucret)~egitim,data=df))']]},
+{id:'p_program',lang:'r',ad:'Program etkisi: farkların farkı (R)',desc:'1.000 birey × 2 dönem: katılım grubu, dönem (önce/sonra), gelir.',gen(){const r=rng(237),raw=[];for(let i=0;i<1000;i++){const g=i%2?'Katılan':'Katılmayan',b=3000+gauss(r)*500+(g==='Katılan'?-150:0);raw.push([i+1,g,'Önce',Math.round(b)]);raw.push([i+1,g,'Sonra',Math.round(b+200+(g==='Katılan'?350:0)+gauss(r)*250)])}return{names:['birey','grup','donem','gelir'],raw}},
+ ex:[['r','Farkların farkı','df$donem<-factor(df$donem,levels=c("Önce","Sonra"))\nsummary(lm(gelir~grup*donem,data=df))'],['r','Grup ortalamaları','aggregate(gelir~grup+donem,df,mean)']]},
+{id:'p_zaman',lang:'r',ad:'Tüketim zaman serisi (R)',desc:'60 çeyrek: tüketim, gelir, faiz; otokorelasyon çalışması için.',gen(){const r=rng(239),raw=[];let c=500,y=700;for(let t=0;t<60;t++){y*=1+.008+gauss(r)*.015;const f=+(12+3*Math.sin(t/8)+gauss(r)*.5).toFixed(2);c=.5*c+.5*(.7*y)-3*(f-12)+gauss(r)*6;raw.push([2010+Math.floor(t/4)+'-Ç'+(t%4+1),+c.toFixed(1),+y.toFixed(1),f])}return{names:['ceyrek','tuketim','gelir','faiz'],raw}},
+ ex:[['r','Otokorelasyon','acf(df$tuketim,main="")'],['r','Gecikmeli model','n<-nrow(df);summary(lm(tuketim[-1]~tuketim[-n]+gelir[-1]+faiz[-1],data=df))']]}
+,
+{id:'p_enerji',lang:'both',ad:'Ülke enerji tüketimi paneli',desc:'25 ülke × 8 yıl: kişi başı enerji, kişi başı GSYH, yenilenebilir pay.',gen(){const r=rng(301),raw=[];for(let c=0;c<25;c++){let g=5000+c*1500,y=10+r()*30;for(let t=0;t<8;t++){g*=1+.03+gauss(r)*.02;y=clamp(y+.8+gauss(r)*.8,1,80);raw.push(['Ülke'+(c+1),2016+t,Math.round(.35*g/10+gauss(r)*150-y*8),Math.round(g),+y.toFixed(1)])}}return{names:['ulke','yil','enerji_kisi','gsyh_kisi','yenilenebilir_pay'],raw}},
+ ex:[['py','Gelir–enerji','print(df[["enerji_kisi","gsyh_kisi","yenilenebilir_pay"]].corr().round(2))'],['r','Enerji modeli','summary(lm(log(enerji_kisi)~log(gsyh_kisi)+yenilenebilir_pay,data=df[df$enerji_kisi>0,]))']]},
+{id:'p_konut',lang:'both',ad:'Konut ilanları',desc:'4.000 ilan: ilçe, metrekare, oda, bina yaşı, fiyat.',gen(){const r=rng(303),I=[['Merkez',1],['Sahil',1.35],['Sanayi',.8],['Yeşiltepe',1.1]],raw=[];for(let i=0;i<4000;i++){const k=Math.floor(r()*4),m=Math.round(clamp(100+gauss(r)*35,45,300)),o=clamp(Math.round(m/35),1,6),y=Math.round(r()*40);raw.push([I[k][0],m,o,y,Math.round(Math.exp(7.2+.011*m*.9-.012*y+Math.log(I[k][1])+gauss(r)*.15)*2000/1000)*1000])}return{names:['ilce','metrekare','oda','bina_yasi','fiyat'],raw}},
+ ex:[['py','İlçeye göre m² fiyatı','df["m2"]=df.fiyat/df.metrekare\nprint(df.groupby("ilce").m2.median().round(0))'],['r','Hedonik fiyat modeli','summary(lm(log(fiyat)~metrekare+bina_yasi+ilce,data=df))']]},
+{id:'p_tarim',lang:'both',ad:'Tarım işletmeleri',desc:'300 işletme: bölge, arazi (da), gübre, sulama, verim.',gen(){const r=rng(305),B=['Ova','Orta','Dağlık'],raw=[];for(let i=0;i<300;i++){const b=Math.floor(r()*3),a=Math.round(Math.exp(3.2+gauss(r)*.6)),g=Math.round(clamp(20+gauss(r)*8,2,50)),s=r()<.4+.1*(2-b)?'Evet':'Hayır';raw.push([B[b],a,g,s,+(250+(2-b)*60+g*3+(s==='Evet'?90:0)+gauss(r)*40).toFixed(0)])}return{names:['bolge','arazi_da','gubre_kg','sulama','verim'],raw}},
+ ex:[['py','Sulama farkı','print(df.groupby(["bolge","sulama"]).verim.mean().unstack().round(0))'],['r','Verim modeli','summary(lm(verim~gubre_kg+sulama+bolge,data=df))']]},
+{id:'p_dagilim',lang:'both',ad:'Gelir dağılımı',desc:'5.000 kişi: yaş, eğitim yılı, gelir, servet. Gini ve Lorenz için.',gen(){const r=rng(307),raw=[];for(let i=0;i<5000;i++){const e=Math.round(clamp(10+gauss(r)*3.5,0,22)),y=Math.round(clamp(40+gauss(r)*14,18,85)),g=Math.exp(8.4+.08*e+.01*y+gauss(r)*.7);raw.push([y,e,Math.round(g),Math.round(g*Math.exp(.9+.03*y+gauss(r)*.9)*.6)])}return{names:['yas','egitim_yili','gelir','servet'],raw}},
+ ex:[['py','Gini katsayısı','import numpy as np\nx=np.sort(df.gelir.values);n=len(x)\nprint("Gini:",round(float((2*np.arange(1,n+1)-n-1)@x/(n*x.sum())),3))'],['r','Lorenz eğrisi','x<-sort(df$gelir);L<-cumsum(x)/sum(x)\nplot(seq_along(x)/length(x),L,type="l",xlab="nüfus payı",ylab="gelir payı");abline(0,1,lty=2)']]},
+{id:'p_turizm',lang:'both',ad:'Turizm geliri serisi',desc:'96 ay: ziyaretçi sayısı, kur endeksi, turizm geliri.',gen(){const r=rng(309),raw=[];for(let t=0;t<96;t++){const k=+(100*Math.pow(1.01,t)*(1+gauss(r)*.02)).toFixed(1),z=Math.round(1200+8*t+700*Math.max(0,Math.sin(2*Math.PI*((t%12)-3)/12))+gauss(r)*60);raw.push([(2018+Math.floor(t/12))+'-'+pad2(t%12+1),z,k,Math.round(z*(.55+.002*k)+gauss(r)*30)])}return{names:['ay','ziyaretci_bin','kur_endeksi','gelir_milyon'],raw}},
+ ex:[['py','Aylık ortalama','df["m"]=df.ay.str[-2:]\nprint(df.groupby("m").ziyaretci_bin.mean().round(0))'],['r','Mevsimsel grafik','boxplot(ziyaretci_bin~substr(ay,6,7),data=df)']]},
+{id:'p_sube',lang:'py',ad:'Banka şubeleri (Python)',desc:'250 şube: mevduat, kredi, personel, takipteki kredi oranı.',gen(){const r=rng(311),raw=[];for(let i=0;i<250;i++){const m=Math.round(Math.exp(4.3+gauss(r)*.7)),k=Math.round(m*clamp(.7+gauss(r)*.2,.2,1.4));raw.push(['Şube'+(i+1),m,k,Math.round(6+m/12+gauss(r)*2),+clamp(2+2.5*k/m+gauss(r),.1,12).toFixed(2)])}return{names:['sube','mevduat','kredi','personel','takip_orani'],raw}},
+ ex:[['py','Kredi/mevduat ve takip','df["kmo"]=df.kredi/df.mevduat\nprint(df[["kmo","takip_orani"]].corr().round(2))']]},
+{id:'p_abtest',lang:'py',ad:'A/B testi (Python)',desc:'5.000 kullanıcı: grup (A/B), harcama, dönüşüm (0/1).',gen(){const r=rng(313),raw=[];for(let i=0;i<5000;i++){const g=i%2?'B':'A',d=r()<(g==='B'?.13:.1)?1:0;raw.push([g,+(Math.exp(3+gauss(r)*.6+(g==='B'?.05:0))*(d?1.8:.6)).toFixed(2),d])}return{names:['grup','harcama','donustu'],raw}},
+ ex:[['py','Dönüşüm oranı farkı (z-testi)','import numpy as np\ns=df.groupby("grup").donustu.agg(["sum","count"])\np=s["sum"]/s["count"];pp=s["sum"].sum()/s["count"].sum()\nz=(p["B"]-p["A"])/np.sqrt(pp*(1-pp)*(1/s["count"]["A"]+1/s["count"]["B"]))\nprint(p.round(3).to_dict(),"z =",round(float(z),2))']]},
+{id:'p_sepet',lang:'py',ad:'Fiyat sepeti – geniş tablo (Python)',desc:'36 ay × 6 ürün sütunu (geniş biçim); melt ve pivot çalışmak için.',gen(){const r=rng(315),U=['ekmek','sut','et','yag','kira','ulasim'],raw=[],p=[8,20,300,60,6000,15];for(let t=0;t<36;t++){raw.push([(2022+Math.floor(t/12))+'-'+pad2(t%12+1),...p.map((v,i)=>+(v*Math.pow(1+.015+i*.002,t)*(1+gauss(r)*.01)).toFixed(2))])}return{names:['ay',...U],raw}},
+ ex:[['py','Uzun biçime çevir (melt)','u=df.melt(id_vars="ay",var_name="urun",value_name="fiyat")\nprint(u.groupby("urun").fiyat.agg(["first","last"]).assign(artis=lambda d:(d["last"]/d["first"]-1)*100).round(1))']]},
+{id:'p_tahmin',lang:'py',ad:'Yön tahmini (Python, sklearn)',desc:'1.000 gün: gecikmeli getiriler, hacim değişimi ve ertesi günün yönü (0/1).',gen(){const r=rng(317),raw=[];let a=gauss(r),b=gauss(r);for(let i=0;i<1000;i++){const h=gauss(r),y=r()<1/(1+Math.exp(-(.25*a-.15*b+.1*h)))?1:0;raw.push([+a.toFixed(3),+b.toFixed(3),+h.toFixed(3),y]);b=a;a=y?Math.abs(gauss(r))*.8:-Math.abs(gauss(r))*.8}return{names:['getiri_1','getiri_2','hacim_degisim','yon'],raw}},
+ ex:[['py','Eğitim/test ayrımı ile sınıflandırma','from sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\nX=df.drop(columns="yon");y=df.yon\nXe,Xt,ye,yt=train_test_split(X,y,test_size=.3,random_state=1)\nprint("test doğruluğu:",round(LogisticRegression().fit(Xe,ye).score(Xt,yt),3))']]},
+{id:'p_cobb',lang:'r',ad:'Cobb-Douglas üretim (R)',desc:'1.000 firma: üretim, sermaye, emek.',gen(){const r=rng(321),raw=[];for(let i=0;i<1000;i++){const k=Math.round(Math.exp(4+gauss(r)*.8)),l=Math.round(Math.exp(3+gauss(r)*.7));raw.push([Math.round(Math.exp(.6+.35*Math.log(k)+.6*Math.log(l)+gauss(r)*.15)*100),k,l])}return{names:['uretim','sermaye','emek'],raw}},
+ ex:[['r','Üretim fonksiyonu','m<-lm(log(uretim)~log(sermaye)+log(emek),data=df);summary(m)'],['r','Ölçek getirisi','b<-coef(lm(log(uretim)~log(sermaye)+log(emek),data=df));sum(b[-1])']]},
+{id:'p_kanal',lang:'r',ad:'Alışveriş kanalı anketi (R)',desc:'400 kişi: yaş grubu, tercih edilen kanal (mağaza/online).',gen(){const r=rng(323),G=['18-30','31-45','46-60','60+'],raw=[];for(let i=0;i<400;i++){const g=Math.floor(r()*4);raw.push([G[g],r()<.75-.18*g?'Online':'Mağaza'])}return{names:['yas_grubu','kanal'],raw}},
+ ex:[['r','Ki-kare bağımsızlık testi','t<-table(df$yas_grubu,df$kanal);print(t);chisq.test(t)'],['r','Mozaik grafik','mosaicplot(table(df$yas_grubu,df$kanal),main="")']]},
+{id:'p_iv',lang:'r',ad:'Araç değişkeni: eğitim ve ücret (R)',desc:'800 kişi: eğitim, ücret, baba eğitimi (araç değişken); içsellik örneği.',gen(){const r=rng(325),raw=[];for(let i=0;i<800;i++){const y=gauss(r),b=Math.round(clamp(7+gauss(r)*2.5,0,16)),e=+(10+.35*b+.8*y+gauss(r)).toFixed(2);raw.push([e,+(1.5+.08*e+.15*y+gauss(r)*.2).toFixed(3),b])}return{names:['egitim','log_ucret','baba_egitimi'],raw}},
+ ex:[['r','OLS ve iki aşamalı EKK (2SLS)','print(coef(lm(log_ucret~egitim,data=df)))\ndf$e_hat<-fitted(lm(egitim~baba_egitimi,data=df))\nprint(coef(lm(log_ucret~e_hat,data=df)))']]},
+{id:'p_rd',lang:'r',ad:'Süreksizlik regresyonu: burs (R)',desc:'600 öğrenci: sınav puanı, burs (puan ≥ 70), sonraki gelir.',gen(){const r=rng(327),raw=[];for(let i=0;i<600;i++){const p=Math.round(clamp(70+gauss(r)*12,30,100)),b=p>=70?1:0;raw.push([p,b,Math.round(4000+25*p+b*450+gauss(r)*300)])}return{names:['puan','burs','gelir'],raw}},
+ ex:[['r','Eşik etrafında etki','df$m<-df$puan-70\ns<-subset(df,abs(m)<=15)\nsummary(lm(gelir~burs+m+burs:m,data=s))']]},
+{id:'p_kur',lang:'r',ad:'Döviz kuru serisi (R)',desc:'300 gün: döviz kuru ve günlük değişim.',gen(){const r=rng(329),raw=[];let k=30;for(let i=0;i<300;i++){const d=+(.0007+gauss(r)*.007).toFixed(4);k*=1+d;raw.push([dGun(i),+k.toFixed(3),d*100])}return{names:['tarih','kur','degisim'],raw}},
+ ex:[['r','ARIMA modeli','m<-arima(log(df$kur),order=c(1,1,0));print(m)'],['r','Seri ve değişim','par(mfrow=c(2,1));plot(df$kur,type="l");plot(df$degisim,type="h")']]}
+];
+const PRC={};
+const loadPR=b=>{if(PRC[b.id])return PRC[b.id];const g=b.gen();return PRC[b.id]=Object.assign(buildDS({id:b.id,ad:b.ad,kaynak:'Eğitim amaçlı sentetik',tarih:'',desc:b.desc,tip:'hazir'},g.names,g.raw),{ex:b.ex||[],lang:b.lang})};
+const prExamples=ds=>{
+  const N=numCols(ds),C=ds.cols.find(c=>c.type!=='num'),a=N[0],b=N[1]||N[0],g=C&&C.name;
+  const P=[['Özet istatistikler','print(df.describe())'],['Eksik değerler','print(df.isna().sum())']];
+  const R=[['Özet istatistikler','summary(df)'],['Eksik değerler','colSums(is.na(df))']];
+  if(g&&a){P.push(['Gruba göre ortalama','print(df.groupby('+JSON.stringify(g)+')['+JSON.stringify(a)+'].agg(["count","mean","median"]))']);R.push(['Gruba göre ortalama','aggregate(df['+JSON.stringify(a)+']~df['+JSON.stringify(g)+'],FUN=mean)'])}
+  if(a&&b&&a!==b){P.push(['Korelasyon','print(df['+JSON.stringify(a)+'].corr(df['+JSON.stringify(b)+']))'],['Dağılım grafiği','import matplotlib.pyplot as plt\nplt.scatter(df['+JSON.stringify(a)+'],df['+JSON.stringify(b)+'])\nplt.xlabel('+JSON.stringify(a)+');plt.ylabel('+JSON.stringify(b)+')\nplt.show()'],['Regresyon (OLS)','import numpy as np\nx,y=df['+JSON.stringify(a)+'],df['+JSON.stringify(b)+']\neğim,sabit=np.polyfit(x,y,1)\nprint("y =",round(sabit,3),"+",round(eğim,3),"x")']);
+    R.push(['Korelasyon','cor(df['+JSON.stringify(a)+'],df['+JSON.stringify(b)+'],use="complete.obs")'],['Dağılım grafiği','plot(df['+JSON.stringify(a)+'][[1]],df['+JSON.stringify(b)+'][[1]],xlab='+JSON.stringify(a)+',ylab='+JSON.stringify(b)+')'],['Regresyon (OLS)','summary(lm(`'+b+'`~`'+a+'`,data=df))'])}
+  if(a)P.push(['Histogram','import matplotlib.pyplot as plt\ndf['+JSON.stringify(a)+'].hist(bins=15)\nplt.show()']),R.push(['Histogram','hist(df['+JSON.stringify(a)+'][[1]],breaks=15,main="",xlab='+JSON.stringify(a)+')']);
+  return (ds.ex||[]).filter(e=>e[0]===PR.lang).map(e=>[e[1],e[2]]).concat(PR.lang==='py'?P:R)};
+async function prRun(out,img,stEl){
+  const ds=PR.ds,code=PR.code;PR.busy=true;PR.txt='';PR.imgs=[];out.textContent='';img.replaceChildren();
+  const add=t=>{PR.txt+=t;out.textContent=PR.txt},st=t=>{PR.st=t;stEl.textContent=t};
+  try{
+    if(PR.lang==='py'){
+      st('Python hazırlanıyor… (ilk seferde 10–30 MB iner)');const py=await loadPy();
+      py.setStdout({batched:s=>add(s+'\n')});py.setStderr({batched:s=>add(s+'\n')});
+      py.FS.writeFile('veri.csv',csvOf(ds));
+      st('Çalışıyor…');await py.loadPackagesFromImports(code);
+      await py.runPythonAsync('import pandas as pd, numpy as np\ndf=pd.read_csv("veri.csv")\ntry:\n    import matplotlib\n    matplotlib.use("agg")\nexcept Exception: pass');
+      try{await py.runPythonAsync(code)}catch(e){add('Hata: '+String(e.message||e).split('\n').slice(-4).join('\n')+'\n')}
+      const js=await py.runPythonAsync('import sys,io,base64,json\nF=[]\nif "matplotlib.pyplot" in sys.modules:\n    import matplotlib.pyplot as _p\n    for n in _p.get_fignums():\n        b=io.BytesIO();_p.figure(n).savefig(b,format="png",dpi=110,bbox_inches="tight");F.append(base64.b64encode(b.getvalue()).decode())\n    _p.close("all")\njson.dumps(F)');
+      JSON.parse(js).forEach(b=>img.append(el('img',{src:'data:image/png;base64,'+b,alt:'Python grafiği',style:'max-width:100%;border-radius:12px;background:#fff'})));
+    }else{
+      st('R hazırlanıyor… (ilk seferde 30 MB civarı iner)');const w=await loadR();
+      await w.FS.writeFile('/home/web_user/veri.csv',new TextEncoder().encode(csvOf(ds)));
+      st('Çalışıyor…');const sh=await new w.Shelter();
+      try{await sh.captureR('df <- read.csv("/home/web_user/veri.csv",fileEncoding="UTF-8",check.names=FALSE)',{captureGraphics:false});
+        const r=await sh.captureR(code,{withAutoprint:true,captureStreams:true,captureConditions:false,captureGraphics:{width:672,height:480}});
+        r.output.forEach(o=>{if(o.type==='stdout'||o.type==='stderr')add(o.data+'\n')});
+        r.images.forEach(bm=>{const c=el('canvas',{style:'max-width:100%;border-radius:12px;background:#fff'});c.width=bm.width;c.height=bm.height;c.getContext('2d').drawImage(bm,0,0);img.append(c)})
+      }catch(e){add('Hata: '+String(e.message||e)+'\n')}finally{sh.purge()}
+    }
+    if(!PR.txt&&!img.children.length)add('(Çıktı yok. Sonucu görmek için print(...) veya bir grafik kullan.)');
+    st('Bitti');
+  }catch(e){add(String(e.message||e));st('Hata')}
+  PR.busy=false}
+const prReset=()=>{PR.code=PR.mode==='yaz'?'':prExamples(PR.ds)[0][1];PR.txt='';PR.st=''};
+mkPage('x-v-pyr','Python ve R','Aynı veri setiyle Python (pandas) veya R yaz; tarayıcıda çalışır, kurulum gerekmez.',['#306998','#276dc3','#ffd43b'],async body=>{
+  const gen=await allDatasets(),B=b=>PRB.filter(x=>b(x.lang)).map(loadPR),ort=B(l=>l==='both'),oz=B(l=>l===PR.lang),all=gen.concat(ort,oz);
+  const cur=PR.ds&&all.find(d=>d.id===PR.ds.id);
+  PR.ds=cur||gen.find(d=>d.id===AT.id)||gen[0];if(!cur||!PR.init){PR.init=1;prReset()}
+  const ds=PR.ds,L=PR.lang==='py'?'Python':'R';
+  const ta=el('textarea',{class:'x2-in',rows:'9',spellcheck:'false',placeholder:PR.lang==='py'?'# Kodunu buraya yaz. Veri “df” adıyla hazır: print(df.head())':'# Kodunu buraya yaz. Veri “df” adıyla hazır: head(df)','aria-label':'Kod',style:'font:500 14px/1.5 ui-monospace,Menlo,Consolas,monospace;width:100%;flex:1 1 100%',oninput:e=>{PR.code=e.target.value}});ta.value=PR.code;
+  const out=el('pre',{style:'white-space:pre-wrap;word-break:break-word;font:500 13.5px/1.5 ui-monospace,Menlo,Consolas,monospace;margin:0;min-height:60px',text:PR.txt}),img=el('div',{class:'x2-stack'}),stEl=el('span',{class:'x2-mut',text:PR.st});
+  const grp=(t,a)=>a.length?el('optgroup',{label:t+' ('+a.length+')'},a.map(d=>el('option',{value:d.id,selected:d.id===ds.id},d.ad))):null;
+  const sel=el('select',{class:'x2-in','aria-label':'Veri seti',onchange:e=>{PR.ds=all.find(d=>d.id===e.target.value);prReset();rerender('x-v-pyr')}},[grp('Genel veri setleri',gen),grp('Ortak ek veri setleri',ort),grp(L+'’a özel veri setleri',oz)]);
+  fill(body,
+    chipRow([['py','🐍 Python'],['r','📊 R']],PR.lang,v=>{PR.lang=v;PR.st='';rerender('x-v-pyr')}),
+    chipRow([['yaz','✍️ Önce ben yazayım'],['hazir','📋 Hazır kod gelsin']],PR.mode,v=>{PR.mode=v;prReset();rerender('x-v-pyr')}),
+    card(el('h3',{text:'Kod'}),el('div',{style:'height:8px'}),field('Veri seti ('+all.length+' seçenek)',sel),
+      el('p',{class:'x2-mut',text:(ds.desc?ds.desc+' ':'')+'Veri “df” adıyla hazır ('+ds.rows.length+' satır; sütunlar: '+ds.cols.map(c=>c.name).join(', ')+').'}),
+      ta,el('div',{style:'height:10px'}),
+      el('div',{class:'x2-row'},el('button',{class:'btn grad',type:'button',onclick:()=>{if(!PR.busy)prRun(out,img,stEl)}},'▶ Çalıştır'),stEl)),
+    card(el('h3',{text:'Çıktı'}),el('div',{style:'height:8px'}),out,img),
+    card(el('h3',{text:'Hazır örnekler ('+L+')'}),el('p',{class:'x2-mut',text:'Birine basınca kod kutusuna gelir; istersen değiştirip çalıştır.'}),el('div',{class:'x2-row'},prExamples(ds).map(([t,c])=>el('button',{class:'btn',type:'button',onclick:()=>{PR.code=c;ta.value=c}},t)))),
+    el('p',{class:'x2-mut',text:'Python: Pyodide (pandas, numpy, matplotlib, scipy, statsmodels, scikit-learn). R: WebR. İlk açılışta internetten indirilir; veri tarayıcından çıkmaz.'}));
+});
+
+/* ---- Haftalık görev ve mini derslerde Python / R ---- */
+function sendToPR(lang,dsid,code){PR.lang=lang;PR.mode='hazir';PR.init=1;PR.ds={id:dsid};PR.code=code;PR.txt='';PR.st='';goHash('x-v-pyr')}
+const qj=JSON.stringify;
+const KC=(a,b)=>[`print(round(df[${qj(a)}].corr(df[${qj(b)}]),2))`,`round(cor(df$${a},df$${b},use="complete.obs"),2)`];
+const KG=(g,v)=>[`print(df.groupby(${qj(g)})[${qj(v)}].mean().sort_values(ascending=False).round(2))`,`a<-aggregate(${v}~${g},df,mean)\na[order(-a$${v}),]`];
+const TPR={
+t1:KC('calisma_saat','gano'),
+t2:['print(round(df.enflasyon.mean(),2))','round(mean(df$enflasyon),2)'],
+t3:['df["ciro"]=df.fiyat*df.adet\nprint(df.groupby("kategori").ciro.sum().sort_values(ascending=False))','df$ciro<-df$fiyat*df$adet\na<-aggregate(ciro~kategori,df,sum)\na[order(-a$ciro),]'],
+t4:['m=df.groupby("staj").gano.mean()\nprint(m.round(3))\nprint("fark:",round(m["Var"]-m["Yok"],2))','m<-tapply(df$gano,df$staj,mean,na.rm=TRUE)\nprint(round(m,3))\nround(m["Var"]-m["Yok"],2)'],
+t5:KC('faiz','kur_endeksi'),
+t6:['print(round((df.fiyat*df.adet).mean()))','round(mean(df$fiyat*df$adet))'],
+t7:['print(df.harcama.isna().sum())','sum(is.na(df$harcama))'],
+t8:KG('bolum','gano'),
+t9:['k=df[df.sinif==4]\nprint(round(k.harcama.mean()),k.harcama.count())','k<-subset(df,sinif==4)\nround(mean(k$harcama,na.rm=TRUE))'],
+t10:KG('sehir','indirim'),
+t11:['c=df.fiyat*df.adet\nprint(round(c[df.indirim==20].sum()/c.sum()*100,1))','c<-df$fiyat*df$adet\nround(sum(c[df$indirim==20])/sum(c)*100,1)'],
+t12:['print((df.faiz>30).sum())','sum(df$faiz>30)'],
+t13:KC('gelir','omur'),
+t14:KG('bolge','gini'),
+t15:['print((df.enflasyon>10).sum())','sum(df$enflasyon>10,na.rm=TRUE)'],
+t16:['print(round(df.gelir.median(),-2))','round(median(df$gelir,na.rm=TRUE),-2)'],
+t17:['p=df.gida/df.gelir*100\nprint(round(p[df.gelir<=20000].mean()-p[df.gelir>=60000].mean(),1))','p<-df$gida/df$gelir*100\nround(mean(p[df$gelir<=20000],na.rm=TRUE)-mean(p[df$gelir>=60000],na.rm=TRUE),1)'],
+t18:['k=df[df.ev_sahibi=="Hayır"]\nprint(round((k.kira/k.gelir).mean()*100,1))','k<-subset(df,ev_sahibi=="Hayır")\nround(mean(k$kira/k$gelir,na.rm=TRUE)*100,1)'],
+t19:KG('sektor','getiri'),
+t20:['g=df.groupby("hisse").getiri.agg(lambda x:x.max()-x.min())\nprint(g.sort_values(ascending=False).round(2))','a<-aggregate(getiri~hisse,df,function(x) max(x)-min(x))\na[order(-a$getiri),]'],
+t21:['k=df[df.hisse=="TKNO"].set_index("ay").kapanis\nprint(round((k["2025-12"]/k["2023-01"]-1)*100,1))','k<-subset(df,hisse=="TKNO");k<-setNames(k$kapanis,k$ay)\nround((k["2025-12"]/k["2023-01"]-1)*100,1)'],
+t22:['print(round((df.iade=="Evet").mean()*100,1))','round(mean(df$iade=="Evet")*100,1)'],
+t23:['print(df.puan.isna().sum())','sum(is.na(df$puan))'],
+t24:['print(((df.kategori=="Giyim")&(df.fiyat>3000)).sum())','sum(df$kategori=="Giyim"&df$fiyat>3000)'],
+t25:KC('kargo_gun','puan'),
+t26:['print(df.assign(i=df.iade=="Evet").groupby("kanal").i.mean().sort_values(ascending=False).round(3))','a<-aggregate(I(iade=="Evet")~kanal,df,mean)\na[order(-a[[2]]),]'],
+t27:['m=df.groupby("iade").kargo_gun.mean()\nprint(m.round(2))\nprint("fark:",round(m["Evet"]-m["Hayır"],2))','m<-tapply(df$kargo_gun,df$iade,mean,na.rm=TRUE)\nprint(round(m,2))\nround(m["Evet"]-m["Hayır"],2)'],
+t28:['print(df[df.yil==2025].sort_values("gsyh",ascending=False)[["il","bolge","gsyh"]].head(3))','k<-subset(df,yil==2025)\nhead(k[order(-k$gsyh),c("il","bolge","gsyh")],3)'],
+t29:KC('egitim','issizlik'),
+t30:['m=df.groupby("yil").gsyh.mean()\nprint(round(((m[2025]/m[2010])**(1/15)-1)*100,1))','m<-tapply(df$gsyh,df$yil,mean)\nround(((m["2025"]/m["2010"])^(1/15)-1)*100,1)'],
+t31:['k=df[df.egitim=="Üniversite"]\nm=k.groupby("cinsiyet").ucret.mean()\nprint(round((m["Erkek"]-m["Kadın"])/m["Erkek"]*100,1))','k<-subset(df,egitim=="Üniversite")\nm<-tapply(k$ucret,k$cinsiyet,mean,na.rm=TRUE)\nround((m["Erkek"]-m["Kadın"])/m["Erkek"]*100,1)'],
+t32:['m=(df.fiyat/df.m2).groupby(df.asansor).mean()\nprint(m.round(2))','m<-tapply(df$fiyat/df$m2,df$asansor,mean,na.rm=TRUE)\nprint(round(m,2))\ndiff(range(m))'],
+t33:['d=df.groupby("urun")[["ihracat","ithalat"]].sum()\nd["acik"]=d.ithalat-d.ihracat\nprint(d.sort_values("acik",ascending=False))','d<-aggregate(cbind(ihracat,ithalat)~urun,df,sum)\nd$acik<-d$ithalat-d$ihracat\nd[order(-d$acik),]'],
+t34:['w=df.pivot(index="ay",columns="hisse",values="getiri")\nprint(round(w["BNKA"].corr(w["TKNO"]),2))','w<-reshape(df[,c("ay","hisse","getiri")],idvar="ay",timevar="hisse",direction="wide")\nround(cor(w$getiri.BNKA,w$getiri.TKNO,use="complete.obs"),2)'],
+t35:['k=df[df.dis_ticaret>60]\nprint(len(k),round(k.gelir.mean(),-2))','k<-subset(df,dis_ticaret>60)\nround(mean(k$gelir,na.rm=TRUE),-2)'],
+t36:['print(df.groupby("sube").puan.mean().sort_values().round(2).head())','a<-aggregate(puan~sube,df,mean)\nhead(a[order(a$puan),])'],
+t37:KC('bekleme_dk','puan'),
+t38:['print(round((df.onay=="Evet").mean()*100,1))','round(mean(df$onay=="Evet")*100,1)'],
+t39:['print(((df.skor>=700)&(df.onay=="Hayır")).sum())','sum(df$skor>=700&df$onay=="Hayır")'],
+t40:KC('sicaklik','tuketim'),
+t41:KG('sehir','tuketim')};
+TASKS.forEach(t=>{const x=TPR[t.id];if(x){t.py=x[0];t.r=x[1]}});
+const LPR={
+tur:['magaza','print(df.dtypes)\nprint(df.sehir.value_counts())','str(df)\ntable(df$sehir)'],
+out:['hane','print(round(df.gelir.mean()),df.gelir.median())','c(ortalama=mean(df$gelir,na.rm=TRUE),medyan=median(df$gelir,na.rm=TRUE))'],
+yay:['ogr','print(round(df.gano.std(),2))\nprint(df.gano.describe())','sd(df$gano,na.rm=TRUE)\nsummary(df$gano)'],
+baz:['makro','a,b=100,150\nprint("artış %:",(b/a-1)*100)\nprint("geri dönmek için gereken %:",(a/b-1)*100)','a<-100;b<-150\nc((b/a-1)*100,(a/b-1)*100)'],
+reel:['makro','df["reel"]=((1+df.faiz/100)/(1+df.enflasyon/100)-1)*100\nprint(df[["faiz","enflasyon","reel"]].describe().round(1))','df$reel<-((1+df$faiz/100)/(1+df$enflasyon/100)-1)*100\nsummary(df[,c("faiz","enflasyon","reel")])'],
+ors:['ogr','import numpy as np\nr=np.random.default_rng(1);x=df.gano.dropna().values\nfor n in (10,100,1000):\n    print(n,round(np.std([r.choice(x,n).mean() for _ in range(500)]),3))','set.seed(1);x<-na.omit(df$gano)\nfor(n in c(10,100,1000)) print(c(n,round(sd(replicate(500,mean(sample(x,n,TRUE)))),3)))'],
+gua:['ogr','import numpy as np\nx=df.gano.dropna();m,se=x.mean(),x.std()/np.sqrt(len(x))\nprint(round(m-1.96*se,2),round(m+1.96*se,2))','t.test(df$gano)$conf.int'],
+pde:['ogr','from scipy import stats\na=df[df.staj=="Var"].gano.dropna();b=df[df.staj=="Yok"].gano.dropna()\nprint(stats.ttest_ind(a,b,equal_var=False))','t.test(gano~staj,data=df)'],
+kor:['makro','print(df[["faiz","kur_endeksi"]].corr().round(2))','round(cor(df[,c("faiz","kur_endeksi")]),2)'],
+sim:['ogr','print(df.groupby("staj").gano.mean().round(2))\nprint(df.groupby(["sinif","staj"]).gano.mean().unstack().round(2))','tapply(df$gano,df$staj,mean,na.rm=TRUE)\ntapply(df$gano,list(df$sinif,df$staj),mean,na.rm=TRUE)'],
+reg:['ogr','import numpy as np\nd=df[["calisma_saat","gano"]].dropna()\nb,a=np.polyfit(d.calisma_saat,d.gano,1)\nprint("eğim:",round(b,3),"sabit:",round(a,2),"R²:",round(d.corr().iloc[0,1]**2,3))','summary(lm(gano~calisma_saat,data=df))'],
+grf:['eticaret','import matplotlib.pyplot as plt\nm=df.groupby("kategori").fiyat.mean()\nm.plot.bar();plt.ylim(0);plt.show()','m<-tapply(df$fiyat,df$kategori,mean,na.rm=TRUE)\nbarplot(m,ylim=c(0,max(m)*1.1))'],
+tem:['ogr','print(df.isna().sum())\nprint("tekrar eden satır:",df.duplicated().sum())','colSums(is.na(df))\nsum(duplicated(df))'],
+sq1:['ogr','print(df[df.sinif==4].sort_values("gano",ascending=False)[["bolum","sinif","gano"]].head(5))','k<-subset(df,sinif==4)\nhead(k[order(-k$gano),c("bolum","sinif","gano")],5)'],
+sq2:['ogr','print(df.groupby("bolum").gano.agg(["count","mean"]).round(2).sort_values("mean",ascending=False))\nprint(pd.pivot_table(df,index="bolum",columns="sinif",values="gano").round(2))','aggregate(gano~bolum,df,mean)\ntapply(df$gano,list(df$bolum,df$sinif),mean,na.rm=TRUE)'],
+ind:['makro','df["endeks"]=df.kur_endeksi/df.kur_endeksi.iloc[0]*100\nprint(df.endeks.iloc[[0,60,-1]].round(1))','df$endeks<-df$kur_endeksi/df$kur_endeksi[1]*100\nround(df$endeks[c(1,61,nrow(df))],1)'],
+bil:['makro','a,b,n=100,180,5\nprint("yıllık bileşik %:",round(((b/a)**(1/n)-1)*100,2))\nprint("yanlış (basit ortalama) %:",round((b/a-1)/n*100,2))','a<-100;b<-180;n<-5\nc(bileşik=((b/a)^(1/n)-1)*100,yanlış=(b/a-1)/n*100)'],
+cey:['konut','import matplotlib.pyplot as plt\nprint(df.fiyat.quantile([.25,.5,.75]))\ndf.boxplot("fiyat");plt.show()','quantile(df$fiyat,c(.25,.5,.75),na.rm=TRUE)\nboxplot(df$fiyat)'],
+nor:['ogr','x=df.gano.dropna();z=(x-x.mean())/x.std()\nprint(round((z.abs()>2).mean()*100,1),"% gözlem |z|>2")','x<-na.omit(df$gano);z<-(x-mean(x))/sd(x)\nround(mean(abs(z)>2)*100,1)'],
+tte:['ogr','from scipy import stats\nprint(stats.ttest_1samp(df.gano.dropna(),2.5))','t.test(df$gano,mu=2.5)'],
+sel:['eticaret','print(df.puan.isna().groupby(df.iade).mean().round(3))','round(tapply(is.na(df$puan),df$iade,mean),3)'],
+gor:['makro','import matplotlib.pyplot as plt\ndf.kur_endeksi.plot();plt.title("Zaman serisi için çizgi grafik");plt.show()','plot(df$kur_endeksi,type="l",main="Zaman serisi için çizgi grafik")'],
+sq3:['magaza','print(df[df.kategori.isin(["Elektronik","Ev"])&(df.indirim>0)].head(10))','head(subset(df,kategori%in%c("Elektronik","Ev")&indirim>0),10)'],
+sq4:['ogr','print("tüm satır:",len(df),"dolu harcama:",df.harcama.count())','c(nrow(df),sum(!is.na(df$harcama)))'],
+sq5:['hane','print(round((df.gida/df.gelir).mean()*100,1),round(df.gida.sum()/df.gelir.sum()*100,1))','c(ortalama_pay=mean(df$gida/df$gelir,na.rm=TRUE)*100,toplam_pay=sum(df$gida,na.rm=TRUE)/sum(df$gelir,na.rm=TRUE)*100)'],
+ayk:['eticaret','print(df.groupby("kategori").fiyat.agg(["mean","median","max"]).round())','aggregate(fiyat~kategori,df,function(x) round(c(ort=mean(x),medyan=median(x),en_yuksek=max(x))))'],
+pan:['panel','print(df.groupby("yil")[["gsyh","issizlik"]].mean().round(1).iloc[::5])','aggregate(cbind(gsyh,issizlik)~yil,df,mean)'],
+cok:['eticaret','from scipy import stats\nfor k in df.kategori.unique():\n    a=df[df.kategori==k].puan.dropna();b=df[df.kategori!=k].puan.dropna()\n    print(k,round(stats.ttest_ind(a,b).pvalue,4))','for(k in unique(df$kategori)) print(c(k,round(t.test(puan~I(kategori==k),data=df)$p.value,4)))'],
+ris:['eticaret','print(pd.crosstab(df.kanal,df.iade,normalize="index").round(3))','round(prop.table(table(df$kanal,df$iade),1),3)'],
+kar:['ogr','print(df.groupby(["sinif","staj"]).gano.mean().unstack().round(2))','tapply(df$gano,list(df$sinif,df$staj),mean,na.rm=TRUE)'],
+log:['ulke','import numpy as np\nimport matplotlib.pyplot as plt\nplt.hist(np.log10(df.gelir.dropna()),bins=15);plt.show()','hist(log10(df$gelir),breaks=15,main="")'],
+sq6:['eticaret','s=df[df.iade=="Evet"].groupby("kategori").size()\nprint(s[s>100].sort_values(ascending=False))','s<-table(df$kategori[df$iade=="Evet"])\ns[s>100]'],
+eng:['hane','df["pay"]=df.gida/df.gelir*100\nprint(df.groupby("il_grubu")[["gida","pay"]].mean().round(1))','df$pay<-df$gida/df$gelir*100\naggregate(cbind(gida,pay)~il_grubu,df,mean)'],
+mev:['enerji','import matplotlib.pyplot as plt\ndf[df.sehir==df.sehir.iloc[0]].tuketim.reset_index(drop=True).plot();plt.show()','k<-subset(df,sehir==df$sehir[1])\nplot(k$tuketim,type="l")'],
+lik:['memnun','print(pd.crosstab(df.sube,df.puan))','table(df$sube,df$puan)']};
+LESSONS.forEach(l=>{const x=LPR[l.id];if(x){l.dene=l.dene||[];l.dene.push({t:'🐍 Python’da dene',pr:['py',x[0],x[1]]},{t:'📊 R’de dene',pr:['r',x[0],x[2]]})}});
+const TPV={t1:{r:'calisma_saat',v:'gano',a:'avg'},t2:{r:'ay',v:'enflasyon',a:'avg'},t3:{r:'kategori',v:'adet',a:'sum',o:'yuksek'},t4:{r:'staj',v:'gano',a:'avg'},t5:{r:'ay',v:'faiz',a:'avg'},t6:{r:'kategori',v:'fiyat',a:'avg'},t7:{r:'sinif',v:'harcama',a:'count'},t9:{r:'sinif',v:'harcama',a:'avg'},t10:{r:'sehir',v:'indirim',a:'avg',o:'yuksek'},t11:{r:'indirim',v:'adet',a:'sum'},t12:{r:'ay',v:'faiz',a:'max'},t13:{r:'bolge',v:'omur',a:'avg',o:'yuksek'},t15:{r:'bolge',v:'enflasyon',a:'max',o:'yuksek'},t16:{r:'il_grubu',v:'gelir',a:'avg'},t17:{r:'cocuk',v:'gida',a:'avg'},t18:{r:'ev_sahibi',v:'kira',a:'avg'},t20:{r:'hisse',v:'getiri',a:'max',o:'yuksek'},t21:{r:'hisse',v:'kapanis',a:'avg'},t22:{r:'kanal',c:'iade',v:'',a:'count',s:'row'},t23:{r:'kategori',v:'puan',a:'count'},t24:{r:'kategori',v:'fiyat',a:'max',o:'yuksek'},t25:{r:'kargo_gun',v:'puan',a:'avg'},t26:{r:'kanal',c:'iade',v:'',a:'count',s:'row'},t27:{r:'iade',v:'kargo_gun',a:'avg'},t28:{r:'bolge',v:'gsyh',a:'max',o:'yuksek'},t29:{r:'bolge',v:'issizlik',a:'avg'},t30:{r:'yil',v:'gsyh',a:'avg'},t31:{r:'egitim',c:'cinsiyet',v:'ucret',a:'avg'},t32:{r:'asansor',v:'fiyat',a:'avg'},t33:{r:'urun',v:'ithalat',a:'sum',o:'yuksek'},t34:{r:'sektor',c:'hisse',v:'getiri',a:'avg'},t35:{r:'bolge',v:'dis_ticaret',a:'avg',o:'yuksek'},t36:{r:'sube',v:'puan',a:'avg'},t37:{r:'puan',v:'bekleme_dk',a:'avg'},t38:{r:'sektor',c:'onay',v:'',a:'count',s:'row'},t39:{r:'onay',v:'skor',a:'max'},t40:{r:'sehir',v:'sicaklik',a:'avg'},t41:{r:'sehir',v:'tuketim',a:'avg',o:'yuksek'}};
+const TSQ={t1:`SELECT calisma_saat, ROUND(AVG(gano),2) AS ort_gano, COUNT(*) AS kisi FROM ogr GROUP BY calisma_saat ORDER BY calisma_saat`,t5:`SELECT ay, faiz, kur_endeksi FROM makro ORDER BY ay LIMIT 24`,t13:`SELECT bolge, ROUND(AVG(gelir)) AS ort_gelir, ROUND(AVG(omur),1) AS ort_omur FROM ulke GROUP BY bolge ORDER BY ort_gelir DESC`,t16:`SELECT il_grubu, COUNT(*) AS hane, ROUND(AVG(gelir)) AS ort_gelir, MIN(gelir) AS en_az, MAX(gelir) AS en_cok FROM hane GROUP BY il_grubu`,t25:`SELECT kargo_gun, COUNT(*) AS siparis, ROUND(AVG(puan),2) AS ort_puan FROM eticaret GROUP BY kargo_gun ORDER BY kargo_gun`,t29:`SELECT bolge, ROUND(AVG(egitim),1) AS ort_egitim, ROUND(AVG(issizlik),1) AS ort_issizlik FROM panel GROUP BY bolge ORDER BY ort_egitim DESC`,t34:`SELECT hisse, ROUND(AVG(getiri),2) AS ort_getiri, ROUND(MIN(getiri),1) AS en_dusuk, ROUND(MAX(getiri),1) AS en_yuksek FROM hisse WHERE hisse IN ('BNKA','TKNO') GROUP BY hisse`,t37:`SELECT puan, COUNT(*) AS yanit, ROUND(AVG(bekleme_dk),1) AS ort_bekleme FROM memnun WHERE puan IS NOT NULL GROUP BY puan ORDER BY puan`,t40:`SELECT sehir, ROUND(AVG(sicaklik),1) AS ort_sicaklik, ROUND(AVG(tuketim)) AS ort_tuketim FROM enerji GROUP BY sehir ORDER BY ort_sicaklik`};
+const LPV={tur:{r:'sehir',v:'adet',a:'sum'},out:{r:'il_grubu',v:'gelir',a:'avg'},yay:{r:'bolum',v:'gano',a:'min'},baz:{r:'ay',v:'enflasyon',a:'avg'},reel:{r:'ay',v:'faiz',a:'avg'},ors:{r:'sinif',v:'gano',a:'count'},gua:{r:'sinif',v:'gano',a:'avg'},pde:{r:'staj',v:'gano',a:'avg'},kor:{r:'ay',v:'faiz',a:'avg'},sim:{r:'sinif',c:'staj',v:'gano',a:'avg'},reg:{r:'calisma_saat',v:'gano',a:'avg'},grf:{r:'kategori',v:'fiyat',a:'avg'},tem:{r:'bolum',v:'harcama',a:'count'},sq1:{r:'sinif',v:'gano',a:'avg'},ind:{r:'ay',v:'kur_endeksi',a:'avg'},bil:{r:'ay',v:'kur_endeksi',a:'avg'},cey:{r:'ilce',v:'fiyat',a:'avg'},nor:{r:'bolum',v:'gano',a:'avg'},tte:{r:'staj',v:'gano',a:'avg'},sel:{r:'iade',v:'puan',a:'count'},gor:{r:'ay',v:'issizlik',a:'avg'},sq3:{r:'kategori',c:'indirim',v:'adet',a:'sum'},sq4:{r:'sinif',v:'harcama',a:'count'},sq5:{r:'il_grubu',v:'gida',a:'avg'},ayk:{r:'kategori',v:'fiyat',a:'max',o:'yuksek'},pan:{r:'yil',v:'gsyh',a:'avg'},cok:{r:'kategori',c:'kanal',v:'puan',a:'avg'},ris:{r:'kanal',c:'iade',v:'',a:'count',s:'row'},log:{r:'bolge',v:'gelir',a:'avg',o:'yuksek'},sq6:{r:'kategori',c:'iade',v:'',a:'count'},eng:{r:'il_grubu',v:'gida',a:'avg'},mev:{r:'sehir',v:'tuketim',a:'avg'},lik:{r:'sube',c:'puan',v:'',a:'count',s:'row'}};
+const LSQ={out:`SELECT il_grubu, COUNT(*) AS hane, ROUND(AVG(gelir)) AS ort_gelir, MIN(gelir) AS en_az, MAX(gelir) AS en_cok FROM hane GROUP BY il_grubu`,yay:`SELECT bolum, ROUND(MIN(gano),2) AS en_dusuk, ROUND(AVG(gano),2) AS ort, ROUND(MAX(gano),2) AS en_yuksek FROM ogr GROUP BY bolum`,baz:`SELECT ay, enflasyon, faiz FROM makro WHERE ay IN ('2014-01','2019-12','2025-12') ORDER BY ay`,reel:`SELECT ay, faiz, enflasyon, ROUND(faiz-enflasyon,2) AS yaklasik_reel FROM makro ORDER BY ay DESC LIMIT 12`,ors:`SELECT bolum, COUNT(*) AS n, ROUND(AVG(gano),2) AS ort_gano FROM ogr GROUP BY bolum ORDER BY n`,gua:`SELECT COUNT(*) AS n, ROUND(AVG(gano),3) AS ort FROM ogr`,pde:`SELECT staj, COUNT(*) AS n, ROUND(AVG(gano),3) AS ort_gano FROM ogr GROUP BY staj`,kor:`SELECT ay, faiz, kur_endeksi FROM makro ORDER BY ay LIMIT 24`,sim:`SELECT sinif, staj, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano FROM ogr GROUP BY sinif, staj ORDER BY sinif, staj`,reg:`SELECT calisma_saat, ROUND(AVG(gano),2) AS ort_gano, COUNT(*) AS kisi FROM ogr GROUP BY calisma_saat ORDER BY calisma_saat`,grf:`SELECT kategori, ROUND(AVG(fiyat)) AS ort_fiyat FROM eticaret GROUP BY kategori ORDER BY ort_fiyat DESC`,ind:`SELECT ay, kur_endeksi FROM makro WHERE ay IN ('2014-01','2019-12','2025-12') ORDER BY ay`,bil:`SELECT ay, kur_endeksi FROM makro WHERE ay IN ('2014-01','2025-12') ORDER BY ay`,cey:`SELECT ilce, MIN(fiyat) AS en_az, ROUND(AVG(fiyat)) AS ort, MAX(fiyat) AS en_cok FROM konut GROUP BY ilce ORDER BY ort DESC`,nor:`SELECT sinif, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano FROM ogr GROUP BY sinif ORDER BY sinif`,tte:`SELECT staj, COUNT(*) AS n, ROUND(AVG(gano),3) AS ort_gano FROM ogr GROUP BY staj`,sel:`SELECT iade, COUNT(*) AS siparis, COUNT(puan) AS puanli FROM eticaret GROUP BY iade`,gor:`SELECT ay, kur_endeksi FROM makro ORDER BY ay LIMIT 36`,pan:`SELECT yil, ROUND(AVG(gsyh)) AS ort_gsyh, ROUND(AVG(issizlik),1) AS ort_issizlik FROM panel GROUP BY yil ORDER BY yil`,cok:`SELECT kategori, ROUND(AVG(puan),3) AS ort_puan, COUNT(puan) AS n FROM eticaret GROUP BY kategori ORDER BY ort_puan`,log:`SELECT bolge, MIN(gelir) AS en_az, ROUND(AVG(gelir)) AS ort, MAX(gelir) AS en_cok FROM ulke GROUP BY bolge ORDER BY ort DESC`,mev:`SELECT sehir, ROUND(AVG(tuketim)) AS ort_tuketim, ROUND(AVG(sicaklik),1) AS ort_sicaklik FROM enerji GROUP BY sehir ORDER BY ort_sicaklik`};
+TASKS.forEach(t=>{if(TPV[t.id]&&!t.pv)t.pv=Object.assign({ds:t.ds},TPV[t.id]);if(TSQ[t.id]&&!t.sql)t.sql=TSQ[t.id]});
+LESSONS.forEach(l=>{l.dene=l.dene||[];if(LPV[l.id]&&!l.dene.some(x=>x.pv))l.dene.push({t:'📊 Pivot’ta dene',pv:Object.assign({ds:LPR[l.id][0]},LPV[l.id])});if(LSQ[l.id]&&!l.dene.some(x=>x.sql))l.dene.push({t:'SQL’de dene',sql:LSQ[l.id]})});
 
 /* ════════════════════════════════════════════════════════════════
    YÖNLENDİRİCİ
