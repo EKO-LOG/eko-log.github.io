@@ -1896,7 +1896,7 @@
     "profil": true,
     "paylas": true,
     "x-etkinlik": true,
-    "x-mentor": true,
+    "x-mentor": false,
     "kavram": true,
     "x-notlar": true,
     "x-panel": true,
@@ -1910,6 +1910,12 @@
     "x-v-port": true,
     "a-grubu": true,
     "mevzuat": true,
+    "ulke": true,
+    "turkiye": true,
+    "grafikokuma": true,
+    "urun": true,
+    "ceviri": true,
+    "arastirma": true,
     "x-bildirim": true
   },
   "fm": {
@@ -2815,5 +2821,18 @@
       }
     ],
     "silinen": []
+  },
+  "xc": {
+    "ulke": [],
+    "urun": [],
+    "turkiye": [],
+    "grafik": [],
+    "ceviri": [],
+    "ceviri_m": [],
+    "ceviri_t": [],
+    "arastirma": [],
+    "tarih": [],
+    "sektor": [],
+    "arastirma_hide": false
   }
 }
