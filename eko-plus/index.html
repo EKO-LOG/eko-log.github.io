@@ -4308,22 +4308,22 @@ async function drawShare(cv){
  const r=$('#p-paylas'),type=$('#xst',r).value,t=$('#xsh1',r).value,b=$('#xsh2',r).value,f=$('#xsh3',r).value,th=THEMES[shT];
  await fontsReady();const W=1080,H=1350,c=cv.getContext('2d');cv.width=W;cv.height=H;bg(c,W,H,th);
  c.textAlign='left';logo(c,80,80,96);c.fillStyle='#fff';c.font='800 40px '+BF;c.fillText('Eko-Log',196,142);
- c.fillStyle='rgba(255,255,255,.2)';const lab={terim:'Günün kavramı',alinti:'Alıntı',quiz:'Quiz sonucu',dusunur:'İktisat düşünürü'}[type];c.font='700 28px '+IF;const lw=c.measureText(lab).width+44;c.beginPath();c.roundRect?c.roundRect(80,300,lw,56,28):c.rect(80,300,lw,56);c.fill();c.fillStyle='#fff';c.fillText(lab,102,338);
- if(type==='quiz'){c.font='800 260px '+BF;c.fillText(t||'8/10',80,700);c.font='700 54px '+BF;wrapText(c,b||'Terim quiz sonucum',80,800,920,66,3)}
- else if(type==='alinti'){c.font='800 200px '+BF;c.fillStyle='rgba(255,255,255,.35)';c.fillText('“',70,560);c.fillStyle='#fff';c.font='800 66px '+BF;const y=wrapText(c,t||'Alıntı',80,640,920,80,6);c.font='600 34px '+IF;c.fillStyle='rgba(255,255,255,.88)';c.fillText(b?'— '+b:'',80,y+30)}
+ c.fillStyle='rgba(255,255,255,.2)';const lab=(type||'').trim()||'Günün kavramı',tk=lab.toLocaleLowerCase('tr');c.font='700 28px '+IF;const lw=c.measureText(lab).width+44;c.beginPath();c.roundRect?c.roundRect(80,300,lw,56,28):c.rect(80,300,lw,56);c.fill();c.fillStyle='#fff';c.fillText(lab,102,338);
+ if(/quiz/.test(tk)){c.font='800 260px '+BF;c.fillText(t||'8/10',80,700);c.font='700 54px '+BF;wrapText(c,b||'Terim quiz sonucum',80,800,920,66,3)}
+ else if(/al[ıi]nt[ıi]/.test(tk)){c.font='800 200px '+BF;c.fillStyle='rgba(255,255,255,.35)';c.fillText('“',70,560);c.fillStyle='#fff';c.font='800 66px '+BF;const y=wrapText(c,t||'Alıntı',80,640,920,80,6);c.font='600 34px '+IF;c.fillStyle='rgba(255,255,255,.88)';c.fillText(b?'— '+b:'',80,y+30)}
  else{c.font='800 100px '+BF;let y=wrapText(c,t||'Kavram',80,500,920,108,3);c.font='500 44px '+IF;c.fillStyle='rgba(255,255,255,.93)';wrapText(c,b||'',80,y+50,920,62,8)}
  c.font='600 30px '+IF;c.fillStyle='rgba(255,255,255,.85)';c.fillText(f||'İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu',80,H-90);
 }
 function renderShare(){
  const r=$('#p-paylas');if(!r)return;const p=rd('pre',null);
- if(p){$('#xst',r).value=p.type;$('#xsh1',r).value=p.title||'';$('#xsh2',r).value=p.body||'';localStorage.removeItem('ekx_pre')}
+ if(p){$('#xst',r).value=({terim:'Günün kavramı',alinti:'Alıntı',quiz:'Quiz sonucu',dusunur:'İktisat düşünürü'})[p.type]||p.type||'Günün kavramı';$('#xst',r).dispatchEvent(new Event('input'));$('#xsh1',r).value=p.title||'';$('#xsh2',r).value=p.body||'';localStorage.removeItem('ekx_pre')}
  else if(!$('#xsh1',r).value){const c=conOf();$('#xsh1',r).value=c[0];$('#xsh2',r).value=c[1]}
  $('#xsc',r).innerHTML=THEMES.map((t,i)=>'<button type="button" class="chip" aria-pressed="'+(shT===i)+'" data-i="'+i+'" style="background:linear-gradient(120deg,'+t[0]+','+t[1]+');color:#fff;min-width:64px" aria-label="Tema '+(i+1)+'">'+(i+1)+'</button>').join('');
  $$('#xsc .chip',r).forEach(b=>b.onclick=()=>{shT=+b.dataset.i;renderShare()});
  drawShare($('#xsv',r));applyLang();
 }
 page('paylas','Paylaşım Kartı','Terim, alıntı ya da quiz sonucunu Instagram’a uygun bir görsele dönüştür.',['#5b2bc4','#e23fa5','#ff8a3d'],
- '<div class="x-g2"><div class="card x-np"><label for="xst">Kart türü</label><select id="xst"><option value="terim">Kavram / terim</option><option value="alinti">Alıntı</option><option value="quiz">Quiz sonucu</option><option value="dusunur">Düşünür</option></select><label for="xsh1">Başlık</label><input id="xsh1" maxlength="90"><label for="xsh2">Metin</label><textarea id="xsh2" class="x-s" style="min-height:130px" maxlength="400"></textarea><label for="xsh3">Alt yazı</label><input id="xsh3" placeholder="İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu"><label>Renk</label><div class="chips" id="xsc"></div><div class="x-row"><button class="btn grad" id="xsdl" type="button">PNG indir</button><button class="btn line" id="xssh" type="button">Paylaş</button></div></div><div><canvas class="x-cv" id="xsv" width="1080" height="1350" aria-label="Paylaşım kartı önizlemesi"></canvas></div></div>',renderShare);
+ '<div class="x-g2"><div class="card x-np"><label for="xst">Kart türü (kendin yaz)</label><input id="xst" maxlength="30" value="Günün kavramı" placeholder="Örn. Günün kavramı, Alıntı, Quiz sonucu, Haftanın sorusu" autocomplete="off"><label for="xsh1">Başlık</label><input id="xsh1" maxlength="90"><label for="xsh2">Metin</label><textarea id="xsh2" class="x-s" style="min-height:130px" maxlength="400"></textarea><label for="xsh3">Alt yazı</label><input id="xsh3" placeholder="İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu"><label>Renk</label><div class="chips" id="xsc"></div><div class="x-row"><button class="btn grad" id="xsdl" type="button">PNG indir</button><button class="btn line" id="xssh" type="button">Paylaş</button></div></div><div><canvas class="x-cv" id="xsv" width="1080" height="1350" aria-label="Paylaşım kartı önizlemesi"></canvas></div></div>',renderShare);
 
 /* ---------- HUB (Eko-Plus ana sayfası) ---------- */
 const TILES=[
@@ -6703,8 +6703,8 @@ function svgToPNG(svgStr,name){const img=new Image(),u=URL.createObjectURL(new B
 /* ---------- Mini SQL motoru (SELECT alt kümesi) ---------- */
 /* Türkçe komut eşlemesi: SEÇ/NEREDEN/NEREDE/GRUPLA … → standart SQL */
 const fold=s=>String(s).toLocaleLowerCase('tr').replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u');
-const TRK={sec:['SELECT'],benzersiz:['DISTINCT'],nereden:['FROM'],nerede:['WHERE'],grupla:['GROUP','BY'],sirala:['ORDER','BY'],sinirla:['LIMIT'],azalan:['DESC'],artan:['ASC'],ve:['AND'],veya:['OR'],degil:['NOT'],olarak:['AS'],benzer:['LIKE'],icinde:['IN'],arasinda:['BETWEEN'],bostur:['IS','NULL'],doludur:['IS','NOT','NULL'],grupta:['HAVING']};
-const TRF={say:'COUNT',toplam:'SUM',ortalama:'AVG',en_az:'MIN',en_cok:'MAX',yuvarla:'ROUND',mutlak:'ABS',karekok:'SQRT',bossa:'COALESCE',buyuk:'UPPER',kucuk:'LOWER',uzunluk:'LENGTH'};
+const TRK={sec:['SELECT'],benzersiz:['DISTINCT'],nereden:['FROM'],nerede:['WHERE'],grupla:['GROUP','BY'],sirala:['ORDER','BY'],sinirla:['LIMIT'],azalan:['DESC'],artan:['ASC'],ve:['AND'],veya:['OR'],degil:['NOT'],olarak:['AS'],benzer:['LIKE'],icinde:['IN'],arasinda:['BETWEEN'],bostur:['IS','NULL'],doludur:['IS','NOT','NULL'],grupta:['HAVING'],duruma_gore:['CASE'],eger:['WHEN'],ise:['THEN'],degilse:['ELSE'],bitir:['END'],birlestir:['JOIN'],uzerinde:['ON'],sol:['LEFT']};
+const TRF={say:'COUNT',toplam:'SUM',ortalama:'AVG',en_az:'MIN',en_cok:'MAX',yuvarla:'ROUND',mutlak:'ABS',karekok:'SQRT',bossa:'COALESCE',buyuk:'UPPER',kucuk:'LOWER',uzunluk:'LENGTH',yil:'YEAR',ay:'MONTH',altmetin:'SUBSTR'};
 function trMap(t){const o=[];for(let i=0;i<t.length;i++){const x=t[i];
   if(x.k==='i'){const f=fold(x.v);
     if(TRK[f]){TRK[f].forEach(w=>o.push({k:'i',v:x.v,u:w}));if((f==='grupla'||f==='sirala')&&t[i+1]&&t[i+1].k==='i'&&['gore','by'].includes(fold(t[i+1].v)))i++;continue}
@@ -6714,13 +6714,13 @@ function sqlTokens(s){const t=[],re=/\s*(?:(\d+(?:\.\d+)?)|'((?:[^']|'')*)'|([A-
   while(i<s.length){re.lastIndex=i;const m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(i)))break;throw new Error('Tanınmayan karakter: “'+s.slice(i).trim().charAt(0)+'”')}i=re.lastIndex;
     if(m[1]!==undefined)t.push({k:'n',v:+m[1]});else if(m[2]!==undefined)t.push({k:'s',v:m[2].replace(/''/g,"'")});else if(m[3]!==undefined)t.push({k:'i',v:m[3],u:m[3].toLocaleUpperCase('en-US')});else t.push({k:'o',v:m[4]})}
   return trMap(t)}
-const RESERVED=new Set(['FROM','WHERE','GROUP','ORDER','HAVING','LIMIT','AS','AND','OR','NOT','ASC','DESC','BY','LIKE','IN','BETWEEN','IS','NULL','DISTINCT','SELECT']);
+const RESERVED=new Set(['CASE','WHEN','THEN','ELSE','END','JOIN','ON','LEFT','INNER','FROM','WHERE','GROUP','ORDER','HAVING','LIMIT','AS','AND','OR','NOT','ASC','DESC','BY','LIKE','IN','BETWEEN','IS','NULL','DISTINCT','SELECT']);
 const AGG=new Set(['COUNT','SUM','AVG','MIN','MAX']);
 function sqlParse(sql){
   const T=sqlTokens(sql.replace(/;+\s*$/,'')),st={p:0};
   const fail=m=>{throw new Error('Sözdizimi hatası: '+m+(T[st.p]?' (“'+T[st.p].v+'” yakınında)':' (sorgu sonunda)'))};
   const isKw=w=>T[st.p]&&T[st.p].k==='i'&&T[st.p].u===w,isOp=o=>T[st.p]&&T[st.p].k==='o'&&T[st.p].v===o;
-  const eatKw=w=>isKw(w)?(st.p++,true):false,eatOp=o=>isOp(o)?(st.p++,true):false,need=w=>{if(!eatKw(w))fail('“'+({SELECT:'SEÇ (SELECT)',FROM:'NEREDEN (FROM)',AND:'VE (AND)'}[w]||w)+'” bekleniyordu')};
+  const eatKw=w=>isKw(w)?(st.p++,true):false,eatOp=o=>isOp(o)?(st.p++,true):false,need=w=>{if(!eatKw(w))fail('“'+({SELECT:'SEÇ (SELECT)',FROM:'NEREDEN (FROM)',AND:'VE (AND)',THEN:'İSE (THEN)',END:'BİTİR (END)',ON:'ÜZERİNDE (ON)'}[w]||w)+'” bekleniyordu')};
   function pOr(){let l=pAnd();while(eatKw('OR'))l={t:'bin',op:'OR',l,r:pAnd()};return l}
   function pAnd(){let l=pNot();while(eatKw('AND'))l={t:'bin',op:'AND',l,r:pNot()};return l}
   function pNot(){return eatKw('NOT')?{t:'not',e:pNot()}:pCmp()}
@@ -6739,16 +6739,19 @@ function sqlParse(sql){
   function pPrim(){const c=T[st.p];if(!c)fail('ifade bekleniyordu');
     if(c.k==='n'){st.p++;return{t:'lit',v:c.v}}if(c.k==='s'){st.p++;return{t:'lit',v:c.v}}
     if(c.k==='o'&&c.v==='('){st.p++;const e=pOr();if(!eatOp(')'))fail('“)” bekleniyordu');return e}
+    if(c.k==='i'&&c.u==='CASE'){st.p++;const whens=[];let els=null;while(eatKw('WHEN')){const cond=pOr();need('THEN');whens.push([cond,pOr()])}if(!whens.length)fail('“EĞER (WHEN)” bekleniyordu');if(eatKw('ELSE'))els=pOr();need('END');return{t:'case',whens,els}}
     if(c.k==='i'){if(c.u==='NULL'){st.p++;return{t:'lit',v:null}}if(RESERVED.has(c.u)&&!(T[st.p+1]&&T[st.p+1].v==='('))fail('ifade bekleniyordu');st.p++;
-      if(isOp('(')){st.p++;const args=[];if(isOp('*')){st.p++;args.push({t:'star'})}else if(!isOp(')')){args.push(pOr());while(eatOp(','))args.push(pOr())}if(!eatOp(')'))fail('“)” bekleniyordu');return{t:'fn',name:c.u,args}}
-      if(isOp('.')){st.p++;const c2=T[st.p++];if(!c2||c2.k!=='i')fail('sütun adı bekleniyordu');return{t:'col',name:c2.v}}
+      if(isOp('(')){st.p++;const args=[];const dist=eatKw('DISTINCT');if(isOp('*')){st.p++;args.push({t:'star'})}else if(!isOp(')')){args.push(pOr());while(eatOp(','))args.push(pOr())}if(!eatOp(')'))fail('“)” bekleniyordu');return{t:'fn',name:c.u,args,distinct:dist}}
+      if(isOp('.')){st.p++;const c2=T[st.p++];if(!c2||c2.k!=='i')fail('sütun adı bekleniyordu');return{t:'col',name:c2.v,q:c.v}}
       return{t:'col',name:c.v}}
     fail('beklenmeyen ifade')}
   const txt=(a,b)=>T.slice(a,b).map(x=>x.k==='s'?"'"+x.v+"'":String(x.v)).join(' ').replace(/ ?\( ?/g,'(').replace(/ \)/g,')').replace(/ ,/g,',').replace(/ \. /g,'.');
   need('SELECT');const distinct=eatKw('DISTINCT'),items=[];
   do{if(isOp('*')){st.p++;items.push({star:true})}else{const a=st.p,e=pOr(),b=st.p;let alias=null;if(eatKw('AS')){const x=T[st.p++];if(!x)fail('takma ad bekleniyordu');alias=x.v}else if(T[st.p]&&T[st.p].k==='i'&&!RESERVED.has(T[st.p].u))alias=T[st.p++].v;items.push({e,alias,label:alias||txt(a,b)})}}while(eatOp(','));
   need('FROM');const tb=T[st.p++];if(!tb||tb.k!=='i')fail('tablo adı bekleniyordu');
-  const q={distinct,items,table:tb.v,where:null,group:[],having:null,order:[],limit:null};
+  let al=null;eatKw('AS');if(T[st.p]&&T[st.p].k==='i'&&!RESERVED.has(T[st.p].u))al=T[st.p++].v;
+  const joins=[];for(;;){let lt=false;if(isKw('LEFT')){st.p++;lt=true}else if(isKw('INNER'))st.p++;if(!eatKw('JOIN')){if(lt)fail('“BİRLEŞTİR (JOIN)” bekleniyordu');break}const jt=T[st.p++];if(!jt||jt.k!=='i')fail('birleştirilecek tablo adı bekleniyordu');let ja=null;eatKw('AS');if(T[st.p]&&T[st.p].k==='i'&&!RESERVED.has(T[st.p].u))ja=T[st.p++].v;need('ON');const lc=pAdd();if(!eatOp('='))fail('“=” bekleniyordu');const rc=pAdd();joins.push({left:lt,table:jt.v,alias:ja,a:lc,b:rc})}
+  const q={distinct,items,table:tb.v,alias:al,joins,where:null,group:[],having:null,order:[],limit:null};
   if(eatKw('WHERE'))q.where=pOr();
   if(isKw('GROUP')){st.p++;need('BY');do q.group.push(pAdd());while(eatOp(','))}
   if(eatKw('HAVING'))q.having=pOr();
@@ -6756,12 +6759,13 @@ function sqlParse(sql){
   if(eatKw('LIMIT')){const n=T[st.p++];if(!n||n.k!=='n')fail('LIMIT için sayı bekleniyordu');q.limit=n.v}
   if(st.p<T.length)fail('beklenmeyen ifade');
   return q}
-const hasAgg=n=>!!n&&((n.t==='fn'&&AGG.has(n.name))||['l','r','e','a','b','pat'].some(k=>n[k]&&typeof n[k]==='object'&&hasAgg(n[k]))||(n.args||[]).some(hasAgg)||(n.list||[]).some(hasAgg));
+const hasAgg=n=>!!n&&((n.t==='fn'&&AGG.has(n.name))||['l','r','e','a','b','pat'].some(k=>n[k]&&typeof n[k]==='object'&&hasAgg(n[k]))||(n.args||[]).some(hasAgg)||(n.list||[]).some(hasAgg)||(n.whens||[]).some(w=>hasAgg(w[0])||hasAgg(w[1]))||(n.els&&hasAgg(n.els)));
 function sqlEval(n,row,grp,cm){
   const E=x=>sqlEval(x,row,grp,cm);
   switch(n.t){
     case 'lit':return n.v;
-    case 'col':{const c=cm[n.name.toLowerCase()];if(c===undefined)throw new Error('Bilinmeyen sütun: '+n.name+'. Bu tablodaki sütunlar: '+Object.values(cm).join(', '));return row[c]}
+    case 'col':{let c=n.q?cm[(n.q+'.'+n.name).toLowerCase()]:undefined;if(c===undefined)c=cm[n.name.toLowerCase()];if(c===undefined)throw new Error('Bilinmeyen sütun: '+n.name+'. Bu tablodaki sütunlar: '+Object.values(cm).join(', '));return row[c]}
+    case 'case':{for(const w of n.whens){if(E(w[0])===true)return E(w[1])}return n.els?E(n.els):null}
     case 'neg':{const v=E(n.e);return v==null?null:-v}
     case 'not':{const v=E(n.e);return v==null?null:!v}
     case 'bin':{if(n.op==='AND'){const a=E(n.l);if(a===false)return false;const b=E(n.r);return b===false?false:(a==null||b==null)?null:true}
@@ -6775,24 +6779,37 @@ function sqlEval(n,row,grp,cm){
     case 'fn':{
       if(AGG.has(n.name)){if(!grp)throw new Error(n.name+' yalnızca özetleme sorgularında kullanılabilir.');const a=n.args[0];
         if(n.name==='COUNT'&&(!a||a.t==='star'))return grp.length;
-        const vs=grp.map(r=>sqlEval(a,r,null,cm)).filter(v=>v!=null);
+        let vs=grp.map(r=>sqlEval(a,r,null,cm)).filter(v=>v!=null);if(n.distinct){const sm=new Map();vs.forEach(v=>sm.set(typeof v+':'+v,v));vs=[...sm.values()]}
         if(n.name==='COUNT')return vs.length;if(!vs.length)return null;
         if(n.name==='SUM')return sum(vs.map(Number));if(n.name==='AVG')return mean(vs.map(Number));
         return vs.reduce((m,v)=>n.name==='MIN'?(v<m?v:m):(v>m?v:m))}
       if(n.name==='COALESCE'){for(const x of n.args){const v=E(x);if(v!=null)return v}return null}
       const a=n.args.map(E);if(a[0]==null)return null;
-      switch(n.name){case 'ROUND':{const d=a[1]||0,f=10**d;return Math.round(a[0]*f)/f}case 'ABS':return Math.abs(a[0]);case 'SQRT':return Math.sqrt(a[0]);case 'UPPER':return String(a[0]).toLocaleUpperCase('tr');case 'LOWER':return String(a[0]).toLocaleLowerCase('tr');case 'LENGTH':return String(a[0]).length}
+      switch(n.name){case 'ROUND':{const d=a[1]||0,f=10**d;return Math.round(a[0]*f)/f}case 'ABS':return Math.abs(a[0]);case 'SQRT':return Math.sqrt(a[0]);case 'UPPER':return String(a[0]).toLocaleUpperCase('tr');case 'LOWER':return String(a[0]).toLocaleLowerCase('tr');case 'LENGTH':return String(a[0]).length;case 'YEAR':return Number(String(a[0]).slice(0,4));case 'MONTH':return Number(String(a[0]).slice(5,7));case 'SUBSTR':return String(a[0]).substr((a[1]||1)-1,a[2]==null?undefined:a[2])}
       throw new Error('Bilinmeyen fonksiyon: '+n.name)}
   }throw new Error('Desteklenmeyen ifade')}
 const cmpV=(a,b)=>a==null?(b==null?0:1):b==null?-1:typeof a==='number'&&typeof b==='number'?a-b:String(a).localeCompare(String(b),'tr');
 function runSQL(sql,dsList){
-  const q=sqlParse(sql),ds=dsList.find(d=>(d.tbl||d.id).toLowerCase()===q.table.toLowerCase()||d.id.toLowerCase()===q.table.toLowerCase());
-  if(!ds)throw new Error('Bilinmeyen tablo: '+q.table+'. Kullanılabilir tablolar: '+dsList.map(d=>d.tbl||d.id).join(', '));
-  const cm={};ds.cols.forEach(c=>{cm[c.name.toLowerCase()]=c.name});
-  let rows=ds.rows;if(q.where)rows=rows.filter(r=>sqlEval(q.where,r,null,cm)===true);
+  const q=sqlParse(sql),find=nm=>dsList.find(d=>(d.tbl||d.id).toLowerCase()===String(nm).toLowerCase()||d.id.toLowerCase()===String(nm).toLowerCase());
+  const noTbl=nm=>new Error('Bilinmeyen tablo: '+nm+'. Kullanılabilir tablolar: '+dsList.map(d=>d.tbl||d.id).join(', '));
+  const ds=find(q.table);if(!ds)throw noTbl(q.table);
+  const cm={},tnames=[ds.ad];let cols=ds.cols.map(c=>c.name),jrows=ds.rows;
+  const quals=(d,al)=>[...new Set([al,d.tbl,d.id].filter(Boolean).map(x=>String(x).toLowerCase()))];
+  ds.cols.forEach(c=>{cm[c.name.toLowerCase()]=c.name;quals(ds,q.alias).forEach(u=>{cm[u+'.'+c.name.toLowerCase()]=c.name})});
+  const resolve=n=>{if(!n||n.t!=='col')throw new Error('BİRLEŞTİR … ÜZERİNDE koşulunda iki sütun eşitlenmeli (örn. a.sutun = b.sutun).');let c=n.q?cm[(n.q+'.'+n.name).toLowerCase()]:undefined;if(c===undefined)c=cm[n.name.toLowerCase()];if(c===undefined)throw new Error('Bilinmeyen sütun: '+n.name+'. Şu ana kadarki sütunlar: '+Object.values(cm).filter((v,i,a)=>a.indexOf(v)===i).join(', '));return c};
+  q.joins.forEach(j=>{const d2=find(j.table);if(!d2)throw noTbl(j.table);tnames.push(d2.ad);
+    const pairs=[];d2.cols.forEach(c=>{const lc=c.name.toLowerCase();let inn=c.name;if(cm[lc]!==undefined){inn=(j.alias||d2.tbl||d2.id)+'_'+c.name}else cm[lc]=c.name;cm[inn.toLowerCase()]=inn;quals(d2,j.alias).forEach(u=>{cm[u+'.'+lc]=inn});pairs.push([inn,c.name])});
+    let ia=resolve(j.a),ib=resolve(j.b);const own=new Set(pairs.map(x=>x[0]));if(own.has(ia)&&!own.has(ib)){const t=ia;ia=ib;ib=t}
+    if(!own.has(ib)||own.has(ia))throw new Error('ÜZERİNDE koşulunun bir tarafı soldaki tablodan, diğer tarafı “'+j.table+'” tablosundan olmalı.');
+    const orig=pairs.find(x=>x[0]===ib)[1],idx=new Map();d2.rows.forEach(r=>{const v=r[orig];if(v==null)return;const k=String(v);if(!idx.has(k))idx.set(k,[]);idx.get(k).push(r)});
+    const out=[];jrows.forEach(r=>{const v=r[ia],m=v==null?null:idx.get(String(v));
+      if(m&&m.length)m.forEach(r2=>{const o=Object.assign({},r);pairs.forEach(([ii,oo])=>{o[ii]=r2[oo]});out.push(o)});
+      else if(j.left){const o=Object.assign({},r);pairs.forEach(([ii])=>{o[ii]=null});out.push(o)}});
+    jrows=out;cols=cols.concat(pairs.map(x=>x[0]))});
+  let rows=jrows;if(q.where)rows=rows.filter(r=>sqlEval(q.where,r,null,cm)===true);
   const agg=q.items.some(i=>i.e&&hasAgg(i.e))||q.group.length>0||(q.having&&hasAgg(q.having));
   let outCols=[],out=[];
-  const starCols=ds.cols.map(c=>c.name);
+  const starCols=cols;
   q.items.forEach(i=>{if(i.star)outCols.push(...starCols);else outCols.push(i.label)});
   const project=(r,g)=>{const v=[];q.items.forEach(i=>{if(i.star)starCols.forEach(c=>v.push(r[c]));else v.push(sqlEval(i.e,r,g,cm))});return v};
   if(agg){
@@ -6807,7 +6824,7 @@ function runSQL(sql,dsList){
     if(idx>=0&&idx<outCols.length){a=A.v[idx];b=B.v[idx]}else{a=sqlEval(o.e,A.r,A.g,cm);b=sqlEval(o.e,B.r,B.g,cm)}
     const c=cmpV(a,b);if(c)return o.desc?-c:c}return 0});
   const total=out.length;if(q.limit!=null)out=out.slice(0,q.limit);
-  return{cols:outCols,rows:out.map(o=>o.v),total,table:ds.ad}}
+  return{cols:outCols,rows:out.map(o=>o.v),total,table:tnames.join(' + ')}}
 
 /* ---------- Ortak arayüz parçaları ---------- */
 const tw=(...k)=>el('div',{class:'x2-tw'},k);
@@ -6833,7 +6850,7 @@ const dsOptions=list=>list.map(d=>el('option',{value:d.id},d.ad));
    ════════════════════════════════════════════════════════════════ */
 const VT=[
   ['x-v-atolye','Veri Atölyesi','CSV yükle, satır ve belge ekle; özetle, grafik çiz, ilişkiyi bul.','#2a2d8f','#12b5c4','Uygula'],
-  ['x-v-sql','SQL ve Pivot','9 hazır tabloda Türkçe SQL yaz, pivot tablo oluştur.','#0b8a4b','#1d4ed8','Uygula'],
+  ['x-v-sql','SQL ve Pivot','20 hazır tabloda 190’dan fazla örnek soru: Türkçe SQL yaz, pivot tablo kur, kendini dene.','#0b8a4b','#1d4ed8','Uygula'],
   ['x-v-hesap','Hesaplayıcılar','Güven aralığı, t-testi, korelasyon; sonuç yanında “bu ne demek?”.','#5b2bc4','#e23fa5','Uygula'],
   ['x-v-quiz','Grafik Okuma Quizi','Yanıltıcı grafikleri yakala, doğru yorumla.','#b45309','#f59e0b','Öğren'],
   ['x-v-gorev','Haftalık Veri Görevi','41 görev, 3 seviye; kademeli ipucu, çözüm yolu ve yorum paylaşımı.','#c4202e','#ff7a45','Öğren'],
@@ -7037,8 +7054,8 @@ mkPage('x-v-atolye','Veri Atölyesi','CSV yükle veya hazır veriyi aç; özetle
    2 · SQL VE PIVOT
    ════════════════════════════════════════════════════════════════ */
 /* ---------- Türkçe ↔ standart SQL ---------- */
-const KWTR=[['IS NOT NULL','DOLUDUR'],['IS NULL','BOŞTUR'],['GROUP BY','GRUPLA'],['ORDER BY','SIRALA'],['SELECT','SEÇ'],['DISTINCT','BENZERSİZ'],['FROM','NEREDEN'],['WHERE','NEREDE'],['HAVING','GRUPTA'],['LIMIT','SINIRLA'],['DESC','AZALAN'],['ASC','ARTAN'],['AND','VE'],['OR','VEYA'],['NOT','DEĞİL'],['AS','OLARAK'],['LIKE','BENZER'],['IN','İÇİNDE'],['BETWEEN','ARASINDA'],['COUNT','SAY'],['SUM','TOPLAM'],['AVG','ORTALAMA'],['MIN','EN_AZ'],['MAX','EN_ÇOK'],['ROUND','YUVARLA'],['ABS','MUTLAK'],['SQRT','KAREKÖK'],['COALESCE','BOŞSA'],['UPPER','BÜYÜK'],['LOWER','KÜÇÜK'],['LENGTH','UZUNLUK']];
-const KWCHEAT=[['SEÇ','SELECT','Hangi sütunlar gösterilsin'],['NEREDEN','FROM','Hangi tablodan'],['NEREDE','WHERE','Satırları süz (gruplamadan önce)'],['GRUPLA','GROUP BY','Satırları gruplara ayır'],['GRUPTA','HAVING','Grupları süz (gruplamadan sonra)'],['SIRALA … AZALAN / ARTAN','ORDER BY … DESC / ASC','Sırala'],['SINIRLA','LIMIT','İlk n satırı al'],['VE / VEYA / DEĞİL','AND / OR / NOT','Koşulları birleştir'],['OLARAK','AS','Sütuna takma ad ver'],['BENZER / İÇİNDE / ARASINDA','LIKE / IN / BETWEEN','Kalıp / liste / aralık koşulu'],['BOŞTUR / DOLUDUR','IS NULL / IS NOT NULL','Eksik değer var mı'],['BENZERSİZ','DISTINCT','Tekrarlayanları at'],['SAY, TOPLAM, ORTALAMA, EN_AZ, EN_ÇOK','COUNT, SUM, AVG, MIN, MAX','Özet işlevler'],['YUVARLA, MUTLAK, KAREKÖK, BOŞSA, BÜYÜK, KÜÇÜK, UZUNLUK','ROUND, ABS, SQRT, COALESCE, UPPER, LOWER, LENGTH','Yardımcı işlevler']];
+const KWTR=[['IS NOT NULL','DOLUDUR'],['IS NULL','BOŞTUR'],['GROUP BY','GRUPLA'],['ORDER BY','SIRALA'],['SELECT','SEÇ'],['DISTINCT','BENZERSİZ'],['FROM','NEREDEN'],['WHERE','NEREDE'],['HAVING','GRUPTA'],['LIMIT','SINIRLA'],['DESC','AZALAN'],['ASC','ARTAN'],['AND','VE'],['OR','VEYA'],['NOT','DEĞİL'],['AS','OLARAK'],['LIKE','BENZER'],['IN','İÇİNDE'],['BETWEEN','ARASINDA'],['COUNT','SAY'],['SUM','TOPLAM'],['AVG','ORTALAMA'],['MIN','EN_AZ'],['MAX','EN_ÇOK'],['ROUND','YUVARLA'],['ABS','MUTLAK'],['SQRT','KAREKÖK'],['COALESCE','BOŞSA'],['UPPER','BÜYÜK'],['LOWER','KÜÇÜK'],['LENGTH','UZUNLUK'],['YEAR','YIL'],['MONTH','AY'],['SUBSTR','ALTMETIN'],['CASE','DURUMA_GÖRE'],['WHEN','EĞER'],['THEN','İSE'],['ELSE','DEĞİLSE'],['END','BİTİR'],['LEFT','SOL'],['JOIN','BİRLEŞTİR'],['ON','ÜZERİNDE']];
+const KWCHEAT=[['SEÇ','SELECT','Hangi sütunlar gösterilsin'],['NEREDEN','FROM','Hangi tablodan'],['NEREDE','WHERE','Satırları süz (gruplamadan önce)'],['GRUPLA','GROUP BY','Satırları gruplara ayır'],['GRUPTA','HAVING','Grupları süz (gruplamadan sonra)'],['SIRALA … AZALAN / ARTAN','ORDER BY … DESC / ASC','Sırala'],['SINIRLA','LIMIT','İlk n satırı al'],['VE / VEYA / DEĞİL','AND / OR / NOT','Koşulları birleştir'],['OLARAK','AS','Sütuna takma ad ver'],['BENZER / İÇİNDE / ARASINDA','LIKE / IN / BETWEEN','Kalıp / liste / aralık koşulu'],['BOŞTUR / DOLUDUR','IS NULL / IS NOT NULL','Eksik değer var mı'],['BENZERSİZ','DISTINCT','Tekrarlayanları at'],['SAY, TOPLAM, ORTALAMA, EN_AZ, EN_ÇOK','COUNT, SUM, AVG, MIN, MAX','Özet işlevler'],['YUVARLA, MUTLAK, KAREKÖK, BOŞSA, BÜYÜK, KÜÇÜK, UZUNLUK','ROUND, ABS, SQRT, COALESCE, UPPER, LOWER, LENGTH','Yardımcı işlevler'],['YIL(ay), AY(ay), ALTMETIN(s, başla, uzunluk)','YEAR(), MONTH(), SUBSTR()','Tarih metninden yıl / ay, metin parçası'],['DURUMA_GÖRE EĞER … İSE … DEĞİLSE … BİTİR','CASE WHEN … THEN … ELSE … END','Koşula göre değer üret (kategori, pivot)'],['SAY(BENZERSİZ sütun)','COUNT(DISTINCT sütun)','Farklı değerleri say'],['a BİRLEŞTİR b ÜZERİNDE a.x = b.x','a JOIN b ON a.x = b.x','İki tabloyu ortak sütunla birleştir (SOL BİRLEŞTİR: eşleşmeyenleri de tut)']];
 const prettySQL=s=>String(s).replace(/\s+(FROM|WHERE|GROUP BY|HAVING|ORDER BY|LIMIT)\b/g,'\n$1');
 const toTR=s=>String(s).split(/('(?:[^']|'')*')/).map((p,i)=>i%2?p:KWTR.reduce((a,[e,t])=>a.replace(new RegExp('\\b'+e+'\\b','g'),t),p)).join('');
 
@@ -7138,7 +7155,263 @@ const PVEX=[
   {ds:'ticaret',r:'urun',c:'',v:'ihracat',a:'sum',o:'yuksek',t:'Ürün grubuna göre toplam ihracat'},
   {ds:'ticaret',r:'urun',c:'',v:'ithalat',a:'sum',o:'yuksek',t:'Ürün grubuna göre toplam ithalat'}
 ];
-const SQ={tab:'sql',lang:'tr',exT:'ogr',q:'',res:null,err:null,pv:{ds:'ogr',r:'',c:'',v:'',a:'avg',s:'val',o:'ad'}};
+const SQLEX_PLUS={
+  ogr:[
+    ['Cinsiyete göre ortalama GANO ve harcama nedir?',`SELECT cinsiyet, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano, ROUND(AVG(harcama)) AS ort_harcama FROM ogr GROUP BY cinsiyet`,'Aynı sorguda iki ortalama hesaplanır. ORTALAMA, boş harcama değerlerini otomatik atlar.'],
+    ['Burslu ve burssuz öğrencilerin ortalama GANO ve devamsızlığı?',`SELECT burs, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano, ROUND(AVG(devamsizlik),1) AS ort_devamsizlik FROM ogr GROUP BY burs`,'Bursun GANO ile ilişkisine ilk bakış. Burs ölçütleri GANO’ya bağlı olabilir; nedensellik çıkarma.'],
+    ['En yüksek GANO’lu 10 öğrenci kim?',`SELECT id, bolum, sinif, gano FROM ogr ORDER BY gano DESC, id LIMIT 10`,'İkinci sıralama ölçütü (id) eşitlikleri çözer; böylece sonuç her çalıştırmada aynı çıkar.'],
+    ['Devamsızlığı 15 günden fazla olan öğrencilerin ortalama GANO’su?',`SELECT COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano FROM ogr WHERE devamsizlik > 15`,'Gruplama yok: koşulu sağlayan tüm satırlar tek bir özet satıra iner.'],
+    ['İktisat ve Ekonometri’de stajlı, GANO’su 3’ün üstündeki öğrenciler bölüme göre kaç kişi?',`SELECT bolum, COUNT(*) AS kisi FROM ogr WHERE bolum IN ('İktisat','Ekonometri') AND staj = 'Var' AND gano > 3 GROUP BY bolum`,'Üç koşul VE ile birleşir; İÇİNDE bölüm listesini kısaltır.'],
+    ['Bölümlere göre en düşük ve en yüksek GANO nedir?',`SELECT bolum, MIN(gano) AS en_dusuk, MAX(gano) AS en_yuksek FROM ogr GROUP BY bolum ORDER BY bolum`,'EN_AZ ve EN_ÇOK her grupta uç değerleri verir; aradaki fark dağılım hakkında kaba bir fikir sağlar.'],
+    ['Haftada 25 saatten fazla çalışan öğrenciler sınıflara nasıl dağılıyor?',`SELECT sinif, COUNT(*) AS kisi, ROUND(AVG(gano),2) AS ort_gano FROM ogr WHERE calisma_saat > 25 GROUP BY sinif ORDER BY sinif`,'Önce NEREDE ile süzülür, sonra sınıfa göre gruplanır. Küçük gruplardaki ortalamalara dikkat et.']],
+  makro:[
+    ['Faizin %30’un üzerinde olduğu kaç ay var?',`SELECT COUNT(*) AS ay_sayisi FROM makro WHERE faiz > 30`,'SAY(*) koşulu sağlayan satırları sayar; tek bir sayı döner.'],
+    ['Büyümenin negatif olduğu aylar ve o aylardaki işsizlik?',`SELECT ay, buyume, issizlik FROM makro WHERE buyume < 0 ORDER BY buyume, ay LIMIT 10`,'Daralma aylarını süzer, en derininden başlayarak sıralar.'],
+    ['2020 yılında ortalama enflasyon ve büyüme nedir?',`SELECT ROUND(AVG(enflasyon),2) AS ort_enflasyon, ROUND(AVG(buyume),2) AS ort_buyume FROM makro WHERE ay LIKE '2020%'`,'Aylar “2020-01” biçiminde metin olduğu için BENZER ile bir yılın tüm ayları seçilir.'],
+    ['Cari açığın en derin olduğu 5 ay hangisi, kur o aylarda nasıldı?',`SELECT ay, cari_denge, kur_endeksi FROM makro ORDER BY cari_denge, ay LIMIT 5`,'Cari denge negatifse açık vardır; küçükten büyüğe sıralayınca en derin açıklar üstte gelir.'],
+    ['İşsizliğin %10 ile %11 arasında kaldığı aylarda ortalama enflasyon?',`SELECT COUNT(*) AS ay_sayisi, ROUND(AVG(enflasyon),2) AS ort_enflasyon FROM makro WHERE issizlik BETWEEN 10 AND 11`,'ARASINDA alt ve üst sınırı dâhil eder.'],
+    ['Kur endeksinin 300’ü aştığı ilk 5 ay hangisi?',`SELECT ay, kur_endeksi FROM makro WHERE kur_endeksi > 300 ORDER BY ay LIMIT 5`,'Eşiği ilk aşılan dönemleri bulmak için tarihe göre sıralanır.'],
+    ['Faizden enflasyonu çıkarınca en yüksek 5 fark hangi aylarda?',`SELECT ay, faiz, enflasyon, ROUND(faiz-enflasyon,2) AS fark FROM makro ORDER BY fark DESC, ay LIMIT 5`,'Sütunlar arası işlemle yeni bir sütun üretilir. İki serinin ölçeği farklı olabilir; bu kaba bir karşılaştırmadır.']],
+  magaza:[
+    ['Ödeme yöntemine göre sipariş sayısı ve ortalama tutar?',`SELECT odeme, COUNT(*) AS siparis, ROUND(AVG(fiyat*adet)) AS ort_tutar FROM magaza GROUP BY odeme ORDER BY siparis DESC`,'Her ödeme yöntemi için hem sayı hem ortalama sipariş tutarı hesaplanır.'],
+    ['Kargosu 5 günden uzun süren siparişler hangi şehirlerde yoğun?',`SELECT sehir, COUNT(*) AS yavas_siparis FROM magaza WHERE kargo_gun > 5 GROUP BY sehir ORDER BY yavas_siparis DESC, sehir`,'Önce yavaş teslimatlar süzülür, sonra şehirlere göre sayılır. Şehirlerin toplam sipariş sayılarını da düşün.'],
+    ['25 yaşından küçük müşteriler hangi kategorilerden alıyor?',`SELECT kategori, COUNT(*) AS siparis, SUM(adet) AS toplam_adet FROM magaza WHERE musteri_yasi < 25 GROUP BY kategori ORDER BY siparis DESC, kategori`,'Genç müşteri kesitinde kategori tercihleri. Sipariş sayısı ile adet toplamı farklı sıralamalar verebilir.'],
+    ['Tutarı (fiyat × adet) en yüksek 5 sipariş hangisi?',`SELECT siparis, sehir, kategori, fiyat*adet AS tutar FROM magaza ORDER BY tutar DESC, siparis LIMIT 5`,'Hesaplanan bir sütuna göre sıralamak için önce ona takma ad verilir.'],
+    ['Haziran 2025’te kategori bazında ciro?',`SELECT kategori, SUM(fiyat*adet) AS ciro FROM magaza WHERE tarih LIKE '2025-06%' GROUP BY kategori ORDER BY ciro DESC`,'Tarih metni “2025-06” ile başlayan siparişler tek ayı seçer.'],
+    ['İndirimsiz ve 5 adet ya da daha fazla alınan kaç sipariş var?',`SELECT COUNT(*) AS siparis FROM magaza WHERE indirim = 0 AND adet >= 5`,'İki koşulu birlikte sağlayan satırlar sayılır.'],
+    ['Şehirlere göre ortalama kargo süresi: en yavaş şehir hangisi?',`SELECT sehir, COUNT(*) AS siparis, ROUND(AVG(kargo_gun),2) AS ort_kargo FROM magaza GROUP BY sehir ORDER BY ort_kargo DESC`,'Ortalamayı grup büyüklüğüyle birlikte okumak için SAY(*) da eklenir.'],
+    ['Cirosu 1 milyon TL’yi aşan kategori–şehir çiftleri hangileri?',`SELECT kategori, sehir, SUM(fiyat*adet) AS ciro FROM magaza GROUP BY kategori, sehir HAVING SUM(fiyat*adet) > 1000000 ORDER BY ciro DESC, kategori, sehir LIMIT 10`,'İki sütuna göre gruplanır; toplam üzerindeki koşul NEREDE değil GRUPTA ile yazılır.']],
+  ulke:[
+    ['Nüfusu en büyük 5 ülke hangisi?',`SELECT ulke, bolge, nufus_mn, gelir FROM ulke ORDER BY nufus_mn DESC, ulke LIMIT 5`,'Nüfus milyon cinsindendir. Yanına kişi başı geliri koyup büyük nüfus–yüksek gelir ilişkisini sorgula.'],
+    ['Gini katsayısı en yüksek 5 ülke ve gelirleri?',`SELECT ulke, gini, gelir FROM ulke WHERE gini IS NOT NULL ORDER BY gini DESC, ulke LIMIT 5`,'DOLUDUR boş değerleri eler; yoksa sıralamada boşlar sona atılır ama satır sayısını bozabilir.'],
+    ['Enflasyonu %15’in üstünde olan ülkeler bölgelere göre kaç tane?',`SELECT bolge, COUNT(*) AS ulke_sayisi FROM ulke WHERE enflasyon > 15 GROUP BY bolge ORDER BY ulke_sayisi DESC, bolge`,'Yüksek enflasyonun hangi bölgelerde toplandığına bakar.'],
+    ['Şehirleşmesi %60’ı aşan ülkelerin ortalama geliri ve ömrü?',`SELECT COUNT(*) AS ulke_sayisi, ROUND(AVG(gelir)) AS ort_gelir, ROUND(AVG(omur),1) AS ort_omur FROM ulke WHERE sehirlesme > 60`,'Tek bir kesitin üç özeti. Şehirleşme gelirle birlikte hareket ediyor olabilir; nedensellik çıkarma.'],
+    ['Her bölgede en düşük ve en yüksek kişi başı gelir?',`SELECT bolge, MIN(gelir) AS en_dusuk, MAX(gelir) AS en_yuksek FROM ulke GROUP BY bolge ORDER BY en_yuksek DESC`,'Bölge içi eşitsizliği kaba biçimde gösterir: uç değerler arası fark büyük mü?'],
+    ['Bölgelere göre toplam nüfus (milyon) ve ülke sayısı?',`SELECT bolge, ROUND(SUM(nufus_mn)) AS toplam_nufus, COUNT(*) AS ulke_sayisi FROM ulke GROUP BY bolge ORDER BY toplam_nufus DESC`,'TOPLAM ve SAY aynı sorguda: ülke sayısı çok olan bölge nüfusça da büyük mü?'],
+    ['Ömrü 80 yılı aşan ülkelerde eğitim yılı ve gelir nasıl?',`SELECT ulke, omur, egitim, gelir FROM ulke WHERE omur > 80 ORDER BY omur DESC, ulke LIMIT 10`,'Uzun ömürlü ülkelerin ortak özelliklerini yan yana okumaya yarar.'],
+    ['Dış ticaret payı %70’i aşan ülkelerin ortalama geliri?',`SELECT COUNT(*) AS ulke_sayisi, ROUND(AVG(gelir)) AS ort_gelir, ROUND(AVG(enflasyon),1) AS ort_enflasyon FROM ulke WHERE dis_ticaret > 70`,'Dışa çok açık ekonomilerin özetini çıkarır.']],
+  hane:[
+    ['Bölgelere göre ortalama gelir ve tasarruf?',`SELECT bolge, COUNT(*) AS hane, ROUND(AVG(gelir)) AS ort_gelir, ROUND(AVG(tasarruf)) AS ort_tasarruf FROM hane GROUP BY bolge ORDER BY ort_gelir DESC`,'Boş tasarruf değerleri ortalamaya girmez; hane sayısı tüm satırları, tasarruf ortalaması ise dolu olanları kapsar.'],
+    ['İnterneti olan ve olmayan hanelerin ortalama eğitim harcaması?',`SELECT internet, COUNT(*) AS hane, ROUND(AVG(egitim)) AS ort_egitim, ROUND(AVG(gelir)) AS ort_gelir FROM hane GROUP BY internet`,'Farkın internetten mi yoksa gelirden mi geldiğini anlamak için gelir ortalamasına da bakılır.'],
+    ['Geliri 100.000 TL’nin üstündeki haneler yerleşim türüne göre kaç tane?',`SELECT il_grubu, COUNT(*) AS hane FROM hane WHERE gelir > 100000 GROUP BY il_grubu ORDER BY hane DESC`,'Yüksek gelirlilerin nerede yoğunlaştığını gösterir.'],
+    ['Kişi başına geliri en yüksek 5 hane hangisi?',`SELECT no, kisi, gelir, ROUND(gelir/kisi) AS kisi_basi_gelir FROM hane ORDER BY kisi_basi_gelir DESC, no LIMIT 5`,'Gelir hane büyüklüğüne bölünerek farklı büyüklükteki haneler karşılaştırılabilir hale gelir.'],
+    ['Bölgelere göre ortalama gıda payı (gıda ÷ gelir, %)?',`SELECT bolge, ROUND(AVG(gida/gelir)*100,1) AS ort_gida_payi FROM hane GROUP BY bolge ORDER BY ort_gida_payi DESC`,'Önce her hanenin payı hesaplanır, sonra bölgede ortalaması alınır; bu, toplamların oranından farklıdır.'],
+    ['Tasarruf bilgisi eksik hanelerin ortalama geliri kaç?',`SELECT COUNT(*) AS eksik, ROUND(AVG(gelir)) AS ort_gelir FROM hane WHERE tasarruf IS NULL`,'Eksik verinin rastgele mi yoksa belli gelir düzeylerinde mi toplandığına bakmak için kullanılır.'],
+    ['3 ve daha fazla çocuklu hanelerde ortalama gelir ve gıda harcaması?',`SELECT COUNT(*) AS hane, ROUND(AVG(gelir)) AS ort_gelir, ROUND(AVG(gida)) AS ort_gida FROM hane WHERE cocuk >= 3`,'Kalabalık hanelerin gelirine göre gıda yükünü gösterir. Grup küçükse dikkatli yorumla.'],
+    ['5 ve daha fazla kişilik kiracı hanelerde ortalama kira yükü (%)?',`SELECT COUNT(*) AS hane, ROUND(AVG(kira/gelir)*100,1) AS ort_kira_payi FROM hane WHERE kisi >= 5 AND ev_sahibi = 'Hayır'`,'Kirası olmayan ev sahiplerini dışarıda bırakmak için ev_sahibi koşulu eklenir.']],
+  hisse:[
+    ['Her hissenin ortalama aylık getirisi?',`SELECT hisse, sektor, ROUND(AVG(getiri),2) AS ort_getiri FROM hisse GROUP BY hisse, sektor ORDER BY ort_getiri DESC`,'Sektör sütunu da gruplamaya girer, böylece hissenin yanında sektörü de görünür.'],
+    ['Her hisse için en yüksek kapanış fiyatı?',`SELECT hisse, MAX(kapanis) AS en_yuksek_kapanis FROM hisse GROUP BY hisse ORDER BY en_yuksek_kapanis DESC`,'Fiyat düzeyleri hisseler arasında kıyaslanmaz; ancak her hissenin kendi tarihsel zirvesini gösterir.'],
+    ['Mart 2020’de hisselerin getirisi nasıldı?',`SELECT hisse, sektor, getiri FROM hisse WHERE ay = '2020-03' ORDER BY getiri, hisse`,'Tek bir ayı seçip hepsini küçükten büyüğe sıralar; kriz ayında kim ne kadar etkilendi?'],
+    ['İşlem hacmi 100’ü aşan kayıtlarda ortalama getiri?',`SELECT COUNT(*) AS kayit, ROUND(AVG(getiri),2) AS ort_getiri FROM hisse WHERE hacim > 100`,'Yüksek hacimli aylar ile getiri arasındaki ilişkiye ilk bakış.'],
+    ['Sektörlere göre kaç hisse-ay negatif getiri verdi?',`SELECT sektor, COUNT(*) AS eksi_kayit FROM hisse WHERE getiri < 0 GROUP BY sektor ORDER BY eksi_kayit DESC, sektor`,'Sektörlerin içindeki hisse sayısı farklıdır; sayıları o sayıya bölmeden yorum yapma.'],
+    ['2025’te ortalama getirisi en yüksek 3 hisse?',`SELECT hisse, ROUND(AVG(getiri),2) AS ort_getiri FROM hisse WHERE ay LIKE '2025%' GROUP BY hisse ORDER BY ort_getiri DESC LIMIT 3`,'Bir yılı süzmek, gruplamak, sıralamak ve ilk üçü almak tek sorguda birleşir.'],
+    ['Fiyatı hiç 100’ün üzerine çıkmış hisseler?',`SELECT hisse, MAX(kapanis) AS en_yuksek FROM hisse GROUP BY hisse HAVING MAX(kapanis) > 100 ORDER BY en_yuksek DESC`,'Koşul bir özet değer (en yüksek) üzerinde olduğu için GRUPTA kullanılır.'],
+    ['Teknoloji sektörünün en iyi 5 ayı?',`SELECT ay, hisse, getiri FROM hisse WHERE sektor = 'Teknoloji' ORDER BY getiri DESC, ay, hisse LIMIT 5`,'Sektör süzülür, getiriye göre sıralanır; birden çok sıralama ölçütü eşitliği çözer.']],
+  isgucu:[
+    ['Sendika üyeleri ile üye olmayanların ortalama ücreti?',`SELECT sendika, COUNT(ucret) AS ucret_var, ROUND(AVG(ucret)) AS ort_ucret FROM isgucu GROUP BY sendika`,'SAY(ucret) yalnızca dolu ücretleri sayar. Sendika kamuda yaygındır; sektör farkını da düşün.'],
+    ['Sözleşme türüne göre ortalama ücret ve çalışma saati?',`SELECT sozlesme, COUNT(*) AS kisi, ROUND(AVG(ucret)) AS ort_ucret, ROUND(AVG(calisma_saat),1) AS ort_saat FROM isgucu GROUP BY sozlesme ORDER BY ort_ucret DESC`,'Güvencesiz sözleşmelerde ücret ve saat birlikte nasıl değişiyor?'],
+    ['Kadınların eğitim düzeyine göre ortalama ücreti?',`SELECT egitim, COUNT(*) AS kisi, ROUND(AVG(ucret)) AS ort_ucret FROM isgucu WHERE cinsiyet = 'Kadın' GROUP BY egitim ORDER BY ort_ucret DESC`,'Eğitimin ücrete getirisini tek bir cinsiyet için gösterir; erkekler için de çalıştırıp karşılaştır.'],
+    ['Haftada 50 saatten fazla çalışanlar en çok hangi sektörlerde?',`SELECT sektor, COUNT(*) AS kisi FROM isgucu WHERE calisma_saat > 50 GROUP BY sektor ORDER BY kisi DESC, sektor`,'Uzun mesai kesitinde sektör dağılımı.'],
+    ['Ücreti en yüksek 5 çalışan kim?',`SELECT no, yas, egitim, sektor, deneyim, ucret FROM isgucu ORDER BY ucret DESC, no LIMIT 5`,'Boş ücretler sıralamanın sonuna düşer, bu yüzden en yüksek 5 satırı etkilemez.'],
+    ['Şehir tipine göre ortalama ücret?',`SELECT sehir_tipi, COUNT(*) AS kisi, ROUND(AVG(ucret)) AS ort_ucret FROM isgucu GROUP BY sehir_tipi ORDER BY ort_ucret DESC`,'Büyükşehir, şehir ve kırsal ücretlerini yan yana koyar.'],
+    ['Saatlik ücreti en düşük 5 çalışan kim? (ay = 4 hafta)',`SELECT no, sektor, ucret, calisma_saat, ROUND(ucret/(calisma_saat*4),1) AS saatlik FROM isgucu WHERE ucret IS NOT NULL ORDER BY saatlik, no LIMIT 5`,'Aylık ücret, aylık toplam saate bölünür; ayı kabaca 4 hafta saydık. Parantez işlem sırasını belirler.'],
+    ['30 yaşından küçük üniversite ve lisansüstü mezunlarının ortalama ücreti?',`SELECT COUNT(*) AS kisi, ROUND(AVG(ucret)) AS ort_ucret FROM isgucu WHERE yas < 30 AND egitim IN ('Üniversite','Lisansüstü')`,'Yaş ve eğitim koşulu birlikte; İÇİNDE iki eğitim düzeyini tek koşulda toplar.']],
+  konut:[
+    ['Isıtma türüne göre ortalama fiyat ve bina yaşı?',`SELECT isitma, COUNT(*) AS satis, ROUND(AVG(fiyat)) AS ort_fiyat, ROUND(AVG(bina_yasi),1) AS ort_yas FROM konut GROUP BY isitma ORDER BY ort_fiyat DESC`,'Fiyat farkının bina yaşından kaynaklanıp kaynaklanmadığını anlamak için ortalama yaş da eklenir.'],
+    ['Otoparklı konutların ilçelere göre sayısı ve ortalama fiyatı?',`SELECT ilce, COUNT(*) AS satis, ROUND(AVG(fiyat)) AS ort_fiyat FROM konut WHERE otopark = 'Var' GROUP BY ilce ORDER BY ort_fiyat DESC`,'Önce otoparklılar süzülür, sonra ilçelere göre özetlenir.'],
+    ['5 yaşından küçük ve 120 m²’den büyük konutların ortalama fiyatı?',`SELECT COUNT(*) AS satis, ROUND(AVG(fiyat)) AS ort_fiyat FROM konut WHERE bina_yasi < 5 AND m2 > 120`,'Yeni ve geniş konut segmentinin özeti. Fiyat bin TL cinsindendir.'],
+    ['En pahalı 5 satış hangisi?',`SELECT no, ilce, m2, oda, bina_yasi, fiyat FROM konut ORDER BY fiyat DESC, no LIMIT 5`,'En pahalı satışlarda ilçe ve büyüklük örüntüsü var mı?'],
+    ['Kat numarasına göre ortalama fiyat?',`SELECT kat, COUNT(*) AS satis, ROUND(AVG(fiyat)) AS ort_fiyat FROM konut GROUP BY kat ORDER BY kat`,'Kat arttıkça fiyat değişiyor mu? Her katın satış sayısına da bak.'],
+    ['30 yaşından eski konutlarda ilçelere göre ortalama m² fiyatı?',`SELECT ilce, COUNT(*) AS satis, ROUND(AVG(fiyat/m2),1) AS ort_m2_fiyati FROM konut WHERE bina_yasi > 30 GROUP BY ilce ORDER BY ort_m2_fiyati DESC`,'Eski bina segmentinde konumun fiyat üzerindeki etkisini görmeye yarar.'],
+    ['80 m²’den küçük konutlar oda sayısına göre nasıl dağılıyor?',`SELECT oda, COUNT(*) AS satis FROM konut WHERE m2 < 80 GROUP BY oda ORDER BY oda`,'Küçük konutların oda sayısı dağılımı; dağılımın hangi odada yoğunlaştığına bak.']],
+  ticaret:[
+    ['Her ürün grubunda ihracatın ithalatı karşılama oranı?',`SELECT urun, ROUND(SUM(ihracat)/SUM(ithalat),2) AS karsilama FROM ticaret GROUP BY urun ORDER BY karsilama DESC`,'1’in üstü ihracat fazlası, altı açık demektir.'],
+    ['Toplam ihracatın en yüksek olduğu 5 ay hangisi?',`SELECT ay, SUM(ihracat) AS toplam_ihracat FROM ticaret GROUP BY ay ORDER BY toplam_ihracat DESC, ay LIMIT 5`,'Beş ürün grubunu aya göre toplar; bu yüzden her ay tek satıra iner.'],
+    ['Otomotivde ithalatın ihracatı aştığı kaç ay var?',`SELECT COUNT(*) AS ay_sayisi FROM ticaret WHERE urun = 'Otomotiv' AND ithalat > ihracat`,'İki sütun doğrudan karşılaştırılabilir: koşulda sabit sayı yerine başka bir sütun yazılır.'],
+    ['Her ürünün 2025 toplam ihracatı?',`SELECT urun, SUM(ihracat) AS ihracat_2025 FROM ticaret WHERE ay LIKE '2025%' GROUP BY urun ORDER BY ihracat_2025 DESC`,'Bir yılı BENZER ile seçip ürünlere göre toplar.'],
+    ['Makine ihracatının en düşük olduğu 5 ay?',`SELECT ay, ihracat FROM ticaret WHERE urun = 'Makine' ORDER BY ihracat, ay LIMIT 5`,'En düşük aylar tarihsel olarak nerede toplanıyor?'],
+    ['Her ürün için aylık dış ticaret dengesinin en kötü ve en iyi değeri?',`SELECT urun, MIN(ihracat-ithalat) AS en_kotu_ay, MAX(ihracat-ithalat) AS en_iyi_ay FROM ticaret GROUP BY urun`,'Özet işlevin içinde sütunlar arası işlem yapılabilir.'],
+    ['Kimya ve Gıda için ortalama aylık ithalat?',`SELECT urun, ROUND(AVG(ithalat)) AS ort_ithalat FROM ticaret WHERE urun IN ('Kimya','Gıda') GROUP BY urun`,'İÇİNDE ile iki ürün seçilir ve ayrı ayrı ortalaması alınır.']],
+  eticaret:[
+    ['Kanallara göre iade edilen sipariş sayısı?',`SELECT kanal, COUNT(*) AS iade_sayisi FROM eticaret WHERE iade = 'Evet' GROUP BY kanal ORDER BY iade_sayisi DESC`,'Yalnızca sayı değil oran önemlidir; kanalların toplam sipariş sayısını da hesaplayıp karşılaştır.'],
+    ['Kaç siparişin müşteri puanı boş?',`SELECT COUNT(*) AS puansiz FROM eticaret WHERE puan IS NULL`,'Eksik değer sayısı veri temizliğinin ilk adımıdır; boşların rastgele olup olmadığına da bak.'],
+    ['Kargo süresine göre sipariş sayısı ve ortalama puan?',`SELECT kargo_gun, COUNT(*) AS siparis, COUNT(puan) AS puanli, ROUND(AVG(puan),2) AS ort_puan FROM eticaret GROUP BY kargo_gun ORDER BY kargo_gun`,'Kargo uzadıkça puan düşüyor mu? SAY(puan) yalnızca dolu puanları sayar.'],
+    ['Fiyatı 20.000 TL’yi aşan siparişler hangi kategorilerde?',`SELECT kategori, COUNT(*) AS siparis, MAX(fiyat) AS en_yuksek FROM eticaret WHERE fiyat > 20000 GROUP BY kategori ORDER BY siparis DESC, kategori`,'Bu veri setinde bazı fiyatlar yanlış girilmiştir (10 kat). Uç değerleri bulmak veri temizliğinin parçasıdır.'],
+    ['Kategoriye göre ortalama, en düşük ve en yüksek fiyat?',`SELECT kategori, ROUND(AVG(fiyat)) AS ort_fiyat, MIN(fiyat) AS en_dusuk, MAX(fiyat) AS en_yuksek FROM eticaret GROUP BY kategori ORDER BY ort_fiyat DESC`,'Uç değerler ortalamayı çeker: ortalama ile en yüksek değer arasındaki farka dikkat et.'],
+    ['Mobil uygulamada puanı 2 ve altı olan siparişler kategorilere göre?',`SELECT kategori, COUNT(*) AS dusuk_puan FROM eticaret WHERE kanal = 'Mobil uygulama' AND puan <= 2 GROUP BY kategori ORDER BY dusuk_puan DESC, kategori`,'Düşük puanlı mobil siparişlerin kategori dağılımı. Boş puanlar koşulu sağlamaz, otomatik elenir.'],
+    ['Kanallara göre ortalama müşteri puanı (yalnızca dolu puanlar)?',`SELECT kanal, COUNT(puan) AS puanli, ROUND(AVG(puan),2) AS ort_puan FROM eticaret GROUP BY kanal ORDER BY ort_puan DESC`,'Ortalama yalnızca puanı olan siparişlerden hesaplanır; puansız siparişler farklıysa sonuç yanıltabilir.'],
+    ['Ciro (fiyat × adet) en yüksek 5 kategori–kanal çifti?',`SELECT kategori, kanal, SUM(fiyat*adet) AS ciro FROM eticaret GROUP BY kategori, kanal ORDER BY ciro DESC, kategori, kanal LIMIT 5`,'İki sütuna göre grupla, topla, sırala, ilk beşi al.']],
+  panel:[
+    ['Bölgelere göre ortalama gelir ve işsizlik?',`SELECT bolge, COUNT(*) AS gozlem, ROUND(AVG(gsyh)) AS ort_gsyh, ROUND(AVG(issizlik),1) AS ort_issizlik FROM panel GROUP BY bolge ORDER BY ort_gsyh DESC`,'Her gözlem bir il–yıl çiftidir; bölge ortalaması hem illeri hem yılları birlikte özetler.'],
+    ['2025’te kişi başı geliri en yüksek 5 il hangisi?',`SELECT il, bolge, gsyh FROM panel WHERE yil = 2025 ORDER BY gsyh DESC, il LIMIT 5`,'Panelden tek bir yılı süzmek, kesit veri elde etmenin yoludur.'],
+    ['Yıllara göre ortalama işsizlik nasıl değişti?',`SELECT yil, ROUND(AVG(issizlik),2) AS ort_issizlik FROM panel GROUP BY yil ORDER BY yil`,'Zaman boyutuna göre gruplamak: 16 satırlık bir zaman serisi elde edilir.'],
+    ['2010 ve 2025’te ortalama gelir kaç?',`SELECT yil, ROUND(AVG(gsyh)) AS ort_gsyh FROM panel WHERE yil IN (2010, 2025) GROUP BY yil ORDER BY yil`,'İki dönemi yan yana koyar; büyüme oranını kendin hesaplayabilirsin.'],
+    ['2025’te işsizliği %6’nın üstünde olan iller hangi bölgelerde?',`SELECT bolge, COUNT(*) AS il_sayisi FROM panel WHERE yil = 2025 AND issizlik > 6 GROUP BY bolge ORDER BY il_sayisi DESC, bolge`,'Kesit veride yüksek işsizliğin bölgesel dağılımı.'],
+    ['2025’te eğitim yılı 10’u aşan iller hangileri?',`SELECT il, bolge, egitim, gsyh FROM panel WHERE yil = 2025 AND egitim > 10 ORDER BY egitim DESC, il LIMIT 10`,'Eğitim ve gelir yan yana: yüksek eğitimli illerde gelir de yüksek mi?'],
+    ['16 yıllık ortalama geliri en yüksek 5 il?',`SELECT il, ROUND(AVG(gsyh)) AS ort_gsyh FROM panel GROUP BY il ORDER BY ort_gsyh DESC, il LIMIT 5`,'İle göre gruplayınca zaman etkisi ortalamaya karışır; kesit–zaman ayrımını düşün.']],
+  memnun:[
+    ['Şubelere göre ortalama memnuniyet ve bekleme süresi?',`SELECT sube, COUNT(*) AS yanit, ROUND(AVG(puan),2) AS ort_puan, ROUND(AVG(bekleme_dk),1) AS ort_bekleme FROM memnun GROUP BY sube ORDER BY ort_puan DESC, sube`,'Puan ile bekleme süresi aynı tabloda: yavaş şubeler daha mı düşük puan alıyor?'],
+    ['Kaç yanıtta memnuniyet puanı boş?',`SELECT COUNT(*) AS bos_puan FROM memnun WHERE puan IS NULL`,'Cevapsızlık ankette önemli bir sorundur; boş bırakanlar rastgele mi, memnuniyetsiz olanlar mı?'],
+    ['Bekleme süresi 15 dakikayı aşanların ortalama puanı ve tavsiye değeri?',`SELECT COUNT(*) AS yanit, ROUND(AVG(puan),2) AS ort_puan, ROUND(AVG(tavsiye),1) AS ort_tavsiye FROM memnun WHERE bekleme_dk > 15`,'Uzun bekleyenlerin özeti. Tüm anketin ortalamasıyla karşılaştırarak yorumla.'],
+    ['Sadık ve yeni müşterilerin ortalama puanı ve tavsiye değeri?',`SELECT musteri, COUNT(puan) AS puanli, ROUND(AVG(puan),2) AS ort_puan, ROUND(AVG(tavsiye),1) AS ort_tavsiye FROM memnun GROUP BY musteri`,'İki müşteri tipini karşılaştırır.'],
+    ['Yaş gruplarına göre ortalama tavsiye puanı?',`SELECT yas_grubu, COUNT(*) AS yanit, ROUND(AVG(tavsiye),1) AS ort_tavsiye FROM memnun GROUP BY yas_grubu ORDER BY ort_tavsiye DESC`,'Yaş grubu bir kategori değişkenidir; her grubun ortalaması tek satırda görünür.'],
+    ['Her puan değerinden kaç yanıt var?',`SELECT puan, COUNT(*) AS yanit FROM memnun GROUP BY puan ORDER BY puan`,'Puan 1–5 sıralı bir ölçektir. Boş değerler tek bir grup oluşturur ve sıralamanın sonunda görünür.'],
+    ['Tavsiye puanı 9 ve 10 olan (destekçi) yanıtlar şubelere göre kaç tane?',`SELECT sube, COUNT(*) AS destekci FROM memnun WHERE tavsiye >= 9 GROUP BY sube ORDER BY destekci DESC, sube`,'Net destekçi skoru (NPS) hesabının ilk adımı. Şubelerin toplam yanıt sayısını da hesaba kat.'],
+    ['Puanı 1 ya da 2 olup 20 dakikadan fazla bekleyen yanıtlar şubelere göre?',`SELECT sube, COUNT(*) AS yanit FROM memnun WHERE puan IN (1, 2) AND bekleme_dk > 20 GROUP BY sube ORDER BY yanit DESC, sube`,'Memnuniyetsizlik ile uzun beklemenin birlikte görüldüğü yanıtları şubeye göre sayar.']],
+  kredi:[
+    ['Onay kararına göre ortalama skor ve gelir?',`SELECT onay, COUNT(*) AS basvuru, ROUND(AVG(skor)) AS ort_skor, ROUND(AVG(gelir)) AS ort_gelir FROM kredi GROUP BY onay`,'Onaylananlar ile reddedilenlerin profilini yan yana koyar.'],
+    ['Sektörlere göre başvuru sayısı (boş sektör dahil)?',`SELECT sektor, COUNT(*) AS basvuru FROM kredi GROUP BY sektor ORDER BY basvuru DESC`,'GRUPLA boş değerleri ayrı bir grup yapar. Sektörü bilinmeyen başvurular tabloda boş satır olarak görünür.'],
+    ['Skoru 700’ün üzerinde olduğu hâlde reddedilen kaç başvuru var?',`SELECT COUNT(*) AS reddedilen FROM kredi WHERE skor > 700 AND onay = 'Hayır'`,'Yüksek skorlu ama reddedilenler, skor dışındaki etkenlerin (gelir, borç) rolüne işaret eder.'],
+    ['Borcu gelirinin %60’ını aşan başvurular onay durumuna göre kaç tane?',`SELECT onay, COUNT(*) AS basvuru FROM kredi WHERE borc/gelir > 0.6 GROUP BY onay`,'Sütunlar arası bir oran koşul olarak kullanılır.'],
+    ['İstenen tutarı en yüksek 5 başvuru hangisi?',`SELECT no, gelir, skor, kredi_tutar, onay FROM kredi ORDER BY kredi_tutar DESC, no LIMIT 5`,'En büyük taleplerin skoru ve onay sonucunu birlikte okur.'],
+    ['30 yaşından küçük onaylı başvurularda ortalama kredi tutarı?',`SELECT COUNT(*) AS basvuru, ROUND(AVG(kredi_tutar)) AS ort_tutar FROM kredi WHERE yas < 30 AND onay = 'Evet'`,'Genç ve onaylı başvurularla ilgili kesit özet.'],
+    ['Sektörü belli olan başvurularda sektöre göre ortalama gelir?',`SELECT sektor, COUNT(*) AS basvuru, ROUND(AVG(gelir)) AS ort_gelir FROM kredi WHERE sektor IS NOT NULL GROUP BY sektor ORDER BY ort_gelir DESC`,'DOLUDUR ile boş sektörleri dışarıda bırakır.'],
+    ['İstenen tutarı gelirinin 8 katını aşan başvurular onay durumuna göre?',`SELECT onay, COUNT(*) AS basvuru FROM kredi WHERE kredi_tutar/gelir > 8 GROUP BY onay`,'Çok yüksek taleplerin ne kadarı onay alıyor?']],
+  enerji:[
+    ['Şehirlere göre ortalama tüketim ve sıcaklık?',`SELECT sehir, ROUND(AVG(tuketim)) AS ort_tuketim, ROUND(AVG(sicaklik),1) AS ort_sicaklik FROM enerji GROUP BY sehir ORDER BY ort_tuketim DESC`,'Şehir büyüklüğü ve iklim aynı tabloda. Tüketim farkı iklimden mi, nüfustan mı?'],
+    ['Tüketimin en yüksek olduğu 5 şehir–ay hangisi?',`SELECT ay, sehir, sicaklik, tuketim FROM enerji ORDER BY tuketim DESC, ay, sehir LIMIT 5`,'En yüksek tüketim, hangi mevsim ve hangi sıcaklıklarda görülüyor?'],
+    ['Sıcaklığı 0 °C’nin altına inen aylarda ortalama tüketim?',`SELECT COUNT(*) AS kayit, ROUND(AVG(tuketim)) AS ort_tuketim FROM enerji WHERE sicaklik < 0`,'Soğuk aylarda ısınma talebini gösterir.'],
+    ['Sıcaklığı 25 °C’yi aşan aylarda ortalama tüketim?',`SELECT COUNT(*) AS kayit, ROUND(AVG(tuketim)) AS ort_tuketim FROM enerji WHERE sicaklik > 25`,'Önceki sorguyla karşılaştır: hem çok soğukta hem çok sıcakta tüketim yüksekse ilişki U biçimlidir.'],
+    ['Ağustos aylarında şehirlere göre ortalama tüketim?',`SELECT sehir, ROUND(AVG(tuketim)) AS ort_tuketim FROM enerji WHERE ay LIKE '%-08' GROUP BY sehir ORDER BY ort_tuketim DESC`,'“-08” ile biten aylar, yıl fark etmeksizin tüm Ağustosları seçer.'],
+    ['Erzurum’un 2025 aylık sıcaklık ve tüketimi?',`SELECT ay, sicaklik, tuketim FROM enerji WHERE sehir = 'Erzurum' AND ay LIKE '2025%' ORDER BY ay`,'On iki satırlık küçük bir zaman serisi: mevsimselliği gözle.'],
+    ['Sanayi payı %45’i aşan kayıtlar şehirlere göre kaç tane?',`SELECT sehir, COUNT(*) AS kayit, ROUND(AVG(tuketim)) AS ort_tuketim FROM enerji WHERE sanayi_payi > 45 GROUP BY sehir ORDER BY kayit DESC, sehir`,'Sanayi ağırlıklı dönemlerin şehirlere dağılımı.'],
+    ['Her şehirde en soğuk ve en sıcak ay kaç derece?',`SELECT sehir, MIN(sicaklik) AS en_soguk, MAX(sicaklik) AS en_sicak FROM enerji GROUP BY sehir ORDER BY sehir`,'Şehirlerin iklim aralığını karşılaştırır.']],
+  saglik:[
+    ['Diyabetli ve diyabetsizlerin ortalama yaş, BKİ ve tansiyonu?',`SELECT diyabet, COUNT(*) AS kisi, ROUND(AVG(yas),1) AS ort_yas, ROUND(AVG(bki),1) AS ort_bki, ROUND(AVG(sistolik)) AS ort_tansiyon FROM saglik GROUP BY diyabet`,'Diyabetle birlikte yaş ve BKİ de yüksekse, farkı tek bir etkene bağlama (karıştırıcı değişkenler).'],
+    ['Sigara durumuna göre diyabetli sayısı?',`SELECT sigara, COUNT(*) AS diyabetli FROM saglik WHERE diyabet = 'Evet' GROUP BY sigara ORDER BY diyabetli DESC`,'Bu sayıyı grupların toplam büyüklüğüne bölmeden yorumlama; oran için Pivot sekmesindeki satır % seçeneğine bak.'],
+    ['BKİ’si 30 ve üzeri olanlarda diyabet dağılımı?',`SELECT diyabet, COUNT(*) AS kisi FROM saglik WHERE bki >= 30 GROUP BY diyabet`,'Obezite kesitinde diyabetli ve diyabetsiz sayısı.'],
+    ['Kolesterolü ölçülmemiş kaç kişi var?',`SELECT COUNT(*) AS eksik FROM saglik WHERE kolesterol IS NULL`,'Eksik ölçümlerin kimlerde yoğunlaştığını sonra yaş ve cinsiyete göre incele.'],
+    ['60 yaşından büyük ve kolesterolü 240’ı aşan kişiler kimler?',`SELECT no, yas, cinsiyet, kolesterol, sistolik, diyabet FROM saglik WHERE yas > 60 AND kolesterol > 240 ORDER BY kolesterol DESC, no LIMIT 10`,'Yüksek riskli kesiti listeler. Boş kolesterol değerleri koşulu sağlamaz.'],
+    ['Haftada 5 saatten fazla egzersiz yapanların ortalama BKİ ve tansiyonu?',`SELECT COUNT(*) AS kisi, ROUND(AVG(bki),1) AS ort_bki, ROUND(AVG(sistolik)) AS ort_tansiyon FROM saglik WHERE egzersiz_saat > 5`,'Aktif kesitin özeti; tüm örneklemin ortalamalarıyla karşılaştır.'],
+    ['Cinsiyete göre ortalama kolesterol (ölçülenlerde)?',`SELECT cinsiyet, COUNT(kolesterol) AS olculen, ROUND(AVG(kolesterol)) AS ort_kolesterol FROM saglik GROUP BY cinsiyet`,'SAY(kolesterol) ölçülen kişi sayısını verir; ortalama yalnızca onlardan hesaplanır.'],
+    ['Sistolik tansiyonu 140 ve üzeri olanlar sigara durumuna göre kaç kişi?',`SELECT sigara, COUNT(*) AS kisi FROM saglik WHERE sistolik >= 140 GROUP BY sigara ORDER BY kisi DESC, sigara`,'Yüksek tansiyon kesitinde sigara durumu dağılımı.']],
+  okul:[
+    ['Devlet ve özel okulların ortalama puanı ve bütçesi?',`SELECT tur, COUNT(*) AS okul, ROUND(AVG(puan)) AS ort_puan, ROUND(AVG(butce_bin_tl)) AS ort_butce FROM okul GROUP BY tur`,'Özel okulların puanı yüksekse bunu okul türüne mi, bulundukları bölgeye mi bağlamalı?'],
+    ['Bölgelere göre ortalama puan?',`SELECT bolge, COUNT(puan) AS puanli, ROUND(AVG(puan)) AS ort_puan FROM okul GROUP BY bolge ORDER BY ort_puan DESC`,'Puanı boş okullar ortalamaya girmez; SAY(puan) kaç okulun puanı olduğunu gösterir.'],
+    ['Özel okullar bölgelere nasıl dağılıyor?',`SELECT bolge, COUNT(*) AS ozel_okul FROM okul WHERE tur = 'Özel' GROUP BY bolge ORDER BY ozel_okul DESC, bolge`,'Özel okullar belli bölgelerde yoğunsa, bölge farkı tür farkıyla karışır (Simpson paradoksuna giriş).'],
+    ['Öğretmen başına 30’dan fazla öğrenci olan okulların ortalama puanı?',`SELECT COUNT(*) AS okul, ROUND(AVG(puan)) AS ort_puan FROM okul WHERE ogrenci_ogretmen > 30`,'Kalabalık sınıfların özeti. Tüm okulların ortalamasıyla karşılaştır.'],
+    ['Kaç okulun puan bilgisi eksik?',`SELECT COUNT(*) AS eksik_puan FROM okul WHERE puan IS NULL`,'Eksik değer sayısı, analiz öncesi ilk kontrol.'],
+    ['Öğrenci başına bütçesi en yüksek 5 okul hangisi?',`SELECT no, bolge, tur, ogrenci, butce_bin_tl, ROUND(butce_bin_tl/ogrenci,1) AS ogrenci_basi FROM okul ORDER BY ogrenci_basi DESC, no LIMIT 5`,'Toplam bütçeyi öğrenci sayısına bölerek farklı büyüklükteki okullar karşılaştırılır.'],
+    ['Bölge ve türe göre ortalama puan?',`SELECT bolge, tur, COUNT(*) AS okul, ROUND(AVG(puan)) AS ort_puan FROM okul GROUP BY bolge, tur ORDER BY bolge, tur`,'Aynı bölge içinde devlet ve özel okulları karşılaştırmak, bölge etkisini sabit tutar.'],
+    ['Öğrenci sayısı 800’ün üstündeki okullar türe göre kaç tane?',`SELECT tur, COUNT(*) AS okul FROM okul WHERE ogrenci > 800 GROUP BY tur`,'Büyük okulların devlet–özel dağılımı.']],
+  tarim:[
+    ['Ürünlere göre ortalama verim ve fiyat?',`SELECT urun, ROUND(AVG(verim),2) AS ort_verim, ROUND(AVG(fiyat),1) AS ort_fiyat FROM tarim GROUP BY urun ORDER BY ort_fiyat DESC`,'Ürünlerin birimleri farklıdır; ürünler arası değil, aynı ürünün yıllar içindeki seyri karşılaştırılmalıdır.'],
+    ['Buğdayın yıllara göre ortalama verimi ve yağışı?',`SELECT yil, ROUND(AVG(verim),2) AS ort_verim, ROUND(AVG(yagis)) AS ort_yagis FROM tarim WHERE urun = 'Buğday' GROUP BY yil ORDER BY yil`,'Tek ürün seçilerek zaman serisi oluşur. Verimin zamanla ortak bir trendi olabilir.'],
+    ['Yağışı 300 mm’nin altında kalan kayıtlarda ürünlere göre ortalama verim?',`SELECT urun, COUNT(*) AS kayit, ROUND(AVG(verim),2) AS ort_verim FROM tarim WHERE yagis < 300 GROUP BY urun ORDER BY kayit DESC, urun`,'Kurak koşullarda hangi ürünler ne kadar etkileniyor?'],
+    ['Bölgelere göre toplam ekim alanı (bin ha)?',`SELECT bolge, SUM(alan_bin_ha) AS toplam_alan FROM tarim GROUP BY bolge ORDER BY toplam_alan DESC`,'Tüm yıl ve ürünlerin alanları bölgeye göre toplanır.'],
+    ['Fiyatı en yüksek 5 kayıt hangisi?',`SELECT yil, urun, bolge, fiyat FROM tarim ORDER BY fiyat DESC, yil, urun, bolge LIMIT 5`,'En yüksek fiyatlar hangi ürün ve yılda toplanıyor? Enflasyon yüzünden yeni yıllar öne çıkabilir.'],
+    ['2025’te ürünlere göre ortalama fiyat?',`SELECT urun, ROUND(AVG(fiyat),1) AS ort_fiyat FROM tarim WHERE yil = 2025 GROUP BY urun ORDER BY ort_fiyat DESC`,'Son yılın fiyat sıralaması.'],
+    ['Sıcaklığı 17 °C’yi aşan kayıtlarda ortalama yağış ve verim?',`SELECT COUNT(*) AS kayit, ROUND(AVG(yagis)) AS ort_yagis, ROUND(AVG(verim),2) AS ort_verim FROM tarim WHERE sicaklik > 17`,'Ürün karışımı farklı olduğu için verim ortalaması ürün bazında okunmalıdır.'],
+    ['Mısır ve Pamuğun bölgelere göre ortalama verimi?',`SELECT urun, bolge, ROUND(AVG(verim),2) AS ort_verim FROM tarim WHERE urun IN ('Mısır','Pamuk') GROUP BY urun, bolge ORDER BY urun, ort_verim DESC`,'İki ürün seçilir, her biri bölgeye göre ayrı ayrı gruplanır.']],
+  turizm:[
+    ['Kaynak ülkelere göre toplam ziyaretçi ve gelir?',`SELECT kaynak, SUM(ziyaretci_bin) AS toplam_ziyaretci, ROUND(SUM(gelir_mn_usd)) AS toplam_gelir FROM turizm GROUP BY kaynak ORDER BY toplam_ziyaretci DESC`,'Ziyaretçi sayısı bin kişi, gelir milyon dolar cinsindendir. Ziyaretçi sayısı ile gelir sıralaması aynı mı?'],
+    ['Nisan 2019 ile Nisan 2020’de toplam ziyaretçi?',`SELECT ay, SUM(ziyaretci_bin) AS ziyaretci FROM turizm WHERE ay IN ('2019-04','2020-04') GROUP BY ay ORDER BY ay`,'Pandemi kırılmasını iki ay üzerinden gösterir.'],
+    ['Temmuz aylarında kaynak ülkelere göre ortalama ziyaretçi?',`SELECT kaynak, ROUND(AVG(ziyaretci_bin)) AS ort_ziyaretci FROM turizm WHERE ay LIKE '%-07' GROUP BY kaynak ORDER BY ort_ziyaretci DESC`,'Mevsimselliğin zirvesinde hangi ülke önde?'],
+    ['Ziyaretçi başına gelir en yüksek kaynak ülkeler?',`SELECT kaynak, ROUND(SUM(gelir_mn_usd)/SUM(ziyaretci_bin)*1000) AS kisi_basi_dolar FROM turizm GROUP BY kaynak ORDER BY kisi_basi_dolar DESC`,'Milyon dolarlık geliri bin kişiye bölüp 1.000 ile çarpınca kişi başı dolar çıkar.'],
+    ['Kaynak ülkelere göre ortalama kalış süresi?',`SELECT kaynak, ROUND(AVG(kalis_gece),1) AS ort_kalis FROM turizm GROUP BY kaynak ORDER BY ort_kalis DESC`,'Uzun kalış kişi başı geliri artırır mı? Önceki sorguyla birlikte oku.'],
+    ['Ziyaretçisi 500 bini aşan aylar hangileri?',`SELECT ay, kaynak, ziyaretci_bin FROM turizm WHERE ziyaretci_bin > 500 ORDER BY ziyaretci_bin DESC, ay, kaynak LIMIT 10`,'Zirve aylar hangi mevsimde ve hangi ülkelerde toplanıyor?'],
+    ['Ziyaretçinin en az olduğu 5 kayıt?',`SELECT ay, kaynak, ziyaretci_bin FROM turizm ORDER BY ziyaretci_bin, ay, kaynak LIMIT 5`,'En düşük değerler 2020–2021 dönemine mi denk geliyor?'],
+    ['2025’te kaynak ülkeye göre toplam turizm geliri?',`SELECT kaynak, ROUND(SUM(gelir_mn_usd)) AS gelir_2025 FROM turizm WHERE ay LIKE '2025%' GROUP BY kaynak ORDER BY gelir_2025 DESC`,'Son yılın gelir sıralaması.']],
+  gunluk:[
+    ['Varlıklara göre ortalama günlük getiri ve uç getiriler?',`SELECT varlik, ROUND(AVG(getiri),3) AS ort_getiri, MIN(getiri) AS en_kotu, MAX(getiri) AS en_iyi FROM gunluk GROUP BY varlik`,'Ortalama küçük olsa da uçlar riski gösterir.'],
+    ['Günlük getirisi mutlak olarak %3’ü aşan günler hangi varlıkta çok?',`SELECT varlik, COUNT(*) AS gun FROM gunluk WHERE ABS(getiri) > 3 GROUP BY varlik ORDER BY gun DESC, varlik`,'MUTLAK işareti yok sayar: hem sert düşüş hem sert yükseliş sayılır. Oynaklığın kaba göstergesidir.'],
+    ['ALTIN’ın en çok düştüğü 5 gün hangisi?',`SELECT tarih, kapanis, getiri FROM gunluk WHERE varlik = 'ALTIN' ORDER BY getiri, tarih LIMIT 5`,'Tek bir varlık süzülür, en kötü getirilerden başlayarak sıralanır.'],
+    ['Mart 2025’te her varlığın ortalama kapanışı?',`SELECT varlik, ROUND(AVG(kapanis),2) AS ort_kapanis FROM gunluk WHERE tarih LIKE '2025-03%' GROUP BY varlik`,'Tek bir ay üzerinden fiyat düzeyi özeti.'],
+    ['Her varlıkta kaç gün getiri negatif oldu?',`SELECT varlik, COUNT(*) AS dusen_gun FROM gunluk WHERE getiri < 0 GROUP BY varlik ORDER BY dusen_gun DESC, varlik`,'Düşen gün sayısı toplam gün sayısının yaklaşık yarısı mı? Yazı-tura benzetmesini düşün.'],
+    ['İşlem hacminin en yüksek olduğu 5 gün?',`SELECT tarih, varlik, hacim, getiri FROM gunluk ORDER BY hacim DESC, tarih, varlik LIMIT 5`,'Yüksek hacimli günlerde getiri de uç mu?'],
+    ['ENDEKS’te getirisi %2’yi aşan günlerin ortalama hacmi?',`SELECT COUNT(*) AS gun, ROUND(AVG(hacim)) AS ort_hacim FROM gunluk WHERE varlik = 'ENDEKS' AND getiri > 2`,'Güçlü yükseliş günlerinde işlem yoğunluğu.'],
+    ['Her varlığın en düşük ve en yüksek kapanış fiyatı?',`SELECT varlik, MIN(kapanis) AS en_dusuk, MAX(kapanis) AS en_yuksek FROM gunluk GROUP BY varlik`,'Varlıkların fiyat düzeyleri çok farklıdır; karşılaştırma için fiyat değil getiri kullanılır.']],
+  lojistik:[
+    ['Depolara göre gecikmeli sevkiyat sayısı?',`SELECT depo, COUNT(*) AS gecikmeli FROM lojistik WHERE gecikme = 'Evet' GROUP BY depo ORDER BY gecikmeli DESC, depo`,'Gecikme sayısını depoların toplam sevkiyatına bölmeden yorum yapma; Pivot sekmesinde oranı görebilirsin.'],
+    ['Hava durumuna göre ortalama teslim süresi?',`SELECT hava, COUNT(*) AS sevkiyat, ROUND(AVG(sure_saat),2) AS ort_sure FROM lojistik GROUP BY hava ORDER BY ort_sure DESC`,'Kötü hava teslimatı ne kadar uzatıyor? Mesafe etkisini de unutma.'],
+    ['Araç tiplerine göre ortalama maliyet ve mesafe?',`SELECT arac, COUNT(*) AS sevkiyat, ROUND(AVG(maliyet)) AS ort_maliyet, ROUND(AVG(mesafe_km)) AS ort_mesafe FROM lojistik GROUP BY arac ORDER BY ort_maliyet DESC`,'Maliyet farkı araçtan mı, taşıdığı mesafeden mi? İkisini yan yana koy.'],
+    ['Kilometre başına maliyeti en yüksek 5 sevkiyat hangisi?',`SELECT sevkiyat, depo, arac, mesafe_km, maliyet, ROUND(maliyet/mesafe_km,1) AS km_maliyeti FROM lojistik ORDER BY km_maliyeti DESC, sevkiyat LIMIT 5`,'Kısa mesafeli sevkiyatlarda sabit maliyet nedeniyle kilometre başı maliyet yükselir.'],
+    ['Karlı havadaki sevkiyatlar gecikme durumuna göre kaç tane?',`SELECT gecikme, COUNT(*) AS sevkiyat FROM lojistik WHERE hava = 'Karlı' GROUP BY gecikme`,'Karlı havada gecikme oranı genel orana göre nasıl?'],
+    ['500 km’den uzun sevkiyatlar araç tipine göre kaç tane, ortalama süre?',`SELECT arac, COUNT(*) AS sevkiyat, ROUND(AVG(sure_saat),1) AS ort_sure FROM lojistik WHERE mesafe_km > 500 GROUP BY arac ORDER BY sevkiyat DESC, arac`,'Uzun yolların hangi araçla gittiğini ve sürelerini gösterir.'],
+    ['Teslim süresi 10 saati aşan uç sevkiyatlar hangileri?',`SELECT sevkiyat, depo, hava, mesafe_km, sure_saat FROM lojistik WHERE sure_saat > 10 ORDER BY sure_saat DESC, sevkiyat LIMIT 10`,'Uç değerlerin ortak özelliği var mı: mesafe mi, hava mı?'],
+    ['Ağırlığı 1.000 kg’ı aşan sevkiyatlar depolara göre kaç tane?',`SELECT depo, COUNT(*) AS sevkiyat, ROUND(AVG(maliyet)) AS ort_maliyet FROM lojistik WHERE agirlik_kg > 1000 GROUP BY depo ORDER BY sevkiyat DESC, depo`,'Ağır yüklerin depolara dağılımı ve maliyeti.']]
+};
+const PVEX_PLUS=[
+  {ds:'ogr',r:'bolum',c:'cinsiyet',v:'',a:'count',s:'row',t:'Bölüm × cinsiyet: dağılım (satır %)'},
+  {ds:'ogr',r:'sinif',c:'burs',v:'harcama',a:'avg',t:'Sınıf × burs: ortalama harcama'},
+  {ds:'ogr',r:'bolum',c:'',v:'devamsizlik',a:'avg',o:'yuksek',t:'Bölüme göre ortalama devamsızlık (yüksekten düşüğe)'},
+  {ds:'ogr',r:'staj',c:'cinsiyet',v:'gano',a:'avg',t:'Staj × cinsiyet: ortalama GANO'},
+  {ds:'ogr',r:'sinif',c:'',v:'gano',a:'max',t:'Sınıfa göre en yüksek GANO'},
+  {ds:'magaza',r:'kategori',c:'odeme',v:'',a:'count',s:'col',t:'Kategori × ödeme yöntemi: sipariş payı (sütun %)'},
+  {ds:'magaza',r:'sehir',c:'kategori',v:'fiyat',a:'avg',t:'Şehir × kategori: ortalama fiyat'},
+  {ds:'magaza',r:'adet',c:'',v:'indirim',a:'avg',t:'Adete göre ortalama indirim'},
+  {ds:'magaza',r:'sehir',c:'',v:'kargo_gun',a:'avg',o:'yuksek',t:'Şehre göre ortalama kargo süresi (yüksekten düşüğe)'},
+  {ds:'ulke',r:'bolge',c:'',v:'enflasyon',a:'avg',o:'yuksek',t:'Bölgeye göre ortalama enflasyon'},
+  {ds:'ulke',r:'bolge',c:'',v:'nufus_mn',a:'sum',o:'yuksek',t:'Bölgeye göre toplam nüfus (milyon)'},
+  {ds:'ulke',r:'bolge',c:'',v:'gelir',a:'max',t:'Bölgeye göre en yüksek kişi başı gelir'},
+  {ds:'ulke',r:'bolge',c:'',v:'egitim',a:'avg',t:'Bölgeye göre ortalama eğitim yılı'},
+  {ds:'hane',r:'bolge',c:'il_grubu',v:'gelir',a:'avg',t:'Bölge × yerleşim türü: ortalama gelir'},
+  {ds:'hane',r:'ev_sahibi',c:'il_grubu',v:'',a:'count',s:'col',t:'Ev sahipliği × yerleşim türü: hane payı (sütun %)'},
+  {ds:'hane',r:'kisi',c:'',v:'gida',a:'avg',t:'Hane büyüklüğüne göre ortalama gıda harcaması'},
+  {ds:'hane',r:'internet',c:'il_grubu',v:'egitim',a:'avg',t:'İnternet × yerleşim türü: ortalama eğitim harcaması'},
+  {ds:'hisse',r:'hisse',c:'',v:'getiri',a:'avg',o:'yuksek',t:'Hisseye göre ortalama aylık getiri'},
+  {ds:'hisse',r:'sektor',c:'',v:'hacim',a:'avg',o:'yuksek',t:'Sektöre göre ortalama işlem hacmi'},
+  {ds:'hisse',r:'hisse',c:'',v:'getiri',a:'min',o:'dusuk',t:'Hisseye göre en kötü aylık getiri'},
+  {ds:'hisse',r:'sektor',c:'',v:'kapanis',a:'avg',t:'Sektöre göre ortalama kapanış fiyatı'},
+  {ds:'isgucu',r:'sektor',c:'cinsiyet',v:'ucret',a:'avg',t:'Sektör × cinsiyet: ortalama ücret'},
+  {ds:'isgucu',r:'sozlesme',c:'sendika',v:'ucret',a:'avg',t:'Sözleşme × sendika: ortalama ücret'},
+  {ds:'isgucu',r:'sehir_tipi',c:'',v:'',a:'count',s:'gen',t:'Şehir tipine göre çalışan payı (genel %)'},
+  {ds:'isgucu',r:'egitim',c:'sektor',v:'',a:'count',s:'row',t:'Eğitim × sektör: dağılım (satır %)'},
+  {ds:'konut',r:'ilce',c:'oda',v:'',a:'count',t:'İlçe × oda sayısı: satış adedi'},
+  {ds:'konut',r:'isitma',c:'',v:'fiyat',a:'avg',o:'yuksek',t:'Isıtma türüne göre ortalama fiyat'},
+  {ds:'konut',r:'ilce',c:'otopark',v:'fiyat',a:'avg',t:'İlçe × otopark: ortalama fiyat'},
+  {ds:'konut',r:'kat',c:'',v:'fiyat',a:'avg',t:'Kata göre ortalama fiyat'},
+  {ds:'ticaret',r:'urun',c:'',v:'ihracat',a:'avg',o:'yuksek',t:'Ürün grubuna göre ortalama aylık ihracat'},
+  {ds:'ticaret',r:'urun',c:'',v:'ihracat',a:'max',o:'yuksek',t:'Ürün grubuna göre en yüksek aylık ihracat'},
+  {ds:'ticaret',r:'urun',c:'',v:'ithalat',a:'min',o:'dusuk',t:'Ürün grubuna göre en düşük aylık ithalat'},
+  {ds:'eticaret',r:'kanal',c:'iade',v:'',a:'count',s:'row',t:'Kanal × iade: iade oranı (satır %)'},
+  {ds:'eticaret',r:'kategori',c:'kanal',v:'fiyat',a:'avg',t:'Kategori × kanal: ortalama fiyat'},
+  {ds:'eticaret',r:'kargo_gun',c:'iade',v:'',a:'count',s:'row',t:'Kargo süresi × iade: iade oranı (satır %)'},
+  {ds:'eticaret',r:'kategori',c:'',v:'puan',a:'avg',o:'yuksek',t:'Kategoriye göre ortalama müşteri puanı'},
+  {ds:'panel',r:'bolge',c:'',v:'gsyh',a:'avg',o:'yuksek',t:'Bölgeye göre ortalama gelir'},
+  {ds:'panel',r:'yil',c:'bolge',v:'issizlik',a:'avg',t:'Yıl × bölge: ortalama işsizlik'},
+  {ds:'panel',r:'yil',c:'',v:'gsyh',a:'avg',t:'Yıla göre ortalama gelir'},
+  {ds:'panel',r:'bolge',c:'',v:'egitim',a:'avg',o:'yuksek',t:'Bölgeye göre ortalama eğitim yılı'},
+  {ds:'memnun',r:'sube',c:'musteri',v:'puan',a:'avg',t:'Şube × müşteri tipi: ortalama puan'},
+  {ds:'memnun',r:'yas_grubu',c:'',v:'tavsiye',a:'avg',o:'yuksek',t:'Yaş grubuna göre ortalama tavsiye'},
+  {ds:'memnun',r:'puan',c:'sube',v:'',a:'count',s:'col',t:'Puan × şube: puan dağılımı (sütun %)'},
+  {ds:'memnun',r:'sube',c:'',v:'bekleme_dk',a:'avg',o:'yuksek',t:'Şubeye göre ortalama bekleme süresi'},
+  {ds:'kredi',r:'sektor',c:'onay',v:'',a:'count',s:'row',t:'Sektör × onay: onay oranı (satır %)'},
+  {ds:'kredi',r:'onay',c:'',v:'skor',a:'avg',t:'Onay durumuna göre ortalama kredi skoru'},
+  {ds:'kredi',r:'sektor',c:'',v:'gelir',a:'avg',o:'yuksek',t:'Sektöre göre ortalama gelir'},
+  {ds:'kredi',r:'onay',c:'',v:'kredi_tutar',a:'avg',t:'Onay durumuna göre ortalama istenen tutar'},
+  {ds:'enerji',r:'sehir',c:'',v:'tuketim',a:'avg',o:'yuksek',t:'Şehre göre ortalama tüketim'},
+  {ds:'enerji',r:'sehir',c:'',v:'sicaklik',a:'avg',o:'yuksek',t:'Şehre göre ortalama sıcaklık'},
+  {ds:'enerji',r:'sehir',c:'',v:'sanayi_payi',a:'avg',o:'yuksek',t:'Şehre göre ortalama sanayi payı'},
+  {ds:'saglik',r:'sigara',c:'diyabet',v:'',a:'count',s:'row',t:'Sigara × diyabet: diyabet oranı (satır %)'},
+  {ds:'saglik',r:'cinsiyet',c:'diyabet',v:'bki',a:'avg',t:'Cinsiyet × diyabet: ortalama BKİ'},
+  {ds:'saglik',r:'sigara',c:'',v:'sistolik',a:'avg',o:'yuksek',t:'Sigara durumuna göre ortalama tansiyon'},
+  {ds:'saglik',r:'diyabet',c:'',v:'yas',a:'avg',t:'Diyabet durumuna göre ortalama yaş'},
+  {ds:'okul',r:'bolge',c:'tur',v:'puan',a:'avg',t:'Bölge × okul türü: ortalama puan'},
+  {ds:'okul',r:'bolge',c:'tur',v:'',a:'count',s:'col',t:'Bölge × okul türü: okul dağılımı (sütun %)'},
+  {ds:'okul',r:'tur',c:'',v:'butce_bin_tl',a:'avg',t:'Okul türüne göre ortalama bütçe'},
+  {ds:'okul',r:'bolge',c:'',v:'ogrenci_ogretmen',a:'avg',o:'yuksek',t:'Bölgeye göre öğretmen başına öğrenci'},
+  {ds:'tarim',r:'urun',c:'',v:'verim',a:'avg',o:'yuksek',t:'Ürüne göre ortalama verim'},
+  {ds:'tarim',r:'bolge',c:'urun',v:'verim',a:'avg',t:'Bölge × ürün: ortalama verim'},
+  {ds:'tarim',r:'yil',c:'',v:'fiyat',a:'avg',t:'Yıla göre ortalama fiyat'},
+  {ds:'tarim',r:'bolge',c:'',v:'yagis',a:'avg',o:'yuksek',t:'Bölgeye göre ortalama yağış'},
+  {ds:'turizm',r:'kaynak',c:'',v:'ziyaretci_bin',a:'sum',o:'yuksek',t:'Kaynak ülkeye göre toplam ziyaretçi (bin)'},
+  {ds:'turizm',r:'kaynak',c:'',v:'gelir_mn_usd',a:'sum',o:'yuksek',t:'Kaynak ülkeye göre toplam gelir (milyon $)'},
+  {ds:'turizm',r:'kaynak',c:'',v:'kalis_gece',a:'avg',o:'yuksek',t:'Kaynak ülkeye göre ortalama kalış (gece)'},
+  {ds:'gunluk',r:'varlik',c:'',v:'getiri',a:'avg',t:'Varlığa göre ortalama günlük getiri'},
+  {ds:'gunluk',r:'varlik',c:'',v:'getiri',a:'min',t:'Varlığa göre en kötü günlük getiri'},
+  {ds:'gunluk',r:'varlik',c:'',v:'hacim',a:'avg',o:'yuksek',t:'Varlığa göre ortalama işlem hacmi'},
+  {ds:'lojistik',r:'hava',c:'gecikme',v:'',a:'count',s:'row',t:'Hava × gecikme: gecikme oranı (satır %)'},
+  {ds:'lojistik',r:'depo',c:'arac',v:'maliyet',a:'avg',t:'Depo × araç: ortalama maliyet'},
+  {ds:'lojistik',r:'arac',c:'',v:'sure_saat',a:'avg',o:'yuksek',t:'Araca göre ortalama teslim süresi'},
+  {ds:'lojistik',r:'depo',c:'gecikme',v:'',a:'count',s:'row',t:'Depo × gecikme: gecikme oranı (satır %)'}
+];
+
+
+Object.keys(SQLEX_PLUS).forEach(k=>{SQLEX[k]=(SQLEX[k]||[]).concat(SQLEX_PLUS[k])});
+PVEX.push(...PVEX_PLUS);
+const SQ={tab:'sql',lang:'tr',exT:'ogr',q:'',res:null,err:null,task:null,openI:null,dirI:null,ptask:null,pch:null,pv:{ds:'ogr',r:'',c:'',v:'',a:'avg',s:'val',o:'ad'}};
 const sqlFor=en=>{const p=prettySQL(en);return SQ.lang==='en'?p:toTR(p)};
 SQ.q=sqlFor(SQLEX.ogr[0][1]);
 const goHash=h=>{if(location.hash==='#/'+h)route();else location.hash='#/'+h};
@@ -7165,21 +7438,68 @@ mkPage('x-v-sql','SQL ve Pivot','Tarayıcıda SQL yaz (Türkçe komutlarla da ç
       dlg('Sorguyu kaydet',[field('Ad',nm)],()=>{const a=rd('vsqs',[]);a.unshift({id:uid(),name:clip(nm.value,50)||q.slice(0,40),q});wr('vsqs',a.slice(0,20));drawQ();toast('Sorgu kaydedildi')})};
     const drawQ=()=>{const sv=rd('vsqs',[]),hs=rd('vsqh',[]),row=(t,q,del)=>el('div',{class:'x2-row',style:'gap:6px;flex-wrap:nowrap'},el('button',{type:'button',class:'x2-ex',style:'flex:1;min-width:0',title:q,onclick:()=>{ta.value=q;SQ.q=q;goUp()}},t),del?el('button',{class:'btn',type:'button','aria-label':'Sorguyu sil',onclick:del},'✕'):null);
       fill(qbox,el('button',{class:'btn',type:'button',onclick:saveQ},'💾 Bu sorguyu kaydet'),sv.length?el('b',{class:'x2-mut',text:'Kayıtlı sorgularım'}):null,sv.map(x=>row(x.name,x.q,()=>{wr('vsqs',rd('vsqs',[]).filter(z=>z.id!==x.id));drawQ()})),hs.length?el('b',{class:'x2-mut',text:'Son çalıştırılanlar'}):null,hs.map(q=>row(q.replace(/\s+/g,' '),q)))};
-    const qCard=card(el('h3',{text:'Sorgu'}),el('div',{style:'height:8px'}),chipRow([['tr','🇹🇷 Türkçe komutlar'],['en','Standart SQL']],SQ.lang,v=>{SQ.lang=v;rerender('x-v-sql')}),el('div',{style:'height:10px'}),ta,el('div',{class:'x2-row',style:'margin-top:10px'},el('button',{class:'btn grad',type:'button',onclick:run},'▶ Çalıştır'),el('span',{class:'x2-mut',text:'Ctrl + Enter'})));
+    const taskBox=el('div',{class:'x2-stack',style:'gap:8px;margin-bottom:10px'});
+    const qCard=card(el('h3',{text:'Sorgu'}),el('div',{style:'height:8px'}),chipRow([['tr','🇹🇷 Türkçe komutlar'],['en','Standart SQL']],SQ.lang,v=>{SQ.lang=v;rerender('x-v-sql')}),el('div',{style:'height:10px'}),taskBox,ta,el('div',{class:'x2-row',style:'margin-top:10px'},el('button',{class:'btn grad',type:'button',onclick:run},'▶ Çalıştır'),el('span',{class:'x2-mut',text:'Ctrl + Enter'})));
     /* örnek koda basınca kod yukarıdaki kutuya gider ve sayfa kutuya kayar */
     const goUp=()=>{const r=qCard.getBoundingClientRect();window.scrollTo({top:Math.max(0,window.scrollY+r.top-84),behavior:'smooth'});ta.classList.remove('x2-flash');void ta.offsetWidth;ta.classList.add('x2-flash');ta.focus({preventScroll:true})};
-    const useCode=(en,go)=>{const c=sqlFor(en);ta.value=c;SQ.q=c;goUp();if(go)setTimeout(run,380);else toast('Kod yukarıdaki kutuya yazıldı · ▶ Çalıştır’a bas')};
-    const exCard=card(el('h3',{text:'Ne öğrenmek istersin?'}),el('p',{class:'x2-mut',style:'margin:4px 0 10px',text:'Bir tablo seç, merak ettiğin soruya dokun; açıklaması açılır. “↑ Sorgu kutusuna yaz” sorguyu yukarıdaki kutuya taşır, “▶ Çalıştır” hem yazar hem sonucu hemen gösterir.'}),
-      chipRow(list.filter(d=>SQLEX[d.id]).map(d=>[d.id,d.ad]),SQ.exT,v=>{SQ.exT=v;rerender('x-v-sql')}),
-      el('div',{class:'x2-stack',style:'gap:8px;margin-top:12px'},(SQLEX[SQ.exT]||[]).map(([soru,en,ac])=>el('details',{class:'x2-exc'},el('summary',{style:'cursor:pointer;font:700 16px/1.4 "Instrument Sans",sans-serif'},soru),
-        el('div',{class:'x2-stack',style:'gap:10px;margin-top:10px'},ac?el('div',{class:'x2-mut',style:'font-size:14.5px',text:ac}):null,
-          el('div',{class:'x2-row'},el('button',{class:'btn',type:'button',onclick:()=>useCode(en,false)},'↑ Sorgu kutusuna yaz'),el('button',{class:'btn grad',type:'button',onclick:()=>useCode(en,true)},'▶ Çalıştır')))))));
+    /* ---- Örnek sorular: “Ben yazayım” (deneme) ya da “Doğrudan yazılsın” ---- */
+    const dsOf=id=>list.find(d=>d.id===id)||{cols:[],id,tbl:id};
+    const showL=s=>SQ.lang==='en'?s:toTR(s);
+    const CMDS=[['SELECT','SELECT'],['DISTINCT','DISTINCT'],['WHERE','WHERE'],['GROUP BY','GROUP BY'],['HAVING','HAVING'],['ORDER BY','ORDER BY'],['LIMIT','LIMIT'],['IS NOT NULL','IS NOT NULL'],['IS NULL','IS NULL'],['IN (','IN'],['BETWEEN','BETWEEN'],['LIKE','LIKE'],['COUNT','COUNT'],['SUM','SUM'],['AVG','AVG'],['MIN(','MIN'],['MAX(','MAX'],['ROUND','ROUND'],['ABS','ABS'],['COALESCE','COALESCE']];
+    const cmdsOf=en=>CMDS.filter(x=>en.includes(x[0])).map(x=>x[1]).join(', ');
+    const colsOf=(en,d)=>d.cols.map(c=>c.name).filter(n=>new RegExp('\\b'+n+'\\b').test(en)).join(', ');
+    const diffRes=(a,b,ordered)=>{if(a.cols.length!==b.cols.length)return'Sütun sayısı farklı: seninki '+a.cols.length+', beklenen '+b.cols.length+'.';
+      if(a.total!==b.total)return'Satır sayısı farklı: seninki '+a.total+', beklenen '+b.total+'.';
+      const nm=r=>JSON.stringify(r.map(v=>typeof v==='number'?Math.round(v*1e6)/1e6:v));let x=a.rows.map(nm),y=b.rows.map(nm);
+      if(!ordered){x.sort();y.sort()}
+      for(let i=0;i<x.length;i++)if(x[i]!==y[i])return'Değerler farklı'+(ordered?' (satır '+(i+1)+')':'')+'. Seninki: '+x[i]+' · Beklenen: '+y[i]+'.';return''};
+    const drawTask=()=>{const t=SQ.task;if(!t){fill(taskBox);return}
+      const d=dsOf(t.exT),b=(txt,f,c)=>el('button',{class:'btn'+(c?' '+c:''),type:'button',onclick:f},txt);
+      fill(taskBox,el('div',{class:'x2-exc',style:'border-color:var(--red)'},
+        el('div',{class:'x2-stack',style:'gap:8px'},
+          el('b',{text:'✍️ Görev: sorguyu sen yaz'}),
+          el('div',{style:'font-weight:700',text:t.soru}),
+          el('div',{class:'x2-mut',style:'font-size:14px',text:'Tablo: '+(d.tbl||d.id)+' · Sütunlar: '+d.cols.map(c=>c.name).join(', ')}),
+          t.hint>=1?el('div',{class:'x2-mut',style:'font-size:14px',text:'💡 Kullanılacak komutlar: '+showL(cmdsOf(t.en))}):null,
+          t.hint>=2?el('div',{class:'x2-mut',style:'font-size:14px',text:'💡 Kullanılacak sütunlar: '+(colsOf(t.en,d)||'—')}):null,
+          t.msg?msgBox(t.msg,t.ok?'':'bad'):null,
+          (t.ok||t.shown)&&t.ac?el('div',{class:'x2-mut',style:'font-size:14px',text:'ℹ️ '+t.ac}):null,
+          t.shown?el('div',{class:'x2-ex',style:'white-space:pre-wrap',text:sqlFor(t.en)}):null,
+          el('div',{class:'x2-row'},b('✅ Kontrol et',checkTask,'grad'),b('💡 İpucu'+(t.hint<2?' ('+(t.hint+1)+'/2)':''),()=>{t.hint=Math.min(2,t.hint+1);drawTask()}),
+            t.shown?b('↑ Çözümü kutuya yaz',()=>{ta.value=sqlFor(t.en);SQ.q=ta.value;goUp()}):b('👁 Çözümü göster',()=>{t.shown=true;drawTask()}),
+            b('✕ Bırak',()=>{SQ.task=null;drawTask()})))))};
+    const checkTask=()=>{const t=SQ.task;if(!t)return;
+      if(!ta.value.trim()){t.msg='Önce sorguyu kutuya yaz.';t.ok=false;drawTask();return}
+      run();
+      if(SQ.err){t.msg='Sorgu çalışmadı: '+SQ.err;t.ok=false;drawTask();return}
+      const diff=diffRes(SQ.res,runSQL(t.en,list),/ORDER BY/.test(t.en));
+      if(!diff){t.ok=true;t.msg='✅ Doğru! Sonucun beklenenle aynı. Farklı bir yazımla da aynı sonucu bulabilirsin.';toast('Görev tamamlandı 🎉')}
+      else{t.ok=false;t.msg='❌ '+diff+' Mantığın doğruysa “Çözümü göster” ile karşılaştır.'}
+      drawTask()};
+    const startTask=(soru,en,ac)=>{SQ.task={exT:SQ.exT,soru,en,ac,hint:0,msg:'',ok:false,shown:false};ta.value='';SQ.q='';SQ.res=null;SQ.err=null;show();drawTask();drawEx();goUp();toast('Görev hazır · sorguyu yaz, sonra Kontrol et')};
+    const useCode=(en,go)=>{SQ.task=null;drawTask();const c=sqlFor(en);ta.value=c;SQ.q=c;goUp();if(go)setTimeout(run,380);else toast('Kod yukarıdaki kutuya yazıldı · ▶ Çalıştır’a bas')};
+    const exList=el('div',{class:'x2-stack',style:'gap:8px;margin-top:12px'});
+    const drawEx=()=>fill(exList,(SQLEX[SQ.exT]||[]).map(([soru,en,ac],i)=>{
+      const dt=el('details',{class:'x2-exc'},el('summary',{style:'cursor:pointer;font:700 16px/1.4 "Instrument Sans",sans-serif'},(i+1)+'. '+soru),
+        el('div',{class:'x2-stack',style:'gap:10px;margin-top:10px'},
+          el('div',{class:'x2-mut',style:'font-size:14.5px',text:'Nasıl çalışmak istersin?'}),
+          el('div',{class:'x2-row'},
+            el('button',{class:'btn grad',type:'button',onclick:()=>{SQ.dirI=null;startTask(soru,en,ac)}},'✍️ Ben yazayım'),
+            el('button',{class:'btn',type:'button',onclick:()=>{SQ.dirI={t:SQ.exT,i};useCode(en,false);drawEx()}},'⌨️ Doğrudan yazılsın')),
+          SQ.task&&SQ.task.soru===soru&&SQ.task.exT===SQ.exT?el('div',{class:'x2-mut',style:'font-size:14px',text:'✍️ Bu görev açık: yukarıdaki kutuya yaz.'}):null,
+          SQ.dirI&&SQ.dirI.t===SQ.exT&&SQ.dirI.i===i?el('div',{class:'x2-stack',style:'gap:10px'},ac?el('div',{class:'x2-mut',style:'font-size:14.5px',text:ac}):null,
+            el('div',{class:'x2-row'},el('button',{class:'btn grad',type:'button',onclick:()=>useCode(en,true)},'▶ Çalıştır'))):null));
+      if(SQ.openI&&SQ.openI.t===SQ.exT&&SQ.openI.i===i)dt.open=true;
+      dt.addEventListener('toggle',()=>{if(dt.open)SQ.openI={t:SQ.exT,i};else if(SQ.openI&&SQ.openI.t===SQ.exT&&SQ.openI.i===i)SQ.openI=null});
+      return dt}));
+    const exCard=card(el('h3',{text:'Ne öğrenmek istersin?'}),el('p',{class:'x2-mut',style:'margin:4px 0 10px',text:'Bir tablo seç, bir soruya dokun. “Ben yazayım” ile sorguyu kendin yazıp kontrol edersin (ipucu ve çözüm de var); “Doğrudan yazılsın” ile kod kutuya gelir. Bu tabloda '+(SQLEX[SQ.exT]||[]).length+' soru var.'}),
+      chipRow(list.filter(d=>SQLEX[d.id]).map(d=>[d.id,d.ad]),SQ.exT,v=>{SQ.exT=v;SQ.openI=null;SQ.dirI=null;rerender('x-v-sql')}),exList);
     fill(pane,el('div',{class:'x2-two'},
       el('div',{class:'x2-stack'},qCard,out,exCard,card(el('h3',{text:'Kayıtlı sorgular ve geçmiş'}),qbox)),
       card(el('h3',{text:'Tablolar ('+list.length+')'}),el('div',{class:'x2-stack',style:'gap:14px;margin-top:10px'},list.map(d=>el('div',{},el('b',{text:d.tbl||d.id,style:'cursor:pointer',title:'Sorguya ekle',onclick:()=>ins(d.tbl||d.id)}),el('span',{class:'x2-mut',text:' · '+d.rows.length+' satır'}),d.desc?el('div',{class:'x2-mut',style:'font-size:13.5px;margin-top:2px',text:d.desc}):null,el('div',{class:'x2-tags',style:'margin-top:6px'},d.cols.map(c=>el('button',{type:'button',class:'x2-pill',style:'border:0;cursor:pointer',title:'Sorguya ekle · '+c.type,onclick:()=>ins(c.name)},c.name+(c.type==='num'?' #':c.type==='date'?' 📅':'')))))),
         el('details',{style:'margin-top:4px'},el('summary',{style:'cursor:pointer;font-weight:700',text:'🇹🇷 Türkçe komut sözlüğü'}),el('div',{style:'margin-top:8px'},tbl(['Türkçe','Standart SQL','Ne yapar?'],KWCHEAT,40))),
         note('Komutlar Türkçe yazılır; istersen standart İngilizce komutlar da çalışır. Desteklenenler: SEÇ, BENZERSİZ, NEREDE (VE, VEYA, DEĞİL, =, <>, <, >, BENZER, İÇİNDE, ARASINDA, BOŞTUR), GRUPLA, GRUPTA, SIRALA, SINIRLA ve özet işlevler. Birleştirme (JOIN) ve alt sorgu yok. Tablo veya sütun adına tıklayınca sorguya eklenir.')))));
-    drawQ();if(SQ.res||SQ.err)show();
+    drawQ();drawTask();drawEx();if(SQ.res||SQ.err)show();
   }else{
     const P=SQ.pv;let ds=list.find(d=>d.id===P.ds)||list[0];P.ds=ds.id;
     const all=ds.cols.map(c=>c.name),N=numCols(ds),texts=ds.cols.filter(c=>c.type!=='num').map(c=>c.name);
@@ -7204,9 +7524,25 @@ mkPage('x-v-sql','SQL ve Pivot','Tarayıcıda SQL yaz (Türkçe komutlarla da ç
         el('tbody',{},data.map(d=>el('tr',{},el('th',{text:d.r}),d.cells.map(v=>el('td',{style:heat(v),text:F(v)})),el('td',{style:'font-weight:700',text:F(totS(d))}))),
           el('tr',{},el('th',{text:'Genel'}),colTot.map((v,i)=>el('td',{style:'font-weight:700',text:F(colS(v,i))})),el('td',{style:'font-weight:700',text:F(mode==='val'?grand:100)}))))),
         el('div',{class:'x2-row'},el('button',{class:'btn',type:'button',onclick:()=>download('pivot.csv','\ufeff'+mat.map(r=>r.map(csvEsc).join(',')).join('\r\n'),'text/csv')},'⬇ CSV indir')))}
+    const ptaskBox=(ds,P)=>{const t=SQ.ptask;if(!t)return null;if(t.p.ds!==ds.id){SQ.ptask=null;return null}
+      const e=t.p,AN=AGGN,b=(txt,f,c)=>el('button',{class:'btn'+(c?' '+c:''),type:'button',onclick:f},txt);
+      const apply=()=>Object.assign(P,{r:e.r,c:e.c||'',v:e.v||'',a:e.a,s:e.s||'val',o:e.o||'ad'});
+      const check=()=>{const bad=[];if(P.r!==e.r)bad.push('Satır');if((P.c||'')!==(e.c||''))bad.push('Sütun');if(P.a!==e.a)bad.push('İşlev');if(e.a!=='count'&&P.v!==e.v)bad.push('Değer');if((e.a==='count'||e.a==='sum')&&P.a===e.a&&P.s!==(e.s||'val'))bad.push('Değer gösterimi');
+        t.ok=!bad.length;t.msg=t.ok?'✅ Doğru kurdun!':'❌ Şunları gözden geçir: '+bad.join(', ')+'.';if(t.ok)toast('Pivot görevi tamamlandı 🎉');rerender('x-v-sql')};
+      return el('div',{class:'x2-exc',style:'border-color:var(--red);margin-top:14px'},el('div',{class:'x2-stack',style:'gap:8px'},
+        el('b',{text:'✍️ Görev: pivotu sen kur'}),el('div',{style:'font-weight:700',text:e.t}),
+        t.hint>=1?el('div',{class:'x2-mut',style:'font-size:14px',text:'💡 Satır: '+e.r+(e.c?' · Sütun: '+e.c:' · Sütun yok')}):null,
+        t.hint>=2?el('div',{class:'x2-mut',style:'font-size:14px',text:'💡 İşlev: '+AN[e.a]+(e.a!=='count'?' · Değer: '+e.v:'')+(e.s&&e.s!=='val'?' · Gösterim: '+({gen:'Genel toplamın %’si',row:'Satır toplamının %’si',col:'Sütun toplamının %’si'}[e.s]):'')}):null,
+        t.msg?msgBox(t.msg,t.ok?'':'bad'):null,
+        el('div',{class:'x2-row'},b('✅ Kontrol et',check,'grad'),b('💡 İpucu'+(t.hint<2?' ('+(t.hint+1)+'/2)':''),()=>{t.hint=Math.min(2,t.hint+1);rerender('x-v-sql')}),b('👁 Çözümü göster',()=>{apply();t.ok=true;t.msg='Çözüm uygulandı: ayarları karşılaştır.';rerender('x-v-sql')}),b('✕ Bırak',()=>{SQ.ptask=null;rerender('x-v-sql')}))))};
     const pre=PVEX.filter(p=>p.ds===ds.id);
     fill(pane,el('div',{class:'x2-two'},card(el('h3',{text:'Pivot ayarları'}),el('div',{style:'height:10px'}),S('ds',list.map(d=>[d.id,d.ad]),'Veri seti'),S('r',all.map(c=>[c,c]),'Satır'),S('c',all.map(c=>[c,c]),'Sütun (isteğe bağlı)','— yok —'),S('a',Object.entries(AGGN),'İşlev'),needV?S('v',N.map(c=>[c,c]),'Değer'):null,pctOK?S('s',[['val','Değer'],['gen','Genel toplamın %’si'],['row','Satır toplamının %’si'],['col','Sütun toplamının %’si']],'Değer gösterimi'):null,S('o',[['ad','Ada göre'],['yuksek','Toplam: yüksekten düşüğe'],['dusuk','Toplam: düşükten yükseğe']],'Satır sırası'),
-      pre.length?el('div',{class:'x2-stack',style:'gap:8px;margin-top:14px'},el('b',{class:'x2-mut',text:'Hazır pivot önerileri'}),pre.map(p=>el('button',{type:'button',class:'x2-ex',style:'font:500 14.5px/1.4 "Instrument Sans",sans-serif',onclick:()=>{Object.assign(P,{r:p.r,c:p.c||'',v:p.v||'',a:p.a,s:p.s||'val',o:p.o||'ad'});rerender('x-v-sql')}},p.t))):null,
+      ptaskBox(ds,P),
+      pre.length?el('div',{class:'x2-stack',style:'gap:8px;margin-top:14px'},el('b',{class:'x2-mut',text:'Hazır pivot önerileri ('+pre.length+') · birine dokun'}),pre.map(p=>el('div',{class:'x2-stack',style:'gap:6px'},
+        el('button',{type:'button',class:'x2-ex',style:'font:500 14.5px/1.4 "Instrument Sans",sans-serif',onclick:()=>{SQ.pch=SQ.pch===p.t?null:p.t;rerender('x-v-sql')}},p.t),
+        SQ.pch===p.t?el('div',{class:'x2-row'},
+          el('button',{class:'btn grad',type:'button',onclick:()=>{SQ.pch=null;SQ.ptask={p,hint:0,msg:'',ok:false,shown:false};Object.assign(P,{r:'',c:'',v:'',a:'count',s:'val',o:'ad'});rerender('x-v-sql')}},'✍️ Ben kurayım'),
+          el('button',{class:'btn',type:'button',onclick:()=>{SQ.pch=null;SQ.ptask=null;Object.assign(P,{r:p.r,c:p.c||'',v:p.v||'',a:p.a,s:p.s||'val',o:p.o||'ad'});rerender('x-v-sql')}},'⚙️ Doğrudan kurulsun')):null))):null,
       note('Excel’deki pivot tabloyla aynı mantık: satırları ve sütunları gruplar, hücrelerde seçtiğin işlevi hesaplar. Koyu hücre yüksek değeri gösterir.')),card(el('h3',{text:'Sonuç'}),el('div',{style:'height:8px'}),res)));
   }
 });
@@ -8690,8 +9026,8 @@ function sharePlus(){const sel=$('#xst');if(!sel||$('#xsdw'))return;const w=el('
  const fire=i=>$('#'+i).dispatchEvent(new Event('input'));
  const fill=()=>{const L=thinkers();if(ds.children.length!==L.length){ds.textContent='';L.forEach((x,i)=>{const o=el('option','',x.ad);o.value=i;ds.append(o)})}};
  const apply=()=>{const x=thinkers()[ds.value];if(!x)return;$('#xsh1').value=x.ad;$('#xsh2').value=([x.yil,x.ekol].filter(Boolean).join(' · ')+(x.ozet?'\n'+x.ozet:'')).slice(0,400);fire('xsh1');fire('xsh2')};
- const show=()=>{w.hidden=sel.value!=='dusunur';if(!w.hidden){fill();const i=thinkers().findIndex(x=>x.ad===$('#xsh1').value);if(i>=0)ds.value=i}};
- sel.addEventListener('change',()=>{show();if(sel.value==='dusunur')apply()});ds.onchange=apply;show()}
+ const isD=()=>/d[üu][şs][üu]n[üu]r/.test(sel.value.toLocaleLowerCase('tr'));const show=()=>{w.hidden=!isD();if(!w.hidden){fill();const i=thinkers().findIndex(x=>x.ad===$('#xsh1').value);if(i>=0)ds.value=i}};
+ sel.addEventListener('input',show);ds.onchange=apply;show()}
 function kiCard(){const D=$('#ki-dv');if(!D||D.hidden||!member()||D.querySelector(':scope>.pl-kc'))return;const t=(D.querySelector('h1,h2,h3')||{}).textContent;const x=thinkers().find(q=>q.ad===t);if(!x)return;
  const w=el('div','pl-sv pl-kc'),b=el('a','btn','🖼️ Paylaşım kartı yap');b.href='#/paylas';b.onclick=()=>{try{localStorage.setItem('ekx_pre',JSON.stringify({type:'dusunur',title:x.ad,body:([x.yil,x.ekol].filter(Boolean).join(' · ')+(x.ozet?'\n'+x.ozet:'')).slice(0,400)}))}catch(e){}};w.append(b);D.append(w)}
 addEventListener('hashchange',()=>{if(location.hash==='#/paylas')setTimeout(sharePlus,50)});
