@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Konya | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#c9871a;--a2:#2f9e6b;--a3:#0b7285"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Konya</span><h1>Konya: Anadolu’nun Tahıl Ambarı ve Sanayi Şehri</h1><p>Yüzölçümüyle Türkiye’nin en büyük, nüfusuyla 6. büyük ili; tarımsal üretim değerinde 1. sırada, otomotiv yan sanayi ve makinede ihracat odağı, güneş enerjisi kurulu gücünde ülke lideri. Bu dosya Konya’nın tarım, dış ticaret, sanayi, gelir, işgücü ve ilçe tablosunu, su-iklim riskiyle birlikte özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>≈2,34 milyon</b><span>Nüfus (2025), 6. büyük il</span></div>
+    <div class="k"><b>≈0,95 trilyon TL</b><span>GSYH (2024), 8. sıra</span></div>
+    <div class="k"><b>388 bin TL</b><span>Kişi başı GSYH (2024), Türkiye ort. 507,6 bin TL</span></div>
+    <div class="k"><b>3,52 mlr $</b><span>İhracat, TİM (2025), ülke payı %1,3</span></div>
+    <div class="k"><b>1,74 mlr $</b><span>Dış ticaret fazlası (2025, KTO)</span></div>
+    <div class="k"><b>%5,6 · 1.</b><span>Türkiye tarım GSYH’sindeki pay ve sıra (2024)</span></div>
+  </div>
+  <div class="secnav"><a href="#tarim">Tarım</a><a href="#dis">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#lojistik">Lojistik-Enerji</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="tarim">
+    <h2>Tarım: Tahıl, Pancar ve Hayvancılık</h2>
+    <p class="sub">Kapalı havza karakterindeki Konya Ovası’nda kuru tarım ve sulu tarım yan yana; il, tarımsal üretim değerinde Türkiye’de açık ara birinci.</p>
+    <div class="g2">
+      <div class="card"><h3>Başlıca ürünler, 2024 üretimi (bin ton)</h3><div class="bars" id="urun"></div></div>
+      <div class="card"><h3>Türkiye üretimindeki pay, 2024 (%)</h3><div class="bars" id="pay"></div>
+        <p class="note">Kesme lalede pay adet üzerinden; tüm ürünlerde Konya ülke birincisi.</p></div>
+    </div>
+    <div class="card"><div class="tabs" id="tt1"></div><h3 id="t1title"></h3><div class="col" id="t1"></div><p class="note" id="t1note"></p></div>
+    <div class="card"><ul style="margin:0">
+      <li>Tarım alanı 1,88 milyon hektar; Türkiye tarım alanının %7,84’ü. İşlenen alanın yalnızca %32’si sulanıyor (6,1 milyon dekar); ekonomik olarak sulanabilir alan 9,5 milyon dekar.</li>
+      <li>Tarım, ormancılık ve balıkçılıktan gelen gayrisafi üretim değeri 100,9 milyar TL (2023): Türkiye toplamının %6,2’si; Antalya, Şanlıurfa ve Mersin’in önünde.</li>
+      <li>Hayvancılık: 944.838 büyükbaş (ülke birincisi) ve 3,2 milyon küçükbaş (ülke ikincisi). Gıda işleme altyapısı geniş: 133 süt işleme, 76 meyve-sebze işleme tesisi ve 66 soğuk hava deposu.</li>
+      <li>Sertifikalı tohumda Konya ülke üretiminin yaklaşık %21-27’sini karşılıyor (2024’te %21,4; KTO’ya göre 2025’te %27,5, 371 bin ton). Organik tarım alanı 2025’te %230 arttı.</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>Dış Ticaret</h2>
+    <p class="sub">TİM ihracatçının kayıtlı olduğu ili, KTO raporu ise TÜİK ihracat ve ithalat verilerini esas alıyor; küçük farklar ölçü farkından geliyor.</p>
+    <div class="card"><div class="tabs" id="tt2"></div><h3 id="t2title"></h3><div class="bars" id="t2"></div><div class="col" id="t2c" style="display:none"></div><p class="note" id="t2note"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>2025’te 209 ülkeye 3,36 milyar $ ihracat ve 1,62 milyar $ ithalat (KTO): 1,74 milyar $ dış ticaret fazlası, ihracatın ithalatı karşılama oranı %207,6. İmalat sanayisinin ihracattaki payı %96,8.</li>
+        <li>TİM ihracatı 2011-2025’te üç katına çıkarak 3,52 milyar $’a ulaştı; Türkiye ihracatı aynı sürede 2 katına çıktığı için Konya’nın payı %0,87’den %1,3’e yükseldi. Dış ticaret hacmi 2018’de 2,6 milyar $ iken 2025’te yaklaşık 5 milyar $ oldu.</li>
+        <li>2026 Ocak-Haziran ihracatı 1,691 milyar $ (+%3,4); Haziran’da +%25,5.</li></ul></div>
+      <div class="card"><h3>Pazarlar ve çeşitlilik</h3><ul>
+        <li>2025 Ocak-Ekim ilk 10 pazar: ABD, Almanya, Irak, Rusya, Polonya, İtalya, Birleşik Krallık, Cezayir, Suudi Arabistan, Romanya.</li>
+        <li>Rusya’ya ihracat 2025’in ilk aylarında yıllık bazda belirgin düştü (Şubat’ta %41,5, Mart’ta %48,9); aynı dönemde Çin ve Mısır’a ihracat hızla arttı (aylık, düşük tabanlı).</li>
+        <li>Otomotiv ve makine tek başına ihracatın yaklaşık %49’u; yani ürün çeşitliliği geniş olsa da ağırlık iki sektörde (yorum).</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi</h2>
+    <p class="sub">Otomotiv yan sanayi, makine, tarım makineleri, plastik, mobilya, metal, döküm, gıda, inşaat malzemesi ve ambalaj öne çıkan alanlar.</p>
+    <div class="g2">
+      <div class="card"><h3>İSO 1000’de Konya firma sayısı</h3><div class="col" id="iso"></div>
+        <p class="note">İlk 500’de 8, İkinci 500’de 17 firma. İlk 500’de en üstte Konya Şeker; listede AYD Otomotiv, Eti Alüminyum, Panagro, Vaden Otomotiv, Enka Süt ve RTM Tarım da var. İkinci 500’de en yüksek sıra 52. ile Konya Çimento.</p></div>
+      <div class="card"><h3>Sanayi altyapısı</h3><ul>
+        <li>12 organize sanayi bölgesi ve 150 sanayi sitesi; bu alanlardaki 28.529 faal işyerinde yaklaşık 228 bin kişi çalışıyor (2025).</li>
+        <li>Tasarım başvurusunda (1.658) ve tescilinde (1.773) Türkiye 7. sırada.</li>
+        <li>Fuarcılık: Konya Tarım Fuarı 21. kez, MAKTEK Konya düzenleniyor; makine sektörü için görünürlük sağlıyor.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>GSYH’nin sektörel bileşimi, 2023 (%)</h3><div class="bars" id="sek"></div><p class="note">Konya’da tarımın payı Türkiye ortalamasının yaklaşık üç katı; hizmetler belirgin biçimde düşük.</p></div>
+      <div class="card"><h3>Kişi başına GSYH, 2024 (bin TL)</h3><div class="bars" id="kb"></div><p class="note">Konya Türkiye ortalamasının yaklaşık %76’sında (KTO aktarımı).</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>2023’te GSYH 560 milyar TL, ülke payı %2,1 ve il sıralaması 7. (KTO); 2024’te yaklaşık 0,95 trilyon TL ile 8. sırada (TÜİK 2024 il tablosu özetleri).</li>
+      <li>Konya 2012’den 2023’e GSYH’sini yaklaşık 17 kat artırdı (33 → 560 milyar TL, cari fiyat; enflasyon etkisi içerir).</li>
+      <li>Kişi başı gelir ülke ortalamasının altında: tarım ve imalat ağırlıklı, katma değeri yüksek hizmetlerin payı düşük bir yapı bunun nedenlerinden biri (yorum).</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><ul>
+        <li>2025: 2.343.409 kişi, Türkiye’nin 6. büyük ili; 2024’te 2.330.024. Nüfus yoğunluğu km² başına yaklaşık 59.</li>
+        <li>Net göç hızı binde -1’den -0,4’e yükseldi: il hâlâ hafif göç veriyor.</li>
+        <li>Nüfusun %52,9’u 35 yaşın altında. Üç merkez ilçe (Selçuklu, Karatay, Meram) ilin yaklaşık %62’sini barındırıyor.</li></ul></div>
+      <div class="card"><h3>İstihdam ve eğitim</h3><ul>
+        <li>İşsizlik oranı 2023’te %6,7 iken son açıklamada %7,7; istihdam oranı %48,6, işgücüne katılım %52,6 (KTO Başkanı aktarımı).</li>
+        <li>2.013 okulda 424.518 öğrenci; mesleki eğitimde 70.741 öğrenci. Lisans öğrenci sayısında Türkiye’nin 4. ili.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="lojistik">
+    <h2>Lojistik, Enerji ve Su</h2>
+    <div class="card"><ul style="margin:0">
+      <li><b>Güneş:</b> lisanssız kurulu güç 2025’te 1.544 MW’ı aştı; bunun %99,06’sı güneş. Konya, güneş kaynaklı lisanssız kurulu güçte Türkiye birincisi.</li>
+      <li><b>Ulaşım:</b> 4.417 km devlet-il-bölünmüş yol ağıyla Türkiye 1.’si; demiryolu ağı 770 km, 2025’te 3,37 milyon yolcu demiryolunu kullandı. KTO, demiryolu yük taşımacılığının artırılmasını ve <a href="il-mersin.html">Mersin Limanı</a> bağlantısının güçlendirilmesini öncelik olarak sayıyor.</li>
+      <li><b>Su ve iklim:</b> yağış azalması ve yeraltı suyu düşüşü nedeniyle bitkisel üretim 2025’te %15,8 geriledi. 19 ilçede su kısıtı uygulanıyor; bu ilçelerde yeni büyükbaş işletmesi açılmıyor ve dane mısırda damla sulama şartı aranıyor.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Konya’da 31 ilçe var; Selçuklu, Karatay ve Meram büyükşehir merkezidir. Nüfus 2024 ADNKS, üretim değerleri 2024 TÜİK bitkisel üretim (İl Tarım ve Orman Müdürlüğü derlemesi). İlçe düzeyinde resmî GSYH yok.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan</th></tr>
+      <tr><td>Selçuklu (700 bin), Karatay (385 bin), Meram (348 bin)</td><td>Büyükşehir merkezi; toplam 1,43 milyon kişi. Ticaret, hizmet, eğitim ve sanayinin yoğunlaştığı çekirdek</td></tr>
+      <tr><td>Ereğli (156 bin)</td><td>İlçe sıralamasında 4.; domates (725 bin ton), silajlık mısır (530 bin ton), şeker pancarı; ilin en çok büyükbaşına (186 bin) ve 32 süt işleme tesisine sahip</td></tr>
+      <tr><td>Akşehir (94 bin)</td><td>Vişne ve kiraz, şeker pancarı (167 bin ton), süt ve meyve-sebze işleme</td></tr>
+      <tr><td>Beyşehir (80 bin)</td><td>Buğday ve şeker pancarı (143 bin ton), büyükbaş hayvancılık, göl çevresi</td></tr>
+      <tr><td>Çumra (69 bin)</td><td>İlin pancar merkezi (1,41 milyon ton), dane mısır (349 bin ton) ve havuç (315 bin ton)</td></tr>
+      <tr><td>Seydişehir (66 bin)</td><td>Alüminyum sanayisi (Eti Alüminyum, İSO 500) ve tarım</td></tr>
+      <tr><td>Cihanbeyli (50 bin)</td><td>Türkiye’nin tarım alanı en geniş ilçesi; pancar (761 bin ton), buğday, arpa ve mısır</td></tr>
+      <tr><td>Karapınar (51 bin)</td><td>İlin en çok küçükbaşına (389 bin) sahip ilçesi; Konya Ovası’nın güneyinde pancar, ayçiçeği, mısır ve siyah havuç</td></tr>
+      <tr><td>Altınekin, Kulu, Ilgın, Kadınhanı, Sarayönü, Yunak</td><td>Tahıl, pancar ve hayvancılık ağırlıklı ilçeler; Altınekin’de pancar 744 bin ton, mısır 273 bin ton</td></tr>
+      <tr><td>Ahırlı, Taşkent, Yalıhüyük ve diğer küçük ilçeler</td><td>Nüfusu birkaç binle sınırlı (ör. Taşkent 5.931, Ahırlı 4.666); tarım ve hayvancılık</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>11.-13. yüzyıl – Başkent.</b> Konya, Anadolu Selçuklu Devleti’nin başkenti oldu; şehrin kültür ve inanç turizmi mirası bu döneme dayanıyor.</p>
+      <p><b>1896 – Demiryolu.</b> Anadolu-Bağdat demiryolu hattı Konya’ya ulaştı; ova ürünleri ulaşım ağına bağlandı.</p>
+      <p><b>1987 – Büyükşehir.</b> Konya büyükşehir statüsü kazandı; Karatay, Meram ve Selçuklu merkez ilçeleri oluştu.</p>
+      <p><b>2011-2025 – İhracat.</b> TİM ihracatı üç katına çıktı, ülke payı %0,87’den %1,3’e yükseldi.</p>
+      <p><b>2015-2024 – Ürün deseni.</b> Dane mısır ekim alanı %189, çerezlik ayçiçeği alanı yaklaşık 9 kat arttı; buğday üretimi %28 azaldı.</p>
+      <p><b>2025 – Güneş ve kuraklık.</b> Lisanssız güneş kurulu gücü 1.544 MW’ı aştı; aynı yıl bitkisel üretim %15,8 geriledi. İSO listelerindeki Konya firma sayısı 22’den 25’e çıktı.</p>
+      <p style="margin:0"><b>2026 – İlk yarı.</b> Ocak-Haziran ihracatı 1,691 milyar $ ile yeni bir rekor.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Tarımsal üretim değerinde ve 14 üründe ülke birinciliği</li><li>Çeşitli imalat tabanı: otomotiv yan sanayi, makine, gıda; ihracatın %96,8’i imalat</li><li>Dış ticaret fazlası (1,74 milyar $) ve 209 ülkeye satış</li><li>Güneş enerjisinde ülke liderliği, 25 firmayla İSO 1000 temsili</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Su kıtlığı: bitkisel üretim 2025’te %15,8 geriledi</li><li>Su isteyen ürünlere kayış (dane mısır +%260) ve buğdayda düşüş</li><li>İhracatın yarısı iki sektörde, Rusya pazarında dalgalanma</li><li>Kişi başı gelir Türkiye ortalamasının altında, net göç negatif</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Tarıma dayalı sanayi: süt, meyve-sebze işleme ve soğuk zincir</li><li>Modern sulama ve kuraklığa dayanıklı ürünle verimlilik</li><li>Tasarım ve ar-ge ile yüksek katma değerli makine ve otomotiv</li><li>Mersin Limanı bağlantısı ve demiryolu yük taşımacılığı</li></ul></div>
+      <div class="card"><h3>Not</h3><p style="margin:0">Konya ihracatı TİM’e göre 3,52, KTO raporuna göre 3,36 milyar $ olarak anılıyor; ölçü farkı gözetilmeli. KTO’nun aktardığı kişi başı GSYH (388 bin TL), toplam GSYH’nin nüfusa bölünmesinden çıkan değerden (yaklaşık 408 bin TL) düşük; TÜİK tablosundan teyit edilmesi iyi olur.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Türkiye’nin tahıl ve pancar ambarı olan ova, yeraltı suyu baskısı altında: su yoğun ürünlerden (dane mısır) kuraklığa dayanıklı desene geçiş çiftçi gelirini nasıl etkiler?</li>
+      <li>İhracatın yarısı otomotiv ve makineye bağlı: Konya’nın yüksek katma değerli yeni ihracat kolları ne olabilir?</li>
+      <li>Tarım ağırlıklı yapı ve düşük kişi başı gelir: tarıma dayalı sanayi ve güneş enerjisi bu farkı kapatmaya yeter mi?</li></ul>
+      <a class="btn" id="lnkFikir" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK: ADNKS 2024 ve 2025 (NVİ Konya ilçe tabloları dahil), il bazında GSYH 2024 (basın aktarımı)</li>
+      <li>Konya Ticaret Odası (KTO): 2025 Yılı Konya Ekonomi Raporu (ekonomim.com ve memleket.com.tr aktarımı), Ocak-Şubat 2025 dergisi, Eylül 2026 Meclis toplantısı (Dünya gazetesi), ekonomik veriler değerlendirmesi (AA)</li>
+      <li>TİM, KTO ve Konya Sanayi Odası ihracat bültenleri ve aylık Konya ekonomik raporları (2025-2026)</li>
+      <li>Konya İl Tarım ve Orman Müdürlüğü: İlçe Bazlı Tarım İstatistikleri 2025 (TÜİK 2024 bitkisel ve hayvansal üretim)</li>
+      <li>Konya Yatırım Ortamı (konyadayatirim.gov.tr): sektörel GSYH payları 2023; Tarım Reformu GM Tarımsal Yatırım Rehberi</li>
+      <li>İSO 500 ve İkinci 500, 2025 (KSO/KTO aktarımı)</li>
+    </ul>
+    <p class="note">Birçok rakam oda, kurum ve basın aktarımına dayanıyor; TÜİK ve TİM’in orijinal tablolarına doğrudan erişilemedi. 2011 ihracat değeri (≈1,17 milyar $) %0,87 pay ve Türkiye ihracatından hesaplandı. İSO 500 sıralaması için kaynaklar farklı değerler verdiğinden sıra numarası yazılmadı. 2015-2024 üretim karşılaştırması iklim ve yağışa duyarlıdır; tek yıl farkı eğilimi tam yansıtmayabilir. ≈ işareti yuvarlama veya hesaplama içeren değerlerde kullanıldı. Tutarlar cari fiyatlarla, ihracat rakamları yıllıktır.</p>
+  </section>
+</div>
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+bars($('urun'),[['Şeker pancarı',6972],['Silajlık mısır',2449],['Dane mısır',2012],['Buğday',1825],['Yonca (yeşil ot)',1400],['Arpa',892],['Patates',754],['Havuç',639]],[0]);
+bars($('pay'),[['Kesme lale',93.1],['Havuç',71.6],['Şeker pancarı',30.3],['Dane mısır',24.8],['Çerezlik ayçiçeği',22.4],['Arpa',11.0],['Buğday',8.8]],[1]);
+var UR=[['Buğday',[2554,1825],'Buğday üretimi, bin ton','Ekilen alan %11 azaldı, verim %22 arttı; yine de üretim 2015’e göre %28 düşük. Konya yine ülke birincisi (%8,8).'],
+ ['Dane mısır',[558,2012],'Dane mısır üretimi, bin ton','Ekilen alan 549 binden 1,59 milyon dekara (%189) çıktı, üretim %260 arttı; Konya ülke birincisi (%24,8). Su kısıtı bulunan ilçelerde damla sulama şartı aranıyor.'],
+ ['Şeker pancarı',[4571,6972],'Şeker pancarı üretimi, bin ton','Alan %18, üretim %52 arttı; Konya Türkiye pancarının yaklaşık %30’unu üretiyor. Yıllık dalgalanma yüksek; kurak yıllarda rekolte kaybı yaşandı.']];
+tabs('tt1',UR.map(function(t){return t[0]}),function(i){var t=UR[i];$('t1title').textContent=t[2]+' (2015 ve 2024)';
+ cols($('t1'),[['2015',t[1][0],'',t[1][0].toLocaleString('tr-TR')],['2024',t[1][1],'lo',t[1][1].toLocaleString('tr-TR')]]);$('t1note').textContent=t[3]});
+var DT=[['Yıllık ihracat (TİM)','Konya ihracatı, TİM (milyar $)','c',[['2011',1.17,'','≈1,17'],['2025',3.52,'lo','3,52']],'2011 değeri %0,87’lik ülke payı ve Türkiye ihracatından hesaplandı (yaklaşık). Aradaki yıllar gösterilmedi.'],
+ ['Sektör (2026 Oca-Haz)','İhracat, sektörlere göre, 2026 Ocak-Haziran (milyon $)','b',[['Otomotiv endüstrisi',450.4],['Makine ve aksamları',385],['Diğer sektörler (toplam)',855.7]],'Toplam 1.691 milyon $. Otomotiv %26,6; makine yaklaşık %22,8. Diğer sektörler arasında hububat-bakliyat, iklimlendirme, demir-demir dışı metaller ve kimya var.',[0,1]],
+ ['Bölge (2025 Oca-Eki)','İhracatın bölgelere dağılımı, 2025 Ocak-Ekim (%)','b',[['Avrupa',37.3],['Orta Doğu-Asya',35.7],['Amerika',14.8],['Afrika',11.6],['Diğer',0.7]],'Avrupa ve Orta Doğu-Asya birlikte ihracatın yaklaşık %73’ü (hesaplama).',[0]]];
+tabs('tt2',DT.map(function(t){return t[0]}),function(i){var t=DT[i];$('t2title').textContent=t[1];
+ $('t2').style.display=t[2]=='b'?'':'none';$('t2c').style.display=t[2]=='c'?'':'none';
+ if(t[2]=='b')bars($('t2'),t[3],t[5]);else cols($('t2c'),t[3]);$('t2note').textContent=t[4]});
+cols($('iso'),[['2024',22],['2025',25,'lo']]);
+bars($('sek'),[['Tarım – Konya',20.3],['Tarım – Türkiye',6.9],['Sanayi – Konya',31.9],['Sanayi – Türkiye',32],['Hizmet – Konya',47.7],['Hizmet – Türkiye',61]],[0,2,4]);
+bars($('kb'),[['Konya',388],['Türkiye',507.6]],[0]);
+</script>
+</body>
+</html>
