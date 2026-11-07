@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ankara | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#8a2342;--a2:#e0a030;--a3:#2a6f97"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Ankara</span><h1>Ankara: Başkent, Savunma ve Bilgi Ekonomisi</h1><p>Türkiye’nin ikinci büyük ekonomisi: kişi başı gelirde İstanbul ve Kocaeli’nin hemen ardında, nüfusu 5,9 milyona dayanmış bir il. “Memur kenti” kimliğinin yanına savunma-havacılık kümelenmesi, 21 üniversite ve hızla büyüyen ihracat eklendi. 2025’te ihracat 17,5 milyar $’a çıktı; öte yandan işsizlik ulusal ortalamanın üzerinde seyrediyor.</p></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg></div>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>788.859 TL</b><span>Kişi başı GSYH (2024), 81 il arasında 3. sıra; Türkiye ort. 507.615 TL (yaklaşık %55 üstü)</span></div>
+    <div class="k"><b>4,67 tr TL</b><span>İl GSYH’si (2024); Türkiye’nin %10,5’i, İstanbul’dan sonra 2. sıra</span></div>
+    <div class="k"><b>17,49 mlr $</b><span>İhracat, 2025 (TİM kayıtları, ASO aktarımı); 2024’e göre %24,3 artış</span></div>
+    <div class="k"><b>5.910.320</b><span>Nüfus (2025, TÜİK ADNKS); 2024’te 5.864.049</span></div>
+    <div class="k"><b>%9,7</b><span>İşsizlik oranı (2024, TÜİK); Türkiye %8,7. 2025 il verisini doğrulayamadım</span></div>
+    <div class="k"><b>8,24 mn</b><span>Anıtkabir ziyaretçisi (2025); 2024’te 6,55 milyon</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#sanayi">Sanayi-Savunma</a><a href="#bilgi">Üniversite-Ar-Ge</a><a href="#ulasim">Ulaşım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Ankara ihracatı 2025’te %24,3 artarak 17,49 milyar $’a ulaştı; 2026’da hız kesmedi. Büyümenin önemli kısmı savunma-havacılıktan ve elektrik-elektronikten geliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="dt"></div><h3 id="dttitle"></h3><div class="bars" id="dtbars"></div><p class="note" id="dtnote"></p></div>
+      <div class="card"><h3>İlk altı ay, milyar $</h3><div class="col" id="h1"></div>
+        <p class="note">Ocak–Haziran 2026’da Ankara ihracatı %27,5 artarak 7,1’den 9,1 milyar $’a çıktı; Türkiye’nin yaklaşık 4,7 milyar $’lık artışının yaklaşık 2 milyar $’ı Ankara’dan geldi. Kaynak: ASO ihracat değerlendirme raporu (basın aktarımı).</p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Ocak–Ağustos 2026’da ihracat %20,7 artışla 12,16 milyar $’a çıktı ve Ankara Türkiye’nin en çok ihracat yapan üçüncü ili oldu (2025 tam yılda 4. sıradaydı). Ağustos 2026 tek başına 1,35 milyar $.</li>
+        <li>ASO’ya göre Ağustos 2026 itibarıyla son 12 aylık ihracat 19,57 milyar $; 2025 kapanışının %11,9 üzerinde.</li>
+        <li>İlk yarı 2026’da elektrik-elektronik, ilk kez kimyayı geçerek en büyük sektör oldu; otomotiv ise ilk kez 1 milyar $’ı aştı.</li>
+        <li>Yıllık 15 milyar $’ı aşan ihracatın %90’ından fazlası sanayi ürünlerinden oluşuyor (ASO Başkanı).</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Toplam ile sektör tablosu arasındaki fark büyüyor: ilk yarı 2026’da 2,67 milyar $ (ihracatın %29,5’i). ASO, farkın büyük bölümünü savunma ve havacılığa bağlıyor; yani il ihracatının yaklaşık üçte biri sektör tablosunda görünmüyor.</li>
+        <li>TİM kanuni merkeze, TÜİK ise faaliyet iline bakar; iki seri birbirine eklenmez. Bu sayfada ağırlıklı olarak TİM/ASO değerleri kullanıldı.</li>
+        <li>2025 için ürün ve ülke kırılımını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Savunma</h2>
+    <p class="sub">Ankara’nın sanayi hikâyesi büyük ölçüde savunma-havacılık kümelenmesinin etrafında kuruluyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Savunma ve havacılık kümelenmesi</h3><ul>
+        <li>ASELSAN, TUSAŞ, ROKETSAN, HAVELSAN, STM, FNSS, Nurol Makina ve MKE gibi büyük yüklenicilerin merkezi veya üretim tesisleri Ankara’da.</li>
+        <li>Bir sektör haberine göre Ankara, savunma ve havacılık firmalarının yaklaşık %60’ına ev sahipliği yapıyor (tarihi belirtilmemiş).</li>
+        <li>OSTİM Savunma ve Havacılık Kümelenmesi (OSSA) küçük ve orta ölçekli tedarikçileri büyük yüklenicilere bağlayan yapılardan biri; OSTİM bugünkü OSB firmalarının önemli kısmının doğduğu yer olarak anlatılıyor.</li>
+        <li>Kahramankazan’daki Ankara Uzay ve Havacılık İhtisas OSB’de (HAB) 2021’de 300 işletme ve 15 bin kişilik istihdam planlanmıştı; o tarihte 7 fabrika çalışıyor, 72 firma ruhsat sürecindeydi (plan; gerçekleşen değil).</li></ul></div>
+      <div class="card"><h3>Altyapı ve yapı</h3><ul>
+        <li>Ankara Kalkınma Ajansı’na göre ilde 13 organize sanayi bölgesi, 93 Ar-Ge merkezi, 29 tasarım merkezi ve 7 teknoloji geliştirme bölgesi var (haber aktarımı).</li>
+        <li>OSB’ler Sincan–Temelli–Polatlı hattında ve İstanbul Yolu çevresinde yoğunlaşıyor; Yenimahalle’de OSTİM ve İvedik OSB’ler KOBİ üretiminin merkezlerinden.</li>
+        <li>Nov. 2025 tarihli Ankara İl Yatırım ve Tanıtım Stratejisi (2025–2028) altı odak belirliyor: yaşanabilir kent, savunma-uzay ve çift kullanımlı teknolojiler, dijitalleşme ve yüksek teknoloji, lojistik, insan kaynağı, sağlık ve yaşam bilimleri.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Ankara’nın toplam imalat katma değerini, sanayi istihdamını ve sektörel GSYH paylarını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>Savunma-havacılık rakamlarının önemli kısmı kurum veya şirket açıklamasına dayanıyor; firma bazında bağımsız ihracat serisi yok.</li></ul></div>
+  </section>
+
+  <section id="bilgi">
+    <h2>Üniversite, Kamu ve Hizmetler</h2>
+    <p class="sub">Ankara’nın ekonomisi imalattan çok hizmet ve kamu ağırlıklı; bunun yanında yoğun bir bilgi altyapısı var.</p>
+    <div class="g2">
+      <div class="card"><h3>Bilgi altyapısı</h3><ul>
+        <li>21 üniversite; 2024–2025 akademik yılında örgün öğretimde 704.763 öğrenci. Ankara, İstanbul’dan sonra en yüksek üniversite öğrenci yoğunluğuna sahip il.</li>
+        <li>6 yaş üstü nüfusta yaklaşık 1,26 milyon önlisans-lisans, yaklaşık 257 bin yüksek lisans-doktora mezunu (2024).</li>
+        <li>2023–2024’te ilde 1,52 milyon öğrenci var; lise öğrencisi bir yılda 424 binden 370 bine, üniversite öğrencisi 355 binden 374 bine gitti.</li></ul></div>
+      <div class="card"><h3>Hizmet ve kamu ağırlığı</h3><ul>
+        <li>TÜİK’in il GSYH hesabında İstanbul’un lider olduğu ticaret, ulaştırma, inşaat, finans gibi alanlarda Ankara ikinci sırada.</li>
+        <li>“Diğer hizmet faaliyetleri” kaleminde Ankara 81 il arasında ilk sırada (haberde %44,9 pay olarak aktarılıyor; kalemin kapsamını ve payın neyin payı olduğunu doğrulayamadım).</li>
+        <li>Eski bir TÜİK değerlendirmesine göre (2017) Ankara’da çalışanların %82’si ücretli veya yevmiyeli; ulusal ortalama %75. Fark yüksek kamu istihdamına bağlanıyor.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Kamu istihdamının güncel il payını ve sektörlere göre istihdam dağılımını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="ulasim">
+    <h2>Ulaşım ve Erişim</h2>
+    <div class="g2">
+      <div class="card"><h3>Ağ</h3><ul>
+        <li>Yüksek hızlı tren ağının kavşağı: İstanbul, Eskişehir, Konya, Sivas’a doğrudan bağlantı; Başkentray Sincan–Kayaş arasında banliyö hattı.</li>
+        <li>Ankaray ve dört metro hattı birlikte 67,4 km (2025).</li>
+        <li>İlde 5.416 km karayolu; il yüzölçümü 26.897 km² ile Konya ve Sivas’tan sonra üçüncü büyük il.</li></ul></div>
+      <div class="card"><h3>Esenboğa</h3><div class="bars" id="hv"></div>
+        <p class="note">Esenboğa 2024’te 9,7 milyon iç hat ve 3,2 milyon dış hat yolcusu taşıdı. İç hatta güçlü, dış hatta İstanbul, Sabiha Gökçen ve Antalya’nın çok gerisinde; planlanan Esenboğa metro hattı ve yeni dış hat seferleri strateji belgesinde öncelik. Kaynak: DHMİ (Ankara Kalkınma Ajansı aktarımı).</p></div>
+    </div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Kültür</h2>
+    <p class="sub">Ankara’nın turizmi büyük ölçüde başkent kimliği ve kültür turizmine dayanıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Anıtkabir ziyaretçisi</h3><div class="col" id="an"></div>
+        <p class="note">2022: 3,97 milyon; 2023: 6,03 milyon; 2024: 6,55 milyon; 2025: 8,24 milyon. 29 Ekim 2025’te tek günde 1.125.311 kişi ziyaret etti (2023’te 1.182.425, 2024’te 745.920). Kaynak: MSB verileri (basın aktarımı). Ziyaretçinin büyük kısmı yerli.</p></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>2025’in ilk yarısında en çok ziyaret edilen müze Cumhuriyet Müzesi (II. TBMM Binası): 233.454 kişi; ikinci sırada Anadolu Medeniyetleri Müzesi.</li>
+        <li>Ankara Turizm Tanıtım ve Geliştirme Yol Haritası, 2028 için toplam 5,5 milyon turist ve yaklaşık 1,05 milyar $ turizm geliri hedefliyor (hedef; gerçekleşen değil).</li>
+        <li>Yabancı ziyaretçi sayısı, konaklama doluluğu ve turizm gelirinin güncel gerçekleşmesini doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH (bin TL, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">Ankara 788.859 TL ile üçüncü; İstanbul’dan 13.810 TL, Kocaeli’nden yalnızca 14 TL geride. En alt üç il Van, Ağrı ve Şanlıurfa. Türkiye ortalamasının yaklaşık %55 üstü.</p></div>
+      <div class="card"><h3>İl GSYH’si (trilyon TL, 2024)</h3><div class="bars" id="gs"></div>
+        <p class="note">Ankara toplam GSYH’nin %10,5’ini üretiyor; en yüksek ilk beş il toplamın %53,0’ını oluşturuyor. 2024’te yıllık GSYH büyümesine ikinci en büyük katkıyı Ankara verdi (yüzde 0,44 puan).</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Kişi başına gelir yüksek ama dağılımı ilçelere ve gelir gruplarına göre ayrıştıran doğrulanmış bir il serisi bulamadım; yoksulluk ve gelir eşitsizliği bu sayfada yok.</li>
+      <li>Ankara’nın GSYH’sinin sektörel dağılımını (tarım, sanayi, hizmet payları) doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus (milyon)</h3><div class="col" id="nuf"></div>
+        <p class="note">2020: 5,66; 2024: 5,86; 2025: 5,91. Nüfus artış hızı 2021’de binde 14,7’ye sıçradı, sonra binde 3–6 bandına döndü. 2025’te artış yaklaşık 46 bin kişi.</p></div>
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>Ankara’da ikamet edenlerin %72,15’i başka ilde kayıtlı (2024); kentin nüfusu büyük ölçüde göçle oluşmuş.</li>
+        <li>Nüfus piramidi Türkiye’ye göre daha dar tabanlı; orta yaş grupları yoğun, yaşlı nüfus artıyor.</li>
+        <li>Çevre ilçelerde (Güdül, Çamlıdere, Evren) 2021’de yaşlı nüfus oranı %30’a yaklaşıyordu.</li></ul></div>
+    </div>
+    <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    <div class="card"><ul style="margin:0">
+      <li>2024’te Ankara’da işsizlik %9,7 (2023: %11,2), istihdam oranı %49,5 (2023: %48,5), işgücüne katılma %55,0. Türkiye’de %8,7, %49,5 ve %54,2. Bir kalkınma ajansı belgesi istihdam oranını %49,6 veriyor; basın aktarımıyla küçük fark var.</li>
+      <li>Ankara’da yaklaşık 2,31 milyon kişi çalışıyor, 249 bin kişi işsiz. Kalkınma ajansı belgesine göre işsizliğin en yoğun olduğu kesim 25–34 yaş.</li>
+      <li>Yorum: katılım ulusal ortalamanın üzerinde, istihdam ise yalnızca eşit; yani iş arayan kalabalık ama bu kalabalığın hepsi işe yerleşemiyor.</li>
+      <li>2025 Ankara işsizlik, katılım ve istihdam oranlarını doğrulanmış kaynakla bulamadım; Türkiye’de 2025’te işsizlik %8,3’e indi. İşgücünün cinsiyet ve sektör dağılımı sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Ankara’nın 25 ilçesi var; nüfusun büyük kısmı dokuz merkezî (büyükşehir) ilçede toplanıyor. Nüfuslar TÜİK ADNKS 2025; değişim 2024’e göre. Tabloda 11 ilçe yer alıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Yıllık değişim</th><th>Öne çıkan</th></tr>
+      <tr><td>Çankaya</td><td>952.198</td><td>+4.868</td><td>En kalabalık ilçe (il nüfusunun %16,1’i); Anıtkabir; 65 yaş üstü nüfusun en yüksek olduğu ilçe (2021 verisi)</td></tr>
+      <tr><td>Keçiören</td><td>931.722</td><td>-406</td><td>İkinci büyük ilçe; 2025’te nüfusu azalan tek büyük merkez ilçe</td></tr>
+      <tr><td>Yenimahalle</td><td>721.531</td><td>+6.665</td><td>OSTİM ve İvedik OSB’ler; KOBİ ve savunma tedarikçileri</td></tr>
+      <tr><td>Mamak</td><td>690.329</td><td>+3.552</td><td>Doğu aksının büyük konut ilçesi</td></tr>
+      <tr><td>Etimesgut</td><td>632.458</td><td>+3.346</td><td>Batı koridorunda (Eskişehir Yolu) gelişen büyük ilçe</td></tr>
+      <tr><td>Sincan</td><td>605.366</td><td>+15.057</td><td>İlin en hızlı büyüyen büyük ilçesi; Sincan–Temelli–Polatlı OSB aksı</td></tr>
+      <tr><td>Altındağ</td><td>418.072</td><td>+3.179</td><td>Karapürçek: 85.305 kişiyle ilin en kalabalık mahallesi</td></tr>
+      <tr><td>Pursaklar</td><td>172.810</td><td>+7.145</td><td>Merkez ilçeler arasında en yüksek göreli artış (yaklaşık %4,3)</td></tr>
+      <tr><td>Gölbaşı</td><td>168.881</td><td>+3.680</td><td>Güneyde gelişen ilçe</td></tr>
+      <tr><td>Polatlı</td><td>131.894</td><td>+1.343</td><td>Merkez dışındaki en büyük ilçe; OSB aksı üzerinde</td></tr>
+      <tr><td>Çubuk</td><td>101.437</td><td>+687</td><td>Yüz binin üzerinde nüfuslu ikinci çevre ilçe</td></tr>
+      <tr><td>Haymana, Kızılcahamam, Bala</td><td>–</td><td>Azalış</td><td>2025’te nüfus kaybeden çevre ilçeler: Haymana -1.443, Kızılcahamam -982; Bala en yüksek azalışı yaşadı (değer aktarılmadı)</td></tr>
+    </table></div>
+    <div class="card"><ul style="margin:0"><li>Kahramankazan’da HAB OSB bulunuyor; diğer ilçeler (Beypazarı, Elmadağ, Akyurt, Nallıhan vb.) için ilçeye özgü ekonomik veriyi bu dosyada doğrulayamadım.</li></ul></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1923 – Başkent.</b> Ankara Cumhuriyet’in başkenti oldu.</p>
+      <p><b>1953 – Anıtkabir.</b> Anıtkabir tamamlandı; bugün il turizminin en çok ziyaret edilen noktası.</p>
+      <p><b>1975 – OSTİM’de savunma tedarikçiliği.</b> OSTİM’in ilk firmalarından EMGE küçük bir atölyede üretime başladı; sonraki yıllarda ASELSAN ve TUSAŞ’ın tedarikçisi oldu.</p>
+      <p><b>1984 – Büyükşehir.</b> Ankara büyükşehir yönetimine geçti; birkaç büyük ilçe bu dönemde kuruldu.</p>
+      <p><b>2020–2024 – Nüfus artışı.</b> Nüfus 5,66’dan 5,86 milyona çıktı.</p>
+      <p><b>2024 – Kişi başı gelirde üçüncü.</b> GSYH 4,67 trilyon TL (%10,5); işsizlik %9,7; Anıtkabir 6,55 milyon ziyaretçi.</p>
+      <p><b>2025 – İhracat sıçraması.</b> İhracat %24,3 artışla 17,49 milyar $; nüfus 5,91 milyona; Anıtkabir 8,24 milyon ziyaretçi.</p>
+      <p><b>Kasım 2025 – Yatırım stratejisi.</b> Ankara Kalkınma Ajansı 2025–2028 İl Yatırım ve Tanıtım Stratejisi’ni tamamladı.</p>
+      <p style="margin:0"><b>2026 – İhracatta üçüncülük.</b> İlk yarıda ihracat %27,5 artışla 9,1 milyar $; elektrik-elektronik en büyük sektör oldu; Ocak–Ağustos’ta Ankara en çok ihracat yapan üçüncü il (12,16 milyar $).</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Kişi başı gelirde ilk üç il arasında; İstanbul’dan sonra en büyük GSYH</li><li>Savunma-havacılık kümelenmesi ve hızlanan, yüksek katma değerli ihracat</li><li>21 üniversite, çok sayıda Ar-Ge ve tasarım merkezi, eğitimli işgücü</li><li>YHT ve metro ağıyla güçlü iç erişim; karar merkezlerine yakınlık</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İşsizlik %9,7 ile ulusal ortalamanın üzerinde; istihdam oranı yalnızca ortalamada</li><li>İhracat artışının önemli kısmı savunma-havacılığa bağlı; bu da kamu siparişine bağımlılık anlamına gelebilir (yorum)</li><li>Dış hat erişimi zayıf; turizm büyük ölçüde tek bir anıta bağlı</li><li>Su stresi ve kuraklık riski strateji belgelerinde ayrı bir risk olarak anılıyor</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Savunma teknolojilerinin sağlık, enerji ve sivil alanlara aktarılması (çift kullanımlı teknoloji)</li><li>KOBİ tedarikçilerin büyük yüklenicilere ve ihracata bağlanması</li><li>Esenboğa’da yeni dış hat seferleri ve metro bağlantısı; lojistik merkez olma hedefi</li><li>Sağlık turizmi ve yaşam bilimleri kümesi (strateji belgesinde “Sağlık Vadisi” fikri)</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Ankara’nın hikâyesi “memur kenti”nden savunma ve bilgi ekonomisine geçişin hikâyesi. Ama ihracat ve gelir yükselirken işsizlik düşmüyor. Asıl soru, bu teknoloji kümelenmesinin yarattığı değerin kentin geniş hizmet ve kamu tabanındaki iş arayanlara ne kadar yayılacağı ve kamu siparişine bağımlılık riskinin nasıl yönetileceği.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>İhracat artışı savunma-havacılık siparişlerine dayanıyorsa, bu büyüme ne kadar sürdürülebilir ve sivil sektöre nasıl yayılır?</li>
+      <li>Kişi başı gelir yüksekken işsizlik neden ulusal ortalamanın üstünde; kamu istihdamı ve nitelikli işgücü arasındaki uyumsuzluk mu var?</li>
+      <li>Başkent kimliği Ankara’yı korumacı bir avantajla mı yoksa bağımlılıkla mı büyütüyor?</li>
+      <li>Esenboğa’nın dış hat zayıflığı ihracat ve turizm hedefleri için ne kadar belirleyici?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (CNBC-e, DHA, Capital, Yeni Ankara, Habertürk aktarımı): GSYH, kişi başı GSYH, sıralamalar</li>
+      <li>Ankara Sanayi Odası (ASO): 2025 İhracat Değerlendirme Raporu, 2026 ilk yarı raporu ve Ağustos 2026 Ankara ihracatı (TİM kayıtları); Ekonomi Gazetesi, Dünya, Ekonomim, Haberler.com, CNBC-e aktarımları</li>
+      <li>Ankara Kalkınma Ajansı, Ankara İl Yatırım ve Tanıtım Stratejisi 2025–2028 (Kasım 2025): nüfus, eğitim, işgücü (TÜİK 2024), ulaşım, üniversiteler, DHMİ yolcu verileri</li>
+      <li>TÜİK ADNKS 2025: il ve ilçe nüfusları (ATO Rakamlarla Ankara raporları, Yeni Ankara, Habertürk, Ekonomi Gazetesi aktarımı); Başkent Gazete: 2024 işgücü</li>
+      <li>Anıtkabir ziyaretçi sayıları (NTV, Yeni Ankara, İşçi Haber aktarımı, MSB verileri); Cumhuriyet Müzesi ziyaretçisi (Yeni Ankara, KTB verisi)</li>
+      <li>Savunma-havacılık: Ekonomist, AA, Takvim, OSSA belgeleri, DergiPark; Gazete İlk Sayfa (2017 istihdam değerlendirmesi, eski veri)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum raporudur; resmî tabloların doğrudan alıntısı değildir. Ankara’nın 2025 işsizlik ve istihdam oranları, sektörel GSYH payları, imalat katma değeri, kamu istihdam payı, tarım ve yabancı turist istatistikleri doğrulanmış kaynakla bulunamadığı için sayfada yok. İhracatta yıllık veriler TİM/ASO esaslıdır; TÜİK faaliyet ili serisiyle karıştırılmamalıdır. Savunma-havacılık, yatırım ve turizm hedeflerinin bir kısmı kurum açıklamasına dayanan plan ve beyanlardır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+var DT=[['İhracat, milyar $ (TİM/ASO)',[['2025 tam yıl',17.49],['2026 Ocak–Ağustos',12.156],['Son 12 ay (Ağu 2026)',19.57]],2,'Son 12 aylık değer ASO’nun “yıllıklandırılmış” hesabıdır; 2025 kapanışından %11,9 yüksek. Ocak–Ağustos 2026 geçen yıla göre %20,7 arttı.'],
+ ['Sektörler, İlk yarı 2026 (milyon $)',[['Elektrik-elektronik (≥)',1010],['Otomotiv',1010],['Makine ve aksamları',880],['Kimyevi maddeler',875]],0,'Elektrik-elektronik %65,7 artışla ilk sıraya çıktı; değeri “1 milyar $’ın üzerinde” olarak aktarıldı, tam rakam doğrulanamadı; çubuk alt sınırı gösterir. Sekiz aylık değeri 1,51 milyar $ (%82 artış).']];
+tabs('dt',['Dönemler','Sektörler'],function(i){
+ $('dttitle').textContent=DT[i][0];
+ bars($('dtbars'),DT[i][1],[DT[i][2]]);
+ $('dtnote').textContent=DT[i][3]});
+cols($('h1'),[['2025 İlk 6 ay',7.1,'','7,1'],['2026 İlk 6 ay',9.1,'lo','9,1']]);
+bars($('hv'),[['Esenboğa iç hat (milyon)',9.73],['Esenboğa dış hat (milyon)',3.24]],[1]);
+cols($('an'),[['2022',3.966,'','3,97'],['2023',6.031,'','6,03'],['2024',6.550,'','6,55'],['2025',8.242,'lo','8,24']]);
+bars($('kb'),[['İstanbul',803],['Kocaeli',789],['Ankara',789],['Türkiye ort.',508],['Van (en düşük)',203]],[2]);
+bars($('gs'),[['İstanbul',13.01],['Ankara',4.67],['İzmir',2.56]],[1]);
+cols($('nuf'),[['2020',5.663,'','5,66'],['2024',5.864,'','5,86'],['2025',5.910,'lo','5,91']]);
+var IG=[['İşsizlik oranı, 2024 (%)',[['Ankara',9.7],['Türkiye',8.7]],0,'Ankara’da 2023’te %11,2 olan işsizlik 2024’te %9,7’ye geriledi.'],
+ ['İstihdam oranı, 2024 (%)',[['Ankara',49.5],['Türkiye',49.5]],0,'Ankara’da 2023’te %48,5 olan istihdam oranı 2024’te %49,5’e çıktı.'],
+ ['İşgücüne katılma oranı, 2024 (%)',[['Ankara',55.0],['Türkiye',54.2]],0,'Katılım ulusal ortalamanın yaklaşık 0,8 puan üzerinde.'],
+ ['Ankara, 2023 → 2024 (%)',[['İşsizlik 2023',11.2],['İşsizlik 2024',9.7],['İstihdam 2023',48.5],['İstihdam 2024',49.5]],1,'İşsizlik 1,5 puan azaldı, istihdam 1 puan arttı. Kaynak: TÜİK 2024 işgücü (Başkent Gazete, Ankara Kalkınma Ajansı aktarımı).']];
+tabs('ig',['İşsizlik','İstihdam','Katılım','2023→2024'],function(i){
+ $('igtitle').textContent=IG[i][0];
+ bars($('igbars'),IG[i][1],i===3?[1,3]:[IG[i][2]]);
+ $('ignote').textContent=IG[i][3]});
+</script>
+</body>
+</html>
