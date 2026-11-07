@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bingöl | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#c98a14;--a2:#2f7d5b;--a3:#3a5a9b"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Bingöl</span><h1>Bingöl: Bal, Süt ve Yeni Sanayi</h1><p>Doğu Anadolu’nun dağlık, az nüfuslu illerinden biri: ekonomisi uzun süre arıcılık ve küçükbaş-büyükbaş hayvancılığa dayandı. Son yıllarda tek bir büyük süt yatırımı (Sütaş), OSB ve tekstil atölyeleri tabloyu değiştirmeye başladı. Kişi başı gelir ulusal ortalamanın yaklaşık %55’i; ihracat ise tek bir ürün grubuna, metal cevherine yaslanıyor. Bu dosya Bingöl’ü rakamları ve açık sorularıyla özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>8.429 $</b><span>Kişi başı GSYH (2024), 81 il arasında 69. sıra; Türkiye ort. 15.325 $</span></div>
+    <div class="k"><b>93,5 mn $</b><span>İhracat, 2025 (TÜİK, faaliyet ili esaslı); 2024’e göre %27,2 düşüş, il sırası 67</span></div>
+    <div class="k"><b>%89,8</b><span>Metal cevherlerinin ihracattaki payı (2025, TÜİK faaliyet ili)</span></div>
+    <div class="k"><b>282.299</b><span>Nüfus (2025); 2024’te 283.276, 2023’te 285.655</span></div>
+    <div class="k"><b>%9,6</b><span>İşsizlik oranı (2025, TÜİK); Türkiye %8,3; istihdam oranı %40,3</span></div>
+    <div class="k"><b>179 bin</b><span>Arılı kovan (2024) ve yaklaşık 1.445 ton bal; AB coğrafi işaretli Bingöl balı</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Tarım-Arıcılık</a><a href="#sanayi">Sanayi-Yatırım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Aynı il için iki farklı seri var: TİM firmanın kanuni merkezine, TÜİK faaliyetin yürütüldüğü ile bakar. İkisi arasındaki fark 20 kattan fazla.</p>
+    <div class="g2">
+      <div class="card"><h3>Aynı il, iki seri, 2025 (milyon $)</h3><div class="bars" id="seri"></div>
+        <p class="note">TİM, Bingöl’de merkezlenen firmaların ihracatını sayar (il sırası 78). TÜİK ise cevherin ve ürünün fiilen çıktığı ili esas alır (il sırası 67). Bingöl’de üretilip başka ilde merkezlenen firma üzerinden yapılan ihracat TİM’de görünmeyebilir. Kaynak: FKA, Bingöl İhracat Görünümü Raporu (Temmuz 2026).</p></div>
+      <div class="card"><h3>TÜİK faaliyet ili ihracatı (milyon $)</h3><div class="col" id="yil"></div>
+        <p class="note">2022’de 127,7; 2023’te 92,9 (%27,2 düşüş); 2024’te 128,5 (%38,3 artış); 2025’te 93,5 (%27,2 düşüş). Dalgalanma, tek bir ürün grubunun ağırlığından geliyor. Türkiye ihracatı aynı 2022–2025 döneminde %7,5 artarken Bingöl’ünki %26,8 azaldı.</p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Ürün grupları, 2025, TÜİK (milyon $)</h3><div class="bars" id="hs"></div>
+        <p class="note">Metal cevherleri, cüruf ve kül (HS 26) toplamın %89,8’i. Rapor, bu payın ağırlıklı olarak Genç ilçesindeki Avnik–Servi bölgesi maden sahalarından (demir cevheri) geldiğini “değerlendirmektedir”; firma veya sahaya ait doğrulanmış bir kırılım yok. Bal da içeren HS 04 grubu (süt ürünleri, yumurta, tabii bal) yalnızca 0,31 milyon $.</p></div>
+      <div class="card"><h3>Pazarlar, 2025, TÜİK (milyon $)</h3><div class="bars" id="paz"></div>
+        <p class="note">Çin %62,2, Cezayir %27,6; ilk beş ülke %95,8. 2025’teki 35 milyon $’lık toplam düşüşün 41,1 milyon $’ı Çin pazarındaki gerilemeden geldi.</p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Bölge içi pay (TRB1, 2025, TÜİK faaliyet ili, %)</h3><div class="bars" id="trb"></div>
+        <p class="note">TRB1 Bölgesi: Malatya, Elazığ, Bingöl, Tunceli. Bingöl’ün payı 2022’de %8,6, 2025’te %9,2.</p></div>
+      <div class="card"><h3>TİM görünümü: sektörler, 2025 (milyon $)</h3><div class="bars" id="tim"></div>
+        <p class="note">Çimento-cam-seramik-toprak ürünleri kaleminin önemli kısmı bir tuğla firmasının İngiltere’ye ihracatından oluşuyor (rapor değerlendirmesi). En büyük TİM pazarları Birleşik Krallık (%34,8) ve Irak (%31,3).</p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TÜİK’e göre 2025’te ilk 10 ürün grubunun payı %99,6; ihracat çok dar bir tabana dayanıyor.</li>
+        <li>Giyim (HS 61, 3,6 milyon $), örme eşya (HS 60, 1,7 milyon $) ve sentetik filament (HS 54, 1,1 milyon $) küçük ama 2025’te yeni yükselen kalemler; bunlar ilin tekstil atölyelerinin ilk işaretleri olabilir (yorum, kanıtı rapor vermiyor).</li>
+        <li>Seramik mamulleri 2022’de 2,9 milyon $’dan 2025’te 1,5 milyon $’a indi.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>2026 aylık veya dokuz aylık il ihracatını doğrulanmış kaynakla bulamadım; veriler 2025 sonudur.</li>
+        <li>TİM ve TÜİK serileri farklı tanımlıdır; doğrudan toplanmaz veya karşılaştırılmaz.</li>
+        <li>Düşük taban nedeniyle yüzde değişimleri yanıltıcı olabilir; raporun kendisi de bunu belirtiyor.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Arıcılık</h2>
+    <p class="sub">Dağlık arazi, yaylalar, yüksek rakım: ekilebilir alan az, hayvancılık ve arıcılık öne çıkıyor.</p>
+    <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Arıcılık ve bal</h3><ul>
+        <li>2024’te 1.179 arıcılık işletmesi, 179 bin kovan ve 1 milyon 445 bin kg (yaklaşık 1.445 ton) bal üretimi (Vali Usta’nın TÜİK’e dayandırdığı açıklama, Mart 2025). Bu rakamlardan hesaplanan kovan başı verim yaklaşık 8 kg.</li>
+        <li>Vali Usta’ya göre kovan sayısı 2000’de yaklaşık 45 binden 2025’te 180 bine çıktı; Türkiye genelinde 14., Doğu Anadolu’da 2. sırada. Bal üretimi 2000’deki yaklaşık 800 tondan 2025’te yaklaşık 2 bin tona çıkması hedefleniyor (hedef; gerçekleşen değil).</li>
+        <li>AB coğrafi işaret tescilli Bingöl balı, Mart 2025’te Migros ile ilk resmî dolum sürecine girdi.</li>
+        <li>2025 sezonunda 15 arıcı toplam 4.878 kg organik bal üretti; son üç yılda 740 organik kovan dağıtıldı. Genç’in Servi bölgesi ile Ilıcalar’da meşe kütüklerinde geleneksel kütük balı üretiliyor.</li></ul></div>
+      <div class="card"><h3>Hayvancılık ve arazi</h3><ul>
+        <li>Bingöl Üniversitesi’nin tarım kitabına göre köylerin yaklaşık %80’inde hayvancılık yapılıyor; en yaygın türler koyun, keçi ve sığır. Arıcıların yarısından fazlası için asıl geçim kaynağı arıcılık.</li>
+        <li>İlin yüzölçümü 8.253 km²; ekilebilir alanlar yüzölçümünün yalnızca %7,2’si (FKA).</li>
+        <li>Genç Ovası ilin en geniş ovası; Karlıova Ovası ağırlıkla hayvancılık için kullanılıyor.</li>
+        <li>Orman, ilin yaklaşık %30’unu kaplıyor (Kiğı, Genç, Karlıova’da yoğun).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Kovan sayısı artarken verim düşebiliyor: bir akademik çalışma Bingöl’de kovan sayısı ile bal verimi arasında negatif ilişki buldu; yani büyüme her zaman verime yansımıyor.</li>
+      <li>Bitkisel üretim miktarları, güncel hayvan sayıları ve tarımın il GSYH’sindeki payını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Yatırım</h2>
+    <p class="sub">Tek bir büyük özel yatırım (Sütaş), kamu destekli OSB ve tekstil atölyeleri ilin yeni üretim hikâyesi.</p>
+    <div class="g2">
+      <div class="card"><h3>Sütaş Bingöl Entegre Tesisleri</h3><ul>
+        <li>3.200 dekar alanda yaklaşık 22.500 baş damızlık süt sığırı (10 bini sağmal); günlük 600 ton kapasiteli yem fabrikası; günlük 1.000 ton süt işleme kapasitesi ve aynı anda 18 ürün (Haziran 2026 haberi).</li>
+        <li>Bakan Kacır (Ağustos 2025): bugüne kadar yaklaşık 202 milyon $’lık yatırım yapıldı ve 900’den fazla kişi doğrudan istihdam ediliyor. Haziran 2026 haberi 977 kişi diyor.</li>
+        <li>Biyogaz tesisi (6,4 MWh) ve çatı güneş santralleriyle toplam 11,5 MWp kurulu güç; haberdeki ifadeye göre tesis elektriğini kendi üretiyor.</li>
+        <li>Bakan, Sütaş’ın bir yıl içinde tedarikçilere, lojistik ve bakım hizmeti verenlere ve çalışanlara 1,9 milyar liradan fazla ödeme yapacağını söyledi.</li></ul></div>
+      <div class="card"><h3>Etki raporu projeksiyonu</h3><ul>
+        <li>Prof. Dr. Erinç Yeldan ve Kamil Taşcı imzalı rapora göre (basın aktarımı) tesis, 2033’te Bingöl GSYH’sinin yaklaşık %61’ini doğrudan ve dolaylı üretecek.</li>
+        <li>Kişi başı gelir yatırım olmasaydı 7.322 $, yatırımla 10.221 $ olacak (%40 fazla); rapor bunun Bingöl’ü 73. sıradan 38. sıraya taşıyacağını söylüyor. Bu bir projeksiyondur, gerçekleşen değer değil.</li>
+        <li>Rapor, tesiste açılan her doğrudan işe karşılık bölgede 8 kişilik ek istihdam öngörüyor; makine-ekipman, ambalaj gibi sektörlerin kümelenmesini bekliyor.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Organize sanayi ve KOBİ</h3><ul>
+        <li>Bingöl OSB’de 1.200’den fazla istihdam; 92 hektarlık genişleme alanının altyapısı tamamlanma aşamasında (Ağustos 2025, Bakan Kacır).</li>
+        <li>Son 23 yılda KOSGEB eliyle KOBİ’lere 969 milyon TL destek verildi.</li>
+        <li>Bakana göre yeni teşvik sistemiyle ilde 54 milyar TL’lik yatırım ve 14 binden fazla istihdamın önü açıldı (kapsam ve takvim açıklanmamış; gerçekleşme değil).</li>
+        <li>Bingöl için öncelikli alanlar: süt hayvancılığı ve süt üretimi, kaba yem, tarım makineleri imalatı; Yerel Kalkınma Hamlesi’nde arı ürünleri, süt, et ve 5 yıldızlı otel yatırımlarına yatırım başına 240 milyon TL’ye kadar finansman desteği.</li></ul></div>
+      <div class="card"><h3>Kalkınma ajansı ve tekstil atölyeleri</h3><ul>
+        <li>Fırat Kalkınma Ajansı, Bingöl’de 187 projeye şimdiye kadar 928 milyon TL destek verdi; Ağustos 2025’te toplam 343 milyon TL’yi aşan 12 projenin açılışı yapıldı.</li>
+        <li>Kaba Yem ve Tarım Makineleri Parkı: 2023–2024’te 8 bin dönümde silajlık mısır eken çiftçilere 76 milyon TL ek katkı; 10 köyde süt toplama merkezi, 975 yetiştiriciye eğitim.</li>
+        <li>Adaklı, Genç, Kiğı, Solhan ile Ilıcalar ve Sancak beldelerindeki “Tekstilkent” atölyeleri tam kapasitede 1.400 kişiye iş sağlayacak. Adaklı ve Ilıcalar’dakiler, yerleşimlerinin ilk üretim tesisi.</li>
+        <li>Temmuz 2025’te Bingöl’e teknopark ilan edildi (Bakan Kacır).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Bu bölümdeki yatırım ve istihdam rakamlarının çoğu bakanlık veya şirket açıklamasına dayanan basın aktarımıdır; bağımsız denetimli bir seri değildir.</li>
+      <li>Sütaş’ın ilin sanayi katma değerindeki payını, il GSYH’sinin sektörel dağılımını ve SGK’lı çalışan sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Doğa</h2>
+    <p class="sub">Yüksek dağlar, göller, kış turizmi ve bal: potansiyel var, ziyaretçi verisi yok.</p>
+    <div class="g2">
+      <div class="card"><h3>Varlıklar</h3><ul>
+        <li>Haserek kayak tesisleri, Çır Şelalesi, Gerendal Gölü, Buban Peri Bacaları (Oğuldere köyü), Sülbüs Dağı, Gülbahar Barajı.</li>
+        <li>Solhan’ın Yüzen Adaları; Karlıova’da Turna Gölü; Kiğı Barajı ve Gölü hidroelektrik için kullanılıyor.</li>
+        <li>İlin en yüksek noktası 3.195 metre (Bingöl Dağları); kışın sıcaklık -30 dereceye kadar düşebiliyor, Karlıova uzun süre karda kalan yerlerden.</li>
+        <li>Bingöl Havalimanı ilin ulaşım altyapısında öne çıkıyor.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Ziyaretçi sayısı, konaklama doluluğu ve turizm geliri için doğrulanmış güncel kaynak bulamadım; bu yüzden sayfada yok.</li>
+        <li>Bakanlık, Yerel Kalkınma Hamlesi kapsamında 5 yıldızlı otel yatırımlarını destekleyeceğini açıkladı; ilde yatırımın gerçekleşme düzeyini bu dosyada gösteremiyorum.</li>
+        <li>Karlıova Üçlü Kavşağı yakınındaki fay hatları ilin deprem riskini artırıyor; bir MTA çalışması Merkez ve Karlıova ilçeleri için yüksek büyüklükte deprem periyotları hesaplıyor (altyapı ve yatırım kararlarında dikkate alınması gereken bir risk).</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla (dolar)</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH ($, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">Bingöl’ün değeri Türkiye ortalamasının yaklaşık %55’i. 81 il arasında 69. sırada; bölge komşuları Tunceli (16.), Malatya (40.) ve Elazığ (47.) önde; Bitlis (77.) ve Muş (78.) geride.</p></div>
+      <div class="card"><h3>Uzun vadeli resim</h3><ul>
+        <li>Dünya gazetesindeki bir analize göre Bingöl’de kişi başı gelir 2004’te 2.300 $’dan 2013’te 6.105 $’a (%165,5) çıktı; Türkiye ortalaması aynı dönemde %109 arttı. Eski TÜİK serisi olduğu için bugünkü 8.429 $ ile doğrudan karşılaştırılmamalı.</li>
+        <li>Türkiye’nin en düşük kişi başı gelirli üç ili Şanlıurfa (5.731 $), Ağrı (5.930 $) ve Van (6.185 $); Bingöl bu uçtaki gruba yakın ama onlardan yaklaşık 2.200–2.700 $ önde.</li>
+        <li>Yeldan–Taşcı projeksiyonu 2033’te 10.221 $ öngörüyor; bu, Sütaş tesisinin etkisine bağlı bir tahmin.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Bingöl’ün toplam GSYH’sini (TL) ve sektörel dağılımını doğrulanmış kaynakla bulamadım; bulununca eklenecek.</li>
+      <li>Haberlerde 73. sıra (etki raporunun taban yılı) ve TÜİK’in 2024 verisine göre 69. sıra birlikte geçiyor; bu sayfada TÜİK sıralaması kullanıldı.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><div class="col" id="nuf"></div>
+        <p class="note">2023: 285.655; 2024: 283.276; 2025: 282.299. 2025’te nüfusu azalan 33 il arasında Bingöl de var.</p></div>
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl merkezinin nüfusu 172.007 (2023); nüfus yoğunluğu km² başına yaklaşık 34 kişi (Küre Ansiklopedi).</li>
+        <li>Yayladere, 1.889 kişiyle Türkiye’nin en az nüfuslu ikinci ilçesi (2025).</li>
+        <li>2018’de il nüfusunun %59,8’i kentte, %40,2’si kırda yaşıyordu; o yıl net göç -3.613 kişi (net göç hızı -12,83‰) (İŞKUR faaliyet raporu).</li>
+        <li>Haberlerde, Sütaş yatırımıyla birlikte “tersine göç”ün başladığı söyleniyor; bu bir iddiadır, doğrulanmış net göç verisi sunmuyorum.</li></ul></div>
+    </div>
+    <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    <div class="card"><ul style="margin:0">
+      <li>2025’te Bingöl’de işgücüne katılma oranı %44,5, istihdam oranı %40,3, işsizlik %9,6. Türkiye’de bu oranlar sırasıyla %53,5, %49,0 ve %8,3. Bingöl’ün istihdam oranı ulusal ortalamanın yaklaşık 9 puan altında.</li>
+      <li>Ekonomi Gazetesi’nin TÜİK bölgesel verisi analizine göre Bingöl, 2025’te işsiz sayısı bir önceki yıla göre %20’nin üzerinde artan on il arasında.</li>
+      <li>Eski bir İŞKUR faaliyet raporunda ilin işsizlik oranı %7,0, katılım %54,6, istihdam %50,8 görünüyor; tablonun yılı belirtilmemiş ve TÜİK seri revizyonları nedeniyle bugünkü rakamlarla kıyaslanamaz. Bu yüzden eğilim olarak okunmadı.</li>
+      <li>SGK’lı sektörel istihdam, kayıt dışılık ve 2024 il işsizlik oranını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Bingöl’de 8 ilçe var; merkez ilçe Bingöl. Tablodaki nüfuslar 2018 sonu (İŞKUR faaliyet raporu, TÜİK ADNKS); kaynak tabloda ilçe toplamı (284.328) il toplamıyla (281.205) birebir tutmuyor. Yayladere için 2025 değeri ayrıca verildi.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2018)</th><th>Öne çıkan</th></tr>
+      <tr><td>Merkez</td><td>160.165</td><td>İl merkezi; il nüfusunun yaklaşık %57’si (2018). Bingöl OSB, üniversite, havalimanı; Ilıcalar ve Sancak beldelerinde Tekstilkent atölyeleri</td></tr>
+      <tr><td>Genç</td><td>38.427</td><td>İlin en geniş ovası Genç Ovası; Avnik–Servi bölgesi demir cevheri sahaları (rapor değerlendirmesi), Servi’de kütük balı; Tekstilkent</td></tr>
+      <tr><td>Solhan</td><td>33.618</td><td>Yüzen Adalar; Tekstilkent (ilçenin en büyük üretim tesisi)</td></tr>
+      <tr><td>Karlıova</td><td>29.450</td><td>Hayvancılık düzlüğü ve Turna Gölü; uzun süre karda kalan bir yer; Karlıova Üçlü Kavşağı fay riski</td></tr>
+      <tr><td>Adaklı</td><td>9.315</td><td>Tekstilkent, ilçedeki ilk üretim tesisi</td></tr>
+      <tr><td>Kiğı</td><td>8.337</td><td>Kiğı Barajı ve Gölü (hidroelektrik); yoğun ormanlık; Tekstilkent</td></tr>
+      <tr><td>Yedisu</td><td>2.877</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+      <tr><td>Yayladere</td><td>2.139 (2025: 1.889)</td><td>Türkiye’nin en az nüfuslu ilçelerinden</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1936 – İl oluyor.</b> Çapakçur adıyla il olan şehir, 1945’te Bingöl adını aldı.</p>
+      <p><b>2004–2013 – Hızlı yakınsama.</b> Kişi başı gelir 2.300 $’dan 6.105 $’a çıktı (%165,5), ama ulusal ortalamanın altında kalmaya devam etti.</p>
+      <p><b>2018 – Nüfus ve göç.</b> İl nüfusu 281.205; net göç -3.613 kişi.</p>
+      <p><b>2022–2023 – İhracat dalgalanıyor.</b> TÜİK faaliyet ili ihracatı 127,7’den 92,9 milyon $’a düştü; nüfus 2023’te 285.655.</p>
+      <p><b>2024 – Gelir ve ihracat.</b> Kişi başı GSYH 8.429 $ (69. sıra); ihracat 128,5 milyon $’a çıktı; 179 bin kovan ve yaklaşık 1.445 ton bal.</p>
+      <p><b>Mart 2025 – Bingöl balı markette.</b> Coğrafi işaretli Bingöl balı için Migros ile ilk resmî dolum yapıldı.</p>
+      <p><b>Temmuz–Ağustos 2025 – Kamu yatırımları.</b> Teknopark ilan edildi; 343 milyon TL’yi aşan 12 FKA projesi açıldı; Bakan Sütaş tesisinde yaklaşık 202 milyon $’lık yatırımı açıkladı.</p>
+      <p><b>2025 – Zayıf yıl.</b> İhracat %27,2 azaldı (Çin pazarı), işsizlik %9,6, nüfus 282.299’a geriledi.</p>
+      <p style="margin:0"><b>Haziran 2026 – Etki raporu.</b> Yeldan–Taşcı raporu, Sütaş’ın 2033’te il GSYH’sinin %61’ini üreteceğini öngördü; il, ihracat raporunda (Temmuz 2026) hâlâ tek ürün grubuna bağımlı görünüyor.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>AB coğrafi işaretli, organik üretime açık bal ve yüksek rakımlı arıcılık</li><li>Hayvancılık geleneği; Sütaş ile entegre süt zincirinin yerinde kurulması</li><li>Genç, çalışma çağı ağırlıklı nüfus ve üniversite</li><li>Teşvikli OSB, teknopark ve havalimanı altyapısı</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın yaklaşık %90’ı tek ürün grubunda (metal cevheri), %62’si tek pazarda (Çin)</li><li>Kişi başı gelir ulusal ortalamanın %55’i; istihdam oranı %40,3</li><li>Dağlık arazi, ekilebilir alan yüzde 7; sert kış koşulları</li><li>Nüfus azalıyor; Karlıova fay hatları nedeniyle deprem riski</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Bal, süt ve et için markalaşma ve ihracat; organik ve coğrafi işaret avantajı</li><li>Kaba yem ve tarım makineleri ile Sütaş çevresinde yan sanayi kümelenmesi</li><li>Tekstilkent atölyeleri ve OSB genişlemesiyle kadın ve genç istihdamı</li><li>Kış ve doğa turizmi için 5 yıldızlı otel gibi teşvikli yatırımlar</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Bingöl’ün kalkınma anlatısı büyük ölçüde tek bir yatırımın etrafında kuruluyor: tek tesisin il GSYH’sinin %61’ini üretmesi, ilin ekonomisini hem hızlandırabilir hem de kırılgan kılabilir. İhracat tarafında ise tablo tersi: büyüme yok, tek ürün ve tek pazar var. Asıl soru, süt ve bal zincirinin yerel esnafa, çiftçiye ve genç girişimcilere yayılıp yayılmayacağı.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Tek bir büyük özel yatırıma dayalı kalkınma (Sütaş) ne kadar sürdürülebilir; küçük üretici ve arıcıyla nasıl bağlanabilir?</li>
+      <li>İhracatın büyük kısmı metal cevherinden geliyorsa, cevher fiyatı veya Çin talebi düştüğünde il ekonomisi ne kadar etkilenir?</li>
+      <li>Arıcılıkta kovan sayısı artarken verim düşüyorsa, politika sayıdan çok verime ve markalaşmaya mı odaklanmalı?</li>
+      <li>Tekstilkent gibi küçük ilçe atölyeleri, göçü durdurmaya yetecek kadar kalıcı ve yeterli gelirli iş üretebilir mi?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>Fırat Kalkınma Ajansı (FKA), Bingöl İhracat Görünümü Raporu (TİM ve TÜİK, 2021–2025, Temmuz 2026): ihracat, sektör, ürün ve pazar kırılımları, il sıralaması</li>
+      <li>TÜİK il bazında GSYH 2024 (Habertürk aktarımı); TÜİK ADNKS 2024–2025 il nüfusları (Karar aktarımı), 2023 nüfusu ve demografi (Küre Ansiklopedi)</li>
+      <li>TÜİK 2025 işgücü istatistikleri, il verileri (Malatya Busabah aktarımı); Ekonomi Gazetesi, işsiz sayısı artışı analizi; ulusal oranlar için Alomaliye aktarımı</li>
+      <li>Sanayi ve Teknoloji Bakanı Kacır’ın Bingöl konuşması (AA, Bigpara, 4 Ağustos 2025): OSB, teşvikler, FKA projeleri, Sütaş yatırımı</li>
+      <li>Memurlar.Net, “Bingöl GSYH’sının yüzde 61’ini tek başına taşıyacak fabrika” (10 Haziran 2026): Sütaş etki raporu projeksiyonu</li>
+      <li>Bal ve arıcılık için Vali Ahmet Hamdi Usta açıklamaları (Capital, Halk TV, CNN Türk); Bingöl Üniversitesi tarım kitabı (Çelik ve ark., 2024); dergipark çalışmaları</li>
+      <li>İŞKUR Bingöl İl İstihdam ve Mesleki Eğitim Kurulu 2019 Faaliyet Raporu (2018 nüfusu, göç); Dünya gazetesi, “Erdoğan’ın Cumhurbaşkanlığında kazanan iller”; MTA Bülteni (deprem olasılıkları); Wikipedia</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Bingöl’ün toplam GSYH’si (TL) ve sektörel payları, 2026 ihracat verisi, güncel hayvan ve bitkisel üretim miktarları, turizm istatistikleri, SGK’lı sektörel istihdam, 2024 il işsizliği ve 2025 ilçe nüfusları (Yayladere hariç) doğrulanmış kaynakla bulunamadığı için sayfada yok. İlçe nüfusları 2018 değerleridir. Yatırım, istihdam ve gelir rakamlarının bir kısmı bakanlık, şirket veya vali açıklamasına dayanan hedef ve beyanlardır; gerçekleşme değildir. Dolar bazlı kişi başı GSYH değerleri TL’den dönüştürülmüş TÜİK değerleridir. Tutarlar cari fiyatlarladır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+cols($('yil'),[['2022',127.7,'','127,7'],['2023',92.9,'','92,9'],['2024',128.5,'','128,5'],['2025',93.5,'lo','93,5']]);
+bars($('seri'),[['TÜİK (faaliyet ili)',93.5],['TİM (kanuni merkez)',4.44]],[0]);
+bars($('hs'),[['Metal cevherleri, cüruf, kül',84.0],['Örme giyim eşyası',3.55],['Örme eşya',1.69],['Seramik mamulleri',1.55],['Sentetik filamentler',1.07]],[0]);
+bars($('paz'),[['Çin',58.2],['Cezayir',25.8],['Belarus',2.3],['Bulgaristan',1.7],['Birleşik Krallık',1.7]],[0]);
+bars($('trb'),[['Malatya',66.3],['Elazığ',24.0],['Bingöl',9.2],['Tunceli',0.6]],[2]);
+bars($('tim'),[['Çimento, cam, seramik, toprak ürünleri',1.56],['Kimyevi maddeler',1.15],['Tekstil ve hammaddeleri',0.49],['Mobilya, kâğıt, orman ürünleri',0.44],['Su ürünleri, hayvansal mamuller',0.25]],[0]);
+bars($('kb'),[['Türkiye ortalaması',15325],['Tunceli',14582],['Malatya',11146],['Elazığ',10660],['Bingöl',8429],['Bitlis',7063],['Muş',7016]],[4]);
+cols($('nuf'),[['2023',285.655,'','285.655'],['2024',283.276,'','283.276'],['2025',282.299,'lo','282.299']]);
+var TA=[['Arılı kovan sayısı (bin)',[['2000 (Vali)',45],['2022',161],['2024',179],['2025 (Vali)',180]],'Kovan sayısı 25 yılda yaklaşık dört katına çıktı. Kaynak: Vali Usta’nın açıklamaları; 2022 değeri dergipark çalışması (TÜİK).'],
+ ['Bal üretimi (ton)',[['2000 (Vali)',800],['2022',1489],['2024',1445]],'Kovan sayısı 2022’den 2024’e artsa da üretim hafif geriledi; kovan başı verim yaklaşık 9,3 kg’dan 8,1 kg’a indi (hesaplama). 2025 için “yaklaşık 2 bin ton” hedefi açıklanmıştı; gerçekleşme verisini bulamadım.']];
+tabs('ta',['Kovan','Bal üretimi'],function(i){
+ $('tatitle').textContent=TA[i][0];
+ bars($('tabars'),TA[i][1],[TA[i][1].length-1]);
+ $('tanote').textContent=TA[i][2]});
+var IG=[['Işgücüne katılma oranı, 2025 (%)',[['Malatya',50.2],['Tunceli',48.6],['Elazığ',46.5],['Bingöl',44.5]],3,'Türkiye ortalaması %53,5.'],
+ ['İstihdam oranı, 2025 (%)',[['Malatya',46.3],['Tunceli',46.1],['Elazığ',42.4],['Bingöl',40.3]],3,'Türkiye ortalaması %49,0.'],
+ ['İşsizlik oranı, 2025 (%)',[['Bingöl',9.6],['Elazığ',8.8],['Malatya',7.8],['Tunceli',5.3]],0,'Türkiye ortalaması %8,3; TRB1 Bölgesi %8,3. Kaynak: TÜİK 2025 il işgücü verileri (basın aktarımı).']];
+tabs('ig',['Katılım','İstihdam','İşsizlik'],function(i){
+ $('igtitle').textContent=IG[i][0];
+ bars($('igbars'),IG[i][1],[IG[i][2]]);
+ $('ignote').textContent=IG[i][3]});
+</script>
+</body>
+</html>
