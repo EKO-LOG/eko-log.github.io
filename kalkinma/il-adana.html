@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adana | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#2b8a3e;--a2:#f59f00;--a3:#c4202e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Adana</span><h1>Adana: Çukurova’nın Tarım ve Sanayi Kenti</h1><p>Türkiye’nin yedinci büyük şehri; dünyanın en verimli ovalarından birinin merkezi, 1860’lardan beri sanayi geleneği olan, enerji ve kimya yatırımlarıyla yeni bir sıçrama arayan bir il. Bu dosya Adana’nın tarım, sanayi, dış ticaret, gelir ve işgücü verilerini özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>2.283.609</b><span>Nüfus (2025), 7. büyük il</span></div>
+    <div class="k"><b>875 milyar TL</b><span>GSYH (2024), 9. sıra, %1,96 pay</span></div>
+    <div class="k"><b>10.692 $</b><span>Kişi başı GSYH (2024), 46. sıra</span></div>
+    <div class="k"><b>3.044 mn $</b><span>İhracat, TİM (2025), 13. sıra</span></div>
+    <div class="k"><b>4.446 mn $</b><span>İhracat, TÜİK faaliyet ili (2025), 14. sıra</span></div>
+    <div class="k"><b>574.827</b><span>SGK’lı aktif çalışan (Mayıs 2025)</span></div>
+  </div>
+  <div class="secnav"><a href="#tarim">Tarım</a><a href="#dis">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#lojistik">Lojistik</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="tarim">
+    <h2>Tarım: Çukurova Ovası</h2>
+    <p class="sub">Seyhan ve Ceyhan nehirlerinin deltası; Türkiye’nin en büyük delta ovası.</p>
+    <div class="g2">
+      <div class="card"><h3>Başlıca ürünler, 2025 üretimi (bin ton)</h3><div class="bars" id="urun"></div></div>
+      <div class="card"><h3>Türkiye üretimindeki pay (ADASO)</h3><div class="bars" id="pay"></div>
+        <p class="note">Mısır, narenciye, karpuz, soya ve yer fıstığında Adana, Sanayi Odası’nın sunumuna göre Türkiye birincisi.</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Tarım alanı 4,92 milyon dekar (Türkiye’nin %2,05’i); bunun %69’u ekilen alan, %23’ü meyve-içecek-baharat bitkileri.</li>
+      <li>Tarım, il GSYH’sinin %8’ini oluşturuyor (Türkiye ortalaması yaklaşık %5,8); yani tarımın ağırlığı ulusal ortalamanın üzerinde.</li>
+      <li>Tarım katma değeri 2024’te 70 milyar TL ile ülkenin 8. büyüğü.</li>
+      <li>Tarım alanları son yıllarda küçülüyor: 2023’te 5,04 milyon dekardı.</li>
+      <li>Karataş’ta planlanan iki tarıma dayalı ihtisas OSB’si (sera ve su ürünleri) var; ADASO sunumuna göre su ürünleri OSB’sinin yıllık 250 milyon $ ihracat, seranın yıllık 100 bin ton domates üretimi hedefi bulunuyor.</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>Dış Ticaret</h2>
+    <p class="sub">TİM verisi ihracatçının kanuni merkezini, TÜİK faaliyet ili verisi üretimin yapıldığı ili esas alır; bu yüzden TÜİK’te Adana’nın ağırlığı daha yüksek.</p>
+    <div class="card"><div class="tabs" id="yt"></div><h3 id="ytitle"></h3><div class="col" id="yil"></div></div>
+    <div class="card"><div class="tabs" id="tt"></div><h3 id="ttitle"></h3><div class="bars" id="bars"></div><p class="note" id="tnote"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>2025’te Adana 164 ülke ve bölgeye ihracat yaptı; ihracat 2021’den bu yana yaklaşık %23 büyüdü (2.481 → 3.044 mn $, TİM).</li>
+        <li>Tekstil, Türkiye ihracatındaki payı en yüksek (%5,22) sektör; yaş meyve-sebze (%4,92) ve su ürünleri (%3,52) onu izliyor.</li>
+        <li>ABD’ye ihracat 2025’te %54 düşerek 175 milyon $’a indi; Suriye (+%37,5) ve Birleşik Krallık (+%15,9) gibi pazarlarda artış var.</li></ul></div>
+      <div class="card"><h3>Dış ticaret dengesi (genel ticaret sistemi)</h3><ul>
+        <li>2025: ihracat 3,16 milyar $, ithalat 3,57 milyar $; açık 407 milyon $.</li>
+        <li>Açık 2022’de 1,76 milyar $ ile zirve yapmış, sonra belirgin biçimde daralmıştı.</li>
+        <li>Adana, ihracat çeşitliliğinde (ihraç edilen ürün çeşidi) İstanbul, İzmir, Ankara ve Konya’dan sonra 5. sırada (ADASO).</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi</h2>
+    <p class="sub">Adana, Türkiye’de sanayileşmenin erken başladığı illerden; ilk çırçır fabrikası 1864’te kuruldu.</p>
+    <div class="g2">
+      <div class="card"><h3>İmalat sanayi istihdamı (SGK, 2025, kişi)</h3><div class="bars" id="imal"></div><p class="note">Toplam imalat istihdamı 89.861 kişi; ilin toplam istihdamının %25,7’si.</p></div>
+      <div class="card"><h3>Adana Hacı Sabancı OSB</h3><ul>
+        <li>1973’te kuruldu; 2.227 hektar, doluluk %100.</li>
+        <li>498 faal firma, 41.723 kişilik istihdam, 21 sektör.</li>
+        <li>Firmaların ihracatı yaklaşık 1,8 milyar $.</li>
+        <li>İSO İlk 500’de 19, İkinci 500’de 15, TİM İlk 1000’de 16 firması var.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Büyük firmalar</h3><ul>
+        <li>İSO İlk 500’de 16 Adana merkezli firma: en büyükleri Sasa Polyester (44.) ve Temsa Skoda Sabancı (138.).</li>
+        <li>İhracatın büyük kısmı az sayıda firmada: TİM İlk 1000’deki 20 Adana firması 1,7 milyar $ ihracat yapıyor; Sasa 351 mn $, Temsa 316 mn $.</li>
+        <li>1.000’den fazla çalışanı olan yalnızca 10 işletme var.</li></ul></div>
+      <div class="card"><h3>Yeni endüstri bölgeleri</h3><ul>
+        <li>Türkiye’de ilan edilen endüstri bölgelerinin yaklaşık %24’ü (6.854 hektar) Adana’da: Ceyhan Enerji, EMBA ve İskenderun Enerji (elektrik üretimi), Sasa Yumurtalık (petrokimya), Ceyhan Kimya, Petro Global.</li>
+        <li>Planlanan alanlar: Kimya İhtisas OSB, Tekstilkent, Gıda İhtisas OSB, AOSB 5. etap. Mevcut ve yeni sanayi alanlarının toplamı yaklaşık 128 bin dekar.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>GSYH’nin sektörel dağılımı, 2024 (%)</h3><div class="bars" id="sek"></div><p class="note">Koyu çubuk Adana, açık çubuk Türkiye. “Diğer” kamu, finans, gayrimenkul, mesleki hizmetler ve vergileri kapsar.</p></div>
+      <div class="card"><h3>Kişi başına GSYH ($)</h3><div class="col" id="kb"></div></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>2024 GSYH’si 875,2 milyar TL; Adana, Konya’nın ardından Türkiye’nin 9. büyük ekonomisi. Ülke GSYH’sindeki payı 2004’te %2,03, 2024’te %1,96: yani son 20 yılda yaklaşık %2’de sabit kaldı.</li>
+      <li>Kişi başı GSYH 10.692 $ ile Türkiye ortalamasının (15.325 $) yaklaşık %70’i; Hatay, Gaziantep, Kahramanmaraş ve Osmaniye’nin üzerinde, sanayi merkezleri Kocaeli, Ankara, Tekirdağ, Bursa ve İzmir’in gerisinde.</li>
+      <li>Sosyo-ekonomik gelişmişlik sıralamasında (SEGE-2025) 22. sırada; rekabet gücü ve yaşam kalitesi güçlü, işsizlik ve eğitim göstergeleri zayıf yön.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><ul>
+        <li>2025: 2.283.609 kişi; Türkiye nüfusunun %2,65’i.</li>
+        <li>Nüfus artış hızı binde 1,4 (Türkiye binde 5,0); 2024-2025’te iller arasında 45. sıra. Adana 1995’ten sonra göç veren illere katıldı.</li>
+        <li>Geçici koruma kapsamındaki Suriyeli sayısı Ekim 2024’te 217.100 iken Temmuz 2026’da 171.801’e düştü.</li></ul></div>
+      <div class="card"><h3>İstihdam</h3><ul>
+        <li>SGK’lı aktif çalışan: 574.827 (Mayıs 2025); 4/a zorunlu sigortalı yaklaşık 346 bin, işyeri sayısı yaklaşık 49.700 (Nisan 2026).</li>
+        <li>Adana-Mersin (TR62) bölgesinde 2023 işsizlik oranı %14,0 idi (Türkiye %9,4). İl düzeyinde güncel TÜİK işsizlik oranını bulamadım.</li>
+        <li>Çukurova Üniversitesi’nde yaklaşık 54 bin, Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi’nde yaklaşık 6.100 öğrenci var.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="lojistik">
+    <h2>Lojistik ve Enerji</h2>
+    <div class="card"><ul style="margin:0">
+      <li>Mersin Limanı 85 km, İskenderun Limanı 84 km, Yumurtalık Limanı 40 km, Ceyhan’daki Toros Limanı 65 km uzaklıkta; Çukurova Havalimanı 35 km.</li>
+      <li>Kalkınma Bakanlığı’nın erişilebilirlik endeksinde Adana, İstanbul, İzmir ve Kocaeli’nin ardından 4. sırada.</li>
+      <li>Ceyhan, Irak-Türkiye ve Bakü-Tiflis-Ceyhan petrol boru hatlarının terminal noktası; ADASO sunumuna göre taşıma kapasitesi günde 2,6 milyon varil.</li>
+      <li>Mersin-Adana-Osmaniye-Gaziantep hızlı tren projesinde, 295 km’lik Mersin-Gaziantep yolculuğunun 6 saat 23 dakikadan 2 saat 15 dakikaya inmesi hedefleniyor.</li>
+      <li>Planlanan Adana Doğu Akdeniz Ana Konteyner Limanı’nın 12 milyon TEU kapasiteli olması öngörülüyor.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Adana’da 15 ilçe var; Seyhan, Yüreğir, Çukurova ve Sarıçam merkez ilçelerdir. İlçe düzeyinde resmî ekonomik veri sınırlıdır, tabloda sanayi ve yatırım verilerinden doğrulananlar var.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan</th></tr>
+      <tr><td>Seyhan, Yüreğir, Çukurova, Sarıçam</td><td>Merkez ilçeler; Adana Hacı Sabancı OSB, Doğu (Yüreğir) KSS, Sarıçam’da mobilyacılar sitesi</td></tr>
+      <tr><td>Ceyhan</td><td>Karma OSB, Ceyhan Enerji İhtisas Endüstri Bölgesi, petrol terminali ve Toros Limanı</td></tr>
+      <tr><td>Yumurtalık</td><td>Serbest bölge, limanı ve çok sayıda endüstri bölgesi (Sasa, EMBA, İskenderun Enerji)</td></tr>
+      <tr><td>Karataş</td><td>Planlanan sera ve su ürünleri ihtisas OSB’leri</td></tr>
+      <tr><td>Kozan</td><td>Kozan OSB (genişleme planlı)</td></tr>
+      <tr><td>Karaisalı</td><td>Planlanan karma OSB</td></tr>
+      <tr><td>İmamoğlu</td><td>Küçük sanayi sitesi</td></tr>
+      <tr><td>Aladağ, Feke, Pozantı, Saimbeyli, Tufanbeyli</td><td>Dağlık kuzey ilçeleri; bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1864 – İlk çırçır fabrikası.</b> Pamuk işleme sanayinin başlangıcı; 1898’de ilk iplikhane, 1901’de ilk entegre dokuma fabrikası kuruldu.</p>
+      <p><b>1894 – Ticaret Odası.</b> Sanayi Odası 1966’da ondan ayrılarak kuruldu.</p>
+      <p><b>1950-60’lar – Büyük işletmeler.</b> Çukobirlik (1941), Adana Çimento (1957), Bossa ve Sasa gibi fabrikalar kuruldu.</p>
+      <p><b>1973 – AOSB ve Çukurova Üniversitesi.</b></p>
+      <p><b>1990 – 4. büyük il.</b> Nüfus sayımında Türkiye’nin dördüncü büyük ili oldu; sonra göç veren illere katıldı.</p>
+      <p><b>2021-2022 – İhracat sıçraması.</b> TİM ihracatı 1,84 milyar $’dan 3,00 milyar $’a çıktı.</p>
+      <p><b>2025 – İhracat yatay, ABD’de düşüş.</b> İhracat %0,4 arttı; Suriye ve Avrupa pazarları büyürken ABD’ye satışlar yarıdan fazla azaldı.</p>
+      <p style="margin:0"><b>2025-26 – Yeni endüstri bölgeleri.</b> Sasa Yumurtalık (Ağustos 2025) ve Ceyhan Kimya (Ocak 2026) endüstri bölgeleri ilan edildi.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Verimli ova ve ürün çeşitliliği</li><li>Çeşitlenmiş sanayi ve ihracat tabanı</li><li>Liman ve havalimanına yakınlık, yüksek erişilebilirlik</li><li>Türkiye’deki endüstri bölgesi alanının %24’ü</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Kişi başı GSYH ulusal ortalamanın yaklaşık %70’i</li><li>Düşük nüfus artışı ve göç</li><li>Eğitim göstergeleri ve işsizlik</li><li>Büyük ölçekli işletme sayısı az</li><li>ABD pazarında sert düşüş</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Ceyhan-Yumurtalık hattında kimya, enerji ve petrokimya yatırımları</li><li>Tarıma dayalı ihtisas OSB’leri (sera, su ürünleri, gıda)</li><li>Hızlı tren ve yeni liman projeleri</li><li>Suriye’de yeniden yapılanma kaynaklı ihracat artışı</li></ul></div>
+      <div class="card"><h3>Not</h3><p style="margin:0">Adana’yı “gelişim potansiyeli en yüksek ikinci il” olarak gösteren TEPAV araştırması 2020 verilerine dayanıyor ve ADASO sunumunda aktarılıyor; güncel doğrulaması yapılmadı.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Adana neden büyük bir ekonomiye sahipken kişi başı gelirde ulusal ortalamanın altında? Hangi sektörler farkı kapatır?</li>
+      <li>Tarım alanlarının küçülmesi sanayi ve kentleşme karşısında nasıl önlenir?</li>
+      <li>Ceyhan-Yumurtalık’taki kimya ve enerji yatırımları kente nasıl yaygın refah sağlar?</li></ul>
+      <a class="btn" id="lnkFikir" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>Adana Sanayi Odası (ADASO), “Rakamlarla Adana 2026” (Ağustos 2026): TÜİK, SGK, TİM, Sanayi ve Teknoloji Bakanlığı ve Tarım ve Orman Bakanlığı verilerinin derlemesi</li>
+      <li>ADASO, 2025 Yılı İhracat Raporu (14 Ocak 2026): TİM ve Ticaret Bakanlığı verileri</li>
+      <li>Fırat Kalkınma Ajansı, Malatya Dış Ticaret Raporu 2021-2025: TÜİK faaliyet ili ihracat verileri (Adana 2022-2025)</li>
+      <li>TÜİK: il bazında GSYH 2024, ADNKS 2025</li>
+    </ul>
+    <p class="note">Kaynakların çoğu Sanayi Odası derlemesidir; yatırım ve potansiyel yorumları kurumun kendi değerlendirmesini yansıtabilir. İl düzeyinde güncel işsizlik oranı ve TÜİK hayvancılık rakamları doğrulanmış kaynakla bulunamadığı için sayfada yok. Tutarlar cari fiyatlarla, ihracat rakamları yıllıktır.</p>
+  </section>
+</div>
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){var h=Math.max(2,d[1]/m*130);var last=(data===D.tim||data===D.tuik)&&i===data.length-1;
+  return '<div class="'+(d[2]||(last?'lo':''))+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(i===hl?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+
+var D={
+urun:[['Mısır',918],['Mandalina',867],['Limon',642],['Buğday',452],['Portakal',372],['Ayçiçeği',203],['Yer fıstığı',117],['Soya',107],['Pamuk',63]],
+pay:[['Soya',57],['Yer fıstığı',57],['Karpuz',34],['Narenciye',29],['Pamuk',8]],
+tim:[['2020',1836.7],['2021',2481.3],['2022',2999.4],['2023',2901.2],['2024',3032.4],['2025',3044.5]],
+fal:[['2022',4431.9],['2023',4121.5],['2024',4338.1],['2025',4445.6]],
+sek:[['Kimyevi maddeler',607.4],['Tekstil ve hammaddeleri',490.7],['Hububat, bakliyat',365.0],['Otomotiv',361.6],['Yaş meyve ve sebze',182.3],['Hazırgiyim',145.2],['Su ürünleri, hayvansal',142.3],['Mobilya, kağıt, orman',138.5],['Çelik',117.4],['Makine ve aksamları',112.1]],
+ulk:[['Irak',237.8],['İspanya',200.1],['İtalya',180.3],['Almanya',177.2],['ABD',174.9],['Hollanda',153.9],['Suriye',142.9],['Birleşik Krallık',136.1],['Fransa',131.5],['Rusya',109.4]],
+tr:[['Tekstil ve hammaddeleri',5.22],['Yaş meyve ve sebze',4.92],['Su ürünleri, hayvansal',3.52],['Hububat, bakliyat',2.95],['Süs bitkileri',2.70],['Meyve sebze mamulleri',2.00],['Kimyevi maddeler',1.90],['Mobilya, kağıt, orman',1.73],['İklimlendirme',1.09],['Makine ve aksamları',1.00]],
+imal:[['Tekstil',13434],['Gıda',13171],['Giyim',8994],['Kimya',7892],['Fabrikasyon metal',7804],['Kauçuk, plastik',5281],['Makine ve ekipman',4410],['Ana metal',3844],['Motorlu taşıt',3348],['Mobilya',2960]],
+gs:[['Adana: Tarım',8.0],['Türkiye: Tarım',5.8],['Adana: Sanayi',21.6],['Türkiye: Sanayi',19.7],['Adana: İnşaat',6.4],['Türkiye: İnşaat',5.8],['Adana: Ticaret-ulaştırma-konaklama',24.9],['Türkiye: Ticaret-ulaştırma-konaklama',24.9],['Adana: Diğer',39.1],['Türkiye: Diğer',43.8]]
+};
+function bars2(el,data,u){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){var hl=/^Adana/.test(d[0]);return '<div class="row'+(hl?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%;'+(/^Türkiye:/.test(d[0])?'opacity:.45':'')+'"></i></div><em>'+N(d[1])+(u||'')+'</em></div>'}).join('')}
+bars(document.getElementById('urun'),D.urun,0);
+bars(document.getElementById('pay'),D.pay,0);
+bars(document.getElementById('imal'),D.imal.map(function(d){return [d[0],d[1]]}),0);
+bars2(document.getElementById('sek'),D.gs,'%');
+cols(document.getElementById('kb'),[['2020',5799,'','5.799'],['2021',6664,'','6.664'],['2022',7579,'','7.579'],['2023',9407,'','9.407'],['2024',10692,'','10.692'],['TR 2024',15325,'fc','15.325']]);
+tabs('yt',['TİM (ihracatçı merkezi)','TÜİK (faaliyet ili)'],function(i){
+ document.getElementById('ytitle').textContent=i?'Yıllık ihracat, TÜİK faaliyet ili (milyon $)':'Yıllık ihracat, TİM (milyon $)';
+ cols(document.getElementById('yil'),i?D.fal:D.tim)});
+var TT=[['Sektör (TİM)',D.sek,'2025 ihracatı, sektörlere göre (milyon $). Toplam 3.044 milyon $; kimya %19,95, tekstil %16,12, hububat %11,99, otomotiv %11,88.',''],
+ ['Ülke (TİM)',D.ulk,'2025 ihracatı, ülkelere göre (milyon $). İlk 20 ülkenin payı %68,2.',''],
+ ['Türkiye payı (%)',D.tr,'Adana’nın, ilgili sektörün Türkiye ihracatındaki payı (%), 2025.','']];
+tabs('tt',TT.map(function(t){return t[0]}),function(i){
+ document.getElementById('ttitle').textContent=TT[i][0]+' – 2025';
+ bars(document.getElementById('bars'),TT[i][1],0);
+ document.getElementById('tnote').textContent=TT[i][2]});
+</script>
+</body>
+</html>

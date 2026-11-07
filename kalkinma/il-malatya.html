@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Malatya | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#e8590c;--a2:#ffb703;--a3:#7c3aed"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Malatya</span><h1>Malatya: Kayısının Ötesinde Bir Ekonomi</h1><p>Dünya kuru kayısı ticaretinin merkezi, Doğu Anadolu’nun en gelişmiş sanayi kentlerinden biri ve üst üste iki büyük şok (6 Şubat 2023 depremleri, Nisan 2025 zirai donu) yaşamış bir il. Bu dosya; tarım, sanayi, dış ticaret ve işgücü verileriyle Malatya’nın bugününü ve potansiyelini özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<details class="card"><summary>Türkiye’nin 81 ili: il seç</summary><p class="note" style="margin:6px 0 0">Şimdilik yalnızca Malatya hazır; diğer iller eklendikçe etkinleşecek. (Plaka sırasıyla.)</p><div class="iller" id="iller"></div></details>
+  <div class="kpis">
+    <div class="k"><b>750.491</b><span>Nüfus (2025)</span></div>
+    <div class="k"><b>%7,8</b><span>İşsizlik oranı (2025)</span></div>
+    <div class="k"><b>%46,3</b><span>İstihdam oranı (2025)</span></div>
+    <div class="k"><b>335 mn $</b><span>İhracat, TİM (2025)</span></div>
+    <div class="k"><b>675 mn $</b><span>İhracat, TÜİK faaliyet ili (2025)</span></div>
+    <div class="k"><b>~%70</b><span>Dünya kuru kayısı ihtiyacındaki pay (TİM)</span></div>
+  </div>
+
+  <div class="secnav">
+    <a href="#kayisi">Kayısı</a><a href="#hayvancilik">Hayvancılık</a><a href="#simulator">Simülatör</a><a href="#hikaye">Ürün Hikâyesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm-Enerji</a><a href="#isgucu">İşgücü</a><a href="#gelir">Gelir</a><a href="#bolge">Bölge</a><a href="#ilceler">İlçeler</a><a href="#soklar">Şoklar</a><a href="#insa">Yeniden İnşa</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a>
+  </div>
+
+  <section id="kayisi">
+    <h2>Tarım: Kayısı Ekonomisi</h2>
+    <p class="sub">Malatya’nın tarımı kayısıyla özdeşleşmiş durumda; ürün AB coğrafi işaret tesciline sahip.</p>
+    <div class="card">
+      <h3>Kuru kayısı rekoltesi (bin ton)</h3>
+      <div class="col" id="kuru"></div>
+      <p class="note">2022–2024: resmi rekolte tahminleri. 2025: zirai don nedeniyle üretim sıfıra yakın; yaş kayısıda TÜİK verisi yalnızca 2.558 ton, kuru kayısı beklentisi 5 bin tonun altı (grafikte sembolik gösterilmiştir). 2026: resmi tahmin (taralı sütun). Sektör temsilcileri normal yıllarda 90–100 bin ton kuru kayısıdan söz eder; tahminler kaynağa göre değişir.</p>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Meyve veren kayısı ağacı sayısı 2020’de 7,79 milyondan 2025’te 8,68 milyona çıktı (%11,4 artış).</li>
+        <li>2026 için resmi tahmin: yaklaşık 341 bin ton yaş, 67,4 bin ton kuru kayısı.</li>
+        <li>Malatya Ticaret Borsası’na göre il, dünya yaş kayısının yaklaşık %20’sini, kuru kayısının yaklaşık %70’ini üretiyor.</li>
+        <li>2023/24 sezonunda 66.178 ton kuru kayısı ihracatından yaklaşık 398 milyon $ gelir sağlandı.</li>
+      </ul></div>
+      <div class="card"><h3>2025’te ne oldu?</h3><ul>
+        <li>Nisan 2025 zirai donu çiçekteki ağaçları vurdu; ihracat gelirleri 2025’te yaklaşık 303,6 milyon $’a indi, miktar yaklaşık %38 azaldı.</li>
+        <li>Önceki yıllardan kalan stok, ihracatın tamamen durmasını engelledi.</li>
+        <li>Küresel pazarda Özbekistan, İran, Tacikistan gibi rakipler büyürken Türkiye’nin dünya kuru kayısı ihracatındaki payı %72,7’den %58,3’e geriledi (2024→2025). Türkiye’nin ton başına birim değeri (6.252 $) dünya ortalamasının %34,6 üzerinde.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="hayvancilik">
+    <h2>Kayısı Dışı Tarım ve Hayvancılık</h2>
+    <p class="sub">Kayısı dışındaki üretim kolları için güncel il düzeyi rakam bulunamadı; aşağıda doğrulanmış çerçeve yer alıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Hayvancılık</h3><ul>
+        <li>İnönü Üniversitesi’nde yapılan akademik çalışmalar, Malatya’nın hayvancılıkta bölgedeki illere kıyasla potansiyelini tam kullanamadığını, özellikle küçükbaş üretiminin düşük kaldığını belirtiyor.</li>
+        <li>Aynı çalışmalara göre ilin öne çıktığı tek kol tavuk eti üretimi; yatırımla bölgenin lider ili olabileceği değerlendiriliyor.</li>
+        <li>TKDK IPARD III kapsamında Malatya’da süt, kırmızı et, kanatlı ve yumurta tesisleri için yaklaşık 30 milyon avroluk hibe programı açıldı.</li></ul></div>
+      <div class="card"><h3>Kayısının ilçe haritası</h3><ul>
+        <li>Akçadağ, Battalgazi, Darende, Hekimhan ve merkez ilçelerin payı, bir araştırmada il kayısı üretiminin yaklaşık %68’i olarak hesaplanmış.</li>
+        <li>Zirai don ve dolu riski en çok Akçadağ, Darende, Yazıhan ve Hekimhan’daki bahçelerde yaşandı.</li>
+        <li>Güncel TÜİK hayvan varlığı, süt, bal ve ceviz rakamları doğrulandıkça eklenecek.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="simulator">
+    <h2>Kayısı Simülatörü</h2>
+    <p class="sub">Rekolte, don kaybı, stok ve fiyat değişince ihracat geliri nasıl değişir? Basit bir öğretim modelidir; gerçek tahmin değildir.</p>
+    <div class="card">
+      <div class="tabs" id="pre"></div>
+      <div class="sl"><span>Normal yıl kuru rekolte (bin ton)</span><input type="range" id="s1" min="0" max="100" value="77"><em id="v1"></em></div>
+      <div class="sl"><span>Don / afet kaybı (%)</span><input type="range" id="s2" min="0" max="100" value="0"><em id="v2"></em></div>
+      <div class="sl"><span>İhracata giden pay (%)</span><input type="range" id="s3" min="50" max="100" value="85"><em id="v3"></em></div>
+      <div class="sl"><span>Stoktan ihracat (bin ton)</span><input type="range" id="s4" min="0" max="60" value="0"><em id="v4"></em></div>
+      <div class="sl"><span>İhracat fiyatı ($/ton)</span><input type="range" id="s5" min="4000" max="9000" step="50" value="6000"><em id="v5"></em></div>
+      <div class="out">
+        <div class="k"><b id="o1"></b><span>Rekolte (bin ton)</span></div>
+        <div class="k"><b id="o2"></b><span>İhracat miktarı (bin ton)</span></div>
+        <div class="k"><b id="o3"></b><span>İhracat geliri (milyon $)</span></div>
+      </div>
+      <div class="bars" id="cmp" style="margin-top:12px"></div>
+      <p class="note">Formül: gelir = (rekolte × ihracat payı + stok) × fiyat. Karşılaştırma: 2023/24 sezonu yaklaşık 398 milyon $ (66.178 ton), 2025 yaklaşık 303,6 milyon $. İhracat payı ve fiyat varsayımdır. “2025 don yılı” ön ayarı, rekolte kaybının önceki yıllardan kalan stokla (yaklaşık 50 bin ton olduğu belirtilmişti) nasıl kısmen telafi edildiğini gösterir.</p>
+    </div>
+  </section>
+
+  <section id="hikaye">
+    <h2>Bir Ürünün Hikâyesi: Kuru Kayısı</h2>
+    <p class="sub">Ağaçtan dünya sofrasına değer zinciri.</p>
+    <div class="card">
+      <div class="steps">
+        <div><b>1. BAHÇE</b>Malatya’da 8,68 milyon meyve veren kayısı ağacı var (2025).</div>
+        <div><b>2. KURUTMA</b>2026 resmi tahmine göre 289.897 ton yaş kayısı, 67.418 ton kuru kayısı veriyor: yaklaşık 4,3 kg yaştan 1 kg kuru.</div>
+        <div><b>3. PAKETLEME</b>Ürün ayıklanır, sınıflandırılır ve paketlenir. Yaş kayısı ise 350 gramdan 5 kiloya kadar paketlerle ihraç ediliyor.</div>
+        <div><b>4. İHRACAT</b>2025’in ilk altı ayında 115 ülkeye 29.704 ton gönderildi. Türkiye ortalama ihracat fiyatı 6.252 $/ton.</div>
+        <div><b>5. PAZAR</b>En büyük alıcı ABD (2025’te Türkiye’den 81,4 milyon $). Fransa ve Almanya izliyor.</div>
+      </div>
+      <p class="note">Katma değer sorusu: ham kuru kayısı yerine işlenmiş ürün (pasta, kayısı ezmesi, atıştırmalık) satılsaydı ton başına gelir nasıl değişirdi?</p>
+      <a class="btn" id="lnkUrun" href="../index.html#/urun">“Bir Ürünün Hikâyesi” sayfasını aç</a>
+    </div>
+  </section>
+
+  <section id="ihracat">
+    <h2>Dış Ticaret</h2>
+    <p class="sub">TİM verisi ihracatçının kanuni merkezini, TÜİK “faaliyet ili” verisi üretimin yapıldığı ili esas alır; iki seri farklı kavramı ölçtüğü için rakamlar farklıdır.</p>
+    <div class="card">
+      <div class="tabs" id="yt"></div>
+      <h3 id="ytitle"></h3>
+      <div class="col" id="yil"></div>
+    </div>
+    <div class="card">
+      <div class="tabs" id="tt"></div>
+      <h3 id="ttitle"></h3>
+      <div class="bars" id="bars"></div>
+      <p class="note" id="tnote"></p>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>2021→2025 yükselenler (TİM)</h3><ul>
+        <li>İklimlendirme sanayii <span class="up">+%117,5</span></li>
+        <li>Elektrik ve elektronik <span class="up">+%88,8</span></li>
+        <li>Makine ve aksamları <span class="up">+%79,7</span> (17,4 → 31,2 mn $)</li>
+        <li>Kimyevi maddeler <span class="up">+%77,2</span></li>
+        <li>Hububat ve bakliyat <span class="up">+%35,8</span></li>
+      </ul></div>
+      <div class="card"><h3>2021→2025 gerileyenler (TİM)</h3><ul>
+        <li>Fındık ve mamulleri <span class="dn">−%86,1</span></li>
+        <li>Su ürünleri ve hayvansal mamuller <span class="dn">−%58,6</span></li>
+        <li>Tekstil ve hammaddeleri <span class="dn">−%38,0</span></li>
+        <li>Meyve sebze mamulleri <span class="dn">−%28,1</span></li>
+        <li>Kuru meyve ve mamulleri <span class="dn">−%22,3</span></li>
+      </ul></div>
+    </div>
+    <div class="card"><h3>Pazar yapısı</h3><p style="margin:0">2025’te Malatya 124 ülkeye ihracat yaptı; 54 ülkeye 1 milyon $’ın üzerinde satış var. Irak’a ihracat 2021’e göre %60,9 azalırken Suriye (+%125,9), Ürdün ve Kazakistan’da güçlü artış görüldü. TÜİK faaliyet ili verisinde Mısır 2022’den bu yana yaklaşık dört katına çıkarak üçüncü pazar oldu. İhracatın Türkiye toplamındaki payı TİM’e göre %0,206’dan (2021) %0,141’e (2025) geriledi.</p></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi</h2>
+    <p class="sub">TRB1 bölgesinin (Malatya, Elazığ, Bingöl, Tunceli) sanayisi en gelişmiş ili Malatya’dır.</p>
+    <div class="g2">
+      <div class="card"><h3>Tekstil ve hazır giyim</h3><ul>
+        <li>TÜİK faaliyet ili verisine göre pamuklu mensucat, örme eşya ve giyim (HS 52, 60, 61, 62) 2025’te 312,7 mn $ ile ihracatın %46,3’ünü oluşturdu; yani Malatya ihracatı yalnızca kayısı değil.</li>
+        <li>Tekstil, OSB istihdamının yaklaşık %52’sini oluşturuyor; çalışan sayısı depremden önceki 21 binden yaklaşık 15 bine geriledi (MTSO).</li>
+        <li>Kalifiye işgücü göçü, sanayicilerin öne çıkardığı temel sorun.</li>
+      </ul></div>
+      <div class="card"><h3>Organize sanayi altyapısı</h3><ul>
+        <li>Sanayi Bakanı’nın açıklamasına göre OSB alanı 650 hektardan 2.341 hektara, OSB istihdamı 5.480’den 25 bine çıktı.</li>
+        <li>Malatya Merkez 1. OSB’nin yeni bölümü (347 hektar) sanayicilerin kullanımına açıldı; Yeşilyurt Sanayi Sitesi’nde yeni etaplar yapılıyor.</li>
+        <li>Deprem sonrası OSB fiziksel olarak büyük ölçüde ayakta kaldı; asıl kayıp işgücünde yaşandı.</li>
+      </ul></div>
+      <div class="card"><h3>Yükselen sanayi kolları</h3><ul>
+        <li>Makine, elektrik-elektronik ve iklimlendirme ihracatta katma değer potansiyeli taşıyor.</li>
+        <li>HS 84 (makine) 2025’te 43,7 mn $ ile TÜİK verisinde 5. sırada; 2022’ye göre %42,2 artış.</li>
+        <li>Plastik mamulleri 2022–2025’te yaklaşık %98 büyüdü.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Enerji</h2>
+    <p class="sub">Bu iki alanda il düzeyinde güncel sayısal veri bulunamadı; doğrulanmış çerçeve aşağıda.</p>
+    <div class="g2">
+      <div class="card"><h3>Turizm</h3><ul>
+        <li>Battalgazi’deki Arslantepe Höyüğü, 2021’den beri UNESCO Dünya Mirası Listesi’nde.</li>
+        <li>Darende’deki Tohma Kanyonu ve yüksek rakımlı ilçeler yaz turizminde öne çıkıyor.</li>
+        <li>Deprem sonrası Bakırcılar, Kuyumcular ve Şire Pazarı gibi tarihî çarşıların yeniden kurulması şehir turizmi için de önemli.</li>
+        <li>Ziyaretçi ve konaklama sayıları doğrulanınca eklenecek.</li></ul></div>
+      <div class="card"><h3>Enerji</h3><ul>
+        <li>Fırat Kalkınma Ajansı’nın 2024–2028 Bölge Planı’na göre TRB1 bölgesinin lisanssız elektrik üretimi kurulu gücü Türkiye’nin %4,26’sı; yani yenilenebilir enerji potansiyeli yüksek.</li>
+        <li>Bu oran Malatya + Elazığ + Bingöl + Tunceli toplamıdır; il bazlı ayrıştırma bu dosyada henüz yok.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <p class="sub">TÜİK, 2025</p>
+    <div class="g2">
+      <div class="card"><h3>Malatya</h3><ul><li>Nüfus: 750.491</li><li>İşsizlik: %7,8</li><li>İstihdam oranı: %46,3</li><li>İşgücüne katılma: %50,2</li></ul></div>
+      <div class="card"><h3>Karşılaştırma</h3><ul><li>TRB1 işsizlik: %8,3 (Elazığ %8,8, Bingöl %9,6, Tunceli %5,3)</li><li>Türkiye işsizlik (2025 4. çeyrek): %8,2</li><li>Malatya, bölgede Tunceli’den sonra en düşük işsizliğe sahip ikinci il.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, cari fiyatlarla</p>
+    <div class="card"><h3>Kişi başına GSYH ($)</h3><div class="col" id="gsyh"></div>
+      <p class="note">Malatya’da 2024 kişi başı GSYH yaklaşık 11.146 $; Türkiye ortalamasının (15.325 $) yaklaşık %73’ü. TL bazında 2020’de 36.118 TL iken 2024’te 365.880 TL’ye çıktı; bu artışın büyük kısmı enflasyon ve kur etkisidir. Toplam GSYH 2020’de yaklaşık 30,1 milyar TL, 2024’te 284,4 milyar TL.</p></div>
+    <div class="card"><ul style="margin:0"><li>2024’te TL bazında en yüksek artış gösteren üçüncü il: Malatya (%17); Adıyaman (%31,4) ve Bayburt (%17,1) önde.</li><li>Malatya’nın sektörel GSYH payları (tarım, sanayi, hizmet) doğrulanmış güncel kaynakla bulunamadı; bulununca eklenecek. Akademik bir çalışma, Malatya’nın bölgesel katma değerinde sanayinin ardından tarımın geldiğini belirtiyor.</li></ul></div>
+  </section>
+
+  <section id="bolge">
+    <h2>Bölge İçindeki Ağırlık</h2>
+    <p class="sub">İhracat, TÜİK faaliyet ili, 2025 (milyon $)</p>
+    <div class="card"><div class="bars" id="trb1"></div>
+      <p class="note">Malatya, TRB1 ihracatının %66,3’ünü yapıyor; 81 il içindeki sırası 2022’de 35 iken 2025’te 41’e indi. Bölgesel payın artması Malatya’nın güçlenmesinden değil, bölgenin diğer illerinin daha hızlı küçülmesinden kaynaklanıyor.</p></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Malatya’da 13 ilçe var; Battalgazi ve Yeşilyurt merkez ilçelerdir. İlçe düzeyinde resmî ekonomik veri sınırlıdır, tabloda yalnızca doğrulanan bilgiler var.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Yüzölçümü (km²)</th><th>Öne çıkan</th></tr>
+      <tr><td>Battalgazi</td><td>947</td><td>Arslantepe (UNESCO); deprem sonrası 26.915 konutluk TOKİ ihalesi; kayısıda önde gelen ilçelerden</td></tr>
+      <tr><td>Yeşilyurt</td><td>953</td><td>İkizce’de 9 bine yakın konut ve köy evi; geleneksel Malatya evleri</td></tr>
+      <tr><td>Akçadağ</td><td>1.118</td><td>Kayısıda ilk sıradaki ilçelerden; nüfusu deprem öncesi yaklaşık 28 bin</td></tr>
+      <tr><td>Darende</td><td>1.482</td><td>Kayısı ve Tohma Kanyonu turizmi</td></tr>
+      <tr><td>Hekimhan</td><td>1.514</td><td>En büyük yüzölçümlü ilçe; kayısı</td></tr>
+      <tr><td>Doğanşehir</td><td>1.364</td><td>Deprem konutlarının yapıldığı ilçelerden</td></tr>
+      <tr><td>Arguvan</td><td>1.096</td><td>–</td></tr>
+      <tr><td>Pütürge</td><td>1.086</td><td>Deprem konutlarının yapıldığı ilçelerden</td></tr>
+      <tr><td>Arapgir</td><td>987</td><td>–</td></tr>
+      <tr><td>Yazıhan</td><td>653</td><td>2017 verisine göre ilin en geniş tarım alanı (386 bin dekar); kayısı</td></tr>
+      <tr><td>Kuluncak</td><td>645</td><td>–</td></tr>
+      <tr><td>Kale</td><td>–</td><td>2017 verisine göre en küçük tarım alanı (15,5 bin dekar); deprem konutları</td></tr>
+      <tr><td>Doğanyol</td><td>–</td><td>Nüfus bakımından en küçük ilçe; deprem konutları</td></tr>
+    </table></div>
+  </section>
+
+  <section id="soklar">
+    <h2>İki Büyük Şok</h2>
+    <div class="card tl">
+      <p><b>6 Şubat 2023 – Depremler.</b> Kentin fiziki ve beşeri altyapısı zarar gördü; 2023’te Malatya ihracatı (TİM) %13,8 düştü, Türkiye’de ise %2,1.</p>
+      <p><b>2024 – Kısmi toparlanma.</b> İhracat %8,7 artarak 426,3 mn $’a çıktı; kayısı rekoltesi ağaç sayısındaki artışla yüksek seyretti.</p>
+      <p><b>Nisan 2025 – Zirai don.</b> Kayısı rekoltesi neredeyse sıfıra indi. İhracat %21,4 düşerek 335 mn $ oldu; kayıp yalnızca kayısıyla sınırlı kalmadı, elektrik-elektronik ve su ürünleri gibi başka sektörlerde de daralma görüldü.</p>
+      <p style="margin:0"><b>2026 – Yeniden hasat.</b> Resmi tahmin, kuru kayısıda yaklaşık 67 bin ton; yaş kayısı ihracatı yeniden başladı.</p>
+    </div>
+  </section>
+
+  <section id="insa">
+    <h2>Deprem Sonrası Yeniden İnşa</h2>
+    <p class="sub">Resmî açıklamalara göre Malatya’da yıl sonu itibarıyla teslim edilenler</p>
+    <div class="card"><div class="bars" id="insab"></div>
+      <p class="note">Toplam 79.660 konut, köy evi ve iş yeri teslim edildi (62.540 konut, 13.032 köy evi, 4.088 iş yeri). Bakırcılar Çarşısı Emlak Konut GYO tarafından 156.642 m² alanda yapılıyor: 3.200 dükkân, 224 konut, 2.270 ofis, 32 restoran. Kuyumcular, Şire Pazarı ve Kasaplar Çarşısı da yeniden kuruluyor. Bu rakamlar bakanlık ve valilik açıklamalarıdır.</p></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>MÖ 4. binyıl – Arslantepe.</b> Höyük, bölgenin en eski kent-devlet merkezlerinden biri sayılıyor; 2021’de UNESCO Dünya Mirası oldu.</p>
+      <p><b>2012 – Büyükşehir.</b> 6360 sayılı kanunla Malatya büyükşehir belediyesi oldu.</p>
+      <p><b>2020 – Elazığ depremi.</b> Malatya’ya da etkisi oldu; Gelinciktepe’de yaklaşık 2.500 konut yapıldı.</p>
+      <p><b>Son 23 yıl – Sanayi altyapısı.</b> OSB alanı 650 hektardan 2.341 hektara, OSB istihdamı 5.480’den 25 bine çıktı (Sanayi Bakanı).</p>
+      <p><b>6 Şubat 2023 – Depremler.</b> Yeniden inşa süreci başladı.</p>
+      <p><b>Nisan 2025 – Zirai don.</b> Kayısı rekoltesi neredeyse sıfıra indi.</p>
+      <p style="margin:0"><b>2026 – Toparlanma.</b> Resmî kayısı rekolte tahmini yaklaşık 67 bin ton kuru.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Aşağıdaki başlıklar, yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Dünya kayısı pazarında marka ve coğrafi işaret</li><li>Bölgenin en gelişmiş sanayi altyapısı</li><li>124 ülkeye yayılmış pazar ağı</li><li>İşsizliğin bölge ortalamasının altında olması</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın yaklaşık yarısı tek ürün grubuna (kuru meyve) bağlı</li><li>İklim şoklarına açıklık; sigorta oranı düşük</li><li>Nitelikli işgücü kaybı</li><li>Orta Asya ve İran’dan gelen kayısı rekabeti</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>İşlenmiş kayısı ve katma değerli gıdalara geçiş (ham ürün payının azaltılması)</li><li>Makine, iklimlendirme ve elektronikte büyüme</li><li>ABD, Kanada, İsviçre ve BAE gibi büyüyen pazarlar</li><li>Don riskine karşı sigorta ve erken uyarı sistemleri</li></ul></div>
+      <div class="card"><h3>Tartışma soruları</h3><ul><li>Malatya bir “tek ürün” ekonomisi olmaktan nasıl çıkar?</li><li>Afet sonrası işgücü göçü nasıl tersine çevrilir?</li><li>Katma değeri artırmak için hangi yatırım araçları kullanılmalı?</li></ul></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card">
+      <ul><li>Malatya “tek ürün ekonomisi” olmaktan nasıl çıkar? Sigorta mı, sanayi mi, işlenmiş ürün mü?</li>
+      <li>Deprem ve don sonrası genç ve nitelikli işgücünü şehre geri çekmek için ne gerekir?</li>
+      <li>Kayısı sigortası zorunlu olmalı mı? Devlet kayıpların ne kadarını karşılamalı?</li></ul>
+      <a class="btn" id="lnkFikir" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a>
+    </div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>Fırat Kalkınma Ajansı, Malatya Dış Ticaret Raporu 2021–2025 (TİM, TÜİK, ITC Trade Map verileriyle), Temmuz 2026</li>
+      <li>TÜİK: 2025 işgücü göstergeleri (il düzeyi), ADNKS nüfus</li>
+      <li>Tarım ve Orman Bakanlığı resmi rekolte tahminleri; Malatya Ticaret Borsası ve MTSO açıklamaları (basın aktarımları)</li>
+      <li>Sanayi ve Teknoloji Bakanlığı açıklamaları (OSB büyüklüğü ve istihdam)</li>
+      <li>TÜİK il bazında GSYH (2020–2024); Çevre, Şehircilik ve İklim Değişikliği Bakanlığı / TOKİ açıklamaları; FKA 2024–2028 TRB1 Bölge Planı; TKDK; İnönü Üniversitesi çalışmaları</li>
+    </ul>
+    <p class="note">Sektörel GSYH payları, SGK sektörel istihdamı, güncel hayvan varlığı ve turizm istatistikleri doğrulanmış kaynakla bulunamadığı için sayfada yer almıyor; bulundukça eklenecek. Tutarlar cari ABD doları, ihracat rakamları yıllıktır.</p>
+  </section>
+</div>
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var D={
+kuru:[['2022',75.8,''],['2023',77.2,''],['2024',76.9,''],['2025',5,'lo','&lt;5'],['2026',67.4,'fc','67,4*']],
+tim:[['2021',425.1],['2022',455.0],['2023',392.2],['2024',426.3],['2025',335.0]],
+tuik:[['2022',908.3],['2023',820.3],['2024',818.2],['2025',675.1]],
+sek:[['Kuru meyve ve mamulleri',164.5],['Makine ve aksamları',31.2],['Elektrik ve elektronik',22.4],['Su ürünleri, hayvansal mam.',20.1],['Tekstil ve hammaddeleri',18.8],['Hububat, bakliyat',18.2],['Çimento, cam, seramik',11.3],['Meyve sebze mamulleri',9.6],['İklimlendirme',9.0],['Kimyevi maddeler',6.4]],
+ulk:[['ABD',44.6],['Irak',24.7],['Almanya',21.2],['Fransa',17.0],['İtalya',13.7],['Suriye',13.0],['Rusya',12.6],['Brezilya',10.0],['Kazakistan',8.2],['Çin',7.2]],
+hs:[['08 Meyve ve sert kabuklular',160.0],['62 Örülmemiş giyim',125.0],['61 Örme giyim',85.0],['52 Pamuk, pamuklu mensucat',80.9],['84 Makine ve mekanik cihaz',43.7],['85 Elektrikli makina',28.3],['60 Örme eşya',21.7],['39 Plastik mamulleri',19.0],['70 Cam ve cam eşya',12.2],['02 Et ve sakatat',11.6]],
+trb:[['Malatya',675.1],['Elazığ',244.7],['Bingöl',93.5],['Tunceli',5.7]]
+};
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){var h=Math.max(2,d[1]/m*130);var last=(data===D.tim||data===D.tuik)&&i===data.length-1;
+  return '<div class="'+(d[2]||(last?'lo':''))+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(i===hl?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+cols(document.getElementById('kuru'),D.kuru);
+tabs('yt',['TİM (ihracatçı merkezi)','TÜİK (faaliyet ili)'],function(i){
+ document.getElementById('ytitle').textContent=i?'Yıllık ihracat, TÜİK faaliyet ili (milyon $)':'Yıllık ihracat, TİM (milyon $)';
+ cols(document.getElementById('yil'),i?D.tuik:D.tim)});
+var TT=[['Sektör (TİM)',D.sek,'2025 ihracatı, sektörlere göre (milyon $). Kaynak: TİM. İlk beş sektör toplamın %76,7’sini oluşturuyor.',0],
+ ['Ülke (TİM)',D.ulk,'2025 ihracatı, ülkelere göre (milyon $). Kaynak: TİM. İlk 10 ülkenin payı %51,4.',0],
+ ['Ürün grubu (TÜİK)',D.hs,'2025 ihracatı, HS-2 ürün gruplarına göre (milyon $). Kaynak: TÜİK faaliyet ili. İlk beş fasıl %73,3.',0]];
+tabs('tt',TT.map(function(t){return t[0]}),function(i){
+ document.getElementById('ttitle').textContent=TT[i][0]+' – 2025';
+ bars(document.getElementById('bars'),TT[i][1],0);
+ document.getElementById('tnote').textContent=TT[i][2]});
+bars(document.getElementById('trb1'),D.trb,0);
+var IL='Adana,Adıyaman,Afyonkarahisar,Ağrı,Amasya,Ankara,Antalya,Artvin,Aydın,Balıkesir,Bilecik,Bingöl,Bitlis,Bolu,Burdur,Bursa,Çanakkale,Çankırı,Çorum,Denizli,Diyarbakır,Edirne,Elazığ,Erzincan,Erzurum,Eskişehir,Gaziantep,Giresun,Gümüşhane,Hakkari,Hatay,Isparta,Mersin,İstanbul,İzmir,Kars,Kastamonu,Kayseri,Kırklareli,Kırşehir,Kocaeli,Konya,Kütahya,Malatya,Manisa,Kahramanmaraş,Mardin,Muğla,Muş,Nevşehir,Niğde,Ordu,Rize,Sakarya,Samsun,Siirt,Sinop,Sivas,Tekirdağ,Tokat,Trabzon,Tunceli,Şanlıurfa,Uşak,Van,Yozgat,Zonguldak,Aksaray,Bayburt,Karaman,Kırıkkale,Batman,Şırnak,Bartın,Ardahan,Iğdır,Yalova,Karabük,Kilis,Osmaniye,Düzce'.split(',');
+document.getElementById('iller').innerHTML=IL.map(function(n,i){var m=n==='Malatya';var R={'Adana':'il-adana.html','Gaziantep':'il-gaziantep.html'};if(R[n])return '<button style="cursor:pointer;opacity:1;border-color:var(--ac2);color:var(--ac2)" onclick="location.href=\''+R[n]+'\'">'+(i+1)+' '+n+'</button>';return '<button class="'+(m?'on':'')+'" '+(m?'':'disabled title="Yakında"')+'>'+(i+1)+' '+n+'</button>'}).join('');
+cols(document.getElementById('gsyh'),[['2020',5131,'','5.131'],['2024',11146,'','11.146'],['Türkiye 2024',15325,'fc','15.325']]);
+bars(document.getElementById('insab'),[['Konut',62540],['Köy evi',13032],['İş yeri',4088]],0);
+var P=[['Normal yıl',[77,0,85,0,6000]],['2025 don yılı',[77,100,85,50,6100]],['2026 tahmini',[67.4,0,85,0,6250]]];
+function sim(){var v=[1,2,3,4,5].map(function(i){return +document.getElementById('s'+i).value});
+ [1,2,3,4,5].forEach(function(i){document.getElementById('v'+i).textContent=String(v[i-1]).replace('.',',')});
+ var r=v[0]*(1-v[1]/100),x=r*v[2]/100+v[3],g=x*v[4]/1000;
+ document.getElementById('o1').textContent=N(r.toFixed(1));document.getElementById('o2').textContent=N(x.toFixed(1));document.getElementById('o3').textContent=N(g.toFixed(0));
+ bars(document.getElementById('cmp'),[['Senaryon',+g.toFixed(0)],['2023/24 sezonu',398],['2025',303.6]],0)}
+tabs('pre',P.map(function(p){return p[0]}),function(i){var a=P[i][1];[1,2,3,4,5].forEach(function(j){document.getElementById('s'+j).value=a[j-1]});sim()});
+[1,2,3,4,5].forEach(function(j){document.getElementById('s'+j).oninput=sim});
+
+</script>
+</body>
+</html>
