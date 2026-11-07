@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hatay | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0f6b8a;--a2:#c8553d;--a3:#6b8e23"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Hatay</span><h1>Hatay: Çelik, Liman ve Yeniden İnşa</h1><p>Doğu Akdeniz’in en çok ihracat yapan ili: ihracatın yaklaşık %61’i çelikten geliyor, çelik de İskenderun’daki demir-çelik ve liman kompleksine dayanıyor. 6 Şubat 2023 depremleri nüfusu ve istihdamı vurdu; büyümenin büyük kısmını ise yeniden inşa getirdi. Kişi başı gelir ulusal ortalamanın yaklaşık %69’u. Bu dosya Hatay’ı rakamları ve açık sorularıyla özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>2.708,8 mn $</b><span>İhracat, Ocak–Eylül 2026 (2025’in aynı dönemine göre %6,1 artış, haberdeki oran)</span></div>
+    <div class="k"><b>%61,5</b><span>Çeliğin ihracattaki payı (Ocak–Eylül 2025, 1.573 mn $)</span></div>
+    <div class="k"><b>10.570 $</b><span>Kişi başı GSYH (2024), 81 il arasında 49. sıra; Türkiye ort. 15.325 $</span></div>
+    <div class="k"><b>1.544.640</b><span>Nüfus (2023); deprem öncesi 2022’de 1.686.043</span></div>
+    <div class="k"><b>153.755</b><span>Hatay’da teslim edilen bağımsız bölüm (Ekim 2026 haberi)</span></div>
+    <div class="k"><b>%15,6</b><span>İşsizlik oranı (2023, TÜİK); 2022’de %14,4</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi-Liman</a><a href="#insa">Yeniden İnşa</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Rakamlar TİM / Ticaret Bakanlığı kaynaklı basın aktarımlarına dayanır; il ihracatçıların kayıtlı olduğu ile göre verilir.</p>
+    <div class="g2">
+      <div class="card"><h3>Kümülatif ihracat (milyon $)</h3><div class="col" id="kum"></div>
+        <p class="note">2025 Ocak–Mayıs: 1.500,3 (2024’ün aynı dönemine göre %9,1 artış). Ocak–Eylül: 2024’te 2.537,9; 2025’te 2.559,0 (%0,8 artış); 2026’da 2.708,8. Haberdeki %6,1’lik artış oranı 2025 değerinden hesaplanan oranla (yaklaşık %5,9) küçük bir fark gösteriyor; olasılıkla verinin sonradan revize edilmesinden kaynaklanıyor.</p></div>
+      <div class="card"><h3>Doğu Akdeniz’in dört ili, Ocak–Eylül 2025 (milyon $)</h3><div class="bars" id="bolge"></div>
+        <p class="note">Hatay, Mersin ve Adana’yı geride bırakarak bölgenin lider ili oldu.</p></div>
+    </div>
+    <div class="card"><h3>Sektörlere göre ihracat, Ocak–Eylül 2025 (milyon $)</h3><div class="bars" id="sek"></div>
+      <p class="note">Çelik ihracatı %3,7 arttı. Su ürünleri ve hayvansal mamullerle (%147,6) ve demir ve demir dışı metallerde (%143,7) yüksek artış görülse de tutarlar küçük. Kaynak: TİM verileri, AA.</p></div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Ocak–Eylül 2025’te Hatay’ın ihracatı 2.559 milyon $ oldu ve çelik tek başına yaklaşık %61,5’ini oluşturdu; yaş meyve ve sebze 308,5 milyon $ ile ikinci.</li>
+        <li>Ana sayfadaki pano (TİM kanuni merkez esaslı, 2025) Hatay’ı 3,5 milyar $ ile ilk 20 il arasında 12. sırada gösteriyor.</li>
+        <li>Cilvegözü Gümrük Kapısı’ndan Suriye’ye son bir yılda yaklaşık 200 milyon $’lık ihracat yapıldığı belirtiliyor (nakliyeci derneği temsilcisi, Şubat 2026); ağırlıkla inşaat malzemesi ve gıda.</li>
+        <li>TEPAV değerlendirmesine göre 2023–2025 arasında ihracattaki artışın neredeyse tamamı demir-çelikten geldi.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>2025 yıllık ihracat değerini ve ülke kırılımını doğrulanmış kaynakla bulamadım; kaynaklarda dokuz aylık veriler var.</li>
+        <li>İhracat serileri (TİM kanuni merkez ve faaliyet ili) farklı tanımlar kullanıyor; rakamlar birbiriyle doğrudan karşılaştırılmamalı.</li>
+        <li>Cilvegözü rakamı bir temsilcinin ifadesidir, resmî bir seri değildir.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım</h2>
+    <p class="sub">Narenciye, zeytin, pamuk ve sebze; Amik Ovası ve kıyı ovaları ilin tarım omurgası.</p>
+    <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Üretim ve alan (2024)</h3><ul>
+        <li>Toplam tarım alanı 275.578 hektar: tarla 150.094, meyve 101.729, sebze 23.755 hektar.</li>
+        <li>Narenciye üretimi yıldan yıla çok dalgalı: 2023’te 1,62 milyon ton iken 2024’te 948.639 ton.</li>
+        <li>Zeytin üretimi 2020’de 67 bin tondan 2024’te 223 bin tona çıktı.</li>
+        <li>Sebzede maydanoz 80.060, havuç 72.886, kuru soğan 155.329 ton (2024).</li></ul></div>
+      <div class="card"><h3>Hayvancılık ve su ürünleri (2024)</h3><ul>
+        <li>Büyükbaş 140.858, küçükbaş 486.087, kanatlı 992.069 baş; 127.054 kovan.</li>
+        <li>Küçükbaş sayısı 2022’deki 558.609’dan geriledi.</li>
+        <li>Su ürünleri: çipura 5.446 ton, levrek 3.883 ton.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Tarım istihdamı depremden sonra azaldı: TEPAV’a göre 2022–2024 arasında tarımdaki sigortalı çalışan sayısı %21,2 düştü.</li>
+      <li>Kaynaklar bölgede zeytinyağı fiyatı ve hasat işçisi bulma sorunlarına, narenciyede ise hava olaylarına işaret ediyor; bunların ilin toplam geliri içindeki ağırlığını bu dosyada veremedim.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Liman</h2>
+    <p class="sub">Demir-çelik ve liman İskenderun’da yoğunlaşıyor; bu ikili ilin ihracat motoru.</p>
+    <div class="g2">
+      <div class="card"><h3>İsdemir ve liman</h3><ul>
+        <li>İsdemir (OYAK/Erdemir grubu) İskenderun’da bulunan büyük bir demir-çelik üreticisi; Hatay’ın çelik ihracatının ana kaynağı.</li>
+        <li>İsdemir’in liman kapasite artışı projesi 1 Eylül 2025’te ÇED onayı aldı: yatırım 8,47 milyar TL (yaklaşık 206 milyon $), yıllık elleçleme kapasitesi 20 milyon tondan 25,7 milyon tona çıkacak; yeni tesislerin 2028’in son çeyreğinde devreye alınması planlanıyor.</li>
+        <li>Erdemir ve İsdemir liman tesislerinin yıllık operasyon kapasitesi 44 milyon ton; 2025’te 21,72 milyon ton yük elleçlendi, genel kargo ve dökme katı yükte ülke pazar payı yaklaşık %10.</li></ul></div>
+      <div class="card"><h3>Lojistik yatırımları</h3><ul>
+        <li>OYAK Liman, İskenderun’da yeni liman ve Demiryolu Lojistik Merkezi yatırımlarını sürdürüyor (Ağustos 2026 haberi; tutar ve takvim açıklanmamış).</li>
+        <li>Grup dışı üçüncü taraflara sunulan hizmetin 2026’nın ilk yarısında bir önceki yıla göre %41 arttığı belirtiliyor.</li>
+        <li>Kuruluşundan bu yana toplam 12.200 gemi operasyonu gerçekleşti; 2025’te yaklaşık 1.370 gemiye acentelik yapıldı.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>TEPAV’a göre 2022–2024’te büyük işletmelerde (250+ çalışan) 83, orta ölçekli işletmelerde (50–249) 58 işyeri arttı; mikro işletmelerde (1–9 çalışan) ise 3.069 işyeri ve 10.493 sigortalı çalışan azaldı. Yani ekonomi büyük firmalara doğru kaydı.</li>
+      <li>Sanayi sigortalı çalışan sayısı aynı dönemde %3,1 azaldı. İlin sanayisi İsdemir dışında kalan kollar için güncel veri bu dosyada yok.</li></ul></div>
+  </section>
+
+  <section id="insa">
+    <h2>Deprem Sonrası Yeniden İnşa</h2>
+    <p class="sub">6 Şubat 2023 depremleri Hatay’ı en ağır etkilenen il yaptı; inşa süreci ekonomiyi şekillendiriyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Hatay’da teslim edilenler (bin adet)</h3><div class="bars" id="ins"></div>
+        <p class="note">Toplam 153.755 bağımsız bölüm: 133.685 konut, 12.868 köy evi, 7.202 iş yeri. Kaynak: Ekim 2026 tarihli haber; teslim tarihi ayrıca verilmemiş.</p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Deprem bölgesinin tamamında 455.357 bağımsız bölüm tamamlandı; bunların yaklaşık 254 bini 2025’te bitirildi (Aralık 2025 açıklaması).</li>
+        <li>Antakya Atatürk Caddesi’nde 5.933 bağımsız bölüm tamamlandı.</li>
+        <li>TEPAV’a göre 2022–2024’te Hatay’ın büyümesinin yaklaşık dörtte üçü inşaattan geldi; inşaat sektöründeki sigortalı çalışan sayısı %222,7 arttı.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Hatay’ın Türkiye GSYH’sindeki payı 2000–2022’de ortalama %1,29, 2023’te %1,27, 2024’te %1,41 oldu (TEPAV).</li>
+      <li>Konteyner kentlerde yaşayanların ve kalıcı konuta geçenlerin il düzeyindeki sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Kültür</h2>
+    <p class="sub">Antakya, mozaikler, inanç turizmi ve mutfak; depremin en çok vurduğu alanlardan biri.</p>
+    <div class="g2">
+      <div class="card"><h3>Varlıklar</h3><ul>
+        <li>Hatay mutfağı 2017’de UNESCO Gastronomi Kenti unvanı aldı.</li>
+        <li>Hatay Arkeoloji Müzesi, dünyanın en büyük mozaik koleksiyonlarından birine sahip.</li>
+        <li>İnanç, termal ve yayla turizmi ilin öne çıkan turizm kolları.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Deprem sonrası ziyaretçi sayısı, konaklama doluluğu ve turizm geliri için doğrulanmış güncel kaynak bulamadım; bu yüzden sayfada yok.</li>
+        <li>Antakya tarihi merkezinin yeniden inşası turizmin geri dönüşünü belirleyecek; bu dosyada o sürecin tamamlanma düzeyine ait veri yok.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla (dolar)</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH ($, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">Hatay’ın değeri Türkiye ortalamasının yaklaşık %69’u. 81 il arasında 49. sırada; Adana (46.) ve Mersin (21.) önde, Kahramanmaraş (52.) ve Gaziantep (60.) geride.</p></div>
+      <div class="card"><h3>Hatay’ın Türkiye GSYH’sindeki payı (%)</h3><div class="col" id="gp"></div>
+        <p class="note">2000–2022 ortalaması, 2023 ve 2024. Kaynak: TEPAV (basın aktarımı); kaynak payın hesabını açıklamıyor.</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Bir yorum, kişi başına gelirdeki artışın bir kısmının nüfusun azalmasından kaynaklandığını söylüyor; bunu ayrıca doğrulayamadım.</li>
+      <li>TÜİK bölgesel fiyat seviyesi endeksine göre (Türkiye=100) Hatay, Kahramanmaraş ve Osmaniye’yi kapsayan TR63’te endeks 2022’de 93,6, 2023’te 92,7, 2024’te 96,6.</li>
+      <li>Hatay’ın toplam GSYH’sini (TL) ve sektörel dağılımını doğrulanmış kaynakla bulamadım; bulununca eklenecek.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><ul>
+        <li>2022: 1.686.043 (deprem öncesi); 2023: 1.544.640. Kaynaklar 2023’teki düşüş hızını binde 87,6, 2024’teki artışı binde 11,3 olarak veriyor.</li>
+        <li>Kütüğe kayıtlı nüfus 1.895.656 ile Türkiye’de 10. sırada; yani yaklaşık 0,3 milyon kişi kütükte Hataylı görünüp başka ilde yaşıyor.</li>
+        <li>2025’te net iç göç +6.364 kişi (51.440 giriş, 45.076 çıkış; TÜİK iç göç istatistikleri, soL aktarımı). 2023’te 164.247 kişilik göçün %90,8’i afet kaynaklı tahliyeydi.</li></ul></div>
+      <div class="card"><h3>İşgücü (Hatay, TÜİK)</h3><ul>
+        <li>İşsizlik oranı 2022’de %14,4, 2023’te %15,6.</li>
+        <li>İstihdam oranı %43,1’den %38,0’a; işgücüne katılma oranı %50,35’ten %45,05’e geriledi. Hatay, deprem illeri arasında istihdamı en çok azalan il oldu.</li>
+        <li>2022–2024’te sigortalı çalışan sayısı tarımda %21,2, hizmetlerde %10,7, sanayide %3,1 düştü; inşaatta %222,7 arttı (TEPAV).</li>
+        <li>2024 ve 2025 il işsizlik oranını doğrulanmış kaynakla bulamadım.</li></ul></div>
+    </div>
+    <p class="note">2025 ikamet nüfusunu (ADNKS) doğrulanmış kaynakla bulamadığım için sayfada 2023 değeri kullanıldı; bir sitede “2025’te 1,8 milyon” tahmini geçiyor ancak resmî bir sayı olmadığı için alınmadı.</p>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Hatay’da 15 ilçe var; merkez Antakya. Tablodaki nüfuslar deprem öncesi (2022) durumu gösterir; kaynakta “2023” etiketli olsa da ilçelerin toplamı 1.686.043 ve deprem öncesi il nüfusuna eşittir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2022)</th><th>Öne çıkan</th></tr>
+      <tr><td>Antakya</td><td>399.045</td><td>Merkez ilçe; tarihi çarşı ve Atatürk Caddesi’nde yeniden inşa (5.933 bağımsız bölüm tamamlandı)</td></tr>
+      <tr><td>İskenderun</td><td>251.682</td><td>İsdemir, liman ve lojistik yatırımları; sanayinin yoğunlaştığı ilçe</td></tr>
+      <tr><td>Defne</td><td>165.494</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+      <tr><td>Dörtyol</td><td>128.941</td><td>Portakal ve narenciye üretimiyle anılıyor</td></tr>
+      <tr><td>Samandağ</td><td>123.447</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+      <tr><td>Kırıkhan</td><td>121.028</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+      <tr><td>Reyhanlı</td><td>108.092</td><td>Cilvegözü Gümrük Kapısı; Suriye ticareti</td></tr>
+      <tr><td>Arsuz</td><td>101.233</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+      <tr><td>Payas</td><td>43.919</td><td>Dolomit madenciliği</td></tr>
+      <tr><td>Diğer ilçeler</td><td>Altınözü 60.344, Hassa 56.675, Erzin 41.558, Yayladağı 36.803, Belen 34.449, Kumlu 13.333</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>2017 – UNESCO Gastronomi Kenti.</b> Hatay mutfağı unvanı aldı.</p>
+      <p><b>2022 – Deprem öncesi.</b> İl nüfusu 1.686.043, işsizlik %14,4.</p>
+      <p><b>2023 – 6 Şubat depremleri.</b> Nüfus 1.544.640’a düştü; 164.247 kişilik göçün %90,8’i afet kaynaklı; işsizlik %15,6’ya çıktı, istihdam oranı %38’e geriledi.</p>
+      <p><b>2024 – Yeniden inşa hızlanıyor.</b> Hatay’ın Türkiye GSYH payı %1,41’e çıktı; nüfus binde 11,3 arttı.</p>
+      <p><b>2025 – Ekonomi toparlanıyor.</b> Ocak–Eylül ihracatı 2,56 milyar $ ile Doğu Akdeniz lideri; Eylül’de İsdemir liman projesi ÇED onayı aldı; net iç göç pozitife döndü (+6.364).</p>
+      <p><b>Aralık 2025 – Konut teslimi.</b> Deprem bölgesinde 455.357 bağımsız bölüm tamamlandı.</p>
+      <p style="margin:0"><b>2026 – Yeni yatırımlar.</b> Ocak–Eylül ihracatı 2,71 milyar $; Hatay’da 153.755 bağımsız bölüm teslim edildi (Ekim haberi); OYAK Liman İskenderun’da yeni liman ve demiryolu lojistik merkezi yatırımlarını sürdürüyor.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Doğu Akdeniz’in lider ihracatçı ili</li><li>İskenderun’da çelik ve liman altyapısı</li><li>Geniş tarım ovaları, güçlü narenciye ve zeytin tabanı</li><li>Yeniden inşa ile büyük ölçekli yatırım akışı</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın yaklaşık %61’i tek sektöre (çelik) bağlı</li><li>Büyümenin yaklaşık dörtte üçü inşaattan; kalıcı olmayabilir</li><li>Mikro işletme ve tarım istihdamında kayıp</li><li>İşsizlik %15,6 (2023); nüfus deprem öncesinin altında</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Liman kapasitesinin 25,7 milyon tona çıkması ve demiryolu lojistik merkezi</li><li>Tarımsal ürünlerin işlenmesi ve yaş meyve-sebze ihracatı</li><li>Antakya’nın yeniden canlanmasıyla gastronomi ve kültür turizmi</li><li>Suriye’yle ticaretin gelişmesi (Cilvegözü)</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Hatay’ın ihracat artışı büyük ölçüde çeliğe, büyümesi ise büyük ölçüde inşaata dayanıyor. TEPAV bunun refaha yeterince yansımadığını savunuyor; yeniden inşa tamamlandığında ekonominin neyle büyüyeceği ilin ana sorusu.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Yeniden inşa bittiğinde inşaata dayalı büyümenin yerini hangi sektörler alabilir?</li>
+      <li>Çeliğe bağımlı ihracat yapısı, küresel çelik fiyatları ve korumacılık karşısında ne kadar dayanıklı?</li>
+      <li>Mikro işletmelerin ve tarım istihdamının kaybı nasıl telafi edilebilir; küçük esnaf yeniden inşa sürecine nasıl bağlanır?</li>
+      <li>Antakya’nın tarihi dokusu ve kültürel kimliği yeniden inşada nasıl korunabilir?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TİM verileri ve AA aktarımları: Hatay ihracatı, sektör kırılımı ve Doğu Akdeniz karşılaştırması (2025 Ocak–Mayıs, Ocak–Eylül; 2026 Ocak–Eylül)</li>
+      <li>TÜİK il bazında GSYH 2024 (Habertürk aktarımı); TÜİK işgücü istatistikleri (Habertürk aktarımı); TÜİK nüfus ve iç göç istatistikleri (basın aktarımları)</li>
+      <li>TEPAV değerlendirme notu (Ekrem Cunedioğlu), BirGün aktarımı: GSYH payı, sektörel istihdam, işletme sayıları</li>
+      <li>Hatay Tarım ve Orman İl Müdürlüğü 2024 brifingi: tarım, hayvancılık ve su ürünleri</li>
+      <li>İsdemir ve OYAK Liman açıklamaları (SteelOrbis, Para Dergi); Çevre, Şehircilik ve İklim Değişikliği Bakanlığı ÇED onayı haberi</li>
+      <li>Yeniden inşa için Habertürk ve Uzmanpara haberleri; Cilvegözü için Posta; ilçe nüfusları için Küre Ansiklopedi</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımıdır; resmî tabloların doğrudan alıntısı değildir. Hatay’ın toplam GSYH’si (TL) ve sektörel payları, 2025 yıllık ihracatı ve ülke kırılımı, 2025 ikamet nüfusu, 2024–2025 il işsizlik oranı, turizm istatistikleri ile ilçelere özgü ekonomik veriler doğrulanmış kaynakla bulunamadığı için sayfada yok. İlçe nüfusları 2022 (deprem öncesi) değerleridir. Dolar bazlı kişi başı GSYH değerleri TL’den dönüştürülmüş TÜİK değerleridir. Tutarlar cari fiyatlarladır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+cols($('kum'),[['Oca–May 2025',1500.3,'','1.500'],['Oca–Eyl 2024',2537.9,'','2.538'],['Oca–Eyl 2025',2559.0,'','2.559'],['Oca–Eyl 2026',2708.8,'lo','2.709']]);
+bars($('bolge'),[['Hatay',2559.0],['Mersin',2314.1],['Adana',2204.5],['Osmaniye',113.0]],[0]);
+bars($('sek'),[['Çelik',1573.4],['Yaş meyve ve sebze',308.5],['Otomotiv',92.9],['Su ürünleri ve hayvansal mamuller',50.6],['Demir ve demir dışı metaller',39.4]],[0]);
+bars($('ins'),[['Konut',133.7],['Köy evi',12.9],['İş yeri',7.2]],[0]);
+bars($('kb'),[['Türkiye ortalaması',15325],['Mersin',13549],['Adana',10692],['Hatay',10570],['Kahramanmaraş',10430],['Gaziantep',9693]],[3]);
+cols($('gp'),[['2000–22 ort.',1.29,'','%1,29'],['2023',1.27,'','%1,27'],['2024',1.41,'lo','%1,41']]);
+var TA=[['Narenciye üretimi (bin ton)',[['2020',675.4],['2021',1229.3],['2022',978.8],['2023',1621.0],['2024',948.6]],'Üretim yıldan yıla çok dalgalı. Kaynak: Hatay Tarım ve Orman İl Müdürlüğü 2024 brifingi.'],
+ ['Zeytin üretimi (bin ton)',[['2020',67.2],['2021',120.0],['2022',221.3],['2023',178.9],['2024',223.4]],'2024’te dikim alanı 572.240 dekar. Kaynak: Hatay Tarım ve Orman İl Müdürlüğü 2024 brifingi.'],
+ ['Pamuk üretimi (bin ton)',[['2020',174.8],['2021',210.1],['2022',239.0],['2023',185.0],['2024',175.1]],'Ekiliş alanı 2022’de 459.510 dekardan 2024’te 342.044 dekara geriledi. Kaynak: Hatay Tarım ve Orman İl Müdürlüğü 2024 brifingi.']];
+tabs('ta',['Narenciye','Zeytin','Pamuk'],function(i){
+ $('tatitle').textContent=TA[i][0];
+ bars($('tabars'),TA[i][1],[4]);
+ $('tanote').textContent=TA[i][2]});
+</script>
+</body>
+</html>
