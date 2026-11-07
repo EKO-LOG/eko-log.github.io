@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Şanlıurfa | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#b8651b;--a2:#d9a441;--a3:#1f6f78"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Şanlıurfa</span><h1>Şanlıurfa: GAP’ın Tarım ve Genç Nüfus Başkenti</h1><p>Türkiye’nin en genç nüfuslu ili: ortanca yaş 21,8. Pamuk üretiminin yaklaşık %40’ı buradan geliyor; Göbeklitepe turizmi hızla büyüyor. Buna karşın kişi başına gelir ulusal ortalamanın yaklaşık %37’si ve 81 il arasında en düşük. Bu dosya Şanlıurfa’yı rakamları ve açık sorularıyla özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>≈2,27 milyon</b><span>Nüfus (2025); 2024’e göre yaklaşık 28 bin artış</span></div>
+    <div class="k"><b>21,8</b><span>Ortanca yaş (2025); Türkiye’de en düşük</span></div>
+    <div class="k"><b>350,2 mn $</b><span>İhracat (2025), GAİB verisi, ihracatçının kayıtlı olduğu ile göre</span></div>
+    <div class="k"><b>188.144 TL</b><span>Kişi başı GSYH (2024), Türkiye ort. 503.076 TL; 81 il arasında en düşük</span></div>
+    <div class="k"><b>≈%40</b><span>Pamuk üretiminde Türkiye payı (yetkili ağzından, yaklaşık)</span></div>
+    <div class="k"><b>781 bin</b><span>Göbeklitepe ziyaretçisi (2025)</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Pamuk-Hububat-Hayvan</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Rakamlar, ihracatçıların kayıtlı olduğu ili esas alır (Güneydoğu Anadolu İhracatçı Birlikleri, GAİB).</p>
+    <div class="g2">
+      <div class="card"><h3>GAİB bölgesi illeri, 2025 (milyon $)</h3><div class="bars" id="bolge"></div>
+        <p class="note">Gaziantep (10,1 milyar $) ölçeği bozduğu için grafiğe alınmadı. Şanlıurfa, bölgenin sekiz ili içinde dördüncü sırada.</p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>2025’te Şanlıurfa’dan 350,2 milyon $ ihracat yapıldı; Malatya (335,0) ve Diyarbakır’ın (275,6) önünde, Mardin’in (908,4) gerisinde.</li>
+        <li>Şanlıurfa Ticaret ve Sanayi Odası’na göre 2025’te 155 bin ton biber üretildi, üretimin yaklaşık yarısı Hollanda ve diğer Avrupa ülkeleri başta olmak üzere 85 ülkeye gitti.</li>
+        <li>Türkiye’nin 2025 pul biber ihracatı 14,1 milyon $ oldu (ülke toplamı, ilin payı ayrıca verilmiyor).</li>
+        <li>Şanlıurfa’daki Trendyol satıcılarının yüzde 40’ı e-ihracat yapıyor; kentte e-ihracatçı satıcı sayısı bir yılda %44,2 arttı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Bir haber, Şanlıurfa’nın 2024 mal ve hizmet ihracatını 507 milyon $ olarak veriyor; bu, GAİB’in ihracatçı kayıtlı il serisinden farklı bir tanım gibi görünüyor ve 350,2 milyon $ ile doğrudan karşılaştırılmamalı.</li>
+      <li>İlin ihracatının ürün ve ülke kırılımı doğrulanmış kaynakla bulunamadığı için sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Pamuk, Hububat ve Hayvancılık</h2>
+    <p class="sub">GAP’la gelen sulama, Harran, Suruç, Ceylanpınar ve Akçakale ovalarını pamuk, mısır ve hububat bölgesine çevirdi.</p>
+    <div class="card"><div class="tabs" id="tt"></div><h3 id="ttitle"></h3><div class="bars" id="bars"></div><p class="note" id="tnote"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Sulama ve pamuk</h3><ul>
+        <li>Bir GAP yetkilisine göre Şanlıurfa’da yaklaşık 510 bin hektar alan sulanıyor; GAP öncesinde bu ancak az bir alanda mümkündü.</li>
+        <li>Aynı yetkili, buğday veriminin dekar başına 200–250 kg’dan 600–700 kg düzeyine çıktığını söylüyor.</li>
+        <li>Pamuk, kentte coğrafi işaret aldı (2024).</li>
+        <li>2025 sezonunda Çukobirlik kütlü pamuk ön alım fiyatı 44 randımanlı için 31 TL/kg idi; üreticiler maliyetlerin fiyatı aştığını söylüyor.</li></ul></div>
+      <div class="card"><h3>Su ve iklim riski</h3><ul>
+        <li>2025’in kurak kışı ve nisandaki don tarımı vurdu; baraj seviyeleri düştü ve bir basın haberine göre GAP bölgesinde çiftçiler 2025/26’da arpa-buğday sonrası ikinci ürün pamuk ekmedi.</li>
+        <li>2026’da durum tersine döndü: Ekim’den itibaren yağış 490 mm’ye ulaştı, Atatürk Barajı’nda 7 yıl sonra kapaklar açıldı.</li>
+        <li>Bu sert dalgalanma, ilin gelirinin yağış ve baraj suyuna ne kadar bağlı olduğunu gösteriyor.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Hayvancılıkta il, ağırlıklı olarak küçükbaşla öne çıkıyor; haberlerde yaklaşık 2 milyon küçükbaş hayvan varlığı anılıyor. Son yıllarda süt ve besi sığırcılığı da büyüyor (Siverek, Viranşehir). Güncel TÜİK il rakamlarını bu dosyada veremedim.</li>
+      <li>Tarım ve hayvancılığın GSYH payı ile ilin güncel hububat, pamuk ve mısır üretim miktarları doğrulanmış kaynakla bulunamadığı için sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve OSB’ler</h2>
+    <p class="sub">Sanayi, tarıma dayalı gıda ve tekstil çevresinde hızla büyüyor; ancak çıkış noktası çok düşüktü.</p>
+    <div class="g2">
+      <div class="card"><h3>OSB altyapısı</h3><ul>
+        <li>Şanlıurfa OSB 1991’de 220 hektarlık alanda kuruldu; bugün 2.145 hektara ulaştı.</li>
+        <li>Sanayi Bakanı Kacır’a göre 22 yıl önce ilde 1 OSB vardı, bugün 5; OSB’lerde 31 binden fazla ilave istihdam yaratıldı. Vali Şıldak ise Tarıma Dayalı İhtisas Besi OSB ile birlikte 6 OSB alanından söz ediyor.</li>
+        <li>Siverek, Birecik ve Viranşehir’de de yeni OSB’ler kuruldu.</li></ul></div>
+      <div class="card"><h3>Gıda ve besi</h3><ul>
+        <li>Şanlıurfa Gıda İhtisas OSB (2018’de kuruldu, altyapısı 2023 sonunda tamamlandı) Kasım 2024’te 25 fabrikayla açıldı.</li>
+        <li>Besi OSB’nin tamamlandığında 47.700 ton karkas et üretmesi ve 8.100 kişi istihdam etmesi hedefleniyor.</li>
+        <li>İlde 2.534 yatırım teşvik belgesiyle 155 milyar TL sabit yatırım yapıldı (Kacır).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Şanlıurfa OSB’de sanayi işçisi sayısı 2008’de 2.500 iken bugün 35 binin üzerinde (Vali Şıldak’ın aktarımıyla). İşgücü tarafında kümelenme projeleri 16 bin kişilik ek istihdam alanı yarattı.</li>
+      <li>Bölgede tekstil, teşviklerle büyüyen bir istihdam alanı; Türkiye genelinde tekstil ve hazır giyim istihdamı ise 2022’deki yaklaşık 1,22 milyondan 2025’te yaklaşık 850 bine geriledi (TBMM soru önergesi metni). Bu, ilin emek yoğun sanayi stratejisinin riskini gösteriyor.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Göbeklitepe, Karahantepe ve Taş Tepeler Projesi; Balıklıgöl, Harran ve Halfeti.</p>
+    <div class="g2">
+      <div class="card"><h3>Göbeklitepe ziyaretçisi (bin kişi)</h3><div class="col" id="tur"></div>
+        <p class="note">2023’te deprem ve sel etkisiyle 317 bine gerilemişti; 2024’te 709.643, 2025’te 781.381. Kaynak: Kültür ve Turizm Bakanlığı ve il müdürlüğü açıklamaları (AA aktarımı).</p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Basında yer alan verilere göre 2025’te günübirlikçilerle birlikte toplam ziyaretçi sayısı yaklaşık 5,3 milyon, yatak satışı yaklaşık 950 bin oldu.</li>
+        <li>İl Kültür ve Turizm Müdürü, Karahantepe ve diğer alanlarla birlikte ziyaretçi sayısının 1 milyonu aştığını, konaklayanların 900 bini geçtiğini söylüyor.</li>
+        <li>Göbeklitepe için yeni otopark ve yürüyüş yolu yatırımları yürütülüyor; ara tatilde ziyaretçi yoğunluğu %90’ın üzerine çıktı.</li>
+        <li>Belediye 2026 sonunda yeni bir rekor bekliyor.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Yurt içi ve yurt dışı ziyaretçi ayrımı ile turizm gelirini bu dosyada veremedim; farklı kaynakların ziyaretçi sayısı tanımları (konaklayan, günübirlik, ören yeri) birbirinden farklı.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH (bin TL)</h3><div class="bars" id="kb"></div>
+        <p class="note">Şanlıurfa’nın değeri Türkiye ortalamasının yaklaşık %37,4’ü; dolar bazında 5.731 $ ile Türkiye ortalaması 15.325 $. Van (203,0) ve Ağrı (194,7) ile birlikte son üç il.</p></div>
+      <div class="card"><h3>Kişi başı GSYH, cari fiyat (bin TL)</h3><div class="col" id="kg"></div>
+        <p class="note">2023: 116,8; 2024: 188,1. Artış nominaldir; yüksek enflasyon nedeniyle reel büyümeyi göstermez.</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Nüfusun hızla artması ve üretimin aynı hızda büyümemesi, kişi başı değeri aşağı çekiyor.</li>
+      <li>TÜİK’in bölgesel tüketim araştırmasına göre Şanlıurfa-Diyarbakır (TRC2) bölgesinde hanehalkı harcamasının %29,6’sı gıdaya gidiyor; İstanbul’da bu pay %14,2.</li>
+      <li>Şanlıurfa’nın toplam GSYH’sini ve sektörel dağılımını doğrulanmış kaynakla bulamadım; bulununca eklenecek.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus yapısı</h3><ul>
+        <li>2024: 2.237.745; 2025: 2.265.800 (ADNKS, basın aktarımı).</li>
+        <li>Çocuk nüfus oranı %43,3 ile Türkiye’de en yüksek (Şırnak %39,2, Mardin %36,7).</li>
+        <li>2025’te ilin net göçü -15.625 kişi: 43.655 kişi göç aldı, 59.280 kişi ilden ayrıldı.</li>
+        <li>Kütüğe kayıtlı nüfus yaklaşık 3 milyon; yani yaklaşık 0,7–0,9 milyon Urfalı başka bir ilde yaşıyor.</li></ul></div>
+      <div class="card"><h3>İşgücü</h3><ul>
+        <li>Güncel TÜİK il işsizlik oranını doğrulanmış kaynakla bulamadım; Şanlıurfa ayrı bir seri olarak yayımlanmıyor, TRC2 (Şanlıurfa-Diyarbakır) bölgesi olarak veriliyor.</li>
+        <li>Bölgesel yazılarda TRC2’de açık işsizlik ile gizli işsizliği içeren genişletilmiş oran arasındaki farkın 20 puanın üzerinde olduğu belirtiliyor.</li>
+        <li>OSB istihdamı artıyor (yukarıda), ancak genç nüfusun hızı bunu aşıyor.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Ortanca yaş, 2025</h3><div class="bars" id="oy"></div></div>
+      <div class="card"><h3>Toplam doğurganlık hızı, 2025</h3><div class="bars" id="dg"></div>
+        <p class="note">Şanlıurfa, 3 çocuk sınırının üzerinde kalan tek il.</p></div>
+    </div>
+    <p class="note">Bir haber (TÜİK göç istatistikleri aktarımı) il nüfusunu 2.115.256 olarak veriyor; bu değer ADNKS toplamıyla tutarsız olduğu için kullanılmadı.</p>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Şanlıurfa’da 13 ilçe var; merkez ilçe 2014’te Eyyübiye, Haliliye ve Karaköprü’ye bölündü. Nüfuslar 2023 TÜİK verisidir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2023)</th><th>Öne çıkan</th></tr>
+      <tr><td>Eyyübiye</td><td>400.084</td><td>Merkez ilçelerden en kalabalığı</td></tr>
+      <tr><td>Haliliye</td><td>392.600</td><td>Tarihi kent merkezi; Balıklıgöl ve Göbeklitepe çevresi</td></tr>
+      <tr><td>Karaköprü</td><td>277.160</td><td>Hızla büyüyen yeni yerleşim ilçesi</td></tr>
+      <tr><td>Siverek</td><td>271.832</td><td>Yüzölçümü en geniş ilçe (4.208 km²); küçükbaş ve büyükbaş hayvancılık, yeni OSB, Hacı Hıdır Barajı</td></tr>
+      <tr><td>Viranşehir</td><td>211.065</td><td>Tarım ve sığırcılık; yeni OSB</td></tr>
+      <tr><td>Akçakale</td><td>127.277</td><td>Suriye sınırı; sınır kapısı ve sınır ticareti</td></tr>
+      <tr><td>Suruç</td><td>103.621</td><td>Pompaj sulama ovası; coğrafi işaretli Suruç narı, ayçiçeği</td></tr>
+      <tr><td>Harran</td><td>98.999</td><td>Harran Ovası; GAP sulamasıyla pamuk ve mısır</td></tr>
+      <tr><td>Birecik</td><td>93.866</td><td>Yeni OSB; Fırat üzerinde Birecik Barajı</td></tr>
+      <tr><td>Ceylanpınar</td><td>92.147</td><td>Pamuk üretimi yapılan ovalardan biri</td></tr>
+      <tr><td>Bozova</td><td>55.553</td><td>Atatürk Barajı ilçe sınırlarında</td></tr>
+      <tr><td>Halfeti</td><td>46.312</td><td>Turizm: batık yerleşim Savaşan, tekne turları</td></tr>
+      <tr><td>Hilvan</td><td>43.448</td><td>Bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1989 – GAP.</b> Güneydoğu Anadolu Projesi’nin uygulanması başladı; Şanlıurfa, GAP alanında en geniş araziye sahip il.</p>
+      <p><b>1991 – Şanlıurfa OSB.</b> İlk OSB 220 hektarda kuruldu.</p>
+      <p><b>2008 – Düşük sanayi tabanı.</b> OSB’de yaklaşık 2.500 sanayi işçisi vardı.</p>
+      <p><b>2014 – Merkez ilçe bölündü.</b> Eyyübiye, Haliliye ve Karaköprü oluştu.</p>
+      <p><b>2018 – Gıda İhtisas OSB.</b> Tarıma dayalı sanayi için kuruldu; altyapısı 2023 sonunda tamamlandı.</p>
+      <p><b>2023 – Deprem ve sel.</b> Göbeklitepe ziyaretçi sayısı 317 bine geriledi.</p>
+      <p><b>2024 – Gıda OSB açılışı.</b> Kasım’da 25 fabrika üretime başladı; Göbeklitepe 710 bin ziyaretçiye ulaştı.</p>
+      <p><b>2025 – Kuraklık ve turizm rekoru.</b> Kurak kış ve nisan donu tarımı vurdu; buna karşın Göbeklitepe 781 bin ziyaretçi ağırladı, ihracat 350,2 milyon $ oldu.</p>
+      <p style="margin:0"><b>2026 – Bol yağış.</b> Ekim’den itibaren yağış 490 mm’ye ulaştı; Atatürk Barajı’nın kapakları 7 yıl sonra açıldı.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Türkiye’nin en genç nüfusu; emek arzı bol</li><li>GAP sulaması ve geniş tarım ovaları</li><li>Pamukta ulusal ağırlık</li><li>Dünya Mirası Göbeklitepe ile büyüyen kültür turizmi</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Kişi başı gelir ulusal ortalamanın yaklaşık %37’si; 81 il arasında en düşük</li><li>Gelir yağış ve baraj suyuna duyarlı</li><li>İl net göç veriyor (2025’te -15.625 kişi)</li><li>Pamuk fiyatı ve maliyet baskısı</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Gıda İhtisas OSB ile tarımın işlenmiş ürüne dönüşümü</li><li>Biber ve isot gibi coğrafi işaretli ürünler</li><li>Besi OSB ve süt sığırcılığı</li><li>Taş Tepeler Projesi ile turizm çeşitlenmesi</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Şanlıurfa’nın asıl sorunu üretim kapasitesinden çok katma değer ve nüfus oranıdır: tarım hammaddesi bol ve nüfus genç, ama kişi başına düşen üretim değeri çok düşük. Hammaddeyi yerinde işleyen sanayi ile genç nüfusu istihdama bağlamak ilin ana kalkınma sorusu.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Genç nüfus ilin bir “demografik fırsatı” mı, yoksa yeterli istihdam yaratılamazsa bir yük mü?</li>
+      <li>Su yoğun pamuk, kuraklık riski artarken GAP bölgesinde hangi ürünlerle dengelenmeli?</li>
+      <li>Göbeklitepe’deki ziyaretçi artışı yerel halka ve kente nasıl yansıyabilir; günübirlik turizm yeterli mi?</li>
+      <li>Emek yoğun tekstil yatırımları, sektör küçülürken ilin kalıcı istihdam stratejisi olabilir mi?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>Güneydoğu Anadolu İhracatçı Birlikleri (GAİB) 2025 yıllık ihracat açıklaması (basın aktarımı); Şanlıurfa Ticaret ve Sanayi Odası açıklamaları (AA)</li>
+      <li>TÜİK il bazında GSYH 2024; TÜİK ADNKS 2025, Doğum İstatistikleri 2025, İstatistiklerle Çocuk 2025, Hanehalkı Tüketim Harcaması (Bölgesel) 2025 (basın aktarımları)</li>
+      <li>Kültür ve Turizm Bakanlığı, Şanlıurfa İl Kültür ve Turizm Müdürlüğü, Şanlıurfa Valiliği açıklamaları (AA, TRT Haber ve yerel basın aktarımı)</li>
+      <li>Sanayi ve Teknoloji Bakanı Kacır’ın ve Vali Şıldak’ın OSB ve istihdam açıklamaları; GAP Bölge Kalkınma İdaresi ve DSİ yetkililerinin tarım ve sulama açıklamaları</li>
+      <li>Urfanatik, Ekonomim, Sanayi Gazetesi, Aydınlık ve diğer haberler: pamuk, kuraklık ve baraj bilgileri</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımıdır; resmî tabloların doğrudan alıntısı değildir. Şanlıurfa’nın toplam GSYH’si ve sektörel payları, il işsizlik oranı, ihracatın ürün ve ülke kırılımı, güncel pamuk, hububat ve hayvan sayıları ile turizm geliri doğrulanmış kaynakla bulunamadığı için sayfada yok. Nüfus ADNKS 2025 toplamına dayanır; farklı bir toplam veren haber bilinçli olarak dışarıda bırakılmıştır. Pamuk payı kaynaklarda %40 ile %45 arasında değişiyor; sayfada yaklaşık değer verilmiştir. Tutarlar cari fiyatlarla, ihracat rakamları yıllıktır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+bars($('bolge'),[['Kahramanmaraş',1300],['Mardin',908.4],['Şanlıurfa',350.2],['Malatya',335.0],['Diyarbakır',275.6],['Kilis',124.0],['Adıyaman',84.1]],[2]);
+cols($('tur'),[['2023',317.3,'','317'],['2024',709.6,'','710'],['2025',781.4,'lo','781']]);
+cols($('kg'),[['2023',116.8,'','116,8'],['2024',188.1,'lo','188,1']]);
+bars($('kb'),[['İstanbul (en yüksek)',802.7],['Türkiye ortalaması',503.1],['Van',203.0],['Ağrı',194.7],['Şanlıurfa',188.1]],[4]);
+bars($('oy'),[['Sinop (en yüksek)',44],['Siirt',25],['Şırnak',23.3],['Şanlıurfa',21.8]],[3]);
+bars($('dg'),[['Şanlıurfa',3.15],['Şırnak',2.53],['Mardin',2.23],['Türkiye',1.42],['Bartın (en düşük)',1.09]],[0]);
+var TT=[['Türkiye üretiminde Şanlıurfa payı, yaklaşık 2020 (%)',[['Pamuk',45],['Kırmızı mercimek',38],['Mısır',22],['Arpa',13],['Buğday',9]],'Vali açıklaması (CNN Türk, 2020 sulama sezonu açılışı). Güncel TÜİK payları bu dosyada yok.'],
+ ['Güncel yetkili ifadesi (%)',[['Pamuk',40],['Buğday',5]],'Bir GAP yetkilisinin yaklaşık ifadesi; mısır için %10–15 aralığı verildi, aralık olduğu için grafikte yok. Bir haber pamukta %42 veriyor.'],
+ ['Buğday verimi, GAP öncesi ve sonrası (kg/dekar)',[['GAP öncesi (alt sınır)',200],['GAP öncesi (üst sınır)',250],['Bugün (alt sınır)',600],['Bugün (üst sınır)',700]],'Bir GAP yetkilisinin ifadesi, ortalama değerler; birim dekar varsayımıyla okunmalıdır.']];
+tabs('tt',['2020 üretim payı','Güncel pay','Buğday verimi'],function(i){
+ $('ttitle').textContent=TT[i][0];
+ bars($('bars'),TT[i][1],[0]);
+ $('tnote').textContent=TT[i][2]});
+</script>
+</body>
+</html>

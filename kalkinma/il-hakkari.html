@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hakkâri | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1f4e79;--a2:#4fa3c7;--a3:#7a3fb0"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Hakkâri</span><h1>Hakkâri: Sınır Kapıları, Dağlar ve Genç Nüfus</h1><p>Irak ve İran sınırındaki bu ilin nüfusu 2025’te 279.681; beş yıldır yerinde sayıyor ve 2025’te net göç −3.400 oldu. 15–24 yaş payı %20,0 ile Şırnak’tan sonra en yüksek. Kişi başına GSYH 9.284 $ ile Türkiye ortalamasının yaklaşık %60,6’sı; Van, Muş ve Bitlis’in üzerinde ama 81 il arasında 64. sırada. Dış ticaret küçük ve ağırlıkla madene dayanıyor; turizm Cilo-Sat Dağları çevresinde büyüyor. Bu dosya Hakkâri’yi rakamları ve açık sorularıyla özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>279.681</b><span>Nüfus (2025); 2024’e göre 2.510 kişi azaldı</span></div>
+    <div class="k"><b>%20,0</b><span>15–24 yaş payı (2025); Türkiye %14,8. Şırnak’tan (%20,4) sonra en yüksek ikinci il</span></div>
+    <div class="k"><b>304.800 TL</b><span>Kişi başı GSYH (2024), Türkiye ort. 503.076 TL; 9.284 $ ile 81 il arasında 64. sıra</span></div>
+    <div class="k"><b>%13,8</b><span>İşsizlik oranı (TÜİK Van Bölge Müdürlüğü aktarımı; dönemi haberde belirtilmemiş)</span></div>
+    <div class="k"><b>6,1 mn $</b><span>İhracat, Ocak–Haziran 2026 (TÜİK Van Bölge Müdürlüğü aktarımı)</span></div>
+    <div class="k"><b>−3.400</b><span>Net göç (2025): yaklaşık 9 bin kişi geldi, 12,3 bin kişi ayrıldı</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">Dış Ticaret</a><a href="#tarim">Tarım-Hayvancılık</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>Dış Ticaret</h2>
+    <p class="sub">İl düzeyindeki güncel rakamlar küçük hacimli; yıllık seri ve ürün-ülke kırılımı doğrulanmış kaynakla bulunamadı.</p>
+    <div class="g2">
+      <div class="card"><h3>Temmuz 2026 ihracatı, komşu iller (milyon $)</h3><div class="bars" id="kom"></div>
+        <p class="note">Hakkâri’nin Temmuz 2026 ihracatı 2,715 milyon $, ithalatı 0,148 milyon $ oldu; ihracat ithalatın yaklaşık 18 katı. İl rakamları ihracatçının kayıtlı olduğu ile göre verildiği için komşu illerle karşılaştırma dikkatli okunmalı. Kaynak: Hakkari İl Sesi (TÜİK ve Ticaret Bakanlığı verisinin aktarımı).</p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Ocak–Haziran 2026’da 6,1 milyon $ ihracat yapıldı (TÜİK Van Bölge Müdürlüğü aktarımı). Temmuz’daki 2,715 milyon $ eklenirse Ocak–Temmuz yaklaşık 8,8 milyon $ eder (bu toplam bize ait).</li>
+        <li>TİM verisine dayandığını söyleyen bir yerel köşe yazısına göre Ocak–Mart 2026 ihracatı yaklaşık 3 milyon $. Ürünlerin başında madenler (çinko, kurşun) geliyor ve İran ile Çin’e gidiyor; tarım ve hayvancılık ürünleri İran ve Irak’a satılıyor.</li>
+        <li>Sınır kapıları: İran’a Esendere (Yüksekova), Irak’a Derecik/Umurlu ve Üzümlü (Çukurca). Esendere’de bir Sınır Ticaret Merkezi var (Doğu Anadolu Kalkınma Ajansı).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025 yıllık il ihracatı ile ürün ve ülke dağılımı doğrulanmış kaynakla bulunamadığı için sayfada yok.</li>
+      <li>Aynı yerel yazar, ihracatın büyük kısmının maden ve transit ihracattan geldiğini, bunun ile katma değer bırakmasının zor olduğunu savunuyor. Bu bir yazarın görüşüdür, resmî bir analiz değildir.</li>
+      <li>Esnaf ve oda temsilcileri, bölgedeki gerilimin Esendere’deki hareketliliği büyük ölçüde durdurduğunu söylüyor (Rudaw). Bunun ihracata etkisi eldeki verilerle ölçülemiyor.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık</h2>
+    <p class="sub">Dağlık bir il: ekonomi küçükbaş hayvancılığa yaslanıyor, tarım alanı sınırlı.</p>
+    <div class="g2">
+      <div class="card"><h3>Temel rakamlar (2025)</h3><ul>
+        <li>Tarım alanı 408 bin dekar (yaklaşık 40,8 bin hektar). İlin yüzölçümü 7.095 km² alınırsa bu, yüzölçümünün yaklaşık %5,8’i eder.</li>
+        <li>Küçükbaş hayvan sayısı 768 bin; kişi başına yaklaşık 2,7 baş düşüyor (nüfus 279.681).</li>
+        <li>Kaynak: TÜİK Van Bölge Müdürlüğü verilerinin yerel basın aktarımı.</li></ul></div>
+      <div class="card"><h3>Yerel ürünler ve pazar</h3><ul>
+        <li>Aynı yerel yazara göre ilin güçlü olduğu ürünler bal, tahin, ceviz, elma ve kısmen üzüm; yem bitkileri, arpa ve buğday da ihracat kalemleri arasında sayılıyor.</li>
+        <li>Yazar, besicilerin son kışta yemi Şırnak ve diğer illerden aldığını, yani ihracat verisiyle yerel piyasa deneyiminin örtüşmediğini söylüyor.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Hububat, meyve, bal ve süt üretim miktarları, tarımın GSYH payı ve hayvancılığın cinsine göre dağılımı doğrulanmış kaynakla bulunamadığı için sayfada yok.</li>
+      <li>Tarım alanı tanımı (işlenen alan, toplam tarım arazisi) haberde belirtilmediği için yüzde payı yaklaşık okunmalı.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi, OSB ve Lojistik</h2>
+    <p class="sub">Sanayi tabanı çok küçük; ilk organize sanayi bölgesi yapım aşamasında ve ilin avantajı konumundan geliyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Yüksekova OSB</h3><ul>
+        <li>Hakkâri–Yüksekova OSB 145 hektar üzerinde kuruluyor; altyapı çalışmaları başladı, ilk ön tahsis başvuruları alındı.</li>
+        <li>Yüksekova TSO Başkanı, 2025 sonbaharında tamamlanma hedefini 2026 sonu veya 2027 başı olarak açıkladı.</li>
+        <li>İl, yatırım teşviklerinde 6. bölgede yer alıyor.</li></ul></div>
+      <div class="card"><h3>Lojistik ve sınır</h3><ul>
+        <li>Nisan 2026’da il başkanı ve ilçe belediye başkanları Ticaret Bakanı Bolat ile görüştü; Umurlu Sınır Kapısı’nın hafta sonları da hizmet vermesi ve Esendere’nin daha verimli çalışması için adım atılacağı, Yüksekova’da lojistik merkez kurulması planının gündemde olduğu bildirildi.</li>
+        <li>3–4 Temmuz 2026’da Yüksekova’da “Hakkâri Sınır Lojistik Merkezi Çalıştayı” düzenlendi (Hakkari Valiliği ve Hakkari Üniversitesi destekli).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Bir haber aktarımına göre ilde 112 teşvik belgesiyle 11 milyar TL yatırım ve 2.700’den fazla istihdam öngörülüyor; ayrıca Şemdinli Sanayi Sitesi açıldı, Yüksekova Sanayi Sitesi genişletiliyor. Bu rakamların resmî kaynağı doğrulanamadı.</li>
+      <li>Yüksekova’da Selahaddin Eyyubi Havalimanı bulunuyor; Valiliğin açılış metnine göre yapımına 102 milyon lira harcandı. Güncel sefer ve yolcu verisi bu dosyada yok.</li>
+      <li>İlde imalat sanayisinin istihdamı, işyeri sayısı ve OSB doluluk bilgisi doğrulanmış kaynakla bulunamadığı için sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Cilo-Sat Dağları, Uludoruk (4.135 m), Mergabütan Kayak Merkezi ve İran sınırından gelen ziyaretçiler.</p>
+    <div class="g2">
+      <div class="card"><h3>Gecelik konaklayan ziyaretçi (bin kişi)</h3><div class="col" id="tur"></div>
+        <p class="note">Vali Ali Çelik’e göre 2017 öncesinde gecelik konaklama yaklaşık 45 bin iken 2025 ortasında ziyaretçi sayısı 100 bine yaklaştı (Temmuz 2025, AA aktarımı). Tam yıllık resmî seri bu dosyada yok.</p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Valiye göre kentte 12 özel, 7 kamu konaklama tesisi var; toplam kapasite yaklaşık 1.500 yatak.</li>
+        <li>Kültür ve Turizm Bakanı Ersoy (Temmuz 2025): Mergabütan Kayak Merkezi yıllık yaklaşık 200 bin ziyaretçiye ulaşıyor; Esendere Sınır Kapısı’ndan 2024’te 1,3 milyondan fazla giriş yapıldı. Cilo ve Kamışlı’yı kapsayan iki turizm merkezi için kararname taslağı Cumhurbaşkanlığı’na gönderildi ve turizm master planı hazırlanıyor.</li>
+        <li>Cilo ve Sat Dağları Milli Parkı 26 Eylül 2020’de ilan edildi; Türkiye’nin 45. milli parkı. Uludoruk (4.135 m), Cilo Dağı’nın zirvesi ve Ağrı’dan sonra Türkiye’nin en yüksek ikinci dağı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul style="margin:0">
+      <li>Ziyaretçi tanımları birbirinden farklı: gecelik konaklayan, kayak merkezini ziyaret eden ve sınır kapısından giren kişi aynı ölçü değildir. Esendere girişlerinin hepsi turist olmayabilir (ticaret, akraba ziyareti, geçiş).</li>
+      <li>Yetkililer artışı güvenlik ortamının iyileşmesine ve tanıtım çalışmalarına bağlıyor. Turizm geliri, 2025 yıl sonu ve 2026 güncel ziyaretçi sayıları ile turizm merkezi ilanının son durumu doğrulanmış kaynakla bulunamadığı için sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla (dolar serisi)</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH, 2024 ($)</h3><div class="bars" id="kb"></div>
+        <p class="note">Hakkâri’nin değeri Türkiye ortalamasının yaklaşık %60,6’sı; TL karşılığı 304.800 TL (Türkiye: 503.076 TL). 81 il arasında 64. sırada. Komşu Van, Muş ve Bitlis’in üzerinde, Şırnak’ın hemen altında.</p></div>
+      <div class="card"><h3>Kişi başına GSYH, dolar (2020–2024)</h3><div class="col" id="kg"></div>
+        <p class="note">Türkiye ortalamasına oranı: 2020’de %62,7; 2022’de %51,6; 2024’te %60,6. Dolar serisi kur hareketlerini taşır; TÜİK, il hesaplarına ulusal hesap revizyonunu 2024 bülteniyle yansıttığı için seri eski yayınlarla karşılaştırılmamalı.</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>İlin toplam GSYH’si ve sektörel dağılımı (tarım, sanayi, hizmet, kamu) doğrulanmış kaynakla bulunamadı. Bu yüzden kişi başı değerin Doğu’daki birçok ile göre yüksek çıkmasının nedeni (küçük nüfus, kamu hizmetlerinin ağırlığı, maden ya da başka bir etken) bu verilerle ayrıştırılamıyor.</li>
+      <li>Konut satışları: 2025’te 1.556; 2026’nın ilk 6 ayında 304 (TÜİK Van Bölge Müdürlüğü aktarımı). Altı aylık değer yıllık değerle doğrudan kıyaslanmamalı.</li>
+      <li>Yerel köşe yazısı, ihracat istatistikleri ile esnafın günlük ticaret deneyimi arasında fark olduğunu, kira ve vergi yükünün altında ezilen esnafın bunu yansıtmadığını savunuyor. Bu bir görüştür; veri değildir.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus yapısı</h3><ul>
+        <li>2023: 287.625; 2024: 282.191; 2025: 279.681 (ADNKS). 2023’teki artış bir önceki yıla göre 12.292 kişiydi; sonrasında iki yıl art arda düşüş var.</li>
+        <li>2025’te nüfus %0,89 azaldı; Hakkâri, nüfusu azalan 33 il arasında.</li>
+        <li>Net göç 2025’te −3.400 kişi: yaklaşık 9 bin kişi geldi, 12,3 bin kişi ayrıldı.</li>
+        <li>195.767 kişi mahallelerde (%70,0), 83.914 kişi köylerde (%30,0) yaşıyor; Türkiye’de belde ve köylerde yaşayanların payı %6,4.</li>
+        <li>Nüfusun %52,3’ü erkek (146.241 erkek, 133.440 kadın). Nüfus yoğunluğu km² başına yaklaşık 39; Türkiye ortalaması 112.</li></ul></div>
+      <div class="card"><h3>İşgücü ve doğum</h3><ul>
+        <li>İşsizlik oranı %13,8, istihdam oranı %32,9, işgücüne katılma oranı %38,1 (TÜİK Van Bölge Müdürlüğü’nün paylaştığı veriler; dönem ve tanım haberde belirtilmemiş).</li>
+        <li>Bir yerel habere göre ilde doğum sayısı son 10 yılda yaklaşık üçte bir azaldı. Çukurca’da 2025’te 208 bebek doğdu; ilçenin nüfusu aynı yıl %8,5 azaldı.</li>
+        <li>İlin toplam doğurganlık hızı doğrulanmış kaynakla bulunamadı; ancak en yüksek üç il (Şanlıurfa 3,15; Şırnak 2,53; Mardin 2,23) arasında yer almıyor.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Nüfus (bin kişi)</h3><div class="col" id="np"></div>
+        <p class="note">Eksen sıfırdan başlar; değişim küçüktür. 2020 ve 2023 ile 2025 arasında kalan yıllar bu grafikte yok.</p></div>
+      <div class="card"><h3>15–24 yaş genç nüfus payı, 2025 (%)</h3><div class="bars" id="gn"></div>
+        <p class="note">Kaynak: TÜİK İstatistiklerle Gençlik 2025.</p></div>
+    </div>
+    <p class="note">Bir haber Hakkâri’nin 2024 nüfusunu 275.300 ve ortanca yaşını 34,5 olarak veriyor; bu değerler ADNKS serisiyle tutarsız (ortanca yaş Türkiye değeriyle karışmış görünüyor) olduğu için kullanılmadı. İlin ortanca yaşı ve çocuk nüfus oranı doğrulanmış kaynakla bulunamadı.</p>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Hakkâri’de 5 ilçe var: Merkez, Yüksekova, Şemdinli, Çukurca ve Derecik. Nüfuslar ADNKS 2025 verisidir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Öne çıkan</th></tr>
+      <tr><td>Yüksekova</td><td>121.314</td><td>İlin %43,4’ü; en kalabalık ilçe. Esendere (İran) kapısı, Cilo-Sat Dağları, OSB ve havalimanı burada; il olabilecek ilçeler tartışmalarında adı geçiyor</td></tr>
+      <tr><td>Merkez</td><td>76.165</td><td>İl merkezi; kamu kurumları ve Hakkari Üniversitesi</td></tr>
+      <tr><td>Şemdinli</td><td>43.034</td><td>Irak ve İran sınırına yakın; sanayi sitesi hizmete açıldı (haber aktarımı)</td></tr>
+      <tr><td>Derecik</td><td>24.869</td><td>Derecik/Umurlu (Irak) sınır kapısı; nüfusun yaklaşık yarısı köylerde (12.120 kişi)</td></tr>
+      <tr><td>Çukurca</td><td>14.299</td><td>En küçük ilçe; 2025’te %8,5 azaldı (15.628’den 14.299’a); erkek payı %62,3; Üzümlü (Irak) sınır kapısı</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>2017 öncesi – Düşük turizm tabanı.</b> Gecelik konaklama yaklaşık 45 bin (vali açıklaması).</p>
+      <p><b>2020 – Milli park.</b> Cilo ve Sat Dağları Milli Parkı 26 Eylül’de ilan edildi; il nüfusu 280.514.</p>
+      <p><b>2023 – Nüfus zirvesi.</b> Nüfus bir önceki yıla göre 12.292 artarak 287.625’e çıktı.</p>
+      <p><b>2024 – Gelir sıçraması.</b> Kişi başı GSYH 9.284 $’a çıktı (2022: 5.381 $); nüfus 282.191’e geriledi.</p>
+      <p><b>2025 – Turizm planı ve göç.</b> Temmuz’da Bakan Ersoy turizm master planı ve iki turizm merkezi için hazırlıkları duyurdu; yıl sonunda nüfus 279.681’e düştü, net göç −3.400 oldu. Sonbaharda Yüksekova OSB için ön tahsis başvuruları alındı.</p>
+      <p><b>2026 – Sınır ve lojistik gündemi.</b> Nisan’da Ticaret Bakanı ile sınır ticareti görüşmesi yapıldı; Haziran sonunda ihracat 6,1 milyon $’a ulaştı; 3–4 Temmuz’da Sınır Lojistik Merkezi Çalıştayı düzenlendi; Temmuz ihracatı 2,715 milyon $ oldu.</p>
+      <p style="margin:0"><b>2026 sonu – 2027 başı: OSB hedefi.</b> Yüksekova OSB’nin tamamlanması hedefleniyor (Yüksekova TSO Başkanı).</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>15–24 yaş payı %20,0; Şırnak’tan sonra en genç ikinci il</li><li>İran ve Irak sınırında üç sınır kapısı; Esendere’de Sınır Ticaret Merkezi</li><li>Cilo-Sat Dağları, Uludoruk ve kayak merkeziyle doğa ve kış turizmi</li><li>6. bölge teşviki ve üniversite varlığı</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Nüfus azalıyor (2025’te −2.510) ve net göç veriyor (−3.400)</li><li>İşsizlik %13,8; istihdam oranı %32,9</li><li>İhracat çok küçük ve ağırlıkla maden; yerel katma değeri tartışmalı</li><li>Yaklaşık 1.500 yatakla dar konaklama kapasitesi</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Yüksekova OSB (145 hektar) ve planlanan sınır lojistik merkezi</li><li>Turizm master planı ve Cilo ile Kamışlı turizm merkezleri</li><li>Esendere’den gelen yıllık 1 milyonu aşan giriş (2024) ile İranlı ziyaretçi potansiyeli</li><li>Bal, ceviz ve elma gibi yerel ürünlerin işlenmiş ürüne dönüşmesi</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Hakkâri’nin asıl sorusu mal ve insan geçişinden çok, o geçişten ilde kalan gelirdir. Sınır kapıları, maden ve turizm var; ancak ihracatın büyük kısmının maden ve transitten geldiği, gençlerin ise ilden ayrıldığı görülüyor. Bölgesel gerilimlerde sınır ticaretinin hızla durabilmesi, ilin gelir kaynaklarının ne kadar kırılgan olduğunu da gösteriyor.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Sınır kapılarına dayalı ekonomi, bölgesel gerilimlerde ne kadar dayanıklı? Lojistik merkezi bunun yerine geçebilir mi?</li>
+      <li>İhracat ağırlıkla madenden geliyorsa yerel katma değer nasıl artırılabilir: işleme tesisi mi, madencilik eğitimi mi?</li>
+      <li>1.500 yatakla turizm nereye kadar ölçeklenebilir? Kış turizmi yıl boyu istihdam yaratır mı?</li>
+      <li>Nüfusun beşte biri 15–24 yaşında iken okuldan sonra ilde kalacak iş nasıl yaratılır?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK ADNKS 2025 (il ve ilçe nüfusu; Hakkari Nüfus ve Vatandaşlık İl Müdürlüğü ile yerel basın aktarımı), TÜİK İstatistiklerle Gençlik 2025, TÜİK İl Bazında Gayrisafi Yurt İçi Hasıla 2024 (11.12.2025; basın ve veri derlemeleri)</li>
+      <li>TÜİK Van Bölge Müdürlüğü’nün il verileri (işsizlik, net göç, tarım alanı, küçükbaş sayısı, konut satışı, Ocak–Haziran 2026 ihracatı), Hakkari İl Sesi aktarımı, 10.08.2026</li>
+      <li>TÜİK ve Ticaret Bakanlığı Temmuz 2026 dış ticaret verileri, Hakkari İl Sesi aktarımı, 28.08.2026; Cengiz Harmancı köşe yazısı (TİM Ocak–Mart 2026 verisi yorumu), 02.06.2026</li>
+      <li>Hakkari Valisi Ali Çelik ve Kültür ve Turizm Bakanı Ersoy açıklamaları (AA, TRT Haber, Halk TV, Temmuz 2025); Yüksekova TSO Başkanı açıklaması; Rudaw ve Hakkari Haber TV sınır ticareti haberleri (2026); Hakkari Valiliği havalimanı açılış metni; Doğu Anadolu Kalkınma Ajansı sınır kapıları bilgisi</li>
+      <li>Cilo ve Sat Dağları Milli Parkı ve Cilo Dağı bilgileri için Vikipedi; teşvik belgesi rakamları için bir haber sitesi aktarımı (resmî kaynağı doğrulanamadı)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımıdır; resmî tabloların doğrudan alıntısı değildir. Hakkâri’nin 2025 yıllık ihracatı, ihracatın ürün ve ülke kırılımı, toplam GSYH ve sektörel payları, ortanca yaş, çocuk nüfus oranı, toplam doğurganlık hızı, işsizlik oranının dönemi, tarımsal üretim miktarları, turizm geliri ve 2025–2026 güncel ziyaretçi sayısı doğrulanmış kaynakla bulunamadığı için sayfada yok. Nüfus ADNKS 2025 toplamına dayanır; farklı toplam veren haberler bilinçli olarak dışarıda bırakılmıştır. Kişi başı GSYH dolar serisi TÜİK’in revize il serisinden alınmıştır. Komşu il ihracat rakamları ihracatçının kayıtlı olduğu ile göre verildiği için ilin gerçek üretimini yansıtmayabilir. Yerel köşe yazısı ve esnaf açıklamaları görüş olarak belirtilmiştir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){if(typeof v!=='number')return String(v).replace('.',',');var p=String(v).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return p.join(',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+var $=function(i){return document.getElementById(i)};
+bars($('kom'),[['Muş',12.255],['Hakkâri',2.715],['Van',2.168],['Bitlis',1.594]],[1]);
+cols($('tur'),[['2017 öncesi',45,'','45'],['2025 (vali)',100,'lo','≈100']]);
+bars($('kb'),[['İstanbul (en yüksek)',24452],['Türkiye ortalaması',15325],['Şırnak',9326],['Hakkâri',9284],['Bitlis',7063],['Muş',7016],['Van',6185],['Ağrı',5930],['Şanlıurfa (en düşük)',5731]],[3]);
+cols($('kg'),[['2020',5264,'','5.264'],['2021',5181,'','5.181'],['2022',5381,'','5.381'],['2023',7192,'','7.192'],['2024',9284,'lo','9.284']]);
+cols($('np'),[['2020',280.5,'','280,5'],['2023',287.6,'','287,6'],['2024',282.2,'','282,2'],['2025',279.7,'lo','279,7']]);
+bars($('gn'),[['Şırnak',20.4],['Hakkâri',20.0],['Siirt',19.8],['Türkiye',14.8]],[1]);
+</script>
+</body>
+</html>
