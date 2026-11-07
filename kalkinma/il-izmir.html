@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İzmir | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0a8a8f;--a2:#f4b942;--a3:#c2255c"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › İzmir</span><h1>İzmir: Ege’nin Liman ve Sanayi Merkezi</h1><p>Türkiye’nin üçüncü büyük ili: GSYH’de %5,7 payla üçüncü, ihracatta 23,6 milyar $ ile yine üçüncü. Aliağa’daki rafineri ve petrokimya kompleksi ülkenin en büyük sanayi kuruluşlarını barındırıyor; Aliağa limanları yük elleçlemede öne çıkıyor. Öte yandan ihracat iki yıldır yatay seyrediyor, Alsancak Limanı’nın konteyner hacmi çöktü, turizm potansiyelinin altında ve işsizlik üç büyükşehir arasında en yüksek görünüyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>16.949 $</b><span>Kişi başı GSYH (2024), 81 il arasında 6. sıra; Türkiye ort. 15.325 $</span></div>
+    <div class="k"><b>%5,7</b><span>Türkiye GSYH’sindeki pay (2024); 2,56 trilyon TL ile İstanbul ve Ankara’nın ardından 3. sıra</span></div>
+    <div class="k"><b>23,6 mlr $</b><span>2025 ihracatı (faaliyet ili); Türkiye’de 3. sıra, 2024’e göre yaklaşık %1 düşük</span></div>
+    <div class="k"><b>4.504.185</b><span>Nüfus (ADNKS 2025); Türkiye nüfusunun %5,23’ü, 3. büyük il</span></div>
+    <div class="k"><b>12,6 mn</b><span>2025’te Adnan Menderes Havalimanı’nı kullanan yolcu; 2006’da 4,4 mn idi</span></div>
+    <div class="k"><b>1,72 mn</b><span>2025’te İzmir’e gelen yabancı turist (sektör temsilcisi aktarımı)</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#sanayi">Sanayi-Liman</a><a href="#turizm">Turizm-Havacılık</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">İzmir, Ege Bölgesi ihracatının yaklaşık yarısından fazlasını yapıyor; ama ihracat 2024’ten 2025’e artmadı ve değer artışı miktara yansımıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Aylık ihracat, 2025 (milyar $, faaliyet ili)</h3><div class="col" id="ay"></div>
+        <p class="note">Haziran 1,950; Ağustos 1,965; Ekim 1,929; Kasım 1,357; Aralık 1,981. Ocak–Mayıs, Temmuz ve Eylül için doğrulanmış değer bulamadığım için grafikte yok. Kaynak: Ticaret Bakanlığı faaliyet illeri verisi (Ege İhracatçı Birlikleri ve haber aktarımı).</p></div>
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>İzmir 2025’te 23 milyar 614 milyon $ ile Türkiye’de en çok ihracat yapan üçüncü il oldu; 2024’te 23 milyar 833 milyon $ idi, yani yaklaşık %1 geriledi. İzmir’deki ihracatçı sayısı 15 bine yaklaştı.</li>
+        <li>Ege Bölgesi’nin toplam ihracatı 2025’te 43,7 milyar $ (2024: 43,4); bölgede İzmir’den sonra Manisa 7,4 milyar $ ile ikinci.</li>
+        <li>Ocak–Eylül 2026’da İzmir’in ihracatı 17 milyar 613 milyon $; Ege Bölgesi aynı dönemde %3,4 artışla 33,1 milyar $’a ulaştı.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Faaliyet ili serisi İzmir’deki iki serbest bölgenin ihracatını da İzmir’e yazar (Kasım 2025’te 281 milyon $). Firmanın kanuni merkezine dayalı TİM serisi farklı sonuç verebilir; iki seri toplanmaz.</li>
+        <li>Ege İhracatçı Birlikleri başkanı, döviz gelirinin artsa da miktarın artmadığını, yani “imalatta çarkların yavaşladığını” söylüyor; döviz dönüşüm desteğinin %3’ten yaklaşık %1’e düştüğünü belirtiyor (ihracatçı temsilcisi açıklaması, yorum içerir).</li>
+        <li>İzmir ihracatının ülke kırılımını ve 2025 TİM kanuni merkez esaslı il değerini doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi, Enerji ve Liman</h2>
+    <p class="sub">İzmir’in üretim hikâyesi Aliağa’daki enerji ve petrokimya kompleksi, çelik, tütün ve gıda ile limanlar arasında paylaşılıyor; limanların ağırlık merkezi ise Alsancak’tan Aliağa’ya kaydı.</p>
+    <div class="g2">
+      <div class="card"><h3>Büyük sanayi kuruluşları (2025)</h3><ul>
+        <li>İzmir Aliağa’da rafinerisi bulunan Tüpraş, İSO 500’de 698,8 milyar TL’lik üretimden satışla Türkiye’nin en büyük sanayi kuruluşu; Star Rafineri de ilk üçte (Tüpraş, Ford Otomotiv, Star Rafineri).</li>
+        <li>Ege Bölgesi Sanayi Odası’nın (EBSO) kendi ilk 100 listesinde Star Rafineri 330,3 milyar TL ile birinci; Tüpraş İzmir Rafinerisi ve Petkim izliyor. İlk 10’da ayrıca İzmir Demir Çelik, Philip Morris, JTI Tütün ve Abalıoğlu Yağ yer alıyor.</li>
+        <li>İSO 500’de oda üyeliğine göre sıralamada İstanbul 129, Ankara 48, Kocaeli 43 ve EBSO 39 kuruluşla dördüncü sırada.</li></ul></div>
+      <div class="card"><h3>Limanlar</h3><ul>
+        <li>Aliağa limanlarında 2025’in ilk 11 ayında 80,57 milyon ton net yük (%3,31 artış) ve 1.577.208 TEU konteyner (%19,43 azalış) elleçlendi; Aliağa konteynerde Türkiye’de 5. sırada.</li>
+        <li>Deniz Ticaret Odası İzmir Şubesi’ne göre eskiden ihracatın yaklaşık %60’ı Alsancak’tan çıkıyordu; bugün Aliağa limanları yaklaşık %70–75’ini taşıyor, Alsancak’ın payı yaklaşık %25.</li>
+        <li>İzmir’in 16 limanı Türkiye’de elleçlenen toplam yükün yaklaşık %17’sini, konteynerin yaklaşık %15’ini yapıyor.</li>
+        <li>TVF İzmir Limanı için 1,5 milyar $’lık modernizasyon planlanıyor; hedef konteyner kapasitesini 3 milyon TEU’ya çıkarmak.</li></ul></div>
+    </div>
+    <div class="card"><h3>Alsancak Limanı konteyner elleçleme (bin TEU)</h3><div class="col" id="lm"></div>
+      <p class="note">2008’de 891 bin TEU’ya çıkan konteyner elleçleme 2023’te 294 bine, 2024’te 271 bine geriledi; sektör temsilcisi 2024 değerini şimdiye kadarki en düşük seviye olarak tanımladı. 2025 için tutarsız değerler (ilk altı ayda yaklaşık 116 bin TEU, başka bir açıklamada 155 bin TEU) aktarıldığından grafiğe konmadı. Kaynak: İMEAK Deniz Ticaret Odası İzmir Şubesi (Ekonomi Gazetesi aktarımı).</p></div>
+    <div class="card"><ul style="margin:0">
+      <li>İSO ve EBSO listeleri oda kaydına dayanır; fabrikanın fiilen İzmir’de olup olmadığı firma bazında değişebilir (İSO 500’de Ege’de üretim yapan ama merkezi başka bölgede olan firmalar ayrıca sayılıyor).</li>
+      <li>Sanayinin il GSYH’sindeki payını, organize sanayi bölgelerinin doluluğunu, sektörel istihdamı ve tarım (zeytin, incir, üzüm vb.) üretimini doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Havacılık</h2>
+    <p class="sub">Efes, Çeşme ve Ege kıyıları güçlü varlıklar; ama kent, yıllardır yabancı turist sayısında sınırlı bir düzeyde kalıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>İzmir Adnan Menderes Havalimanı 2025’te 12,66 milyon yolcuya hizmet verdi; 2006’da 4,4 milyon idi. Dış hat yolcusu 5,1 milyon; TAV’a göre dış hat yolcusu 2024’ün %32 üzerinde.</li>
+        <li>Havalimanının yıllık yolcu kapasitesi 35 milyona ulaştı; işletme hakkı Aralık 2034’e kadar TAV’da.</li>
+        <li>2025’in ilk altı ayında İzmir’e 26, Çeşme’ye 24 kruvaziyer uğradı; toplam 62.012 yolcu getirdiler.</li>
+        <li>İzmir Limanı modernizasyonu sürecinde kruvaziyer rıhtımının uzun süre kapalı kalacağı bildirildi.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>1.721.822 yabancı turist sayısı Ege Turistik İşletmeler ve Konaklamalar Birliği (ETİK) yöneticisinin açıklamasından aktarılıyor; resmî il bülteni değil. Aynı kişi İzmir’in son 30 yılda yılda yaklaşık 1,5 milyon civarında kaldığını söylüyor (yorum).</li>
+      <li>İzmir’in turizm gelirini, doluluk oranını ve geceleme sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Türkiye geneli 2025: 63,9 milyon ziyaretçi, 65,2 milyar $ gelir.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla (dolar)</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH ($, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">İzmir 6. sırada ve 556.376 TL; Türkiye ortalamasının yaklaşık 1,1 katı. Ortalamanın üzerinde yalnızca 11 il var. İlk beş: İstanbul, Kocaeli, Ankara, Tekirdağ, Antalya.</p></div>
+      <div class="card"><h3>Okuma notları</h3><ul>
+        <li>Toplam GSYH’de İzmir 2 trilyon 562 milyar 758 milyon TL ve %5,7 payla İstanbul (%29,2) ve Ankara’nın (%10,5) ardından üçüncü.</li>
+        <li>İzmir’in GSYH payı (%5,7), nüfus payının (%5,23) üstünde; bu yüzden kişi başı değer ortalamanın üzerinde (kendi hesabım).</li>
+        <li>Dolar bazlı değerler kur etkisi taşır; TL değerleri farklı bir sıralama verebilir.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>İzmir’in sektörel GSYH dağılımını (sanayi, hizmet, tarım payları) ve önceki yıla göre büyüme katkısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>En kalabalık üç ilçe (bin kişi, ADNKS 2025)</h3><div class="bars" id="nf"></div>
+        <p class="note">Buca 520.941; Karabağlar 467.472; Bornova 452.479. Üçü birlikte yaklaşık 1,44 milyon kişiyle il nüfusunun üçte birinden fazlası. Kaynak: TÜİK ADNKS 2025 (Son Mühür aktarımı).</p></div>
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 31 Aralık 2025’te 4.504.185; 2.227.738’i erkek, 2.276.447’si kadın.</li>
+        <li>2025’te nüfusu en hızlı artan ilçeler Torbalı ve Menemen (her birinde yaklaşık 6 bin kişi); Buca ise yaklaşık 2.252 kişi kaybetti.</li>
+        <li>Konak’ın nüfusu 2010’da 405 binin üzerindeyken 2020’de 344 bine geriledi ve düşüş sürüyor; ilçenin yoğunluğu km² başına 13.225 kişi.</li>
+        <li>Urla’nın nüfusu son dört yılda 74 binden 82 bin bandına çıktı; haberlerde özellikle İstanbul’dan gelen göç belirtiliyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>İşsizlik oranı, 2025 (%)</h3><div class="bars" id="isz"></div>
+      <p class="note">İki farklı derleme İzmir için %10,6 ve %11,0 veriyor; kesin TÜİK il değerini doğrulayamadım. İkisi de İzmir’i üç büyükşehir (İstanbul, Ankara, İzmir) arasında en yüksek işsizlikli il gösteriyor. Türkiye ortalaması %8,3.</p></div>
+    <div class="card"><ul style="margin:0">
+      <li>İzmir için 2025 işgücüne katılma ve istihdam oranlarını, kadın-erkek işsizliğini, SGK’lı sektörel istihdamı ve İŞKUR kayıtlı işsiz sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">İzmir’in 30 ilçesi var. Tabloda 2025 ADNKS değerleri belirtilen ilçelerde yıl yazmıyor; “(2024)” işaretli satırlar önceki yıl değeridir (Vikipedi ilçe tablosu aktarımı) ve 2025 değeri doğrulanamadı.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Öne çıkan</th></tr>
+      <tr><td>Buca</td><td>520.941</td><td>İlin en kalabalık ilçesi; 2025’te yaklaşık 2.252 kişi azaldı</td></tr>
+      <tr><td>Karabağlar</td><td>467.472</td><td>İkinci en kalabalık ilçe</td></tr>
+      <tr><td>Bornova</td><td>452.479</td><td>Üçüncü sırada; nüfusu artan nadir merkez ilçelerden</td></tr>
+      <tr><td>Karşıyaka</td><td>341.580 (2024)</td><td>Merkez ilçelerden</td></tr>
+      <tr><td>Konak</td><td>322.393 (2024)</td><td>Kentin merkezi; en yüksek yoğunluk, uzun süredir azalan nüfus</td></tr>
+      <tr><td>Bayraklı</td><td>299.859 (2024)</td><td>Merkez ilçelerden</td></tr>
+      <tr><td>Torbalı</td><td>218.744 (2024)</td><td>2025’te nüfusu en hızlı artan iki ilçeden biri (yaklaşık +6 bin)</td></tr>
+      <tr><td>Çiğli</td><td>215.697 (2024)</td><td>Merkez ilçelerden</td></tr>
+      <tr><td>Menemen</td><td>—</td><td>2025’te nüfusu en hızlı artan iki ilçeden biri (yaklaşık +6 bin)</td></tr>
+      <tr><td>Urla</td><td>yaklaşık 82 bin</td><td>Son dört yılda 74 binden yükseldi; İstanbul’dan göç</td></tr>
+      <tr><td>Kınık</td><td>28.604</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Karaburun</td><td>13.725</td><td>Küçük ilçelerden; nüfusu artan ilçeler arasında</td></tr>
+      <tr><td>Beydağ</td><td>11.904</td><td>İlin en az nüfuslu ilçesi</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>2006 – Havalimanı.</b> TAV Adnan Menderes’te dış hatlar terminalinin işletmesini üstlendi; yıllık yolcu 4,4 milyondu.</p>
+      <p><b>2008 – Alsancak zirvesi.</b> Alsancak Limanı’nda konteyner elleçleme 891 bin TEU’ya çıktı.</p>
+      <p><b>2017 – Liman rekoru.</b> İzmir’deki konteyner limanlarında toplam 1,44 milyon TEU (Alsancak 646 bin, Aliağa’daki üç liman 794 bin).</p>
+      <p><b>2023–2024 – Alsancak’ta düşüş.</b> Konteyner hacmi 294 bin, ardından 271 bin TEU’ya indi.</p>
+      <p><b>2024 – Gelir ve ihracat.</b> Kişi başı GSYH 16.949 $ (6. sıra); ihracat 23,833 milyar $.</p>
+      <p><b>2025 – İhracat ve nüfus.</b> İhracat 23,614 milyar $ (%1 düşüş); Adnan Menderes’te 12,66 milyon yolcu; il nüfusu 4.504.185.</p>
+      <p><b>2026 – Liman yatırımı.</b> TVF İzmir Limanı için 1,5 milyar $’lık modernizasyon planı açıklandı; Ocak–Eylül’de İzmir ihracatı 17,6 milyar $.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>GSYH’de ve ihracatta ülkenin üçüncü büyük ili; kişi başı gelir ortalamanın üstünde</li><li>Rafineri, petrokimya, çelik, tütün ve gıdada ölçekli sanayi kuruluşları</li><li>Aliağa limanları yük elleçlemede güçlü; kentte havalimanı kapasitesi 35 milyona ulaştı</li><li>Büyük, kentleşmiş nüfus ve ihracatçı tabanı (yaklaşık 15 bin ihracatçı)</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracat 2025’te geriledi; aylık değerler yatay ve miktarın artmadığı belirtiliyor</li><li>Alsancak’ın konteyner hacmi 2008’deki seviyenin üçte birine indi</li><li>İşsizlik oranı iki derlemede de üç büyükşehir arasında en yüksek</li><li>Turizm yılda yaklaşık 1,5–1,7 milyon yabancıyla sınırlı kalıyor; Konak ve Buca gibi merkez ilçelerde nüfus azalıyor</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Liman modernizasyonu: kapasitenin 3 milyon TEU’ya ve 400 metrelik gemilere açılması</li><li>Alsancak, Aliağa ve Çandarlı’yı birlikte ele alan bir lojistik master planı (Deniz Ticaret Odası önerisi)</li><li>Dış hat yolcusunun hızlı artması ve 35 milyonluk havalimanı kapasitesiyle turizm ve ihracat bağlantısı</li><li>Sahil ilçelerinin (Urla, Seferihisar, Çeşme) yeni yerleşim ve turizm merkezine dönüşmesi</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">İzmir’in ihracatı büyük ölçüde enerji, kimya ve çelik gibi birkaç sektöre ve Aliağa’daki liman altyapısına dayanıyor. Hem ihracat hacmi yatay seyrediyor hem de tarihî liman Alsancak değer kaybediyor. Asıl soru, kentin sanayi ve liman gücünü miktara dayalı büyümeye ve daha fazla ürüne çevirip çeviremeyeceği; turizmin ve kentsel merkezin bu dönüşümde nasıl bir rol oynayacağı.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Alsancak Limanı yük merkezi olarak mı kalmalı, yoksa kent merkezinde turizm ve kruvaziyer limanına mı dönüşmeli?</li>
+      <li>Döviz geliri artarken ihracat miktarı artmıyorsa ihracat başarısı nasıl ölçülmeli?</li>
+      <li>İzmir’in turizm potansiyeli neden yılda 1,5–1,7 milyon yabancı turistle sınırlı kalıyor?</li>
+      <li>İşsizliğin büyükşehirler arasında en yüksek olduğu bir kentte sanayinin hangi kolları istihdamı artırabilir?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (CNBC-e, Habertürk, Rudaw, Ekonomi Gazetesi aktarımı): kişi başı GSYH, toplam GSYH ve il payları</li>
+      <li>Ticaret Bakanlığı faaliyet illeri ihracat verileri ve Ege İhracatçı Birlikleri açıklamaları (Ekonomi Gazetesi, SteelRadar, Hürriyet aktarımı): 2025 İzmir ve Ege ihracatı, sektörler, aylık değerler; EİB Ocak–Eylül 2026 değerlendirmesi (Ekonomi Gazetesi, 20 Ekim 2026)</li>
+      <li>İSO 500 2025 (Capital, Milliyet, Dünya aktarımı) ve EBSO 2025 ilk 100 (Ekonomi Gazetesi, Forbes Türkiye aktarımı): sanayi kuruluşları</li>
+      <li>İMEAK Deniz Ticaret Odası İzmir Şubesi açıklamaları (Ekonomi Gazetesi), Aliağa Liman İşletmecileri (Habertürk) ve TVF İzmir Limanı haberleri (AA, Dünya): liman verileri</li>
+      <li>TÜİK ADNKS 2025 (Son Mühür, Sözcü aktarımı; 2024 ilçe değerleri için Vikipedi “Districts of Turkey” tablosu)</li>
+      <li>TAV Havalimanları açıklamaları ve DHMİ verileri (ForInvest/Foreks, Yatırım Ofisi aktarımı): Adnan Menderes yolcu trafiği; Ekonomi Gazetesi (ETİK açıklaması): yabancı turist; Yeni Asır: kruvaziyer</li>
+      <li>İşsizlik oranları için iki derleme (Aydınlık, Eleman.net) ve TÜİK 2025 işgücü istatistikleri (ulusal %8,3)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. İzmir’in 2025 TİM kanuni merkez esaslı ihracatı, ihracatın ürün ve ülke kırılımı, sektörel GSYH dağılımı, 2025 işgücüne katılma ve istihdam oranları, resmî il bazlı turizm istatistikleri, tarım üretimi, OSB verileri ve 2025 ilçe nüfuslarının çoğu doğrulanmış kaynakla bulunamadığı için sayfada yok. İşsizlik için iki kaynak farklı değer verdiğinden her ikisi gösterildi. “(2024)” işaretli ilçe nüfusları önceki yıl değeridir. Alsancak’ın 2025 konteyner değeri için kaynaklar tutarsız olduğundan kullanılmadı.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+cols($('ay'),[['Haz',1.950,'','1,950'],['Ağu',1.965,'','1,965'],['Eki',1.929,'','1,929'],['Kas',1.357,'lo','1,357'],['Ara',1.981,'','1,981']]);
+var BT=[['Ege Bölgesi, Ocak–Eylül 2026 (milyar $)',[['İzmir',17.613],['Manisa',5.159],['Denizli',3.869],['Balıkesir',2.195],['Aydın',1.466],['Muğla',1.157],['Kütahya',0.776],['Afyonkarahisar',0.551],['Uşak',0.345]],0,'Bölge toplamı 33,132 milyar $ (%3,4 artış); İzmir bölgenin yarısından fazlasını yapıyor. Kaynak: Ege İhracatçı Birlikleri açıklaması.'],
+ ['İzmir’in büyük ihracat sektörleri, 2025 (milyon $)',[['Kimya',2126],['Çelik, demir ve demirdışı',1542],['Konfeksiyon',1271]],0,'Üç sektör birlikte yaklaşık 4,94 milyar $; İzmir ihracatının yaklaşık beşte biri (kendi hesabım). Kaynak: Ege İhracatçı Birlikleri.'],
+ ['İzmir yıllık ihracat (milyar $)',[['2024',23.833],['2025',23.614]],1,'2025’te yaklaşık %1 düşüş; Ege Bölgesi toplamı ise 43,4’ten 43,7 milyar $’a hafif arttı.']];
+tabs('bt',['Ege 2026','Sektörler','2024→2025'],function(i){
+ $('bttitle').textContent=BT[i][0];
+ bars($('btbars'),BT[i][1],[BT[i][2]]);
+ $('btnote').textContent=BT[i][3]});
+cols($('lm'),[['2008',891,'','891'],['2023',294,'','294'],['2024',271,'lo','271']]);
+var TA=[['Adnan Menderes Havalimanı yolcusu (milyon)',[['2006',4.4],['2025 toplam',12.6],['2025 dış hat',5.1]],1,'Yolcu sayısı 2006’dan 2025’e yaklaşık üç katına çıktı; 2025’te yolcuların 5,1 milyonu dış hat. Kaynak: TAV Havalimanları açıklaması.'],
+ ['İzmir’e gelen yabancı turist (milyon)',[['2025',1.722],['Tipik düzey (yakl., sektör ifadesi)',1.5]],0,'1.721.822 değeri ve “yılda yaklaşık 1,5 milyon” ifadesi ETİK yöneticisine ait; resmî il bülteni değildir.']];
+tabs('ta',['Havalimanı','Turist'],function(i){
+ $('tatitle').textContent=TA[i][0];
+ bars($('tabars'),TA[i][1],[TA[i][2]]);
+ $('tanote').textContent=TA[i][3]});
+bars($('kb'),[['Türkiye ortalaması',15325],['İstanbul',24452],['Kocaeli',24031],['Ankara',24031],['Tekirdağ',18406],['Antalya',17103],['İzmir',16949],['Bolu',16703]],[6]);
+bars($('nf'),[['Buca',520.9],['Karabağlar',467.5],['Bornova',452.5]],[0]);
+bars($('isz'),[['Türkiye',8.3],['İzmir (Aydınlık derlemesi)',10.6],['İzmir (Eleman.net derlemesi)',11.0]],[1,2]);
+</script>
+</body>
+</html>
