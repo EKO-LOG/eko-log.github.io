@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İstanbul | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0e5fa8;--a2:#f2a33a;--a3:#b3263e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › İstanbul</span><h1>İstanbul: Ekonominin Merkezi</h1><p>İki kıtaya yayılan 15,8 milyonluk kent: Türkiye GSYH’sinin %29,2’si, mal ihracatının yaklaşık üçte biri ve iki büyük havalimanı burada. Kişi başına GSYH 81 il arasında birinci ve Türkiye ortalamasının yaklaşık 1,6 katı. Öte yandan büyük sanayi şirketlerinin ağırlığı yıllardır İstanbul dışına yayılıyor, ilçeler arası fark büyük ve il düzeyinde güncel işgücü verisi sınırlı.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>24.452 $</b><span>Kişi başı GSYH (2024), 81 il arasında 1. sıra; Türkiye ort. 15.325 $</span></div>
+    <div class="k"><b>%29,2</b><span>Türkiye GSYH’sindeki pay (2024); 13,01 trilyon TL, ilk beş il toplamın %53,0’ı</span></div>
+    <div class="k"><b>95,2 mlr $</b><span>2025 ihracatı (TİM kanuni merkez esaslı, ADASO raporu aktarımı); ilk sırada</span></div>
+    <div class="k"><b>15.754.053</b><span>Nüfus (ADNKS 2025); Türkiye nüfusunun %18,3’ü, km² başına 2.943 kişi</span></div>
+    <div class="k"><b>132 mn</b><span>2025’te İstanbul Havalimanı (84 mn) ve Sabiha Gökçen’de (48 mn) seyahat eden yolcu</span></div>
+    <div class="k"><b>14,4 mn</b><span>Ocak–Eylül 2026’da İstanbul’a giriş yapan yabancı ziyaretçi; 2025’in aynı dönemine göre %1,56 fazla</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm-Havacılık</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">İstanbul ihracatta açık ara birinci; ama hangi seriye bakıldığına göre tablo değişiyor. Firmanın kanuni merkezine dayalı TİM serisi ile üretimin yapıldığı yere dayalı Ticaret Bakanlığı “faaliyet ili” serisi aynı sayı değildir.</p>
+    <div class="g2">
+      <div class="card"><h3>Aylık ihracat, 2025 (milyar $, faaliyet ili)</h3><div class="col" id="ay"></div>
+        <p class="note">Temmuz 5,835; Eylül 4,512; Ekim 4,859; Kasım 4,459; Aralık 5,688. Ocak–Haziran ve Ağustos için doğrulanmış değer bulamadığım için grafikte yok. Kaynak: Ticaret Bakanlığı faaliyet illeri verisi (haber aktarımı).</p></div>
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TİM kanuni merkez esaslı il tablosunda İstanbul 2025’te 95,2 milyar $ ile birinci; Kocaeli 22,9 ve Bursa 17,9 milyar $. Ana sayfadaki il tablosunda İstanbul’un payı %40,1; Türkiye’nin 273,4 milyar $’lık toplam mal ihracatına oranlanırsa yaklaşık %35 (kendi hesabım; iki payın paydası farklı).</li>
+        <li>Ticaret Bakanlığı’nın faaliyet ili sıralamasında 2025’in ilk beşi İstanbul, Kocaeli, İzmir, Bursa ve Tekirdağ.</li>
+        <li>Otomotiv ihracatında Ocak–Ekim 2026’da İstanbul 7,3 milyar $ ile Kocaeli (10,5) ve Bursa’nın (8,1) ardından üçüncü.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>İstanbul’da merkezi olup üretimi başka ilde yapan firmalar kanuni merkez serisinde İstanbul’a yazılır. Aralık 2025 sekmeleri bu farkı gösteriyor: İstanbul 8,6 ile 5,7 milyar $, Ankara 3,0 ile 1,8 milyar $. İki seri toplanmaz.</li>
+        <li>İstanbul İhracatçı Birlikleri’nin (yedi birlik) 2025 ihracatı 12,73 milyar $ (%5,7 artış); bu, İstanbul’un toplam ihracatı değil, belirli sektör birliklerinin (hububat, mobilya-kâğıt, gemi-yat, su ürünleri vb.) toplamıdır ve üyeleri başka illerde de olabilir.</li>
+        <li>İstanbul’un ihracatının ürün ve ülke kırılımını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve İş Dünyası</h2>
+    <p class="sub">İstanbul hâlâ Türkiye’nin ticaret ve yönetim merkezi, ama büyük sanayi şirketlerinin üretim ağırlığı kentin dışına doğru kayıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>İSO 500 ve İkinci 500 (2025)</h3><ul>
+        <li>İstanbul Sanayi Odası’na kayıtlı firma sayısı İSO 500’de 144’ten 129’a düştü (Dünya gazetesi, Anadolu’daki odalara bağlı firmaların ağırlığının arttığını yazıyor).</li>
+        <li>İSO İkinci 500’de İstanbul 144 firmayla (9 artış) yine ilk sırada; Ege Bölgesi Sanayi Odası 36, Kocaeli 34 firmayla izliyor.</li>
+        <li>İSO 500’ün toplam üretimden satışları %28 artışla 11,118 trilyon TL oldu; bu şirketler Türkiye’nin 273,3 milyar $’lık ihracatının 104,7 milyar $’ını yaptı (ülke geneli, yalnızca İstanbul değil).</li></ul></div>
+      <div class="card"><h3>İlçelerin iş profili</h3><ul>
+        <li>Şişli, Kadıköy ve Fatih ticaret ve finans merkezi olarak öne çıkıyor; Esenyurt ve Tuzla ise sanayi merkezi olarak anılıyor (2025 Mart ilçe raporu, Ahmet Sait Öner).</li>
+        <li>Gün içi nüfus artışı Fatih, Kadıköy ve Şişli gibi merkezlerde yoğun; yani kentin ekonomik merkezleri ile konut ilçeleri ayrışıyor.</li>
+        <li>Esenyurt’ta raylı sistem yok; nüfus yoğunluğunun en yüksek olduğu ana arterlerden biri olmasına rağmen.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>İSO listeleri odalara kayıtlı firmaları sayar; fabrikanın fiilen bulunduğu ili göstermez. Bu yüzden “sanayi İstanbul’dan çıkıyor” sonucu temkinle okunmalı.</li>
+      <li>İstanbul’un imalat katma değeri, OSB doluluğu, sektörel istihdam ve kayıtlı işyeri sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Havacılık</h2>
+    <p class="sub">Türkiye’ye gelen yabancıların yarısından fazlası İstanbul’daki sınır kapılarından giriyor; kent aynı zamanda bölgenin en büyük havacılık merkezlerinden biri.</p>
+    <div class="g2">
+      <div class="card"><h3>Aylık yabancı ziyaretçi, 2026 (milyon)</h3><div class="col" id="tz"></div>
+        <p class="note">Ocak 1,360; Şubat 1,233; Haziran 1,659; Temmuz 1,932; Ağustos 1,929; Eylül 1,905. Mart–Mayıs için doğrulanmış değer bulamadım. Ocak–Eylül 2026 toplamı 14.379.176; 2025’in aynı dönemi 14.158.502 (%1,56 artış). Kaynak: İstanbul İl Kültür ve Turizm Müdürlüğü (haber aktarımı).</p></div>
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Kasım 2025’te Türkiye’ye giren yabancıların %52,14’ü (1.462.607 kişi) İstanbul’daki sınır kapılarından geldi.</li>
+        <li>İstanbul’daki havalimanlarında Ocak–Ağustos 2025’te uçan yolcu sayısı (86,45 milyon), Türkiye’nin 1 Temmuz 2025 nüfusunu (85,82 milyon) aştı.</li>
+        <li>İstanbul Havalimanı’nda 116 tarifeli yolcu havayolu operasyon yapıyor; 2026 yolcu hedefi 90 milyon.</li>
+        <li>Galata ve Kız Kulesi 2025’te toplam 1.197.385 ziyaretçi ağırladı (Galata 951.338, Kız Kulesi 246.047).</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Giriş sayıları sınır kapısı sayımıdır; konaklama değildir. Belgeli tesislerde 2024’te 14.233.983 geliş, 31.631.933 geceleme ve ortalama 2,22 gün kalış kaydedildi (turizm istatistik raporu).</li>
+        <li>İstanbul’un tüm 2025 yılı yabancı ziyaretçi toplamını ve il bazında turizm gelirini doğrulanmış kaynakla bulamadım; bu yüzden Ocak–Eylül karşılaştırması kullanıldı. Türkiye geneli 2025: 63,9 milyon ziyaretçi, 65,2 milyar $ gelir.</li>
+        <li>2026’da ziyaretçi artışı yavaş (Ocak–Eylül %1,56); Haziran 2026’da en büyük pay %12,40 ile Rusya’da.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla (dolar)</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH ($, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">İstanbul 802.669 TL ile birinci; Kocaeli 788.873 TL, Ankara 788.859 TL. Türkiye ortalamasının üzerinde yalnızca 11 il var. En alt üç il Van (203.049 TL), Ağrı (194.660 TL) ve Şanlıurfa (188.144 TL); dolar bazında Şanlıurfa 5.731 $.</p></div>
+      <div class="card"><h3>Okuma notları</h3><ul>
+        <li>İstanbul toplam GSYH’de 13 trilyon 10 milyar TL ile birinci ve payı %29,2; ilk beş il toplamın %53,0’ını oluşturuyor.</li>
+        <li>İstanbul GSYH’sinin en büyük kalemi %33,9 ile ticaret, ulaştırma, konaklama ve yiyecek hizmetleri.</li>
+        <li>İstanbul, %3,3’lük 2024 Türkiye büyümesine 0,62 puan katkı verdi; ikinci sıradaki Ankara 0,44 puan.</li>
+        <li>Kişi başına değer il ortalamasıdır; ilçeler ve haneler arasındaki farkı göstermez (yorum).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>İstanbul GSYH’sinin diğer sektör paylarını (sanayi, finans, bilgi-iletişim) doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>En kalabalık beş il (milyon kişi, ADNKS 2025)</h3><div class="bars" id="nf"></div>
+        <p class="note">İstanbul 15.754.053; Ankara 5.910.320; İzmir 4.504.185; Bursa 3.263.011; Antalya yaklaşık 2,77 milyon (yuvarlanmış aktarım). Kaynak: TÜİK ADNKS 2025 (haber aktarımı).</p></div>
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>Türkiye nüfusunun %18,3’ü İstanbul’da; km² başına 2.943 kişi ile Türkiye ortalamasının (112) yaklaşık 26 katı.</li>
+        <li>İstanbul’un nüfusu 2020’de 56.815 kişi azalarak 2001’den bu yana ilk kez geriledi.</li>
+        <li>Nüfusun yaklaşık %25’i Esenyurt, Küçükçekmece, Pendik, Ümraniye ve Bağcılar’da yaşıyor; doğurganlık Esenyurt, Sultanbeyli, Sultangazi ve Sancaktepe’de yüksek, Bakırköy, Şişli, Beşiktaş ve Kadıköy’de düşük (2025 ilçe raporu).</li>
+        <li>İstanbul Türkiye nüfusunun yaklaşık %18’ine, işgücünün yaklaşık %20’sine sahip (İŞKUR raporu).</li></ul></div>
+    </div>
+    <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    <div class="card"><ul style="margin:0">
+      <li>İstanbul’un (TR10) 2022 işgücü yapısı: işgücü 6,99 milyon, işsiz 713 bin kişi; kadınlarda işsizlik %13,4, erkeklerde %8,5.</li>
+      <li>İŞKUR’a kayıtlı işsiz sayısı 2023 sonunda 332.068; bunların %50,0’ı kadın, %15,5’i 18–24 yaş grubunda.</li>
+      <li>2025 TÜİK işgücü verisini İstanbul için doğrulanmış kaynakla bulamadım. Bazı haberler ulusal %8,3’ü “İstanbul’da” başlığıyla aktarıyor; bu sayfada kullanılmadı. Bu yüzden il düzeyinde güncel işsizlik, katılım ve istihdam oranı sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">İstanbul’un 39 ilçesi var; tabloda 2025 ADNKS nüfusuna göre seçilmiş 12 ilçe yer alıyor. Fatih, Beşiktaş ve diğer ilçelerin 2025 nüfusunu doğrulayamadım.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Öne çıkan</th></tr>
+      <tr><td>Esenyurt</td><td>1.003.905</td><td>Türkiye’de nüfusu 1 milyonu aşan ilk ilçe; doğurganlık yüksek; sanayi merkezi olarak anılıyor; raylı sistem yok</td></tr>
+      <tr><td>Küçükçekmece</td><td>785.270</td><td>Türkiye’nin en kalabalık 10 ilçesinden biri (7. sıra)</td></tr>
+      <tr><td>Pendik</td><td>752.033</td><td>Türkiye’nin en kalabalık 10 ilçesinden biri (9. sıra)</td></tr>
+      <tr><td>Ümraniye</td><td>728.913</td><td>Türkiye’nin en kalabalık 10 ilçesinden biri (10. sıra)</td></tr>
+      <tr><td>Bağcılar</td><td>707.635</td><td>İstanbul nüfusunun dörtte birini barındıran beş ilçeden biri</td></tr>
+      <tr><td>Bahçelievler</td><td>539.035</td><td>Nüfusu 500 binin üzerindeki ilçelerden</td></tr>
+      <tr><td>Başakşehir</td><td>536.797</td><td>Nüfusu 500 binin üzerindeki ilçelerden</td></tr>
+      <tr><td>Sultangazi</td><td>529.306</td><td>Doğurganlığın yüksek olduğu ilçelerden</td></tr>
+      <tr><td>Maltepe</td><td>525.044</td><td>Nüfusu 500 binin üzerindeki ilçelerden</td></tr>
+      <tr><td>Kadıköy</td><td>458.573</td><td>Ticaret ve finans merkezlerinden; doğurganlık düşük; raylı sisteme erişim yüksek</td></tr>
+      <tr><td>Tuzla</td><td>313.865</td><td>Sanayi merkezi olarak anılıyor</td></tr>
+      <tr><td>Şişli</td><td>261.959</td><td>Ticaret ve finans merkezi; doğurganlık düşük</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>2018 – İstanbul Havalimanı.</b> Yeni havalimanı hizmete girdi; sonraki yıllarda trafik rekorları kırdı.</p>
+      <p><b>2020 – Nüfus düştü.</b> Kentin nüfusu 56.815 kişi azaldı; 2001’den beri ilk gerileme.</p>
+      <p><b>2024 – Gelir ve GSYH.</b> Kişi başı GSYH 24.452 $ (1. sıra); toplam GSYH 13,01 trilyon TL, Türkiye’nin %29,2’si.</p>
+      <p><b>2025 – İhracat ve havacılık.</b> TİM kanuni merkez esaslı ihracat 95,2 milyar $; İstanbul’daki iki havalimanında 132 milyon yolcu.</p>
+      <p><b>Şubat 2026 – Nüfus.</b> ADNKS 2025: kent nüfusu 15.754.053; Esenyurt 1 milyonu aşan ilk ilçe oldu.</p>
+      <p><b>Haziran 2026 – İSO 500.</b> İstanbul Sanayi Odası’na kayıtlı firma sayısı 144’ten 129’a indi.</p>
+      <p><b>Ocak–Eylül 2026 – Turizm.</b> 14,38 milyon yabancı ziyaretçi; 2025’in aynı dönemine göre %1,56 fazla.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Ülkenin en yüksek kişi başı GSYH’si ve toplam GSYH’nin yaklaşık %29’u</li><li>İhracatta açık ara birinci konum; ticaret, ulaştırma ve hizmet ağırlıklı çeşitlenmiş yapı</li><li>İki büyük havalimanı ve 132 milyon yolcu; sınır kapılarından giren yabancıların yarısı</li><li>Türkiye işgücünün yaklaşık beşte birini barındıran büyük iç pazar</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Ekonominin ticaret ve hizmet kolunun yüksek payı, dış talep ve turizm dalgalanmalarına açıklık getirebilir</li><li>İSO 500’de İstanbul’a kayıtlı firma sayısı düşüyor (144 → 129)</li><li>İlçeler arası fark büyük: raylı sisteme erişim, doğurganlık ve kira düzeyi ilçeden ilçeye çok değişiyor</li><li>TR10’da 2022 işsizliği %10,2; kadın işsizliği %13,4</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Havacılık ve lojistik: İstanbul Havalimanı’nın 2026 için 90 milyon yolcu hedefi</li><li>Otomotiv gibi yüksek değerli ihracat kalemlerinde pay (Ocak–Ekim 2026’da 7,3 milyar $)</li><li>Ticaret ve finans merkezi rolünü ilçelerdeki ofis ve hizmet kümelenmesiyle güçlendirmek</li><li>Çevre ilçelerde raylı sistem ve ulaşım yatırımıyla işgücüne erişimi artırmak</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">İstanbul’un güçlü tablosu iki kaydın birleşiminden oluşuyor: üretimin yapıldığı yer ile yönetimin ve kayıtların bulunduğu yer. Kanuni merkez serisi İstanbul’u büyütüyor, faaliyet ili serisi küçültüyor. Asıl soru, kentin geliri ne kadarının İstanbul’da üretilip ne kadarının merkez olmaktan geldiği ve bunun ilçelere ve hanelere ne ölçüde yansıdığı.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>İhracat ve GSYH için “kanuni merkez” mi “faaliyet ili” mi daha doğru ölçüt? İstanbul’un payı hangisiyle ne kadar değişiyor?</li>
+      <li>Büyük sanayi şirketlerinin İstanbul dışına yayılması kent için kayıp mı, yoksa merkez olma rolünün doğal sonucu mu?</li>
+      <li>Kişi başı gelirde birinci olan bir kentte ilçeler arası fark nasıl kapanabilir?</li>
+      <li>Turizmde ziyaretçi artışı %1,56’da kalıyorsa İstanbul’un havacılık ve turizm stratejisi değişmeli mi?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Habertürk, CNBC-e, Rudaw, Ekonomi Gazetesi, DHA aktarımı): kişi başı GSYH, pay, sektör payı, büyüme katkısı</li>
+      <li>TİM / ADASO 2025 Yılı Aralık İhracat Raporu (TİM kanuni merkez esaslı il tablosu: İstanbul, Kocaeli, Bursa; Aralık 2025); TİM raporları: Türkiye toplam ihracatı</li>
+      <li>Ticaret Bakanlığı faaliyet illeri ihracat verileri, 2025 (Bloomberg HT, DHA, CNN Türk, ticaret.gov.tr aktarımı): aylık değerler ve sıralamalar; Capital/AA: Ocak–Ekim 2026 otomotiv ihracatı il dağılımı; Ekonomi Gazetesi: İstanbul İhracatçı Birlikleri 2025</li>
+      <li>İSO Türkiye’nin 500 Büyük Sanayi Kuruluşu 2025 ve İkinci 500 2025 (Ekonomi Gazetesi, Dünya, AA, Halk TV aktarımı)</li>
+      <li>TÜİK ADNKS 2025 (Medyascope, Habertürk, BirGün, Bloomberg HT aktarımı): il ve ilçe nüfusları; Vikipedi “List of districts of Istanbul” tablosu (Kadıköy, Tuzla, Şişli ve karşılaştırma için)</li>
+      <li>İŞKUR İstanbul İli İşgücü Piyasası Araştırması 2022 ve 2023 sonuç raporları: TR10 işgücü göstergeleri; İstanbul ilçe raporu (Milliyet, Karar, Hürriyet Daily News aktarımı)</li>
+      <li>İstanbul İl Kültür ve Turizm Müdürlüğü turizm istatistikleri (Turizm Güncel, Sözcü aktarımı); Kültür ve Turizm Bakanlığı (Posta, Benguturk aktarımı): Galata ve Kız Kulesi; Bakan Ersoy’un 2025 turizm açıklaması</li>
+      <li>DHMİ ve AA aktarımı (Memurlar.net, Ekonomi Gazetesi, CNN Türk, Dünya): İstanbul’daki havalimanlarında 2025 yolcu trafiği</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. İstanbul’un 2025 TÜİK işgücü göstergeleri, faaliyet ili bazında yıllık ihracat toplamı, ihracatın ürün ve ülke kırılımı, 2025 yıllık yabancı ziyaretçi sayısı, GSYH’nin tüm sektör payları, imalat katma değeri, OSB ve sektörel istihdam doğrulanmış kaynakla bulunamadığı için sayfada yok. İlçe tablosundaki bazı notlar (yoğunluk, doğurganlık, sanayi/ticaret merkezi niteliği) 2025 Mart tarihli bir ilçe raporunun basın aktarımına dayanır. Yüzde 35 oranı, farklı kaynakların toplamları oranlanarak yapılan kendi hesabımdır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+cols($('ay'),[['Tem',5.835,'','5,835'],['Eyl',4.512,'','4,512'],['Eki',4.859,'','4,859'],['Kas',4.459,'lo','4,459'],['Ara',5.688,'','5,688']]);
+var BT=[['2025 yıllık, ilk üç il (milyar $, TİM kanuni merkez)',[['İstanbul',95.197],['Kocaeli',22.928],['Bursa',17.862]],0,'İstanbul ilk üç ilin toplamının yaklaşık %70’ini tek başına oluşturuyor. Kaynak: TİM / ADASO 2025 ihracat raporu.'],
+ ['Aralık 2025, TİM kanuni merkez (milyar $)',[['İstanbul',8.604],['Ankara',2.991],['Kocaeli',2.033],['Bursa',1.673],['İzmir',1.194]],0,'Kanuni merkez esaslı seride Ankara ikinci sırada; merkez ofislerin etkisi bu seride görünür. Kaynak: ADASO raporu (TİM verisi).'],
+ ['Aralık 2025, faaliyet ili (milyar $)',[['İstanbul',5.688],['Kocaeli',3.006],['İzmir',1.981],['Bursa',1.882],['Ankara',1.770]],0,'Faaliyet ili serisinde İstanbul’un değeri daha düşük, Kocaeli ve İzmir daha yukarıda. Kaynak: Ticaret Bakanlığı (haber aktarımı).']];
+tabs('bt',['Yıllık','Aralık: kanuni merkez','Aralık: faaliyet ili'],function(i){
+ $('bttitle').textContent=BT[i][0];
+ bars($('btbars'),BT[i][1],[BT[i][2]]);
+ $('btnote').textContent=BT[i][3]});
+cols($('tz'),[['Oca',1.360,'','1,360'],['Şub',1.233,'lo','1,233'],['Haz',1.659,'','1,659'],['Tem',1.932,'','1,932'],['Ağu',1.929,'','1,929'],['Eyl',1.905,'','1,905']]);
+var TA=[['Havalimanı yolcusu, 2025 (milyon)',[['İstanbul Havalimanı',84],['Sabiha Gökçen',48]],'İki havalimanı toplamda 132 milyon yolcuya hizmet verdi; ikisi de tüm zamanların en yüksek trafiğine ulaştı. Kaynak: DHMİ ve AA aktarımı.'],
+ ['Yolcu, 2024 ve 2025 (milyon)',[['İstanbul Havalimanı 2024',80.4],['İstanbul Havalimanı 2025',84],['Sabiha Gökçen 2024',41.4],['Sabiha Gökçen 2025',48]],'Sabiha Gökçen’in artışı (yaklaşık 6,6 milyon) İstanbul Havalimanı’nın artışından (yaklaşık 3,6 milyon) büyük; dış hatlar %24’ten fazla arttı.']];
+tabs('ta',['2025','2024→2025'],function(i){
+ $('tatitle').textContent=TA[i][0];
+ bars($('tabars'),TA[i][1],i===1?[1,3]:[0,1]);
+ $('tanote').textContent=TA[i][2]});
+bars($('kb'),[['Türkiye ortalaması',15325],['İstanbul',24452],['Kocaeli',24031],['Ankara',24031],['Tekirdağ',18406],['Antalya',17103],['İzmir',16949],['Şanlıurfa (en alt)',5731]],[1]);
+bars($('nf'),[['İstanbul',15.754],['Ankara',5.910],['İzmir',4.504],['Bursa',3.263],['Antalya (yakl.)',2.77]],[0]);
+var IG=[['TR10 İstanbul, 2021 → 2022 (%)',[['İşsizlik 2021',12.3],['İşsizlik 2022',10.2],['Katılım 2021',54.0],['Katılım 2022',56.1]],1,'İşsizlik 2,1 puan düştü, işgücüne katılma 2,1 puan arttı. Kaynak: İŞKUR İstanbul işgücü piyasası raporları (TÜİK TR10 verisi).'],
+ ['Cinsiyete göre TR10, 2022 (%)',[['Katılım, kadın',38.3],['Katılım, erkek',74.2],['İşsizlik, kadın',13.4],['İşsizlik, erkek',8.5]],0,'Kadınların işgücüne katılımı erkeklerin yaklaşık yarısı; kadın işsizliği erkeğin 1,6 katı.'],
+ ['Karşılaştırma: TR10 2022 ve Türkiye 2025 (%)',[['Katılım, TR10 2022',56.1],['Katılım, Türkiye 2025',53.5],['İstihdam, TR10 2022',50.4],['İstihdam, Türkiye 2025',49.0],['İşsizlik, TR10 2022',10.2],['İşsizlik, Türkiye 2025',8.3]],0,'Farklı yılları karşılaştırıyor; İstanbul’un 2025 değeri doğrulanmadığı için doğrudan kıyas yapılmamalı.']];
+tabs('ig',['2021→2022','Cinsiyet','Türkiye ile'],function(i){
+ $('igtitle').textContent=IG[i][0];
+ bars($('igbars'),IG[i][1],i===0?[1,3]:(i===1?[0,2]:[0,2,4]));
+ $('ignote').textContent=IG[i][3]});
+</script>
+</body>
+</html>
