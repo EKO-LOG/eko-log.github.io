@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Van | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1e6fb0;--a2:#0aa6a6;--a3:#c0392b"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Van</span><h1>Van: Doğu’nun Kapısı, Küçükbaş Başkenti</h1><p>Türkiye’nin küçükbaş hayvan varlığında 1. ili; İran sınırındaki Kapıköy kapısı ve yılda yaklaşık 777 bin yabancı ziyaretçiyle hizmet ve sınır ticareti ekseninde bir ekonomi. Kişi başına gelirde ise 81 il arasında son üçte; genç nüfusu göç veriyor. Bu dosya Van’ı rakamları ve tartışmalı başlıklarıyla birlikte özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>1.112.013</b><span>Nüfus (2025), 2024’e göre %0,5 azaldı</span></div>
+    <div class="k"><b>≈202 milyar TL</b><span>GSYH (2024), ülke GSYH’sinin yaklaşık %0,45’i</span></div>
+    <div class="k"><b>203.049 TL</b><span>Kişi başı GSYH (2024), Türkiye ort. 503.076 TL; 81 il içinde 79.</span></div>
+    <div class="k"><b>62 mn $</b><span>İhracat, TİM (2025)</span></div>
+    <div class="k"><b>≈3,5 milyon</b><span>Küçükbaş hayvan, Türkiye 1.’si (Haziran 2026)</span></div>
+    <div class="k"><b>777 bin</b><span>Yabancı ziyaretçi (2025), Türkiye’de 8. il</span></div>
+  </div>
+  <div class="secnav"><a href="#tarim">Tarım</a><a href="#dis">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#lojistik">Sınır-Turizm</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık</h2>
+    <p class="sub">Yüksek rakımlı, sert kışlı bir coğrafya: bitkisel üretim sınırlı, mera ve küçükbaş hayvancılık ise ilin asıl tarımsal kimliği.</p>
+    <div class="g2">
+      <div class="card"><h3>Küçükbaş hayvan varlığı (milyon baş)</h3><div class="bars" id="kucuk"></div>
+        <p class="note">Van yaklaşık 3,5 milyon başla Türkiye birincisi (TÜRKYED’in TÜİK Haziran 2026 verisine dayalı aktarımı; il rakamı yuvarlak). Türkiye toplamının yaklaşık %5,8’i (hesaplama).</p></div>
+      <div class="card"><h3>Sektör payları, GSKD, 2019 (%)</h3><div class="bars" id="gsk"></div>
+        <p class="note">2019 verisi (TRB2 Sanayi Mevcut Durum Analizi Raporu); güncel il bazlı sektör kırılımı bu dosyada doğrulanamadı.</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Türkiye’de küçükbaş hayvan varlığı Haziran 2026’da 60,8 milyon baş; koyun 49,5, keçi 11,3 milyon. Van’ın bu içindeki payı yaklaşık %5,8.</li>
+      <li>Eski bir il ekonomik raporuna göre tarım alanının %62’si tahıl ve diğer bitkisel ürünlere ayrılmış, %35’i nadasta, %2’si meyve-içecek-baharat bitkilerine; yani bitkisel çeşitlilik düşük (eski veri, yaklaşık 2018).</li>
+      <li>TRB2 bölgesi (Van, Muş, Bitlis, Hakkari) istihdamının %28,4’ü hâlâ tarımda; Türkiye’de bu oran çok daha düşük.</li>
+      <li>Van’a özgü güncel bitkisel üretim ve bal üretimi rakamlarını doğrulayamadım; bu yüzden ürün grafiği yerine hayvan varlığı gösterildi.</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>Dış Ticaret</h2>
+    <p class="sub">TİM firma merkezini, TÜİK genel ticaret sistemi gümrük işleminin yapıldığı ili esas alır; Van’da ikisi çok küçük ve aynı yönde.</p>
+    <div class="card"><h3>Van ihracatı, TÜİK genel ticaret sistemi, Ocak–Eylül (milyon $)</h3><div class="col" id="t2c"></div><p class="note">2026’nın ilk dokuz ayında ihracat %9,5 arttı; aynı dönemde ithalat 55,7 milyon $’dan 28,9 milyon $’a geriledi. Yıllık TİM serisi yerine bu dönemlik seri kullanıldı, çünkü Van için doğrulanmış çok yıllı TİM tablosu bulunamadı.</p></div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TİM’e göre 2025 ihracatı 62 milyon $; yaklaşık %0,02 ülke payı (hesaplama). Başlıca pazarlar İran, Romanya, Güney Kore, ABD ve İspanya.</li>
+        <li>İran Van’ın en büyük pazarı; TİM Başkanı bölgedeki çatışmaların ihracatı zorladığını belirtti. 2026 Nisan’ında ticari yük geçişleri İran tarafıyla koordine ve kontrollü sürdü, günübirlik yolcu geçişleri karşılıklı durduruldu (Nisan 2026 haber aktarımı).</li>
+        <li>TÜİK genel ticaret sisteminde Van’da 2026 Ocak–Eylül ihracatı 19,08 milyon $ (+%9,5), ithalatı 28,9 milyon $ (−%48,1); dış ticaret açığı 38,3 milyondan 9,8 milyon $’a indi.</li></ul></div>
+      <div class="card"><h3>Ölçü farkı</h3><ul>
+        <li>TİM (62 mn $) ile TÜİK genel ticaret (Ocak–Eylül 2025: 17,4 mn $) çok farklı: Van’da kayıtlı ihracatçıların bir kısmı malı başka il gümrüğünden çıkarıyor olabilir (yorum).</li>
+        <li>İŞKUR 2024 işgücü araştırmasında 20+ çalışanlı işyerlerinin yalnızca %6,5’i ihracat yapıyor, %7,9’u Ar-Ge çalışması yürütüyor.</li>
+        <li>Faaliyet bazlı ihracat 2025’in ilk iki ayında 11 milyon $ düzeyinde; yıllık seri doğrulanamadı.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi</h2>
+    <p class="sub">Van OSB’deki fabrika sayısı ve istihdam konusunda resmî veri ile yerel eleştiriler çelişiyor; sayfa iki tarafı da aktarıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Van OSB istihdamı: iki okuma (kişi)</h3><div class="bars" id="osb"></div>
+        <p class="note">Sanayi ve Teknoloji Bakanlığı’nın TBMM yanıtına göre 2025’te Van ve Erciş OSB’lerinde üretime geçmiş 184 parselde 9.505 kişi çalışıyor. Bir iş insanı ise ürettiğini söylenen fabrikalarda gerçek üretim istihdamının en fazla 500 olduğunu savunuyor; veri farklı tanımlara dayanıyor ve doğrudan karşılaştırılamaz.</p></div>
+      <div class="card"><h3>Van OSB ve tekstil hamlesi</h3><ul>
+        <li>OSB yönetimine göre 525 hektar, 5 etap, yaklaşık 180 fabrika ve 10 binin üzerinde istihdam; hedef 50 bin.</li>
+        <li>Cazibe Merkezleri Programı kapsamında 20 tekstil fabrikası tamamlandı; 10 yenisi yapım aşamasında. 30 fabrikanın tamamlanmasıyla yaklaşık 20 bin istihdam hedefleniyor.</li>
+        <li>Eleştirel okuma: bir milletvekili 170 fabrikanın yaklaşık 40’ının faal olduğunu, faal işletmelerin yarıdan fazlasının çağrı merkezi olduğunu söyledi; bunun kesin sayısı doğrulanamadı.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Eski veriye göre Van’da sanayi işletmelerinin yaklaşık %40’ı gıda ürünleri imalatında; plastik-kauçuk ikinci sırada. Güncel sektör kırılımı bu dosyada yok.</li>
+      <li>İŞKUR teşvik belgesi listesinde imalat 51 belge ve 5.657 gerçekleşen istihdam ile öne çıkıyor (eski rapor).</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>Kişi başına GSYH, 2024 (bin TL)</h3><div class="bars" id="kb"></div><p class="note">Van Türkiye ortalamasının yaklaşık %40’ında; Şanlıurfa (188 bin) ve Ağrı (195 bin) daha düşük.</p></div>
+      <div class="card"><h3>Kişi başına GSYH ($)</h3><div class="col" id="kbd"></div><p class="note">2020–2024’te yaklaşık iki katına çıktı (3.148 → 6.185 $).</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Kişi başı GSYH TL cinsinden 2020’de 22.159’dan 2024’te 203.049’a çıktı (nominal; enflasyon etkisi içerir). TRB2 bölgesinde 226.213 TL; Hakkari 304.752, Bitlis 231.869, Muş 230.300 TL.</li>
+      <li>Van’ın toplam sektörel katma değeri 2024’te 202 milyar TL’yi aştı. TÜİK, kişi başına GSYH’nin bireylerin gelirini veya yoksulluk oranını tek başına ölçmediğini belirtiyor.</li>
+      <li>Van TSO Başkanı il ekonomisinin yaklaşık %63’ünün hizmetlere bağlı olduğunu söylüyor.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><ul>
+        <li>2025: 1.112.013; 2024’te 1.118.087. Van, nüfusu azalan 33 il arasında.</li>
+        <li>Çocuk nüfus payı %35,2 (2024: %36,2); Türkiye’nin en genç illerinden. Van TSO yaş ortalamasını 25 civarı olarak veriyor.</li>
+        <li>Van TSO Başkanı son 5 yılda 308 bin kişinin Van’dan göç ettiğini söylüyor; neden olarak işsizlik ve gelir eşitsizliğini gösteriyor (kurum beyanı, doğrulanmış resmî seri değil).</li></ul></div>
+      <div class="card"><h3>İstihdam</h3><ul>
+        <li>İşsizlik oranı 2025’te %12,7, istihdam oranı %37 (Türkiye’de işsizlik %8,3). Hakkari en yüksek işsizlikli il (%13,8).</li>
+        <li>TRB2 bölgesinde işsizlik %8,8 olarak da aktarılıyor; seri farkı var (bölge ve il düzeyi ayrı).</li>
+        <li>TRB2 istihdamı: tarım %28,4, sanayi %23,2, hizmet %48,4.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="lojistik">
+    <h2>Sınır, Turizm ve Ulaşım</h2>
+    <div class="g2">
+      <div class="card"><h3>Yabancı ziyaretçi (bin kişi)</h3><div class="col" id="tur"></div>
+        <p class="note">2024’te 718 bin, 2025’te 777 bin (+%8,2); çoğunluğu Kapıköy’den giren İranlılar. 2026’nın ilk 8 ayında İranlı ziyaretçi 427 binden 580 bine çıktı (+%36).</p></div>
+      <div class="card"><h3>Sınır kapıları</h3><ul>
+        <li><b>Kapıköy–Razi (Saray):</b> kara ve demiryolu (Van–Tebriz hattı) kapısı; 2011’de açıldı, 2019’da yeni gümrük binası hizmete girdi. Ekim 2026’da karşılıklı transit TIR geçişleri başladı ve 7/24 işleyiş duyuruldu.</li>
+        <li>Uygulamada tartışma var: bir sektör temsilcisi kapının zaten TIR’lara açık olduğunu, asıl sorunun işlem yavaşlığı olduğunu söylüyor; İranlı bir yetkili günlük 2 bin kamyon olan geçişin 200’e düştüğünü iddia etti.</li>
+        <li>Başkale’de Gelincik–Salmas kapısı için yapım çalışmaları başladı. Irak Kürdistan’dan Üzümcü kapısıyla ziyaretçi sayısı 2026’nın ilk 8 ayında 47.590.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li><b>Hava:</b> Van Ferit Melen Havalimanı 2025’te pist tadilatı ve kısmi kapanmalar nedeniyle 1.164.718 yolcuya geriledi (−%28,2).</li>
+      <li><b>Jeopolitik risk:</b> Nisan 2026’da İsrail–ABD’nin İran’a saldırılarının 38. gününde sınır kapıları kontrollü açıktı. Van’ın en büyük pazarı ve turizm kaynağı tek ülkeye bağlı.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Van’da 13 ilçe var; İpekyolu ve Tuşba merkez ilçelerdir. İlçe düzeyinde resmî ekonomik veri sınırlı; tabloda yalnızca bu dosyada doğrulanan başlıklar yer alıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan</th></tr>
+      <tr><td>Tuşba, İpekyolu</td><td>Merkez ilçeler; 2011 depreminin merkez üssü Tuşba’daki Tabanlı Mahallesi. Ticaret, hizmet ve kamu</td></tr>
+      <tr><td>Edremit</td><td>Van Ferit Melen Havalimanı burada; 9 Kasım 2011 depremi Edremit merkezliydi</td></tr>
+      <tr><td>Erciş</td><td>2011 depreminde ağır hasar aldı; Van OSB’nin Erciş kolu (Van ve Erciş OSB’leri birlikte 184 parsel)</td></tr>
+      <tr><td>Saray</td><td>Kapıköy–Razi sınır kapısı (İran), transit TIR geçişleri</td></tr>
+      <tr><td>Başkale</td><td>Gelincik–Salmas sınır kapısı yapım aşamasında; yüksek işsizlik nedeniyle genç nüfus göç veriyor (TBMM soru önergesi)</td></tr>
+      <tr><td>Diğer ilçeler</td><td>Gevaş, Gürpınar, Muradiye, Özalp, Bahçesaray, Çaldıran, Çatak: bu dosyada ilçeye özgü ekonomik veri yok</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>MÖ 9.–7. yüzyıl – Tuşpa.</b> Van Kalesi’nin bulunduğu Tuşpa, Urartu Krallığı’nın başkentiydi; Ayanis Kalesi de aynı uygarlığa ait.</p>
+      <p><b>2011 – Sınır kapısı.</b> Kapıköy–Razi kara sınır kapısı açıldı; 2019’da modern gümrük binası hizmete girdi.</p>
+      <p><b>23 Ekim 2011 – Van depremi.</b> Mw 7,2 büyüklüğündeki depremde 604 kişi, 9 Kasım depremiyle birlikte toplam 644 kişi hayatını kaybetti; kentin yapı stoku ağır hasar gördü.</p>
+      <p><b>2025 – İhracat, turizm ve nüfus.</b> TİM ihracatı 62 milyon $; yabancı ziyaretçi 777 bine çıktı, havalimanı yolcusu tadilat nedeniyle %28 düştü; nüfus 1,112 milyona geriledi.</p>
+      <p><b>Nisan 2026 – İran gerilimi.</b> İsrail–ABD saldırıları sürerken sınır kapıları ticari yük için kontrollü açık kaldı.</p>
+      <p style="margin:0"><b>Ekim 2026 – Karşılıklı TIR geçişi.</b> Kapıköy’de Türk ve İran tırlarının karşılıklı geçişi başladı; kapının fiilî kapasitesi tartışılıyor.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Küçükbaş hayvancılıkta Türkiye birinciliği (~3,5 milyon baş)</li><li>İran sınırındaki konum: Kapıköy kara ve demiryolu kapısı; yabancı ziyaretçide 8. il</li><li>Çok genç nüfus; OSB’de tekstil yatırımı ve devlet destekli fabrikalar</li><li>İranlı turist sayısında 2026’da hızlı artış</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Kişi başı GSYH Türkiye ortalamasının yaklaşık %40’ı; 81 il içinde son üçte</li><li>İşsizlik %12,7, istihdam oranı %37; nüfus azalıyor</li><li>İhracat 62 milyon $ ile çok düşük, tek pazara (İran) bağımlı</li><li>Deprem riski ve eski yapı stoku (2011 depremi)</li><li>OSB’deki gerçek üretim ve istihdamın düzeyi tartışmalı</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Kapıköy’de transit TIR trafiğinin fiilen çalışması ve Gelincik–Salmas kapısı</li><li>Tekstil ve hazır giyimde ihracata dönük üretim (OSB, Cazibe Merkezleri)</li><li>Hayvancılığa dayalı işleme: et, süt, deri, yün (yorum)</li><li>Sınır turizmi ve alışveriş turizmi; hedef 1 milyon İranlı ziyaretçi</li></ul></div>
+      <div class="card"><h3>Not</h3><p style="margin:0">Van’da tarım, sanayi ve ihracat için güncel il bazlı ayrıntılı seriler sınırlı. Bu yüzden sayfada bazı bölümler eski (2018–2019) veya yerel basın aktarımına dayanıyor ve ilgili yerlerde belirtildi.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Van’ın GSYH’si 2020–2024’te dolar bazında iki katına çıktı ama kişi başı gelir hâlâ ülke ortalamasının %40’ında: bu fark kapanabilir mi, ve hangi sektörle?</li>
+      <li>OSB’de “fabrika sayısı” ile “üretim ve istihdam” arasındaki fark ne anlama geliyor? Teşvik ve kamu yapımı tesisler kalıcı üretime dönüşür mü?</li>
+      <li>Ekonomi büyük ölçüde bir sınır kapısı ve tek bir pazara bağlıyken risk dağıtımı nasıl yapılır?</li></ul>
+      <a class="btn" id="lnkFikir" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK: il bazında GSYH 2024 (Aralık 2025), ADNKS 2025 (Şubat 2026), Dış Ticaret İstatistikleri, Hayvancılık İstatistikleri (Haziran 2026); sayılar çoğunlukla yerel ve ulusal basın aktarımından</li>
+      <li>TİM: Başkan Gültepe’nin 2025 Van ihracatı açıklaması (62 milyon $)</li>
+      <li>Van TSO ve TÜRKYED açıklamaları (göç, işsizlik, küçükbaş hayvan, İranlı turist); Sanayi ve Teknoloji Bakanlığı’nın TBMM yanıtı (OSB istihdamı)</li>
+      <li>TRB2 Bölgesi Sanayi Mevcut Durum Analizi Raporu (2021), Van Valiliği ve İŞKUR il raporları (eski veriler)</li>
+      <li>Kültür ve Turizm Bakanlığı, TÜİK turizm verileri ve DHMİ 2025 havalimanı istatistikleri (basın aktarımı)</li>
+    </ul>
+    <p class="note">Rakamların çoğu yerel basın, oda ve kurum açıklamasından alındı; TÜİK ve TİM’in orijinal tablolarına doğrudan erişilemedi. “İşsizlik %12,7, istihdam %37” Van Haber’in Haziran 2026 tarihli aktarımına dayanıyor. Kişi başı GSYH dolar serisi (3.148 → 6.185) basın aktarımıdır. “≈” işareti yuvarlama veya hesaplama içeren değerlerde kullanıldı; Van’ın GSYH’si “toplam sektörel katma değer” ifadesinden alındı ve ülke payı hesaplamadır. Güncel gelişmeler (Kapıköy, İran gerilimi) hızla değişebilir; son durum için resmî açıklamalara bakın.</p>
+  </section>
+</div>
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+bars($('kucuk'),[['Van',3.5],['Türkiye (Van hariç, toplam 60,8)',57.3]],[0]);
+bars($('gsk'),[['Hizmetler',73.3],['Tarım',15.6],['Sanayi',11.1]],[1]);
+cols($('t2c'),[['2025',17.43,'','17,4'],['2026',19.08,'lo','19,1']]);
+bars($('osb'),[['Bakanlık yanıtı (Van+Erciş OSB, 2025)',9505],['OSB yönetimi (hedef 50 bin)',10000],['Eleştirel iddia (üretim istihdamı, en fazla)',500]],[0]);
+bars($('kb'),[['Van',203.0],['Muş',230.3],['Bitlis',231.9],['Hakkari',304.8],['TRB2',226.2],['Türkiye',503.1]],[0]);
+cols($('kbd'),[['2020',3148],['2021',3138],['2022',3396],['2023',4741],['2024',6185,'lo']]);
+cols($('tur'),[['2024',718],['2025',777,'lo']]);
+</script>
+</body>
+</html>
