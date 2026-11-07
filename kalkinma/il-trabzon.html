@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trabzon | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#8d1b3d;--a2:#1f8fd1;--a3:#0b6e4f"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Trabzon</span><h1>Trabzon: Karadeniz’in Ticaret Kapısı</h1><p>Doğu Karadeniz’in ihracat merkezi: bölge ihracatının yaklaşık dörtte üçü ve Türkiye fındık ihracatının yaklaşık dörtte biri buradan çıkıyor. Fındığın yanında su ürünleri, maden, gıda ve hızla büyüyen turizm var; kişi başı gelir ise ulusal ortalamanın yaklaşık %69’u. Bu dosya Trabzon’u rakamları ve açık sorularıyla özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>≈819 bin</b><span>Nüfus (2025); Doğu Karadeniz’de nüfusu artan tek il</span></div>
+    <div class="k"><b>1.074 mn $</b><span>İhracat (2025), Doğu Karadeniz İhracatçı Birlikleri verisi</span></div>
+    <div class="k"><b>%51,5</b><span>Fındığın ihracattaki payı (553 mn $)</span></div>
+    <div class="k"><b>345.969 TL</b><span>Kişi başı GSYH (2024), Türkiye ort. 503.076 TL</span></div>
+    <div class="k"><b>1,45 milyon</b><span>Konaklayan ziyaretçi (2025), yabancı 808 bin</span></div>
+    <div class="k"><b>5</b><span>Organize sanayi bölgesi (TTSO)</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Fındık-Balık-Çay</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Rakamlar, ihracatçıların kayıtlı olduğu ili esas alır (Doğu Karadeniz İhracatçı Birlikleri / TİM).</p>
+    <div class="g2">
+      <div class="card"><h3>2025 kümülatif ihracat (milyon $)</h3><div class="col" id="kum"></div>
+        <p class="note">Ocak’tan ilgili ayın sonuna kadar. Yıl sonu: 1.073,7 milyon $.</p></div>
+      <div class="card"><h3>Doğu Karadeniz’in dört ili, 2025 (milyon $)</h3><div class="bars" id="bolge"></div>
+        <p class="note">Dört ilin toplam ihracatı 1.458,9 milyon $; Trabzon’un payı %73,6.</p></div>
+    </div>
+    <div class="card"><div class="tabs" id="tt"></div><h3 id="ttitle"></h3><div class="bars" id="bars"></div><p class="note" id="tnote"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>2025’te Trabzon’dan 1,07 milyar $ ihracat yapıldı; Rize 204, Gümüşhane 107, Artvin 75 milyon $.</li>
+        <li>Fındık tek başına ihracatın yaklaşık %51,5’ini oluşturuyor; yani il ihracatı büyük ölçüde tek ürüne dayanıyor.</li>
+        <li>Bölgede fındığı su ürünleri ve hayvansal mamuller, maden ve metaller ile yaş meyve-sebze izliyor.</li>
+        <li>Bölge ihracatının ilk beş pazarı İtalya, Rusya, Gürcistan, Almanya ve Çin (Ocak–Ekim 2025).</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Bu seri, TÜİK’in üretim ili esaslı serisinden farklıdır; Trabzon’un TİM sıralamasını ve TÜİK faaliyet ili değerini bu dosyada veremedim.</li>
+        <li>Doğu Karadeniz İhracatçı Birliği, bölgenin 1,4 milyar $’lık ihracatını potansiyelin çok altında buluyor.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="tarim">
+    <h2>Fındık, Su Ürünleri ve Çay</h2>
+    <p class="sub">Trabzon, fındığın üretildiği kadar işlendiği ve dünyaya satıldığı bir il.</p>
+    <div class="g2">
+      <div class="card"><h3>Fındık</h3><ul>
+        <li>2025’te Trabzon firmaları 59.791 ton fındık ihraç etti ve 553,1 milyon $ gelir elde etti; miktar ve değer 2024’ün gerisinde kaldı.</li>
+        <li>Türkiye’nin toplam fındık ihracatının (2025’te yaklaşık 239 bin ton) yaklaşık %25’i Trabzon üzerinden yapıldı.</li>
+        <li>Yılın başında değer payı %36 iken ilk altı ayda %33’e geriledi.</li></ul></div>
+      <div class="card"><h3>Su ürünleri</h3><ul>
+        <li>Somon yetiştiriciliği, TTSO’ya göre fındıktan sonra il ve bölgenin en çok ihracat yapan ikinci sektörü.</li>
+        <li>Sanayi Bakanlığı’nın Yerel Kalkınma Hamlesi’nde 2025’te Trabzon için teşvik edilen dört başlıktan biri su ürünleri yetiştiriciliği.</li>
+        <li>Su Ürünleri İhtisas OSB için yer arama çalışması sürüyor; Beşikdüzü OSB’nin 2. ve 3. etap genişlemesi sektörün 4-5 yıllık ihtiyacını karşılayabilir.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Çay üretimi Doğu Karadeniz’in tarım ekonomisinin parçası; ÇAYKUR Rize, Trabzon, Artvin ve Giresun’da 1.500 mevsimlik işçi aldı (haber). Üretim miktarını bu dosyada veremedim.</li>
+      <li>Güncel fındık ve çay üretim miktarları, tarım GSYH payı ve hayvancılık verileri doğrulanmış kaynakla bulunamadığı için sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve OSB’ler</h2>
+    <p class="sub">Gıda sanayi ilde hem tesis sayısı hem istihdam bakımından önde; imalat daha çok fındık ve su ürünlerine bağlı.</p>
+    <div class="g2">
+      <div class="card"><h3>Sektörler</h3><ul>
+        <li>TTSO’ya göre Trabzon’da gıda, makine, inşaat, orman ürünleri, mobilya, enerji, savunma sanayi, gemi üretimi ve sağlık alanlarında üretim yapılıyor.</li>
+        <li>Oda; sağlık turizmi, inşaat, mobilya, gıda, tekstil ve ayakkabıda kümelenme projeleri yürütüyor.</li></ul></div>
+      <div class="card"><h3>OSB altyapısı</h3><ul>
+        <li>İlde 5 OSB var; ilki Arsin OSB. Bir habere göre Arsin OSB şehir ihracatının yaklaşık %30’unu karşılıyor.</li>
+        <li>Sanayi Bakanı Kacır’a göre OSB alanı 100 hektardan 422 hektara, OSB istihdamı yaklaşık 4.865 kişi artarak yükseldi (son 23 yıl).</li>
+        <li>Araklı Hazır Giyim-Tekstil İhtisas OSB projesinin 4.000 kişilik istihdam hedefi var.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Yeni teşvik sisteminde Trabzon’daki OSB’lerde yapılacak yatırımlar için istihdam edilenlerin SGK işveren payının yarısı 4 yıl boyunca Sanayi Bakanlığı’nca karşılanıyor (Kacır). TTSO ve belediye, teşviklerin 5. bölgeye çıkarılması için çalıştıklarını söylüyor.</li>
+      <li>Arsin’de planlanan mega endüstri bölgesi projesi, TTSO’ya göre devlet desteği bekliyor.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Sümela, Uzungöl, Ayasofya ve yaylalar; yabancı ziyaretçi sayısı hızla artıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Konaklayan ziyaretçi (bin kişi)</h3><div class="col" id="tur"></div>
+        <p class="note">2024: toplam 1.346 bin; 2025: 1.448 bin (%8 artış). Yabancı ziyaretçide artış %14. Kaynak: Trabzon İl Kültür ve Turizm Müdürlüğü (AA aktarımı).</p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Sümela Manastırı 2025’te 514.596 ziyaretçi ağırladı.</li>
+        <li>Uzungöl’ün 2025 ziyaretçi sayısı günübirlik gelenler dahil 4,34 milyon (+%71); sayı konaklayan turist verisinden bağımsız ve farklı yöntemle sayılıyor.</li>
+        <li>İlde 519 tesiste 31.113 yatak var; havalimanının yolcu kapasitesi 3,5 milyon.</li>
+        <li>Körfez ülkelerinden gelen turistlerin payı yüksek; bölgedeki çatışmalar bu pazar için risk.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="card"><h3>Kişi başına GSYH (bin TL)</h3><div class="bars" id="kb"></div>
+      <p class="note">Trabzon’un değeri Türkiye ortalamasının yaklaşık %68,8’i; Doğu Karadeniz illeri arasında Artvin ve Samsun’un gerisinde, Ordu’nun önünde. Bir haber kaynağı Trabzon için dolar bazında 9.420 $ veriyor; TL ile tutarsız göründüğü için TL değerleri kullanıldı.</p></div>
+    <div class="card"><ul style="margin:0">
+      <li>Trabzon’un toplam GSYH’sini ve sektörel dağılımını doğrulanmış kaynakla bulamadım; bulununca eklenecek.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><ul>
+        <li>2024: 818.023 kişi; 2025’te nüfus 1.053 kişi artarak yaklaşık 819 bin oldu. Doğu Karadeniz’de nüfusu artan tek il.</li>
+        <li>İlk nüfus sayımında (1927) 293.055 idi; yaklaşık 2,8 kat büyüdü.</li></ul></div>
+      <div class="card"><h3>İşgücü</h3><ul>
+        <li>Güncel TÜİK il işsizlik oranını bulamadım.</li>
+        <li>Bölgede ÇAYKUR gibi mevsimlik işler, fındık hasadı ve turizm istihdamın önemli kalemleri.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Trabzon’da 18 ilçe var; Ortahisar merkez ilçedir. İlçe düzeyinde resmî ekonomik veri sınırlıdır, tabloda doğrulanan bilgiler var.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan</th></tr>
+      <tr><td>Ortahisar</td><td>Merkez ilçe; ticaret, hizmetler ve ildeki turizmin ana üssü</td></tr>
+      <tr><td>Arsin</td><td>İlin ilk OSB’si</td></tr>
+      <tr><td>Araklı</td><td>Planlanan Hazır Giyim-Tekstil İhtisas OSB</td></tr>
+      <tr><td>Beşikdüzü</td><td>OSB (genişleme planlı); su ürünleri büyüme alanı</td></tr>
+      <tr><td>Çaykara</td><td>Uzungöl</td></tr>
+      <tr><td>Maçka</td><td>Sümela Manastırı</td></tr>
+      <tr><td>Diğer ilçeler</td><td>Akçaabat, Çarşıbaşı, Dernekpazarı, Düzköy, Hayrat, Köprübaşı, Of, Sürmene, Şalpazarı, Tonya, Vakfıkebir, Yomra: bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1927 – İlk nüfus sayımı.</b> İl nüfusu 293.055.</p>
+      <p><b>1994-1997 – Sanayi başlangıcı.</b> Arsin OSB’de tesisler kurulmaya başladı; 1997’de Trabzon kalkınmada öncelikli iller arasına alındı.</p>
+      <p><b>2003 – Yeni teşvik sistemi.</b></p>
+      <p><b>2023 – Yabancı turist sıçraması.</b> Yılın ilk yarısında konaklayan yabancı turist sayısı %115,9 artarak yaklaşık 205 bine çıktı.</p>
+      <p><b>2025 – Rekor yabancı ziyaretçi.</b> 808 bin yabancı ziyaretçi; ihracat 1,07 milyar $, fındıkta düşüş.</p>
+      <p style="margin:0"><b>2025-26 – Yeni destekler.</b> Doğu Karadeniz Projesi (DOKAP) eylem planında 11 ili kapsayan 158 projeye 394 milyar TL kaynak ayrıldı; Trabzon’da su ürünleri ve tekstil OSB’leri planlanıyor.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Bölge ihracatının yaklaşık %74’ü Trabzon’dan</li><li>Limanı, havalimanı ve üniversiteleriyle bölgesel merkez</li><li>Hızlı büyüyen turizm</li><li>Nüfusu artan tek Doğu Karadeniz ili</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın yarısından fazlası fındığa bağlı</li><li>Kişi başı gelir ulusal ortalamanın yaklaşık %69’u</li><li>Sınırlı düz arazi; sanayi alanı sorunu</li><li>Turizmin Körfez pazarına bağımlılığı</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Su ürünleri ve tekstil ihtisas OSB’leri</li><li>Fındığın işlenmiş ürüne dönüşümü</li><li>Sağlık turizmi ve yayla turizmi</li><li>DOKAP projeleri</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Trabzon’un ihracatı büyük ölçüde fındığın işlenip satılmasına dayanıyor; il üretimden çok ticaret ve işleme merkezi olarak öne çıkıyor.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Trabzon fındığın ticaret merkezi olmayı sürdürürken katma değeri nasıl artırır?</li>
+      <li>Uzungöl ve Sümela’daki yoğun ziyaretçi akışı doğal alanların taşıma kapasitesiyle nasıl dengelenir?</li>
+      <li>Su ürünleri yetiştiriciliğinin hızlı büyümesi kıyı ve çevre açısından hangi sınırlarla yönetilmeli?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>Doğu Karadeniz İhracatçı Birlikleri (DKİB) açıklamaları, AA ve basın aktarımları: 2025 il ihracatı, sektör ve ülke sıralaması; DKİB Fındık Sektör Komitesi açıklamaları</li>
+      <li>TÜİK il bazında GSYH 2024 (basın aktarımı)</li>
+      <li>Trabzon İl Kültür ve Turizm Müdürlüğü verileri (AA, DHA aktarımı); Sabah, Ekonomim haberleri</li>
+      <li>Trabzon Ticaret ve Sanayi Odası (TTSO) yayınları; Sanayi ve Teknoloji Bakanı Kacır’ın açıklamaları; DOKAP eylem planı haberleri</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımıdır; resmî tabloların doğrudan alıntısı değildir. Trabzon’un toplam GSYH’si ve sektörel payları, il işsizlik oranı, liman yükü, fındık ve çay üretim miktarları ile ilçe verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. 2025 nüfusu, 2024 değerine bildirilen artış eklenerek verilmiştir. Tutarlar cari fiyatlarla, ihracat rakamları yıllıktır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+cols($('kum'),[['Şub',224.6,'','225'],['Mar',363.7,'','364'],['May',561.2,'','561'],['Tem',716.8,'','717'],['Eki',917.5,'','918'],['Ara',1073.7,'lo','1.074']]);
+bars($('bolge'),[['Trabzon',1073.7],['Rize',203.6],['Gümüşhane',106.8],['Artvin',74.9]],[0]);
+cols($('tur'),[['Yabancı 2024',711.6,'','712'],['Yabancı 2025',808.0,'lo','808'],['Yerli 2024',634.6,'','635'],['Yerli 2025',639.6,'lo','640']]);
+bars($('kb'),[['Türkiye ortalaması',503.1],['Artvin',390.1],['Samsun',369.4],['Trabzon',346.0],['Ordu',293.8],['Van (en düşük üçten biri)',203.0]],[3]);
+var TT=[['Sektör (Doğu Karadeniz, Oca–Eki 2025, milyon $)',[['Fındık',500.4],['Su ürünleri ve hayvansal mamuller',183.9],['Maden ve metaller',166.7],['Yaş meyve ve sebze',111.4]],'Dört ilin (Trabzon, Rize, Artvin, Gümüşhane) toplamı; fındığın payı yaklaşık %41. Kaynak: DKİB (AA).'],
+ ['Fındık ihracatı (Trabzon, kümülatif, milyon $)',[['Ocak–Mart',229.3],['Ocak–Nisan',297.5],['Ocak–Haziran',391.5],['Ocak–Kasım',523.3],['2025 tümü',553.1]],'Trabzon firmalarının fındık ihracatı. Kaynak: DKİB Fındık Komitesi.'],
+ ['Türkiye fındık ihracatındaki pay (%)',[['Ocak–Mart (değer)',36],['Ocak–Nisan (değer)',35],['Ocak–Haziran (değer)',33],['2025 tümü (miktar)',25]],'İlk üç değer payı, sonuncusu miktar payıdır; yıl ilerledikçe pay düştü.']];
+tabs('tt',TT.map(function(t){return t[0].split(' (')[0]}),function(i){
+ $('ttitle').textContent=TT[i][0];
+ bars($('bars'),TT[i][1],[0]);
+ $('tnote').textContent=TT[i][2]});
+</script>
+</body>
+</html>

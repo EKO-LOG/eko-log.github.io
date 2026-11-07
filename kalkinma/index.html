@@ -139,7 +139,7 @@ footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-bet
 </head>
 <body>
 <header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
-<div class="aurora banner" style=""><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a></span><h1>Türkiye’nin 81 İli: Kalkınma ve Ekonomi</h1><p>Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik Malatya, Adana, Gaziantep, Mersin, Konya ve Van hazır; diğer iller sırayla eklenecek.</p></div></div>
+<div class="aurora banner" style=""><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a></span><h1>Türkiye’nin 81 İli: Kalkınma ve Ekonomi</h1><p>Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik 8 il hazır (Malatya, Adana, Gaziantep, Mersin, Konya, Van, Trabzon, Muğla); diğer iller sırayla eklenecek.</p></div></div>
 <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
 <div class="w">
 <div class="kpis">
@@ -148,7 +148,7 @@ footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-bet
     <div class="k"><b>44,6 trilyon TL</b><span>GSYH (2024)</span></div>
     <div class="k"><b>15.325 $</b><span>Kişi başı GSYH (2024)</span></div>
     <div class="k"><b>%8,3</b><span>İşsizlik (2025)</span></div>
-    <div class="k"><b id="hz">3 / 81</b><span>Hazır il sayfası</span></div>
+    <div class="k"><b id="hz">8 / 81</b><span>Hazır il sayfası</span></div>
   </div>
 
   <section>
@@ -166,6 +166,8 @@ footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-bet
     <a class="card" href="il-mersin.html" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Mersin →</h3><p style="margin:0" class="note">Akdeniz’in liman ve narenciye kenti; konteyner limanı, serbest bölge, bakliyat ticareti ve Akkuyu nükleer santrali.</p></a>
       <a class="card" href="il-konya.html" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Konya →</h3><p style="margin:0" class="note">Tahıl ambarı ve sanayi şehri: pancar, buğday, otomotiv yan sanayi, makine ve güneş enerjisi. Su-iklim riski ve ilçe tablosu.</p></a>
     <a class="card" href="il-van.html" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Van →</h3><p style="margin:0" class="note">Doğu’nun kapısı: küçükbaş hayvancılıkta Türkiye birincisi, Kapıköy sınır ticareti, sınır turizmi; düşük kişi başı gelir ve göç.</p></a>
+    <a class="card" href="il-trabzon.html" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Trabzon →</h3><p style="margin:0" class="note">Karadeniz’in ticaret kapısı: fındık işleme ve ihracatı, su ürünleri, hızla büyüyen turizm ve OSB’ler; kişi başı gelir ve fındık bağımlılığı.</p></a>
+    <a class="card" href="il-mugla.html" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Muğla →</h3><p style="margin:0" class="note">Bodrum-Marmaris-Fethiye turizminin yanında Türkiye’nin su ürünleri başkenti; düşük imalat payı, mermer ve komşu illerle karşılaştırma.</p></a>
     </div>
   </section>
 
@@ -195,7 +197,7 @@ function tabs(id,items,cb){var el=document.getElementById(id);
  el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
  el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
 
-var SAYFA={44:'il-malatya.html',1:'il-adana.html',27:'il-gaziantep.html',33:'il-mersin.html',42:'il-konya.html',65:'il-van.html'};
+var SAYFA={44:'il-malatya.html',1:'il-adana.html',27:'il-gaziantep.html',33:'il-mersin.html',42:'il-konya.html',65:'il-van.html',61:'il-trabzon.html',48:'il-mugla.html'};
 var IL='Adana,Adıyaman,Afyonkarahisar,Ağrı,Amasya,Ankara,Antalya,Artvin,Aydın,Balıkesir,Bilecik,Bingöl,Bitlis,Bolu,Burdur,Bursa,Çanakkale,Çankırı,Çorum,Denizli,Diyarbakır,Edirne,Elazığ,Erzincan,Erzurum,Eskişehir,Gaziantep,Giresun,Gümüşhane,Hakkari,Hatay,Isparta,Mersin,İstanbul,İzmir,Kars,Kastamonu,Kayseri,Kırklareli,Kırşehir,Kocaeli,Konya,Kütahya,Malatya,Manisa,Kahramanmaraş,Mardin,Muğla,Muş,Nevşehir,Niğde,Ordu,Rize,Sakarya,Samsun,Siirt,Sinop,Sivas,Tekirdağ,Tokat,Trabzon,Tunceli,Şanlıurfa,Uşak,Van,Yozgat,Zonguldak,Aksaray,Bayburt,Karaman,Kırıkkale,Batman,Şırnak,Bartın,Ardahan,Iğdır,Yalova,Karabük,Kilis,Osmaniye,Düzce'.split(',');
 var fold=function(s){return s.toLocaleLowerCase('tr').replace(/[^a-z0-9ğüşıöç]/g,'')};
 function draw(q){var f=fold(q||'');
@@ -234,7 +236,7 @@ bars3(document.getElementById('gs'),[['İstanbul',13.01],['Ankara',4.67],['İzmi
   draw(document.getElementById('ara').value||'');
   document.getElementById('hz').textContent=Object.keys(SAYFA).length+' / 81';
   var names=Object.keys(SAYFA).map(Number).sort(function(a,b){return a-b}).map(function(k){return IL[k-1]});
-  [].forEach.call(document.querySelectorAll('p'),function(p){if(/^Bir il seç/.test(p.textContent)&&/hazır/.test(p.textContent))p.textContent='Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik '+names.join(', ')+' hazır; diğer iller sırayla eklenecek.'});
+  [].forEach.call(document.querySelectorAll('p'),function(p){if(/^Bir il seç/.test(p.textContent)&&/hazır/.test(p.textContent))p.textContent='Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik 8 il hazır (Malatya, Adana, Gaziantep, Mersin, Konya, Van, Trabzon, Muğla); diğer iller sırayla eklenecek.'});
  });
 })();
 </script>
