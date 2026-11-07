@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mersin | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0b7285;--a2:#15aabf;--a3:#f59f00"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Mersin</span><h1>Mersin: Akdeniz’in Liman ve Narenciye Kenti</h1><p>Türkiye’nin 11. büyük ili; en büyük konteyner limanlarından birine, limon ve muz üretiminde ülke birinciliğine ve bakliyat ihracatının yaklaşık %88’ine ev sahipliği yapıyor, ilk nükleer santrali Akkuyu da burada tamamlanıyor. Bu dosya Mersin’in tarım, sanayi, dış ticaret, gelir ve işgücü verilerini özetliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>≈1,96 milyon</b><span>Nüfus (2025), 11. büyük il</span></div>
+    <div class="k"><b>≈960 milyar TL</b><span>GSYH (2024), 7. sıra, yaklaşık %2,2 pay</span></div>
+    <div class="k"><b>13.549 $</b><span>Kişi başı GSYH (2024), 21. sıra</span></div>
+    <div class="k"><b>3.630 mn $</b><span>İhracat, TİM (2025), 10. sıra</span></div>
+    <div class="k"><b>9,9 milyar $</b><span>İhracat, TÜİK faaliyet ili (2025), 7. sıra</span></div>
+    <div class="k"><b>551.575</b><span>SGK’lı aktif çalışan (Ekim 2025)</span></div>
+  </div>
+  <div class="secnav"><a href="#tarim">Tarım</a><a href="#dis">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#lojistik">Lojistik</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="tarim">
+    <h2>Tarım: Narenciye, Muz ve Örtüaltı</h2>
+    <p class="sub">Dar kıyı ovaları ve Toros eteklerinde, iklimin izin verdiği çok ürünlü bir tarım; üretimde ve ihracatta ülkenin önde gelen ili.</p>
+    <div class="g2">
+      <div class="card"><h3>Başlıca ürünler, 2024 üretimi (bin ton)</h3><div class="bars" id="urun"></div></div>
+      <div class="card"><h3>Türkiye üretimindeki pay, 2024 (%)</h3><div class="bars" id="pay"></div>
+        <p class="note">Limon ve muzda Mersin, Türkiye üretiminin yaklaşık yarısını tek başına karşılıyor.</p></div>
+    </div>
+    <div class="card"><h3>Türkiye ihracatındaki pay, AKİB (%)</h3><div class="bars" id="ihrpay"></div>
+      <p class="note">Mersin Ticaret Borsası’na göre ülkenin bakliyat ticaretinin yaklaşık %80’i Mersin üzerinden yapılıyor; borsa 1926’da kuruldu ve işlem hacmi her yıl ilk 10 borsa arasında.</p></div>
+    <div class="card"><ul style="margin:0">
+      <li>Meyve üretiminde 3,6 milyon ton ile Türkiye birincisi, sebzede 1,9 milyon ton ile 4. sırada. Örtüaltında 175.975 dekarda 1,7 milyon ton üretim var; örtüaltı meyvede 1., örtüaltı sebzede 2. sırada.</li>
+      <li>Narenciye toplamı 2024’te 1,43 milyon ton (limon 836 bin, mandalina 324 bin, portakal 248 bin ton).</li>
+      <li>Tarım alanı yaklaşık 3,26 milyon dekar; Türkiye tarım alanının yalnızca %1,4’ü, fakat meyve üretimindeki payı çok daha yüksek. Son 20 yılda tarım alanı %18 küçüldü.</li>
+      <li>Ürün deseni değişiyor: 20 yıl önce meyvelik alanların %63’ü üzüm ve narenciyeydi, 2025’te %32. Zeytin, şeftali, nektarin, muz, kayısı, erik ve avokado alanları arttı.</li>
+      <li>Tarım ve gıda ihracatı 2025’te 3,8 milyar $; Mersin’in toplam ihracatının %45’i, Türkiye tarımsal ihracatının %12’si (il, 4. sırada). Ürünlerin önemli kısmı ham veya düşük katma değerli; Borsa, daha yüksek katma değerli işlenmiş ürünlere geçişi öneriyor.</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>Dış Ticaret</h2>
+    <p class="sub">Üç farklı ölçü var: TİM ihracatçının kanuni merkezini, TÜİK faaliyet ili üretimin yapıldığı ili, TÜİK genel ticaret sistemi ise gümrük işleminin yapıldığı ili esas alır. Mersin’de liman ve serbest bölge olduğu için üçü birbirinden çok farklı çıkıyor.</p>
+    <div class="card"><div class="tabs" id="yt"></div><h3 id="ytitle"></h3><div class="col" id="yil"></div><p class="note" id="ynote"></p></div>
+    <div class="card"><div class="tabs" id="tt"></div><h3 id="ttitle"></h3><div class="bars" id="bars"></div><p class="note" id="tnote"></p></div>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TİM İlk 1000’de 22 Mersin merkezli firma var; toplam ihracatları 1.636 mn $ (Mersin’in TİM ihracatının yaklaşık %45’i) ve 177 ülkeye satış yapıyorlar. Tarım ve gıda bağlantılı 16 firma 1.230 mn $ ihracat yapıyor.</li>
+        <li>TİM ihracatı 2025’te %15 artarak 3.147’den 3.630 mn $’a çıktı; 2026 Ocak–Eylül’de 2.999 mn $, yıllık %26,6 artış.</li>
+        <li>Artış iki sektöre dayanıyor: Ocak–Eylül 2026’da yaş meyve-sebze 880 mn $ (+371 mn $), hazır giyim 358 mn $ (+204 mn $). İkisi toplam artışın %91,3’ünü oluşturuyor (MÜSİAD Mersin).</li>
+        <li>Pazar yoğunluğu yüksek: Irak ve Rusya birlikte TİM ihracatının yaklaşık %36’sı.</li></ul></div>
+      <div class="card"><h3>Dış ticaret dengesi ve liman etkisi</h3><ul>
+        <li>TÜİK genel ticaret sistemine göre 2025 ihracatı 8,4 milyar $ (7. sıra); MTSO’ya göre dış ticaret hacmi 16,9 milyar $. İkisinden ithalatın kabaca 8,5 milyar $ olduğu çıkıyor (hesaplama), yani dış ticaret yaklaşık dengede. 2024’te ihracat 8,3, ithalat 8,0 milyar $ idi.</li>
+        <li>Faaliyet ili esasına göre ihracat 2024’te 10,1 milyar $ (+%4,6), 2025’te 9,9 milyar $; yine 7. sırada.</li>
+        <li>Gümrük esaslı ihracat (8,4 mlr $) TİM verisinin (3,6 mlr $) yaklaşık 2,3 katı. Bu fark, Mersin Limanı ve serbest bölgesinin başka illerin yükünü de işlemesiyle uyumlu bir tablo (yorum).</li></ul></div>
+    </div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi</h2>
+    <p class="sub">Mersin ekonomisinde sanayi, hizmetlerden sonra ikinci sektör; fakat Türkiye sanayisindeki payı (%1,2, 2022) ekonomideki genel payının belirgin altında.</p>
+    <div class="g2">
+      <div class="card"><h3>Sanayi işletmelerinde çalışanların dağılımı (%)</h3><div class="bars" id="imal"></div><p class="note">Sanayi sicilinde 1.802 işletme ve 51.995 çalışan var; işletmelerin %56’sı mikro ölçekli (MTSO Stratejik Planı 2024-2026).</p></div>
+      <div class="card"><h3>Organize sanayi bölgeleri</h3><ul>
+        <li><b>Mersin Tarsus OSB (MTOSB):</b> 1993’te kuruldu; 823 hektar, 263 firma, yaklaşık 27 bin istihdam (Ekim 2024). Onaylanan 5. etap (235 hektar) ile 1.058 hektara ve yaklaşık 50 bin istihdama çıkması hedefleniyor.</li>
+        <li><b>TÜİOSB (Tarsus):</b> Tarımsal ürün işleme ihtisas OSB’si; yönetimin hedefi 100 fabrika, 10 bin istihdam ve yıllık 500 milyon $’ı aşan ihracat.</li>
+        <li><b>Silifke OSB:</b> 2000’de ilan edildi; yaklaşık 2 bin kişi istihdam ediyor, taş-toprak ve gıda öne çıkıyor.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Büyük firmalar</h3><ul>
+        <li>İSO 500 (2025): Mersin bağlantılı 21 firma var; 9’u Mersin, Tarsus veya Silifke odalarına kayıtlı, 12’si merkezi başka ilde olup Mersin’de üretim yapıyor. Toplam üretimden net satışları 434,5 milyar TL.</li>
+        <li>Mersin’de üretim yapan Şişecam (17., 93,6 milyar TL) ve Çimsa (137., 18,7 milyar TL) en büyükler arasında. Mersin odalı 9 firmanın toplam satışı 129,3 milyar TL.</li>
+        <li>İSO İkinci 500’de 10 Mersin bağlantılı firma daha var; iki liste birlikte 31 firma, yaklaşık 469 milyar TL.</li></ul></div>
+      <div class="card"><h3>Teknoloji ve ar-ge</h3><ul>
+        <li>Mersin Teknopark’ın yurt içi satışları 2021’de 124 milyon TL iken 2023’te 400 milyon TL’ye, yurt dışı satışları 4,8 milyon $’dan 7 milyon $’a çıktı.</li>
+        <li>Akkuyu’nun yerlileştirme sürecinin sanayi tedarik zincirine etkisi (Lojistik ve Enerji bölümü) orta vadede izlenmesi gereken bir başlık.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>Mersin’in Türkiye GSYH’sindeki payı, faaliyet koluna göre, 2022 (%)</h3><div class="bars" id="sek"></div><p class="note">Paranteze yazılan sayı Mersin’in o faaliyet kolundaki il sıralamasıdır. Mersin inşaat ve tarımda ülke payının üzerinde, sanayide belirgin şekilde altında. Hizmetlerin il GSYH’sindeki payı yaklaşık %53 (MTSO).</p></div>
+      <div class="card"><h3>Kişi başına GSYH ($)</h3><div class="col" id="kb"></div></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>2024 GSYH’si yaklaşık 960 milyar TL; Mersin İstanbul, Ankara, İzmir, Kocaeli, Bursa ve Antalya’nın ardından 7. büyük ekonomi, ülke GSYH’sinin yaklaşık %2,2’si.</li>
+      <li>Kişi başı GSYH 13.549 $ ile Türkiye ortalamasının (15.325 $) yaklaşık %88’i ve komşu Adana’nın (10.692 $) üzerinde; ülke sıralamasında 21. Fark kapanıyor: 2020’de Mersin ortalamanın yaklaşık %79’undaydı, 2020-2024’te kişi başı gelir iki katına çıktı (Türkiye’de yaklaşık %82 artış).</li>
+      <li>SEGE-2025’te 13. sıra; 12 basamak yükseldi. MTSO Başkanı’nın aktardığına göre rekabet-yenilikçilik, mali durum ve yaşam kalitesinde ilk 8 il arasında, kişi başı vergi ödemede 5. sırada.</li>
+      <li>MTSO’nun 2025 Ekonomik Raporu il ekonomisinin reel olarak %7,3 büyüdüğünü belirtiyor; il bazında resmî 2025 GSYH henüz yayımlanmadığı için bu rakam doğrulanamadı.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Nüfus</h3><ul>
+        <li>2025: yaklaşık 1,96 milyon kişi; Türkiye nüfusunun yaklaşık %2,3’ü, 11. büyük il.</li>
+        <li>Mersin 2000’den 2025’e %31 büyümüştü (1,49 → 1,96 milyon) ama artış durdu: 2025’te nüfus artış hızı binde 1,1 (Türkiye binde 5,0); 2024-2025’te toplam artış 2.149 kişi.</li>
+        <li>MTSO plan belgesine göre ilde yabancı nüfus toplam nüfusun %2,6’sı; 2022-2023’te net göç hızı binde 6,8 ile yüksekti.</li></ul></div>
+      <div class="card"><h3>İstihdam</h3><ul>
+        <li>İşsizlik oranı (il düzeyi): 2022’de %8,6, 2023’te %7,1, 2024’te %6,6, 2025’te %7,7; Türkiye’nin (%8,3) altında ama 2025’te yükseldi. İstihdam oranı 2025’te %49,2 ile son dört yılın zirvesinde.</li>
+        <li>SGK’lı aktif çalışan 551.575 (Ekim 2025; yıllık %2 düşüş); işyeri sayısı 48.686 (%2 artış), Türkiye işyerlerinin %2,1’i.</li>
+        <li>İstihdamın sektörel dağılımı (2023): hizmetler %58, sanayi %25, tarım %17 (MTSO).</li></ul></div>
+    </div>
+  </section>
+
+  <section id="lojistik">
+    <h2>Lojistik, Enerji ve Turizm</h2>
+    <div class="card"><ul style="margin:0">
+      <li><b>Mersin Limanı:</b> 2,6 milyon TEU konteyner ve 10 milyon ton konvansiyonel yük kapasitesi; genişleme tamamlanınca 3,6 milyon TEU’ya ve aynı anda iki mega gemiye hizmet verecek. Bakanlığa göre Türkiye ihracatının konteynerde %22’si, konvansiyonel yükte %7’si bu limandan geçiyor; hinterlandı ülkenin yaklaşık yarısı.</li>
+      <li>2023’te 31,5 milyon ton yük (Türkiye’nin %6’sı) ve 1,94 milyon TEU (%15,5) elleçlendi. MTSO’ya göre Mersin ve Taşucu limanlarında 2025’te elleçlenen konteyner %4 artarak yaklaşık 2 milyon TEU oldu.</li>
+      <li><b>Mersin Serbest Bölgesi:</b> 1987’de açıldı; işleticisine göre 2023’te 3,7 milyar $ ticaret hacmi yaptı ve 2024’te bunu korudu.</li>
+      <li><b>Akkuyu Nükleer Güç Santrali:</b> 4 ünite, toplam 4.800 MW; tamamlandığında Türkiye elektriğinin yaklaşık %10’unu karşılaması bekleniyor. Birinci ünitede devreye alma sürüyor; Enerji Bakanı 6 Kasım 2026’da ilk elektriğin önümüzdeki haftalarda-aylarda üretileceğini, hedefin yıl sonu olduğunu belirtti.</li>
+      <li><b>Raylı ulaşım:</b> Mersin-Adana-Osmaniye-Gaziantep hızlı tren projesinde Mersin-Gaziantep yolculuğunun 6 saat 23 dakikadan 2 saat 15 dakikaya inmesi hedefleniyor. Adana ve Mersin’e hizmet veren Çukurova Havalimanı Ağustos 2024’te Şakirpaşa’nın yerini aldı.</li>
+      <li><b>Turizm:</b> MTSO 2025 raporuna göre konaklama tesislerine giriş yapan ziyaretçi sayısı %34 artarak 1,27 milyonu aştı; artışı yerli ziyaretçi taşıdı, geceleme süresi kısaldı.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Mersin’de 13 ilçe var; Akdeniz, Mezitli, Toroslar ve Yenişehir büyükşehir merkez ilçeleridir. İlçe düzeyinde resmî ekonomik veri sınırlıdır; tablo tarım ve sanayi kaynaklarından doğrulananları içeriyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan</th></tr>
+      <tr><td>Akdeniz, Mezitli, Toroslar, Yenişehir</td><td>Büyükşehir merkezi; Mersin Limanı, Mersin Serbest Bölgesi, Mersin Teknopark, ticaret ve hizmetler</td></tr>
+      <tr><td>Tarsus</td><td>En kalabalık ilçe (350 bin üzeri); Mersin Tarsus OSB hattı, TÜİOSB ve tarıma dayalı sanayi</td></tr>
+      <tr><td>Erdemli</td><td>Limon üretiminin merkezi (2019 verisine göre ilin en büyük limon ilçesi, yaklaşık 277 bin ton)</td></tr>
+      <tr><td>Silifke</td><td>Çilek, Silifke OSB ve Taşucu Limanı</td></tr>
+      <tr><td>Anamur</td><td>Muz üretiminin merkezi (2019’da yaklaşık 217 bin ton, ilin muz üretiminin büyük kısmı)</td></tr>
+      <tr><td>Mut, Gülnar</td><td>Mut’ta kayısı ve zeytin, Gülnar’da elma</td></tr>
+      <tr><td>Bozyazı, Aydıncık, Çamlıyayla</td><td>Kıyı ve dağlık ilçeler; bu dosyada henüz ilçeye özgü ekonomik veri yok</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1860’lar – Pamuk ve liman.</b> Amerikan İç Savaşı’nın yarattığı pamuk talebi Çukurova’da üretimi artırdı; 1863’te ilk çırçır fabrikası açıldı, 1864’te Mersin Tarsus’tan ayrılarak kaza oldu.</p>
+      <p><b>1886 – Demiryolu.</b> Mersin-Tarsus-Adana hattı 2 Ağustos’ta hizmete girdi, liman ticaret hacmi iki katına çıktı; kentteki konsolosluk sayısı 12’ye ulaştı.</p>
+      <p><b>1926 – Ticaret Borsası.</b> Mersin Ticaret Borsası kuruldu.</p>
+      <p><b>1933 – İçel.</b> İçel (Silifke) ve Mersin vilayetleri birleştirildi; il, 2002’ye kadar İçel adıyla anıldı.</p>
+      <p><b>1987 – Serbest bölge.</b> Mersin Serbest Bölgesi açıldı.</p>
+      <p><b>1993 – Büyükşehir ve MTOSB.</b> Mersin büyükşehir statüsü kazandı; Mersin Tarsus OSB kuruldu.</p>
+      <p><b>2002 – Yeniden Mersin.</b> İlin adı Haziran’da yeniden Mersin oldu.</p>
+      <p><b>2024 – Havalimanı ve OSB genişlemesi.</b> Çukurova Havalimanı açıldı; MTOSB’nin 5. etap genişlemesi onaylandı.</p>
+      <p><b>2025 – İhracat ve SEGE.</b> TİM ihracatı %15 artarak 3,63 milyar $’a çıktı, hazır giyim ihracatı yaklaşık dört katına yükseldi; SEGE-2025’te il 13. sıraya çıktı.</p>
+      <p style="margin:0"><b>2026 – Akkuyu.</b> Birinci ünitede devreye alma çalışmaları sürüyor; ilk elektrik üretimi yıl sonuna hedefleniyor.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Ülkenin en büyük konteyner limanlarından biri, serbest bölge ve geniş hinterland</li><li>Narenciye, muz, bakliyat ve yaş meyve-sebzede ülke liderliği; örtüaltı üretim</li><li>Kişi başı gelirde ülke ortalamasına yaklaşma (%79’dan %88’e)</li><li>SEGE’de yükseliş, istihdam oranında son dört yılın zirvesi</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Sanayinin ülke içindeki payı düşük (%1,2, 2022)</li><li>İhracat artışı iki sektöre (yaş meyve-sebze, hazır giyim) ve iki pazara (Irak, Rusya) bağımlı</li><li>Nüfus artışı durdu, 2025’te işsizlik yükseldi</li><li>Tarım alanları 20 yılda %18 küçüldü</li><li>Tarımsal ihracatın önemli bölümü düşük katma değerli</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Akkuyu’nun devreye girmesi ve yerli tedarik zinciri</li><li>Liman genişlemesi (2,6 → 3,6 milyon TEU) ve hızlı tren</li><li>MTOSB 5. etap ve TÜİOSB ile tarıma dayalı sanayi</li><li>İşlenmiş gıda ve hazır giyimde katma değer artışı</li><li>Suriye’de yeniden yapılanma (Suriye, TİM ihracatında 3. pazar)</li></ul></div>
+      <div class="card"><h3>Not</h3><p style="margin:0">Mersin ihracatı, ölçüye göre 3,6 (TİM), 8,4 (TÜİK genel ticaret) veya 9,9 milyar $ (faaliyet ili) olarak anılıyor. Kıyaslama yaparken hangi ölçünün kullanıldığına bakmak gerekir; il sıralaması da ölçüye göre 7. ile 10. arasında değişiyor.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Mersin Türkiye’nin 7. büyük ihracat ili görünürken firma merkezi esaslı ihracatta 10. sırada: limandan geçen değerin ne kadarı kentte kalıyor, nasıl artırılır?</li>
+      <li>Tarım ve gıda ihracatının %45’lik payı ham ürüne dayanıyor: işleme, paketleme ve soğuk zincir yatırımları ihracatın katma değerini nasıl yükseltir?</li>
+      <li>Akkuyu ve liman genişlemesi sanayinin payını artırır mı, yoksa Mersin’in hizmet ve lojistik ağırlığını mı güçlendirir?</li></ul>
+      <a class="btn" id="lnkFikir" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK: il bazında GSYH 2024 (Aralık 2025), ADNKS 2025 (Şubat 2026), Dış Ticaret İstatistikleri (genel ticaret sistemi ve faaliyet ili); sayılar çoğunlukla Mersin Ticaret Borsası ve basın aktarımından</li>
+      <li>TİM: İlk 1000 İhracatçı 2025 ve il ihracat verileri (MÜSİAD Mersin Şubesi, AKİB ve AA aktarımları)</li>
+      <li>Mersin Ticaret ve Sanayi Odası (MTSO): 2025 Ekonomik Raporu (basın aktarımı), Ocak 2026 Ekonomik Görünüm, 2024 Ekonomik Raporu, Stratejik Plan 2024-2026</li>
+      <li>Mersin Ticaret Borsası: tarımsal ihracat açıklamaları (Şubat 2026)</li>
+      <li>Mersin İl Tarım ve Orman Müdürlüğü, 2024 Yılı Brifingi (TÜİK bitkisel üretim); TEPGE Turunçgiller Ürün Raporu 2025</li>
+      <li>Ulaştırma ve Altyapı Bakanlığı (Mersin Limanı, AA, Ocak 2025); Enerji ve Tabii Kaynaklar Bakanlığı açıklamaları (Akkuyu, AA, Kasım 2026)</li>
+      <li>İSO 500 ve İkinci 500 (2025), MÜSİAD Mersin aktarımı; Sanayi ve Teknoloji Bakanlığı SEGE-2025, MTSO Başkanı aktarımı</li>
+    </ul>
+    <p class="note">Birçok rakam oda, borsa ve basın aktarımına dayanıyor; TÜİK ve TİM’in orijinal tablolarına doğrudan erişilemedi. İşsizlik için kaynaklar farklı seriler veriyor: il düzeyi %7,7 (2025), TR62 bölgesi için başka bir veri setinde %9,7; Adana sayfasındaki TR62 2023 değeri (%14,0) ayrı bir seri olduğundan bu oranlarla doğrudan karşılaştırılamaz. Kişi başı GSYH dizisi TÜİK’in 2024 yayınındaki güncel seridir. ≈ işareti yuvarlama veya hesaplama içeren değerlerde kullanıldı. Tutarlar cari fiyatlarla, ihracat rakamları yıllıktır.</p>
+  </section>
+</div>
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){var h=Math.max(2,d[1]/m*130);var last=(data===D.tim||data===D.gts)&&i===data.length-1;
+  return '<div class="'+(d[2]||(last?'lo':''))+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(i===hl?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+
+var D={
+urun:[['Limon',836],['Domates',719],['Muz',401],['Mandalina',324],['Portakal',248],['Hıyar',222],['Karpuz',187],['Biber',173]],
+pay:[['Limon',48.3],['Muz',45.9],['Mandalina',16.3],['Portakal',15.4]],
+ihrpay:[['Bakliyat',88],['Narenciye',43],['Yaş meyve-sebze',27]],
+gts:[['2021',4.25,'','4,25'],['2022',6.16,'','6,16'],['2023',7.68,'','7,68'],['2024',8.3,'','8,3'],['2025',8.4,'','8,4']],
+tim:[['2020',2036,'','2.036'],['2024',3147,'','3.147'],['2025',3630,'','3.630']],
+sek:[['Yaş meyve ve sebze',986],['Hububat, bakliyat, yağlı tohum',971],['Kimyevi maddeler',235],['Hazır giyim ve konfeksiyon',230]],
+ulk:[['Irak',942],['Rusya',359],['Suriye',145],['Almanya',132],['İran',109]],
+tar:[['Narenciye',714],['Bakliyat',686],['Hububat ve mamulleri',377],['Antep fıstığı',276]],
+imal:[['Gıda ürünleri',22],['Giyim eşyası',15],['Metalik olmayan mineral ürünler',12]],
+gs:[['İnşaat (4. sıra)',4.0],['Tarım (5. sıra)',3.8],['Hizmetler (7. sıra)',2.1],['Sanayi (19. sıra)',1.2]]
+};
+bars(document.getElementById('urun'),D.urun,0);
+bars(document.getElementById('pay'),D.pay,0);
+bars(document.getElementById('ihrpay'),D.ihrpay,0);
+bars(document.getElementById('imal'),D.imal,0);
+bars(document.getElementById('sek'),D.gs,3);
+cols(document.getElementById('kb'),[['2020',6670,'','6.670'],['2021',7368,'','7.368'],['2022',8801,'','8.801'],['2023',10895,'','10.895'],['2024',13549,'','13.549'],['TR 2024',15325,'fc','15.325']]);
+tabs('yt',['TÜİK genel ticaret (gümrük esaslı)','TİM (ihracatçı merkezi)'],function(i){
+ document.getElementById('ytitle').textContent=i?'Yıllık ihracat, TİM (milyon $)':'Yıllık ihracat, TÜİK genel ticaret sistemi (milyar $)';
+ document.getElementById('ynote').textContent=i?'Yalnızca 2020, 2024 ve 2025 için doğrulanmış TİM değeri bulundu; ara yıllar gösterilmedi.':'Serbest bölge ve liman çıkışları dahil; 2021’den 2025’e ihracat yaklaşık iki katına çıktı.';
+ cols(document.getElementById('yil'),i?D.tim:D.gts)});
+var TT=[['Sektör (TİM)',D.sek,'2025 ihracatı, sektörlere göre (milyon $). Toplam 3.630 milyon $; ilk dört sektör toplamın yaklaşık %67’si. Yaş meyve-sebze 2024’e göre %20 arttı (815 → 986), hububat-bakliyat %2 geriledi (994 → 971), hazır giyim %333 arttı.'],
+ ['Ülke (TİM)',D.ulk,'2025 ihracatı, ülkelere göre (milyon $). Irak tek başına toplamın yaklaşık %26’sını, Irak ve Rusya birlikte yaklaşık %36’sını alıyor (hesaplama).'],
+ ['Tarımsal ihracat (TÜİK)',D.tar,'2025, TÜİK genel ticaret sistemi (milyon $). Tarım ve gıda ihracatının tamamı 3,8 milyar $; Türkiye tarımsal ihracatının %12’si, il 4. sırada.']];
+tabs('tt',TT.map(function(t){return t[0]}),function(i){
+ document.getElementById('ttitle').textContent=TT[i][0]+' – 2025';
+ bars(document.getElementById('bars'),TT[i][1],0);
+ document.getElementById('tnote').textContent=TT[i][2]});
+</script>
+</body>
+</html>
