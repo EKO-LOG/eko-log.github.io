@@ -179,7 +179,7 @@ footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-bet
 
   <section>
     <h2>Sayfa Eklemek</h2>
-    <div class="card"><p style="margin:0">Yeni bir il sayfası hazır olunca bu klasöre <code>il-ankara.html</code> gibi bir dosya eklenir ve <code>SAYFA</code> listesine plaka kodu ile dosya adı yazılır (örneğin <code>6:'il-ankara.html'</code>); il kutusu otomatik etkinleşir. Şu an hazır dosyalar: <code>il-malatya.html</code>, <code>il-adana.html</code>, <code>il-gaziantep.html</code>, <code>il-mersin.html</code>, <code>il-konya.html</code>.</p></div>
+    <div class="card"><p style="margin:0">Yeni bir il sayfası hazır olunca bu klasöre <code>il-ankara.html</code> gibi bir dosya eklenir ve <code>SAYFA</code> listesine plaka kodu ile dosya adı yazılır (örneğin <code>6:'il-ankara.html'</code>); il kutusu otomatik etkinleşir. Admin panelinde Kalkınma › İl dosyaları bölümünden de il eklenebilir, açıklaması değiştirilebilir ya da gizlenebilir. Şu an hazır dosyalar: <code>il-malatya.html</code>, <code>il-adana.html</code>, <code>il-gaziantep.html</code>, <code>il-mersin.html</code>, <code>il-konya.html</code>.</p></div>
   </section>
 </div>
 <footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
@@ -209,6 +209,33 @@ function bars3(el,data,hl,u){var m=Math.max.apply(null,data.map(function(d){retu
  el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>=0?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
 bars3(document.getElementById('ihr'),[['İstanbul',95.2],['Kocaeli',22.9],['Bursa',17.9],['Ankara',17.5],['İzmir',13.6],['Gaziantep',10.1],['Sakarya',5.9],['Manisa',5.1],['Denizli',4.7],['Mersin',3.6],['Konya',3.5],['Hatay',3.5],['Adana',3.0],['Kayseri',3.0],['Çorum',2.4],['Antalya',2.1],['Tekirdağ',2.0],['Eskişehir',1.6],['Muğla',1.3],['K.Maraş',1.3],['Malatya (39. sıra)',0.3]],[12,20]);
 bars3(document.getElementById('gs'),[['İstanbul',13.01],['Ankara',4.67],['İzmir',2.56],['Kocaeli',1.71],['Bursa',1.67],['Antalya',1.52],['Mersin',0.96],['Konya',0.95],['Adana',0.88],['Gaziantep',0.83]],[8]);
+</script>
+<script>
+/* Admin panelinden (Kalkınma › İl dosyaları) gelen il listesi: content.json → xc.kalkinma */
+(function(){
+ var box=document.querySelector('a.card[href^="il-"]');if(!box)return;box=box.parentNode;
+ function load(i){var u=['../content.json','/content.json'];if(i>=u.length)return Promise.resolve(null);
+  return fetch(u[i],{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){return d||load(i+1)}).catch(function(){return load(i+1)})}
+ load(0).then(function(d){
+  var L=d&&d.xc&&d.xc.kalkinma;if(!Array.isArray(L)||!L.length)return;
+  var cards={};
+  [].forEach.call(box.children,function(a){var f=a.getAttribute('href'),k=Object.keys(SAYFA).filter(function(x){return SAYFA[x]===f})[0];
+   if(k)cards[k]={f:f,d:(a.querySelector('p')||{}).textContent||''}});
+  L.forEach(function(e){if(!e)return;var k=parseInt(e.p,10);if(!(k>=1&&k<=IL.length))return;
+   if(e.h){delete SAYFA[k];delete cards[k];return}
+   var f=String(e.f||'').trim();if(!/^il-[a-z0-9-]+\.html$/.test(f))return;
+   SAYFA[k]=f;cards[k]={f:f,d:String(e.d||(cards[k]&&cards[k].d)||'')}});
+  var keys=Object.keys(cards).map(Number).sort(function(a,b){return a-b});
+  box.textContent='';
+  keys.forEach(function(k){var a=document.createElement('a');a.className='card';a.href=cards[k].f;a.style.cssText='text-decoration:none;color:inherit';
+   var t=document.createElement('h3');t.style.color='var(--ac)';t.textContent=IL[k-1]+' →';
+   var p=document.createElement('p');p.className='note';p.style.margin='0';p.textContent=cards[k].d;a.appendChild(t);a.appendChild(p);box.appendChild(a)});
+  draw(document.getElementById('ara').value||'');
+  document.getElementById('hz').textContent=Object.keys(SAYFA).length+' / 81';
+  var names=Object.keys(SAYFA).map(Number).sort(function(a,b){return a-b}).map(function(k){return IL[k-1]});
+  [].forEach.call(document.querySelectorAll('p'),function(p){if(/^Bir il seç/.test(p.textContent)&&/hazır/.test(p.textContent))p.textContent='Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik '+names.join(', ')+' hazır; diğer iller sırayla eklenecek.'});
+ });
+})();
 </script>
 </body>
 </html>
