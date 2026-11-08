@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bayburt | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Bayburt'a özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#9a3412;--a2:#f59e0b;--a3:#0e7490"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Bayburt</span><h1>Bayburt: Türkiye’nin En Küçük Ekonomisi Neye Yaslanıyor?</h1><p>82.836 nüfuslu Bayburt, kişi başına GSYH’de 331.432 TL ile 81 il arasında 54. (yaklaşık 10.100 $; Türkiye ortalamasının yaklaşık %66’sı), toplam GSYH’de ise 28,1 milyar TL ile sonuncu. 2024’te reel büyüme %17,1 ile Türkiye’nin yaklaşık beş katıydı; kaynaklar nedenini açıklamıyor. Bu dosya ili sektör sektör okuyor: sulamayla büyüyen şeker pancarı, geniş mera, Bayburt taşı ve müzeler güçlü kartlar; ihracat neredeyse yok, sanayi ve turizm kapasitesinin altında, nüfus azalıyor. Birçok veri eski olduğu için yılı ve kaynağı her yerde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>331.432 TL</b><span>Kişi başına GSYH (2024), 81 il arasında 54.; yaklaşık 10.100 $, Türkiye ort. 15.325 $’ın yaklaşık %66’sı (kendi hesabım)</span></div>
+    <div class="k"><b>82.836</b><span>Nüfus (ADNKS 2025); Türkiye’nin en az nüfuslu ili, bir yılda −840 (yaklaşık −%1,0)</span></div>
+    <div class="k"><b>28,1 mlr TL</b><span>Toplam GSYH (2024), 81 il arasında 81.; Türkiye toplamının yaklaşık %0,06’sı (kendi hesabım)</span></div>
+    <div class="k"><b>%17,1</b><span>2024 reel GSYH artışı, Adıyaman’dan sonra 2.; Türkiye ortalaması %3,3</span></div>
+    <div class="k"><b>34 bin $</b><span>Ocak-şubat 2025 ihracatı (iki ay); en az ihracat yapan il (TÜİK)</span></div>
+    <div class="k"><b>~155 bin ton</b><span>2026 şeker pancarı rekolte beklentisi, yaklaşık 31.700 dekar (İl Tarım Müdürlüğü, 6 Kasım 2026)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#tarim">Tarım-Hayvancılık</a><a href="#sanayi">Sanayi-Doğal Taş</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">8 sektör, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait: TÜİK 2024-2025, kalkınma ajansı raporları (2015-2017 verileri), bir milletvekili konuşması (2024) ve yerel haberler. Yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki 2024 payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. Etiketler üretim, ihracat ve yatırım haberlerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Hayvancılık, sanayi ve turizm kartlarının sayıları 2014-2019 arasından; güncel karşılığı bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>Dış Ticaret: Neredeyse Hiç Yok</h2>
+    <p class="sub">Bayburt’un aylık ihracatı onlarca bin dolarla ölçülüyor; ocak-şubat 2025’te 34 bin $ ile 81 il arasında en sondaydı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>TÜİK’in aylık verileri: ekim 2023’te 3 bin $, ocak 2024’te 77 bin $ (ithalat 4 bin $), ocak 2025’te 20 bin $, şubat 2025’te 14 bin $.</li>
+        <li>Daha uzun dönemde: kalkınma ajansı raporu 2015 ihracatını 7,4 milyon $, ithalatını 4,0 milyon $ gösteriyor; TÜİK’e dayanan bir tabloda 2018 ihracatı 1,25 milyon $.</li>
+        <li>Ocak-şubat 2025’te en az ihracat yapan üç il Bayburt (34 bin $), Tunceli (37 bin $) ve Bingöl (468 bin $).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Doğal taşta ihracata başlandığı haberi var (tarihi belirsiz); işlenmiş ürün için OSB’de tesis ve AB destekli ortak kullanım merkezi mevcut.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İhracat 2015’ten 2018’e 7,4’ten 1,25 milyon $’a düşmüş görünüyor ve 2025’te aylık değerler 14-20 bin $ düzeyinde.</li><li>Tunceli’nin bile gerisinde; Doğu Karadeniz’de ihracat Trabzon’da toplanıyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Bayburt’un 2024 ve 2025 yıllık ihracatını, Ticaret Bakanlığı faaliyet ili serisini ve sektör ile ülke kırılımını bulamadım; aylık değerler tek tek ay verisidir, toplanıp yıl yapılmadı.</li>
+      <li>2015 ve 2018 rakamları farklı kaynaklardan ve tanım farkı olabilir (tahmin). Bir haber ithalatı 1 milyon 13 bin $ olarak veriyor; dönemi belirsiz olduğu için kullanılmadı.</li>
+      <li>İhracat kaydı firmanın kayıtlı olduğu ile bağlıysa Bayburt’ta üretilip başka ilden ihraç edilen ürün burada görünmeyebilir (tahmin).</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık: Pancar Yükseliyor, Tahıl Küçük, Mera Geniş</h2>
+    <p class="sub">Tarım mera, tahıl ve sulamayla yeni genişleyen şeker pancarı üzerine kurulu; hayvancılık verisi eski.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Tarım ve Orman Bakanlığı rehberinin (TÜİK 2024) tablosuna göre Bayburt 50,4 bin ton arpa (Türkiye üretiminin %0,49’u) ve 56,8 bin ton buğday (%0,27) üretti.</li>
+        <li>Şeker pancarında 2011’de 6,4 bin dekarda 26 bin ton alınırken, 2026 için 31,7 bin dekarda 155 bin ton (dekara yaklaşık 5,2 ton) bekleniyor. Ekim alanı ve üretim 2011’e göre yaklaşık 5 kat (kendi hesabım).</li>
+        <li>Mera varlığı 209,8 bin hektar, yüzölçümünün yaklaşık %57’si. Büyükbaş sayısı 2002’de 58,9 bin, 2016’da 87 bin; 2016’da yaklaşık %82’si melez ırk (kendi hesabım).</li>
+        <li>Çiftçi Kayıt Sistemi’nde 4.347 çiftçi var (2025 üretim yılı); bu Türkiye’nin 2,35 milyon çiftçisinin yaklaşık %0,18’i, nüfus payının (%0,10) yaklaşık iki katı (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Baraj ve gölet sulaması pancarı yaydı; il müdürlüğü pancarı en çok gelir getiren ürünler arasında sayıyor ve aynı sezonda iki ürün alınmaya başlandı (milletvekili konuşması, 2024).</li><li>Geniş mera küçükbaş hayvancılığa ve arıcılığa elverişli; il müdürlüğü ekolojik tarıma uygun kirlenmemiş kaynakları güçlü yan sayıyor (2019 raporu).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tahıl hacmi küçük ve verim düşük (2011’de buğday dekara yaklaşık 216, arpa 205 kg; ulusal ortalama yaklaşık 265).</li><li>İl müdürlüğü genç nüfusun tarımdan uzaklaşmasını tehdit olarak yazıyor (2019); bir 2025 çalışmasında Bayburt çiftçileri desteklerin katkısını Erzurum ve Erzincan çiftçilerinden daha düşük buluyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Bakanlık rehberinin tam metnine erişemedim; arpa ve buğday rakamları arama sonucundaki tablo özetinden, “TÜİK 2024” kaynak notuna dayanarak alındı.</li>
+      <li>Pancar rakamları beklentidir, gerçekleşme değil. 2025 için iki farklı açıklama var: il müdürlüğü 32,5 bin dekar ve 146,25 bin ton, vali açıklaması 38 bin dekar ve 135 bin ton; gerçekleşen rekoltesini bulamadım.</li>
+      <li>Hayvancılığın en yeni tablosu 2016; güncel hayvan sayısı, süt ve et üretimi bulunamadı. Tarım ve hayvancılığın il GSYH’sindeki 2024 payını da bulamadım.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Doğal Taş: Güçlü Taş, Zayıf Fabrika</h2>
+    <p class="sub">Sanayi il ekonomisinde küçük bir pay; doğal taş ve OSB ana kozlar, ama verilerin çoğu eski ya da yok.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>KUDAKA’nın 2017 raporu ilin ekonomisinde hayvancılığı, bitkisel tarımı ve madenciliği (doğal taş) öne çıkarıyor; OSB’de AB desteğiyle Doğaltaş Üretim ve Pazarlama Destek Merkezi kurulmuş.</li>
+        <li>Sanayinin il GSYH’sindeki payı 2014’te %9,0 (Türkiye %28,2); kişi başına sanayi GSYH’si 654 $ (Türkiye 3.415 $).</li>
+        <li>Bayburt taşı 2019’da coğrafi işaretle tescil edildi (No 442). Bir 2019 makalesi OSB’deki tesisin yıllık 30 bin ton blok işleme ve 400 bin m² plaka kapasitesini veriyor.</li>
+        <li>Bayburt OSB 6. bölge teşviklerinden yararlanıyor. Ocak 2024’te 800 milyon TL’lik sanayi sitesi projesi onaylandı, eylül 2026 haberinde OSB’de organik baharat işleme tesisi planlanıyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Coğrafi işaretli, yerel kimliği olan bir ürün (Bayburt taşı); iç pazarda 26 şehre mermer ve traverten gidiyor (haber, tarihi belirsiz).</li><li>Teşvik, cazibe merkezleri programı ve kendi enerjisini üreten “yeşil” sanayi sitesi planı.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İmalat sanayi istihdamı 2015’te toplam istihdamın %7,5’i (Türkiye %25,2).</li><li>KUDAKA nitelikli personel eksikliğini, OSB altyapı yetersizliğini ve doğal taşta kümelenme eksikliğini sorun sayıyor; ocak işletmeciliğinde %70’e yakın atık oluştuğu bildiriliyor (akademik çalışma).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Sanayi payları 2014-2015 verisidir; 2024 sektörel GSYH payını bulamadım. OSB’deki firma sayısı, doluluk, istihdam ve doğal taş sektörünün işletme sayısı ile cirosunu bulamadım.</li>
+      <li>Yatırım haberleri (sanayi sitesi, baharat tesisi, yalıtımlı duvar malzemesi fabrikası) duyuru niteliğinde; gerçekleşmeleri doğrulanmadı.</li>
+      <li>Kapasite rakamı tek bir tesise aittir ve 2019 tarihlidir; il genelini temsil etmez.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Müzeler Çalışıyor, Yeraltı Şehri Kapalı</h2>
+    <p class="sub">Baksı Müzesi ve Dede Korkut mirası güçlü bir kimlik veriyor; kayıtlı konaklama kapasitesi ve altyapı çok küçük.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>TÜİK kültürel miras verisine göre Bayburt’taki müzelere 2025’te 30.817 giriş oldu; Bakanlığa bağlı müze kapalı olduğu için ziyaretçi sıfır, ziyaretçinin tamamı Baksı ve Kenan Yavuz müzelerinde.</li>
+        <li>Aydıntepe Yeraltı Şehri göçük riski nedeniyle uzun süredir kapalı; geçmişte yılda yaklaşık 50 bin kişi geliyordu. 2024’te restorasyon ihalesinin bitme aşamasında olduğu söylenmişti, yerel haber (Kasım 2026) çalışmaların başlamadığını yazıyor.</li>
+        <li>Bayburt Turizm Yol Haritası 2028 için yaklaşık 46,1 bin yerli ve 1,1 bin yabancı turist ile yaklaşık 8,6 milyon $ gelir hedefliyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Baksı Müzesi uluslararası ödüllü; Kenan Yavuz Etnografya Müzesi ile birlikte kentin deneyim turizmi öncüsü. Dede Korkut kültürü, kale, Çoruh vadisi ve yayla rotaları ek potansiyel.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kapalı yeraltı şehri ve kapalı Bakanlık müzesi; aktif havalimanı yok, ulaşım Erzurum ve Trabzon üzerinden.</li><li>2015’te yalnızca 1 turizm işletme belgeli tesis ve 101 yatak vardı (belediye belgeli 4 tesis, 242 yatak).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Konaklama rakamları 2015 tarihli; güncel yatak sayısını, ziyaretçi, geceleme ve turizm gelirini il için bulamadım.</li>
+      <li>Müze ziyaretçileri iki farklı kaynaktan geliyor (müze yöneticilerinin sezon içi açıklamaları ve TÜİK); sayılar tanım ve dönem farkı taşıyabilir, bu yüzden 2024-2025 düşüş ya da artış olarak okunmadı.</li>
+      <li>Turizm yol haritası yaklaşık 2023 tarihli bir plandır; hedefler gerçekleşme değildir.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Bayburt 28,1 milyar TL ile toplam GSYH’de son sırada (Gümüşhane 41,9 ve Ardahan 35,5 milyar TL’nin gerisinde); iller toplamı yaklaşık 44,6 trilyon TL olduğundan payı yaklaşık %0,06 (kendi hesabım).</li>
+        <li>Kişi başına 331.432 TL ile 54. sırada; Çorum (328.605) ve Gaziantep’in (318.204) önünde, Artvin, Samsun ve Trabzon’un gerisinde. Dolar karşılığı, Balıkesir dosyasındaki oran (459.714 TL = 14.004 $) kullanılarak yaklaşık 10.100 $ ve Türkiye ortalamasının yaklaşık %66’sı (kendi hesabım).</li>
+        <li>Zincirlenmiş hacim endeksiyle GSYH 2024’te %17,1 arttı: Adıyaman (%31,4) ve Malatya (%17,0) ile birlikte ilk üçte; Türkiye ortalaması %3,3. Kaynaklar artışın nedenini açıklamıyor.</li>
+        <li>Nüfus 2025’te 82.836 ile en küçük; 2024’ten −840. İşgücü: 2013’te katılma %51,0, istihdam %48,1, işsizlik %6,2 (Türkiye %9,7) ve istihdamın %44,3’ü tarımda (KUDAKA 2017).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>2024’te ülkenin en hızlı büyüyen illerinden biri; kişi başına gelir Çorum ve Gaziantep’i geride bırakıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ekonomi Türkiye’nin yaklaşık %0,06’sı; kişi başına gelir ortalamanın yaklaşık üçte ikisi.</li><li>Nüfus azalıyor ve ilçe verilerinde iç ilçelerden çıkış izleri var (aşağıya bak).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Bayburt’a özgü 2025 işsizlik, katılma ve istihdam oranını bulamadım; işgücü rakamları 2013 tarihli. TRA1 (Erzurum, Erzincan, Bayburt) için 2015’te istihdamın %52,5’inin kayıt dışı olduğu yazılmış (KUDAKA).</li>
+      <li>Büyümenin kaynağı bilinmiyor; küçük bir ekonomide tek bir yatırım ya da ürün yılı sonucu etkileyebilir (tahmin).</li>
+      <li>Bir köşe yazısında aktarılan eski seriye göre kişi başına gelir 2014’te 7.748 $, 2023’te 6.606 $’dı; bu, 2024’ün yeni serisiyle aynı revizyon olmadığı için karşılaştırılmadı.</li>
+      <li>Nüfusta 2016’da +11.604 (%14,8) sıçrama görülüyor ve nedenini kaynak açıklamıyor; 2023 değeri ilçe tablosunun toplamıdır (kendi hesabım). Nüfus kayıtlı nüfustur.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Bayburt’un 3 ilçesinden Merkez nüfusun yaklaşık %82’sini barındırıyor. Nüfus ADNKS 2023 (İŞKUR raporu); 2025 ilçe kırılımını bulamadım.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2023)</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Merkez</td><td>70.905 (%82,4)</td><td>İdari ve hizmet merkezi; üniversite, OSB ve doğal taş tesisleri; Baksı Müzesi (Bayraktar köyü)</td></tr>
+      <tr><td>Demirözü</td><td>8.072 (%9,4)</td><td>Tarım ve hayvancılık; Çiftetaş köyünde 2025’te 41 üretici 2.870 dekarda şeker pancarı yetiştirdi</td></tr>
+      <tr><td>Aydıntepe</td><td>7.070 (%8,2); 2024’te 6.388</td><td>Tarım ve hayvancılık, Çoruh ovası; kapalı Aydıntepe Yeraltı Şehri; 4 mahalle, 23 köy</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İl toplamı 86.047; 2023-2024’te 83.676’ya (−%2,8) indi (kendi hesabım). Aydıntepe’nin 2023 ve 2024 değerleri arasında yaklaşık −%9,6 fark var; farklı kaynak ve kayıt hareketlerinden kaynaklanıyor olabilir (tahmin). İlçe bazında GSYH, istihdam veya ihracat verisi yok; “ekonomik karakter” sütunu kurum raporları ve yerel haberlerden derlenmiş genel bir özettir. Eski bir milletvekili konuşması Aydıntepe halkının %70’inin geçimini tarımdan sağladığını söylüyor (tarihi belirsiz, doğrulanmadı).</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Bayburt</h3>
+      <p style="margin:0">Bayburt 2024’te Türkiye’nin yaklaşık beş katı reel büyüdü ve kişi başına gelirde 54. sıraya çıktı, ama ekonomisi 81 il arasında en küçük, nüfusu eriyor ve ihracatı neredeyse sıfır. Güçlü kartları sulamayla büyüyen şeker pancarı, geniş mera, coğrafi işaretli Bayburt taşı ve ödüllü müzeler; zayıf yanı bunların hiçbirinin büyük bir gelir ya da istihdam kalemine dönüşmemiş olması. Büyümenin kaynağı kaynaklarda açıklanmadığı için sürdürülebilirliği belirsiz (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Pancarın yanına yem, ayçiçeği ve işleme gibi ikinci ve üçüncü bir sulu tarım ayağı kurmak; tek ürüne bağımlılığı azaltmak.</div>
+      <div><b>HAMLE 2</b>Bayburt taşını blok satışından işlenmiş, markalı ve ihracata dönük ürüne taşımak; coğrafi işaret bunun için hazır bir kimlik.</div>
+      <div><b>HAMLE 3</b>Aydıntepe Yeraltı Şehri’ni ziyarete açmak ve belgeli konaklama kapasitesini artırmak; müzelerin getirdiği ziyaretçiyi geceleme gelirine çevirmek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Nüfusu ve genç işgücünü ilde tutamamak, her hamlenin önündeki ortak risk (KUDAKA da nitelikli işgücünün ilde tutulamamasını risk sayıyor).</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>2024’te reel %17,1 büyüyen Türkiye’nin en küçük ekonomisi bu hızı kalıcı kılabilir mi, yoksa küçük tabanın getirdiği bir sıçrama mı?</li>
+      <li>Sulamayla yaklaşık 5 kat büyüyen şeker pancarı yerine, hayvancılık, yem ve işleme zinciri nasıl kurulursa il tek ürüne yaslanmadan büyür?</li>
+      <li>Bayburt taşı coğrafi işaretli olduğu halde ihracat yok denecek kadar az: engel ölçek mi, markalaşma mı, lojistik mi?</li>
+      <li>Nüfusu 82 bine inen ilde üniversite, gençleri ilde tutmanın aracı olabilir mi, yoksa mezunlar yine de dışarı mı gider?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024, 11.12.2025 (Capital, Floryagazetesi, İstib aktarımı; kişi başına sıralama için Olaymedya ve Gazete Arena listeleri; Habergazetesi); TÜİK ADNKS 2025 (Ekonomi Gazetesi, Bloomberg HT, Yeni Birlik), ADNKS 2024 (Milliyet)</li>
+      <li>TÜİK aylık dış ticaret aktarımları (TRT Haber, Bayburt Haber); Vikipedi “Türkiye’de illere göre ihracat”; KUDAKA Bayburt İli Yatırım Destek ve Tanıtım Stratejisi (Mart 2017, 2013-2015 verileri)</li>
+      <li>Tarım ve Orman Bakanlığı Bayburt Tarımsal Yatırım Rehberi 2025 (arama özeti); Bayburt Belediyesi ekonomik yapı tablosu (2011); Bayburt İl Tarım Müdürlüğü belgeleri; pancar haberleri (Kuzey Ekspres, Bayburt Postası, Karar, Haberler.com, 6 Kasım 2026); TBMM Genel Kurul konuşmaları (30.01.2024 ve eski bir konuşma); Bayburt Üniversitesi hayvancılık destekleri çalışması</li>
+      <li>Türk Patent coğrafi işaret No 442 (Bayburt taşı); Mavi Gezegen dergisi 2019 (JMO); Steelradar (doğal taş ihracatı); Mynet ve Haberler.com (OSB ve sanayi sitesi haberleri); Sanal Santiye (OSB fabrika haberi); Gazete Vatan (baharat tesisi)</li>
+      <li>TÜİK Kültürel Miras İstatistikleri aktarımı (Bayburt Haber); AA (Baksı ve Kenan Yavuz müzeleri, 2024); Bayburt Haber (Aydıntepe Yeraltı Şehri); Bayburt Turizm Tanıtım ve Geliştirme Yol Haritası (Kapadokya Üniversitesi açık erişim); İŞKUR Bayburt raporları (ilçe nüfusu ve 2016-2017 nüfus tabloları)</li>
+      <li>Dünya gazetesi köşe yazısı (eski gelir serisi); TÜİK 2025 işgücü istatistikleri aktarımı (İşçi Haber; Türkiye geneli)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum raporu veya konuşma metnidir; resmî tabloların doğrudan alıntısı değildir. Bayburt’un 2024-2025 yıllık ihracatı, ihracatın sektör ve ülke kırılımı, güncel hayvan sayısı ile süt ve et üretimi, 2024 sektörel GSYH payları, Bayburt’a özgü 2025 işgücü göstergeleri, OSB’deki firma ve istihdam sayısı, güncel yatak kapasitesi ve ziyaretçi sayısı, 2025 ilçe nüfusları ve doğal taş sektörünün işletme sayısı ile ciroları doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık 10.100 $ ve %66 (gelir oranı), %0,06 (GSYH payı), yaklaşık 5 kat (büyüme oranı ve pancar artışı), −840 ve −%1,0, 86.047 ile ilçe yüzdeleri, −%2,8 ve −%9,6, %0,18 (çiftçi payı) ve yaklaşık %82 (melez oranı) kendi hesabımdır. Pancar rakamları beklentidir. Eski veriler (2011, 2013-2016) yılları belirtilerek kullanıldı ve güncel durumu yansıtmayabilir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'YÜKSELEN',ad:'Şeker pancarı ve sulu tarım',big:'~155 bin ton',alt:'2026 rekolte beklentisi (~31.700 da); 2011’de üretim 26 bin tondu',y:'Baraj ve gölet sulaması ekimi yaydı; il müdürlüğü pancarı en çok gelir getiren ürünler arasında sayıyor. Aynı sezonda iki ürün alınmaya başlandı (milletvekili konuşması, 2024).',n:'Tek ürüne yaslanma; 2025 için iki farklı beklenti açıklandı (135 ve 146 bin ton); ürünün nerede işlendiği ve ilde kalan katma değer kaynaklarda yok.'},
+ {c:'warn',chip:'KIRILGAN: HAYVANCILIK',ad:'Büyükbaş ve küçükbaş hayvancılık',big:'~210 bin ha',alt:'Mera varlığı, yüzölçümünün yaklaşık %57’si; büyükbaş 2016’da 87 bin baş (2002: 58,9 bin)',y:'Geniş mera ve yem bitkisi alanı; 2016’da 71,1 bin melez ve 13,7 bin kültür ırkı sığır; destek projesiyle koyun sayısı artırıldı (2020 haberi).',n:'Tarımsal üretim değerinin Türkiye payı %0,22 (2015); genç nüfus tarımdan uzaklaşıyor (il müdürlüğü, 2019); ileri-geri entegrasyon zayıf (KUDAKA 2017); güncel hayvan sayısı bulunamadı.'},
+ {c:'warn',chip:'DAR: TAHIL',ad:'Tahıl (buğday, arpa)',big:'107 bin ton',alt:'Arpa 50,4 + buğday 56,8 bin ton (TÜİK 2024); Türkiye payı %0,49 ve %0,27',y:'Tahıl ve yem bitkisi tarım arazisinin neredeyse tamamını kaplıyor (%99,5 tarla alanı, KUDAKA 2017).',n:'Ölçek küçük, verim düşük (2011’de buğday ~216, arpa ~205 kg/da; ulusal ~265); soğuk iklim kısıtı (KUDAKA).'},
+ {c:'sleep',chip:'UYUYAN: DOĞAL TAŞ',ad:'Bayburt taşı ve doğal taş',big:'30 bin ton',alt:'OSB’deki bir tesisin yıllık blok işleme kapasitesi (2019 makalesi); coğrafi işaret 2019’da tescil',y:'Coğrafi işaretli (No 442); ilin başat sektörlerinden (KUDAKA); iç pazarda 26 şehre mermer ve traverten gidiyor, ihracata başlandı (haber, tarihi belirsiz).',n:'Ocak işletmeciliğinde %70’e yakın atık (akademik çalışma); kümelenme zayıf (KUDAKA); işletme sayısı, istihdam ve ihracat tutarı bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: SANAYİ',ad:'OSB ve imalat sanayi',big:'%9,0',alt:'Sanayinin il GSYH’sindeki payı (2014); Türkiye %28,2',y:'OSB’de 6. bölge teşviki; 800 milyon TL’lik sanayi sitesi projesi onaylandı (2024); OSB’de organik baharat işleme tesisi planlanıyor (Eylül 2026 haberi).',n:'İmalat istihdamının payı %7,5 (2015; Türkiye %25,2); nitelikli personel ve altyapı sorunları (KUDAKA 2017); OSB’deki firma ve istihdam sayısını bulamadım.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm ve kültür',big:'30.817',alt:'Baksı ve Kenan Yavuz müzelerinin 2025 ziyaretçisi (TÜİK)',y:'Uluslararası ödüllü Baksı Müzesi; Dede Korkut, kale, Çoruh vadisi ve yayla rotaları; il yerli turist odaklı bir yol haritası izliyor.',n:'Aydıntepe Yeraltı Şehri göçük riskiyle kapalı (geçmişte yılda ~50 bin ziyaretçi); Bakanlık müzesinde 2025 ziyaretçisi sıfır; aktif havalimanı yok; 2015’te 1 belgeli tesis, 101 yatak.'},
+ {c:'good',chip:'DESTEK AYAĞI',ad:'Kamu, eğitim ve sağlık hizmetleri',big:'270 yatak',alt:'Hastane yatak sayısı; hekim sayısı 200 (milletvekili konuşması, Ocak 2024)',y:'Bayburt Üniversitesi yurt dışı öğrenci kabulüne başladı; kemoterapi ünitesi ve ilçe hastanelerinde hemodiyaliz açıldı (aynı konuşma).',n:'Sektörün il GSYH’sindeki payı ve istihdamı için veri yok; rakamlar bir siyasi konuşmadan, doğrulanmadı.'},
+ {c:'bad',chip:'SEMBOLİK',ad:'Dış ticaret',big:'34 bin $',alt:'Ocak-şubat 2025 ihracatı (iki ay); 81 il arasında en az (TÜİK)',y:'Doğal taşta ihracata başlandığı haberi var; 2015’te ihracat 7,4 milyon $ ile ithalatı (4,0 milyon $) aşıyordu (KUDAKA).',n:'Ocak 2024’te 77 bin $, ekim 2023’te 3 bin $; 2018’de 1,25 milyon $. Tunceli’nin (37 bin $) bile altında.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Dönemsel ihracat (bin $)',[['Ekim 2023 (tek ay)',3],['Ocak 2024',77],['Ocak 2025',20],['Şubat 2025',14]],[1],'Her değer tek bir aya aittir; toplanıp yıl yapılmadı. Kaynak: TÜİK dış ticaret aktarımları (TRT Haber, Bayburt Haber).'],
+ ['Yıllık ihracat, iki farklı kaynak (milyon $)',[['2015 (KUDAKA)',7.4],['2018 (Vikipedi, TÜİK’e dayalı)',1.25]],[0,1],'Kaynak ve tanım farkı olabilir (tahmin); 2015’te ithalat 4,0 milyon $ idi. Kaynak: KUDAKA 2017, Vikipedi.'],
+ ['En az ihracat yapan üç il, ocak-şubat 2025 (bin $)',[['Bayburt',34],['Tunceli',37],['Bingöl',468]],[0],'Bayburt iki ayda yalnızca 34 bin $. Kaynak: TÜİK (Bayburt Haber aktarımı).']];
+mk('ih',IH,['Aylık seyir','Uzun seri','Son üç il']);
+var TA=[['Seçilmiş tarla bitkileri üretimi (bin ton, TÜİK 2024)',[['Buğday',56.8],['Arpa',50.4]],[0,1],'Türkiye üretiminin %0,27’si ve %0,49’u. Kaynak: Tarım ve Orman Bakanlığı Bayburt Tarımsal Yatırım Rehberi 2025 (arama özeti).'],
+ ['Şeker pancarı üretimi (bin ton)',[['2011 (üretim)',26.0],['2025 beklenti (vali)',135],['2025 beklenti (il müdürlüğü)',146.3],['2026 beklenti',155]],[3],'2011 gerçekleşen, diğerleri beklentidir. Kaynak: Bayburt Belediyesi tablosu, Kuzey Ekspres, Bayburt Postası, Haberler.com (6 Kasım 2026).'],
+ ['Şeker pancarı ekim alanı (bin dekar)',[['2011',6.4],['2023 (milletvekili)',33],['2025 (il müdürlüğü)',32.5],['2025 (vali)',38],['2026',31.7]],[4],'2025 için iki farklı açıklama var. Kaynak: Bayburt Belediyesi, TBMM (30.01.2024), il müdürlüğü ve vali açıklamaları.'],
+ ['Büyükbaş hayvan, 2016 (baş)',[['Melez sığır',71147],['Kültür sığır',13691],['Manda',1107],['Yerli sığır',1092]],[0],'Toplam 87.037 baş (2002’de 58.907). Güncel tablo bulunamadı. Kaynak: Bayburt İl Tarım Müdürlüğü belgesi.']];
+mk('ta',TA,['Tahıl','Pancar üretimi','Pancar alanı','Büyükbaş']);
+var SA=[['Sanayinin ağırlığı: Bayburt ve Türkiye (%)',[['Sanayi payı, il GSYH (Bayburt, 2014)',9.0],['Türkiye (2014)',28.2],['İmalat istihdam payı (Bayburt, 2015)',7.5],['Türkiye (2015)',25.2]],[0,2],'Yeni tablo bulunamadı. Kaynak: KUDAKA Bayburt Yatırım Destek ve Tanıtım Stratejisi (2017).'],
+ ['İstihdamın sektörel dağılımı, 2013 (%)',[['Tarım, Bayburt',44.3],['Tarım, Türkiye',23.6],['Sanayi, Bayburt',11.2],['Sanayi, Türkiye',26.4],['Hizmet, Bayburt',44.5],['Hizmet, Türkiye',50.0]],[0,2,4],'Tarım ulusal oranın yaklaşık iki katı, sanayi yarıdan az. Kaynak: KUDAKA 2017.'],
+ ['Türkiye içindeki payı (%, 2015 civarı)',[['Tarımsal üretim değeri',0.22],['Nüfus',0.10],['Kamu yatırım harcaması',0.10],['Teşvik belgesi sayısı',0.07],['Teşvikli sabit yatırım',0.03]],[0,1],'Nüfus payının kendi hesabımdır (78.550 / 78,7 milyon). Kaynak: KUDAKA 2017.']];
+mk('sa',SA,['Sanayi payı','İstihdam yapısı','Türkiye payı']);
+var TU=[['Müze ziyaretçisi, 2025 ve geçmiş (bin kişi)',[['Aydıntepe Yeraltı Şehri, kapanmadan önce (yıllık, yaklaşık)',50],['Baksı + Kenan Yavuz müzeleri, 2025 (TÜİK)',30.8],['Bakanlık müzesi, 2025 (kapalı)',0]],[1],'Yeraltı şehri rakamı yaklaşıktır ve geçmiş yılları anlatır. Kaynak: TÜİK aktarımı (Bayburt Haber).'],
+ ['Müze yöneticilerinin 2024 sezonu açıklamaları (bin kişi)',[['Kenan Yavuz, 2024 (sezon bitmeden)',50],['Baksı, 2024 (sezon bitmeden)',40],['İki müze birlikte, 2025 (TÜİK)',30.8]],[2],'Kaynak ve tanım farkı olabilir; düşüş olarak okunmamalı. Kaynak: AA (2024), TÜİK aktarımı.'],
+ ['Konaklama kapasitesi, 2015 (yatak)',[['Belediye belgeli (4 tesis)',242],['Turizm işletme belgeli (1 tesis)',101]],[0,1],'Güncel veri bulunamadı. Kaynak: KUDAKA 2017.'],
+ ['Turizm Yol Haritası 2028 hedefi (bin kişi)',[['Yerli turist',46.1],['Yabancı turist',1.1]],[0],'Hedef gelir yaklaşık 8,6 milyon $; plan yaklaşık 2023 tarihli, hedefler gerçekleşme değil. Kaynak: Bayburt Turizm Tanıtım ve Geliştirme Yol Haritası.']];
+mk('tu',TU,['Müze girişi','Müze açıklamaları','Konaklama','2028 hedefi']);
+var GT=[['Kişi başına GSYH, 2024 (bin TL)',[['İstanbul',802.7],['Balıkesir',459.7],['Artvin',390.1],['Samsun',369.4],['Trabzon',346.0],['Bayburt',331.4],['Çorum',328.6],['Gaziantep',318.2],['Van (son sıra)',203.0]],[5],'Bayburt 81 il arasında 54. Balıkesir değeri kardeş il dosyasından. Kaynak: TÜİK il bazında GSYH 2024 (Olaymedya, Habergazetesi, Capital).'],
+ ['Toplam GSYH, son üç il, 2024 (milyar TL)',[['Gümüşhane',41.9],['Ardahan',35.5],['Bayburt',28.1]],[2],'Bayburt toplam GSYH’de 81. sırada. Kaynak: TÜİK (Capital, Floryagazetesi).'],
+ ['Reel GSYH artışı, 2024 (%)',[['Adıyaman',31.4],['Bayburt',17.1],['Malatya',17.0],['Türkiye',3.3]],[1],'Zincirlenmiş hacim endeksi. Nedeni kaynaklarda açıklanmıyor. Kaynak: TÜİK (Capital, Floryagazetesi).'],
+ ['Nüfus (bin kişi)',[['2015',78.6],['2016',90.2],['2020',81.2],['2023 (ilçe toplamı)',86.0],['2024',83.7],['2025',82.8]],[5],'2016’daki sıçramanın nedeni kaynakta yok; 2023 değeri ilçe tablosunun toplamıdır (kendi hesabım). Kaynak: İŞKUR raporları, Bayburt Üniversitesi, TÜİK ADNKS 2024-2025.']];
+mk('gt',GT,['Gelir','Toplam GSYH','Büyüme','Nüfus']);
+</script>
+</body>
+</html>
