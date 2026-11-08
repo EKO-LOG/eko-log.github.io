@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muş | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İl'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0369a1;--a2:#ca8a04;--a3:#be185d"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Muş</span><h1>Muş: Ova ve Mera Güçlü, Gelir ve Nüfus Zayıf</h1><p>389 bin nüfuslu Muş, kişi başına GSYH’de yaklaşık 7.100 $ (230.300 TL) ile 81 il arasında 78.; Türkiye ortalamasının yaklaşık %46’sı. İlin taşıyıcıları tarım ve hayvancılık: küçükbaş sayısı bir yılda %21,9 arttı, 2026’da yaklaşık 700 ton bal alındı. Buna karşılık ihracat 2025’te %35,6 düştü, nüfus iki yılda 10.752 kişi azaldı ve 2025’te net göç −6.900 oldu. Veri bulamadığım yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>~7.100 $</b><span>Kişi başına GSYH (2024; 230.300 TL), 81 il arasında 78.; Türkiye ort. 15.325 $’ın yaklaşık %46’sı (kendi hesabım)</span></div>
+    <div class="k"><b>389.127</b><span>Nüfus (ADNKS 2025); bir yılda −3.174, iki yılda −10.752 (−%2,7, kendi hesabım)</span></div>
+    <div class="k"><b>158,2 mn $</b><span>2025 ihracatı (TÜİK, Van Bölge Müdürlüğü aktarımı); 2024’te 245,8 mn $ idi: −%35,6 (kendi hesabım)</span></div>
+    <div class="k"><b>1,41 mn</b><span>Küçükbaş hayvan sayısı (2025), bir yılda +%21,9; büyükbaş 253.840 (+%4,8) (kendi hesabım)</span></div>
+    <div class="k"><b>~700 ton</b><span>2026 bal hasadı; 290 bin kovan, 710 arıcı (haber, 22.09.2026)</span></div>
+    <div class="k"><b>−6.900</b><span>2025 net göç: 12.100 gelen, 19.000 giden (TÜİK Van Bölge Müdürlüğü aktarımı)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım-Hayvancılık</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK Van Bölge Müdürlüğü sunumunun yerel basın aktarımı, il tarım müdürlüğü beyanları, 2017 ve 2021 tarihli haberler). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi hayvan sayısı ve üretim beklentilerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Muş’a özgü 2025 işsizlik oranını bulamadım; elimdeki işsizlik oranı dört illik TRB2 bölgesine (Van, Muş, Bitlis, Hakkari) ait.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Küçük Rakam, Düşüş ve İthalat Üstünlüğü</h2>
+    <p class="sub">TÜİK’in Muş için yayımladığı dış ticaret rakamları küçük; 2025’te ihracat belirgin düştü ve ithalat ihracatı geçti.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>İhracat 2024’te 245,8, 2025’te 158,2 milyon $ oldu; bu yaklaşık −%35,6 (kendi hesabım). İthalat aynı dönemde 192,9’dan 180,3 milyon $’a indi (−%6,5, kendi hesabım).</li>
+        <li>2024’te ihracat ithalatı geçiyordu; 2025’te ithalat ihracatın yaklaşık %114’üne çıktı (kendi hesabım).</li>
+        <li>Ocak–Eylül 2026’da ihracat 99,6, ithalat 105,1 milyon $; ithalat ihracatın yaklaşık %105,5’i (kendi hesabım).</li>
+        <li>2025 ihracatı ve nüfusundan kişi başına yaklaşık 407 $ çıkıyor (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Temmuz 2026’da aylık ihracat Haziran’a göre %130’dan fazla arttı (5,32’den 12,26 milyon $; tek aylık veri).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>2025’te ihracat bir yılda yaklaşık üçte bir düştü ve dış ticaret açığa döndü. Ocak–Temmuz 2026’da ithalat ihracatın yaklaşık %133’ü (94,69’a karşı 71,08 milyon $; kendi hesabım).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Rakamlar yerel basındaki (Haber49, Muş Şark Haber) TÜİK Van Bölge Müdürlüğü aktarımlarından; resmî tabloyla doğrudan karşılaştırmadım. Hangi yöntemle (üretim yeri, kayıt yeri) sayıldığını kaynak belirtmiyor, bu yüzden Tekirdağ ya da Yozgat dosyalarıyla kıyaslamadım.</li>
+      <li>Muş’a özgü sektör ve ülke kırılımını bulamadım (haberlerde yalnızca Türkiye geneli veriliyor). 2025 düşüşünün nedenini kaynaklar açıklamıyor.</li>
+      <li>Ticaret Bakanlığı faaliyet ili PDF’ini okuyamadım (erişim izni yoktu), bu yüzden o seriye ait Muş değeri yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: Küçük Taban, Yatırım Haberleri</h2>
+    <p class="sub">Muş’un sanayisi ölçülebilir bir hacme sahip değil; elde olan, birkaç yatırım haberi ve eski bir OSB bilgisi.</p>
+    <div class="g2">
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Bir ansiklopedi sayfasına göre Muş OSB 2008’de faaliyete geçti ve ilde Muş Şeker Fabrikası ile Muş Çimento Fabrikası büyük ölçekli işletmeler olarak anılıyor; aynı sayfa sanayinin istihdamdaki payını %2 olarak veriyor (yıl belirtilmemiş).</li>
+        <li>Haziran 2023 tarihli bir haberde Star Agritech’in Muş OSB’de yaklaşık 12 milyon $’lık tütün işleme tesisi kurduğu, ilk dönemde 600 ila 700 kişiyi istihdam etmeyi hedeflediği ve temel atmanın yapıldığı aktarılıyor.</li>
+        <li>Muş OSB’de bir otomotiv markasının yatırım planladığına dair bir haber başlığı gördüm; içeriğine erişemediğim için kullanmadım.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Tütün tesisinin açılıp açılmadığını, gerçek istihdamı ve üretimi doğrulayamadım. Haber “yıllık 20 milyon ton” gibi büyüklük belirtiyor; bu rakam kapasite için makul görünmediğinden kullanmadım.</li>
+        <li>Muş OSB’nin doluluk oranı, firma ve işçi sayısı için güncel veri bulamadım. Şeker fabrikasının işlediği pancar miktarı ve istihdamı da yok.</li>
+        <li>Sanayi katma değeri, imalat istihdamı ve OSB ihracatı için il verisi bulunamadı.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>OSB’de tütün işleme gibi tarıma dayalı yatırım, ilin hammaddesiyle uyumlu bir sanayi yönü gösteriyor (yorum; gerçekleşme doğrulanmadı).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Sanayinin istihdamdaki payı yaklaşık %2 gibi küçük bir değerde anılıyor (ansiklopedi, yıl yok); ölçülebilir bir sanayi tabanı görünmüyor.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık: Muş’un Asıl Gücü</h2>
+    <p class="sub">Muş Ovası’nda hububat, yüksek rakımlı meralarda küçükbaş hayvancılık ve arıcılık ilin öne çıkan alanları.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>2025 verisinde Muş’ta toplam tarım arazisi 3,22 milyon dekar, ekili alan 3,11 milyon dekar (yaklaşık %96,5, kendi hesabım).</li>
+        <li>Küçükbaş sayısı 1.158.120’den 1.411.269’a (+%21,9), büyükbaş 242.277’den 253.840’a (+%4,8) çıktı (TÜİK 2025, İHA aktarımı). Kişi başına yaklaşık 3,6 küçükbaş düşüyor (kendi hesabım).</li>
+        <li>2026 hububat hasadında il yetkilisi yaklaşık 600–650 bin ton buğday ve arpa (400 bin ton buğday, 200 bin ton arpa) ve yaklaşık 11 milyar TL katkı bekliyor (22.07.2026; beklenti).</li>
+        <li>2026 bal hasadı yaklaşık 700 ton; 290 bin kovan ve 710 arıcı anılıyor (haberkenti, 22.09.2026).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Hayvan sayısındaki artış, devlet desteklerinin (yem, düşük faizli kredi, kuzu-oğlak ve besilik desteği) karşılığı olarak sunuluyor; “gençler köyde kalıyor” vurgusu var (haber başlığı).</li><li>Muş Ovası’nın zengin florası, her yıl farklı illerden gezgin arıcıları çekiyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Bir ansiklopedi sayfası sulama altyapısının yetersizliğinin verimi düşürdüğünü ve hayvancılığın geleneksel yöntemlerle yapıldığını söylüyor (yıl belirtilmemiş).</li><li>Hayvan sayısı desteklere bağlı bir artış olabilir; bu artışın gelire dönüşüp dönüşmediği ölçülmüyor (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Hububat rakamları 2026 için bir yetkilinin beklentisidir, gerçekleşme değildir. 2021 tarihli bir tarım müdürlüğü haberinde Muş Ovası’ndan yaklaşık 1 milyar TL’lik hububat katkısı yazıyordu; 5 yıl sonraki 11 milyar TL ile fiyat, kur ve rekolteyi ayıramadığım için karşılaştırma yapmadım.</li>
+      <li>Haberdeki hayvan sayısı artışının nedenini (sayım yöntemi, destek, gerçek artış) bilmiyorum; %21,9’luk sıçrama tek yıllık veri olup doğrulanması gerekir.</li>
+      <li>Kovanlardan kaçının yerel, kaçının gezgin arıcıya ait olduğu, bal değeri ve fiyatı haberde yok. Ürün bazında (şeker pancarı, tütün, ayçiçeği) ton verisi bulamadım. Bir ansiklopedideki “tarımda istihdam %56,2” rakamının yılı belli olmadığı için kullanmadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Malazgirt Etkinliği, Zayıf Altyapı</h2>
+    <p class="sub">Muş’un turizm gündemini Malazgirt Zaferi anmaları belirliyor; ölçülebilir güncel veri yok.</p>
+    <div class="g2">
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>2017 tarihli bir haberde, 21–27 Ağustos’taki Malazgirt anmaları için yaklaşık 100.000 ziyaretçi bekleniyor ve konaklamanın o hafta tamamen dolacağı belirtiliyor; normalde doluluk yaklaşık %50’ydi. Şehirde 12 otel ve pansiyonlarla birlikte yaklaşık 1.000 yatak vardı. Yaklaşık 100 milyon TL ek harcama öngörülüyordu (oda başkanı tahmini).</li>
+        <li>Sayfalarda Malazgirt Kalesi, Muş Kalesi, Murat Köprüsü, Kutsal Havariler Manastırı, Hacı Şeref Camii ile Gaz Gölü ve Akdoğan Gölü gibi doğa ve tarih unsurları sayılıyor.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Rakamlar 2017’ye ait ve bir yerel oda başkanının tahminidir; güncel yatak sayısı, ziyaretçi ve gelir verisi bulamadım. Turizmin il GSYH’sindeki payı yok.</li>
+        <li>Etkinliğin tek haftalık oluşu yıl boyu turizm anlamına gelmez (yorum). Bu yüzden turizm “uyuyan potansiyel” olarak etiketlendi; ölçülmüş bir güç değil.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Anma etkinliği yıllık ve ulusal ilgi görüyor; kısa süreli de olsa konaklama ve esnaf talebi yaratıyor (2017 tahmini).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yaklaşık 1.000 yataklık altyapı (2017) büyük etkinlik dışında ölçekli turizm için sınırlı görünüyor; güncel kapasiteyi doğrulayamadım.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir, İşgücü ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024), ADNKS 2025 ve TÜİK Van Bölge Müdürlüğü sunumu</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Muş 2024’te kişi başına 230.300 TL (yaklaşık 7.100 $) ile 81 il arasında 78.; Van 79., Ağrı 80. Türkiye ortalamasının (15.325 $) yaklaşık %46’sı (kendi hesabım).</li>
+        <li>Toplam ekonomi: 230.300 TL ile 392.301 kişi çarpımından yaklaşık 90 milyar TL, Türkiye GSYH’sinin (44,6 trilyon TL) yaklaşık %0,2’si; nüfus payı ise %0,45 (kendi hesabım).</li>
+        <li>İstihdam oranı 2025’te %35,7; dört illik TRB2’de %36,8, işgücüne katılma %41,7 ve işsizlik %11,8. Türkiye’de işsizlik 2025’te %8,3, istihdam oranı yaklaşık %49.</li>
+        <li>Nüfus 399.879’dan (2023) 392.301’e (2024) ve 389.127’ye (2025) indi. 2025’te net göç −6.900 (12.100 gelen, 19.000 giden); binde yaklaşık −17,7 (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus kaybı yavaşladı: 2024’te −7.578, 2025’te −3.174.</li><li>Doğum hızı 2025’te binde 16, bebek ölüm hızı binde 9,9; il nüfusu genç kalmaya devam ediyor olabilir (yorum, yaş yapısı verisi yok).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yarısından az; komşuların çoğunun gerisinde (yalnızca Van ve Ağrı daha düşük).</li><li>Göç eden (19.000) gelenin (12.100) yaklaşık 1,6 katı (kendi hesabım). Doğal artış göçü telafi etmiyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Muş’a özgü 2025 işsizlik ve işgücüne katılma oranını bulamadım; işsizlik ve katılma oranı TRB2 bölgesinin (Van, Muş, Bitlis, Hakkari) değeridir. İl istihdam oranı (%35,7) Muş’a özgü.</li>
+      <li>Nüfus serilerinde çelişki var: bir ansiklopedi 392.301’i “2023” diye veriyor, TÜİK Van Bölge Müdürlüğü sunumu bunu 2024 olarak, 2023’ü 399.879 olarak yazıyor. Ben sunumun serisini kullandım. Başka bir sitede yer alan 417.279 (2023) toplamı ve ilçe değerleri kendi içinde tutarsız olduğu için kullanılmadı.</li>
+      <li>Doğal artış ile göçün karşılaştırması bir kaba hesaptır: net göç (−6.900) ile nüfus değişimi −3.174 arasındaki fark yaklaşık +3.700 doğal artışa işaret ediyor (kendi hesabım, doğrudan doğum-ölüm verisi değil). Sektörel GSYH payları bulunamadı; dolar karşılığı (~7.100 $) bir basın aktarımıdır ve kur etkisini içerir.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Muş’un 6 ilçesinden yalnızca dördünün 2025 nüfusunu bulabildim; Merkez, Bulanık ve Malazgirt il nüfusunun yaklaşık %80,5’ini barındırıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Merkez</td><td>203.810 (%52,4)</td><td>İl merkezi; il nüfusunun tek artan ilçesi (kaynak); ekonomik veri bulunamadı</td></tr>
+      <tr><td>Bulanık</td><td>68.983 (%17,7)</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Malazgirt</td><td>40.595 (%10,4)</td><td>Malazgirt Zaferi anmaları; kale ve tarihî varlıklar</td></tr>
+      <tr><td>Varto</td><td>28.804 (%7,4)</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Hasköy</td><td>bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Korkut</td><td>bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Dört ilçenin toplamı 342.192; il toplamı 389.127 olduğundan Hasköy ve Korkut birlikte 46.935 kişi (yaklaşık %12,1) olmak zorunda (kendi hesabım; ayrı ayrı doğrulayamadım). Merkez’in %52,4’lük payı yüksek göründüğü için tek bir kaynağa dayanan bu değeri ihtiyatla okumak gerekir. İlçe bazında GSYH, istihdam, tarım veya ihracat verisi bulamadım; “ekonomik karakter” sütunu çok sınırlı kaynaklardan derlenmiş genel bir özettir. Yüzölçümü yaklaşık 8.196 km² (ansiklopedi; yıl yok) ve il yoğunluğu km²’de yaklaşık 47,5 kişi (kendi hesabım).</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Muş</h3>
+      <p style="margin:0">Muş’un ekonomik omurgası tarım ve hayvancılık: 3,1 milyon dekar ekili alan, 1,41 milyon küçükbaş ve 700 ton bal, ilin yerel üretimini taşıyor. Zayıflığı gelirin Türkiye ortalamasının yaklaşık %46’sında kalması, ihracatın 2025’te %35,6 düşmesi ve net göç kaybının (2025’te −6.900) nüfusu iki yılda 10.752 kişi azaltması. Bu tablo tarıma dayalı üretimi sanayi ve gelire dönüştürememeyle ilgili olabilir, ama bunu doğrudan ölçen bir veri bulamadım (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Hayvancılık ve baldan işleme: süt, et ve bal için paketleme ve markalaşmayla katma değeri ilde tutmak.</div>
+      <div><b>HAMLE 2</b>OSB’yi doldurmak: tütün gibi tarıma dayalı tesislerin gerçekleşmesini izlemek ve yeni yatırımcı çekmek.</div>
+      <div><b>HAMLE 3</b>Gençleri tutmak: göç eden 19.000 kişinin nereye ve neden gittiğini ölçmek, eğitim ve istihdam planını buna göre kurmak.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Destekle büyütülen hayvancılığın kalıcı gelir mi yoksa geçici bir artış mı yarattığı tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Hayvan sayısındaki artış destekle mi sağlanıyor, yoksa üreticinin gelirini gerçekten artırıyor mu? Hangi gösterge bunu ayırır?</li>
+      <li>Her yıl yaklaşık 19.000 kişi Muş’tan ayrılırken tarıma dayalı yerel sanayi gençleri tutabilir mi?</li>
+      <li>Muş’ta ihracat 2025’te üçte bir düşerken ithalat üstünlüğü kalıcı bir sorun mu, yoksa tek yıllık bir dalgalanma mı?</li>
+      <li>Malazgirt anmaları gibi tek haftalık etkinlikler yıl boyu turizme dönüştürülebilir mi, bunun için nasıl bir altyapı gerekir?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Sabah tabanlı il listesi: mirathaber; Alomaliye; Rudaw)</li>
+      <li>TÜİK Van Bölge Müdürlüğü Muş il sunumu (Muş Şark Haber ve Haber49, 05.11.2026): nüfus 2023–2025, göç, istihdam, TRB2 oranları, dış ticaret 2024–2025 ve Ocak–Eylül 2026, hayvan sayısı, tarım arazisi, konut</li>
+      <li>Aylık dış ticaret: Muş Şark Haber (30.08.2026, Temmuz 2026); Ocak–Temmuz 2026 toplamları</li>
+      <li>Hayvancılık: İHA/Ekonomist (12.02.2026); bal: haberkenti (22.09.2026); hububat: Yeni Birlik (22.07.2026); Muş İl Tarım Müdürlüğü haberi (13.08.2021)</li>
+      <li>Sanayi: Capital (13.06.2023, tütün işleme tesisi); Küre Ansiklopedi (Muş il maddesi; OSB, tarım, sanayi)</li>
+      <li>Turizm: Yeni Akit (26.08.2017, Malazgirt anmaları); Küre Ansiklopedi</li>
+      <li>Nüfus ilçeleri: Haber Gazetesi (2025 ilçe nüfusları, Merkez, Bulanık, Malazgirt, Varto); TÜİK ADNKS 2025 (86.092.168 Türkiye nüfusu)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Muş’a özgü 2025 işsizlik ve işgücüne katılma oranı, Hasköy ve Korkut nüfusları, ilçe bazlı ekonomik veriler, sektörel GSYH payları, ürün bazında üretim tonajları, güncel turizm istatistikleri, Muş OSB doluluk ve istihdam rakamı, tütün işleme tesisinin güncel durumu, faaliyet ili serisi ihracatı ve ihracatın sektör ve ülke kırılımı doğrulanmış kaynakla bulunamadığı için sayfada yok. %46 (gelir oranı), −%35,6 ve −%6,5 (ihracat ve ithalat değişimi), %114, %105,5 ve %133 (ithalat/ihracat), 407 $ (kişi başı ihracat), −%2,7 (nüfus kaybı), %0,2 ve %0,45 (GSYH ve nüfus payı), binde −17,7 (net göç hızı), %80,5, %52,4 ve ilçe yüzdeleri, 46.935 (Hasköy+Korkut), 3,6 küçükbaş/kişi, %96,5 (ekili alan), 47,5 kişi/km² ve %21,9 ve %4,8 (hayvan artışı) kendi hesabımdır. Tarih belirtilmeyen beyanlar (yetkili, oda başkanı, ansiklopedi) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: TARIM',ad:'Hububat (buğday, arpa)',big:'~600 bin ton',alt:'2026 buğday ve arpa rekolte beklentisi (400 bin buğday, 200 bin arpa); beklenen katkı ~11 milyar TL (22.07.2026)',y:'Ekili alan 3,11 milyon dekar (arazinin yaklaşık %96,5’i, 2025); Muş Ovası’nın tarımı ilin en geniş ekonomik tabanı.',n:'Rakamlar bir yetkilinin beklentisi; gerçekleşme, verim ve çiftçi geliri bulunamadı. Sulama altyapısı eksikliği bir ansiklopedide anılıyor.'},
+ {c:'good',chip:'MOTOR: HAYVANCILIK',ad:'Küçükbaş ve büyükbaş hayvancılık',big:'1,41 mn baş',alt:'Küçükbaş sayısı 2025 (bir yılda +%21,9); büyükbaş 253.840 (+%4,8) (TÜİK, İHA)',y:'Küçükbaş kişi başına yaklaşık 3,6; devlet destekleri (yem, kredi, kuzu-oğlak desteği) hayvan sayısını artırıyor deniyor.',n:'Artışın nedeni (sayım, destek) belirsiz; süt, et üretimi ve gelir verisi yok; hayvancılığın geleneksel olduğu ve verimin düşük kaldığı belirtiliyor (ansiklopedi, yıl yok).'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'Arıcılık ve bal',big:'~700 ton',alt:'2026 bal hasadı; 290 bin kovan, 710 arıcı (haberkenti, 22.09.2026)',y:'Muş Ovası’nın florası her yıl farklı illerden gezgin arıcıları çekiyor; bal ve pekmezde markalaşma haberi var.',n:'Kovanların ne kadarı gezgin arıcıya ait ve ne kadar bal değeri yerel ekonomiye kalıyor, haberde yok; fiyat ve gelir verisi bulunamadı.'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Dış ticaret',big:'−%35,6',alt:'İhracat 245,8’den 158,2 milyon $’a (2024→2025, TÜİK Van BM aktarımı; kendi hesabım)',y:'Temmuz 2026’da aylık ihracat Haziran’a göre %130’dan fazla arttı (5,32 → 12,26 milyon $; tek ay).',n:'2025’te ithalat (180,3) ihracatı (158,2) geçti; Ocak–Eylül 2026’da ithalat ihracatın yaklaşık %105,5’i; sektör ve ülke kırılımı yok.'},
+ {c:'sleep',chip:'UYUYAN: SANAYİ',ad:'Sanayi, OSB ve gıda işleme',big:'600–700',alt:'Star Agritech tütün işleme tesisinin ilk dönem istihdam hedefi; ~12 milyon $ yatırım (Capital, 13.06.2023)',y:'OSB’de tarıma dayalı yatırım haberi var; Muş OSB 2008’de faaliyete geçmiş (ansiklopedi).',n:'Tesisin açılıp açılmadığı ve gerçek istihdamı doğrulanamadı; sanayinin istihdam payı yaklaşık %2 (ansiklopedi, yıl yok).'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm ve Malazgirt anmaları',big:'~100 bin',alt:'2017’de Malazgirt anmaları için beklenen ziyaretçi (oda başkanı tahmini; 12 otel, ~1.000 yatak)',y:'Yıllık ulusal etkinlik; kale, köprü, manastır ve göl gibi tarih ve doğa unsurları var.',n:'Güncel yatak, ziyaretçi ve gelir verisi yok; rakamlar 2017’ye ait ve tek haftalık etkinliğe bağlı.'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'İnşaat ve konut',big:'4.212',alt:'2025 konut satışı; Ocak–Eylül 2026’da 2.508 (TÜİK Van BM aktarımı); yapı kullanma izni 1.965 daire (2025)',y:'Konut satışı ve yapı izni için güncel il verisi mevcut.',n:'Önceki yılla kıyaslanacak seri bulunamadı; konut fiyatı, istihdam ve sektörün GSYH payı yok.'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'İşgücü ve istihdam',big:'%35,7',alt:'Muş istihdam oranı (2025); TRB2 %36,8, Türkiye yaklaşık %49',y:'Dört illik TRB2 bölgesinde istihdam oranı il ile benzer; kayıtlı açık iş ve işsiz verisi ayrıca incelenmeli.',n:'TRB2 işsizliği %11,8 (Türkiye %8,3); Muş’a özgü işsizlik ve katılma oranı bulunamadı.'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Nüfus ve göç',big:'−6.900',alt:'2025 net göç: 12.100 gelen, 19.000 giden (TÜİK Van BM aktarımı)',y:'Nüfus kaybı yavaşladı: 2024’te −7.578, 2025’te −3.174; doğum hızı binde 16, bebek ölüm hızı binde 9,9.',n:'Nüfus iki yılda 10.752 azaldı (−%2,7); gidenler gelenlerin yaklaşık 1,6 katı (kendi hesabım).'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Gelir',big:'78 / 81',alt:'Kişi başına GSYH sırası (2024; 230.300 TL, ~7.100 $); Van 79., Ağrı 80.',y:'Komşu Bitlis (77.) ve Batman (76.) ile benzer düzeyde; Diyarbakır (75.) ve Bingöl (69.) önde.',n:'Gelir Türkiye ortalamasının yaklaşık %46’sı (kendi hesabım); yalnızca iki il daha geride.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Yıllık ihracat ve ithalat (milyon $)',[['İhracat 2024',245.8],['İthalat 2024',192.9],['İhracat 2025',158.2],['İthalat 2025',180.3]],[2,3],'2024’te ihracat ithalatı geçiyordu; 2025’te ithalat ihracatın yaklaşık %114’üne çıktı (kendi hesabım). Kaynak: TÜİK Van Bölge Müdürlüğü Muş sunumu (Haber49, Muş Şark Haber).'],
+ ['Ocak–Eylül 2026 dış ticaret (milyon $)',[['İhracat',99.6],['İthalat',105.1]],[1],'İthalat ihracatın yaklaşık %105,5’i (kendi hesabım). Ocak–Temmuz için ihracat 71,08, ithalat 94,69 milyon $ idi. Kaynak: TÜİK Van BM aktarımı (Haber49, Muş Şark Haber).'],
+ ['Aylık dış ticaret, Haziran–Temmuz 2026 (milyon $)',[['İhracat, Haziran',5.32],['İhracat, Temmuz',12.26],['İthalat, Haziran',15.0],['İthalat, Temmuz',11.07]],[1],'Temmuz ihracatı Haziran’a göre %130’dan fazla arttı; tek ay değişimi trend sayılmamalı. Kaynak: Muş Şark Haber (30.08.2026, TÜİK).'],
+ ['Pay karşılaştırması (%)',[['Nüfus payı (2025)',0.452],['İl GSYH payı (2024)',0.203]],[1],'Nüfus: 389.127 / 86.092.168. GSYH: kişi başı 230.300 TL ile 2024 nüfusundan ve 44,6 trilyon TL’den. İhracat payı için aynı seride Türkiye toplamı bulamadığım için eklemedim. Kendi hesabım.']];
+mk('ih',IH,['Yıllık','Ocak–Eylül 2026','Aylık 2026','Pay karşılaştırması']);
+var TA=[['Büyükbaş hayvan sayısı (bin baş)',[['2024',242.3],['2025',253.8]],[1],'+11.563 baş, yaklaşık +%4,8 (kendi hesabım). Kaynak: TÜİK 2025 (İHA/Ekonomist, 12.02.2026).'],
+ ['Küçükbaş hayvan sayısı (bin baş)',[['2024',1158.1],['2025',1411.3]],[1],'+253.149 baş, yaklaşık +%21,9 (kendi hesabım); tek yıllık sıçrama, nedeni kaynakta açıklanmıyor. Kaynak: TÜİK 2025 (İHA/Ekonomist).'],
+ ['2026 hububat rekolte beklentisi (bin ton)',[['Buğday',400],['Arpa',200]],[0],'İl yetkilisinin 22.07.2026 beklentisi: toplam 600–650 bin ton ve yaklaşık 11 milyar TL katkı; gerçekleşme değil. Kaynak: Yeni Birlik.']];
+mk('ta',TA,['Büyükbaş','Küçükbaş','Hububat 2026']);
+var GT=[['Kişi başına GSYH, 2024 (bin TL)',[['Elazığ',349.9],['Erzurum',321.1],['Bingöl',276.7],['Siirt',261.8],['Diyarbakır',245.0],['Batman',236.4],['Bitlis',231.9],['Muş',230.3],['Van',203.0],['Ağrı',194.7]],[7],'Muş 81 il arasında 78.; Van 79., Ağrı 80. Dolar karşılığı yaklaşık 7.100 $ (Türkiye ort. 15.325 $’ın yaklaşık %46’sı, kendi hesabım). Kaynak: TÜİK (mirathaber, Sabah tabanlı liste; Muş Şark Haber).'],
+ ['Nüfus (bin kişi)',[['2023',399.879],['2024',392.301],['2025',389.127]],[2],'2024’te −7.578, 2025’te −3.174; iki yılda −10.752 (−%2,7, kendi hesabım). Kaynak: TÜİK ADNKS (TÜİK Van BM sunumu, Haber49).'],
+ ['Göç, 2025 (bin kişi)',[['Gelen',12.1],['Giden',19.0],['Net (mutlak değer)',6.9]],[1],'Net göç −6.900; “Net” çubuğu eksi işaretli değerin mutlak değeridir. Giden gelenin yaklaşık 1,6 katı (kendi hesabım). Kaynak: Haber49 (05.11.2026).'],
+ ['İşgücü göstergeleri, 2025 (%)',[['İstihdam oranı, Muş',35.7],['İstihdam oranı, TRB2',36.8],['Katılma oranı, TRB2',41.7],['İşsizlik, TRB2',11.8],['İşsizlik, Türkiye',8.3]],[0],'TRB2 = Van, Muş, Bitlis, Hakkari. Muş’a özgü işsizlik ve katılma oranını bulamadım. Türkiye işsizliği 2025 TÜİK yıllık verisi. Kaynak: TÜİK Van BM (Muş Şark Haber), Medyascope.']];
+mk('gt',GT,['Gelir','Nüfus','Göç','İşgücü']);
+</script>
+</body>
+</html>

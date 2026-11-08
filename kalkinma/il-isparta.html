@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isparta | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Isparta'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#be185d;--a2:#16a34a;--a3:#0e7490"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Isparta</span><h1>Isparta: Gül, Elma ve Aranan İkinci Ayak</h1><p>445 bin nüfuslu Isparta, kişi başına GSYH’de 11.826 $ ile 81 il arasında 35. sırada; Türkiye ortalamasının yaklaşık %77’si. Tarımda gül, elma ve kiraz ilin kimliği; ihracatta ise yaş meyve-sebze, madencilik ve mermer öne çıkıyor. 2026’nın ilk on ayında ihracat 438 milyon $’a ulaştı. Nüfus yerinde sayıyor, gelir ortalamanın altında, turizm ve sanayi ise potansiyelinin altında. Bu dosya ili sektör sektör okuyor ve verinin bulunamadığı yerleri açıkça işaretliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>11.826 $</b><span>Kişi başına GSYH (2024), 81 il arasında 35. (kendi sıralamam); Türkiye ort. 15.325 $’ın yaklaşık %77’si</span></div>
+    <div class="k"><b>445.303</b><span>Nüfus (ADNKS 2025); 2024’e göre −1.106, 2023’ten beri azalıyor</span></div>
+    <div class="k"><b>438,4 mn $</b><span>2026 Ocak–Ekim ihracatı (TİM, ITSO aktarımı); 2025’in aynı dönemine göre yaklaşık +%6,5 (kendi hesabım)</span></div>
+    <div class="k"><b>105,3 mn $</b><span>2026’nın ilk 10 ayında yaş meyve ve sebze ihracatı; +%95 (yaklaşık 54 mn $’dan)</span></div>
+    <div class="k"><b>%84,4</b><span>Türkiye yağ gülü üretiminde Isparta payı (akademik makale; yıl belirtilmemiş)</span></div>
+    <div class="k"><b>~800 bin ton</b><span>Geçen yıl elma üretimi (ziraat odası yetkilisi beyanı; yıl belirsiz)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">8 sektör, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. “Baskı altında” etiketini bu ilde kullanmadım, çünkü Isparta’ya özgü doğrulanmış bir daralma verisi bulamadım.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan, dar ya da kimlik odaklı</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK 2024, TİM ve ITSO aktarımları 2025–2026, kurum beyanları, bir akademik makale). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracatta tekrar eden üst sıralar ve üretim payına dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Birçok rakam kurum beyanıdır (ITSO, ziraat odası, TKDK) ve ilgili yerde işaretlenmiştir.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Tarım, Maden ve Mermer Önde</h2>
+    <p class="sub">Isparta ihracatı Türkiye’nin ilk 30 ili arasında yer alıyor (bir yerel haber, 2025). 2026’da yaş meyve ve sebze zirveyi aldı; madencilik ve mermer sürekli üst sıralarda.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>TİM verilerine göre Isparta’nın ihracatı 2026 Ocak–Ekim döneminde 411,5 milyon $’dan 438,4 milyon $’a çıktı. Ekim 2026’da 47,9 milyon $ (+%9); Temmuz’da 71,2 milyon $ (+%56) ile yılın zirvesi görüldü.</li>
+        <li>Yaş meyve ve sebze ihracatı 2026’nın ilk 10 ayında yaklaşık 54 milyon $’dan 105,3 milyon $’a çıktı (+%95); Ekim’de tek ay +%148. Temmuz 2026’da bu kalem 29,8 milyon $ ile en büyük sektördü; onu madencilik (9 milyon $) ve çimento, cam, seramik (8 milyon $) izledi.</li>
+        <li>Ticaret Bakanlığı’nın üretim yerine göre serisinde ihracat 2022’de 570, 2023’te 610, 2024’te 628 milyon $ oldu; TİM serisi ise 2024’te %4 düşüş gösterdi (ITSO).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat 2026’da hem yıl toplamında hem Temmuz–Ekim aylarında arttı; yaş meyve-sebzede iki katına yakın sıçrama var.</li><li>En çok ihracat yapılan ülkeler ABD, Çin, Fransa, Almanya ve Kanada; pazar tek bir ülkeye bağlı görünmüyor (Ekim 2026, ITSO).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yaş meyve-sebze hızlı artarken tarıma bağımlılık ve hava koşullarına duyarlılık da artıyor (yorum); Nisan 2025’teki zirai don ihracatı etkilemişti (Ekonomi Gazetesi başlığı).</li><li>İhracat hacmi küçük; 2024’te TİM serisinde %4 düşüş yaşandı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İki farklı seri var: TİM (firma merkezi esaslı; 2026 Ocak–Ekim 438,4 milyon $) ve Ticaret Bakanlığı üretim yerine göre serisi (2024’te 628 milyon $). Aralarındaki fark kapsam tanımından gelebilir (tahmin); birbirine eklenmedi.</li>
+      <li>2025’in yıllık TİM toplamını bulamadım; yalnızca ilk yedi ay (279,6 milyon $, +%9) ve Ocak–Ekim (411,5 milyon $) biliniyor. Sektör ve ülke dağılımı yalnızca tek tek aylar için var (Ocak 2025, Temmuz 2026).</li>
+      <li>ITSO’nun açıklamaları kurum beyanıdır ve artışın nedeni (fiyat, miktar, tek bir firma) belirtilmiyor. Yaş meyve-sebze 2025’te düşük bir tabandan, zirai donun ardından arttığı için %95’lik artış kısmen baz etkisi olabilir (tahmin).</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım: Gül, Elma ve Kiraz</h2>
+    <p class="sub">Isparta “güller şehri”; ama tarımsal kimliği yalnızca gülden ibaret değil: elma, kiraz, lavanta ve tıbbi-aromatik bitkiler de ilin stratejik ürünleri arasında sayılıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Bir akademik çalışmaya göre Türkiye yağ gülü üretiminin %84,4’ü Isparta’dan geliyor (yıl belirtilmemiş); 2009’da yağ gülü ekim alanının %79,5’i Isparta’daydı. Gül yağı üretimi 1888’de Bulgaristan’dan getirilen fidanlarla başlamıştır.</li>
+        <li>Isparta Ziraat Odası’na göre ilde geçen yıl yaklaşık 800 bin ton elma üretildi ve Türkiye’de üretilen her üç elmadan biri Isparta’da yetişiyor (beyan).</li>
+        <li>TKDK yöneticisi, destekledikleri iki kiraz işleme ve paketleme tesisiyle Türkiye’deki kirazın büyük kısmının Isparta’da işlenip ihraç edildiğini söylüyor (beyan, abartılı olabilir).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gül, elma, kiraz ve lavanta birlikte güçlü bir tarımsal portföy oluşturuyor; yaş meyve-sebze ihracatı 2026’da iki katına çıktı.</li><li>ITSO üniversite-sanayi işbirliğiyle gül kalitesini artırmaya çalışıyor; kozmetik ve mobilya için ayrı kümelenme projeleri yürütüyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gül yağının katma değeri, parfüm ve kozmetiğe dönüştüğünde artıyor; Türkiye genelinde gül ürünleri ihracatı yılda yaklaşık 30 milyon $ gibi küçük bir tutar (basın aktarımı).</li><li>Elma ve diğer meyvelerde zirai don ve iklim dalgalanması (Türkiye elma üretimi TÜİK tahminine göre yıllar arasında büyük farklar gösterdi).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Gül payı (%84,4) yıl belirtilmeyen eski bir akademik makaleden; güncel pay farklı olabilir. “Her üç elmadan biri” iddiası, Türkiye elma üretimi (yaklaşık 4,6 milyon ton, TÜİK 2023) ve 800 bin ton rakamıyla tam örtüşmüyor (yaklaşık %17); beyan ve yıl farkı olabilir, bu yüzden pay hesaplanmadı.</li>
+      <li>Grafikteki “stratejik ürün” sıralaması resmî üretim verisi değil, ITSO’nun yaptırdığı bir algı araştırmasıdır (katılımcıların tercihi); ürünlerin ekonomik büyüklüğünü göstermez.</li>
+      <li>Isparta’nın TÜİK 2023 meyve ve sebze üretim miktarlarını (Bakanlık rehberi) bulamadım; hayvancılık, çiftçi geliri ve tarımın il GSYH’sindeki payı için de veri yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: Maden, Halı, Mobilya ve Aranan Serbest Bölge</h2>
+    <p class="sub">Isparta sanayisi madencilik ve mermer, halı, mobilya ve tarıma dayalı üretimde toplanıyor; ilin ikinci büyük ayağı henüz net değil.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>ITSO’ya göre ocak 2025’te en büyük ihracat kalemi madencilikti (7 milyon $); onu hububat-bakliyat (3,8), halı (2,4), hazır giyim (2,4), mobilya-kâğıt-orman (2,0), tekstil (1,8), meyve-sebze mamulleri (1,3) ve çimento-cam-seramik (1,2 milyon $) izledi. Temmuz 2025’te en büyük kalem mermer ve madencilik ürünleriydi (8,2 milyon $).</li>
+        <li>Ticaret Bakanı Bolat, halıda Türkiye’nin dünyada ikinci sırada olduğunu söyledi ve Isparta’yı halı üretimiyle bilinen şehirler arasında saydı.</li>
+        <li>ITSO, Ticaret Bakanlığı desteğiyle mobilya-ahşap ve kozmetik alanlarında iki kümelenme (UR-GE) projesi yürütüyor, ayrıca Isparta serbest bölgesi için fizibilite çalışması tamamlandı; yatırım teşvikinde il üçüncü bölgeye geçti.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Madencilik, mermer, çimento-cam-seramik, halı ve mobilya gibi birbirinden farklı sektörler ihracatta yer alıyor; ihracat yalnızca tarıma bağlı değil.</li><li>Serbest bölge fizibilitesi tamamlandı; teşvik bölgesi yükseltildi (daha yüksek destek).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Hiçbir sanayi sektörü ihracatta öne geçecek ölçeğe ulaşmamış görünüyor; ayrıntılı sanayi üretim ve istihdam verisi yok.</li><li>Halı gibi emek yoğun sektörler Türkiye genelinde maliyet baskısı altında (genel bilgi; Isparta’ya özgü veri bulunamadı).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Sektör sıralaması yalnızca tek tek aylar için bulundu (Ocak 2025, Temmuz 2025, Temmuz 2026); yıllık sektör dağılımını bulamadım. Aylık sıralama mevsimsel olabilir (yaş meyve-sebze yaz aylarında zirve yapar, tahmin).</li>
+      <li>OSB sayısı, doluluk, sanayi istihdamı, İSO 500 firmaları ve sanayi üretim değeri için doğrulanmış kaynak bulamadım; bu yüzden sayfada yok. Serbest bölgenin kurulup kurulmayacağı henüz belli değil, yalnızca fizibilite tamamlandı.</li>
+      <li>“Tarım ve tarım makineleri üretim üssü” ifadesi bir yerel haber başlığıdır; makine üretiminin büyüklüğünü doğrulayamadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Göl, Dağ ve Antik Kent</h2>
+    <p class="sub">Eğirdir Gölü, Davraz Kayak Merkezi, Kovada Milli Parkı ve Pisidia Antiokheia gibi değerlere rağmen Isparta turizmde Antalya’nın gölgesinde kalıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Davraz Kayak Merkezi bir sezonda 250 binin üzerinde ziyaretçi ağırladı; erken kar yağan bir sezonda ilk 13 günde 70 binden fazla kişi geldi ve günlük ortalama 10 bin ziyaretçi sayıldı (basın aktarımları, sezonlar belirsiz).</li>
+        <li>ITSO’nun Turizm ve Gastronomi Fuarı 16–19 Ekim 2025’te 90 bin ziyaretçiye ulaştı; ITSO Isparta’nın “Antalya turizminden daha fazla pay almak istediğini” söylüyor.</li>
+        <li>Eğirdir Cittaslow (Sakin Şehir) unvanına sahip; Yalvaç’ta Pisidia Antiokheia antik kenti ve müzesi, Sütçüler’de Köprülü Kanyon ve Adada antik kenti var.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kış (Davraz), göl (Eğirdir, Kovada), kültür (Pisidia, Adada) ve gastronomi bir arada; Antalya’ya yakın konum.</li><li>Gastronomi fuarı ve turizm yol haritası kentin tanıtımında yeni bir ürün oluşturuyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İl düzeyinde belgeli tesis, geceleme ve yabancı turist verisi bulunamadı; ziyaretin ilde harcamaya dönüşüm düzeyi belirsiz.</li><li>Davraz ve fuar sayıları günübirlik ziyaretçiyi de kapsıyor olabilir (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Davraz rakamları iki ayrı sezona ait basın aktarımlarıdır (250 bin sezon toplamı, 70 bin ilk 13 gün); yılları belirtilmemiş ve birbirine eklenemez. Fuar sayısı ITSO beyanıdır.</li>
+      <li>Kültür ve Turizm Bakanlığı belgeli tesis verisi (tesise geliş, geceleme, yabancı payı), turizm geliri ve turizmin il GSYH’sindeki payı için doğrulanmış veri bulamadım; bu yüzden sayfada yok.</li>
+      <li>Sagalassos (Ağlasun) Burdur sınırlarındadır, Isparta turizm verisine dahil değildir; yakın rota olarak anılsa da bu sayfada sayılmadı.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Kişi başına GSYH 2020’de 6.965 $’dan 2024’te 11.826 $’a çıktı (yaklaşık +%70, kendi hesabım); 2023–2024’te yaklaşık %19 arttı.</li>
+        <li>Türkiye ortalamasına oranı 2020’de yaklaşık %83’ten 2022’de yaklaşık %74’e düştü, 2024’te yaklaşık %77’de kaldı (kendi hesabım). Yani göreli konum 2020’ye göre daha zayıf.</li>
+        <li>Nüfus 2023’te 449.777’den 2025’te 445.303’e geriledi; kadın nüfus erkeklerden fazla (225.579 ve 219.724). Bir yerel haber başlığı ilin yaşlandığını söylüyor (başlık düzeyinde, yaş verisi doğrulanmadı).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir 2020–2024’te yaklaşık %70 arttı; Afyonkarahisar’ın (10.243 $) önünde, Konya ve Aydın’la aynı düzeyde.</li><li>İhracat 2026’da artışta.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Türkiye ortalamasının yaklaşık beşte bir altında; Burdur, Denizli ve Kütahya’nın gerisinde.</li><li>Nüfus 2023’ten beri azalıyor; genç nüfusun ilde kalıp kalmadığı belirsiz (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>35. sıra tablodaki değerlerin kendi sıralamamdır (aralarda yakın değerler var, Burdur 11.950 $, Artvin 11.884 $, Konya 11.845 $, Aydın 11.798 $); TÜİK’in açıklaması değildir. Toplam il GSYH’sini ve sektör paylarını bulamadım.</li>
+      <li>Isparta’ya özgü 2025 işsizlik, işgücüne katılma ve istihdam oranlarını bulamadım; Türkiye’de 2025 işsizlik %8,3’tü. TR61 (Antalya–Burdur–Isparta) verisi üç ili birlikte kapsar.</li>
+      <li>Dolar cinsinden kişi başına GSYH kur ve fiyat etkilerini içerir. Nüfus ADNKS kayıtlı nüfusudur; öğrenci (Süleyman Demirel Üniversitesi) ve mevsimlik hareketi yansıtmaz.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Isparta’nın merkez dahil 13 ilçesi var. İlçe nüfusları 2024 verisidir (kaynaklar birbirinden farklı rakam veriyor); ekonomik karakter genel özettir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2024)</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Merkez</td><td>272.797 (il nüfusunun yaklaşık %61’i)</td><td>Ticaret, hizmet, sanayi ve üniversite; ihracat ve OSB faaliyetleri (genel özet)</td></tr>
+      <tr><td>Yalvaç</td><td>44.777</td><td>Merkezden sonra en büyük ilçe; Pisidia Antiokheia antik kenti ve müzesi, tarım</td></tr>
+      <tr><td>Eğirdir</td><td>30.053</td><td>Eğirdir Gölü, Cittaslow, elma ve balıkçılık; Davraz ve Kovada’ya yakın turizm</td></tr>
+      <tr><td>Şarkikaraağaç</td><td>24.579</td><td>Tarım ağırlıklı ilçe (genel özet, ayrıntılı veri yok)</td></tr>
+      <tr><td>Gelendost</td><td>14.235</td><td>Tarım ağırlıklı ilçe (genel özet)</td></tr>
+      <tr><td>Keçiborlu</td><td>14.129</td><td>Isparta Süleyman Demirel Havalimanı bu ilçede; tarım ve maden (genel özet)</td></tr>
+      <tr><td>Senirkent</td><td>10.659</td><td>Tarım ağırlıklı ilçe (genel özet)</td></tr>
+      <tr><td>Aksu, Atabey, Gönen, Sütçüler, Uluborlu, Yenişarbademli</td><td>bulunamadı</td><td>Sütçüler’de Köprülü Kanyon ve Adada antik kenti; Yenişarbademli ilin en az nüfuslu ilçesi; diğerleri için ekonomik veri yok</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Merkez ilçe il nüfusunun yaklaşık %61,1’ini oluşturuyor (272.797 / 446.409, kendi hesabım); altı ilçenin toplamı yaklaşık %83’ü tutuyor (kendi hesabım). İlçe bazında GSYH, istihdam veya ihracat verisi yok; “ekonomik karakter” sütunu yerel haber, kurum açıklaması ve genel bilgiden derlenmiş bir özettir. Atabey ve Gönen için kaynaklar çelişkili rakam verdiği için sayı yazılmadı.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Isparta</h3>
+      <p style="margin:0">Isparta’nın gücü kimlikte: gül, elma ve kiraz bir tarım markası oluşturuyor ve ihracatta yaş meyve-sebze, maden ve mermer birlikte taşıyor. Zayıflığı, bu kimliğin gelire ve nüfusa dönüşmemesi: kişi başına gelir Türkiye ortalamasının yaklaşık %77’sinde, nüfus 2023’ten beri azalıyor ve ilin ikinci büyük ayağı (sanayi ya da turizm) henüz net değil. Bu yüzden asıl soru ürünlerin ilde ne kadar katma değere dönüştüğü ve genç nüfusun ilde tutulup tutulamadığı (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Gül, elma ve kirazı işlenmiş ürüne taşımak: gül yağından kozmetik ve parfüme, taze meyveden işlenmiş ve soğuk zincirli ürüne.</div>
+      <div><b>HAMLE 2</b>Serbest bölge ve kümelenme projelerini somut yatırıma çevirmek: mobilya-ahşap, kozmetik ve mermer ürünleri.</div>
+      <div><b>HAMLE 3</b>Turizmi günübirlikten geceleme düzeyine taşımak: Davraz, Eğirdir, Pisidia ve gastronomi rotalarını Antalya’yla birlikte paketlemek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Yaş meyve-sebze ihracatındaki %95’lik sıçramanın kalıcı olup olmadığı 2026’nın tamamı bilinmeden söylenemez.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Isparta gül ve elmayla tanınırken kişi başına geliri neden Türkiye ortalamasının altında kalıyor?</li>
+      <li>Gül yağı ham ürün olarak mı satılmalı, yoksa kozmetik ve parfüme dönüştürülerek mi? Bunu kim yapabilir?</li>
+      <li>Yaş meyve-sebzedeki %95’lik ihracat artışı kalıcı bir yapısal dönüşüm mü, yoksa zirai don sonrası baz etkisi mi?</li>
+      <li>Nüfusu azalan bir ilde serbest bölge ve kümelenme projeleri genç nüfusu tutabilir mi?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2020–2024 (Pusula Haber, 12.12.2025; Habertürk, CNBC-e, Rudaw aktarımı); TÜİK ADNKS 2021–2025 (İşçi Haber aktarımı); Emlakjet demografi (2024 ilçe nüfusları)</li>
+      <li>TİM verileri ve ITSO değerlendirmeleri (Isparta Haber, Habertürk Yerel, Ekonomi Gazetesi, Bomba32, Sondakika aktarımları; 2024–2026 ihracat); Ticaret Bakanlığı üretim yerine göre ihracat (ITSO aktarımı)</li>
+      <li>Dergipark akademik makalesi (yağ gülü payı); Ekonomi Gazetesi (ITSO algı araştırması, TKDK, gül ve gülyağı); Habertürk Yerel (elma rekoltesi)</li>
+      <li>Ekonomi Gazetesi (ITSO kümelenme, serbest bölge fizibilitesi, teşvik bölgesi); Posta (Bolat, halı)</li>
+      <li>Gazete Vatan ve Habertürk Yerel (Davraz Kayak Merkezi); Ekonomi Gazetesi (Turizm ve Gastronomi Fuarı); haberler.com, Kürenet (Eğirdir, Pisidia, Sütçüler)</li>
+      <li>TÜİK 2025 işgücü istatistikleri (Medyascope aktarımı)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum beyanı veya akademik makaledir; resmî tabloların doğrudan alıntısı değildir. Isparta’ya özgü 2025 işsizlik, katılma ve istihdam oranı, sektörel GSYH payları, 2025’in yıllık TİM toplamı, yıllık sektör ve ülke bazlı ihracat, OSB ve sanayi istihdamı, belgeli tesis ve turizm geliri, TÜİK 2023 tarımsal üretim miktarları ve ilçelerin çoğunun ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. 35. sıra, %77, %83, %74, +%70, +%19, +%6,5, %61,1 ve %83 (altı ilçe payı) kendi hesabımdır. İhracat için iki ayrı seri (TİM ve Ticaret Bakanlığı üretim yerine göre) kullanıldığından rakamlar birbirine eklenmemiştir. Gül payı ve algı araştırması resmî üretim istatistiği değildir; elma ve kiraz rakamları kurum beyanıdır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+var KARNE=[
+ {c:'good',chip:'MOTOR',ad:'Yaş meyve ve sebze ihracatı',big:'105,3 mn $',alt:'2026 ilk 10 ay, +%95 (yaklaşık 54 mn $’dan); Temmuz’da 29,8 mn $ ile en büyük kalem',y:'İki katına yakın sıçrama; ABD, Çin, Fransa, Almanya ve Kanada başlıca pazarlar.',n:'Hava ve zirai don riskine açık (Nisan 2025’te don ihracatı vurdu); baz etkisi içerebilir.'},
+ {c:'good',chip:'MOTOR',ad:'Elma ve kiraz',big:'~800 bin ton',alt:'Geçen yıl elma üretimi (ziraat odası beyanı; yıl belirsiz)',y:'Türkiye elma üretiminde öne çıkan il; kiraz işleme ve paketleme tesisleri destekleniyor.',n:'“Her üç elmadan biri” iddiası rakamlarla tam örtüşmüyor; yıllık dalgalanma büyük.'},
+ {c:'good',chip:'MOTOR',ad:'Madencilik ve mermer',big:'7–9 mn $',alt:'Aylık: Ocak 2025’te 7, Temmuz 2025’te 8,2, Temmuz 2026’da 9 mn $',y:'Birçok ayda ihracatın en büyük ya da ikinci kalemi; ürün çeşitliliği düşük riskli.',n:'Yıllık toplamı, istihdamı ve çevre etkisini bulamadım; ham madde ihracatı katma değer düşük olabilir (yorum).'},
+ {c:'warn',chip:'KİMLİK: GÜL',ad:'Gül, gül yağı ve kozmetik',big:'%84,4',alt:'Türkiye yağ gülü üretiminde Isparta payı (akademik makale; yıl belirsiz)',y:'Dünya çapında tanınan marka; ITSO kozmetik kümelenme projesi yürütüyor.',n:'Türkiye gül ürünleri ihracatı yılda yaklaşık 30 mn $ (basın); Isparta payı ve işlenmiş ürün oranı bilinmiyor.'},
+ {c:'warn',chip:'DAR: EMEK YOĞUN',ad:'Halı, mobilya, tekstil, hazır giyim',big:'~2 mn $/ay',alt:'Ocak 2025: halı 2,4, hazır giyim 2,4, mobilya 2,0, tekstil 1,8 mn $',y:'Halı ve mobilya geleneksel ürünler; mobilya-ahşap kümelenme projesi var.',n:'Her biri küçük; emek yoğun sektörler Türkiye’de maliyet baskısı altında (genel bilgi, Isparta’ya özgü değil).'},
+ {c:'sleep',chip:'UYUYAN: YATIRIM',ad:'Serbest bölge ve teşvik',big:'Fizibilite tamam',alt:'Serbest bölge fizibilitesi tamamlandı; il 3. teşvik bölgesine geçti (ITSO)',y:'Daha yüksek yatırım desteği; serbest bölge ihracat ve lojistiği güçlendirebilir.',n:'Kuruluş kararı yok; yatırımın ne zaman ve hangi sektörde geleceği belirsiz.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Davraz, Eğirdir, Pisidia',big:'250 bin+',alt:'Davraz Kayak Merkezi bir sezonda; gastronomi fuarı 90 bin ziyaretçi (Ekim 2025)',y:'Kış, göl, antik kent ve gastronomi bir arada; Cittaslow Eğirdir.',n:'Belgeli tesis, geceleme ve gelir verisi bulunamadı; ziyaretçi sayıları günübirlik olabilir.'},
+ {c:'warn',chip:'DAR: GELİR',ad:'Kişi başına gelir',big:'11.826 $',alt:'2024; Türkiye ortalamasının yaklaşık %77’si, 81 il içinde 35. (kendi sıralamam)',y:'2020–2024’te yaklaşık +%70 arttı; Afyonkarahisar’ın önünde.',n:'Burdur, Denizli ve Kütahya’nın gerisinde; nüfus 2023’ten beri azalıyor.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Ocak–Ekim ihracatı, TİM (milyon $)',[['2025',411.5],['2026',438.4]],[1],'Yaklaşık +%6,5 (kendi hesabım). Kaynak: TİM, ITSO aktarımı (Isparta Haber).'],
+ ['Temmuz ve Ekim ihracatı (milyon $)',[['Temmuz 2025',45.5],['Temmuz 2026',71.2],['Ekim 2025',44.0],['Ekim 2026',47.9]],[1,3],'Temmuz +%56, Ekim +%9. Kaynak: TİM, ITSO aktarımı (Habertürk Yerel, Isparta Haber).'],
+ ['Yaş meyve ve sebze ihracatı, ilk 10 ay (milyon $)',[['2025 (yaklaşık)',54],['2026',105.3]],[1],'+%95; 2025 değeri yaklaşık olarak verilmiştir. Kaynak: ITSO (Habertürk Yerel, Milliyet Uzmanpara).'],
+ ['Üretim yerine göre yıllık ihracat (milyon $)',[['2022',570],['2023',610],['2024',628]],[2],'Ticaret Bakanlığı serisi; TİM serisi 2024’te %4 düştü. 2025 bulunamadı. Kaynak: ITSO (Ekonomi Gazetesi).'],
+ ['Ocak 2025, sektörlere göre (milyon $)',[['Madencilik',7.0],['Hububat, bakliyat, yağlı tohum',3.8],['Halı',2.4],['Hazır giyim ve konfeksiyon',2.4],['Mobilya, kâğıt, orman',2.0],['Tekstil ve hammaddeleri',1.8],['Meyve-sebze mamulleri',1.3],['Çimento, cam, seramik',1.2]],[0],'Tek aylık sıralama; yıllık dağılımı temsil etmeyebilir. Kaynak: ITSO (Ekonomi Gazetesi).']];
+mk('ih',IH,['Ocak–Ekim','Aylık','Yaş meyve-sebze','Yıllık','Ocak 2025 sektör']);
+var TA=[['Isparta’nın yağ gülü payı (%)',[['Üretimde pay (yıl belirsiz)',84.41],['Ekim alanında pay (2009)',79.47]],[0],'Akademik makale; güncel pay farklı olabilir. Kaynak: Dergipark (GÜLBİRLİK, BAKA kayıtları).'],
+ ['Isparta’nın stratejik ürünleri, algı araştırması (% tercih)',[['Gül ve gül ürünleri',20.6],['Elma',18.1],['Lavanta',14.2],['Halıcılık',8.8],['Hayvancılık',6.0],['Tarıma dayalı sanayi',5.8],['Kesme çiçek',5.7],['Aromatik bitkiler',5.6],['Turizm',4.2],['Mobilya ve ahşap',3.9],['Gıda sanayisi',3.6],['Enerji',2.2],['Tıbbi ürün ve cihaz',1.3]],[0,1,2],'Katılımcıların algısı, resmî üretim verisi değil. Kaynak: ITSO araştırması (Ekonomi Gazetesi).']];
+mk('ta',TA,['Gül payı','Algı araştırması']);
+var SA=[['Temmuz 2026, sektörlere göre ihracat (milyon $)',[['Yaş meyve ve sebze',29.8],['Madencilik',9.0],['Çimento, cam, seramik',8.0]],[0],'Haberde dördüncü kalem (7,5 mn $) sektörü okunamadığı için dahil edilmedi. Kaynak: ITSO (Habertürk Yerel).'],
+ ['Temmuz 2025, mermer ve madencilik (milyon $)',[['Mermer ve madencilik ürünleri',8.2]],[0],'Temmuz 2025’te en büyük kalem. Kaynak: ITSO (Ekonomi Gazetesi).']];
+mk('sa',SA,['Temmuz 2026','Temmuz 2025']);
+var TU=[['Davraz ve fuar ziyaretçisi (bin kişi)',[['Davraz sezon toplamı (sezon belirsiz)',250],['Gastronomi fuarı, Ekim 2025',90],['Davraz ilk 13 gün (sezon belirsiz)',70]],[0],'Sezonlar belirtilmemiş ve kalemler birbirine eklenemez. Kaynak: Habertürk Yerel, Gazete Vatan, ITSO (Ekonomi Gazetesi).']];
+mk('tu',TU,['Ziyaretçi']);
+var GT=[['Kişi başına GSYH, Isparta ($)',[['2020',6965],['2021',7122],['2022',7670],['2023',9923],['2024',11826]],[4],'2020–2024’te yaklaşık +%70 (kendi hesabım). Kaynak: TÜİK il bazında GSYH (Pusula Haber).'],
+ ['Türkiye ortalamasına oran (%)',[['2020',83.0],['2021',75.6],['2022',73.5],['2023',76.3],['2024',77.2]],[4],'Isparta / Türkiye ortalaması (kendi hesabım). Kaynak: TÜİK (Pusula Haber).'],
+ ['Komşu ve benzer iller, 2024 ($)',[['Antalya',17103],['Türkiye ortalaması',15325],['Denizli',12522],['Burdur',11950],['Konya',11845],['Isparta',11826],['Aydın',11798],['Afyonkarahisar',10243]],[5],'Isparta bu listede alt-orta sırada. Kaynak: TÜİK (Pusula Haber).'],
+ ['Nüfus (bin kişi)',[['2021',445.7],['2022',445.3],['2023',449.8],['2024',446.4],['2025',445.3]],[4],'2023’ten beri azalıyor. Kaynak: TÜİK ADNKS (İşçi Haber aktarımı).'],
+ ['İlçe nüfusu, 2024 (bin kişi)',[['Merkez',272.8],['Yalvaç',44.8],['Eğirdir',30.1],['Şarkikaraağaç',24.6],['Gelendost',14.2],['Keçiborlu',14.1],['Senirkent',10.7]],[0],'Diğer altı ilçe için güvenilir rakam bulunamadı. Kaynak: Emlakjet demografi (TÜİK).']];
+mk('gt',GT,['Gelir seyri','Ortalamaya oran','Komşu iller','Nüfus','İlçeler']);
+</script>
+</body>
+</html>

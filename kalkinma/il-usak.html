@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Uşak | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Uşak'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#b45309;--a2:#0f766e;--a3:#7c2d12"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Uşak</span><h1>Uşak: Küçük İl, Hızlı İhracat, Dar Taban</h1><p>Yaklaşık 377 bin nüfuslu Uşak, kişi başına GSYH’de 12.114 $ ile 81 il arasında 29. sırada; Türkiye ortalamasının yaklaşık %79’u. İhracatı küçük ama Ege’de en hızlı artanlardan: 2025’te 471 milyon $ (+%6,6), 2026’nın ilk dokuz ayında +%18,5. Ekonomi tekstil, halı, deri ve geri dönüşüm kümesine ve niş tarım ürünlerine yaslanıyor; turizm ise yeni yeni hareketleniyor. Bu dosya ili sektör sektör okuyor ve verinin bulunamadığı yerleri açıkça işaretliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>12.114 $</b><span>Kişi başına GSYH (2024), 81 il arasında 29.; Türkiye ort. 15.325 $’ın yaklaşık %79’u (kendi hesabım)</span></div>
+    <div class="k"><b>471 mn $</b><span>2025 ihracatı (faaliyet ili serisi, EİB aktarımı); 442 mn $’dan +%6,6; Aralık tek ay +%28</span></div>
+    <div class="k"><b>264,7 mn $</b><span>2026 Ocak–Eylül ihracatı (AA aktarımı), +%18,5; Ege’de oransal artışı en yüksek il</span></div>
+    <div class="k"><b>%17,2</b><span>Haşhaşta Türkiye üretim payı (2024, 1.105 ton; Tarım ve Orman Bakanlığı rehberi)</span></div>
+    <div class="k"><b>303 firma</b><span>Uşak OSB’de faal firma, 644 hektar (basın aktarımı; tarihi doğrulanmadı)</span></div>
+    <div class="k"><b>~377 bin</b><span>İl nüfusu (ADNKS, İŞKUR il raporu aktarımı; yıl doğrulanmadı)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">6 sektör, dört etiketten üçü. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. “Baskı altında” etiketini bu ilde kullanmadım, çünkü Uşak’a özgü doğrulanmış bir daralma verisi bulamadım.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan, dar ya da niş</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve farklı ihracat serilerine ait (TÜİK 2024, EİB ve AA aktarımları 2025–2026, yerel basın). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat artışı ve kümelenme haberlerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Bazı rakamlar (OSB, geri dönüşüm, çörek otu) yerel basın aktarımıdır ve ilgili yerde işaretlenmiştir.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Küçük Ama Ege’nin En Hızlısı</h2>
+    <p class="sub">Uşak’ın ihracatı Ege’nin en küçüklerinden, ama 2025’in son çeyreğinde ve 2026’da oransal olarak bölgenin en hızlı artanı oldu.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>EİB’in aktardığı faaliyet ili serisine göre Uşak 2025’te ihracatını 442 milyon $’dan 471 milyon $’a çıkardı (+%6,6). Yıl içinde ihracat önce geride kaldı, Eylül ve Ekim’deki sıçramalarla on aylık dönemde eksiden artıya döndü (%4,3, 365,8’den 381,6 milyon $’a).</li>
+        <li>Eylül 2025’te +%16,5, Ekim’de +%44, Aralık’ta +%28 ile Ege’de ay ay artış rekortmeni oldu (Ekim ve Eylül’de bölge birincisi).</li>
+        <li>2026’nın ilk dokuz ayında ihracat %18,5 artışla 264,7 milyon $ oldu; halı 74,6 milyon $ (+%34,6), tekstil ve hammaddeleri 72,6 milyon $ (+%22,1), deri ve deri mamulleri +%58,3 arttı (AA aktarımı).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Halı, tekstil ve deri birlikte büyüyor; ihracat sepeti tek ürüne bağlı değil.</li><li>TİM ilk 1000 ihracatçı listesinde Uşak’tan BALTA Orient Tekstil yer alıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Hacim küçük: Aralık 2025’te tek ay 45,7 milyon $; İzmir ve Manisa ile kıyaslanamaz.</li><li>Yıl içinde dalgalanma büyük; 2025’in ilk on ayına kadar ihracat geride kalmıştı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İki farklı ihracat verisi var: EİB’in aktardığı faaliyet ili serisi (2025’te 471 milyon $) ve AA’nın aktardığı 2026 serisi (ilk dokuz ay 264,7 milyon $). İki seri aynı kapsama sahip olmayabilir ve 2025’in aylık değerleriyle tutarlı karşılaştırılamaz; bu yüzden birbirine eklenmedi. Kasım 2025 değeri (43,7 milyon $) yıllık toplamdan çıkarım olarak kendi hesabımdır.</li>
+      <li>Sektör kırılımı yalnızca AA aktarımındaki üç kalem için bulundu; 2025’in sektör ve ülke dağılımını bu seri için bulamadım. “Hangi pazara ihracat” sorusu bu dosyada yanıtsız.</li>
+      <li>Artışın nedenini (fiyat, miktar, tek bir firma) kaynaklar açıklamıyor; birkaç aylık sıçramayı kalıcı eğilim saymak için erken.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım: Niş Ürünlerin İli</h2>
+    <p class="sub">Uşak’ın tarımı hacimde küçük, ama haşhaş, tütün, adaçayı ve susam gibi niş ürünlerde Türkiye üretiminde belirgin pay alıyor. Türkiye’nin ilk şeker fabrikası da Uşak’ta (1926).</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Tarım ve Orman Bakanlığı Uşak Tarımsal Yatırım Rehberi’ne göre (TÜİK 2024) Uşak Türkiye haşhaş üretiminin %17,2’sini, tütünün %9,2’sini, adaçayının %9,0’ını ve susamın %8,6’sını karşılıyor.</li>
+        <li>Tarım ürünleri ihracatı 2024’te 74 milyon $’dan 2025’te 76 milyon $’a çıktı (EİB tarım raporu); toplam ihracatın yaklaşık altıda biri (kendi hesabım).</li>
+        <li>Yerel basına göre ilde 33.942 dekarda yaklaşık 3.500 ton çörek otu üretildi ve lavanta bahçeleri artıyor (yıl belirtilmemiş).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Niş ürünlerde (haşhaş, tütün, adaçayı, susam) ulusal ölçekte güçlü pay; çörek otu ve lavanta gibi alternatif ürünler gündemde.</li><li>Tarım ihracatı 2025’te hafif de olsa arttı.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Pay yüksek olan ürünlerin üretim miktarı küçük (haşhaş 1.105 ton, adaçayı 210 ton); ildeki toplam tarımsal değere etkisi sınırlı olabilir (yorum).</li><li>Tahıl ve diğer geniş ürünlerde güçlü bir ulusal pay görünmüyor; badem payı %1,5 ile küçük.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Rehberdeki pay ve ton değerleri TÜİK 2024’e ait ve tek bir üründe yıllık dalgalanma büyük olabilir. Bu ürünlerden bazıları devlet denetimine bağlı üretimdir (genel bilgi); bu çalışmada ayrıntısı doğrulanmadı.</li>
+      <li>Çörek otu rakamı yerel haber aktarımıdır, yılı belirtilmemiştir; lavanta için alan ya da ton verisi yok.</li>
+      <li>Tarımın il GSYH’sindeki payını, hayvancılık varlığını ve çiftçi gelirini doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: OSB ve Tekstil Geri Dönüşüm Kümesi</h2>
+    <p class="sub">Uşak sanayisi organize sanayi bölgesinde ve tekstil, halı, deri ve geri dönüşüm çevresinde toplanıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Basında yer alan bilgiye göre Uşak OSB 644 hektar alan üzerinde 303 faal firmayla çalışıyor.</li>
+        <li>Yerel basın, ilde tekstil atıklarının geri dönüştürülmesine dayanan bir kümelenme olduğunu, yılda yaklaşık 708 bin ton tekstil atığının işlendiğini ve 200’den fazla firmanın bu alanda çalıştığını aktarıyor; kümenin yaklaşık 50 yıllık bir geçmişi olduğu belirtiliyor.</li>
+        <li>Eşme’de büyük bir altın madeni (Kışladağ) bulunduğu genel bilgidir; üretim, istihdam ve ihracat rakamı bu çalışmada doğrulanmadı.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tekstil, halı ve deri ihracatı 2026’da çift ve üç haneli artış gösteriyor.</li><li>Geri dönüşüm kümesi atığı hammaddeye çeviriyor ve maliyet avantajı sağlıyor olabilir (yorum).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Sanayi tek kümeye (tekstil ve türevleri) yoğunlaşmış; tekstil ve hazır giyim Türkiye genelinde istihdam kaybı yaşıyor (yıllık %9,3 ve %12,1, sektör temsilcisi açıklaması; Uşak’a özgü değil).</li><li>OSB doluluğu ve istihdamı için güncel veri bulunamadı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>OSB’nin 644 hektar ve 303 firma bilgisi bir basın aktarımından geliyor; tarihi doğrulanamadı. Geri dönüşüm rakamları (708 bin ton, 200’den fazla firma) yerel haber iddiasıdır, resmî veriye bağlanamadı.</li>
+      <li>Uşak’ın İSO 500 firmaları, sanayi üretim değeri, OSB istihdamı ve kümenin il ihracatındaki payı için doğrulanmış veri bulamadım; bu yüzden sayfada yok.</li>
+      <li>Türkiye geneli tekstil istihdam kaybı bir sektör temsilcisinin açıklamasıdır; Uşak’taki durumu doğrudan göstermez.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Doğa ve Tarih Yeni Keşfediliyor</h2>
+    <p class="sub">Uşak’ın turizmi küçük; Ulubey Kanyonu ve Blaundus antik kenti gibi değerler ilin ziyaretçi çekmesinde öne çıkıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Ulubey Kanyonu 2024’te yaklaşık 300 bin ziyaretçi çekti ve yeni yatırımlarla 600 bin ziyaretçi hedefleniyor (basın aktarımı).</li>
+        <li>Blaundus antik kenti Ulubey ilçesinde; Uşak Arkeoloji Müzesi’nde Karun Hazinesi’nin sergilendiği genel bilgidir.</li>
+        <li>Uşak yönetimi turizmden “daha fazla pay almak istediğini” söylüyor (Ekonomi Gazetesi başlığı); somut hedef rakamı bu çalışmada doğrulanmadı.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kanyon yatırımlarıyla ziyaretçi sayısının iki katına çıkması hedefleniyor.</li><li>Tarih, doğa ve yerel ürünler (tarım rotaları) birleştirilebilir (yorum).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Konaklama kapasitesi, geceleme ve yabancı turist sayısı için veri bulunamadı; ziyaretin ildeki harcamaya dönüşümü belirsiz.</li><li>Hedefin tarihi belli değil; 2024 gerçekleşmesiyle doğrudan kıyaslanamaz.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Ulubey rakamları bir basın aktarımıdır; sayımın biletli mi, günübirlik mi olduğu belli değil. Müze ziyaretçi sayısını, belgeli tesis sayısını ve turizm gelirini bulamadım; bu yüzden sayfada yok.</li>
+      <li>Turizmin il GSYH’sindeki payı için veri yok; sektör toplam ekonomi içinde küçük görünüyor ama bu bir yorumdur.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024)</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Kişi başına GSYH 2020’de 7.737 $’dan 2024’te 12.114 $’a çıktı (yaklaşık +%57, kendi hesabım); yalnızca 2023–2024’te yaklaşık %23 arttı (9.832 $’dan).</li>
+        <li>Türkiye ortalamasına oranı 2020’de yaklaşık %92’den 2023’te yaklaşık %76’ya geriledi, 2024’te yaklaşık %79’a toparlandı (kendi hesabım). Yani göreli konum zayıfladı, son yılda kısmen düzeldi.</li>
+        <li>Uşak komşu Ege iline göre alt sıralarda: Manisa (13.852 $), Denizli (12.522 $) ve Kütahya’nın (12.384 $) gerisinde, Afyonkarahisar’ın (10.243 $) önünde.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir 2024’te hızlı arttı (+%23) ve ortalamaya yaklaşım yeniden başladı.</li><li>İhracat 2025–2026’da bölgenin en hızlı artanları arasında.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Türkiye ortalamasının yaklaşık beşte biri altında; 81 il içinde 29. sırada.</li><li>Gelir artışı ihracat artışıyla aynı hızda gitmiyor olabilir; neden belirsiz.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>29. sıra bir yerel haber aktarımından; TÜİK tablosundan ayrıca doğrulanmadı. İl GSYH’sinin toplam TL değerini ve sektör paylarını bulamadım.</li>
+      <li>Uşak’a özgü 2025 işsizlik, işgücüne katılma ve istihdam oranlarını bulamadım; Türkiye’de 2025 işsizlik %8,3’tü. İl nüfusunun 2025 rakamını doğrulanmış kaynakla bulamadım.</li>
+      <li>Dolar cinsinden kişi başına GSYH kur ve fiyat etkilerini içerir; 2023–2024’teki sıçrama enflasyon ve kur etkisini de yansıtabilir.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Uşak’ın 6 ilçesi var. Nüfus rakamları İŞKUR il raporunda aktarılan ADNKS değerleridir (rapor yılı net değil); ilçelerin ekonomik rolü genel özettir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Merkez</td><td>265.148 (il nüfusunun yaklaşık %70’i)</td><td>Ticaret, OSB, tekstil, halı, deri ve geri dönüşüm kümesi; Uşak Arkeoloji Müzesi</td></tr>
+      <tr><td>Banaz</td><td>35.313</td><td>İkinci büyük ilçe; tarım ve küçük sanayi (genel özet, ayrıntılı veri yok)</td></tr>
+      <tr><td>Eşme</td><td>34.692</td><td>Kışladağ altın madeni (genel bilgi, doğrulanmadı) ve halı-kilim geleneği</td></tr>
+      <tr><td>Sivaslı</td><td>19.939</td><td>Tarım ağırlıklı ilçe (genel özet)</td></tr>
+      <tr><td>Ulubey</td><td>12.025</td><td>Ulubey Kanyonu (2024’te yaklaşık 300 bin ziyaretçi), Blaundus antik kenti</td></tr>
+      <tr><td>Karahallı</td><td>9.884</td><td>İlin en küçük ilçesi; tarım (genel özet)</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Merkez ilçe il nüfusunun yaklaşık %70,3’ünü oluşturuyor (265.148 / 377.001, kendi hesabım); beş ilçenin toplamı kalan yaklaşık %29,7’yi tutuyor. İlçe bazında GSYH, istihdam veya ihracat verisi yok; “ekonomik karakter” sütunu yerel haber ve genel bilgiden derlenmiş bir özettir.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Uşak</h3>
+      <p style="margin:0">Uşak’ın gücü bir kümede: tekstil, halı, deri ve geri dönüşüm, ihracatı Ege’nin en hızlı artanları arasına taşıyor. Zayıflığı tabanın darlığı: ihracat hacmi küçük, tarım niş ürünlere dayanıyor, turizm yeni başlıyor ve kişi başına gelir Türkiye ortalamasının yaklaşık %79’unda. Bu yüzden asıl soru ihracattaki hızın kalıcı olup olmadığı ve bu hızın gelire ve istihdama ne kadar yansıdığı (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>İhracat sepetini tekstil dışına yaymak: deri, halı ve tarıma dayalı işlenmiş ürünlerde ikinci ve üçüncü ayak.</div>
+      <div><b>HAMLE 2</b>Niş tarım ürünlerini (adaçayı, susam, çörek otu, lavanta) işleme ve markalaşmayla katma değere çevirmek.</div>
+      <div><b>HAMLE 3</b>Ulubey Kanyonu ve müzeleri çevreleyen konaklama ve rota altyapısını kurmak; ziyaretçiyi günübirlikten geceleme düzeyine taşımak.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. İhracat hızının kalıcı olup olmadığı 2026’nın tamamı bilinmeden söylenemez.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Uşak’ın ihracatı Ege’nin en hızlı artanı olurken kişi başına geliri neden Türkiye ortalamasının altında kalıyor?</li>
+      <li>Tekstil, halı ve geri dönüşüm kümesi, ulusal ölçekte emek yoğun sektörlere baskı artarken Uşak için ne kadar güvenli bir taban?</li>
+      <li>Haşhaş, adaçayı ve susam gibi niş ürünlerde Türkiye payı yüksekken, katma değer ilde nasıl tutulur?</li>
+      <li>Ulubey Kanyonu 600 bin ziyaretçiye ulaşırsa bu, ilin ekonomisinde fark yaratır mı yoksa günübirlik bir uğrak olarak mı kalır?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2020–2024 (Pusula Haber, 12.12.2025; Habertürk, CNBC-e, Rudaw aktarımı); Uşak’ın 29. sırası (Yeşil Sivaslı Gazetesi aktarımı)</li>
+      <li>Ege İhracatçı Birlikleri / Ticaret Bakanlığı faaliyet ili verileri (Ekonomi Gazetesi, ForInvest, SteelRadar, Dünya aktarımları; 2025 yıllık ve aylık); AA (Ege 6 aylık ve ocak–eylül ihracatı, 2026); EİB tarım ürünleri ihracatı raporu (Ekonomi Gazetesi)</li>
+      <li>Tarım ve Orman Bakanlığı Uşak Tarımsal Yatırım Rehberi 2025 (TÜİK 2024); Ekonomi Gazetesi Uşak haberleri (çörek otu, lavanta); Hürriyet (Uşak Şeker Fabrikası)</li>
+      <li>Yerel basın ve Ekonomi Gazetesi aktarımları (Uşak OSB, tekstil geri dönüşüm kümesi); TRT Haber ve sektör temsilcisi açıklaması (Türkiye tekstil istihdamı)</li>
+      <li>Hürriyet Daily News ve haberler.com (Ulubey Kanyonu); Ekonomi Gazetesi (Uşak turizmi)</li>
+      <li>İŞKUR Uşak il raporu (ADNKS ilçe nüfusları); TÜİK 2025 işgücü istatistikleri (Medyascope aktarımı)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya il raporudur; resmî tabloların doğrudan alıntısı değildir. Uşak’a özgü 2025 işsizlik, katılma ve istihdam oranı, il nüfusunun 2025 rakamı, sektörel GSYH payları, 2025’in sektör ve ülke bazlı ihracatı, OSB istihdamı, belgeli tesis ve turizm geliri, Eşme madenciliği ve ilçe bazında ekonomik veriler doğrulanmış kaynakla bulunamadığı için sayfada yok. %79, %92, %76, +%57, +%23, %70,3 ve Kasım 2025 ihracatı kendi hesabımdır. İhracat için iki ayrı seri (EİB faaliyet ili ve AA 2026) kullanıldığından rakamlar birbirine eklenmemiştir. Geri dönüşüm ve OSB rakamları basın iddiasıdır; tarihleri doğrulanamadı.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+var KARNE=[
+ {c:'good',chip:'MOTOR',ad:'Tekstil, halı ve deri',big:'74,6 + 72,6 mn $',alt:'Halı (+%34,6) ve tekstil-hammaddeleri (+%22,1), 2026 ocak–eylül; deri +%58,3 (AA aktarımı)',y:'Üç kalem birlikte büyüyor; BALTA Orient Tekstil TİM ilk 1000’de.',n:'Emek yoğun sektörlerde ulusal baskı (Türkiye geneli, Uşak’a özgü değil); sektör istihdam verisi bulunamadı.'},
+ {c:'good',chip:'MOTOR',ad:'Dış ticaret ve ihracat hızı',big:'471 mn $',alt:'2025 ihracatı, +%6,6 (faaliyet ili serisi); 2026 ocak–eylül +%18,5',y:'Eylül–Aralık 2025’te ay ay Ege’nin artış rekortmeni; 10 aylıkta eksiden artıya döndü.',n:'Hacim Ege’nin küçüklerinden; sektör-ülke kırılımı yok; iki ayrı seri birbirine eklenemiyor.'},
+ {c:'good',chip:'MOTOR (KÜME)',ad:'OSB ve tekstil geri dönüşüm kümesi',big:'303 firma',alt:'Uşak OSB, 644 hektar (basın aktarımı); geri dönüşümde 200’den fazla firma (yerel haber)',y:'Atığı hammaddeye çeviren, yaklaşık 50 yıllık küme; maliyet avantajı sağlıyor olabilir (yorum).',n:'Tarihler doğrulanmadı; OSB istihdamı ve kümenin ihracat payı bulunamadı.'},
+ {c:'warn',chip:'NİŞ: TARIM',ad:'Haşhaş, tütün, adaçayı, susam',big:'%17,2',alt:'Haşhaşta Türkiye payı (2024, 1.105 ton); tütün %9,2, adaçayı %9,0, susam %8,6',y:'Niş ürünlerde güçlü ulusal pay; tarım ihracatı 74’ten 76 mn $’a çıktı.',n:'Üretim miktarları küçük (tonla ölçülen); tarımın il GSYH’sindeki payı bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Ulubey Kanyonu ve tarih',big:'~300 bin',alt:'Ulubey Kanyonu 2024 ziyaretçisi; hedef 600 bin (basın aktarımı)',y:'Yatırımla ziyaretçinin ikiye katlanması hedefleniyor; Blaundus ve müzeler tamamlayıcı.',n:'Konaklama, geceleme, yabancı turist ve gelir verisi bulunamadı; hedefin tarihi belirsiz.'},
+ {c:'warn',chip:'DAR: GELİR',ad:'Kişi başına gelir',big:'12.114 $',alt:'2024; Türkiye ortalamasının yaklaşık %79’u, 81 il içinde 29.',y:'2023–2024’te yaklaşık +%23 arttı; ortalamaya yaklaşım yeniden başladı.',n:'Komşu Ege illerinin (Manisa, Denizli, Kütahya) gerisinde; göreli konum 2020’ye göre zayıf.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Yıllık ihracat (milyon $, faaliyet ili serisi)',[['2024',442],['2025',471]],[1],'+%6,6. Kaynak: EİB / Ticaret Bakanlığı (Ekonomi Gazetesi, SteelRadar aktarımı).'],
+ ['Son çeyrek aylık ihracat (milyon $)',[['Eylül 2024',38.6],['Eylül 2025',45.0],['Ekim 2024',42.7],['Ekim 2025',61.4],['Aralık 2024',35.6],['Aralık 2025',45.7]],[1,3,5],'Eylül +%16,5, Ekim +%44, Aralık +%28; Kasım değeri bulunamadı. Kaynak: EİB aylık bültenleri (Ekonomi Gazetesi, SteelRadar).'],
+ ['Ocak–Ekim ihracatı (milyon $)',[['2024',365.8],['2025',381.6]],[1],'+%4,3; yıl içinde geride kalan ihracat Eylül–Ekim sıçramasıyla artıya döndü. Kaynak: SteelRadar (EİB aktarımı).'],
+ ['2026 ocak–eylül, kalem bazında (milyon $)',[['Toplam',264.7],['Halı',74.6],['Tekstil ve hammaddeleri',72.6]],[0],'Toplam +%18,5; halı +%34,6, tekstil +%22,1. Bu seri 2025’in EİB serisiyle aynı kapsamda olmayabilir. Kaynak: AA (Ekim 2026).']];
+mk('ih',IH,['Yıllık','Son çeyrek','10 ay','2026']);
+var TA=[['Türkiye üretimindeki Uşak payı, 2024 (%)',[['Haşhaş (kapsül)',17.23],['Tütün',9.21],['Adaçayı',9.02],['Susam',8.57],['Hayvan pancarı',4.67],['Badem',1.46]],[0,1,2,3],'Niş ürünlerde güçlü pay, badem ve pancarda küçük. Kaynak: Tarım ve Orman Bakanlığı Uşak Tarımsal Yatırım Rehberi 2025 (TÜİK 2024).'],
+ ['Üretim miktarı, 2024 (ton)',[['Tütün',9945],['Badem',2917],['Hayvan pancarı',1776],['Susam',1238],['Haşhaş (kapsül)',1105],['Adaçayı',210]],[0],'Payı yüksek ürünlerin tonajı küçük. Kaynak: aynı rehber (TÜİK 2024).'],
+ ['Tarım ürünleri ihracatı (milyon $)',[['2024',74],['2025',76]],[1],'Toplam ihracatın yaklaşık altıda biri (kendi hesabım). Kaynak: EİB tarım ihracatı raporu (Ekonomi Gazetesi).']];
+mk('ta',TA,['Üretim payı','Ton','Tarım ihracatı']);
+var SA=[['Uşak OSB (basın aktarımı)',[['Alan (hektar)',644],['Faal firma',303]],[1],'Tarihi doğrulanmadı. Kaynak: basın aktarımı (Uşak OSB).'],
+ ['Tekstil geri dönüşüm kümesi (yerel haber)',[['Yıllık tekstil atığı (bin ton)',708],['Firma sayısı (200’den fazla, alt sınır)',200]],[0],'Yerel basın iddiası; resmî veriye bağlanamadı ve iki kalem farklı birimdedir. Kaynak: yerel basın.']];
+mk('sa',SA,['OSB','Geri dönüşüm']);
+var TU=[['Ulubey Kanyonu ziyaretçisi (bin kişi)',[['2024 gerçekleşme',300],['Hedef (tarih belirsiz)',600]],[0],'Hedefin tarihi belirsiz; sayımın biletli ya da günübirlik olduğu belirtilmiyor. Kaynak: Hürriyet Daily News, haberler.com.']];
+mk('tu',TU,['Ulubey']);
+var GT=[['Kişi başına GSYH, Uşak ($)',[['2020',7737],['2021',8448],['2022',8998],['2023',9832],['2024',12114]],[4],'2020–2024’te yaklaşık +%57, yalnızca 2023–2024’te yaklaşık +%23 (kendi hesabım). Kaynak: TÜİK il bazında GSYH (Pusula Haber).'],
+ ['Türkiye ortalamasına oran (%)',[['2020',92.1],['2021',89.6],['2022',86.2],['2023',75.6],['2024',79.0]],[4],'Uşak / Türkiye ortalaması (kendi hesabım). 2023’te dip, 2024’te toparlanma. Kaynak: TÜİK (Pusula Haber).'],
+ ['Komşu Ege illeri, 2024 ($)',[['İzmir',16949],['Eskişehir',16171],['Türkiye ortalaması',15325],['Manisa',13852],['Denizli',12522],['Kütahya',12384],['Uşak',12114],['Isparta',11826],['Aydın',11798],['Afyonkarahisar',10243]],[6],'Uşak bu listede orta-alt sırada. Kaynak: TÜİK (Pusula Haber).'],
+ ['İlçe nüfusu (bin kişi)',[['Merkez',265.1],['Banaz',35.3],['Eşme',34.7],['Sivaslı',19.9],['Ulubey',12.0],['Karahallı',9.9]],[0],'Toplam yaklaşık 377 bin; yıl doğrulanmadı, 2025 rakamı bulunamadı. Kaynak: İŞKUR il raporu (ADNKS).']];
+mk('gt',GT,['Gelir seyri','Ortalamaya oran','Komşu iller','İlçeler']);
+</script>
+</body>
+</html>
