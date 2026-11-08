@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kayseri | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#b91c1c;--a2:#f59e0b;--a3:#0f766e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Kayseri</span><h1>Kayseri: Anadolu’nun Sanayi ve Ticaret Kenti</h1><p>1,46 milyon nüfuslu Kayseri, 2025’te 3,85 milyar $ mal ihracatı yaptı ve İSO’nun ilk 1000 listesine 26 firma soktu. Mobilya, kablo ve elektrik, makine ve çelikten gıdaya uzanan geniş bir sanayi tabanı var; Erciyes Kayak Merkezi 2025–26 sezonunda 3,3 milyon ziyaretçi ağırladı. Zayıf yan: kişi başına GSYH 2024’te 12.296 $ ile Türkiye ortalamasının (15.325 $) yaklaşık %80’inde ve 28. sırada; oran 2020’de yaklaşık %87 idi.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>12.296 $</b><span>Kişi başına GSYH (2024; 403.635 TL), 81 il arasında 28. sıra; Türkiye ort. 15.325 $’ın yaklaşık %80’i (kendi hesabım)</span></div>
+    <div class="k"><b>1.458.991</b><span>Nüfus (ADNKS 2025); en kalabalık 15. il; 2024’te 1.452.458 idi</span></div>
+    <div class="k"><b>3,85 mlr $</b><span>2025 mal ihracatı (KTO, TÜİK verisi); 2024’te 3,75 mlr $; ithalat yaklaşık 1,7 mlr $</span></div>
+    <div class="k"><b>26 firma</b><span>İSO 2025 listelerinde Kayseri: 11’i ilk 500’de, 15’i ikinci 500’de</span></div>
+    <div class="k"><b>3,3 milyon</b><span>Erciyes’in 2025–26 sezonu ziyaretçisi (rekor); ekonomik katkı yaklaşık 250 milyon $ (DHA aktarımı)</span></div>
+    <div class="k"><b>14. sıra</b><span>2024 toplam GSYH’de Kayseri (yerel basın aktarımı); yaklaşık 586 milyar TL, Türkiye’nin ~%1,3’ü (kendi hesabım)</span></div>
+  </div>
+  <div class="secnav"><a href="#sanayi">Sanayi</a><a href="#dis">İhracat</a><a href="#tarim">Tarım-Gıda</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="sanayi">
+    <h2>Sanayi</h2>
+    <p class="sub">Kayseri’nin kimliği: Kayseri OSB ve çevresinde yoğunlaşan, tek sektöre bağlı olmayan imalat tabanı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sn"></div><h3 id="sntitle"></h3><div class="bars" id="snbars"></div><p class="note" id="snnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>İSO 2025 araştırmasında Kayseri’den 11 firma ilk 500’e, 15 firma (KAYSO üyesi) ikinci 500’e girdi; toplam 26 firma. İlk 500’deki sayı 2023’te 14, 2024’te 13 idi; ikinci 500’deki sayı ise 10’dan 15’e çıktı.</li>
+        <li>Kayseri OSB Başkanı Yalçın, listedeki firmaların çoğunluğunun Kayseri OSB’de yerleşik olduğunu belirtiyor. İlk 500’de kablo üreticileri (Hasçelik Kablo, HES Hacılar Elektrik, Mega Metal) üst sıralarda; ikinci 500’de Boyçelik, Erbosan ve Form Sünger ilk üç Kayseri firması.</li>
+        <li>KAYSO Başkanı Büyüksimitci’ye göre Türkiye’nin 20 büyük mobilya üreticisinin 11’i Kayseri’de. Basında mobilya, çelik kapı, makine ve yan sanayi, savunma sanayi, gıda, hazır giyim ve tekstil kentin sanayi alanları olarak sayılıyor.</li>
+        <li>Kayseri OSB’nin kuruluş girişimi 1968’e dayanıyor; kent, 2020’lerde yeni OSB projeleriyle (basın örneği: tam kapasitede yaklaşık 4 bin istihdam, 1 milyar $’ın üzerinde ihracat öngörülen bir proje) kapasite artırmayı hedefliyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İSO listeleri üretimden satışlar esaslı firma sıralamasıdır; Kayseri’nin toplam sanayi üretimini, sanayi istihdamını ya da sanayinin il GSYH’sindeki payını göstermez. Bu üç rakamı doğrulanmış kaynakla bulamadım.</li>
+      <li>“20 büyük üreticinin 11’i” ifadesi bir oda yetkilisinin beyanıdır; hangi yılın hangi sıralamasına dayandığını kaynakta teyit edemedim.</li>
+      <li>OSB’lerdeki firma sayısı, parsel doluluğu ve OSB bazlı istihdam rakamlarını bulamadığım için sayfada yok. Yeni OSB’lerin rakamları projelerin hedefidir; gerçekleşme değildir.</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Kayseri ihracat yapan 3 binden fazla firmasıyla dış ticarette fazla veren illerden; ihracat ithalatın yaklaşık 2,2 katı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>KTO’ya göre Kayseri 2025’i 3 milyar 847 milyon $ ihracatla kapattı; 2024’te 3 milyar 751 milyon $ idi (yaklaşık +%2,6, kendi hesabım). 2024’te 187 ülkeye ihracat yapıldı.</li>
+        <li>Kayseri’de ihracatın ithalatı karşılama oranı yaklaşık %222; 2025’te ithalat yaklaşık 1,7 milyar $. Bu oran Kayseri’nin dış ticaret fazlası verdiğini gösteriyor.</li>
+        <li>2026’nın ilk altı ayında ihracat %3,62 artışla 1 milyar 928 milyon $; ithalat 924 milyon $. Haziranda 151 ülkeye 338,4 milyon $ gönderildi. Kayseri OSB Başkanı 2026 hedefini 4 milyar $’ın üzerinde tutuyor.</li>
+        <li>2026 ilk yarıda elektrik-elektronik, demir ve demir dışı metaller, çelik, mobilya-kâğıt-orman ürünlerinde artış; makine, kuru meyve ve mücevherde düşüş var (KTO).</li>
+        <li>AKAMİB Başkanı’na göre mobilya, kâğıt ve orman ürünleri ihracatında Kayseri yaklaşık 600 milyon $ ile İstanbul, Bursa ve İzmir’in ardından dördüncü.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Kayseri ihracatının iki farklı serisi dolaşıyor: bu sitenin Türkiye panosundaki TİM kanuni merkez esaslı rakam yaklaşık 3,0 milyar $, KTO’nun TÜİK verisine dayanan rakamı ise 3,85 milyar $. Fark tanımdan gelir; ikisi birbirine eklenemez ve doğru-yanlış olarak okunmamalıdır.</li>
+      <li>İthalat (1,7 milyar $) ve %222 karşılama oranı OSB Başkanı’nın aktarımıdır; 12 aylık kesin ithalat rakamını bulamadım. 11 aylık ithalat 1,587 milyar $’dı.</li>
+      <li>Sektörel pay tablosunu ve ülke bazlı ihracatı Kayseri için bulamadım. 600 milyon $’lık mobilya rakamı AKAMİB’in sektör sıralamasından alındı; Kayseri’nin toplam ihracatındaki payı (yaklaşık %16, kendi hesabım) farklı serilerin oranıdır, kesin değildir.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Gıda</h2>
+    <p class="sub">Hayvancılık ve hayvansal ürünler, şeker pancarı, tahıl ve çerezlik ürünler; Kayseri pastırması ve sucuğu coğrafi işaretli markalar.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>İl Tarım ve Orman Müdürlüğü’ne göre küçükbaş hayvan sayısı 2024’te 1.016.843’ten 2025’te 1.150.117’ye çıktı (+133.274, yaklaşık %13); Türkiye sıralamasında 17.’likten 14.’lüğe yükseldi.</li>
+        <li>İl Müdürü Saklav’a göre Kayseri yaklaşık 463 bin büyükbaş, 1 milyon küçükbaş ve 3,9 milyon kanatlıyla hayvancılıkta Türkiye’de ilk 10’da; manda üretiminde ilk 4’te. Kayıtlı çiftçi sayısı 2023’te 28 binden yaklaşık 32 bine çıktı.</li>
+        <li>Ağırlıklı ürünler: buğday (en çok ekilen), şeker pancarı, çerezlik ayçekirdeği ve kabak çekirdeği, patates, yem bitkileri, baklagiller, arpa, elma ve üzüm.</li>
+        <li>Kayseri Pastırması ve Kayseri Sucuğu, Türk Patent ve Marka Kurumu’nda mahreç işaretiyle tescilli (pastırma No: 36, sucuk No: 35). Şeker üretiminde Kayseri Şeker, 2024 İSO listesinde Kayseri firmalarının başındaydı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>TÜİK’in 2024 verisi büyükbaş için yaklaşık 436 bin, küçükbaş için 1,017 milyon gösterirken; İl Müdürü’nün sayıları (463 bin büyükbaş) farklı bir tarihe ve kayıt sistemine dayanıyor. Karşılaştırırken aynı kaynak ve yıl kullanılmalı.</li>
+      <li>Tarımın il GSYH’sindeki payını, bitkisel üretim miktarlarını (ton), süt ve et üretimini ve gıda sanayinin ihracat payını doğrulanmış kaynakla bulamadım; sayfada yok.</li>
+      <li>Pastırma-sucuk imalathane sayısı ve cirosu için güncel resmî veri bulamadım. Belediye kaynağındaki eski sayıma göre 19 imalathane vardı (tarihi belirsiz).</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Erciyes ve Kültür</h2>
+    <p class="sub">Kayseri’nin turizmi büyük ölçüde Erciyes Kayak Merkezi’ne ve günübirlik ziyaretçiye dayanıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tz"></div><h3 id="tztitle"></h3><div class="bars" id="tzbars"></div><p class="note" id="tznote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Erciyes AŞ ve Büyükşehir Belediyesi’ne göre 18 Aralık 2025’te başlayıp 15 Mayıs 2026’da biten sezonda 3,3 milyon ziyaretçi geldi; bu tüm zamanların rekoru. Önceki sezon 3 milyon, ondan önceki 2,5 milyondu.</li>
+        <li>Ziyaretçilerin yaklaşık %20–25’i kayakçı; kayakçıların yaklaşık %15’i yabancı. Yetkililer sezonun ekonomiye katkısını yaklaşık 250 milyon $ olarak açıkladı.</li>
+        <li>TÜRSAB yetkilisine göre Kayseri’ye gelen turistlerin yaklaşık %10–12’si yabancı; yabancı ziyaretçi payında büyüme alanı olduğu söyleniyor.</li>
+        <li>Erciyes, 300 milyon euro’yu aşan yatırımla 2011’den itibaren işletmeye açılan, yetkililerin Avrupa’nın en büyük kayak merkezlerinden biri olarak tanımladığı bir tesis. Yahyalı’da Kapuzbaşı Şelaleleri (Aladağlar Millî Parkı) ve coğrafi işaretli Yahyalı halısı diğer değerler.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>3,3 milyon, Kayseri’ye gelen turist değil Erciyes’e gelen ziyaretçi sayısıdır; günübirlik ziyaretçiler ve yerel halk da içindedir. İl bazlı yatak kapasitesi, geceleme, doluluk ve turizm geliri verisini Kayseri için bulamadım.</li>
+      <li>250 milyon $’lık katkı, 2025–26 sezonu için yetkililerin beyanıdır; hesaplama yöntemi kaynakta açıklanmıyor.</li>
+      <li>Sezon rakamları kayak merkezinin kapılarından (turnike) geçen sayıya dayanır; aynı kişi birden çok kez sayılabilir (yorum).</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Kayseri’de 2024’te kişi başına GSYH 403.635 TL, dolar karşılığı 12.296 $ oldu; 81 il arasında 28. sırada. Türkiye ortalaması 503.076 TL (15.325 $); yalnızca 11 il bu ortalamanın üzerinde.</li>
+        <li>Kişi başına gelir Türkiye ortalamasının yaklaşık %80’ine denk geliyor. 2020’de bu oran yaklaşık %87’ydi; yani Kayseri’nin geliri hızlı artarken Türkiye ortalamasının gerisinde kaldı (kendi hesabım).</li>
+        <li>Toplam GSYH’de Kayseri, 2024’te yerel basın aktarımına göre 14. sırada; kişi başına sıralamadaki 28. sıranın çok üstünde. Bu, nüfusuna göre üretim gücü yüksek ama kişi başına düşen payın düşük kaldığını gösteriyor (yorum).</li>
+        <li>Yerel basında, 2004’te 5.633 $ olan kişi başına gelirin 2023’e kadar %95,2 arttığı, Türkiye’de ise %119,9 arttığı yazıldı; Türkiye ile arasındaki fark ilk kez 2.000 $’ı aştı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İl GSYH’si üretim yeri esaslıdır ve nominal TL’dir; dolar karşılığı kurdan etkilenir. Kişi başına GSYH hanehalkı gelirini göstermez.</li>
+      <li>TÜİK her yıl önceki yılları revize ediyor: Kayseri 2023’te ilk açıklamada 258.312 TL (10.996 $) ve 22. sıradaydı; sonraki tabloda 2023 değeri 10.686 $ olarak geçiyor. Farklı yayımlardaki sıralamalar birbirine doğrudan kıyaslanamaz.</li>
+      <li>2024 toplam GSYH’sini ve sektör paylarını (sanayi, hizmet, tarım) doğrulanmış kaynakla bulamadım. 586 milyar TL ve ~%1,3 payı, kişi başına değer ile ortalama nüfustan kendi yaklaşık hesabımdır.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 1.458.991’e çıktı; 2024’te 1.452.458 idi (+6.533, yaklaşık %0,45; kendi hesabım). 2023’te 1.445.683’tü; artış yavaşlıyor.</li>
+        <li>Valilik verisine göre 1.266.972 kişi (yaklaşık %86,8) kentlerde, 191.990 kişi (%13,2) kırsalda yaşıyor. Nüfusun yaklaşık yarısı kadın (730.155 kadın, 728.836 erkek).</li>
+        <li>Kayseri 16 ilçe ve yaklaşık 711 mahalleden oluşuyor; 2014’te 49 belediyeden 33 belde belediyesi kapatılarak 16 ilçe belediyesine dönüştürüldü.</li>
+        <li>Küçük ilçelerin (Özvatan, Akkışla, Felahiye) nüfusu birkaç bin kişide kalıyor; yerel yorumcular bunu göç ve düşen doğum oranına bağlıyor.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Kayseri’ye özgü 2025 işsizlik, işgücüne katılma ve istihdam oranını (TÜİK il düzeyi) doğrulanmış kaynakla bulamadım. Karşılaştırma için Türkiye 2025: işsizlik %8,3, işgücüne katılma %53,5 (erkek %71,3, kadın %36,2).</li>
+      <li>Sigortalı çalışan sayısı, sektörlere göre istihdam ve ücretler için güncel il verisi sayfada yok; yalnızca bir akademik çalışmanın Kayseri’de sanayi yığılmasının yarışabilir düzeyde olduğunu söylediği biliniyor, ayrıntıları doğrulanmadı.</li>
+      <li>İlçe nüfus artış hızlarında farklar büyük; ancak bunlar bir internet nüfus sitesinin hesabıdır ve burada kullanılmadı.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Kayseri’nin 16 ilçesinin nüfusları ADNKS 2025’e aittir. Melikgazi, Kocasinan ve Talas il nüfusunun yaklaşık %81’ini barındırıyor (kendi hesabım).</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Öne çıkan</th></tr>
+      <tr><td>Melikgazi</td><td>593.262</td><td>En kalabalık ilçe (il nüfusunun %40,7’si); Türkiye’nin en kalabalık 19. ilçesi; 2025’te 14.118 konut satışı</td></tr>
+      <tr><td>Kocasinan</td><td>421.472</td><td>İkinci büyük ilçe (%28,9); Valilik binası bu ilçede</td></tr>
+      <tr><td>Talas</td><td>173.657</td><td>Üçüncü büyük ilçe (%11,9); merkeze bitişik</td></tr>
+      <tr><td>Develi</td><td>67.818</td><td>Dördüncü büyük ilçe; Erciyes Kayak Merkezi bölgesi ile ilişkilendiriliyor</td></tr>
+      <tr><td>Yahyalı</td><td>35.207</td><td>Kapuzbaşı Şelaleleri, Aladağlar; coğrafi işaretli Yahyalı halısı</td></tr>
+      <tr><td>Bünyan</td><td>30.362</td><td>Orta ölçekli ilçe</td></tr>
+      <tr><td>İncesu</td><td>29.780</td><td>Orta ölçekli ilçe</td></tr>
+      <tr><td>Pınarbaşı</td><td>20.598</td><td>En çok mahalleye (122) sahip ilçe; kırsal ağırlıklı</td></tr>
+      <tr><td>Tomarza</td><td>20.156</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Yeşilhisar</td><td>15.409</td><td>Kırsal ilçe</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İlk 10 ilçe il nüfusunun yaklaşık %96,5’sını oluşturuyor; Hacılar (13.701), Sarıoğlan (13.510), Sarız (9.213), Felahiye (5.529), Akkışla (5.440) ve Özvatan (3.877) tabloda yok. “Öne çıkan” sütunu genel niteliktedir; ilçe bazında GSYH, istihdam ya da ihracat verisi bulunamadı. Nisan 2026’da iki MHP milletvekili, Melikgazi ve Kocasinan’dan mahalleler ayırarak “Gesi” adıyla yeni bir ilçe kurulmasına dair kanun teklifi verdi; teklifin sonucunu doğrulamadım. Yüzdeler kendi hesabımdır.</p></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1968 – OSB girişimi.</b> Kayseri Sanayi Odası’nın öncülüğünde sanayicilere çağrı yapıldı; organize sanayi bölgesi kurulması için adımlar atıldı.</p>
+      <p><b>2011 – Erciyes.</b> Kayak merkezi, 300 milyon euroyu aşan yatırımla faaliyete geçirilmeye başlandı.</p>
+      <p><b>2014 – İdari yapı.</b> 33 belde belediyesi kapatıldı, ilde 16 ilçe belediyesi kaldı.</p>
+      <p><b>2023 – Sanayi.</b> İSO ilk 500’de 14 Kayseri firması; il ilk açıklamada kişi başına GSYH’de 22. sırada.</p>
+      <p><b>2024 – Gelir ve ihracat.</b> Kişi başına GSYH 12.296 $ (28. sıra); ihracat 3,75 milyar $; 187 ülke.</p>
+      <p><b>2025 – İhracat ve nüfus.</b> İhracat 3,85 milyar $; nüfus 1.458.991; İSO listelerinde 26 firma.</p>
+      <p><b>2025–26 – Rekor sezon.</b> Erciyes 3,3 milyon ziyaretçi ağırladı.</p>
+      <p><b>2026 – İlk yarı.</b> İhracat %3,62 artışla 1,93 milyar $; yıl hedefi 4 milyar $’ın üzeri.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Çok sektörlü sanayi tabanı: mobilya, kablo ve elektrik, makine, çelik, gıda</li><li>İhracat ithalatın yaklaşık 2,2 katı; 3,85 milyar $ ihracat</li><li>İSO listelerinde 26 firma; ikinci 500’deki sayı bir yılda 10’dan 15’e çıktı</li><li>Erciyes’in rekor ziyaretçisi ve coğrafi işaretli gıda markaları</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Kişi başına GSYH Türkiye ortalamasının yaklaşık %80’inde; oran 2020’de yaklaşık %87 idi</li><li>İSO ilk 500’deki firma sayısı 14’ten 11’e geriledi</li><li>Yabancı turist payı düşük (yaklaşık %10–12); turizm kayağa bağımlı</li><li>Nüfus artışı yavaş; küçük ilçelerde nüfus birkaç binde kalıyor</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>4 milyar $’ı aşan ihracat hedefi; yeni OSB yatırımları</li><li>Küçükbaş hayvancılıkta yükseliş (17.’den 14.’ye) ve hayvansal ürünlerde işleme</li><li>Mobilyada marka ve tasarım odaklı büyüme; yan sanayiyle bağ</li><li>Erciyes’te dört mevsim turizm ve yabancı pazarlarda büyüme</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Kayseri’nin sorunu üretim eksikliği değil, üretimin kişi başına gelire dönüşme hızı: toplam GSYH’de üst sıralarda, kişi başına gelirde 28. sırada. Daha yüksek katma değerli ürünler, marka ve ihracat çeşitlendirmesi bu farkı kapatabilir; ancak sanayinin istihdam ve ücret yapısı hakkında doğrulanmış il verisi sınırlı kaldığı için yorumlar temkinli okunmalı.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Toplam GSYH’de 14., kişi başına gelirde 28. olan bir ilde sanayinin kazancı çalışanlara ve kente yeterince yansıyor mu?</li>
+      <li>Mobilya, kablo ve makine gibi birkaç güçlü sektöre dayanmak mı, yoksa yeni sektörlere açılmak mı Kayseri’yi daha dayanıklı kılar?</li>
+      <li>Erciyes’in rekor ziyaretçisi, yabancı turist payı %10–12 düzeyindeyken kente nasıl kalıcı gelire dönüşür?</li>
+      <li>Hayvancılıkta yükselen Kayseri, pastırma-sucuk ve hayvansal ürünlerde ham madde mi satmalı, yoksa daha çok markalı ürün mü üretmeli?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Habertürk, CNBC-e, Rudaw, Marmara Haber, Kütahya Haber aktarımı; Pusula Haber 2020–2024 dolar serisi); yerel basında 2023 ilk açıklama ve toplam GSYH sıralaması (Kayseri Olay)</li>
+      <li>TÜİK ADNKS 2025 (Kayseri Valiliği nüfus sayfası; Habertürk, Kayseri Olay, Kayseri Gündem); Melikgazi Belediyesi (ilçe sıralaması, konut satışı)</li>
+      <li>KTO ve Kayseri OSB Başkanlığı aylık ihracat açıklamaları (Habertürk, Yeni Birlik, Sanayi Gazetesi, 2024–2026); Ekonomi Gazetesi (2024 ihracat, 187 ülke); AKAMİB (Ekonomist: mobilya il sıralaması; AKİB Aktüel)</li>
+      <li>İSO ilk 500 ve ikinci 500 araştırmaları 2025 (Kayseri Olay, Kayseri Haber, Kayseri Gündem, Kayseri Gazetesi); Kayseri OSB; KAYSO beyanı (Ekonomi Gazetesi)</li>
+      <li>Kayseri İl Tarım ve Orman Müdürlüğü (Kayseri Olay, Kayseri Haber: hayvan sayısı); Kayseri Ticaret Borsası tarım raporları; TÜRKPATENT ve Kültür Portalı (coğrafi işaretler)</li>
+      <li>Erciyes AŞ, Kayseri Büyükşehir Belediyesi (Habertürk, Ensonhaber, Milliyet Uzmanpara, DHA); TÜRSAB açıklaması (AA); TÜİK 2025 işgücü istatistikleri (Türkiye geneli)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Kayseri’ye özgü 2025 işsizlik ve katılma oranı, sektörel katma değer payları, sanayi istihdamı ve OSB verileri, tarımsal üretim miktarları, turizm geliri ve yatak kapasitesi, ülke bazlı ihracat ve çoğu ilçenin ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık %80 ve 2020’deki %87 (gelir oranları), 586 milyar TL ve %1,3 (toplam GSYH ve payı), +%2,6 (ihracat artışı), %0,45 ve +6.533 (nüfus artışı), %86,8 ve %13,2 (kent-kır), %81 ve %96,5 (ilçe payları), %16 (mobilyanın ihracat payı) ve 2,2 katı (ihracat/ithalat) kendi hesabımdır. İlçe nüfusları ADNKS 2025’e aittir. İhracat için iki farklı seri (TİM kanuni merkez, KTO/TÜİK) kullanıldığından rakamlar birbirine eklenmemiştir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+var SN=[['İSO ilk 500’de Kayseri firmaları (sayı)',[['2023',14],['2024',13],['2025',11]],[2],'İlk 500 listesindeki sayı 14’ten 11’e geriledi. Kaynak: Kayseri OSB, Kayseri Haber, Kayseri Olay.'],
+ ['İSO ikinci 500’de Kayseri firmaları (sayı)',[['2024',10],['2025',15]],[1],'KAYSO üyesi firma sayısı %50 arttı. İlk üç firma: Boyçelik, Erbosan, Form Sünger. Kaynak: KAYSO, Kayseri Gündem.'],
+ ['İSO listelerinde toplam Kayseri firması 2025 (sayı)',[['İlk 500',11],['İkinci 500',15],['Toplam',26]],[2],'İlk 1000’de 26 firma. Çoğunluğu Kayseri OSB’de yerleşik. Kaynak: Kayseri Gündem, Kayseri Olay.']];
+mk('sn',SN,['İlk 500','İkinci 500','Toplam 2025']);
+var IH=[['Kayseri mal ihracatı (milyon $)',[['2024',3751],['2025',3847]],[1],'Yaklaşık +%2,6 (kendi hesabım). 2024’te 187 ülkeye ihracat. Kaynak: KTO (TÜİK verisi), Ekonomi Gazetesi, Habertürk.'],
+ ['İhracat ve ithalat, 2025 (milyon $)',[['İhracat',3847],['İthalat (yaklaşık)',1730]],[0],'İthalat, ihracatın yaklaşık %45’i; OSB Başkanı karşılama oranını %222 olarak veriyor. 11 aylık ithalat 1.587 milyon $’dı. Kaynak: Kayseri OSB, Yeni Akit aktarımı.'],
+ ['İlk yarı ihracatı (milyon $)',[['2025 Oca–Haz',1861],['2026 Oca–Haz',1929]],[1],'2026’da %3,62 artış; ithalat 924 milyon $. Haziran 2026’da tek ayda 338,4 milyon $. Kaynak: KTO, Kayseri OSB (Sanayi Gazetesi, Yeni Birlik).'],
+ ['Mobilya, kâğıt ve orman ürünleri ihracatı, 2025, il sıralaması (milyon $)',[['İstanbul',3500],['Bursa',910],['İzmir',820],['Kayseri',600],['Gaziantep',590]],[3],'Türkiye toplamı 8,4 milyar $. Kayseri bu sektörde dördüncü. Kaynak: AKAMİB Başkanı (Ekonomist).']];
+mk('ih',IH,['Yıllık','İhracat/ithalat','Yarıyıl','Mobilya']);
+var TA=[['Küçükbaş hayvan sayısı (bin baş)',[['2024',1016.8],['2025',1150.1]],[1],'Bir yılda +133,3 bin (yaklaşık %13); Türkiye sıralaması 17.’den 14.’ye. Kaynak: Kayseri İl Tarım ve Orman Müdürlüğü.'],
+ ['Hayvan varlığı, İl Müdürü beyanı (bin baş)',[['Kanatlı',3900],['Küçükbaş',1000],['Büyükbaş',463]],[2],'Müdür’e göre Kayseri hayvancılıkta Türkiye’de ilk 10’da, manda üretiminde ilk 4’te. Rakamlar yuvarlaktır ve 2024–25 başı verisidir. Kaynak: Kayseri Olay.'],
+ ['TÜİK hayvan sayısı, 2024 (bin baş)',[['Küçükbaş',1017],['Büyükbaş',436]],[0],'Aynı yıl Sivas’ta 365 bin büyükbaş, 1,009 milyon küçükbaş. Kayseri iki ilin önünde. Kaynak: TÜİK (Kayseri Haber aktarımı).']];
+mk('ta',TA,['Küçükbaş','Beyan','TÜİK']);
+var TZ=[['Erciyes kayak sezonu ziyaretçisi (milyon)',[['2023–24',2.5],['2024–25',3.0],['2025–26',3.3]],[2],'2025–26 tüm zamanların rekoru; önceki sezona göre yaklaşık +%10 (kendi hesabım). Kaynak: Kayseri Büyükşehir Belediyesi, Erciyes AŞ (Habertürk, Ensonhaber).'],
+ ['Erciyes ziyaretçisinin bileşimi (yaklaşık %)',[['Kayakçı olmayan',77.5],['Kayakçı',22.5]],[1],'Kayakçı payı %20–25 arası verilmiş, ortası alındı (kendi hesabım); kayakçıların yaklaşık %15’i yabancı. Kaynak: Erciyes AŞ (DHA, Milliyet).'],
+ ['Kayseri’ye gelen turistte yabancı payı (%)',[['Yerli',89],['Yabancı',11]],[1],'TÜRSAB yetkilisi yabancı payını %10–12 olarak verdi; ortası alındı. Kaynak: TÜRSAB (AA).']];
+mk('tz',TZ,['Sezon','Kayakçı payı','Yabancı payı']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İstanbul',24452],['Kocaeli',24031],['Ankara',24031],['Antalya',17103],['Türkiye ortalaması',15325],['Aksaray',12319],['Kayseri',12296],['Uşak',12114]],[6],'Kayseri 81 il arasında 28.; Türkiye ortalamasının yaklaşık %80’i (kendi hesabım). Kaynak: TÜİK il bazında GSYH 2024 (Habertürk, Rudaw, Kütahya Haber).'],
+ ['Kişi başına GSYH, 2024 (bin TL)',[['İstanbul',802.7],['Türkiye ortalaması',503.1],['Kütahya',406.5],['Aksaray',404.4],['Kayseri',403.6],['Uşak',397.7],['Kastamonu',395.1]],[4],'Kayseri 28.; ilk 30’daki komşu sıralar çok yakın. Nominal TL. Kaynak: TÜİK (Marmara Haber, CNBC-e).'],
+ ['Kişi başına GSYH, Kayseri ($)',[['2020',7319],['2021',8073],['2022',8368],['2023',10686],['2024',12296]],[4],'Türkiye ortalaması aynı yıllarda 8.397, 9.424, 10.434, 13.008 ve 15.325 $. Kayseri’nin Türkiye’ye oranı 2020’de %87,2, 2022’de %80,2, 2023’te %82,1, 2024’te %80,2 (kendi hesabım). Kaynak: TÜİK (Pusula Haber).']];
+mk('gt',GT,['Dolar','TL','Kayseri serisi']);
+var IG=[['Nüfus (bin kişi)',[['2023',1445.7],['2024',1452.5],['2025',1459.0]],[2],'2025’te +6,5 bin (%0,45; kendi hesabım). Kaynak: TÜİK ADNKS (Kayseri Olay, Valilik).'],
+ ['Kent ve kır nüfusu, 2025 (bin kişi)',[['Kent',1267.0],['Kır',192.0]],[0],'Kent payı yaklaşık %86,8 (kendi hesabım). Kaynak: Kayseri Valiliği (ADNKS 2025).'],
+ ['İlçe nüfusu, 2025 (bin kişi)',[['Melikgazi',593.3],['Kocasinan',421.5],['Talas',173.7],['Develi',67.8],['Yahyalı',35.2]],[0,1,2],'İlk üç ilçe il nüfusunun yaklaşık %81’i. Kaynak: Kayseri Valiliği (ADNKS 2025).']];
+mk('ig',IG,['Nüfus','Kent/Kır','İlçeler']);
+</script>
+</body>
+</html>

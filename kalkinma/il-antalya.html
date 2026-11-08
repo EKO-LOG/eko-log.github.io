@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Antalya | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0891b2;--a2:#f59e0b;--a3:#7c3aed"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Antalya</span><h1>Antalya: Türkiye’nin Turizm Başkenti ve Sera Bahçesi</h1><p>2,78 milyon nüfuslu Antalya, 2025’te 17,57 milyon ziyaretçiyle turizm rekoru kırdı; Bakanlık belgeli yatak kapasitesinin %33,7’si burada. Kişi başına GSYH 2024’te 17.103 $ ile Türkiye’nin beşincisi; GSYH’de altıncı. Turizmin yanında örtüaltı tarım da güçlü: Türkiye domatesinin %20’si, biberinin %23’ü, salatalığının %27’si buradan geliyor. Zayıf yan: gelir turizme ve birkaç pazara bağlı; 2026’da yabancı ziyaretçi sayısı geriledi.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>17.103 $</b><span>Kişi başına GSYH (2024; 561.426 TL), 81 il arasında 5. sıra; Türkiye ort. 15.325 $’ın yaklaşık %112’si (kendi hesabım)</span></div>
+    <div class="k"><b>2.777.677</b><span>Nüfus (ADNKS 2025); en kalabalık 5. il; 2007’de 1.789.295’ti</span></div>
+    <div class="k"><b>17,57 milyon</b><span>2025’te gelen turist (rekor; transfer yolcular dahil)</span></div>
+    <div class="k"><b>654.133</b><span>Bakanlık belgeli yatak kapasitesi (Ağustos 2026); Türkiye toplamının %33,7’si</span></div>
+    <div class="k"><b>2,1 mlr $</b><span>2025 mal ihracatı; yaklaşık %57’si (1,2 milyar $) tarım</span></div>
+    <div class="k"><b>1,52 trilyon TL</b><span>2024 GSYH (cari), 81 il arasında 6. sıra; Türkiye GSYH’sinin yaklaşık %3,4’ü (kendi hesabım)</span></div>
+  </div>
+  <div class="secnav"><a href="#turizm">Turizm</a><a href="#tarim">Tarım</a><a href="#dis">İhracat</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Antalya ekonomisinin omurgası: otel, tur, ulaşım, yeme-içme ve inşaat zinciri. 2025 rekor yıldı; 2026 ise geriliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tz"></div><h3 id="tztitle"></h3><div class="bars" id="tzbars"></div><p class="note" id="tznote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Kültür ve Turizm İl Müdürlüğü’ne göre Antalya’ya 2025’te 17.571.155 turist geldi: 17.122.548’i Antalya ve Gazipaşa’ya direkt yurt dışı uçuşlarla, 448.607’si başka havalimanlarından aktarmayla. Direkt uçuşlar %1,7, aktarmalılar %27 arttı.</li>
+        <li>İşletme belgeli konaklama tesisi sayısı 2002’de 523’ten Eylül 2026’da 2.709’a, yatak kapasitesi 150.955’ten 619.644’e çıktı; belgeli tesislerde konaklayan kişi sayısı 2018’de yaklaşık 13,85 milyondan 2025’te 29,71 milyona yükseldi (Bakan Ersoy).</li>
+        <li>Ağustos 2026’da tüm Bakanlık belgeli türlerde Antalya 2.764 tesis ve 654.133 yatakla yatakta birinci, tesis sayısında İstanbul’dan (3.192) sonra ikinci.</li>
+        <li>ATSO Başkanı Hacısüleyman kişi başı turizm gelirini 972 $ olarak veriyor; 17 milyon ziyaretçiyle bu yaklaşık 17 milyar $ eder. Antalya’nın ülke ekonomisine toplam katkısını (turizm, tarım, sanayi) 20 milyar $ civarı olarak tahmin ediyor.</li>
+        <li>2026’da tablo zayıfladı: Ocak–Eylül yabancı ziyaretçi %5,6 azalarak 12.483.159 oldu. Almanya ve Birleşik Krallık kaybın yaklaşık %43’ünü oluşturdu; Rusya’nın payı %24,98’den %26,65’e çıktı (AKTOB).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Ziyaretçi serileri karıştırılmamalı: 17,57 milyon (havalimanı, aktarmalılar dahil), İl Müdürlüğü’nün aylık “yabancı ziyaretçi” serisi ve havalimanı idarelerinin sayımı (1 Ocak–27 Ekim 2026: 15,07 milyon, AA) farklı tanımlara dayanıyor.</li>
+      <li>Yıl sonu tahminleri (turist sayısında %3–6 düşüş, yaklaşık 16,6–17 milyon) sektör temsilcilerinin görüşüdür; gerçekleşme değildir. Basında düşüş bölgesel savaşlarla ilişkilendiriliyor; nedeni burada doğrulayamadım.</li>
+      <li>Turizm gelirinin il bazında resmî rakamını bulamadım; 972 $ ve 17 milyar $ ATSO beyanından, “Türkiye’nin %26’sı” payı ise kendi yaklaşık hesabımdan (17 / 65,2 milyar $) gelir. Ortalama kalış süresi, doluluk oranı ve turizmin il GSYH’sindeki payı sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Örtüaltı</h2>
+    <p class="sub">Antalya’nın ikinci gücü: kıyı ovalarında seralar, yaylalarda meyve; Türkiye’nin kışlık sebze deposu.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Tarım ve Orman İl Müdürlüğü’ne göre 2025’te Antalya’da yaklaşık 5 milyon ton sebze üretildi; örtüaltı alanı 322.993 dekar (252.315’i plastik sera, 44.007’si cam sera).</li>
+        <li>Üretimde domates 2,68 milyon ton (Türkiye’nin %20’si), biber 778.798 ton (%23), hıyar 455.215 ton (%27).</li>
+        <li>Sebze tohumu üreten 380 firmanın 124’ü (%33), fide üreten 249 firmanın 108’i (%43) Antalya’da. 2025’te 258 ton tohum (12 milyar TL) ve 1,9 milyar adet fide (16 milyar TL) üretildi.</li>
+        <li>Süs bitkileri ihracatında Antalya’nın payı %38 (61 milyon $ / Türkiye 160 milyon $).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Rakamların tamamı İl Müdürlüğü sunumundan (TÜİK 2025 verileri) alındı; doğrudan TÜİK tablosu değildir.</li>
+      <li>Tarımın il GSYH’sindeki payını, çiftçi sayısını, narenciye ve hayvancılık üretimini ve su-iklim riskini doğrulanmış kaynakla gösteremedim; bu yüzden sayfada yok.</li>
+      <li>Seracılıkta enerji, işçilik ve gübre maliyeti ana risk alanlarıdır; bu sayfada Antalya’ya özgü maliyet verisi yok (yorum).</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Antalya’nın mal ihracatı turizmin yanında küçük kalıyor ve ağırlıklı olarak tarıma dayanıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Antalya’nın 2025 mal ihracatı 2,1 milyar $; bunun 1,2 milyar $’ı (%57) tarım sektöründe. Yaş meyve ve sebze 692 milyon $ ile Türkiye toplamının (3,7 milyar $) %19’u.</li>
+        <li>2026’nın ilk altı ayında yaş meyve ve sebze 449,97 milyon $, süs bitkileri 40,03 milyon $ oldu.</li>
+        <li>Batı Akdeniz (Antalya, Burdur, Isparta) yaş meyve-sebze ihracatı 2025’i 751 milyon $ ile kapatmıştı; Ocak–Ekim 2026’da %26 artışla 735,3 milyon $’a ulaştı. Biber 217,9 milyon $ (+%33) ile en büyük ürün. Bölgeden 2.235 firma 179 ülkeye ihracat yaptı (BAİB).</li>
+        <li>Türkiye’nin sebze ihracatının yaklaşık yarısı Antalya, Isparta ve Burdur’dan geliyor (2025’in ilk yarısı).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Antalya için sektörel ve ülke bazlı tam ihracat tablosunu bulamadım; 2,1 milyar $ rakamı İl Müdürlüğü sunumundan, il sıralaması ise bu sitenin Türkiye panosundan okunuyor. Hangi serinin (TİM yasal merkez ya da Bakanlık faaliyet ili) kullanıldığı kaynakta belirtilmiyor.</li>
+      <li>Batı Akdeniz rakamları üç ili birlikte kapsar; Antalya’ya ayrılamaz. İthalat ve dış ticaret dengesi sayfada yok.</li>
+      <li>Mal ihracatı turizm gelirinin yaklaşık onda biri düzeyinde (2,1 / 17 milyar $; kendi hesabım); ancak iki rakam farklı kaynaklardan ve tanımlardan geldiği için kesin bir oran değil.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Antalya’da 2024’te kişi başına GSYH 561.426 TL, dolar karşılığı 17.103 $ oldu; İstanbul, Kocaeli, Ankara ve Tekirdağ’ın ardından beşinci. Yalnızca 11 il Türkiye ortalamasının (15.325 $) üzerinde.</li>
+        <li>İl GSYH’si yaklaşık 1,52 trilyon TL ile İstanbul, Ankara, İzmir, Kocaeli ve Bursa’nın ardından altıncı sırada.</li>
+        <li>İlk 5 il toplam GSYH’nin %53’ünü aldı; Antalya bu beşin dışında ama onu hemen izliyor.</li>
+        <li>Basında yer alan başlığa göre Antalya 2022 il GSYH büyümesinde Türkiye birincisiydi (ayrıntıyı doğrulamadım).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İl GSYH’si üretim yeri esaslıdır ve nominal TL’dir; kişi başına rakam yazın gelen mevsimlik çalışanı ve turisti değil, resmî nüfusu bölüyor (yorum). Dolar karşılığı kur etkilidir.</li>
+      <li>Hizmetlerin, ticaret-konaklamanın ve sanayinin 2024’teki il GSYH’si içindeki payını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>Sanayi, organize sanayi bölgeleri, madencilik (doğal taş), inşaat ve emlak da Antalya’da önemlidir; bu sayfada onlara özgü doğrulanmış veri olmadığı için ayrı bölüm açmadım.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 2.777.677’ye çıktı; 2024’te 2.722.103’tü (yaklaşık +55.574, %2,0; kendi hesabım). 2007’de 1.789.295 olan nüfus 18 yılda yaklaşık %55 arttı; artışta iç ve dış göç etkili.</li>
+        <li>Kentin nüfusu, yılda ağırladığı yabancı turist sayısının beşte birinden azdır; turist/nüfus oranı yaklaşık 5’in üzerindedir (AA).</li>
+        <li>İŞKUR’un 2024 araştırması (Nisan–Mayıs) 404.709 çalışanı kapsadı: 262.983 erkek, 141.726 kadın. Kadın istihdamı en çok konaklama ve yiyecek hizmetlerinde.</li>
+        <li>15.002 açık iş 1.511 işyerinde; 20+ çalışanlı işyerlerinin %38,6’sında açık iş var. En çok aranan işler otel genel alan temizliği, temizlik görevlisi ve mutfak görevlisi. İşverenlerin %61,6’sı eleman arayışında İŞKUR’u kullandı.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Antalya’ya özgü 2025 işsizlik, işgücüne katılma ve istihdam oranını doğrulanmış kaynakla bulamadım. Karşılaştırma için Türkiye 2025: işsizlik %8,3, işgücüne katılma %53,5, istihdam oranı %49,0, atıl işgücü %29,7.</li>
+      <li>İŞKUR araştırması sezon başında (15 Nisan–17 Mayıs 2024) yapıldı; yazın zirve yapan mevsimlik istihdamı tam yansıtmaz (yorum). Küçük işyerleri örneklemle kapsanır ve kayıt dışı çalışma dahil değildir.</li>
+      <li>Açık iş ve beceri beyanları işveren beyanıdır; ücret düzeyi ve sezonluk işsizlik için doğrulanmış il verisi bulamadım.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Antalya’nın 19 ilçesi ve 914 mahallesi var; aşağıdaki nüfus ADNKS 2024’e ait (Alanya ve Manavgat için 2025 değerleri notta). Kepez ve Muratpaşa nüfusun yaklaşık %41,8’ini barındırıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2024)</th><th>Öne çıkan</th></tr>
+      <tr><td>Kepez</td><td>629.479</td><td>En kalabalık ilçe</td></tr>
+      <tr><td>Muratpaşa</td><td>509.444</td><td>Merkez ilçe; tarihî Kaleiçi; en yoğun nüfus</td></tr>
+      <tr><td>Alanya</td><td>361.873</td><td>2025’te 371.547; TÜİK’in il olabilecek ilçeler listesinde birinci</td></tr>
+      <tr><td>Manavgat</td><td>262.576</td><td>2025’te 266.480; geniş orman ve yaylalar, şelale; il adayı ilçeler listesinde</td></tr>
+      <tr><td>Konyaaltı</td><td>196.079</td><td>Kent merkezinin batısında kıyı ilçesi</td></tr>
+      <tr><td>Serik</td><td>143.435</td><td>Belek turizm bölgesi</td></tr>
+      <tr><td>Döşemealtı</td><td>90.572</td><td>Merkeze bitişik ilçe</td></tr>
+      <tr><td>Aksu</td><td>82.560</td><td>Merkeze bitişik ilçe</td></tr>
+      <tr><td>Kumluca</td><td>75.041</td><td>Batı kıyısında örtüaltı tarım ilçelerinden</td></tr>
+      <tr><td>Kaş</td><td>63.921</td><td>Batı kıyısında turizm ilçesi</td></tr>
+      <tr><td>Korkuteli</td><td>58.728</td><td>İç kesim ilçesi</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İlk 10 ilçe il nüfusunun yaklaşık %88,7’sini oluşturuyor; kalan 8 ilçe (Kemer, Finike, Gazipaşa, Elmalı, Gündoğmuş, Kale, Akseki, Ibradı gibi) tabloda yok. “Öne çıkan” sütunu genel niteliktedir; ilçe bazında ekonomik veri (GSYH, istihdam, ihracat) bulunamadı. Kepez+Muratpaşa payı ve ilk 10 payı kendi hesabımdır; 2024 il toplamı 2.722.103 alındı.</p></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>2002 – Turizm tabanı.</b> İşletme belgeli 523 tesis, 150.955 yatak.</p>
+      <p><b>2007 – Nüfus.</b> İl nüfusu 1.789.295; 2025’e kadar yaklaşık %55 arttı.</p>
+      <p><b>2018 – Konaklama.</b> Belgeli tesislerde yaklaşık 13,85 milyon kişi konakladı; 2025’te 29,71 milyon.</p>
+      <p><b>2024 – Gelir.</b> Kişi başına GSYH 17.103 $ ile beşinci; GSYH yaklaşık 1,52 trilyon TL.</p>
+      <p><b>2025 – Rekor yıl.</b> 17.571.155 turist; ihracat yaklaşık 2,1 milyar $; nüfus 2.777.677.</p>
+      <p><b>2026 – Gerileme.</b> Ocak–Eylül yabancı ziyaretçi %5,6 düştü (12,48 milyon); Rusya’nın payı %26,65’e çıktı.</p>
+      <p><b>9–20 Kasım 2026 – COP31.</b> BM iklim zirvesi Antalya’da yapılıyor; hazırlıklar kapsamında yaklaşık 38 kilometrelik yeni yol imalatı ve yatırımlar duyuruldu.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Türkiye’nin yatak kapasitesinin üçte biri; rekor 17,57 milyon ziyaretçi</li><li>Kişi başına GSYH’de ilk beş il arasında</li><li>Örtüaltı tarım, tohum ve fide: domates, biber, hıyarda yüzde 20–27 pay</li><li>Hızlı nüfus artışı ve güçlü göç çekimi</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Gelir turizme bağlı; ziyaretçi 2026’da düşüyor (Ocak–Eylül −%5,6)</li><li>Rusya’nın payı yaklaşık dörtte bir; Almanya ve Birleşik Krallık kaybı belirgin</li><li>Mal ihracatı küçük (2,1 milyar $) ve yarıdan fazlası tarımda</li><li>Sezonluk, düşük katma değerli istihdam; temizlik ve mutfak işleri açık işlerin başında</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Dört mevsim turizmi: sonbahar ve kış doluluğu, kongre turizmi (COP31, uzay kongresi)</li><li>Tohum, fide ve yüksek teknoloji sera ihracatı; biberde %33 artış</li><li>Çevreye duyarlı belgeli yatak kapasitesinin %68,6’sı Antalya’da</li><li>Yeni pazarlar ve çeşitlenen kaynak ülkeler</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Antalya’nın sorunu gelir eksikliği değil, gelirin ne kadar mevsime, pazara ve emeğe bağlı olduğu: yüksek kişi başına GSYH ile zayıf mal ihracatı ve sezonluk işler yan yana duruyor. Tarım, tohum-fide ve kongre turizmi bu bağımlılığı azaltabilir; ancak ziyaretçi sayısı iki-üç ülkenin talebine ve bölgesel gelişmelere duyarlı kaldıkça kentin ekonomisi dalgalanmaya açık olacaktır.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Türkiye’nin yatağının üçte biri tek ildeyken turizm gelirinin yerel halka ve il bütçesine yansıması yeterli mi?</li>
+      <li>Rusya’nın payı artıp Almanya ve Birleşik Krallık’ın payı düşerken pazar çeşitlendirmesi nasıl yapılır?</li>
+      <li>Seracılıkta tohum-fide ve teknoloji, ham sebze satışından daha fazla katma değer üretebilir mi?</li>
+      <li>Aşırı yapılaşma, su ve iklim riski karşısında Antalya’nın turizm modeli ne kadar sürdürülebilir?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (CNBC-e, Habertürk, Rudaw, Alomaliye aktarımı); bu sitenin Türkiye panosundaki GSYH ve ihracat sıralaması</li>
+      <li>Antalya Kültür ve Turizm İl Müdürlüğü verileri (DHA, Sözcü, Ekonomist, DHA Eylül 2026: aylık yabancı ziyaretçi); AKTOB bülteni (Yeni Alanya); Turizm Güncel; AA (havalimanı verisi, 22 Ağustos ve Ekim 2026); Ekonomi Gazetesi (Alşan değerlendirmesi)</li>
+      <li>Kültür ve Turizm Bakanı Ersoy açıklamaları (AA, Milliyet, Dünya, Turizm Ekonomi, Eylül 2026); Bakanlık belgeli yatak kapasitesi (TRT Haber, Haberler.com, Ağustos 2026); ATSO Başkanı Hacısüleyman (Milliyet, Ocak 2026)</li>
+      <li>Antalya Tarım ve Orman İl Müdürlüğü 2026 sunumu (TÜİK 2025 verileri, ihracat); BAİB / Batı Akdeniz İhracatçı Birlikleri (Milliyet, Ekonomi Gazetesi, memurlar.net, Ekonomist)</li>
+      <li>TÜİK ADNKS 2025 (Yeni Alanya, Gazete Vatan: ilçe nüfusları; Türkiye Gazetesi, Yenimeram: Alanya ve Manavgat); Kür Ansiklopedi (ilçe ve mahalle sayısı)</li>
+      <li>İŞKUR Antalya İşgücü Piyasası Araştırması 2024; TÜİK 2025 işgücü istatistikleri (Kocaeli sayfasındaki Türkiye karşılaştırması)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Antalya’ya özgü 2025 işsizlik ve katılma oranı, 2024 sektörel katma değer payları, turizm geliri, sanayi ve OSB verileri, hayvancılık ve narenciye üretimi, ülke bazlı ihracat ve çoğu ilçenin ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık %112 (gelir oranı), %3,4 (GSYH payı), %2,0 ve +55.574 (nüfus artışı), %26 (turizm geliri payı), %57 dışındaki ihracat bölünmeleri, %41,8 ve %88,7 (ilçe payları), %35,0 (kadın payı), 2025 Ocak–Ağustos kıyası ve “onda biri” oranı kendi hesabımdır. İlçe nüfusları 2024’e aittir (Alanya ve Manavgat 2025 değerleri ayrıca verildi); 2024 il toplamı 2.722.103 olarak bir yerel basın aktarımından alınmıştır. Kaynakların bir kısmı farklı ziyaretçi tanımları kullanır; bunlar birbirine eklenmemiştir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+var TZ=[['Ocak–Ağustos yabancı ziyaretçi, İl Müdürlüğü (milyon)',[['2025',11.702],['2026',11.024]],[1],'2026’da yaklaşık 679 bin kişi (%5,8) azalış. Ocak–Eylül’de 12.483.159 (%5,6 düşüş); Almanya Ocak–Ağustos’ta 2,083 milyon (−%5,5). Kaynak: Kültür ve Turizm İl Müdürlüğü (Ekonomist, DHA).'],
+ ['Rusya’nın yabancı ziyaretçi içindeki payı (%)',[['2025',24.98],['2026 Oca–Eyl',26.65]],[1],'Rusya’dan gelen sayı az arttı ama Almanya ve Birleşik Krallık düştüğü için payı yükseldi. İkisinin kaybı toplam kaybın yaklaşık %43’ü (323.965 kişi). Kaynak: AKTOB bülteni.'],
+ ['Bakanlık belgeli yatak kapasitesi, Ağustos 2026 (bin)',[['Antalya',654.1],['İstanbul',272.7],['Muğla',243.3],['İzmir',94.9],['Aydın',58.7]],[0],'Türkiye toplamı 1.939.125 yatak; Antalya’nın payı %33,7. Tesis sayısında İstanbul 3.192, Antalya 2.764. Kaynak: Kültür ve Turizm Bakanlığı (TRT Haber, Haberler.com).'],
+ ['İşletme belgeli yatak kapasitesi (bin)',[['2002',151.0],['Eylül 2026',619.6]],[1],'Tesis sayısı 523’ten 2.709’a çıktı; yatak yaklaşık dört kat. Bakanlık belgeli tüm türlerde (basit konaklama dahil) rakam 654.133. Kaynak: Bakan Ersoy (AA, Dünya).']];
+mk('tz',TZ,['Ziyaretçi','Rusya payı','Yatak','Gelişim']);
+var TA=[['Sebze üretimi, 2025 (bin ton)',[['Domates',2684.6],['Biber',778.8],['Hıyar',455.2]],[0],'Antalya’da toplam sebze üretimi yaklaşık 5 milyon ton. Türkiye üretimindeki pay: domates %20, biber %23, hıyar %27. Kaynak: Antalya Tarım ve Orman İl Müdürlüğü (TÜİK 2025).'],
+ ['Örtüaltı üretim alanı, 2025 (bin dekar)',[['Plastik sera',252.3],['Cam sera',44.0],['Yüksek tünel',14.3],['Alçak tünel',12.4]],[0],'Toplam 322.993 dekar. Kaynak: Antalya Tarım ve Orman İl Müdürlüğü (TÜİK 2025).'],
+ ['Antalya’nın Türkiye içindeki payı (%)',[['Sebze fidesi firması',43],['Süs bitkisi ihracatı',38],['Sebze tohumu firması',33],['Hıyar üretimi',27],['Biber üretimi',23],['Domates üretimi',20],['Yaş meyve-sebze ihracatı',19]],[0],'Firma payları sayıya göredir: tohum 124/380, fide 108/249. İhracat payları 2025 verisidir. Kaynak: Antalya Tarım ve Orman İl Müdürlüğü.']];
+mk('ta',TA,['Üretim','Örtüaltı','Türkiye payı']);
+var IH=[['Antalya mal ihracatı, 2025 (milyon $)',[['Toplam',2100],['Tarım',1200],['Yaş meyve ve sebze',692],['Süs bitkileri',61]],[1],'Tarım toplam ihracatın yaklaşık %57’si. Diğer sektörlerin payı yaklaşık 0,9 milyar $ (kendi hesabım). Kaynak: Antalya Tarım ve Orman İl Müdürlüğü.'],
+ ['Ocak–Haziran 2026 (milyon $)',[['Yaş meyve ve sebze',450.0],['Süs bitkileri',40.0]],[0],'Karşılaştırılabilir 2025 ilk yarı değerini bulamadım. Kaynak: Antalya Tarım ve Orman İl Müdürlüğü.'],
+ ['Batı Akdeniz yaş meyve-sebze ihracatı (milyon $)',[['2025 (12 ay)',751],['2026 Oca–Eki',735.3]],[1],'Antalya, Burdur ve Isparta birlikte; Ocak–Ekim 2026’da %26 artış. Biber 217,9 milyon $ (+%33). Kaynak: BAİB (Ekonomi Gazetesi).']];
+mk('ih',IH,['Sektör 2025','Yarıyıl 2026','Batı Akdeniz']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İstanbul',24452],['Kocaeli',24031],['Ankara',24031],['Tekirdağ',18406],['Antalya',17103],['İzmir',16949],['Türkiye ortalaması',15325]],[4],'Antalya Türkiye ortalamasının yaklaşık %112’si (kendi hesabım); yalnızca 11 il ortalamanın üzerinde. Kaynak: TÜİK il bazında GSYH 2024 (CNBC-e, Habertürk).'],
+ ['Kişi başına GSYH, 2024 (bin TL)',[['İstanbul',802.7],['Kocaeli',788.9],['Ankara',788.9],['Tekirdağ',604.2],['Antalya',561.4],['İzmir',556.4],['Türkiye ortalaması',503.1]],[4],'Nominal TL serisi. Kaynak: TÜİK (CNBC-e).'],
+ ['Toplam GSYH, 2024 (trilyon TL)',[['İstanbul',13.01],['Ankara',4.67],['İzmir',2.56],['Kocaeli',1.71],['Bursa',1.67],['Antalya',1.52]],[5],'Antalya altıncı; Türkiye GSYH’sinin yaklaşık %3,4’ü (kendi hesabım). Kaynak: TÜİK il bazında GSYH 2024.']];
+mk('gt',GT,['Dolar','TL','Toplam']);
+var IG=[['Nüfus (bin kişi)',[['2007',1789.3],['2024',2722.1],['2025',2777.7]],[2],'2007’den 2025’e yaklaşık %55 artış; 2025’te yaklaşık +55,6 bin (kendi hesabım). Kaynak: TÜİK ADNKS (Yeni Alanya); 2024 değeri yerel basın aktarımı.'],
+ ['Kayıtlı çalışan, İŞKUR 2024 (bin kişi)',[['Erkek',263.0],['Kadın',141.7]],[1],'Ziyaret edilen işyerlerinde 404.709 çalışan; kadın payı %35,0 (kendi hesabım). Kadın istihdamı en çok konaklama ve yiyecek hizmetlerinde. Araştırma Nisan–Mayıs’ta, sezon başında yapıldı. Kaynak: İŞKUR Antalya İşgücü Piyasası Araştırması 2024.']];
+mk('ig',IG,['Nüfus','Çalışan']);
+</script>
+</body>
+</html>
