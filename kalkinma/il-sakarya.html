@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sakarya | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0e7c66;--a2:#f2a31b;--a3:#2c4a8c"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Sakarya</span><h1>Sakarya: Toyota’nın Kenti, Marmara’nın Yeşil Kapısı</h1><p>1,12 milyon nüfuslu Sakarya, 2025’te 5,9 milyar $ ihracatla (TİM, yasal merkez) en çok ihracat yapan 7. il. İhracatın yaklaşık %83’ü otomotivden geliyor ve Toyota tek başına yaklaşık 3,9 milyar $ ihracat yapıyor. Kişi başına GSYH ise 2024’te 479.426 TL ile Türkiye ortalamasının biraz altında; Doğu Marmara’da Kocaeli, Bolu ve Yalova’nın ardından dördüncü. Güçlü yan: sanayi, tarım ve göl turizmi bir arada. Zayıf yan: ihracat tek sektöre ve birkaç Avrupa pazarına yaslanıyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>479.426 TL</b><span>Kişi başına GSYH (2024); yaklaşık 14.600 $ (kendi hesabım), Türkiye ortalamasının (503.076 TL) %95’i</span></div>
+    <div class="k"><b>1.123.693</b><span>Nüfus (ADNKS 2025); bir yılda 12.958 kişi arttı; artış hızı binde 11,6 (Türkiye binde 5)</span></div>
+    <div class="k"><b>5,9 mlr $</b><span>2025 ihracatı (TİM, yasal merkez); 2024’te 6,28 milyar $ ile rekordu</span></div>
+    <div class="k"><b>%83</b><span>Ocak–Eylül 2026 ihracatında otomotivin payı (%82,96)</span></div>
+    <div class="k"><b>162.696</b><span>2026’nın ilk dokuz ayında Sakarya’da üretilen taşıt; Türkiye üretiminin %16,5’i</span></div>
+    <div class="k"><b>536,7 mlr TL</b><span>2024 GSYH (cari); 2020’de 60,7 milyar TL (nominal, enflasyon dahil)</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#sanayi">Otomotiv-Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Sakarya, ihracat sıralamasında İstanbul, Kocaeli, Ankara, Bursa, İzmir ve Gaziantep’in ardından yedinci; ama hangi serinin kullanıldığı rakamı çok değiştiriyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TİM verisine göre Sakarya 2024’te %9,8 artışla 6,28 milyar $ ihracat yaptı; bu o güne kadarki rekordu. 2025’te ihracat 155 ülkeye 5,9 milyar $ oldu; ilk beş sektör otomotiv, demir ve demir dışı metaller, kimya, çelik ve makineydi (SATSO Başkanı Altuğ).</li>
+        <li>Ocak–Eylül 2026’da ihracat %1,3 azalarak 4,008 milyar $’a indi; Sakarya Türkiye ihracatının %2,18’ini yaptı. Yılın ilk iki ayı güçlüydü (949 milyon $, +%17,7); sonrasında ivme kayboldu (kendi yorumum).</li>
+        <li>Otomotiv Ocak–Eylül 2026’da 3,326 milyar $ ile %3,9 geriledi; payı %82,96. Çelik (+%13,8), kimya (+%12,6), elektrik-elektronik (+%16,4) ve mobilya-kâğıt-orman ürünleri (+%39,5) arttı; demir ve demir dışı metaller (−%9,7) ve iklimlendirme (−%9,9) geriledi.</li>
+        <li>En büyük pazarlar Fransa (660,9 milyon $), İspanya (584,4), Polonya (512,3), Birleşik Krallık (326,5) ve İtalya (310,7). Romanya (+%51,5), İsveç (+%45,4) ve İspanya (+%29,8) hızla büyürken Almanya (−%57,8) ve Birleşik Krallık (−%32,3) sert düştü.</li>
+        <li>2025’in ilk on ayında ihracatın ithalatı karşılama oranı yüksekti; yaklaşık 1,5 milyar $ dış ticaret fazlası verildi (Ekonomi Gazetesi aktarımı). TİM’in “İlk 1000 İhracatçı” listesinde Sakarya’dan 31 firma yer aldı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İki ayrı seri var ve toplanmamalı: TİM yasal merkez serisi (6,28 milyar $) ile Ticaret Bakanlığı faaliyet ili serisi (üretimin yapıldığı il; 2024’te 10,03 milyar $, +%5,6). 2025 ve 2026 için Sakarya’nın faaliyet ili toplamını bulamadım.</li>
+      <li>2025’in 5,9 milyar $’ı yuvarlak bir rakam; 2024’ün 6,28 milyar $’ına göre yaklaşık %6 düşüşe işaret ediyor (kendi hesabım). Kaynaktaki “ihracat artmaya devam etti” ifadesi 82 ülkeye ihracatın artmasını anlatıyor, toplamı değil.</li>
+      <li>2026 yalnızca ilk dokuz ayı kapsıyor; yıllık seyir için yıl sonu beklenmeli.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Otomotiv ve Sanayi</h2>
+    <p class="sub">Sakarya sanayisi büyük ölçüde üç fabrikaya dayanıyor: Toyota (otomobil), TürkTraktör (traktör) ve Otokar (otobüs, midibüs, küçük kamyon).</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="os"></div><h3 id="ostitle"></h3><div class="bars" id="osbars"></div><p class="note" id="osnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>OSD verisine göre Sakarya’da 2024’te 274.323 taşıt üretildi, %73,5’i ihraç edildi; il Türkiye otomotiv ihracatının %19,6’sını yaptı ve günde ortalama 751 araç banttan indi.</li>
+        <li>Ocak–Eylül 2026’da 162.696 araç üretildi (143.778 otomobil, 14.913 traktör, 1.595 midibüs, 1.386 otobüs, 992 küçük kamyon, 32 kamyonet); 108.841’i ihraç edildi. Bu Türkiye üretiminin %16,49’u, taşıt ihracatının %15,65’i.</li>
+        <li>Toyota’nın Arifiye fabrikası Corolla, C-HR ve Corolla Hybrid üretiyor. Toyota Otomotiv Sanayi Türkiye 2025’te 3,9 milyar $ ihracatla Türkiye’nin en çok mal ihraç eden ikinci şirketi oldu; kadın çalışan oranı %3’ten %19’a çıktı (şirket açıklaması).</li>
+        <li>Ocak–Haziran 2026’da Sakarya’da 114.935 araç üretildi (2025: 114.138). Toyota 102.185’e (+%6,6) çıkarken TürkTraktör 15.563’ten 10.015’e (yaklaşık −%36) düştü; Otokar 2.735 üretti.</li>
+        <li>Otomotiv dışında çelik, demir ve demir dışı metaller, kimya, makine, elektrik-elektronik, iklimlendirme ve mobilya-kâğıt öne çıkıyor; her biri toplam ihracatın %3’ünden azını oluşturuyor (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025’in tam yıl taşıt üretimini Sakarya için bulamadım; 2025–2026 karşılaştırmaları yalnızca ilk çeyrek (59.740 → 60.640) ve ilk yarı için var.</li>
+      <li>Organize sanayi bölgeleri, doluluk, OSB istihdamı ve İSO 500’deki Sakarya firma sayısı doğrulanmış kaynakla bulunamadığı için sayfada yok.</li>
+      <li>Dev üreticilerin yönetim merkezi başka illerde olduğunda ürettikleri değer il rakamlarında eksik ya da farklı görünebilir; TİM ile faaliyet ili serileri arasındaki 6,3’e karşı 10,0 milyar $ fark bunun işareti olabilir (yorum).</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık</h2>
+    <p class="sub">Sakarya, Türkiye’nin fındık ve mısır merkezlerinden biri; kuzeyde fındık, ovada mısır ve sebze, güneyde ayva ve meyve öne çıkıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TOBB Başkanı Hisarcıklıoğlu’na göre Sakarya yılda yaklaşık 95 bin ton fındıkla Türkiye üçüncüsü, dane ve silajlık mısırda yılda 380 bin ton üretiyor, bal kabağında (14 bin ton) Türkiye lideri ve dış mekân süs bitkisi üretim alanında birinci.</li>
+        <li>Geyve, ayva üretiminde Türkiye’nin yaklaşık %60’ına ulaşıyor. Fındık Hendek, Karasu ve Kocaali gibi kuzey ilçelerinde yoğunlaşıyor.</li>
+        <li>Giresun Ticaret Borsası derlemesine göre ticaret borsalarında 12 ayda işlem gören 649,4 bin ton fındığın en büyük bölümü (133,6 bin ton) Sakarya’da işlem gördü.</li>
+        <li>Tarım, ormancılık ve balıkçılık katma değeri 2024’te reel olarak %6,8 büyüdü (TÜİK aktarımı). Bakan Yumaklı Sakarya’nın tarımsal hasılasının yaklaşık 17 milyar liraya ulaştığını belirtti.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Fındık, mısır ve bal kabağı rakamları yıl belirtilmeyen konuşma aktarımlarıdır; güncel TÜİK serisi değildir.</li>
+      <li>Tarımsal hasılanın “21 kat” artışı nominal TL serisidir ve enflasyonu içerir; reel bir büyüme değildir. Borsa işlem hacmi üretim miktarı değil, ticaret hacmidir; başka illerin fındığı da Sakarya’da işlem görmüş olabilir (yorum).</li>
+      <li>Güncel hayvan varlığı, süt üretimi, tarımın il GSYH’sindeki payı ve tarımsal ihracat doğrulanmış kaynakla bulunamadığı için sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Sapanca Gölü, Maşukiye, Acarlar Longozu ve Karasu sahili; İstanbul ve Ankara’ya yakınlıkla hafta sonu ve günübirlik turizm öne çıkıyor.</p>
+    <div class="g2">
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Sapanca Gölü kıyılarında çok sayıda konaklama ve yeme-içme tesisi, kamp alanı ve yürüyüş parkuru bulunuyor (Büyükşehir turizm broşürü). Yerel basına göre Sapanca’da yaklaşık 4 bin bungalov tesisi var.</li>
+        <li>Acarlar Longozu ve Sakarya İl Ormanı Tabiat Parkı 2024’te 360 bini aşkın ziyaretçi ağırladı (Büyükşehir Belediyesi).</li>
+        <li>Karasu’nun nüfusunun yaz aylarında yaklaşık üç katına çıktığı basında aktarılıyor; ilçe nüfusu 75.887.</li>
+        <li>Sapanca’nın taşıma kapasitesi ve ziyaretçi memnuniyeti 2025’te yayımlanan akademik çalışmalarda ele alınıyor; yoğunluk bölgede tartışma konusu.</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>İşletme belgeli tesis sayısı, yatak kapasitesi, yıllık yerli-yabancı ziyaretçi ve turizm geliri için doğrulanmış güncel bir Sakarya rakamı bulamadım; bu yüzden sayfada grafik yok.</li>
+        <li>Bungalov sayısı ve Karasu’nun yaz nüfusu yerel basın aktarımıdır; resmî sayım değildir ve tarihi belirsizdir.</li>
+        <li>Kaçak ya da belgesiz konaklama ile kayıtlı konaklamanın payını da doğrulanmış kaynakla gösteremedim.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Sakarya’nın 2024 GSYH’si 536,7 milyar TL, kişi başına GSYH’si 479.426 TL; Doğu Marmara’da Kocaeli, Bolu ve Yalova’nın ardından dördüncü. Türkiye ortalaması 503.076 TL (15.325 $); yalnızca 11 il bu ortalamanın üzerinde ve Sakarya bunların dışında.</li>
+        <li>2023’te GSYH 310,4 milyar TL ile 17. sırada ve Türkiye’nin %1,17’siydi; kişi başına GSYH dolar bazında %27 artışla 12.131 $ olup 16. sıradaydı (SATSO). 2024 değeri yaklaşık 14.600 $ (kendi hesabım).</li>
+        <li>2024’te sanayi üretimi 194,8 milyar TL, bunun 182,8 milyar TL’si imalat; ticaret, ulaştırma, konaklama ve yeme-içme 113,7 milyar TL. İmalatın GSYH’deki payı yaklaşık %34 (kendi hesabım).</li>
+        <li>Mesleki-idari destek hizmetleri reel %19,3, finans ve sigortacılık %10,1, bilgi ve iletişim %6,3 büyüdü.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İl GSYH’si üretim yeri esaslıdır ve nominal TL’dir; 2020’den 2024’e “yaklaşık dokuz kat” artış büyük ölçüde enflasyondur, reel zenginleşme değildir.</li>
+      <li>2024 toplam GSYH içindeki sektör paylarını resmî tablodan doğrulayamadım; 194,8 ve 182,8 milyar TL’lik rakamlar yerel basın aktarımıdır ve imalat payı bunlardan hesaplandı.</li>
+      <li>Sakarya’nın 2024’teki tam sıralamasını bulamadım; yalnızca ilk 10’da olmadığı ve Türkiye ortalamasının altında kaldığı kesin.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 1.123.693 (erkek 563.586, kadın 560.107); beş yıldır kesintisiz artıyor (2020: 1.042.649; 2024: 1.110.735). Nüfus yoğunluğu kilometrekare başına 234 kişi; Büyükşehir yasası sonrası resmî kırsal nüfus kalmadı.</li>
+        <li>Adapazarı, Serdivan ve Erenler’in toplamı il nüfusunun yaklaşık %48,5’i (kendi hesabım). Bir yılda en çok Serdivan (+2.534) ve Arifiye (+2.610, yaklaşık %4,9) arttı; Geyve, Kocaali ve Söğütlü’nün nüfusu azaldı.</li>
+        <li>İŞKUR 2024 araştırması 20 ve üzeri çalışanlı tüm işyerlerini, küçükleri örneklemle kapsadı: 120.860 çalışanın 34.197’si kadın. İşyerlerinin %30,9’u ihracat yapıyor, %22,6’sı Ar-Ge yürütüyor, %10’unun yeşil dönüşüm sertifikası var.</li>
+        <li>3.789 açık işin 2.618’i imalatta. En çok aranan meslekler proses işçisi, MIG-MAG kaynakçı, market elemanı ve konfeksiyon işçisi; kadınlarda konfeksiyon, dikiş ve fındık işleme öne çıkıyor. 501 işyeri 3.087 kişinin temininde güçlük çekiyor.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Sakarya’ya özgü 2025 işsizlik, işgücüne katılma ve istihdam oranını doğrulanmış kaynakla bulamadım. Karşılaştırma için Türkiye 2025: işsizlik %8,3, işgücüne katılma %53,5, istihdam oranı %49,0, atıl işgücü %29,7.</li>
+      <li>İŞKUR rakamları işveren beyanıdır ve il istihdamının tamamını temsil etmez; 120.860 kişi, ildeki tüm çalışanları değil, ziyaret edilen işyerlerini gösterir.</li>
+      <li>Açık işlerin %50,7’sinde asgari ücretin 1,5 katı, %43,4’ünde asgari ücret düzeyinde ücret öngörülüyor; kadın taleplerinin %77,8’inde asgari ücret düzeyi beklenirken erkeklerde bu oran %37,2. Fark iş tanımlarından da kaynaklanıyor olabilir (yorum).</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Sakarya’nın 16 ilçesi var; nüfus ADNKS 2025. Adapazarı ve Serdivan nüfusun yaklaşık %40,3’ünü barındırıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Öne çıkan</th></tr>
+      <tr><td>Adapazarı</td><td>284.006</td><td>İl merkezi ve en kalabalık ilçe; yıllık artış +1.928</td></tr>
+      <tr><td>Serdivan</td><td>168.855</td><td>İkinci en kalabalık; bir yılda +2.534 ile en çok artan ilçelerden</td></tr>
+      <tr><td>Akyazı</td><td>99.561</td><td>Üçüncü en kalabalık; +1.463</td></tr>
+      <tr><td>Hendek</td><td>93.990</td><td>Fındık yetiştirilen kuzey ilçelerinden; +1.261</td></tr>
+      <tr><td>Erenler</td><td>92.549</td><td>2008’de ilçe oldu; Adapazarı’yla kentsel bütünlük; nüfus yalnızca +86 arttı</td></tr>
+      <tr><td>Karasu</td><td>75.887</td><td>Karadeniz sahili; yaz nüfusu belirgin artıyor; fındık</td></tr>
+      <tr><td>Arifiye</td><td>55.589</td><td>Toyota fabrikası; bir yılda +2.610 (yaklaşık %4,9)</td></tr>
+      <tr><td>Geyve</td><td>51.708</td><td>Türkiye ayva üretiminin yaklaşık %60’ı; nüfus −43</td></tr>
+      <tr><td>Sapanca</td><td>47.505</td><td>Sapanca Gölü; konaklama ve bungalov turizmi</td></tr>
+      <tr><td>Ferizli</td><td>36.015</td><td>Nüfus +852</td></tr>
+      <tr><td>Pamukova</td><td>31.536</td><td>Ayva yetiştiriciliğinin yoğun olduğu güney ilçelerinden</td></tr>
+      <tr><td>Kaynarca</td><td>25.440</td><td>Hayvansal üretimin bitkisel üretimden yüksek olduğu ilçelerden</td></tr>
+      <tr><td>Kocaali</td><td>24.966</td><td>Karadeniz sahili; fındık; nüfus −114</td></tr>
+      <tr><td>Söğütlü</td><td>15.288</td><td>Küçük ilçe; nüfus −78</td></tr>
+      <tr><td>Karapürçek</td><td>13.734</td><td>İlin en eski bucağı; nüfus +8</td></tr>
+      <tr><td>Taraklı</td><td>7.064</td><td>İlin en az nüfuslu ilçesi</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">16 ilçenin toplamı 1.123.693 yapar (kontrol edildi). “Öne çıkan” sütunu genel niteliktedir; ilçe bazında ekonomik veri (GSYH, istihdam, ihracat) bulunamadı. Adapazarı+Serdivan payı kendi hesabımdır.</p></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1954 – İl oluyor.</b> Sakarya il statüsü kazandı; Akyazı gibi ilçeler Kocaeli’den Sakarya’ya bağlandı.</p>
+      <p><b>1994 – Toyota.</b> Toyota Arifiye’deki fabrikada üretime başladı; kent otomotiv merkezine dönüştü.</p>
+      <p><b>1999 – Marmara Depremi.</b> 17 Ağustos depremi Adapazarı ve çevresini ağır vurdu; kentsel yapı yeniden kuruldu.</p>
+      <p><b>2008 – Erenler ilçesi.</b> Büyükşehir yasası kapsamında Erenler ayrı ilçe oldu; kaymakamlık 15 Eylül 2008’de hizmete başladı.</p>
+      <p><b>2020–2024 – GSYH sıçraması.</b> Cari GSYH 60,7 milyar TL’den 536,7 milyar TL’ye çıktı (nominal).</p>
+      <p><b>2024 – İhracat rekoru.</b> TİM serisinde 6,28 milyar $; 274.323 taşıt üretildi.</p>
+      <p><b>2025 – Nüfus ve ihracat.</b> Nüfus 1.123.693; ihracat 155 ülkeye 5,9 milyar $; Toyota 3,9 milyar $ ihracatla Türkiye’nin ikinci büyük ihracatçısı.</p>
+      <p><b>2026 – Yavaşlama ve altyapı.</b> Ocak–Eylül ihracatı %1,3 azaldı; Temmuz’da Adapazarı–Serdivan tramvayının yapım sözleşmesi Makyol İnşaat’la imzalandı.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Toyota’nın Avrupa’ya yönelik üretimi: Türkiye taşıt ihracatının yaklaşık %16–20’si</li><li>Sanayi, tarım ve turizmi bir arada barındıran çeşitli yapı</li><li>İstanbul, Ankara ve Kocaeli’ye yakınlık; kesintisiz nüfus artışı</li><li>Fındık, mısır, ayva, süs bitkisi ve bal kabağı gibi öne çıkan tarım ürünleri</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın yaklaşık %83’ü otomotivde; Toyota’nın 3,9 milyar $’ı TİM’in 5,9 milyar $’ının yaklaşık üçte ikisi (kendi hesabım)</li><li>Fransa, İspanya, Polonya, Birleşik Krallık ve İtalya Ocak–Eylül 2026 ihracatının yaklaşık %60’ı; Almanya ve Birleşik Krallık’ta sert düşüş</li><li>Kişi başına GSYH Türkiye ortalamasının altında; komşu Kocaeli’nin yaklaşık %61’i (kendi hesabım)</li><li>Açık işlerin çoğu imalatta ve düşük-orta ücretli; kadın talebinde ücret daha düşük</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Hibrit ve elektrikli dönüşüm: Corolla Hybrid ve yan sanayi</li><li>Yeni pazarlar: Romanya (+%51,5), İsveç (+%45,4), İspanya (+%29,8)</li><li>Çelik, kimya, elektrik-elektronik ve mobilya-kâğıt ihracatındaki çift haneli artışlar</li><li>Adapazarı–Serdivan tramvayı ve Sapanca-Karasu turizminin dört mevsime yayılması</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Sakarya’nın sorunu üretimin olmaması değil, üretimin kentte ne kadar kaldığı ve ne kadar çeşitlendiği: faaliyet ili ihracatı 10 milyar $’ı aşarken yasal merkez serisi 6,3 milyar $’da kalıyor, kişi başına gelir ise Türkiye ortalamasının biraz altında. Tarım, turizm ve orta ölçekli sanayi bu dengeyi değiştirebilir; ancak ihracat birkaç fabrikanın ve birkaç Avrupa pazarının kararına duyarlı kaldıkça kentin ekonomisi dalgalanmaya açık olacaktır.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>İhracatın yaklaşık %83’ü otomotiv ve üçte ikisi tek firmayken Sakarya ekonomisi nasıl çeşitlendirilebilir?</li>
+      <li>Faaliyet ili ile yasal merkez ihracatı arasındaki 3–4 milyar $’lık fark, ilin kazancı hakkında ne söyler?</li>
+      <li>Fındık ve mısırda öne çıkan bir ilde tarımsal katma değer ham ürün satışından işlemeye nasıl kaydırılır?</li>
+      <li>Sapanca gibi günübirlik yoğunluk yaşayan göl turizmi, su kaynakları ve çevre korunarak nasıl sürdürülür?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2023 ve 2024 (CNBC-e, Habertürk, Rudaw aktarımı); Sakarya’ya özgü rakamlar: Bizim Sakarya, Söz Sakarya ve SATSO 2025 bütçe konuşması (GSYH, kişi başına GSYH, sanayi ve hizmet üretimi, 2023 sıralaması)</li>
+      <li>TİM ihracat verileri (SATSO, Milliyet, Ekonomi Gazetesi, Yeni Şafak; AA Ekim 2026, Foreks aktarımı: Ocak–Eylül 2026 sektör ve pazar tabloları); SATSO Başkanı Altuğ açıklamaları (2025 yıllık ihracat); CNN Türk (Ocak–Şubat 2026)</li>
+      <li>Otomotiv Sanayii Derneği verileri (AA, Haberler.com, Habertürk Yerel Haberler, Borsagündem, CNN Türk: 2024, 2025 ve 2026 üretim ve ihracat); TİM otomotiv sıralaması (AA, Kocaeli sayfasındaki derleme); Ekonomist (Toyota 2025 ihracatı)</li>
+      <li>TOBB Başkanı Hisarcıklıoğlu konuşması (Habertürk Yerel Haberler, Sondakika); Giresun Ticaret Borsası derlemesi (Ekonomi Gazetesi); Bakan Yumaklı konuşması (Türkgün); Sakarya Üniversitesi açık erişim tarım çalışmaları</li>
+      <li>Sakarya Büyükşehir Belediyesi (Acarlar Longozu ziyaretçi sayısı, turizm broşürü); Sapanca turizm yerel basın; dergipark (Sapanca taşıma kapasitesi, 2025); NTV (Karasu)</li>
+      <li>TÜİK ADNKS 2025 (NetGaste, Akyazı Haber, Sakarya Postası, Halk54 ilçe tablosu, Karasu Haberleri); İŞKUR Sakarya İşgücü Piyasası Araştırması 2024; TÜİK 2025 işgücü istatistikleri (Kocaeli sayfasındaki Türkiye karşılaştırması)</li>
+      <li>Railway Gazette (Adapazarı–Serdivan tramvayı, Temmuz 2026); Milliyet (deprem risk haritası, Marmara depremleri); Sakarya Valiliği ve Erenler Kaymakamlığı bilgileri</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Sakarya’ya özgü 2025 işsizlik ve katılma oranı, 2024 sektörel katma değer payları, 2025 faaliyet ili ihracatı, 2025 tam yıl taşıt üretimi, OSB doluluk ve istihdam rakamları, güncel hayvan varlığı, belgeli tesis ve yatak sayıları, turizm geliri ve çoğu ilçenin ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık 14.600 $ (2024 kişi başına GSYH; 2024 dolar kuru Kocaeli ve Ankara’nın TL/$ oranından türetildi), %95 (Türkiye ortalamasına oran), %34 (imalat payı), %6 (2025 ihracat düşüşü), %66 (Toyota’nın ihracat payı), %60 (ilk beş pazar), %61 (Kocaeli’ye oran), %66,9 (ihracat/üretim, 2026 ilk dokuz ay), %20,6 (borsa payı), %28,3 (kadın payı), %48,5 ve %40,3 (ilçe payları), %4,9 (Arifiye artışı), −%36 (TürkTraktör) ve 307 (diğer açık iş) kendi hesabımdır. 2025 ihracatı yuvarlak bir rakamdır; 2025 ilk yarı üretim değeri üretici toplamlarından hesaplandı. Fındık, mısır ve bal kabağı rakamlarının yılı belirtilmemiştir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+var BT=[['Yıllık ihracat, TİM yasal merkez (milyar $)',[['2024',6.28],['2025',5.9]],[1],'2025 rakamı yuvarlaktır; 2024’e göre yaklaşık %6 düşüş (kendi hesabım). 2024 %9,8 artışla o güne kadarki rekordu. Kaynak: TİM (SATSO, Ekonomi Gazetesi); SATSO Başkanı Altuğ.'],
+ ['İki seri, 2024 (milyar $)',[['TİM, yasal merkez',6.28],['Bakanlık, faaliyet ili',10.03]],[0],'Faaliyet ili serisi üretimin yapıldığı ili, TİM serisi firma merkezini esas alır; toplanmamalı. Faaliyet ili 2024’te %5,6 arttı. Kaynak: SATSO; Ticaret Bakanlığı verisi.'],
+ ['Ocak–Eylül ihracatı, TİM (milyar $)',[['2025',4.063],['2026',4.008]],[1],'2026’da %1,3 azalış; Türkiye ihracatındaki payı %2,18, sıralama 7. Kaynak: TİM (AA, 7 Ekim 2026).'],
+ ['Sektör, Oca–Eyl 2026 (milyon $)',[['Otomotiv',3325.7],['Demir ve demir dışı',117.9],['Kimya',79.3],['Çelik',70.4],['Makine',60.0],['Elektrik-elektronik',52.5],['İklimlendirme',48.2]],[0],'Otomotiv %3,9 azaldı, payı %82,96. Artış: kimya %12,6, çelik %13,8, elektrik-elektronik %16,4; düşüş: demir ve demir dışı %9,7, iklimlendirme %9,9. Kaynak: TİM (AA).'],
+ ['Pazar, Oca–Eyl 2026 (milyon $)',[['Fransa',660.9],['İspanya',584.4],['Polonya',512.3],['Birleşik Krallık',326.5],['İtalya',310.7],['Romanya',220.0],['Almanya',144.8]],[0],'İlk beş pazar ihracatın yaklaşık %60’ı (kendi hesabım). Değişim: Romanya +%51,5, İspanya +%29,8, Fransa +%11,6; Birleşik Krallık −%32,3, Almanya −%57,8. Kaynak: TİM (AA).']];
+mk('bt',BT,['Yıllık','İki seri','Oca–Eyl','Sektör','Pazar']);
+var OS=[['Ocak–Haziran taşıt üretimi (bin adet)',[['2025',114.1],['2026',114.9]],[1],'2026’da yalnızca 797 adet fazla (+%0,7); 2025 değeri firma toplamlarından hesaplandı. Kaynak: OSD (AA, Habertürk Yerel Haberler).'],
+ ['Firma bazında üretim, Oca–Haz 2026 (bin adet)',[['Toyota',102.2],['TürkTraktör',10.0],['Otokar',2.7]],[0],'2025’te Toyota 95,9, TürkTraktör 15,6, Otokar 2,7 bin adetti. Toyota +%6,6, TürkTraktör yaklaşık −%36. İhracat: Toyota 66,2, TürkTraktör 6,6, Otokar 1,0 bin. Kaynak: OSD (AA).'],
+ ['Üretim ve ihracat, Oca–Eyl 2026 (bin adet)',[['Üretim',162.7],['İhracat',108.8]],[1],'Üretilen araçların yaklaşık %66,9’u ihraç edildi (kendi hesabım). Türkiye üretiminin %16,49’u, ihracatının %15,65’i. Kaynak: OSD (AA, 14 Ekim 2026).'],
+ ['Otomotiv ihracatı il sıralaması, Oca–Eki 2026 (milyar $)',[['Kocaeli',10.5],['Bursa',8.1],['İstanbul',7.3],['Sakarya',3.7],['Ankara',1.5]],[3],'Yasal merkez esaslı; Sakarya dördüncü. Kaynak: TİM (AA), Kocaeli sayfasındaki derleme.'],
+ ['Toyota ve il ihracatı, 2025 (milyar $)',[['Sakarya toplam (TİM)',5.9],['Toyota Otomotiv',3.9]],[1],'Toyota il ihracatının yaklaşık %66’sı (kendi hesabım; iki rakam farklı kaynaklardan ve yuvarlak). Toyota Türkiye’nin en çok mal ihraç eden ikinci şirketi. Kaynak: TİM İlk 1000 İhracatçı 2025 (Ekonomist); SATSO.']];
+mk('os',OS,['Üretim','Firma','İhracat','İl sırası','Toyota']);
+var TA=[['Öne çıkan ürünler (bin ton, yıllık)',[['Mısır (dane + silaj)',380],['Fındık',95],['Bal kabağı',14]],[0],'Yıl belirtilmemiş konuşma aktarımı. Fındıkta Türkiye 3.sü, bal kabağında 1.si; Geyve ayvada Türkiye üretiminin yaklaşık %60’ı. Kaynak: TOBB Başkanı Hisarcıklıoğlu (Habertürk Yerel, Sondakika).'],
+ ['Fındık, ticaret borsası işlemi, 12 ay (bin ton)',[['Sakarya Ticaret Borsası',133.6],['Tüm borsalar toplamı',649.4]],[0],'Sakarya payı yaklaşık %20,6 (kendi hesabım). Üretim değil, borsada işlem hacmidir. Kaynak: Giresun Ticaret Borsası derlemesi (Ekonomi Gazetesi).']];
+mk('ta',TA,['Ürün','Fındık']);
+var GT=[['Kişi başına GSYH, 2024 (bin TL)',[['Kocaeli',788.9],['Tekirdağ',604.2],['Bolu',548.3],['Bilecik',527.5],['Türkiye ortalaması',503.1],['Sakarya',479.4]],[5],'Sakarya Türkiye ortalamasının yaklaşık %95’i, Kocaeli’nin yaklaşık %61’i (kendi hesabım). Doğu Marmara’da Kocaeli, Bolu ve Yalova’nın ardından dördüncü. Kaynak: TÜİK il bazında GSYH 2024 (CNBC-e); Bizim Sakarya.'],
+ ['Toplam GSYH, cari (milyar TL)',[['2020',60.7],['2023',310.4],['2024',536.7]],[2],'Nominal seridir, enflasyondan etkilenir. 2023’te 17. sıra ve Türkiye’nin %1,17’si. Kaynak: TÜİK; SATSO, Bizim Sakarya.'],
+ ['Üretim, 2024 (milyar TL)',[['Sanayi',194.8],['İmalat',182.8],['Ticaret-ulaştırma-konaklama',113.7]],[1],'İmalatın GSYH’deki payı yaklaşık %34 (kendi hesabım). Yerel basın aktarımı; resmî tabloyla doğrulanmadı. Kaynak: TÜİK (Bizim Sakarya).']];
+mk('gt',GT,['Kişi başı','GSYH','Sektör']);
+var IG=[['Nüfus (bin kişi)',[['2020',1042.6],['2022',1080.1],['2023',1098.1],['2024',1110.7],['2025',1123.7]],[4],'2025’te +12.958 kişi (%1,17); artış hızı binde 11,6. Ortanca yaş 36,0 (Türkiye 34,9). Kaynak: TÜİK ADNKS (NetGaste, Akyazı Haber).'],
+ ['Kayıtlı çalışan, İŞKUR 2024 (bin kişi)',[['Erkek',86.7],['Kadın',34.2]],[1],'Ziyaret edilen işyerlerinde 120.860 çalışan; kadın payı %28,3 (kendi hesabım). Kadın istihdamının en yüksek olduğu sektör imalat. Kaynak: İŞKUR Sakarya İşgücü Piyasası Araştırması 2024.'],
+ ['Açık işler, 2024 (kişi)',[['İmalat',2618],['Toptan ve perakende',595],['Konaklama ve yiyecek',164],['İdari ve destek',105],['Diğer sektörler*',307]],[0],'*Toplam 3.789 açık işten kalan (kendi hesabım); imalat payı yaklaşık %69. Kaynak: İŞKUR 2024.']];
+mk('ig',IG,['Nüfus','Çalışan','Açık iş']);
+</script>
+</body>
+</html>
