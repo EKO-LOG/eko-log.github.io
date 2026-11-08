@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rize | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Rize'ye özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#15803d;--a2:#be123c;--a3:#0369a1"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Rize</span><h1>Rize: Çayla Anılan, Havalimanına ve Limana Yaslanan İl</h1><p>346.947 nüfuslu Rize, kişi başına GSYH’de 10.837 $ ile 81 il arasında 44. (Türkiye ortalamasının yaklaşık %71’i). Türkiye yaş çay üretiminin yaklaşık üçte ikisini veriyor, ama ihracatı çaydan çok başka kalemlere dayanıyor ve 2025’te %12,4 geriledi. Öte yandan turizm ve havalimanı hızla büyüyor, İyidere Lojistik Limanı ise henüz tamamlanmadı. Dağ ilçelerinde nüfus eriyor. Birçok veri bir ticaret borsası raporu ve basın aktarımı olduğu için yılı ve kaynağı her yerde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>10.837 $</b><span>Kişi başına GSYH (2024), 81 il arasında 44.; Türkiye ort. 15.325 $’ın yaklaşık %71’i (kendi hesabım)</span></div>
+    <div class="k"><b>346.947</b><span>Nüfus (2025), bir yılda −30; nüfusa göre 56. büyük il (RTB raporu)</span></div>
+    <div class="k"><b>205,2 mn $</b><span>2025 ihracatı; 2024’te 234,2 milyon $ idi (yaklaşık −%12,4, kendi hesabım)</span></div>
+    <div class="k"><b>%67,7</b><span>Rize’nin Türkiye yaş çay üretimindeki payı (2024, Tarım ve Orman Bakanlığı)</span></div>
+    <div class="k"><b>1,16 mn</b><span>Rize-Artvin Havalimanı yolcusu (2025); dış hat yolcusu %62,5 arttı</span></div>
+    <div class="k"><b>284.725</b><span>Tesise geliş (2025); 2024’te 149.847 idi (yaklaşık +%90, kendi hesabım)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#cay">Çay-Tarım</a><a href="#ihracat">Dış Ticaret</a><a href="#ulasim">Havalimanı-Liman-Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">7 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Rakamların çoğu Rize Ticaret Borsası’nın (RTB) raporundan ve basın aktarımlarından geliyor; raporun tam tablolarına erişemedim, arama sonuçlarındaki özetleri kullandım.</li>
+      <li>Sektörlerin il GSYH’sindeki 2024 payını, istihdamını ve toplam GSYH’yi doğrulanmış bir tabloyla bulamadım. Etiketler üretim, ihracat ve yatırım rakamlarına dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Çay rakamlarının bir kısmı Türkiye geneline aittir (işlenen yaş çayın tamamı); Rize’ye özel olan paylar ayrıca belirtildi.</li></ul></div>
+  </section>
+
+  <section id="cay">
+    <h2>Çay ve Tarım: Kimlik Güçlü, Katma Değer Zayıf</h2>
+    <p class="sub">Rize çayın başkenti; ama aile işletmeleri küçük, rekolte 2025’te düştü ve çaydan gelen ihracat gelirleri sınırlı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ca"></div><h3 id="catitle"></h3><div class="bars" id="cabars"></div><p class="note" id="canote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Tarım ve Orman Bakanlığı’na göre Türkiye 2024’te yaklaşık 1,4 milyon ton yaş çay üretti ve Rize’nin payı %67,7 oldu; çayın tamamı Karadeniz’de yetişiyor.</li>
+        <li>RTB’ye göre 2025’te 1.338.662 ton yaş çay işlendi (bir önceki yıla göre −%7,68): ÇAYKUR 822,7 bin ton (%61,46), özel sektör 515,9 bin ton (%38,54); yaklaşık 256 bin ton kuru çay elde edildi. 2025 yaş çay alım fiyatı 25,44 TL/kg.</li>
+        <li>Çayın ardından ikinci ürün fındık (3.080 ha); kivi 255,6 ha. Türkiye’de yaklaşık 205 bin çay üreticisi var (RTB Başkanı).</li>
+        <li>RTB, bölge sanayisinin neredeyse tamamının çaya dayandığını ve üretimin arazi mülkiyeti sınırlı olduğu için küçük aile işletmeleriyle yapıldığını yazıyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Çay ilin kimliği ve ana gelir kaynağı; 2026’da Rize’de sürdürülebilir çay ve çay atığından kömür, sirke, gübre üretimi gibi yeni modeller deneniyor (Belediye, Migros projesi).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>RTB sektörü hacimde istikrarlı ama katma değer ve verimlilikte dönüşüme muhtaç buluyor; genç nüfusun çay tüketimi azalıyor.</li><li>Zararlı böcekler (Ardeşen’de “Amerikan kurdu”) çay, fındık ve kivi bahçelerine yayılıyor (haber).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Rize’ye özel yaş çay üretim tonajı, çay alanı ve üretici sayısı bulunamadı; %67,7 payı ile Türkiye toplamından yaklaşık 950 bin ton çıkar (kendi hesabım), ama bu bir tahmin.</li>
+      <li>2024 rekolteyi (yaklaşık 1,45 milyon ton) RTB’nin %7,68’lik azalışından geri hesapladım; bakan 2024’ü 1,43 milyon ton diye açıkladı. 2026 için bakanın beklentisi yaklaşık 1,3 milyon ton.</li>
+      <li>Çay ve tarımın il GSYH’sindeki 2024 payı ile tarımsal istihdam bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>Dış Ticaret: Küçük Ama Daralan, Ürün Yoğun</h2>
+    <p class="sub">İhracat 2025’te 205,2 milyon $’a geriledi; çay ihracatın ancak küçük bir bölümü gibi görünüyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>RTB’ye göre ihracat 2024’te 234,2 milyon $ iken 2025’te 205,2 milyon $’a indi; ithalat 8,3 milyon $’dan 11,2 milyon $’a çıktı. Ocak-eylül 2025’te ihracat 154,9 milyon $ idi.</li>
+        <li>En büyük ihracat pazarları Bulgaristan (83,8 milyon $), Gürcistan (26,6 milyon $) ve Rusya (21,4 milyon $); ithalatta Çin (2,9 milyon $), İtalya (1,2 milyon $) ve Almanya (1,1 milyon $).</li>
+        <li>Rize’den çay ihracatı 2025 ocak-haziranda 2.155 ton ve 9,88 milyon $ (Türkiye çay ihracatının %58’i), 2026 ocak-eylülde 1.820 ton ve 9,21 milyon $ (%37) oldu; ilk üç pazar Belçika, KKTC ve ABD ya da Birleşik Krallık.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Dış ticaret fazlası büyük (ihracat ithalatın yaklaşık 18 katı, kendi hesabım); çay Belçika, ABD ve Birleşik Krallık gibi yüksek gelirli pazarlara ulaşıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İhracat bir yılda yaklaşık %12 düştü ve RTB’ye göre sınırlı sayıda ürün ve pazara yoğunlaşmış durumda; Bulgaristan tek başına yaklaşık %41 (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İhracatın ürün kırılımını (özellikle Bulgaristan’a giden kalemi) ve rakamın kaynağının “faaliyet ili” mi “genel ticaret sistemi” mi olduğunu bulamadım; RTB raporundan özet alındı.</li>
+      <li>Çay ihracatı rakamları farklı dönemlere ait (2025 ilk yarı, 2026 ilk dokuz ay); karşılaştırılıp artış ya da düşüş sayılmadı. Yıllık Rize çay ihracatını bulamadım; çayın toplam ihracat içindeki payı yalnızca büyüklük tahminidir.</li>
+      <li>Bir başka haberde Doğu Karadeniz illerinin ilk yarı ihracatı verilmiş (Rize 111,1 milyon $), ama yılı belirsiz olduğu için kullanılmadı.</li></ul></div>
+  </section>
+
+  <section id="ulasim">
+    <h2>Havalimanı, Liman ve Turizm: Hızlı Büyüyen Yüz</h2>
+    <p class="sub">Deniz dolgusu üzerindeki Rize-Artvin Havalimanı yolcu çekiyor; İyidere Lojistik Limanı ise ilin ticaret hikâyesini değiştirmesi beklenen proje.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ul"></div><h3 id="ultitle"></h3><div class="bars" id="ulbars"></div><p class="note" id="ulnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Rize-Artvin Havalimanı 14 Mayıs 2022’de açıldı ve Mayıs 2026’ya kadar 4,2 milyon yolcuya hizmet verdi. 2025’te 1.161.135 yolcu taşıdı; 2024’e göre +63.307. Dış hat yolcusu 19.453’ten 31.617’ye çıktı.</li>
+        <li>İyidere Lojistik Limanı genel kargo, dökme yük, konteyner ve Ro-Ro taşımacılığıyla yıllık 13 milyon ton kapasiteli olacak; vali, üstyapının bu yaz tamamlanacağını ve Ovit bağlantısıyla stratejik değer kazanacağını söyledi.</li>
+        <li>Turizmde 2024’ten 2025’e tesise geliş 149.847’den 284.725’e, geceleme 260.659’dan 478.583’e yükseldi (RTB raporu).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Hava ulaşımı ve liman, çay dışındaki ekonomiyi (turizm, lojistik) besleyebilecek altyapı; deniz dolgusu üzerinde şehir hastanesi ve millet bahçesi de yükseliyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Liman henüz tamamlanmadı, dış hat yolcusu küçük; şirket kuruluşları 2025’te 176’dan 162’ye düşerken kapanışlar 42’den 53’e çıktı (RTB). Şiddetli yağışlarda sel ve heyelan görülüyor (haber, tarihi belirsiz).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Havalimanı Rize ve Artvin’e ortak hizmet veriyor; yolcu sayısı yalnızca Rize’ye ait sayılmamalı.</li>
+      <li>Turizm rakamlarının iki yıl arasındaki farkı, kapsam değişikliğinden de kaynaklanabilir (tahmin); yatak sayısı, turizm geliri ve yabancı ziyaretçi bulunamadı.</li>
+      <li>Havalimanı verileri Rize Ticaret Borsası raporu ve bakan açıklamasından; limanın tamamlanma tarihi birkaç kez ertelenmiş görünüyor (2025’te faaliyete geçmesi söylenmişti) ve henüz resmî açılış bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (2024) ve ADNKS (2025)</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Kişi başına GSYH 10.837 $ ile 44. sırada; Niğde (11.052) ve Zonguldak’ın (11.114) hemen arkasında, Sivas (10.697) ve Adana’nın (10.692) önünde. Türkiye ortalaması 15.325 $; yalnızca 11 il ortalamanın üzerinde.</li>
+        <li>Nüfus 2025’te 346.947 ile 2024’e göre 30 kişi azaldı; 2023’te 350.506’ydı (yaklaşık −%1,0, kendi hesabım).</li>
+        <li>İlçelerde 2025 değişimi: Merkez +1.980, Pazar +368, Ardeşen +101; İkizdere −652, Kalkandere −438, Çamlıhemşin −310, Fındıklı −289.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kişi başına gelir Samsun ve Trabzon’a yakın düzeyde (TL cinsinden kendi dönüşümümle); Merkez ilçe ve havalimanı çevresi nüfus çekiyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık %71’i; dağ ilçelerinde nüfus erimesi sürüyor ve toplam nüfus durağan.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Rize’nin toplam GSYH’sini (TL), 2024 reel büyümesini, sektör paylarını ve il bazında 2025 işgücü göstergelerini bulamadım.</li>
+      <li>Samsun ve Trabzon dolar değerleri, TL değerlerinden Balıkesir dosyasındaki yaklaşık 32,83 TL/$ oranıyla hesaplandı (kendi hesabım); resmî dolar listesinde farklı olabilir.</li>
+      <li>Nüfus kayıtlı nüfustur; fiilen yaşayan nüfus farklı olabilir. Rize’den İstanbul’a yoğun iç göç var (akademik çalışma), bu da kayıtlı nüfusu kentte yaşayan nüfustan farklı kılabilir.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Rize’nin 12 ilçesi var: Merkez, Ardeşen, Çamlıhemşin, Çayeli, Derepazarı, Fındıklı, Güneysu, Hemşin, İkizdere, İyidere, Kalkandere ve Pazar. 2025 ilçe nüfuslarını bulamadım; yalnızca bir yıllık değişimler biliniyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus değişimi (2025)</th><th>Not</th></tr>
+      <tr><td>Merkez</td><td>+1.980</td><td>İdari merkez; deniz dolgusunda şehir hastanesi ve millet bahçesi</td></tr>
+      <tr><td>Pazar</td><td>+368</td><td>Artan üç ilçeden biri</td></tr>
+      <tr><td>Ardeşen</td><td>+101</td><td>Çay, fındık ve kivi üretimi; zararlı böcek sorunu</td></tr>
+      <tr><td>Fındıklı</td><td>−289</td><td>Kıyı ilçesi</td></tr>
+      <tr><td>Çamlıhemşin</td><td>−310</td><td>Yayla turizmi ve dağ ilçesi</td></tr>
+      <tr><td>Kalkandere</td><td>−438</td><td>Dağ ilçesi</td></tr>
+      <tr><td>İkizdere</td><td>−652</td><td>En çok kayıp veren ilçe</td></tr>
+      <tr><td>Diğer 5 ilçe</td><td>Bulunamadı</td><td>Çayeli, Güneysu, Hemşin, Derepazarı, İyidere</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Bu tablo RTB raporu ve basından derlenmiş genel bir özettir; ilçe bazında GSYH, istihdam veya ihracat verisi yok. “Not” sütunu kaynaklardaki genel ifadelerden çıkarıldı.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Rize</h3>
+      <p style="margin:0">Rize çayın başkenti ama çay ekonomisi katma değerde ve ihracatta sınırlı kalıyor; 2025’te ihracat %12 düştü ve nüfus durağan. En canlı alan havalimanı, turizm ve inşaatı süren İyidere Limanı; bunların kalıcı bir sanayi ve gelir tabanına dönüşüp dönüşmeyeceği belirsiz. Dağ ilçeleri eriyor, kıyı ve Merkez nüfus çekiyor.</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Çayda kilogram başına ihracat gelirini artırmak: markalaşma, paketli ve katma değerli ürün, yeni pazarlar.</div>
+      <div><b>HAMLE 2</b>İyidere Limanı’nı ve OSB’yi çay dışı bir sanayi ve ihracat tabanına bağlamak; ihracat ürün ve pazar çeşitliliğini artırmak.</div>
+      <div><b>HAMLE 3</b>Havalimanıyla gelen turisti dağ ilçelerine yaymak, taşıma kapasitesini ve sel-heyelan riskini planlamaya dahil etmek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyet ya da getiri hesaplayan veri bulamadım. Limanın tamamlanması ve açılışı belirsiz, bu yüzden hamle 2’nin zamanlaması bilinmiyor.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Rize Türkiye yaş çayının yaklaşık üçte ikisini üretirken çay ihracatı yalnızca birkaç on milyon dolar: çay neden bir ihracat ürününe dönüşemedi?</li>
+      <li>İhracat 2025’te yaklaşık %12 düştü ve Bulgaristan tek başına yaklaşık %41: ürün ve pazar çeşitliliği nasıl artırılır?</li>
+      <li>İyidere Lojistik Limanı Rize’nin ihracat hikâyesini değiştirebilir mi, yoksa yalnızca geçiş yükü mü taşır?</li>
+      <li>Havalimanı ve turizm büyürken İkizdere ve Kalkandere nüfus kaybediyor: turizm dağ ilçelerine nasıl yayılır?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>Rize Ticaret Borsası “113 Rize Ekonomisi Raporu” ve “Çay Sektörü Raporu Ocak 2026” (nüfus, ihracat, ithalat, şirket sayıları, turizm, havalimanı; arama özetlerinden); RTB 2025 yaş çay rekolte duyurusu (Olay53, Kuzey Ekspres, AA)</li>
+      <li>TÜİK il bazında GSYH 2024 dolar sıralaması (Habertürk, Rudaw); Tarım ve Orman Bakanlığı Çay Piyasaları Raporu (Temmuz 2025); Tarım Bakanı açıklaması (Dünya köşe yazısı)</li>
+      <li>DKİB çay ihracatı verileri (Yeni Akit, AA, Dünya, İşçi Haber, Halk TV, İstanbul Ticaret Gazetesi); DHA (Rize Ticaret ve Ekonomi Kongresi, ocak-eylül 2025 ihracat)</li>
+      <li>Rize-Artvin Havalimanı ve İyidere Limanı: AA, DHA, Habertürk, Gazete Vatan, Posta, Hürriyet; Rize Valiliği ve Ulaştırma Bakanı açıklamaları</li>
+      <li>DergiPark makalesi (fındık ve kivi alanları), NTV (zararlı), Paradergi ve Milliyet (çay projesi), Hürriyet Daily News (sel ve heyelan), Kure Ansiklopedi (2023 nüfusu)</li>
+    </ul>
+    <p class="note">Çoğu veri bir ticaret borsası raporu, basın aktarımı veya yetkili açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Rize’nin toplam GSYH’si, kişi başına GSYH’nin TL değeri, 2024 reel büyümesi, sektör payları, ürün bazında ihracat, yıllık çay ihracatı, Rize’ye özel çay üretimi ve alanı, 2025 işgücü göstergeleri, güncel yatak sayısı ve turizm geliri, ilçe nüfusları ve limanın açılış tarihi doğrulanmış kaynakla bulunamadığı için sayfada yok. %71 (gelir oranı), −%12,4, yaklaşık +%90, yaklaşık %41 (Bulgaristan payı), yaklaşık 18 kat (ihracat/ithalat), yaklaşık 950 bin ton, yaklaşık 1,45 milyon ton (2024 rekolte), −%1,0 ve Samsun-Trabzon dolar değerleri kendi hesabımdır. Eski ya da dönemi farklı veriler yılları belirtilerek kullanıldı.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: ÇAY',ad:'Çay (üretim ve işleme)',big:'%67,7',alt:'Rize’nin Türkiye yaş çay üretimindeki payı (2024); 2025’te Türkiye’de 1,34 milyon ton işlendi',y:'Ana gelir kaynağı ve ilin kimliği; ÇAYKUR 822,7 bin ton (%61,46), özel sektör 515,9 bin ton; 2025 yaş çay alım fiyatı 25,44 TL/kg.',n:'2025 rekolte −%7,68; aile işletmeleri küçük, katma değer ve verimlilik zayıf, genç nüfus tüketimi azalıyor (RTB).'},
+ {c:'warn',chip:'DAR: İHRACAT',ad:'Dış ticaret',big:'205,2 mn $',alt:'2025 ihracatı; 2024’te 234,2 milyon $ (yaklaşık −%12,4)',y:'İthalat yalnızca 11,2 milyon $ (fazla büyük); ocak-eylül 2025’te 154,9 milyon $; çay Belçika, ABD, Birleşik Krallık’a gidiyor.',n:'Bulgaristan 83,8, Gürcistan 26,6, Rusya 21,4 milyon $ ile pazar yoğunlaşması; ürün kırılımı bulunamadı; Rize çay ihracatı 9 ayda 9,2 milyon $.'},
+ {c:'good',chip:'YÜKSELEN: ULAŞIM',ad:'Havalimanı ve lojistik liman',big:'1,16 mn',alt:'Rize-Artvin Havalimanı 2025 yolcusu (+63 bin); dış hat 31,6 bin (+%62,5)',y:'Deniz dolgusu havalimanı 2022’den beri 4,2 milyon yolcu taşıdı; İyidere Limanı yıllık 13 milyon ton kapasiteli olacak.',n:'Liman henüz tamamlanmadı, tarihi ertelendi; dış hat yolcusu küçük; yolcu Rize ve Artvin’e ortak.'},
+ {c:'good',chip:'YÜKSELEN: TURİZM',ad:'Turizm',big:'284.725',alt:'Tesise geliş (2025); 2024’te 149.847; geceleme 478.583',y:'Bir yılda yaklaşık %90 artış; yayla, doğa ve havalimanı bağlantısı.',n:'Kapsam farkı olabilir; yatak sayısı ve gelir bulunamadı; sel ve heyelan riski; dağ ilçelerine yayılma sorunu.'},
+ {c:'warn',chip:'DAR: FINDIK, KİVİ',ad:'Fındık ve meyve (kivi)',big:'3.080 ha',alt:'Fındık alanı (çaydan sonra ikinci ürün); kivi 255,6 ha',y:'Çay dışı gelir ve meyve çeşitliliği; yüksek rakımda çay, alçakta fındık.',n:'Alanlar küçük; zararlı böcekler (Amerikan kurdu) fındık, kivi ve çaya yayılıyor (haber).'},
+ {c:'sleep',chip:'UYUYAN: SANAYİ',ad:'Sanayi ve girişimcilik',big:'162 / 53',alt:'2025’te kurulan / kapanan şirket (2024: 176 / 42)',y:'OSB gelişiyor, İyidere Limanı sanayi için fırsat sayılıyor (Bakan); bir yatırım destek programında Rize’de silah üretimi de yer aldı (haber).',n:'RTB: bölge sanayisinin neredeyse tamamı çaya dayalı; kuruluşlar düştü, kapanışlar arttı; OSB’deki firma ve istihdam sayısı bulunamadı.'},
+ {c:'bad',chip:'BASKI ALTINDA: DAĞ İLÇELERİ',ad:'Nüfus ve dağ ilçeleri',big:'346.947',alt:'Nüfus 2025 (−30); İkizdere −652, Kalkandere −438',y:'Merkez ilçe +1.980, Pazar +368, Ardeşen +101.',n:'Çamlıhemşin −310, Fındıklı −289; toplam nüfus 2023’teki 350.506’dan yaklaşık %1 geride (kendi hesabım).'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var CA=[['Yaş çay işleme, 2025 (bin ton, Türkiye geneli)',[['ÇAYKUR',822.7],['Özel sektör',515.9]],[0,1],'Toplam 1.338,7 bin ton; yaklaşık 256 bin ton kuru çay. Kaynak: Rize Ticaret Borsası.'],
+ ['Yaş çay rekoltesi, Türkiye (bin ton)',[['2024 (geri hesaplanan)',1450],['2025',1338.7],['2026 beklenti (Bakan)',1300]],[1],'2024 değeri %7,68’lik azalıştan geri hesaplandı (kendi hesabım); Bakan 2024’ü 1.430 bin ton diye açıkladı. Kaynak: RTB, Tarım ve Orman Bakanlığı.'],
+ ['Rize’den çay ihracatı, farklı dönemler (milyon $)',[['Ocak-haziran 2025',9.88],['Ocak-eylül 2026',9.21]],[0,1],'Dönemler farklı, karşılaştırılmamalı; Türkiye çay ihracatındaki Rize payı %58 ve %37. Kaynak: DKİB (İşçi Haber, AA).'],
+ ['Çay dışı ürün alanı (hektar)',[['Fındık',3079.7],['Kivi',255.6]],[0,1],'Fındık çaydan sonra ikinci ürün. Kaynak: DergiPark makalesi (İl Tarım ve Orman verisi).']];
+mk('ca',CA,['İşleme','Rekolte','Çay ihracatı','Fındık ve kivi']);
+var IH=[['İhracat ve ithalat (milyon $)',[['İhracat 2024',234.2],['İhracat 2025',205.2],['İthalat 2024',8.3],['İthalat 2025',11.2]],[1],'İhracat yaklaşık −%12,4, ithalat +%35 (kendi hesabım). Kaynak: Rize Ticaret Borsası raporu.'],
+ ['2025 ihracatta ilk üç pazar (milyon $)',[['Bulgaristan',83.8],['Gürcistan',26.6],['Rusya',21.4],['Diğer (hesaplanan)',73.4]],[0],'Diğer değer toplamdan çıkarıldı (kendi hesabım). Kaynak: Rize Ticaret Borsası raporu.'],
+ ['İhracat, ocak-eylül 2025 ve tüm yıl (milyon $)',[['Ocak-eylül 2025',154.9],['2025 yıllık',205.2]],[1],'Son çeyrek yaklaşık 50 milyon $ (kendi hesabım). Kaynak: DHA (Rize Ticaret ve Ekonomi Kongresi), RTB.']];
+mk('ih',IH,['İhracat ve ithalat','Pazarlar','Dönemsel']);
+var UL=[['Rize-Artvin Havalimanı yolcusu (bin kişi)',[['2024 (hesaplanan)',1097.8],['2025',1161.1]],[1],'2025’te +63.307 yolcu; 2024 değeri bu farktan çıkarıldı (kendi hesabım). Kaynak: Rize Ticaret Borsası raporu.'],
+ ['Dış hat yolcusu (bin kişi)',[['2024',19.5],['2025',31.6]],[1],'Yaklaşık +%62,5. Kaynak: Rize Ticaret Borsası raporu.'],
+ ['Tesise geliş ve geceleme (bin)',[['Geliş 2024',149.8],['Geliş 2025',284.7],['Geceleme 2024',260.7],['Geceleme 2025',478.6]],[1,3],'Kapsam değişikliği olasılığı var (tahmin). Kaynak: Rize Ticaret Borsası raporu.'],
+ ['Şirket kuruluşu ve kapanışı (adet)',[['Kurulan 2024',176],['Kapanan 2024',42],['Kurulan 2025',162],['Kapanan 2025',53]],[2,3],'Net kuruluş 134’ten 109’a düştü (kendi hesabım). Kaynak: Rize Ticaret Borsası raporu.']];
+mk('ul',UL,['Havalimanı','Dış hat','Turizm','Şirketler']);
+var GT=[['Kişi başına GSYH, 2024 (dolar)',[['İstanbul',24452],['Türkiye',15325],['Artvin (hesaplanan)',11884],['Samsun (hesaplanan)',11253],['Rize',10837],['Trabzon (hesaplanan)',10539],['Şanlıurfa (son sıra)',5731]],[4],'Rize 81 il arasında 44. Hesaplananlar TL değerinin yaklaşık 32,83 TL/$ ile bölünmesidir (kendi hesabım). Kaynak: TÜİK (Habertürk, Rudaw), önceki il dosyaları.'],
+ ['Nüfus (bin kişi)',[['2023',350.5],['2024',347.0],['2025',346.9]],[2],'Rize nüfusa göre 56. büyük il. Kaynak: Kure Ansiklopedi, Rize Ticaret Borsası raporu (TÜİK ADNKS).'],
+ ['İlçelerde 2025 nüfus değişimi (kişi, mutlak değer)',[['Merkez (+1.980)',1980],['Pazar (+368)',368],['Ardeşen (+101)',101],['Fındıklı (−289)',289],['Çamlıhemşin (−310)',310],['Kalkandere (−438)',438],['İkizdere (−652)',652]],[3,4,5,6],'Çubuklar değişimin büyüklüğünü gösterir; ilk üç artış, son dördü azalıştır. Kaynak: Rize Ticaret Borsası raporu.']];
+mk('gt',GT,['Gelir','Nüfus','İlçe değişimi']);
+</script>
+</body>
+</html>

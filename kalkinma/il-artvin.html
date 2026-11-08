@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artvin | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Artvin'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#166534;--a2:#0d9488;--a3:#b45309"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Artvin</span><h1>Artvin: Elektriği Üreten, Kapıdan Geçen, Madeni Tartışılan İl</h1><p>167.531 nüfuslu Artvin, kişi başına GSYH’de 390.108 TL ile (yaklaşık 11.900 $, Türkiye ortalamasının yaklaşık %78’i) Samsun ve Trabzon’un önünde. Ama aynı il 2023’te reel olarak %16 daralarak en çok küçülen il oldu; nedeni kaynaklarda yok. İlin üç büyük ekonomik hikâyesi var: Çoruh üzerindeki barajlar, Gürcistan sınırındaki Sarp Kapısı ve tartışmalı bakır madenciliği. Ancak kendi adına kayıtlı ihracatı yalnızca 79,6 milyon $; kapıdan geçen ihracatın yaklaşık yirmide biri. Birçok veri eski ya da basın aktarımı olduğu için yılı ve kaynağı her yerde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>390.108 TL</b><span>Kişi başına GSYH (2024); yaklaşık 11.900 $, Türkiye ort. 15.325 $’ın yaklaşık %78’i (kendi hesabım)</span></div>
+    <div class="k"><b>167.531</b><span>Nüfus (TÜİK 2025); bir yılda −1.749 (yaklaşık −%1,0), köy ve belde nüfusu −%3,8</span></div>
+    <div class="k"><b>558 MW</b><span>Yusufeli HES; kurak 2025’te Türkiye hidroelektrik üretiminin %3,5’ini sağladı (DSİ yetkilisi)</span></div>
+    <div class="k"><b>79,6 mn $</b><span>Artvin’e kayıtlı ihracat (2024); Sarp Kapısı’ndan geçen ihracat yaklaşık 1,7 milyar $</span></div>
+    <div class="k"><b>−%16</b><span>2023’te reel GSYH değişimi; en çok daralan il (TÜİK, haber aktarımı)</span></div>
+    <div class="k"><b>5,04 mn</b><span>Sarp Sınır Kapısı yolcu geçişi (2025); 2024’e göre −%8,3</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#enerji">Enerji-Maden</a><a href="#ihracat">Dış Ticaret</a><a href="#tarim">Tarım-Bal</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">7 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da tartışmalı</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Rakamlar farklı yıllardan ve kaynaklardan: TÜİK 2024-2025, bir belediye plan raporu, valilik ve milletvekili açıklamaları ile yerel basın. Yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki 2024 payını ve istihdamını doğrulanmış bir tabloyla bulamadım. Etiketler üretim, ihracat ve yatırım haberlerine dayanıyor.</li>
+      <li>Madencilik kartı tartışmalı bir konudur; hem şirket hem muhalif çevre örgütü kaynakları kullanıldı, ikisi de kendi çıkarına göre konuşuyor olabilir.</li></ul></div>
+  </section>
+
+  <section id="enerji">
+    <h2>Enerji ve Madencilik: Çoruh’un Barajları, Murgul’un Bakırı</h2>
+    <p class="sub">Artvin Türkiye’nin hidroelektrik merkezlerinden biri; bakır madenciliği ise ilde hem istihdam hem büyük bir toplumsal tartışma kaynağı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="en"></div><h3 id="entitle"></h3><div class="bars" id="enbars"></div><p class="note" id="ennote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Çoruh üzerindeki Muratlı, Borçka, Deriner, Artvin ve Yusufeli barajları ilde yer alıyor; milletvekili açıklamasına göre 5 baraj bugüne kadar 59,7 milyar kWh elektrik üretti.</li>
+        <li>Yusufeli HES 558 MW kurulu güçle, yıllık ortalama yaklaşık 1,83-1,89 milyar kWh üretiyor; 2025’te kurak yıla rağmen rekor üretti ve aşağıdaki dört barajın üretimini yaklaşık %10 artırdı (işletme yetkilisi). 2023 sonu itibarıyla 6,6 milyar TL gelir sağladığı belirtiliyor.</li>
+        <li>Bakır: Eti Bakır’ın ildeki ruhsat sahası 24.093 hektar (Kemalpaşa ve Hopa’nın yüzölçümünden büyük). Murgul’daki kapasite artışı projesi (yaklaşık 4,5 milyar TL) temmuz 2026’da ÇED’in son aşamasındaydı.</li>
+        <li>Cerattepe’de şirket, projenin ömrünü 14 yıl, istihdamı 387 kişi olarak açıklamıştı; muhalif çevre örgütü cevherin 5-6 yıllık kaldığı bilgisi verildiğini söylüyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kurak yılda bile rekor üretim ve komşu barajlara su desteği; enerji ilin en görünür ve en istikrarlı ekonomik varlığı.</li><li>Murgul’daki mevcut tesis cevher işleme (flotasyon) için ilde altyapı sağlıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Maden projeleri halk tepkisi ve davalarla ilerliyor; Anayasa Mahkemesi 2024’te Cerattepe için hak ihlali kararı verdi ve şirket sonrasında yeni bir ÇED raporu hazırlattı (Yeşil Artvin Derneği’nin aktarımı).</li><li>Muhalif bir haber, Artvin yüzölçümünün %71’inin maden ruhsat alanı olduğunu ve ilde 41 maden işletmesi bulunduğunu yazıyor (doğrulanmadı).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Barajların gelirinin ne kadarının ilde kaldığını (vergi, pay, istihdam) gösteren bir veri bulamadım; “ekonomiye katkı” rakamları ulusal ölçekte ve yetkili açıklamasıdır.</li>
+      <li>Madencilik için ildeki üretim miktarı, istihdam ve ihracat tutarı bulunamadı; tartışmanın iki tarafının rakamları doğrulanmadı.</li>
+      <li>Bir akademik çalışmaya göre Çoruh havzasında 3.899 MW’lık 37 HES planlanmış; kaç tanesinin yapıldığı bu sayfada hesaplanmadı.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>Dış Ticaret: Kapı Büyük, İlin Payı Küçük</h2>
+    <p class="sub">Sarp Sınır Kapısı ve Hopa Limanı’ndan geçen ihracat milyar dolarla ölçülüyor; Artvin’e kayıtlı ihracat onlarca milyon dolar.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Valiliğe göre Sarp Kapısı’ndan 2025’te 5,04 milyon yolcu geçti (2024: 5,555 milyon, −%8,33); kapıdan ihracat %4 artarak 1,774 milyar $ oldu. Hopa Limanı’nda 2025’te 284 gemi çıkış yaptı (bir önceki yıl 357).</li>
+        <li>Artvin’e kayıtlı ihracat 2024’te 79,6 milyon $; 2026’nın ilk altı ayında %51,3 artışla 51,7 milyon $ oldu. Kapı ihracatı bu tutarın yaklaşık 21 katı (2024 değerlerine göre, kendi hesabım).</li>
+        <li>Sarp’ta peron sayısı 8’den 12’ye çıkarıldı; Türkiye-Gürcistan ticaret hacmi 2025’te 3 milyar $’ı aştı.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Orta Asya ve Kafkasya’ya açılan en yoğun kapılardan birine sahip; 2026’da kayıtlı ihracat hızla artıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Geçiş hacmi ilin kendi üretimi değil; yolcu ve gemi sayıları 2025’te düştü, kaçak mal el koyma tutarı 936 milyon TL’den 3,4 milyar TL’ye çıktı (vali açıklaması).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Kapıdan geçen ihracat Türkiye genelinden gelen mallardır; Artvin’in ihracatı sayılmamalı. İki rakam farklı kavramları ölçüyor.</li>
+      <li>79,6 milyon $ rakamı bir belediye plan raporundan alındı; Ticaret Bakanlığı tablosunu doğrulayamadım. 2025 yıllık Artvin ihracatını bulamadım; 2025 ilk yarı değeri (yaklaşık 34 milyon $) 2026 artış oranından geri hesaplandı; yılı belirsiz bir DKİB haberi ilk yarıda Artvin için yaklaşık 47,9 milyon $ veriyor (kendi hesabım, bölgenin toplamından çıkarıldı) ve bu değerle uyuşmuyor, kaynak tanımları farklı olabilir.</li>
+      <li>İhracatın ürün ve ülke kırılımı bulunamadı. Vali açıklamasındaki limandan ihracat (1,774 milyar $) ile kapı ihracatı iki ayrı kaynak olarak okunmalı; bir haber ise “ihracat 17 milyar dolar” diyor ve büyük olasılıkla hatalı olduğu için kullanılmadı (tahmin).</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım, Çay ve Bal: Orman İl, Dar Tarım Alanı</h2>
+    <p class="sub">Arazinin yarısından fazlası orman; tarım arazisi %9. Çay, fındık ve bal öne çıkan ürünler.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>İlin 730 bin hektarlık arazisinin %54’ü orman, %22’si kültür dışı, %15’i çayır-mera ve yaklaşık %9’u tarım arazisi (63,1 bin ha).</li>
+        <li>TÜİK 2024’e göre 188 bin dekarda yaklaşık 152,7 bin ton çay ve 5,8 bin ton fındık üretildi.</li>
+        <li>Artvin Kafkas arısının gen merkezi; 2024’te yaklaşık 701 ton bal üretildi, koloni başına verim 6,21 kg ile Türkiye ortalamasının (10,66 kg) yaklaşık %58’i (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kestane balı ve Kafkas arısı güçlü bir marka kimliği; çay ilde ölçekli bir ürün.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tarım arazisi dar ve engebeli; bal veriminde Türkiye’nin gerisinde.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Çay rakamının “yaş çay” mı kuru çay mı olduğu kaynakta belirtilmiyor; bir belediye plan raporundan alındı, TÜİK tablosunu doğrulayamadım.</li>
+      <li>Çay, fındık ve balın il GSYH’sindeki payını, üretici sayısını ve gelirini bulamadım; hayvancılık verisi de bu sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Doğa Güçlü, Yatak Kapasitesi Sınırlı</h2>
+    <p class="sub">Borçka Karagöl, Kaçkar, Macahel ve Yusufeli’nin rafting rotaları ilin ana kozları; 2026-2030 Turizm Master Planı yeni tanıtıldı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>İl müdürüne göre Borçka Karagöl’e 2024’te 500 binden fazla turist geldi ve 2025 için 1 milyon hedefleniyor; 2019’da il genelinde tesislerde 404 bin turist ağırlanmıştı.</li>
+        <li>2024’te Bakanlık belgeli 18, basit konaklama belgeli 114 ve yatırım belgeli 5 olmak üzere toplam 137 tesis ve 2.790 oda var (belediye plan raporu).</li>
+        <li>Master Plan; Karagöl, Macahel, Yusufeli kanosu ve Deriner baraj atlayışı gibi ürünleri planlı yatırıma bağlıyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Doğa, kültür ve macera turizmini birleştiren çeşitlilik; Kaçkar ve Karagöl etrafında uluslararası etkinlik planları.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Konaklama kapasitesi taleple birlikte büyümüyor (il yöneticisi 2020’de tesislerin yeterli olmadığını söylemişti); taşıma kapasitesi analizleri henüz yapılmamış görünüyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2019 ve 2024 rakamları farklı tanımlara ait (tesise gelen turist ve bir mesire alanının ziyaretçisi); karşılaştırılıp artış sayılmadı.</li>
+      <li>2024-2025 il geneli turist, geceleme ve turizm geliri ile yatak sayısını bulamadım; 2019 yatak sayısı 5.780’di, 2024’ün yatak sayısı kaynakta kesilmişti.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Kişi başına 390.108 TL; Erzincan (394.311) ve Ardahan’ın (385.104) yanında, Samsun (369.415) ve Trabzon’un (345.969) önünde. Dolar karşılığı yaklaşık 11.900 $, Türkiye ortalamasının yaklaşık %78’i (Balıkesir dosyasındaki 32,83 TL/$ oranı ile, kendi hesabım).</li>
+        <li>2023’te reel GSYH %16 küçüldü ve Artvin en çok daralan il oldu (Bayburt %10,4, Zonguldak %6,9); kişi başına gelir 2023’te 9.620 $’dı. Nedeni kaynakta açıklanmıyor.</li>
+        <li>Nüfus 2025’te 167.531; belde ve köy nüfusu 60.455’ten 58.176’ya indi. Uluslararası göçte gelen 275, giden 189 (net +86; gelenlerin 148’i yabancı uyruklu).</li>
+        <li>Hastane yatağı 100 bin kişiye 213 (Türkiye 307), 1.000 kişiye 2 hekim (Türkiye 2,3) (2022).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kişi başına gelir Karadeniz komşuları Samsun ve Trabzon’un önünde; 2023’teki çöküşten sonra dolar bazında yaklaşık %24 yükselmiş görünüyor (kendi hesabım, kur ve revizyon farkı olabilir).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelirin dalgalı olması enerji ve inşaat gibi az sayıda kalemin etkisini düşündürüyor (tahmin); nüfus ve kırsal alan eriyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2024 toplam GSYH, sektör payları ve reel büyüme oranını Artvin için bulamadım; 2023 ve 2024 dolar değerleri farklı kaynaklardan ve kur varsayımından geliyor.</li>
+      <li>Artvin’e özgü 2025 işsizlik ve istihdam oranlarını bulamadım. Kayıtlı nüfus ile fiilen yaşayan nüfus farklı olabilir; örneğin Bursa’da Artvin nüfus kütüğüne kayıtlı 70.052 kişi yaşıyor (ADNKS 2025 aktarımı).</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Artvin’in 9 ilçesi var; 2025 ilçe nüfuslarını bulamadım, yalnızca sıralama biliniyor: Merkez en kalabalık, sonra Hopa, Borçka ve Arhavi; en küçüğü Murgul.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan ekonomik unsur</th></tr>
+      <tr><td>Merkez</td><td>İdari merkez, Cerattepe bakır projesi, Kafkasör Yaylası; Artvin Çoruh Üniversitesi</td></tr>
+      <tr><td>Hopa</td><td>Hopa Limanı ve Sarp Sınır Kapısı’nın etkisindeki ticaret ve lojistik</td></tr>
+      <tr><td>Borçka</td><td>Borçka Karagöl, Borçka Barajı, Hatila Vadisi turizmi</td></tr>
+      <tr><td>Arhavi</td><td>Kıyı ilçesi; maden projesi (10 köy) tartışması</td></tr>
+      <tr><td>Şavşat</td><td>Şavşat Karagöl, doğa turizmi, “sakin şehir”</td></tr>
+      <tr><td>Yusufeli</td><td>Yusufeli Barajı, rafting ve Kaçkar rotaları</td></tr>
+      <tr><td>Murgul</td><td>Eti Bakır’ın bakır işletmesi; en az nüfuslu ilçe</td></tr>
+      <tr><td>Ardanuç, Kemalpaşa</td><td>Ardanuç Kalesi ve doğa turizmi; Kemalpaşa için ayrıntılı bilgi bulamadım</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Bu tablo kurum raporları ve yerel haberlerden derlenmiş genel bir özettir; ilçe bazında GSYH, istihdam veya ihracat verisi yok. İlçelerdeki köy ve belde nüfusunun erimesi il düzeyinde görünüyor (60,5 binden 58,2 bine).</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Artvin</h3>
+      <p style="margin:0">Artvin’in kişi başına geliri Karadeniz komşularının üstünde, ama bunu barajlara, geçiş ekonomisine ve madenciliğe borçlu; bu üçünün ne kadarının ilde kaldığı veride görünmüyor. 2023’te %16 daralması, gelirin az sayıda kaleme bağlı olduğunu düşündürüyor (tahmin). Kendi ihracatı küçük, nüfusu eriyor, doğa turizmi büyük potansiyel ama sınırlı yatakla karşılaşıyor.</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Sarp ve Hopa’daki geçiş hacmini ilde kalan katma değere (depolama, lojistik, işleme) çevirmek; kayıtlı ihracatı yükseltmek.</div>
+      <div><b>HAMLE 2</b>Barajların ve madenin ilde kalan vergi, istihdam ve yatırım payını şeffaf biçimde açıklayıp izlemek; madende çevre ve istihdam dengesini ortak veriyle tartışmak.</div>
+      <div><b>HAMLE 3</b>Doğa turizminde taşıma kapasitesi analizleriyle yatak kapasitesini planlı artırmak; kestane balı ve çayı markalaşmayla desteklemek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. Maden konusunda iki tarafın argümanını da doğrulayamadım; hamle 2 bir yargı değil, veri açıklığı önerisidir.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Çoruh’un barajları Türkiye’nin elektriğine büyük katkı yapıyor; bu gelirin ne kadarı Artvin’de kalıyor ve nasıl ölçülmeli?</li>
+      <li>Sarp Kapısı’ndan geçen yaklaşık 1,7 milyar $’lık ihracat, ilin kendi ihracatının yaklaşık 21 katı: bu geçişten yerel katma değer nasıl üretilir?</li>
+      <li>Bakır madenciliği istihdam ve gelir getirirken ormanlık ve su kaynakları üzerindeki risk tartışması sürüyor: karar hangi veriyle verilmeli?</li>
+      <li>Borçka Karagöl’e yılda yarım milyon ziyaretçi gelirken yatak kapasitesi dar: turizm doğaya zarar vermeden nasıl büyür?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Gündem Artvin 11.12.2025; Yeni Akit; Olaymedya ve Gazete Arena listeleri; Habergazetesi); 2023 il GSYH (Pusula Haber); ADNKS 2025 (Habergazetesi, Bursa Hakimiyet aktarımı); Artvin Metre (dolar karşılığı)</li>
+      <li>Hopa Belediyesi imar plan raporları 2025 (Aycan Ayçiçek Şehir Planlama; arazi, çay-fındık, bal, turizm, ihracat, sağlık verileri)</li>
+      <li>Yusufeli HES: NTV, DHA, Milliyet, CNN Türk, İşçi Haber, Uzmanpara, Küre Ansiklopedi, Ekonomist; Çoruh havzası makalesi (DergiPark)</li>
+      <li>Sarp Sınır Kapısı ve ihracat: Benguturk, Haberler.com, Yeni Birlik, Yeni Akit (Artvin Valisi açıklamaları)</li>
+      <li>Madencilik: Evrensel, BirGün, Cumhuriyet, Halk TV, Yeni Akit (Eti Bakır açıklaması), Steelradar, Bianet, Sözcü; ilgili şirket ve çevre örgütü kaynakları farklı görüşleri yansıtır</li>
+      <li>Turizm: Kapadokya Üniversitesi Artvin Turizm Yol Haritası ve Master Plan; TRT Haber, Benguturk, Haber7, Haberler.com</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum raporu veya yetkili açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Artvin’in toplam GSYH’si, 2024 reel büyümesi, sektör payları, 2025 yıllık ihracatı ve ürün kırılımı, ilçe nüfusları, 2025 işgücü göstergeleri, hayvancılık verileri, madenin ildeki üretim ve istihdamı, barajların ilde kalan geliri ve güncel turist sayısı doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık 11.900 $ ve %78, −%1,0 ve −%3,8, yaklaşık 21 kat, bal verimi %58, 2025 ilk yarı ihracatı (yaklaşık 34 milyon $) ve dolar bazında yaklaşık %24 artış kendi hesabımdır. Eski veriler yılları belirtilerek kullanıldı ve güncel durumu yansıtmayabilir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: ENERJİ',ad:'Hidroelektrik (Çoruh barajları)',big:'558 MW',alt:'Yusufeli HES kurulu gücü; 2025’te Türkiye HES üretiminin %3,5’i (işletme yetkilisi)',y:'5 baraj bugüne kadar 59,7 milyar kWh üretti; kurak 2025’te rekor üretim, aşağıdaki dört barajın üretimi yaklaşık %10 arttı.',n:'Gelirin ilde kalan payı için veri yok; “ekonomiye katkı” rakamları ulusal ve yetkili açıklaması; kuraklık ve HES tepkileri riski.'},
+ {c:'warn',chip:'TARTIŞMALI: MADEN',ad:'Bakır ve diğer madencilik',big:'24.093 ha',alt:'Eti Bakır’ın ildeki ruhsat sahası; Murgul kapasite artışı projesi ~4,5 milyar TL (ÇED son aşama, Temmuz 2026)',y:'Murgul’da bakır işletmesi ve flotasyon tesisi; Cerattepe için şirket 14 yıllık proje ömrü ve 387 kişilik istihdam açıkladı.',n:'Halk tepkisi ve davalar; Anayasa Mahkemesi 2024’te Cerattepe için hak ihlali kararı verdi; ildeki üretim ve istihdam rakamları doğrulanmadı.'},
+ {c:'good',chip:'GEÇİT EKONOMİSİ',ad:'Sınır ticareti ve liman (Sarp, Hopa)',big:'1,77 mlr $',alt:'Hopa Limanı üzerinden 2025 ihracatı; Sarp’ta 5,04 milyon yolcu',y:'Sarp, Gürcistan’a açılan en yüksek kapasiteli kapı; peron sayısı 8’den 12’ye çıkarıldı; Artvin’e kayıtlı ihracat 2026 ilk yarıda %51,3 arttı.',n:'Kapıdan geçen ihracat ilin üretimi değil: Artvin ihracatı 2024’te 79,6 milyon $; 2025’te yolcu −%8,3 ve gemi sayısı 357’den 284’e düştü.'},
+ {c:'warn',chip:'DAR: ÇAY, FINDIK',ad:'Çay ve fındık',big:'152,7 bin ton',alt:'Çay (188 bin dekar, TÜİK 2024); fındık 5,8 bin ton',y:'İlin arazisinin ancak %9’unu oluşturan tarım alanında çay ve fındık öne çıkıyor.',n:'Arazinin %54’ü orman, tarım alanı dar ve engebeli; il GSYH’sindeki payı ve üretici geliri bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: BAL',ad:'Arıcılık ve kestane balı',big:'701 ton',alt:'2024 bal üretimi; 112.927 koloni, verim 6,21 kg (Türkiye 10,66)',y:'Artvin Kafkas arısının gen merkezi; kestane balı ilin simge ürünlerinden.',n:'Koloni başına verim Türkiye ortalamasının yaklaşık %58’i (kendi hesabım); fiyat ve gelir verisi yok.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Doğa ve macera turizmi',big:'500 bin+',alt:'Borçka Karagöl’ün 2024 ziyaretçisi (il müdürü); 2025 hedefi 1 milyon',y:'Karagöl, Kaçkar, Macahel, Yusufeli rafting; 2026-2030 Turizm Master Planı hazırlandı.',n:'2024’te 137 tesis ve 2.790 oda; taşıma kapasitesi analizleri eksik; il geneli turist ve gelir verisi bulunamadı.'},
+ {c:'bad',chip:'BASKI ALTINDA: NÜFUS',ad:'Nüfus ve kırsal boşalma',big:'−%1,0',alt:'Nüfus 169.280’den 167.531’e (2024-2025); köy-belde nüfusu −%3,8',y:'Şehir ve ilçe merkezlerinde nüfus hafif artıyor (haber aktarımı).',n:'Köy ve belde nüfusu 60.455’ten 58.176’ya; hastane yatağı 100 bin kişiye 213 (Türkiye 307); gençler büyük şehirlere gidiyor (haber yorumu).'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve tartışmalı'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var EN=[['Yusufeli’nin Türkiye hidroelektrik üretimindeki payı (%)',[['Yıllık ortalama',2.5],['2025 (kurak yıl)',3.5]],[1],'Kurak yılda pay yükseldi. Kaynak: İletişim Başkanlığı, DHA, Uzmanpara (DSİ işletme yetkilisi).'],
+ ['Çoruh havzası: planlanan ve Yusufeli kurulu gücü (MW)',[['Havzada planlanan 37 HES (toplam)',3899],['Yusufeli HES',558]],[1],'Planlananın kaçının yapıldığı hesaplanmadı. Kaynak: DergiPark makalesi, Küre Ansiklopedi.'],
+ ['Maden: ruhsat ve arama alanı (hektar)',[['Eti Bakır ildeki ruhsat sahası (2026)',24093],['Cerattepe arama ruhsatı (şirket, 2016)',4406]],[0],'İki farklı yıl ve tanım. Kaynak: BirGün (2026), Yeni Akit (şirket açıklaması).']];
+mk('en',EN,['HES payı','Çoruh kurulu güç','Maden alanı']);
+var IH=[['Artvin’e kayıtlı ihracat ile kapı ve liman geçişi (milyon $)',[['Artvin ihracatı, 2024',79.6],['Sarp Kapısı ihracatı, 2024 (yaklaşık)',1700],['Hopa Limanı üzerinden ihracat, 2025',1774]],[0],'Kapı ve liman geçişi Türkiye genelinden gelen malları kapsar. Kaynak: Hopa Belediyesi plan raporu, Artvin Valiliği açıklamaları.'],
+ ['Artvin ihracatı, ilk 6 ay (milyon $)',[['2025 (hesaplanan)',34.2],['2026',51.7]],[1],'2025 değeri +%51,3 artıştan geri hesaplandı (kendi hesabım). Kaynak: Yeni Birlik, Haberler.com.'],
+ ['Sarp Kapısı yolcu geçişi (milyon kişi)',[['2024',5.555],['2025',5.042]],[1],'Değişim −%8,33. Kaynak: Artvin Valiliği (Benguturk).']];
+mk('ih',IH,['Kayıtlı ve geçiş','İlk 6 ay','Yolcu']);
+var TA=[['Arazi dağılımı (bin hektar)',[['Orman',400.1],['Kültür dışı',163.3],['Çayır-mera',103.5],['Tarım arazisi',63.1]],[3],'Toplam 730 bin ha (orman %54, tarım %9). Kaynak: Hopa Belediyesi plan raporu (İl Tarım Müdürlüğü 2022).'],
+ ['Çay ve fındık üretimi (bin ton, TÜİK 2024)',[['Çay',152.7],['Fındık',5.8]],[0,1],'Çayın yaş mı kuru mu olduğu belirtilmiyor. Kaynak: Hopa Belediyesi plan raporu.'],
+ ['Bal: koloni başına verim (kg, 2024)',[['Artvin',6.21],['Türkiye',10.66]],[0],'Toplam bal 701 ton, 112.927 koloni. Kaynak: Hopa Belediyesi plan raporu.']];
+mk('ta',TA,['Arazi','Çay ve fındık','Bal verimi']);
+var TU=[['Ziyaretçi ve turist (bin kişi)',[['Borçka Karagöl, 2024 (il müdürü)',500],['Tesislerde turist, 2019 (il geneli)',404]],[0],'Farklı tanım ve yıllar; birbiriyle kıyaslanmamalı. Kaynak: TRT Haber, Haber7.'],
+ ['Konaklama tesisi türü, 2024 (adet)',[['Basit konaklama belgeli',114],['Bakanlık işletme belgeli',18],['Yatırım belgeli',5]],[0],'Toplam 137 tesis, 2.790 oda. Kaynak: Hopa Belediyesi plan raporu.']];
+mk('tu',TU,['Ziyaretçi','Tesis türü']);
+var GT=[['Kişi başına GSYH, 2024 (bin TL)',[['İstanbul',802.7],['Tunceli',478.7],['Balıkesir',459.7],['Erzincan',394.3],['Artvin',390.1],['Ardahan',385.1],['Samsun',369.4],['Trabzon',346.0],['Bayburt',331.4],['Van (son sıra)',203.0]],[4],'Kaynak: TÜİK il bazında GSYH 2024 (Yeni Akit, Olaymedya, Gündem Artvin). Balıkesir ve Bayburt değerleri kardeş il dosyalarından.'],
+ ['Kişi başına GSYH, dolar',[['Artvin 2023',9620],['Artvin 2024 (hesaplanan)',11884],['Türkiye 2024',15325]],[1],'2024 Artvin değeri TL/$ oranıyla hesaplanmış; kur ve revizyon farkı olabilir. Kaynak: Pusula Haber, Artvin Metre, Adana SO raporu.'],
+ ['Reel GSYH daralması, 2023 (%, azalış miktarı)',[['Artvin (−%16,0)',16.0],['Bayburt (−%10,4)',10.4],['Zonguldak (−%6,9)',6.9]],[0],'En çok azalan üç il; Artvin için nedeni kaynakta yok. Kaynak: TÜİK (Pusula Haber aktarımı).'],
+ ['Nüfus (bin kişi)',[['İl, 2024',169.3],['İl, 2025',167.5],['Köy ve belde, 2024',60.5],['Köy ve belde, 2025',58.2]],[1,3],'Yıllık değişim: il −1.749, köy ve belde −2.279. Kaynak: TÜİK ADNKS (Habergazetesi).']];
+mk('gt',GT,['Gelir','Dolar','2023 daralma','Nüfus']);
+</script>
+</body>
+</html>
