@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tekirdağ | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İl dosyasına özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1d4ed8;--a2:#f59e0b;--a3:#0f766e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Tekirdağ</span><h1>Tekirdağ: Fabrika ve Liman Önde, Su ve Tekstil Baskıda</h1><p>1,21 milyon nüfuslu Tekirdağ, kişi başına GSYH’de 18.406 $ ile 81 il arasında 4.; Türkiye ortalamasının yaklaşık %120’si. Faaliyet ili esaslı seride 2025 ihracatı 13,2 milyar $ ile Türkiye’de 5. Çerkezköy-Çorlu sanayi çekirdeği, Asyaport ve ayçiçeği ovası ilin üç ayağı; tekstil, Ergene’nin suyu ve kuraklık ise baskı noktaları. Rakamların bir kısmı farklı serilere dayanıyor ve bunu açıkça işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>18.406 $</b><span>Kişi başına GSYH (2024; 604.226 TL), 81 il arasında 4.; Türkiye ort. 15.325 $’ın yaklaşık %120’si (kendi hesabım)</span></div>
+    <div class="k"><b>1.208.441</b><span>Nüfus (ADNKS 2025); bir yılda +21.279, binde 17,8 (Türkiye binde 5)</span></div>
+    <div class="k"><b>13,2 mlr $</b><span>2025 ihracatı, faaliyet ili esaslı seri (Ticaret Bakanlığı); Türkiye’de 5.; toplamın yaklaşık %4,8’i (kendi hesabım)</span></div>
+    <div class="k"><b>~10.900 $</b><span>Kişi başına ihracat, aynı seri ve 2025 nüfusu (kendi hesabım)</span></div>
+    <div class="k"><b>1.</b><span>2024 yağlık ayçiçeği üretiminde Türkiye sırası (Tarım Bakanlığı TEPGE); 2023’te 3.</span></div>
+    <div class="k"><b>1,68 mn TEU</b><span>Asyaport’ta Ocak–Eylül 2026 konteyner elleçleme (AA)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi-Liman</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, Ticaret Bakanlığı, TİM, basın ve oda açıklamaları). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat sırası ve yatırım haberlerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Tekirdağ’ın sektörel ihracat sırası (metal, elektrik-elektronik, kimya) TİM serisinden geliyor; 13,2 milyar $’lık faaliyet ili serisinin sektör kırılımını bulamadım.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Üç Farklı Seri, Tek Mesaj</h2>
+    <p class="sub">Tekirdağ nüfusunun %1,4’ü ve GSYH’nin %1,6’sı ile Türkiye ihracatının yaklaşık %4,8’ini yapıyor; ama hangi seriye baktığına göre rakam çok değişiyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Faaliyet ili esaslı seriye (Ticaret Bakanlığı) göre 2025’te İstanbul 57,8, Kocaeli 35,1, İzmir 23,6, Bursa 20 ve Tekirdağ 13,2 milyar $ ihracat yaptı (İKV notu). Tekirdağ beşinci.</li>
+        <li>Aynı seriyle kişi başına ihracat yaklaşık 10.900 $; Balıkesir dosyasındaki aynı serinin kişi başı değeri yaklaşık 2.010 $ idi (iki hesap da kendi hesabım; yaklaşık 5,4 kat).</li>
+        <li>Eylül 2026 tek ayında Tekirdağ 1.418 milyon $ ile ilk beşte; Eylül 2025’te 1.189 milyon $ idi (tek ay, yaklaşık +%19,3, kendi hesabım). Türkiye’nin Ocak–Eylül 2026 ihracatı %5,2 arttı.</li>
+        <li>TİM serisinde Tekirdağ’dan en çok ihracat yapılan sektörler sırasıyla demir ve demir dışı metaller, elektrik-elektronik ve kimyevi maddeler.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>2025’te ilk beşte; Nisan 2025’te aylık ihracat artışında Türkiye’de beşinci il.</li><li>İhracat tek sektöre yaslanıyor gibi görünmüyor: metal, elektrik-elektronik ve kimya ilk üçte (payları bilinmiyor). Almanya, ABD ve Mısır Ocak 2026’da ilk üç pazar.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ocak 2026’da TÜİK serisinde ithalat (196 mn $) ihracatın (243 mn $) yaklaşık %81’ine denk; en büyük ithalat kaynağı Çin. Bu, ihracatın ithal girdiye bağımlı olabileceğine işaret eder (yorum).</li><li>Emek yoğun kalemler (tekstil, hazır giyim, deri) baskı altında; ayrıntı Sanayi bölümünde.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Üç ayrı seri var: faaliyet ili (Ticaret Bakanlığı, 2025’te 13,2 milyar $), TÜİK/Edirne Bölge Müdürlüğü aylık ihracatı (Ocak 2025 228,8, Haziran 2026 331,5 milyon $) ve TİM. TÜİK serisinde Haziran 2026’da Tekirdağ Türkiye’de 13. sırada, faaliyet ili serisinde 5. Fark kapsam tanımından gelebilir (tahmin; muhtemelen ihracatçının kayıtlı olduğu yer ile üretim yeri farkı); seriler birbirine eklenemez.</li>
+      <li>Faaliyet ili serisinde Ocak–Eylül 2026 toplamını Tekirdağ için bulamadım; yalnızca Eylül tek ay değerini buldum. İlk dokuz ay artışı için rakam vermedim.</li>
+      <li>Sektör (yalnızca demir) ve pazar rakamları kısmi dönemlere (Ocak–Haziran 2025, Ocak 2026) ait; yıllık sektör dağılımı bulunamadı. Eylül 2026 artışının nedenini (fiyat, miktar, bir firma) kaynaklar açıklamıyor.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Liman: Ergene Havzası’ndan Asyaport’a</h2>
+    <p class="sub">Sanayi Çorlu, Çerkezköy, Kapaklı ve Ergene’de yoğunlaşıyor; konteyner limanı ise ihracatın deniz kapısı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Çerkezköy OSB yaklaşık 1.234 hektarla Çerkezköy ve Kapaklı sınırlarında; 1976’da Türkiye’nin 12. OSB’si olarak kuruldu (2016 tarihli haber; ciro ve ihracat rakamları da o yıla ait, eski). Çerkezköy TSO Başkanı, Tekirdağ sanayi gücünün yüzde 90’ının Çerkezköy ve Çorlu’dan geldiğini söylüyor (sözlü beyan).</li>
+        <li>Çorlu TSO Başkanı, Tekirdağ’ın sanayi doğalgazı kullanımında 4., sanayi elektriğinde 6. olduğunu belirtti (yıl belirtilmemiş).</li>
+        <li>Lloyd’s List’in 2024 verisine dayanan 2025 sıralamasında Tekirdağ limanları dünyanın ilk 100 konteyner limanı arasında. Asyaport’un tek gemi uğrağında 22.896 TEU ile Türkiye rekoru var; Ceyport Tekirdağ 2018’den beri özel işletmede.</li>
+        <li>Asyaport yıllık kapasiteyi 2,5 milyon TEU’dan 4 milyon TEU’ya çıkarmayı hedefliyor; 2026’da konteyner limanları arasında ilk Yeşil Liman sertifikasının alındığı açıklandı (AA).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İstanbul’a 132 km, demiryolu ve karayolu bağlantılı; Asyaport 9 ayda geçen yılın aynı dönemini aştı.</li><li>Çerkezköy OSB’den 17 ila 19 firma İSO 500’de; beyaz eşya ve kablo gibi katma değerli üretim var.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Çorlu TSO Meclis Başkanı üretim maliyetinde işçilik payının %25’ten %55’e çıktığını söyledi; Türkiye genelinde ISO 500’de tekstil-hazır giyim payı %11,8’den %5,8’e indi.</li><li>Ergene Nehri bir derneğin raporunda en kirli su sınıfında; Çerkezköy TSO Başkanı bölgeyi bekleyen en büyük tehlikenin su azalması olduğunu söylüyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İSO 500 listesindeki Tekirdağ firma sayısını 2025 için bulamadım; Çerkezköy OSB rakamı 2022 listesine ait. Sanayi tesisi, istihdam ve kapasite kullanım verisi yok.</li>
+      <li>Asyaport’ta 2021-22 değeri için “1,7–1,8 milyon TEU” aralığı verildi, grafikte alt sınır kullanıldı; 9 aylık 2026 ile yıllık değerler doğrudan karşılaştırılamaz ve yıl sonu için tahmin yapmadım. Ceyport hacmini bulamadım.</li>
+      <li>Tekstildeki işçilik maliyeti payı bir oda yöneticisinin beyanıdır, doğrulanmış sektör verisi değildir. Tekirdağ’a özgü kapanan işletme ya da işten çıkarma sayısını bulamadım; Türkiye geneli sendika rakamları il verisi değildir.</li>
+      <li>Ergene Nehri su sınıfı bilgisi bir dernek raporundan (tarih belirsiz); Havza Koruma Eylem Planı’nın uygulama durumunu değerlendirmedim. Kirliliğin kaynağı konusunda sanayi, evsel atık ve altyapı tartışması sürüyor.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım: Ayçiçeği Üssü, Kuraklığa Açık</h2>
+    <p class="sub">Tekirdağ yağlık ayçiçeğinde Türkiye’nin en büyük üreticisi; verim ise kuraklıkla oynuyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Ayçiçeği Tekirdağ tarım arazisinin yaklaşık %40’ında ekiliyor ve Türkiye üretiminin yaklaşık %16’sı buradan geliyor (TRT Haber aktarımı, yıl belirtilmemiş). İl Tarım Müdürü bir yıl için 1,7 milyon dekar ekim ve 400 bin ton rekolte beklentisi açıkladı (yıl belirtilmemiş).</li>
+        <li>Trakya (TR21: Tekirdağ, Edirne, Kırklareli) Türkiye ayçiçeği üretiminin %44,8’ini, buğdayın %9’unu üretiyor (2017, akademik kaynak). Tekirdağ’ın yağlık ayçiçeği ve buğday sıralaması Ticaret Bakanı’nın açıklamasında yer aldı.</li>
+        <li>TR21 istihdamının yaklaşık %10’u tarımda (Eurostat; yıl belirtilmemiş).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yerli hibrit ayçiçeği tohumu yayılıyor; Bakan, kuraklıkta yabancı çeşitlere göre %25–30 verim farkı olduğunu söyledi. Türkiye’de ayçiçeği kendine yeterlilik %72’ye çıktı (2023/24).</li><li>Anıza ayçiçeği projesinde 2024’te 2.150 dekardan 400 ton üretildi; izleyen yıl için 10 bin dekar planlandı (haberde yıl açık değil).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Bakan, Trakya’da kuraklık nedeniyle %42’ye varan ayçiçeği rekolte kaybı açıkladı; kuraklık desteği ton başına 1.000 TL’den 1.500 TL’ye çıkarıldı (2023).</li><li>Bir çiftçi yer altı suyunun çekildiğini ve sulamanın sınırlı olduğunu söylüyor; muhalefetten bir milletvekili 2026’da sulama yatırımı eksikliğini TBMM’de dile getirdi (siyasi beyan).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Sıralama yıllara göre değişiyor: 2023’te Edirne ilk, Tekirdağ üçüncü; 2024’te Tekirdağ ilk. Buğday sırasının yılını ve kaynağın dayandığı veriyi bulamadım.</li>
+      <li>Ekim alanı grafiği 2020’ye ait; Tekirdağ için güncel TÜİK ton serisini (ayçiçeği, buğday) ve tarımın il GSYH payını bulamadım. “400 bin ton” bir beklenti, gerçekleşme değil.</li>
+      <li>Verim rakamları (180–200, 50 kg/da) tek bir çiftçinin anlatımı; %42 kayıp bölgesel (Trakya) ve yılı belirsiz. Hayvancılık, süt ve gıda sanayi için Tekirdağ verisi araştırmadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm ve Bağcılık: İstanbul’un Arka Bahçesi</h2>
+    <p class="sub">Şarköy-Mürefte şarap rotası ve Marmara plajları potansiyel sunuyor; ama resmî rakam yok.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Tekirdağ’ın Marmara kıyısı yaklaşık 133 km. Şarköy bağcılık, şarap ve yaz turizmiyle; Mürefte’de ülkenin ilk şarap müzesi olduğu söyleniyor (rehber siteleri).</li>
+        <li>Bir akademik çalışmaya göre Trakya Bağ Rotası’nda butik üreticiler yer alıyor; İstanbul ve çevre illerden günübirlik ve şarap tadımı ziyaretçileri geliyor.</li>
+        <li>İl Kültür ve Turizm Müdürü yerli ve yabancı turistlerin mavi bayraklı plajları tercih ettiğini söyledi (AA/NTV).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İstanbul’a yakınlık günübirlik ve hafta sonu talebini besliyor; sörf, yamaç paraşütü ve bağ turizmi gibi alternatif turizm türleri var.</li><li>Kıyı ilçelerinde nüfus artıyor (Marmaraereğlisi +%4,7, Şarköy +%1,1).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Turizmin ekonomideki ağırlığını gösteren resmî veri bulamadım; bu başlık ölçülemediği için “uyuyan potansiyel” olarak etiketlendi.</li><li>Sanayi ve limanın kıyıdaki varlığı ile turizm arasındaki dengeyi inceleyen bir veri bulamadım.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Yatak sayısı, belgeli tesis, ziyaretçi ve geceleme, yabancı turist payı ve turizmin il GSYH’sindeki payı için güvenilir il verisi bulamadım. Şarap ve üzüm üretim miktarını ve Tekirdağ’ın Türkiye bağcılığındaki payını da bulamadım.</li>
+      <li>Kıyı nüfus değişimi bir turizm göstergesi değildir; kayıtlı nüfusu gösterir, yazlıkçıyı yansıtmaz. Artışın nedeni (turizm, konut, İstanbul’dan göç) kaynakta belirtilmiyor (yorum).</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Tekirdağ 2024’te kişi başına 18.406 $ (604.226 TL) ile 81 il arasında 4.; yalnızca 11 il Türkiye ortalamasının (15.325 $) üstünde.</li>
+        <li>Toplam ekonomi: kişi başına değer ile 2024 nüfusundan yaklaşık 717 milyar TL ve Türkiye GSYH’sinin (44,6 trilyon TL) yaklaşık %1,6’sı çıkıyor (kendi hesabım).</li>
+        <li>2022’den 2023’e kişi başına GSYH Tekirdağ’da %12 arttı; Türkiye ortalaması %24 idi ve Tekirdağ en düşük artışlı beş il arasındaydı (dolar bazında).</li>
+        <li>Tekirdağ, Edirne ve Kırklareli’yi kapsayan TR21’de 2025 istihdam oranı %58,3 (Eurostat); Türkiye’de %49,0 (TÜİK). İmalat, madencilik, enerji ve su istihdamın yaklaşık %33’ünü oluşturuyor (yıl belirtilmemiş).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>2024 nüfusuyla Türkiye’de en hızlı büyüyen il; 2025’te de binde 17,8 ile Türkiye (binde 5) ortalamasının çok üstünde.</li><li>Gelir Türkiye ortalamasının yaklaşık %20 üstünde; işsizlik 2024’te %6,7 (Türkiye %8,7).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>2023’te gelir artışı Türkiye ortalamasının yarısı kadar kaldı; 2024’teki sıçramanın nedenini kaynaklar açıklamıyor.</li><li>Nüfus yılda yaklaşık 20 bin kişi artıyor; bu hızın su, konut ve yol altyapısına baskı yapabileceği düşünülebilir (yorum, bunu ölçen veri bulamadım).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Tekirdağ’a özgü 2025 işsizlik, işgücüne katılma ve istihdam oranını bulamadım; 2024 işsizlik oranı (%6,7) bir yerel gazete aktarımıdır. İstihdam oranı TR21 verisidir ve üç ili kapsar.</li>
+      <li>Sektörel GSYH payları (sanayi, hizmet, tarım) için 2024 verisini doğrulayamadım. Eski kaynaklardaki TR21 payları (tarım %12,5, sanayi %34) 2008 dönemine ait olduğu için kullanılmadı.</li>
+      <li>Dolar cinsinden değerler kur etkisini içerir. 2023 artış oranı (%12) bir basın tablosundan; 2023 ve 2024 dolar değerlerini aynı kaynakta yan yana bulamadığım için 2024 artışı hesaplanmadı. İŞKUR’un 2024 araştırması (822 işyerinde 6.673 açık iş; 20+ çalışanlı işyerlerinin %45,5’i ihracat yapıyor) yalnızca örneklem sonucudur.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Tekirdağ’ın 11 ilçesinden dördü (Çorlu, Çerkezköy, Kapaklı, Ergene) nüfusun yaklaşık %62’sini barındırıyor. Nüfus ADNKS 2025’e aittir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>2025 değişim</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Çorlu</td><td>306.939 (%25,4)</td><td>+%2,2</td><td>Tekstil, deri ve makine kümesi; Ergene Havzası’nın sanayi merkezi</td></tr>
+      <tr><td>Süleymanpaşa</td><td>226.582 (%18,7)</td><td>+%1,6</td><td>İl merkezi; limanlar, kamu ve hizmetler, buğday-ayçiçeği tarımı</td></tr>
+      <tr><td>Çerkezköy</td><td>223.975 (%18,5)</td><td>+%2,3</td><td>Çerkezköy OSB, beyaz eşya, kablo, Trakya’daki Ar-Ge merkezlerinin çoğu (2016 verisi)</td></tr>
+      <tr><td>Kapaklı</td><td>152.509 (%12,6)</td><td>+%3,3</td><td>Çerkezköy OSB’nin bir bölümü; 2012’de kurulan en küçük yüz ölçümlü ilçe; hızlı nüfus artışı</td></tr>
+      <tr><td>Ergene</td><td>68.648 (%5,7)</td><td>+%0,2</td><td>Sanayi, Ergene Nehri ve Çorlu Deresi kirliliğinin yaşandığı ilçe</td></tr>
+      <tr><td>Saray</td><td>51.468 (%4,3)</td><td>+%0,4</td><td>Ergene Nehri’nin kaynak bölgesi; tarım ve sanayi (genel özet)</td></tr>
+      <tr><td>Malkara</td><td>50.123 (%4,1)</td><td>−%1,2</td><td>Tarım ve hayvancılık (genel özet)</td></tr>
+      <tr><td>Şarköy</td><td>34.458 (%2,9)</td><td>+%1,1</td><td>Bağcılık, şarap, yaz turizmi</td></tr>
+      <tr><td>Marmaraereğlisi</td><td>33.623 (%2,8)</td><td>+%4,7</td><td>Martaş limanı, Marmaraereğlisi OSB, plajlar</td></tr>
+      <tr><td>Muratlı</td><td>30.410 (%2,5)</td><td>−%0,1</td><td>Tarım ve sanayi (genel özet)</td></tr>
+      <tr><td>Hayrabolu</td><td>29.706 (%2,5)</td><td>−%1,3</td><td>Ayçiçeği tarımı</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Dört ilçe (Çorlu, Çerkezköy, Kapaklı, Ergene) nüfusun yaklaşık %62,2’sini (752.071 kişi), ilk beş ilçe (Çorlu, Süleymanpaşa, Çerkezköy, Kapaklı, Ergene) yaklaşık %81’ini oluşturuyor; en büyük dört ilçe (Çorlu, Süleymanpaşa, Çerkezköy, Kapaklı) %75,3 (kendi hesabım). 2025’te sekiz ilçede nüfus arttı, üçünde (Malkara, Muratlı, Hayrabolu) azaldı. İlçe bazında GSYH, istihdam veya ihracat verisi yok; “ekonomik karakter” sütunu sektör raporları ve yerel haberlerden derlenmiş genel bir özettir. Saray, Malkara ve Muratlı satırları özellikle zayıf kaynaklıdır.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Tekirdağ</h3>
+      <p style="margin:0">Tekirdağ’ın gücü sanayi ile limanın aynı ilde buluşması: Ergene Havzası’ndaki çekirdek metal, elektrik-elektronik ve kimya üretirken Asyaport bu üretimi dünyaya bağlıyor; il nüfusunun yaklaşık %1,4’üyle ihracatın yaklaşık %4,8’ini yapıyor. Zayıflığı, bu büyümenin su ve çevre kısıtına, emek yoğun tekstildeki maliyet baskısına ve kuraklığa açık ayçiçeği tarımına dayanması; 2023’te gelir artışının ülke ortalamasının yarısında kalması da büyümenin düz bir çizgi olmadığını gösteriyor. Bu kısıtlar en çok Ergene çevresindeki ilçelerde ve tekstil istihdamında hissedilebilir (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Su ve Ergene altyapısı: arıtma, atıksu yönetimi ve su temini sanayinin devamının ön şartı.</div>
+      <div><b>HAMLE 2</b>Liman arkası lojistik: Çorlu-Martaş demiryolu ve lojistik merkez projeleriyle konteyner hacmini sanayi ihracatına bağlamak.</div>
+      <div><b>HAMLE 3</b>Tekstilde katma değere dönüşüm; ayçiçeğinde yerli tohum ve sulama ile kuraklığa dayanıklılık.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Tekstilin desteklenmesi, kur ve işgücü maliyeti gibi konularda sanayici, sendika ve ekonomistler farklı çözümler savunuyor; burada hiçbiri tercih edilmedi.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Ergene Havzası’nda sanayi büyürken su kalitesi ve kıtlığı nasıl yönetilmeli: yeni OSB’ler mi, mevcut kirliliği gidermek mi önce gelir?</li>
+      <li>Çorlu ve Çerkezköy’ün ayrı il olması (Çorlu TSO Başkanı’nın talebi) sanayi hizmetlerini hızlandırır mı, yoksa Tekirdağ’ın bütünlüğünü mü zayıflatır?</li>
+      <li>Tekstilde işçilik maliyeti ve kur baskısına karşı destek mi, yoksa katma değerli sektörlere dönüşüm mü daha doğru yol?</li>
+      <li>Asyaport kapasitesi 4 milyon TEU’ya çıkarken liman arkası lojistik ve demiryolu altyapısı yetişmezse konteyner büyümesi yerel ekonomiye ne kadar yansır?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Rudaw, CNBC-e, Habertürk, Ekonomi Gazetesi); CNBC-e (2022-2023 kişi başı GSYH artışı); TÜİK ADNKS 2024 ve 2025 (Karar, Yeni Akit, Yeni Şafak, Medyascope)</li>
+      <li>Ticaret Bakanlığı faaliyet illeri ihracatı: Eylül 2025 (Alomaliye, Takvim), Aralık 2025 ve 2025 yıllık (BloombergHT, Dünya, Ticaret Bakanlığı), Eylül 2026 (Haberkenti, Ticaret Bakanlığı); İKV bilgi notu (2025 il sıralaması); İSO 500 haberi (Türkiye 2025 ihracatı)</li>
+      <li>TÜİK Edirne Bölge Müdürlüğü aylık dış ticaret (Habertürk, Yeşilyurt Gazete, Yeni Birlik, Uzmanpara); TİM sektörel ihracat (AA/Capital Ocak–Haziran 2025, Yeni Birlik)</li>
+      <li>Tarım ve Orman Bakanlığı TEPGE Ayçiçeği Piyasa Raporları (2021, 2024, 2025); DHA, Habertürk, TRT Haber, Dünya, CNN Türk (ayçiçeği ve buğday); İklim değişikliği ve Trakya bölüm yazıları (iklimin.org); Ticaret Bakanı Tekirdağ konuşması (Yeni Birlik); TBMM genel kurul konuşması (24.02.2026)</li>
+      <li>Asyaport (AA/Foreks 29.10.2026, Dünya, Ekonomi Gazetesi); Ulaştırma Bakanlığı lojistik koordinasyon belgesi (2023); Çerkezköy OSB (Sabah 2016, Milliyet/DHA 2023); Ekonomi Gazetesi (Çorlu ve Çerkezköy oda başkanları, tekstil çalıştayı); Textilegence (tekstil payı, Balıkesir dosyasından)</li>
+      <li>Ergene Havzası: HYD raporu, Çevre Şehircilik açıklama raporu, Habertürk, CNN Türk, DHA, Yeni Birlik, Bianet</li>
+      <li>İŞKUR Tekirdağ İşgücü Piyasası Araştırması 2024; Eurostat TR21 (iz.sk); TÜİK 2025 işgücü istatistikleri (Alomaliye, Hürriyet Daily News)</li>
+      <li>Turizm: NTV/AA, Hürriyet, DergiPark (Tekirdağ bağcılık ve bağ turizmi), kureansiklopedi, istanbul.com</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Tekirdağ’a özgü 2025 işsizlik ve istihdam oranı, sektörel katma değer payları, Ocak–Eylül 2026 faaliyet ili ihracat toplamı, faaliyet ili serisinin sektör kırılımı, turizm istatistikleri, ilçe bazlı ekonomik veriler ve Tekirdağ’a özgü tekstil kapanma sayıları doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık %120 (gelir oranı), 717 milyar TL ve %1,6 (toplam GSYH ve payı), %1,4 (nüfus payı), %4,8 (ihracat payı), 10.900 $ ve 5,4 kat (kişi başına ihracat), +%19,3 (Eylül ihracat artışı), %81 ve %15 (Ocak 2026 ithalat/ihracat ve Almanya payı), %21,8 (Tekirdağ’ın ayçiçeği ekim alanı payı), %62,2, %75,3, %81 ve ilçe yüzdeleri kendi hesabımdır. İhracat için üç farklı seri (faaliyet ili, TÜİK, TİM) kullanıldığından rakamlar birbirine eklenmemiştir. Tarih belirtilmeyen beyanlar (oda başkanları, bakan, il müdürü, çiftçi) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR',ad:'Demir, çelik ve metal',big:'275,9 mn $',alt:'Demir ve demir dışı metaller ihracatı, Ocak–Haziran 2025 (TİM); Tekirdağ’ın en büyük ihracat sektörü',y:'TİM aktarımlarında farklı dönemlerde de Tekirdağ ihracatında ilk sırada.',n:'Alt ürün (çelik, bakır, alüminyum vb.), istihdam ve kârlılık verisi yok; faaliyet ili serisinde payını bulamadım.'},
+ {c:'good',chip:'MOTOR',ad:'Elektrik-elektronik ve beyaz eşya',big:'2.',alt:'TİM serisinde Tekirdağ ihracatında ikinci sektör (Ocak–Haziran 2025)',y:'BSH’nin dünyadaki en büyük fabrikası Çerkezköy’de (İTÜ sayfası, tarih belirsiz); Çerkezköy’de üretilen kablolar 80 ülkeye gidiyor (Sanayi Gazetesi, Ocak 2025).',n:'Sektörün değerini ve alt kırılımını bulamadım; hangi firmaların ihracat sıralamasında olduğunu doğrulayamadım.'},
+ {c:'good',chip:'MOTOR',ad:'Kimya',big:'3.',alt:'TİM serisinde Tekirdağ ihracatında üçüncü sektör (Ocak–Haziran 2025)',y:'İhracatın ilk üç sektöründen biri; ürün çeşitliliğini tekstil dışına yayıyor (yorum).',n:'Tekstil kimyasalları tekstilin daralmasından olumsuz etkileniyor (Çerkezköy TSO yöneticisi); değer ve alt kırılım yok.'},
+ {c:'good',chip:'MOTOR',ad:'Liman ve konteyner (Asyaport, Ceyport)',big:'1,68 mn TEU',alt:'Asyaport’ta Ocak–Eylül 2026 konteyner elleçleme (AA, 29.10.2026)',y:'9 ayda geçen yılın aynı dönemini aştı; yıllık kapasite 2,5’ten 4 milyon TEU’ya çıkarılıyor; Lloyd’s List ilk 100 liman listesinde; 2026’da ilk Yeşil Liman sertifikası.',n:'Limanın istihdam ve yerel katma değer katkısı ölçülmedi; liman arkası depolama alanı yetersizliği resmî belgede belirtiliyor.'},
+ {c:'warn',chip:'KIRILGAN: KURAKLIK',ad:'Ayçiçeği ve buğday',big:'1.',alt:'2024 yağlık ayçiçeği üretiminde Türkiye sırası (TEPGE); 2023’te 3.',y:'Türkiye’nin en büyük yağlık ayçiçeği ekim alanı (2020: 142 bin ha); yerli hibrit tohum kullanımı yayılıyor.',n:'Kuraklık verimi vuruyor: bir çiftçi 180–200 kilodan 50 kiloya düşüşten söz ediyor; Bakan Trakya’da %42’ye varan rekolte kaybı açıkladı (yıl belirtilmemiş).'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm, bağcılık ve şarap',big:'~133 km',alt:'Marmara kıyı uzunluğu (ansiklopedi); mavi bayraklı plajlar',y:'Şarköy-Mürefte bağ rotası, sörf ve yamaç paraşütü, İstanbul’a yakınlık; kıyı ilçelerinde nüfus artıyor (Marmaraereğlisi +%4,7).',n:'Resmî yatak, ziyaretçi ve gelir verisi bulunamadı; turizmin il ekonomisindeki ağırlığı ölçülemedi.'},
+ {c:'sleep',chip:'UYUYAN: LOJİSTİK',ad:'Liman arkası lojistik ve demiryolu',big:'35,6 km',alt:'Çorlu–Martaş limanı demiryolu hattı projesi (UAB belgesi, 2023)',y:'Marmaraereğlisi OSB (2020) ve Martaş limanı; Asyaport ve Ceyport’a 20 km’de 280 hektarlık lojistik merkez için alan ayrıldı (planlanan).',n:'Projelerin bugünkü durumunu doğrulayamadım; belge limanların arkasında yeterli depolama ve elleçleme alanı olmadığını belirtiyor.'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Tekstil, hazır giyim ve deri',big:'%25 → %55',alt:'Üretim maliyetinde işçilik payı (Çorlu TSO Meclis Başkanı beyanı)',y:'Çorlu-Ergene-Çerkezköy üçgeni “tekstilin başkenti” olarak anılıyor; üretici ve makine mühendisliği aynı bölgede kümelenmiş (köşe yazısı).',n:'Maliyet, kur ve kıdem tazminatı baskısı; Türkiye genelinde ISO 500’de tekstil payı %11,8’den %5,8’e indi; Tekirdağ’a özgü kapanma sayısı bulunamadı.'},
+ {c:'bad',chip:'KISIT: SU VE ÇEVRE',ad:'Su ve Ergene Havzası',big:'4. sınıf',alt:'Ergene Nehri en kirli su sınıfında (HYD raporu, tarih belirsiz)',y:'Ergene Havzası Koruma Eylem Planı ve Meriç-Ergene Havza Su Kurulu çalışıyor; kirleten tesislere para cezası kesiliyor.',n:'Çorlu Deresi cezalara rağmen kirli akıyor (basın); Çerkezköy TSO Başkanı su azalmasını bölgenin en büyük tehlikesi olarak görüyor.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Aylık ihracat, iki seri (milyon $)',[['Faaliyet ili, Eylül 2025',1189],['Faaliyet ili, Eylül 2026',1418],['TÜİK, Ocak 2025',228.8],['TÜİK, Ocak 2026',243.4],['TÜİK, Haziran 2026',331.5]],[1,4],'İlk iki çubuk Ticaret Bakanlığı faaliyet ili serisi, son üçü TÜİK Edirne Bölge Müdürlüğü serisi; aynı grafikte karşılaştırılamaz, farkı göstermek için yan yana duruyor. Faaliyet ili serisinde Eylül tek ay artışı yaklaşık +%19,3 (kendi hesabım). Kaynak: Haberkenti, Alomaliye, Habertürk, Yeni Birlik.'],
+ ['Sektör, TİM serisi, Ocak–Haziran 2025 (milyon $)',[['Trakya toplamı (üç il)',1080.7],['Tekirdağ: demir ve demir dışı metaller',275.9]],[1],'Tekirdağ’dan en çok ihracat yapılan sektör demir ve demir dışı metaller; ardından elektrik-elektronik ve kimya geliyor (değerleri açıklanmadı). 275,9 milyon $ Tekirdağ’a, 1.080,7 milyon $ üç ilin toplamına ait; oran Tekirdağ’ın değil Trakya toplamının yaklaşık %25,5’i (kendi hesabım). Kaynak: AA/Capital.'],
+ ['Ana pazarlar, Ocak 2026 (milyon $, TÜİK)',[['Almanya',37.4],['ABD',20.1],['Mısır',14.9]],[0],'Üç pazar Ocak 2026 ihracatının (243,4 milyon $) yaklaşık %29,7’si; Almanya tek başına yaklaşık %15,4 (kendi hesabım). Tek aylık veridir. Kaynak: Habertürk (TÜİK Edirne Bölge Müdürlüğü).'],
+ ['Pay karşılaştırması (%)',[['Nüfus payı (2025)',1.40],['İl GSYH payı (2024)',1.61],['İhracat payı (2025, faaliyet ili)',4.83]],[2],'Nüfus: 1.208.441 / 86.092.168. GSYH: kişi başı değer ile 2024 nüfusundan ve 44,6 trilyon TL’den. İhracat: 13,2 / 273,3 milyar $. Hepsi kendi hesabım; ihracat payı seriye bağlıdır.']];
+mk('ih',IH,['Aylık seriler','Sektör','Pazarlar','Pay karşılaştırması']);
+var SA=[['Asyaport konteyner elleçleme (milyon TEU)',[['2021–22 yıllık (alt sınır)',1.7],['Ocak–Eylül 2026 (9 ay)',1.675],['Mevcut yıllık kapasite',2.5],['Hedef yıllık kapasite',4]],[1],'2021-22 için kaynakta “1,7–1,8 milyon” aralığı var. 9 aylık değer ile yıllık değerler doğrudan karşılaştırılamaz. Kaynak: Ekonomi Gazetesi, AA/Foreks (29.10.2026), Dünya.'],
+ ['Çerkezköy OSB’den İSO 500’e giren firma sayısı',[['2019',18],['2020',18],['2021',19],['2022',17]],[3],'2022 listesi Eylül 2023’te açıklandı. 2025 listesinde Tekirdağ firma sayısını bulamadım. Kaynak: Milliyet/DHA (26.09.2023).'],
+ ['Tekstilde işçilik maliyeti payı (%, oda yöneticisi beyanı)',[['Birkaç yıl önce',25],['Son yıllarda',55]],[1],'Çorlu TSO Meclis Başkanı’nın tekstil çalıştayındaki sözü; doğrulanmış sektör verisi değil. Kaynak: Ekonomi Gazetesi.'],
+ ['Türkiye ISO 500’de tekstil ve hazır giyim payı (%)',[['2021',11.8],['2025',5.8]],[1],'Türkiye geneli göstergedir, Tekirdağ’a özgü değildir. Kaynak: Textilegence (İSO 500).']];
+mk('sa',SA,['Asyaport','Çerkezköy OSB','Tekstil maliyeti','Tekstil (Türkiye)']);
+var TA=[['Yağlık ayçiçeği ekim alanı, 2020 (bin ha)',[['Tekirdağ',142],['Edirne',90],['Kırklareli',77],['Konya',66],['Adana',60]],[0],'Beş il Türkiye yağlık ayçiçeği ekim alanının %67’sini oluşturuyor (Türkiye 650 bin ha); Tekirdağ tek başına yaklaşık %21,8 (kendi hesabım). Kaynak: TEPGE Ayçiçeği Piyasa Raporu (Haziran 2021).'],
+ ['Türkiye’deki sıra (düşük sayı daha iyi)',[['Ayçiçeği üretimi, 2024 (TEPGE)',1],['Ayçiçeği üretimi, 2023 (TEPGE)',3],['Buğday (Ticaret Bakanı; yıl belirsiz)',3]],[0],'2023’te sıra Edirne, Adana, Tekirdağ, Kırklareli; 2024’te Tekirdağ, Adana, Konya, Kırklareli. Buğday sırası bir bakan konuşmasından, yılı belirtilmemiş. Kaynak: TEPGE (Temmuz 2024 ve 2025), Yeni Birlik.'],
+ ['Ayçiçeği verimi, dekar başına kg (bir çiftçi anlatımı)',[['Eskiden (alt)',180],['Eskiden (üst)',200],['Kurak yıllarda',50]],[2],'Tek çiftçinin ifadesi, il ortalaması değil. Bakan Trakya’da kuraklıkla %42’ye varan rekolte kaybı açıkladı (yıl belirtilmemiş). Kaynak: TRT Haber, DHA.']];
+mk('ta',TA,['Ekim alanı','Sıralama','Verim']);
+var TU=[['Kıyı ilçelerinde nüfus değişimi, 2024→2025 (%)',[['Marmaraereğlisi',4.73],['Şarköy',1.08]],[0],'Kayıtlı nüfus; yazlıkçıyı ve turisti yansıtmaz. Artışın nedeni kaynakta belirtilmiyor (yorum). Kaynak: TÜİK ADNKS (Karar, Yeni Şafak); oranlar kendi hesabım.']];
+mk('tu',TU,['Kıyı ilçeleri']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İstanbul',24452],['Kocaeli',24031],['Ankara',24031],['Tekirdağ',18406],['Antalya',17103],['İzmir',16949],['Bolu',16703],['Kırklareli',16188],['Eskişehir',16171],['Bilecik',16068],['Türkiye ortalaması',15325]],[3],'Tekirdağ 81 il arasında 4.; Türkiye ortalamasının yaklaşık %120’si (kendi hesabım). Kaynak: TÜİK (CNBC-e, Rudaw, Habertürk).'],
+ ['Nüfus (bin kişi)',[['2023',1167.1],['2024',1187.2],['2025',1208.4]],[2],'2024’te +20.103 (%1,72), 2025’te +21.279 (%1,79). Kaynak: TÜİK ADNKS (Karar, Yeni Akit).'],
+ ['Yıllık nüfus artış hızı (binde)',[['Tekirdağ 2024',17.1],['Tekirdağ 2025',17.8],['Türkiye 2024',3.4],['Türkiye 2025',5.0]],[0,1],'2024’te Tekirdağ Türkiye’de en hızlı büyüyen ildi; 2025 sıralamasını doğrulamadım. Kaynak: Medyascope, Yeni Şafak.'],
+ ['İşsizlik oranı, 2024 (%)',[['Kırklareli',5.8],['Tekirdağ',6.7],['Edirne',7.2],['Türkiye',8.7]],[1],'2024 TÜİK verisinin yerel gazete aktarımı. Tekirdağ’a özgü 2025 oranını bulamadım. Kaynak: Yeşilyurt Gazete.']];
+mk('gt',GT,['Gelir','Nüfus','Nüfus artışı','İşsizlik']);
+</script>
+</body>
+</html>

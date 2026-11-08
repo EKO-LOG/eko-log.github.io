@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Çanakkale | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Çanakkale'ye özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0369a1;--a2:#f59e0b;--a3:#be123c"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Çanakkale</span><h1>Çanakkale: Tarım, Tarih ve Köprünün Getirdiği Fırsat</h1><p>573 bin nüfuslu Çanakkale, kişi başına GSYH’de 14.704 $ ile Türkiye ortalamasının yaklaşık %96’sında; yani ortalamaya yakın, ama ihracatı küçük (2025’te 234,8 milyon $). Bu dosya ili sektör sektör okuyor: tarım ve bahçecilik, seramik, rüzgâr ve termik enerji, tarih turizmi ve 1915 Çanakkale Köprüsü’nün açtığı lojistik fırsat. Bulamadığım veriyi ve farklı yıllara ait rakamları açıkça işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>14.704 $</b><span>Kişi başına GSYH (2024; yaklaşık 482,7 bin TL). Türkiye ort. 15.325 $’ın yaklaşık %96’sı (kendi hesabım); Balıkesir’in (18.) önünde</span></div>
+    <div class="k"><b>573.976</b><span>Nüfus (ADNKS 2025); bir yılda +5.010 (yaklaşık %0,88). Merkez ilçe 208.613</span></div>
+    <div class="k"><b>234,8 mn $</b><span>2025 ihracatı (TÜİK genel ticaret sistemi); 2024’te 192,7 milyon $ idi, artış yaklaşık %22</span></div>
+    <div class="k"><b>~110 mn $</b><span>2025 dış ticaret fazlası: ihracat 234,8, ithalat 124,9 milyon $</span></div>
+    <div class="k"><b>6.984 kWh</b><span>Kişi başına yıllık elektrik tüketimi; Türkiye ortalamasının neredeyse iki katı (TÜİK Bölge Müdürlüğü göstergeleri, yerel haber aktarımı)</span></div>
+    <div class="k"><b>%5,6</b><span>İşsizlik oranı (aynı göstergeler; yıl ve kapsam haberde net değil)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#tarim">Tarım-Hayvancılık</a><a href="#enerji">Enerji</a><a href="#sanayi">Sanayi-Köprü</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">10 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK 2024–2025, kalkınma ajansı rehberi yaklaşık 2016, akademik makaleler, yerel basın). Yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi üretim sırası, kapasite ve yatırım haberlerine dayanıyor, katma değer ölçümüne değil.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Küçük Hacim, Dalgalı Sevkiyat</h2>
+    <p class="sub">İhracat üç yıldır artıyor ve ithalatın üstünde; ama hacim küçük ve yılın yaklaşık yarısı üç aya sığıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>İhracat 2023’te 183,4, 2024’te 192,7, 2025’te 234,8 milyon $ oldu. İthalat 2025’te 132,3’ten 124,9 milyon $’a geriledi; fark yaklaşık 110 milyon $.</li>
+        <li>2025’te Temmuz, Eylül ve Ekim aylarının toplamı yaklaşık 109,6 milyon $ ile yıllık ihracatın yaklaşık %47’sine denk geliyor (kendi hesabım). Diğer aylar 12–17 milyon $ bandında.</li>
+        <li>Türkiye’nin 2025 ihracatı 273,4 milyar $ (TİM). Çanakkale’nin payı kabaca binde 1’in altında (farklı seriler, kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Üç yıl üst üste artış; ihracat ithalatın yaklaşık 1,9 katı.</li><li>Ocak 2026’da tek ayda 59,8 milyon $ ihracat yapıldı (Ocak 2025: 12,6).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İhracat birkaç büyük sevkiyata bağlı görünüyor; aylık dalgalanma çok yüksek.</li><li>Ocak 2026 hariç tutulunca Şubat–Ağustos 2026 ihracatı yaklaşık %24 geride (kendi hesabım, geçici veri).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İl ihracatının sektör ve ülke dağılımını bulamadım. Hangi ürünün (seramik, gıda, tarım) hangi aylarda sıçrama yarattığını kaynaklar açıklamıyor; bu yüzden nedeni tahmin etmedim.</li>
+      <li>Seri TÜİK genel ticaret sistemidir; Balıkesir dosyasındaki faaliyet ili serisinden farklı olabilir ve iki il birbirine bu açıdan birebir kıyaslanmaz.</li>
+      <li>Ocak–Ağustos 2025 (131,1) ilk dokuz ay toplamından Eylül çıkarılarak, 2026 (150,1) ise yerel haber aktarımıyla alındı. İkisi de geçici veridir.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık: Sebze, Meyve ve Zeytin</h2>
+    <p class="sub">Çanakkale yaklaşık 58 üründe üretim miktarıyla ilk 10 ilde; ama su ve veri eskiliği iki ana soru işareti.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Yerel haberde Çanakkale badem, ceviz, yağlık ayçiçeği ve sofralık domateste Türkiye 5.’si; elmada 6., erik ve biberde 7., yağlık zeytin ve zeytinyağında 8. olarak aktarılıyor (yıl belirtilmemiş).</li>
+        <li>Akademik bir makaleye göre ilin tarımsal üretim değerindeki payı %1,97, nüfus payı ise %0,66; yani tarım nüfusuna göre yaklaşık 3 kat ağırlık taşıyor (eski veri, kendi hesabım).</li>
+        <li>Sofralık domates TÜİK 2021’de 48.810 dekardan 370.804 ton ile ilde gelir bakımından ikinci ürün olarak anılıyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ürün çeşitliliği yüksek; organik tarım, coğrafi işaretli ürünler (Ezine peyniri) ve Saanen keçisi damızlık merkezi.</li><li>Ezine Gıda İhtisas OSB’nin yaklaşık 8 bin kişiye istihdam sağlaması bekleniyor (2024 haberi, beklenti).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Su sorunu: Bayramiç’te bir domates üreticisi, köyünde su olmadığı için başka köyde tarla kiraladığını söylüyor (yerel haber).</li><li>Kişi başına hayvansal üretim değerinde il 17., bitkisel üretimde 4. (akademik makale, yıl belirsiz); yani hayvancılık geride.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Üretim ve hayvan varlığı rakamlarının büyük kısmı kalkınma ajansı rehberinden ve yaklaşık 2016’ya ait; güncel TÜİK serisini doğrulayamadım. Sıralamalar da yıl belirtmeden aktarıldı.</li>
+      <li>Tarımın il GSYH’sindeki payını, tarım istihdamını ve tarım ihracatını bulamadım. Su kıtlığı tek bir üreticinin anlatımıdır, il geneline genellenemez.</li></ul></div>
+  </section>
+
+  <section id="enerji">
+    <h2>Enerji: Termik Büyük, Rüzgâr Yükselişte</h2>
+    <p class="sub">Elektrik üretim kapasitesi yüksek ve tüketim de; ama bunun yerelde ne kadar katma değer bıraktığı belirsiz.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="en"></div><h3 id="entitle"></h3><div class="bars" id="enbars"></div><p class="note" id="ennote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Bir akademik sunumdaki dağılıma göre ilin santral kapasitesinin yaklaşık %78’i termik, %21’i rüzgârdır; jeotermal, biyokütle ve hidroelektrik toplamda %2’den azdır (yıl belirtilmemiş).</li>
+        <li>Kişi başına elektrik tüketimi 6.984 kWh ile Türkiye ortalamasının neredeyse iki katı; büyük bir elektrik kullanıcı tabanına (sanayi) işaret edebilir (tahmin).</li>
+        <li>Karaibrahimler, Çamköy ve Çaltıkara RES için ÇED/proje dosyaları Çevre, Şehircilik Bakanlığı Çanakkale duyurularında; Akfen’in Kocalar RES kapasite artışı tamamlandı. Bunlar yatırım göstergesidir, devreye alma kanıtı değildir.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Rüzgâr, jeotermal ve biyokütle bir arada; yeni RES başvuruları sürüyor.</li><li>Güney Marmara rüzgâr potansiyeli akademik çalışmalarda öne çıkıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kapasitenin büyük kısmı termik; Çan termik santrali üzerine çevre etkisi çalışmaları var.</li><li>Rüzgâr ve termik az istihdam yaratır, kârın ne kadarı ilde kalıyor belli değil (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Kapasite dağılımı yılı belirtilmeyen bir sunumdan geliyor. Termik için 3.704 MW rakamı yüksek görünüyor; başka kaynakla doğrulayamadım, bu yüzden oranları kabaca okumak gerekir.</li>
+      <li>Balıkesir dosyasındaki “Türkiye RES kurulu gücünde yaklaşık %6” (yıl belirsiz) bu dosyadaki 982 MW ile birebir karşılaştırılmadı.</li>
+      <li>Santrallerin il GSYH’sine ve istihdama katkısını rakamla bulamadım.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Köprü: OSB’ler, Seramik ve Yeni Erişim</h2>
+    <p class="sub">1915 Çanakkale Köprüsü ve otoyolu, OSB’lere ilgiyi artırdığı söyleniyor; ama bunu ölçen bağımsız veri sınırlı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Çan’daki Kale Grubu (Kale Seramik, Çanakkale Seramik) kendi açıklamasında Türkiye seramik pazarında yaklaşık %30 paya sahip; yeni slab fabrikası açılışı Çan’da yapıldı. Bu pay grup geneli içindir, yalnızca ilin payı değildir.</li>
+        <li>Çanakkale OSB yöneticisi 2025’te 43 hektarlık (40–45 parsel) genişleme planını açıkladı. Çanakkale TSO Başkanı köprü ve otoyolun yatırım ilgisini zirveye çıkardığını söylüyor.</li>
+        <li>OSB yöneticisi bacasız sanayi tercihini ve İstanbul–İzmir erişimini öne çıkarıyor; bunlar kurum açıklamalarıdır, bağımsız değerlendirme değildir.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Marmara ile Ege arasında köprü ve tünellerle kilit lojistik konum.</li><li>OSB’lerde genişleme ve yeni gıda ihtisas OSB’si.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Köprünün üretim ve ihracata etkisini gösteren veri yok; ihracat 2023’ten beri artsa da hacim küçük.</li><li>İSO 500’de ilde faaliyet gösteren firmaların güncel listesini bulamadım.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>OSB dönüm ve istihdam rakamları farklı tarihli haberlerden: 1.100 dönüm ve 1.600 dönüm hedefi eski bir haberden, 43 hektar 2025’ten. Hedef ve beklentiler gerçekleşme değildir.</li>
+      <li>Liman hacmi (Çardak, Çanakkale), sanayi istihdamı ve sanayinin il GSYH payı için güvenilir veri bulamadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Tarihin Sermayesi, Yabancıda Toparlanma</h2>
+    <p class="sub">Troya, Gelibolu Tarihi Alanı, Assos, Gökçeada ve Bozcaada; yerli talep güçlü, yabancı ziyaretçi 2019’un hâlâ altında görünüyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Yerel bir haberde ilin 970 tesisi, 14 bin odası ve 28 bin yatağı olduğu belirtiliyor (tarih belirtilmemiş).</li>
+        <li>Bir yol haritası belgesine göre yabancı ziyaretçi 2019’da 247 bin, 2023’te tahminen 98 bin (yaklaşık %40); yerli ziyaretçi 464 bin ve 720 bin (yaklaşık 1,5 kat). Hesap bana ait.</li>
+        <li>Gökçeada ve Bozcaada’da sezon haziran–eylül arası; adalara ulaşım feribotla.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yerli ziyaretçi 2023’te 2019’un üstünde (tahmini).</li><li>UNESCO’lu Troya, Assos antik kenti, adalar ve savaş alanı turizmi birlikte farklı turist profilleri çekiyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yabancı ziyaretçi 2023’te 2019’un yaklaşık %40’ı.</li><li>Ziyaretçi sayımı zor: okul grupları ve günübirlik gezenler konaklama verisine yansımıyor (akademik makale).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2022 ve 2023 ziyaretçi sayıları kaynakta yıldızlı (tahmini). 2024–2025 resmî il ziyaretçi sayısını ve Gelibolu Tarihi Alanı’nın güncel ziyaretçisini bulamadım.</li>
+      <li>Konaklama kapasitesi haberde yıl belirtmiyor; turizmin il GSYH’sindeki payını da bulamadım.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Kişi başına 482,7 bin TL ile nüfustan yaklaşık 275 milyar TL; Türkiye GSYH’sinin (44,6 trilyon TL) yaklaşık %0,6’sı (kendi hesabım). Nüfus payı %0,67 olduğu için kabaca nüfusuyla orantılı.</li>
+        <li>Nüfus 2024’te 568.966’ya düşmüş, 2025’te 573.976’ya çıkmıştı; merkez ilçe 204.454’ten 208.613’e (yaklaşık %2) arttı.</li>
+        <li>Konut satışı 2025’te 14.539 ile üç yıllık artışı sürdürdü (2024’e göre yaklaşık +%9,9, kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kişi başına gelir Türkiye ortalamasına yakın; Balıkesir ve Sakarya’nın önünde.</li><li>Nüfus ve konut hareketliliği artıyor; işsizlik %5,6 (kapsam belirsiz).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Eskişehir’in (16.171 $) ve Türkiye ortalamasının altında.</li><li>İlçelerin hepsi aynı hızda büyümüyor; artış merkez ilçe ve kıyıda yoğun (yerel haber).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İşsizlik oranının kapsamı (il mi, Balıkesir’le birlikte TR22 mi) ve yılı haberde net değil; Türkiye 2025 işsizliği %8,3’tü (Balıkesir dosyasındaki aktarım), doğrudan kıyas yapılmadı.</li>
+      <li>İlin sektörel GSYH paylarını (tarım, sanayi, hizmet) 2024 için bulamadım. Konut satışı ekonomik üretim değil; yatırım amaçlı alımlar da içerebilir (tahmin). Zeytinlik ve tarım arazisine yatırımcı ilgisi bir gayrimenkul değerleme şirketi açıklamasıdır.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">12 ilçe. Yalnızca Merkez ilçe 2025 verisiyle; diğer ilçeler farklı yıl ve kaynaklardan ve kabaca okunmalıdır.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (kaynak yılı)</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Merkez</td><td>208.613 (2025; il nüfusunun yaklaşık %36,3’ü)</td><td>Kamu, üniversite (ÇOMÜ), hizmet ve turizm</td></tr>
+      <tr><td>Biga</td><td>~92 bin (yıl belirsiz)</td><td>Tarım alanı en geniş ilçe; yem bitkisi, hayvancılık, Biga OSB ve Biga TSO fuarı</td></tr>
+      <tr><td>Çan</td><td>~48 bin (yıl belirsiz)</td><td>Kale seramik fabrikaları, termik santral</td></tr>
+      <tr><td>Gelibolu</td><td>44.174 (2024)</td><td>Gelibolu Yarımadası’nın kuzeyi, köprünün Avrupa ayağı, tarım ve turizm</td></tr>
+      <tr><td>Ayvacık</td><td>35.088 (2024)</td><td>Zeytin ve küçükbaş hayvancılık, Assos, RES</td></tr>
+      <tr><td>Ezine</td><td>31.811 (2024)</td><td>Ezine peyniri, zeytin, Gıda İhtisas OSB</td></tr>
+      <tr><td>Yenice, Lapseki, Bayramiç</td><td>~31 bin, ~29 bin, ~29 bin (yıl belirsiz)</td><td>Yem bitkisi ve hayvancılık (Yenice), köprünün Asya ayağı (Lapseki), domates ve su sorunu (Bayramiç)</td></tr>
+      <tr><td>Gökçeada, Eceabat, Bozcaada</td><td>11.145, 8.828, 3.363 (2024)</td><td>Ada turizmi ve organik tarım (Gökçeada), Tarihi Alan Başkanlığı’nın bulunduğu ilçe (Eceabat), bağcılık ve turizm (Bozcaada)</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Ayrıntı: Merkez ilçe il nüfusunun yaklaşık %36’sını oluşturuyor; ilçe bazında gelir, istihdam ve ihracat verisi bulunamadı. Biga, Çan, Yenice, Lapseki ve Bayramiç rakamları eski olabilir.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Çanakkale</h3>
+      <p style="margin:0">Çanakkale’nin gücü geniş bir temelde: gelir Türkiye ortalamasına yakın, tarım ve bahçecilik çeşitli, seramik, enerji ve tarih turizmi aynı ilde yan yana. Zayıflığı küçük ve dalgalı bir ihracat, su sıkıntısı, yabancı turistteki toparlanma gecikmesi ve enerji ile köprü gibi büyük yatırımların yerelde ne bıraktığının ölçülememesi. 1915 Çanakkale Köprüsü ve OSB genişlemeleri fırsat açıyor; bunun üretime ve ihracata dönüşüp dönüşmediği bu verilerle kesin gösterilemiyor.</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Tarımı işlemeye taşımak: domates, zeytin, süt ve Ezine peyniri gibi ürünleri markalı ve işlenmiş ürüne çevirmek (Ezine Gıda İhtisas OSB bunun adayı).</div>
+      <div><b>HAMLE 2</b>Köprü ve OSB avantajını ihracata çevirmek: birkaç büyük sevkiyata bağlı dalgalı ihracatı ikinci ve üçüncü ürün ayağıyla düzgün hâle getirmek.</div>
+      <div><b>HAMLE 3</b>Turizmde yabancıyı 2019 düzeyine taşımak: Troya, Gelibolu, Assos ve adaları yıl boyu program ve kayıtlı kapasiteyle birleştirmek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Su kıtlığı ve enerji yatırımlarının tarım ve turizmle çatışıp çatışmadığı da bu dosyanın verisiyle cevaplanamıyor.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>1915 Çanakkale Köprüsü Çanakkale’yi üretim ve ihracat üssü mü yapacak, yoksa yazlık, konut ve geçiş kenti mi?</li>
+      <li>Domates ve zeytinde su kıtlığı büyürken tarımın ilin ekonomisindeki yeri nasıl korunur?</li>
+      <li>Termik ağırlıklı bir enerji yapısından rüzgâra geçerken katma değer ve istihdam yerelde nasıl kalır?</li>
+      <li>Tarih turizmi yabancı ziyaretçide 2019 düzeyine dönmek için neye ihtiyaç duyar: tanıtım, kapasite, ulaşım ya da program?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Rudaw, Habertürk, CNBC-e, Ekonomi Gazetesi aktarımı); TÜİK ADNKS 2025 (Haber Gazetesi, Rudaw, Medyascope); İŞKUR Çanakkale İl Raporu (2021 nüfus)</li>
+      <li>TÜİK Balıkesir Bölge Müdürlüğü göstergeleri (Kalenin Sesi: ihracat, ithalat, GSYH, konut satışı, elektrik tüketimi, işsizlik); Çanakkale Olay ve Çanakkale Kalem (TÜİK genel ticaret aylık ihracat ve ithalat)</li>
+      <li>Kalkınma Ajansları Çanakkale Tarım-Hayvancılık Rehberi; Dergipark makaleleri (tarımın payı, domates, zeytin, süt); Habertürk Yerel Haberler (58 üründe ilk 10, su sorunu); Hürriyet, Sanayi Gazetesi, Ekonomi Gazetesi, Para Dergi (OSB, Kale Grubu, köprü)</li>
+      <li>ÇOMÜ Deniz Teknolojileri MYO sunumu (santral dağılımı, TÜREB atfı); Çevre, Şehircilik Bakanlığı Çanakkale duyuruları (RES dosyaları); Akfen (Kocalar RES)</li>
+      <li>Yeni Birlik (konaklama kapasitesi); Çanakkale Turizm Tanıtım ve Geliştirme Yol Haritası (ziyaretçi sayısı); Dergipark (ziyaretçi sayımı); Wikipedia, Emlakjet, Haber Gazetesi (ilçe nüfusları)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması, sunum ya da akademik makaledir; resmî tabloların doğrudan alıntısı değildir. Bulamadığım ya da doğrulayamadığım başlıca veriler: ihracatın sektör ve ülke dağılımı, ilçe bazında GSYH ve istihdam, güncel TÜİK tarım serisi, 2024–2025 turizm ziyaretçi sayısı, sektörel GSYH payları, liman hacimleri ve termik santral kapasitesinin ikinci bir kaynakla doğrulanması.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+var KARNE=[
+ {c:'good',chip:'MOTOR',ad:'Sebze, meyve ve zeytin',big:'58 üründe ilk 10',alt:'Üretim miktarında Türkiye ilk 10’unda; domates, badem, ceviz, ayçiçeğinde 5. (yerel haber, yıl belirtilmemiş)',y:'Ürün çeşitliliği, organik ve coğrafi işaretli ürünler; kişi başına bitkisel üretim değerinde 4. (akademik, yıl belirsiz).',n:'Su sıkıntısı (Bayramiç’ten üretici anlatımı); sektörün ihracat ve istihdam verisini bulamadım.'},
+ {c:'warn',chip:'ORTA ÖLÇEKLİ',ad:'Süt, küçükbaş ve Ezine peyniri',big:'%2,63',alt:'Türkiye süt üretiminde il payı; keçi sütünde %8 (akademik makale, yıl belirsiz)',y:'Saanen keçisi damızlık merkezi, Ezine peyniri ve Gıda İhtisas OSB.',n:'Kişi başına hayvansal üretim değerinde 17.; güncel il serisini doğrulayamadım.'},
+ {c:'good',chip:'MOTOR',ad:'Seramik ve yapı malzemesi',big:'~%30',alt:'Kale Grubu’nun Türkiye seramik pazar payı (şirket açıklaması; grup geneli, yalnızca ilin payı değil)',y:'Çan’da Kale Seramik ve Çanakkale Seramik fabrikaları; yeni slab fabrikası açıldı.',n:'İlin ihracatındaki payı ve istihdamı için veri bulamadım.'},
+ {c:'good',chip:'MOTOR',ad:'Rüzgâr ve diğer yenilenebilirler',big:'982 MW',alt:'İlde rüzgâr kapasitesi, kapasitenin yaklaşık %21’i (akademik sunum, yıl belirtilmemiş)',y:'Rüzgâr, jeotermal, biyokütle; yeni RES dosyaları (Karaibrahimler, Çamköy, Çaltıkara) ve Kocalar RES artışı.',n:'İlde kalan katma değer ve istihdam ölçülemedi; ÇED dosyaları devreye alma kanıtı değil.'},
+ {c:'warn',chip:'STRATEJİK AMA KARBON YOĞUN',ad:'Termik enerji',big:'~%78',alt:'Santral kapasitesinde termik payı (akademik sunum; 3.704 MW doğrulanamadı)',y:'Büyük ve sürekli üretim kapasitesi; elektrik tüketimi Türkiye ortalamasının neredeyse 2 katı.',n:'Kömür bağımlılığı ve çevre etkisi tartışması (Çan termik üzerine çalışma); güncel kapasiteyi doğrulayamadım.'},
+ {c:'warn',chip:'TOPARLANIYOR',ad:'Turizm',big:'28 bin yatak',alt:'970 tesis, 14 bin oda (yerel haber, tarih belirtilmemiş)',y:'Troya, Gelibolu Tarihi Alanı, Assos ve adalar; yerli ziyaretçi 2023’te 2019’un yaklaşık 1,5 katı (tahmini).',n:'Yabancı ziyaretçi 2023’te 2019’un yaklaşık %40’ı (tahmini); resmî güncel ziyaretçi verisi yok.'},
+ {c:'sleep',chip:'UYUYAN: LOJİSTİK',ad:'Köprü, otoyol ve OSB’ler',big:'1.100 → 1.600 dönüm',alt:'Çanakkale OSB mevcut alanı ve genişleme izni (eski haber); 2025’te 43 hektar daha planlandı',y:'Marmara–Ege geçişinde kilit konum; OSB doluluğu ve yatırım ilgisi artıyor (yönetici açıklamaları).',n:'Köprünün üretim ve ihracata etkisini gösteren bağımsız veri yok.'},
+ {c:'sleep',chip:'UYUYAN: SU ÜRÜNLERİ',ad:'Su ürünleri ve balıkçılık',big:'8.809 ton',alt:'Su ürünleri üretimi (kalkınma ajansı rehberi, yaklaşık 2016)',y:'Rehber su ürünlerinde “yüksek potansiyel” diyor; Boğaz ve iki deniz kıyısı.',n:'Veri eski; ihracat kırılımı ve güncel üretim bulunamadı.'},
+ {c:'warn',chip:'DALGALI',ad:'İhracat',big:'234,8 mn $',alt:'2025 ihracatı; 2024’e göre yaklaşık +%22 (TÜİK genel ticaret sistemi)',y:'Üç yıl üst üste artış; ihracat ithalatın yaklaşık 1,9 katı.',n:'Yılın yaklaşık %47’si üç ayda; Şubat–Ağustos 2026 yaklaşık %24 geride (kendi hesabım); sektör kırılımı yok.'},
+ {c:'warn',chip:'HAREKETLİ',ad:'Konut ve yaşam göçü',big:'14.539',alt:'2025 konut satışı (2022: 12.658, 2023: 11.100, 2024: 13.224)',y:'Üç yıldır artış; nüfus 2025’te +5.010; zeytinlik ve tarım arazisine yatırımcı ilgisi.',n:'Konut satışı üretim değil; yatırım amaçlı alım olabilir (tahmin); tarım arazisi üzerindeki baskı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['İhracat ve ithalat (milyon $, TÜİK genel ticaret)',[['İhracat 2023',183.4],['İhracat 2024',192.7],['İhracat 2025',234.8],['İthalat 2024',132.3],['İthalat 2025',124.9]],[2],'2025’te ihracat yaklaşık +%22; fazla yaklaşık 110 milyon $. Kaynak: Kalenin Sesi (TÜİK Bölge Müdürlüğü göstergeleri), Çanakkale Olay.'],
+ ['2025 aylık ihracat (milyon $)',[['Ocak',12.6],['Şubat',12.0],['Mart',13.4],['Nisan',13.3],['Mayıs',16.6],['Haziran',12.3],['Temmuz',36.6],['Ağustos',14.4],['Eylül',35.5],['Ekim',37.4],['Kasım',14.5],['Aralık',16.2]],[6,8,9],'Temmuz, Eylül ve Ekim yaklaşık 109,6 milyon $; yıllık toplamın yaklaşık %47’si (kendi hesabım). Nedeni kaynaklarda belirtilmiyor. Kaynak: Çanakkale Olay, Çanakkale Kalem.'],
+ ['Ocak–Ağustos ihracatı (milyon $)',[['2025 (kendi hesabım)',131.1],['2026 (haber aktarımı)',150.1]],[1],'Yaklaşık +%14,5; ama Ocak 2026 tek ay 59,8 milyon $ idi. Geçici veri. Kaynak: Çanakkale Olay, Kalenin Sesi.'],
+ ['Şubat–Ağustos ihracatı (milyon $, Ocak hariç)',[['2025',118.5],['2026',90.3]],[1],'Yaklaşık −%24 (kendi hesabım; iki ayrı haber derlemesinden çıkarım, geçici veri). Ocak 2026’daki sıçrama toplamı yukarı çekiyor.']];
+mk('ih',IH,['Yıllar','2025 aylık','Ocak–Ağustos','Ocak hariç']);
+var TA=[['Üretimde Türkiye sırası (düşük sayı daha iyi)',[['Badem',5],['Ceviz',5],['Yağlık ayçiçeği',5],['Sofralık domates',5],['Elma',6],['Erik',7],['Biber',7],['Yağlık zeytin',8]],[3],'Yıl belirtilmemiş yerel haber aktarımı. Kaynak: Habertürk Yerel Haberler.'],
+ ['Üretim (bin ton; kalkınma ajansı rehberi, yaklaşık 2016)',[['Sebze',869.1],['Meyve',498.1],['Organik ürün',14.6],['Su ürünleri',8.8]],[0],'Güncel TÜİK serisi değil. Kaynak: Çanakkale Tarım-Hayvancılık Rehberi (TÜİK ve Bakanlık atfı).'],
+ ['Hayvan varlığı (bin; yaklaşık 2016)',[['Küçükbaş',716.5],['Büyükbaş',205.9],['Arı kovanı',71.6]],[0],'Kanatlı (yaklaşık 6,18 milyon) ölçek nedeniyle grafikte yok. Kaynak: Çanakkale Tarım-Hayvancılık Rehberi.'],
+ ['Türkiye’deki payı (%, akademik makale, yıl belirsiz)',[['Süt üretimi',2.63],['Keçi sütü',8],['Tarımsal üretim değeri',1.97],['Bitkisel üretim değeri',2.24],['Hayvansal üretim değeri',1.45],['Nüfus payı (kıyas)',0.66]],[2,5],'Tarım payı nüfus payının yaklaşık 3 katı (kendi hesabım). Kaynak: Dergipark (Çanakkale’de tarımın yapısı).']];
+mk('ta',TA,['Sıralama','Üretim','Hayvan','Pay']);
+var EN=[['Santral kapasitesi, türe göre (MW; yıl belirtilmemiş)',[['Termik',3704],['Rüzgâr',982.2],['Jeotermal',31],['Biyokütle',26.8],['Hidroelektrik',14.2]],[1],'Toplam yaklaşık 4.758 MW; termik yaklaşık %78, rüzgâr yaklaşık %21. Termik rakam başka kaynakla doğrulanamadı. Kaynak: ÇOMÜ Deniz Teknolojileri MYO sunumu (TÜREB atfı).']];
+mk('en',EN,['Kapasite']);
+var SA=[['OSB alanı (dönüm; farklı tarihli haberler)',[['Çanakkale OSB, mevcut (eski haber)',1100],['Genişleme izniyle hedef',1600]],[1],'2025’te ayrıca 43 hektar (yaklaşık 430 dönüm, 40–45 parsel) genişleme planı açıklandı. Hedef, gerçekleşme değil. Kaynak: Ekonomi Gazetesi, Para Dergi.'],
+ ['OSB istihdamı (kişi; hedef ve beklenti)',[['Çanakkale OSB, mevcut (eski haber)',1000],['Çanakkale OSB hedefi',1500],['Ezine Gıda İhtisas OSB beklentisi',8000]],[2],'Rakamlar yönetici beklentileridir, gerçekleşmiş istihdam değil. Kaynak: Ekonomi Gazetesi, Yeni Asır (2024).']];
+mk('sa',SA,['OSB alanı','OSB istihdamı']);
+var TU=[['Yabancı ziyaretçi (bin kişi)',[['2019',247.3],['2020',31.5],['2021',44],['2022*',61.6],['2023*',98]],[4],'* ile işaretli yıllar kaynakta tahmini. 2023, 2019’un yaklaşık %40’ı (kendi hesabım). Kaynak: Çanakkale Turizm Tanıtım ve Geliştirme Yol Haritası.'],
+ ['Yerli ziyaretçi (bin kişi)',[['2019',464.3],['2020',218],['2021',300],['2022*',450],['2023*',720]],[4],'* ile işaretli yıllar tahmini. 2023, 2019’un yaklaşık 1,55 katı (kendi hesabım). Kaynak: aynı yol haritası.'],
+ ['Konaklama kapasitesi (bin)',[['Yatak',28],['Oda',14]],[0],'970 tesis; tarih belirtilmemiş yerel haber. Kaynak: Yeni Birlik Gazetesi.']];
+mk('tu',TU,['Yabancı','Yerli','Kapasite']);
+var GT=[['Kişi başına GSYH, benzer iller 2024 ($)',[['Eskişehir',16171],['Çanakkale',14704],['Sakarya',14605],['Karaman',14374],['Balıkesir',14004],['Manisa',13852],['Düzce',13721],['Türkiye ortalaması',15325]],[1],'Çanakkale Türkiye ortalamasının yaklaşık %96’sı (kendi hesabım). Kaynak: TÜİK il bazında GSYH (Rudaw, Kalenin Sesi aktarımı).'],
+ ['Nüfus (bin kişi)',[['2018',540.7],['2019',542.2],['2020',541.5],['2021',557.3],['2023',570.5],['2024',569],['2025',574]],[6],'2025’te +5,0 bin (yaklaşık %0,88). 2022 değeri bulunamadı. Kaynak: TÜİK ADNKS (Haber Gazetesi, İŞKUR).'],
+ ['Konut satışı (adet)',[['2022',12658],['2023',11100],['2024',13224],['2025',14539]],[3],'2025’te 2024’e göre yaklaşık +%9,9 (kendi hesabım). Kaynak: TÜİK (Kalenin Sesi).']];
+mk('gt',GT,['Benzer iller','Nüfus','Konut']);
+</script>
+</body>
+</html>
