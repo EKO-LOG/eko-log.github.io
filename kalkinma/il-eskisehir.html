@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eskişehir | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1d4ed8;--a2:#f97316;--a3:#0891b2"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Eskişehir</span><h1>Eskişehir: Havacılık, Raylı Sistem ve Üniversite Kenti</h1><p>928 bin nüfuslu Eskişehir, kişi başına GSYH’de 16.171 $ ile 81 il arasında dokuzuncu; Türkiye ortalamasının yaklaşık %5 üzerinde. Kalkınmanın taşıyıcıları sanayi (ESO’ya göre 10 milyar $ ciro, 4,75 milyar $ ihracat), havacılık ve savunma, raylı sistemler, beyaz eşya, şeker pancarı ve üç devlet üniversitesi. Zayıf yanlar da net: toplam ekonomi küçük, ihracatın yaklaşık yarısı AB’ye bağlı, sanayi nitelikli işgücü, finansman, konut-kira ve ulaşımdan şikâyetçi, kamu yatırımı gelir sıralamasının gerisinde ve nüfus iki merkez ilçede toplanırken 12 ilçede azalıyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>16.171 $</b><span>Kişi başına GSYH (2024; 530.834 TL), 81 il arasında 9. sıra; Türkiye ort. 15.325 $’ın yaklaşık %105’i (kendi hesabım)</span></div>
+    <div class="k"><b>927.956</b><span>Nüfus (ADNKS 2025); 2024’te 921.630; 2000’de 651.672</span></div>
+    <div class="k"><b>4,75 mlr $</b><span>2025 ihracatı (ESO, Aralık 2025 değerlendirmesi); 2024’te 4,5 mlr $ (+%15,1), ihracatçı iller arasında 12.</span></div>
+    <div class="k"><b>601 milyon $</b><span>2025 havacılık ve savunma ihracatı; 2024’te 514 milyon $ (OSB Başkanı Küpeli)</span></div>
+    <div class="k"><b>10 mlr $</b><span>ESO’ya göre sanayi cirosu; 1.600’ü aşkın üretici firma, 24 Ar-Ge merkezi</span></div>
+    <div class="k"><b>%7,03</b><span>Türkiye şeker pancarı üretiminin Eskişehir payı (2024; 1,62 milyon ton), TÜİK</span></div>
+  </div>
+  <div class="secnav"><a href="#sanayi">Sanayi</a><a href="#dis">İhracat</a><a href="#tarim">Tarım</a><a href="#egitim">Eğitim</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#sorunlar">Sorunlar</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="sanayi">
+    <h2>Sanayi: Kentin Motoru</h2>
+    <p class="sub">Eskişehir’in kalkınma hikâyesi büyük ölçüde sanayiye dayanıyor: havacılık, raylı sistemler, makine-metal, beyaz eşya, cam-seramik ve gıda.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sn"></div><h3 id="sntitle"></h3><div class="bars" id="snbars"></div><p class="note" id="snnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>ESO Başkanı Kesikbaş’a göre Eskişehir’de 1.600’ü aşkın üretici firma var; sanayinin yıllık cirosu 10 milyar $’ın üzerinde. Sanayi, kent ekonomisinin yaklaşık %40–44’ünü oluşturuyor ve yaklaşık 90–100 bin kişiye doğrudan istihdam sağlıyor.</li>
+        <li>Öne çıkan sektörler havacılık-uzay, raylı sistemler, makine imalatı, savunma, cam-seramik, tekstil ve gıda. Havacılık motoru üretimiyle kent “Türkiye’nin motor üretim merkezi” olarak anılıyor.</li>
+        <li>ESO verilerine göre kentte 24 Ar-Ge merkezi var ve OSB alanı yaklaşık 35 milyon m² ile Türkiye’de ikinci sırada. Kilogram başına ihracat değeri 1,95 $, yani Türkiye ortalamasının yaklaşık %25 üzerinde.</li>
+        <li>Eskişehir, savunma ve havacılık ürünleri ihracatında Ankara ve İstanbul’dan sonra yaklaşık %20 payla üçüncü sırada; beyaz eşya ihracatı bir milyar $’ı aşıyor (ESO’nun eski bir açıklaması).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Ciro, istihdam ve sanayi payı rakamları ESO başkanının ve oda raporlarının beyanıdır; sanayinin il GSYH’sindeki payı %40 ile %44 arasında farklı verilmiş, bu yüzden aralık olarak yazıldı. İstihdam rakamı da 90 bin ile 100 bin arasında değişiyor.</li>
+      <li>Sektör bazında ciro, istihdam ve firma sayısını doğrulanmış bir tabloyla bulamadım; “öne çıkan sektörler” listesi basın aktarımıdır, sıralama değildir.</li>
+      <li>Beyaz eşya ihracatındaki “bir milyar $’ı aştı” bilgisi eski bir ESO yazısından geliyor; güncel rakamı bulamadım.</li></ul></div>
+  </section>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Eskişehir ihracatı büyüyor ve teknoloji içeriği Türkiye ortalamasının üzerinde; ama pazar yapısı Avrupa’ya fazla bağımlı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>2024’te ihracat %15,11 artarak 4,5 milyar $’a çıktı ve Eskişehir en çok ihracat yapan iller arasında 12. oldu. 2025’te ESO yaklaşık 4,75–4,8 milyar $ açıkladı; ESO’nun 5 milyar $’lık hedefine yaklaşıldı.</li>
+        <li>İhracatın yaklaşık %30’u (OSB Başkanı %33 diyor) orta-yüksek ve yüksek teknolojili ürünlerden oluşuyor; Türkiye ortalaması bunun belirgin altında. Kişi başına ihracat yaklaşık 4.900 $.</li>
+        <li>Havacılık ve savunma ihracatı 2024’te 514 milyon $’dan 2025’te 601 milyon $’a çıktı (yaklaşık +%17, kendi hesabım).</li>
+        <li>ESO’ya göre Eskişehir dış ticaret fazlası veren ender sanayi merkezlerinden biri.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İhracatın yaklaşık yarısı AB ülkelerine gidiyor. ESO Başkanı, Avrupa’nın “Made in EU” yaklaşımının hem pazar kaybı riski hem de yeniden konumlanma fırsatı olduğunu söylüyor; yani yoğunlaşma bir kırılganlık.</li>
+      <li>İhracat için iki farklı seri dolaşıyor: ESO’nun Ticaret Bakanlığı verisine dayanan 4,5–4,8 milyar $ rakamı ile BEBKA bültenindeki 2025 yılı için 1,64 milyar $ (%4,1 artış). Fark ölçüm tanımından geliyor olabilir (tahmin); ikisi birbirine eklenemez ve burada hangisinin doğru olduğu yargılanmadı.</li>
+      <li>Ülke ve ürün bazlı tam dağılımı, ithalatı ve dış ticaret dengesini rakamla bulamadım; “fazla veriyor” ifadesi ESO’nun beyanıdır.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım</h2>
+    <p class="sub">Şeker pancarı ve mısır başta olmak üzere ova tarımı; ama maliyet baskısı büyüyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TÜİK 2024: Eskişehir şeker pancarında 1.616.804 ton ile Türkiye üretiminin %7,03’ünü, dane mısırda 469.064 ton ile %5,79’unu üretti. Buğdayda pay %2,76, arpada %2,79.</li>
+        <li>Pancar üretimi yerel fabrikanın kapasitesini tek başına dolduruyor; fazla ürün başka illere gidiyor.</li>
+        <li>Verim ilçeden ilçeye değişiyor; kaynağa göre Alpu’da pancar verimi Çifteler’in yaklaşık iki katı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Pancar üretiminde en büyük sorun artan sulama ve enerji maliyetidir; bu, çiftçi kârlılığını sınırlayan bir risk.</li>
+      <li>Tarımın il GSYH’sindeki payını, hayvancılık ve süt üretimini, çiftçi sayısını doğrulanmış kaynakla bulamadım; sayfada yok. Kaynak, ilçe verimi için sayısal değer veriyor ama birim belirsiz olduğundan buraya almadım.</li>
+      <li>Tarım Eskişehir’in küçük kalan, katma değer olarak sanayinin gerisinde bir kolu; bunu yorum olarak okumak gerekir.</li></ul></div>
+  </section>
+
+  <section id="egitim">
+    <h2>Eğitim ve Hizmet</h2>
+    <p class="sub">Eskişehir bir öğrenci kenti: üç devlet üniversitesi hem hizmet ekonomisini hem de sanayinin nitelikli insan kaynağını besliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="eg"></div><h3 id="egtitle"></h3><div class="bars" id="egbars"></div><p class="note" id="egnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Kentte Anadolu Üniversitesi, Eskişehir Osmangazi Üniversitesi ve 2018’de kurulan Eskişehir Teknik Üniversitesi var. Anadolu’nun Mart 2025’te örgün öğrenci sayısı 21.113, açıköğretimde aktif öğrenci sayısı 685.507 olarak açıklandı.</li>
+        <li>Eskişehir Teknik Üniversitesi havacılık ve teknik alanlarda uzmanlaşıyor; Eskişehir’deki havacılık motoru üreticisi (TUSAŞ Motor Sanayi, TEI) gibi şirketler bu üniversitelerin öğrencileri için staj ve istihdam imkânı sunuyor.</li>
+        <li>Üç üniversitenin örgün öğrenci toplamı 65 binin üzerinde; yani il nüfusunun yaklaşık yüzde 7’si (kendi hesabım). Kadın nüfusu erkekten fazla: 466.776 kadın, 461.180 erkek.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Anadolu’nun milyonluk öğrenci sayıları açıköğretim kaydıdır ve Eskişehir’de yaşayan öğrenci anlamına gelmez; kentin yerel ekonomisine etkisi örgün öğrenciyle ölçülmeli.</li>
+      <li>65 binlik örgün öğrenci toplamı, farklı yıllardan ve internet kaynaklarından derlenmiş yaklaşık bir sayıdır; Osmangazi’nin güncel öğrenci sayısını doğrulayamadım. Öğrencilerin yerel harcaması, kira etkisi ve mezunların kentte kalma oranı için veri bulamadım.</li>
+      <li>Turizm (ziyaretçi, geceleme, yatak) için güvenilir il verisi bulamadım; sayfada turizm bölümü yok.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Eskişehir’de 2024’te kişi başına GSYH 530.834 TL, dolar karşılığı 16.171 $ oldu; 81 il arasında 9. sırada. Türkiye ortalaması 503.076 TL (15.325 $); yalnızca 11 il ortalamanın üzerinde. Eskişehir Bursa, Sakarya, Balıkesir ve Denizli gibi sanayi illerinin önünde.</li>
+        <li>Toplam ekonomi küçük: kişi başına değer ile nüfustan yaklaşık 490 milyar TL ve Türkiye GSYH’sinin (44,6 trilyon TL) yaklaşık %1,1’i çıkıyor (kendi hesabım). Yani kent kişi başına zengin ama ulusal ekonominin içinde küçük bir pay.</li>
+        <li>Bütçe tarafında: kişi başına net bütçe geliri 65.590 TL ile 81 il arasında 14., 30 büyükşehir arasında 10.; gelirlerin giderleri karşılama oranı %82,4 (il bazında 20.).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İl GSYH’si üretim yeri esaslıdır, nominal TL’dir; dolar karşılığı kurdan etkilenir. Küçük bir nüfusa bölündüğü için kişi başına rakam yüksek çıkabilir (yorum).</li>
+      <li>Kamu yatırımı geride: kişi başına kamu yatırımı 9.119 TL ile il bazında 23., yatırımın toplam harcamadaki payı 31. sırada (toplam harcama 73,9 milyar TL, yatırım 8,46 milyar TL). Bu bütçe sıralaması, gelir sıralamasının (14.) gerisinde kalıyor. Yılı ve ayrıntıyı kaynak açıkça vermiyor; kamu verisinin doğrudan tablosu değildir.</li>
+      <li>2024 sektör payları (sanayi, hizmet, tarım) ve büyüme hızını doğrulanmış kaynakla bulamadım; ESO’nun “sanayi %40’ın üzerinde” beyanı resmî GSYH tablosu değildir. Dolar serisi geçmiş yılları olmadığı için zaman içindeki gelişimi sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 927.956’ya çıktı; bir yılda +6.326 (yaklaşık %0,69). 2022’de 906.617 idi; 2000’den bu yana yaklaşık %42 arttı (kendi hesabım).</li>
+        <li>Nüfus iki merkez ilçede toplanıyor: Odunpazarı (431.652) ve Tepebaşı (398.129) il nüfusunun yaklaşık %89’unu oluşturuyor (kendi hesabım).</li>
+        <li>Eskişehir 14 ilçeli bir büyükşehir; 12 ilçenin nüfusu 2024’ten 2025’e azaldı (aşağıdaki ilçe bölümüne bakın).</li>
+        <li>Türkiye’de 2025’te işsizlik %8,3, işgücüne katılma %53,5 (erkek %71,3, kadın %36,2) oldu; Eskişehir’in kendi 2025 oranlarını doğrulanmış kaynakla bulamadım.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Eskişehir’e özgü 2025 işsizlik, katılma ve istihdam oranı sayfada yok: bir yerel haberin “istihdam oranı %54” ifadesi kendi içinde tutarsız göründüğü için kullanılmadı.</li>
+      <li>Sektörel istihdam ve ücretler için güncel il verisi bulamadım; yalnızca ESO’nun sanayinin doğrudan istihdamı beyanı (90–100 bin) var.</li>
+      <li>Nüfus artışı Türkiye ortalamasına yakın ama düşük; öğrenci nüfusu resmî nüfusa tam yansımıyor olabilir (yorum).</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Eskişehir’in 14 ilçesinin nüfusu ADNKS 2025’e aittir. İki merkez ilçe il nüfusunun yaklaşık %89’unu barındırıyor; kalan 12 ilçenin hepsinde nüfus 2024’e göre azaldı.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Öne çıkan</th></tr>
+      <tr><td>Odunpazarı</td><td>431.652</td><td>En kalabalık ilçe (%46,5); tarihî çarşı ve Odunpazarı Evleri; 2024’te +5.071</td></tr>
+      <tr><td>Tepebaşı</td><td>398.129</td><td>Porsuk Çayı’nın kuzeyi; 2008’de ilçe oldu (%42,9); 2024’te +3.395</td></tr>
+      <tr><td>Sivrihisar</td><td>20.189</td><td>Kırsalın en büyük ilçesi; Sivrihisar Ulu Camii</td></tr>
+      <tr><td>Çifteler</td><td>14.487</td><td>2024’te 14.814 idi</td></tr>
+      <tr><td>Seyitgazi</td><td>12.565</td><td>Seyit Battal Gazi Külliyesi; 2024’te 12.878</td></tr>
+      <tr><td>Alpu</td><td>9.725</td><td>Ova tarımı; 2024’te 10.072</td></tr>
+      <tr><td>Mihalıççık</td><td>7.605</td><td>2024’te 7.959</td></tr>
+      <tr><td>Mahmudiye</td><td>7.407</td><td>2024’te 7.524</td></tr>
+      <tr><td>İnönü</td><td>6.114</td><td>2024’te 6.194</td></tr>
+      <tr><td>Beylikova</td><td>5.611</td><td>2024’te 5.723</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İlk 10 ilçe il nüfusunun yaklaşık %98,4’ünü oluşturuyor; Günyüzü (5.008), Sarıcakaya (4.477), Mihalgazi (2.861) ve Han (2.126) tabloda yok. İki merkez ilçe dışındaki 12 ilçenin toplam nüfusu 100.315’ten 98.175’e düştü (yaklaşık −2.140, kendi hesabım); il genelindeki artış tamamen Odunpazarı ve Tepebaşı’ndan geldi. İlçe bazında GSYH, istihdam veya ihracat verisi bulunamadı; “öne çıkan” sütunu genel niteliktedir. Yüzdeler kendi hesabımdır.</p></div>
+  </section>
+
+  <section id="sorunlar">
+    <h2>Sorunlar ve Riskler</h2>
+    <p class="sub">Eskişehir güçlü bir sanayi ilidir, ama kalkınmanın önündeki engellerin çoğu sanayicilerin kendi anketinde ve ESO raporlarında yazılı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sk"></div><h3 id="sktitle"></h3><div class="bars" id="skbars"></div><p class="note" id="sknote"></p></div>
+      <div class="card"><h3>Öne çıkan sorunlar</h3><ul>
+        <li><b>İşgücü ve yaşam maliyeti:</b> ESO anketinde sanayicilerin %95’i nitelikli işgücüne erişimde sorun yaşıyor; %98’i konut ve kira fiyatlarının işgücü bulmayı zorlaştırdığını söylüyor.</li>
+        <li><b>Mekân ve ulaşım:</b> %93 fabrika arsası ve inşaat maliyetinden, %94 sanayi bölgelerine ulaşımdan şikâyetçi. ESO’nun vizyon belgesine göre Eskişehir limanlara demiryolu-karayolu ile yeterince bağlanamıyor; Hasanbey Lojistik Köyü etkin kullanılamıyor.</li>
+        <li><b>Maliyet ve finansman:</b> Enflasyonun üretim maliyetini artırdığını %98, işçilik payının büyüdüğünü %98 belirtiyor; finansmana erişim, yüksek kredi maliyeti ve tahsilat riski en çok zorlayan konular.</li>
+        <li><b>Pazar:</b> Firmaların %97’si iç pazarda, %94’ü dış pazarda daralma bekliyor; ihracatın yaklaşık yarısı AB’ye bağlı ve “Made in EU” gibi düzenlemeler risk yaratıyor.</li>
+        <li><b>Kamu yatırımı:</b> Kişi başına kamu yatırımı il bazında 23., yatırım payı 31.; gelir yaratan bir ilin kamudan aldığı pay göreli geride.</li>
+        <li><b>Tarım ve ilçeler:</b> Pancarda sulama-enerji maliyeti artıyor; 12 ilçede nüfus azalıyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>ESO anketi 2025’e ait bir üye anketidir: katılımcı sayısı kaynakta verilmiyor ve rastgele örnek değildir; oranlar sanayici algısını gösterir, ölçülmüş bir gerçekleşme değildir. Oranların çoğunun %93–99 aralığında olması, soru kalıbından etkilenmiş olabileceğini düşündürür (yorum).</li>
+      <li>Kamu yatırımı sıralamaları bir bütçe analizinden aktarılmıştır; yılı net değildir.</li>
+      <li>Bu sorunların büyüklüğünü (maliyete etkisini, kayıp ihracatı) rakamla gösteren veri bulamadım.</li></ul></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>2000 – Nüfus.</b> İl nüfusu 651.672; 2025’e kadar yaklaşık %42 arttı.</p>
+      <p><b>2008 – İlçeler.</b> Merkez, Odunpazarı ve Tepebaşı olmak üzere iki ilçeye ayrıldı.</p>
+      <p><b>2018 – Teknik Üniversite.</b> Eskişehir Teknik Üniversitesi, Anadolu Üniversitesi’nden ayrılarak kuruldu.</p>
+      <p><b>2022 – Nüfus.</b> 906.617; sonraki üç yılda yaklaşık +21 bin.</p>
+      <p><b>2024 – İhracat ve gelir.</b> İhracat %15,1 artışla 4,5 milyar $; kişi başına GSYH 16.171 $ ile 9.; havacılık ve savunma ihracatı 514 milyon $.</p>
+      <p><b>2025 – İhracat.</b> ESO’ya göre ihracat yaklaşık 4,75–4,8 milyar $; havacılık-savunma 601 milyon $; sanayi cirosu 10 milyar $.</p>
+      <p><b>2025 – ESO anketi.</b> Sanayicilerin çoğu iç ve dış pazarda daralma beklediğini, nitelikli işgücü ve ulaşım sorunlarını bildirdi.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Kişi başına GSYH’de 9. sıra; sanayi illerinin önünde</li><li>Havacılık-savunma ve raylı sistemlerde teknoloji yoğun üretim; ihracatın yaklaşık %30’u orta-yüksek teknoloji</li><li>Dış ticarette fazla; 24 Ar-Ge merkezi ve büyük OSB alanı</li><li>Üç devlet üniversitesi ve nitelikli insan kaynağı havuzu</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Toplam ekonomi Türkiye’nin yaklaşık %1,1’i; ölçek küçük</li><li>İhracatın yaklaşık yarısı AB’ye bağlı</li><li>Nitelikli işgücü, finansman, konut-kira ve ulaşım sorunları</li><li>Kamu yatırımı gelir sıralamasının gerisinde; 12 ilçede nüfus azalıyor</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Savunma ve havacılıkta büyüyen ihracat (2025’te 601 milyon $)</li><li>5 milyar $ ihracat hedefi ve katma değeri yükseltme</li><li>Yeşil-dijital dönüşümle AB pazarında yeniden konumlanma</li><li>Lojistik bağlantıların (liman, Hasanbey Lojistik Köyü) güçlendirilmesi</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Eskişehir’in sorunu üretim gücü eksikliği değil, bu gücün ölçeği ve bağımlılıkları: kişi başına gelir yüksek, ama ekonomi küçük, ihracat birkaç alana ve AB pazarına dayalı, sanayici işgücü ve altyapıdan şikâyetçi. Kalkınmanın sürmesi için nitelikli insan, lojistik ve konut maliyetini birlikte ele almak gerekiyor; ancak bu sorunların büyüklüğünü ölçen veri sınırlı olduğu için yorumlar temkinli okunmalı.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Kişi başına gelirde 9. olan ama toplam ekonomide küçük kalan bir kent büyümek için ölçek mi, katma değer mi aramalı?</li>
+      <li>İhracatın yaklaşık yarısı AB’ye bağlıyken “Made in EU” gibi düzenlemelere karşı Eskişehir sanayisi pazarını nasıl çeşitlendirmeli?</li>
+      <li>Nitelikli işgücünü ve öğrencileri kentte tutmak için konut, kira ve ulaşım maliyeti nasıl çözülmeli?</li>
+      <li>Gelir yaratan ama kamu yatırımında daha geride kalan bir ilde yatırım kararları neye göre verilmeli?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Bölge Gündemi, Habertürk, Rudaw, Eskişehir Haber Ajansı aktarımı); Eskişehir Haber Ajansı (kamu yatırımı ve net bütçe geliri sıralaması)</li>
+      <li>TÜİK ADNKS 2025 (Şehir Gazetesi, Gazetevatan, Porsuk Haber Ajansı, Anadolu Gazetesi, Eskişehir.net: il ve ilçe nüfusları)</li>
+      <li>ESO açıklamaları (Ekonomi Gazetesi, Ekonomim, Sanayi Gazetesi, Habertürk: ihracat, sanayi cirosu, istihdam); OSB Başkanı Küpeli (Ekonomi Gazetesi: havacılık-savunma ihracatı); BEBKA Ekonomi Göstergeleri Bültenleri 2025</li>
+      <li>ESO 2025 Ekonomik Durum ve Beklenti Anketi (İHA, Şehir Gazetesi, Eskişehir Ekspres, ESO yayını); ESO Havacılık Sektörü Vizyon Programı (sorunlar ve çözümler)</li>
+      <li>TÜİK tarım verileri 2024 (GOSBİK Haberler, Milli İrade aktarımı); Anadolu Üniversitesi (örgün ve açıköğretim öğrenci sayıları), Eskişehir Teknik Üniversitesi (2022–23 verisi), Milli İrade ve CampusConnect (üniversite özeti)</li>
+      <li>TÜİK 2025 işgücü istatistikleri (Türkiye geneli, Eskişehir Gazetesi, Rudaw)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Eskişehir’e özgü 2025 işsizlik, katılma ve istihdam oranı, 2024 sektörel katma değer payları ve büyüme hızı, turizm verisi, hayvancılık ve süt üretimi, ülke bazlı ihracat ve ithalat, ilçe bazında ekonomik veriler doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık %105 (gelir oranı), 490 milyar TL ve %1,1 (toplam GSYH ve payı), yaklaşık +%17 (havacılık ihracatı), %0,69 ve %42 (nüfus değişimi), %89, %98,4, %46,5 ve %42,9 (ilçe payları), −2.140 (12 ilçenin toplam kaybı) ve %7 (örgün öğrenci payı) kendi hesabımdır. İhracat için iki farklı seri (ESO/Ticaret Bakanlığı ve BEBKA) kullanıldığından rakamlar birbirine eklenmemiştir. ESO anketi katılımcı sayısı bilinmeyen bir üye anketidir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+var SN=[['ESO’ya göre sanayi göstergeleri (milyar $)',[['Sanayi cirosu',10],['İhracat',4.75]],[0],'1.600’ü aşkın üretici firma; ihracat ciroya göre yaklaşık %47,5 (kendi hesabım). Kaynak: ESO (Aralık 2025 değerlendirmesi; Ekonomi Gazetesi, Ekonomim).'],
+ ['Havacılık ve savunma ihracatı (milyon $)',[['2024',514],['2025',601]],[1],'Yaklaşık +%17 (kendi hesabım). Eskişehir bu alanda Ankara ve İstanbul’dan sonra üçüncü. Kaynak: Eskişehir OSB Başkanı Küpeli (Ekonomi Gazetesi), Ekonomi Gazetesi.']];
+mk('sn',SN,['Ciro-ihracat','Havacılık']);
+var IH=[['Eskişehir ihracatı (milyar $)',[['2024',4.5],['2025',4.75]],[1],'2024’te %15,11 artış ve 12. sıra; 2025’te ESO yaklaşık 4,75–4,8 milyar $ açıkladı (hedef 5 milyar $). Kaynak: ESO (Sanayi Gazetesi, Ekonomi Gazetesi).'],
+ ['İhracatın yapısı (yaklaşık %)',[['AB ülkelerine',50],['Orta-yüksek ve yüksek teknoloji',30]],[0],'İki oran birbirine eklenmez. Teknoloji payı OSB Başkanı’na göre %33. Kaynak: ESO Başkanı Kesikbaş (Ekonomi Gazetesi), Ekonomi Gazetesi.'],
+ ['Eskişehir ihracatı, iki farklı seri 2025 (milyar $)',[['ESO (Bakanlık verisi)',4.75],['BEBKA bülteni',1.64]],[0],'Aralarındaki fark tanımdan gelebilir (tahmin); ikisi doğrulanmadan karşılaştırılmamalı. Kaynak: ESO, BEBKA Ekonomi Göstergeleri Bülteni (Ekim–Aralık 2025).']];
+mk('ih',IH,['Yıllık','Pazar/teknoloji','İki seri']);
+var TA=[['Türkiye üretimindeki Eskişehir payı, 2024 (%)',[['Şeker pancarı',7.03],['Dane mısır',5.79],['Arpa',2.79],['Buğday',2.76]],[0],'Eskişehir’in en güçlü ürünü pancar. Kaynak: TÜİK 2024 (GOSBİK Haberler aktarımı).'],
+ ['Üretim, 2024 (bin ton)',[['Şeker pancarı',1616.8],['Dane mısır',469.1]],[0],'Pancar yerel fabrikanın kapasitesini tek başına dolduruyor. Kaynak: TÜİK 2024 (GOSBİK Haberler aktarımı).']];
+mk('ta',TA,['Türkiye payı','Üretim']);
+var EG=[['Anadolu Üniversitesi öğrencileri (bin kişi)',[['Örgün (Mart 2025)',21.1],['Açıköğretim aktif',685.5]],[0],'Açıköğretim kaydı Eskişehir’de yaşayan öğrenci sayısı değildir. Kaynak: Anadolu Üniversitesi (Vikipedi özeti, Milli İrade).'],
+ ['Eskişehir Teknik Üniversitesi (bin kişi, 2022–23)',[['Birinci öğretim',14.6],['Toplam',15.1]],[1],'Havacılık ve teknik alanlarda uzmanlaşan üniversite; 2018’de kuruldu. Kaynak: Gemlik Gündem, turkiyeuniversiteleri.com (2022–23 verisi).']];
+mk('eg',EG,['Anadolu','ESTÜ']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İstanbul',24452],['Antalya',17103],['İzmir',16949],['Bolu',16703],['Kırklareli',16188],['Eskişehir',16171],['Bilecik',16068],['Türkiye ortalaması',15325]],[5],'Eskişehir 81 il arasında 9.; Türkiye ortalamasının yaklaşık %105’i (kendi hesabım). Kaynak: TÜİK il bazında GSYH 2024 (Habertürk, Rudaw).'],
+ ['Kişi başına GSYH, 2024 (bin TL)',[['İstanbul',802.7],['Tekirdağ',604.2],['İzmir',556.4],['Bolu',548.3],['Kırklareli',531.4],['Eskişehir',530.8],['Bilecik',527.5],['Türkiye ortalaması',503.1]],[5],'Nominal TL serisi. Kaynak: TÜİK (CNBC-e, Bölge Gündemi).'],
+ ['Kişi başına bütçe göstergeleri, il sırası (düşük sayı daha iyi)',[['Net bütçe geliri (14.)',14],['Kamu yatırımı (23.)',23],['Yatırım payı (31.)',31]],[0],'Kişi başına net bütçe geliri 65.590 TL, kamu yatırımı 9.119 TL. Gelir sıralaması yatırım sıralamasının önünde. Yılı belirsiz. Kaynak: Eskişehir Haber Ajansı aktarımı.']];
+mk('gt',GT,['Dolar','TL','Bütçe sırası']);
+var IG=[['Nüfus (bin kişi)',[['2000',651.7],['2022',906.6],['2023',915.4],['2024',921.6],['2025',928.0]],[4],'2025’te +6,3 bin (%0,69; kendi hesabım); 2000’den bu yana yaklaşık %42 artış. Kaynak: TÜİK ADNKS (Anadolu Gazetesi, Gazetevatan, Şehir Gazetesi).'],
+ ['İlçe nüfus payı, 2025 (%)',[['Odunpazarı',46.5],['Tepebaşı',42.9],['Diğer 12 ilçe',10.6]],[0,1],'İki merkez ilçe il nüfusunun yaklaşık %89’unu oluşturuyor (kendi hesabım). Kaynak: Şehir Gazetesi, Gazetevatan (ADNKS 2025).'],
+ ['Cinsiyete göre nüfus, 2025 (bin kişi)',[['Kadın',466.8],['Erkek',461.2]],[0],'Eskişehir’de kadın nüfusu erkek nüfusundan fazla. Kaynak: Porsuk Haber Ajansı, nufusu.com (ADNKS 2025).']];
+mk('ig',IG,['Nüfus','İlçe payı','Cinsiyet']);
+var SK=[['ESO anketi: sanayicilerin şikâyet oranı (%)',[['Konut-kira işgücünü zorlaştırıyor',98],['Enflasyon maliyeti artırıyor',98],['Nitelikli işgücü sorunu',95],['Sanayi bölgelerine ulaşım',94],['Arsa ve inşaat maliyeti',93]],[0],'Eskişehir’e özgü başlıklar. Üye anketidir; katılımcı sayısı belli değil. Kaynak: ESO 2025 Ekonomik Durum ve Beklenti Anketi (İHA, Şehir Gazetesi).'],
+ ['ESO anketi: daralma beklentisi (%)',[['İç pazarda daralma bekleyen',97],['Dış pazarda daralma bekleyen',94]],[0],'Firmaların büyük çoğunluğu 2025’te daralma bekledi. Kaynak: ESO 2025 anketi (İHA).'],
+ ['Maliyet algısı: artış bildirenler (%)',[['Dışarıdan alınan hizmet bedeli',99],['İşçilik payı',98],['Enflasyonun üretim maliyeti etkisi',98]],[0],'Anketteki maliyet başlıkları. Kaynak: ESO 2025 anketi (Eskişehir Ekspres, Şehir Gazetesi).']];
+mk('sk',SK,['Eskişehir’e özgü','Pazar beklentisi','Maliyet']);
+</script>
+</body>
+</html>
