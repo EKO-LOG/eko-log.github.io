@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diyarbakır | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#8d5524;--a2:#e0a82e;--a3:#1f7a6b"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Diyarbakır</span><h1>Diyarbakır: Güneydoğu’nun Tarım ve Tekstil Kenti</h1><p>1,85 milyonluk Diyarbakır, pamuk ve kırmızı mercimekte Türkiye’nin öne çıkan üreticisi ve Güneydoğu’nun yükselen tekstil merkezlerinden biri. Buna rağmen kişi başı GSYH Türkiye ortalamasının yaklaşık yarısı ve 81 il arasında 75. sırada; ihracat 2025’te %13,5 artsa da 275,6 milyon $’da kaldı ve 2026’nın ilk yarısında %23,7 düştü. İşsizlik ortalamanın üstünde, kadın ve genç işgücü katılımı düşük.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>7.464 $</b><span>Kişi başı GSYH (2024), 81 il arasında 75. sıra; Türkiye ort. 15.325 $’ın yaklaşık yarısı</span></div>
+    <div class="k"><b>275,6 mn $</b><span>2025 ihracatı (TİM/GAİB); 2024’e göre %13,5 artış; yarısı Irak’a</span></div>
+    <div class="k"><b>1.852.356</b><span>Nüfus (ADNKS 2025); bir yılda 18.672 kişi arttı, Türkiye nüfusunun yaklaşık %2,2’si</span></div>
+    <div class="k"><b>%11,8</b><span>2025 işsizlik oranı (haber aktarımı); Türkiye ortalaması %8,3</span></div>
+    <div class="k"><b>23 bin</b><span>Diyarbakır OSB’de istihdam (Aralık 2025); firma sayısı 370</span></div>
+    <div class="k"><b>1,6 mn</b><span>2025’te kenti ziyaret eden turist (Valilik verisi); 2024’te 1,2 mn</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Diyarbakır’ın kayıtlı ihracatı fabrika ve üretim kapasitesinin altında görünüyor; yerel odalar dolaylı ihracatın başka illere yazıldığını savunuyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Diyarbakır’ın ihracatı 2025’te %13,5 artışla 275,6 milyon $’a çıktı (2024: 242,8). Bu, Güneydoğu Anadolu Bölgesi’nin 12,0 milyar $’lık ihracatının yaklaşık %2,3’ü (kendi hesabım).</li>
+        <li>Kentten Irak’a (Kürdistan Bölgesi dahil) yapılan ihracat 2025’te %7,4 artışla 140,4 milyon $ oldu; bu, toplamın %50,9’u.</li>
+        <li>Güneydoğu Anadolu İhracatçı Birlikleri’ne göre 2026’nın ilk altı ayında Diyarbakır ihracatı 104,9 milyon $’a indi (%23,7 düşüş); aynı dönemde Şanlıurfa ve Kilis çift haneli artış kaydetti.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Diyarbakır Ticaret ve Sanayi Odası başkanı, üretim bazlı ve kendi kayıtlarına göre kentten yılda yaklaşık 1 milyar $ ihracat yapıldığını, ancak TİM kaydında 250 milyon $ civarı göründüğünü söylüyor (2021 tarihli açıklama; oda iddiası, resmî seri değil). Ticaret Bakanlığı yetkilisi de bir zirvede “368 milyon $’lık” rakamın potansiyeli yansıtmadığını, doğrudan ihracatla 1 milyar $’a ulaşılabileceğini belirtti; bu rakamın dönemi kaynakta belirtilmemiş.</li>
+      <li>Irak’a bağımlılık yüksek: DTSO, Türkiye’nin Irak’a ihracatının Şubat 2026’da bir önceki yılın aynı ayına göre %25,5 düştüğünü açıkladı ve bölgedeki ihracatçı illerin bu daralmadan daha fazla etkilendiğini belirtti.</li>
+      <li>Diyarbakır ihracatının ürün kırılımını (tekstil, mermer, gıda payları) doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Sulama</h2>
+    <p class="sub">Diyarbakır’ın ekonomik temeli büyük ölçüde tarım: pamuk, buğday ve kırmızı mercimekte Türkiye’nin üst sıralarında; ama su altyapısı henüz tamamlanmadı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Valilik açıklamalarına göre Diyarbakır kırmızı mercimek ve pamukta Türkiye ikincisi, buğdayda dördüncü; 154 bin dekar bağ alanıyla bağcılıkta da dördüncü.</li>
+        <li>İlde 1 milyon 585 bin dekar alan sulanıyor. Silvan Barajı ve Sulama Projesi tamamlandığında yaklaşık 2,35 milyon dekar (2.350.580) ek alanın sulanması hedefleniyor; projenin 255 milyar TL’ye mal olması planlanıyor.</li>
+        <li>2025 sezonunda ildeki 772 bin dekarlık pamuk alanının 400.648 dekarı Bismil’de; Bismil’de buğday ve pamuk en çok ekilen iki ürün.</li>
+        <li>Diyarbakır’da 450 binden fazla kişi kırsalda yaşıyor; Türkiye’de kırsal nüfusu en yüksek yedinci il.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Silvan Barajı’nın sulama kanallarına bağlanma takvimini doğrulayamadım; bir milletvekili soru önergesi projenin gecikmesinden söz ediyor. “Üretimi 2–3 kat artıracak” gibi öngörüler Valilik’in proje hedefidir, gerçekleşme verisi değildir.</li>
+      <li>Bismil’de üreticiler 2025’i tarım açısından “çok zor” bir yıl olarak anlattı; ürünlerin değerinde satılması ve desteklerin zamanında ödenmesi talepleri öne çıkıyor.</li>
+      <li>Tarımın il GSYH’sindeki güncel payını ve hayvancılık verilerini doğrulanmış kaynakla bulamadım; 2022 için büyükbaş 568 bin, küçükbaş 1,94 milyon baş aktarılmış, ama güncel olmadığı için kullanılmadı.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Organize Sanayi Bölgeleri</h2>
+    <p class="sub">Sanayi, 6. bölge teşvikleri ve OSB yatırımlarıyla büyüdü; tekstil istihdamın başı çekiyor, ama sektör son bir yılda zorlandı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="os"></div><h3 id="ostitle"></h3><div class="bars" id="osbars"></div><p class="note" id="osnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Diyarbakır OSB’de firma sayısı 275’ten 370’e, istihdam 14 binden 23 bine çıktı; OSB alanı 915 hektardan 1.147 hektara genişledi (OSB başkanı, Aralık 2025). OSB’de tekstil, gıda, inşaat, mermer ve mobilya üretiliyor.</li>
+        <li>Sanayi ve Teknoloji Bakanı Kacır’ın yanıtına göre Diyarbakır’daki dört OSB’de doluluk %60’ı geçti; son bir yılda 282 parsel üretime geçti, üretimdeki toplam parsel 419’a, OSB istihdamı yaklaşık 7 binden 29 bine çıktı.</li>
+        <li>Silvan’da tarıma dayalı sanayi için gıda ve tarımsal sanayi ihtisas OSB’si kuruluyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Tekstil İhtisas OSB’nin başkanı Mayıs 2026’da, OSB’de yaklaşık 100 fabrika bulunduğunu, ancak son bir yılda yaklaşık 20 fabrikanın kapandığını ve ayakta kalanların personel azalttığını söyledi. Tekstil yine de ilde istihdamda birinci sırada ve bir dönem 22 binin üzerinde çalışanı vardı; sektör teşvik sisteminin güncellenmesini istiyor (sektör temsilcisi açıklaması).</li>
+      <li>Bir yerel gazete, ekonominin %57,4’ünün hizmet, %9,0’ının sanayi olduğunu aktarıyor; yıl ve kaynak tablosu belirtilmediği için bu paylar kesin kabul edilmemeli.</li>
+      <li>OSB istihdam rakamları OSB yönetimi ve bakanlık beyanıdır; SGK’lı sektörel istihdam ve İSO 500’deki Diyarbakır firmalarını doğrulanmış kaynakla bulamadım, bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">UNESCO Dünya Miras Listesi’ndeki surlar ve Hevsel Bahçeleri kentin turizm çekirdeğini oluşturuyor; ziyaretçi artıyor ama yabancı konaklama sınırlı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tz"></div><h3 id="tztitle"></h3><div class="bars" id="tzbars"></div><p class="note" id="tznote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Valilik verisine göre kenti 2024’te 1,2 milyon, 2025’te 1,6 milyon turist ziyaret etti; 2026 için hedef 2 milyon.</li>
+        <li>2025’in ilk 10 ayında 541 bin konaklama kaydedildi; bunun 510 bini yerli, yalnızca 31 bini yabancı ziyaretçi (Vali açıklaması).</li>
+        <li>Zerzevan Kalesi ve Mithras Tapınağı, Türkiye’nin UNESCO’ya önerdiği alan olarak anılıyor; Diyarbakır müze ziyaretçisi 2021’de 47 binden 2023’te 131 bine çıktı.</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Ziyaretçi sayıları kaynağa göre değişiyor: 2025 için ilk 10 ayda yaklaşık 1,3 milyon, yıl için 1,5–1,6 milyon aktarılıyor; 2026’nın ilk beş ayı için iki farklı değer (427 bin ve 847 bin) yayımlandı, bu yüzden 2026 için sayı verilmedi. Sayılar günübirlik ziyaretleri de içerir.</li>
+      <li>Esnaf ve turizmciler, aşırı sıcaklarla Temmuz–Ağustos 2026’da ziyaretçi sayısının yaklaşık %80 azaldığını söylüyor (sektör iddiası); otellerde yaklaşık 10 bin yatak kapasitesi var.</li>
+      <li>İl bazında turizm gelirini ve Diyarbakır Havalimanı yolcu serisini (DHMİ tablosundaki dönemleri net ayıramadığım için) doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, cari fiyatlarla (dolar)</p>
+    <div class="g2">
+      <div class="card"><h3>Diyarbakır’da kişi başı GSYH ($)</h3><div class="col" id="gt"></div>
+        <p class="note">2020: 3.865; 2021: 3.966; 2022: 4.380; 2023: 5.823; 2024: 7.464 $. 2024’teki artış 2023’e göre yaklaşık %28 (kendi hesabım, dolar bazında). Yıllar arası değerler TÜİK revizyonlarına tabidir; 2023 için ilk açıklamada 5.762 $ verilmişti. Kaynak: TÜİK il bazında GSYH (haber aktarımı).</p></div>
+      <div class="card"><h3>Kişi başı GSYH ($, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">Diyarbakır, en düşük gelirli ilk 10 içinde 7. sırada (81 il içinde 75.). Türkiye ortalamasının yaklaşık %49’u (kendi hesabım). Yerel bir gazete TL karşılığını 245.024 TL olarak aktarıyor.</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>2023 verisine göre ilde tarım gelirinin 2004’te yaklaşık 1,2 milyar TL’den 32,3 milyar TL’nin üzerine çıktığı, hizmetler sektörünün (gayrimenkul, kamu yönetimi, sağlık) en büyük pay aldığı aktarılıyor. Nüfus artış hızının gelir artışını geri çektiği yorumu yapılıyor.</li>
+      <li>Diyarbakır’ın 2024 toplam GSYH’sini, Türkiye payını ve sektörel dağılımını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Kişi başı GSYH il içi dağılımı ve hane gelirini göstermez.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2024’te 1.833.684 iken 2025’te 1.852.356’ya çıktı (+18.672, yaklaşık %1,0).</li>
+        <li>Kayapınar, Bağlar, Yenişehir ve Sur’dan oluşan dört merkez ilçe toplam 1.187.169 kişiyle il nüfusunun %64,09’unu barındırıyor.</li>
+        <li>Bağlar’daki Bağcılar Mahallesi 160.136 kişiyle Türkiye’nin en kalabalık mahallesi (haber aktarımı, Şubat 2026).</li>
+        <li>Nüfus artışı Kayapınar’da binde 29,99 ile en yüksek; Yenişehir (binde 17,57) ve Ergani (binde 13,37) izliyor. Bismil ve Silvan’da küçük bir azalma görülüyor.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Diyarbakır Ticaret ve Sanayi Odası başkanı, çalışabilir nüfus içinde fiilî işsizliğin yaklaşık %25, kadınlarda %50 civarında olduğunu söylüyor; Büyükşehir Belediyesi yetkilisi de geniş tanımlı kadın işsizliğinin %40 düzeyinde olduğunu belirtiyor. Bunlar kurum açıklamalarıdır, resmî dar tanımlı seri değildir.</li>
+      <li>Diyarbakır için 2025 işgücüne katılma ve istihdam oranlarını, il bazında kadın-erkek işsizliğini ve SGK’lı sektörel istihdamı doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Diyarbakır’ın 17 ilçesi var; tabloda 2025 ADNKS değerleri, en az nüfuslu ilçe için 2024 değeri yer alıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Öne çıkan</th></tr>
+      <tr><td>Kayapınar</td><td>454.311</td><td>İlin en kalabalık ilçesi; nüfus artışı en hızlı (binde 29,99)</td></tr>
+      <tr><td>Bağlar</td><td>402.275</td><td>Türkiye’nin en kalabalık mahallesi (Bağcılar) bu ilçede</td></tr>
+      <tr><td>Yenişehir</td><td>232.622</td><td>Nüfus artış hızı binde 17,57</td></tr>
+      <tr><td>Ergani</td><td>141.098</td><td>Merkez dışındaki en kalabalık ilçe; artış binde 13,37</td></tr>
+      <tr><td>Bismil</td><td>119.815</td><td>“Pamuk başkenti”; ildeki pamuk alanının yarıdan fazlası burada</td></tr>
+      <tr><td>Sur</td><td>97.961</td><td>Tarihî merkez; UNESCO listesindeki surlar ve Hevsel Bahçeleri</td></tr>
+      <tr><td>Silvan</td><td>86.752</td><td>Silvan Barajı ve tarıma dayalı sanayi OSB planı</td></tr>
+      <tr><td>Çınar</td><td>79.114</td><td>Tarım ağırlıklı; nüfus artışı binde 4,1</td></tr>
+      <tr><td>Çüngüş</td><td>10.463 (2024)</td><td>İlin en az nüfuslu ilçesi</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1993 – Büyükşehir.</b> Diyarbakır büyükşehir statüsü kazandı; Bağlar, Kayapınar, Sur ve Yenişehir merkez ilçeler oldu.</p>
+      <p><b>2010 – Düşük katılım.</b> TÜİK verilerine göre işgücüne katılma %31,8 ile tüm iller arasında en düşük, işsizlik %13,5 idi.</p>
+      <p><b>2012 – 6. bölge teşviki.</b> Yatırımlarda Devlet Yardımları Kararı ile Diyarbakır en yüksek teşvik kapsamındaki 6. bölgeye alındı.</p>
+      <p><b>2023 – Deprem etkisi.</b> 6 Şubat depremleri bölge ekonomisini etkiledi; kişi başı GSYH 5.823 $.</p>
+      <p><b>2024 – Gelir ve turizm.</b> Kişi başı GSYH 7.464 $; ihracat 242,8 milyon $; kenti 1,2 milyon turist ziyaret etti.</p>
+      <p><b>2025 – İhracat, nüfus, OSB.</b> İhracat 275,6 milyon $; nüfus 1.852.356; turist sayısı 1,6 milyon; Diyarbakır OSB’de istihdam 23 bin.</p>
+      <p><b>2026 – Tekstilde zorlanma.</b> İlk altı ayda ihracat 104,9 milyon $’a (%23,7 düşüş) indi; Tekstil İhtisas OSB başkanı bir yılda yaklaşık 20 fabrikanın kapandığını açıkladı.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Pamuk, buğday ve kırmızı mercimekte ulusal ölçekte güçlü tarımsal taban</li><li>Genç ve büyüyen nüfus; OSB’lerde hızlı artan firma ve istihdam</li><li>UNESCO listesindeki mirası ve artan ziyaretçi sayısıyla kültür turizmi</li><li>6. bölge teşvikleri ve Irak’a yakınlık</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Kişi başı gelir ortalamanın yarısı kadar; işsizlik ortalamanın üstünde ve işgücüne katılım düşük</li><li>İhracat küçük ve Irak’a bağımlı; 2026’nın ilk yarısında sert düştü</li><li>Tekstilde fabrika kapanışları ve istihdam kaybı</li><li>Silvan Barajı sulaması tamamlanmadığı için tarımın verimlilik potansiyeli henüz kullanılamıyor</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Silvan projesiyle yaklaşık 2,35 milyon dekar ek sulu tarım ve tarıma dayalı sanayi</li><li>Doğrudan ihracat kanallarıyla ihracatın kayıtlı rakamın üzerine çıkarılması (Bakanlık ve oda hedefi: 1 milyar $)</li><li>Tekstilde teşvik ve eğitim desteğiyle kadın istihdamının artırılması</li><li>Kültür, inanç ve gastronomi turizminde yabancı konaklamanın payını yükseltmek</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Diyarbakır’ın sorunu üretim kapasitesi kadar kaydın ve değer zincirinin nerede olduğu: fabrikalar ve çiftçiler üretiyor, fakat ihracat ve katma değerin önemli kısmı başka illerde kayda geçiyor ya da hiç oluşmuyor. Düşük kadın ve genç işgücü katılımı bu tabloyu ağırlaştırıyor.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Diyarbakır’ın gerçek ihracatı kayıtlı 275,6 milyon $’dan ne kadar büyük? Doğrudan ihracat bu farkı kapatır mı?</li>
+      <li>Tekstilde fabrika kapanışlarını durdurmak için teşvikler mi, yoksa farklı bir sanayi politikası mı gerekiyor?</li>
+      <li>Silvan Barajı tamamlanırsa tarım kenti Diyarbakır’ın gelir düzeyi ne kadar değişir?</li>
+      <li>Kadın ve genç işgücü katılımını artırmak için kentin öncelikleri ne olmalı?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2023 ve 2024 (Pusula Haber, Kütahya Haber, Mücadele Gazetesi, Diyarbakır Olay, Amed Times aktarımı): kişi başı GSYH ve sıralama</li>
+      <li>Güneydoğu Anadolu İhracatçı Birlikleri 2025 ve 2026 açıklamaları (Yeni Birlik, Rudaw aktarımı); Diyarbakır Ticaret ve Sanayi Odası verileri (Rudaw, Habertürk, Medyascope aktarımı); Ticaret Bakanlığı İhracat Genel Müdürü açıklaması (Sondakika, Yeni Birlik)</li>
+      <li>Tarım ve Orman Bakanlığı Diyarbakır Tarımsal Yatırım Rehberi 2025 (TÜİK 2024 üretim verileri); Valilik açıklamaları (Habertürk, İşçi Haber, DHA aktarımı); Silvan Projesi haberleri (DHA, Ekonomi Gazetesi)</li>
+      <li>Diyarbakır OSB ve Tekstil İhtisas OSB yönetimi açıklamaları (Rudaw, Haberler, Evrensel aktarımı); Sanayi ve Teknoloji Bakanı Kacır’ın soru önergesi yanıtı (Ekonomi Gazetesi)</li>
+      <li>TÜİK ADNKS 2024 ve 2025 (Bismil Haber, Dicle TV, Malabadi Gazetesi, Evrensel aktarımı): il ve ilçe nüfusları</li>
+      <li>Amida Haber (26 Mart 2026): il işsizlik serisi; İŞKUR Diyarbakır İl İstihdam ve Mesleki Eğitim Kurulu 2024 raporu; Karacadağ Kalkınma Ajansı raporları; Güneydoğu Ekspres, Evrensel</li>
+      <li>Diyarbakır Valiliği, İl Kültür ve Turizm Müdürlüğü ve sektör temsilcileri açıklamaları (DHA, Rudaw, Cumhuriyet, Kurdistan24 aktarımı): turizm</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. İşsizlik serisi bir yerel haber sitesinden alınmıştır ve TÜİK tablosundan doğrulanmamıştır; İŞKUR raporu 2023 için %11,9, o haber %10,7 veriyor, bu yüzden ikisi ayrı gösterildi. Diyarbakır’ın toplam GSYH’si, sektörel GSYH payları, ihracat ürün kırılımı, 2025 işgücüne katılma ve istihdam oranları, il bazında turizm geliri, Diyarbakır Havalimanı yolcu verisi ve SGK’lı sektörel istihdam doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık %2,3 (ihracat payı), %49 (gelir oranı) ve %28 (gelir artışı) oranları kendi hesabımdır. Kişi başı gelirin TL karşılığı (245.024) yerel bir gazete aktarımıdır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+var BT=[['Diyarbakır ihracatı (milyon $)',[['2024',242.8],['2025',275.6]],1,'2025’te %13,5 artış. Kaynak: DTSO ve Güneydoğu Anadolu İhracatçı Birlikleri (haber aktarımı).'],
+ ['Güneydoğu Anadolu illeri, 2025 (milyon $)',[['Mardin',908.4],['Şanlıurfa',350.2],['Malatya',335.0],['Diyarbakır',275.6],['Kilis',124.0]],3,'Mardin’in ihracatı Diyarbakır’ın yaklaşık 3,3 katı. Kahramanmaraş 1,3 milyar $; Gaziantep bu liste için bulunamadı. Bölge toplamı 12,0 milyar $. Kaynak: GAİB.'],
+ ['Irak’a ihracat (milyon $)',[['2024',130.7],['2025',140.4]],1,'2025’te %7,4 artış; toplam ihracatın %50,9’u. Kaynak: DTSO verileri (Rudaw aktarımı).']];
+tabs('bt',['Yıllık','Bölge','Irak'],function(i){
+ $('bttitle').textContent=BT[i][0];
+ bars($('btbars'),BT[i][1],[BT[i][2]]);
+ $('btnote').textContent=BT[i][3]});
+var TA=[['Türkiye üretimindeki pay, 2024 (%)',[['Kırmızı mercimek',27.22],['Pamuk (kütlü)',17.32],['Buğday',5.41],['Mısır (dane)',2.85],['Arpa',2.29],['Nohut',0.89]],[0,1],'Kırmızı mercimek ve pamuk, Diyarbakır’ın ulusal ölçekte en ağırlıklı ürünleri. Kaynak: Tarım ve Orman Bakanlığı Yatırım Rehberi (TÜİK 2024).'],
+ ['Üretim miktarı, 2024 (bin ton)',[['Buğday',1145.0],['Pamuk (kütlü)',388.5],['Arpa',232.7],['Mısır (dane)',230.7],['Kırmızı mercimek',110.3],['Nohut',5.1]],[0],'Buğday açık ara en büyük üretim kalemi. Kaynak: Tarım ve Orman Bakanlığı Yatırım Rehberi (TÜİK 2024).']];
+tabs('ta',['Pay','Miktar'],function(i){
+ $('tatitle').textContent=TA[i][0];
+ bars($('tabars'),TA[i][1],TA[i][2]);
+ $('tanote').textContent=TA[i][3]});
+var OS=[['Diyarbakır OSB’de firma sayısı',[['Başlangıç',275],['Aralık 2025',370]],1,'Dört yıllık yönetim döneminde 275’ten 370’e. Kaynak: OSB yönetim kurulu başkanı (Rudaw, Haberler aktarımı).'],
+ ['Diyarbakır OSB’de istihdam (bin kişi)',[['Başlangıç',14],['Aralık 2025',23]],1,'14 binden 23 bine. Başlangıç yılı kaynaklarda dört yıl önce olarak verilmiş; tam yıl doğrulanmadı.']];
+tabs('os',['Firma','İstihdam'],function(i){
+ $('ostitle').textContent=OS[i][0];
+ bars($('osbars'),OS[i][1],[OS[i][2]]);
+ $('osnote').textContent=OS[i][3]});
+var TZ=[['Kenti ziyaret eden turist (milyon)',[['2024',1.2],['2025',1.6],['2026 hedefi',2.0]],1,'2026 değeri gerçekleşme değil, Valilik ve sektör hedefidir. Kaynak: Valilik verisi (Kurdistan24, Rudaw aktarımı).'],
+ ['Müze ziyaretçisi (bin kişi)',[['2021',47],['2022',68],['2023',131]],2,'Müze ziyaretçisi üç yılda yaklaşık 2,8 katına çıktı (kendi hesabım). Kaynak: Diyarbakır Müze Müdürlüğü (Cumhuriyet aktarımı).']];
+tabs('tz',['Turist','Müze'],function(i){
+ $('tztitle').textContent=TZ[i][0];
+ bars($('tzbars'),TZ[i][1],[TZ[i][2]]);
+ $('tznote').textContent=TZ[i][3]});
+cols($('gt'),[['2020',3865,'','3.865'],['2021',3966,'','3.966'],['2022',4380,'','4.380'],['2023',5823,'','5.823'],['2024',7464,'','7.464']]);
+bars($('kb'),[['Türkiye ortalaması',15325],['Siirt (10. en düşük)',7975],['Kilis',7724],['Mardin',7537],['Diyarbakır',7464],['Şanlıurfa (en düşük)',5731]],[4]);
+var IG=[['Diyarbakır işsizlik oranı (%)',[['2022',10.5],['2023',10.7],['2024',8.7],['2025',11.8],['Türkiye 2025',8.3]],[3],'2025’te işsizlik 2024’e göre 3,1 puan arttı ve Türkiye ortalamasının 3,5 puan üstüne çıktı. Kaynak: Amida Haber (TÜİK il verisi aktarımı), doğrulanmadı.'],
+ ['İŞKUR raporunda 2023 göstergeleri (%)',[['İşgücüne katılma',40.8],['İstihdam oranı',35.9],['İşsizlik',11.9]],[2],'İŞKUR kurul raporu 2023 için bu değerleri veriyor; yukarıdaki haber 2023 işsizliği için %10,7 aktarıyor, bu yüzden iki değer farklı. Türkiye 2025 katılma oranı %53,5, istihdam %49,0.']];
+tabs('ig',['İşsizlik','2023 İŞKUR'],function(i){
+ $('igtitle').textContent=IG[i][0];
+ bars($('igbars'),IG[i][1],IG[i][2]);
+ $('ignote').textContent=IG[i][3]});
+</script>
+</body>
+</html>

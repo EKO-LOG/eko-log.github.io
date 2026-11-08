@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bursa | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1f6f43;--a2:#d9a21b;--a3:#1c4f8a"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Bursa</span><h1>Bursa: Türkiye’nin Otomotiv ve Sanayi Kenti</h1><p>3,26 milyonluk Bursa, Togg, Oyak Renault ve Tofaş ile Türkiye’nin otomotiv merkezi; 2025’te 18,2 milyar $ ihracatla ilk beş il arasında ve GSYH’de beşinci büyük il. Ama ihracatın yarısından fazlası tek sektörde: otomotiv. Kentin geleneksel sektörleri tekstil ve hazır giyim geriliyor, kişi başına GSYH (15.014 $) Türkiye ortalamasının biraz altında kalıyor ve yabancı turist ortalama 1,7 gün kalıp gidiyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>1,67 trilyon TL</b><span>2024 GSYH (TÜİK); 81 il arasında 5. sıra, Türkiye GSYH’sinin yaklaşık %3,7’si</span></div>
+    <div class="k"><b>15.014 $</b><span>Kişi başı GSYH (2024), 81 il arasında 13. sıra; Türkiye ort. 15.325 $’ın biraz altında</span></div>
+    <div class="k"><b>18,2 mr $</b><span>2025 ihracatı (TİM); 2024’e göre %9,5 artış; serbest bölge dahil 20 mr $, 194 ülke</span></div>
+    <div class="k"><b>%52</b><span>Otomotivin ihracattaki payı (Ocak–Eylül 2026: 7,1 mr $ / 13,6 mr $)</span></div>
+    <div class="k"><b>3.263.011</b><span>Nüfus (ADNKS 2025); bir yılda 24.393 kişi arttı, Türkiye nüfusunun yaklaşık %3,8’i</span></div>
+    <div class="k"><b>1,76 mn</b><span>2025’te turizm tesislerine geliş; yabancı 365 bin (%0,8 düşüş), ort. kalış 1,67 gün</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Bursa ihracatta Türkiye’nin ilk beş ilinden biri; ama ihracat sepeti otomotive çok bağımlı, pazar ise Avrupa’da yoğunlaşıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TİM verilerine göre Bursa 2025’te 18,2 milyar $ ihracat yaptı (%9,5 artış); serbest bölge ihracatıyla birlikte 20 milyar $’a ulaştı ve 194 ülkeye mal ve hizmet gönderdi.</li>
+        <li>Ocak–Eylül 2026’da ihracat %4,7 artışla 13,57 milyar $ oldu; Bursa, Türkiye ihracatının %6,43’ünü yaparak dördüncü sırada yer aldı.</li>
+        <li>Otomotiv, Ocak–Eylül 2026’da %8,7 artışla 7,1 milyar $’a çıktı; makine 976 milyon $, tekstil 928 milyon $, hazır giyim 840 milyon $ oldu.</li>
+        <li>Almanya (2,23 mr $), Fransa (1,95 mr $), İtalya (1,16 mr $) ve İspanya (0,91 mr $) ilk dört pazar; ABD’ye ihracat %30,6 artışla 660 milyon $ ile beşinci sırada.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Otomotivin payı %50’nin üstünde; ilk dört pazarın toplamı (6,25 mr $) 2026’nın ilk dokuz ayındaki ihracatın yaklaşık %46’sı (kendi hesabım). Avrupa talebindeki bir daralma Bursa’yı doğrudan etkiler.</li>
+      <li>Geleneksel sektörler zayıflıyor: BTSO verisine göre 2025’in ilk 11 ayında hazır giyim ihracatı %17,6 azalarak 1,2 milyar $, tekstil %4,6 azalarak 1,1 milyar $ oldu; otomotiv aynı dönemde %20,5 artışla 8,2 milyar $’a çıktı (basın aktarımı).</li>
+      <li>Farklı ihracat serileri birbirine karıştırılmamalı: Uludağ İhracatçı Birlikleri (UİB) 2025 için 43,3 milyar $ açıkladı, ancak bu rakam birliklere kayıtlı üyelerin ihracatıdır ve il bazlı TİM rakamı (18,2 mr $) ile aynı şey değildir. Genel Kalkınma sayfasındaki 17,9 mr $ ise başka bir TİM derlemesinden gelir; ikisi arasındaki fark derleme yöntemindendir.</li>
+      <li>2024 ihracatı, 2025 artışından geriye hesaplanmıştır (kendi hesabım); resmî seri değildir.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Gıda</h2>
+    <p class="sub">Bursa sanayi kenti olmasının yanında Türkiye’nin meyve ve sebze üretiminde ağırlığı olan bir tarım merkezi; ama bu üretimi katma değere çevirecek gıda sanayisi altyapısı sınırlı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Tarım ve Orman Bakanlığı Yatırım Rehberi’ne göre (TÜİK 2023) Türkiye’deki armut üretiminin %46,4’ü, salçalık domatesin %24,5’i, sofralık zeytinin %19,7’si ve şeftalinin %12,7’si Bursa’dan geliyor.</li>
+        <li>Bursa Ticaret Borsası başkanı ilin 369 bin hektardan fazla tarım alanı ve yaklaşık 2 milyar $’lık tarımsal ihracat potansiyeli olduğunu söylüyor (kurum beyanı).</li>
+        <li>Gıda tarafında Sütaş, İSO 500 listesindeki Bursa firmaları arasında; Pro Yem ve Eker Süt Ürünleri de ilk 160’a giriyor.</li>
+        <li>Gemlik’te planlanan Yeşil Gıda OSB için hedef 100 işletme ve 6 bin istihdam (Gemlik TSO başkanı açıklaması).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Bursa Ticaret Borsası yöneticileri, ilde 17 OSB olmasına rağmen tarımsal üretimi sanayiyle bütünleştirecek bir Gıda İhtisas OSB’nin bulunmadığını, bunun donmuş gıda gibi alanlarda fırsat kaçırmak anlamına geldiğini savunuyor.</li>
+      <li>Zirai don sezonları şeftali, nektarin ve kiraz gibi ürünlerde ciddi hasar yaratabiliyor; ilin yıllık şeftali üretimi yaklaşık 100 bin ton, bunun yaklaşık 25 bin tonu Gürsu’dan (yerel basın aktarımı).</li>
+      <li>Tarımın il GSYH’sindeki güncel payını, hayvancılık verilerini ve il bazında tarımsal ihracat rakamını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Üretim rakamları 2023 verisidir, güncel olmayabilir.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Organize Sanayi Bölgeleri</h2>
+    <p class="sub">Türkiye’de OSB uygulamasının başladığı il Bursa; bugün 17 OSB ile en çok OSB’ye sahip il. Otomotiv ana ve yan sanayisi ekonominin omurgası.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="os"></div><h3 id="ostitle"></h3><div class="bars" id="osbars"></div><p class="note" id="osnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Tofaş ve Oyak-Renault 1971’de Bursa’daki fabrikalarında seri üretime başladı; Togg 29 Ekim 2022’de Gemlik’teki tesisinde seri üretime geçti. Bursa’nın Türkiye otomotiv ihracatının yaklaşık %25’ini yaptığı aktarılıyor (BOSB açıklaması).</li>
+        <li>İSO 500’ün 2025 araştırmasında BTSO ve ilçe odalarına kayıtlı 31 firma yer aldı (2024’te 25); bunların 11’i taşıt araçları, 6’sı gıda sanayinde. Togg 28., Bosch 35., Sütaş 46. sırada.</li>
+        <li>Bursa Teknoloji OSB (TEKNOSAB) 1.377,5 hektar alan ve 164 sanayi parseliyle planlanıyor; genişleme alanı onaylandı.</li>
+        <li>BOSB, Kasım 2026’da altıncı kez Dünya Otomotiv Buluşmaları’na ev sahipliği yapıyor; 40’tan fazla ülkeden 300 firma katılacak.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>OSB istihdamı ve doluluk rakamı (15 faal OSB’de 198 bin kişi, doluluk %76) yerel bir gazete aktarımıdır ve yayın tarihi doğrulanamadı; güncel olmayabilir. Aynı kaynağa göre firma sayısının %37’si tekstil, %13’ü otomotiv, ama istihdamda otomotiv (66 bin) tekstili (57 bin) geçiyor.</li>
+      <li>İSO 500 özeti Bursa’daki büyük firmaların tamamını göstermeyebilir (ör. Oyak Renault bu özette geçmiyor); sıralamalar kesin kabul edilmemeli.</li>
+      <li>Bursa’nın SGK’lı sektörel istihdamını ve il bazında sanayi katma değerini doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Osmanlı’nın ilk başkenti Bursa; UNESCO listesindeki külliyeler, Uludağ kış turizmi ve termal kaynaklarıyla yerli ziyaretçi çekiyor, ama yabancı turisti uzun süre tutamıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tz"></div><h3 id="tztitle"></h3><div class="bars" id="tzbars"></div><p class="note" id="tznote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>GÜMTOB verisine göre 2025’te turizm tesislerine geliş %3,68 artışla 1.761.053 oldu; artış yerli ziyaretçiden (1,40 milyon, %4,92 artış) geldi.</li>
+        <li>Yabancı ziyaretçi 368.017’den 365.078’e geriledi; yabancı geceleme %6,32 azaldı, ortalama kalış 1,72 günden 1,67 güne düştü.</li>
+        <li>En çok ziyaretçi gönderen ülkeler: Endonezya (43.389), Çin (26.551), Almanya (24.556); Körfez’den Suudi Arabistan ve Kuveyt de ilgi gösteriyor, Kuveytlilerin ortalama kalışı 3,22 gün.</li>
+        <li>Kentte 555 belgeli tesis ve 28.607 yatak var. Uludağ’a 2024–25 kış sezonunun ilk üç ayında (Aralık–Şubat) 793.268 kişi geldi (önceki yıl 656.012).</li></ul></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>“Bursa ve Cumalıkızık: Osmanlı İmparatorluğu’nun Doğuşu” 2014’te UNESCO Dünya Miras Listesi’ne girdi. İznik 2014’ten beri geçici listede; kalıcı listeye alınma çalışmaları sürüyor, 2026’daki güncel durumunu doğrulayamadım.</li>
+      <li>Sayılar GÜMTOB’un belgeli tesislerdeki geliş kaydıdır; günübirlik ziyaretçileri ve belgesiz konaklamayı içermez. Bir turizm yetkilisi 2025 için yabancı turist sayısını 380 bin dolayında verdi, bu yüzden yabancı rakamı kaynağa göre değişiyor.</li>
+      <li>İl bazında turizm gelirini ve ilin 2025 toplam günübirlik ziyaretçi sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Bursa Turizm Yol Haritası 2028 için yaklaşık 532 bin yabancı ve 1,8 milyon yerli turist hedefliyor.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><h3>GSYH, 2024, ilk 5 il (trilyon TL)</h3><div class="bars" id="gs"></div>
+        <p class="note">Bursa 1,67 trilyon TL ile beşinci; ilk beş il toplam GSYH’nin %53,0’ını oluşturdu. Bursa’nın Türkiye payı yaklaşık %3,7 (kendi hesabım, 44,59 trilyon TL toplam GSYH üzerinden). Kaynak: TÜİK il bazında GSYH 2024.</p></div>
+      <div class="card"><h3>Kişi başı GSYH ($, 2024)</h3><div class="bars" id="kb"></div>
+        <p class="note">Bursa 15.014 $ ile 13. sırada ve Türkiye ortalamasının (15.325 $) yaklaşık %98’i (kendi hesabım). Kocaeli’nin yaklaşık 0,62 katı. Kaynak: TÜİK il bazında GSYH 2024 (Rudaw, Habertürk aktarımı).</p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Üretim gücüne rağmen Bursa’nın kişi başı geliri sanayi komşularının gerisinde: Kocaeli 24.031 $, Bilecik 16.068 $, Eskişehir 16.171 $. Nüfusun yüksek ve göçle büyümesi toplam GSYH’yi paylaşılan kişi sayısına böler.</li>
+      <li>İlçe düzeyinde fark büyük: bir ilçe SES sıralamasında Nilüfer Türkiye’de beşinci, Büyükorhan ise Bursa’nın en düşük skorlu ilçesi (haber aktarımı, 2023).</li>
+      <li>Bursa’nın 2020–2023 kişi başı GSYH serisini ve sektörel GSYH dağılımını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Kişi başı GSYH il içi dağılımı ve hane gelirini göstermez.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 3.263.011’e çıktı (+24.393); yıllık artış hızı binde 7,5 ve 2024’teki gibi sabit kaldı. Nüfusun 1.628.212’si erkek, 1.634.699’u kadın.</li>
+        <li>Üç merkez ilçe (Osmangazi, Yıldırım, Nilüfer) toplam 2.118.759 kişiyle il nüfusunun yaklaşık %65’ini barındırıyor (kendi hesabım).</li>
+        <li>TÜİK’in 2025 uluslararası göç istatistiklerine göre Bursa, Türkiye’ye gelen göçün %2,9’unu alarak en çok göç alan beşinci il oldu; son yıllarda Orta Asya’dan gelenlerin arttığı aktarılıyor.</li>
+        <li>Bursa nüfusunda başka illerin kütüğüne kayıtlı çok sayıda kişi var; ilk sırada Erzurum, ardından Muş (112.394), Samsun (95.065) ve Artvin (70.052) geliyor.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><ul style="margin:0">
+      <li>Bursa için il bazında 2025 işsizlik, işgücüne katılma ve istihdam oranlarını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Gösterilen veri, Bursa’yı da içeren TR41 bölgesinin (Bursa–Eskişehir–Bilecik) 2023 sektörel istihdam dağılımıdır ve Bursa’yı tek başına temsil etmez.</li>
+      <li>Türkiye genelinde 2025 işsizlik oranı %8,3, işgücüne katılma %53,5, istihdam oranı %49,0; atıl işgücü oranı %29,7’ye yükseldi.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Bursa’nın 17 ilçesi var; tabloda nüfusu doğrulanan ilçeler 2025 ADNKS değerleriyle, diğerleri ise ilçenin ekonomik rolüyle yer alıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Öne çıkan</th></tr>
+      <tr><td>Osmangazi</td><td>886.111</td><td>İlin en kalabalık ilçesi; Türkiye’nin en kalabalık ilk 10 ilçesi arasında</td></tr>
+      <tr><td>Yıldırım</td><td>654.589</td><td>İkinci en kalabalık ilçe; sanayi ve yoğun konut alanı</td></tr>
+      <tr><td>Nilüfer</td><td>578.059</td><td>Nüfus artışı ilçeler arasında en hızlı; ilçe SES sıralamasında Türkiye’de beşinci (haber aktarımı)</td></tr>
+      <tr><td>İnegöl</td><td>306.004</td><td>Mobilya merkezi; 2025’te 1,13 mr $ ihracat, 333 milyon $ ithalat, 793 milyon $ dış ticaret fazlası (İTSO)</td></tr>
+      <tr><td>Gemlik</td><td>nüfus doğrulanmadı</td><td>Togg’un seri üretim tesisi; liman, zeytin ve Yeşil Gıda OSB planı</td></tr>
+      <tr><td>Gürsu</td><td>nüfus doğrulanmadı</td><td>Şeftali üretimi; ilin yaklaşık 25 bin tonu buradan (yerel basın aktarımı)</td></tr>
+      <tr><td>Yenişehir</td><td>nüfus doğrulanmadı</td><td>Donmuş gıda gibi tarıma dayalı sanayi için potansiyel olarak anılıyor</td></tr>
+      <tr><td>İznik</td><td>nüfus doğrulanmadı</td><td>İnanç ve kültür turizmi; UNESCO geçici listesinde</td></tr>
+      <tr><td>Harmancık</td><td>6.089</td><td>İlin en az nüfuslu ilçesi</td></tr>
+    </table></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1326 – İlk başkent.</b> Bursa Osmanlı Devleti’nin ilk başkenti oldu; bugünkü ticaret ve kültür mirasının temeli bu dönemde atıldı.</p>
+      <p><b>1971 – Otomotiv.</b> Tofaş ve Oyak-Renault Bursa’daki fabrikalarında seri üretime başladı.</p>
+      <p><b>2014 – UNESCO.</b> Bursa ve Cumalıkızık Dünya Miras Listesi’ne girdi; İznik geçici listeye alındı.</p>
+      <p><b>2022 – Togg.</b> Gemlik’teki tesiste 29 Ekim’de seri üretim başladı.</p>
+      <p><b>2024 – Gelir ve GSYH.</b> Kişi başı GSYH 15.014 $; il GSYH’si 1,67 trilyon TL; Bursa GSYH’de beşinci il oldu.</p>
+      <p><b>2025 – İhracat, nüfus, turizm.</b> İhracat 18,2 milyar $ (%9,5 artış); nüfus 3.263.011; turizm tesislerine geliş 1,76 milyon; İSO 500’de Bursa’dan 31 firma.</p>
+      <p><b>2026 – Otomotiv ağırlığı.</b> Ocak–Eylül’de ihracat 13,57 milyar $’a (%4,7 artış) çıktı, otomotiv 7,1 milyar $’la ihracatın yarısından fazlasını oluşturdu.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Togg, Oyak Renault, Tofaş ve Bosch’la kurulu otomotiv ana ve yan sanayi ekosistemi</li><li>17 OSB ve 194 ülkeye uzanan ihracat ağı</li><li>Armut, salçalık domates, sofralık zeytin ve şeftalide ulusal ölçekte güçlü tarım tabanı</li><li>UNESCO mirası, Uludağ ve termalle çeşitli turizm ürünü</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın %50’den fazlası otomotivde, yarısına yakını dört Avrupa pazarında</li><li>Tekstil ve hazır giyimde ihracat ve istihdam kaybı</li><li>Kişi başı gelir sanayi komşularının ve Türkiye ortalamasının biraz altında</li><li>Yabancı turistin kalış süresi 1,7 günün altında; tarımı sanayiye bağlayan Gıda İhtisas OSB yok</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Elektrikli araç, batarya ve enerji depolamada Togg ve Siro gibi yatırımlar; TEKNOSAB ile yüksek teknoloji üretimi</li><li>Gemlik Yeşil Gıda OSB ve donmuş gıda ile tarıma dayalı sanayi</li><li>ABD (%30,6) ve İtalya (%26,1) gibi hızla büyüyen pazarlarla Avrupa bağımlılığını azaltmak</li><li>Körfez ve Uzak Doğu turistini daha uzun tutarak turizm gelirini artırmak</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Bursa’nın sorunu üretim gücü eksikliği değil; kişi başı gelirin bu güce rağmen ortalamanın altında kalması ve ihracat sepetinin dar olması. Otomotiv büyürken tekstil ve hazır giyim küçülüyor; şehrin bir sonraki büyük sektörünün ne olacağı sorusu bu yüzden açık.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>İhracatın yarısından fazlası otomotivde: bu Bursa için bir güç mü, yoksa kırılganlık mı?</li>
+      <li>Tekstil ve hazır giyimde geri çekilme kaçınılmaz mı, yoksa tasarım ve markalaşmayla durdurulabilir mi?</li>
+      <li>Bursa neden Türkiye’nin tarım merkezlerinden biri olduğu hâlde bir Gıda İhtisas OSB’ye sahip değil?</li>
+      <li>Yabancı turisti Bursa’da bir geceden fazla tutmak için ne gerekir?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Rudaw, Habertürk, CNBC-e, Ekonomi Gazetesi aktarımı): kişi başı GSYH, sıralama ve ilk 5 il payı; Bursa’nın 1,67 trilyon TL’lik GSYH’si Genel Kalkınma ana sayfasındaki tablodan alınmıştır</li>
+      <li>TİM verileri (CNN Türk, Temmuz 2026; CNBC-e, Ekim 2026): 2025 ve Ocak–Eylül 2026 ihracatı, sektör ve ülke kırılımı; BTSO ve Ekonomi Gazetesi aktarımları (2024 ve 2025 sektör rakamları); Uludağ İhracatçı Birlikleri ve BEBKA bültenleri (UİB rakamları)</li>
+      <li>Tarım ve Orman Bakanlığı Bursa Tarımsal Yatırım Rehberi 2024 (TÜİK 2023 üretim verileri); Bursa Ticaret Borsası ve Gemlik TSO açıklamaları (Ekonomi Gazetesi, Bursada Bugün aktarımı)</li>
+      <li>BOSB, OSB yönetimleri ve BTSO açıklamaları (Ekonomi Gazetesi, Ekohaber, Milliyet, Habertürk aktarımı); İSO 500 2025 araştırması (Ekonomi Gazetesi); Togg ve otomotiv tarihi (Habertürk)</li>
+      <li>GÜMTOB turizm verileri (Ekonomi Gazetesi, 25 Mart 2026); Otel Gazetesi (Uludağ kış sezonu); Bursa Turizm Tanıtım ve Geliştirme Yol Haritası; UNESCO Dünya Miras Listesi kayıtları</li>
+      <li>TÜİK ADNKS 2025 (Bursa Hakimiyet, 9 Şubat 2026; Ekonomi Gazetesi): il ve ilçe nüfusları; TÜİK 2025 Uluslararası Göç İstatistikleri (Ekonomi Gazetesi); TÜİK 2025 işgücü istatistikleri (Medyascope, Rudaw)</li>
+      <li>BEBKA İş Gücü Broşürü (TÜİK 2023): TR41 bölgesi sektörel istihdam; Bursa Hakimiyet (ilçe SES sıralaması)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Bursa’nın il bazında 2025 işsizlik, işgücüne katılma ve istihdam oranları, 2020–2023 kişi başı GSYH serisi, sektörel GSYH payları, tarımın il GSYH’sindeki payı, SGK’lı sektörel istihdam, il bazında turizm geliri ve çoğu ilçenin 2025 nüfusu doğrulanmış kaynakla bulunamadığı için sayfada yok. TR41 istihdam dağılımı Bursa, Eskişehir ve Bilecik’in toplamıdır. UİB rakamları il ihracatı değildir. Yaklaşık %3,7 (GSYH payı), %3,8 (nüfus payı), %52 (otomotiv payı), %46 (ilk dört pazar payı), %98 (gelir oranı), %65 (üç ilçe payı) ve 2024 ihracat tahmini kendi hesabımdır. İSO 500 ve OSB istihdam özetleri kesin sıralama olarak okunmamalıdır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d){var h=Math.max(2,d[1]/m*130);
+  return '<div class="'+(d[2]||'')+'"><b>'+(d[3]||N(d[1]))+'</b><i style="height:'+h+'px"></i><span>'+d[0]+'</span></div>'}).join('')}
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+(d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+var BT=[['Bursa ihracatı (milyar $)',[['2024 (türetilmiş)',16.6],['2025',18.2],['2025 + serbest bölge',20.0]],1,'2025’te %9,5 artış. 2024 değeri artış oranından geriye hesaplanmıştır (kendi hesabım). Kaynak: TİM (CNN Türk aktarımı).'],
+ ['Sektör, Ocak–Eylül 2026 (milyon $)',[['Otomotiv',7115],['Makine ve aksamı',976],['Tekstil ve hammaddeleri',928],['Hazır giyim',840],['Kimyevi maddeler',691],['Çelik',637],['Mobilya, kâğıt, orman',525],['İklimlendirme',480],['Demir ve demir dışı',436]],[0],'Otomotiv toplamın yaklaşık %52’si (kendi hesabım; toplam 13,57 mr $). Kaynak: TİM (CNBC-e, 6 Ekim 2026).'],
+ ['2025 ilk 11 ay, sektör (milyar $)',[['Otomotiv (+%20,5)',8.2],['Hazır giyim (−%17,6)',1.2],['Makine (+%3,3)',1.1],['Tekstil (−%4,6)',1.1],['Kimya (+%6,8)',0.842]],[0],'Otomotiv hızla büyürken hazır giyim ve tekstil geriledi. Kaynak: BTSO/UİB verisi (Ekonomi Gazetesi aktarımı).'],
+ ['Pazar, Ocak–Eylül 2026 (milyon $)',[['Almanya',2234.7],['Fransa',1946.5],['İtalya',1159.4],['İspanya',911.6],['ABD',659.6]],[0,1,2,3],'İlk dört pazar Avrupa’da; ABD’ye ihracat %30,6, İtalya’ya %26,1, Almanya’ya %15,3 arttı, İspanya’ya %3 azaldı. Kaynak: TİM (CNBC-e aktarımı).']];
+tabs('bt',['Yıllık','Sektör','2025 değişim','Pazar'],function(i){
+ $('bttitle').textContent=BT[i][0];
+ bars($('btbars'),BT[i][1],BT[i][2]);
+ $('btnote').textContent=BT[i][3]});
+var TA=[['Türkiye üretimindeki pay, 2023 (%)',[['Armut',46.35],['Salçalık domates',24.47],['Sofralık zeytin',19.69],['Şeftali',12.66],['Ayva',7.79],['Kiraz',6.03],['Kestane',4.8],['Patlıcan',3.35]],[0,1,2,3],'Bursa armutta Türkiye üretiminin yaklaşık yarısını karşılıyor. Kaynak: Tarım ve Orman Bakanlığı Bursa Tarımsal Yatırım Rehberi 2024 (TÜİK 2023).'],
+ ['Üretim miktarı, 2023 (bin ton)',[['Salçalık domates',1358.8],['Armut',247.8],['Buğday',163.4],['Şeftali',101.3],['Sofralık zeytin',96.5],['Kiraz',44.4],['Arpa',30.1],['Patlıcan',27.4],['Ayva',15.0],['Kestane',3.4]],[0],'Salçalık domates açık ara en büyük kalem. Kaynak: Tarım ve Orman Bakanlığı Bursa Tarımsal Yatırım Rehberi 2024 (TÜİK 2023).']];
+tabs('ta',['Pay','Miktar'],function(i){
+ $('tatitle').textContent=TA[i][0];
+ bars($('tabars'),TA[i][1],TA[i][2]);
+ $('tanote').textContent=TA[i][3]});
+var OS=[['OSB’lerde firma/fabrika sayısı',[['Demirtaş OSB (firma)',573],['Uludağ OSB (firma)',260],['Barakfakih OSB (fabrika)',155]],[0],'DOSAB 491 hektarlık alanda 573 faal firmaya sahip; Uludağ OSB’de yaklaşık 15 bin, Barakfakih’te yaklaşık 11,5 bin kişi çalışıyor. Kaynak: OSB yönetimleri (Ekohaber aktarımı); dönemleri doğrulanmadı.'],
+ ['OSB’lerde istihdam, sektöre göre (bin kişi)',[['Otomotiv ana ve yan sanayi',66],['Tekstil',57]],[0],'15 faal OSB’de toplam yaklaşık 198 bin kişi çalışıyor; otomotiv istihdamda ilk, tekstil ikinci. Kaynak: yerel gazete aktarımı (Milliyet), yayın tarihi doğrulanamadı.'],
+ ['İSO 500’de Bursa firmaları (sektöre göre)',[['Taşıt araçları',11],['Gıda',6],['Elektrik makineleri',4],['Demir-çelik',2]],[0],'Bursa’dan 31 firma listede (2024’te 25). Kaynak: İSO 500 2025 araştırması (Ekonomi Gazetesi aktarımı).']];
+tabs('os',['Firma','İstihdam','İSO 500'],function(i){
+ $('ostitle').textContent=OS[i][0];
+ bars($('osbars'),OS[i][1],OS[i][2]);
+ $('osnote').textContent=OS[i][3]});
+var TZ=[['Turizm tesislerine geliş (bin kişi)',[['2024 toplam',1698.5],['2025 toplam',1761.1],['2025 yerli',1396.0],['2025 yabancı',365.1]],[1],'Toplam %3,68 arttı; yabancı %0,8 azaldı. Kaynak: GÜMTOB (Ekonomi Gazetesi, 25 Mart 2026).'],
+ ['Yabancı ziyaretçi, ülkeye göre, 2025 (bin kişi)',[['Endonezya',43.4],['Çin',26.6],['Almanya',24.6]],[0],'Asya pazarı öne çıkıyor. Kaynak: GÜMTOB (Ekonomi Gazetesi aktarımı).'],
+ ['Yabancı geceleme (bin)',[['2024',692.7],['2025',649.0]],[1],'Yabancı geceleme %6,32 azaldı; ortalama kalış 1,72 günden 1,67 güne indi. Kaynak: GÜMTOB.']];
+tabs('tz',['Geliş','Ülke','Geceleme'],function(i){
+ $('tztitle').textContent=TZ[i][0];
+ bars($('tzbars'),TZ[i][1],TZ[i][2]);
+ $('tznote').textContent=TZ[i][3]});
+bars($('gs'),[['İstanbul',13.01],['Ankara',4.67],['İzmir',2.56],['Kocaeli',1.71],['Bursa',1.67]],[4]);
+bars($('kb'),[['İstanbul',24452],['Kocaeli',24031],['Tekirdağ',18406],['Eskişehir',16171],['Bilecik',16068],['Türkiye ortalaması',15325],['Yalova',15269],['Bursa',15014],['Çanakkale',14704],['Sakarya',14605]],[7]);
+var IG=[['İstihdamın sektörel dağılımı, 2023 (%)',[['TR41 sanayi',42.0],['Türkiye sanayi',27.5],['TR41 hizmet',50.4],['Türkiye hizmet',57.6],['TR41 tarım',7.6],['Türkiye tarım',14.8]],[0,2,4],'TR41 (Bursa–Eskişehir–Bilecik) istihdamında sanayi payı Türkiye ortalamasının çok üstünde, tarım payı yarısı kadar. Bursa’yı tek başına göstermez. Kaynak: BEBKA İş Gücü Broşürü (TÜİK 2023).'],
+ ['Türkiye geneli, 2025 (%)',[['İşsizlik',8.3],['İşgücüne katılma',53.5],['İstihdam oranı',49.0],['Atıl işgücü',29.7]],[0],'Karşılaştırma için ulusal değerler; Bursa’ya özgü il serisi bulunamadı. Kaynak: TÜİK 2025 işgücü istatistikleri (Medyascope aktarımı).']];
+tabs('ig',['Sektör (TR41)','Türkiye 2025'],function(i){
+ $('igtitle').textContent=IG[i][0];
+ bars($('igbars'),IG[i][1],IG[i][2]);
+ $('ignote').textContent=IG[i][3]});
+</script>
+</body>
+</html>
