@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kocaeli | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0f6e8c;--a2:#e8710a;--a3:#3b4a8c"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Kocaeli</span><h1>Kocaeli: Türkiye’nin Sanayi ve Otomotiv Üssü</h1><p>Nüfusu 2,16 milyonu aşan Kocaeli, 2024’te kişi başına 24.031 $ ile İstanbul’un ardından ikinci (2022 ve 2023’te TL bazında birinciydi). Ekonomisi otomotiv, rafineri-kimya ve liman lojistiğine dayanıyor: 2025’te Türkiye’nin taşıt üretiminin %45’i buradan çıktı; ihracatı 35,1 milyar $ ile İstanbul’dan sonra ikinci. Zayıf yan: kent ihracatının yaklaşık yarısı tek sektöre, yaklaşık yarısı da altı Avrupa pazarına bağlı.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>24.031 $</b><span>Kişi başı GSYH (2024), 81 il arasında 2. sıra; Türkiye ort. 15.325 $’ın yaklaşık 1,57 katı</span></div>
+    <div class="k"><b>2.161.171</b><span>Nüfus (ADNKS 2025); bir yılda 31.165 kişi arttı; en kalabalık 10. il</span></div>
+    <div class="k"><b>35,1 mlr $</b><span>2025 ihracatı (Ticaret Bakanlığı, faaliyet ili); İstanbul’dan sonra 2.; Türkiye ihracatının yaklaşık %12,8’i</span></div>
+    <div class="k"><b>643.873</b><span>2025’te Kocaeli’de üretilen taşıt; Türkiye üretiminin (traktör hariç) %45’i</span></div>
+    <div class="k"><b>140</b><span>İSO İlk 500 (85) ve İkinci 500’de (55) üretim yapan Kocaeli firması; 2024’te 130’du</span></div>
+    <div class="k"><b>83,9 mn ton</b><span>2025’te Kocaeli limanlarında elleçlenen yük; Türkiye toplamının yaklaşık %15’i</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#sanayi">Sanayi</a><a href="#liman">Liman</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Kocaeli, Bakanlığın faaliyet ili serisinde İstanbul’un ardından ikinci; ama kaç milyar dolar olduğu, hangi seriye baktığınıza göre değişiyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Ticaret Bakanlığı’nın faaliyet ili verisine göre Kocaeli’nin ihracatı 2025’te 35,1 milyar $ oldu; İstanbul 57,8, İzmir 23,6, Bursa 20,0, Tekirdağ 13,2 milyar $’la izledi (KSO derlemesi). Bakanlık, Kocaeli’yi 2025’te ihracatını en çok artıran il olarak gösterdi: 3,102 milyar $ artış.</li>
+        <li>Eylül 2026’da faaliyet ili ihracatı 3,73 milyar $ ile yine ikinci sırada; geçen yıla göre artış 761 milyon $ (İstanbul’dan sonra en büyük artış). En büyük kalem motorlu kara taşıtları (1,47 milyar $), ardından elektrikli makine ve cihazlar (344 milyon $) ile mineral yakıtlar (333 milyon $). En çok ihracat yapılan ülkeler İngiltere (422 milyon $), Almanya (356 milyon $) ve ABD (210 milyon $).</li>
+        <li>TİM’in yasal merkez serisinde Ocak–Eylül 2026 ihracatı %8,9 artışla 18,57 milyar $. Otomotiv 9,31 milyar $ (+%2,6) ile ihracatın yaklaşık yarısı; kimya 4,34 milyar $ (+%19,1), elektrik-elektronik 1,03 milyar $ (+%40,9).</li>
+        <li>Yeni pazarlar hızlı büyüyor: Fas’a ihracat iki katına çıkıp 339 milyon $’a, Malta’ya beş katına çıkıp 288 milyon $’a, Cezayir’e üç katına çıkıp 142 milyon $’a ulaştı (Ocak–Eylül 2026, TİM).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İki ayrı seri var ve toplanmamalı: Ticaret Bakanlığı faaliyet ili serisi (üretimin yapıldığı il) ile TİM yasal merkez serisi. Eylül 2026’da Kocaeli için TİM 2,20 milyar $, Bakanlık 3,73 milyar $ gösteriyor (kendi karşılaştırmam).</li>
+      <li>2024 ihracatı için doğrudan bir Bakanlık rakamı bulamadım; 32,0 milyar $ değeri 35,1 milyar $’dan bildirilen 3,102 milyar $’lık artışın çıkarılmasıyla elde edildi (kendi hesabım).</li>
+      <li>Gümrük bazlı dış ticaret ayrı bir seridir: 2024’te Kocaeli gümrüklerinden 41,3 milyar $ ihracat ve 77,9 milyar $ ithalat aktarılıyor. Bir bakan açıklamasında ise yaklaşık 30 milyar $ ihracat ve 40 milyar $ ithalat geçiyor. Tanımları ve dönemleri net olmadığı için ithalatı sayfada kullanmadım; ithalatın ihracatın üzerinde ve ham petrol, türevleri ve kimyasallar ağırlıklı olduğu not edilebilir.</li>
+      <li>Faaliyet ili serisinde Ocak, Şubat, Nisan ve Eylül 2026 için aylık rakamlar var; 2026’nın ilk dokuz ayı için tek bir toplam bulamadım, bu yüzden TİM serisini kullandım.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Organize Sanayi Bölgeleri</h2>
+    <p class="sub">Kocaeli’nin gücü tek bir fabrika değil, kümelenme: otomotiv, rafineri-kimya, lastik-plastik, çelik ve yan sanayi iç içe.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="os"></div><h3 id="ostitle"></h3><div class="bars" id="osbars"></div><p class="note" id="osnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>OSD verisine göre Kocaeli’deki fabrikalar (Ford Otosan, Hyundai Motor Türkiye, Anadolu Isuzu) 2025’te 643.873 taşıt üretti (2024: 620.056; +%3,8). Bu, Türkiye’nin traktör hariç üretiminin %45’i ve taşıt ihracatının %52’si.</li>
+        <li>Ford Otosan Kocaeli’de 441.597 araç üretip 396.521’ini ihraç etti (ihracat +%21,6). Hyundai İzmit’te yaklaşık 197 bin otomobil üretti; %79,4’ü yurt dışına gitti. Ford’un Kocaeli’deki kapasitesi 612 bin adet (Yeniköy 405, Gölcük 207 bin).</li>
+        <li>Ocak–Eylül 2026’da üç üretici 460.729 araç üretti (Türkiye’nin 971.159’unun %47’si) ve 381.097 araç ihraç etti (%56). Hyundai Ağustos 2026’da tam elektrikli IONIQ 3’ün seri üretimine başladı; Ford’un dokuz aylık üretimi 330.551.</li>
+        <li>İSO 500 (2025) listesinde Kocaeli’de tesisi bulunan Tüpraş 698,8 milyar TL ile birinci, Ford Otomotiv 538,3 milyar TL ile ikinci (firma toplamları; üretimin tamamı Kocaeli’de değil). Üretimi Kocaeli’de yapılan 85 firma İlk 500’de, 55 firma İkinci 500’de; toplam 140 ile Kocaeli bugüne kadarki en yüksek sayıya ulaştı. Gebze Ticaret Odası’na kayıtlı 67 firma İSO 500’de yer aldı.</li>
+        <li>Altyapı: Gebze OSB, Gebze Güzeller OSB, Gebze Plastikçiler OSB, Gebze Kimya İhtisas OSB, Dilovası OSB (2002), Kandıra Gıda İhtisas OSB, Kocaeli KOBİ OSB ve otomotiv yan sanayi için TOSB gibi bölgeler; ayrıca TÜBİTAK MAM Teknoloji Serbest Bölgesi ve Kocaeli Serbest Bölgeleri.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2026 üretim değeri yalnızca ilk dokuz ayı kapsıyor. Aynı dönemin 2025 karşılaştırmasını kaynaklar arası tutarsız olduğu için sayfaya koymadım; bu yüzden 2026’nın yıllık seyri için yıl sonunu beklemek gerekir.</li>
+      <li>İSO listesinde “Kocaeli’de üretim yapan” firma sayısı (85) ile “merkezi Kocaeli olarak görünen” firma sayısı farklı: KSO’ya göre bir önceki listede merkezi Kocaeli görünen firma 39, üretim yeri Kocaeli olan 79’du.</li>
+      <li>OSB doluluk oranı, faal fabrika sayısı ve OSB istihdamı gibi il bazında rakamları doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Küçük sanayi sitesi (13 site, yaklaşık 4 bin işyeri, yaklaşık 50 bin çalışan) ve Ar-Ge merkezi sıralaması (üçüncü) bir yerel köşe yazısından; tarihi doğrulanmadı.</li>
+      <li>Sanayi katma değerinin il GSYH’sindeki payını ve imalatın 2024’teki küçülmesinin Kocaeli’ye etkisini doğrulanmış il verisiyle gösteremedim.</li></ul></div>
+  </section>
+
+  <section id="liman">
+    <h2>Liman ve Lojistik</h2>
+    <p class="sub">İzmit Körfezi’ndeki yaklaşık 35 liman tesisi, Kocaeli’yi yalnızca üretim değil geçit kenti yapıyor: Türkiye’nin en yoğun yük merkezlerinden biri.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="lm"></div><h3 id="lmtitle"></h3><div class="bars" id="lmbars"></div><p class="note" id="lmnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>2025’te Türkiye limanlarında 553,3 milyon ton yük elleçlendi; Cumhuriyet tarihinin rekoru. Bölge liman başkanlıkları arasında Aliağa birinci, 83,9 milyon tonla Kocaeli ikinci, 70,9 milyon tonla İskenderun üçüncü oldu (Ulaştırma Bakanlığı).</li>
+        <li>Haziran 2026’da bölge liman başkanlıkları arasında en yüksek yük hacmine 7,61 milyon tonla Kocaeli ulaştı; Aliağa 7,57 milyon tonla çok yakındı.</li>
+        <li>Kocaeli limanlarında 2024’te 2,32 milyon TEU konteyner elleçlendiği bir akademik çalışmada geçiyor; Türkiye’nin 13,5 milyon TEU’luk konteynerinin yaklaşık %61’i Ambarlı, Kocaeli, Gemlik ve Tekirdağ limanlarında toplanıyor (aynı çalışma).</li>
+        <li>Ticaret Bakanı Bolat’a göre Kocaeli’nin ithalatında ham petrol, türevleri ve kimyasal ürünler önemli yer tutuyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Sıralama ölçüye göre değişiyor: Aliağa kaynaklı açıklamalar “toplam groston” bazında Kocaeli’yi birinci gösterirken, Bakanlığın net yük sıralamasında Aliağa birinci. İki ölçüyü karıştırmadım.</li>
+      <li>Liman sayısı için iki rakam geçiyor: yerel bir köşe yazısında 35 liman tesisi, Ticaret Bakanı’nın konuşmasında 36 liman.</li>
+      <li>Kocaeli’nin Türkiye konteynerindeki payını 2025 için doğrulanmış kaynakla bulamadım; liman bazında güncel konteyner (TEU) sayısı ve liman istihdamı sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık</h2>
+    <p class="sub">Tarım ilin ekonomisinde küçük bir dilim; ama Kandıra’da manda, ayçiçeği ve tarla bitkileriyle sürüyor, merkezde ise sanayi ve kentleşme tarım alanını daraltıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Tarımsal üretim alanının %44’ü Kandıra’da; İzmit %15, Karamürsel %12, Gebze %10 ile izliyor. Çayırova, Dilovası ve Darıca’da neredeyse hiç tarım alanı yok.</li>
+        <li>Tarım Bakanlığı rehberinde Kocaeli’nin orman alanı 143.205 hektar; üretimde öne çıkan kalem yulaf (yeşil ot): 96.513 ton, Türkiye üretiminin %2,13’ü.</li>
+        <li>Sığır ve kanatlıda Kandıra öne çıkıyor; manda sütüyle yapılan Kandıra yoğurdu tescilli, Kandıra hindisi ve dartısı için coğrafi işaret başvurusu yapılmış. Coğrafi işaretli ürünler arasında Hereke halısı, pişmaniye, Karamürsel sepeti ve Kandıra bezi var.</li>
+        <li>Büyükşehir Belediyesi, Kandıra’da fındık, mısır, arpa ve buğday için kurutma ve depolama sunan Tarımsal Ürün Depolama ve Değerlendirme Merkezi açtı; ayçiçeği ve yem bitkisi için gübre ve tohum desteği veriyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Hayvan varlığı (yaklaşık 130 bin büyükbaş, 110 bin küçükbaş) il müdürünün yıl belirtmeyen sözlü beyanıdır; güncel TÜİK serisi değil.</li>
+      <li>Tarım Bakanlığı rehberindeki üretim miktarları 2023 yılına ait ve seçilmiş ürünlerdir; Kocaeli’nin Türkiye üretimindeki payı yulafta %2,13, diğer ürünlerde %0,4’ün altında.</li>
+      <li>Tarımın il GSYH’sindeki payını, tarımsal ihracatı ve güncel çiftçi sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Orman alanının il yüz ölçümündeki yüzdesini de hesaplamadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Turizm sanayi kentinde yan sektör: sayılar küçük, ama belgeli tesis ve yatak sayısı son yirmi yılda hızla arttı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tz"></div><h3 id="tztitle"></h3><div class="bars" id="tzbars"></div><p class="note" id="tznote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Kültür ve Turizm Bakanı Ersoy’a göre 2002’de 33 olan işletme belgeli konaklama tesisi sayısı Eylül 2026’da 281’e, yatak kapasitesi 966’dan 16.040’a çıktı.</li>
+        <li>2026’nın ilk altı ayında kenti ziyaret eden yerli ve yabancı misafir sayısı geçen yıla göre yaklaşık %2,3 artışla 485 bin oldu.</li>
+        <li>Yaklaşık 20.000 hektarlık Kocaeli-Sakarya Kıyı Bandı Kültür ve Turizm Koruma ve Gelişim Bölgesi’nin Kocaeli kesimi için çevre düzeni planı değişikliği onaylandı; kentte 17 restorasyon projesi tamamlandı (Bakan Ersoy).</li>
+        <li>Kartepe kış turizmi için kayak merkezi ve otel yatırımına dair ön fizibilite raporu hazırlanmış; turizm yol haritası 2028 için yaklaşık 336 bin yabancı ve 1,4 milyon yerli turist hedefliyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>485 bin rakamının “misafir” tanımı (belgeli tesise geceleyen mi, günübirlikçi dahil mi) açıklamada belli değil; 2025 değeri de oran üzerinden hesaplandı.</li>
+      <li>2028 hedefleri bir yol haritası belgesindeki hedeflerdir, gerçekleşme değildir.</li>
+      <li>Turizm gelirini, yabancı-yerli ayrımını ve doluluk oranını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Kocaeli’de 2024’te kişi başına GSYH 788.873 TL, dolar karşılığı 24.031 $ oldu. İstanbul 24.452 $ ile ilk, Ankara 24.031 $ ile Kocaeli’yle neredeyse aynı düzeyde; yalnızca 11 il Türkiye ortalamasının (15.325 $) üzerinde.</li>
+        <li>Kocaeli, TL bazında 2022’de (302.772 TL) ve 2023’te (516.460 TL) kişi başına GSYH’de Türkiye birincisiydi; 2023’te toplam GSYH’de dördüncü sıradaydı (KSO).</li>
+        <li>2023’te GSYH büyümesine en çok katkı veren iller İstanbul (%1,65), Ankara (%0,96) ve Kocaeli (%0,27) oldu (TÜİK).</li>
+        <li>İl, kişi başı gelirde Türkiye’nin en yoksul üç ilinden (Van, Ağrı, Şanlıurfa) yaklaşık dört kat öndedir.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İl GSYH’si üretim yeri esaslıdır: Tüpraş, otomotiv ve kimya gibi büyük tesislerin katma değerini kentin nüfusuna böler. Bu, hanehalkı gelirini değil üretimi ölçer; Kocaeli’de çalışıp başka ilde oturanlar ve ilçeler arası farklar rakamda görünmez (yorum).</li>
+      <li>2024 toplam il GSYH’sini, sektörel katma değer paylarını ve 2024 reel büyüme hızını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>Kocaeli ile Ankara’nın 2024 TL değerleri arasında yalnızca 14 TL fark var; “ikinci” sıra bu yüzden sınırdadır. TL serisi nominal olduğundan enflasyondan etkilenir.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 2.161.171’e çıktı (2024: 2.130.099; 2020: 1.997.258). Erkek nüfus 1.088.753, kadın nüfus 1.072.418. Nüfus yoğunluğu kilometrekare başına 633 kişiyle İstanbul’dan sonra ikinci.</li>
+        <li>Beş yılda en çok büyüyen ilçeler Kartepe (+%22,5), Başiskele (+%21,4) ve Çayırova (+%15,7); Gebze yalnızca %5,6 arttı.</li>
+        <li>İŞKUR’un 2024 işgücü piyasası araştırması 3.913 işyerini kapsadı: 422.380 çalışanın %45,3’ü imalatta; işyerlerinin %39,6’sı ihracat yapıyor, %20,8’i Ar-Ge çalışması yürütüyor.</li>
+        <li>Açık iş 14.186; 1.218 işyerinde 9.054 kişinin temininde güçlük çekiliyor. Açık işlerin %39,6’sında asgari ücret düzeyinde, %47,3’ünde asgari ücretin 1,5 katı ücret öngörülüyor; kadın işgücü taleplerinin %81,1’i asgari ücret düzeyinde (erkeklerde %31,4).</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025 yılı için Kocaeli’ye özgü işsizlik, işgücüne katılma ve istihdam oranını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. Karşılaştırma için Türkiye 2025: işsizlik %8,3, işgücüne katılma %53,5, istihdam oranı %49,0, atıl işgücü %29,7.</li>
+      <li>İŞKUR araştırması 20 ve üzeri çalışanlı işyerlerini tam sayımla, küçükleri örneklemle kapsar; il istihdamının tamamını temsil etmez ve kayıt dışı çalışmayı içermez.</li>
+      <li>Açık iş ve “temininde güçlük” rakamları işveren beyanıdır; ücret beklentileri ise kadınlar için belirgin biçimde daha düşük görünüyor, ama bu iş tanımlarının farkından da kaynaklanıyor olabilir (yorum).</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Kocaeli’nin 12 ilçesi var ; nüfus ADNKS 2025. Gebze ve İzmit nüfusun %36,8’ini barındırıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Öne çıkan</th></tr>
+      <tr><td>Gebze</td><td>414.960</td><td>En kalabalık ilçe; İstanbul sınırında OSB, plastik ve kimya yoğunluğu, TÜBİTAK MAM</td></tr>
+      <tr><td>İzmit</td><td>381.254</td><td>İl merkezi; Hyundai Motor Türkiye’nin fabrikası</td></tr>
+      <tr><td>Darıca</td><td>235.632</td><td>Gebze’nin güneyinde yoğun yerleşim ilçesi; 2020–2025 arasında %9,7 büyüdü</td></tr>
+      <tr><td>Körfez</td><td>183.077</td><td>İzmit Körfezi kıyısında sanayi ve liman ilçesi; geçmişte tarım ve hayvancılık merkeziydi</td></tr>
+      <tr><td>Gölcük</td><td>181.227</td><td>Ford Otosan Gölcük fabrikası (2001’de kuruldu)</td></tr>
+      <tr><td>Çayırova</td><td>162.262</td><td>2008’de Gebze’den ayrıldı; Anadolu Isuzu fabrikası, TOSB; beş yılda %15,7 büyüdü</td></tr>
+      <tr><td>Kartepe</td><td>154.377</td><td>Kayak ve dağ turizmi; son beş yılda %22,5 büyüdü</td></tr>
+      <tr><td>Derince</td><td>147.892</td><td>İzmit Körfezi’nde liman ve sanayi ilçesi</td></tr>
+      <tr><td>Başiskele</td><td>131.387</td><td>Ford Otosan Yeniköy fabrikası; son beş yılda %21,4 büyüdü</td></tr>
+      <tr><td>Karamürsel</td><td>59.488</td><td>Tarımsal üretim alanının %12’si; coğrafi işaretli Karamürsel sepeti</td></tr>
+      <tr><td>Dilovası</td><td>55.355</td><td>Dilovası OSB (2002); çelik ve kimya tesisleri, uzun yıllar çevre sorunlarıyla anıldı</td></tr>
+      <tr><td>Kandıra</td><td>54.260</td><td>İlin en az nüfuslu ilçesi; tarımsal üretim alanının %44’ü, manda ve ayçiçeği</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">12 ilçenin toplamı 2.161.171 yapar (kontrol edildi). “Öne çıkan” sütunu genel niteliktedir; ilçe bazında ekonomik veri (GSYH, istihdam, ihracat) bulunamadı. Gebze+İzmit payı kendi hesabımdır.</p></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1999 – Marmara Depremi.</b> 17 Ağustos depremi Kocaeli ve çevresini ağır vurdu; kent her yıl anılıyor.</p>
+      <p><b>2001 – Ford Otosan Gölcük.</b> Fabrika kuruldu; Gölcük ve Yeniköy’den oluşan Ford Otosan Kocaeli tesisleri bugün Ford’un Avrupa’daki en büyük ticari araç üretim merkezi.</p>
+      <p><b>2002 – OSB ve turizm tabanı.</b> Dilovası OSB kuruldu; belgeli konaklama tesisi sayısı 33, yatak sayısı 966.</p>
+      <p><b>2008 – Çayırova ilçesi.</b> Gebze’den ayrılarak ayrı ilçe oldu.</p>
+      <p><b>2022–2023 – Gelirde birincilik.</b> Kişi başına GSYH’de Türkiye birincisi (302.772 TL, 516.460 TL); 2023’te Ford Otosan’ın yeniden tasarlanan Yeniköy fabrikası açıldı.</p>
+      <p><b>2024 – İkinci sıra.</b> Kişi başı GSYH 24.031 $ ile İstanbul’un ardından ikinci; üretim 620.056 taşıt.</p>
+      <p><b>2025 – Rekorlar.</b> İhracat 35,1 milyar $, taşıt üretimi 643.873, İSO’da 140 firma, nüfus 2.161.171; limanlarda 83,9 milyon ton yük.</p>
+      <p><b>2026 – Elektrikli dönüşüm.</b> Hyundai’nin tam elektrikli IONIQ 3’ü Ağustos’ta seri üretime girdi; Eylül ihracatı 3,73 milyar $, TİM serisinde Ocak–Eylül ihracatı 18,57 milyar $.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Türkiye taşıt üretiminin %45’i ve taşıt ihracatının %52’si; otomotiv, rafineri ve kimyada derin tedarik zinciri</li><li>Kişi başına GSYH’de Türkiye’nin ilk iki ili arasında</li><li>İzmit Körfezi’ndeki liman yoğunluğu ve İstanbul’a yakınlık</li><li>İSO listelerinde rekor 140 firma; orta ölçekli firmaların büyümesi</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>İhracatın yaklaşık yarısı otomotiv; yaklaşık yarısı altı Avrupa pazarında</li><li>Taşıt üretimi iki firmaya yaslanıyor: 2026’nın ilk dokuz ayında üretimin yaklaşık %72’si Ford’dan, %27’si Hyundai’dan geldi (kendi hesabım)</li><li>Düşük ücretli imalat işleri: açık işlerin çoğu asgari ücret düzeyinde, kadın talebinde daha belirgin</li><li>Yoğun nüfus ve sanayi: Dilovası örneğindeki çevre baskısı, tarım alanlarının daralması</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>Elektrikli ve hibrit dönüşüm: Hyundai IONIQ 3, Ford’un elektrikli ticari araçları ve batarya montajı</li><li>Fas, Malta, Cezayir gibi yeni pazarlarda hızlı büyüme; kimya ve elektrik-elektronikte yüksek artış</li><li>Turizmi dört mevsime yaymak: Kartepe, kıyı bandı planı, belgeli yatak sayısındaki artış</li><li>20 ve üzeri çalışanlı işyerlerinde yeşil dönüşüm sertifikası oranı yalnızca %8,1; büyüme alanı olarak okunabilir</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Kocaeli’nin sorunu üretim eksikliği değil, üretimin ne kadarının kentte kaldığı: ihracat ve GSYH çok yüksek, ama açık işlerin büyük bölümü asgari ücret düzeyinde ve kişi başı GSYH üretim yerini ölçüyor, oturanın gelirini değil. Elektrikli dönüşüm ve Ar-Ge bu tabloyu değiştirebilir; ancak otomotiv ve Avrupa bağımlılığı sürdüğü sürece kentin ihracatı birkaç fabrikanın ve birkaç pazarın kararına duyarlı kalır.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Kişi başına GSYH’de ilk iki arada olan bir ilin işgücü piyasasında neden açık işlerin büyük kısmı asgari ücret düzeyinde?</li>
+      <li>Hyundai ve Ford’un elektrikli dönüşümü yan sanayide yeni iş mi yaratır, yoksa mevcut işleri mi eritir?</li>
+      <li>İhracatın yarısı otomotiv ve Avrupa’ya bağlıyken kent ekonomisi nasıl çeşitlendirilebilir?</li>
+      <li>Sanayinin ve nüfusun yoğunlaştığı bir ilde tarım alanı, çevre ve turizm nasıl korunur?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2022, 2023 ve 2024 (Habertürk, CNBC-e, Diken, Rudaw, Ekonomist, Alomaliye aktarımı): kişi başına GSYH, sıralama ve ortalamalar; KSO Başkanı Zeytinoğlu’nun GSYH değerlendirmesi (Ekonomi Gazetesi)</li>
+      <li>Ticaret Bakanlığı faaliyet illerine göre ihracat bültenleri (Ocak, Nisan, Şubat, Ekim 2025, Eylül 2026), Sanayi Gazetesi, Mavi Kocaeli (İHA), Hisse.net; KSO Başkanı Zeytinoğlu’nun 2025 il ihracat derlemesi (Gazete ABC); TİM verileri (AA, 9 Ekim 2026; AA, Kasım 2026 otomotiv ihracatı)</li>
+      <li>Otomotiv Sanayii Derneği (OSD) verileri (Borsagündem, AA 23 Ekim 2026, Milliyet); Ford Otosan Genel Müdürü açıklaması (Ekonomi Gazetesi); Ford Otosan tesis sayfası</li>
+      <li>İSO “Türkiye’nin 500 Büyük Sanayi Kuruluşu 2025” (Dünya, CNBC-e, Forbes Türkiye); Ekonomi Gazetesi (Sabiha Toprak, Temmuz 2026; KSO açıklaması); Mavi Kocaeli (GTO, 67 firma); Gebze Ticaret Odası ve OSB haberleri; OSBÜK ve Sanayi Gazetesi</li>
+      <li>Ulaştırma ve Altyapı Bakanlığı liman verileri (Halk TV, TRT Haber, Ekovitrin); Dünya (Aliağa karşılaştırması); Kocaeli Üniversitesi akademik çalışma (dergipark, 2024 konteyner)</li>
+      <li>Tarım ve Orman Bakanlığı Kocaeli Tarımsal Yatırım Rehberi 2024 (TÜİK 2023); Şura Akademi dergisi makalesi; Tölü (2023) akademik çalışma; Gazete Vatan, Yeni Şafak, Milliyet (Kandıra ürünleri)</li>
+      <li>Kültür ve Turizm Bakanı Ersoy açıklamaları (DHA, Sabah); yatirimadestek.gov.tr Kartepe ön fizibilite raporu; Kocaeli Turizm Tanıtım ve Geliştirme Yol Haritası (akademik arşiv)</li>
+      <li>TÜİK ADNKS 2025 (Kocaeli Gazetesi, Bağımsız Kocaeli, nufusu.com, İsteKocaeli); TÜİK 2025 işgücü istatistikleri (Medyascope, İşçi Haber); İŞKUR Kocaeli İşgücü Piyasası Araştırması 2024</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. Kocaeli’ye özgü 2025 işsizlik ve katılma oranı, 2024 toplam il GSYH’si ve sektör payları, OSB doluluk ve istihdam rakamları, güncel hayvan varlığı, liman konteyner sayıları, turizm geliri ve çoğu ilçenin ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. Yaklaşık 1,57 (gelir oranı), 2024 ihracatı 32,0 milyar $, %12,8 (ihracat payı), Eylül 2025 ihracatı 2,97 milyar $, %50,1 (otomotiv payı), yaklaşık %49 (altı Avrupa pazarı), %89,8 ve %72 (Ford ihracat ve kapasite oranı), %15 (liman payı), 474 bin (2025 ilk yarı ziyaretçi), %26,3 (kadın payı), 1.864 (diğer açık iş), 4,2 kat (gelir farkı) ve %36,8 (Gebze+İzmit payı) kendi hesabımdır. 2024 ihracatı, Eylül 2025 ihracatı ve 2025 ilk yarı ziyaretçi sayısı, bildirilen artış tutarı veya oranından geri hesaplanmıştır; kesin resmî değerler olmayabilir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+var BT=[['Yıllık ihracat, Bakanlık faaliyet ili (milyar $)',[['2024*',32.0],['2025',35.1]],[1],'*35,1 milyar $’dan Bakanlığın bildirdiği 3,102 milyar $’lık artış çıkarılarak bulundu (kendi hesabım). Kocaeli 2025’te ihracatını en çok artıran il. Kaynak: Ticaret Bakanlığı (Hisse.net aktarımı), KSO.'],
+ ['2025 il sıralaması (milyar $)',[['İstanbul',57.8],['Kocaeli',35.1],['İzmir',23.6],['Bursa',20.0],['Tekirdağ',13.2]],[1],'Faaliyet ili esaslı sıralama. Kaynak: Ticaret Bakanlığı verileri, KSO Başkanı Zeytinoğlu’nun derlemesi (Gazete ABC).'],
+ ['Aylık ihracat, faaliyet ili (milyar $)',[['Eyl 2025*',2.973],['Oca 2026',2.546],['Şub 2026',2.944],['Nis 2026',3.512],['Eyl 2026',3.734]],[4],'*Eylül 2025, Eylül 2026 değerinden bildirilen 761 milyon $’lık artış çıkarılarak bulundu (kendi hesabım). Kaynak: Ticaret Bakanlığı faaliyet illeri bültenleri (Oca, Eyl 2026); Sanayi Gazetesi (Şub, Nis 2026).'],
+ ['TİM, Ocak–Eylül ihracatı (milyar $)',[['2025',17.05],['2026',18.57]],[1],'TİM yasal merkez serisi; Bakanlığın faaliyet ili serisinden çok daha düşük. 2026 yüzde 8,9 artış; Eylül ayı 2,20 milyar $ (+%17,4). Kaynak: TİM (AA, 9 Ekim 2026).'],
+ ['Sektör, TİM Oca–Eyl 2026 (milyar $)',[['Otomotiv',9.31],['Kimya',4.34],['Demir ve demir dışı',1.22],['Elektrik-elektronik',1.03],['Çelik',1.00],['Gemi, yat ve hizmetleri',0.08]],[0],'Otomotiv kent ihracatının yaklaşık yarısı (%50,1, kendi hesabım). Artışlar: kimya %19,1, elektrik-elektronik %40,9, demir ve demir dışı %26,6, çelik %11,8, gemi-yat %46,1; otomotiv %2,6. Kaynak: TİM (AA).'],
+ ['Pazar, TİM Oca–Eyl 2026 (milyar $)',[['Birleşik Krallık',2.21],['Almanya',1.79],['Slovenya',1.63],['İtalya',1.26],['İspanya',1.12],['Fransa',1.01],['ABD',0.78]],[0],'İlk altı Avrupa pazarı ihracatın yaklaşık %49’u (kendi hesabım). ABD’ye ihracat %14 arttı. Kaynak: TİM (AA).']];
+mk('bt',BT,['Yıllık','İller','Aylık','Oca–Eyl','Sektör','Pazar']);
+var OS=[['Kocaeli’de taşıt üretimi (bin adet)',[['2024',620.1],['2025',643.9],['2026 Oca–Eyl',460.7]],[1],'2025’te +%3,8; Türkiye’nin traktör hariç üretiminin %45’i. 2026’nın ilk dokuz ayında Türkiye’de 971.159 taşıt üretildi, Kocaeli payı %47. 2026 değeri yalnızca dokuz aylıktır. Kaynak: OSD (Borsagündem, AA).'],
+ ['Firma bazında üretim, 2025 (bin adet)',[['Ford Otosan (Kocaeli)',441.6],['Hyundai (İzmit)',197.0]],[0],'Ford üretiminin 396.521’ini (%89,8, kendi hesabım), Hyundai üretiminin %79,4’ünü ihraç etti. Anadolu Isuzu (Çayırova) küçük hacimli: 2026 ilk dokuz ayda 4.298 araç. Kaynak: OSD (Borsagündem, AA).'],
+ ['Ford Otosan Kocaeli, 2025 (bin adet)',[['Kapasite',612],['Üretim',441.6],['İhracat',396.5]],[1],'Kapasite: Yeniköy 405 bin, Gölcük 207 bin; üretim kapasitenin yaklaşık %72’si (kendi hesabım). Ford’un ayrıca açıkladığı %75 kullanım oranı Kocaeli’ye özgü değildir. Kaynak: Ford Otosan Genel Müdürü (Ekonomi Gazetesi); OSD.'],
+ ['İSO listelerinde Kocaeli firmaları',[['İlk 500, 2024',79],['İlk 500, 2025',85],['İkinci 500, 2024',51],['İkinci 500, 2025',55]],[1,3],'Üretim yeri Kocaeli olan firmalar; toplam 130’dan 140’a çıktı. Merkezi Kocaeli görünen firma sayısı daha düşük (bir önceki listede 39). Kaynak: Ekonomi Gazetesi, Temmuz 2026 köşe yazısı ve KSO açıklaması.'],
+ ['Otomotiv ihracatı, TİM Oca–Eki 2026 (milyar $)',[['Kocaeli',10.5],['Bursa',8.1],['İstanbul',7.3],['Sakarya',3.7],['Ankara',1.5]],[0],'İl sıralaması yasal merkez esaslı. Kaynak: TİM (AA).']];
+mk('os',OS,['Üretim','Firma','Ford','İSO','İhracat']);
+var LM=[['Yük elleçleme, 2025 (milyon ton)',[['Kocaeli (2.)',83.9],['İskenderun (3.)',70.9]],[0],'Bölge liman başkanlıkları sıralamasında Aliağa birinci (rakamı bulunamadı). Türkiye toplamı 553,3 milyon ton; Kocaeli payı yaklaşık %15 (kendi hesabım). Kaynak: Ulaştırma ve Altyapı Bakanlığı (Halk TV, TRT Haber).'],
+ ['Haziran 2026 yük elleçleme (milyon ton)',[['Kocaeli',7.61],['Aliağa',7.57],['İskenderun',5.44]],[0],'Haziran’da Kocaeli birinci; fark çok küçük. Kaynak: Ulaştırma Bakanı Uraloğlu’nun açıklaması (Ekovitrin).'],
+ ['Gümrük bazlı dış ticaret, 2024 (milyar $)',[['İhracat',41.3],['İthalat',77.9]],[1],'Kocaeli gümrüklerinden geçen mal; tanımı TİM ve faaliyet ili serilerinden farklıdır, birbirine eklenmemeli. Kaynak: Gebze toplantısında aktarılan gümrük verisi (Ekonomi Gazetesi).']];
+mk('lm',LM,['Yük 2025','Haziran 2026','Gümrük']);
+var TA=[['Tarla bitkileri üretimi, 2023 (bin ton)',[['Yulaf (yeşil ot)',96.5],['Arpa (yeşil ot)',27.9],['Buğday',20.5],['Mısır (dane)',13.9],['Ayçiçeği (yağlık)',4.0]],[0],'Türkiye üretimindeki payı: yulaf %2,13, arpa %0,36, buğday %0,09, mısır %0,15, ayçiçeği %0,20. Kaynak: Tarım ve Orman Bakanlığı Kocaeli Tarımsal Yatırım Rehberi 2024 (TÜİK 2023).'],
+ ['Tarımsal üretim alanı, ilçe payı (%)',[['Kandıra',44],['İzmit',15],['Karamürsel',12],['Gebze',10],['Diğer ilçeler*',19]],[0],'*Kalan pay kendi hesabım. Çayırova, Dilovası ve Darıca’da neredeyse hiç tarım alanı yok. Kaynak: Şura Akademi dergisi makalesi (TÜİK 2023).'],
+ ['Hayvan varlığı (bin baş, yaklaşık)',[['Büyükbaş',130],['Küçükbaş',110]],[0],'İl Tarım ve Orman Müdürü’nün yıl belirtilmemiş beyanı; güncel TÜİK serisi değil. Sığır ve kanatlıda Kandıra, koyunda Kandıra, Gebze ve Körfez öne çıkıyor. Kaynak: Gazete Vatan; Tölü (2023) akademik çalışma.']];
+mk('ta',TA,['Bitki','Arazi','Hayvan']);
+var TZ=[['İşletme belgeli konaklama tesisi sayısı',[['2002',33],['Eylül 2026',281]],[1],'Yaklaşık dokuz kat artış. Kaynak: Kültür ve Turizm Bakanı Ersoy (DHA, Sabah).'],
+ ['Yatak kapasitesi (bin)',[['2002',0.966],['Eylül 2026',16.04]],[1],'Yaklaşık on yedi kat artış. Kaynak: Kültür ve Turizm Bakanı Ersoy (DHA, Sabah).'],
+ ['Ocak–Haziran gelen ziyaretçi (bin)',[['2025*',474.1],['2026',485]],[1],'*2026 değerinden bildirilen yaklaşık %2,3 artış çıkarılarak bulundu (kendi hesabım). Yerli-yabancı ayrımı ve ziyaretçi tanımı açıklamada yok. Kaynak: Bakan Ersoy (DHA).']];
+mk('tz',TZ,['Tesis','Yatak','Ziyaretçi']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İstanbul',24452],['Kocaeli',24031],['Ankara',24031],['Tekirdağ',18406],['Antalya',17103],['İzmir',16949],['Türkiye ortalaması',15325]],[1],'Kocaeli Türkiye ortalamasının yaklaşık 1,57 katı (kendi hesabım). Kocaeli ile Ankara TL’de yalnızca 14 TL farkla (788.873 ve 788.859). Kaynak: TÜİK il bazında GSYH 2024 (Habertürk, CNBC-e).'],
+ ['Kişi başına GSYH, TL (bin TL, cari)',[['2022',302.8],['2023',516.5],['2024',788.9]],[2],'2022 ve 2023’te Türkiye birincisi, 2024’te ikinci. Nominal seridir, enflasyondan etkilenir; reel gelir artışını göstermez. Kaynak: TÜİK (Ekonomist, Diken, Rudaw).'],
+ ['Uçurum, 2024 (bin TL)',[['Kocaeli',788.9],['Türkiye ortalaması',503.1],['Van',203.0],['Ağrı',194.7],['Şanlıurfa',188.1]],[0],'Kocaeli, en düşük il Şanlıurfa’nın yaklaşık 4,2 katı (kendi hesabım). Kaynak: TÜİK il bazında GSYH 2024 (Rudaw, Ekonomi Gazetesi).']];
+mk('gt',GT,['2024 dolar','TL serisi','Uçurum']);
+var IG=[['Nüfus (bin kişi)',[['2020',1997.3],['2024',2130.1],['2025',2161.2]],[2],'5 yılda yaklaşık 164 bin kişi arttı; 2025’te +31.165 (%1,46). Kocaeli en kalabalık 10. il. Kaynak: TÜİK ADNKS (Kocaeli Gazetesi, İsteKocaeli).'],
+ ['Kayıtlı çalışan, İŞKUR 2024 (bin kişi)',[['Erkek',311.5],['Kadın',110.9]],[1],'Ziyaret edilen 3.913 işyerinde 422.380 çalışan; kadın payı %26,3 (kendi hesabım). Eğitim ile sağlık ve sosyal hizmetlerde kadın çalışan sayısı erkekten fazla. Kaynak: İŞKUR Kocaeli İşgücü Piyasası Araştırması 2024.'],
+ ['Açık işler, 2024 (kişi)',[['İmalat',7173],['İdari ve destek hizmetleri',1774],['Toptan ve perakende ticaret',1689],['Ulaştırma ve depolama',1686],['Diğer sektörler*',1864]],[0],'*Toplam 14.186 açık işten kalan (kendi hesabım). En çok açık iş: paketleme, ambar-depo, proses işçisi, lojistik, otomotiv montaj. Kaynak: İŞKUR 2024.']];
+mk('ig',IG,['Nüfus','Çalışan','Açık iş']);
+</script>
+</body>
+</html>

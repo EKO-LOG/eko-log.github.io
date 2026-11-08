@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Erzurum | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.blobwrap{position:relative;width:min(340px,80%);aspect-ratio:1;margin:auto}
+.blobwrap::before{content:"";position:absolute;inset:-8%;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.08));border-radius:42% 58% 63% 37%/45% 40% 60% 55%;animation:morph 9s ease-in-out infinite;backdrop-filter:blur(4px)}
+.blobwrap img{position:relative;width:100%;height:100%;border-radius:50%;background:#fff;padding:5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+@keyframes morph{50%{border-radius:60% 40% 38% 62%/58% 55% 45% 42%;transform:rotate(14deg)}}
+.hero .rise{animation:up .9s both cubic-bezier(.2,.8,.2,1)}.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+.marq{overflow:hidden;white-space:nowrap;padding:6px 0 34px;font:800 clamp(28px,5vw,46px) "Bricolage Grotesque",sans-serif;color:transparent;-webkit-text-stroke:1.5px var(--mut);opacity:.7}
+.marq div{display:inline-block;animation:tick 30s linear infinite}.marq span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;padding-bottom:30px}
+.tile{position:relative;overflow:hidden;border-radius:30px;padding:28px;color:#fff;text-decoration:none;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.8,.2,1);background:var(--bg1);isolation:isolate}
+.tile::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--bg2);right:-70px;top:-90px;filter:blur(30px);opacity:.85;z-index:-1;transition:transform .6s}
+.tile:hover{transform:translateY(-6px)}.tile:hover::before{transform:scale(1.25) translate(-20px,20px)}
+.tile small{font-weight:600;font-size:14px;opacity:.9;margin-bottom:6px}.tile h3{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}.tile p{margin:0;max-width:34ch;font-size:15.5px;opacity:.95}
+.tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:20px;backdrop-filter:blur(6px);transition:transform .3s}
+.tile:hover .go{transform:rotate(-45deg) scale(1.1)}
+.t1{grid-column:span 4;--bg1:#a3162a;--bg2:#ff8a3d}.t2{grid-column:span 2;--bg1:#2a2d8f;--bg2:#12b5c4}.t3{grid-column:span 2;--bg1:#5b2bc4;--bg2:#e23fa5}.t4{grid-column:span 4;--bg1:#c4202e;--bg2:#ff5f8f}
+.facts{display:flex;gap:12px;flex-wrap:wrap;padding:6px 0 70px}
+.fact{flex:1 1 180px;background:var(--surf);border-radius:22px;padding:18px 20px;border:1px solid var(--line)}
+.fact b{display:block;font:800 36px "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact span{color:var(--mut);font-size:14.5px}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.col{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:8px;font-size:12.5px}
+.col div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+.col i{width:100%;max-width:66px;background:linear-gradient(180deg,#12b5c4,#2a2d8f);border-radius:12px 12px 0 0;display:block;min-height:3px}
+.col .lo i{background:linear-gradient(180deg,var(--g2),var(--g1))}
+.col .fc i{background:repeating-linear-gradient(45deg,#2a2d8f,#2a2d8f 5px,transparent 5px,transparent 9px)}
+.col b{margin-bottom:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.tl b{font-family:"Bricolage Grotesque",sans-serif}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.sl{display:grid;grid-template-columns:minmax(120px,38%) 1fr 72px;gap:10px;align-items:center;font-size:14px;margin:10px 0}
+.sl input{width:100%;accent-color:var(--red)}.sl em{font-style:normal;font-weight:700;text-align:right}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.steps{display:flex;gap:10px;flex-wrap:wrap}.steps div{flex:1 1 140px;border:1px solid var(--line);border-radius:18px;padding:12px;background:var(--bg);font-size:14px;line-height:1.5}
+.steps b{display:block;font:700 12px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+.iller{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:10px}
+.iller button{font:600 12.5px "Instrument Sans",sans-serif;padding:8px 4px;border:0;box-shadow:inset 0 0 0 1px var(--line);background:var(--bg);color:var(--mut);border-radius:12px;cursor:not-allowed;opacity:.7}
+.iller button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none;opacity:1;cursor:pointer}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1c4f8a;--a2:#c4202e;--a3:#5b8fb9"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Erzurum</span><h1>Erzurum: Doğu’nun Hayvancılık ve Kış Turizmi Kenti</h1><p>Nüfusu 736 bini bulan Erzurum, Türkiye’nin en küçük nüfuslu büyükşehri. Ekonomisi mera hayvancılığına, kamu ve hizmetlere, son yıllarda Palandöken’le kış turizmine dayanıyor; sanayi ve ihracat ise çok küçük: 2025’te 40,8 milyon $ ile 72. sırada. Kişi başı GSYH (9.783 $) Türkiye ortalamasının yaklaşık %64’ü, nüfus ise her yıl azalıyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>9.783 $</b><span>Kişi başı GSYH (2024), 81 il arasında 57.–58. sıra; Türkiye ort. 15.325 $’ın yaklaşık %64’ü</span></div>
+    <div class="k"><b>736.877</b><span>Nüfus (ADNKS 2025); bir yılda 8.128 kişi azaldı; 30 büyükşehrin en küçüğü</span></div>
+    <div class="k"><b>40,8 mn $</b><span>2025 ihracatı (TİM); 2024’teki 60,3 mn $’ın altında, il sıralaması 72</span></div>
+    <div class="k"><b>493.641</b><span>2025’te kente gelen turist; 2026’nın ilk 8 ayında 428.563 (%36,9 artış)</span></div>
+    <div class="k"><b>%51,5</b><span>İşgücüne katılma (2025, Valilik derlemesi); Türkiye ort. %53,5</span></div>
+    <div class="k"><b>%62,8</b><span>İl yüz ölçümünün çayır-mera payı; tarım arazisi yalnızca %18,2</span></div>
+  </div>
+  <div class="secnav"><a href="#dis">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir</a><a href="#isgucu">Nüfus-İşgücü</a><a href="#ilceler">İlçeler</a><a href="#tarihce">Tarihçe</a><a href="#potansiyel">Potansiyel</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="dis">
+    <h2>İhracat</h2>
+    <p class="sub">Erzurum’un ihracatı Türkiye toplamının on binde birkaçı kadar; yıldan yıla oynak, sepeti dağınık ve pazarı Gürcistan’a yaslanıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="bt"></div><h3 id="bttitle"></h3><div class="bars" id="btbars"></div><p class="note" id="btnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>TİM verilerine göre Erzurum’un ihracatı 2025’te 40,8 milyon $ oldu; il 2024’te 60,3 milyon $ ile 69., 2025’te 72. sırada (DOSİAD analizi). 2025 değeri Türkiye’nin 273,4 milyar $’lık ihracatının on binde 1,5’i kadar (kendi hesabım).</li>
+        <li>2026’nın ilk dokuz ayında ihracat %28 artışla 34,5 milyon $’a, ilk on ayında %21,1 artışla 37,9 milyon $’a çıktı; yıl toplamı 2025’i geçebilir ama bu bir tahmindir.</li>
+        <li>Ocak–Eylül 2026’da en büyük pazar 8,6 milyon $ ile Gürcistan (toplamın yaklaşık %25’i, kendi hesabım); Özbekistan, KKTC ve Azerbaycan da önde gelen pazarlar arasında.</li>
+        <li>Mart 2026’da TİM’in Bölgesel İhracat Buluşmaları’nın dokuzuncusu Erzurum’da yapıldı; Doğu Anadolu İhracatçı Birlikleri bölge için 3,5 milyar $’lık hedef açıkladı.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İhracat, ithalatın çok gerisinde: Ticaret Bakanlığı verisine göre 2025 Ocak–Temmuz’da 15,5 milyon $ ihracata karşılık 64,4 milyon $ ithalat var. Bu seri TİM serisinden farklı bir derlemedir; ikisi birbirine eklenmemeli.</li>
+      <li>Sektör dağılımında bir belirsizlik var: Ocak–Eylül 2026’da en büyük sektörün 15,4 milyon $ (%141 artış) olduğu aktarılıyor, Eylül ayında ise su ürünleri ve hayvansal mamullerin ilk sırada olduğu yazılıyor. Haber metinlerinde sektör adı ile rakam tam eşleşmediği için grafikte “en büyük sektör” olarak işaretledim.</li>
+      <li>Küçük bir taban olduğu için yüzde değişimler yanıltıcı olabilir: örneğin otomotiv Eylül’de 5 bin $’dan 510 bin $’a çıkarak “yüzde on bin” artış görünüyor.</li>
+      <li>İl bazında 2025 yıl sonu sektör ve ülke tablosunu (tam yıl) doğrulanmış kaynakla bulamadım; ayrıntı Ocak–Eylül 2026 verisinden.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık</h2>
+    <p class="sub">Erzurum’un doğal avantajı sulanabilir ova ve geniş meralar; sorun, üretimin katma değere dönüşmemesi ve yüksek rakım-kış koşulları.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>İl, 25,3 milyon dekarlık yüz ölçümüyle Türkiye’nin dördüncü büyük ili; arazinin %62,8’i çayır-mera. Tarım Bakanlığı il müdürlüğü brifingine göre Türkiye’deki mera alanlarının yaklaşık %12’si tek başına Erzurum’da.</li>
+        <li>Erzurum Şeker Fabrikası’nı işleten Sukkar Şeker 2025’te 515 bin ton net pancar işlediğini açıkladı; günlük 4.400 ton olan kapasitenin 7.500–8.000 tona çıkarılması planlanıyor.</li>
+        <li>Ayçiçeği hızla yükseliyor: yetkililer Erzurum’un Türkiye ayçiçeği üretimindeki payının daha önceki %2,23’ten 2026’da %11’e çıktığını söylüyor (kurum beyanı; önceki payın hangi yıla ait olduğu aktarımda belli değil).</li>
+        <li>Eylül 2026’da Tarım ve Orman Bakanı, Türkiye Kırmızı Et Üreticileri Merkez Birliği’nin Erzurum tesisinin açılışını yaptı: 9 bin ton kırmızı et ve 1.500 kişilik istihdam hedefleniyor; Aziziye’de 25 bin büyükbaş kapasiteli besi organize tarım bölgesi kurulması planlanıyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Hayvan varlığı ve süt rakamları eski: 2014 TÜİK verisine göre yaklaşık 650 bin büyükbaş, 285 bin sağmal inek ve 715 bin ton süt üretimi var; ticarete konu olan süt üretimin yaklaşık %10’u. Bu oran, sütün işlenip katma değere dönüşmediğini gösteren eski bir akademik tespittir ve güncel olmayabilir.</li>
+      <li>Büyükbaş sayısında Türkiye birinciliği 2001 verisine dayanıyor (537.113 baş); bugünkü sırayı doğrulamadım.</li>
+      <li>Tarımın il GSYH’sindeki güncel payını, güncel hayvan sayılarını ve il bazında tarımsal ihracatı doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi ve Organize Sanayi Bölgeleri</h2>
+    <p class="sub">Sanayi küçük ve tarıma dayalı; asıl umut ikinci OSB ve et-süt-şeker zincirinde.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="os"></div><h3 id="ostitle"></h3><div class="bars" id="osbars"></div><p class="note" id="osnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Erzurum 2. OSB (Aziziye) fabrika temelleri atılan aşamaya geldi; müteşebbis heyet 250’den fazla yatırımcı başvurusu aldığını, tamamlandığında yaklaşık 8 bin kişilik istihdam beklendiğini açıkladı.</li>
+        <li>2. OSB için 650 hektarlık ilave alanın tahsis süreci tamamlandı (ETSO açıklaması); Merkez II OSB’nin kapasitesini artıran bakanlık onaylı genişleme projesi duyuruldu.</li>
+        <li>Oltu OSB ve Erzurum OSB (1. OSB) de genişleme ve kadın istihdamı haberleriyle gündemde.</li>
+        <li>Pancar, ayçiçeği, kırmızı et ve süt, ildeki sanayi yatırımlarının hammadde zincirini oluşturuyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>OSB doluluk oranı, faal fabrika sayısı ve sektörel istihdam gibi rakamları doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. “8 bin kişilik istihdam” yatırımcı beyanlarına dayanan bir hedeftir, gerçekleşmiş istihdam değildir.</li>
+      <li>İSO 500 listesindeki Erzurum firmalarını ve il bazında sanayi katma değerini doğrulanmış kaynakla bulamadım.</li>
+      <li>Erzurum Şeker Fabrikası 1950’lerde kurulan bir kamu fabrikasıydı; bugün Sukkar Şeker bünyesinde faaliyet gösteriyor.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm</h2>
+    <p class="sub">Palandöken Kayak Merkezi ve 2025 “EİT Turizm Başkenti” unvanıyla Erzurum’un turist sayısı hızla artıyor; ama artış yerliden geliyor, yabancı turist azalıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tz"></div><h3 id="tztitle"></h3><div class="bars" id="tzbars"></div><p class="note" id="tznote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Erzurum Valiliği verisine göre 2025’in tamamında kente 493.641 turist geldi; 2026’nın ilk sekiz ayında sayı 313.004’ten 428.563’e çıktı (%36,9 artış). Yıl sonunda 600 bini aşması bekleniyor.</li>
+        <li>Toplam geceleme sayısı aynı dönemde 596.896’dan 761.278’e yükseldi (%27,5, kendi hesabım).</li>
+        <li>2026’da yaz ayları kışı geçti: Temmuz’da 66.662, Ağustos’ta 69.716 ziyaretçi; Ocak’ta 65.465, Şubat’ta 51.254.</li>
+        <li>Erzurum, EİT tarafından “2025 Turizm Başkenti” ilan edildi ve “Avrupa Kış Sporları Başkenti” seçildi; yetkililer Palandöken ve Konaklı’da önceki sezonda yaklaşık 3 milyon turnike geçişi olduğunu, yeni sezon için 4 milyon beklediğini söylüyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Yabancı turist sayısı doğrudan açıklanmadı; toplamdan yerli turisti çıkardığımızda Ocak–Ağustos’ta yaklaşık 27,4 bin’den 24,9 bin’e düştüğü görülüyor (kendi hesabım; kalan kısmın tamamının yabancı olduğu varsayımıyla). Yani yabancı payı toplamın yalnızca %6’sı kadar ve azalıyor.</li>
+      <li>Atatürk Üniversitesi’nden bir turizm akademisyeni, turizm arzının yerli ziyaretçiye yönelik olduğunu ve Palandöken’in yeterince tanıtılamadığını söyledi (yorum).</li>
+      <li>Turnike geçişi ile turist sayısı farklı ölçülerdir: turnike geçişi aynı kişinin tekrar tekrar girişini sayar. Turizm gelirini ve belgeli yatak sayısını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Katma Değer</h2>
+    <p class="sub">TÜİK il bazında GSYH, 2024, cari fiyatlarla</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Öne çıkanlar</h3><ul>
+        <li>Erzurum’da 2024’te kişi başına GSYH 321.146 TL, dolar karşılığı 9.783 $ oldu. Türkiye ortalaması 15.325 $; Erzurum bunun yaklaşık %64’ü (kendi hesabım).</li>
+        <li>Dolar bazında 2023’teki 7.365 $’dan %32,8 yükseldi (kendi hesabım); Türkiye ortalaması aynı dönemde 13.243 $’dan 15.325 $’a çıktı (%15,7).</li>
+        <li>2023’te Erzurum toplam GSYH’de 129,7 milyar TL ile 32. sıradaydı; kişi başına gelirde 2023’te 61., 2024’te 57.–58. sırada.</li>
+        <li>Kişi başı gelir, Doğu Anadolu’da Tunceli ve Erzincan’ın, Ardahan’ın ve Elazığ’ın altında; Malatya ve Hakkari’nin üzerinde (2023 verisiyle).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2024 toplam il GSYH’si için bir yerel haberde 137,0 milyar TL yazıyor, ancak bu rakam kişi başı GSYH ile nüfusun çarpımından (yaklaşık 239 milyar TL) çok farklı; tutarsız göründüğü için sayfaya koymadım. Doğrusu için TÜİK il bazında GSYH tablosuna bakılmalı.</li>
+      <li>Sıra bilgisi kaynağa göre değişiyor: Rudaw’ın TÜİK aktarımı 57., Erzurum Gazetesi 58. diyor.</li>
+      <li>TL cinsinden seri, enflasyondan etkilenen nominal değerdir; reel büyüme göstermez. Sektörel GSYH payları ve 2024 reel büyüme hızını doğrulanmış kaynakla bulamadım.</li></ul></div>
+  </section>
+
+  <section id="isgucu">
+    <h2>Nüfus ve İşgücü</h2>
+    <div class="g2">
+      <div class="card"><h3>Demografik notlar</h3><ul>
+        <li>İl nüfusu 2025’te 736.877’ye düştü (2024: 745.005, 2023: 749.993); son iki yılda toplam 13.116 kişi azaldı. Nüfusun 366.932’si erkek, 369.945’i kadın.</li>
+        <li>Erzurum, 30 büyükşehir içinde nüfusu en az olan il ve 20 ilçeden oluşuyor; ilçelerin merkeze uzaklığı toplamda 1.800 km’yi aşıyor (Tarım il müdürlüğü brifingi).</li>
+        <li>15–24 yaş genç nüfus 2023’te 135.783’ten 2025’te 128.282’ye geriledi; gençlerin payı %17,5 (Valilik derlemesi).</li>
+        <li>2024’te medyan yaş 30,8’e yükseldi; 2025’te ildeki yabancı nüfus 4.677 kişi.</li></ul></div>
+      <div class="card"><div class="tabs" id="ig"></div><h3 id="igtitle"></h3><div class="bars" id="igbars"></div><p class="note" id="ignote"></p></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025 işsizlik oranı için iki farklı rakam var: TÜİK Erzurum Bölge Müdürlüğü’nün TRA1 raporuna dayanan aktarımda %9,9; Valilik’in sunumunda %6,8. Valilik serisi (katılma %51,5, istihdam %48,0) kendi içinde tutarlı, ancak hangisinin il için resmî ve güncel olduğunu doğrulayamadım. İkisini de grafikte gösteriyorum.</li>
+      <li>Türkiye geneli 2025: işsizlik %8,3, işgücüne katılma %53,5, istihdam oranı %49,0, atıl işgücü %29,7.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Erzurum’un 20 ilçesi var; nüfus ADNKS 2025. Üç merkez ilçe nüfusun %60’ını barındırıyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus</th><th>Öne çıkan</th></tr>
+      <tr><td>Yakutiye</td><td>189.149</td><td>En kalabalık ilçe; kent merkezi, tarihî yapılar ve ticaret</td></tr>
+      <tr><td>Palandöken</td><td>181.922</td><td>Palandöken Kayak Merkezi, Atatürk Üniversitesi’ne ve üniversite kampüslerine yakın; genç nüfus</td></tr>
+      <tr><td>Aziziye</td><td>71.827</td><td>Erzurum Şeker Fabrikası, 2. OSB ve planlanan besi OTB’nin bulunduğu ilçe</td></tr>
+      <tr><td>Horasan</td><td>34.896</td><td>Merkez dışındaki en kalabalık ilçe</td></tr>
+      <tr><td>Oltu</td><td>29.765</td><td>Oltu OSB’nin bulunduğu ilçe</td></tr>
+      <tr><td>Pasinler</td><td>25.401</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Hınıs</td><td>23.011</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Karayazı</td><td>22.570</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Tekman</td><td>20.826</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Aşkale</td><td>19.983</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Karaçoban</td><td>19.922</td><td>Kırsal ilçe</td></tr>
+      <tr><td>Pazaryolu</td><td>3.537</td><td>İlin en az nüfuslu ilçesi</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Tabloda 12 ilçe var; kalan sekiz ilçenin nüfusu: Şenkaya 14.918, Çat 14.015, İspir 13.984, Köprüköy 12.903, Tortum 12.881, Narman 11.119, Uzundere 8.263 ve Olur 5.985. 20 ilçenin toplamı 736.877 yapar (kontrol edildi). “Öne çıkan” sütunundaki kırsal ilçe notları genel niteliktedir; ilçe bazında ekonomik veri bulunamadı.</p></div>
+  </section>
+
+  <section id="tarihce">
+    <h2>Zaman Çizelgesi</h2>
+    <div class="card tl">
+      <p><b>1950’ler – Şeker.</b> Aziziye’de Erzurum Şeker Fabrikası kuruldu; pancar ekimi ve sanayi zincirinin temeli atıldı.</p>
+      <p><b>2008 – Palandöken ilçesi.</b> Merkez ilçeden ayrılarak ayrı ilçe oldu.</p>
+      <p><b>2023 – Gelir.</b> Kişi başı GSYH 7.365 $, toplam GSYH 129,7 milyar TL ile 32. sıra.</p>
+      <p><b>2024 – İhracat zirvesi.</b> İhracat 60,3 milyon $’la serideki en yüksek yıl; kişi başı GSYH 9.783 $.</p>
+      <p><b>2025 – Turizm başkenti.</b> EİT “Turizm Başkenti” ve “Avrupa Kış Sporları Başkenti”; ihracat 40,8 milyon $, nüfus 736.877, 493.641 turist.</p>
+      <p><b>2026 – Yatırım ve turizm.</b> TİM bölgesel buluşması (Mart), kırmızı et tesisi açılışı (Eylül), ihracat 10 ayda 37,9 milyon $; turist sayısı ilk sekiz ayda 428.563.</p>
+    </div>
+  </section>
+
+  <section id="potansiyel">
+    <h2>Potansiyel: Değerlendirme</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="g2">
+      <div class="card"><h3 class="up">Güçlü yönler</h3><ul><li>Geniş mera ve sulanabilir ova; hayvancılıkta güçlü altyapı ve girdi tabanı</li><li>Palandöken ve iki başkentlik unvanıyla hızlı büyüyen kış ve yaz turizmi</li><li>Şeker fabrikası, ayçiçeği ve yeni kırmızı et tesisiyle tarıma dayalı sanayi zemini</li><li>Genç üniversite nüfusu ve Atatürk Üniversitesi</li></ul></div>
+      <div class="card"><h3 class="dn">Zayıf yönler / riskler</h3><ul><li>Nüfus ve genç nüfus azalıyor; sürekli göç veren bir il</li><li>İhracat çok küçük, yıldan yıla oynak ve ithalatın çok gerisinde</li><li>Kişi başı gelir Türkiye ortalamasının yaklaşık %64’ü</li><li>Turist artışı yerliden geliyor; yabancı turist azalıyor, sütte katma değer düşük</li></ul></div>
+      <div class="card"><h3>Fırsatlar</h3><ul><li>2. OSB ve besi OTB ile hammaddeyi yerinde işleyen tarıma dayalı sanayi</li><li>Gürcistan ve Orta Asya hattında sınır ve ticaret koridoru potansiyeli</li><li>Yaz turizminin güçlenmesiyle mevsimsellik sorununu azaltmak</li><li>Palandöken’i yabancı pazarda daha iyi tanıtmak</li></ul></div>
+      <div class="card"><h3>Tartışma notu</h3><p style="margin:0">Erzurum’un sorunu üretim kaynağı eksikliği değil; üretilen sütün, etin ve pancarın bölge dışında işlenmesi ve genç nüfusun kentten ayrılması. Turizm ve yeni OSB umut verici, ama ikisi de henüz ihracat ve nüfus kaybı tablosunu değiştirmiş görünmüyor.</p></div>
+    </div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Erzurum, mera ve süt potansiyeline rağmen neden hâlâ bölge dışına ham girdi veren bir il?</li>
+      <li>Palandöken’deki turist artışı yabancı turisti ve gelir düzeyini de yükseltebilir mi, yoksa yerli talebe mi bağımlı kalacak?</li>
+      <li>Genç nüfusu kentte tutmak için üniversiteyle sanayi nasıl bağlanmalı?</li>
+      <li>Gürcistan’a dayanan küçük ihracat nasıl çeşitlendirilebilir?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2023 ve 2024 (Rudaw, Habertürk, CNBC-e, Erzurum Gazetesi aktarımı): kişi başı GSYH, sıralama ve 2023 toplam GSYH</li>
+      <li>TİM verileri (Erzurum Gazetesi, DOSİAD analizi, Eylül–Ekim 2026; Yeni Birlik, Erzurum Olay, AA aktarımı): 2022–2025 ihracat, Ocak–Eylül ve Ocak–Ekim 2026 ihracat, sektör ve pazar; Ticaret Bakanlığı verileri (Erzurum Gazetesi, 2025 dış ticaret); TİM Bölgesel İhracat Buluşmaları (AA, TİM)</li>
+      <li>Tarım ve Orman Bakanlığı Erzurum İl Müdürlüğü brifingi (Nisan 2025); dergipark akademik çalışmalar (arazi kullanımı, hayvancılık ve süt, 2001 ve 2014 verileri); Sukkar Şeker açıklaması (DHA); Bakan Yumaklı açıklamaları (AA, Foreks); ayçiçeği payı için Capital haberi</li>
+      <li>Sanayi Gazetesi, Yeni Birlik, Milliyet Uzmanpara (2. OSB, Merkez II OSB, Oltu OSB)</li>
+      <li>Erzurum Valiliği turizm istatistikleri (DHA, Yeniçağ, 2026); EİT Turizm Başkenti (AA, Hürriyet Daily News, NTV); Cevdet Yılmaz konuşması (Ekonomim)</li>
+      <li>TÜİK ADNKS 2025 (Yeni Şafak, Yeni Birlik, 9 Şubat 2026); TÜİK 2025 işgücü istatistikleri (Medyascope, Rudaw); TÜİK Erzurum Bölge Müdürlüğü TRA1 raporu (Erzincan Haber aktarımı, 2026); Erzurum Valiliği derlemesi (Haberler.com, PolitiKARS aktarımı)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı veya kurum açıklamasıdır; resmî tabloların doğrudan alıntısı değildir. 2024 toplam il GSYH’si (tutarsız bulunduğu için), güncel hayvan varlığı, sektörel GSYH payları, OSB doluluk ve istihdam rakamları, turizm geliri, işsizlik için tek bir resmî kaynak ve çoğu ilçenin ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok veya iki değerle birlikte gösterildi. Yaklaşık %64 (gelir oranı), %60 (üç ilçe payı), %25 (Gürcistan payı), %36,9 ve %27,5 (turist ve geceleme artışı), %32,8 ve %15,7 (dolar bazında gelir artışı), 27,4 ve 24,9 bin (yabancı turist), on binde 1,5 (ihracat payı) ve %6 (yabancı payı) kendi hesabımdır. Yabancı turist sayısı doğrudan açıklanmış bir rakam değildir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+var BT=[['Yıllık ihracat (milyon $)',[['2022',26.8],['2023',25.9],['2024',60.3],['2025',40.8]],[3],'2024 serideki en yüksek değer; 2025’te geriledi. İl sıralaması: 2022’de 79., 2023’te 76., 2024’te 69., 2025’te 72. Kaynak: TİM (Erzurum Gazetesi / DOSİAD aktarımı).'],
+ ['Ocak–Eylül ihracatı (milyon $)',[['2025',27.0],['2026',34.5]],[1],'2026’nın ilk dokuz ayında %28 artış; ilk on ayda 37,9 milyon $ (%21,1 artış). Kaynak: TİM (Yeni Birlik, Erzurum Gazetesi aktarımı).'],
+ ['Sektör, Ocak–Eylül 2026 (milyon $)',[['En büyük sektör*',15.36],['Kimyevi maddeler',6.52],['Makine ve aksamı',1.37],['Otomotiv',1.22],['Elektrik-elektronik',1.11],['Çelik',0.6],['Madencilik',0.29],['Hazır giyim',0.17]],[0],'*Sektörün adı aktarımda net değil; Eylül ayında su ürünleri ve hayvansal mamullerin ilk sırada olduğu yazılıyor. Kimya geçen yıla göre %21,7 azaldı. Kaynak: TİM (Erzurum Olay, Kamu Haber aktarımı).'],
+ ['Pazar, Ocak–Eylül 2026 (milyon $)',[['Gürcistan',8.63],['Diğer tüm pazarlar',25.9]],[0],'Gürcistan toplamın yaklaşık %25’i (kendi hesabım); diğer pazarların dökümü aktarımda yok. Kaynak: TİM (Ajans Türk Haber aktarımı).'],
+ ['İhracat ve ithalat, Ocak–Temmuz 2025 (milyon $)',[['İhracat',15.5],['İthalat',64.4]],[0],'Ticaret Bakanlığı serisi; TİM serisinden farklı bir derlemedir. İthalat ihracatın yaklaşık dört katı. Kaynak: Ticaret Bakanlığı (Erzurum Gazetesi aktarımı).']];
+mk('bt',BT,['Yıllık','Oca–Eyl','Sektör','Pazar','Dış ticaret']);
+var TA=[['İl yüz ölçümünün kullanımı (%)',[['Çayır-mera',62.8],['Tarım alanı',18.2],['Orman',9.2],['Diğer',9.8]],[0],'Mera payı çok yüksek, tarım alanı dar. Yüz ölçümü 25,3 milyon dekar (Türkiye’de 4.). Kaynak: dergipark akademik çalışma (yıl doğrulanmadı, 2010’lar); Tarım il müdürlüğü brifingi.'],
+ ['Süt, 2014 (bin ton)',[['Üretilen süt',715],['Ticarete konu süt (≈%10)',71.5]],[1],'Ticari süt payı eski bir akademik tespittir ve güncel olmayabilir; ticari kısım yaklaşık %10 varsayımıyla hesaplandı (kendi hesabım). Kaynak: dergipark; TÜİK 2014.']];
+mk('ta',TA,['Arazi','Süt']);
+var OS=[['Erzurum Şeker, günlük pancar işleme kapasitesi (bin ton)',[['Mevcut',4.4],['Hedef (alt)',7.5],['Hedef (üst)',8.0]],[0],'2025’te 515 bin ton net pancar işlendi. Hedef rakamlar yatırım planıdır. Kaynak: Sukkar Şeker (DHA).'],
+ ['Planlanan istihdam (bin kişi)',[['Erzurum 2. OSB',8],['Kırmızı et tesisi',1.5]],[0],'Yatırımcı ve bakanlık beyanları; gerçekleşmiş istihdam değil. Kaynak: Sanayi Gazetesi; AA (Bakan Yumaklı).']];
+mk('os',OS,['Şeker','İstihdam']);
+var TZ=[['Ocak–Ağustos, gelen turist (bin)',[['2025',313.0],['2026',428.6],['2025 tüm yıl',493.6]],[1],'2026’nın ilk sekiz ayı, 2025’in tüm yılına yaklaştı. Kaynak: Erzurum Valiliği (DHA, Yeniçağ).'],
+ ['Ocak–Ağustos, yerli ve yabancı* (bin)',[['2025 yerli',285.7],['2026 yerli',403.6],['2025 yabancı*',27.4],['2026 yabancı*',24.9]],[1],'*Yabancı sayısı toplamdan yerliyi çıkararak bulundu (kendi hesabım); kaynakta doğrudan verilmemiş. Yerli %41,3 arttı. Kaynak: Erzurum Valiliği.'],
+ ['2026 aylık ziyaretçi (bin)',[['Ocak',65.5],['Şubat',51.3],['Temmuz',66.7],['Ağustos',69.7]],[3],'Yaz ayları kış aylarını geçti. Diğer aylar aktarımda yok. Kaynak: Erzurum Valiliği (DHA).'],
+ ['Ocak–Ağustos toplam geceleme (bin)',[['2025',596.9],['2026',761.3]],[1],'Geceleme %27,5 arttı (kendi hesabım). Kaynak: Erzurum Valiliği (Yeniçağ aktarımı).']];
+mk('tz',TZ,['Geliş','Yerli-yabancı','Aylık','Geceleme']);
+var GT=[['Kişi başı GSYH, 2024 ($)',[['Türkiye ortalaması',15325],['Çorum',10010],['Adıyaman',9977],['Erzurum',9783]],[3],'Erzurum Türkiye ortalamasının yaklaşık %64’ü. Kaynak: TÜİK il bazında GSYH 2024 (Rudaw aktarımı).'],
+ ['Kişi başı GSYH, TL (bin TL, cari)',[['2020',36.7],['2021',47.2],['2022',94.3],['2023',173.0],['2024',321.1]],[4],'Nominal seridir, enflasyondan etkilenir; reel gelir artışını göstermez. Kaynak: TÜİK (Erzurum Gazetesi aktarımı).'],
+ ['Doğu Anadolu, kişi başı GSYH, 2023 (bin $)',[['Tunceli',10.7],['Erzincan',10.5],['Ardahan',8.9],['Elazığ',8.3],['Malatya',7.7],['Erzurum',7.3],['Hakkari',6.8],['Iğdır',6.5],['Kars',6.5],['Bingöl',6.1]],[5],'2023 verisidir; 2024 sıralaması değişmiş olabilir. Kaynak: TÜİK (Erzurum Gazetesi aktarımı).']];
+mk('gt',GT,['2024 dolar','TL serisi','Bölge 2023']);
+var IG=[['İşsizlik oranı, 2025 (%)',[['Bayburt (TRA1)',5.5],['Erzincan (TRA1)',6.8],['Erzurum (TÜİK TRA1)',9.9],['Erzurum (Valilik)',6.8],['Türkiye',8.3]],[2,3],'Erzurum için iki farklı rakam var; hangisinin resmî olduğunu doğrulayamadım. Kaynak: TÜİK Erzurum Bölge Müdürlüğü (Erzincan Haber aktarımı); Valilik (PolitiKARS aktarımı).'],
+ ['Valilik serisi (%)',[['İşgücüne katılma 2023',51.9],['İşgücüne katılma 2024',52.8],['İşgücüne katılma 2025',51.5],['İstihdam 2025',48.0],['İşsizlik 2025',6.8]],[2],'Katılma 2024’te yükselip 2025’te geriledi; Türkiye ortalaması 2025’te %53,5. Kaynak: Valilik derlemesi (Haber Sarıkamış aktarımı).'],
+ ['Nüfus (bin kişi)',[['2023',750.0],['2024',745.0],['2025',736.9]],[2],'İki yılda 13 binden fazla kişi azaldı; yıllık nüfus artış hızı 2024’te −6,7 binde. Kaynak: TÜİK ADNKS (Yeni Şafak, Yeni Birlik).']];
+mk('ig',IG,['İşsizlik','Katılma','Nüfus']);
+</script>
+</body>
+</html>
