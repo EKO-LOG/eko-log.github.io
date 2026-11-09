@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Düzce | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Düzce'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#15803d;--a2:#0e7490;--a3:#b45309"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Düzce</span><h1>Düzce: Orman, Fındık ve Hızlı Büyüyen Sanayi</h1><p>416 bin nüfuslu Düzce, kişi başına GSYH’de 13.721 $ ile 81 il arasında 20. sırada; Türkiye ortalamasının yaklaşık %90’ı. İhracat verisi ise tek bir ilin iki farklı yüzünü gösteriyor: Ticaret Bakanlığı’nın faaliyet ili serisine göre yaklaşık 2 milyar $ ile 19. sırada, TİM serisine göre 441,5 milyon $ ile 39. sırada. 2026’nın ilk yarısında ihracat %15,8 arttı. Orman ürünleri, fındık ve organize sanayi bölgeleri ilin üç ayağı; turizm ise Akçakoca ve şelalelerle potansiyel olarak duruyor. Bu dosya ili sektör sektör okuyor ve verinin bulunamadığı yerleri açıkça işaretliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>13.721 $</b><span>Kişi başına GSYH (2024), 81 il arasında 20.; Türkiye ort. 15.325 $’ın yaklaşık %90’ı (kendi hesabım)</span></div>
+    <div class="k"><b>415.622</b><span>Nüfus (ADNKS 2025); 2024’e göre +3.278 (yaklaşık +%0,8)</span></div>
+    <div class="k"><b>~2 mr $</b><span>2025 ihracatı (Ticaret Bakanlığı faaliyet ili serisi), Türkiye’de 19.; ithalat yaklaşık 260 mn $</span></div>
+    <div class="k"><b>1,23 mr $</b><span>2026 Ocak–Haziran ihracatı (faaliyet ili); önceki yıla göre +%15,81; Haziran’da +%27,27</span></div>
+    <div class="k"><b>%11,0</b><span>Fındıkta Türkiye üretim payı (TÜİK 2019, 85,7 bin ton); Düzce Türkiye’nin 5. büyük fındık üreticisi</span></div>
+    <div class="k"><b>23.391 ton</b><span>2025’te orman ürünü ihracatı; 2024’teki 13.578 tona göre yaklaşık +%72 (kendi hesabım)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">6 sektör, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. “Baskı altında” etiketini bu ilde kullanmadım, çünkü Düzce’ye özgü doğrulanmış bir daralma verisi bulamadım.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan, dar ya da riskli</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK 2019 ve 2024, Ticaret Bakanlığı 2025–2026, DTSO ve Bakan açıklamaları). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat artışı, orman ürünleri ve OSB doluluğu haberlerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Birçok rakam kurum beyanıdır (DTSO yöneticileri, Bakan, Belediye Başkanı) ve ilgili yerde işaretlenmiştir.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: İki Seri, İki Farklı Düzce</h2>
+    <p class="sub">Düzce’nin ihracatı hangi seriye bakıldığına göre dört kat fark ediyor; ortak nokta, ihracatın hızla arttığı ve ithalatın çok küçük kaldığı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Ticaret Bakanı Bolat Ocak 2026’da Düzce’nin ihracatta Türkiye’nin 19. büyük ili olduğunu, yaklaşık 2 milyar $ dış satım yaptığını ve ithalatın yaklaşık 260 milyon $ kaldığını söyledi (bu, ihracatın ithalatın yaklaşık 7,7 katı olması demek, kendi hesabım).</li>
+        <li>Ticaret Bakanlığı’nın faaliyet ili verisine göre Ocak–Haziran 2026’da ihracat 1.060,1 milyon $’dan 1.227,8 milyon $’a (+%15,81) çıktı; Haziran’da 159,7’den 203,2 milyon $’a (+%27,27). Düzce, 2026’nın ilk çeyreğinde ihracatını en çok artıran beş il arasında yer aldı.</li>
+        <li>DTSO yöneticisi, TİM serisine göre aynı yıl ihracatın 441,5 milyon $ ve 39. sırada olduğunu, ihracatın orman ürünleri (ahşap kaplama, parke, kereste) ağırlıklı olduğunu söyledi.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat 2026’da çift haneli artıyor ve ilk çeyrekte en hızlı artan beş il arasında.</li><li>Çok büyük dış ticaret fazlası: ithalat ihracatın yalnızca yaklaşık %13’ü (kendi hesabım).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Orman ürünleri ağırlıklı ihracat, inşaat ve mobilya talebine ve ahşap fiyatına duyarlı (yorum).</li><li>İki serideki dört kata varan fark, ihracatın ne kadarının Düzce’de üretilen katma değere dayandığını belirsiz bırakıyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İki seri farklı tanımlıdır: faaliyet ili serisi ihracatın yapıldığı (üretildiği) yere, TİM serisi firmanın kayıtlı merkezine bakar (genel bilgi). Fark, Düzce’de üretim yapan ama merkezi başka ilde olan firmalardan kaynaklanıyor olabilir (tahmin). Bu yüzden iki rakam birbirine eklenmedi.</li>
+      <li>2025 yıllık toplamı (~2 milyar $) bir Bakan konuşmasında yuvarlak rakamla verilmiştir; kesin değeri ve aylık dağılımı bulamadım. Sektör ve ülke dağılımını faaliyet ili serisi için bulamadım; “hangi pazara ihracat” sorusu bu dosyada yanıtsız.</li>
+      <li>Ocak–Mart 2026’daki “ilk beş” sıralaması bir yerel haber aktarımıdır; artış oranı bu çeyrek için doğrulanmadı.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Orman: Fındık Kimliği, Yarısı Orman</h2>
+    <p class="sub">Düzce yüzölçümünün yaklaşık yarısı orman; geri kalanında fındık, mısır ve buğday öne çıkıyor. Fındık, Düzce kırsalının en önemli gelir kaynağı.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>İl Tarım ve Orman Müdürlüğü’nün yatırım rehberine göre (TÜİK 2019) Düzce 85.688 ton fındık üreterek Türkiye’nin %11,04’ünü karşıladı; Düzce Türkiye’nin 5. büyük fındık üreticisi. Dane mısırda pay %0,55, kestanede %0,83.</li>
+        <li>İlin yüzölçümünün yaklaşık %30’u (yaklaşık 74 bin hektar) tarım arazisi, yaklaşık %50’si (yaklaşık 125 bin hektar) ormanlık alan.</li>
+        <li>Düzce’den 2025’te AB ülkelerine yaklaşık 16,5 bin ton iç fındık ihraç edildi; Bakan Yumaklı fındık ihracatının yaklaşık %80’inin AB’ye gittiğini söyledi. 2025’te fındıkta zirai don zararı için 2,3 milyar TL tazminat açıklandı.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Fındıkta ulusal ölçekte güçlü pay ve işlenmiş iç fındık ihracatı; AB gibi yüksek fiyatlı pazarlara erişim.</li><li>Orman emvali ihracatı 2025’te 13.578 tondan 23.391 tona çıktı (+%72); planlanan Mobilya Kent ile orman ürünlerinde işlemenin artması hedefleniyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Fındık zirai don ve zararlı riskine açık: 2025 don zararı için tazminat verildi, İl Müdürlüğü kahverengi kokarcaya karşı uyarı yaptı.</li><li>Tarım alanı küçük (ilin yaklaşık %30’u); ürün çeşitliliği fındık ve mısırın gerisinde.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Fındık üretim miktarı ve payı TÜİK 2019 değeridir (il müdürlüğü rehberinden); güncel üretim zirai donla ve yıllık dalgalanmayla farklı olabilir. Tek bir yıllık ihracat rakamı (16,5 bin ton) yalnızca AB’ye giden iç fındıktır; toplam fındık ihracatını göstermez.</li>
+      <li>Tarım ve Orman Bakanlığı’nın 2025 Düzce rehberindeki güncel (TÜİK 2024) üretim miktarlarını bulamadım; hayvancılık, tarımın il GSYH’sindeki payı ve çiftçi geliri için de doğrulanmış veri yok.</li>
+      <li>“Orman ürünleri üretiminin %14’ü Düzce’de” iddiası bir yerel yetkilinin beyanıdır ve resmî kayıtla doğrulanmamıştır; orman emvali ihracat tonajı da tek bir haber aktarımından gelmektedir.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: Beş OSB, Dolu Parseller</h2>
+    <p class="sub">Düzce, 1999 depremi sonrasında sanayi yatırımlarıyla büyüyen bir il; otomotiv yan sanayi, cam, güneş paneli ve orman ürünleri öne çıkıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>DTSO yöneticisine göre ilde 5 OSB var: 3’ü aktif, 2’si kurulma aşamasında. DTSO’nun 4.817 üyesi var ve 491’inin kapasite raporu bulunuyor, yani imalat yapan firma sayısı bu civarda olabilir.</li>
+        <li>Düzce 2. OSB yönetimine göre bölgede ağırlıklı sektörler cam sanayi, otomotiv yan sanayi ve güneş enerjisi panel sistemleri; 2. OSB’de tüm parseller dolu ve 2023’te parselasyon artışı yapıldı. Yeni OSB’lerde boş parsel çok az.</li>
+        <li>Ticaret Bakanı Bolat Düzce ekonomisini “4T, 1S” (ticaret, tarım, turizm, taşımacılık ve sanayi) olarak özetledi ve organize sanayi bölgesinin hızla geliştiğini söyledi.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>OSB parselleri dolu; yeni OSB’ler açılıyor ve ihracat hızla artıyor.</li><li>Otomotiv yan sanayi dünya markalarına üretim yapıyor (DTSO beyanı), cam ve güneş paneli sanayiyi çeşitlendiriyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İmalat yapan firma sayısı DTSO’nun üye sayısına göre küçük (üyelerin yaklaşık %10’u kapasite raporlu, kendi hesabım).</li><li>Otomotiv yan sanayi Türkiye genelinde Avrupa talebine bağlı; 2026’da otomotiv üretimi gerilerken yan sanayi ihracatı yılın ilk yarısında %5,4 arttı (Türkiye geneli).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>OSB sayısı, DTSO üye sayısı ve OSB doluluğu kurum yöneticilerinin beyanıdır ve tarihleri farklıdır (2. OSB bilgisi 2023’e ait). OSB istihdamını, firma sayısını, sektörel üretimi, İSO 500 firmalarını ve sanayinin il GSYH’sindeki payını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>Otomotiv yan sanayi verisi Türkiye geneline aittir (Uludağ İhracatçı Birlikleri); Düzce’deki firmaların payını göstermez.</li>
+      <li>“Deprem sonrası büyüme” bir yorumdur; Düzce’deki yatırım teşviklerinin etkisini ölçen veri bu çalışmada bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Doğa ve Deniz, Küçük Ölçek</h2>
+    <p class="sub">Akçakoca’nın kumsalları, Samandere, Güzeldere ve Aydınpınar şelaleleri, Efteni Gölü ve Konuralp Antik Kenti ilin başlıca değerleri; il turizm ölçeğini büyütmeyi hedefliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Düzce Turizm Tanıtım ve Geliştirme Yol Haritası, 2028 için yaklaşık 19 bin yabancı ve 358 bin yerli turist (konaklamalı) ve 5,2 milyon $ yabancı ve 67,2 milyon $ yerli turizm geliri hedefliyor.</li>
+        <li>Bayram tatillerinde Akçakoca, Samandere, Aydınpınar ve Güzeldere şelaleleri ile 150 çeşit göçmen kuşu ağırlayan Efteni Kuş Cenneti ziyaretçi çekiyor.</li>
+        <li>Düzce’de aynı anda beş otelin açılması ve haftada 10 bin turist hedefi gündemde (yerel köşe yazısı başlığı).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İstanbul’a ve Ankara’ya yakın konum; deniz, şelale ve göl bir arada.</li><li>Yeni otel yatırımları ve turizm yol haritası kapasiteyi artırmayı hedefliyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>2028 hedefi (yaklaşık 377 bin turist) küçük bir ölçek; yabancı payı çok düşük.</li><li>Güncel turist sayısı, geceleme ve gelir verisi bulunamadı; mevcut durumu hedefle karşılaştıramıyoruz.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2028 hedefleri bir yol haritası hedefidir, gerçekleşme değildir. Düzce’nin 2024–2025 turist, geceleme, yabancı payı, yatak kapasitesi ve turizm gelirini doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>“Haftada 10 bin turist” hedefi bir köşe yazısı başlığıdır; dayanağını ve süresini doğrulayamadım.</li>
+      <li>Turizmin il GSYH’sindeki payı için veri yok; turizmin ekonomideki ağırlığı küçük görünüyor ama bu bir yorumdur.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Düzce 2024’te kişi başına 13.721 $ ile 81 il arasında 20. sırada; Türkiye ortalamasının (15.325 $) yaklaşık %89,5’i (kendi hesabım). Manisa (13.852 $) ve Mersin (13.549 $) ile aynı düzeyde.</li>
+        <li>Komşu sanayi illeriyle fark büyük: Kocaeli 24.031 $, Bolu 16.703 $, Sakarya 14.605 $, Bursa 15.014 $.</li>
+        <li>Nüfus 2025’te 415.622’ye çıktı (+3.278, yaklaşık %0,8); Türkiye’de 33 ilin nüfusu azalırken Düzce büyüdü. İl, Türkiye nüfusunun yaklaşık %0,48’ini barındırıyor (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus büyüyor; gelir Türkiye ortalamasına yakın (yaklaşık %90).</li><li>İhracat 2026’da hızla artıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Komşu Kocaeli’nin yaklaşık %57’sinde (13.721 / 24.031, kendi hesabım); sanayi komşularına göre gelir geride.</li><li>Gelirin seyrini 2020–2023 için gösteren seri bulunamadı; konumun nasıl değiştiği belirsiz.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>20. sıra Habertürk’ün TÜİK tablosu aktarımından alınmıştır. Düzce’nin 2020–2023 kişi başına GSYH serisini, toplam il GSYH’sini ve sektör paylarını doğrulanmış kaynakla bulamadım; bu yüzden zaman içindeki değişim sayfada yok.</li>
+      <li>Düzce’ye özgü 2025 işsizlik, işgücüne katılma ve istihdam oranlarını bulamadım; Türkiye’de 2025 işsizlik %8,3’tü.</li>
+      <li>Dolar cinsinden kişi başına GSYH kur ve fiyat etkilerini içerir. Düzce’nin üretim gücünün (ihracat) il GSYH’sine ne kadar yansıdığı faaliyet ili ve TİM serisi farkı nedeniyle belirsizdir.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Düzce’nin Merkez dahil 8 ilçesi var. İlçe nüfuslarının güncel (2025) değerini doğrulanmış kaynakla bulamadığım için nüfus sütunu verilmedi; ekonomik karakter genel özettir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Öne çıkan</th></tr>
+      <tr><td>Merkez</td><td>Kamu, üniversite ve ticaret; Düzce OSB’ler; Konuralp Antik Kenti ve Müzesi (Prusias ad Hypium)</td></tr>
+      <tr><td>Akçakoca</td><td>Karadeniz kıyısı, plajlar, Ceneviz Kalesi ve tarihi evler; fındık; turizmin merkezi</td></tr>
+      <tr><td>Cumayeri</td><td>Fındık ve tarım; Melen Çayı üzerinde rafting (genel özet)</td></tr>
+      <tr><td>Gölyaka</td><td>Efteni Gölü ve sulak alanı (150 çeşit göçmen kuşu); fındık</td></tr>
+      <tr><td>Gümüşova</td><td>Sanayi ve ulaşım koridoru üzerinde (TEM/D-100); fındık (genel özet)</td></tr>
+      <tr><td>Çilimli, Kaynaşlı</td><td>Tarım ve fındık ağırlıklı ilçeler; Kaynaşlı’da sanayi tesisleri (genel özet)</td></tr>
+      <tr><td>Yığılca</td><td>Orman ve yayla ağırlıklı ilçe; Topuk Yaylası ve Torkul Göleti (genel özet)</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İlçe bazında nüfus, GSYH, istihdam veya ihracat verisi yok; “öne çıkan” sütunu yerel haber, kurum açıklaması ve genel bilgiden derlenmiş bir özettir. OSB’lerin hangi ilçede olduğunu bu çalışmada doğrulamadım.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Düzce</h3>
+      <p style="margin:0">Düzce’nin gücü sanayi ve ormanda: dolu OSB’ler, otomotiv yan sanayi, cam ve orman ürünleri ihracatı 2026’nın ilk yarısında %15,8 arttı ve fındık hâlâ kırsalın temel geliri. Zayıflığı ölçülebilirlikte ve ölçekte: ihracat iki farklı seride dört kat farklı görünüyor, orman ürünleri ağırlıklı ihracat dar bir tabana yaslı ve turizm ölçeği küçük. Bu yüzden asıl soru, ihracatın ilde ne kadar katma değer ve istihdam bıraktığı (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Orman ürünlerini ham ihracattan mobilya ve işlenmiş ahşaba taşımak: planlanan Mobilya Kent, ahşap kaplama ve parkede işleme.</div>
+      <div><b>HAMLE 2</b>OSB’leri otomotiv yan sanayi, cam ve güneş paneli gibi yüksek katma değerli üretime yönlendirip ihracatı çeşitlendirmek.</div>
+      <div><b>HAMLE 3</b>Turizmi (Akçakoca, şelaleler, Efteni) yol haritasındaki hedeflere uygun konaklama kapasitesiyle büyütmek; fındıkta zirai don sigortası ve işleme tesisleri.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Faaliyet ili ve TİM serisi farkının nedeni doğrulanmadığı için ihracat tablosu kesin okunmamalıdır.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Düzce’nin ihracatı bir seride 2 milyar $, diğerinde 441 milyon $: ilin “gerçek” ihracatı hangisi ve bu fark neyi gösteriyor?</li>
+      <li>Ormanın yarıyı kapladığı bir ilde ahşap ham maddesi mi ihraç edilmeli, yoksa mobilya ve işlenmiş ürünler mi?</li>
+      <li>Fındık zirai don, zararlı ve fiyat dalgalanmasına açıkken kırsal gelir nasıl güvence altına alınır?</li>
+      <li>Düzce 1999 depremi sonrasında sanayileşirken kişi başına geliri neden Kocaeli’nin yaklaşık %57’sinde kalıyor?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (Habertürk, Rudaw aktarımı); TÜİK ADNKS 2024–2025 il nüfusları (Rudaw, 9 Şubat 2026)</li>
+      <li>Ticaret Bakanlığı (Bolat’ın Düzce ziyareti, 23 Ocak 2026; Düzce ihracatı, Ocak–Haziran 2026 aktarımı – Sondakika); DTSO yöneticisi beyanı (Ekonomim köşe yazısı: faaliyet ili sırası ve TİM 2025 rakamı); Yeni Birlik Gazetesi (ilk çeyrek sıralaması)</li>
+      <li>Düzce İl Tarım ve Orman Müdürlüğü yatırım rehberi 2020 (TÜİK 2019); İHA ve Ekonomim (orman ürünü ihracatı); Benguturk ve Yeni Birlik (iç fındık ihracatı, Bakan Yumaklı); Habertürk (kahverengi kokarca uyarısı)</li>
+      <li>Dünya ve Ekonomim (Düzce 2. OSB, DTSO üye sayıları); Milliyet Uzmanpara ve CNN Türk (otomotiv yan sanayi ihracatı, Türkiye geneli)</li>
+      <li>Düzce Turizm Tanıtım ve Geliştirme Yol Haritası (Kapadokya Üniversitesi açık erişim); Habertürk Yerel (bayram turizmi); Kürenet ansiklopedisi</li>
+      <li>TÜİK 2025 işgücü istatistikleri (Medyascope aktarımı)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum beyanı veya yol haritası hedefidir; resmî tabloların doğrudan alıntısı değildir. Düzce’ye özgü 2025 işsizlik, katılma ve istihdam oranı, 2020–2023 kişi başına GSYH serisi, sektörel GSYH payları, 2025’in yıllık kesin ihracatı ve sektör-ülke kırılımı, OSB istihdamı, güncel turist ve geceleme sayıları, TÜİK 2024 tarımsal üretim miktarları ve ilçe nüfusları doğrulanmış kaynakla bulunamadığı için sayfada yok. %90, %89,5, %57, +%72, 7,7 katı, %13, %0,48 ve %10 (kapasite raporlu üye oranı) kendi hesabımdır. İhracat için iki ayrı seri (faaliyet ili ve TİM) kullanıldığından rakamlar birbirine eklenmemiştir. Fındık payı 2019 verisidir; OSB bilgileri tarihleri farklı beyanlardır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+var KARNE=[
+ {c:'good',chip:'MOTOR',ad:'Dış ticaret',big:'~2 mr $',alt:'2025 ihracatı (faaliyet ili serisi), Türkiye’de 19.; ithalat yaklaşık 260 mn $',y:'Ocak–Haziran 2026’da 1,23 mr $ (+%15,81); Haziran’da +%27; ilk çeyrekte en hızlı artan beş il arasında.',n:'TİM serisinde yalnızca 441,5 mn $ (39. sıra); sektör-ülke kırılımı ve seri farkının nedeni doğrulanmadı.'},
+ {c:'good',chip:'MOTOR',ad:'Sanayi ve OSB’ler',big:'5 OSB',alt:'3’ü aktif, 2’si kurulma aşamasında (DTSO beyanı); DTSO’nun 491 kapasite raporlu üyesi',y:'2. OSB’de tüm parseller dolu; otomotiv yan sanayi, cam ve güneş paneli; yeni OSB’lerde boş parsel az.',n:'OSB istihdamı ve üretimi bulunamadı; otomotiv yan sanayi Avrupa talebine bağlı (genel bilgi).'},
+ {c:'good',chip:'MOTOR',ad:'Orman ürünleri ve ahşap',big:'23.391 ton',alt:'2025 orman emvali ihracatı; 2024’te 13.578 ton (+%72, kendi hesabım)',y:'İhracatın ana sektörü; orman ürünleri üretiminin %14’ü Düzce’de (DTSO beyanı); Mobilya Kent planı.',n:'Ham ve yarı işlenmiş ağırlıkta; inşaat ve mobilya talebine duyarlı (yorum); %14 iddiası doğrulanmadı.'},
+ {c:'warn',chip:'KİMLİK VE RİSK: FINDIK',ad:'Fındık',big:'%11,0',alt:'Türkiye üretim payı (TÜİK 2019, 85,7 bin ton); Türkiye’de 5. il',y:'Yaklaşık 16,5 bin ton iç fındık 2025’te AB’ye gitti; ihracatın yaklaşık %80’i AB’ye (Bakan).',n:'Zirai don (2025’te 2,3 mr TL tazminat) ve kahverengi kokarca riski; payın güncel değeri bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Akçakoca, şelaleler, Efteni',big:'2028 hedefi',alt:'Yaklaşık 19 bin yabancı ve 358 bin yerli turist (yol haritası hedefi)',y:'Deniz, şelale, göl ve antik kent bir arada; İstanbul ve Ankara’ya yakın; yeni otel yatırımları.',n:'Güncel turist, geceleme ve gelir verisi yok; hedef ölçeği küçük.'},
+ {c:'warn',chip:'ORTALAMAYA YAKIN: GELİR',ad:'Kişi başına gelir',big:'13.721 $',alt:'2024; Türkiye ortalamasının yaklaşık %90’ı, 81 il içinde 20.',y:'Manisa ve Mersin’le aynı düzeyde; nüfus 2025’te büyüdü.',n:'Kocaeli’nin yaklaşık %57’si; 2020–2023 seyri bulunamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Ocak–Haziran ihracatı, faaliyet ili (milyon $)',[['2025',1060.1],['2026',1227.8]],[1],'+%15,81. Kaynak: Ticaret Bakanlığı (Sondakika aktarımı).'],
+ ['Haziran ayı ihracatı (milyon $)',[['Haziran 2025',159.7],['Haziran 2026',203.2]],[1],'+%27,27. Kaynak: Ticaret Bakanlığı (Sondakika aktarımı).'],
+ ['2025 için iki seri (milyon $)',[['Faaliyet ili (yaklaşık)',2000],['TİM (39. sıra)',441.5],['İthalat (yaklaşık)',260]],[0,1],'Faaliyet ili ve ithalat Bakan konuşmasından yuvarlak rakamdır; TİM rakamı DTSO beyanıdır. Seriler aynı kapsamda değildir. Kaynak: Ticaret Bakanlığı, DTSO (Ekonomim).'],
+ ['Orman emvali ihracatı (ton)',[['2024',13578],['2025',23391]],[1],'+%72 (kendi hesabım). Kaynak: İHA (Ekonomim).']];
+mk('ih',IH,['H1 ihracat','Haziran','İki seri','Orman']);
+var TA=[['Fındık ve diğer ürünlerin Türkiye payı, 2019 (%)',[['Fındık',11.04],['Kestane',0.83],['Dane mısır',0.55]],[0],'Düzce fındıkta Türkiye’nin 5. büyük üreticisi. Kaynak: Düzce İl Tarım ve Orman Müdürlüğü yatırım rehberi (TÜİK 2019).'],
+ ['Üretim miktarı, 2019 (bin ton)',[['Fındık',85.7],['Dane mısır',33.0],['Kestane',0.6]],[0],'Güncel (2024) değerler bulunamadı. Kaynak: aynı rehber (TÜİK 2019).'],
+ ['AB’ye iç fındık ihracatı, 2026 (ton)',[['Ocak',811.7],['Şubat',1026],['Mart',957],['Nisan',1667.8],['Eylül',774]],[3],'Yalnızca AB’ye giden iç fındık; Mayıs–Ağustos bulunamadı. Kaynak: İl Tarım ve Orman Müdürlüğü (Yeni Birlik, AA).']];
+mk('ta',TA,['Pay','Üretim','AB ihracatı']);
+var SA=[['DTSO üyeleri ve imalat yapan firmalar',[['DTSO üyesi',4817],['Kapasite raporlu firma',491]],[1],'Kapasite raporlu firma sayısı imalat yapan firma sayısına yakın olabilir (DTSO beyanı); tarih belirtilmemiş. Kaynak: Ekonomim köşe yazısı.'],
+ ['Organize sanayi bölgeleri (adet)',[['Toplam',5],['Aktif',3],['Kurulma aşamasında',2]],[0],'DTSO beyanı; OSB’lerin doluluğu ve istihdamı bulunamadı. Kaynak: Ekonomim köşe yazısı.']];
+mk('sa',SA,['Firmalar','OSB']);
+var TU=[['Turizm Yol Haritası, 2028 hedefi (bin turist)',[['Yerli turist',358],['Yabancı turist',19]],[0],'Yol haritası hedefidir, gerçekleşme değildir; yabancı gelir hedefi 5,2 mn $, yerli 67,2 mn $. Kaynak: Düzce Turizm Tanıtım ve Geliştirme Yol Haritası.']];
+mk('tu',TU,['2028 hedefi']);
+var GT=[['Komşu ve benzer iller, kişi başına GSYH, 2024 ($)',[['Kocaeli',24031],['Bolu',16703],['Türkiye ortalaması',15325],['Bursa',15014],['Sakarya',14605],['Manisa',13852],['Düzce',13721],['Mersin',13549]],[6],'Düzce Türkiye ortalamasının yaklaşık %90’ı. Kaynak: TÜİK (Habertürk, Rudaw).'],
+ ['Nüfus (bin kişi)',[['2024',412.3],['2025',415.6]],[1],'2025’te +3.278 kişi. Kaynak: TÜİK ADNKS (Rudaw).']];
+mk('gt',GT,['Komşu iller','Nüfus']);
+</script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Batman | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Batman'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#1e293b;--a2:#b45309;--a3:#0891b2"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Batman</span><h1>Batman: Petrol Şehri, Tarım Ovası, Düşük Gelir</h1><p>Batman’ın nüfusu 662 bin ve 2025’te +8.098 kişi arttı. Kişi başına GSYH’de 236.422 TL (yaklaşık 7.300 $) ile 81 il arasında 76.; Türkiye ortalamasının yaklaşık %48’i. Petrol ilin kimliği: Batman, Diyarbakır, Siirt ve Mardin birlikte Türkiye ham petrol üretiminin %28’ini veriyor. Buğday, mercimek ve mısır ilin tarım gücü. Karşı tarafta ihracat 2023’ten bu yana belirgin düştü ve tekstilde kapanışlar var. Veri bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>~7.300 $</b><span>Kişi başına GSYH (2024; 236.422 TL), 81 il arasında 76.; Türkiye ort. 15.325 $’ın yaklaşık %48’i (dolar dönüşümü ve oran kendi hesabım)</span></div>
+    <div class="k"><b>662.626</b><span>Nüfus (ADNKS 2025), bir yılda +8.098 (+%1,24, kendi hesabım); Türkiye’de 32. sırada</span></div>
+    <div class="k"><b>166,8 mn $</b><span>2025 ihracatı (TÜİK, Batman Rehber aktarımı); 2023’te 510,6 mn $ görünüyor, ama seri farklı olabilir</span></div>
+    <div class="k"><b>%28</b><span>Batman, Diyarbakır, Siirt ve Mardin’in Türkiye ham petrol üretimindeki payı (günlük 35.085 varil, 23.02.2026); Batman’a özgü rakam yok</span></div>
+    <div class="k"><b>149.849 ton</b><span>Buğday üretimi (TÜİK 2024); kırmızı mercimek 33.429 ton, dane mısır 65.099 ton</span></div>
+    <div class="k"><b>1,02 mn</b><span>Küçükbaş hayvan (TÜİK 2024); büyükbaş 100.630</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Petrol-Sanayi</a><a href="#tarim">Tarım-Hayvancılık</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">10 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, İl Tarım ve Orman Müdürlüğü brifingi, İŞKUR 2023, İHA ve yerel basın). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi üretim ve ihracat verilerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Batman’a özgü güncel işsizlik oranını, il bazında net göçü (2024–2025), OSB doluluğunu ve petrol üretiminin Batman payını bulamadım.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Üç Ayrı Seri, Üç Ayrı Hikâye</h2>
+    <p class="sub">Batman’ın ihracatı için birbirini tutmayan en az üç rakam seti var; bu yüzden aşağıdakileri birbirine eklemedim.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>TÜİK’in yıllık ihracat serisi (Batman Rehber, 30.01.2026): 2023’te 510,6, 2024’te 152,2, 2025’te 166,8 milyon $. 2025 bir önceki yıla göre yaklaşık +%9,6, 2023’e göre yaklaşık −%67 (kendi hesabım).</li>
+        <li>2025 ithalatı 67,5 milyon $; 2024’te yaklaşık 94 milyon $ idi (−%28,2, kendi hesabım). İhracat ithalatın yaklaşık 2,5 katı (kendi hesabım).</li>
+        <li>Diyarbakır TSO’nun (İHA, 06.11.2025) Ocak–Ekim 2025 değeri 235,3 milyon $ (+%17,5); Irak 120 milyon $’ın üzerinde ve bu toplamın yarısından fazlası (yaklaşık %51, kendi hesabım). Sektörlerde kimya 39,9, demir-çelik 37,3, hububat-bakliyat 30,6 milyon $.</li>
+        <li>2025 ihracatından kişi başına yaklaşık 252 $ çıkıyor (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>2024’teki sert düşüşün ardından 2025’te ihracat toparlandı; ihracat ithalatı rahatça karşılıyor.</li><li>İhracat sepeti dağınık: kimya, demir-çelik ve hububat-bakliyat birlikte toplamın yaklaşık %46’sı (kendi hesabım).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Batman Rehber, 2023’e kıyasla düşüşü tekstildeki kapanışlara bağlıyor (nicelleştirmeden). 2025 hâlâ 2023’ün yaklaşık üçte biri.</li><li>Pazar Irak’a çok bağımlı (yaklaşık yarısı, Diyarbakır TSO serisinde).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Üç seri: (1) TÜİK yıllık değer 166,8 milyon $ (2025), (2) Diyarbakır TSO’nun on aylık değeri 235,3 milyon $, (3) “girişimci merkezi esaslı” 83 milyon $ (2025). On aylık değer yıllık TÜİK rakamından büyük; bu, serilerin farklı kayıt esaslarına dayandığını gösteriyor. Hangisinin doğru olduğunu söyleyemem; Muş ve Yozgat dosyalarıyla da kıyaslamadım.</li>
+      <li>2023’teki 510,6 milyon $ ve ~1.269 milyon $’lık ithalat rakamı olağandışı yüksek; muhtemelen bir kayıt yöntemi farkı. “Girişimci merkezi esaslı” seri aynı yıl 450,7 milyon $ gösteriyor. Düşüşün gerçek mi, yöntem kaynaklı mı olduğunu ayıramadım.</li>
+      <li>Ticaret Bakanlığı faaliyet ili PDF’ine erişemediğim için o seriye ait Batman değeri yok. Ürün bazında Batman’a özgü ihracat (ör. petrol ürünleri) bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Petrol ve Sanayi</h2>
+    <p class="sub">Petrol Batman’ın kimliği, ama il bazında üretim ve istihdam rakamı yok; sanayi 2023 İŞKUR verisinde tekstil ve hazır giyime yaslanıyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>TPAO Batman Bölge Müdürlüğü sahaları (Batman, Diyarbakır, Siirt, Mardin) günlük 35.085 varil üretiyor ve Türkiye ham petrol üretiminin %28’ini karşılıyor; 2025’te 52 kuyu açıldı, 2026 hedefi 140 kuyu (Milliyet/AA, 23.02.2026). Batman’da üretim 1948’de başladı.</li>
+        <li>Bir ansiklopedi Raman ve Garzan sahalarını ve Batman Rafinerisi’ni anıyor (yıl yok); sanayide gıda, tekstil ve inşaat öne çıkıyor.</li>
+        <li>2023’te İŞKUR yerleştirmelerinin 3.381’i (%75,9) imalatta; teşvik belgelerinde öngörülen istihdamın yaklaşık %77’si hazır giyimde (3.385 / 4.414, kendi hesabım).</li>
+        <li>BATSO başkan adayı Ferdi Kurt (13.10.2026) petrolün katma değerinin Batman’da kalması için kimya ve plastik ihtisas OSB’si öneriyor; bu bir seçim vaadi, onaylanmış proje değil.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kuyu açma hedefinin 52’den 140’a çıkması üretimi artırma niyetini gösteriyor (hedef, gerçekleşme değil).</li><li>İmalat, 2023 yerleştirmelerinin dörtte üçünü oluşturuyor; hazır giyim istihdam çekiyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Petrolün işlenmesi ve katma değeri şehir dışında kalıyor iddiası dile getiriliyor (aday açıklaması, doğrulanmamış).</li><li>Sanayi tekstile bağımlı; tekstildeki kapanışlar ihracat düşüşünün nedeni olarak gösteriliyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Batman’a özgü petrol üretimini (varil, ton), TPAO ve rafineri istihdamını ve petrol gelirinin ildeki payını bulamadım. Valiliğin TPAO sayfasına erişim engelliydi.</li>
+      <li>İŞKUR raporu 2023’e ait ve kendi içinde tutarsız: imalat teşvik belgelerinde 1.479 milyon TL yatırım yazarken tüm belgeler için 863,5 milyon TL veriliyor; yeni açılan ve kapanan işyeri tabloları da toplamıyla tutmuyor. Bu yüzden yalnızca öngörülen istihdam ve yerleştirme sayılarını kullandım; bunlar gerçekleşme değil, hedeftir.</li>
+      <li>Batman OSB’nin doluluğu, firma ve işçi sayısı için güncel veri bulunamadı. Tekstil kapanışlarını gösteren bir Batman rakamı da yok; bulduğum 20 fabrika kapanışı haberi Diyarbakır Tekstil OSB’sine ait.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım ve Hayvancılık</h2>
+    <p class="sub">İl Tarım ve Orman Müdürlüğü’nün 2024 brifingi (TÜİK üretim verileri)</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Yüzölçümü 451.525 ha; tarım arazisi %24,3, orman %28,4, mera %10,6, tarıma elverişsiz alan %36,7.</li>
+        <li>2024 üretimi: buğday 149.849 ton, dane mısır 65.099 ton, kırmızı mercimek 33.429 ton, arpa 25.549 ton, domates 17.407 ton, karpuz 23.275 ton, kütlü pamuk 6.321 ton. Sebze alanı 30.445 dekar (93.440 ton), meyve alanı 213.782 dekar; Antep fıstığı 154.356 dekar dikili alan ve 2.809 ton.</li>
+        <li>Hayvan varlığı (TÜİK 2024): 100.630 büyükbaş, 1.024.909 küçükbaş, 145.154 kanatlı. Küçükbaş sayısı kişi başına yaklaşık 1,6 (kendi hesabım). Çiftçi kayıt sisteminde 8.799 işletme var.</li>
+        <li>Sözcü’ye (16.07.2026) göre 2026’da kıraç arazide yaklaşık 150 bin dekarda mercimek ekildi, 25.000 ton ve 45 TL/kg fiyat bekleniyor; il müdürü yaklaşık %50 verim artışı söylüyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ürün çeşitliliği geniş: tahıl, baklagil, mısır, sebze ve meyve; dane mısır dekar başına yaklaşık 1,1 ton verim (kendi hesabım).</li><li>Tarım Kredi Kooperatifleri’nin mercimek alımı yaptığı aktarılıyor (2026).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tarıma elverişsiz alan ilin %36,7’si; sulu tarla arazisi 115.022 dekar (yıl belirtilmemiş).</li><li>2024’te kırmızı mercimek 33.429 ton iken 2026 beklentisi 25.000 ton; “%50 artış” ifadesi hangi yılla kıyaslandığı belirtilmediği için bu rakamla uyuşmuyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Brifing kendi içinde tutarsız: tarım arazisi metinde 109.683 ha (%24,29), bitkisel üretim tablosunda yaklaşık 95.769 ha; buğdayda İl Müdürlüğü tahmini 198.583 ton, TÜİK değeri 149.849 ton. Ben TÜİK değerlerini kullandım.</li>
+      <li>Hayvan sayıları iki sistemde var: TÜİK 2024 (100.630 büyükbaş, 1.024.909 küçükbaş) ve hayvan bildirim sistemi 2025 (101.750 ve 998.242). Farklı yöntemler olduğu için bunlardan artış ya da azalış hesaplamadım.</li>
+      <li>Süt ve et üretimi, hayvancılık geliri, Antep fıstığı rekoltesinin gelirdeki rolü ve tarımın il GSYH ve istihdam payı için güvenilir veri bulamadım. Seracılık bölgesi için 30.000 ton yıllık hedef ve 1.100 dekar alan bir 2025 haberinde (İstiklal) plan olarak geçiyor; kurulum durumunu doğrulayamadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Hasankeyf’in Gölgesinde</h2>
+    <p class="sub">Tek öne çıkan varlık Hasankeyf; ölçülebilir ziyaretçi verisi yok.</p>
+    <div class="g2">
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Bir ansiklopedi Hasankeyf’i ilin başlıca turizm varlığı olarak veriyor ve yaklaşık 12.000 yıllık geçmişinden söz ediyor. Aynı sayfada Zeynel Bey Türbesi ve Mor Kiryakus Manastırı da anılıyor.</li>
+        <li>Hasankeyf ilçesinin nüfusu ve merkezi küçük: 2024 değerleriyle ilçe 7.324 kişi, bunun 4.035’i merkezde (kaynak: Batman Rehber).</li></ul></div>
+      <div class="card"><h3>Dikkat</h3><ul>
+        <li>Ziyaretçi, geceleme, yatak ve turizm geliri için Batman’a özgü veri bulamadım. Turizmin il ekonomisindeki payı bilinmiyor; bu yüzden “uyuyan potansiyel” etiketli.</li>
+        <li>Hasankeyf’in yer değiştirmesi ve baraj gölü etkisi konusunda güvenilir kaynak okumadım; bu konuda yorum yapmadım.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tarihî ve kültürel varlık çeşitli; Batman Valiliği ve yerel kurumlar turizmi bir fırsat olarak sunuyor (yorum).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Rakam olmadan turizmin ekonomideki yerini söylemek mümkün değil; en az iki yılın tesis ve ziyaretçi verisi gerekir.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir, İşgücü ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024), ADNKS 2025 ve İŞKUR 2023</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Batman 2024’te kişi başına 236.422 TL ile 81 il arasında 76.; Bitlis 77., Muş 78. Dolar karşılığı yaklaşık 7.300 $ (Muş için aktarılan 230.300 TL ≈ 7.100 $ oranıyla; kendi hesabım) ve Türkiye ortalamasının yaklaşık %48’i.</li>
+        <li>Toplam ekonomi: 236.422 TL ile 654.528 kişi çarpımından yaklaşık 155 milyar TL; Türkiye GSYH’sinin (44,6 trilyon TL) yaklaşık %0,35’i. Nüfus payı ise %0,76 (kendi hesabım).</li>
+        <li>Nüfus 654.528’den (2024) 662.626’ya (2025) çıktı: +8.098. Büyüme tamamen Merkez ilçede; il ve ilçe merkezleri +10.882, köy ve beldeler −2.784 (kendi hesabım).</li>
+        <li>Medyan yaş 25,9 (2024’te 25,4), ortalama hane büyüklüğü 4,43 (TÜİK 2025, Batman Yön).</li>
+        <li>2023 İŞKUR raporunda 31.004 kayıtlı işsiz ve 2023 net göç +2.750 (27.888 gelen, 25.138 giden) yazıyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus artıyor ve genç görünüyor: medyan yaş 25,9 (Türkiye ortalamasıyla kıyaslamadım).</li><li>2023’te ilin net göçü pozitifti (+2.750), yani il göç almıştı.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yarısından az ve ilin sıralaması 76.</li><li>Nüfus artışı Merkez’de toplanıyor; Kozluk, Beşiri, Sason, Gercüş ve Hasankeyf küçülüyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025 nüfusu için üç değer gördüm: Valilik/ADNKS haberleri 662.626 (2024’ten +8.098), Batman Rehber ise 654.528’i “2025” ve 647.205’i “2024” diye yazdı, bir başka yerel haber 2024’ü 624.528 diye verdi. 662.626 ve +8.098 TÜİK ADNKS aktarımlarında tutarlı olduğu için onu kullandım; 654.528 büyük olasılıkla 2024 değeridir.</li>
+      <li>İŞKUR raporundaki %18,5 işsizlik oranı “2022” etiketli ama tablo notu verinin 2013 olduğunu söylüyor; güncel değil ve çelişkili olduğu için grafikte yalnızca uyarıyla gösterdim. Batman’a özgü 2025 işsizlik ve istihdam oranını bulamadım. Türkiye’de 2025 işsizlik %8,3, istihdam oranı %49,0 idi.</li>
+      <li>2024 ve 2025 için ilin net göç verisini bulamadım; 2023 değeri İŞKUR raporundaki bir tablodan ve oran birimi kaynakta tutarsız. Dolar karşılığı bir basın aktarımına ve kur dönüşümüne dayanır.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Batman’ın 6 ilçesinden Merkez nüfusun yaklaşık %78’ini barındırıyor ve tek büyüyen ilçe. 2025 verisi TÜİK ADNKS’dendir (Batman Yön, Batman Çağdaş).</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>2024→2025</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Merkez</td><td>517.785 (%78,1)</td><td>+11.463 (+%2,3)</td><td>İl merkezi; petrol, OSB, ticaret ve hizmet (ansiklopedi, genel anlatım)</td></tr>
+      <tr><td>Kozluk</td><td>58.781 (%8,9)</td><td>−781 (−%1,3)</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Beşiri</td><td>31.864 (%4,8)</td><td>−560 (−%1,7)</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Sason</td><td>28.150 (%4,2)</td><td>−952 (−%3,3)</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Gercüş + Hasankeyf</td><td>26.046 (%3,9), ayrı ayrı bulunamadı</td><td>−1.072 (−%4,0)</td><td>Hasankeyf: turizm varlığı; Gercüş: veri bulunamadı</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Gercüş ve Hasankeyf’in 2025 değerlerini kaynaklar vermiyor; ikisinin toplamını il toplamından (662.626) diğer dört ilçeyi çıkararak buldum (kendi hesabım). 2024 ilçe değerlerini (Merkez 506.322, Kozluk 59.562, Beşiri 32.424, Sason 29.102, Gercüş 19.794, Hasankeyf 7.324) bir ansiklopedi sayfasından aldım; yıl belirtmiyor, ama toplamı tam 654.528 ettiği için 2024 saydım. Değişimler ve yüzdeler kendi hesabımdır. 2025’te il ve ilçe merkezlerinde 557.414 (%84,1), belde ve köylerde 105.212 kişi (%15,9) yaşıyor; köy nüfusu 2024’e göre %2,6 azaldı. İlçe bazında GSYH, istihdam, tarım veya ihracat verisi yok; “ekonomik karakter” sütunu çok sınırlı kaynaklardan derlenmiş genel bir özettir. Yüzölçümü 4.515 km² (il müdürlüğü; ansiklopedi 4.477 diyor), yoğunluk TÜİK’e göre km²’de 148.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Batman</h3>
+      <p style="margin:0">Batman, nüfusu hâlâ artan, genç ve petrolü olan bir il: dört illik TPAO bölgesi Türkiye ham petrolünün %28’ini veriyor, tarımda 150 bin ton buğday ve 65 bin ton mısır üretiliyor. Ama gelir Türkiye ortalamasının yaklaşık %48’inde, ihracat 2023’ün gerisinde ve nüfus artışı yalnızca Merkez ilçede; beş ilçe küçülüyor. Petrolün il ekonomisine ne kadar katma değer bıraktığını ölçen bir veri bulamadım, o yüzden asıl soru cevapsız kaldı (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Petrolün katma değerini şehirde tutmak: kimya ve plastik gibi ihtisas sanayisi önerisini veriyle test etmek.</div>
+      <div><b>HAMLE 2</b>Tekstili toparlamak ve çeşitlendirmek: kapanışları ölçmek, ihracatı Irak dışına yaymak.</div>
+      <div><b>HAMLE 3</b>Sulamayı ve işlemeyi büyütmek: mercimek, mısır ve Antep fıstığını işleme ve markalaşmayla ilçelere yaymak.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Seçim dönemindeki oda başkanı adaylığı açıklamaları da bir görüştür, kanıtlanmış bir eylem planı değildir.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Türkiye petrolünün büyük payını veren bir bölge neden kişi başına gelirde alt sıralarda kalıyor? Petrol gelirinin yerel ekonomiye bırakıldığı bir ölçüm var mı?</li>
+      <li>Nüfus Merkez’de toplanırken beş ilçe küçülüyorsa, ilçe ekonomilerini ayakta tutmak için ne yapılabilir?</li>
+      <li>İhracat Irak’a bu kadar bağımlıyken pazar çeşitlendirmesi gerçekçi mi?</li>
+      <li>Tekstildeki kapanışlar geçici bir dalgalanma mı, yoksa Güneydoğu tekstilinin yapısal sorunu mu?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 (mirathaber, Sabah tabanlı il listesi; Muş için aktarılan dolar karşılığı)</li>
+      <li>TÜİK ADNKS 2025 (Batman Yön, Batman Çağdaş, Batman Valiliği paylaşımı; 662.626); ADNKS 2024 bölümü: Batman Rehber, Küre Ansiklopedi (Batman il maddesi)</li>
+      <li>İhracat: Batman Rehber (30.01.2026, TÜİK 2023–2025); Batman Çağdaş / İHA (06.11.2025, Diyarbakır TSO, Ocak–Ekim 2025)</li>
+      <li>Petrol: Milliyet/AA (23.02.2026, TPAO Batman Bölge); Batman Medya (13.10.2026, BATSO aday açıklaması)</li>
+      <li>İl Tarım ve Orman Müdürlüğü Brifing 2024 (TÜİK üretim ve hayvan varlığı verileri); Sözcü (16.07.2026, mercimek); İstiklal (14.06.2025, hibe ve sera planı)</li>
+      <li>İŞKUR Batman İşgücü Piyasası Araştırması (2023 raporu); İşçi Haber (TÜİK 2025 işgücü, Türkiye); Evrensel (23.05.2026, Diyarbakır Tekstil OSB)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Batman’a özgü 2025 işsizlik ve istihdam oranı, 2024–2025 net göç, petrol üretiminin Batman payı ve istihdamı, Batman OSB doluluğu, tekstil kapanış ve işçi sayısı, Gercüş ve Hasankeyf’in ayrı nüfusu, ilçe bazlı ekonomik veriler, güncel turizm istatistikleri, süt ve et üretimi, sektörel GSYH payları ve faaliyet ili serisi ihracatı doğrulanmış kaynakla bulunamadığı için sayfada yok. %48 (gelir oranı) ve 7.300 $ (dolar karşılığı), %0,35 ve %0,76 (GSYH ve nüfus payı), +%1,24 (nüfus artışı), ilçe yüzdeleri ve değişimleri, 26.046 (Gercüş+Hasankeyf), −%67 ve +%9,6 (ihracat değişimleri), −%28,2 (ithalat), 252 $ (kişi başı ihracat), %51, %46 (ihracat payları), %75,9 ve %77 (İŞKUR payları), verim değerleri ve 1,6 küçükbaş/kişi kendi hesabımdır. Tarih belirtilmeyen beyanlar (ansiklopedi, oda başkanı adayı, il müdürü) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: ENERJİ',ad:'Petrol',big:'%28',alt:'Batman, Diyarbakır, Siirt, Mardin’in Türkiye ham petrol üretimindeki payı; 35.085 varil/gün (Milliyet/AA, 23.02.2026)',y:'52 kuyu 2025’te açıldı, 2026 hedefi 140; Batman’da üretim 1948’den beri sürüyor.',n:'Batman’a özgü üretim, TPAO istihdamı ve ildeki katma değer bulunamadı; “katma değer şehirde kalmıyor” iddiası bir oda başkanı adayından (doğrulanmadı).'},
+ {c:'good',chip:'MOTOR: TARIM',ad:'Hububat (buğday, arpa)',big:'149.849 ton',alt:'Buğday üretimi, 387.133 dekar (TÜİK 2024); arpa 25.549 ton',y:'Buğdayda dekar başına yaklaşık 387 kg verim (kendi hesabım); il müdürlüğü TÜİK’ten yüksek bir tahmin (198.583 ton) veriyor.',n:'Brifing kendi içinde tutarsız (tarım arazisi 109.683 ha mı 95.769 ha mı); sulu alan yalnızca 115.022 dekar.'},
+ {c:'warn',chip:'KIRILGAN: VERİM',ad:'Mercimek ve baklagil',big:'33.429 ton',alt:'Kırmızı mercimek üretimi, 168.780 dekar (TÜİK 2024); 2026 beklentisi ~25.000 ton',y:'Tarım Kredi Kooperatifleri alım yapıyor; fiyat ~45 TL/kg (Sözcü, 16.07.2026).',n:'İl müdürü “yaklaşık %50 verim artışı” diyor ama 2026 beklentisi 2024 üretiminin altında; hangi yılla kıyaslandığı belli değil.'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'Hayvancılık',big:'1,02 mn',alt:'Küçükbaş hayvan sayısı (TÜİK 2024); büyükbaş 100.630, kanatlı 145.154',y:'Küçükbaş kişi başına yaklaşık 1,6; il müdürlüğü hayvancılığı ildeki önemli gelir kaynağı olarak anıyor (ansiklopedi).',n:'İki farklı sayım sistemi (2025’te 998.242 küçükbaş) trend çıkarmayı engelliyor; süt, et ve gelir verisi bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: SULU TARIM',ad:'Sebze, mısır, Antep fıstığı',big:'65.099 ton',alt:'Dane mısır üretimi, 58.160 dekar (dekar başına yaklaşık 1,1 ton, kendi hesabım); sebze 93.440 ton',y:'Antep fıstığı 154.356 dekar dikili alan; sera bölgesi planı 30.000 ton/yıl, 1.100 dekar (2025 haberi).',n:'Antep fıstığı rekoltesi 2.809 ton; sera hedefi plan düzeyinde, kurulum doğrulanmadı; gelir etkisi bilinmiyor.'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'Dış ticaret',big:'166,8 mn $',alt:'2025 ihracatı (TÜİK, Batman Rehber); 2023’te 510,6 mn $ görünüyor',y:'2024’e göre +%9,6; ihracat ithalatın (67,5 mn $) yaklaşık 2,5 katı (kendi hesabım).',n:'Üç farklı seri birbirini tutmuyor; Diyarbakır TSO serisinde Irak’ın payı yaklaşık %51; düşüş tekstil kapanışlarına bağlanıyor.'},
+ {c:'warn',chip:'KIRILGAN: TEKSTİL',ad:'Tekstil ve imalat',big:'3.385',alt:'Hazır giyim teşvik belgelerinde öngörülen istihdam (İŞKUR 2023); toplam 4.414',y:'2023’te yerleştirmelerin %75,9’u imalatta (3.381 / 4.455, kendi hesabım).',n:'Bunlar hedeftir, gerçekleşme değil; Batman’a özgü kapanış ve işsiz sayısı bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm (Hasankeyf)',big:'Veri yok',alt:'Hasankeyf: yaklaşık 12.000 yıllık yerleşim iddiası (ansiklopedi); ziyaretçi verisi bulunamadı',y:'Tarihî ve kültürel varlıkların çeşitliliği (Zeynel Bey Türbesi, Mor Kiryakus Manastırı).',n:'Ziyaretçi, yatak ve gelir verisi yok; turizmin il ekonomisindeki ağırlığı ölçülemedi.'},
+ {c:'good',chip:'MOTOR: NÜFUS',ad:'Nüfus',big:'+8.098',alt:'2025 nüfus artışı (662.626; 2024: 654.528), TÜİK ADNKS; Türkiye’de 32.',y:'Medyan yaş 25,9; 2023’te net göç +2.750 (İŞKUR).',n:'Artış Merkez ilçede (+11.463); diğer ilçeler küçülüyor, köy ve belde nüfusu %2,6 azaldı (kendi hesabım).'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Gelir ve işgücü',big:'76 / 81',alt:'Kişi başına GSYH sırası (2024; 236.422 TL, ~7.300 $); Bitlis 77., Muş 78.',y:'Bitlis (77.) ve Diyarbakır (75.) ile yakın sıralarda; kayıtlı işgücü 76.138 (İŞKUR 2023).',n:'Gelir Türkiye ortalamasının yaklaşık %48’i (kendi hesabım); 31.004 kayıtlı işsiz (2023); güncel il işsizlik oranı bulunamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['TÜİK yıllık ihracat (milyon $)',[['2023',510.6],['2024',152.2],['2025',166.8]],[2],'2023 değeri olağandışı yüksek; kayıt yöntemi farkı olabilir (aynı yıl “girişimci merkezi esaslı” seri 450,7 milyon $). Kaynak: Batman Rehber (30.01.2026, TÜİK).'],
+ ['Diyarbakır TSO serisi: sektör, Ocak–Ekim 2025 (milyon $)',[['Kimyasal maddeler',39.9],['Demir-çelik ve demir dışı metaller',37.3],['Hububat, bakliyat, yağlı tohumlar',30.6]],[0],'Toplam 235,3 milyon $ (+%17,5); bu üç sektör toplamın yaklaşık %46’sı (kendi hesabım). Yıllık TÜİK serisiyle toplanamaz. Kaynak: Diyarbakır TSO (İHA, 06.11.2025).'],
+ ['Diyarbakır TSO serisi: ülke, Ocak–Ekim 2025 (milyon $)',[['Irak (120’den fazla)',120],['Suriye',11.4],['Azerbaycan',7.4],['Gürcistan',6.6],['Almanya',6.2]],[0],'Irak 120 milyon $’ın “üzerinde” olarak aktarıldı; çubuk alt sınırı gösteriyor. Toplamın yaklaşık %51’i (kendi hesabım). Kaynak: Diyarbakır TSO (İHA, 06.11.2025).']];
+mk('ih',IH,['TÜİK yıllık','Sektör','Ülke']);
+var SA=[['İŞKUR 2023 yerleştirmeler, sektör (kişi)',[['İmalat',3381],['Toptan/perakende ticaret',156],['İnşaat',22]],[0],'Toplam yerleştirme 4.455 (2.622 erkek, 1.833 kadın); imalat %75,9 (kendi hesabım). İŞKUR 2023 raporu kendi içinde tutarsız olabilir. Kaynak: İŞKUR Batman (2023).'],
+ ['2023 teşvik belgeleri, öngörülen istihdam (kişi)',[['Hazır giyim (kürk hariç)',3385],['Tüm belgeler',4414]],[0],'Hazır giyim toplamın yaklaşık %77’si (kendi hesabım); hedef istihdamdır, gerçekleşme değildir. Kaynak: İŞKUR Batman (2023).'],
+ ['TPAO Batman Bölge, günlük petrol (varil)',[['4 il toplamı (Batman, Diyarbakır, Siirt, Mardin)',35085]],[0],'Türkiye ham petrol üretiminin %28’i; Batman’a özgü değer yok. 2025’te 52, 2026 hedefinde 140 yeni kuyu. Kaynak: Milliyet/AA (23.02.2026).']];
+mk('sa',SA,['İŞKUR yerleştirme','Teşvik belgeleri','Petrol']);
+var TA=[['2024 üretim (bin ton)',[['Buğday',149.8],['Dane mısır',65.1],['Kırmızı mercimek',33.4],['Arpa',25.5],['Karpuz',23.3],['Domates',17.4],['Kütlü pamuk',6.3]],[0],'Üretim TÜİK 2024. Antep fıstığı 2,8 bin ton ve sebze toplamı 93,4 bin ton ayrıca. Kaynak: Batman İl Tarım ve Orman Müdürlüğü Brifing 2024.'],
+ ['Verim, 2024 (kg/dekar, kendi hesabım)',[['Dane mısır',1119],['Buğday',387],['Pamuk (kütlü)',537],['Arpa',356],['Kırmızı mercimek',198]],[0],'Üretim ton / ekili alan hesabı; ekim alanı ve üretim tutarsızlıkları nedeniyle yaklaşık değerlerdir. Kaynak: Brifing 2024 (TÜİK).'],
+ ['Arazi varlığı (%)',[['Tarıma elverişsiz',36.66],['Orman',28.42],['Tarım arazisi',24.29],['Mera',10.63]],[2],'Toplam yüzölçümü 451.525 ha. Tarım arazisi metinde 109.683 ha; üretim tablosunda yaklaşık 95.769 ha (tutarsız). Kaynak: Brifing 2024.'],
+ ['Hayvan varlığı, TÜİK 2024 (bin baş)',[['Küçükbaş',1024.9],['Kanatlı',145.2],['Büyükbaş',100.6]],[0],'Hayvan bildirim sistemi 2025: 101.750 büyükbaş, 998.242 küçükbaş; iki sistem farklı olduğu için değişim hesaplanmadı. Kaynak: Brifing 2024.']];
+mk('ta',TA,['Üretim','Verim','Arazi','Hayvan']);
+var GT=[['Kişi başına GSYH, 2024 (bin TL)',[['Elazığ',349.9],['Erzurum',321.1],['Bingöl',276.7],['Siirt',261.8],['Diyarbakır',245.0],['Batman',236.4],['Bitlis',231.9],['Muş',230.3],['Van',203.0],['Ağrı',194.7]],[5],'Batman 81 il arasında 76.; yaklaşık 7.300 $ ve Türkiye ortalamasının %48’i (kendi hesabım). Kaynak: TÜİK (mirathaber, Sabah tabanlı liste).'],
+ ['Nüfus (bin kişi)',[['2024',654.5],['2025',662.6]],[1],'+8.098 (+%1,24, kendi hesabım). 2024 değeri 2025 değerinden “önceki yıl” farkıyla türetilmiş ve Küre Ansiklopedi’deki 654.528 ile tutuyor. Kaynak: TÜİK ADNKS (Batman Yön).'],
+ ['İlçe nüfusu, 2025 (bin kişi)',[['Merkez',517.8],['Kozluk',58.8],['Beşiri',31.9],['Sason',28.2],['Gercüş + Hasankeyf',26.0]],[0],'Gercüş ve Hasankeyf toplamı il toplamından kalan değerdir (kendi hesabım). Merkez nüfusun %78,1’i. Kaynak: TÜİK ADNKS (Batman Yön, Batman Çağdaş).'],
+ ['Göç, 2023 (bin kişi)',[['Gelen',27.9],['Giden',25.1],['Net',2.75]],[2],'2023 net göç +2.750; oran birimi kaynakta tutarsız, 2024–2025 değeri bulunamadı. Kaynak: İŞKUR Batman (2023).'],
+ ['Eski TÜİK işgücü göstergeleri (%, yıl şüpheli)',[['İşsizlik',18.5],['İstihdam oranı',33.8],['Katılma oranı',41.5]],[0],'“2022” etiketli ama tablo notu verinin 2013 olduğunu söylüyor; güncel kabul edilmemeli. Türkiye 2025: işsizlik %8,3, istihdam %49,0. Kaynak: İŞKUR Batman (2023 raporu); İşçi Haber.']];
+mk('gt',GT,['Gelir','Nüfus','İlçe','Göç 2023','İşgücü']);
+</script>
+</body>
+</html>

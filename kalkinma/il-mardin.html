@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mardin | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Mardin'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#c2410c;--a2:#ca8a04;--a3:#0e7490"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Mardin</span><h1>Mardin: Un, Taş Evler ve Sınır Kapısı</h1><p>904 bin nüfuslu Mardin, kişi başına GSYH’de 7.537 $ ile 81 il arasında 74. sırada; Türkiye ortalamasının yaklaşık yarısı. Buna karşın ihracatta Güneydoğu’nun Gaziantep ve Kahramanmaraş’tan sonra üçüncü büyük ili: 2025’te 908 milyon $. Gücü un, bulgur ve hububat işlemeye, Irak pazarına ve bereketli Mezopotamya ovasına dayanıyor; turizm ise 2025’te yaklaşık 4 milyon ziyaretçiyle rekor kırdı. Bu dosya ili sektör sektör okuyor ve verinin bulunamadığı yerleri açıkça işaretliyor.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>7.537 $</b><span>Kişi başına GSYH (2024), 81 il arasında 74.; Türkiye ort. 15.325 $’ın yaklaşık %49’u (kendi hesabım)</span></div>
+    <div class="k"><b>903.576</b><span>Nüfus (ADNKS 2025); 2024’e göre +7.665 (yaklaşık +%0,9)</span></div>
+    <div class="k"><b>908,4 mn $</b><span>2025 ihracatı (GAİB aktarımı); Güneydoğu’da Gaziantep ve Kahramanmaraş’ın ardından 3.</span></div>
+    <div class="k"><b>451,5 mn $</b><span>2026 Ocak–Haziran ihracatı (GAİB); önceki yılın aynı dönemine göre +%1,1</span></div>
+    <div class="k"><b>%35,4</b><span>Türkiye un ihracatında Mardin OSB payı (OSB beyanı; yıl belirtilmemiş)</span></div>
+    <div class="k"><b>~4 milyon</b><span>2025’te ziyaretçi (yaklaşık 1 milyonu konaklamalı); 2026 Eylül’e kadar yabancı ziyaretçi +%41 (Bakan Yardımcısı)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#tarim">Tarım</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">7 sektör, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. “Baskı altında” etiketini bu ilde kullanmadım, çünkü Mardin’e özgü doğrulanmış bir daralma verisi bulamadım.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan, dar ya da bağımlı</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK 2024, GAİB aktarımları 2025–2026, OSB ve valilik beyanları). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat, üretim payı ve OSB beyanlarına dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Birçok rakam kurum beyanıdır (Mardin OSB, valilik, otelciler derneği) ve ilgili yerde işaretlenmiştir; yıllar çoğu zaman belirtilmemiştir.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Üçüncü Büyük, Tek Bacağa Yaslı</h2>
+    <p class="sub">Mardin, Güneydoğu Anadolu İhracatçı Birlikleri (GAİB) illeri arasında Gaziantep ve Kahramanmaraş’tan sonra üçüncü sırada; ihracat ağırlıkla hububat işleme ürünlerinden ve Irak pazarından geliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>GAİB’in açıkladığına göre Mardin 2025’te 908,4 milyon $ ihracat yaptı; Kahramanmaraş 1,3 milyar $, Şanlıurfa 350,2 milyon $, Malatya 335,0 milyon $, Diyarbakır 275,6 milyon $ oldu. Gaziantep yaklaşık 10,1 milyar $ ile bölgenin açık ara lideri (GTO).</li>
+        <li>2026’nın ilk altı ayında Mardin’in ihracatı %1,1 artışla 451,5 milyon $’a çıktı; aynı dönemde Şanlıurfa %10,0 arttı, Kahramanmaraş %2,0 ve Malatya %13,8 geriledi.</li>
+        <li>Mardin Ticaret ve Sanayi Odası kaynaklı bir aktarıma göre ilin ihracatının büyük kısmı Irak’a gidiyor: bir yılın ilk 7 ayında %81,6; en büyük kalem 220,5 milyon $ ile hububat, bakliyat ve yağlı tohumlar, ikinci kalem 67,4 milyon $ ile hazır giyim (yıl belirtilmemiş).</li>
+        <li>2025’te ihracatın nüfusa oranı kişi başına yaklaşık 1.005 $; Türkiye ortalaması yaklaşık 3.176 $ (kendi hesabım, farklı seriler).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gaziantep dışında Güneydoğu’da ihracat hacminde ikinci-üçüncü sıradaki il.</li><li>Aylık ihracat 2026’da 68–70 milyon $ düzeyinde istikrarlı; Eylül 2025’te 83,9 milyon $ ile en yüksek aylardan biri görüldü.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İhracat yüksek oranda Irak’a bağlı; bölgesel bir şok ihracatı doğrudan etkileyebilir (yorum).</li><li>2021’de yaklaşık 958 milyon $ olan ihracat 2025’te 908 milyon $’da kalmış görünüyor; farklı seriler olabilir, ancak dolar bazında belirgin bir büyüme yok.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025 ve 2026 rakamları GAİB’in üyelerinin bağlı olduğu şehirler üzerinden aktardığı seridir; Ticaret Bakanlığı faaliyet ili serisinden ya da TİM firma merkezi serisinden farklı olabilir. 2021’deki 958 milyon $ rakamı bir OSB yöneticisinin beyanıdır ve 2025’le aynı kapsamda olmayabilir; bu yüzden “ihracat düştü” sonucu kesin değildir.</li>
+      <li>Irak payı (%81,6) ve sektör rakamları yıl belirtilmeden aktarılan bir beyandır; 2025 ya da 2026 için güncel sektör ve ülke kırılımını bulamadım.</li>
+      <li>Mardin’in 2022–2024 yıllık ihracat serisini ve ithalatını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok. “Yaklaşık 1.005 $ ve 3.176 $” karşılaştırması iki ayrı serinin oranıdır, yaklaşık bir göstergedir.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım: Ova, Hububat ve Bağ</h2>
+    <p class="sub">Mardin yüzölçümünün yaklaşık %38’i tarım alanı; buğday, kırmızı mercimek, mısır, sofralık üzüm ve acur Türkiye üretiminde belirgin payları olan ürünler.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Tarım ve Orman Bakanlığı Mardin Tarımsal Yatırım Rehberi’ne göre (TÜİK 2024) ilde 3.338.620 dekar tarım alanı var (yüzölçümü 8.891.000 dekar) ve 21.901 çiftçi ÇKS’ye kayıtlı.</li>
+        <li>Buğdayda 864.632 ton (%4,08), mısırda 337.773 ton (%4,17), kırmızı mercimekte 20.282 ton (%5,01), sofralık çekirdekli üzümde 79.115 ton (%5,61) üretim yapılıyor; acurda Türkiye üretiminin %30,1’i Mardin’den geliyor.</li>
+        <li>Midyat ilçesi Türkiye’de en geniş bağ alanlarından birine sahip (122.210 dekar, akademik çalışma; yıl belirsiz). Mardin’in kırmızı mercimeği coğrafi işaretli; Derik’te zeytin, Ömerli ve Yeşilli’de kiraz ve üzüm bahçeleri kuruluyor (firma beyanı).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Hububat, bakliyat, sebze ve meyve bir arada; hububat ürünleri ilin işleme sanayisine hammadde sağlıyor.</li><li>Coğrafi işaretli kırmızı mercimek ve geniş bağ alanı katma değerli ürünler için temel oluşturuyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Maliyet ile alım fiyatı arasında dar bir makas olduğu belirtiliyor (Ekonomim başlığı: yaklaşık %20); çiftçi geliri verisi bulunamadı.</li><li>Meyvecilikte bahçe verimlerinde düşüş eğilimi olduğu söyleniyor (bir firma beyanı); mevsimsel yağış ve iklim riskine açık (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Rehber ve TÜİK ton değerleri tek yıllık (2024) değerlerdir; verim yağışa göre yıllar arasında büyük oynayabilir. Bazı ürünlerin (acur, kavun) payı küçük bir Türkiye toplamına göre büyük görünebilir.</li>
+      <li>Mardin ihracatında tarım ürünlerinin payı 2018’de yaklaşık %57 olarak bir akademik çalışmada verilmiş; güncel payı bulamadım. Hayvancılık, tarımın il GSYH’sindeki payı ve çiftçi geliri için de doğrulanmış veri yok.</li>
+      <li>Midyat bağ alanı ve bahçe verimi gibi ifadeler kaynak tarihleri farklı olan akademik çalışmalardan ve firma beyanından alınmıştır.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: Un, Bulgur ve İkinci OSB</h2>
+    <p class="sub">Mardin sanayisi büyük ölçüde tarıma dayalı: un, bulgur, makarna ve diğer gıda işleme tesisleri; ikinci OSB’de tekstil ve çeşitli sektörlere yatırım çağrısı sürüyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Mardin OSB yöneticilerine göre OSB’de yaklaşık 220 firma üretim yapıyor ve yaklaşık 8.000–8.500 kişi çalışıyor; Türkiye un ihracatının %35,4’ü ve bulgur ihracatının %23,5’i bu OSB’den geliyor (beyan, yıl belirtilmemiş).</li>
+        <li>Başka bir aktarıma göre OSB’deki 42 un fabrikası geçen yıl 1,2 milyon ton un ihraç etti ve Mardin Türkiye’nin en çok un üreten ili olarak anılıyor (yıl belirtilmemiş).</li>
+        <li>Mardin 2. OSB’de gıda, tekstil, plastik, makine, kimya, elektrik, geri dönüşüm, mobilya, medikal ve sağlık sektörlerinde 70 parselin tahsisi yapılmış, ikinci etap için çalışma başlamış; tekstil fabrikaları valilik ve büyükşehir belediyesi ortaklığıyla yükseliyor. Midyat OSB ise kuruluş aşamasında.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Un ve bulgurda ulusal ölçekte belirleyici bir kümelenme; ikinci OSB tekstil ve diğer sektörlerle çeşitlenme sağlıyor.</li><li>Yatırımcı ilgisi yüksek: 2. OSB’de tahsis tamamlandı, yeni etap açılıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Sanayi tek bir ürün zincirine (hububat işleme) ve bir pazara (Irak) bağımlı; katma değeri düşük ham ve yarı işlenmiş ürün ağırlıkta (yorum).</li><li>OSB’nin ilin toplam ihracatındaki %65’lik payı eski bir beyan (2021); güncel durum bilinmiyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>OSB rakamları (220 firma, 8.000–8.500 istihdam, %35,4 un payı, %65 ihracat payı) OSB yöneticilerinin farklı tarihli beyanlarıdır ve birbirinden farklı yıllara ait olabilir; resmî kayıtla doğrulanmamıştır. 42 fabrika ve 1,2 milyon ton rakamı OSB’nin kendi aktarımıdır; il toplamı değildir.</li>
+      <li>Mardin’in SGK’lı sanayi istihdamını, sanayi üretim değerini, İSO 500 firmalarını ve OSB’lerin doluluk oranlarını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>Nusaybin ve Habur sınır kapılarının güncel işleyişini ve Suriye pazarına yönelik ihracat potansiyelini doğrulanmış kaynakla ölçemedim; eski röportajlardaki beklentiler kesin gelişme olarak okunmamalı.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Rekor, Günübirlik Ağırlıklı</h2>
+    <p class="sub">Taş evleri, çok kültürlü mirası, dizi ve film çekimleriyle Mardin 2025’te ziyaretçi rekoru kırdı; ziyaretçilerin üçte ikisinden fazlası günübirlik geliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Mardin 2025’te yaklaşık 4 milyon kişiyi (1 milyonu konaklamalı) ağırladı (turizm derneği ve basın aktarımı); Kültür ve Turizm Bakan Yardımcısı “3 milyonun üzerinde” ve bir önceki yıla göre %29 artış verdi. Vali konaklamayı 1 milyon civarında, günübirlik ziyaretçiyi 3 milyonun üzerinde olarak açıkladı.</li>
+        <li>2026 Eylül sonu itibarıyla ziyaretçi sayısı bir önceki yılın aynı dönemine göre yaklaşık %15, yabancı ziyaretçi %41 arttı (Bakan Yardımcısı).</li>
+        <li>2025’te 70 film ve dizi çekimi için başvuru yapıldı; bunların 13’ü sinema filmi ve dizi, 9’u yabancı yapım.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ziyaretçi sayısı hızla artıyor; 2022’de yaklaşık 507 bin olan belgeli tesis konaklayanı 2025’te yaklaşık 1 milyona çıktı (farklı tanımlar).</li><li>Uzak Doğu ve diğer yabancı pazarlarda artış var; Vali Çin’le turizm ve kültür bağlarını güçlendirmek istiyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ziyaretçilerin çoğu günübirlik; yatak ve harcama payı küçük kalıyor.</li><li>Bayramlarda otel doluluğu nedeniyle turistlerin çevre illere yönlendirildiği bildirildi; konaklama kapasitesi sıkışık olabilir (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Toplam ziyaretçi sayısı kaynağa göre değişiyor (“3 milyon üzeri” ile “4 milyon” aynı yılı farklı tanımlarla veriyor); günübirlik sayımın yöntemi açıklanmamıştır. Bakanlık belgeli konaklama verisi (2022: 506,6 bin) ile il beyanları (2025: yaklaşık 1 milyon konaklama) aynı tanımda değildir.</li>
+      <li>Turizm gelirini, yabancı ziyaretçi sayısını, ortalama kalış süresini ve turizmin il GSYH’sindeki payını doğrulanmış kaynakla bulamadım; bu yüzden sayfada yok.</li>
+      <li>Yabancı ziyaretçide %41 artış, düşük bir tabandan gelmiş olabilir (yorum); mutlak sayı bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari fiyat, 2024) ve ADNKS 2025</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Kişi başına GSYH 2020’de 4.821 $’dan 2024’te 7.537 $’a çıktı (yaklaşık +%56, kendi hesabım); TL cinsinden 2024’te 247.416 TL. Mardin 81 il arasında 74. sırada.</li>
+        <li>Türkiye ortalamasına oranı 2020’de yaklaşık %57’den 2024’te yaklaşık %49’a geriledi (kendi hesabım): gelir artıyor ama Türkiye ortalaması daha hızlı artıyor.</li>
+        <li>Nüfus 2025’te 903.576’ya yükseldi (+7.665); Türkiye’de 33 ilin nüfusu azalırken Mardin büyüdü. İl, Türkiye nüfusunun yaklaşık %1,05’ini barındırıyor (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus büyüyor, genç nüfus yoğunluğu yatırımcılar için avantaj olarak anılıyor (basın).</li><li>Gelir 2020–2024’te yaklaşık %56 arttı; Şanlıurfa’nın (5.731 $) önünde.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Türkiye ortalamasının yaklaşık yarısında; Siirt, Kilis ve komşu illerle benzer düşük gelir grubunda.</li><li>Ortalamaya oran 2020’den beri düşüyor; fark büyüyor.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>74. sıra TÜİK ve basın aktarımlarındaki değerlerden alınmıştır (Rudaw, Mirat Haber); sıralamayı tablodan ayrıca doğrulamadım. Toplam il GSYH’sini (TL) ve sektör paylarını bulamadım.</li>
+      <li>Mardin’e özgü 2025 işsizlik, işgücüne katılma ve istihdam oranlarını, kayıt dışılığı ve yoksulluk göstergelerini doğrulanmış kaynakla bulamadım; Türkiye’de 2025 işsizlik %8,3’tü.</li>
+      <li>Dolar cinsinden kişi başına GSYH kur ve fiyat etkilerini içerir. Nüfus, ADNKS’ye göre kayıtlı nüfustur; Suriyeliler geçici koruma statüsünde olduğu için nüfusa dahil edilmemiştir.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Mardin’in 10 ilçesi var. Nüfuslar 2024 verisidir (kaynak Emlakjet, TÜİK); tablodaki dört ilçe dışındakiler için güvenilir güncel rakam bulunamadı. Ekonomik karakter genel özettir.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2024)</th><th>Ekonomik karakter</th></tr>
+      <tr><td>Kızıltepe</td><td>275.460 (il nüfusunun yaklaşık %31’i)</td><td>En kalabalık ilçe; Mezopotamya ovasında hububat ve bakliyat tarımı, ticaret</td></tr>
+      <tr><td>Artuklu</td><td>197.776</td><td>İl merkezi; tarihi kent, turizm ve hizmetler</td></tr>
+      <tr><td>Midyat</td><td>124.543</td><td>Bağcılık (il içinde en geniş bağ alanı), mercimek; Midyat OSB kuruluş aşamasında; Süryani kültür mirası</td></tr>
+      <tr><td>Nusaybin</td><td>nüfus doğrulanmadı</td><td>Suriye sınırında kent; sınır ticareti ve lojistik potansiyeli (beklenti)</td></tr>
+      <tr><td>Derik, Ömerli, Yeşilli</td><td>Yeşilli 12.996</td><td>Derik’te zeytin, Ömerli ve Yeşilli’de kiraz ve üzüm bahçeleri (firma beyanı); Derik’te mevsimlik tarım işçisi hareketi</td></tr>
+      <tr><td>Savur, Dargeçit, Mazıdağı</td><td>doğrulanmadı</td><td>Tarım ve hayvancılık ağırlıklı ilçeler (genel özet; ayrıntılı veri yok)</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">Kızıltepe il nüfusunun yaklaşık %30,7’sini oluşturuyor (275.460 / 895.911, kendi hesabım); Kızıltepe, Artuklu ve Midyat birlikte yaklaşık %67’sini tutuyor (kendi hesabım). İlçe bazında GSYH, istihdam veya ihracat verisi yok; “ekonomik karakter” sütunu yerel haber, kurum açıklaması ve genel bilgiden derlenmiş bir özettir.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Mardin</h3>
+      <p style="margin:0">Mardin’in gücü ova, un ve konumda: hububat işleme ve ihracat, Güneydoğu’nun üçüncü büyük ihracatçısı olmasını sağlıyor ve turizm 2025’te rekor kırdı. Zayıflığı, bu üretimin gelire dönüşmemesi: kişi başına gelir Türkiye ortalamasının yaklaşık yarısında ve bu oran 2020’den beri düşüyor, ihracat tek bir ürün zincirine ve tek bir pazara yaslı, ziyaretçilerin çoğu günübirlik. Bu yüzden asıl soru, ihracat ve ziyaretçi hacminin ilde ne kadar katma değer ve gelir bıraktığı (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Hububat işlemeyi katma değerli ürüne ve yeni pazarlara taşımak: makarna, bulgur ve unlu mamullerde markalaşma, Irak dışı pazarlar.</div>
+      <div><b>HAMLE 2</b>İkinci ve Midyat OSB’lerde tekstil ve çok sektörlü yatırımı hayata geçirip istihdamı ve ihracat sepetini çeşitlendirmek.</div>
+      <div><b>HAMLE 3</b>Turizmi günübirlikten geceleme düzeyine çıkarmak: konaklama kapasitesi, Uzak Doğu ve Körfez pazarları, kültür-gastronomi rotaları.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. İhracatın düşüp düşmediği, serilerin farkı nedeniyle kesin söylenemez.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Mardin Güneydoğu’nun üçüncü büyük ihracatçısı iken kişi başına geliri neden Türkiye ortalamasının yarısında kalıyor?</li>
+      <li>İhracatın büyük kısmı Irak’a bağlıyken bu bir güç mü, yoksa kırılganlık mı?</li>
+      <li>4 milyon ziyaretçiye rağmen yalnızca 1 milyonu konaklıyorsa turizm geliri neden daha az hissediliyor?</li>
+      <li>Un ve bulgur kümelenmesi Mardin’i yüksek katma değerli bir gıda sanayisine taşıyabilir mi?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2020–2024 (Pusula Haber, 12.12.2025; Rudaw, 14.12.2025; Mirat Haber/Sabah aktarımı); TÜİK ADNKS 2024–2025 il nüfusları (Rudaw, 9 Şubat 2026); Emlakjet demografi (2024 ilçe nüfusları)</li>
+      <li>GAİB ihracat verileri (Gazete Birlik, Rudaw, Ekonomi Gazetesi, Haberler.com aktarımları; 2025 ve 2026); GTO (Gaziantep ihracatı)</li>
+      <li>Mardin OSB beyanları (Sanayi Gazetesi, Ekonomi Gazetesi, Ensonhaber); İşçi Haber (Mardin TSO, ilk 7 ay ihracat); Sanayi Gazetesi ve Türkiye Gazetesi (Mardin 2. OSB, Midyat OSB)</li>
+      <li>Tarım ve Orman Bakanlığı Mardin Tarımsal Yatırım Rehberi 2025 (TÜİK 2024); Dergipark akademik çalışmalar (Midyat bağ alanı, tarım ihracatı payı 2018); Ekonomim (buğday maliyeti); Habertürk Yerel (kırmızı mercimek desteği)</li>
+      <li>Haberler.com (Kültür Yolu Festivali, Bakan Yardımcısı); DHA (METOSAD/MARTOD, ziyaretçi sayıları); Yeni Akit, Hürriyet Daily News (Vali Akkoyun); Kapadokya Üniversitesi açık erişim (2022 Bakanlık konaklama istatistiği)</li>
+      <li>TÜİK 2025 işgücü istatistikleri (Medyascope aktarımı); TİM Suriye Masası (TRT Haber)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum beyanı veya akademik çalışmadır; resmî tabloların doğrudan alıntısı değildir. Mardin’e özgü 2025 işsizlik, katılma ve istihdam oranı, sektörel GSYH payları, 2022–2024 ihracat serisi, güncel sektör ve ülke bazlı ihracat, OSB doluluğu ve sanayi istihdamı, turizm geliri ve yabancı ziyaretçi sayısı, ilçelerin çoğunun nüfusu ve ekonomik verileri doğrulanmış kaynakla bulunamadığı için sayfada yok. 74. sıra, %49, %57, %56, %1,05, %30,7, %67, 1.005 $ ve 3.176 $ kişi başına ihracat karşılaştırması kendi hesabımdır. İhracat için farklı seriler (GAİB, OSB beyanı) kullanıldığından rakamlar birbirine eklenmemiştir. OSB, valilik ve otelciler derneği rakamları beyandır; yıl belirtilmeyenler açıkça işaretlenmiştir.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+var KARNE=[
+ {c:'good',chip:'MOTOR',ad:'Un, bulgur ve hububat işleme',big:'%35,4',alt:'Türkiye un ihracatında Mardin OSB payı (OSB beyanı); bulgurda %23,5',y:'Yaklaşık 220 firma ve 8.000–8.500 istihdam; 42 un fabrikası, 1,2 milyon ton un ihracatı (aktarım).',n:'Irak’a ve tek ürün zincirine bağımlı; katma değer düşük olabilir; rakamlar OSB beyanı, yıllar belirsiz.'},
+ {c:'good',chip:'MOTOR',ad:'Ova tarımı: buğday, mercimek, üzüm',big:'864,6 bin ton',alt:'Buğday (%4,08); kırmızı mercimek %5,01, sofralık üzüm %5,61, acur %30,1 (TÜİK 2024)',y:'3,34 milyon dekar tarım alanı; coğrafi işaretli kırmızı mercimek; geniş bağ alanı (Midyat).',n:'Maliyet ile alım fiyatı arasında dar makas; verim ve çiftçi geliri verisi yok.'},
+ {c:'good',chip:'MOTOR (DIŞ TİCARET)',ad:'İhracat hacmi',big:'908,4 mn $',alt:'2025 (GAİB aktarımı); Güneydoğu’da Gaziantep ve Kahramanmaraş’tan sonra 3.',y:'2026 Ocak–Haziran’da 451,5 mn $ (+%1,1); aylık 68–70 mn $.',n:'Irak’a bağımlı (ilk 7 ayda %81,6, yıl belirsiz); 2021’den beri dolar bazında belirgin büyüme yok (seri farkı olabilir).'},
+ {c:'warn',chip:'BÜYÜYEN AMA KÜÇÜK',ad:'Hazır giyim ve tekstil',big:'67,4 mn $',alt:'İkinci büyük ihracat kalemi (ilk 7 ay, yıl belirsiz)',y:'Mardin 2. OSB’de tekstil fabrikaları yükseliyor; her fabrikada en az 200 kişi istihdam hedefi (vali).',n:'Hacim hububatın üçte biri; emek yoğun sektörde ulusal maliyet baskısı (genel bilgi); fiili istihdam verisi yok.'},
+ {c:'good',chip:'MOTOR (YÜKSELEN)',ad:'Turizm',big:'~4 milyon',alt:'2025 ziyaretçisi (yaklaşık 1 milyonu konaklamalı); önceki yıla göre %29 (Bakan Yardımcısı)',y:'2026 Eylül sonuna kadar toplam ziyaretçi +%15, yabancı +%41; film-dizi çekimleri.',n:'Ziyaretçilerin çoğu günübirlik; yatak ve gelir verisi bulunamadı; kapasite bayramlarda yetersiz.'},
+ {c:'sleep',chip:'UYUYAN: SINIR VE LOJİSTİK',ad:'Nusaybin, Habur ve Midyat OSB',big:'90 / 130 km',alt:'Midyat’tan Nusaybin ve Habur kapılarına mesafe (Mardin TSO)',y:'Suriye ve Irak pazarlarına yakınlık; Midyat OSB karma yapıyla kuruluyor.',n:'Sınır kapılarının işleyişi ve kuruluş takvimi belirsiz; Suriye pazarı beklentisi kesin gelişme değil.'},
+ {c:'warn',chip:'DAR: GELİR',ad:'Kişi başına gelir',big:'7.537 $',alt:'2024; Türkiye ortalamasının yaklaşık %49’u, 81 il içinde 74.',y:'2020–2024’te yaklaşık +%56 arttı; Şanlıurfa’nın önünde; nüfus büyüyor.',n:'Ortalamaya oran 2020’de %57’den %49’a düştü; Siirt ve Kilis’in gerisinde.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['GAİB illerinde ihracat, 2025 (milyon $, Gaziantep hariç)',[['Kahramanmaraş',1300],['Mardin',908.4],['Şanlıurfa',350.2],['Malatya',335.0],['Diyarbakır',275.6],['Kilis',124.0],['Adıyaman',84.1]],[1],'Gaziantep yaklaşık 10,1 milyar $ ile grafiğin dışında bırakıldı. Kaynak: GAİB (Gazete Birlik), GTO.'],
+ ['Ocak–Haziran 2026 ihracatı (milyon $, Gaziantep hariç)',[['Kahramanmaraş (−%2,0)',625.1],['Mardin (+%1,1)',451.5],['Şanlıurfa (+%10,0)',181.9],['Malatya (−%13,8)',150.8]],[1],'Gaziantep 5.037 milyon $ (+%3,9). Kaynak: GAİB (Rudaw).'],
+ ['Seçili aylar, Mardin ihracatı (milyon $)',[['Mart 2026',68.3],['Mayıs 2026',69.8],['Eylül 2025',83.9]],[2],'Aylar farklı yıllara aittir, mevsimsel olabilir. Kaynak: GAİB (Ekonomi Gazetesi, Haberler.com).'],
+ ['Sektör, bir yılın ilk 7 ayı (milyon $, yıl belirsiz)',[['Hububat, bakliyat, yağlı tohum',220.5],['Hazır giyim ve konfeksiyon',67.4]],[0],'Çimento-cam-seramik ve kimya takipçi sektörler olarak anılmış, rakam verilmemiş. Kaynak: Mardin TSO aktarımı (İşçi Haber).'],
+ ['Yıllık ihracat (milyon $)',[['2021 (OSB beyanı)',958],['2025 (GAİB)',908.4]],[1],'Farklı kaynaklar; kapsamlar aynı olmayabilir, bu yüzden düşüş kesin değil. Kaynak: Sanayi Gazetesi, GAİB.']];
+mk('ih',IH,['2025 iller','2026 H1','Aylık','Sektör','2021–2025']);
+var TA=[['Türkiye üretimindeki pay, 2024 (%)',[['Acur',30.08],['Kavun',5.68],['Sofralık üzüm',5.61],['Kırmızı mercimek',5.01],['Mısır (dane)',4.17],['Buğday',4.08],['Badem',1.92],['Pamuk (kütlü)',1.36],['Nohut',1.02],['Arpa',0.77]],[0,2,3,5],'Acurda Türkiye üretiminin yaklaşık üçte biri. Kaynak: Tarım ve Orman Bakanlığı Mardin Tarımsal Yatırım Rehberi 2025 (TÜİK 2024).'],
+ ['Üretim miktarı, 2024 (bin ton)',[['Buğday',864.6],['Mısır (dane)',337.8],['Kavun',84.0],['Sofralık üzüm',79.1],['Arpa',78.5],['Pamuk (kütlü)',30.5],['Kırmızı mercimek',20.3],['Acur',14.1],['Nohut',5.9]],[0],'Buğday tek başına açık ara en büyük kalem. Kaynak: aynı rehber (TÜİK 2024).']];
+mk('ta',TA,['Pay','Üretim']);
+var SA=[['Mardin OSB’nin ulusal payı (%)',[['Mardin ihracatında OSB payı (2021 beyanı)',65],['Türkiye un ihracatında OSB payı',35.41],['Türkiye bulgur ihracatında OSB payı',23.52]],[1,2],'OSB yöneticilerinin farklı tarihli beyanları; resmî kayıtla doğrulanmadı. Kaynak: Sanayi Gazetesi, Ekonomi Gazetesi.']];
+mk('sa',SA,['Ulusal pay']);
+var TU=[['Ziyaretçi (milyon kişi)',[['2024 toplam',3.0],['2024 konaklamalı',0.9],['2025 toplam',4.0],['2025 konaklamalı',1.0]],[2,3],'Toplam “3 milyon üzeri” ile “4 milyon” arasında kaynağa göre değişiyor; günübirlik sayımı yöntemi belirsiz. Kaynak: DHA (METOSAD/MARTOD), Bakan Yardımcısı, Vali.'],
+ ['Bakanlık belgeli konaklama, 2022 (bin kişi)',[['Yerli',465.1],['Yabancı',41.5]],[1],'Toplam 506,6 bin; yalnızca belgeli tesisler. Kaynak: Kültür ve Turizm Bakanlığı (Kapadokya Üniv. açık erişim).']];
+mk('tu',TU,['Ziyaretçi','2022 belgeli']);
+var GT=[['Kişi başına GSYH, Mardin ($)',[['2020',4821],['2021',5276],['2022',5772],['2023',6531],['2024',7537]],[4],'2020–2024’te yaklaşık +%56 (kendi hesabım). Kaynak: TÜİK il bazında GSYH (Pusula Haber).'],
+ ['Türkiye ortalamasına oran (%)',[['2020',57.4],['2021',56.0],['2022',55.3],['2023',50.2],['2024',49.2]],[4],'Mardin / Türkiye ortalaması (kendi hesabım). Sürekli düşüş. Kaynak: TÜİK (Pusula Haber).'],
+ ['Komşu ve benzer iller, 2024 ($)',[['Türkiye ortalaması',15325],['Siirt',7975],['Kilis',7724],['Mardin',7537],['Diyarbakır',7464],['Batman',7202],['Bitlis',7063],['Muş',7016],['Şanlıurfa',5731]],[3],'Mardin bu grupta orta sırada, ortalamanın yaklaşık yarısında. Kaynak: TÜİK (Rudaw, Yozgatçamlık).'],
+ ['Nüfus (bin kişi)',[['2024',895.9],['2025',903.6]],[1],'2025’te +7.665 kişi. Kaynak: TÜİK ADNKS (Rudaw).'],
+ ['İlçe nüfusu, 2024 (bin kişi)',[['Kızıltepe',275.5],['Artuklu',197.8],['Midyat',124.5],['Yeşilli',13.0]],[0],'Diğer ilçeler için güvenilir rakam bulunamadı. Kaynak: Emlakjet demografi (TÜİK).']];
+mk('gt',GT,['Gelir seyri','Ortalamaya oran','Komşu iller','Nüfus','İlçeler']);
+</script>
+</body>
+</html>
