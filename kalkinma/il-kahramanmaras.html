@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kahramanmaraş | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İle özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#9a1b1b;--a2:#e8a317;--a3:#0f766e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Kahramanmaraş</span><h1>Kahramanmaraş: Tekstil, Ağır Sanayi ve Biber; Depremden Toparlanan Bir Üretim Kenti</h1><p>1.134.105 nüfuslu Kahramanmaraş’ın kişi başına GSYH’si 2024’te 10.430 $ ile 81 il arasında 52. sırada ve Türkiye ortalamasının yaklaşık %68’i. Ekonominin çekirdeği tekstil ve hazır giyim; çimento, kâğıt, metal ve gıda (Maraş biberi, dondurma) yanında duruyor. 6 Şubat 2023 depremleri sonrası ihracat 2022’deki yaklaşık 1,5 milyar $’dan 2024’te yaklaşık 1,2 milyar $’a indi ve 2026 ilk yarıda yıllık %2 daha geriledi. Ama ilin sektörel GSYH payını, resmî il ihracat tablosunu ve turizm istatistiğini doğrulanmış bir kaynakta bulamadım. Veri bulamadığım ya da kaynakların tutmadığı yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>10.430 $</b><span>Kişi başına GSYH (2024), 81 il arasında 52.; Türkiye ort. 15.325 $’ın yaklaşık %68’i (oran kendi hesabım; TÜİK)</span></div><div class="k"><b>1.134.105</b><span>Nüfus (2025); 2022’de 1.177.436 idi, yaklaşık −%3,7 (kendi hesabım); son bir yılda +17.487</span></div><div class="k"><b>~1,2 milyar $</b><span>İhracat, 2024 (KMTSO başkan vekili beyanı); 2022’de ~1,5 milyar $; resmî il tablosu bulunamadı</span></div><div class="k"><b>501,5 mn $</b><span>Tekstil ve ham madde ihracatı, 2024 ilk 9 ay, +%12,2 (KMTSO verisi, haber)</span></div><div class="k"><b>~31 bin</b><span>Erkenez OSB’de istihdam; 200 sanayi sicil belgeli firma (haber; yıl belirsiz)</span></div><div class="k"><b>%17,1</b><span>TR63 (Hatay, Osmaniye, Kahramanmaraş) işsizlik oranı, 2022 (İŞKUR raporu); il düzeyi güncel oran bulunamadı</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus-Deprem</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, İŞKUR, oda başkanı beyanları, yerel ve ulusal basın). Yan yana okunmaları kesin bir karşılaştırma değildir.</li><li>Sektörlerin il GSYH’sindeki payını ve sektörlere göre istihdam ve cirosunu doğrulanmış bir tabloyla bulamadım. “Motor” etiketi kurum ve tesis varlığına, ihracat ve istihdam beyanlarına dayanıyor, katma değer ölçümüne değil.</li><li>Deprem sonrası konut teslim rakamları kaynaklar arasında tutmuyor; bu yüzden toplam bir sayı vermedim. Turizm istatistiğini bulamadım.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>Dış Ticaret: Deprem Çukuru ve Kısmi Toparlanma</h2>
+<p class="sub">İl ihracatı için elimde resmî TİM tablosu değil, oda başkanı beyanları ve haber aktarımları var.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>KMTSO Başkan Vekili’ne göre ihracat deprem öncesi 2022’de 1,5 milyar $ idi; 2023’te 1 milyara zor ulaşıldı, 2024’te yaklaşık 1,2 milyar $ oldu. Sigorta tazminatlarıyla sanayicinin yatırıma döndüğünü söyleyip 2025 için 2 milyar $ hedefi koymuş (beyan ve hedef).</li><li>2026 ocak-haziranda Kahramanmaraş’ın ihracatı yüzde 2 azalışla yaklaşık 625 milyon $ oldu (haber aktarımı); bölgede ihracatı düşen dört ilden biri (Diyarbakır, Adıyaman, Malatya ile birlikte). 11 depremzede ilin toplamı ise %7,34 artışla 10,07 milyar $’a çıktı.</li><li>Tekstil ve ham maddeler 2024’ün ilk 9 ayında 501,5 milyon $ (+%12,2); ağırlıklı pazar İtalya. Ayrı bir aktarımda ihracatçı firmaların 134 ülkeye sattığı, en büyük alıcıların İtalya, Almanya ve Rusya olduğu yazıyor (yıl belirsiz).</li><li>Maraş dondurması ihracatı küçük: “geçen yıl” 2,6 milyon $, yılın ilk 6 ayında 820 bin $ (esnaf odası başkanı; yıl belirsiz). Maraş biberi 2023’te yaklaşık 800 bin $ (belediye başkanı).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tekstil ihracatı 2023’e göre 2024’te %12,2 arttı.</li><li>Sanayicinin yatırıma dönmesi ve yeni OSB’ler 2025-2026 için canlanma beklentisi doğuruyor (beyan).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>2026 ilk yarıda ihracat hâlâ düşüyor (−%2) ve yıllık düzey 2022’nin altında görünüyor.</li><li>2025 için konan 2 milyar $ hedefinin tuttuğuna dair veri bulamadım.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Yıllık ihracat rakamları yuvarlak ve oda yöneticisi beyanıdır; TİM’in il tablosunu bulamadım. İhracat/ithalat toplamı ve ihracatın ithalatı karşılama oranı yok.</li><li>Tekstil serisinde 2022 değeri farklı bir aktarımdan; 9 aylık dönemler karşılaştırılırken revizyon farkı olabilir. 2026 rakamı depremzede 11 ili listeleyen haberlerden; tablonun kendisini görmedim.</li><li>İşyeri bazlı ihracat anketi, Ar-Ge oranı ya da e-ticaret göstergesini il için bulamadım.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Sanayi: Tekstil Başı Çekiyor, Ağır Sanayi Yanında</h2>
+<p class="sub">Çok ayaklı bir üretim ili; deprem sonrası OSB’lerde yeniden yatırım ve yeni bölgeler gündemde.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>İŞKUR il müdürlüğü raporuna göre tekstil ve hazır giyim istihdamın ve ihracatın temelini oluşturuyor; onları çelik mutfak eşyaları izliyor. Tamamlanan yatırımlarda tekstil, inşaat-çimento ve enerji öne çıkıyor; devam eden yatırımlarda enerji, gıda ve altyapı ilk üçte (2023 raporu).</li><li>Eski bir röportajda (yıl belirsiz, 2013-2018 dönemi verileri) ilde 1.800 sanayi tesisinin olduğu, 2013-2018’de 624 projeyle 2,5 milyar $ yatırım yapıldığı, iki çimento tesisinin Türkiye üretiminin %10’unu, iki kâğıt fabrikasının %20’sini karşıladığı söyleniyor; bu payları eski beyan olarak okumak gerek.</li><li>Erkenez OSB’de 200 sanayi sicil belgeli firma, yaklaşık 31 bin istihdam ve 656 MW kurulu güç anılıyor (haber; yıl belirsiz). TOBB Başkanı 4 OSB’nin yetmediğini söylüyor. 2022’de Aksu, Erkenez ve Türkoğlu-2 OSB’lerin tüzel kişilik kazandığı haberi var.</li><li>Eski adıyla Tekstil İhtisas OSB olan Tomsuklu OSB’de 3.500 dönümlük saha yatırımcıya açıldı; proje tamamlanınca yaklaşık 30 bin kişiye istihdam öngörülüyor (OSB başkanı beyanı). TUSAŞ’ın şehre 1 milyar TL’lik yatırım lansmanı yapıldığı ve Lezita’nın yaklaşık 130 milyon € değerinde piliç eti entegre tesisi duyurduğu haber olarak çıktı.</li><li>İŞKUR 2023: 21.217 açık iş bildirildi, 46.621 kişiyi özel sektör işe aldı, İŞKUR 2.298 kişiyi yerleştirdi; iş arayan başvurucu 41.482. Çoğu başvuran ilköğretim ve lise mezunu; en kalabalık grup nitelik gerektirmeyen meslekler (19.092).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tekstil, çimento, kâğıt, metal ve gıda arasında dağılmış geniş bir sanayi tabanı.</li><li>Yeni OSB’ler, TUSAŞ ve piliç entegre tesisi duyuruları sanayi altyapısını genişletme sinyali (beyan).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kahramanmaraş, Hatay ve Malatya oda başkanlarına göre çalışan ve fabrika sayıları hâlâ deprem öncesine ulaşmadı (Bloomberg HT, 2025).</li><li>Sanayi arsası yetersiz ve pahalı; Tomsuklu OSB’nin ilerleyişi yavaş bulunuyor (köşe yazısı; yıl belirsiz).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Sektörlere göre istihdam, ciro ve üretim miktarlarını bulamadım. Erkenez OSB’nin 31 bin istihdamı ve Tomsuklu’nun 30 bin hedefi beyandır, doğrulanmış kayıt değildir. “Eski beyan” dediğim paylar (çimento %10, kâğıt %20, yatırımın %15’i) güncel sayılmamalı.</li><li>TUSAŞ ve Lezita yatırımlarının gerçekleşme durumunu bulamadım; haberler duyuru niteliğinde. İŞKUR’un 2023 raporu depremin yaşandığı yıla ait ve deprem etkisini ayrıca ölçmüyor.</li><li>İŞKUR’un il işgücü piyasası araştırmasının (işyeri anketi) Kahramanmaraş sonuçlarına ulaşamadım; burada yalnızca faaliyet raporunun idari kayıtları var.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım ve Gıda: Biber, Dondurma, Ceviz, Elbistan Ovası</h2>
+<p class="sub">Coğrafi işaretli ürünler ve geniş ova tarımı; ton ve alan verisi sınırlı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Belediye başkanına göre Maraş biberi 13 bin dekarda yaklaşık 30 bin ton üretiliyor, işlenmemiş biberin %10’unu karşılayan ilin 2024’teki payının %15’e çıkması bekleniyor. 500’den fazla çiftçi üretiyor, 66 firma pul biber, toz biber ve isot olarak işliyor. Çiftçiye %75 hibeyle yaklaşık 1 milyon fide dağıtıldı (2024). Kahramanmaraş’ın 30 coğrafi işaretli ürünü var (aynı beyan).</li><li>Ceviz üretiminde Kahramanmaraş Türkiye’nin üçüncü ilidir (TÜİK 2025’e atıf yapan akademik makale).</li><li>Türkiye’nin en büyük dördüncü ovası olarak anılan Elbistan Ovası’nda buğday, arpa ve şeker pancarı öne çıkıyor (köşe yazısı).</li><li>Eski bir haber başlığında “denizi olmayan kentten 25 milyon dolarlık balık ihracatı” geçiyor; içeriğine ve yılına ulaşamadım.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Coğrafi işaretli ürün zenginliği ve biberde işleme sanayisi (66 firma).</li><li>Ceviz gibi uzun vadeli ürünlerde ülke ölçeğinde üst sıra.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Biber ve dondurma ihracatı milyon dolar düzeyinde; ilin toplam ihracatının küçük bir parçası.</li><li>Buğday, arpa ve pamuk gibi ana ürünlerin ton verisini bulamadım; tarımın il ekonomisindeki ağırlığı ölçülemedi.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Biber rakamları belediye başkanının konuşmasına dayanıyor; 2024 payı “öngörü”dür. Dondurma ihracatı rakamlarının yılı belli değil.</li><li>Hayvancılık, süt, tarımın GSYH ve istihdam payı, çiftçi geliri ve Tarım ve Orman Bakanlığı’nın Kahramanmaraş yatırım rehberindeki tablolar bulunamadı.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm ve Marka Şehir: Veri Yok</h2>
+<p class="sub">Elimde ziyaretçi sayısı değil, “marka şehir” anlatısı ve el sanatları eğitimi var.</p>
+<div class="g2"><div class="card"><h3>Okuma notu</h3><ul><li>TOBB Başkanı Kahramanmaraş’ı dondurması, biberi, tarhanası, ahşap oymacılığı ve bakır işlemeciliğiyle ülkenin marka şehirlerinden biri olarak anıyor (konuşma).</li><li>İŞKUR’un 2023 eğitim planında ahşap oymacılığı, bakırcılık, Maraş işi ve halı-kilim gibi el sanatı kursları yer alıyor.</li></ul></div><div class="card"><h3>Dikkat</h3><ul><li>Konaklayan turist, yatak sayısı, turizm geliri ve depremin turizme etkisi için doğrulanmış veri bulamadım.</li><li>Turizm bu sayfada “uyuyan potansiyel” etiketli; ölçülmüş bir güç değil (yorum).</li></ul></div></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve Deprem Sonrası</h2>
+<p class="sub">TÜİK il GSYH (2024, cari fiyat), nüfus verileri ve İŞKUR raporu</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Kahramanmaraş kişi başına GSYH’de 2024’te 342.287 TL (10.430 $) ile 52.; Hatay 49. (10.570 $), Adıyaman 56. (9.977 $), Gaziantep 60. (318.204 TL), Osmaniye 61. (316.158 TL). Türkiye ortalaması 503.076 TL (15.325 $), Ankara 788.859 TL (TÜİK). Adıyaman bir önceki yıla göre en hızlı artışı (%31,4) gösteren il oldu.</li><li>Nüfus 2022’de 1.177.436 idi; 2025’te 1.134.105 (haber ve ansiklopedi aktarımı). Haberlere göre son bir yılda 17.487 kişi arttı, yani 2024 nüfusu yaklaşık 1.116.618 (kendi hesabım). 2022’de il net göç vermişti: 29.319 giriş, 34.501 çıkış.</li><li>2022’de çocuk payı %16,9, 15-64 yaş %74,2, 65 üzeri %8,9 idi (İŞKUR raporu, TÜİK’ten).</li><li>TR63 bölgesinin (Hatay, Osmaniye, Kahramanmaraş) 2022 işsizlik oranı %17,1, işgücüne katılım %48,1, istihdam oranı %39,9; İŞKUR raporu Türkiye işsizliğini aynı yıl %12 veriyor.</li><li>Depremin merkez ilçesi Pazarcık. Bakan Kurum bir konuşmasında Kahramanmaraş’ta 34 bin konut ve işyeri teslim edildiğini, toplam hedefin 74 bine çıkarılacağını söylemişti (tarihi belirsiz beyan).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus son yılda yeniden artmaya başladı; konut teslimleri ve ticaretin canlanması gösteriliyor.</li><li>Gelir düzeyi Gaziantep ve Osmaniye’nin üzerinde (TL).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Nüfus 2022’ye göre yaklaşık %3,7 düşük; Elbistan gibi ilçelerde kayıp daha yüksek.</li><li>Gelir Türkiye ortalamasının yaklaşık %68’i, Ankara’nın yaklaşık %43’ü (kendi hesabım).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Kahramanmaraş’a özgü güncel işsizlik oranını bulamadım; %17,1 bölge ve deprem öncesi 2022 verisidir. 2023 nüfusunu da bulamadım.</li><li>Nüfus kaynağı bir haber ve bir ansiklopedi sayfası; TÜİK tablosunu doğrudan görmedim. Konut teslim sayıları kaynaklar arasında tutmuyor (bölge toplamı bir yerde 201.580, başka bir yerde Kasım 2025 itibarıyla 86.754), bu yüzden toplam vermedim.</li><li>Dolar ve TL karşılıkları TÜİK’in açıkladığı değerlerdir; sektörel GSYH payları bulunamadı.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">11 ilçe: Onikişubat ve Dulkadiroğlu (merkez), Afşin, Andırın, Çağlayancerit, Ekinözü, Elbistan, Göksun, Nurhak, Pazarcık ve Türkoğlu. İlçe ekonomisi için güncel veri sınırlı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus 2022 → 2025</th><th>Ekonomik karakter</th></tr>
+<tr><td>Onikişubat</td><td>453.730 → 436.385 (−%3,8)</td><td>İlin en kalabalık ilçesi; merkez yerleşim ve ticaret (genel anlatım); Maraş biberi hasadı burada</td></tr>
+<tr><td>Dulkadiroğlu</td><td>226.409 → 217.530 (−%3,9)</td><td>Merkez ilçe; ekonomik veri bulunamadı</td></tr>
+<tr><td>Elbistan</td><td>141.307 → 130.246 (−%7,8)</td><td>Elbistan Ovası’nda buğday, arpa, şeker pancarı; Elbistan OSB’de 12 fabrika haberi (2024)</td></tr>
+<tr><td>Afşin</td><td>80.044 (2022)</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Türkoğlu</td><td>78.976 (2022)</td><td>Türkoğlu-2 OSB tüzel kişilik kazandı (2022)</td></tr>
+<tr><td>Pazarcık</td><td>70.173 (2022)</td><td>İlk depremin merkezi; ekonomik veri bulunamadı</td></tr>
+<tr><td>Göksun, Andırın, Çağlayancerit, Nurhak, Ekinözü</td><td>50.676; 31.224; 22.350; 12.257; 10.290 (2022)</td><td>Ekonomik veri bulunamadı</td></tr>
+</table><p class="note" style="margin:10px 0 0">2022 nüfusları İŞKUR faaliyet raporundan (TÜİK), 2025 nüfusları bir ansiklopedi sayfasından; değişim yüzdeleri kendi hesabım. Diğer ilçelerin 2025 nüfusunu bulamadım. İlçe bazında GSYH, istihdam ve ihracat verisi yok.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Kahramanmaraş</h3><p style="margin:0">Kahramanmaraş, tekstil ve hazır giyimin başını çektiği, çimento, kâğıt, metal ve gıdayla desteklenen geniş bir üretim tabanına sahip; ama kişi başına geliri Türkiye ortalamasının yaklaşık %68’inde. Deprem sonrası ihracat 2022’deki yaklaşık 1,5 milyar $’dan 2024’te yaklaşık 1,2 milyar $’a indi, 2026 ilk yarıda hâlâ geriliyor ve oda başkanlarına göre çalışan ve fabrika sayıları eski düzeye dönmedi; nüfus ise son yılda yeniden artıyor. Yeni OSB’ler, TUSAŞ ve gıda yatırımlarının bu kaybı ne kadar kapatacağı henüz ölçülemiyor (yorum).</p></div>
+<div class="three"><div><b>HAMLE 1</b>Veriyi netleştirmek: il ihracatını, OSB istihdamını ve deprem sonrası konut teslimlerini ilçe bazında yıllık yayımlamak.</div><div><b>HAMLE 2</b>Tomsuklu OSB ve yeni sanayi arsalarını hızlandırmak; duyurulan yatırımların (TUSAŞ, Lezita) gerçekleşmesini izlemek.</div><div><b>HAMLE 3</b>Tekstil dışına çeşitlenmek: biber, dondurma, ceviz gibi coğrafi işaretli ürünlerde katma değeri ve ihracatı artırmak.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Tekstil yoğunluğunun ve depremin ardından yeniden yapılanmanın ilin geleceği için risk mi fırsat mı olduğu tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>Kahramanmaraş’ın tekstil ağırlıklı yapısı deprem sonrası toparlanmada avantaj mı, yoksa tek ayağa bağımlılık riski mi?</li><li>İhracat 2022’de ~1,5, 2024’te ~1,2 milyar $ iken 2025 hedefi 2 milyar $ konmuştu: bu hedef neden bu kadar yüksek, hangi koşullarda gerçekçi olur?</li><li>Nüfus 2022’ye göre %3,7 düşük ama son yılda arttı: göç edenler dönüyor mu, yoksa konut teslimi mi nüfusu sayıma geri taşıyor?</li><li>Maraş biberi ve dondurması gibi güçlü markalar neden milyon dolarlık ihracat düzeyinde kalıyor?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Habertürk il sıralaması, CNBC-e, Capital, Olay Medya; TÜİK “İl Bazında Gayrisafi Yurt İçi Hasıla, 2024” duyurusu)</li>
+<li>Nüfus ve demografi: Habertürk (Kahramanmaraş nüfusu), Küre Ansiklopedi (2025 ilçe nüfusları); İŞKUR Kahramanmaraş İl Müdürlüğü 2023 Faaliyet Raporu (2022 nüfus, göç, işgücü, işe yerleştirme, rekabet gücü yüksek sektörler)</li>
+<li>Dış ticaret: Yeni Asır ve Benguturk/AA (KMTSO başkan vekili beyanı); Takvim (8 Temmuz 2026), Sabah, Capital ve Milliyet Uzmanpara (depremzede 11 ilin ihracatı); Ekonomi Gazetesi, Sanayi Gazetesi, Ekonomist (tekstil ihracatı); Habertürk Yerel (dondurma ihracatı)</li>
+<li>Sanayi: CNN Türk ve Milliyet (TOBB Başkanı konuşması), Sanayi Gazetesi (OSB haberleri), Ekonomi Gazetesi (Erkenez OSB, Tomsuklu OSB, Lezita), Ekonomist (eski sanayi röportajı), Dünya köşe yazısı, Bloomberg HT (Kasım 2025)</li>
+<li>Tarım ve marka: Cumhuriyet (Maraş biberi hasadı, 16 Ağustos 2024), DergiPark (ceviz makalesi), Ekonomi Gazetesi (Elbistan Ovası köşe yazısı), Hürriyet (balık ihracatı başlığı)</li>
+<li>Deprem ve konut: NTV (Bakan Kurum konuşması), Sanayi Gazetesi, Medyascope</li>
+</ul><p class="note">Çoğu veri basın aktarımı, oda başkanı veya bakan beyanıdır; resmî tabloların doğrudan alıntısı değildir. TİM il ihracat tablosu, Kahramanmaraş’a özgü güncel işsizlik ve istihdam oranı, 2023 nüfusu, ilçe GSYH ve ekonomi verileri, sektörlerin GSYH payı ve ciroları, tarımın il ekonomisindeki payı ve ton verileri, hayvancılık, turizm istatistikleri ve konut teslimlerinin tutarlı bir toplamı doğrulanmış kaynakla bulunamadığı için sayfada yok. %68 (gelir oranı), %43 (Ankara’ya oran), −%3,7 (2022-2025 nüfus), 1.116.618 (2024 nüfusu), −%3,8, −%3,9 ve −%7,8 (ilçe nüfus değişimi), %10,8 (açık işe yerleştirme oranı, yalnızca not edilmedi) ve 2023→2024 karşılaştırmaları kendi hesabımdır. Tarih belirtilmeyen beyanlar (oda başkanı, belediye başkanı, bakan) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: TEKSTİL',ad:'Tekstil ve hazır giyim',big:'501,5 mn $',alt:'Tekstil ve ham madde ihracatı, 2024 ilk 9 ay, +%12,2 (KMTSO); yaklaşık 100 ihracatçı firma',y:'İstihdam ve ihracatın temeli (İŞKUR 2023); onlarca ülkeye ihracat (oda beyanı).',n:'2022’nin ilk 9 ayındaki 681,4 milyon $’ın altında; sektör bazında istihdam ve ciro bulunamadı.'},
+ {c:'good',chip:'MOTOR: AĞIR SANAYİ',ad:'Çimento, kâğıt, metal ve enerji',big:'~31 bin',alt:'Erkenez OSB’de istihdam; 200 sanayi sicil belgeli firma, 656 MW (haber; yıl belirsiz)',y:'Çelik mutfak eşyası, çimento ve enerji İŞKUR raporunda öne çıkan alanlar; enerji devam eden yatırımlarda ilk üçte.',n:'Çimento %10, kâğıt %20 gibi Türkiye payları eski beyan; sektörel ciro ve ihracat bulunamadı.'},
+ {c:'good',chip:'MOTOR: TARIM-GIDA',ad:'Maraş biberi, dondurma, ceviz',big:'30 bin ton',alt:'Maraş biberi yıllık üretim, 13 bin dekar (belediye başkanı beyanı, 2024); ceviz üretiminde Türkiye 3.’sü',y:'30 coğrafi işaretli ürün; biberde 66 işleme firması; Elbistan Ovası’nda ova tarımı.',n:'Biber ihracatı 2023’te yalnızca ~800 bin $; tarımın GSYH ve istihdam payı bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: İHRACAT',ad:'İhracat',big:'~1,2 milyar $',alt:'2024 (KMTSO başkan vekili); 2022’de ~1,5 milyar $; 2026 ocak-haziran ~625 milyon $, yıllık −%2',y:'2023’teki ~1 milyar $ dibinden toparlanma; 2025 için 2 milyar $ hedefi vardı (hedef).',n:'2026 ilk yarıda hâlâ düşüş; 2 milyar $ hedefinin gerçekleştiğine dair veri bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İşsizlik ve işgücü',big:'%17,1',alt:'TR63 (Hatay, Osmaniye, Kahramanmaraş) işsizlik oranı, 2022 (İŞKUR raporu); Türkiye %12',y:'2023’te özel sektör 46.621 kişi işe aldı; 21.217 açık iş bildirildi.',n:'İŞKUR 2.298 kişiyi yerleştirdi; güncel il işsizliği bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: GELİR',ad:'Gelir düzeyi',big:'52 / 81',alt:'Kişi başına GSYH sırası (2024; 10.430 $; Türkiye ort. 15.325 $)',y:'Gaziantep (60.) ve Osmaniye (61.) üstünde (TL); Hatay (49.) ile yakın.',n:'Ortalamanın yaklaşık %68’i; Ankara’nın yaklaşık %43’ü (kendi hesabım).'},
+ {c:'warn',chip:'KIRILGAN: NÜFUS',ad:'Nüfus ve deprem etkisi',big:'−%3,7',alt:'2022’den 2025’e: 1.177.436 → 1.134.105 (kendi hesabım)',y:'Son bir yılda +17.487 kişi; konut teslimleriyle toparlanma haberi.',n:'Deprem öncesi seviyenin altında; Elbistan’da −%7,8; 2023 verisi bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: YENİ YATIRIM',ad:'TUSAŞ, Tomsuklu OSB ve yeni tesisler',big:'1 milyar TL',alt:'TUSAŞ yatırım lansmanı tutarı (KMTSO başkanı); Tomsuklu OSB’de 3.500 dönüm yatırımcıya açık',y:'Tomsuklu OSB tamamlanınca ~30 bin istihdam öngörüsü; Lezita 130 milyon € piliç yatırımı duyurusu.',n:'Hepsi beyan ve duyuru; gerçekleşen istihdam ve üretim bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm ve marka şehir',big:'Veri yok',alt:'Ziyaretçi, yatak ve gelir verisi bulunamadı',y:'Dondurma, biber, tarhana, bakır ve ahşap oymacılığıyla “marka şehir” anlatısı (TOBB Başkanı).',n:'Ölçülmüş turizm gücü yok; deprem sonrası etkisi bulunamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['Yıllık ihracat (milyon $), KMTSO beyanı',[['2022 (deprem öncesi)',1500],['2023',1000],['2024',1200]],[2],'Oda başkan vekilinin yuvarlak beyanıdır; TİM il tablosu değildir. Kaynak: Yeni Asır, AA aktarımı (Şubat 2025).'],
+ ['Tekstil ve ham madde ihracatı, ilk 9 ay (milyon $)',[['2022',681.4],['2023',446.9],['2024',501.5]],[2],'KMTSO verisi, haber aktarımı; 2022 değeri ayrı bir aktarımdan. Kaynak: Ekonomi Gazetesi, Sanayi Gazetesi.'],
+ ['Depremzede iller, 2026 ocak-haziran ihracat (milyon $)',[['Gaziantep',5037],['Hatay',1808],['Adana',1690],['Kahramanmaraş',625.1],['Elazığ',249.5],['Şanlıurfa',181.9],['Osmaniye',120.5]],[3],'11 depremzede ilin listelendiği haberlerden; Kahramanmaraş −%2, Gaziantep +%3,9, Adana +%16,3, Osmaniye +%66,5. Tablonun kendisini görmedim. Kaynak: Takvim, Sabah.']];
+mk('ih',IH,['Yıllık ihracat','Tekstil','Deprem bölgesi 2026']);
+var SA=[['Açık iş, işe alım ve başvuru, İŞKUR 2023 (kişi)',[['Özel sektörün işe aldığı',46621],['İş arayan başvuru',41482],['Bildirilen açık iş',21217],['İŞKUR’la işe yerleşen',2298]],[2],'İl İstihdam ve Mesleki Eğitim Kurulu 2023 faaliyet raporu; idari kayıt, yıllık toplam. Kaynak: İŞKUR Kahramanmaraş İl Müdürlüğü.'],
+ ['İş arayanlar, meslek grubu (kişi), İŞKUR 2023',[['Nitelik gerektirmeyen meslekler',19092],['Hizmet ve satış elemanları',6624],['Tesis ve makine operatörleri',4019],['Sanatkârlar ve ilgili işler',3567],['Büro hizmetleri',2905],['Teknisyenler ve tekniker',2376],['Profesyonel meslekler',2078]],[0],'Toplam 41.482 başvuru; yalnızca İŞKUR’a kayıtlı iş arayanlardır, il işsizliğinin ölçüsü değildir. Kaynak: İŞKUR 2023.'],
+ ['İş arayanlar, eğitim durumu (kişi), İŞKUR 2023',[['İlköğretim',15471],['Lise ve dengi',15441],['Önlisans',5002],['Lisans',3791],['İlkokul',933]],[2],'Okur-yazar olmayanlar, okur-yazarlar ve lisansüstü gruplar grafikte yok. Kaynak: İŞKUR 2023.']];
+mk('sa',SA,['İstihdam kayıtları','Meslek','Eğitim']);
+var TA=[['Maraş biberi ve dondurma ihracatı (bin $)',[['Maraş biberi, 2023',800],['Maraş dondurması, “geçen yıl”',2600],['Maraş dondurması, yılın ilk 6 ayı',820]],[0],'Biber rakamı belediye başkanı beyanı (Ağustos 2024); dondurma rakamları esnaf odası başkanı beyanı, yıl belirsiz. Kaynak: Cumhuriyet, Habertürk Yerel.'],
+ ['Maraş biberinin Türkiye üretimindeki payı (%), beyan',[['İşlenmemiş biberde mevcut pay',10],['2024 payı (öngörü)',15]],[1],'Belediye başkanının konuşmasına dayanır; ölçülmüş TÜİK payı değildir. Kaynak: Cumhuriyet, 16 Ağustos 2024.']];
+mk('ta',TA,['İhracat','Biber payı']);
+var GT=[['Kişi başına GSYH, 2024 (bin TL)',[['Ankara',788.9],['Türkiye ort.',503.1],['Kahramanmaraş',342.3],['Adıyaman',327.5],['Gaziantep',318.2],['Osmaniye',316.2],['Şanlıurfa',188.1]],[2],'Kahramanmaraş 81 il arasında 52.; Türkiye ortalamasının yaklaşık %68’i (kendi hesabım). Kaynak: TÜİK, Olay Medya ve Capital aktarımı.'],
+ ['Nüfus (bin kişi)',[['2022',1177.4],['2024 (türetilmiş)',1116.6],['2025',1134.1]],[2],'2022 İŞKUR raporundan (TÜİK); 2025 ve “son bir yılda +17.487” Habertürk’ten; 2024 değeri bu farktan kendi hesabımla türetildi. 2023 bulunamadı.'],
+ ['İlçe nüfusu, 2022 ve 2025 (bin kişi)',[['Onikişubat 2022',453.7],['Onikişubat 2025',436.4],['Dulkadiroğlu 2022',226.4],['Dulkadiroğlu 2025',217.5],['Elbistan 2022',141.3],['Elbistan 2025',130.2]],[1,3,5],'2022: İŞKUR raporu (TÜİK); 2025: Küre Ansiklopedi aktarımı, resmî tablo değil. Değişim: −%3,8, −%3,9 ve −%7,8 (kendi hesabım).']];
+mk('gt',GT,['Gelir','Nüfus','İlçeler']);
+</script>
+</body>
+</html>
