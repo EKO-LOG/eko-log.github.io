@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Samsun | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Osmaniye'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0e7490;--a2:#f59e0b;--a3:#15803d"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Samsun</span><h1>Samsun: Liman Kenti, Çeltik ve Fındık Ovası, Geniş Tabanlı Bir Ekonomi</h1><p>Yaklaşık 1,39 milyon nüfuslu Samsun’un kişi başına GSYH’si 2024’te 11.253 $ ile 81 il arasında 39. sırada ve Türkiye ortalamasının yaklaşık %73,4’ü. Samsun TSO’ya göre ihracat 2009’daki 304 milyon $’dan 2025’te 1,65 milyar $’a çıktı ve 183 ülkeye gidiyor. Tarımda çeltik (2025’te 183 bin ton) ve fındık öne çıkıyor; ama fındıkta 2025 beklentisi 2024’ün yaklaşık beşte bir altında. İhracat için birbirini tutmayan seriler var; veri bulamadığım ya da kaynakların çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>11.253 $</b><span>Kişi başına GSYH (2024), 81 il arasında 39.; Türkiye ort. 15.325 $’ın yaklaşık %73,4’ü (oran kendi hesabım; TÜİK)</span></div><div class="k"><b>1.392.403</b><span>Nüfus (“TÜİK’in en güncel verisi”; yıl haberde belirtilmemiş), 17 ilçe; 2020’de 1.356.079 idi</span></div><div class="k"><b>1,65 mlr $</b><span>2025 ihracatı (Samsun TSO aktarımı), 183 ülke ve 94 fasıl; 2009’da 304 mn $</span></div><div class="k"><b>183 bin ton</b><span>2025 çeltik üretimi, 231 bin dekar; Bafra tek başına 124,7 bin ton (il tarım müdürlüğü aktarımı)</span></div><div class="k"><b>~91,5 bin ton</b><span>2025 fındık rekolte beklentisi; 2024’te 114 bin ton üretilmişti (il tarım müdürü)</span></div><div class="k"><b>490.655</b><span>Yılın ilk 9 ayında en az bir gece konaklayan turist (TGA; yıl haberde belirtilmemiş, büyük olasılıkla 2025)</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">8 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, Tarım ve Orman Bakanlığı, oda ve kurum açıklamaları, yerel basın). Yan yana okunmaları kesin bir karşılaştırma değildir.</li><li>Sektörlerin il GSYH’sindeki payını, istihdamını ve OSB doluluğunu doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat ve üretim verilerine dayanıyor, katma değer ölçümüne değil.</li><li>Samsun’a özgü güncel işsizlik oranını, 2025 ihracat kırılımını ve ilçe bazlı ekonomik verileri bulamadım; ilgili bölümlerde ayrıca yazdım. “Baskı altında” etiketini kullanacak kadar güçlü veri çıkmadı.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>İhracat: Büyük ve Çeşitli, Ama Seriler Karışık</h2>
+<p class="sub">Samsun yaklaşık 1,6 milyar $’lık ihracatla büyük bir ihracatçı il; ama farklı kurumların rakamları aynı şeyi ölçmüyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Samsun TSO’ya göre ihracat 2009’da yaklaşık 304 milyon $, 2021’de 1,29 milyar $, 2025’te 1.648,5 milyon $ (Samsun TSO meclis toplantısı aktarımı). 2021’den 2025’e yaklaşık +%28 (kendi hesabım). 2025’te 183 ülkeye, 94 fasılda ihracat yapılmış; odaya göre 163 sanayi ürün grubu var.</li><li>TÜİK faaliyet ili serisinde Ocak–Haziran 2025 ihracatı 839,9 milyon $ (2024’te 844,7; yaklaşık %−0,6, kendi hesabım); Ocak–Temmuz 2025’te 1.008,9 milyon $ ihracat, 915,4 milyon $ ithalat. Aynı dönemde “illere göre” (GTS) ihracat 780,6 milyon $.</li><li>2026: Ocak ayında Samsun, Türkiye’de ihracatı en çok artan beşinci il oldu (+47 milyon $; Ticaret Bakanlığı aktarımı). Mart 2026’da ihracat 86,6 milyon $ (25. sıra), ithalat 95,2 milyon $ (19. sıra; TÜİK, Yeni Birlik). Mart ayı karşılama oranı yaklaşık %91 (kendi hesabım).</li><li>Odanın 2022 değerlendirmesine göre öne çıkan ürünler demir-çelik, değirmencilik ürünleri, motorlu kara taşıtları ve kazanlar; pazarlar Rusya, ABD, Peru, Hollanda ve Fas. Güncel kırılımı bulamadım.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat 2009’dan beri yaklaşık 5,4 katına çıktı (kendi hesabım) ve çok sayıda ülkeye dağılıyor.</li><li>Ocak–Temmuz 2025’te faaliyet ili serisinde dış ticaret fazlası var (yaklaşık 93,5 milyon $).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>2025’in ilk yarısında ihracat bir önceki yıla göre durağandı; Mart 2026’da ihracat gerilerken ithalat arttı.</li><li>Samsun’un ihracatının sektör ve firma bazında yoğunlaşması bilinmiyor; bu da risk ölçümünü zorlaştırıyor.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>2025 için en az üç farklı büyüklük var: TSO’nun 1.648,5 milyon $’lık yıllık rakamı, TÜİK faaliyet ili serisinde Ocak–Ekim 1.421 milyon $ ve GTS “illere göre” serisinde Ocak–Ekim 1.093 milyon $. Bunlar farklı tanımlara dayanıyor; hangisinin hangi sisteme ait olduğunu TSO rakamı için doğrulayamadım. Birbirine eklenmemeli.</li><li>Gümrük Müdürlüğü rakamları (meyve, metal cevheri, bakır, motorin, hurda, hububat) limandan geçen ürünleri gösterir; Samsun’da üretilen ürünlerle aynı olmayabilir. Kapsamını (yalnızca Samsun mu, Orta Karadeniz mi) doğrulayamadım.</li><li>2026 için ilin yarıyıl toplamını bulamadım; yalnızca ayrı aylık haberler var.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Sanayi: Tek Bir Alana Yaslanmayan Çeşitlilik</h2>
+<p class="sub">11 OSB ve çok sektörlü bir yapı; ama OSB istihdamı ve firma sayısı yok.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Samsun TSO başkanı şehrin belli bir alanda ihtisaslaşmadığını, bunun esneklik sağladığını söylüyor; öne çıkan sektörler ana metal, gıda, lojistik, mobilya ve medikal el aletleri (Samsunport röportajı, 2017) ve odanın UR-GE projeleri mobilya, medikal, inşaat/yapı malzemeleri ve gıdada yürüyor.</li><li>11 organize sanayi bölgesi var ve il 170’ten fazla ülkeye ihracat yapıyor (TSO başkanı, Habertürk). 2025 İSO “İkinci 500” listesinde 7 Samsunlu firma yer aldı.</li><li>Samsun Limanı 2008’de özelleştirildi; 2010’dan beri Cey Group işletiyor (Samsunport). Gıda OSB’sinden 100’den fazla ülkeye ihracat yapıldığı bildiriliyor (Tridge, 29.11.2025).</li><li>Samsun’un da içinde olduğu TR83 bölgesinde istihdamın %17,2’si sanayide (Türkiye %25,3); %38,4’ü tarımda (Türkiye %18,2) (OKA, yılı belirtilmeyen Covid etki raporu).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Sanayi çeşitli: metal, gıda, mobilya ve medikal bir arada; yedi firma İSO ikinci 500’de.</li><li>Liman ve OSB altyapısı var.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Bölgede sanayi istihdamı Türkiye ortalamasının gerisinde, tarım payı iki katından fazla (OKA raporu; yıl belirsiz).</li><li>Çeşitlilik, hiçbir sektörde derin bir uzmanlaşma olmadığı anlamına da gelebilir (yorum).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>TR83 verisi Samsun’a özgü değil; Samsun, Tokat, Çorum ve Amasya’yı kapsar ve raporun yılı belli değil. Samsun’un sanayi istihdamı ayrıca bilinmiyor.</li><li>OSB’lerin firma, işçi ve doluluk sayılarını bulamadım. İSO listesindeki firmaların adlarını ve cirolarını bu sayfaya almadım.</li><li>TSO ve belediye açıklamaları kurum görüşüdür; ölçülmüş bir sıralama değildir.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Çeltik, Fındık ve Sebze</h2>
+<p class="sub">Bafra ve Çarşamba ovaları, üç ova ve bir sahil havzası; ama iklim ve fiyat riski var.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>2025’te il genelinde 231.044 dekarda 183.424 ton çeltik elde edildi (dekarda ortalama 780 kg); Bafra 155.080 dekar ve 124.674 ton ile payın çoğunu veriyor. Yetkililer çeltiğin il ekonomisine katkısını yaklaşık 6 milyar TL, Bafra’nın payını yaklaşık 4 milyar TL olarak anlatıyor (beyan).</li><li>Fındık: yaklaşık 1,25 milyon dekar. 2024’te 114 bin ton üretildi; 2025 için yaklaşık 91,5 bin ton bekleniyor (il tarım müdürü, Halk TV). Çarşamba ve Terme üretim alanında ilk sırada.</li><li>TÜİK 2023 (Tarım ve Orman Bakanlığı yatırım rehberi): Türkiye üretimindeki pay lahanada %35,4, karnabaharda %27,9, çeltikte %17,5, fındıkta %17,3, kivide %13,1; buğday 234.905 ton ile %1,1.</li><li>Bafra ve Çarşamba ovaları, Vezirköprü ve sahil havzası ilin dört tarım havzası olarak anılıyor (vali).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Çeltik ekim alanı Bafra’da 2015’te 63 bin dekardan 2025’te 157 bin dekara çıktı (Bafra Ziraat Odası, beyan).</li><li>Lahana ve karnabaharda Türkiye payı yüksek; ürün çeşitliliği geniş.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>2025 fındık beklentisi 2024’ün yaklaşık %20 altında (91,5 / 114; kendi hesabım).</li><li>Bafra’da don ve sel tehdidi anlatılıyor; Çarşamba Ovası’nda şeker fabrikasının kapanmasından sonra sebzeden fındık ve kavağa geçildiğini söyleyen üretici anlatımları var (yerel haber, doğrulanmamış).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Çeltikte sıra için kaynaklar çelişiyor: il müdürü “Türkiye’de ikinci” diyor, eski bir kurum dergisi “üçüncü”; fındıkta Ordu’dan sonra ilin ikinci/üçüncü olduğu anlatılıyor. Bu yüzden sıra yazmadım, 2023 paylarını kullandım.</li><li>Fındık için 2023’te TÜİK 112.536 ton, 2024 için il müdürü 114 bin ton diyor; farklı kaynaklar, aynı serinin devamı olmayabilir.</li><li>Hayvancılık, balıkçılık, tarımın il GSYH ve istihdam payı ve çiftçi gelirleri verisini bulamadım. Fiyat verisi yok; fındık ve çeltik fiyat riskini ölçemedim.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Kentsel ve Günübirlik Ağırlıklı</h2>
+<p class="sub">Konaklayan turist sayısı büyüyor ama süre kısa; yabancı payı küçük.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>2022’de Samsun yaklaşık 643 bin turisti konaklama tesislerinde ağırladı: yaklaşık 587 bin yerli, 56 bin yabancı; ortalama geceleme 1,62 gün (Kapadokya Üniversitesi aktarımı). 2028 hedefi yaklaşık 1,03 milyon turist (934 bin yerli, 97 bin yabancı).</li><li>Yılın ilk 9 ayında en az bir gece konaklayan turist sayısı 490.655 (TGA aktarımı; yıl haberde yok).</li><li>2025’te Samsun Turizm Eylem Planı, 7 stratejik hedef, 14 öncelikli alan ve 50 politika önerisiyle tamamlandı (Habertürk).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>2022’den bugüne konaklamalı turist sayısı yükselmiş görünüyor (yıl farkı nedeniyle yorum).</li><li>Master plan ve eylem planı hazır; kamu ve üniversite iş birliği var.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ortalama geceleme 1,62 gün (2022); ziyaret kısa.</li><li>Yabancı turist payı yaklaşık %9 (56 / 643; kendi hesabım).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>İlk 9 ay verisinin yılını doğrulayamadım; 2022 ile karşılaştırılmamalı. Turizm geliri ve istihdamı, doluluk ve günübirlik ziyaretçi için güncel veri bulamadım.</li><li>Master planın uygulanıp uygulanmadığı belli değil; hedefler gerçekleşme değildir.</li></ul></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">TÜİK il GSYH (2024, cari fiyat), nüfus kayıtları ve bölge verileri</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Samsun kişi başına GSYH’de 2024’te 11.253 $ ile 39.; hemen önünde Karabük (11.265 $, 38.) ve Ardahan (11.731 $). Türkiye ortalaması 15.325 $; Bolu 16.703 $ ile 7. (TÜİK, Rudaw tablosu). TL karşılığı yaklaşık 369 bin TL (İstanbul’un TL/$ oranıyla; kendi hesabım).</li><li>Nüfus 2020’de 1.356.079, en güncel TÜİK değeri 1.392.403 (+%2,7; kendi hesabım). 65 yaş ve üzeri %14,3 (2025), ortalama hane büyüklüğü 2,94 (TÜİK Samsun Bölge Müdürlüğü).</li><li>Samsun nüfus kütüğüne kayıtlı 2.032.154 kişiden 952.535’i başka illerde yaşıyor (yaklaşık %47; kendi hesabım). İstanbul’da 413.585 Samsunlu var (TÜİK ADNKS 2025, Haber Gazetesi).</li><li>TÜİK 2025 Yaşam Koşulları Araştırması’na göre TR83 bölgesinde nüfusun %26,2’si yoksulluk ya da sosyal dışlanma riski altında (CHP Samsun İl Başkanı’nın aktarımı).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İlin büyüklüğü ve çok yönlü ekonomisi sayesinde gelir, birçok ilin üzerinde; Türkiye ortalamasının yaklaşık %73,4’ü.</li><li>Nüfus artış eğiliminde; merkez ilçelerde ve Atakum’da büyüme görülüyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının altında ve Bolu gibi komşu sanayi illerin gerisinde.</li><li>Kütüğe kayıtlıların yaklaşık yarısı ilin dışında yaşıyor: ilin gençleri başka illere gidiyor olabilir (yorum).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Samsun’a özgü 2025 işsizlik ve istihdam oranlarını bulamadım. TR83 için bulduğum İŞKUR rapor değerleri farklı yıllara ait ve birbiriyle tutmuyor; kullanmadım. Türkiye’de 2025 işsizlik %8,3 idi.</li><li>Yoksulluk riski oranı bölge (Samsun, Tokat, Çorum, Amasya) düzeyinde ve bir siyasi kişinin aktarımından; ilin kendisine ait değil.</li><li>“En güncel TÜİK” nüfus değerinin yılı haberde belirtilmemiş; ADNKS 2025 değeri olması büyük olasılık ama doğrulanmadı. Dolar karşılıkları kur dönüşümüne dayanır.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">17 ilçe; ilçe bazlı güncel nüfus ve ekonomi verisinin çoğu bulunamadı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus</th><th>Ekonomik karakter</th></tr>
+<tr><td>İlkadım</td><td>330.290 (en güncel; il nüfusunun %23,7)</td><td>İl merkezi; ticaret, hizmet, liman çevresi (genel anlatım)</td></tr>
+<tr><td>Atakum</td><td>221.082 (2020)</td><td>Genç nüfus ve üniversite öğrencisi yoğun; ilin en hızlı büyüyen merkez ilçesi (haber)</td></tr>
+<tr><td>Bafra</td><td>Bulunamadı</td><td>Çeltik merkezi: 155.080 dekar, 124.674 ton (2025)</td></tr>
+<tr><td>Çarşamba</td><td>Bulunamadı</td><td>Fındık ve ova tarımı; fındık üretim alanında ilk sırada</td></tr>
+<tr><td>Terme</td><td>Bulunamadı</td><td>Fındık üretim alanında ilk sırada; turizm ve tarım (haber)</td></tr>
+<tr><td>Alaçam</td><td>Bulunamadı</td><td>32 bin dekar çeltik, yaklaşık 30 bin ton beklentisi (yıl belirtilmemiş, haber)</td></tr>
+<tr><td>Yakakent</td><td>8.916 (en küçük ilçe)</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Diğer 9 ilçe</td><td>Bulunamadı</td><td>Canik, Tekkeköy, 19 Mayıs, Asarcık, Ayvacık, Havza, Kavak, Ladik, Salıpazarı ve Vezirköprü dahil; veri bulunamadı</td></tr>
+</table><p class="note" style="margin:10px 0 0">İlkadım ve Yakakent değerleri aynı haberden (yıl belirtilmemiş); Atakum değeri 2020 TÜİK verisidir ve diğer sütunla aynı yıl değildir. İlkadım’ın %23,7 payı 330.290 / 1.392.403’ten kendi hesabımdır. Eski bir nüfus sitesinde ilçe değerleri çok daha düşük görünüyor; yıl belirsiz olduğu için kullanmadım. İlçe bazında GSYH, istihdam veya ihracat verisi yok.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Samsun</h3><p style="margin:0">Samsun büyük ve çok yönlü bir il: ihracatı 2009’dan beri yaklaşık 5,4 katına çıktı ve 183 ülkeye gidiyor, tarımda çeltik ve fındık, sanayide metal, gıda ve mobilya öne çıkıyor. Tek bir sektöre bağımlı değil ama hiçbir alanda belirgin bir lider olmaması gelirin Türkiye ortalamasının yaklaşık %73,4’ünde kalmasıyla birlikte okunabilir (yorum). Zayıflığı, fındıktaki rekolte düşüşü, 2026’da ihracatın dalgalanması, nüfusun yaklaşık yarısının ilin dışında yaşaması ve ihracat serilerinin birbirini tutmaması.</p></div>
+<div class="three"><div><b>HAMLE 1</b>Ölçümü netleştirmek: faaliyet ili, GTS ve TSO ihracat serilerini şeffaf biçimde yayımlamak.</div><div><b>HAMLE 2</b>Tarımda iklim ve fiyat riskini azaltmak: fındık ve çeltikte işleme, depolama ve markalaşma (Bafra pirinci için coğrafi işaret çalışması sürüyor).</div><div><b>HAMLE 3</b>Gençleri ilde tutmak: üniversite, liman ve OSB’yi birbirine bağlayan nitelikli istihdam; turizmde kalış süresini uzatmak.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Çeşitlilik mi güçlü yan, ihtisaslaşma mı gerekli sorusu tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>Samsun’un ihracatı 16 yılda yaklaşık 5,4 katına çıktı: bu büyüme bir çeşitlilik hikâyesi mi, yoksa az sayıda büyük firmanın işi mi?</li><li>Fındıkta rekolte 2024’ten 2025’e yaklaşık %20 düşecekse, üretici geliri nasıl korunur?</li><li>Kütüğe kayıtlı Samsunluların yaklaşık yarısı başka illerde yaşıyor: bu bir sorun mu, yoksa kentin dışarıdaki “sermayesi” mi?</li><li>Liman ve lojistik avantajı sanayiye ve ihracata ne kadar dönüşüyor?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Rudaw sıralama tablosu; CNBC-e, Habertürk, Capital)</li>
+<li>Nüfus: Haber Gazetesi (TÜİK en güncel ve ADNKS 2025 göç tabloları); Çevre ve Şehircilik Bakanlığı belgesi (2020 nüfus); TÜİK Samsun Bölge Müdürlüğü (Gazete Vatan aktarımı)</li>
+<li>İhracat: Samsun TSO açıklamaları (Haberler.com, Yeni Birlik, Sanayi Gazetesi); TÜİK faaliyet ili ve GTS verileri (NTV, İHA/Bengütürk, 28.08.2025); Ticaret Bakanlığı (Ocak 2026); Yeni Birlik (Mart 2026); Hisse.net (Samsun Gümrük 2025)</li>
+<li>Sanayi: Samsun TSO (Habertürk, Haberler.com); Samsunport; Tridge; OKA TR83 raporları</li>
+<li>Tarım: Samsun Tarım ve Orman İl Müdürlüğü aktarımları (Halk TV, Dünya, Sondakika, Gazete Vatan); Tarım ve Orman Bakanlığı Samsun Tarımsal Yatırım Rehberi (TÜİK 2023); Habertürk yerel haberler</li>
+<li>Turizm: Kapadokya Üniversitesi açık erişim (Samsun Turizm Yol Haritası); Bengütürk (TGA); Habertürk (Eylem Planı)</li>
+<li>İşgücü: İşçi Haber (TÜİK 2025, Türkiye); Habertürk (TR83 Yaşam Koşulları)</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya oda ve yetkili beyanıdır; resmî tabloların doğrudan alıntısı değildir. Samsun’a özgü 2025 işsizlik ve istihdam oranı, 2025 ve 2026 yıllık ihracat kırılımı, ilçe nüfusları ve ekonomik verileri, OSB doluluk ve istihdamı, sektörel GSYH payları, turizm geliri ve güncel doluluk doğrulanmış kaynakla bulunamadığı için sayfada yok. %73,4 (gelir oranı), ~369 bin TL (kur dönüşümü), +%2,7 (nüfus artışı), %23,7 (İlkadım payı), %47 (başka ilde yaşayan), +%28 ve 5,4 kat (ihracat büyümesi), %91 (Mart 2026 karşılama), %−0,6 (2025 ilk yarı), %−20 (fındık rekolte), %9 (yabancı turist payı) kendi hesabımdır. Tarih belirtilmeyen beyanlar (oda başkanı, il müdürü, ziraat odası, vali, siyasi kişi) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: İHRACAT',ad:'İhracat',big:'1,65 mlr $',alt:'2025 ihracatı, 183 ülke, 94 fasıl; 2009’da 304 mn $ (Samsun TSO aktarımı)',y:'16 yılda yaklaşık 5,4 kat; çok sayıda ülkeye dağılım.',n:'Serileri birbirini tutmuyor (TSO, faaliyet ili, GTS); firma ve sektör yoğunlaşması bilinmiyor.'},
+ {c:'good',chip:'MOTOR: SANAYİ',ad:'Çok sektörlü sanayi',big:'11 OSB',alt:'Metal, gıda, mobilya, medikal; 2025 İSO İkinci 500’de 7 Samsunlu firma (TSO)',y:'Tek sektöre yaslanmayan yapı; liman ve OSB altyapısı.',n:'OSB istihdamı yok; TR83’te sanayi istihdamı %17,2 (Türkiye %25,3; OKA, yıl belirsiz).'},
+ {c:'good',chip:'MOTOR: TARIM',ad:'Çeltik, fındık ve sebze',big:'183 bin ton',alt:'2025 çeltik; Bafra 124,7 bin ton; 2024 fındık 114 bin ton (il tarım müdürlüğü)',y:'Lahanada Türkiye’nin %35,4’ü, karnabaharda %27,9’u (TÜİK 2023).',n:'2025 fındık beklentisi yaklaşık 91,5 bin ton (−%20); don ve sel riski, fiyat verisi yok.'},
+ {c:'sleep',chip:'UYUYAN: LİMAN',ad:'Liman ve lojistik',big:'5,1 mlr $',alt:'Orta Karadeniz gümrük dış ticaret hacmi, 2025 (kapsamı doğrulanamadı; Hisse.net)',y:'Samsun Limanı 2010’dan beri Cey Group’ta; meyve, metal cevheri, bakır ihracatı limandan.',n:'Yük (ton), gemi ve istihdam verisi bulunamadı; gümrük rakamları il üretimiyle aynı değil.'},
+ {c:'warn',chip:'KIRILGAN: DENGE',ad:'Dış ticaret dengesi',big:'%110',alt:'Ocak–Temmuz 2025 faaliyet ili karşılama oranı: 1.008,9 / 915,4 mn $ (TÜİK, kendi hesabım)',y:'2025’te fazla var (yaklaşık 93,5 mn $); Ocak 2026’da ihracat artışında Türkiye 5.',n:'2025 ilk yarı ihracat %−0,6; Mart 2026’da ihracat 86,6 mn $, ithalat 95,2 mn $ (karşılama %91).'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm',big:'643 bin',alt:'2022’de konaklayan turist (56 bin yabancı); 2028 hedefi ~1,03 mn (Kapadokya Üniv. aktarımı)',y:'Eylem planı hazır; 2025 ilk 9 ay 490.655 konaklayan (yıl doğrulanamadı).',n:'Ortalama geceleme 1,62 gün; gelir ve doluluk verisi bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: GÖÇ',ad:'Nüfus',big:'1,39 mn',alt:'En güncel TÜİK; 2020’de 1.356.079 (+%2,7, kendi hesabım)',y:'Artış eğiliminde; Atakum genç ve hızlı büyüyor (haber).',n:'Kütüğe kayıtlıların yaklaşık %47’si (952.535) başka ilde yaşıyor.'},
+ {c:'warn',chip:'ORTA: GELİR',ad:'Gelir ve işgücü',big:'39 / 81',alt:'Kişi başına GSYH sırası (2024; 11.253 $; Türkiye ort. 15.325 $)',y:'Ortalamanın yaklaşık %73,4’ü; Karabük’ün hemen gerisinde.',n:'Bolu’nun gerisinde; il işsizlik oranı bulunamadı; TR83’te yoksulluk riski %26,2 (beyan).'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['İhracat, TSO aktarımı (milyon $)',[['2009',304],['2021',1290],['2022',1317],['2025',1648.5]],[3],'2009’dan 2025’e yaklaşık 5,4 kat; 2021’den +%28 (kendi hesabım). Kaynak: Samsun TSO (Haberler.com, Yeni Birlik; 2022 değeri Sanayi Gazetesi). Sistem (özel ihracat/GTS) doğrulanamadı.'],
+ ['Faaliyet ili dış ticareti, Ocak–Temmuz 2025 (milyon $)',[['İhracat',1008.9],['İthalat',915.4]],[0],'Fazla yaklaşık 93,5 milyon $; karşılama oranı %110,2 (kendi hesabım). “İllere göre” GTS ihracatı aynı dönemde 780,6 milyon $. Kaynak: TÜİK, NTV (28.08.2025).'],
+ ['Samsun Gümrük, en çok ihraç edilen ürünler, 2025 (milyon $)',[['Meyve',552],['Metal cevheri',331],['Bakır',134]],[0],'Limandan geçen ürünler; il üretimiyle aynı olmayabilir. Kaynak: Gümrük ve Ticaret Bölge Müdürlüğü aktarımı (Hisse.net).'],
+ ['Samsun Gümrük, en çok ithal edilen ürünler, 2025 (milyon $)',[['Motorin',635],['Metal hurdası',520],['Hububat',356]],[0],'Limandan geçen ürünler; kapsam (Samsun/Orta Karadeniz) doğrulanamadı. Kaynak: Hisse.net.']];
+mk('ih',IH,['Yıllık','Dış ticaret','Gümrük ihracat','Gümrük ithalat']);
+var SA=[['İstihdamın sektörel payı, TR83 ve Türkiye (%, yıl belirsiz)',[['Tarım, TR83',38.4],['Tarım, Türkiye',18.2],['Sanayi, TR83',17.2],['Sanayi, Türkiye',25.3],['Hizmet, TR83',44.3],['Hizmet, Türkiye',56.5]],[0,2,4],'TR83: Samsun, Tokat, Çorum ve Amasya; Samsun’a özgü değil. Kaynak: OKA Covid-19 etki raporu; yıl belirtilmemiş.']];
+mk('sa',SA,['İstihdam payı']);
+var TA=[['Çeltik üretimi (bin ton)',[['2023 (TÜİK)',157.4],['2025 il',183.4],['2025 Bafra',124.7]],[1],'2025’te il 231.044 dekar, dekar başına 780 kg. Kaynak: TÜİK 2023 (Tarım ve Orman Bakanlığı rehberi); il tarım müdürlüğü aktarımı (Dünya, Sondakika).'],
+ ['Fındık üretimi (bin ton)',[['2023 (TÜİK)',112.5],['2024 (il müdürü)',114.0],['2025 beklenti',91.5]],[2],'2025 beklentisi 2024’ten yaklaşık %20 düşük (kendi hesabım). Farklı kaynaklar; aynı serinin devamı olmayabilir. Kaynak: Tarım ve Orman Bakanlığı rehberi; Halk TV.'],
+ ['Türkiye üretiminde Samsun payı, 2023 (%)',[['Lahana',35.4],['Karnabahar',27.9],['Çeltik',17.5],['Fındık',17.3],['Kivi',13.1],['Tütün',7.6]],[0],'Seçilmiş ürünler. Kaynak: TÜİK 2023, Tarım ve Orman Bakanlığı Samsun Tarımsal Yatırım Rehberi.']];
+mk('ta',TA,['Çeltik','Fındık','Türkiye payı']);
+var TU=[['Konaklayan turist, 2022 ve 2028 hedefi (bin)',[['2022 yerli',587],['2022 yabancı',56],['2022 toplam',643],['2028 hedef',1031]],[3],'Ortalama geceleme 2022’de 1,62. 2028 hedefi 934 bin yerli ve 97 bin yabancı. Kaynak: Kapadokya Üniversitesi aktarımı (Samsun Turizm Yol Haritası).'],
+ ['İlk 9 ayda konaklayan turist (bin)',[['İlk 9 ay',490.7]],[0],'Yıl haberde belirtilmemiş (büyük olasılıkla 2025); 2022 ile karşılaştırılmamalı. Kaynak: TGA, Bengütürk.']];
+mk('tu',TU,['2022 ve hedef','İlk 9 ay']);
+var GT=[['Kişi başına GSYH, 2024 (bin $)',[['Bolu',16.7],['Türkiye ort.',15.3],['Erzincan',12.0],['Konya',11.8],['Ardahan',11.7],['Karabük',11.3],['Samsun',11.3]],[6],'Samsun 81 il arasında 39.; Türkiye ortalamasının yaklaşık %73,4’ü (kendi hesabım). Kaynak: TÜİK, Rudaw tablosu; Bolu için CNBC-e.'],
+ ['Nüfus (bin kişi)',[['2020',1356.1],['En güncel',1392.4]],[1],'+%2,7 (kendi hesabım). En güncel değerin yılı haberde yok. Kaynak: Çevre ve Şehircilik Bakanlığı belgesi (2020); Haber Gazetesi.'],
+ ['İlçe nüfusu (bin kişi, yıllar farklı)',[['İlkadım (güncel)',330.3],['Atakum (2020)',221.1],['Yakakent (güncel)',8.9]],[0],'Yılları farklı üç değer; birbirine eklenmemeli. Kaynak: Haber Gazetesi; Çevre ve Şehircilik Bakanlığı belgesi.'],
+ ['Samsun kütüğüne kayıtlı, başka ilde yaşayan, 2025 (bin kişi)',[['İstanbul',413.6],['Bursa',94.5],['Ankara',89.7],['Tekirdağ',54.0],['Kocaeli',47.8]],[0],'Kütüğe kayıtlı 2.032.154 kişinin 952.535’i başka ilde yaşıyor (yaklaşık %47, kendi hesabım). Kaynak: TÜİK ADNKS 2025, Haber Gazetesi.']];
+mk('gt',GT,['Gelir','Nüfus','İlçe','Hemşehri']);
+</script>
+</body>
+</html>

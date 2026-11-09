@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karabük | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Osmaniye'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#334155;--a2:#ea580c;--a3:#0d9488"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Karabük</span><h1>Karabük: Çelik Kenti, Dünya Mirası ve Dar Bir Taban</h1><p>Karabük’ün kişi başına GSYH’si 2024’te 11.265 $ ile 81 il arasında 38. sırada ve Türkiye ortalamasının yaklaşık %73,5’i. Ekonominin omurgası Türkiye’nin ilk entegre demir-çelik tesisi Kardemir: 2026’nın ilk yarısında 37,4 milyar TL satış, haziranda 7,75 milyon $’lık demiryolu tekeri ihracatı. Öteki ayak Safranbolu turizmi, ama yılın ilk yarısında doluluk yaklaşık %25’te kaldı. İl ihracatının ithalatı karşılaması ise Ocak 2024’te yalnızca %20,8’di. Veri bulamadığım ya da kaynakların tutmadığı yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>11.265 $</b><span>Kişi başına GSYH (2024), 81 il arasında 38.; Türkiye ort. 15.325 $’ın yaklaşık %73,5’i (oran kendi hesabım; TÜİK)</span></div><div class="k"><b>255.242</b><span>Nüfus (TÜİK 2023, Tarım ve Orman Bakanlığı yatırım rehberi); 2025 ADNKS değerini bulamadım</span></div><div class="k"><b>37,4 mlr TL</b><span>Kardemir’in 2026 ilk yarı satış geliri; net kâr 5,98 mlr TL, FAVÖK 4,75 mlr TL (şirket açıklaması, 14.08.2026)</span></div><div class="k"><b>7,75 mn $</b><span>Kardemir’in Haziran 2026’da Avrupa’ya demiryolu tekeri ihracatı (Çek Cumhuriyeti ve Bulgaristan)</span></div><div class="k"><b>104.258</b><span>Safranbolu’da 2026 ilk 6 ayda konaklayan turist (83.366 yerli, 20.892 yabancı); doluluk ~%25</span></div><div class="k"><b>%20,8</b><span>Ocak 2024’te il ihracatının ithalatı karşılama oranı (23,2 / 111,6 milyon $; kendi hesabım)</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#turizm">Turizm</a><a href="#tarim">Tarım</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">8 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, şirket açıklamaları, yerel basın). Yan yana okunmaları kesin bir karşılaştırma değildir.</li><li>Sektörlerin il GSYH’sindeki payını, istihdamını ve OSB doluluğunu doğrulanmış bir tabloyla bulamadım. “Motor” etiketi şirket ve ihracat verilerine dayanıyor, katma değer ölçümüne değil.</li><li>Karabük’e özgü güncel işsizlik oranı, 2025 yıllık ihracat ve 2025 nüfusu bulunamadı; ilgili bölümlerde ayrıca yazdım.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>İhracat: Çelik Ağırlıklı, İthalatın Çok Gerisinde</h2>
+<p class="sub">İl düzeyinde elimdeki en yeni resmî rakam 2024’ten; 2026 için yalnızca Kardemir’in açıklamaları var.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Ocak 2024’te (TÜİK, TRT Haber) il ihracatı yıllık %22,8 artışla 23,2 milyon $, ithalatı %12,5 azalışla 111,6 milyon $ oldu. İthalat ihracatın yaklaşık 4,8 katı (kendi hesabım).</li><li>Yılı belirtilmeyen bir mart ayı haberine göre (Steelradar) il 14,668 milyon $ ihracatla 42. sıradaydı; çelik 13,565 milyon $ ile yaklaşık %92’sini oluşturuyordu (kendi hesabım), en büyük pazar 4 milyon $ ile Fas’tı. Haberin yılı doğrulanamadı.</li><li>Haziran 2026’da Kardemir, Çek Cumhuriyeti’ne 2,25 milyon $ ve 3 milyon $, Bulgaristan’a 2,5 milyon $ olmak üzere toplam 7,75 milyon $’lık demiryolu tekeri ihracatı yaptı (CNN Türk, 02.07.2026). Ayrıca Cezayir’e 11,8 milyon €’luk ray satışı ve Tunus’a kangal ürün ihracatı haberleri var; tarihleri belirsiz.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat tekerlek ve ray gibi daha yüksek katma değerli demiryolu ürünlerine kayıyor (yorum).</li><li>Ocak 2024’te ihracat yıllık %22,8 arttı.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İthalat ihracatın yaklaşık 4,8 katıydı; ihracat tek sektöre (çelik) çok bağımlı görünüyor (yorum).</li><li>Seriler farklı dönemlerden; trend çıkarmak için yeterli değil.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Karabük’ün 2025 yıllık ihracatını ve 2026 aylık il toplamlarını bulamadım. Kardemir’in sözleşmeleri il ihracatının toplamı değil, tek firmanın bildirimidir; sözleşme değeri ile gerçekleşen sevkiyat da aynı şey olmayabilir.</li><li>Cezayir’le 27 milyon $’lık ve 11,8 milyon €’luk iki ayrı anlaşma haberi var; aynı işi mi anlattıklarını ya da tarihlerini doğrulayamadım.</li><li>Ocak 2024 değerleri tek aylık veridir; mevsimsellik ve toplu sevkiyatlar nedeniyle yıllık duruma genellenmemeli.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Sanayi: Kardemir ve Çevresi</h2>
+<p class="sub">Kardemir il ekonomisinin görünen yüzü; OSB, istihdam ve yan sanayi verisi yok.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Kardemir, Türkiye’nin ilk entegre demir-çelik fabrikası olarak anılıyor ve merkezi Karabük’te (şirket açıklamaları).</li><li>2026 ilk yarıda satış geliri 37.353 milyon TL, FAVÖK 4.750 milyon TL ve net dönem kârı 5.976 milyon TL (şirket, 14.08.2026). FAVÖK marjı yaklaşık %12,7, net kâr marjı %16,0 (kendi hesabım).</li><li>Şirket, demiryolu tekeri ve ray gibi yüksek katma değerli ürünlere yöneldiğini anlatıyor; haberlerde bir Amerikan şirketiyle (Amsted Rail) ortaklık anılıyor, ayrıntısını doğrulayamadım.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kârlı bir ilk yarı ve ürün çeşitlendirmesi: ihracat sözleşmeleri sıralanıyor.</li><li>Entegre tesis il için güçlü bir sanayi çekirdeği (yorum).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Net kârın FAVÖK’ü aşması operasyon dışı kalemlerden geliyor olabilir; nedenini bulamadım, bu yüzden kârı “faaliyet gücü” diye okumadım (yorum).</li><li>İlin sanayisi büyük ölçüde tek bir şirkete yaslanıyor görünüyor; yan sanayi ve diğer firmalara dair veri bulamadım.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Kardemir verisi şirket düzeyindedir ve konsolide olabilir; hepsi Karabük’te üretilmeyebilir (şirketin başka il ve enerji yatırımları da var). İlin sanayi katma değeriyle eşitlenmemeli.</li><li>Karabük’ün OSB’lerinin firma, işçi ve doluluk sayılarını, il sanayi istihdamını bulamadım.</li><li>Üretim miktarı (ton) ve istihdam bu sayfada yok.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Safranbolu Çekirdeği</h2>
+<p class="sub">Safranbolu UNESCO Dünya Mirası; konaklama verisi düzenli ama doluluk düşük.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>2026’nın ilk altı ayında Safranbolu’da 104.258 kişi konakladı: 83.366 yerli (+%7,1), 20.892 yabancı (−%13); toplam konaklama %2,4 arttı, doluluk yaklaşık %25 (Safranbolu otelciler temsilcisi; Habertürk yerel, İstiklal). Yabancı düşüşü için İran’daki savaşa bağlı uçuş aksaklıkları gösteriliyor (kurum görüşü).</li><li>2022’de il genelinde 202,5 bin konaklamalı turist (189 bin yerli, 13,5 bin yabancı), ortalama geceleme 1,46 gün (Kapadokya Üniversitesi aktarımı). 2028 hedefi 325,5 bin turist ve 61,8 milyon $ gelir.</li><li>Günübirlik ve konaklamalı toplam ziyaretçi için Safranbolu’da yaklaşık 1,26 milyon (2018 rekoru, Hürriyet) ve 1,2 milyon (10 aylık dönem, yıl belirsiz) gibi rakamlar var; günübirlik sayısı için net veri olmadığı söyleniyor.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yerli konaklama 2026’da arttı; UNESCO markası ve bayram dönemlerinde yüksek doluluk var (haber).</li><li>2028 için sayısal hedef konmuş.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Doluluk ~%25 ve ortalama geceleme 1,46 gün: ziyaretçi var ama ilde kalış kısa (yorum).</li><li>Yabancı turist, uzak doğu pazarına bağımlı görünüyor ve dış şoklara açık.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Konaklamalı sayı (otel kayıtları) ile günübirlikçi tahminleri aynı tablo değil; 1,2 – 1,3 milyon gibi rakamlar karşılaştırılmamalı.</li><li>İlin 2025 konaklama ve turizm geliri verisini bulamadım; 2022 ve 2026 rakamları kapsam (il / Safranbolu) ve dönem bakımından farklı.</li><li>Turizmin il GSYH ve istihdamındaki payı bulunamadı.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Dar ve Verisi Az</h2>
+<p class="sub">Tarım ve ormancılık için güncel, il düzeyinde güvenilir bir ton veya gelir serisi bulamadım.</p>
+<div class="g2"><div class="card"><h3>Okuma notu</h3><ul><li>Tarım ve Orman Bakanlığı yatırım rehberine göre ilde ÇKS’ye kayıtlı 2.346 çiftçi var; Türkiye genelinde 2.245.526 (yaklaşık %0,10; kendi hesabım). Yüzölçümü yaklaşık 4,1 milyon dekar.</li><li>Haberlerde hayvancılık yatırımına TKDK’dan hibe alan işletmeler anılıyor; ayrıntı yok.</li></ul></div><div class="card"><h3>Dikkat</h3><ul><li>Ürün bazlı üretim, hayvancılık ve ormancılık gelirini, tarımın il GSYH ve istihdam payını bulamadım. Bu yüzden tarım için “motor” ya da “zayıf” demedim; karnede “kırılgan ya da dar” etiketi veri eksikliğine dayanıyor.</li><li>Yüzölçümü için iki değer var (4.142 ve 4.145 km²).</li></ul></div></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">TÜİK il GSYH (2024, cari fiyat) ve nüfus kayıtları</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Karabük kişi başına GSYH’de 2024’te 11.265 $ ile 38.; Samsun 39. (11.253 $), Ardahan 37. (11.731 $). Türkiye ortalaması 15.325 $; Bolu 16.703 $ ile 7. (TÜİK, Rudaw tablosu).</li><li>TL karşılığını yaklaşık 370 bin TL olarak hesapladım (İstanbul’un 802.669 TL / 24.452 $ oranıyla; kendi hesabım, resmî TL değerini bulamadım).</li><li>Nüfus 2020’de 243.614, 2022’de 252.058 ve 2023’te 255.242. 2020’den 2023’e +%4,8 (kendi hesabım). 2025 ADNKS değerini bulamadım.</li><li>İŞKUR 2022 raporuna göre nüfusun %28’i Safranbolu’da; en küçük ilçe Ovacık (yaklaşık %0,2).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık %73,5’i; 81 ilin ortasının biraz üstünde (38.).</li><li>Nüfus birkaç yıldır artış eğiliminde.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Komşu Bolu’nun (16.703 $) gerisinde; il ortalamanın altında.</li><li>Nüfus artışı küçük ve 2025 verisi eksik; eğilimi kesin saymam.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Karabük’e özgü güncel işsizlik, istihdam ve net göç rakamlarını bulamadım; sadece Türkiye düzeyinde veriler var.</li><li>Nüfus serisi farklı kaynaklardan (2018 değeri 248.014 bir yatırım rehberinden); ADNKS tanımlarıyla birebir aynı olmayabilir.</li><li>Dolar ve TL karşılıkları kur dönüşümüne dayanır; sektörel GSYH payları bulunamadı.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">Altı ilçe: Merkez, Safranbolu, Yenice, Eskipazar, Eflani, Ovacık. İlçe bazlı güncel nüfus ve ekonomi verisi bulunamadı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus</th><th>Ekonomik karakter</th></tr>
+<tr><td>Merkez</td><td>Bulunamadı</td><td>Kardemir ve il merkezi; sanayi ve hizmet (genel anlatım)</td></tr>
+<tr><td>Safranbolu</td><td>67.245 (2020; il nüfusunun %27,6)</td><td>UNESCO Dünya Mirası, konaklamalı turizm</td></tr>
+<tr><td>Yenice</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Eskipazar</td><td>Bulunamadı</td><td>Hadrianopolis antik kenti; ekonomik veri bulunamadı</td></tr>
+<tr><td>Eflani</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Ovacık</td><td>Bulunamadı (il nüfusunun ~%0,2’si)</td><td>İlin en küçük ilçesi; ekonomik veri bulunamadı</td></tr>
+</table><p class="note" style="margin:10px 0 0">Safranbolu’nun %27,6 payı 67.245 / 243.614’ten kendi hesabımdır (2020 verisi). Güncel ilçe nüfuslarını ve ilçe bazında GSYH, istihdam, ihracat verisini bulamadığım için tabloyu boş bırakmak yerine “bulunamadı” yazdım.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Karabük</h3><p style="margin:0">Karabük’ün ekonomisi büyük ölçüde Kardemir’e yaslanıyor: şirket 2026’nın ilk yarısında 37,4 milyar TL satış yaptı ve demiryolu tekeri gibi daha yüksek katma değerli ürünlerle ihracatını çeşitlendiriyor. Safranbolu ikinci ayak: yerli konaklama arttı, ama doluluk yaklaşık %25 ve yabancı turist düştü. Zayıflığı, gelirin Türkiye ortalamasının yaklaşık %73,5’inde kalması, ihracatın tek ürüne yaslanması, ithalatın ihracatın birkaç katı olması ve ilçe, işgücü gibi birçok alanda verinin bulunmaması (yorum).</p></div>
+<div class="three"><div><b>HAMLE 1</b>Çelikte katma değeri artırmak: tekerlek, ray gibi ürünlerde sözleşmeleri sevkiyata ve istihdama çevirmek.</div><div><b>HAMLE 2</b>Turizmde kalış süresini uzatmak: ortalama 1,46 gün geceleme ve ~%25 doluluğu; doğa ve Hadrianopolis gibi varlıklarla artırmak.</div><div><b>HAMLE 3</b>Veriyi netleştirmek: il ihracatını yıllık yayımlamak, OSB ve ilçe istatistiklerini açık hale getirmek.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Tek bir şirkete yaslanmanın risk mi, uzmanlaşma mı olduğu tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>Kardemir’in kârı ve ihracat sözleşmeleri il halkının gelirine ne kadar yansıyor: il geliri neden Türkiye ortalamasının altında?</li><li>İthalat ihracatın birkaç katıyken (Ocak 2024) bu, hammadde ithalatına dayalı sanayinin doğal sonucu mu, yoksa bir zayıflık mı?</li><li>Safranbolu’da doluluk ~%25 iken daha fazla ziyaretçi mi, yoksa daha uzun kalış mı hedeflenmeli?</li><li>Bir şirkete bu kadar bağlı bir il ekonomisi nasıl çeşitlendirilir?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Rudaw sıralama tablosu; Habertürk, CNBC-e ve Capital haberleri; Türkiye ortalaması 15.325 $)</li>
+<li>Nüfus: Tarım ve Orman Bakanlığı Karabük Tarımsal Yatırım Rehberi (TÜİK 2023); İŞKUR Karabük İl İstihdam Kurulu 2022 ve 2020 raporları; Çevre ve Şehircilik Bakanlığı (ADNKS 2020); Karabük Turizm Yatırım Rehberi (2018)</li>
+<li>Dış ticaret: TRT Haber (TÜİK Ocak 2024); Steelradar (yılı belirsiz mart ayı il ihracatı)</li>
+<li>Kardemir: şirket açıklamaları ve KAP aktarımları — Capital, Gazete Oksijen, Ekonomist (14–15.08.2026 ilk yarı sonuçları); CNN Türk (02.07.2026), Milliyet, Finansopia, Steelradar (ihracat sözleşmeleri)</li>
+<li>Turizm: Habertürk yerel haberler, Haberler.com, İstiklal (Safranbolu 2026 ilk 6 ay); Kapadokya Üniversitesi açık erişim (Karabük 2022 ve 2028 hedefi); Hürriyet (2018 ziyaretçi sayısı); Haber7</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya şirket duyurusudur; resmî tabloların doğrudan alıntısı değildir. Karabük’e özgü 2025 nüfusu, 2025 yıllık ve 2026 aylık il ihracatı, işsizlik ve istihdam oranı, ilçe nüfusları ve ekonomik verileri, OSB doluluk ve istihdamı, sektörel GSYH payları, tarım üretim değerleri ve 2025 turizm istatistikleri doğrulanmış kaynakla bulunamadığı için sayfada yok. %73,5 (gelir oranı), ~370 bin TL (kur dönüşümü), +%4,8 (nüfus artışı), %20,8 ve 4,8 kat (dış ticaret oranı), %92 (çelik payı), %12,7 ve %16,0 (Kardemir marjları), %0,10 (çiftçi payı), %27,6 (Safranbolu nüfus payı) kendi hesabımdır. Tarih belirtilmeyen beyanlar (otelci temsilcisi, şirket, vali, rehberler) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: SANAYİ',ad:'Demir-çelik (Kardemir)',big:'37,4 mlr TL',alt:'2026 ilk yarı satış geliri; net kâr 5,98 mlr TL, FAVÖK 4,75 mlr TL (şirket, 14.08.2026)',y:'Türkiye’nin ilk entegre demir-çelik tesisi; kârlı ilk yarı ve ürün çeşitlendirmesi.',n:'Şirket düzeyinde veri; il istihdamı ve yan sanayi bulunamadı. Net kârın FAVÖK’ü aşma nedeni belirsiz.'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'İhracat yapısı',big:'%92',alt:'Çeliğin il ihracatındaki payı, yılı belirsiz bir mart ayı (13,565 / 14,668 mn $; Steelradar, kendi hesabım)',y:'Çelik ürünleri Fas gibi pazarlara gidiyor; ihracat 2024’te arttı.',n:'Tek ürüne yaslanma; fiyat ve talep şoklarına açık (yorum).'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Dış ticaret dengesi',big:'%20,8',alt:'İhracatın ithalatı karşılama oranı, Ocak 2024: 23,2 / 111,6 mn $ (TÜİK, kendi hesabım)',y:'İhracat yıllık %22,8, ithalat %12,5 azaldı.',n:'İthalat ihracatın yaklaşık 4,8 katı; tek aylık veri olduğundan yıllığa genellenmemeli.'},
+ {c:'sleep',chip:'UYUYAN: KATMA DEĞER',ad:'Demiryolu tekeri ve ray',big:'7,75 mn $',alt:'Haziran 2026 tekerlek ihracatı (Çek Cumhuriyeti, Bulgaristan); CNN Türk, 02.07.2026',y:'Daha yüksek katma değerli ürünlere geçiş; Cezayir ray satışı haberleri de var.',n:'Sözleşme değeri sevkiyat değil; sayılar tek firma bildirimidir, il toplamı bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Safranbolu turizmi',big:'104.258',alt:'2026 ilk 6 ayda konaklayan turist (83.366 yerli, 20.892 yabancı); doluluk ~%25',y:'UNESCO Dünya Mirası; yerli konaklama +%7,1.',n:'Yabancı −%13, doluluk ~%25, il genelinde ortalama geceleme 1,46 gün (2022).'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'Tarım',big:'2.346',alt:'ÇKS’ye kayıtlı çiftçi (Tarım ve Orman Bakanlığı rehberi); Türkiye’de 2.245.526',y:'TKDK hibesiyle hayvancılık yatırımı haberleri var.',n:'Üretim, gelir ve GSYH payı verisi bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: YAVAŞ',ad:'Nüfus',big:'+%4,8',alt:'2020’den 2023’e: 243.614 → 255.242 (kendi hesabım)',y:'Artış eğilimi; nüfusun %28’i Safranbolu’da (2022).',n:'2025 ADNKS verisi bulunamadı; ilçelerin çoğunda güncel sayı yok.'},
+ {c:'warn',chip:'ORTA: GELİR',ad:'Gelir ve işgücü',big:'38 / 81',alt:'Kişi başına GSYH sırası (2024; 11.265 $; Türkiye ort. 15.325 $)',y:'Ortalamanın yaklaşık %73,5’i; Samsun’un hemen üstünde.',n:'Bolu’nun (16.703 $) gerisinde; il işsizlik ve istihdam rakamları bulunamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['Kardemir demiryolu tekeri ihracatı, Haziran 2026 (milyon $)',[['Çek Cumhuriyeti (1)',2.25],['Bulgaristan',2.5],['Çek Cumhuriyeti (2)',3.0]],[2],'Toplam 7,75 milyon $. Kaynak: CNN Türk, 02.07.2026 (Kardemir açıklaması).'],
+ ['İl dış ticareti, Ocak 2024 (milyon $)',[['İhracat',23.2],['İthalat',111.6]],[1],'İhracat +%22,8, ithalat −%12,5; karşılama oranı %20,8 (kendi hesabım). Kaynak: TÜİK, TRT Haber.'],
+ ['İl ihracatı, yılı belirsiz bir mart ayı (milyon $)',[['Toplam',14.668],['Çelik',13.565],['Fas (en büyük pazar)',4.0]],[1],'Çelik toplamın yaklaşık %92’si (kendi hesabım); ilk iki satır birbirine eklenmemeli. Kaynak: Steelradar; yıl doğrulanamadı.']];
+mk('ih',IH,['Kardemir','Ocak 2024','Çelik payı']);
+var SA=[['Kardemir 2026 ilk yarı (milyon TL)',[['Satış geliri',37353],['FAVÖK',4750],['Net kâr',5976]],[0],'FAVÖK marjı %12,7, net kâr marjı %16,0 (kendi hesabım). Net kârın FAVÖK’ten yüksek olması operasyon dışı kalemlere işaret edebilir; nedeni doğrulanmadı. Kaynak: şirket açıklaması, 14.08.2026.']];
+mk('sa',SA,['Finansal sonuçlar']);
+var TU=[['Safranbolu konaklayan turist, 2026 ilk 6 ay (kişi)',[['Yerli',83366],['Yabancı',20892]],[1],'Toplam 104.258; yerli +%7,1, yabancı −%13; doluluk ~%25. Kaynak: Habertürk yerel, Haberler.com.'],
+ ['Karabük konaklamalı turist, 2022 ve hedef (bin)',[['2022 toplam',202.5],['2022 yerli',189.0],['2022 yabancı',13.5],['2028 hedef',325.5]],[3],'İl genelinde 2022 verisi ve 2028 hedefi (Kapadokya Üniversitesi aktarımı). Safranbolu 2026 serisiyle kapsam farklıdır.']];
+mk('tu',TU,['Safranbolu 2026','İl 2022–2028']);
+var GT=[['Kişi başına GSYH, 2024 (bin $)',[['Bolu',16.7],['Türkiye ort.',15.3],['Erzincan',12.0],['Konya',11.8],['Ardahan',11.7],['Karabük',11.3],['Samsun',11.3]],[5],'Karabük 81 il arasında 38.; Türkiye ortalamasının yaklaşık %73,5’i (kendi hesabım). Kaynak: TÜİK, Rudaw tablosu; Bolu için CNBC-e.'],
+ ['Nüfus (bin kişi)',[['2018',248.0],['2020',243.6],['2022',252.1],['2023',255.2]],[3],'2020’den 2023’e +%4,8 (kendi hesabım). Kaynaklar: yatırım rehberi (2018), ADNKS 2020, İŞKUR 2022, Tarım ve Orman Bakanlığı (2023); 2025 bulunamadı.']];
+mk('gt',GT,['Gelir','Nüfus']);
+</script>
+</body>
+</html>
