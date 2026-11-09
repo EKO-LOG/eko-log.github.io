@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edirne | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Osmaniye'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#9f1239;--a2:#ca8a04;--a3:#0f766e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Edirne</span><h1>Edirne: Sınır Kapısı, Çeltik Ambarı ve Tarih Kenti</h1><p>Edirne’nin kişi başına GSYH’si 2024’te 12.711 $ ile 81 il arasında 24. sırada ve Türkiye ortalamasının yaklaşık %82,9’u. Çeltikte Türkiye üretiminin yaklaşık %38’i buradan çıkıyor (2024’te 391 bin ton); Kapıkule’den 2025’te yaklaşık 4 milyon araç geçti ve kente yılda yaklaşık 5 milyon ziyaretçi geldiği tahmin ediliyor. Buna rağmen il ihracatı 2026’da ayda yalnızca 9–12 milyon $ ve ithalatın yaklaşık üçte biri düzeyinde; OSB’lerde doğrudan istihdam 1.255 kişi. Veri bulamadığım ya da kaynakların çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>12.711 $</b><span>Kişi başına GSYH (2024), 81 il arasında 24.; Türkiye ort. 15.325 $’ın yaklaşık %82,9’u (oran kendi hesabım; TÜİK); TL karşılığı 417.266 TL</span></div><div class="k"><b>421.247</b><span>Nüfus (ADNKS 2024); 2020’de 413.903 idi; 2025 nüfusunu bulamadım</span></div><div class="k"><b>391 bin ton</b><span>2024 çeltik üretimi, 486 bin dekar; Türkiye üretiminin yaklaşık %38,4’ü (Tarım ve Orman Bakanı; LinkedIn derlemesi)</span></div><div class="k"><b>9,8 mn $</b><span>Haziran 2026 il ihracatı; ithalat 29,7 mn $ (TÜİK Edirne Bölge Müdürlüğü; karşılama oranı yaklaşık %33, kendi hesabım)</span></div><div class="k"><b>~4 milyon</b><span>2025’te Kapıkule’den geçen araç (1 milyondan fazlası ağır vasıta); kaynak bir lojistik blogu, resmî rakam değil</span></div><div class="k"><b>~5 milyon</b><span>2024’te Edirne’ye gelen ziyaretçi tahmini, yaklaşık 1 milyonu konaklayan (Edirne Tanıtım ve Turizm Derneği Başkanı)</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">8 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, İŞKUR, bakanlık ve vali açıklamaları, dernek tahminleri, yerel basın). Yan yana okunmaları kesin bir karşılaştırma değildir.</li><li>Sektörlerin il GSYH’sindeki payını, istihdam ve ciro verisini doğrulanmış bir tabloyla bulamadım. “Motor” etiketi üretim ve gelir verisine dayanıyor, katma değer ölçümüne değil.</li><li>Edirne’ye özgü güncel işsizlik oranını, 2025 nüfusunu ve il düzeyinde yıllık ihracatı bulamadım; ilgili bölümlerde ayrıca yazdım. “Baskı altında” etiketini kullanacak kadar güçlü veri çıkmadı.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>Dış Ticaret: Sınır Kenti, Ama İl İhracatı Küçük</h2>
+<p class="sub">Kapıkule ve İpsala’dan çok büyük bir geçiş var; il düzeyindeki ihracat rakamı ise küçük.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>TÜİK Edirne Bölge Müdürlüğü’nün aylık verilerinde Edirne ihracatı Ocak 2026’da 8,9, Mart’ta 11,6, Mayıs’ta 9,9 ve Haziran’da 9,8 milyon $; ithalatı sırasıyla 30,5, 40,8, 32,6 ve 29,7 milyon $. Bu aylarda karşılama oranı yaklaşık %28–33 (kendi hesabım). Bulduğum Nisan, Şubat ve Temmuz 2026 değerleri yok.</li><li>2025’ten iki ay: Şubat’ta 9,6 milyon $ ihracat, 27,7 milyon $ ithalat; Temmuz’da 11,2 milyon $ ihracat, 8,7 milyon $ ithalat. İthalat bir ayda üçte bir düzeyine inebiliyor, yani aylık oynaklık yüksek.</li><li>Ocak 2026’da en çok ihracat Kosova’ya (1,62 milyon $; yaklaşık %18, kendi hesabım), ardından Bulgaristan ve Almanya’ya yapıldı; en çok ithalat Moldova’dan (11,68 milyon $; yaklaşık %38) yapıldı. Mart 2026’da ihracatta Bulgaristan, ithalatta yine Moldova öndeydi. Ürün kırılımını bulamadım.</li><li>Kapıkule: 2025’te yaklaşık 4 milyon araç geçti, bunun 1 milyondan fazlası ağır vasıta; günlük rekor 3.442 ticari araç (gettransport blogu; kaynağı belirsiz). İki hükûmetin Kapitan Andreevo / “Kapıkule North” adıyla ağır vasıta için yeni bir geçiş kurup kapasiteyi ikiye katlama niyetinden söz ediliyor; Bulgaristan hükûmeti yeni sınır kapısı anlaşma taslağını onayladı (AA). İpsala’da 400 TIR ve 100 yolcu aracı kapasiteli bir TIR parkı açıldı (yıl belirsiz).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Sınır kapıları ve karayolu bağlantısı Edirne’yi lojistik açıdan önemli kılıyor; yeni kapı ve OSB projeleri var.</li><li>Mart–Haziran 2026 arasında ihracat 10 milyon $ civarında yatay ve karşılama oranı yavaşça yükseldi (kendi hesabım).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İl ihracatı Türkiye’nin aylık ihracatının (Haziran 2026’da 24.915 milyon $) yaklaşık %0,04’ü (kendi hesabım).</li><li>İthalat ihracatın yaklaşık üç katı (Moldova ağırlıklı); aylık değişkenlik çok yüksek.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Kapıkule’den geçen yük, il ihracatı olarak görünmüyor olabilir: bu büyük olasılıkla geçişlerin başka illerin firmalarına ait olmasından kaynaklanıyor (yorum). TÜİK Edirne serisinin tam kapsamını (ihracat ili / gümrük ili) doğrulayamadım.</li><li>2025 yılı toplamını ve 2026 yıllık toplamını bulamadım; yalnızca ayrı ay verileri var. Ürün kırılımı (ne ihraç edildiği) yok.</li><li>Kapıkule rakamı bir lojistik blogundan; resmî Gümrük Bakanlığı tablosu değil. “Bulgar turist” sayıları (hafta sonu 32 bin; “yılbaşından beri 1 milyon”) farklı ve eski yıllara ait haberlerden; 2025 değerini bulamadım.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Sanayi: Yeni OSB’lerin Yüzü</h2>
+<p class="sub">Tarım ve ticaret ağırlıklı bir ilde sanayi yeni ve küçük; altyapı 2020’lerde hızlandı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Sanayi ve Teknoloji Bakanı’na göre (Nisan 2026) Edirne’de son 23 yılda 4 yeni OSB kuruldu; OSB’lerin toplam büyüklüğü 1 milyon m²’den 4,5 milyon m²’ye çıktı ve bu bölgelerde 1.255 kişiye doğrudan istihdam sağlandı.</li><li>Uzunköprü Atatürk OSB’nin temeli atıldı: 400 milyon TL’lik altyapı yatırımı, tam kapasitede 2.500 kişilik istihdam hedefi (Alomaliye, Habertürk yerel). İpsala OSB’de (350 dekar, İpsala Sınır Kapısı yakınında) 16 firmaya yer tahsisi yapıldı, 4’ünün temeli atıldı ve yaklaşık 1.000 kişilik istihdam öngörülüyor (DHA; yıl belirsiz).</li><li>Keşan OSB “yenilenebilir, yeşil, yenilikçi” anlayışıyla planlanıyor ve yatırımcılara arsa ön tahsisi yapıldı; Edirne Merkez OSB’si genişletildi (vali ve milletvekili açıklamaları).</li><li>İŞKUR 2020 raporunda 2020’de özel sektörde 370 işyeri açılmış, 131 kapanmış; işsizlik sigortasından yararlananların %21,4’ü ticaret, %17,5’i imalat sektöründen.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Dört yeni OSB ve genişleyen alanlar var; yeni fabrikalar sınır kapısına yakın kuruluyor.</li><li>2020’de açılan işyeri sayısı kapananın yaklaşık 2,8 katı (370 / 131, kendi hesabım).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Mevcut OSB’lerde doğrudan istihdam yalnızca 1.255 kişi; il nüfusu 421 bin.</li><li>Sektörel imalat ürün kırılımı, firma sayısı ve ciro verisi yok; sanayi kimliği net değil.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Hedefler (2.500 ve 1.000 kişi) gerçekleşme değildir; “yaklaşık 1.000” rakamı ve OSB’lerin doluluk oranı doğrulanmadı. İpsala haberinin yılını bulamadım.</li><li>İşsizlik sigortası dağılımı 2020’ye ait (pandemi yılı) ve yalnızca sigortadan yararlananları gösterir; sektörlerin gerçek büyüklüğünü ölçmez.</li><li>Edirne’deki sanayi sektörleri (gıda, tekstil, enerji vb.) ve şirketleri için güvenilir bir kaynak bulamadım; kendi bilgimle sektör adı yazmadım.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Çeltik, Ayçiçeği ve Buğday</h2>
+<p class="sub">İlin yüz ölçümünün yaklaşık %72’si tarımsal üretim alanı; Türkiye çeltiğinin yaklaşık %38–41’i buradan.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Tarım ve Orman Bakanı’na göre Edirne 2024’te 486 bin dekarda çeltik ekti ve 391 bin ton ürün aldı; Türkiye’de çeltik üretimi aynı yıl 1 milyon 19 bin ton oldu. Edirne’nin payı yaklaşık %38,4 (LinkedIn derlemesi; Bakan “yüzde 40” diyor).</li><li>Bir milletvekilinin Meclis konuşmasına göre Edirne TÜİK verilerinde çeltikte %41 payla birinci, ayçiçeğinde %13 payla önemli bir yerde, kanola ve buğdayda öne çıkan illerden biri. İl yetkilileri Edirne’nin buğday, ayçiçeği ve çeltikte Türkiye’de ilk sırada olduğunu söylüyor (2026 haberi).</li><li>2025 çeltik sezonu için yerel haberde “geçen yıl 398 bin ton, bu yıl 400 bin tonun üstü” deniyor; 2025 ülke çeltik beklentisi 988 bin ton (Bakan). Bakan ülkenin pirinç ihtiyacının %72’sinin yerli üretimle karşılandığını söylüyor.</li><li>2025’te Edirne’de 5.217 dekarda karpuz üretildi (24.259 ton); il yetkilileri aşılı karpuz fidesi dağıttı (Habertürk yerel, Vatan).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Çeltikte Türkiye üretiminin yaklaşık yarısına yakınını (%38–41) veriyor; buğday ve ayçiçeğinde de büyük pay.</li><li>Yeni tarımsal yatırım destekleri ve imar kolaylığı açıklandı (Bakan).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ürün tek tip ve fiyata, yağışa ve zararlıya (Haziran 2025’te ayçiçeğinde çayır tırtılı uyarısı) açık.</li><li>Tarım dışı gelir ve katma değer verisi yok; çeltik işleme ve depolama bilgisi bulunamadı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Çeltik payı için %38,4, %40 ve %41 farklı kaynaklardan; 2024 ve 2023 gibi farklı yıllara denk geliyor olabilir. Ayçiçeği payı için %13 (milletvekili konuşması, yıl belirsiz) ve %15 (2023, ikincil bir derleme) var; hangisinin hangi yıla ait olduğunu doğrulayamadım.</li><li>2025 çeltik üretimini (391 mu 398 bin ton mu) resmî bir tabloda doğrulayamadım. Bakan’ın “bitkisel üretim yüzde 41 arttı, 1,8 milyon ton” cümlesinin Edirne için mi Trakya için mi olduğu belli değil; kullanmadım.</li><li>Hayvancılık, kanola, buğday ve ayçiçeği ton verisi, tarımın il GSYH ve istihdam payı bulunamadı.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Kültür, Güreş ve Günübirlik</h2>
+<p class="sub">UNESCO Selimiye Camii, Kırkpınar ve Hıdırellez; sayılar tahmin ağırlıklı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Edirne Tanıtım ve Turizm Derneği Başkanı’na göre 2024’te kente yaklaşık 5 milyon ziyaretçi geldi; bunun yaklaşık 1 milyonu konaklayan. Kırkpınar Yağlı Güreşleri ve Hıdırellez-Kakava dönemlerinde yoğunluk yaşanıyor; Saros bölgesi yerli ve yabancı turiste hitap etmeye başladı.</li><li>Selimiye Camii’ni 2016’da yaklaşık 1,5 milyon, 2017’de yaklaşık 2 milyon kişi ziyaret etmiş (Edirne Kültür ve Turizm Müdürü, kapılarda yapılan sayım).</li><li>Vali, geçen yıla göre turist ve konaklama sayısında önemli artış olduğunu, Sarayiçi/Edirne Sarayı ve Er Meydanı–Kırkpınar Müzesi projelerinin yabancı ziyaretçiyi artıracağını söylüyor (yıl ve sayı belirtilmemiş). Bir haberde Edirne “İstanbul’dan sonra en çok turist ağırlayan il” olarak anılıyor; bunu doğrulayamadım.</li><li>Kapadokya Üniversitesi’nin Edirne Turizm Yol Haritası ilin turizm potansiyelinin ziyaretçi sayısı ve gelir bakımından yeterince kullanılmadığını kabul ediyor.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>UNESCO listesinde Selimiye Camii; Kırkpınar, Hıdırellez, gastronomi (tava ciğer) ve İstanbul’a yakınlık gibi çok yönlü çekim var.</li><li>Vali turist ve konaklamada artış bildiriyor; yeni müze ve saray projeleri sürüyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ziyaretçilerin yalnızca yaklaşık beşte biri konaklıyor (1 / 5 milyon, tahmin); çoğu günübirlik.</li><li>Yabancı turist payı belirsiz; turizm geliri ve doluluk verisi yok.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>“5 milyon” ve “1 milyon” bir derneğin tahminidir; resmî bir istatistik değil. Kültür ve Turizm Bakanlığı’nın il bazlı belediye belgeli tesis verisini (geceleme, doluluk) bulamadım.</li><li>Selimiye sayıları 2016–2017’ye ait, 2024 ile karşılaştırılmamalı; sayım yöntemi “kapılarda sayım”. 2026 için “muazzam artış” beyanını sayıya çeviremedim.</li><li>Sınırdan alışveriş için gelen Bulgar ve Yunan turistler büyük bir kalem olabilir ama güncel ve güvenilir bir sayı bulamadım.</li></ul></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">TÜİK il GSYH (2024, cari fiyat), nüfus kayıtları ve İŞKUR verileri</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Edirne kişi başına GSYH’de 2024’te 12.711 $ ile 24. (TL karşılığı 417.266 TL); Çankırı 23. (13.111 $), Denizli 25. (12.522 $), Kayseri 28. (12.296 $). Tekirdağ 18.406 $ ile 4. Türkiye ortalaması 15.325 $ (TÜİK).</li><li>Nüfus 2020’de 413.903 (Merkez %44,8; Keşan %20,1), 2024’te 421.247 (ADNKS 2024); 2020’den 2024’e yaklaşık +%1,8 (kendi hesabım). 2020’de nüfusun %66,8’i kentte; 65 yaş ve üzeri yaklaşık %14,5 (kendi hesabım); net göç +103 kişi.</li><li>TR21 bölgesinde (Tekirdağ, Edirne, Kırklareli) 2020’de işsizlik %11,0, istihdam oranı %53, işgücüne katılım %59,6 (İŞKUR raporunda TÜİK verisi; yalnızca Edirne değil).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık %82,9’u ve 81 il arasında üst üçte birde (24.).</li><li>Nüfus yavaşça artıyor; 2020’de göç dengesi hafif pozitif (+103).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Tekirdağ’ın yaklaşık %69’u (12.711 / 18.406, kendi hesabım); komşu sanayi ilinin gerisinde.</li><li>2020 bölge işsizliği %11,0 (eski ve geniş kapsamlı); kayıtlı işsizlerin yaklaşık %39’u niteliksiz meslekte (İŞKUR 2020).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Edirne’ye özgü 2025 nüfusu, güncel işsizlik ve istihdam oranını bulamadım; TR21 verisi 2020’ye ait ve üç ili kapsar. Cumhuriyet haberindeki 407.763 değerinin yılını bulamadım, kullanmadım.</li><li>İlçe nüfusları İŞKUR’un 2020 raporundandır; güncel (ADNKS 2025) ilçe nüfusları bulunamadı.</li><li>Dolar karşılıkları kur dönüşümüne dayanır; sektörel GSYH payları bulunamadı.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">9 ilçe (Merkez dahil). Nüfuslar 2020 İŞKUR raporundan; güncel ilçe verisi bulunamadı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2020)</th><th>Ekonomik karakter</th></tr>
+<tr><td>Merkez</td><td>185.408 (%44,8)</td><td>Selimiye, Sarayiçi ve kent turizmi; Edirne OSB’si genişletildi; Kapıkule yakını (genel anlatım)</td></tr>
+<tr><td>Keşan</td><td>83.373 (%20,1)</td><td>Keşan OSB (arsa ön tahsisi yapıldı); Saros yöresi</td></tr>
+<tr><td>Uzunköprü</td><td>61.087</td><td>Uzunköprü Atatürk OSB (2.500 kişilik hedef); dünyanın en uzun taş köprülerinden biri</td></tr>
+<tr><td>İpsala</td><td>27.246</td><td>İpsala Sınır Kapısı ve OSB; çeltik üretim merkezi</td></tr>
+<tr><td>Havsa</td><td>18.648</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Meriç</td><td>13.681</td><td>Meriç Nehri çevresinde tarım; ekonomik veri bulunamadı</td></tr>
+<tr><td>Enez</td><td>10.583</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Süloğlu</td><td>7.287</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Lalapaşa</td><td>6.590</td><td>Ekonomik veri bulunamadı</td></tr>
+</table><p class="note" style="margin:10px 0 0">Nüfus sütunu İŞKUR Edirne 2020 faaliyet raporundandır (toplam 413.903); sütunun yüzdeleri raporda ya da kendi hesabımdır. Karakter sütunu haber ve bakan-vali açıklamalarından özetlenmiştir. İlçe bazında GSYH, istihdam ve ihracat verisi yok.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Edirne</h3><p style="margin:0">Edirne, çeltikte Türkiye üretiminin yaklaşık %38–41’ini veren ve gelirde Türkiye ortalamasının yaklaşık %82,9’una ulaşan; sınır kapıları ve tarihî kimliğiyle büyük bir geçiş ve ziyaret hacmi taşıyan bir il. Bu hareket il ihracatına (ayda yaklaşık 10 milyon $) ve sanayi istihdamına (OSB’lerde 1.255 kişi) henüz yansımıyor; sanayi ve lojistik yatırımları ise yeni başlıyor (yorum). Güçlü yanı tarım ve konum; zayıf yanı katma değerin ve ölçülebilir verinin azlığı.</p></div>
+<div class="three"><div><b>HAMLE 1</b>Geçişi katma değere çevirmek: Kapıkule ve İpsala’daki yeni OSB’lerle lojistik ve işleme tesislerini birbirine bağlamak.</div><div><b>HAMLE 2</b>Çeltik ve ayçiçeğinde işleme, depolama ve markalaşma: ham ürünü il içinde değer zincirine dönüştürmek.</div><div><b>HAMLE 3</b>Ziyaretçiyi konaklamaya dönüştürmek: günübirlik ağırlıklı yapıyı Selimiye Meydanı, Saray projeleri ve Saros ile uzun kalışa çevirmek.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Sınır ticaretinin bir il için fırsat mı, yoksa geçiş maliyeti mi olduğu tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>Yılda yaklaşık 4 milyon araç geçen bir sınır ilinin ihracatı ayda 10 milyon $ civarındaysa, bu geçiş ilin ekonomisine ne kazandırıyor?</li><li>Çeltikte Türkiye’nin yaklaşık %40’ını üreten bir ilde işleme ve markalaşma neden yeterince gelişmedi, ya da gelişti mi?</li><li>Yılda 5 milyon ziyaretçinin yalnızca yaklaşık 1 milyonu konaklıyorsa, ilin turizm geliri nasıl artırılır?</li><li>Yeni OSB’ler (Uzunköprü, İpsala, Keşan) tarım ve lojistik ilinin sanayi kimliğini değiştirebilir mi?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Haberturk, Rudaw ve Olay Medya sıralama tabloları; TL değerleri Olay Medya)</li>
+<li>Nüfus: İŞKUR Edirne İl İstihdam ve Mesleki Eğitim Kurulu 2020 Faaliyet Raporu (TÜİK ADNKS 2020); Yeşilyurt Gazete (ADNKS 2024); TÜİK ADNKS 2025 Türkiye sonuçları (Medyascope, Gazete Oksijen)</li>
+<li>Dış ticaret: TÜİK Edirne Bölge Müdürlüğü aylık il verileri (Habertürk, Haberler.com, Yeni Birlik, Sondakika, Türkiye Gazetesi, Yeşilyurt Gazete); Ticaret Bakanlığı ve TÜİK Türkiye toplamları (Ekonomist)</li>
+<li>Sınır kapıları: gettransport blogu (Kapıkule 2025); BTA (2025 yaz geçişleri); AA (yeni sınır kapısı taslağı); Ensonhaber, DHA (Bulgar turist)</li>
+<li>Sanayi: Alomaliye ve Habertürk yerel (Bakan Kacır, Nisan 2026); Sanayi Gazetesi, DHA, Benguturk (OSB’ler)</li>
+<li>Tarım: Haberler.com ve Ekonomi Gazetesi (Bakan Yumaklı, 2024 çeltik); TBMM genel kurul konuşması; Gazete Vatan, Habertürk yerel (il yetkilileri); LinkedIn derlemesi (çeltik ve ayçiçeği payı)</li>
+<li>Turizm: Ekonomi Gazetesi (Edirne Tanıtım ve Turizm Derneği); Memurlar.net (Selimiye sayımı); Habertürk yerel (Vali); Kapadokya Üniversitesi açık erişim (Edirne Turizm Yol Haritası)</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum açıklaması, dernek tahmini veya yetkili beyanıdır; resmî tabloların doğrudan alıntısı değildir. Edirne’ye özgü 2025 nüfusu, 2025 ve 2026 yıllık il ihracatı, ihracat ve ithalatın ürün kırılımı, güncel işsizlik ve istihdam oranı, ilçe güncel nüfusları ve ekonomik verileri, OSB doluluk ve firma sayıları, sektörel GSYH payları, hayvancılık ve turizm gelirinin resmî istatistikleri doğrulanmış kaynakla bulunamadığı için sayfada yok. %82,9 (gelir oranı), +%1,8 (nüfus artışı), %28–33 ve %29,3/%33,0 (karşılama oranları), %0,04 (Türkiye ihracatındaki pay), %69 (Tekirdağ’a oranı), %14,5 (yaşlı nüfus), %18 ve %38 (Kosova ve Moldova payları), 2,8 kat (açılan/kapanan işyeri) ve %38,4 (çeltik payı, kaynak hesabıyla birlikte) kendi hesabımdır ya da derlemedir. Tarih belirtilmeyen beyanlar (vali, bakan, dernek, milletvekili) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: TARIM',ad:'Çeltik, ayçiçeği, buğday',big:'%38,4',alt:'Çeltikte Türkiye üretimindeki pay, 2024: 391 bin ton / 1,019 mn ton (Bakan; LinkedIn derlemesi)',y:'Çeltikte Türkiye’nin yaklaşık %38–41’i; ayçiçeği ve buğdayda da öne çıkıyor.',n:'Tek tip ürün; işleme, depolama ve katma değer verisi bulunamadı.'},
+ {c:'good',chip:'MOTOR: GELİR',ad:'Gelir düzeyi',big:'24 / 81',alt:'Kişi başına GSYH sırası (2024; 12.711 $; 417.266 TL; Türkiye ort. 15.325 $)',y:'Ortalamanın yaklaşık %82,9’u; Kayseri ve Denizli’nin üzerinde.',n:'Tekirdağ’ın yaklaşık %69’u; güncel işsizlik verisi bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: LOJİSTİK',ad:'Kapıkule ve İpsala',big:'~4 mn araç',alt:'2025’te Kapıkule’den geçen araç; 1 milyondan fazlası ağır vasıta (lojistik blogu, resmî değil)',y:'Büyük geçiş hacmi; yeni ağır vasıta kapısı ve İpsala TIR parkı gündemde.',n:'Geçiş hacmi il gelirine ve ihracata yansıyor mu, belli değil.'},
+ {c:'warn',chip:'KIRILGAN: DIŞ TİCARET',ad:'İl ihracatı',big:'9,8 mn $',alt:'Haziran 2026 ihracat; ithalat 29,7 mn $ (TÜİK Edirne Bölge Müdürlüğü)',y:'Karşılama oranı yaklaşık %29–33; Bulgaristan, Kosova, Almanya pazarları.',n:'İthalat yaklaşık üç kat; Moldova ağırlıklı; ürün kırılımı yok; aylık değişkenlik yüksek.'},
+ {c:'sleep',chip:'UYUYAN: SANAYİ',ad:'OSB’ler',big:'1.255',alt:'OSB’lerde doğrudan istihdam (Bakan Kacır, Nisan 2026); 4 yeni OSB, 4,5 milyon m²',y:'Uzunköprü OSB (2.500 kişilik hedef), İpsala OSB, Keşan OSB yolda.',n:'İstihdam il nüfusuna göre küçük; hedefler gerçekleşme değil; sektör kırılımı yok.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Kültür ve gün birlik turizm',big:'~5 mn',alt:'2024 ziyaretçi tahmini, ~1 milyonu konaklayan (dernek başkanı)',y:'UNESCO Selimiye, Kırkpınar, Hıdırellez; Saros’ta yabancı turist ilgisi.',n:'Ziyaretçilerin çoğu günübirlik; gelir ve doluluk verisi bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: DURGUN',ad:'Nüfus',big:'+%1,8',alt:'2020’den 2024’e: 413.903 → 421.247 (kendi hesabım)',y:'Yavaş artış; 2020’de net göç +103.',n:'2025 nüfusu bulunamadı; yaşlı nüfus yaklaşık %14,5; ilçelerin çoğu küçük.'},
+ {c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İşgücü piyasası',big:'%11,0',alt:'TR21 (Tekirdağ-Edirne-Kırklareli) işsizlik oranı, 2020 (İŞKUR raporunda TÜİK)',y:'2020’de açılan işyeri kapananın yaklaşık 2,8 katı (370 / 131).',n:'Veri eski ve üç ilin ortalaması; kayıtlı işsizlerin yaklaşık %39’u niteliksiz meslekte.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['Edirne ihracatı, 2026 (milyon $)',[['Ocak',8.9],['Mart',11.6],['Mayıs',9.9],['Haziran',9.8]],[1],'Şubat, Nisan ve Temmuz 2026 değerlerini bulamadım. Kaynak: TÜİK Edirne Bölge Müdürlüğü (Haberturk, Sondakika, Haberler.com).'],
+ ['Edirne ithalatı, 2026 (milyon $)',[['Ocak',30.5],['Mart',40.8],['Mayıs',32.6],['Haziran',29.7]],[1],'İhracatın yaklaşık üç katı; karşılama oranı Ocak %29,3, Mart %28,3, Mayıs %30,5, Haziran %33,0 (kendi hesabım). 2025: Şubat 9,6 ihracat / 27,7 ithalat; Temmuz 11,2 / 8,7. Kaynak: TÜİK Edirne Bölge Müdürlüğü.'],
+ ['Ocak 2026 en büyük ülkeler (milyon $)',[['İhracat: Kosova',1.62],['İthalat: Moldova',11.68]],[1],'Ocak 2026 ihracat 8,9, ithalat 30,5 milyon $. Ürün kırılımı bulunamadı. Kaynak: Habertürk (TÜİK Edirne Bölge Müdürlüğü).']];
+mk('ih',IH,['İhracat','İthalat','Ülkeler']);
+var SA=[['OSB büyüklüğü (milyon m²)',[['Yaklaşık 23 yıl önce',1.0],['Bugün',4.5]],[1],'4 yeni OSB kuruldu. Kaynak: Sanayi ve Teknoloji Bakanı Kacır (Nisan 2026; Alomaliye, Habertürk yerel).'],
+ ['OSB istihdamı ve hedefleri (kişi)',[['Mevcut OSB’lerde doğrudan istihdam',1255],['Uzunköprü OSB tam kapasite hedefi',2500],['İpsala OSB öngörüsü (yıl belirsiz)',1000]],[0],'İlk satır gerçekleşen, diğerleri hedef ya da öngörüdür; toplanmamalı. Kaynak: Bakan Kacır; DHA (Gazete Vatan).'],
+ ['İşsizlik sigortasından yararlananlar, 2020 (kişi)',[['Toptan ve perakende ticaret',441],['İmalat',361],['Konaklama ve yiyecek',342],['İnşaat',198],['İdari ve destek hizmetleri',187]],[1],'Toplam 2.059 (2020, pandemi yılı); sektör büyüklüğünü göstermez. Kaynak: İŞKUR Edirne 2020 faaliyet raporu.']];
+mk('sa',SA,['OSB büyüklüğü','İstihdam','İşsizlik sigortası']);
+var TA=[['Çeltik üretimi, 2024 (bin ton)',[['Edirne',391.1],['Türkiye',1019.0]],[0],'Edirne payı yaklaşık %38,4 (kendi hesabım ve LinkedIn derlemesi); 486 bin dekar. Kaynak: Tarım ve Orman Bakanı (Haberler.com); LinkedIn derlemesi.'],
+ ['Türkiye üretiminde Edirne payı (%)',[['Çeltik, 2024',38.4],['Çeltik, 2023 (TÜİK, Meclis)',41.0],['Ayçiçeği, 2023 (ikincil derleme)',15.0],['Ayçiçeği (Meclis konuşması)',13.0]],[0],'Farklı yıllar ve kaynaklar bir arada; ayçiçeği payının yılı doğrulanamadı. Kaynak: TBMM genel kurul konuşması; LinkedIn derlemesi.']];
+mk('ta',TA,['Çeltik','Pay']);
+var TU=[['Selimiye Camii ziyaretçisi (milyon kişi)',[['2016',1.5],['2017',2.0]],[1],'Kapılarda yapılan sayım; 2018 ve sonrası için tutarlı bir seri bulamadım. Kaynak: Edirne Kültür ve Turizm Müdürü (AA, Memurlar.net).'],
+ ['Edirne’ye gelen ziyaretçi, 2024 tahmini (milyon kişi)',[['Toplam',5.0],['Konaklayan',1.0]],[0],'Dernek başkanının tahminidir; resmî istatistik değildir. Kaynak: Ekonomi Gazetesi (Edirne Tanıtım ve Turizm Derneği).']];
+mk('tu',TU,['Selimiye','2024 tahmin']);
+var GT=[['Kişi başına GSYH, 2024 (bin $)',[['Tekirdağ',18.4],['Türkiye ort.',15.3],['Kırıkkale',13.3],['Edirne',12.7],['Denizli',12.5],['Kayseri',12.3]],[3],'Edirne 81 il arasında 24.; Türkiye ortalamasının yaklaşık %82,9’u (kendi hesabım). Kaynak: TÜİK; Haberturk ve Rudaw tabloları.'],
+ ['Nüfus (bin kişi)',[['2020',413.9],['2024',421.2]],[1],'+%1,8 (kendi hesabım). 2025 bulunamadı. Kaynak: İŞKUR Edirne 2020 raporu; Yeşilyurt Gazete (ADNKS 2024).'],
+ ['İlçe nüfusları, 2020 (bin kişi)',[['Merkez',185.4],['Keşan',83.4],['Uzunköprü',61.1],['İpsala',27.2],['Havsa',18.6],['Meriç',13.7],['Enez',10.6],['Süloğlu',7.3],['Lalapaşa',6.6]],[0],'Toplam 413,9 bin. Kaynak: İŞKUR Edirne 2020 faaliyet raporu.']];
+mk('gt',GT,['Gelir','Nüfus','İlçe']);
+</script>
+</body>
+</html>

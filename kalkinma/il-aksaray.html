@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aksaray | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İl sayfasına özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#7c2d12;--a2:#0e7490;--a3:#b45309"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Aksaray</span><h1>Aksaray: Kamyon, Şeker Pancarı ve Kapadokya’nın Kapısı; Küçük Nüfuslu Bir İhracatçı İl</h1><p>441.136 nüfuslu Aksaray’ın kişi başına GSYH’si 2024’te 12.319 $ ile 81 il arasında 27. sırada ve Türkiye ortalamasının yaklaşık %80,4’ü. Ekonominin çekirdeği Mercedes-Benz Türk kamyon fabrikası ve Aksaray OSB; tarımda şeker pancarı, yonca ve büyükbaş hayvancılık öne çıkıyor; Ihlara Vadisi 2025’te 510 bin ziyaretçi ağırladı. Ama ilin ihracatı için birbirini tutmayan iki seri dolaşıyor (146,6 milyon $ ve 1,2–1,6 milyar $), sektörel GSYH payını ve güncel işsizlik oranını bulamadım. Veri bulamadığım ya da kaynakların tutmadığı yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>12.319 $</b><span>Kişi başına GSYH (2024), 81 il arasında 27.; Türkiye ort. 15.325 $’ın yaklaşık %80,4’ü (oran kendi hesabım; TÜİK)</span></div><div class="k"><b>441.136</b><span>Nüfus (2025, TÜİK); 2022’de 433.055 idi, yaklaşık +%1,9 (kendi hesabım)</span></div><div class="k"><b>660</b><span>İŞKUR 2024 araştırmasında tespit edilen açık iş; 447’si imalatta (382 işyeri kapsamı)</span></div><div class="k"><b>%24,6</b><span>İşyerlerinin ihracat yapma oranı (İŞKUR 2024 işgücü piyasası araştırması)</span></div><div class="k"><b>1.900+</b><span>Mercedes-Benz Türk Aksaray Kamyon Fabrikası çalışanı (haber; yıl belirsiz); fabrika 1986’da kuruldu</span></div><div class="k"><b>510 bin</b><span>Ihlara Vadisi ziyaretçisi, 2025 (il kültür ve turizm müdürlüğü, DHA); 2024’te 550 bindi</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, İŞKUR, Ticaret Bakanlığı, oda, şirket ve yerel basın). Yan yana okunmaları kesin bir karşılaştırma değildir.</li><li>Sektörlerin il GSYH’sindeki payını, Mercedes ve OSB firmalarının cirosunu ve OSB’nin güncel istihdamını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi kurum varlığına, üretim ve ihracat haberlerine dayanıyor, katma değer ölçümüne değil.</li><li>Aksaray’a özgü güncel işsizlik oranı ve hayvancılık sayıları (2024–2025) bulunamadı; ilgili bölümlerde ayrıca yazdım. “Baskı altında” etiketini kullanacak kadar güçlü veri çıkmadı.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>Dış Ticaret: İki Ayrı İhracat Serisi Var</h2>
+<p class="sub">Aksaray için bulduğum ihracat rakamları 10 kata varan farklarla birbirini tutmuyor; nedeni büyük olasılıkla ölçüm yöntemi. İthalat verisi yok.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Bir sektör gazetesi, Ticaret Bakanlığı’nın 2023 verisinde Aksaray’da merkezi başka illerde olan firmalar bazında 148,6 milyon $ ihracat olduğunu, üretim yerlerinin illere dağıtıldığı seride ise 2022’de 1,431 milyar $ ve 2023’te 1,605 milyar $ görüldüğünü aktarıyor (Sanayi Gazetesi, oda açıklaması). İki serinin farkını “firma merkezi” ve “üretim yeri” ayrımına bağlamam yorumdur.</li><li>Ticaret Bakanı 2025 için 1,2 milyar $ üzerini söyledi; yöntem belirtmedi. Başka bir yazıda 2024 için 146,6 milyon $ var ve 2025’in ilk altı ayında il 100 milyon $’ın altında kalmasına rağmen %30’un üzerinde artış göstermiş. 2022’de oda 214 milyon $ ve en büyük kalemin makine ve aksamları (128 milyon $) olduğunu söylemişti.</li><li>Ticaret Bakanlığı’nın Eylül 2025 faaliyet ili bülteninde Aksaray, ihracat artışı en yüksek beşinci il (+55 milyon $); haber makine ve otomotiv yan sanayi, kimyevi maddeler ile demir ve demir dışı metalleri öne çıkarıyor.</li><li>İŞKUR 2024 araştırmasında (15 Nisan–17 Mayıs 2024; 382 işyeri) işyerlerinin %24,6’sı ihracat yapıyor, %17,3’ü e-ticaret yapıyor, il genelinde Ar-Ge yapan işyeri oranı %16 ve %38,5’i bir yıl içinde yatırım planlıyor.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat yapan işyeri oranı (%24,6) komşu Kırıkkale’nin anketinden (%15,9) yüksek; ancak iki anketin örneklemi farklı, doğrudan kıyas yok.</li><li>2025’te aylık ihracat artışı Ticaret Bakanlığı bülteninde görünür durumda (Eylül +55 milyon $).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Hangi ihracat rakamının ilin gerçek ihracatı olduğu net değil; 2025’in 1,2 milyar $ beyanı 2023’ün 1,605 milyar $’ından düşük, ama aynı yöntem olduğu doğrulanmadı.</li><li>İthalat ve ihracatın ithalatı karşılama oranı bulunamadı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Tek bir resmî il ihracat tablosu elde edemedim; rakamlar haber aktarımı, bakan ve oda beyanıdır. Karşılaştırma yapmak için tek bir yöntemle (aynı kaynaktan) yıllık seri gerekir.</li><li>Mercedes-Benz Türk’ün ihracatı il verisine hangi yöntemle yansıyor, bulamadım. Bu yüzden ihracatı “Mercedes’e bağlı” diye yazmadım.</li><li>İŞKUR anketi 382 işyerini kapsar: 20 ve üzeri çalışanı olanlarda tam sayım, 2–19 çalışanı olanlarda örneklem. Bazı oranlar yalnızca 20+ çalışanlı işyerleri için; grafikte işaretledim.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Sanayi: Mercedes Kamyon Fabrikası, Aksaray OSB ve Yeni OSB’ler</h2>
+<p class="sub">1986’da kurulan kamyon fabrikası ve onun çevresinde büyüyen OSB; yeni OSB’ler ve tekstil, plastik, gıda gibi alanlar yanına ekleniyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Mercedes-Benz Türk Aksaray Kamyon Fabrikası 1986’da kuruldu; 100 bininci kamyon 2008’de, 200 bininci 2014’te, 300 bininci 2021’de banttan indi (haber); 350 bininci ve 400 bininci kamyonlara ait haberlerin tarihini bulamadım. Fabrika “Türkiye’de üretilen her 10 kamyondan 7’si” iddiasıyla anılıyor (haber ve şirket anlatımı; bir haber 6’dan, bir başkası ihracatta 8’den söz ediyor).</li><li>Fabrikada 1.900’ün üzerinde çalışan (eski haberler) ve bir gazete 2 bin üzeri istihdam yazıyor; Ar-Ge merkezi 2018’de 8,4 milyon avroluk yatırımla açılmış ve fabrikada 7,5 MWp güneş santrali var (haber).</li><li>Aksaray OSB için vali beyanı olarak 2021’de doluluk %98 ve 12 binin üzerinde işçi geçiyor; yeni yatırımlarla bu sayının 25 bine çıkması hedefleniyordu (Haber7, Aralık 2021). Aynı haberde 5 bin kişilik bir fabrikanın temeli atıldı; LC Waikiki’nin 5 bin kişi istihdam edeceği fabrika haberiyle aynı yatırım olup olmadığını doğrulayamadım.</li><li>İSO 2025 “İkinci 500” listesinde Aksaray OSB’den iki firma var: Kuzey Boru ve Untad Aksaray Unlu Mamulleri. İl 2022’de Sultanhanı, Eskil ve Ortaköy’de üç yeni OSB kurulduğunu duyurdu (vali beyanı); Eren Holding’in Sultanhanı OSB’de 2 bin kişilik bir elektrik panosu fabrikası için ön protokol imzaladığı haberi var (yıl belirsiz). Karkın Tarıma Dayalı İhtisas (Sera) OSB için jeotermal sondajda 170 derece sıcak suya ulaşıldı, 1,5 milyar TL’lik yatırım öngörülüyor (Ekonomi Gazetesi köşe yazısı).</li><li>İŞKUR 2024: 382 işyerinde 26.310 çalışan (20.312 erkek, 5.998 kadın; kadın payı %22,8, kendi hesabım). 660 açık iş (175 işyeri); en çok aranan meslekler dikiş makinecisi, tekstil yıkama makinesi işçisi, gazaltı kaynakçısı, ütücü, süt işlemecisi ve plastik boru imal işçisi.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İşyerlerinin %35,9’u net istihdam artışı bekliyor; imalatta 1 yıl içinde 762 kişilik artış beklentisi var (İŞKUR anketi).</li><li>Otomotiv, tekstil, plastik, süt ve unlu mamuller gibi birden çok imalat kolu yan yana çalışıyor; bu çeşitlilik tek fabrikaya bağımlılığı azaltıyor olabilir (yorum).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Açık işlerin %68,6’sında asgari ücret düzeyi düşünülüyor; kadın işgücü taleplerinde bu oran %78,1 (İŞKUR anketi).</li><li>20+ çalışanlı işyerlerinin %46,1’i eleman temininde güçlük çekiyor (176 işyeri, 486 kişi); dikiş makinecisi ve gazaltı kaynakçısı en zor bulunanlar arasında.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Mercedes’in çalışan sayısı ve “10 kamyondan 7’si” payı haber ve şirket anlatımıdır, güncel ve doğrulanmış bir tablo bulamadım. OSB’nin 2021 rakamı eskidir; güncel OSB istihdamı bulunamadı.</li><li>Anket beklentileri (762 ve 535 kişi) niyettir, gerçekleşme değildir. İŞKUR araştırması yalnızca ziyaret edilen işyerlerini kapsar, il toplamı değildir.</li><li>Yeni OSB’lerdeki yatırımlar ön protokol ve beyan aşamasında; fabrikanın açılıp açılmadığını doğrulayamadım. Bağımsız bir değerlendirme yerine kurum ve oda açıklamaları ağırlıkta.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Şeker Pancarı, Yonca ve Hayvancılık</h2>
+<p class="sub">Tarım alanı geniş; su isteyen ürünler Tuz Gölü Havzası’nda yeraltı suyunu zorluyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Aksaray Belediye Başkanı’na göre il yoncada Türkiye’de 2., çerezlik ayçiçeğinde 3., kabak çekirdeği ve sarımsakta 4., şeker pancarında 5. sırada (beyan; yıl belirsiz). Bir köşe yazısı şeker pancarı, yonca ve çerezlik ayçiçeği gibi birçok üründe ilin ilk 10’da olduğunu yazıyor.</li><li>2025 pancar hasadında Eskil Ziraat Odası Başkanı yılda 2 milyon tona yakın rekolte ve 3.100 TL/ton fiyat bildirdi; bölgedeki şeker fabrikasının 750 bin ton şeker işleme kotası var (DHA, 26 Ekim 2025). Başka bir haber dekara 7.517 kg verimle 1 milyon tonu aşkın rekolteden söz ediyor (Karar, yıl belirsiz).</li><li>Tarım alanı bir akademik kaynakta 390.875 ha (mera 188.993 ha, yüzölçümü 799.700 ha), bir ansiklopedide 420.430 ha olarak geçiyor; yıl ve yöntem farklı.</li><li>Büyükbaş sayısı 2019’da 310.549 baş ve bunun 119.180’i sağmal (akademik makale). Bir köşe yazısı 2010–2023 arasında Aksaray’da büyükbaş sayısının %210 arttığını ve bunun 81 il içinde en yüksek artış olduğunu yazıyor (yazarın hesabı). Süt üretiminde Türkiye’de 9. sırada olduğu bir haberde geçiyor.</li><li>Eskil’de Tuz Gölü Havzası’nda yeraltı suyu 150–200 metreye çekilmiş; il tarım müdürlüğü mısır ve pancara alternatif olarak kavun ve domates yetiştiriyor (yaklaşık 4 bin dekar; DHA).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>2025 pancar hasadında üreticiler hem verim hem fiyattan memnun (oda başkanı beyanı).</li><li>Hayvancılıkta büyükbaş sayısı hızla artıyor (yazar hesabı) ve ilde yem ürünleri (yonca, silajlık mısır) bu yapıyı besliyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Su isteyen pancar ve mısır yeraltı suyunu düşürüyor; ilin tarım modeli suya bağımlı.</li><li>Güncel (2024–2025) hayvan sayısı ve süt ton verisi ile ürünlerin Türkiye payı bulunamadı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Aksaray Tarımsal Yatırım Rehberi’nin tablolarına ulaşamadığım için ürünlerin Türkiye payını ve ton değerlerini resmî tablodan veremiyorum. Sıralamalar belediye başkanı ve basın beyanıdır.</li><li>Pancar rekoltesi için iki haber 1 ve 2 milyon ton diyor; yıllar ve kapsamlar farklı olabilir. Grafikte ikisini ayrı gösterdim, birini seçmedim.</li><li>“%210” yazarın 2010–2023 hesabıdır; hayvan sayısının mutlak değerleri 2019 (310.549) dışında bulunamadı. Tarımın il GSYH ve istihdam payı ve çiftçi geliri verisi bulunamadı.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Ihlara ve Balon Var, Konaklama Verisi Yok</h2>
+<p class="sub">Aksaray Kapadokya’nın batı kapısı; ölçülen en güçlü veri Ihlara Vadisi’nin ziyaretçi sayısı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Ihlara Vadisi 2024’te 550 bin, 2025’te 510 bin ziyaretçi ağırladı (DHA; il kültür ve turizm müdürü); bu, 2024’e göre yaklaşık −%7,3 (kendi hesabım). 2012’de 323.799, 2018’de 501.158 ziyaretçi vardı (eski haberler).</li><li>Ihlara ve Belisırma’dan kalkan sıcak hava balonlarıyla 2025’te 700 uçuşta yaklaşık 10 bin kişi uçtu; yılda 160–170 gün uçuş yapılıyor (il müdürü).</li><li>Kapadokya Üniversitesi’nin yol haritası, ilin 2028 turist hedefini yaklaşık 16,1 bin yabancı ve 298,6 bin yerli olmak üzere toplam 314,7 bin kişi olarak koyuyor.</li><li>Ihlara dışında Saratlı Yeraltı Şehri, Güzelyurt Manastır Vadisi ve Sultanhanı Kervansarayı il turizminin parçaları olarak anılıyor (il müdürü).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ihlara yarım milyon ziyaretçi eşiğinin üzerinde seyrediyor ve balon turizmi büyüyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ihlara’nın ziyaretçisi 2024’ten 2025’e geriledi.</li><li>Konaklayan turist, yatak ve gelir verisi bulunamadı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Ihlara’nın 510 bin ziyaretçisi, il turist hedefinin (314,7 bin) üzerinde; iki sayı farklı tanımlara dayanıyor olabilir (günübirlik vadi ziyaretçisi ile konaklayan turist). Bunu doğrulayamadım, yorum.</li><li>Turizm bu sayfada “uyuyan potansiyel” etiketli; ilin gelirindeki payını gösteren veri yok. 2019 için yalnızca Ocak–Eylül (425.850) değerini buldum; yıllık seriye almadım.</li></ul></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">TÜİK il GSYH (2024, cari fiyat), nüfus serisi ve İŞKUR verileri</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Aksaray kişi başına GSYH’de 2024’te 12.319 $ ile 27.; Kütahya 26. (12.384 $), Kayseri 28. (12.296 $). Kırıkkale 22. (13.284 $), Çankırı 23. (13.111 $). Ankara 24.031 $; Türkiye ortalaması 15.325 $ (TÜİK, Rudaw tablosu). Gelir ortalamanın yaklaşık %80,4’ü ve Ankara’nın yaklaşık %51,3’ü (kendi hesabım).</li><li>Nüfus 2022’de 433.055, 2023’te 438.504 ve 2025’te 441.136 (İŞKUR faaliyet raporu ve Gazete Oksijen’in TÜİK aktarımı). 2022–2025 arası yaklaşık +%1,9; aynı dönemde Türkiye’de yaklaşık +%0,95 (kendi hesabım). 2024 değerini doğrulayamadım. İl merkezinin nüfusu 327.575 (2025, Wikipedia), yani ilin yaklaşık %74’ü.</li><li>Nüfusun %72,2’si kentte, %27,8’i kırda (İŞKUR faaliyet raporu, 2023).</li><li>İŞKUR aracılığıyla işe yerleşme 2022’de 9.106 (bir önceki yıla göre +%34,5; İŞKUR’a göre Türkiye 4.’sü), 2023’te 7.618 oldu. Aksaray Üniversitesi’nin öğrenci sayısı bir kaynakta 19.983 (önlisans 4.661, lisans 12.260, yüksek lisans 2.879, doktora 183; yıl belirsiz), bu il nüfusunun yaklaşık %4,5’i (kendi hesabım).</li><li>TR71 bölgesi (Niğde, Aksaray, Kırşehir, Kırıkkale, Nevşehir) için İŞKUR raporu 2024 işsizlik oranını %8,6, işgücüne katılma oranını %48,9 veriyor; Türkiye’de 2025 işsizlik %8,3 idi.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus 2022’den 2025’e Türkiye ortalamasından hızlı arttı (yaklaşık +%1,9 ve +%0,95).</li><li>Gelir sıralaması 81 il içinde üst üçte birde (27.) ve Kayseri’den biraz yüksek.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık %80,4’ü ve komşu Kırıkkale’nin gerisinde.</li><li>İşe yerleşme sayısı 2022’den 2023’e geriledi (9.106 → 7.618).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Aksaray’a özgü işsizlik ve istihdam oranını bulamadım; TR71’in tek bir değeri var ve İŞKUR tablosunun dönemi belirsiz (tabloda Aralık 2023, metinde 2024). Aksaray’ın bölge ortalamasının altında mı üstünde mi olduğu bu veriden çıkmaz.</li><li>İŞKUR’un net göç verisi (+117 kişi; hız binde 0,27) yılı belli olmayan bir rapordan; güncel net göç bulunamadı. Üniversite öğrenci sayısı bir eğitim sitesinden; resmî YÖK tablosu değil.</li><li>Dolar ve TL karşılıkları kur dönüşümüne dayanır; Aksaray’ın TL cinsinden kişi başına GSYH değerini bulamadım; sektörel GSYH payları bulunamadı.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">8 ilçe: Merkez, Ağaçören, Eskil, Gülağaç, Güzelyurt, Ortaköy, Sarıyahşi ve Sultanhanı. İlçe bazında ekonomi verisi sınırlı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus</th><th>Ekonomik karakter</th></tr>
+<tr><td>Merkez</td><td>327.575 (2025, Wikipedia)</td><td>Mercedes kamyon fabrikası, Aksaray OSB ve üniversite il merkezinde anılıyor (genel anlatım)</td></tr>
+<tr><td>Eskil</td><td>27.822 (yıl belirsiz)</td><td>Şeker pancarı, mısır ve çerezlik ayçiçeği; Tuz Gölü Havzası’nda yeraltı suyu 150–200 m’ye düşmüş; yeni Eskil OSB (vali beyanı, 2022)</td></tr>
+<tr><td>Ortaköy</td><td>Doğrudan bulunamadı; toplamdan çıkarılan yaklaşık 30 bin (kendi hesabım)</td><td>Yeni OSB kurulan üç ilçeden biri (vali beyanı, 2022); başka ekonomik veri bulunamadı</td></tr>
+<tr><td>Gülağaç</td><td>19.382 (yıl belirsiz)</td><td>Saratlı Yeraltı Şehri bu ilçede; ilçe ekonomisine dair veri bulunamadı</td></tr>
+<tr><td>Sultanhanı</td><td>12.749 (yıl belirsiz)</td><td>Sultanhanı Kervansarayı; yeni Sultanhanı OSB; Eren Holding 2 bin kişilik fabrika için ön protokol (yıl belirsiz)</td></tr>
+<tr><td>Güzelyurt</td><td>10.782 (yıl belirsiz)</td><td>Ihlara Vadisi, Belisırma ve Manastır Vadisi; balon uçuşları; ilin turizm merkezi</td></tr>
+<tr><td>Ağaçören</td><td>7.628 (yıl belirsiz)</td><td>Ekonomik veri bulunamadı; yaşlılık endeksi 149,4 (Urbistat; yıl belirsiz)</td></tr>
+<tr><td>Sarıyahşi</td><td>5.008 (yıl belirsiz)</td><td>Ekonomik veri bulunamadı; yaşlılık endeksi 187,0 (Urbistat; yıl belirsiz)</td></tr>
+</table><p class="note" style="margin:10px 0 0">Merkez dışı ilçe nüfusları bir Wikipedia ve emlak sitesi derlemesinden; hangi yıla ait olduğunu doğrulayamadım. Ortaköy, 2025 il toplamından (441.136) Merkez ve diğer yedi ilçenin toplamının çıkarılmasıyla bulundu (yılları karışık olabilir). İlçe bazında GSYH, istihdam, ihracat verisi yok.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Aksaray</h3><p style="margin:0">Aksaray, kişi başına gelirde Türkiye ortalamasının yaklaşık %80,4’üne ulaşan; otomotiv (Mercedes kamyon fabrikası), OSB’deki imalat ve şeker pancarı ile hayvancılığa dayanan bir il; nüfusu da yaklaşık +%1,9 artarak Türkiye ortalamasından hızlı büyüdü. Ama ihracatı için birbirini tutmayan iki seri var, açık işlerin yaklaşık %69’u asgari ücret düzeyinde ve tarım Tuz Gölü Havzası’nda suya bağımlı. Bu yüzden büyümenin ne kadarının tek büyük fabrikadan, ne kadarının OSB’nin çeşitlenmesinden geldiği belirsiz (yorum).</p></div>
+<div class="three"><div><b>HAMLE 1</b>Veriyi netleştirmek: il ihracatını tek yöntemle yıllık yayımlamak; Mercedes ve OSB istihdamını güncellemek.</div><div><b>HAMLE 2</b>Suyu korumak: pancar ve mısırda su tasarruflu ürünlere geçişi (kavun, domates gibi) ölçeklemek.</div><div><b>HAMLE 3</b>Ihlara’nın ziyaretçisini konaklamaya ve gelire çevirmek, ve imalatta nitelikli (kaynakçı, dikiş makinecisi) işgücü açığını meslek eğitimiyle kapatmak.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Tek büyük fabrikaya bağlı bir sanayinin risk mi, uzmanlaşma mı olduğu ve su kısıtının tarımı ne kadar daraltacağı tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>Aksaray’ın gücü Mercedes gibi tek büyük üreticiye mi dayanıyor, yoksa OSB’deki tekstil, plastik, gıda ve yeni yatırımlar ilin dayanıklılığını artırıyor mu?</li><li>İhracat için 146,6 milyon $ ve 1,2–1,6 milyar $ gibi iki ayrı seri dolaşıyor: bir ilin gerçek ihracatını firma merkezi mi, üretim yeri mi daha iyi gösterir?</li><li>Açık işlerin yaklaşık %69’u asgari ücret düzeyinde, ama işverenler eleman bulmakta zorlanıyor: ücret mi, nitelik mi asıl sorun?</li><li>Tuz Gölü Havzası’nda yeraltı suyu 150–200 metreye inmişken pancar ve mısır üretimini ne korur, üreticiyi hangi ürünler taşır?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Rudaw sıralama tablosu; CNBC-e, Habertürk, Capital)</li>
+<li>Nüfus: Gazete Oksijen (TÜİK ADNKS 2025 il nüfusları); İŞKUR Aksaray İl İstihdam ve Mesleki Eğitim Kurulu 2024 Faaliyet Raporu (2022–2023 nüfusu, kır-kent, göç, işe yerleşme); Wikipedia (Aksaray Merkez 2025, ilçe nüfusları)</li>
+<li>İşgücü ve işyeri verisi: İŞKUR Aksaray 2024 İşgücü Piyasası Araştırması Sonuçları (euroguidance.iskur.gov.tr); TÜİK 2025 işgücü istatistikleri (İşçi Haber)</li>
+<li>İhracat: Sanayi Gazetesi (oda ve Ticaret Bakanlığı aktarımı, Eylül 2025 faaliyet ili bülteni), Ekonomi Gazetesi (İbrahim Ekinci, 2024 il ihracatı), İşçi Haber (Ticaret Bakanı Bolat beyanı), Finansopia ve Sanayi Gazetesi (2022 oda açıklaması)</li>
+<li>Sanayi: Mercedes-Benz Türk haberleri (CNN Türk, Ensonhaber, Donanım Haber, Steelradar, Sanayi Gazetesi); Haber7, Ekonomist ve TRT Haber (OSB ve vali beyanları); Ekonomi Gazetesi (Karkın OSB), Sanayi Gazetesi (İSO 500)</li>
+<li>Tarım ve hayvancılık: DHA/Milliyet (Eskil pancar ve su), Karar (pancar hasadı), Posta (belediye başkanı sıralamaları), Bloomberg HT (köşe yazısı), Dergipark (arazi ve büyükbaş sayısı), Ekonomi Gazetesi (hayvan sayısı artışı), Star (süt sıralaması)</li>
+<li>Turizm ve üniversite: DHA ve Milliyet (Ihlara ziyaretçisi, balon), Haberler.com (Ihlara 2012), Kapadokya Üniversitesi açık erişim (Aksaray Turizm Yol Haritası), Youthall (öğrenci sayısı)</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yetkili beyanıdır; resmî tabloların doğrudan alıntısı değildir. Aksaray’a özgü güncel işsizlik ve istihdam oranı, resmî tek bir il ihracat serisi ve ithalat, Mercedes ve OSB firmalarının güncel istihdamı ve cirosu, sektörel GSYH payları, Tarımsal Yatırım Rehberi tabloları (ürünlerin Türkiye payı), 2024–2025 hayvan sayıları, ilçe ekonomisi verileri, 2024 nüfusu ve konaklama istatistikleri doğrulanmış kaynakla bulunamadığı için sayfada yok. %80,4 (gelir oranı), %51,3 (Ankara’ya oranı), +%1,9 ve +%0,95 (2022–2025 nüfus değişimi), %22,8 (kadın payı), %4,5 (öğrenci payı), −%7,3 (Ihlara 2025/2024), yaklaşık 30 bin (Ortaköy nüfusu), %67,7 (imalatın açık işlerdeki payı) ve %60 civarı (2022’de makine ve aksamlarının payı) ile 314,7 bin (turizm hedef toplamı) kendi hesabımdır. Tarih belirtilmeyen beyanlar (oda başkanı, vali, belediye başkanı, il müdürü) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: OTOMOTİV',ad:'Mercedes-Benz Türk kamyon fabrikası',big:'1986',alt:'Aksaray Kamyon Fabrikası’nın kuruluşu; 1.900+ çalışan (haber, yıl belirsiz); “Türkiye’de üretilen her 10 kamyondan 7’si” (haber ve şirket anlatımı)',y:'Ar-Ge merkezi (2018), 7,5 MWp güneş santrali; 100 bininci kamyon 2008’de, 300 bininci 2021’de.',n:'Güncel çalışan, ciro ve ihracat verisi bulunamadı; bir fabrikaya yaslanma riski (yorum).'},
+ {c:'good',chip:'MOTOR: OSB',ad:'Aksaray OSB ve yeni OSB’ler',big:'12 bin+',alt:'OSB’de çalışan işçi, 2021 (vali beyanı); doluluk %98; hedef 25 bin',y:'İSO İkinci 500’de iki firma (2025); Sultanhanı, Eskil ve Ortaköy’de üç yeni OSB (2022).',n:'2021’den sonra güncel istihdam bulunamadı; yeni OSB yatırımları ön protokol aşamasında.'},
+ {c:'good',chip:'MOTOR: İHRACAT',ad:'İhracat',big:'%24,6',alt:'İhracat yapan işyeri oranı (İŞKUR 2024); il ihracatı için 146,6 milyon $ ile 1,2–1,6 milyar $ arası iki seri',y:'Ar-Ge yapan işyeri %16; yatırım planlayan işyeri %38,5; Eylül 2025’te ihracat artışı +55 milyon $.',n:'Hangi ihracat serisinin geçerli olduğu net değil; ithalat bulunamadı.'},
+ {c:'good',chip:'MOTOR: TARIM',ad:'Şeker pancarı ve yem bitkileri',big:'~2 milyon ton',alt:'2025 pancar rekolte beklentisi (Eskil Ziraat Odası, DHA); başka bir haber 1 milyon ton üzeri diyor',y:'Fiyat 3.100 TL/ton; yoncada Türkiye 2.’si, pancarda 5.’si (belediye başkanı beyanı).',n:'Tuz Gölü Havzası’nda yeraltı suyu 150–200 m’ye düştü; resmî ürün payları bulunamadı.'},
+ {c:'good',chip:'MOTOR: HAYVANCILIK',ad:'Büyükbaş hayvancılık',big:'+%210',alt:'2010–2023 büyükbaş sayısı artışı (köşe yazarının hesabı); 2019’da 310.549 baş büyükbaş',y:'Artışta 81 il içinde birinci; süt üretiminde Türkiye 9.’su (haber).',n:'2024–2025 hayvan sayısı ve süt miktarı bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: İSTİHDAM',ad:'İmalat işgücü',big:'660',alt:'İŞKUR 2024 açık iş; 447’si imalatta; araştırmada 26.310 çalışan (382 işyeri)',y:'İmalatta 762 net istihdam artışı bekleniyor; işyerlerinin %35,9’u artış bekliyor.',n:'Açık işlerin %68,6’sında asgari ücret; işyerlerinin %46,1’i eleman bulmakta zorlanıyor.'},
+ {c:'warn',chip:'KIRILGAN: GELİR',ad:'Gelir düzeyi ve nüfus',big:'27 / 81',alt:'Kişi başına GSYH sırası (2024; 12.319 $; Türkiye ort. 15.325 $); nüfus 441.136',y:'Nüfus 2022’den 2025’e yaklaşık +%1,9 (Türkiye’de +%0,95).',n:'Gelir ortalamanın yaklaşık %80,4’ü ve Ankara’nın yaklaşık %51,3’ü; il işsizlik oranı bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm',big:'510 bin',alt:'Ihlara Vadisi ziyaretçisi, 2025 (il müdürü, DHA); 2024’te 550 bin',y:'Kapadokya’nın batı kapısı; balonla 2025’te yaklaşık 10 bin yolcu uçtu.',n:'Ihlara 2024’e göre yaklaşık −%7,3; konaklama, yatak ve gelir verisi bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: ÜNİVERSİTE',ad:'Aksaray Üniversitesi',big:'19.983',alt:'Öğrenci (bir eğitim sitesi, yıl belirsiz); il nüfusunun yaklaşık %4,5’i',y:'Tıp ve Diş Hekimliği fakülteleri var; Mercedes ile mesleki lise iş birliği haberde geçiyor.',n:'Mezun istihdamı ve öğrencinin ilde kalıcılığı bulunamadı; sayı resmî YÖK tablosu değil.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['İl ihracatı, milyon $ (iki ayrı seri, birbirine eklenemez)',[['2022 oda/TİM (firma merkezi?)',214],['2024 ihracat yazısı (kayıtlı il?)',146.6],['2022 üretim yeri bazlı',1431],['2023 üretim yeri bazlı',1605],['2025 Bakan beyanı (yöntem yok)',1200]],[4],'Serilerin yöntemi kaynaklarda açık değil; “firma merkezi” ve “üretim yeri” ayrımı sektör gazetesi aktarımından çıkardığım yorumdur. 2025 değeri “1,2 milyar $’ın üzerinde” beyanıdır (alt sınır). Kaynak: Sanayi Gazetesi, Ekonomi Gazetesi, İşçi Haber.'],
+ ['İşyeri göstergeleri, İŞKUR 2024 (%)',[['İhracat yapan işyeri',24.6],['Ar-Ge yapan işyeri (il geneli)',16],['E-ticaret yapan işletme',17.3],['Yatırım planlayan işyeri',38.5],['Vardiyalı çalışma (20+ çalışan)',40.3],['Dijital teknoloji kullanan (20+ çalışan)',48.7],['Yeşil dönüşüm sertifikalı (20+ çalışan)',18.1]],[0],'382 işyeri; 20+ çalışanlılarda tam sayım, 2–19 çalışanlılarda örneklem. Oranların bir kısmı yalnızca 20+ çalışanlı işyerleri içindir. İl ihracat toplamı değildir. Kaynak: İŞKUR Aksaray 2024 İşgücü Piyasası Araştırması.']];
+mk('ih',IH,['İl ihracatı','İşyeri göstergeleri']);
+var SA=[['Açık işler, sektör (kişi), İŞKUR 2024',[['İmalat',447],['Toptan ve perakende ticaret',117],['İnşaat',23],['Konaklama ve yiyecek',21],['Diğer sektörler',52]],[0],'Toplam 660 açık iş (175 işyeri); imalat %67,7 (kendi hesabım); diğer sektörler toplamdan çıkarılarak bulundu (kendi hesabım). Kaynak: İŞKUR 2024 işgücü piyasası araştırması.'],
+ ['Beklenen net istihdam artışı, 1 yıl (kişi)',[['İmalat',762],['Toptan ve perakende',535],['İnşaat',157],['Konaklama ve yiyecek',108],['Ulaştırma ve depolama',41],['Diğer hizmetler',40]],[0],'İşverenlerin beklentisidir (net istihdam değişim oranı %6,6); gerçekleşme değildir. Kaynak: İŞKUR 2024.'],
+ ['Araştırmadaki çalışanlar, cinsiyet (kişi)',[['Erkek',20312],['Kadın',5998]],[1],'Toplam 26.310; kadın payı %22,8 (kendi hesabım). Yalnızca ziyaret edilen işyerlerini kapsar, il toplamı değildir. Kaynak: İŞKUR 2024.']];
+mk('sa',SA,['Açık işler','İstihdam beklentisi','Çalışanlar']);
+var TA=[['Şeker pancarı rekolte beklentisi (bin ton)',[['DHA, Eskil Ziraat Odası (2025, “yakın”)',2000],['Karar haberi (“1 milyonu aşkın”)',1000]],[0],'İki haberin yılı ve kapsamı farklı olabilir; ikisi de beklenti ve beyandır. İkisini ayrı gösterdim, birini seçmedim. Kaynak: DHA/Milliyet (26 Ekim 2025), Karar.'],
+ ['Arazi varlığı (bin ha, akademik kaynak, yıl belirsiz)',[['Yüzölçümü',799.7],['Tarım arazisi',390.9],['Mera',189.0]],[1],'Başka bir kaynak tarım alanını 420,4 bin ha veriyor; yöntem ve yıl farklı. Kaynak: Dergipark.'],
+ ['Büyükbaş varlığı, 2019 (baş)',[['Toplam büyükbaş',310549],['Sağmal büyükbaş',119180]],[0],'2019 verisidir; güncel sayı bulunamadı. Kaynak: Dergipark (Anonim, 2019).']];
+mk('ta',TA,['Pancar','Arazi','Büyükbaş']);
+var TU=[['Ihlara Vadisi ziyaretçisi (bin kişi)',[['2012',323.8],['2018',501.2],['2024',550],['2025',510]],[3],'Ihlara ziyaretçisi il turist sayısı değildir; farklı tanımlara dayanabilir. 2019 için yalnızca Ocak–Eylül (425.850) bulundu, grafiğe alınmadı. Kaynak: Haberler.com (2012), Memurlar (2018), DHA (2024–2025).'],
+ ['Sıcak hava balonu, 2025',[['Uçuş sayısı',700],['Uçan yolcu (bin)',10]],[1],'Ihlara ve Belisırma’dan kalkan balonlar; iki ayrı birim bir arada, karşılaştırma yoktur. Kaynak: DHA, il kültür ve turizm müdürü.']];
+mk('tu',TU,['Ihlara','Balon']);
+var GT=[['Kişi başına GSYH, 2024 (bin $)',[['Ankara',24.0],['Türkiye ort.',15.3],['Kırıkkale',13.3],['Çankırı',13.1],['Kütahya',12.4],['Aksaray',12.3],['Kayseri',12.3]],[5],'Aksaray 81 il arasında 27.; Türkiye ortalamasının yaklaşık %80,4’ü (kendi hesabım). Kayseri ile fark yaklaşık 23 $’dır. Kaynak: TÜİK, Rudaw tablosu.'],
+ ['Nüfus (bin kişi)',[['2022',433.1],['2023',438.5],['2025',441.1]],[2],'2022’den 2025’e yaklaşık +%1,9 (kendi hesabım); 2024 değeri doğrulanamadı. Kaynak: İŞKUR faaliyet raporu ve Gazete Oksijen’in TÜİK aktarımı.'],
+ ['Aksaray Üniversitesi öğrenci sayısı (kişi)',[['Önlisans',4661],['Lisans',12260],['Yüksek lisans',2879],['Doktora',183]],[1],'Toplam 19.983; il nüfusunun yaklaşık %4,5’i (kendi hesabım). Eğitim sitesi aktarımı, yıl belirsiz; resmî YÖK tablosu değil. Kaynak: Youthall.']];
+mk('gt',GT,['Gelir','Nüfus','Üniversite']);
+</script>
+</body>
+</html>
