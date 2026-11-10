@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Denizli | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Denizli'ye özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0e7490;--a2:#7c3aed;--a3:#be185d"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Denizli</span><h1>Denizli: Ev Tekstili, Elektronik, Pamukkale</h1><p>1.060.975 nüfuslu Denizli; Türkiye’nin ev tekstili ihracatının yaklaşık yarısını karşılayan, son yıllarda elektrik-elektronik ve doğal taşla çeşitlenen bir ihracat şehri. Kişi başına GSYH 12.522 $ ile 81 il arasında 25.; Türkiye ortalamasının yaklaşık %81,7’si. İhracat 2025’te 4,7 milyar $ (TİM). Nüfus ise onlarca yıl artıştan sonra 2025’te hafif azaldı. Bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>12.522 $</b><span>Kişi başına GSYH (2024), 81 il arasında 25.; Türkiye ort. 15.325 $’ın yaklaşık %81,7’si (oran kendi hesabım)</span></div>
+<div class="k"><b>1.060.975</b><span>Nüfus (ADNKS 2025); 2024: 1.061.371 (−396, −%0,04; kendi hesabım)</span></div>
+<div class="k"><b>4,7 mlr $</b><span>2025 ihracatı (TİM, firma merkezi esaslı), +%7; 183 ülke. Ticaret Bakanlığı faaliyet esaslı: 4,5 mlr $, +%6,4</span></div>
+<div class="k"><b>1,37 mlr $</b><span>2025 tekstil ve konfeksiyon ihracatı (−%2); elektrik-elektronik 1,02 mlr $ (+%16)</span></div>
+<div class="k"><b>479 mn $</b><span>Eylül 2026 ihracatı, +%22,6 (AA, DENİB); son 12 ay 5 milyar $’ın üzerinde</span></div>
+<div class="k"><b>2,30 milyon</b><span>Pamukkale (Hierapolis) 2025 ziyaretçisi; Efes’in ardından ikinci ören yeri</span></div>
+</div>
+<div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+<section id="karne"><h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+<li>Sayılar farklı yıllara ve kaynaklara ait (TİM ve Ticaret Bakanlığı aktarımları, DENİB açıklamaları, İŞKUR ve kalkınma ajansı belgeleri, yerel basın). Yan yana okunmaları kesin karşılaştırma değildir.</li>
+<li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat ve yatırım izlerine dayanıyor, katma değer ölçümüne değil.</li>
+<li>Denizli’ye özgü güncel işsizlik, ilçe nüfusları, tarım üretim tonajları ve 2025 net göç sayısı bulunamadı; ilgili bölümlerde ayrıca yazdım.</li></ul></div></section>
+
+<section id="ihracat"><h2>İhracat: Dört Ölçüt, Tek Yön: Yukarı</h2>
+<p class="sub">TİM (firma merkezi esaslı) ile Ticaret Bakanlığı (faaliyet esaslı) rakamları birbirinden farklı; ikisini birleştirmedim.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>İhracat 2025’te %7 artarak 4,7 milyar $’a çıktı; il yıl başındaki 4,7 milyar $’lık hedefe ulaştı (DENİB). Ocak–Temmuz 2025’te 2,699 milyar $ (+%8,9).</li>
+<li>Elektrik-elektronik ilk kez 1 milyar $’ı aştı (1,019 milyar $, +%16); tekstil ve konfeksiyon 1,368 milyar $ ile hâlâ birinci ama %2 geriledi ve payı yaklaşık %29.</li>
+<li>2026’da tekstil ve konfeksiyon ilk çeyrekte %7,4 düşüşle 309 milyon $’a indi (il ihracatındaki payı %27); buna karşılık Eylül 2026’da ihracat tüm ana sektörlerde arttı.</li>
+<li>En büyük pazar İngiltere: 2025’te 653 milyon $ (+%13); onu ABD (422 milyon $) ve İtalya (404 milyon $, +%23,7) izledi.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat çeşitleniyor: elektrik-elektronik, demir-demir dışı ve doğal taş tekstilin yanına geliyor (yorum).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tekstil hâlâ en büyük kalem ve küçülüyor; İngiltere tek pazarda yaklaşık %14 pay (kendi hesabım).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>2025 için üç farklı toplam var: TİM 4,7 milyar $, Ticaret Bakanlığı faaliyet esaslı 4,5 milyar $ (2024: 4,2 milyar $) ve bir kalkınma ajansı sunumunda 2024 için 4,457 milyar $. Ölçü ve yıl farkı olabilir; biri diğerine çevrilmedi.</li>
+<li>Eylül 2026 için iki değer dolaşıyor: 479 milyon $ (AA, DENİB) ve 490 milyon $ (yerel haber sitesi). “Son 12 ay 5 milyar $ üzeri” ifadesinin hangi ölçüye ait olduğu belirtilmemiş.</li></ul></div></section>
+
+<section id="sanayi"><h2>Sanayi: Tekstil Çekirdeği, Yeni Sektörler</h2>
+<p class="sub">Denizli ihracatını 25 sektörde üretiyor; kablo, makine, elektronik ve doğal taş tekstilin yanına geliyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Ev tekstili Türkiye ihracatının yaklaşık yarısını karşılıyor (GEKA sunumu, 2025). 2025’te havlu 108 ülkeye 412 milyon $, nevresim 96 ülkeye 250 milyon $, bornoz 91 ülkeye 134 milyon $.</li>
+<li>Denizli’deki OSB’lerde yaklaşık 27.000 kişi çalışıyor (4 aktif OSB; GEKA, 2025); Denizli OSB, Çardak Özdemir Sabancı OSB ve Deri İhtisas OSB’nin adı geçiyor.</li>
+<li>TİM’in İlk 1000 İhracatçı listesinde Denizli’de üretim ve yatırımı bulunan 23 firma yer aldı (2025).</li>
+<li>İşlenmiş doğal taş ihracatı 2026’nın ilk sekiz ayında %10, blok mermer %7 arttı; Denizli 120 ülkeye doğal taş ihraç ediyor (DENİB).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Büyük firma yoğunluğu ve çok sektörlü üretim tabanı var; 2023’te enerji ve imalatta 274 yatırım teşvik belgesi çıkmış.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tekstilde karlılığın düşük olduğu ve tarım-gıda sanayine yönelmenin önerildiği eski bir İŞKUR raporu var; güncel kâr verisi bulunamadı.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Teşvik belgeleri 2023’e, firma sayıları (tekstil 1.724, gıda 574) 2023 İŞKUR raporuna aittir; güncel OSB doluluğu ve sanayi istihdamı bulunamadı. Denizli OSB’de 182 firma bilgisi eski bir makaleden.</li>
+<li>Elektrik-elektronik ve kablo ihracatının hangi firmalarda toplandığı kaynaklarda yok; tek tek firma yoğunluğu bilinmiyor.</li></ul></div></section>
+
+<section id="tarim"><h2>Tarım ve Hayvancılık: Geri Plan</h2>
+<p class="sub">Tarım ihracatı küçük ama büyüyor; üretim tonajlarını güncel ve doğrulanmış biçimde bulamadım.</p>
+<div class="card"><h3>Bulabildiklerim</h3><ul>
+<li>GEKA sunumuna göre Denizli’de ekonomiye katkısı olan 125 tarım ürünü yetiştirilebiliyor.</li>
+<li>Eylül 2026’da tarım ihracatı %26,3 artışla 33 milyon $’a, madencilik ihracatı %7,1 artışla 27 milyon $’a çıktı (DENİB).</li>
+<li>Eski bir parti raporunda (yıl belirtilmemiş) 36 firmanın süt satın aldığı ve 127 tesiste yılda 3.570 ton alabalık üretildiği yazıyor.</li></ul></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tarım ihracatı Eylül 2026’da çift haneli arttı ve tarıma dayalı sanayi, İŞKUR raporlarında alternatif alan olarak öneriliyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tarımın il ekonomisindeki payı ve üretim tonajları bilinmiyor; il tekstil ve sanayi ağırlıklı görünüyor (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Süt ve alabalık rakamları tarihsiz, tek bir parti raporundan; güncel olarak okuma. Üretim tonajı, hayvan sayısı ve çiftçi geliri verisi yok.</li></ul></div></section>
+
+<section id="turizm"><h2>Turizm: Pamukkale Bir Mıknatıs</h2>
+<p class="sub">UNESCO Dünya Mirası Pamukkale-Hierapolis, termal sular ve kayak merkezi.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Pamukkale 2025’te yaklaşık 2,30 milyon ziyaretçi ağırladı; bu, il nüfusunun iki katından fazla ve ören yerleri arasında Efes’ten sonra ikinci sıra.</li>
+<li>Türkiye’deki müze ve ören yerlerinde 2025’te ziyaretçi sayısı yaklaşık %7, gelir %34’ün üzerinde arttı (ülke toplamı, Denizli’ye özgü değil).</li>
+<li>Denizli’deki tesislerde 2025’te en çok yabancı turist Güney Kore’den geldi (78.635); Avrupa ve Amerika’nın payı arttı.</li>
+<li>DENTUROD Başkanı konaklama süresinin uzatılması ve Pamukkale’nin su yönetiminin bilimsel yapılması gerektiğini söylüyor.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Pamukkale rekor bir ören yeri yılında ikinci sırada; gece müzeciliği, balon ve termal sağlık turizmi eklendi.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İncelenen 15 ülkenin tamamında yabancı turistlerin ortalama konaklama süresi 2025’te geriledi (akademisyen verisi); ziyaret günübirlik kalıyor olabilir (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Pamukkale rakamı iki kaynakta 2.301.689 ve 2.302.218; ikisi aynı sayı kabul edildi. Eski bir röportajda “yaklaşık 2 milyon 450 bin” geçiyordu (yıl belirtilmemiş); iki sayı arasında düşüş mü olduğu doğrulanamadı.</li>
+<li>Turizm gelirinin il GSYH’sindeki payı, geceleme sayısı ve doluluk bulunamadı.</li></ul></div></section>
+
+<section id="gelir"><h2>Gelir, İşgücü ve Nüfus</h2>
+<p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar) ve ADNKS 2024–2025</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kişi başına 12.522 $ ile 81 il arasında 25.; Muğla 11. (16.040 $), Manisa 19. (13.852 $) ve İzmir 6. (16.949 $) önünde; Kütahya 26., Uşak 29., Burdur 32., Isparta 35., Aydın 36. ve Afyonkarahisar 53. sırada. Oran Türkiye ortalamasının (15.325 $) yaklaşık %81,7’si (kendi hesabım).</li>
+<li>Toplam ekonomi: 12.522 $ ile 1.060.975 kişi çarpımından yaklaşık 13,3 milyar $; nüfus payı yaklaşık %1,23 (kendi hesabım).</li>
+<li>Nüfus 2024’te 1.061.371, 2025’te 1.060.975: −396 kişi. Yerel bir haber, il on yıllardır göç alırken 2025’te göç fazlası verdiğini (aldığından fazla göç verdiğini) yazıyor.</li>
+<li>TR32 bölgesinde (Aydın, Denizli, Muğla) 2023’te işgücüne katılma %54,2, işsizlik %8,1 ve istihdam %49,8; Türkiye’de %53,3, %9,4 ve %48,3.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Türkiye ortalamasının beşte dördünden fazla ve işgücü göstergeleri Türkiye’nin üzerinde (bölge verisi).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Muğla, Manisa ve İzmir’in gerisinde; il göç alma özelliğini kaybediyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>İşgücü verisi il değil TR32 bölgesine ve 2023’e ait; Denizli’ye özgü güncel işsizlik ve katılma oranı bulunamadı. Türkiye’de 2025 yıllık işsizlik %8,3.</li>
+<li>2025 net göç sayısı haberin görünen kısmında yok; nüfus azalışının nedenini (göç, doğurganlık, yaş yapısı) doğrulanmış biçimde ayıramadım. Sektörel GSYH payları ve TL değeri yok.</li></ul></div></section>
+
+<section id="ilceler"><h2>İlçe Kırılımı</h2>
+<p class="sub">19 ilçe; güncel ilçe nüfuslarını ve ilçe ekonomisi verilerini bulamadığım için tablo yalnızca bulduğum ipuçlarını içeriyor.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+<tr><td>Merkezefendi ve Pamukkale</td><td>Bulunamadı</td><td>İl merkezi sanayisi; Pamukkale/Hierapolis ören yeri (2025’te 2,30 milyon ziyaretçi)</td></tr>
+<tr><td>Çardak</td><td>Bulunamadı</td><td>Çardak Özdemir Sabancı OSB (yaklaşık 2 milyon m² alan, 2018 haberi)</td></tr>
+<tr><td>Acıpayam</td><td>Bulunamadı</td><td>Selüloz ve yem fabrikası (eski parti raporu)</td></tr>
+<tr><td>Tavas</td><td>Bulunamadı</td><td>Un fabrikası (eski parti raporu)</td></tr></table>
+<p class="note" style="margin:10px 0 0">Tabloda olmayan 14 ilçe (Babadağ, Baklan, Bekilli, Beyağaç, Bozkurt, Buldan, Çal, Çameli, Çivril, Güney, Honaz, Kale, Sarayköy, Serinhisar) için doğrulanmış veri bulamadım. İlçe adlarını genel bilgiden yazdım, kaynak aramadım. İl toplamı 1.060.975 (ADNKS 2025); ilçe bazında GSYH, ihracat ve istihdam yok.</p></div></section>
+
+<section id="sonuc"><h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Denizli</h3>
+<p style="margin:0">Denizli’nin ekonomisi Türkiye’nin ev tekstili ihracatının yaklaşık yarısına, hızla büyüyen elektrik-elektronik ve doğal taş ihracatına ve Pamukkale turizmine yaslanıyor; kişi başına gelir 12.522 $ ile Türkiye ortalamasının yaklaşık %81,7’si. Güçlü tarafı çok sektörlü ihracat tabanı (183 ülke, 4,7 milyar $), zayıf tarafı küçülen tekstil kalemi, tek pazarda İngiltere ağırlığı ve nüfusun göç vermeye başlaması. İl hâlâ güçlü bir sanayi kenti ama göç çekme gücünü korumak için tekstil dışı katma değeri artırması gerekiyor (yorum).</p></div>
+<div class="three">
+<div><b>HAMLE 1</b>Tekstil dışı ihracatı büyütmek: elektrik-elektronik, kablo, makine ve doğal taş için ihtisas OSB ve Ar-Ge desteği.</div>
+<div><b>HAMLE 2</b>Ev tekstilinde katma değeri artırmak: marka, tasarım ve yeni pazarlar ile İngiltere ağırlığını dengelemek.</div>
+<div><b>HAMLE 3</b>Pamukkale’yi gecelemeye çevirmek: Hierapolis, Laodikya ve termal rotaları tek pakette sunmak.</div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. Nüfus ve göç eğiliminin tekstil sektöründen mi başka bir nedenden mi etkilendiği kaynaklarda gösterilmemiş.</li></ul></div></section>
+
+<section id="tartisma"><h2>Tartışma Köşesi</h2>
+<div class="card"><ul>
+<li>Tekstil ilk çeyrekte %7,4 küçülürken ihracat toplamı büyüyorsa, Denizli artık bir “tekstil kenti” mi?</li>
+<li>Elektrik-elektronik 1 milyar $’ı aştı; bu sektör tekstilin yerini alabilir mi, yoksa az sayıda büyük firmaya mı bağlı?</li>
+<li>İl onlarca yıl göç alırken neden 2025’te göç vermeye başladı; bu geçici mi kalıcı mı?</li>
+<li>Pamukkale’ye yılda 2,3 milyon kişi geliyorsa, ilin turizm geliri neden ihracat kadar konuşulmuyor?</li></ul>
+<a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div></section>
+
+<section id="kaynak"><h2>Kaynaklar ve Veri Notu</h2>
+<ul class="src">
+<li>Gelir ve nüfus: TÜİK il bazında GSYH 2024 ve ADNKS 2025 (Rudaw aktarımları)</li>
+<li>İhracat: Denizli İhracatçı Birlikleri açıklamaları (T24, Ekonomi Gazetesi, AA/Foreks, Habertürk Yerel, Dünya); Ege İhracatçı Birlikleri aktarımları (Denizli Haber); Ticaret Bakanlığı faaliyet esaslı ihracat (Ekonomi Gazetesi)</li>
+<li>Sanayi: GEKA Yerel Kalkınma Hamlesi sunumu (2025); TİM İlk 1000 İhracatçı (2025); İŞKUR Denizli işgücü piyasası raporları; Ekonomist (OSB makalesi, eski)</li>
+<li>Turizm: AA/İHA (Pamukkale 2025); Kültür ve Turizm Bakanlığı verileri (Denizli Haber); Prof. Dr. Serkan Bertan analizi (Sondakika, Haberler.com)</li>
+<li>İşgücü: İŞKUR Denizli raporu (TÜİK 2023, TR32); TÜİK 2025 işgücü istatistikleri (Medyascope)</li>
+<li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168: Amasya dosyasıyla aynı kaynaklar</li></ul>
+<p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Denizli’ye özgü güncel işsizlik, ilçe nüfusları, ilçe ekonomisi, tarım üretim tonajları, 2025 net göç sayısı, OSB doluluğu ve il GSYH’sinin TL değeri doğrulanmış kaynakla bulunamadığı için sayfada yok. %81,7 (gelir oranı), %0,04 (nüfus değişimi), %1,23 (nüfus payı), 13,3 milyar $ (toplam ekonomi), %14 (İngiltere payı), %29 (tekstil payı hesabı) ve grafiklerdeki “diğer” çubukları ile diğer illerin nüfus değişim yüzdeleri kendi hesabımdır. Tarih belirtilmeyen beyanlar (yetkili, dernek başkanı, eski rapor) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p></section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+{c:'good',chip:'MOTOR: EV TEKSTİLİ',ad:'Tekstil ve konfeksiyon',big:'1,37 mlr $',alt:'2025 ihracatı (−%2); ihracat payı yaklaşık %29; havlu 412 mn $, 108 ülke',y:'Türkiye ev tekstili ihracatının yaklaşık yarısı (GEKA); 183 ülkeye ulaşan ihracat tabanı.',n:'2026 ilk çeyrekte −%7,4 (309 mn $); payı %29’dan %27’ye indi; kârlılık verisi yok.'},
+{c:'good',chip:'MOTOR: ELEKTRİK-ELEKTRONİK',ad:'Elektrik-elektronik ve kablo',big:'1,02 mlr $',alt:'2025 ihracatı, +%16; ilk kez 1 milyar $ üstü',y:'Eylül 2026’da 138 mn $ (+%47,3); tekstilin ardından ikinci büyük ihracat kalemi.',n:'Firma yoğunluğu ve ithal girdi payı bulunamadı; tek tek firmalara bağımlılık bilinmiyor.'},
+{c:'good',chip:'MOTOR: TOPLAM İHRACAT',ad:'Dış ticaret',big:'4,7 mlr $',alt:'2025 TİM ihracatı, +%7; faaliyet esaslı 4,5 mlr $ (+%6,4)',y:'Son 12 ay 5 milyar $ üzerinde (ölçü belirsiz); Eylül 2026 +%22,6 (479 mn $).',n:'İngiltere tek pazarda yaklaşık %14 (653 mn $, kendi hesabım); üç farklı toplam dolaşıyor.'},
+{c:'good',chip:'MOTOR: DOĞAL TAŞ',ad:'Mermer ve traverten',big:'120 ülke',alt:'Doğal taş ihracatı yapılan ülke sayısı (DENİB, 2026)',y:'2026 ilk sekiz ayda işlenmiş taş +%10, blok mermer +%7; eski bir konuşmada Türkiye’nin 2. büyük mermer havzası.',n:'İhracat tutarı ve üretim miktarı bulunamadı; pay doğrulanamadı.'},
+{c:'sleep',chip:'UYUYAN: TURİZM',ad:'Pamukkale ve termal turizm',big:'2,30 milyon',alt:'Pamukkale 2025 ziyaretçisi; Efes’ten (2,55 mn) sonra 2. ören yeri',y:'UNESCO mirası, gece müzeciliği ve balon; Güney Kore, Çin, İtalya öne çıkıyor.',n:'Yabancı konaklama süresi 15 ülkede geriledi; geceleme ve gelir verisi bulunamadı.'},
+{c:'warn',chip:'ORTA: GELİR',ad:'Gelir',big:'25 / 81',alt:'Kişi başına GSYH sırası (2024; 12.522 $, Türkiye ort. yaklaşık %81,7)',y:'Kütahya, Uşak, Burdur, Isparta, Aydın ve Afyonkarahisar’ın önünde.',n:'Muğla, Manisa ve İzmir’in gerisinde; sektörel katma değer payı bulunamadı.'},
+{c:'warn',chip:'KIRILGAN: NÜFUS',ad:'Nüfus ve göç',big:'1.060.975',alt:'ADNKS 2025; 2024: 1.061.371 (−396, −%0,04; kendi hesabım)',y:'Kayıp çok küçük; nüfus neredeyse sabit kaldı.',n:'On yıllardır göç alan il 2025’te göç fazlası verdi (yerel haber); sayı ve neden doğrulanamadı.'},
+{c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İstihdam',big:'%8,1',alt:'TR32 bölgesi 2023 işsizliği (Denizli’ye özgü değil; Türkiye %9,4)',y:'Bölgede katılma %54,2 ve istihdam %49,8 ile Türkiye’nin üzerinde.',n:'Denizli’ye özgü güncel veri yok; 2023 verisi eski.'},
+{c:'sleep',chip:'UYUYAN: YATIRIM',ad:'Teşvik ve yeni OSB',big:'274 belge',alt:'Yatırım teşvik belgesi, Ocak–Kasım 2023; 21,0 mlr TL, 2.576 istihdam',y:'Enerji (114 belge) ve imalat (129 belge) ağırlıklı; makine ihtisas OSB planı gündemde (eski görüşme).',n:'2023 verisi; gerçekleşme ve güncel yatırım tutarı bulunamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve orta'],['sleep','Uyuyanlar']];
+function karne(f){
+var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+$('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['İhracat, farklı ölçüler (milyar $)',[['2024, TİM',4.4],['2025, TİM',4.7],['2025, Ticaret Bakanlığı (faaliyet)',4.5],['Son 12 ay, Eylül 2026 (5 üzeri)',5.0]],[1],'Ölçüler birbirine eşdeğer değil. 2024 değeri 4,4 milyar $ (DENİB, Ekonomi Gazetesi); son 12 ay “5 milyar $ üzeri” ifadesi olup 5,0 yalnızca alt sınırdır. Kaynak: DENİB (T24, Ekonomi Gazetesi); Ticaret Bakanlığı.'],
+['2025 sektörler (milyon $)',[['Tekstil ve konfeksiyon',1368],['Elektrik-elektronik',1019],['Diğer (kendi hesabım)',2313]],[0,1],'Toplam 4,7 milyar $ (TİM). Tekstil −%2, elektrik-elektronik +%16. Kaynak: DENİB (Ekonomi Gazetesi, Ocak 2026).'],
+['Eylül 2026 sektörler (milyon $)',[['Elektrik-elektronik',138],['Tekstil ve konfeksiyon',128],['Demir ve demir dışı metaller',81],['Tarım',33],['Madencilik',27],['Diğer (kendi hesabım)',72]],[0],'Toplam 479 milyon $ (+%22,6); elektrik-elektronik +%47,3, tekstil +%11, demir +%40,8, tarım +%26,3, madencilik +%7,1. Tek ay. Kaynak: DENİB (Ekonomi Gazetesi, AA/Foreks).'],
+['2025 en büyük pazarlar (milyon $)',[['İngiltere',653],['ABD',422],['İtalya',404]],[0],'İngiltere +%13, İtalya +%23,7; Eylül 2026’da İngiltere’ye ihracat +%58,2 (91 milyon $). Yalnızca üç pazar listelendi. Kaynak: DENİB (Ekonomi Gazetesi, Ocak 2026).']];
+mk('ih',IH,['Toplam','Sektör 2025','Eylül 2026','Pazar']);
+var SA=[['Yatırım teşvik belgeleri, Ocak–Kasım 2023 (adet)',[['İmalat',129],['Enerji',114],['Hizmetler',13],['Tarım',13],['Madencilik',5]],[0],'Toplam 274 belge, 21,0 milyar TL yatırım, 2.576 öngörülen istihdam; imalat 1.913 kişi. 2023 verisi, güncel değil. Kaynak: İŞKUR Denizli raporu (Sanayi ve Teknoloji Bakanlığı).'],
+['Firma sayısı, 2023',[['Tekstil',1724],['Gıda',574]],[0],'İl Müdürlüğü verisi, 2023; diğer sektörler ve toplam bulunamadı. Kaynak: İŞKUR Denizli raporu (Bilim, Sanayi ve Teknoloji İl Müdürlüğü).']];
+mk('sa',SA,['Teşvik','Firmalar']);
+var TU=[['Ören yeri ziyaretçisi, 2025 (bin kişi)',[['Efes',2552.7],['Pamukkale (Hierapolis)',2302.2]],[1],'Pamukkale ikinci sırada. Ülke toplamı 34,8 milyon ziyaretçi (+%7). Pamukkale için bir kaynak 2.301.689 veriyor. Kaynak: Kültür ve Turizm Bakanlığı (İHA, Denizli Haber); AA.']];
+mk('tu',TU,['Ören yeri']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İzmir',16949],['Muğla',16040],['Manisa',13852],['Denizli',12522],['Kütahya',12384],['Uşak',12114],['Burdur',11950],['Isparta',11826],['Aydın',11798],['Afyonkarahisar',10243]],[3],'Denizli 81 il arasında 25.; Türkiye ortalaması 15.325 $, oran yaklaşık %81,7 (kendi hesabım). Sıralar: İzmir 6, Muğla 11, Manisa 19, Denizli 25, Kütahya 26, Uşak 29, Burdur 32, Isparta 35, Aydın 36, Afyonkarahisar 53. Kaynak: TÜİK (Rudaw aktarımı).'],
+['Nüfus, 2025 (bin kişi)',[['İzmir',4504.2],['Manisa',1477.8],['Aydın',1172.1],['Muğla',1099.5],['Denizli',1061.0],['Afyonkarahisar',751.8],['Isparta',445.3],['Uşak',374.4],['Burdur',277.2]],[4],'Denizli 2024’te 1.061.371 idi. Kaynak: TÜİK ADNKS 2025 (Rudaw aktarımı).'],
+['Nüfus artışı, 2024–2025 (%)',[['Muğla',1.63],['Aydın',0.53],['Burdur',0.51],['İzmir',0.24],['Afyonkarahisar',0.22],['Manisa',0.16]],[0],'Değerler kendi hesabımdır (ADNKS 2024–2025). Nüfusu azalanlar listede yok: Isparta yaklaşık −%0,25, Uşak −%0,24, Denizli −%0,04. Kaynak: Rudaw aktarımı.']];
+mk('gt',GT,['Gelir','Nüfus','Artış']);
+</script>
+</body>
+</html>

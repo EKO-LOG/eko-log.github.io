@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karaman | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Karaman'a özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0f766e;--a2:#b45309;--a3:#4338ca"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Karaman</span><h1>Karaman: Bisküvi, Elma, Üretim Merkezi</h1><p>262.355 nüfuslu Karaman; Türkiye’nin bisküvi-çikolata-kek üretiminin büyük bir bölümünü, elma ve bulgurda öne çıkan bir ürün gücünü barındıran küçük ama sanayileşmiş bir il. Kişi başına GSYH 14.374 $ ile 81 il arasında 17.; Türkiye ortalamasının yaklaşık %93,8’i. İlden doğrudan ihracat 2025’te 343 milyon $, ilde üretilen ürünlerin ihracatı ise 635,6 milyon $ (KTSO). 2026’da ihracat ilk on ayda %4,9 geride. Bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>14.374 $</b><span>Kişi başına GSYH (2024), 81 il arasında 17.; Türkiye ort. 15.325 $’ın yaklaşık %93,8’i (oran kendi hesabım)</span></div>
+<div class="k"><b>262.355</b><span>Nüfus (ADNKS 2025); 2024: 262.791 (−436, −%0,17; kendi hesabım)</span></div>
+<div class="k"><b>343 mn $</b><span>2025 ihracatı, Karaman’dan doğrudan (KTSO); üretim merkezi esaslı 635,6 mn $</span></div>
+<div class="k"><b>257,3 mn $</b><span>Ocak–Ekim 2026 ihracatı; 2025’in aynı dönemi 270,5 mn $ (−%4,87; KTSO, TİM)</span></div>
+<div class="k"><b>687 bin ton</b><span>2024 elma üretimi; 2025’te zirai don çok az ürün verdi, 2026 beklentisi 750–800 bin ton</span></div>
+<div class="k"><b>~1/3</b><span>Türkiye bisküvi-çikolata-şekerleme üretiminin ildeki payı (KTSO); başka kaynaklar %35 ve %70 diyor</span></div>
+</div>
+<div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+<section id="karne"><h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+<li>Sayılar farklı yıllara ve kaynaklara ait (KTSO açıklamaları, TİM aktarımları, bakanlık rehberleri, eski gazete ve dernek metinleri). Yan yana okunmaları kesin karşılaştırma değildir.</li>
+<li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat ve üretim izlerine dayanıyor, katma değer ölçümüne değil.</li>
+<li>Karaman’a özgü güncel işsizlik, turizm, ilçe nüfusu ve OSB istihdamı bulunamadı; ilgili bölümlerde ayrıca yazdım.</li></ul></div></section>
+
+<section id="ihracat"><h2>İhracat: İki Ölçü, 2026’da Geride</h2>
+<p class="sub">Karaman’dan doğrudan yapılan ihracat ile ilde üretilen ürünlerin ihracatı arasında büyük fark var; ikisini birleştirmedim.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>KTSO’ya göre 2025’te Karaman’da üretilen ürünlerin ihracat değeri 635,6 milyon $, Karaman’dan doğrudan ihracat 343,0 milyon $; aradaki yaklaşık 292,6 milyon $ (kendi hesabım: yaklaşık %46), ürünlerin başka gümrüklerden çıkmasından kaynaklanıyor.</li>
+<li>2026’da ihracat Ocak–Ekim döneminde 257,3 milyon $ ile geçen yılın 270,5 milyon $’ının %4,87 altında; Ocak–Mayıs’ta düşüş %11,8 idi, Eylül (+%14,6) ve Ekim’de (+%8,1) artış var.</li>
+<li>Karaman Türkiye ortalamasıyla yakın seyretti: Mayıs 2026’da il %9,65, Türkiye %9,3 düştü; Eylül’de il %14,6, Türkiye %15,4 arttı.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kayıp ilk beş ayda %11,8’den ilk on ayda %4,9’a indi (KTSO’nun açıkladığı yüzdeler); son iki ay artışta.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yıl bütününde 2025’in gerisinde kalma riski sürüyor; KTSO maliyet baskısı, kur ve bölgesel belirsizliğe dikkat çekiyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>343,0 ile 635,6 milyon $ farklı ölçülerdir; ikincisi “üretim merkezi” esaslıdır. Eski, tarihsiz bir serbest bölge protokolü haberinde geçen “ortalama 400 milyon $” ifadesi de bu iki rakamla birebir örtüşmüyor. Karaman OSB’nin 2022 ihracatı 278 milyon $ olarak verilmişti (KTSO); hangi ölçüye ait olduğu belirtilmemiş.</li>
+<li>2025 yıllık ürün ve ülke kırılımı ile 2024 yıllık ihracatı bulunamadı. 2026 grafiklerinde Şubat, Mart ve Nisan eksik; yalnızca elimdeki aylar gösteriliyor.</li></ul></div></section>
+
+<section id="sanayi"><h2>Sanayi: Gıda Ağırlıklı Üretim Merkezi</h2>
+<p class="sub">Bisküvi üretimi 1960’ların sonunda küçük atölyelerde başladı; bugün Karaman OSB gıda ağırlıklı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>KTSO başkanına göre OSB’de 469 firma, yaklaşık 19 bin işçi çalışıyor ve ihracatın yüzde 90’ı bisküvi, çikolata, kek ve gofretten oluşuyor (yaklaşık 2020 haberi; yıl belirtilmemiş).</li>
+<li>Bisküvi, çikolata ve şekerleme üretiminin ildeki payı için üç farklı iddia var: yaklaşık üçte bir (KTSO), yaklaşık %35 (ansiklopedi) ve %70 (belediye başkanı, “70’i” ifadesi).</li>
+<li>Gıdanın yanında bulgur, makarna, un, meyve işleme ve ambalaj sanayisi sayılıyor; İSO 500 listesinde 2021’de 4 Karaman firması vardı.</li>
+<li>Karaman Teknoloji Geliştirme Bölgesi ve ikinci OSB’nin kuruluş çalışmaları sürüyor; ilde serbest bölge ilan edilmiş alan var (ansiklopedi metni, tarihsiz).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yoğunlaşmış bir gıda kümesi var ve ürünler yüzü aşkın ülkeye gidiyor (KTSO: yüzden fazla ülke).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Sanayi tek bir ürün ailesine (unlu ve şekerli gıda) çok bağımlı; sektörde fiyat rekabetinden kaçınma ve çocuk nüfusunun azalması uyarıları var (Anadolu Sohbetleri).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Pay iddiaları birbiriyle çelişiyor (33–70) ve hiçbiri güncel bir tabloya dayanmıyor; firma ve çalışan sayıları da eski. Güncel OSB doluluğu bulunamadı.</li>
+<li>Serbest bölge ve ikinci OSB bilgilerinin güncel durumunu doğrulayamadım.</li></ul></div></section>
+
+<section id="tarim"><h2>Tarım: Elma Cenneti, Zirai Don Riski</h2>
+<p class="sub">Karaman sertifikalı elma ağacı sayısında Türkiye’de ilk; üretim sırası iklim koşullarına göre değişiyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>2024’te 687 bin ton elma üretildi; 2025’te zirai don nedeniyle çok az ürün alındı ve 2026 için 750–800 bin ton rekolte bekleniyor (haber, hasat başlangıcı).</li>
+<li>Toplam tarım alanı 3,37 milyon dekar, yüzölçümü 9,16 milyon dekar (kendi hesabım: yaklaşık %37); çiftçi kayıt sistemine kayıtlı 15.402 çiftçi var (Tarım ve Orman Bakanlığı rehberi, 2025).</li>
+<li>Elma 20 ülkeye ihraç ediliyor (haber, tarihsiz). Bulgurda Türkiye üretiminin yaklaşık %20’si ildeydi (KTSO, eski).</li>
+<li>2022’de yaklaşık 323,9 ton bal üretildi.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Rekor rekolte beklentisi var ve elma, bulgur ve bakliyat gıda sanayisine yerel girdi sağlıyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tek bir don olayı bir yıllık ürünün büyük bölümünü silebiliyor; 2025 bunu gösterdi.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Elma üretim sırası kaynaklara göre değişiyor: “ilk sırada”, “ilk üçte” ve “Isparta ile rekabet”; eski yazılarda 350–400 bin ton ve %20 pay geçiyor, 2024 değeri 687 bin ton. Bunlar aynı yıla ait değil.</li>
+<li>2025’in gerçekleşen elma üretimi, bulgur ve bakliyat tonajları ve hayvancılık için güncel veri bulunamadı.</li></ul></div></section>
+
+<section id="turizm"><h2>Turizm: Veri Yok</h2>
+<p class="sub">Karaman’a özgü güncel turist, geceleme ve gelir verisini güvenilir bir kaynakta bulamadım.</p>
+<div class="card"><h3>Bulabildiklerim</h3><ul>
+<li>Taşkale Tahıl Ambarları, Manazan Mağaraları, Binbirkilise, Karaman Kalesi ve Yılkı Atları ilin simgeleri olarak sayılıyor; Kapadokya Üniversitesi’nin bir “Turizm Tanıtım ve Geliştirme Yol Haritası” taslağı ilin 2028 turist hedefini içeriyor (rakam çıkarılamadı).</li>
+<li>Çok eski (2013) bir kayıtta ilde 5 turizm işletme belgeli otel ve 1 müze vardı; güncel karşılığı bilinmiyor.</li></ul></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tarih, doğa ve gastronomi unsurları ve bir yol haritası taslağı var.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Güncel ölçülmüş veri olmadan sektörün ekonomideki yeri bilinemiyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu bölüm bilerek sayısal içerik taşımıyor; 2013 verisini güncel gibi sunmadım. Taşkale ve Binbirkilise gibi yerlerin ziyaretçi sayıları bulunamadı.</li></ul></div></section>
+
+<section id="gelir"><h2>Gelir, İşgücü ve Nüfus</h2>
+<p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar) ve ADNKS 2024–2025</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kişi başına 14.374 $ ile 81 il arasında 17.; Antalya 5. (17.103 $) önünde; Mersin 21. (13.549 $), Aksaray 27., Kayseri 28., Konya 34., Isparta 35., Nevşehir 41. ve Niğde 43. sırada. Oran Türkiye ortalamasının (15.325 $) yaklaşık %93,8’i (kendi hesabım).</li>
+<li>Toplam ekonomi: 14.374 $ ile 262.355 kişi çarpımından yaklaşık 3,8 milyar $; nüfus payı yaklaşık %0,30 (kendi hesabım).</li>
+<li>Nüfus 2024’te 262.791, 2025’te 262.355: −436 kişi (−%0,17). Komşu Konya (+%0,57), Mersin (+%0,11) ve Nevşehir (+%0,69) arttı, Isparta (−%0,25) azaldı.</li>
+<li>Eski bir İŞKUR raporu (2020 verileri) Karaman’ı göç veren il olarak tanımlıyor.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Küçük bir il için gelir yüksek; Türkiye ortalamasına yakın ve komşu Konya, Kayseri, Aksaray’ın önünde.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Nüfus küçülüyor ve komşuların çoğu büyürken Karaman göç veriyor olabilir (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Güncel işgücü verisini bulamadım. Elimde yalnızca eski değerler var: Karaman 2013’te işsizlik %4,2, katılma %50,3; TR52 (Konya, Karaman) bölgesi 2020’de işsizlik %8,0, katılma %48,6. Bunları güncel saymadım.</li>
+<li>Nüfus azalışının nedeni (göç, yaş yapısı) doğrulanamadı; 2025 net göçü, sektörel GSYH payları ve TL değeri yok.</li></ul></div></section>
+
+<section id="ilceler"><h2>İlçe Kırılımı</h2>
+<p class="sub">Altı ilçe; güncel ilçe nüfuslarını ve ilçe ekonomisi verilerini bulamadığım için tablo yalnızca bulduğum ipuçlarını içeriyor.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+<tr><td>Merkez</td><td>Bulunamadı</td><td>Karaman OSB (gıda kümesi); Taşkale (Merkez’e bağlı) tahıl ambarları ve Manazan Mağaraları</td></tr>
+<tr><td>Ayrancı</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Başyayla</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Ermenek</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Kazımkarabekir</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Sarıveliler</td><td>Bulunamadı</td><td>Gödet köyünde şifalı su ve doğa turizmi (eski turizm çalışması)</td></tr></table>
+<p class="note" style="margin:10px 0 0">İl toplamı 262.355 (ADNKS 2025). İlçe adlarını genel bilgiden yazdım, kaynak aramadım; ilçe bazında nüfus, GSYH, tarım ve istihdam verisi bulunamadı.</p></div></section>
+
+<section id="sonuc"><h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Karaman</h3>
+<p style="margin:0">Karaman’ın ekonomisi bisküvi-çikolata-kek merkezli gıda sanayisine, dünyada ilk sıralarda ve zirai dona açık bir elma üretimine yaslanıyor; kişi başına gelir 14.374 $ ile Türkiye ortalamasının yaklaşık %93,8’i ve komşu illerin çoğunun önünde. Güçlü tarafı yoğun bir gıda kümesi ve ilde üretilen ürünlerin 635,6 milyon $’lık ihracatı, zayıf tarafı 2026’da gerileyen ihracat, tek ürün ailesine ve hava olaylarına bağımlılık ve hafif küçülen nüfus. İl küçük ama verimli; sorun ölçek ve çeşitlilik (yorum).</p></div>
+<div class="three">
+<div><b>HAMLE 1</b>Gıda çeşitliliğini artırmak: unlu-şekerli ürünlerin yanında bulgur, bakliyat, meyve işleme ve katma değerli ürünlerle bağımlılığı azaltmak.</div>
+<div><b>HAMLE 2</b>Elmada riski yönetmek: don koruma, depolama ve işleme tesisleriyle rekolte dalgalanmasının etkisini azaltmak.</div>
+<div><b>HAMLE 3</b>Üretim ile ihracat kaydını eşleştirmek: ilde üretilen ürünlerin ihracatının ilde yazılması için gümrük ve lojistik altyapısını güçlendirmek.</div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. Nüfus azalışının nedenleri kaynaklarda ayrıştırılmamış.</li></ul></div></section>
+
+<section id="tartisma"><h2>Tartışma Köşesi</h2>
+<div class="card"><ul>
+<li>Karaman’da üretilen ürünlerin yaklaşık yarısı başka gümrüklerden çıkıyorsa, ilin gerçek ihracat gücü hangi rakamla ölçülmeli?</li>
+<li>Bisküvi-çikolata-şekerleme kümesi tek bir ürün ailesine yaslanırsa, tüketici alışkanlığı değiştiğinde il ne kadar kırılgan olur?</li>
+<li>Bir zirai don bir yıllık elma ürününü yok edebiliyorsa, elma ekonominin motoru mu yoksa riski mi?</li>
+<li>Gelir yüksek ve nüfus azalıyorsa, “verimli ama küçülen il” bir başarı mı yoksa uyarı mı?</li></ul>
+<a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div></section>
+
+<section id="kaynak"><h2>Kaynaklar ve Veri Notu</h2>
+<ul class="src">
+<li>Gelir ve nüfus: TÜİK il bazında GSYH 2024 ve ADNKS 2025 (Rudaw aktarımları)</li>
+<li>İhracat: Karaman Ticaret ve Sanayi Odası (KTSO) açıklamaları ve TİM verileri (Karaman’da Uyanış, Karamandan.com, Garaman.net); KTSO “Karaman İhracat Gücü” notu; Cumhuriyet, Habertürk, Hürriyet (eski haberler)</li>
+<li>Sanayi: KTSO açıklamaları (AA, Mynet, Bigpara, Cumhuriyet); TOBB Ekonomik Forum; Dünya (Anadolu Sohbetleri); Küre Ansiklopedi (Karaman maddesi)</li>
+<li>Tarım: Tarım ve Orman Bakanlığı Karaman Tarımsal Yatırım Rehberi (2025); Karar, Habertürk Yerel, SonDakika (elma rekoltesi); Bianet (eski)</li>
+<li>Turizm ve işgücü: Kapadokya Üniversitesi (Karaman Turizm Yol Haritası); Dergipark (2013 turizm arzı); İŞKUR Karaman raporları</li>
+<li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168: Amasya dosyasıyla aynı kaynaklar</li></ul>
+<p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Karaman’a özgü güncel işsizlik, turist ve geceleme sayıları, OSB istihdamı ve doluluğu, ilçe nüfusları, ilçe ekonomisi, 2025 ürün ve ülke ihracat kırılımı, 2025 gerçekleşen elma üretimi ve il GSYH’sinin TL değeri doğrulanmış kaynakla bulunamadığı için sayfada yok. %93,8 (gelir oranı), %0,17 (nüfus değişimi), %0,30 (nüfus payı), 3,8 milyar $ (toplam ekonomi), yaklaşık %46 (üretim ile doğrudan ihracat farkı), %37 (tarım alanı payı), kümülatif kayıp çubukları ve diğer illerin nüfus değişim yüzdeleri kendi hesabımdır. Tarih belirtilmeyen beyanlar (dernek başkanı, belediye başkanı, eski rapor) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p></section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+{c:'good',chip:'MOTOR: GIDA SANAYİ',ad:'Bisküvi, çikolata, kek',big:'~1/3',alt:'Türkiye üretiminin ildeki payı (KTSO); başka kaynaklar %35 ve %70 diyor',y:'OSB’de 469 firma, ~19 bin çalışan (yaklaşık 2020); yüzden fazla ülkeye ihracat.',n:'Pay iddiaları 33–70 arasında çelişiyor; güncel firma ve istihdam verisi yok.'},
+{c:'good',chip:'MOTOR: İHRACAT',ad:'Dış ticaret',big:'343 mn $',alt:'2025, Karaman’dan doğrudan (KTSO); üretim merkezi esaslı 635,6 mn $',y:'İlde üretilen ürünlerin yaklaşık yarısının ihracatı başka gümrüklerden çıkıyor (kendi hesabım: ~%46).',n:'Ocak–Ekim 2026 257,3 mn $ ile 2025’in %4,87 altında.'},
+{c:'warn',chip:'KIRILGAN: İKLİM',ad:'Elma',big:'687 bin ton',alt:'2024 elma üretimi; 2026 beklentisi 750–800 bin ton',y:'Sertifikalı elma ağacında Türkiye’de ilk; 2026 rekolte beklentisi yüksek.',n:'2025’te zirai don çok az ürün bıraktı; üretim sırası değişken (ilk üç / Isparta ile rekabet).'},
+{c:'warn',chip:'KIRILGAN: VERİ ESKİ',ad:'Bulgur ve bakliyat',big:'~%20',alt:'Türkiye bulgur üretiminin ildeki payı (KTSO, eski ifade)',y:'Bulgur, makarna ve un sanayisi gıda kümesine girdi veriyor.',n:'Güncel tonaj, pay ve ihracat verisi bulunamadı.'},
+{c:'good',chip:'GÜÇLÜ: GELİR',ad:'Gelir',big:'17 / 81',alt:'Kişi başına GSYH sırası (2024; 14.374 $, Türkiye ort. yaklaşık %93,8)',y:'Konya, Kayseri, Aksaray, Isparta, Nevşehir ve Niğde’nin önünde.',n:'Hâlâ Türkiye ortalamasının altında; Antalya’nın (17.103 $) gerisinde.'},
+{c:'warn',chip:'KIRILGAN: NÜFUS',ad:'Nüfus',big:'262.355',alt:'ADNKS 2025; 2024: 262.791 (−436, −%0,17; kendi hesabım)',y:'Kayıp küçük.',n:'Komşu Konya, Mersin ve Nevşehir artarken azalıyor; eski rapor göç veren il diyor.'},
+{c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İstihdam',big:'Veri yok',alt:'Güncel il verisi bulunamadı; TR52 2020: işsizlik %8,0, katılma %48,6',y:'Karaman 2013’te %4,2 işsizlikle düşük bir orana sahipti (eski).',n:'Eski ve bölge düzeyinde; güncel sektör istihdamı yok.'},
+{c:'sleep',chip:'UYUYAN: TURİZM',ad:'Taşkale, Manazan, Binbirkilise',big:'Veri yok',alt:'Güncel ziyaretçi ve geceleme verisi bulunamadı',y:'Tahıl ambarları, mağaralar, kale ve yol haritası taslağı var.',n:'Ölçülmüş turizm verisi yok; 2013’te 5 işletme belgeli otel (eski).'},
+{c:'sleep',chip:'UYUYAN: YATIRIM',ad:'İkinci OSB ve serbest bölge',big:'Veri yok',alt:'Teknoloji Geliştirme Bölgesi ve ikinci OSB kuruluş çalışmaları (tarihsiz)',y:'Gıda kümesinin büyümesi için altyapı planlanıyor.',n:'Güncel durum, tutar ve istihdam doğrulanamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve orta'],['sleep','Uyuyanlar']];
+function karne(f){
+var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+$('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['İhracat, farklı ölçüler (milyon $)',[['2025, üretim merkezi esaslı',635.6],['2025, Karaman’dan doğrudan',343.0],['Ocak–Ekim 2025',270.5],['Ocak–Ekim 2026',257.3]],[1],'Üretim merkezi ve doğrudan ihracat farklı ölçülerdir; fark yaklaşık 292,6 milyon $. Ocak–Ekim 2026, 2025’in %4,87 altında. Kaynak: KTSO (Karaman İhracat Gücü notu); Karaman’da Uyanış (TİM verileri).'],
+['2026 aylık ihracat (milyon $)',[['Ocak',20.1],['Mayıs',22.5],['Haziran',24.3],['Temmuz',27.7],['Ağustos',23.6],['Eylül',32.1],['Ekim',34.2]],[5,6],'Şubat, Mart ve Nisan bulunamadı. Geçen yılın aynı aylarına göre: Ocak −%34, Mayıs −%9,65, Haziran +%0,52, Temmuz −%10,2, Ağustos −%4,88, Eylül +%14,6, Ekim +%8,1 (Ocak değişimi kendi hesabımdır). Kaynak: KTSO (Karaman’da Uyanış).'],
+['2026 kümülatif kayıp, 2025’e göre (milyon $)',[['Ocak–Mayıs',15.4],['Ocak–Haziran',15.3],['Ocak–Temmuz',18.5],['Ocak–Ağustos',19.7],['Ocak–Eylül',15.7],['Ocak–Ekim',13.2]],[5],'Değerler kendi hesabımdır (KTSO’nun açıkladığı kümülatif 2025 ve 2026 toplamlarının farkı). Kayıp Ağustos’ta zirve yaptıktan sonra daraldı. Kaynak: KTSO (Karaman’da Uyanış).']];
+mk('ih',IH,['Ölçüler','Aylık','Kayıp']);
+var SA=[['Bisküvi-çikolata-şekerleme payı iddiaları (%)',[['KTSO (yaklaşık üçte bir)',33],['Küre Ansiklopedi (bisküvi)',35],['Belediye başkanı (“70’i”)',70]],[0],'Üç iddia çelişiyor; hiçbiri güncel bir tabloya dayanmıyor. Kapsam (bisküvi mi, bisküvi-çikolata mı) farklı olabilir. Kaynak: Cumhuriyet (KTSO), Küre Ansiklopedi, AA/Memurlar.'],
+['OSB ihracatı (milyon $)',[['2022 (KTSO)',278],['2023 tahmini (üzeri)',300]],[0],'OSB ihracatı olarak verilmiş; hangi ölçüye ait olduğu belirtilmemiş ve 2025 ilin geneliyle birebir karşılaştırılamaz. Kaynak: Cumhuriyet (KTSO).']];
+mk('sa',SA,['Pay iddiaları','OSB ihracatı']);
+var TA=[['Elma üretimi (bin ton)',[['2024',687],['2026 beklentisi (alt)',750],['2026 beklentisi (üst)',800]],[2],'2025 için çok az ürün alındı (zirai don); sayı bulunamadı. Beklentiler hasat haberlerinden. Kaynak: Habertürk Yerel (2024); Karar, SonDakika (2026).'],
+['Alan (bin dekar)',[['Yüzölçümü',9163],['Toplam tarım alanı',3372]],[1],'Tarım alanı yüzölçümünün yaklaşık %37’si (kendi hesabım). ÇKS’ye kayıtlı 15.402 çiftçi. Kaynak: Tarım ve Orman Bakanlığı Karaman Yatırım Rehberi (2025).']];
+mk('ta',TA,['Elma','Alan']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Antalya',17103],['Karaman',14374],['Mersin',13549],['Aksaray',12319],['Kayseri',12296],['Konya',11845],['Isparta',11826],['Nevşehir',11126],['Niğde',11052]],[1],'Karaman 81 il arasında 17.; Türkiye ortalaması 15.325 $, oran yaklaşık %93,8 (kendi hesabım). Sıralar: Antalya 5, Karaman 17, Mersin 21, Aksaray 27, Kayseri 28, Konya 34, Isparta 35, Nevşehir 41, Niğde 43. Kaynak: TÜİK (Rudaw aktarımı).'],
+['Nüfus, 2025 (bin kişi)',[['Antalya',2777.7],['Konya',2343.4],['Mersin',1956.4],['Kayseri',1459.0],['Isparta',445.3],['Aksaray',441.1],['Niğde',374.5],['Nevşehir',320.2],['Karaman',262.4]],[8],'Karaman 2024’te 262.791 idi. Kaynak: TÜİK ADNKS 2025 (Rudaw aktarımı).'],
+['Nüfus artışı, 2024–2025 (%)',[['Antalya',2.04],['Nevşehir',0.69],['Konya',0.57],['Niğde',0.48],['Kayseri',0.45],['Aksaray',0.38],['Mersin',0.11]],[0],'Değerler kendi hesabımdır (ADNKS 2024–2025). Nüfusu azalanlar listede yok: Karaman yaklaşık −%0,17, Isparta −%0,25. Kaynak: Rudaw aktarımı.']];
+mk('gt',GT,['Gelir','Nüfus','Artış']);
+</script>
+</body>
+</html>
