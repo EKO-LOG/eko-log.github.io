@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Siirt | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İle özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#4d7c0f;--a2:#bef264;--a3:#b45309"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Siirt</span><h1>Siirt: Fıstık, Bakır ve Küçük Bir OSB; Gelir Türkiye Ortalamasının Yarısı</h1><p>332.369 nüfuslu (2025) Siirt’in kişi başına GSYH’si 2024’te 7.975 $ ile 81 il arasında 72. sırada ve Türkiye ortalamasının yaklaşık %52’si. Ekonomi fıstığa (yaklaşık 415 bin dekar), Madenköy bakır işletmesine, 2025’te 2.600 kişiyi istihdam eden Siirt OSB’ye ve esnafa yaslanıyor; 2024’te işgücüne katılım %41,6 ile Türkiye’nin en düşüğüydü, nüfus 2025’te %1,21 azaldı. Güçlü yanlar: coğrafi işaretli fıstık, bakır, Botan Vadisi’nin turizm potansiyeli. Zayıf yanlar: 2025’te fıstık rekoltesi yaklaşık %80 düştü, ilin yıllık ihracat tutarı ve işsizlik oranı bulunamadı, turizm verisi yok. Bulamadığım ya da kaynakların tutmadığı yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>7.975 $</b><span>Kişi başına GSYH (2024), 81 il arasında 72.; Türkiye ort. 15.325 $’ın yaklaşık %52,0’ı (oran kendi hesabım; TÜİK)</span></div><div class="k"><b>332.369</b><span>Nüfus (2025); 2024’te 336.453 idi, yıllık −%1,21 (kendi hesabım; TÜİK)</span></div><div class="k"><b>%41,6</b><span>İşgücüne katılım oranı (2024), Türkiye’de en düşük; Türkiye ortalaması %54,2 (TÜİK)</span></div><div class="k"><b>2.600</b><span>Siirt OSB toplam istihdamı, 29 aktif fabrika; 2025’te +1.200 (Sanayi Gazetesi, Ocak 2026)</span></div><div class="k"><b>~415 bin dekar</b><span>Fıstık alanı, 12 milyondan fazla ağaç (Tarım ve Orman İl Müdürlüğü beyanı); Ticaret Bakanlığı raporunda 320 bin dekar</span></div><div class="k"><b>180 mn $</b><span>Bakır konsantresinin Türkiye’ye yıllık katkısı (Para Dergisi aktarımı; Eti Bakır)</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#sanayi">Özel Sektör</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">8 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, Ticaret Bakanlığı, Tarım ve Orman Bakanlığı, Valilik, bakan ve il müdürü beyanları, yerel basın). Yan yana okunmaları kesin bir karşılaştırma değil; ilin yıllık ihracat toplamı hiçbir kaynakta bulunamadı.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>Dış Ticaret: Fıstık Ülke Gündeminde, İlin İhracat Rakamı Görünmüyor</h2>
+<p class="sub">Siirt’in yıllık ihracat tutarı bulunamadı; fıstık ve bakır için dolaylı göstergeler var.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Ticaret Bakanlığı’nın 2026 Sert Kabuklu ve Kuru Meyveler raporuna göre Türkiye’nin Antep fıstığı ihracatı 2024’te yaklaşık 445 milyon $ (41,1 bin ton), 2025’te yaklaşık 497 milyon $ (39,8 bin ton, +%11,7) oldu; Türkiye dünyada üçüncü. Siirt’in bu ihracattaki payı kaynakta yok.</li><li>Ticaret Bakanı Ağustos 2025’te Siirt’te 73 ihracatçı ve 5.149 esnaf bulunduğunu, Siirtli ihracatçılara geçen yıl 33,5 milyon $ Eximbank sübvansiyonlu reeskont kredisi verildiğini, 22 yılda 55,5 milyar TL kamu yatırımı yapıldığını söyledi. Aynı konuşmada fıstık için lisanslı depo kurulacağı belirtildi.</li><li>Siirt fıstığının (coğrafi işaretli) kendi ihracatı küçük: 2019-2021’de toplam 120 ton, 2022’nin ilk altı ayında 70 ton (AA/Cumhuriyet); ilk satış Almanya’ya, sonra Romanya, Belçika, Hollanda, Çin; İspanya ve İtalya için anlaşma imzalandı.</li><li>Eti Bakır’ın Siirt’teki işletmesinin bakır konsantresiyle Türkiye’ye yıllık yaklaşık 180 milyon $ katkı sağladığı bildiriliyor (Para Dergisi, Eylül 2026; “katkı”nın ihracat mı, üretim değeri mi olduğu özette belirtilmemiş).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Türkiye fıstık ihracatı 2025’te arttı; Siirt fıstığı yeni ülkelere açılıyor ve lisanslı depo planlanıyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Siirt fıstığının doğrudan ihracatı yalnızca onlarca ton; ilin toplam ihracatı ve ürün dağılımı kamuoyuna açık bir tabloda görünmüyor.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>İlin yıllık ihracat tutarı, ürün ve ülke dağılımı, ithalatı bulunamadı; GAİB’in aylık bültenlerinde Siirt ayrıca sayılmıyor. Bakır katkısının tanımı ve fıstık ihracatındaki Siirt payı bilinmiyor.</li><li>Fıstık ihracatı için iki Türkiye serisi var (Ticaret Bakanlığı Antep fıstığı 497 milyon $; GAİB “fıstık” ocak-eylül 2025’te 152,6 milyon $, 2024’te 229,8 milyon $); kapsamları farklı, birbirine eklenmedi. 55,5 milyar TL ve 33,5 milyon $ rakamları bakan beyanı.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Özel Sektör Yapısı: Küçük ve Büyüyen OSB, Madenköy ve Esnaf</h2>
+<p class="sub">OSB 2025’te istihdamı iki katına yakın artırdı ama hâlâ küçük; esnaf ağırlıklı yapı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Sanayi Gazetesi’ne göre Siirt OSB 2025’te 1.200 kişiye yeni iş imkânı sağladı, toplam istihdam 2.600’e ve aktif fabrika sayısı 29’a çıktı (kaynak “yetkililer”e atıf yapıyor). Bir başka haberde Sanayi ve Teknoloji Bakanı OSB’ye 254 milyon TL kaynak aktarıldığını ve bugüne dek 2.300 kişi istihdam edildiğini söylüyor; bir milletvekili alanın 700’den 1.650 dönüme çıkarıldığını belirtti; Kasım 2026’da OSB yönetim kurulu 2. etap genişlemeyi görüştü.</li><li>Aynı yayın Siirt OSB’nin yatırımcı çekme ve istihdam oluşturmada komşuları Batman ve Bitlis’in gerisinde kaldığını yazıyor (yorum); Bitlis’te mevcut OSB’de 55 firma var.</li><li>Bakan beyanına göre Siirt’te 5.149 esnaf, 13 esnaf odası ve 3.000 esnaf kefalet kooperatifi üyesi var; 22 yılda 1,7 milyar TL esnaf kredisi verildi, 2025’te ağustosa dek 254 milyon TL faiz sübvansiyonlu kredi kullanıldı.</li><li>TÜİK 2024’te Siirt’te işgücüne katılım oranı %41,6 ile Türkiye’nin en düşüğüydü; 2025’te Siirt en düşük istihdam oranına sahip dördüncü il (Para Dergisi aktarımı; oran bulunamadı). Türkiye 2025’te işsizlik %8,3, istihdam %49,0, katılım %53,5.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>OSB’de 2025’te +1.200 iş; alan yaklaşık 2,4 kat büyütülüyor (700’den 1.650 dönüme, beyan).</li><li>Madenköy bakır işletmesi ilin en büyük sanayi tesislerinden biri (yorum).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İşgücüne katılım Türkiye’nin en düşüğü (%41,6, 2024); OSB’nin 2.600 kişilik istihdamı 332 bin nüfusa göre küçük (yaklaşık %0,8, kendi hesabım).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Siirt’in TÜİK işsizlik oranı, 2025 istihdam ve katılım oranı, SGK sigortalı sayısı, sektörel istihdam, ihracat ve ciro verisi bulunamadı. OSB istihdamı yetkili beyanı; 2.600 ve 2.300 arasındaki farkın tarihi belirsiz.</li><li>İşgücü sorunlarının nedeni (kadın katılımı, eğitim, bölgesel koşullar) için bu sayfada kaynaklı bir analiz yok; yorum yapmadım.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Siirt Fıstığı ve Bal</h2>
+<p class="sub">Fıstık ilin sembol ürünü; ürün düzensiz (yok yılı) ve rekolte oynak.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Ticaret Bakanlığı raporuna göre Şanlıurfa 1,5 milyon dekarla, Gaziantep 1,4 milyon dekarla en geniş fıstık alanına sahip; Siirt 320 bin dekarla üçüncü. Siirt Tarım ve Orman İl Müdürlüğü ise yaklaşık 415 bin dekarda 12 milyondan fazla fıstık ağacı olduğunu söylüyor; iki alan rakamı farklı kaynak ve yıllardan.</li><li>Siirt fıstığı coğrafi işaretli. Eski bir haberde fıstığın ilin ekonomisine yılda 400 milyon TL gelir sağladığı yazılıyordu (yıl belirsiz, güncelliğini yitirmiş); 2025’te bir özet yok yılı ve yüksek sıcaklık nedeniyle Siirt’te rekoltenin yaklaşık %80 düştüğünü söylüyor (Tridge, 10 Eylül 2025); sonraki “yok yılı” hasat haberinde yağışlarla ağaçların toparlandığı ve yüksek verim beklendiği bildirildi.</li><li>Pervari balı için akademisyenler polen atlası hazırlıyor (Hürriyet yerel haberi); bal ve yayla ürünlerinin ekonomik büyüklüğü bulunamadı. Aralık 2025’te çiftçilere 25 bin fıstık ve 4.300 Trabzon hurması fidanı dağıtıldı (Tridge özeti).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Coğrafi işaretli Siirt fıstığı, Türkiye’nin ilk üç fıstık ilinden biri; il müdürlüğü beyanına göre 12 milyondan fazla ağaç.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Rekolte iklime ve yok yılına bağlı: 2025’te yaklaşık %80 düşüş bildirildi; gelir tek ürüne bağlı kalıyor (yorum).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Fıstık üretimi (ton), hububat, hayvan varlığı, çiftçi sayısı, bal üretimi ve tarımın GSYH ve istihdam payı bulunamadı. %80 düşüş bir ticaret sitesi özetinden; ölçütü (ilin geneli mi, belirli bir bölge mi) belirsiz. 400 milyon TL’lik gelir rakamı eski ve güncel değil.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Botan Vadisi ve Tillo</h2>
+<p class="sub">Doğa turizmi potansiyeli anılıyor; ziyaretçi ve gelir verisi yok.</p>
+<div class="g2"><div class="card"><h3>Okuma notu</h3><ul><li>Vali Kemal Kızılkaya Turizm Haftası panelinde Siirt’in “12 bin yıllık” tarihine, Botan Vadisi’nin kanyon ve vadilerine, tarihî cami ve türbelere ve Tillo’nun UNESCO Geçici Miras Listesi’nde yer almasına vurgu yaptı. İçişleri Bakanı Botan Vadisi Millî Parkı’nda tekne ve yamaç paraşütü gibi etkinliklere dikkat çekti; Rasıl Hacar (delikli taş) turist ilgisi gören bir nokta olarak haberleştirildi; Siirt Fıstığı Doğa ve Kültür Festivali düzenleniyor.</li></ul></div><div class="card"><h3>Dikkat</h3><ul><li>Ziyaretçi sayısı, konaklama, yatak kapasitesi, doluluk, turizm geliri ve istihdamı bulunamadı; kentte turizm yatırımının büyüklüğü bilinmiyor. Yukarıdakiler yetkili beyanı ve tanıtım haberleridir.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Botan Vadisi Millî Parkı, Tillo ve festival, doğa sporları için bir başlangıç sağlıyor (beyan).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Turizm ölçülemiyor: ziyaretçi, yatak ve gelir verisi yok; ekonomik etkisi bilinmiyor.</li></ul></div></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">Gelir Türkiye ortalamasının yaklaşık yarısı; işgücüne katılım ülkenin en düşüğü; nüfus azalıyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Siirt kişi başına GSYH’de 2024’te 7.975 $ ile 72. sırada. Komşularda Elazığ 47. (10.660 $), Şırnak 63. (9.326 $), Hakkari 64. (9.284 $), Mardin 74. (7.537 $), Diyarbakır 75. (7.464 $), Batman 76. (7.202 $), Bitlis 77. (7.063 $), Muş 78. (7.016 $), Van 79. (6.185 $), Urfa 81. (5.731 $). Türkiye ortalaması 15.325 $ (TÜİK, Rudaw tablosu). Siirt, ortalamanın yaklaşık %52,0’ı.</li><li>Nüfus 2024’te 336.453, 2025’te 332.369 (−4.084, −%1,21; kendi hesabım): Siirt, nüfusu azalan 33 il arasında. Komşu Batman (+%1,24), Diyarbakır (+%1,02), Mardin (+%0,86), Şırnak (+%0,50) ve Bitlis (+%0,17) arttı; Hakkari (−%0,89) ve Muş (−%0,81) azaldı.</li><li>TÜİK 2024: işgücüne katılım Siirt’te %41,6 (Türkiye %54,2; en yüksek Ardahan %63,9). 2025’te en düşük katılım Hakkari’de (%38,1) görüldü; Siirt’in 2025 oranı bulunamadı.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Mardin, Diyarbakır, Batman, Bitlis, Muş, Van ve Urfa’nın üzerinde.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık yarısı; Elazığ, Şırnak ve Hakkari’nin gerisinde.</li><li>İşgücüne katılım 2024’te ülkenin en düşüğü; nüfus 2025’te %1,21 azaldı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>İl işsizlik oranı, 2025 istihdam ve katılım oranı, kayıtlı işsiz ve ücret verisi bulunamadı. Rudaw tablosunda Kocaeli ve Ankara aynı değerde (24.031) görünüyor; Ankara’yı TL değerinden doğruladım.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">8 ilçe (Merkez, Aydınlar, Baykan, Eruh, Kurtalan, Pervari, Şirvan, Tillo). İlçe düzeyinde ekonomik veri çok sınırlı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus</th><th>Ekonomik karakter</th></tr>
+<tr><td>Merkez</td><td>veri yok</td><td>Siirt OSB, Ulu Cami, Botan Vadisi yakınında fıstık bahçeleri ve festival</td></tr>
+<tr><td>Pervari</td><td>veri yok</td><td>Pervari balı (polen atlası çalışması), yayla ürünleri</td></tr>
+<tr><td>Kurtalan</td><td>veri yok</td><td>Siirt-Kurtalan yolu 21,2 km bölünmüş yol standardına yükseltildi (milletvekili beyanı)</td></tr>
+<tr><td>Tillo</td><td>veri yok</td><td>UNESCO Geçici Miras Listesi’nde yer alan Tillo (Vali beyanı)</td></tr>
+<tr><td>Şirvan</td><td>veri yok</td><td>Kaynak ilçeyi yazmıyor; Eti Bakır’ın Madenköy işletmesi genel bilgiye göre bu ilçede, doğrulanmadı</td></tr>
+<tr><td>Aydınlar, Baykan, Eruh</td><td>veri yok</td><td>Ekonomik veri bulunamadı</td></tr>
+</table><p class="note" style="margin:10px 0 0">Hiçbir ilçenin güncel nüfusu, GSYH’si, istihdamı veya ihracatı bulunamadı; ilçe karakterleri kaynaklarda dağınık geçen beyan ve haberlerden derlendi.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Siirt</h3><p style="margin:0">Siirt, coğrafi işaretli fıstığı (yaklaşık 320-415 bin dekar), bakır işletmesi ve 2025’te 2.600 kişiye ulaşan küçük OSB’siyle ayakta duran; kişi başına geliri Türkiye ortalamasının yaklaşık %52’si (72. sıra), işgücüne katılımı 2024’te Türkiye’nin en düşüğü (%41,6) olan bir il. Nüfus 2025’te %1,21 azaldı, fıstık rekoltesi 2025’te yaklaşık %80 düştü ve ilin yıllık ihracatı, işsizliği ve turizm gelirinin hiçbiri ölçülemiyor. Komşu Batman ve Bitlis’te OSB’ler daha hızlı büyüyor gözüküyor (yorum, Sanayi Gazetesi).</p></div>
+<div class="three"><div><b>HAMLE 1</b>Veriyi netleştirmek: il ihracatını ve ürün dağılımını, işsizlik ve katılım oranını, turizmi ve fıstık üretimini yayımlamak.</div><div><b>HAMLE 2</b>Fıstığı tek ürün riskinden ve yok yılından korumak: lisanslı depo, işleme ve markalaşma; bal ve diğer ürünlere çeşitlenme.</div><div><b>HAMLE 3</b>OSB’yi büyütmek ve istihdamı nüfusa yaymak: ikinci etap, kadın ve genç istihdamı, nitelikli işgücü.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Düşük katılımın nedenini açıklayan bir kaynak bulamadığım için neden atfı yapmadım.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>Fıstık ilin sembolü ama rekolte bir yıl %80 düşebiliyor: gelir tek ürüne bu kadar bağlıyken sigorta, işleme ve çeşitlenme nasıl kurgulanmalı?</li><li>İşgücüne katılım %41,6 ile Türkiye’nin en düşüğü: bu rakam gerçekten çalışmak isteyenin azlığını mı, iş bulunamamasını mı yansıtıyor?</li><li>Siirt OSB 2025’te 1.200 iş açtı ama komşu OSB’lerin gerisinde görülüyor: sorun alan mı, yatırımcı mı, teşvik mi?</li><li>Botan Vadisi, Tillo ve Pervari balı gibi varlıkların ekonomik karşılığı hiçbir tabloda görünmüyor: turizm ve yöresel ürünler nasıl ölçülmeli?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Rudaw il sıralaması tablosu, Habertürk, CNBC-e, Alo Maliye aktarımı); TÜİK 2025 nüfus verileri (Rudaw il tablosu); TÜİK işgücü istatistikleri 2024 ve 2025 (Alo Maliye, Halk TV, İşçi Haber, Rudaw, Ekonomist, Para Dergisi aktarımı); Küre Ansiklopedi (Siirt, 2024 nüfus)</li>
+<li>Dış ticaret: Ticaret Bakanlığı “2026 Sert Kabuklu ve Kuru Meyveler” raporu; Ticaret Bakanı Bolat’ın Siirt konuşması (ticaret.gov.tr, 22 Ağustos 2025); GAİB verileri (TRT Haber, Ekonomi Gazetesi); AA/Cumhuriyet (Siirt fıstığı ihracatı, 2022); Para Dergisi (Eti Bakır, Eylül 2026)</li>
+<li>Sanayi: Sanayi Gazetesi (Siirt OSB 2025 istihdamı, OSB karşılaştırması), DHA (Sanayi ve Teknoloji Bakanı, Siirt OSB), TBMM Genel Kurul konuşması (Siirt OSB alanı), Malatya Güncel/haberler.com (OSB 2. etap, Kasım 2026)</li>
+<li>Tarım ve turizm: Habertürk Yerel/AA (fıstık hasadı, festival, Botan Vadisi), Tridge (2025 rekolte, fidan dağıtımı), Hürriyet Yerel (Pervari balı), Gazete Birlik (Vali, Turizm Haftası), CNN Türk (Rasıl Hacar), Politikam/AA (Botan Vadisi)</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum raporlarının özeti veya yetkili beyanıdır; resmî tabloların doğrudan alıntısı değildir. Siirt’in yıllık ihracat tutarı ve ürün-ülke dağılımı, ithalatı, il işsizlik, istihdam ve 2025 katılım oranı, kayıtlı işsiz, ücret, SGK işyeri ve sigortalı sayıları, sektörlerin GSYH payları, fıstık, hububat ve hayvan üretimi, çiftçi sayısı, bal üretimi, turist sayısı, yatak kapasitesi ve turizm geliri, ilçe nüfusları ve ilçe GSYH’si doğrulanmış kaynakla bulunamadığı için sayfada yok. %52,0 (gelir oranı), −%1,21 (nüfus), −4.084 (nüfus kaybı), %0,8 (OSB istihdamının nüfusa oranı), 2024 sonu OSB istihdamı (2.600 − 1.200 = 1.400) ve komşu illerin nüfus değişim yüzdeleri kendi hesabımdır. Tarihi belirtilmeyen beyanlar (vali, bakan, il müdürü, milletvekili, OSB yetkilileri) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: MADEN',ad:'Bakır (Madenköy, Eti Bakır)',big:'180 mn $',alt:'Bakır konsantresinin Türkiye’ye yıllık katkısı (Para Dergisi aktarımı; yerin 669 m altından üretim)',y:'İlin en büyük sanayi işletmelerinden biri olduğu anlaşılıyor (yorum).',n:'İstihdam, vergi ve yerel gelir payı bulunamadı; “katkı”nın ihracat mı üretim değeri mi olduğu belirsiz.'},
+ {c:'good',chip:'MOTOR: FISTIK',ad:'Siirt fıstığı',big:'~415 bin dekar',alt:'12 milyondan fazla ağaç (Tarım ve Orman İl Müdürlüğü beyanı); Ticaret Bakanlığı raporunda 320 bin dekar, Türkiye’de 3. sıra',y:'Coğrafi işaretli; Türkiye Antep fıstığı ihracatı 2025’te 497 mn $ (+%11,7); lisanslı depo planlanıyor (Bakan beyanı).',n:'2025’te rekolte yaklaşık %80 düştü (Tridge özeti); Siirt fıstığının doğrudan ihracatı 2022’nin ilk 6 ayında 70 ton.'},
+ {c:'good',chip:'MOTOR: OSB',ad:'Siirt OSB',big:'2.600',alt:'Toplam istihdam, 29 aktif fabrika (Sanayi Gazetesi, Ocak 2026); 2025’te +1.200',y:'Alan 700’den 1.650 dönüme çıkarılıyor; 2. etap genişleme görüşüldü (Kasım 2026).',n:'Yatırımcı çekmede Batman ve Bitlis’in gerisinde (Sanayi Gazetesi yorumu); ciro ve ihracat verisi yok.'},
+ {c:'warn',chip:'DAR: GELİR',ad:'Gelir düzeyi',big:'72 / 81',alt:'Kişi başına GSYH sırası (2024; 7.975 $; Türkiye ort. 15.325 $)',y:'Mardin, Diyarbakır, Batman, Bitlis, Muş, Van ve Urfa’nın üzerinde.',n:'Türkiye ortalamasının yaklaşık %52,0’ı; Elazığ (10.660 $), Şırnak ve Hakkari’nin (9.3 bin $) gerisinde.'},
+ {c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İşgücüne katılım',big:'%41,6',alt:'İşgücüne katılım oranı, 2024; Türkiye’de en düşük (Türkiye %54,2; TÜİK)',y:'OSB 2025’te 1.200 iş açtı; bakan beyanına göre istihdam teşvikleri 14 yıla çıkarıldı.',n:'2025’te en düşük istihdam oranına sahip 4. il (Para Dergisi aktarımı; oran bulunamadı); işsizlik oranı bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: NÜFUS',ad:'Nüfus ve göç',big:'−%1,21',alt:'2024’ten 2025’e: 336.453 → 332.369 (−4.084; kendi hesabım; TÜİK)',y:'Kayıp küçük ölçekte; Muş (−%0,81) ve Hakkari (−%0,89) da azaldı.',n:'Nüfusu azalan 33 il arasında; Batman (+%1,24), Diyarbakır (+%1,02), Mardin (+%0,86) ve Şırnak (+%0,50) arttı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Botan Vadisi, Tillo',big:'Botan Vadisi',alt:'Millî Park; Tillo UNESCO Geçici Miras Listesi’nde (Vali); Rasıl Hacar, Siirt Ulu Cami, fıstık festivali',y:'Tekne, yamaç paraşütü ve doğa sporları için potansiyel (Bakan ve Vali beyanları).',n:'Ziyaretçi, yatak, doluluk ve gelir verisi bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: DIŞ TİCARET',ad:'İhracatçı tabanı',big:'73 ihracatçı',alt:'Siirt’te kayıtlı ihracatçı (Ticaret Bakanı, Ağustos 2025); 5.149 esnaf, 13 esnaf odası',y:'Siirtli ihracatçılara geçen yıl 33,5 mn $ Eximbank reeskont kredisi verildi (beyan).',n:'Siirt’in yıllık ihracat tutarı, ürün ve ülke dağılımı bulunamadı.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Türkiye Antep fıstığı ihracatı (milyon $)',[['2024',445],['2025',497]],[1],'Ticaret Bakanlığı, “2026 Sert Kabuklu ve Kuru Meyveler” raporu (2025: 39,8 bin ton, +%11,7). Türkiye toplamı; Siirt’in payı kaynakta yok.'],
+ ['Siirt fıstığı ihracatı (ton)',[['2019-2021 toplamı',120],['2022 ilk 6 ay',70]],[1],'AA/Cumhuriyet (13 Temmuz 2022); sonraki yıllar bulunamadı. İlk ihracat Almanya’ya; İspanya ve İtalya için anlaşma imzalandı.']];
+mk('ih',IH,['Türkiye fıstık ihracatı','Siirt fıstığı']);
+var SA=[['Siirt OSB istihdamı (kişi)',[['2024 sonu (2.600 − 1.200)',1400],['2025 sonu',2600]],[1],'Sanayi Gazetesi (9 Ocak 2026): 2025’te 1.200 yeni istihdam, toplam 2.600, 29 aktif fabrika. 2024 sonu değeri kendi hesabım. Başka bir beyanda 2.300 istihdam (tarih belirsiz).'],
+ ['Esnaf ve ihracatçı tabanı (sayı)',[['Esnaf',5149],['Kayıtlı ihracatçı',73],['Esnaf odası',13]],[0],'Ticaret Bakanı’nın Siirt konuşması (22 Ağustos 2025); beyan düzeyinde.']];
+mk('sa',SA,['OSB istihdamı','Esnaf-ihracatçı']);
+var TA=[['Antep fıstığı alanı, ilk üç il (bin dekar)',[['Şanlıurfa',1500],['Gaziantep',1400],['Siirt',320]],[2],'Ticaret Bakanlığı, “2026 Sert Kabuklu ve Kuru Meyveler” raporu.'],
+ ['Siirt fıstık alanı, iki kaynak (bin dekar)',[['Ticaret Bakanlığı raporu',320],['İl Tarım ve Orman Müdürlüğü beyanı',415]],[0],'Farklı kaynak ve yıllar; il müdürlüğü ayrıca 12 milyondan fazla ağaç sayıyor. Hangi rakamın güncel olduğunu doğrulayamadım.']];
+mk('ta',TA,['Fıstık alanı, ilk üç il','İki kaynak']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Türkiye ort.',15325],['Elazığ',10660],['Şırnak',9326],['Hakkari',9284],['Siirt',7975],['Mardin',7537],['Diyarbakır',7464],['Batman',7202],['Bitlis',7063],['Muş',7016]],[4],'Siirt 81 il arasında 72.; Türkiye ortalamasının yaklaşık %52,0’ı (kendi hesabım). Kaynak: TÜİK, Rudaw tablosu.'],
+ ['Nüfus azalışı, 2024’ten 2025’e (%)',[['Siirt',1.21],['Hakkari',0.89],['Muş',0.81]],[0],'Siirt 336.453 → 332.369; Hakkari 282.191 → 279.681; Muş 392.301 → 389.127. Yüzdeler kendi hesabım. Batman, Diyarbakır, Mardin, Şırnak ve Bitlis arttı. Kaynak: TÜİK.'],
+ ['İşgücüne katılım oranı, 2024 (%)',[['Ardahan (en yüksek)',63.9],['Türkiye',54.2],['Siirt (en düşük)',41.6]],[2],'TÜİK 2024 işgücü istatistikleri (Alo Maliye, Halk TV). 2025’te Siirt’in oranı bulunamadı; 2025’te en düşük katılım Hakkari’de (%38,1).']];
+mk('gt',GT,['Gelir','Nüfus azalışı','İşgücüne katılım']);
+</script>
+</body>
+</html>
