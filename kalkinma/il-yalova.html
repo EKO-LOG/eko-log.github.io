@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yalova | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İle özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0e7490;--a2:#22d3ee;--a3:#16a34a"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Yalova</span><h1>Yalova: Tersaneler İhracatı Roketledi; Termal Turizm, Makine OSB ve Süs Bitkileri Arkadan Geliyor</h1><p>311.635 nüfuslu (2025) Yalova’nın kişi başına GSYH’si 2024’te 15.269 $ ile 81 il arasında 12. sırada ve Türkiye ortalamasının neredeyse tamamı (%99,6). İhracat 2025’te 805 milyon $ iken 2026’nın ilk dokuz ayında 899 milyon $’a çıktı (+%97); gemi ve yat ihracatı on ayda 778 milyon $, ihracatın yaklaşık %89’u tersanelerden. Çiftlikköy’deki Makine İhtisas OSB büyüyor, Termal’de 5.000 yataklı kaplıca tesisleri var. Zayıf yanlar: ihracat tek sektöre ve teslimat takvimine bağlı (temmuz-ağustos 2026’da aylık yaklaşık 15 milyon $), yıllık ihracat için iki ayrı rakam dolaşıyor, güncel işsizlik verisi yok ve süs bitkisi ihracatı toplamın yaklaşık %0,3’ü. Bulamadığım ya da kaynakların tutmadığı yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>15.269 $</b><span>Kişi başına GSYH (2024), 81 il arasında 12.; Türkiye ort. 15.325 $’ın yaklaşık %99,6’sı (oran kendi hesabım; TÜİK)</span></div><div class="k"><b>311.635</b><span>Nüfus (2025); 2024’te 307.882 idi, yıllık +%1,22 (kendi hesabım; TÜİK)</span></div><div class="k"><b>899 mn $</b><span>2026’nın ilk 9 ayında ihracat (yerel haber aktarımı); 2025’in aynı döneminde 456,5 mn $ (+%96,96)</span></div><div class="k"><b>805 mn $</b><span>2025 yılı ihracatı (yerel haber aktarımı); 2024’te 578 mn $ idi (+%39,3, kendi hesabım)</span></div><div class="k"><b>778 mn $</b><span>Gemi ve yat ihracatı, 2026’nın ilk 10 ayı (+%71,6); İstanbul’dan sonra 2. il (Dünya)</span></div><div class="k"><b>5.000 yatak</b><span>Termal’deki kaplıca tesisleri (17 Bakanlık belgeli tesis ve belediye belgeli işletmeler; haber aktarımı)</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#sanayi">Özel Sektör</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">8 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, TİM/Ticaret Bakanlığı bazlı haberler, Sanayi ve Teknoloji İl Müdürü, tersane ve OSB yetkilileri, yerel basın). Yalova’nın 2025 ihracatı için iki ayrı rakam var; ayrıntısı Dış Ticaret bölümünde.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>Dış Ticaret: Tersanelerle Fırlayan, Teslimata Bağlı İhracat</h2>
+<p class="sub">İhracat 2026’da tersane teslimatlarıyla fırladı; aylar arası dalgalanma büyük ve 2025 için rakamlar çelişiyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Yerel haberlerdeki seriye göre Yalova’nın ihracatı 2020’de 524, 2021’de 855, 2022’de 503, 2023’te 819, 2024’te 578, 2025’te 805 milyon $ oldu (2025’te +%39,3, kendi hesabım). 2026’nın ilk altı ayında 815,9 milyon $ (+%171) ile 2025’in tamamı aşıldı; ilk 9 ayda 899,1 milyon $ (+%96,96; 2025’in ilk 9 ayında 456,5 milyon $), ilk 10 ayda 915,7 milyon $.</li><li>2026 aylık ihracat: ocak 95,3, şubat 109,4, mart 112,9, nisan 275,5, mayıs 132,5, haziran 90,1, temmuz 15,4, ağustos 15,3, eylül 52,6 milyon $ (aylık toplamlar 899,1 yapıyor). İlk dokuz ayda ilk sırada Norveç: 327,4 milyon $, toplamın %36,4’ü.</li><li>Gemi ve yat ihracatı 2026’nın ilk 10 ayında 778,1 milyon $ (2025’te aynı dönemde 453,4 milyon $; +%71,6); İstanbul 1.089,7 milyon $ ile ilk, Yalova ikinci. İlk 7 ayda 831,2 milyon $’lık ihracatın 743,0 milyon $’ı gemi, yat ve hizmetlerden (%89,4, kendi hesabım), ardından çelik 37,9 ve kimyevi maddeler 14,7 milyon $. Ticaret Bakanlığı’nın ocak-ekim 2025 il bülteninde Yalova, ihracatını en çok artıran dördüncü il (+119 milyon $; İzmir 173, Çorum 135).</li><li>Sanayi ve Teknoloji İl Müdürü Yalova Ekonomi Zirvesi’nde 2025’te 2,6 milyar $ ihracat ve 2,2 milyar $ ithalat dediğini ve ilk kez cari fazla verdiklerini söyledi; Altınova Tersane Girişimcileri yönetim kurulu başkanı Yalova’da yapılan gemilerin %99,9’unun ihraç edildiğini belirtti.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat 2026’da on aylık dönemde 2025’in tamamını geçti; geniş pazar: Norveç ilk sırada, tersaneler yüksek teknolojili gemi ihraç ediyor (beyan).</li><li>Ticaret Bakanlığı’na göre 2025’te ihracatı en çok artıran dördüncü il.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Temmuz-ağustos 2026’da aylık ihracat yaklaşık 15 milyon $’a düştü; nisanda 275 milyon $’dı (teslimat takvimine bağlı oynaklık, yorum).</li><li>İhracatın yaklaşık %89’u tek sektörde; Tersan temsilcisi yeni siparişte zorlandıklarını söylüyor (Dünya başlığı).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>2025 için iki ayrı rakam var: yerel haberlerde 805 milyon $, Sanayi İl Müdürü’nde 2,6 milyar $ (ithalat 2,2 milyar $). Aradaki fark yöntemden (TİM kanuni merkez ile faaliyet ili, hizmet gelirleri, gemi bazlı sayım) kaynaklanıyor olabilir ama doğrulayamadım; ikisini birleştirmedim.</li><li>Aylık serilerin TİM/GAİB türü bir kaynağa dayandığını görmedim (haberler yalnızca “Yalova’daki firmalar” diyor). İl düzeyinde ithalat, ürün ve ülke dağılımı bulunamadı; tersane ihracatının yerel katma değeri (ithal girdi, çelik) bilinmiyor.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Özel Sektör Yapısı: Tersaneler ve Makine İhtisas OSB</h2>
+<p class="sub">Altınova’da tersane kümesi, Çiftlikköy’de büyüyen makine OSB’si; firma ve istihdam verisi dağınık.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Ulaştırma ve Altyapı Bakanı’na atfedilen haberde Yalova’da 31 faal tersane, 7 tekne imal yeri ve 2 yeni tersane yatırımı var; planlanan toplam tersane alanı yaklaşık 3,4 milyon m², tamamlanan alan 2,8 milyon m² (yıl belirsiz; haberde Yalova’nın gemi ihracatı 661 milyon $ olarak geçiyor, dönemi belirtilmemiş).</li><li>Sanayi İl Müdürü kentte 4 ihtisas OSB ve 6 küçük sanayi sitesi olduğunu söylüyor. Yalova Makine İhtisas OSB’nin Çiftlikköy’de 640 hektar alanda 320 fabrikaya ulaşması hedefleniyor; yönetim kurulu başkanı 2030’a kadar 20 bin istihdam ve 4 milyar $ ihracat hedeflediklerini söylemişti (Sanayi Gazetesi, Ocak-Şubat 2025; daha eski bir haberde 2028’de 25 bin kişi deniyordu).</li><li>Makine İhtisas OSB’de 2025’te Yalova’dan sağlanan istihdam 1.170 kişiye ulaştı (+%317; kadın istihdamı +%367, genç istihdamı +%323; haber), OSB’deki çalışan sayısı 2.000’i aştı ve firma sayısı bir önceki yıla göre %420, kapalı alan %350 büyüdü (Sanayi Gazetesi). Bölgede veri merkezi ve savunma sanayii yatırımları anılıyor (Ekonomi Gazetesi zirve haberi).</li><li>TR42 bölgesi (Kocaeli, Sakarya, Düzce, Bolu, Yalova) için 2022 İŞKUR raporunda işgücüne katılım %52,5, istihdam %47,5 ve işsizlik %9,6; aynı raporda 2018 yatırım teşviklerinde hizmetler (turizm) 41 belge ve 7.032 istihdamla başta.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Tersane kümesi üstüne ikinci bir sanayi ayağı (makine OSB) kuruluyor; OSB istihdamı kadın ve genç ağırlıklı artıyor (beyan).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Büyüme hedefleri (2030’da 20 bin istihdam, 4 milyar $) yetkili beyanı; bugünkü OSB istihdamı 2.000 civarı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>İl düzeyinde SGK sigortalı sayısı, sektörel istihdam, güncel işsizlik oranı, kayıtlı işsiz, tersanelerin çalışan sayısı ve ihracattaki yerli katma değer bulunamadı. OSB rakamları OSB yönetiminin beyanı; hedef rakamları değişiyor (25 bin / 20 bin). TR42 verisi 2022’ye ait ve Yalova’ya özgü değil.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Küçük Parsellerde Süs Bitkisi</h2>
+<p class="sub">Tarım küçük ama katma değerli; ihracat payı çok düşük.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Yalova Üniversitesi’nin düzenlediği forumda tarım alanlarının %72’sinin 5 dekar ve altında olduğu, üretim alanının az olduğu için yüksek katma değerli ürüne yönelmenin zorunlu hale geldiği söylendi. Süs bitkisi üretimi 1940’larda kesme çiçekle başlamış; İŞKUR’un eski bir raporu ülkenin kesme çiçek üretiminin yaklaşık %25’inin Yalova’dan geldiğini, eski bir makale ise ilde tarımda çalışan nüfusun %5 civarında olduğunu yazıyor.</li><li>Süs bitkileri ihracatı 2026’nın ilk beş ayında 2,2 milyon $’ı aştı (Sabah); toplam ihracata oranla yaklaşık %0,3 (2,2 / 725 milyon $, kendi hesabım). Bir üretici 3.500 türü 30 ülkeye ihraç ettiklerini söylüyor (Cumhuriyet). SÜSBİR Başkanı Türkiye’nin süs bitkisi ihracatının yedi yılda iki katına çıktığını, Türkiye’de KDV’nin %20, Avrupa’da %1 olduğunu belirtti.</li><li>Altınova’da coğrafi işaretli bir meyvenin hasat şenliği yapıldı; Vali, “Yalova hem sanayi hem tarım kenti olma mücadelesi veriyor” dedi (Sözcü; meyvenin adı ve rakamlar özette yok).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Seracılık ve süs bitkisinde köklü bir üretim kültürü; ihracat artıyor (beyan) ve üretici kooperatifi kuruluyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Parçaların %72’si 5 dekar ve altında; tarım ihracatı tersane ihracatının yanında çok küçük (yaklaşık %0,3).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Güncel arazi dağılımı, çiftçi sayısı, üretim miktarları, süs bitkisi üretim değeri, hayvancılık ve tarımın GSYH ve istihdam payı bulunamadı. %25 kesme çiçek payı ve arazi dağılımı (tarla %70, bağ-bahçe %28, süs bitkisi %2) eski kaynaklardan (yaklaşık 2005 ve 2018); güncel değil.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Termal Kaplıcalar ve Sahil</h2>
+<p class="sub">Termal’de dolu tesisler ve sezon dalgalanması; il toplamı ve gelir verisi yok.</p>
+<div class="g2"><div class="card"><h3>Okuma notu</h3><ul><li>Termal ilçesi kent merkezine yaklaşık 12 km mesafede; Kültür ve Turizm Bakanlığı belgeli 17 tesis ve belediye belgeli işletmelerle toplam 5.000 yatak kapasitesi var. Bir haberde “geçen yıl” yaklaşık 500 bin turistin konakladığı yazılıyor (yıl belirtilmemiş; başka bir yayın 2021 için aynı sayıyı veriyor).</li><li>Doluluk: aralık 2025’te %80, temmuz 2026’da %55, kış tatili ve bayramlarda %100’e yakın beklentisi; tarihi hamamları kullanan günlük misafir normalde 500 iken yaz 2026’da 3.000’e çıktı (işletme müdürü beyanı, DHA/Sözcü). Armutlu kaplıcaları ve sahil ilçeleri (Çınarcık, Armutlu) yazlık turizm için anılıyor.</li></ul></div><div class="card"><h3>Dikkat</h3><ul><li>İl genelinde yıllık turist sayısı, geceleme, yabancı payı, turizm geliri ve istihdamı bulunamadı; 500 bin rakamı yıl belirsiz ve tek bir tesis grubu için. Doluluk oranları tek tesis yöneticisinin beyanı.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kış ve bayramlarda yüksek doluluk; termal tesislerin yıl boyu ziyaretçi çekmesi (beyan).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yazın doluluk %55’e düşüyor; turizmin ildeki ekonomik ağırlığı ve geliri bilinmiyor.</li></ul></div></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">Gelir ülke ortalamasında; nüfus hızla artıyor; güncel işgücü verisi eksik.</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Yalova kişi başına GSYH’de 2024’te 15.269 $ ile 12. sırada, Türkiye ortalamasının (15.325 $) yaklaşık %99,6’sı. Çevresinde İstanbul 1. (24.452 $), Kocaeli 2. (24.031 $), Bilecik 10. (16.068 $), Bursa 13. (15.014 $), Sakarya 15. (14.605 $). Yalova, İstanbul’un yaklaşık %62,4’ü, Kocaeli’nin yaklaşık %63,5’i (kendi hesabım; TÜİK, Rudaw tablosu).</li><li>Nüfus 2024’te 307.882, 2025’te 311.635 (+3.753, +%1,22; kendi hesabım). Aynı yıl Kocaeli +%1,46, Sakarya +%1,17, Bursa +%0,75, İstanbul +%0,33 (TÜİK).</li><li>2022 İŞKUR raporundaki TR42 bölgesi göstergeleri: katılım %52,5, istihdam %47,5, işsizlik %9,6; Yalova’ya özgü güncel işsizlik oranı bulunamadı.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Türkiye ortalamasında, Bursa ve Sakarya’nın üzerinde; nüfus bir yılda %1,22 artarak İstanbul ve Bursa’dan hızlı büyüdü.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İstanbul ve Kocaeli’nin yaklaşık %63’ü; Bilecik’in (16.068 $) ve Kocaeli’nin (+%1,46) gerisinde.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Güncel il işsizlik, istihdam ve ücret verisi, kayıtlı işsiz, ilçe nüfusları ve nüfus artışının doğal artış mı göç mü olduğu bulunamadı. Gelirin yüksekliği ihracat patlamasından önceki 2024 verisi; 2026’daki sıçrama sonraki GSYH bültenlerinde görünecek (yorum).</li><li>Rudaw tablosunda Kocaeli ve Ankara aynı değerde (24.031) görünüyor; Ankara’yı TL değerinden doğruladım.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">6 ilçe (Merkez, Altınova, Armutlu, Çınarcık, Çiftlikköy, Termal). İlçe düzeyinde ekonomik veri çok sınırlı.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus</th><th>Ekonomik karakter</th></tr>
+<tr><td>Altınova</td><td>veri yok</td><td>Tersane kümesi (Altınova Tersane Girişimcileri); coğrafi işaretli meyve hasat şenliği</td></tr>
+<tr><td>Çiftlikköy</td><td>veri yok</td><td>Yalova Makine İhtisas OSB (640 hektar, 320 fabrika hedefi); İstanbul-İzmir Otoyolu’na yakın</td></tr>
+<tr><td>Termal</td><td>veri yok</td><td>Kaplıca tesisleri (5.000 yatak, kent merkezine yaklaşık 12 km); tarihî hamamlar</td></tr>
+<tr><td>Armutlu</td><td>veri yok</td><td>Armutlu kaplıcaları ve sahil turizmi (yerel anlatım)</td></tr>
+<tr><td>Merkez, Çınarcık</td><td>veri yok</td><td>Ekonomik veri bulunamadı; Çınarcık sahil yazlık turizmi olarak anılıyor</td></tr>
+</table><p class="note" style="margin:10px 0 0">Hiçbir ilçenin güncel nüfusu, GSYH’si, istihdamı veya ihracatı bulunamadı; tersanelerin Altınova’da, makine OSB’nin Çiftlikköy’de yoğunlaştığı kaynaklarda dolaylı geçiyor. Merkez ilçenin süs bitkisi üretimi ve Yalova Üniversitesi’nin ekonomiye katkısı ölçülemedi.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Yalova</h3><p style="margin:0">Yalova, kişi başına geliri Türkiye ortalamasında (%99,6, 12. sıra) olan, nüfusu 2025’te %1,22 artan ve tersane teslimatlarıyla ihracatı 2025’te 805 milyon $’dan 2026’nın ilk dokuz ayında 899 milyon $’a çıkaran bir il; ihracatın yaklaşık %89’u gemi ve yat. Bu patlama teslimat takvimine bağlı oynak (temmuz-ağustos 2026’da aylık yaklaşık 15 milyon $), yeni sipariş akışı belirsiz, 2025 ihracatı için 805 milyon $ ve 2,6 milyar $ gibi iki rakam dolaşıyor. Makine OSB, termal turizm ve süs bitkileri ikinci ve üçüncü ayaklar ama ağırlıkları henüz küçük ve ölçülemiyor (yorum).</p></div>
+<div class="three"><div><b>HAMLE 1</b>Veriyi netleştirmek: ihracatı tek ve tutarlı bir yöntemle (üretim ili, hizmet dahil mi hariç mi) yayımlamak; tersane yerli katma değerini, OSB firma ve istihdamını ve turist sayısını açıklamak.</div><div><b>HAMLE 2</b>Tersane dışı ayakları büyütmek: Makine İhtisas OSB’yi doldurmak, nitelikli işgücü (CNC operatörlüğü gibi) yetiştirmek, yeni gemi siparişi akışını izlemek.</div><div><b>HAMLE 3</b>Termal turizmi yaz dönemine yaymak ve süs bitkileri ile termal için ölçülebilir gelir göstergeleri kurmak.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Tersane ihracatının sürdürülebilirliği hakkında kaynaklı bir tahmin görmedim; “oynaklık” ifadesi benim yorumumdur.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>İhracatın yaklaşık %89’u gemi ve yat: bu uzmanlaşma Yalova için bir avantaj mı, yoksa teslimat takvimine bağlı bir kırılganlık mı?</li><li>2025 ihracatı yerel haberlerde 805 milyon $, Sanayi İl Müdürü’nde 2,6 milyar $: il ekonomisi için hangi ölçüm daha anlamlı?</li><li>Makine İhtisas OSB 2030’da 20 bin istihdam hedefliyor ama bugün yaklaşık 2.000: bu hedefin gerçekleşmesi için nitelikli işgücü mü, yatırımcı mı belirleyici?</li><li>Süs bitkisi ihracatı toplamın yaklaşık %0,3’ü ama ilin kimliğinin parçası: bu üretim nasıl ölçülmeli ve desteklenmeli?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Rudaw il sıralaması tablosu, Habertürk, CNBC-e, Alo Maliye aktarımı); TÜİK 2025 nüfus verileri (Rudaw il tablosu); İŞKUR Yalova İl İstihdam ve Mesleki Eğitim Kurulu raporları (2018, 2022 verileri; arama özetleri)</li>
+<li>Dış ticaret: Yeni Birlik Gazetesi, haberler.com, Benguturk/İHA, mynet (Yalova aylık ihracat haberleri), Dünya (gemi ve yat ihracatı, Tersan), Ticaret Bakanlığı (ocak-ekim 2025 il ihracat bülteni), Ekonomi Gazetesi/Ekonomim (Yalova Ekonomi Zirvesi), Benguturk (Ulaştırma ve Altyapı Bakanı, tersaneler)</li>
+<li>Sanayi: Sanayi Gazetesi (Yalova Makine İhtisas OSB haberleri), Habertürk (OSB istihdamı), Ekonomi Gazetesi (veri merkezi ve savunma), Dünya/AA (Çalışma ve Sosyal Güvenlik Bakanı Yalova ziyareti)</li>
+<li>Tarım ve turizm: Habertürk Yerel (süs bitkileri forumu), Sabah (süs bitkisi ihracatı), Cumhuriyet, Sözcü (Altınova hasat, Termal doluluk), DHA, Milliyet Yerel, Habertürk (Yalova kaplıcaları), propertyturkey, gezelim.com; DergiPark ve İŞKUR (eski tarım verileri)</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum raporlarının özeti veya yetkili beyanıdır; resmî tabloların doğrudan alıntısı değildir. Yalova’ya özgü 2025 yıllık TÜİK/TİM il ihracatını açıklayan tek bir resmî tablo, ihracat ve ithalat arasındaki 805 milyon $ ile 2,6 milyar $ farkını açıklayan bir kaynak, ürün ve ülke dağılımının tamamı, güncel (2023-2025) il işsizlik, istihdam, ücret ve kayıtlı işsiz verisi, sektörlerin GSYH payları, SGK işyeri ve sigortalı sayıları, tersane ve OSB firma ve istihdam sayıları, tersane yerli katma değeri, güncel çiftçi sayısı, arazi dağılımı ve tarımsal üretim, il genelinde turist sayısı, geceleme ve turizm geliri, ilçe nüfusları ve ilçe GSYH’si doğrulanmış kaynakla bulunamadığı için sayfada yok. %99,6 (gelir oranı), %62,4 ve %63,5 (İstanbul ve Kocaeli’ne oran), +%1,22 (nüfus), +%39,3 (2025 ihracat artışı), %89,4 (tersane payı), %0,3 (süs bitkisi payı) ve komşu illerin nüfus değişim yüzdeleri kendi hesabımdır. Tarihi belirtilmeyen beyanlar (bakan, il müdürü, OSB ve tersane yetkilileri, işletme müdürü) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: İHRACAT',ad:'İhracat',big:'899 mn $',alt:'2026’nın ilk 9 ayında ihracat (+%96,96; 2025’in ilk 9 ayında 456,5 mn $); 2025 tamamı 805 mn $ (yerel haber)',y:'2026’nın ilk 6 ayında 815,9 mn $ ile 2025’in tamamı aşıldı; Norveç %36,4 ile ilk pazar; 2025’te ihracatı en çok artıran 4. il (Ticaret Bakanlığı).',n:'Temmuz-ağustos 2026’da aylık ~15 mn $’a düştü (nisan 275,5); 2025 için iki rakam var: 805 mn $ ve 2,6 mr $ (İl Müdürü).'},
+ {c:'good',chip:'MOTOR: TERSANE',ad:'Gemi ve yat',big:'778 mn $',alt:'Gemi ve yat ihracatı, 2026’nın ilk 10 ayı (+%71,6); İstanbul’dan sonra 2. il (Dünya)',y:'İlk 7 ayda ihracatın %89,4’ü tersaneden (743 / 831,2 mn $, kendi hesabım); 31 faal tersane (Bakan beyanı, yıl belirsiz); gemilerin %99,9’u ihraç ediliyor (tersane yöneticisi).',n:'İhracat tek sektöre dayalı; Tersan temsilcisi yeni siparişte zorlandıklarını söylüyor (Dünya başlığı); yerli katma değer bilinmiyor.'},
+ {c:'good',chip:'MOTOR: OSB',ad:'Yalova Makine İhtisas OSB',big:'640 ha',alt:'Çiftlikköy’de 320 fabrikalık plan (Sanayi Gazetesi); OSB’de çalışan sayısı 2.000’i aştı',y:'2025’te Yalova’dan sağlanan istihdam 1.170 (+%317); firma sayısı %420 büyüdü; hedef: 2030’da 20 bin istihdam ve 4 mr $ ihracat (OSB beyanı).',n:'Hedefler yetkili beyanı ve değişiyor (25 bin / 20 bin); firma sayısı ve resmî ihracat bulunamadı.'},
+ {c:'good',chip:'GÜÇLÜ YAN: GELİR',ad:'Gelir düzeyi',big:'12 / 81',alt:'Kişi başına GSYH sırası (2024; 15.269 $; Türkiye ort. 15.325 $)',y:'Ortalamanın %99,6’sı; Bursa (15.014 $) ve Sakarya’nın (14.605 $) üzerinde.',n:'İstanbul ve Kocaeli’nin yaklaşık %63’ü; Bilecik’in (16.068 $) gerisinde; 2026 ihracat sıçraması bu veride yok.'},
+ {c:'good',chip:'GÜÇLÜ YAN: NÜFUS',ad:'Nüfus',big:'+%1,22',alt:'2024’ten 2025’e: 307.882 → 311.635 (+3.753; kendi hesabım; TÜİK)',y:'İstanbul (+%0,33) ve Bursa’dan (+%0,75) hızlı arttı; Sakarya’ya (+%1,17) yakın.',n:'Kocaeli’nin (+%1,46) gerisinde; artışın göçten mi doğal artıştan mı geldiği ve ilçe verisi bulunamadı.'},
+ {c:'good',chip:'MOTOR: TERMAL TURİZM',ad:'Termal kaplıcalar',big:'5.000 yatak',alt:'17 Bakanlık belgeli tesis ve belediye belgeli işletmeler (Termal); “geçen yıl” ~500 bin turist (haber, yıl belirsiz)',y:'Aralık 2025’te doluluk %80, bayram ve tatillerde %100’e yakın beklenti; yaz 2026’da günübirlik misafir 500’den 3.000’e (işletme müdürü beyanı).',n:'Temmuz 2026’da doluluk %55; il toplamı turist, yabancı payı ve gelir verisi bulunamadı.'},
+ {c:'warn',chip:'DAR: TARIM',ad:'Süs bitkileri ve tarım',big:'%72',alt:'Tarım alanlarının 5 dekar ve altındaki payı (Yalova Üniversitesi forumu beyanı)',y:'3.500 tür 30 ülkeye ihraç ediliyor (üretici beyanı); süs bitkisi ihracatı 2026’nın ilk 5 ayında 2,2 mn $’ı aştı.',n:'Süs bitkisi toplam ihracatın yaklaşık %0,3’ü (kendi hesabım); SÜSBİR’e göre KDV Türkiye’de %20, Avrupa’da %1.'},
+ {c:'warn',chip:'VERİ EKSİK: İŞGÜCÜ',ad:'İşsizlik ve işgücü',big:'%9,6',alt:'TR42 (Kocaeli, Sakarya, Düzce, Bolu, Yalova) işsizlik oranı; İŞKUR Yalova 2022 raporu (eski, bölgesel)',y:'TR42’de istihdam oranı %47,5, katılım %52,5 (2022).',n:'Yalova’ya özgü güncel işsizlik, istihdam ve kayıtlı işsiz verisi bulunamadı; 2022 verisi tersane ve OSB atılımını yansıtmaz.'},
+ {c:'sleep',chip:'UYUYAN: İNOVASYON',ad:'Veri merkezi ve savunma yatırımları',big:'Yatırım beyanı',alt:'Yalova Ekonomi Zirvesi haberinde “veri merkezi ve savunma sanayii yatırımlarının yeni adresi” olacağı anlatıldı (Ekonomi Gazetesi başlığı)',y:'Makine OSB için veri merkezi ve savunma ilgisi anılıyor (beyan).',n:'Yatırım tutarı, firma adı, istihdam ve takvim bulunamadı; haberin ayrıntısına erişemedim.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Yıllık ihracat (milyon $)',[['2020',524],['2021',855],['2022',503],['2023',819],['2024',578],['2025',805]],[5],'Yerel haber aktarımı (haberler.com, Yalova); dalgalı seri: 2022’de −%41, 2023’te +%63 (kendi hesabım). 2025 için Sanayi İl Müdürü 2,6 milyar $ diyor; bu rakamla uzlaştırılamadı.'],
+ ['2026 aylık ihracat (milyon $)',[['Ocak',95.3],['Şubat',109.4],['Mart',112.9],['Nisan',275.5],['Mayıs',132.5],['Haziran',90.1],['Temmuz',15.4],['Ağustos',15.3],['Eylül',52.6]],[3],'Yeni Birlik Gazetesi (ilk 9 ay): toplam 899,1 milyon $ (+%96,96; 2025’in ilk 9 ayında 456,5 milyon $). Temmuz-ağustos dibi gemi teslimat takvimine bağlı olabilir (yorum, doğrulanmadı).'],
+ ['2026 ilk 9 ay, Norveç payı (milyon $)',[['Toplam ihracat',899.1],['Norveç',327.4],['Diğer ülkeler (kalan)',571.7]],[1],'Norveç toplamın %36,4’ü (Yeni Birlik Gazetesi); “diğer” kalan, kendi hesabım.']];
+mk('ih',IH,['Yıllık','2026 aylık','Norveç payı']);
+var SA=[['Gemi ve yat ihracatı, ilk 10 ay (milyon $)',[['2025',453.4],['2026',778.1]],[1],'Dünya haberi; +%71,6. İstanbul 1.089,7 milyon $ ile ilk sırada, Yalova ikinci. Toplam ihracat ilk 10 ayda 915,7 milyon $.'],
+ ['İhracat sektörleri, 2026 ilk 7 ay (milyon $)',[['Gemi, yat ve hizmetleri',743.0],['Çelik',37.9],['Kimyevi maddeler',14.7]],[0],'Mynet/haberler.com; ilk 7 ay toplamı 831,2 milyon $; gemi payı %89,4 (kendi hesabım). 9 ayda madencilik 13,7, hazırgiyim 10,4, makine 4,8 milyon $.'],
+ ['Makine İhtisas OSB istihdamı (kişi)',[['Yalova’dan sağlanan istihdam, 2025',1170],['OSB çalışan sayısı (“2 bini aştı”)',2000],['Hedef, 2030 (OSB beyanı)',20000]],[1],'Habertürk (2025 istihdam), Sanayi Gazetesi (çalışan sayısı ve hedef); farklı dönem ve kapsam, doğrudan kıyaslanamaz. Eski bir haberde 2028 hedefi 25 bin kişiydi.']];
+mk('sa',SA,['Gemi ve yat','Sektörler','OSB istihdamı']);
+var TA=[['Tarım alanı kullanımı, eski veri (%)',[['Tarla bitkileri',70],['Bağ-bahçe',28],['Süs bitkileri',2]],[2],'Yaklaşık 2005 tarihli DergiPark makalesi (20.420 hektar işlenen tarım arazisi); güncel değil. Süs bitkisi alanı küçük, kârlılığı yüksek olarak anılıyor.'],
+ ['Tarımsal parsel büyüklüğü (%)',[['5 dekar ve altı',72],['Daha büyük (kalan)',28]],[0],'Yalova Üniversitesi forumu beyanı (Habertürk Yerel); “kalan” kendi hesabım. Tarım ve Orman İl Müdürlüğü verisiyle doğrulanmadı.']];
+mk('ta',TA,['Arazi kullanımı (eski)','Parsel büyüklüğü']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['İstanbul',24452],['Kocaeli',24031],['Bilecik',16068],['Türkiye ort.',15325],['Yalova',15269],['Bursa',15014],['Sakarya',14605]],[4],'Yalova 81 il arasında 12.; Türkiye ortalamasının yaklaşık %99,6’sı (kendi hesabım). Kaynak: TÜİK, Rudaw tablosu.'],
+ ['Nüfus artışı, 2024’ten 2025’e (%)',[['Kocaeli',1.46],['Yalova',1.22],['Sakarya',1.17],['Bursa',0.75],['İstanbul',0.33]],[1],'Yalova 307.882 → 311.635; Kocaeli 2.130.006 → 2.161.171; Sakarya 1.110.735 → 1.123.693; Bursa 3.238.618 → 3.263.011; İstanbul 15.701.602 → 15.754.053. Yüzdeler kendi hesabım. Kaynak: TÜİK.'],
+ ['TR42 işgücü göstergeleri, 2022 (%)',[['İşgücüne katılım',52.5],['İstihdam',47.5],['İşsizlik',9.6]],[2],'İŞKUR Yalova raporu (2022; TR42: Kocaeli, Sakarya, Düzce, Bolu, Yalova). Bölgesel ve eski veri; Yalova’ya özgü değil.']];
+mk('gt',GT,['Gelir','Nüfus artışı','TR42 işgücü']);
+</script>
+</body>
+</html>
