@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nevşehir | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Nevşehir'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#9a3412;--a2:#d97706;--a3:#6d28d9"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Nevşehir</span><h1>Nevşehir: Kapadokya’nın Vitrini, Turizme Yaslanan Ekonomi</h1><p>320 bin nüfuslu Nevşehir’in ekonomisi büyük ölçüde Kapadokya turizmine dayanıyor. Kişi başına GSYH yaklaşık 11.126 $ ile 81 il arasında 41.; Türkiye ortalamasının yaklaşık %73’ü. Nüfus 2025’te +2.198 artarak 320.150’ye çıktı. Kapadokya bölgesi 2025’te 4,5 milyondan fazla ziyaretçi saydı, ama otel doluluğu yılın ilk beş ayında yaklaşık %28’de kaldı. Kabak çekirdeği öne çıkan tarım ürünü; yıllık ihracat ve güncel sanayi verisini bulamadım. Veri bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>11.126 $</b><span>Kişi başına GSYH (2024), 81 il arasında 41.; Türkiye ort. 15.325 $’ın yaklaşık %73’ü (oran kendi hesabım)</span></div>
+    <div class="k"><b>320.150</b><span>Nüfus (ADNKS 2025), bir yılda +2.198 (+%0,69, kendi hesabım); 2024: 317.952</span></div>
+    <div class="k"><b>4,52 mn</b><span>2025’te Kapadokya ziyaretçisi (Kültür ve Turizm Bakanlığı verisi, Habertürk, 17.02.2026); kapsamı il sınırından geniş olabilir</span></div>
+    <div class="k"><b>%28</b><span>2025 ilk beş ayda otel doluluğu; ortalama konaklama 1,8 gece (KAPYAD başkanı, 01.08.2025)</span></div>
+    <div class="k"><b>60,97 mn $</b><span>Ağustos 2026 ihracatı (ithalat 14,72 mn $); aylık veri, yıllık toplam bulunamadı (Fibhaber, 30.09.2026)</span></div>
+    <div class="k"><b>23.670 ton</b><span>Kabak çekirdeği üretimi (TÜİK, 2024), değeri yaklaşık 1,34 milyar TL (AA, 09.10.2025)</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">10 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK aktarımları, Kültür ve Turizm Bakanlığı verisi, dernek beyanları, yerel basın, eski İŞKUR raporları). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Turizm rakamlarının önemli kısmı “Kapadokya” bölgesine ait; bu bölge Nevşehir il sınırından daha geniş olabilir (örneğin Kaymaklı yeraltı şehri, bildiğim kadarıyla Niğde’de). Kaynak kapsamı açıklamıyor, bu yüzden bölge ile il aynı şey gibi okunmamalı.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ziyaretçi, üretim ve ticaret verilerine dayanıyor, katma değer ölçümüne değil.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Aylık Dalgalı, Yıllık Toplam Yok</h2>
+    <p class="sub">Elimde üç ayın verisi var; ihracat 19,8 milyon $’dan 61,0 milyon $’a, sonra 46,0 milyon $’a gidip geliyor.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Nisan 2026: ihracat 19,77 milyon $, ithalat 12,49 milyon $ (TÜİK, Fibhaber, 22.05.2026).</li>
+        <li>Ağustos 2026: ihracat 60,97 milyon $, ithalat 14,72 milyon $; ihracat ithalatın yaklaşık 4,1 katı, fazla yaklaşık 46,2 milyon $ (kendi hesabım). TR71’de (Kırıkkale, Aksaray, Niğde, Nevşehir, Kırşehir) diğer dört ilin toplamından yaklaşık 13,1 milyon $ fazla (Fibhaber, Muşkara Haber, 30.09.2026).</li>
+        <li>Eylül 2026: ihracat 46,01 milyon $, ithalat 44,76 milyon $; fazla yalnızca yaklaşık 1,25 milyon $ (Muşkara Haber, 28.10.2026). Nevşehir TR71’de hem ihracatta hem ithalatta ilk sırada.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ağustos ve Eylül’de Nevşehir, TR71 illeri arasında ihracatta ilk sırada.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ay ay çok dalgalı: ihracat Nisan’dan Ağustos’a yaklaşık 3 kat artıp Eylül’de düştü; ithalat Eylül’de bir önceki aya göre yaklaşık 3 kat (kendi hesabım). Bu, yıllık bir eğilim değil.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Yıllık ihracat, ihracatın ürün ve ülke kırılımı ve aylık dalgalanmanın nedenini bulamadım. Üç ayı toplayıp yıllaştırmadım; aradaki aylar eksik.</li>
+      <li>Aylık haberlerde “TÜİK genel ticaret sistemi” deniyor; faaliyet esaslı mı işyeri merkezi esaslı mı olduğu belirtilmemiş. Başka il dosyalarındaki ihracat rakamlarıyla birleştirmedim ya da kıyaslamadım.</li>
+      <li>Bu aylık değerlerin yıl ve ay etiketlerini haberlerin kendisinden aldım; tutarlılığını resmî tablolarla doğrulayamadım.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: Küçük Taban, Yeni Alanlar</h2>
+    <p class="sub">Güncel imalat, OSB ve istihdam verisi bulmakta en çok zorlandığım başlık.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>2017 İŞKUR işgücü araştırmasında 20 ve üzeri çalışanı olan 302 işyerinde 11.091 kişi çalışıyordu; imalatta 73 işyeri (%24,2). Bu veri 2017 sonu içindir ve eski.</li>
+        <li>Ocak 2026’da Nevşehir’in de içinde olduğu 16 yatırım bölgesi ilan edildi (Ekonomi Gazetesi); bölgenin kapsamı ve yatırım tutarı bulunamadı.</li>
+        <li>Aralık 2025’te Polyteks bir arazi tipi güneş enerjisi santralini tamamladı (Ekonomi Gazetesi); kapasitesi bulunamadı.</li>
+        <li>Haberlerde Avanos’ta bir “Kapadokya OSB” geçiyor; doluluk, firma ve işçi sayısını doğrulayamadım.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yeni yatırım bölgesi ve OSB haberleri sanayi için alan açma çabasını gösteriyor (yorum).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Güncel imalat tabanını ölçen hiçbir veri bulamadım; elimdeki en son istatistik 2017–2018’e ait. İmalat, ilin ekonomisinde turizmin yanında küçük görünüyor (yorum, doğrulanmadı).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İŞKUR araştırmaları 2017 ve 2019 tarihli; son güncel İŞKUR il raporunu bulamadım. 2017 raporunun kendi içinde de tutarsızlıkları var (vardiyalı çalışanlarda kadın ve erkek oranları toplamı %110). Bu yüzden yalnızca işyeri sayıları ve yerleştirme toplamlarını aldım.</li>
+      <li>SSBS imalat firma ve işçi sayıları, OSB doluluğu, teşvik belgeleri ve sanayi üretim değeri bulunamadı.</li>
+      <li>Yatırım bölgesi ve güneş santrali haberleri yatırım niyeti ya da tamamlanmış tesis duyurusudur; ildeki istihdama etkisi bilinmiyor.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım: Kabak Çekirdeği, Patates, Üzüm</h2>
+    <p class="sub">Kabak çekirdeği güncel ve ölçülebilir tek ürün; patates için elimde yalnızca 2013 verisi var.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Nevşehir kabak çekirdeği 2019’da coğrafi işaret aldı. TÜİK’e göre 2024’te 221.350 dekarda 23.670 ton üretildi; ekonomik katkısı yaklaşık 1,34 milyar TL. Bu dekara yaklaşık 107 kg ve ton başına yaklaşık 56.700 TL eder (kendi hesabım). Nevşehir Ticaret Borsası genel sekreterine göre Türkiye üretiminin yaklaşık %35’i (AA, 09.10.2025).</li>
+        <li>Ekim alanı tescil öncesi yaklaşık 160 bin dekardan bugün 300 bin dekara yakın (haberdeki ifade); TÜİK’in 221 bin dekarlık değeriyle aynı değil.</li>
+        <li>Eski bir veri: 2013 haberinde 80 bin dekardan yaklaşık 320 bin ton patates üretimi, Nevşehir ülkenin ikinci büyük patates ekim ili (Mynet, 25.04.2013).</li>
+        <li>Küre Ansiklopedi’ye göre üzüm (çekirdeksiz), elma, patates, kabak ve kayısı ile koyun ve sığır yetiştiriciliği öne çıkıyor; ürün bazında ton verisi yok.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kabak çekirdeği coğrafi işaretli ve yüksek ulusal paya sahip; ekim alanı artmış.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kabak çekirdeği patatesin yerini alıyor gibi anlatılıyor (AA haberi); tek ürüne kayış, fiyat ve iklim riskini artırabilir (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>%35 pay iddiası bir borsa yetkilisine ait; doğrulayamadım. Aynı haber patates için pay vermiyor. İnternette dolaşan “patates Türkiye üretiminin %35’i” benzeri ifadeleri kabak çekirdeği için kullanılan rakamla karıştırmadım.</li>
+      <li>Patates verisi 13 yıllık; güncel üretimi, ihracatı ve hayvan sayısını bulamadım. Bağcılık, elma ve kayısı için ton verisi yok. Tarımın il GSYH ve istihdam payı bilinmiyor.</li>
+      <li>1,34 milyar TL “ekonomik katkı”, haberde açıklaması olmayan bir hesap; üretim değeri olarak okudum ve katma değerle karıştırmadım.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: İlin Ana Motoru</h2>
+    <p class="sub">Ziyaretçi sayısı çok yüksek; sorun, kalan para ve gece sayısında.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>2025’te Kapadokya’da müze ve ören yerlerini 4.523.275 yerli ve yabancı ziyaretçi gezdi; bir önceki yıla göre +149.256 (yaklaşık +%3,4, kendi hesabım). Göreme Açık Hava Müzesi 1.186.332 ile ilk sırada (Habertürk, DHA, 17.02.2026).</li>
+        <li>Aynı kaynakta 2025’te 883 tesis, 15.688 oda, 32.037 yatak, 2.205.619 konaklayan ve 4.299.830 geceleme var; ortalama konaklama 1,95 gece (kendi hesabım 4.299.830 / 2.205.619 = 1,95; yatak başına yaklaşık 36 yatak/tesis).</li>
+        <li>KAPYAD başkanına göre 2025 ilk beş ayda doluluk %28 ve ortalama konaklama 1,8 gece; 2024 turizm geliri 2,061 milyar $ (Kapadokya Üniversitesi araştırması), 2025 beklentisi 2,4 milyar $, hedef 5 milyar $ (Forbes Türkiye, 01.08.2025).</li>
+        <li>Ulaştırma Bakanı’na göre Kapadokya Havalimanı’nın yıllık kapasitesi, yeni terminalle 700 binden 2 milyon yolcuya çıkacak (Şubat 2026).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ziyaretçi sayısı artmaya devam ediyor; havalimanı kapasitesi iki katından fazlasına çıkarılıyor.</li><li>2024’te konaklayanların %60’tan fazlası yabancı (vali), yani ilin ihracat gibi çalışan bir turizm tabanı var (yorum).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Doluluk yaklaşık %28’de ve dernek, otel arzının talebin üzerine çıktığını, fiyatların düştüğünü söylüyor.</li><li>Ortalama konaklama 2 geceden kısa; gelir ziyaretçi sayısına göre sınırlı kalıyor (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2024 için 1.351.763 “konaklayan turist” (856 tesis, vali beyanı, TRT Haber 30.01.2025) ile 2025 için 2.205.619 “konaklayan” (883 tesis) arasında %60’ı aşan bir fark var. İkisi muhtemelen farklı kapsam ya da yöntemle sayılmış; büyüme olarak okumadım ve oranlamadım.</li>
+      <li>4,5 milyonluk ziyaretçi rakamı Kapadokya bölgesine ait ve müze, ören yeri girişlerini sayıyor; Kaymaklı (muhtemelen Niğde’de) ve Derinkuyu gibi yerler dahil. Nevşehir ili tek başına bu sayının ne kadarı, belli değil.</li>
+      <li>Doluluk %28 yılın ilk beş ayı (düşük sezon dahil), yıllık ortalama değil. 2,061 milyar $ gelir bir üniversite araştırması; yöntemini görmedim ve il GSYH’sıyla (yaklaşık 3,6 milyar $, kendi hesabım) kıyaslamadım, çünkü gelir ile katma değer aynı şey değil ve kapsam farklı.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir, İşgücü ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar), ADNKS 2024–2025 ve eski İŞKUR raporları</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Nevşehir 2024’te kişi başına 11.126 $ ile 81 il arasında 41. Kırıkkale 22. (13.284 $), Aksaray 27. (12.319 $), Kayseri 28. (12.296 $), Niğde 43. (11.052 $) ve Kırşehir 48. (10.572 $). Türkiye ortalaması 15.325 $; Nevşehir’in oranı yaklaşık %73 (kendi hesabım). TL karşılığını bulamadım.</li>
+        <li>Toplam ekonomi: 11.126 $ ile 320.150 kişi çarpımından yaklaşık 3,56 milyar $; nüfus payı yaklaşık %0,37 (86.092.168 Türkiye nüfusuna göre; kendi hesabım).</li>
+        <li>Nüfus 2024’te 317.952, 2025’te 320.150 (+2.198, +%0,69). 2016’da 290.895 idi; 2016’dan 2025’e +%10,1 (kendi hesabım). Yüzölçümü 5.467 km² ile yoğunluk km²’de yaklaşık 59 kişi (kendi hesabım).</li>
+        <li>Güncel işsizlik oranını bulamadım. Bir köşe yazısı, Nevşehir’in 2025’te işsiz sayısının en çok arttığı iller arasında olduğunu söylüyor ama sayı vermiyor (Ekonomim).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Niğde ve Kırşehir’in üzerinde, Kayseri ve Aksaray’a yakın.</li><li>Nüfus artıyor; 2016’dan beri yaklaşık %10 büyüme, turizmin çektiği bir göçe işaret edebilir (yorum).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık dörtte biri kadar altında; ziyaretçi yoğunluğuna rağmen üst sıralarda değil.</li><li>2025’te işsiz sayısının arttığı iddiası (sayı yok, doğrulanmadı).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İŞKUR kayıtlı işsiz ve yerleştirme rakamları 2016 ve 2018’e ait (2017 ve 2019 raporlarından); 2015’te SGK kayıtlarının esas alınmasıyla seri kırılmış. Güncel değer olarak okunmamalı. 2018’de kadın kayıtlı işsiz 6.865 (%56,2, kendi hesabım).</li>
+      <li>2025 net göçünü, katılma ve istihdam oranlarını, ilçe nüfuslarını ve sektörel GSYH paylarını bulamadım. Dolar değerleri rudaw aktarımından.</li>
+      <li>2017–2023 arası nüfus değerlerini toplamadım; nüfus grafiği yalnızca elimdeki dört yılı gösteriyor.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Sekiz ilçe (Merkez, Avanos, Ürgüp, Gülşehir, Derinkuyu, Acıgöl, Hacıbektaş, Kozaklı); ilçe nüfuslarını bulamadığım için yalnızca ekonomik ipuçları var.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+      <tr><td>Merkez</td><td>Bulunamadı</td><td>Göreme Açık Hava Müzesi 1.186.332 ziyaretçi (2025); 2016’da il merkezi nüfusu 102.997</td></tr>
+      <tr><td>Avanos</td><td>Bulunamadı</td><td>Çömlekçilik (Küre Ansiklopedi); Kapadokya OSB haberleri (doluluk doğrulanmadı)</td></tr>
+      <tr><td>Ürgüp</td><td>Bulunamadı</td><td>“Ürgüp İşi” şehir markası (Temmuz 2026, Ekonomi Gazetesi)</td></tr>
+      <tr><td>Derinkuyu</td><td>Bulunamadı</td><td>Derinkuyu Yeraltı Şehri 547.417 ziyaretçi (2025)</td></tr>
+      <tr><td>Hacıbektaş</td><td>Bulunamadı</td><td>Oniks işçiliği (Küre Ansiklopedi)</td></tr>
+      <tr><td>Gülşehir</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Acıgöl</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Kozaklı</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İl toplamı 320.150 (ADNKS 2025, rudaw aktarımı). İlçe nüfuslarını ve ilçe bazında GSYH, tarım, ihracat ve istihdam verilerini doğrulanmış kaynakla bulamadım. İlçe-ziyaret yeri eşleştirmelerim genel bilgime dayanıyor; kaynak haberlerde ilçe adı verilmiyor. Paşabağları (907.345) ve Kaymaklı (688.417) ziyaretçi değerlerini, hangi ilçe ya da ilde olduklarından emin olamadığım için tabloya koymadım.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Nevşehir</h3>
+      <p style="margin:0">Nevşehir’in ekonomisi Kapadokya turizmine yaslanıyor: 4,5 milyon ziyaretçi, 883 tesis ve 32 bin yatak. Ama doluluk düşük (ilk beş ayda yaklaşık %28), konaklama 2 geceden kısa ve kişi başına gelir Türkiye ortalamasının yaklaşık %73’ünde. Tarımda kabak çekirdeği öne çıkıyor, sanayi ise küçük görünüyor ve güncel verisi yok; nüfus artmaya devam ediyor (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Gece sayısını artırmak: günü birlikçiyi konaklayana çevirecek gece programları, müzeler ve gastronomi.</div>
+      <div><b>HAMLE 2</b>Arzı talebe göre yönetmek: plansız otel ve kiralık konut artışını sınırlayıp kaliteyi korumak.</div>
+      <div><b>HAMLE 3</b>Turizm dışı ayak: kabak çekirdeği işleme, çömlek ve taş zanaatı ve OSB yatırımlarını ölçmek ve teşvik etmek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Turizm odaklı bir ekonominin istikrar mı, kırılganlık mı getirdiği tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Ziyaretçi sayısı rekora giderken otel doluluğu yaklaşık %28 ise, sorun talep mi yoksa arz mı?</li>
+      <li>Kişi başına gelir, bu kadar turistin geldiği bir ilde neden Türkiye ortalamasının altında?</li>
+      <li>Kabak çekirdeği patatesin yerini aldıysa, tek ürüne yönelmek tarımda risk mi, uzmanlaşma mı?</li>
+      <li>Ay ay bu kadar dalgalanan bir ihracat serisi, ilin dış ticaret gücü hakkında ne söylüyor?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 ve ADNKS 2024–2025 (rudaw aktarımı); Yeni Şafak (nüfus 2015–2016, 31.01.2017); Küre Ansiklopedi (Nevşehir il maddesi)</li>
+      <li>İhracat ve ithalat: TÜİK verisi, Fibhaber (22.05.2026 ve 30.09.2026), Muşkara Haber (30.09.2026 ve 28.10.2026)</li>
+      <li>Turizm: Habertürk/DHA (17.02.2026, Kültür ve Turizm Bakanlığı verisi); TRT Haber (30.01.2025); Forbes Türkiye (KAPYAD, 01.08.2025); Ekonomi Gazetesi Nevşehir sayfası (havalimanı, yatırım bölgesi, güneş enerjisi, Ürgüp markası)</li>
+      <li>Tarım: AA/Gazete Vatan (kabak çekirdeği, 09.10.2025); Mynet/CİHAN (patates, 25.04.2013)</li>
+      <li>İşgücü: İŞKUR Nevşehir İşgücü Piyasası Araştırmaları (2017 ve 2019 tarihli); Ekonomim köşe yazısı (2025 işsiz sayısı)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Nevşehir’e özgü yıllık ihracat ve ithalat, ihracatın kırılımı, güncel işsizlik ve istihdam oranı, güncel İŞKUR verileri, 2025 net göç, ilçe nüfusları, güncel patates ve hayvan verisi, OSB doluluğu, il GSYH’sinin TL değeri, turizm istihdamı ve 2025 yıllık gelir doğrulanmış kaynakla bulunamadığı için sayfada yok. %73 (gelir oranı), 3,56 milyar $ (toplam ekonomi), %0,37 (nüfus payı), +%0,69 ve +%10,1 (nüfus değişimleri), 59 kişi/km², +%3,4 (ziyaretçi artışı), 4.374.019 (2024 ziyaretçi, geri hesap), 1,95 gece, 36 yatak/tesis, %60’tan fazla (2024 yabancı payı hesabı, 850 bin / 1,35 milyon yaklaşık %62,9), 107 kg/dekar, 56.700 TL/ton, 46,2 milyon $ (Ağustos fazlası), 4,1 kat, %56,2 (kadın işsiz payı), %24,2 (imalat işyeri payı) kendi hesabımdır. Tarih belirtilmeyen beyanlar (vali, dernek başkanı, borsa genel sekreteri, bakan, haber metinleri) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: TURİZM',ad:'Kapadokya turizmi',big:'4,52 mn',alt:'2025 ziyaretçi (müze ve ören yeri, Kapadokya bölgesi; +%3,4, kendi hesabım)',y:'883 tesis, 32.037 yatak; 2024 turizm geliri 2,061 milyar $ (üniversite araştırması, doğrulanmadı).',n:'Sayı il sınırından geniş bir bölgeye ait; Nevşehir’in payı belli değil.'},
+ {c:'warn',chip:'KIRILGAN: DOLULUK',ad:'Konaklama ve arz',big:'%28',alt:'2025 ilk beş ay otel doluluğu; ortalama konaklama 1,8 gece (KAPYAD)',y:'2025’te 2,2 milyon konaklayan ve 4,3 milyon geceleme aktarıldı.',n:'Dernek arzın talebi aştığını, fiyatların düştüğünü söylüyor; 2024 ve 2025 konaklama sayıları uzlaşmıyor.'},
+ {c:'good',chip:'MOTOR: TARIM',ad:'Kabak çekirdeği',big:'23.670 ton',alt:'2024 üretim, 221.350 dekar; yaklaşık 1,34 milyar TL (TÜİK, AA)',y:'Coğrafi işaretli (2019); Türkiye üretiminin yaklaşık %35’i (borsa beyanı).',n:'Patatesin yerini alıyor; tek ürüne kayış riski (yorum).'},
+ {c:'warn',chip:'KIRILGAN: VERİ YOK',ad:'Patates ve diğer tarım',big:'~320 bin ton',alt:'2013 patates üretimi (80 bin dekar; il müdürlüğü beyanı, eski)',y:'Üzüm, elma, kayısı ve hayvancılık (koyun, sığır) var.',n:'Güncel tonaj ve hayvan sayısı bulunamadı; 13 yıllık rakam güncel sayılmamalı.'},
+ {c:'warn',chip:'KIRILGAN: DALGALI',ad:'Dış ticaret',big:'60,97 mn $',alt:'Ağustos 2026 ihracatı; ithalat 14,72 mn $ (Fibhaber, 30.09.2026)',y:'Ağustos ve Eylül’de TR71’de ihracatta ilk sırada.',n:'Nisan 19,8, Ağustos 61,0, Eylül 46,0 mn $; Eylül ithalatı 44,8 mn $. Yıllık toplam yok.'},
+ {c:'sleep',chip:'UYUYAN: SANAYİ',ad:'İmalat, OSB, yatırım bölgesi',big:'16 bölge',alt:'Ocak 2026’da ilan edilen yatırım bölgeleri arasında Nevşehir de var (Ekonomi Gazetesi)',y:'Avanos’ta OSB haberleri, güneş enerjisi yatırımı (Polyteks, Aralık 2025).',n:'Güncel firma, işçi ve doluluk verisi yok; en son istatistik 2017 (73 imalat işyeri).'},
+ {c:'sleep',chip:'UYUYAN: ZANAAT',ad:'Çömlek, oniks, yerel marka',big:'Veri yok',alt:'Avanos çömlekçiliği, Hacıbektaş oniksi (Küre); “Ürgüp İşi” markası (Temmuz 2026)',y:'Turizmin yanına yerel üretim ve marka ekleme zemini var (yorum).',n:'Üretim, istihdam ve satış rakamı bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: ORTA',ad:'Gelir',big:'41 / 81',alt:'Kişi başına GSYH sırası (2024; 11.126 $)',y:'Niğde (43.) ve Kırşehir (48.) önünde; Türkiye ortalamasının yaklaşık %73’ü (kendi hesabım).',n:'Kırıkkale, Aksaray ve Kayseri’nin gerisinde; Türkiye ortalamasının altında.'},
+ {c:'good',chip:'MOTOR: NÜFUS',ad:'Nüfus',big:'320.150',alt:'ADNKS 2025; 2024: 317.952 (+2.198, +%0,69; kendi hesabım)',y:'2016’dan beri yaklaşık +%10 (290.895 → 320.150; kendi hesabım).',n:'2025 net göç ve ilçe nüfusları bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İşgücü',big:'12.219',alt:'2018 kayıtlı işsiz (İŞKUR araştırması, eski); 6.865’i kadın',y:'2018’de 4.654 işe yerleştirme (2016: 3.507).',n:'Güncel oran yok; 2025’te işsiz sayısı arttığı söyleniyor (sayı yok, doğrulanmadı).'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Aylık ihracat, 2026 (milyon $)',[['Nisan',19.77],['Ağustos',60.97],['Eylül',46.01]],[1],'Aradaki aylar yok; yıllık toplam bulunamadı, toplayıp yıllaştırmadım. Kaynak: Fibhaber (22.05.2026 ve 30.09.2026), Muşkara Haber (28.10.2026).'],
+ ['Aylık ithalat, 2026 (milyon $)',[['Nisan',12.49],['Ağustos',14.72],['Eylül',44.76]],[2],'Eylül’de ithalat ihracata yaklaşık eşit (fazla ~1,25 milyon $); nedeni belirtilmemiş. Kaynak: aynı haberler.'],
+ ['TR71 illeri, Eylül 2026 ihracatı (milyon $)',[['Nevşehir',46.01],['Kırşehir',26.20],['Aksaray',17.71],['Niğde',8.55],['Kırıkkale',3.00]],[0],'Ağustos 2026’da: Nevşehir 60,97, Kırşehir 22,62, Aksaray 16,37, Niğde 7,81, Kırıkkale 1,11. Faaliyet esası belirtilmemiş. Kaynak: Muşkara Haber, Fibhaber.']];
+mk('ih',IH,['İhracat','İthalat','TR71 Eylül']);
+var SA=[['2017 İŞKUR araştırması: 20+ çalışanlı işyeri sayısı',[['Toplam',302],['İmalat',73],['Diğer (kendi hesabım)',229]],[1],'İmalat %24,2; bu işyerlerinde 11.091 kişi çalışıyor. 2017 sonu verisi, eski. Kaynak: İŞKUR Nevşehir İşgücü Piyasası Araştırması 2017.'],
+ ['İŞKUR işe yerleştirme (kişi)',[['2016',3507],['2018',4654]],[1],'Farklı raporlardan (2017 ve 2019 araştırmaları); 2018’de yaklaşık %27,6’sı kadın. Eski veri, güncel değil. Kaynak: İŞKUR Nevşehir araştırmaları.']];
+mk('sa',SA,['İşyeri 2017','Yerleştirme']);
+var TA=[['Kabak çekirdeği ekim alanı (bin dekar)',[['Tescil öncesi (yaklaşık)',160],['2024, TÜİK',221.35],['“Bugün” (yaklaşık, haber)',300]],[1],'TÜİK değeri ile haberdeki “300 bin dekara yakın” aynı değil. Üretim 23.670 ton, yaklaşık 107 kg/dekar (kendi hesabım). Kaynak: AA / Gazete Vatan (09.10.2025).'],
+ ['Patates, 2013 (bin ton) — eski',[['Üretim',320],['İhracat, Nisan 2013’e kadar',32.8],['İhracat, 2012 sezonu',6.6]],[0],'80 bin dekardan yaklaşık 320 bin ton (dekara yaklaşık 4 ton, kendi hesabım); ülkenin en çok patates ekilen ikinci ili denmiş. Güncel değil. Kaynak: Mynet / CİHAN (25.04.2013).']];
+mk('ta',TA,['Kabak çekirdeği','Patates 2013']);
+var TU=[['2025 en çok ziyaret edilen yerler, Kapadokya (kişi)',[['Göreme Açık Hava Müzesi',1186332],['Paşabağları',907345],['Kaymaklı Yeraltı Şehri',688417],['Derinkuyu Yeraltı Şehri',547417]],[0],'Toplam 4.523.275 ziyaretçi (+149.256). Bölge, il sınırından geniş olabilir. Kaynak: Habertürk / DHA (17.02.2026).'],
+ ['2025 konaklama, Kapadokya (kişi)',[['Geceleme',4299830],['Konaklayan',2205619]],[1],'883 tesis, 15.688 oda, 32.037 yatak; ortalama konaklama 1,95 gece (kendi hesabım). 2024 rakamıyla karşılaştırılamaz. Kaynak: Habertürk / DHA (17.02.2026).'],
+ ['2024 konaklayan turist (kişi)',[['Toplam',1351763],['Yabancı (yaklaşık)',850000]],[1],'Yabancı payı yaklaşık %62,9 (kendi hesabım); vali “%60’tan fazla” demiş. 856 tesis. 2025’teki 2,2 milyonla aynı ölçü olmayabilir. Kaynak: TRT Haber (30.01.2025).']];
+mk('tu',TU,['Ziyaret yerleri','Konaklama 2025','Konaklama 2024']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Kırıkkale',13284],['Aksaray',12319],['Kayseri',12296],['Nevşehir',11126],['Niğde',11052],['Kırşehir',10572]],[3],'Nevşehir 81 il arasında 41.; Türkiye ortalaması 15.325 $ ve oran yaklaşık %73 (kendi hesabım). Sıralar: Kırıkkale 22, Aksaray 27, Kayseri 28, Niğde 43, Kırşehir 48. Kaynak: TÜİK (rudaw aktarımı).'],
+ ['Nüfus (bin kişi)',[['2015',286.8],['2016',290.9],['2024',318.0],['2025',320.2]],[3],'2017–2023 değerlerini toplamadım. 2016’dan 2025’e +%10,1; 2025’te +2.198 (kendi hesabım). Kaynak: Yeni Şafak (ADNKS 2015–2016); rudaw (ADNKS 2024–2025).'],
+ ['İŞKUR kayıtlı işsiz ve açık iş (kişi) — eski',[['Kayıtlı işsiz 2016',8959],['Kayıtlı işsiz 2018',12219],['Açık iş 2016',8576],['Açık iş 2018',5971]],[1],'2015’te sayım yöntemi değişmiş (SGK kayıtları); iki yıl farklı raporlardan. Güncel durum değil. Kaynak: İŞKUR Nevşehir araştırmaları 2017 ve 2019.']];
+mk('gt',GT,['Gelir','Nüfus','İşgücü (eski)']);
+</script>
+</body>
+</html>
