@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kastamonu | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Kastamonu'a özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#166534;--a2:#0e7490;--a3:#a16207"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Kastamonu</span><h1>Kastamonu: Orman, Sarımsak, Oynak İhracat</h1><p>379.934 nüfuslu Kastamonu; ormanın etrafında kurulan panel-mobilya sanayisi, Taşköprü sarımsağı ve doğa turizmi potansiyeliyle duruyor. Kişi başına GSYH yaklaşık 12.035 $ ile 81 il arasında 30.; Türkiye ortalamasının yaklaşık %78,5’i. İhracat 2025’te 381,5 milyon $’a çıktı ama ay ay çok oynuyor. Bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>12.035 $</b><span>Kişi başına GSYH (2024), 81 il arasında 30.; Türkiye ort. 15.325 $’ın yaklaşık %78,5’i (oran kendi hesabım)</span></div>
+<div class="k"><b>379.934</b><span>Nüfus (ADNKS 2025); 2024: 381.991 (−2.057, −%0,54; kendi hesabım)</span></div>
+<div class="k"><b>381,5 mn $</b><span>2025 ihracatı; 2024: 274,8 mn $ (+%38,8, kendi hesabım). Ocak–Nisan 2026: 126,6 mn $ (Kastamonu İstiklal, TÜİK TR82 aktarımı)</span></div>
+<div class="k"><b>100,3 mn $</b><span>Ağustos 2026 ihracatı; Eylül 2026’da 25,0 mn $ (TÜİK aktarımları)</span></div>
+<div class="k"><b>%5,9</b><span>2025 işsizlik oranı; katılma %58,1, istihdam %55,7</span></div>
+<div class="k"><b>~30 bin ton</b><span>Taşköprü sarımsağı 2025 üretim hedefi, ~25 bin dekar (ilçe tarım müdürü beyanı)</span></div>
+</div>
+<div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+<section id="karne"><h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+<li>Sayılar farklı yıllara ve kaynaklara ait (TÜİK aktarımları, basın, akademik çalışmalar). Yan yana okunmaları kesin karşılaştırma değildir.</li>
+<li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi üretim ve ihracat izlerine dayanıyor, katma değer ölçümüne değil.</li>
+<li>Güncel OSB doluluğu, sanayi istihdamı, turist ve geceleme sayıları, ilçe nüfuslarının çoğu ve hayvancılık verisi bulunamadı.</li></ul></div></section>
+
+<section id="ihracat"><h2>İhracat: Hızlı Büyüdü, Çok Oynuyor</h2>
+<p class="sub">TÜİK verileri girişimlerin merkezine göre hazırlanıyor; il dışında merkezi olan firmaların ihracatı Kastamonu’ya yazılmayabilir.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>İhracat 2024’te 274,8 milyon $ iken 2025’te 381,5 milyon $’a çıktı (kendi hesabım: +%38,8). Ocak–Nisan 2026’da 126,6 milyon $ var.</li>
+<li>Aylar arası fark büyük: Aralık 2025’te 11,4 milyon $, Ağustos 2026’da 100,3 milyon $. Ağustos’ta metaller öne çıkmış; ayrıntısını doğrulamadım.</li>
+<li>Temmuz 2025’te ilk üç ürün grubu (materyal geri kazanımı, kimyasal gübre, demir dışı metal) toplamın yaklaşık %73’ünü oluşturuyor (kendi hesabım); orman ürünleri bu üçte görünmüyor.</li>
+<li>Eylül 2026: ihracat 25,0, ithalat 14,4 milyon $; 10,6 milyon $ dış ticaret fazlası, 50 ülke.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İki yılda ihracat yaklaşık %39 büyüdü ve dış ticaret çoğu ay fazla veriyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Birkaç sevkiyat ayın sonucunu değiştiriyor; yıllık eğilim ay verisinden okunamaz. İlk üç ürün grubu dar bir tabana işaret ediyor (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>2025 yıllık ve 2024 değerleri tek bir yerel haberde (TÜİK TR82 aktarımı); TÜİK tablosunu doğrudan göremedim. Ağustos 2026’nın ürün ayrıntısı ve 2025’in ürün-ülke kırılımı bulunamadı.</li>
+<li>Eski TİM serileri (2019: yaklaşık 95 milyon $) firma merkezine göre; TÜİK ile birleştirmedim. Kastamonu Entegre gibi büyük firmaların ihracatının ile yazılıp yazılmadığını kaynaklar belirtmiyor.</li></ul></div></section>
+
+<section id="sanayi"><h2>Sanayi: Panel, Mobilya, Madencilik İzleri</h2>
+<p class="sub">Dünyanın büyük ağaç bazlı panel üreticilerinden Kastamonu Entegre il merkezinde doğdu (1971); güncel işçi ve firma sayıları bulunamadı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kastamonu Entegre, yonga levha tesisini kent merkezinden OSB’ye taşıdı (yaklaşık 125 milyon € yatırım); yonga levha kapasitesi yılda 600 bin m³’e çıkarıldı (Sanayi Gazetesi, şirket beyanı).</li>
+<li>Kastamonu OSB, Taşköprü OSB ve Tosya OSB var; Taşköprü OSB’de 5 milyon €’luk zincir fabrikasının temeli atıldı (Habertürk yerel, 2026).</li>
+<li>Yerel Kalkınma Hamlesi kapsamında Kastamonu, Çankırı ve Sinop’ta 11 projeye 6 milyar TL yatırım öngörülüyor; bentonit, tuz, ahşap panel, mobilya, kenevir ve orman-su ürünleri sayılıyor (KUZKA).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ormana dayalı entegre bir üretim zinciri ve yeni OSB yatırımları var.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Sanayinin ağırlığı büyük ölçüde tek bir büyük firmaya bağlı görünüyor (yorum; doğrulanmadı). Üç OSB’nin doluluğu bilinmiyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Kastamonu Entegre kapasite ve konum bilgileri şirket beyanına dayanıyor; il istihdamı ve ekonomideki payı bulunamadı. Temmuz 2025 ürün dağılımı tek bir aya aittir.</li>
+<li>Teşvik programı üç ili birlikte kapsıyor; Kastamonu payı ayrıştırılamadı ve proje niyetidir, gerçekleşme değil.</li></ul></div></section>
+
+<section id="tarim"><h2>Tarım: Sarımsak, Defne, Dar Ova</h2>
+<p class="sub">Arazi dağlık ve büyük bölümü ormanlık (eski bir belgede %61,5); ekilebilir alan sınırlı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Taşköprü sarımsağı AB coğrafi işaretli; yaklaşık 4–5 bin aile geçiniyor ve ilçe yetkilisi 2025’te 25 bin dekarda 30 bin ton hedefledi.</li>
+<li>Rekolte yıldan yıla oynuyor: farklı yıllarda 16 ile 35 bin ton arası beklentiler aktarılmış; fiyat da sert dalgalanıyor (pandemi sonrası depoda kalan ürün haberleri).</li>
+<li>Defne: ilde tek işleme tesisi var (yıllık 750 ton yaş defne kapasitesi); rapora göre toplam gelir potansiyeli yılda 139,5 milyon TL.</li>
+<li>TÜİK 2025: toplam tarım alanı 1,381 milyon dekar, bunun 1,130 milyon dekarı ekilen alan.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Sarımsak, Türkiye ihtiyacının yaklaşık %20–25’ini karşılıyor (üretici ve yetkili beyanları).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tek ürüne ve tek ilçeye bağımlılık var; yağış ve nematod gibi hastalıklar rekolteyi, rekolte fazlası fiyatı bozuyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Sarımsak rakamları yıl yıl çelişiyor ve çoğu beklenti ya da hedef; resmî gerçekleşen 2025 üretimini bulamadım. Tarım alanı için Tarım ve Orman Müdürlüğü raporu 3,1 milyon dekar (yüzölçümünün %24) veriyor; TÜİK’ten 1,381 milyon dekarla çelişiyor, tanım farkı olabilir.</li>
+<li>Hayvancılık, bal, kestane ve fındık için güncel veri bulunamadı.</li></ul></div></section>
+
+<section id="turizm"><h2>Turizm: Doğa Zengin, Doluluk Düşük</h2>
+<p class="sub">Küre Dağları ve Ilgaz Dağı milli parkları, Valla ve Horma kanyonları, sahil ilçeleri.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Akademik bir çalışmada ilde ortalama geceleme 1,61 gün ve ortalama doluluk %26,55; çalışma ilin Türkiye turizmine katkısını yetersiz bulmuş (yıl belirtilmemiş).</li>
+<li>Kastamonu Üniversitesi Turizm Fakültesi’nin 2025 master planı Küre Dağları, Ilgaz, Valla Kanyonu, Şeyh Şaban-ı Veli ve Nasrullah Camii’ni öne çıkarıyor.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Doğa, tarih ve gastronomi bir arada; kamp, kanyon, kayak ve dalış gibi çeşitli kullanım alanları sayılıyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kısa kalış ve düşük doluluk, potansiyelin gelire dönüşmediğini gösteriyor (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Güncel turist, konaklayan, müze ziyaretçisi, yatak kapasitesi ve gelir verisini bulamadım; doluluk ve kalış süresi tek bir akademik çalışmadan ve tarihsizdir. Tek bir sayıyla ilin turizmini ölçme.</li></ul></div></section>
+
+<section id="gelir"><h2>Gelir, İşgücü ve Nüfus</h2>
+<p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar), ADNKS 2025 ve işgücü 2025</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kişi başına yaklaşık 12.035 $ ile 81 il arasında 30.; Kırıkkale 22., Çankırı 23., Kastamonu 30., Samsun 39., Sivas 45., Amasya 50., Çorum 55., Yozgat 65. ve Tokat 71. Oran Türkiye ortalamasının (15.325 $) yaklaşık %78,5’i (kendi hesabım).</li>
+<li>Toplam ekonomi: 12.035 $ ile 379.934 kişi çarpımından yaklaşık 4,6 milyar $; nüfus payı yaklaşık %0,44 (kendi hesabım).</li>
+<li>Nüfus 2024’te 381.991, 2025’te 379.934; binde −5,4 azalış. Köy ve beldelerde 136.934 kişi (yaklaşık %36, kendi hesabım).</li>
+<li>2025’te katılma %58,1, istihdam %55,7, işsizlik %5,9.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İşsizlik düşük, istihdam yüksek; gelir Amasya, Çorum, Yozgat, Tokat ve Sivas’ın üzerinde.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Nüfus azalıyor; gelir Türkiye ortalamasının yaklaşık beşte bir gerisinde ve Kırıkkale, Çankırı’nın altında.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>İşgücü oranları yerel bir haberde TÜİK TR82 aktarımı olarak geçiyor; il düzeyi olduğunu kaynaktan tam doğrulayamadım. Yüksek katılma ve düşük işsizliğin kalitesi (kayıt dışılık, mevsimlik iş) hakkında veri yok.</li>
+<li>GSYH sıraları ve dolar değerleri Amasya dosyasındaki aktarımdan; TL değerini bulamadım. 2025 net göçü ve sektörel GSYH payları yok.</li></ul></div></section>
+
+<section id="ilceler"><h2>İlçe Kırılımı</h2>
+<p class="sub">20 ilçe; yalnızca üçünün 2025 nüfusunu bulabildim.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+<tr><td>Merkez</td><td>Bulunamadı</td><td>Kastamonu OSB; Kastamonu Entegre MDF ve yonga levha tesisleri</td></tr>
+<tr><td>Taşköprü</td><td>Bulunamadı</td><td>Sarımsak (86 köyde üretim); Taşköprü OSB</td></tr>
+<tr><td>Tosya</td><td>Bulunamadı</td><td>Tosya OSB (2023’te yangın haberi); orman ürünleri firmaları</td></tr>
+<tr><td>Cide</td><td>Bulunamadı</td><td>Gideros Koyu; sahil ve doğa turizmi</td></tr>
+<tr><td>Pınarbaşı</td><td>Bulunamadı</td><td>Horma Kanyonu; eko turizm</td></tr>
+<tr><td>Küre</td><td>Bulunamadı</td><td>Küre Dağları Milli Parkı; Belören tatil alanı</td></tr>
+<tr><td>Hanönü</td><td>4.286</td><td>Ekonomik veri bulunamadı (artış hızı −8,3‰)</td></tr>
+<tr><td>Şenpazar</td><td>4.083</td><td>Ekonomik veri bulunamadı (artış hızı −67,8‰)</td></tr>
+<tr><td>Ağlı</td><td>3.176</td><td>Ekonomik veri bulunamadı (artış hızı −22,8‰)</td></tr></table>
+<p class="note" style="margin:10px 0 0">Tabloda olmayan 11 ilçe (Abana, Araç, Azdavay, Bozkurt, Çatalzeytin, Daday, Devrekani, Doğanyurt, İhsangazi, İnebolu, Seydiler) için doğrulanmış veri bulamadım. İl toplamı 379.934 (ADNKS 2025); üç ilçenin nüfusu ve artış hızı Kastamonu Ticaret İl Müdürlüğü 2025 raporundan, ipuçları basın ve akademik kaynaklardandır.</p></div></section>
+
+<section id="sonuc"><h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Kastamonu</h3>
+<p style="margin:0">Kastamonu’nun ekonomisi ormana dayalı panel-mobilya sanayisine, Taşköprü sarımsağına ve henüz gelire dönmemiş doğa turizmine yaslanıyor; kişi başına gelir yaklaşık 12.035 $ ile Türkiye ortalamasının yaklaşık %78,5’i ve işsizlik %5,9 ile düşük. Güçlü tarafı büyüyen ihracat ve entegre bir orman ürünleri zinciri, zayıf tarafı oynak aylık ihracat, tek ürüne ve tek firmaya bağımlılık ve azalan nüfus. İl dengeli ama küçülüyor; sorun işsizlikten çok genç ve kalıcı nüfus (yorum).</p></div>
+<div class="three">
+<div><b>HAMLE 1</b>Sarımsağı işlemek ve markalaştırmak: AB işaretli ürünü kurutma, paketleme ve ihracatla katma değere çevirmek.</div>
+<div><b>HAMLE 2</b>Orman ürünlerinde çeşitlenmek: panel dışında mobilya ve tasarımlı ürünlere, KOBİ’lere yer açmak.</div>
+<div><b>HAMLE 3</b>Turizmi gecelemeye çevirmek: kanyon, milli park ve sahili tek rotada paketlemek.</div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. Nüfus azalmasının nedenleri (göç, yaşlanma) kaynaklarda ayrıştırılmamış.</li></ul></div></section>
+
+<section id="tartisma"><h2>Tartışma Köşesi</h2>
+<div class="card"><ul>
+<li>Ormana dayalı sanayi tek bir büyük firmaya bu kadar yaslanıyorsa, il ekonomisi o firmanın kararlarına ne kadar bağımlı?</li>
+<li>İhracat 2025’te %38 büyüyüp bazı aylarda 11 milyon $’a düşüyorsa, bu büyüme kalıcı mı yoksa birkaç sevkiyatın sonucu mu?</li>
+<li>Taşköprü sarımsağı AB’de tescilliyken ham olarak satılıyorsa, katma değer ilde mi kalıyor?</li>
+<li>İşsizlik %5,9 ve nüfus azalıyorsa, “genç nüfus kaçıyor” mu, “iş yok” mu daha doğru açıklama?</li></ul>
+<a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div></section>
+
+<section id="kaynak"><h2>Kaynaklar ve Veri Notu</h2>
+<ul class="src">
+<li>Nüfus ve ilçeler: Kastamonu Ticaret İl Müdürlüğü, 2025 Yılı Ekonomik Görünüm Raporu (ADNKS 2025)</li>
+<li>İhracat ve işgücü: Kastamonu İstiklal Gazetesi, “Kastamonu’nun 2025 karnesi” (TÜİK TR82, Mayıs 2026) ve “ihracatı 100 milyon doları aştı” (Ağustos 2026); Habertürk Yerel, haberler.com ve Gerede Medya Takip aktarımları (Nisan, Temmuz, Eylül 2026 ve Temmuz 2025 TÜİK dış ticaret)</li>
+<li>Gelir ve karşılaştırma illeri: TÜİK il bazında GSYH 2024 ve ADNKS 2025 (Amasya dosyasındaki rudaw aktarımı)</li>
+<li>Sanayi: Sanayi Gazetesi (Kastamonu Entegre, 2022–2023); Habertürk Yerel (Taşköprü OSB, KUZKA teşvik programı)</li>
+<li>Tarım: Mynet/İHA, TRT Haber, Cumhuriyet, Habertürk (sarımsak beklentileri, farklı yıllar); Kalkınma Kütüphanesi defne değer zinciri raporu (2025); Kastamonu Tarım ve Orman İl Müdürlüğü 2025 faaliyet raporu</li>
+<li>Turizm: Kapadokya Üniversitesi açık erişim çalışması; Kastamonu Üniversitesi Turizm Master Planı (2025)</li>
+<li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168: Amasya dosyasıyla aynı kaynaklar</li></ul>
+<p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir (Ticaret Bakanlığı PDF’ine doğrudan erişemedim, yalnızca arama özetini kullandım). Kastamonu’ya özgü güncel turist ve geceleme sayıları, sanayi istihdamı, OSB doluluğu, hayvancılık, 2025 resmî sarımsak üretimi, il GSYH’sinin TL değeri, 2025 net göçü, ihracatın ürün-ülke kırılımı ve çoğu ilçe nüfusu doğrulanmış kaynakla bulunamadığı için sayfada yok. %78,5 (gelir oranı), %38,8 (ihracat artışı), %73 (Temmuz 2025 ilk üç grup), 4,6 milyar $ (toplam ekonomi), %0,44 (nüfus payı), −%0,54 (nüfus değişimi), %36 (köy-belde payı) ve grafiklerdeki “diğer” çubukları kendi hesabımdır. Tarih belirtilmeyen beyanlar (üretici, yetkili, akademik çalışma) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p></section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+{c:'good',chip:'MOTOR: DIŞ TİCARET',ad:'İhracat',big:'381,5 mn $',alt:'2025 ihracatı; 2024: 274,8 mn $ (+%38,8, kendi hesabım); Ocak–Nisan 2026: 126,6 mn $',y:'İki yılda yaklaşık %39 büyüme; Eylül 2026’da 10,6 mn $ dış ticaret fazlası.',n:'Aylık çok oynak (Aralık 2025: 11,4; Ağustos 2026: 100,3 mn $); ürün kırılımı dar, ihracatın hangi firmalarda toplandığı bilinmiyor.'},
+{c:'good',chip:'MOTOR: ORMAN ÜRÜNLERİ',ad:'Panel ve mobilya',big:'600 bin m³',alt:'Kastamonu Entegre yonga levha kapasitesi (OSB, yıllık; şirket beyanı)',y:'Entegre zincir (MDF + yonga levha) tek lokasyonda; dünyanın büyük panel üreticilerinden biri (şirket beyanı).',n:'İl istihdamı ve ekonomik payı bulunamadı; tek büyük firmaya yaslanma riski (yorum).'},
+{c:'warn',chip:'KIRILGAN: TEK ÜRÜN',ad:'Taşköprü sarımsağı',big:'~30 bin ton',alt:'2025 hedefi, ~25 bin dekar; 4–5 bin aile (ilçe müdürü beyanı)',y:'AB coğrafi işareti; Türkiye ihtiyacının yaklaşık %20–25’ini karşılıyor (beyan).',n:'Rekolte ve fiyat yıldan yıla sert oynuyor; resmî 2025 gerçekleşmesi bulunamadı.'},
+{c:'good',chip:'MOTOR: İŞGÜCÜ',ad:'İstihdam',big:'%5,9',alt:'2025 işsizlik; katılma %58,1, istihdam %55,7 (TÜİK TR82 aktarımı)',y:'Bölge illeri arasında öne çıkan işgücü göstergeleri (haber aktarımı).',n:'İş kalitesi ve kayıt dışılık hakkında veri yok; il mi bölge mi doğrulanamadı.'},
+{c:'bad',chip:'BASKI ALTINDA',ad:'Nüfus',big:'379.934',alt:'ADNKS 2025; 2024: 381.991 (−2.057, −%0,54; kendi hesabım)',y:'Kayıp küçük ve yoğunluk düşük (29 kişi/km²) olduğu için hizmet maliyeti sorun olabilir (yorum).',n:'Binde −5,4 azalış; yaklaşık %36’sı köy ve beldede (kendi hesabım); göç ve yaşlanma ayrıştırılmamış.'},
+{c:'warn',chip:'ORTA: GELİR',ad:'Gelir',big:'30 / 81',alt:'Kişi başına GSYH sırası (2024; ~12.035 $)',y:'Türkiye ortalamasının yaklaşık %78,5’i; Samsun, Sivas, Amasya, Çorum, Yozgat ve Tokat’ın önünde.',n:'Kırıkkale ve Çankırı’nın gerisinde; sektörel katma değer payı bulunamadı.'},
+{c:'sleep',chip:'UYUYAN: TURİZM',ad:'Doğa turizmi',big:'%26,55',alt:'Ortalama doluluk; ortalama geceleme 1,61 gün (akademik çalışma, yıl belirsiz)',y:'İki milli park, Valla ve Horma kanyonları, sahil; 2025 master planı hazır.',n:'Güncel ziyaretçi, geceleme ve gelir verisi bulunamadı; kalış kısa.'},
+{c:'sleep',chip:'UYUYAN: YATIRIM',ad:'OSB ve teşvik',big:'6 mlr TL',alt:'Yerel Kalkınma Hamlesi, Kastamonu-Çankırı-Sinop 11 proje (KUZKA); Taşköprü OSB’de 5 mn € fabrika',y:'Bentonit, tuz, ahşap panel, mobilya, kenevir ve orman-su ürünleri destekleniyor.',n:'Üç ilin toplamı; Kastamonu payı ve gerçekleşme bilinmiyor.'},
+{c:'sleep',chip:'UYUYAN: DEFNE',ad:'Defne ve yerel ürünler',big:'750 ton',alt:'Tek işleme tesisinin yıllık yaş defne kapasitesi; il gelir potansiyeli 139,5 mn TL/yıl (2025 raporu)',y:'Kooperatif ve kurutma tesisiyle katma değer artırma önerisi var.',n:'Potansiyel tahmin; gerçekleşen üretim, bal ve kestane için güncel veri yok.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve orta'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+$('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['İhracat (milyon $)',[['2024',274.8],['2025',381.5],['Ocak–Nisan 2026 (4 ay)',126.6]],[1],'2025: +%38,8 (kendi hesabım). 2026 değeri yalnızca dört ay. Kaynak: Kastamonu İstiklal, TÜİK TR82 aktarımı (Mayıs 2026).'],
+['Seçili aylar (milyon $)',[['Temmuz 2025',38.5],['Aralık 2025',11.4],['Nisan 2026',35.3],['Ağustos 2026',100.3],['Eylül 2026',25.0]],[3],'Yalnızca elimdeki aylar; eksik aylar bulunamadı. Aylık dalgalanma çok yüksek. Kaynak: TÜİK dış ticaret aktarımları (yerel basın).'],
+['Nisan 2026 ülkeler (milyon $)',[['Belçika',21.4],['Finlandiya',5.7],['İspanya',4.7],['Diğer (kendi hesabım)',3.4]],[0],'Toplam 35,3 milyon $, 46 ülke; Belçika yaklaşık %61 (kendi hesabım). Tek ay. Kaynak: TÜİK aktarımı (haberler.com).']];
+mk('ih',IH,['Yıllık','Aylık','Ülke']);
+var SA=[['Temmuz 2025 ihracat, ürün grupları (milyon $)',[['Materyal geri kazanımı',12.6],['Kimyasal gübre, azotlu bileşik',12.0],['Diğer demir dışı metaller',3.5],['Diğer (kendi hesabım)',10.3]],[0],'Toplam 38,5 milyon $, 56 ürün grubu; ilk üçün payı yaklaşık %73 (kendi hesabım). Tek ay. Kaynak: TÜİK aktarımı (Gerede Medya Takip, 03.09.2025).']];
+mk('sa',SA,['Ürün grupları']);
+var TA=[['Taşköprü sarımsağı (bin ton)',[['2023 beklentisi',25],['2025 hedefi',30]],[1],'Beklenti ve hedeftir, gerçekleşme değil. Başka yıllarda 16–35 bin ton arası beklentiler aktarılmış. Kaynak: GZT (27.07.2023); Mynet/İHA (2025).'],
+['Tarım alanı (bin dekar)',[['TÜİK toplam tarım alanı, 2025',1381],['TÜİK ekilen alan, 2025',1130],['İl Müdürlüğü raporu, toplam',3100]],[0],'İki kaynak çelişiyor (TÜİK ve Tarım Orman raporu; tanım farkı olabilir). Kaynak: Kastamonu İstiklal (TÜİK); İl Tarım ve Orman Müdürlüğü 2025 faaliyet raporu.']];
+mk('ta',TA,['Sarımsak','Tarım alanı']);
+var TU=[['Ortalama doluluk (%)',[['Kastamonu ortalaması',26.55],['Tam doluluk (ölçek için)',100]],[0],'Ortalama geceleme 1,61 gün. Akademik çalışma, yıl belirtilmemiş; resmî güncel tablo bulunamadı. Kaynak: Kapadokya Üniversitesi açık erişim çalışması.']];
+mk('tu',TU,['Doluluk']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Kırıkkale',13284],['Çankırı',13111],['Kastamonu',12035],['Samsun',11253],['Sivas',10697],['Amasya',10552],['Çorum',10010],['Yozgat',9233],['Tokat',8058]],[2],'Kastamonu 81 il arasında 30.; Türkiye ortalaması 15.325 $, oran yaklaşık %78,5 (kendi hesabım). Sıralar: Kırıkkale 22, Çankırı 23, Kastamonu 30, Samsun 39, Sivas 45, Amasya 50, Çorum 55, Yozgat 65, Tokat 71. Kaynak: TÜİK (rudaw aktarımı, Amasya dosyasıyla aynı).'],
+['Nüfus, 2025 (bin kişi)',[['Samsun',1392.4],['Sivas',631.4],['Tokat',614.1],['Çorum',519.6],['Yozgat',413.2],['Kastamonu',379.9],['Amasya',342.2],['Kırıkkale',282.8]],[5],'Kastamonu 2024’te 381.991 idi. Kaynak: TÜİK ADNKS 2025 (rudaw aktarımı); Kastamonu Ticaret İl Müdürlüğü raporu.'],
+['Nüfus dağılımı (bin kişi)',[['İl ve ilçe merkezleri (2024)',244.4],['İl ve ilçe merkezleri (2025)',243.0],['Belde ve köyler (2024)',137.6],['Belde ve köyler (2025)',136.9]],[1,3],'Yoğunluk 29 kişi/km²; yüzölçümü 13.136 km². Kaynak: Kastamonu Ticaret İl Müdürlüğü 2025 Ekonomik Görünüm Raporu.'],
+['İşgücü göstergeleri, 2025 (%)',[['Katılma oranı',58.1],['İstihdam oranı',55.7],['İşsizlik',5.9]],[2],'İl mi bölge mi olduğu kaynaktan tam doğrulanamadı. Kaynak: Kastamonu İstiklal (TÜİK TR82 aktarımı).']];
+mk('gt',GT,['Gelir','Nüfus','Köy-kent','İşgücü']);
+</script>
+</body>
+</html>

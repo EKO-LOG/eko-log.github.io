@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Giresun | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İle özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#6b3410;--a2:#d97706;--a3:#0f766e"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Giresun</span><h1>Giresun: Fındığın Başkenti; İhracatta TR90 Birincisi, Gelirde 62. Sırada</h1><p>455.074 nüfuslu (2025) Giresun’un kişi başına GSYH’si 2024’te 9.377 $ ile 81 il arasında 62. sırada ve Türkiye ortalamasının yaklaşık %61,2’si. Ekonominin ayakları fındık (TMO’nun 2026 alım fiyatı Giresun kalite için 255 TL/kg), 2025’te 1,003 milyar $’a çıkan ve TR90’da birinci olan ihracat ve 6 bini aşkın kişi çalıştıran iki OSB. Ama nüfus 2025’te azaldı, ortanca yaş 43,5 ile ülkenin ikincisi, SGK verisine göre emekli sayısı (120 bin) aktif çalışanı (110 bin) geçiyor ve serbest piyasada fındık geçen yılın 350 TL’lik zirvesinden 188 TL dolayına indi. 2026’da bahçelerle iç içe maden arama ruhsatları il gündemini belirledi; o bölümde iki tarafın rakamlarını ayrı ayrı yazdım. Bulamadığım ya da kaynakların tutmadığı yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis"><div class="k"><b>9.377 $</b><span>Kişi başına GSYH (2024), 81 il arasında 62.; Türkiye ort. 15.325 $’ın yaklaşık %61,2’si (oran kendi hesabım; TÜİK, Rudaw aktarımı)</span></div><div class="k"><b>455.074</b><span>Nüfus (2025, TÜİK ADNKS); 2024’te 455.922; ortanca yaş 43,5; 65 yaş üstü payı %20</span></div><div class="k"><b>1,003 mn $</b><span>İl ihracatı, 2025; TR90’ın birincisi; 2024’e göre +60,5 mn $ (AA aktarımı, oda başkanı beyanı)</span></div><div class="k"><b>255 TL/kg</b><span>TMO 2026-27 alım fiyatı, Giresun kalite; Giresun’da serbest piyasa 9 Kasım’da ~188 TL (haber aktarımı)</span></div><div class="k"><b>6 bin+</b><span>İki OSB’de çalışan, 2025 sonu (2021: 4.050); OSB’ler ihracatın %65’ini yapıyor (AA aktarımı)</span></div><div class="k"><b>120 bin / 110 bin</b><span>Emekli / aktif çalışan sayısı, SGK 2024 (Hürriyet Daily News aktarımı)</span></div></div><div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">Dış Ticaret</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#maden">Maden</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div><section id="karne">
+<h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, üç etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK, SGK, TMO, oda ve basın aktarımları). Yan yana okunmaları kesin bir karşılaştırma değildir.</li><li>Fındığın, OSB’lerin ve turizmin il GSYH’sindeki payını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat, istihdam ve fiyat verisine dayanıyor, katma değer ölçümüne değil.</li><li>Maden kartı bir hüküm değildir: iki taraf farklı ölçütler kullandığı için “tartışmalı” diye işaretledim ve “kırılgan ya da dar” rengine koydum; kartta iki tarafın rakamını da yazdım.</li></ul></div>
+</section>
+<section id="ihracat">
+<h2>Dış Ticaret: 1 Milyar Doları Aşan İhracat</h2>
+<p class="sub">Basın ve oda aktarımları; Ticaret Bakanlığı tablosunun kendisini görmedim.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>AA’nın aktardığına göre Giresun 2025’te 1 milyar 3 milyon $ ihracatla Ordu, Rize, Trabzon, Artvin ve Gümüşhane’nin de bulunduğu TR90 bölgesinde zirvede yer aldı; ihracat bir önceki yıla göre 60,478 milyon $ arttı. 2024 değerini (yaklaşık 942,5 milyon $) ve artışı (yaklaşık %6,4) bu farktan ben çıkardım.</li><li>Giresun Ticaret ve Sanayi Odası Başkanı, ilin önceki yıllarda ihracatta TR90’da 3. ve 4. sıralarda olduğunu, birinciliğe OSB’lerin katkısının büyük olduğunu söylüyor. Habere göre OSB’ler kentin ihracatının %65’ini yapıyor.</li><li>Giresun’un fındık ihracatı ocak-haziran döneminde 438,2 milyon $’dan 480,8 milyon $’a (+%10) çıktı (Ticaret Bakanlığı verisine dayanan haber; haberde yıl yazmıyordu, 2025 olarak okudum).</li><li>Ülke düzeyinde Karadeniz Fındık ve Mamulleri İhracatçıları Birliği (KFMİB) verisine göre 2024-25 sezonunda 309 bin 64 ton fındık 2 milyar 558 milyon $’a satıldı; 2025-26 sezonunun ilk 8 ayında (Eylül-Nisan) 135 bin ton ve 1,776 milyar $ gerçekleşti. BirGün’ün aktardığına göre Türkiye’den hasat edilen fındığın üçte birini alan Ferrero’nun alımı durdurması sonrası ihracatta gerileme yaşandı.</li><li>Ayrı bir haberde kadın çalışanların katkı sağladığı ihracatın toplam içindeki payının 2025’te %59,6 ile en yüksek olduğu il Giresun olarak geçiyor (hesap yöntemini görmedim).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İhracat 2025’te arttı ve il TR90’da birinci oldu.</li><li>Fındık ihracatı ocak-haziranda iki haneli arttı (haber).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İhracatın ürün ve ülke dağılımını bulamadım; fındığın ihracat içindeki payı görünmüyor.</li><li>Ülke fındık ihracatı tek büyük alıcının kararlarına duyarlı görünüyor (BirGün aktarımı).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>1 milyar 3 milyon $ ve 60,478 milyon $ rakamları AA haberinden; kayıt esasını (faaliyet ili mi, ihracatçı birliği kaydı mı) belirten bir not görmedim. Ordu’nun 2025 ihracatı (707,9 mn $) ile karşılaştırma bu yüzden yapılmadı.</li><li>Grafikteki üç seri farklı dönem ve kapsamdadır; doğrudan karşılaştırılmamalı. İthalat ve ithalatı karşılama oranı yok.</li></ul></div>
+</section>
+<section id="sanayi">
+<h2>Sanayi: OSB Merkezli Büyüme</h2>
+<p class="sub">İki OSB’nin dolduğu, üç yeni OSB’nin beklediği bir yapı; sektör dağılımı verisi yok.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>AA’ya göre iki OSB’de çalışan sayısı 2021’de 4.050’yken yüzde 50 artışla 2025 sonunda 6 binin üzerine çıktı; OSB’lerdeki istihdamın kentin sanayi istihdamına oranı aynı dönemde %25,92’den %41,52’ye yükseldi.</li><li>Oda Başkanı bölge coğrafyasının yatırım için zorlu olduğunu, arazi sorunu ve yüksek maliyet nedeniyle OSB’lerin yatırımcıya avantaj sağladığını söylüyor. İlin yatırım teşvikinde 5. bölgede olduğunu ve istihdam maliyetinin düşük iller arasında yer aldığını ekliyor.</li><li>Oda Başkanı’na göre 1. ve 2. OSB’nin kapasitesi doldu; 3., 4. ve 5. OSB kuruldu ama henüz faaliyette değil. Beş OSB’nin tamamı çalışırsa 15-20 bin kişilik istihdam hedefleniyor (beyan).</li><li>İŞKUR’un 2024 İşgücü Piyasası Araştırması’nın (15 Nisan-17 Mayıs 2024) Giresun özetine göre 47 işyerinde 350 açık iş tespit edildi; 91 işyerinde toplam 397 kişinin temininde güçlük çekiliyor. İşyerlerinin %30,8’i net istihdamın artacağını düşünüyor, uzaktan çalışan işyeri oranı %2.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>OSB istihdamı 4 yılda yaklaşık yarı yarıya arttı, sanayi istihdamındaki payı %41,5’e çıktı.</li><li>İmalat, işverenlerin önümüzdeki bir yıl için en çok net istihdam artışı beklediği sektör (768 kişi).</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Mevcut iki OSB dolu; yeni üç OSB için faaliyete geçiş takvimi bulunamadı.</li><li>Sanayi ölçeği küçük: OSB’lerdeki 6 bin kişi, il nüfusunun yaklaşık %1,3’ü (kendi hesabım).</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>OSB’lerdeki firma sayısı, sektör dağılımı, ciro ve katma değer yok; “6 bin” alt sınırdır. Rakamlar AA’nın oda başkanından aktardığı beyanlardır.</li><li>İŞKUR araştırması örneklem temellidir ve yalnızca ankete katılan işyerlerini kapsar; il istihdamının ölçüsü değildir. Grafikte yalnızca özetteki iki sektörü gösterdim.</li><li>İŞKUR’un il müdürlüğü faaliyet raporundaki kayıtlı işsiz, yerleştirme ve işsizlik sigortası rakamlarını bulamadım.</li></ul></div>
+</section>
+<section id="tarim">
+<h2>Tarım: Fındık, Fiyat Dalgası ve Veri Tutarsızlığı</h2>
+<p class="sub">Tek ürüne yaslanan bir yapı; ton ve alan verisi kaynaklara göre değişiyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Giresun kalite tombul fındığın yalnızca Giresun ve Trabzon’un bazı bölgelerinde yetiştiği, Giresun dışındakilerin “levant” kalite sayılıp daha ucuz satıldığı belirtiliyor (akademik makale). TMO’nun 2026 fiyatı Giresun kalite için 255, levant için 250 TL/kg; yüzde 50 randımanın üzerindeki her puan için Giresun kalitede 5,10 TL ek ödeme var.</li><li>Giresun’da serbest piyasada 9 Kasım 2026’da yağlı fındık 188,25 TL, levant 172,25 TL (haber sitesi derlemesi); bir Ordu haberi Giresun’da 200 TL bandından söz ediyor. Giresun’da 2025’te kabuklu fındığın 350 TL’ye kadar çıktığı yazıldı. Serbest piyasa TMO fiyatının yaklaşık %26 altında, 350 TL’lik zirvenin yaklaşık %46 altında (kendi hesabım).</li><li>TMO, 24 Ağustos’ta başlayan alımlarda yaklaşık 152 bin üreticiden 190 bin ton fındık almış, yıl sonuna kadar en az 50 bin ton daha alması bekleniyor (Ordu haberi; ülke geneli rakam). Ticaret Bakanlığı’nın Ordu ve Giresun’daki dört ticaret borsasına müfettiş görevlendirdiği haberi var (tarihini doğrulamadım).</li><li>Haberlerde ilin tarım arazisinin en az %64’ünde fındık yetiştirildiği ve 100 bine yakın çiftçinin geçimini buradan sağladığı yazılıyor; başka bir haber yaklaşık 117 bin hektar alan ve 80-100 bin çiftçi ailesi diyor. İkisini de doğrulamadım.</li><li>Ülke payı kaynaklara göre farklı: 2022’de Giresun’un 92 bin tonla ülkenin 4. üreticisi olduğu (Giresun Üniversitesi proje formundaki aktarım), bir ansiklopedi maddesinde yaklaşık %14, il tarım müdürlüğüne ait bir belgede %20 yazıyor. Şubat 2026’daki erken tahmine göre 2026-27 için Giresun 87.537 ton, Türkiye 829.239 ton; bu da yaklaşık %10,6 eder (kendi hesabım).</li><li>Bir uzmana göre Ordu, Giresun ve Trabzon’da bahçelerin yaşlanmasıyla verim ciddi geriledi (Gazete Vatan aktarımı). Hayvancılık sahilde mera sınırlı olduğu için büyük ölçekli gelişmedi; arıcılar gezici ve fındık bahçelerindeki ilaçlama nedeniyle çevre illere gidiyor (ansiklopedi maddesi).</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>TMO’nun alım fiyatı bir önceki yıla göre yaklaşık %27,5 yüksek (200’den 255 TL; kendi hesabım) ve serbest piyasanın üzerinde.</li><li>“Giresun kalite” TMO’da levanta göre 5 TL daha yüksek fiyat alıyor.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Fiyat bir yılda büyük oynadı; 2025’te rekolte tahminleri 769 bin tondan 529 bin tona indi, 2026’da serbest piyasa fiyatı zirveden yarıya yakın geriledi.</li><li>Yaşlı bahçeler ve düşük verim anılıyor; il ekonomisi büyük oranda tek ürüne bağlı.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Fındığın il GSYH ve istihdam payı, resmî fındık alanı ve ilin üretim tonu için TÜİK ya da Bakanlık tablosu görmedim; Giresun Tarımsal Yatırım Rehberi’ne ulaşamadım. Ülke payı rakamları tutarsız olduğu için tek bir pay yazmadım.</li><li>Hayvan sayıları, balıkçılık üretimi ve fındık dışı ürünlerin (örneğin kiraz) tonları yok. Günlük fiyatlar haber sitelerinin derlemesidir ve her gün değişir.</li><li>2026-27 tahmini erken ve kurum belirtilmemiş bir tahmindir; TMO 2025 için 453 bin ton demişti, INC 609 bin ton açıklamıştı (CNN Türk, Ekonomi Gazetesi).</li></ul></div>
+</section>
+<section id="maden">
+<h2>Maden Ruhsatları ve Tarım: İki Tarafın Rakamları</h2>
+<p class="sub">2026’da il gündemine oturan tartışma. Taraflar farklı ölçütler kullanıyor; hepsini kaynağıyla yan yana yazdım ve taraf tutmadım.</p>
+<div class="card tw"><table>
+<tr><th>Ölçüt</th><th>Kim söylüyor</th><th>Değer ya da iddia</th></tr>
+<tr><td>4. grup maden ruhsatı sayısı</td><td>MAPEG verisi (BirGün aktarımı; başka bir BirGün haberi 724 yazıyor)</td><td>720 adet</td></tr>
+<tr><td>Ruhsatların orman ve tarım alanındaki payı</td><td>Madene karşı çıkan gruplar (BirGün aktarımı)</td><td>Ormanların %90’ı, tarım alanlarının %85’i ruhsatlı deniyor; hesabın dayanağı yazılmamış, doğrulanmadı</td></tr>
+<tr><td>Fiili maden üretimi yapılan alan</td><td>İletişim Başkanlığı Dezenformasyonla Mücadele Merkezi (8 Nisan 2026 açıklaması)</td><td>Giresun’da on binde 4; Türkiye genelinde binde 1,8; Ordu ve Gümüşhane’de on binde 8</td></tr>
+<tr><td>Tirebolu Sekü Köyü</td><td>TBMM soru önergesi (Evrensel, Cumhuriyet)</td><td>Giresun İdare Mahkemesi 24 Şubat 2026’da yürütmeyi durdurdu; önergede sondajın sürdüğü iddia edildi. Sonraki durumu bilmiyorum</td></tr>
+<tr><td>Batlama Vadisi</td><td>TBMM soru önergesi (Cumhuriyet)</td><td>Yaklaşık 14 köyü kapsayan alan için maden arama ruhsatı ihalesi; 18 Nisan 2026’da Tirebolu’da “Büyük Köylü Mitingi”</td></tr>
+<tr><td>Bulancak</td><td>BirGün (Kasım 2025)</td><td>Akan Madencilik’in 1.983,52 hektarlık arama ruhsatı; 4 sondaj planlanıyor</td></tr>
+<tr><td>Ordu ve Giresun’da etkilenen fındık alanı</td><td>Bir milletvekilinin beyanı (haberler.com)</td><td>Yaklaşık 37 bin hektar fındık üretim alanının belirsizliğe sürüklendiği iddiası</td></tr>
+<tr><td>Madenciliğin il ekonomisine katkısı</td><td>—</td><td>İstihdam, vergi ya da ihracat verisi bulunamadı</td></tr>
+</table></div>
+<div class="g2" style="margin-top:14px"><div class="card"><h3>Eleştirenlerin dile getirdikleri</h3><ul><li>Arama sahalarının fındık bahçeleri, su kaynakları ve köylerle iç içe olduğunu, ağır metallerin toprağa ve suya karışmasının verim ve kaliteyi düşüreceğini söylüyorlar.</li><li>Giresun Doğayı Koruma Topluluğu’nun çağrısıyla Nisan 2026’da yürüyüş ve miting yapıldı; Greenpeace Türkiye de açıklama yaptı.</li></ul></div><div class="card"><h3>Resmî tarafın açıklaması</h3><ul><li>İletişim Başkanlığı DMM, arazilerin büyük bölümünün maden sahası olarak ruhsatlandırıldığı iddialarını gerçeği yansıtmayan paylaşımlar diye niteledi ve fiili kazı alanının çok küçük olduğunu açıkladı.</li><li>Bir CHP milletvekili Ordu için “on binde 8” rakamını belgeleriyle tartıştı (Evrensel); Giresun için yapılmış benzer bir belgeli itirazı görmedim.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Benim yorumum: ruhsat alanı (izin verilen ya da aranan alan) ile fiili kazı alanı farklı şeyleri ölçer; bu yüzden %85 iddiası ve on binde 4 rakamı birbirini doğrudan yalanlamıyor ya da doğrulamıyor. Ruhsat alanları ile fındık alanlarının çakışmasını gösteren bir harita ya da tablo bulamadım.</li><li>Ruhsat sayıları, oranlar ve beyanlar medya, milletvekili ve kurum aktarımıdır; MAPEG ruhsat tablosunu ve DMM’nin Giresun’a özel hesabını doğrudan görmedim. Bu bölümde hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="turizm">
+<h2>Turizm: Çekim Noktaları Çok, Belgeli Yatak Az</h2>
+<p class="sub">Ziyaretçi, geceleme ve gelir verisi bulunamadı; elimde yalnızca kapasite var.</p>
+<div class="g2"><div class="card"><h3>Bakanlık işletme belgeli tesis yatağı, Mayıs 2026</h3><div class="bars" id="tubars"></div><p class="note">Kültür ve Turizm Bakanlığı belgeli tesis istatistiği (geçici veri; Alomaliye aktarımı). Yatırım belgeli ve basit konaklama (belediye belgeli) tesisler dahil değil.</p></div><div class="card"><h3>Okuma notu</h3><ul><li>Giresun’da Mayıs 2026’da 32 işletme belgeli tesis (976 oda, 1.954 yatak), 2 yatırım belgeli tesis (69 oda, 156 yatak) ve 26 basit konaklama tesisi (516 oda, 1.032 yatak) var. Trabzon’da işletme belgeli 282 tesis ve 19.619 yatak bulunuyor.</li><li>Çekim noktaları olarak Giresun Adası, Giresun Kalesi, Zeytinlik Mahallesi ve Kümbet, Kulakkaya, Bektaş ve Sis Dağı yaylaları anılıyor (haber ve rehber siteleri). İl Kültür ve Turizm Müdürü 2025 sezonunda tekne turlarının başlayacağını söylemişti; adaya 32 milyon TL’lik çevre düzenlemesi yapıldığı haberi var.</li><li>2021’de hazırlanan bir ön fizibilite raporu Dereli’de Kümbet Koçkayası Yaylası’nda 70 odalı (140 yataklı) kış turizmi tesisi ve telesiyej öngörüyor: sabit yatırım 13,27 milyon $, geri dönüş süresi 8 yıl (Yatırım Destek Ofisi). Projenin gerçekleşip gerçekleşmediğini bulamadım.</li><li>Bir yüksek lisans tezi (yıl belirsiz) Giresun Adası’nın rekreasyon potansiyelini “yüksek”, performansını “çok düşük” buluyor.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>Turist sayısı, gelir, doluluk ve turizmin il GSYH ve istihdam payı yok. Belgesiz pansiyon, yazlık ve ev kiralamaları bilinmiyor.</li><li>Bakanlık verisi geçicidir ve yalnızca belgeli tesisleri kapsar; kapasitenin talebe uygun olup olmadığını söyleyecek veri yok.</li></ul></div>
+</section>
+<section id="gelir">
+<h2>Gelir, Nüfus ve İşgücü</h2>
+<p class="sub">TÜİK il GSYH (2024, cari fiyat), ADNKS nüfus (2025) ve SGK verileri</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div><div class="card"><h3>Okuma notu</h3><ul><li>Giresun kişi başına GSYH’de 2024’te 9.377 $ (307.828 TL) ile 62.; Osmaniye 61. (9.631 $), Şırnak 63. (9.326 $), Ordu 67. (8.949 $), Gümüşhane 68. (8.757 $). Türkiye ortalaması 15.325 $; Giresun bunun yaklaşık %61,2’si ve Kocaeli-Ankara düzeyinin (24.031 $) yaklaşık %39’u (kendi hesabım).</li><li>TL cinsinden TR90 illeri: Artvin 390.108, Trabzon 345.969, Giresun 307.828, Ordu 293.783, Gümüşhane 287.458. Rize’nin TL değerini bulamadım, bu yüzden Giresun’un bölgedeki sırasını kesin yazmadım.</li><li>Nüfus 2024’te 455.922’den 2025’te 455.074’e geriledi (−848, yaklaşık %0,19; kendi hesabım); Giresun nüfusu azalan 33 il arasında. Merkez ilçe 143.915 kişiyle nüfusun yaklaşık %31,6’sı (kendi hesabım).</li><li>2025’te ortanca yaş 43,5 ile Sinop’un (44) ardından ikinci; 65 yaş üstü payı %20 ile Sinop ve Kastamonu’nun ardından üçüncü. Türkiye’nin 2024 ortanca yaşı 34,4’tü.</li><li>SGK’nın 2024 verisine göre Giresun’da yaklaşık 120 bin emekli ve 110 bin aktif çalışan var; aynı haberde Rize’de 92 bin emekliye karşı 96 bin aktif çalışan yazıyor. Haber, emekli olup memlekete dönenleri ve geçmişte kapanan ya da küçülen büyük işyerlerini nedenler arasında sayıyor (yerel görüşler).</li><li>İşsizlik: TÜİK’e göre Aralık 2024’te TR90’da %7,7, Türkiye’de %8,8 (İŞKUR Ordu raporundan). Giresun’un il bazlı işsizlik oranını bulamadım.</li></ul></div></div><div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İşsizlik oranı TR90’da Türkiye ortalamasının altında (Aralık 2024).</li><li>Gelir sıralaması Ordu ve Gümüşhane’nin üzerinde; ihracat TR90’ın zirvesinde.</li></ul></div><div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kişi başına gelir Türkiye ortalamasının yaklaşık %61’i ve 81 il içinde 62. sırada.</li><li>Nüfus azalıyor, medyan yaş çok yüksek ve emekli sayısı aktif çalışandan fazla.</li></ul></div></div><div class="card"><h3>Dikkat</h3><ul><li>İlçe nüfusları Endeksa/Emlakjet aktarımıdır; toplamı TÜİK’in il nüfusuyla (455.074) örtüşüyor. Haberlerdeki Giresun ilçe merkezi nüfusu (143.915) il nüfusu değil, Merkez ilçe nüfusudur.</li><li>İşsizlik oranı bölge (TR90) düzeyinde ve Aralık 2024’e ait; 2025 il verisi yok. Net göç, kadın işgücüne katılım ve sektörel GSYH payları da bulunamadı.</li><li>Emekli ve aktif çalışan sayıları yuvarlak ve bir gazete haberinden; SGK tablosunu görmedim. Dolar değerleri TÜİK’in açıkladığı dönüşümlerdir.</li></ul></div>
+</section>
+<section id="ilceler">
+<h2>İlçe Kırılımı</h2>
+<p class="sub">16 ilçe (Merkez ve 15 ilçe). Nüfus 2025; ilçe ekonomisi için sınırlı veri var.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus 2025</th><th>Ekonomik karakter</th></tr>
+<tr><td>Merkez</td><td>143.915</td><td>İlin nüfusunun yaklaşık %31,6’sı (kendi hesabım); Giresun Adası, Kale ve Zeytinlik; Giresun Üniversitesi’nin merkezi (2023 net bütçe geliri 988,7 mn TL; Sayıştay); TMO fındık alım noktası</td></tr>
+<tr><td>Bulancak</td><td>70.397</td><td>Fındık, balıkçılık, tarım ve küçük ölçekli sanayi (ansiklopedi); 2024’te ilçe merkezi 50.112, köy ve belde 20.571; üç şirketin maden projesine tepki (BirGün, Kasım 2025); TMO alım noktası</td></tr>
+<tr><td>Espiye</td><td>39.182</td><td>TMO fındık alım noktası; başka ekonomik veri bulunamadı</td></tr>
+<tr><td>Tirebolu</td><td>32.124</td><td>Harşit Çayı’nın denize döküldüğü ilçe; Sekü Köyü maden arama tartışması; TMO alım noktası</td></tr>
+<tr><td>Görele</td><td>31.536</td><td>Sis Dağı Yaylası; TMO alım noktası</td></tr>
+<tr><td>Keşap</td><td>20.859</td><td>TMO alım noktası; başka ekonomik veri bulunamadı</td></tr>
+<tr><td>Dereli</td><td>20.100</td><td>Kümbet’te kış turizmi merkezi ön fizibilitesi (2021)</td></tr>
+<tr><td>Şebinkarahisar</td><td>19.130</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Piraziz</td><td>15.109</td><td>Küçük ölçekli fındık işletmeleri üzerine saha makalesi (Ege Üniv. Ziraat Fak. Derg., 2025)</td></tr>
+<tr><td>Yağlıdere, Eynesil, Alucra, Güce, Doğankent, Çanakçı, Çamoluk</td><td>14.688; 12.548; 8.473; 8.194; 7.327; 5.783; 5.709</td><td>Ekonomik veri bulunamadı; Güce’de TMO alım noktası var (haber)</td></tr>
+</table><p class="note" style="margin:10px 0 0">Nüfuslar 2025 ADNKS’ye dayanan Endeksa/Emlakjet tablosundan; toplamı 455.074. En kalabalık üç ilçe (Merkez, Bulancak, Espiye) nüfusun yaklaşık %55,7’sini taşıyor (kendi hesabım). TMO alım noktaları bir haberde (tarih belirtilmemiş) Merkez, Bulancak, Keşap, Espiye, Güce, Tirebolu ve Görele olarak sayılıyor. İlçe bazında yıllık nüfus değişimi, GSYH, istihdam ve ihracat verisi yok.</p></div>
+</section>
+<section id="sonuc">
+<h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Giresun</h3><p style="margin:0">Giresun, fındıkta ülkenin ilk sıralarındaki üreticilerinden biri, 2025’te 1 milyar doları aşan ihracatla TR90’ın birincisi ve iki OSB’siyle sanayi istihdamını artıran bir il; ama kişi başına geliri ülke ortalamasının yaklaşık %61’inde, nüfusu azalıyor, ortanca yaşı 43,5 ve emekli sayısı aktif çalışanı geçiyor. 2026’da serbest piyasada fındık fiyatı geçen yılın zirvesinin yarısına yakın düzeye indi ve bahçelerle iç içe maden arama ruhsatları il gündemine yerleşti. Büyümenin fındık fiyatına, birkaç alıcıya ve yeni OSB’lerin açılmasına ne kadar bağlı olduğu ve madencilikle tarımın aynı havzada nasıl bir arada duracağı belirsiz (yorum).</p></div>
+<div class="three"><div><b>HAMLE 1</b>Veriyi netleştirmek: il ihracatını ürün ve ülke bazında yayımlamak; fındığın il GSYH ve istihdamdaki payını ve maden ruhsatı ile fındık alanının çakışmasını açık bir haritayla göstermek.</div><div><b>HAMLE 2</b>Fındıkta fiyat dalgasını ve tek alıcı bağımlılığını izlemek, yaşlı bahçelerde verimi ölçmek; Giresun Ticaret Borsası Başkanı’nın da dediği gibi fındığı bütün halinde değil katma değerli ürün olarak satmayı artırmak.</div><div><b>HAMLE 3</b>Nüfusu tutacak iş alanları: 3., 4. ve 5. OSB’lerin faaliyete geçmesi (hedef 15-20 bin istihdam), 1.954 belgeli yataklı turizm kapasitesinin ve eve dönen emeklilerin ekonomik etkisinin ölçülmesi.</div></div><div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Fındık ve maden konusunda burada hiçbir görüş tercih edilmedi.</li></ul></div>
+</section>
+<section id="tartisma">
+<h2>Tartışma Köşesi</h2>
+<p class="sub"></p>
+<div class="card"><ul><li>TMO’nun 255 TL’lik alım fiyatı ile 188 TL dolayındaki serbest piyasa fiyatı arasındaki fark ne anlatıyor: üreticiye taban mı, piyasaya bir sinyal mi?</li><li>İhracat 1 milyar doları aştı ama kişi başına gelirde il 62. sırada: ihracat gelire ne kadar dönüşüyor, kim kazanıyor?</li><li>Ruhsat alanı mı, fiili kazı alanı mı: madencilik ve fındık tarımı hakkında karar verirken hangi ölçüt daha anlamlı?</li><li>Emekli sayısı aktif çalışanı geçerken eve dönen emeklilerin harcaması il ekonomisi için bir destek mi, yoksa genç nüfusun gittiğinin işareti mi?</li><li>1. ve 2. OSB doluyken 3-5. OSB neden faaliyette değil; bu gecikme neyin işareti?</li></ul><a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+</section>
+<section id="kaynak">
+<h2>Kaynaklar ve Veri Notu</h2>
+<p class="sub"></p>
+<ul class="src">
+<li>TÜİK il bazında GSYH 2024 (Rudaw, Habertürk, CNBC-e, Olay Medya, Haber Gazetesi ve Mirat Haber aktarımı); TÜİK yıllık GSYH 2024 (Alomaliye)</li>
+<li>TÜİK ADNKS 2025 nüfus, ortanca yaş ve yaşlı nüfus oranı (Yeni Birlik, Karar, Ekonomi Gazetesi, Milliyet, CNN Türk); Endeksa/Emlakjet Giresun demografi tablosu (ilçe nüfusları)</li>
+<li>Dış ticaret: Ekonomist/AA ve Gazete Vatan (Giresun ihracatı, OSB istihdamı ve payları); Ekonomi Gazetesi (Giresun fındık ihracatı); KFMİB verisi (Ekonomi Gazetesi, BirGün, Habertürk yerel); Haberler.com (kadın katkılı ihracat payı)</li>
+<li>İşgücü ve istihdam: İŞKUR Giresun 2024 İşgücü Piyasası Araştırması özeti; İŞKUR Ordu İl İstihdam ve Mesleki Eğitim Kurulu 2024 raporu (TR90 işsizliği); Hürriyet Daily News (SGK emekli ve aktif çalışan sayıları)</li>
+<li>Tarım: TMO ve Tarım ve Orman Bakanlığı (alım fiyatları; Habertürk, Tarım TV); Gazete Arena, Haberlisin, Orducu, NTV ve haberler.com (güncel fiyat ve TMO alımı haberleri); Ekonomi Gazetesi (rekolte tahminleri); CNN Türk ve Bigpara (TMO ve INC tahminleri); Giresun Üniversitesi proje formu ve Hars Akademi makalesi (üretim, kalite ve ülke payı); KÜRE Ansiklopedi (yapay zeka destekli madde); Gazete Vatan (verim)</li>
+<li>Maden: BirGün, Evrensel, Cumhuriyet, Sol, Milli Gazete, Sondakika ve Haberler.com haberleri; İletişim Başkanlığı DMM açıklaması (DHA, TGRT Haber, Yeni Birlik aktarımı)</li>
+<li>Turizm: Kültür ve Turizm Bakanlığı belgeli tesis istatistiği, Mayıs 2026 (Alomaliye); Yatırım Destek Ofisi Giresun Kış Turizm Merkezi Ön Fizibilite Raporu (2021); Bengü Türk (AA) ve Habertürk yerel haberleri; Tezara tez özetleri</li>
+<li>Diğer: Giresun Adliyesi faaliyet raporları (Merkez ilçe nüfusu teyidi); Sayıştay Giresun Üniversitesi raporu</li>
+</ul><p class="note">Çoğu veri basın aktarımı, kurum raporlarının özeti veya yetkili beyanıdır; resmî tabloların doğrudan alıntısı değildir. Ticaret Bakanlığı il ihracat tablosunun kendisi, ihracatın ürün ve ülke dağılımı, Giresun’un il bazlı 2024-2025 işsizlik oranı, İŞKUR il müdürlüğü raporu, sektörel GSYH payları, fındığın il GSYH ve istihdam payı, resmî fındık alanı ve üretim tonu, hayvan sayıları ve fındık dışı ürünlerin ton verileri, turist sayısı ve geliri, OSB’lerin sektör dağılımı, net göç, MAPEG ruhsat tablosu ve madenciliğin il ekonomisine katkısı doğrulanmış kaynakla bulunamadığı için sayfada yok. %61,2 (gelir oranı), %39 (Kocaeli-Ankara düzeyine oran), 942,5 mn $ ve %6,4 (2024 ihracatı ve artış), %26 ve %46 (serbest piyasa farkları), %27,5 (TMO fiyat artışı), %10,6 (Giresun’un 2026-27 tahmini payı), %31,6 (Merkez ilçe payı), %55,7 (üç ilçenin payı), −848 ve %0,19 (nüfus değişimi) ve %1,3 (OSB çalışanı/nüfus) kendi hesabımdır. Tarih belirtilmeyen beyanlar (oda başkanı, vali, yetkili) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+</section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: FINDIK',ad:'Fındık',big:'255 TL/kg',alt:'TMO 2026-27 alım fiyatı, Giresun kalite (%50 randıman); 2025’te 200, 2021’de 27 TL (TMO, Habertürk)',y:'Giresun kalite tombul fındık yalnızca Giresun ve Trabzon’un bazı bölgelerinde yetişiyor (makale); il 2022’de 92 bin tonla ülkenin 4. üreticisiydi (aktarım).',n:'Ülke payı kaynaklara göre yaklaşık %11 ile %20 arasında değişiyor; fındığın il GSYH ve istihdam payı bulunamadı.'},
+ {c:'good',chip:'MOTOR: İHRACAT',ad:'İhracat',big:'1,003 mn $',alt:'2025 il ihracatı; TR90’da 1. (önceki yıllarda 3.-4.); 2024’e göre +60,5 mn $ (AA aktarımı, oda başkanı beyanı)',y:'Fındık ihracatı ocak-haziranda 438,2 mn $’dan 480,8 mn $’a çıktı (+%10; haber).',n:'İhracatın ürün ve ülke dağılımı bulunamadı; kayıt esası belirtilmemiş.'},
+ {c:'good',chip:'MOTOR: OSB’LER',ad:'Organize sanayi bölgeleri',big:'6 bin+',alt:'İki OSB’de çalışan, 2025 sonu (2021: 4.050); sanayi istihdamının %41,5’i, ihracatın %65’i (AA aktarımı)',y:'OSB istihdamı 4 yılda yaklaşık %50 arttı; il yatırım teşvikinde 5. bölgede.',n:'OSB’lerdeki sektör dağılımı ve firma sayısı bulunamadı; 1. ve 2. OSB’nin kapasitesi dolu.'},
+ {c:'warn',chip:'KIRILGAN: FİYAT',ad:'Fındık fiyatı ve tek ürün bağımlılığı',big:'~188 TL/kg',alt:'Giresun’da serbest piyasa, yağlı fındık, 9 Kasım 2026 (haber derlemesi); 2025’te 350 TL’ye kadar çıkmıştı',y:'TMO alım fiyatı (255 TL) serbest piyasanın üzerinde; TMO yaklaşık 190 bin ton almış (ülke geneli, haber).',n:'Serbest piyasa TMO fiyatının yaklaşık %26, 350 TL’lik zirvenin yaklaşık %46 altında (kendi hesabım); 2025’te rekolte tahmini 769 bin tondan 529 bin tona indi.'},
+ {c:'warn',chip:'KIRILGAN: GELİR',ad:'Gelir düzeyi',big:'62 / 81',alt:'Kişi başına GSYH sırası (2024; 9.377 $; Türkiye ort. 15.325 $)',y:'Ordu (67.) ve Gümüşhane’nin (68.) üzerinde; Osmaniye (61.) ve Şırnak (63.) ile bitişik sırada.',n:'Ortalamanın yaklaşık %61,2’si, Kocaeli-Ankara düzeyinin yaklaşık %39’u (kendi hesabım).'},
+ {c:'warn',chip:'KIRILGAN: NÜFUS',ad:'Nüfus ve yaşlanma',big:'−848',alt:'2025’te nüfus değişimi (455.922 → 455.074; kendi farkım); ortanca yaş 43,5 ile Sinop’un ardından 2.',y:'Merkez ilçe 143.915 ile nüfusun ~%31,6’sını topluyor (kendi hesabım); memlekete dönen emekliler anlatılıyor (haber).',n:'65 yaş üstü payı %20 (3. en yüksek); SGK 2024: yaklaşık 120 bin emekli, 110 bin aktif çalışan.'},
+ {c:'warn',chip:'TARTIŞMALI: MADEN',ad:'Maden arama ruhsatları',big:'720',alt:'4. grup maden ruhsatı (MAPEG verisi, BirGün aktarımı); fiili kazı alanı oranı on binde 4 (İletişim Başkanlığı DMM, 8 Nisan 2026)',y:'Resmî açıklamaya göre fiili kazı alanı çok küçük (Giresun’da on binde 4); Tirebolu Sekü ruhsatı için mahkeme 24 Şubat 2026’da yürütmeyi durdurdu.',n:'Eleştirenlere göre arama ruhsatları fındık bahçeleri ve su havzalarıyla iç içe; Nisan 2026’da Tirebolu’da miting yapıldı. Madenin il ekonomisine katkısı bulunamadı.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm',big:'1.954 yatak',alt:'Bakanlık işletme belgeli tesis yatağı, Mayıs 2026 (32 tesis, 976 oda); Trabzon 19.619, Rize 4.419, Ordu 4.295',y:'Giresun Adası, kale, Zeytinlik ve yaylalar; 2021’de Dereli’de kış turizmi merkezi için ön fizibilite hazırlandı.',n:'Ziyaretçi sayısı, gelir ve doluluk bulunamadı; belgeli yatak sayısı TR90 komşularının gerisinde.'},
+ {c:'sleep',chip:'UYUYAN: YENİ OSB’LER',ad:'3., 4. ve 5. OSB',big:'15-20 bin',alt:'Beş OSB çalışırsa hedeflenen istihdam (oda başkanı beyanı); 3-5. OSB kuruldu ama henüz faaliyette değil',y:'Mevcut iki OSB’nin kapasitesi dolu; yatırımcı için arazi ve maliyet sorununu OSB’nin çözdüğü söyleniyor.',n:'Faaliyete geçiş takvimi ve yatırım tutarı bulunamadı; hedef bir beyan, ölçülmüş bir veri değil.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['Giresun il ihracatı, yıllık (milyon $)',[['2024 (benim hesabım)',942.5],['2025',1003]],[1],'AA’nın aktardığı 2025 değeri (1 milyar 3 milyon $) ve 60,478 milyon $’lık artıştan 2024’ü ben çıkardım. Kaynak: Ekonomist/AA, Gazete Vatan.'],
+ ['Giresun fındık ihracatı, ocak-haziran (milyon $)',[['Ocak-Haziran 2024',438.2],['Ocak-Haziran 2025',480.8]],[1],'Ticaret Bakanlığı verisine dayanan haber (+%10); haberde yıl yazmıyordu, 2025 olarak okudum. Kaynak: Ekonomi Gazetesi.'],
+ ['Türkiye fındık ihracatı (milyon $)',[['2024-25 sezonu (12 ay)',2558.5],['Ocak-Ekim 2025',1813.1],['2025-26, Eylül-Nisan (8 ay)',1776.4]],[0],'Farklı dönemler; doğrudan karşılaştırılmamalı. Kaynak: KFMİB verisi (Ekonomi Gazetesi, BirGün, Habertürk yerel).']];
+mk('ih',IH,['İl ihracatı','Fındık ihracatı','Türkiye fındık']);
+var SA=[['İki OSB’de çalışan sayısı (kişi)',[['2021',4050],['2025 sonu (en az)',6000]],[1],'Haberde “6 bini aşkın” deniyor; 6.000’i alt sınır olarak çizdim. Kaynak: Ekonomist/AA.'],
+ ['OSB payları (%)',[['Sanayi istihdamındaki pay, 2021',25.92],['Sanayi istihdamındaki pay, 2025',41.52],['İhracattaki pay (dönem belirtilmemiş)',65]],[1],'İstihdam payı için haber “aynı dönemde” diyor; ihracat payının dönemi yazılmamış. Kaynak: Ekonomist/AA, oda başkanı beyanı.'],
+ ['İŞKUR araştırması: bir yılda beklenen net istihdam artışı (kişi)',[['İmalat',768],['İnşaat',255]],[0],'2024 İşgücü Piyasası Araştırması Giresun özeti; yalnızca özetteki iki sektör. Örneklem temellidir. Kaynak: İŞKUR.']];
+mk('sa',SA,['OSB çalışanı','OSB payları','İstihdam beklentisi']);
+var TA=[['TMO alım fiyatı, Giresun kalite (TL/kg)',[['2021',27],['2022',53],['2023',84],['2024',132],['2025',200],['2026',255]],[5],'Yüzde 50 sağlam iç esasına göre; enflasyon düzeltmesi yapılmadı. Kaynak: TMO fiyat tablosu (Habertürk).'],
+ ['2026-27 sezonu erken tahmin, Doğu Karadeniz (ton)',[['Ordu',276511],['Giresun',87537],['Trabzon',48799],['Artvin',4007]],[1],'Şubat 2026’da yayımlanan erken tahmin; tahmini yapan kurumu haberde net göremedim. Kaynak: Ekonomi Gazetesi.'],
+ ['Türkiye rekolte tahminleri (bin ton)',[['2025 sezonu, Şubat 2025 tahmini',768.7],['2025 sezonu, Mayıs 2025',609.4],['2025 sezonu, Temmuz 2025',601.2],['2025 sezonu, Kasım 2025 revize',528.8],['2026-27, Şubat 2026 tahmini',829.2]],[4],'Tahminler tarihe ve kuruma göre değişiyor (TMO 2025 için 453 bin ton demişti). Kaynak: Ekonomi Gazetesi, CNN Türk.']];
+mk('ta',TA,['TMO fiyatı','2026-27 tahmini','Rekolte tahminleri']);
+bars($('tubars'),[['Trabzon',19619],['Rize',4419],['Ordu',4295],['Giresun',1954],['Artvin',1356],['Gümüşhane',546]],[3]);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Kocaeli ve Ankara',24031],['Türkiye ort.',15325],['Osmaniye (61.)',9631],['Giresun (62.)',9377],['Şırnak (63.)',9326],['Ordu (67.)',8949],['Gümüşhane (68.)',8757],['Şanlıurfa',5731]],[3],'Giresun 81 il arasında 62.; Türkiye ortalamasının yaklaşık %61,2’si (kendi hesabım). Kaynak: TÜİK, Rudaw ve Habertürk aktarımı.'],
+ ['TR90 illerinde kişi başına GSYH, 2024 (bin TL)',[['Türkiye ort.',503.1],['Artvin',390.1],['Trabzon',346.0],['Giresun',307.8],['Ordu',293.8],['Gümüşhane',287.5]],[3],'Rize’nin TL değerini bulamadım. Kaynak: TÜİK; Haber Gazetesi ve Olay Medya aktarımı, Alomaliye (ort.).'],
+ ['İlçe nüfusu, 2025 (bin kişi)',[['Merkez',143.9],['Bulancak',70.4],['Espiye',39.2],['Tirebolu',32.1],['Görele',31.5],['Keşap',20.9],['Dereli',20.1],['Şebinkarahisar',19.1]],[0],'En kalabalık sekiz ilçe; il toplamı 455.074. Kaynak: Endeksa/Emlakjet (ADNKS 2025).'],
+ ['Emekli ve aktif çalışan, SGK 2024 (bin kişi)',[['Giresun, emekli',120],['Giresun, aktif çalışan',110],['Rize, emekli',92],['Rize, aktif çalışan',96]],[0,1],'Yuvarlak rakamlar, gazete aktarımı; SGK tablosunu görmedim. Kaynak: Hürriyet Daily News (17 Nisan 2025).']];
+mk('gt',GT,['Gelir','TR90 geliri','İlçe nüfusu','Emekli-aktif']);
+</script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Niğde | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Niğde'ye özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#b45309;--a2:#be123c;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Niğde</span><h1>Niğde: Patates, Elma, Yeni OSB Yatırımları</h1><p>374.492 nüfuslu Niğde; Türkiye’nin patates ve elmada ilk sıralarındaki üreticilerinden biri ve nüfusu artan nadir iller arasında. Kişi başına GSYH yaklaşık 11.052 $ ile 81 il arasında 43.; Türkiye ortalamasının yaklaşık %72’si. İhracat 2025’te 277 milyon $ (faaliyet esaslı) ama ölçüye göre rakam çok değişiyor. Bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>11.052 $</b><span>Kişi başına GSYH (2024), 81 il arasında 43.; Türkiye ort. 15.325 $’ın yaklaşık %72,1’i (oran kendi hesabım)</span></div>
+<div class="k"><b>374.492</b><span>Nüfus (ADNKS 2025); 2024: 372.708 (+1.784, +%0,48; kendi hesabım)</span></div>
+<div class="k"><b>915.734 ton</b><span>2024 patates üretimi, Türkiye 1.’si, payı %13,3 (TÜİK, Tarım ve Orman Bakanlığı yatırım rehberi)</span></div>
+<div class="k"><b>619.371 ton</b><span>2024 elma üretimi, ~247 bin dekar; rehberde Türkiye 1.’si (sıra kaynaklara göre değişiyor)</span></div>
+<div class="k"><b>277 mn $</b><span>2025 ihracatı, faaliyet esaslı, +%6,2 (Ticaret Bakanı Bolat); TİM’e göre 2026 ilk yarı 55,8 mn $</span></div>
+<div class="k"><b>~6.100</b><span>Niğde OSB çalışan sayısı; 705 hektar, 137 parsel (OSB Başkanı, Sanayi Gazetesi)</span></div>
+</div>
+<div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+<section id="karne"><h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+<li>Sayılar farklı yıllara ve kaynaklara ait (TÜİK aktarımları, bakanlık rehberleri, valilik beyanları, yerel basın). Yan yana okunmaları kesin karşılaştırma değildir.</li>
+<li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi üretim, istihdam ve yatırım izlerine dayanıyor, katma değer ölçümüne değil.</li>
+<li>Niğde’ye özgü güncel işsizlik, turizm, hayvancılık ve ilçe nüfusu verisi bulunamadı; ilgili bölümlerde ayrıca yazdım.</li></ul></div></section>
+
+<section id="ihracat"><h2>İhracat: Üç Ölçü, Üç Ayrı Rakam</h2>
+<p class="sub">Faaliyet iline göre, firma merkezine göre ve yarıyıl verisi aynı tabloda toplanamıyor; hepsini ayrı gösteriyorum.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Ticaret Bakanı Bolat Niğde’de, ilin 2025 ihracatının faaliyet bazında 277 milyon $ olduğunu ve %6,2 arttığını söyledi; ithalat için 59 milyon $ verdi (yılı kaynakta net değil).</li>
+<li>TİM verilerine göre 2026’nın ilk yarısında ihracat 55,77 milyon $; geçen yılın aynı dönemi yaklaşık 46 milyon $ (kendi hesabım: yaklaşık +%21). Haziran 2026’da 8,66 milyon $.</li>
+<li>İlk yarıda kimyevi maddeler 18,65 milyon $ (geçen yıl 13,31; yaklaşık +%40), otomotiv 10,46 milyon $ (7,55; kendi hesabım: yaklaşık +%38). İran’a ihracat yaklaşık 11 kat artarak 7,75 milyon $ oldu.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İki ana sektörde de çift haneli artış var; ihracat kimya ve otomotive yayılıyor (yorum).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tek bir ülkedeki (İran) yaklaşık 11 katlık sıçrama kalıcı mı belli değil; bu ülke ilk yarı ihracatının yaklaşık %14’ü (kendi hesabım).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>277 milyon $ (TÜİK faaliyet esaslı, bir yetkili beyanı) ile 55,8 milyon $ (TİM, firma merkezi esaslı, yalnızca 6 ay) aynı ölçü değil; birbirine oranlamadım ya da yıla taşımadım.</li>
+<li>2025 yıllık TİM ihracatı, ürün kırılımı ve ithalatın güncel rakamını doğrulanmış kaynakla bulamadım.</li></ul></div></section>
+
+<section id="sanayi"><h2>Sanayi: Niğde OSB Yükseliyor</h2>
+<p class="sub">1994’te kurulan Niğde OSB, ilin sanayi çekirdeği; ikinci bir OSB de gündemde.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Niğde OSB 1994’te 70 kişi çalıştırırken bugün yaklaşık 6.100 kişiye istihdam veriyor; 705 hektar alanda 137 sanayi parseli var (Sanayi Gazetesi, OSB Başkanı Altunbaş; haber tarihi belirtilmemiş).</li>
+<li>OSB’de yaklaşık 240 milyon $’lık likra fabrikasının ilk fazı tamamlandı ve üretim başladı (yıllık 7 bin ton); yatırımın yaklaşık 600 kişiye istihdam ve yıllık 180 milyon $ ihracat sağlaması bekleniyor.</li>
+<li>2019’da OSB’de 91 firma ve yaklaşık 3.200 doğrudan çalışan vardı (milletvekili konuşması).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Teşvikle büyük ölçekli yatırımlar çekiliyor; istihdam beş yılda yaklaşık iki katına çıkmış görünüyor (farklı kaynaklar).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Güncel OSB doluluğu, firma sayısı ve ilin toplam sanayi istihdamı bilinmiyor; 240 milyon $’lık yatırımın 600 kişilik istihdamı sermaye yoğun bir yapıya işaret ediyor (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>İstihdam rakamları farklı yıllara ve konuşma ya da haber metnine ait; 1994, 2019 ve “bugün” değerleri aynı seriden değil. Yatırımın 600 kişilik ve 180 milyon $’lık hedefi beklentidir, gerçekleşme değil.</li>
+<li>Niğde’de ayrıca madencilik ve ikinci OSB var; üretim ve yatırım verisini bulamadım.</li></ul></div></section>
+
+<section id="tarim"><h2>Tarım: Patates, Elma, Fasulye, Kiraz</h2>
+<p class="sub">İlin en görünür ekonomisi tarım; tonajlar yüksek ama fiyatlar çiftçiyi memnun etmiyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>2024’te 264.830 dekarda 915.734 ton patates; Türkiye üretiminin yaklaşık %13’ü ve ilk sıra. Vali Akmeşe 2025’te 243.750 dekarda 884 bin tonun üzerinde üretimle Türkiye’de ikinci olunduğunu, 2026 için yaklaşık 278.600 dekarda 1,178 milyon ton beklediklerini söyledi.</li>
+<li>Elmada 2024’te 246.900 dekarda 619.371 ton; yatırım rehberi Türkiye 1.’si diyor. 2024 başında bir yetkili ise ağaç sayısında ilk, üretimde Isparta’dan sonra ikinci olduklarını söylemiş.</li>
+<li>Kuru fasulyede 2024’te 46.021 ton ile ikinci sıra (Türkiye’nin %16,44’ü); kirazda 43.136 ton ile altıncı, nektarinde sekizinci.</li>
+<li>Ekim 2026 tarihli bir yerel haberde 2026 rekoltesi patateste 1.067.320 ton, elmada 555.469 ton, lahanada 148.117 ton ve kuru fasulyede 41.470 ton; yüksek rekolteye rağmen çiftçi fiyatlardan şikâyetçi.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Birden fazla üründe ilk on içinde bir üretim çeşitliliği var; yerli patates tohumu çalışmaları sürüyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yüksek rekolte fiyatı düşürüyor; 2026 elma rekoltesi 2024’ün yaklaşık %10 altında (kendi hesabım, farklı kaynaklar).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Patates 2026 değeri iki kaynakta farklı: Vali beklentisi 1,178 milyon ton, yerel haberde kayıtlı 1,067 milyon ton; hangisinin gerçekleşme olduğunu doğrulayamadım. Sıralamalar (1. ya da 2.) yıla ve kaynağa göre değişiyor.</li>
+<li>Hayvancılık, tarımın il GSYH ve istihdam payı ve çiftçi geliri için güncel veri bulunamadı.</li></ul></div></section>
+
+<section id="turizm"><h2>Turizm: Veri Yok</h2>
+<p class="sub">Niğde’ye özgü turist, geceleme ve gelir verisini güvenilir bir kaynakta bulamadım.</p>
+<div class="card"><h3>Bulabildiklerim</h3><ul>
+<li>Elimde Niğde için doğrulanmış turist sayısı, doluluk, yatak kapasitesi ya da müze ziyaretçisi yok.</li>
+<li>Doğa ve kültür turizmi potansiyeli (Aladağlar çevresi, tarihî yapılar) genel bilgidir; bu sayfa için kaynak aramadım ve sayısal bir iddiada bulunmuyorum.</li></ul></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Değerlendirilebilecek doğa ve tarih unsurları var (genel bilgi, doğrulanmadı).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ölçülmüş bir turizm tablosu olmadan sektörün il ekonomisindeki yeri bilinemiyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu bölüm bilerek boş bırakıldı; Amasya ve Kastamonu dosyalarında olduğu gibi bulunamayan veriyi tahminle doldurmadım.</li></ul></div></section>
+
+<section id="gelir"><h2>Gelir, İşgücü ve Nüfus</h2>
+<p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar) ve ADNKS 2024–2025</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kişi başına yaklaşık 11.052 $ ile 81 il arasında 43.; Nevşehir 41. (11.126 $), Adana 46. (10.692 $), Sivas 45., Kırşehir 48., Amasya 50.; Karaman 17., Mersin 21., Aksaray 27., Kayseri 28., Konya 34. ile Niğde’nin önünde. Oran Türkiye ortalamasının (15.325 $) yaklaşık %72,1’i (kendi hesabım).</li>
+<li>Toplam ekonomi: 11.052 $ ile 374.492 kişi çarpımından yaklaşık 4,1 milyar $; nüfus payı yaklaşık %0,43 (86.092.168 Türkiye nüfusuna göre; kendi hesabım).</li>
+<li>Nüfus 2024’te 372.708, 2025’te 374.492: +%0,48. Türkiye’de 2025’te 33 ilin nüfusu azaldı; Niğde azalanlar arasında değil.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Nüfus artıyor; gelir Adana, Sivas, Kırşehir ve Amasya’nın üzerinde.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık beşte ikisi değil ama dörtte biri kadar (yaklaşık %28) geride; komşu Aksaray, Kayseri ve Konya’nın da gerisinde.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Niğde’ye özgü güncel işsizlik ve işgücüne katılma oranını bulamadım. TR71 bölgesi (Niğde, Aksaray, Nevşehir, Kırşehir, Kırıkkale) için 2024 işsizliği %8,5 olarak aktarılıyor; bu bir il oranı değildir.</li>
+<li>Nüfus artışının doğum mu göç mü kaynaklı olduğunu ve 2025 net göçünü bulamadım. Sektörel GSYH payları ve il GSYH’sinin TL değeri yok.</li></ul></div></section>
+
+<section id="ilceler"><h2>İlçe Kırılımı</h2>
+<p class="sub">Altı ilçe; güncel ilçe nüfuslarını bulamadığım için tablo yalnızca bulduğum ekonomik ipuçlarını içeriyor.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+<tr><td>Merkez</td><td>Bulunamadı</td><td>Niğde OSB; yerli patates tohumu denemesi (Konaklı beldesi, 23 dekar)</td></tr>
+<tr><td>Bor</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Ulukışla</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Çamardı</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Çiftlik</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Altunhisar</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr></table>
+<p class="note" style="margin:10px 0 0">İl toplamı 374.492 (ADNKS 2025). İlçe nüfuslarını, ilçe bazında GSYH, tarım, ihracat ve istihdam verilerini doğrulanmış kaynakla bulamadım; arama sonuçlarında yalnızca başlıklar ya da il düzeyi sayılar çıktı, bunları ilçeye dağıtmadım.</p></div></section>
+
+<section id="sonuc"><h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Niğde</h3>
+<p style="margin:0">Niğde’nin ekonomisi Türkiye’nin en büyük patates ve elma üretim merkezlerinden birine, büyüyen bir OSB’ye (yaklaşık 6.100 çalışan, 240 milyon $’lık yeni yatırım) ve kimya-otomotiv ağırlıklı küçük bir ihracata yaslanıyor; kişi başına gelir yaklaşık 11.052 $ ile Türkiye ortalamasının yaklaşık %72’si. Güçlü tarafı üretim çeşitliliği, artan nüfus ve OSB yatırımları, zayıf tarafı fiyat baskısı altındaki ham tarım, tek ülkeye sıçrayan ihracat ve ölçülemeyen turizm. İl dengeli ama katma değeri yukarı taşıyacak işleme halkası eksik görünüyor (yorum).</p></div>
+<div class="three">
+<div><b>HAMLE 1</b>Patates ve elmayı işlemek: soğuk hava deposu, cips-donuk ürün ve meyve işleme tesisleriyle ham ürün satışına bağımlılığı azaltmak.</div>
+<div><b>HAMLE 2</b>OSB yatırımlarını çeşitlendirmek: likra gibi büyük yatırımların yanına yerel KOBİ’leri ve ihracat pazarı çeşitliliğini eklemek.</div>
+<div><b>HAMLE 3</b>Ölçülebilir turizm kurmak: önce ziyaretçi ve geceleme verisini toplamak, sonra rota ve konaklama planlamak.</div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. Ham tarım ya da sanayi ağırlığının hangisinin daha iyi bir kalkınma yolu olduğu tartışmalıdır; burada hiçbiri tercih edilmedi.</li></ul></div></section>
+
+<section id="tartisma"><h2>Tartışma Köşesi</h2>
+<div class="card"><ul>
+<li>Patates rekolte rekoru kırarken çiftçi fiyattan şikâyetçiyse, “daha çok üret” stratejisi doğru mu?</li>
+<li>Niğde’nin patatesi ve elması başka illerde mi işleniyor, yoksa ilde mi? Katma değer nerede kalıyor?</li>
+<li>240 milyon $’lık yatırım yaklaşık 600 kişiye iş veriyorsa, sermaye yoğun sanayi il için ne kadar iyi?</li>
+<li>İhracatta tek ülkeye 11 kat sıçrama bir fırsat mı yoksa bir risk mi?</li></ul>
+<a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div></section>
+
+<section id="kaynak"><h2>Kaynaklar ve Veri Notu</h2>
+<ul class="src">
+<li>Gelir ve nüfus: TÜİK il bazında GSYH 2024 ve ADNKS 2025 (Rudaw aktarımları; il tabloları)</li>
+<li>İhracat: Ticaret Bakanı Bolat’ın Niğde konuşması (Ticaret Bakanlığı, DHA); AA/Habertürk Yerel, TİM verileri (08.07.2026)</li>
+<li>Tarım: Tarım ve Orman Bakanlığı Niğde Tarımsal Yatırım Rehberi (2025); TEPGE Patates Ürün Raporu 2025; AA (2024 rekolte beklentisi); DHA ve Niğde Haber (Vali Akmeşe, Ekim 2026); Hamle Gazetesi (2026 rekoltesi)</li>
+<li>Sanayi: Sanayi Gazetesi (Niğde OSB, Ekonomist (likra fabrikası), Habertürk Yerel (240 milyon $ protokol); TBMM genel kurul konuşması (2019)</li>
+<li>İşgücü: iz.sk TR71 bölge göstergesi (2024), TÜİK işgücü haberleri</li>
+<li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168: Amasya dosyasıyla aynı kaynaklar</li></ul>
+<p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Niğde’ye özgü 2025 yıllık TİM ihracatı, ithalatın güncel rakamı, ürün-ülke kırılımı, güncel işsizlik, turizm, hayvancılık, OSB doluluğu, ilçe nüfusları, 2025 net göçü ve il GSYH’sinin TL değeri doğrulanmış kaynakla bulunamadığı için sayfada yok. %72,1 (gelir oranı), %0,48 (nüfus değişimi), %0,43 (nüfus payı), 4,1 milyar $ (toplam ekonomi), yaklaşık %21 (ilk yarı ihracat artışı), %38 (otomotiv), %14 (İran payı), %10 (elma düşüşü), diğer illerin nüfus değişim yüzdeleri ve grafiklerdeki “diğer” çubuğu kendi hesabımdır. Tarih belirtilmeyen beyanlar (yetkili, OSB başkanı, çiftçi) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p></section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+{c:'good',chip:'MOTOR: TARIM',ad:'Patates',big:'915.734 ton',alt:'2024 üretimi, ~265 bin dekar; Türkiye payı %13,3 (TÜİK, Tarım ve Orman Bakanlığı)',y:'2024’te Türkiye 1.’si; 2025’te 884 bin ton+ (2.), 2026 beklentisi 1,18 milyon ton (Vali).',n:'Yüksek rekolteye rağmen fiyat şikâyeti; 2026 değeri iki kaynakta farklı (1,18 mn / 1,07 mn ton).'},
+{c:'good',chip:'MOTOR: MEYVE',ad:'Elma, kiraz, nektarin',big:'619.371 ton',alt:'2024 elma üretimi, ~247 bin dekar (yatırım rehberi)',y:'Elmada rehberde 1.; kirazda 43.136 ton ile 6., nektarinde 8.; kuru fasulyede 2.',n:'Sıra kaynaklara göre değişiyor (Isparta’dan sonra 2.); 2026 elma rekoltesi 555 bin ton, 2024’ün yaklaşık %10 altı.'},
+{c:'good',chip:'MOTOR: SANAYİ',ad:'Niğde OSB',big:'~6.100',alt:'OSB çalışan sayısı; 705 hektar, 137 parsel (OSB Başkanı)',y:'1994’te 70 kişiydi; ~240 mn $’lık likra fabrikası üretime başladı (600 kişi, 180 mn $/yıl ihracat hedefi).',n:'Güncel doluluk ve ilin toplam sanayi istihdamı bulunamadı; hedefler beklenti.'},
+{c:'warn',chip:'KIRILGAN: DAR',ad:'İhracat',big:'277 mn $',alt:'2025, faaliyet esaslı, +%6,2 (Bakan Bolat); TİM: 2026 ilk yarı 55,8 mn $',y:'İlk yarıda kimya +%40, otomotiv yaklaşık +%38; İran’a yaklaşık 11 kat.',n:'İki ölçü birbirine oranlanamıyor; tek ülkedeki sıçrama (İran ~%14) kalıcı mı belli değil.'},
+{c:'warn',chip:'ORTA: GELİR',ad:'Gelir',big:'43 / 81',alt:'Kişi başına GSYH sırası (2024; ~11.052 $)',y:'Türkiye ortalamasının yaklaşık %72’si; Adana, Sivas, Kırşehir ve Amasya’nın önünde.',n:'Karaman, Mersin, Aksaray, Kayseri ve Konya’nın gerisinde; sektörel katma değer payı bulunamadı.'},
+{c:'good',chip:'GÜÇLÜ: NÜFUS',ad:'Nüfus',big:'374.492',alt:'ADNKS 2025; 2024: 372.708 (+1.784, +%0,48; kendi hesabım)',y:'Türkiye’de 33 ilin nüfusu azalırken artıyor.',n:'Artış çok yavaş; doğum mu göç mü kaynaklı olduğu ve 2025 net göçü bulunamadı.'},
+{c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İstihdam',big:'%8,5',alt:'TR71 bölgesi 2024 işsizliği (Niğde’ye özgü değil; Türkiye’de 2025 yıllık %8,3)',y:'Bölge oranı Türkiye ortalamasına yakın.',n:'Niğde’ye özgü işsizlik, katılma ve sektörel istihdam bulunamadı.'},
+{c:'sleep',chip:'UYUYAN: İŞLEME',ad:'Patates ve meyve işleme',big:'Veri yok',alt:'Rehber işlenmiş patates talebinin arttığını söylüyor; tesis kapasitesi bulunamadı',y:'Ham madde ilde var; yerli tohum çalışmaları (60 ton hibe tohum) sürüyor.',n:'İşleme kapasitesi ve katma değer verisi yok; ham ürünün ilde mi işlendiği bilinmiyor.'},
+{c:'sleep',chip:'UYUYAN: TURİZM',ad:'Doğa ve kültür turizmi',big:'Veri yok',alt:'Güvenilir turist ve geceleme verisi bulunamadı',y:'Doğa ve tarihî unsurlar var (genel bilgi, doğrulanmadı).',n:'Sektör ölçülemediği için il ekonomisindeki yeri bilinmiyor.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve orta'],['sleep','Uyuyanlar']];
+function karne(f){
+var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+$('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Farklı ölçüler, birbirine eşdeğer değil (milyon $)',[['2025, TÜİK faaliyet esaslı (Bakan)',277],['2026 ilk yarı, TİM',55.8],['2025 ilk yarı, TİM (yaklaşık)',46]],[0],'Faaliyet esaslı ile firma merkezi esaslı rakamlar aynı ölçü değildir; ilk yarı verisi yıllığa çevrilmedi. Kaynak: Ticaret Bakanlığı (Bolat, Niğde); AA/Habertürk Yerel (TİM, 08.07.2026).'],
+['2026 ilk yarı, sektörler (milyon $)',[['Kimyevi maddeler',18.7],['Otomotiv',10.5],['Diğer (kendi hesabım)',26.6]],[0],'Toplam 55,77 milyon $. Kimya geçen yıl 13,3, otomotiv 7,6 milyon $ idi. TİM, firma merkezi esaslı. Kaynak: AA/Habertürk Yerel (08.07.2026).'],
+['2026 ilk yarı, seçili ülkeler (milyon $)',[['İran',7.7],['Irak',3.4],['Bulgaristan',3.0],['Cezayir',2.7]],[0],'İran’a ihracat geçen yılın yaklaşık 11 katı. Yalnızca dört ülke listelendi; kalan pazarlar bulunamadı. Kaynak: AA/Habertürk Yerel (08.07.2026).']];
+mk('ih',IH,['Ölçüler','Sektör','Ülke']);
+var SA=[['Niğde OSB çalışan sayısı (kişi)',[['1994',70],['2019 (91 firma, doğrudan)',3200],['Son haber (tarihsiz)',6100]],[2],'Üç değer farklı kaynaklardan ve aynı seriye ait değil. 2019 yalnızca doğrudan istihdam (dolaylı yaklaşık 5.000 daha). Kaynak: Sanayi Gazetesi (OSB Başkanı); TBMM genel kurul konuşması (26.06.2019).']];
+mk('sa',SA,['OSB istihdamı']);
+var TA=[['Patates üretimi (bin ton)',[['2023',757.5],['2024',915.7],['2025 (884 bin ton üzeri)',884],['2026 beklentisi (Vali)',1178]],[3],'2025 ve 2026 değerleri Vali açıklamasıdır; 2026 beklentidir. Yerel bir haberde kayıtlı 2026 değeri 1.067 bin ton. Kaynak: TEPGE Patates Raporu 2025; DHA (Ekim 2026).'],
+['2024 ürünler (bin ton)',[['Patates',915.7],['Elma',619.4],['Kuru fasulye',46.0],['Kiraz',43.1],['Nektarin',3.8]],[0,1],'TÜİK 2024: patates 1., kuru fasulye 2., kiraz 6., nektarin 8.; elmada rehber 1. diyor, bir yetkili Isparta’dan sonra 2. demişti. Kaynak: Tarım ve Orman Bakanlığı Niğde Yatırım Rehberi (2025).'],
+['2026 rekoltesi, haber (bin ton)',[['Patates',1067.3],['Elma',555.5],['Lahana',148.1],['Kuru fasulye',41.5]],[1],'Dört ürün toplamı 1,812 milyon ton; elma 2024’ün yaklaşık %10 altı (kendi hesabım). Çiftçi fiyatlardan şikâyetçi. Kaynak: Hamle Gazetesi (Ekim 2026).']];
+mk('ta',TA,['Patates','2024','2026']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Karaman',14374],['Mersin',13549],['Aksaray',12319],['Kayseri',12296],['Konya',11845],['Nevşehir',11126],['Niğde',11052],['Adana',10692]],[6],'Niğde 81 il arasında 43.; Türkiye ortalaması 15.325 $, oran yaklaşık %72,1 (kendi hesabım). Sıralar: Karaman 17, Mersin 21, Aksaray 27, Kayseri 28, Konya 34, Nevşehir 41, Niğde 43, Adana 46. Kaynak: TÜİK (Rudaw aktarımı).'],
+['Nüfus, 2025 (bin kişi)',[['Konya',2343.4],['Adana',2283.6],['Mersin',1956.4],['Kayseri',1459.0],['Aksaray',441.1],['Niğde',374.5],['Nevşehir',320.2],['Karaman',262.4]],[5],'Niğde 2024’te 372.708 idi. Kaynak: TÜİK ADNKS 2025 (Rudaw aktarımı).'],
+['Nüfus artışı, 2024–2025 (%)',[['Nevşehir',0.69],['Konya',0.57],['Niğde',0.48],['Kayseri',0.45],['Aksaray',0.38],['Adana',0.14],['Mersin',0.11]],[2],'Değerler kendi hesabımdır (ADNKS 2024–2025). Karaman bu listede yok çünkü nüfusu azaldı (yaklaşık −%0,17). Kaynak: Rudaw aktarımı.']];
+mk('gt',GT,['Gelir','Nüfus','Artış']);
+</script>
+</body>
+</html>
