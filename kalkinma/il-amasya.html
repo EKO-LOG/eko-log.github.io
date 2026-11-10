@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amasya | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Amasya'e özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#9f1239;--a2:#65a30d;--a3:#0e7490"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Amasya</span><h1>Amasya: Elma Şehri, Patates Ovası, Zor Yıl</h1><p>342 bin nüfuslu Amasya; tarım (elma, patates, soğan, şeker pancarı, kiraz), gıda-giyim ağırlıklı küçük bir imalat tabanı ve tarihî doku turizmiyle ayakta. Kişi başına GSYH yaklaşık 10.552 $ ile 81 il arasında 50.; Türkiye ortalamasının yaklaşık %69’u. 2025 yıllık ihracatını bulamadım, yalnızca Ağustos 2025 verisi var (22,3 milyon $, +%38,1). Veri bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+    <div class="k"><b>10.552 $</b><span>Kişi başına GSYH (2024), 81 il arasında 50.; Türkiye ort. 15.325 $’ın yaklaşık %69’u (oran kendi hesabım)</span></div>
+    <div class="k"><b>342.242</b><span>Nüfus (ADNKS 2025), bir yılda −136 (2024: 342.378)</span></div>
+    <div class="k"><b>22,3 mn $</b><span>Ağustos 2025 ihracatı, +%38,1 (TÜİK Samsun Bölge Müdürlüğü, İHA aktarımı, 01.10.2025); yıllık toplam bulunamadı</span></div>
+    <div class="k"><b>~130 bin ton</b><span>2026 patates rekolte beklentisi (yaklaşık 28.000 dekar; Gazete, 15.07.2026)</span></div>
+    <div class="k"><b>3.871</b><span>2024 İŞKUR işe yerleştirme (%58,9’u kadın, kendi hesabım); kayıtlı işsiz 11.278</span></div>
+    <div class="k"><b>119.102</b><span>2025 ilk yarı turistik konaklayan (yabancı 4.636); basın aktarımı</span></div>
+  </div>
+  <div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+  <section id="karne">
+    <h2>Sektör Karnesi</h2>
+    <p class="sub">10 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir. Filtreyle iyi ve kötü tarafları ayırabilirsin.</p>
+    <div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+    <div class="tabs" id="kf"></div>
+    <div class="kg" id="kg"></div>
+    <div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+      <li>Karnedeki sayılar farklı yıllara ve kaynaklara ait (TÜİK aktarımları, İŞKUR 2024 raporu, eski OKA raporları, yerel basın). Aynı tabloda yan yana okunmaları kesin bir karşılaştırma değildir.</li>
+      <li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi üretim, istihdam ve beklenti verilerine dayanıyor, katma değer ölçümüne değil.</li>
+      <li>Amasya 2025 yıllık ihracatı, güncel işsizlik oranı, OSB doluluğu, güncel hayvan sayısı ve ilçe nüfuslarını bulamadım; ilgili bölümlerde ayrıca yazdım.</li></ul></div>
+  </section>
+
+  <section id="ihracat">
+    <h2>İhracat: Küçük, Ama Hareketli</h2>
+    <p class="sub">Amasya’nın gümrük idaresi yok; bu yüzden ihracat rakamları kayıt esasına göre çok değişiyor. Elimde yalnızca tek bir güncel ay var.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Ağustos 2025’te Amasya ihracatı 22,3 milyon $ ile yıllık %38,1 arttı ve ülke sıralamasında 46. oldu (TÜİK Samsun Bölge Müdürlüğü, İHA aktarımı, 01.10.2025).</li>
+        <li>%38,1 artıştan geriye gidince Ağustos 2024 yaklaşık 16,1 milyon $ çıkıyor (kendi hesabım).</li>
+        <li>Eski OKA verisinde 2013 için 73,7 milyon $ yazıyor; aynı raporda 2011 saha anketine dayanan 200,5 milyon $ da var, çünkü Amasya’da gümrük idaresi olmadığı için kayıtlar başka illerde tutuluyor.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ağustos 2025’te çift haneli artış (+%38,1) var.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Tek bir ayın artışı yıllık eğilim hakkında bir şey söylemez; yıllık toplam, ülke ve ürün kırılımı elimde yok.</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>2025 yıllık ihracatını, ithalatı ve ürün-ülke dağılımını bulamadım. Ağustos değerini 12 ile çarpıp yıla taşımadım; mevsimsel dalgalanma bunu yanıltıcı kılar.</li>
+      <li>2011, 2013 ve 2025 değerleri farklı seriler (saha anketi, eski kayıt, TÜİK aylık). Birleştirmedim; “eski seriler” sekmesi yalnızca serilerin ne kadar farklı olduğunu göstermek için.</li>
+      <li>İhracatın faaliyet esaslı mı, işyeri merkezi esaslı mı olduğunu kaynak belirtmiyor; diğer il dosyalarındaki rakamlarla da kıyaslamadım.</li></ul></div>
+  </section>
+
+  <section id="sanayi">
+    <h2>Sanayi: Gıda, Giyim ve Elektrikli Teçhizat</h2>
+    <p class="sub">Küçük firmalardan oluşan bir imalat tabanı; Merzifon ve Suluova’da OSB’ler var.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>İŞKUR 2024 raporuna göre (SSBS) 820 imalat firmasında 15.770 kişi çalışıyor; firma başına yaklaşık 19 kişi (kendi hesabım). En büyük alt sektörler gıda (4.279), giyim (2.798) ve elektrikli teçhizat (2.310); üçü birlikte imalat istihdamının yaklaşık %59,5’i (kendi hesabım).</li>
+        <li>2024’te 3.871 işe yerleştirmenin 1.141’i imalatta (%29,5), 856’sı sağlıkta (%22,1) ve 815’i tarımda (%21,1; kendi hesabım).</li>
+        <li>Faal dört OSB var: Amasya, Merzifon ve iki Suluova OSB’si (karma ve besi); Taşova Karma OSB 17.07.2023’te onaylandı.</li>
+        <li>2012–2023 teşvik belgelerinde 128 belge, yaklaşık 1,34 milyar TL yatırım ve 3.680 öngörülen istihdam var (İŞKUR).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İmalat yerleştirmelerde ilk sırada ve imalat tabanı gıda, giyim, elektrikli teçhizat arasında dağılmış; tek bir sektöre bağımlı değil (yorum).</li><li>Dört faal OSB ve onaylı bir beşinci OSB altyapı sağlıyor.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Firma başına 19 kişi küçük ölçeğe işaret ediyor; büyük bir ihracatçı çıpa firma görünmüyor (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İŞKUR raporu kendi içinde tutarsız (tablolar aynı yıl için farklı toplamlar veriyor, bazı bölümler eski yıl verisiyle etiketlenmiş). Bu yüzden yalnızca imalat yerleştirmesini, SSBS imalat sayılarını ve teşvik toplamlarını kullandım. Teşvik belgeleri yatırım niyetidir, gerçekleşme değil.</li>
+      <li>Güncel OSB doluluğu, OSB’lerdeki firma ve işçi sayısı ile ildeki sanayi üretim değeri bulunamadı. Eski OKA yatırım rehberindeki (2013 dönemi) sanayi tanımlarını güncel kabul etmedim.</li>
+      <li>Şeker fabrikası (Suluova) ile maden ve mermer yataklarının güncel üretim verisi yok; bu konuda yalnızca eski OKA anlatımına dayanıyorum.</li></ul></div>
+  </section>
+
+  <section id="tarim">
+    <h2>Tarım: Elma, Patates, Soğan, Pancar</h2>
+    <p class="sub">İlin en görünür ekonomisi tarım; ama güncel tonaj verisi sınırlı ve 2025 donu elmayı vurdu.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Patates: yaklaşık 28.000 dekar alanda yaklaşık 130.000 ton rekolte bekleniyor; bu dekara yaklaşık 4,6 ton eder (kendi hesabım). Üretimin %55’i sanayiye gidiyor; fiyat kilo başına 14 TL (Gazete, 15.07.2026). 14 TL ile 130 bin ton yaklaşık 1,8 milyar TL eder (kendi hesabım, ortalama fiyat varsayımıyla).</li>
+        <li>Elma: 2021’de tüm çeşitlerde 35.000 tonun üzerinde, misket elmada 12.000 tonun üzerinde üretim aktarılmış. Nisan 2025 dondan sonra bir üretici, geçen yıl 25.000 tonun üzerinde olan üretimin yaklaşık 2.000 tona düşeceğini söylemiş (Tridge, 07.10.2025); doğrulanmamış.</li>
+        <li>Eski OKA verisinde (yıl belirtilmemiş) buğday 636.223 ton, kuru soğan 402.292 ton (Türkiye üretiminin %16,4’ü), şeker pancarı 390.345 ton ve kiraz 33.886 ton (%7,7).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Patatesin yarısından fazlası sanayiye gidiyor; yani bir işleme pazarı var.</li><li>Soğan ve kirazda eski veriye göre ulusal payı yüksek ürünler var.</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ağır don elmayı vurdu (hasarın boyutu doğrulanmadı). Elma, ilin simge ürünü olduğu için hem gelir hem imaj kaybı demek (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Soğan, pancar, buğday ve kiraz verisi yılı belirtilmeyen eski bir OKA belgesinden; bunları güncel üretim olarak okuma. Aynı belgenin hayvancılık tablosu tutarsız olduğu için kullanmadım.</li>
+      <li>Elma tonajı için tek kaynak bir üretici beyanı ve tutarsız görünen bir sayfa; 2.000 ton rakamını doğrulanmış sayma. Resmî 2025 elma rekoltesi ve don zararı tazminatını bulamadım.</li>
+      <li>Patatesin “130 bin ton” değeri bir beklenti, gerçekleşme değil. Güncel hayvan sayısı ve tarımın il GSYH ve istihdam payı bulunamadı.</li></ul></div>
+  </section>
+
+  <section id="turizm">
+    <h2>Turizm: Tarihî Doku, Düşük Doluluk</h2>
+    <p class="sub">Müze ziyaretçisi yüksek, gecelemeli konaklama düşük ve yabancı payı küçük.</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>2024’ün ilk 9 ayında 406.817 müze ziyaretçisi ve 279.077 konaklayan oldu; konaklayanların 16.212’si yabancı (yaklaşık %5,8, kendi hesabım).</li>
+        <li>2025’in ilk yarısında 119.102 konaklayan, bunun 4.636’sı yabancı (yaklaşık %3,9, kendi hesabım); yabancı sayısında yaklaşık %11 artış bildirilmiş.</li>
+        <li>Bölge genelinde doluluk %40–50, şehir merkezinde yaklaşık %30 aktarılmış; vali 1 milyon turist hedefi koymuş.</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yabancı ziyaretçi küçük bir tabandan da olsa artıyor (+%11, 2025 ilk yarı).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Merkezde doluluk yaklaşık %30; müze ziyaretçisi ile konaklayan arasındaki fark, ziyaretçinin çoğunun günübirlik olduğunu düşündürüyor (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>Bir yerde 2024 gecelemesi için “600 bine yakın” ifadesi geçiyor; bu, aynı yılın ilk 9 ayındaki 279.077 ile uzlaşmıyor. Rakamı kullanmadım.</li>
+      <li>Doluluk oranları ve 1 milyon turist hedefi yetkili beyanıdır, doğrulanmamıştır. 2024 (9 ay) ile 2025 (6 ay) farklı dönemler olduğu için birbirine oranlamadım.</li>
+      <li>Turizm gelirini, yatak kapasitesini ve istihdamını bulamadım.</li></ul></div>
+  </section>
+
+  <section id="gelir">
+    <h2>Gelir, İşgücü ve Nüfus</h2>
+    <p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar), ADNKS 2025 ve İŞKUR 2024 raporu</p>
+    <div class="g2">
+      <div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+      <div class="card"><h3>Okuma notu</h3><ul>
+        <li>Amasya 2024’te kişi başına yaklaşık 10.552 $ ile 81 il arasında 50.; komşu ve benzer illerden Kırıkkale 22., Çankırı 23., Kastamonu 30., Samsun 39., Sivas 45., Çorum 55., Yozgat 65. ve Tokat 71. Oran Türkiye ortalamasının (15.325 $) yaklaşık %69’u (kendi hesabım). TL karşılığını bulamadım.</li>
+        <li>Toplam ekonomi: 10.552 $ ile 342.242 kişi çarpımından yaklaşık 3,6 milyar $; nüfus payı yaklaşık %0,40 (86.092.168 Türkiye nüfusuna göre; kendi hesabım).</li>
+        <li>Nüfus 2024’te 342.378, 2025’te 342.242 (−136, −%0,04; kendi hesabım): hemen hemen durağan.</li>
+        <li>2023’te net göç +4.261 (19.307 gelen, 15.046 giden). 2025 net göçünü bulamadım.</li>
+        <li>İŞKUR 2024: 11.278 kayıtlı işsiz (6.752’si kadın, %59,9), 7.787 açık iş; açık iş sayısı kayıtlı işsizin yaklaşık %69’u (kendi hesabım).</li></ul></div>
+    </div>
+    <div class="pcg">
+      <div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Çorum, Yozgat ve Tokat’ın üzerinde; nüfus kaybı neredeyse durmuş görünüyor.</li><li>2023’te net göç pozitif (+4.261).</li></ul></div>
+      <div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Kırıkkale, Çankırı, Kastamonu, Samsun ve Sivas’ın gerisinde; Türkiye ortalamasının yaklaşık üçte biri eksik.</li><li>Kayıtlı işsizlerin yaklaşık %60’ı kadın; kadın istihdamı tarafı zayıf görünüyor (yorum).</li></ul></div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul>
+      <li>İŞKUR raporundaki TÜİK göstergeleri (katılma %52,1, istihdam %47,4, işsizlik %8,9) 2023 tablosundan; il mi bölge (TR83) mi olduğunu kaynakta doğrulayamadım ve bu bir il oranı olmayabilir. Güncel Amasya işsizlik oranını bulamadım.</li>
+      <li>GSYH sıraları ve dolar değerleri rudaw aktarımından; Amasya için TL değerini ve dolar kurunu doğrulayamadım. Sektörel GSYH payları yok.</li>
+      <li>2023 net göç ile 2024–2025 nüfus durağanlığı farklı yıllara ait; birini diğerinin devamı gibi okumadım. İŞKUR raporu kendi içinde tutarsız olduğu için yalnızca işsiz, açık iş ve yerleştirme toplamlarını aldım.</li></ul></div>
+  </section>
+
+  <section id="ilceler">
+    <h2>İlçe Kırılımı</h2>
+    <p class="sub">Yedi ilçe; güncel ilçe nüfuslarını bulamadığım için tablo yalnızca bulduğum ekonomik ipuçlarını içeriyor.</p>
+    <div class="card tw"><table>
+      <tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+      <tr><td>Merkez</td><td>Bulunamadı</td><td>İl merkezi; Amasya OSB; tarihî doku ve turizm</td></tr>
+      <tr><td>Merzifon</td><td>Bulunamadı</td><td>Merzifon OSB (faal)</td></tr>
+      <tr><td>Suluova</td><td>Bulunamadı</td><td>Suluova Karma ve Suluova Besi OSB (faal); eski OKA anlatımında şeker fabrikası</td></tr>
+      <tr><td>Taşova</td><td>Bulunamadı</td><td>Taşova Karma OSB onaylandı (17.07.2023); faal olduğu doğrulanmadı</td></tr>
+      <tr><td>Gümüşhacıköy</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Göynücek</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+      <tr><td>Hamamözü</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+    </table>
+    <p class="note" style="margin:10px 0 0">İl toplamı 342.242 (ADNKS 2025). İlçe nüfuslarını, ilçe bazında GSYH, tarım, ihracat ve istihdam verilerini doğrulanmış kaynakla bulamadım; arama sonuçlarında yalnızca başlıklar ya da eski ve tutarsız değerler çıktı, bunları kullanmadım. Sütundaki ipuçları İŞKUR 2024 raporu ve eski OKA anlatımından alınmıştır.</p></div>
+  </section>
+
+  <section id="sonuc">
+    <h2>Sonuç: Karne Özeti</h2>
+    <p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+    <div class="verdict"><h3>Üç cümlede Amasya</h3>
+      <p style="margin:0">Amasya’nın ekonomisi tarıma (patates, soğan, pancar, kiraz ve elma) ve gıda-giyim-elektrikli teçhizat ağırlıklı küçük bir imalat tabanına yaslanıyor; kişi başına gelir yaklaşık 10.552 $ ile Türkiye ortalamasının yaklaşık %69’u. Güçlü tarafı çeşitlilik ve OSB altyapısı, zayıf tarafı iklim şoklarına açık tarım (2025 donu), küçük ölçekli firmalar ve düşük turizm doluluğu. Nüfus durağan; yani il ne hızla büyüyor ne de belirgin biçimde küçülüyor (yorum).</p></div>
+    <div class="three">
+      <div><b>HAMLE 1</b>Elmayı sigortalamak ve işlemek: don riskine karşı sigorta, soğuk hava deposu ve işleme tesisi ölçeğini artırmak.</div>
+      <div><b>HAMLE 2</b>Tarıma dayalı sanayiyi büyütmek: patates, soğan ve kirazı OSB’lerde işleyerek katma değeri ilde tutmak.</div>
+      <div><b>HAMLE 3</b>Turizmi gecelemeye çevirmek: müzeye gelen günübirlikçiyi konaklayana dönüştürmek.</div>
+    </div>
+    <div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; hiçbirinin maliyetini ya da getirisini hesaplayan veri bulamadım. Tarıma yaslanmanın risk mi, kimlik mi olduğu tartışmalıdır; burada hiçbir görüş tercih edilmedi.</li></ul></div>
+  </section>
+
+  <section id="tartisma">
+    <h2>Tartışma Köşesi</h2>
+    <div class="card"><ul>
+      <li>Simge ürün elma bir don yüzünden bu kadar kırılganken, il ekonomisi tek ürünün imajına ne kadar yaslanmalı?</li>
+      <li>Patatesin yarısından fazlası sanayiye gidiyorsa, işleme katma değeri ildeki firmalarda mı kalıyor yoksa başka illerde mi?</li>
+      <li>Müze ziyaretçisi 400 bini aşarken gecelemeli konaklama bunun yaklaşık yarısı ve doluluk %30’da: turist şehirde neden kalmıyor?</li>
+      <li>Gümrük idaresi olmayan bir ilde ihracat gerçek hacmiyle nasıl ölçülmeli?</li></ul>
+      <a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div>
+  </section>
+
+  <section id="kaynak">
+    <h2>Kaynaklar ve Veri Notu</h2>
+    <ul class="src">
+      <li>TÜİK il bazında GSYH 2024 ve ADNKS 2024–2025 (rudaw aktarımı; il ve karşılaştırma illeri)</li>
+      <li>İŞKUR Amasya 2024 Faaliyet Raporu (yerleştirme, kayıtlı işsiz, açık iş, SSBS, OSB, teşvik, göç)</li>
+      <li>İhracat: TÜİK Samsun Bölge Müdürlüğü, İHA aktarımı (01.10.2025); eski OKA raporları (2011–2013)</li>
+      <li>Tarım: Gazete (patates, 15.07.2026); Tridge (elma, 07.10.2025); eski OKA tarım ve yatırım raporları (yıl belirtilmemiş)</li>
+      <li>Turizm: yerel basın ve valilik aktarımları (Ağustos 2024 ve 2025 haberleri; kaynak sayfa adları kayıt altına alınmadı)</li>
+      <li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168 (Muş ve Karabük dosyalarıyla aynı kaynaklar)</li>
+    </ul>
+    <p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Amasya’ya özgü 2025 yıllık ihracat ve ithalat, ihracatın kırılımı, güncel işsizlik oranı, 2025 net göç, 2025 ilçe nüfusları, güncel hayvan sayısı ve elma tonajı, il GSYH’sinin TL değeri, güncel OSB doluluğu, turizm geliri ve yatak kapasitesi doğrulanmış kaynakla bulunamadığı için sayfada yok. %69 (gelir oranı), 3,6 milyar $ (toplam ekonomi), %0,40 (nüfus payı), −%0,04 (nüfus değişimi), 16,1 milyon $ (Ağustos 2024), 19 kişi/firma, %59,5 (üç alt sektör payı), %29,5, %22,1, %21,1 ve %58,9 (yerleştirme payları), %59,9 (kadın işsiz payı), %69 (açık iş/işsiz), 4,6 ton/dekar, 1,8 milyar TL (patates değeri), 71,5 bin ton (sanayiye giden patates), %5,8 ve %3,9 (yabancı payları) kendi hesabımdır. Tarih belirtilmeyen beyanlar (üretici, vali, otel dernekleri, haber metinleri) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p>
+  </section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+ {c:'good',chip:'MOTOR: TARIM',ad:'Patates, soğan, pancar, kiraz',big:'~130 bin ton',alt:'2026 patates rekolte beklentisi, ~28.000 dekar; %55’i sanayiye (Gazete, 15.07.2026)',y:'Patateste işleme pazarı var; eski OKA verisine göre soğanda Türkiye üretiminin %16,4’ü, kirazda %7,7’si.',n:'Soğan, pancar ve kiraz verisi yılı belirsiz eski bir belgeden; patates değeri bir beklenti.'},
+ {c:'bad',chip:'BASKI ALTINDA',ad:'Elma ve misket elma',big:'35 bin ton+',alt:'2021 tüm çeşitler; misket elma 12 bin ton+ (Nisan 2025 dondan önceki aktarım)',y:'Simge ürün; coğrafi kimliği ve ilin tanıtımında öne çıkıyor.',n:'Nisan 2025 donu; bir üretici beyanına göre üretim 25 bin ton+ düzeyinden yaklaşık 2 bin tona inmiş (doğrulanmadı).'},
+ {c:'good',chip:'MOTOR: SANAYİ',ad:'İmalat sanayi',big:'15.770',alt:'İmalatta çalışan, 820 firma; İŞKUR 2024 (SSBS)',y:'Gıda (4.279), giyim (2.798) ve elektrikli teçhizat (2.310) dengeli bir dağılım veriyor; imalat yerleştirmede ilk sırada.',n:'Firma başına yaklaşık 19 kişi: küçük ölçek; üretim değeri ve ihracat payı bulunamadı.'},
+ {c:'good',chip:'MOTOR: ALTYAPI',ad:'Organize sanayi bölgeleri',big:'4 faal OSB',alt:'Amasya, Merzifon, Suluova Karma, Suluova Besi; Taşova Karma onaylı (2023)',y:'Beş OSB (biri onaylı) ilçelere yayılmış; yatırım için hazır alan var.',n:'Güncel doluluk, firma ve işçi sayısı bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: DAR',ad:'Dış ticaret',big:'22,3 mn $',alt:'Ağustos 2025 ihracatı, +%38,1; 46. sıra (TÜİK Samsun BM, İHA)',y:'Ağustos’ta çift haneli artış.',n:'Yıllık toplam, ithalat ve kırılım yok; gümrük idaresi olmadığı için seri tutarlılığı zayıf.'},
+ {c:'sleep',chip:'UYUYAN: TURİZM',ad:'Turizm ve tarihî doku',big:'406.817',alt:'2024 ilk 9 ay müze ziyaretçisi; 279.077 konaklayan (basın aktarımı)',y:'Yabancı konaklama 2025 ilk yarıda yaklaşık +%11; vali hedefi 1 milyon turist.',n:'Şehir merkezinde doluluk yaklaşık %30; yabancı payı yaklaşık %4–6; gelir ve yatak verisi yok.'},
+ {c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İşgücü',big:'11.278',alt:'Kayıtlı işsiz (İŞKUR 2024); %59,9’u kadın; açık iş 7.787',y:'3.871 yerleştirme; açık iş sayısı işsizin yaklaşık %69’u (kendi hesabım).',n:'Güncel işsizlik oranı bulunamadı; 2023 tablosundaki %8,9 il mi bölge mi belirsiz.'},
+ {c:'warn',chip:'KIRILGAN: DURAĞAN',ad:'Nüfus',big:'342.242',alt:'ADNKS 2025; 2024: 342.378 (−136, −%0,04; kendi hesabım)',y:'Kayıp neredeyse sıfır; 2023 net göç +4.261.',n:'2025 net göç ve ilçe nüfusları bulunamadı.'},
+ {c:'warn',chip:'KIRILGAN: ORTA',ad:'Gelir',big:'50 / 81',alt:'Kişi başına GSYH sırası (2024; ~10.552 $)',y:'Türkiye ortalamasının yaklaşık %69’u; Çorum (55.), Yozgat (65.) ve Tokat (71.) önünde.',n:'Kırıkkale, Çankırı, Kastamonu, Samsun ve Sivas’ın gerisinde.'},
+ {c:'sleep',chip:'UYUYAN: MADEN VE ENERJİ',ad:'Kömür, mermer, termal',big:'Veri yok',alt:'Eski OKA yatırım rehberi (2013 dönemi): Çeltek kömürü, Beji mermeri, termal alanlar',y:'Yatırım rehberi bu kaynakları fırsat olarak sayıyor.',n:'Güncel üretim, rezerv ve yatırım verisi bulunamadı; eski anlatım güncel kabul edilmedi.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve dar'],['sleep','Uyuyanlar'],['bad','Baskı altında']];
+function karne(f){
+ var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+ $('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+var IH=[['Ağustos ihracatı (milyon $)',[['Ağustos 2024 (geri hesap)',16.1],['Ağustos 2025',22.3]],[1],'+%38,1; 2024 değeri bu artıştan geriye hesaplandı (kendi hesabım). Yıllık toplam bulunamadı. Kaynak: TÜİK Samsun Bölge Müdürlüğü, İHA aktarımı (01.10.2025).'],
+ ['Eski seriler, birbirine eşdeğer değil (milyon $)',[['2013 (eski OKA)',73.7],['2011 saha anketi (OKA)',200.5]],[],'Amasya’da gümrük idaresi olmadığı için kayıtlar başka illerde tutuluyor; iki değer farklı yöntemlerle ve yıllarla ölçülmüş. Güncel ihracatla karşılaştırılmaz.']];
+mk('ih',IH,['Ağustos 2025','Eski seriler']);
+var SA=[['İŞKUR 2024 işe yerleştirme (kişi)',[['İmalat',1141],['Sağlık',856],['Tarım',815],['Diğer (kendi hesabım)',1059]],[0],'Toplam 3.871; imalat %29,5, sağlık %22,1, tarım %21,1 (kendi hesabım). Kadın yerleştirme 2.279 (%58,9). Rapor kendi içinde tutarsız. Kaynak: İŞKUR Amasya 2024 faaliyet raporu.'],
+ ['İmalat istihdamı alt sektörler (kişi, SSBS)',[['Gıda',4279],['Giyim',2798],['Elektrikli teçhizat',2310],['Diğer (kendi hesabım)',6383]],[0],'Toplam 15.770 çalışan, 820 firma; üç alt sektör %59,5 (kendi hesabım). Kaynak: İŞKUR Amasya 2024 faaliyet raporu.']];
+mk('sa',SA,['Yerleştirme','İmalat istihdamı']);
+var TA=[['Eski OKA tarım verisi, yıl belirsiz (bin ton)',[['Buğday',636.2],['Kuru soğan',402.3],['Şeker pancarı',390.3],['Kiraz',33.9]],[1],'Soğan Türkiye üretiminin %16,4’ü, kiraz %7,7’si. Yılı belirtilmemiş eski belge; güncel kabul edilmemeli. Kaynak: eski OKA tarım raporu.'],
+ ['Patates 2026 beklentisi (bin ton)',[['Beklenen rekolte',130],['Sanayiye giden (%55, kendi hesabım)',71.5]],[0],'Yaklaşık 28.000 dekar; dekara yaklaşık 4,6 ton (kendi hesabım); kilo fiyatı 14 TL. Bir beklentidir, gerçekleşme değil. Kaynak: Gazete (15.07.2026).'],
+ ['Elma üretimi (bin ton)',[['2021, tüm çeşitler (en az)',35],['2024 üretimi, üretici beyanı (en az)',25],['2025 beklentisi, üretici beyanı',2]],[2],'Nisan 2025 donu sonrası tek bir üretici beyanı; tutarsız bir sayfadan, doğrulanmamış. 2021 değeri “35.000 tonun üzerinde” ifadesinden alınmıştır. Kaynak: Tridge (07.10.2025).']];
+mk('ta',TA,['Eski OKA verisi','Patates','Elma']);
+var TU=[['Ocak–Eylül 2024 (kişi)',[['Müze ziyaretçisi',406817],['Konaklayan',279077],['Yabancı konaklayan',16212]],[1],'Yabancı payı yaklaşık %5,8 (kendi hesabım). Kaynak: basın aktarımı (resmî tablo bulunamadı).'],
+ ['Ocak–Haziran 2025 konaklayan (kişi)',[['Toplam',119102],['Yabancı',4636]],[0],'Yabancı payı yaklaşık %3,9 (kendi hesabım); yabancı sayısı yaklaşık +%11 olarak bildirilmiş. 2024 ile aynı dönem değil. Kaynak: basın aktarımı.']];
+mk('tu',TU,['2024 (9 ay)','2025 (6 ay)']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Kırıkkale',13284],['Çankırı',13111],['Kastamonu',12035],['Samsun',11253],['Sivas',10697],['Amasya',10552],['Çorum',10010],['Yozgat',9233],['Tokat',8058]],[5],'Amasya 81 il arasında 50.; Türkiye ortalaması 15.325 $, Amasya’nın oranı yaklaşık %69 (kendi hesabım). Sıralar: Kırıkkale 22, Çankırı 23, Kastamonu 30, Samsun 39, Sivas 45, Çorum 55, Yozgat 65, Tokat 71. Kaynak: TÜİK (rudaw aktarımı).'],
+ ['Nüfus, 2025 (bin kişi)',[['Samsun',1392.4],['Sivas',631.4],['Tokat',614.1],['Çorum',519.6],['Yozgat',413.2],['Kastamonu',379.9],['Amasya',342.2],['Kırıkkale',282.8]],[6],'Amasya 2024’te 342.378 idi (−136). Kaynak: TÜİK ADNKS 2025 (rudaw aktarımı).'],
+ ['Göç, 2023 (kişi)',[['Gelen',19307],['Giden',15046],['Net',4261]],[2],'2023 net göç pozitif (+4.261). 2025 net göçünü bulamadım. Kaynak: İŞKUR Amasya 2024 faaliyet raporu.'],
+ ['İşgücü göstergeleri, 2023 tablosu (%)',[['Katılma oranı',52.1],['İstihdam oranı',47.4],['İşsizlik',8.9]],[2],'İl mi bölge mi olduğu doğrulanamadı; 2023 tablosu, 2024 raporunda yer alıyor. Güncel Amasya işsizlik oranı bulunamadı. Kaynak: İŞKUR Amasya 2024 faaliyet raporu (TÜİK).']];
+mk('gt',GT,['Gelir','Nüfus','Göç 2023','İşgücü']);
+</script>
+</body>
+</html>
