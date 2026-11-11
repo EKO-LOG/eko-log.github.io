@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kırklareli | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- İle özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#0f766e;--a2:#f59e0b;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Kırklareli</span><h1>Kırklareli: Ayçiçeği, OSB, Karadeniz Kıyısı</h1><p>379.595 nüfuslu Kırklareli; Trakya’nın ayçiçeği ve buğday ambarı, Lüleburgaz ve OSB’lerle sanayileşen, Bulgaristan sınırında ve Karadeniz kıyısında bir il. Kişi başına GSYH 16.188 $ ile 81 il arasında 8.; Türkiye ortalamasının yaklaşık %105,6’sı. 2025’te aşırı kuraklık tarımı vurdu; Kırklareli merkezli firmaların ihracatı 2026’nın ilk on ayında %8,9 geride. Bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>16.188 $</b><span>Kişi başına GSYH (2024), 81 il arasında 8.; Türkiye ort. 15.325 $’ın yaklaşık %105,6’sı (oran kendi hesabım)</span></div>
+<div class="k"><b>379.595</b><span>Nüfus (ADNKS 2025); 2024: 379.031 (+564, +%0,15; kendi hesabım)</span></div>
+<div class="k"><b>105 mn $</b><span>Ocak–Ekim 2026 ihracatı, “Kırklareli merkezli firmalar” (KTSO); 2025’in aynı döneminin %8,9 altında</span></div>
+<div class="k"><b>18,1 mn $</b><span>Eylül 2026 il ihracatı (TÜİK genel ticaret sistemi); aynı ay KTSO ölçüsü 10,2 mn $</span></div>
+<div class="k"><b>564 bin</b><span>2025’te konaklayan turist; 2024: 271 bin, 2023: 244 bin (İl Kültür ve Turizm Müdürlüğü)</span></div>
+<div class="k"><b>1.440 ha</b><span>İlin toplam OSB büyüklüğü; yaklaşık 23 yıl önce 400 ha (Bakan Kacır)</span></div>
+</div>
+<div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+<section id="karne"><h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+<li>Sayılar farklı yıllara ve kaynaklara ait (TÜİK, KTSO, bakan ve vali açıklamaları, ziraat odası beyanları, yerel haberler). Yan yana okunmaları kesin karşılaştırma değildir.</li>
+<li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi OSB, ihracat ve üretim izlerine dayanıyor, katma değer ölçümüne değil.</li>
+<li>2025 yıllık ihracat, güncel işsizlik, 2025 ilçe nüfusları ve ürün tonajları bulunamadı; ilgili bölümlerde ayrıca yazdım.</li></ul></div></section>
+
+<section id="ihracat"><h2>İhracat: İki Ölçü, İki Hikâye</h2>
+<p class="sub">KTSO yalnızca “Kırklareli merkezli firmaları”, TÜİK genel ticaret sistemi ise ilden yapılan ihracatı sayıyor; aynı ay için rakamlar iki kattan fazla ayrışabiliyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>KTSO’ya göre 2025’in ilk dokuz ayında ihracat 105,4 milyon $ ile 2024’ün %20,5 altındaydı. 2026’da Ocak–Eylül 90,2 milyon $ (−%14,3), Ocak–Ekim 105,0 milyon $ (−%8,9); Ekim ayı 14,8 milyon $ ile yıllık %47,2 arttı.</li>
+<li>TÜİK ölçüsünde Temmuz 2025’te il ihracatı 28,0, Eylül 2026’da 18,1 milyon $; KTSO’nun aynı Temmuz için verdiği 11,8 milyon $’ın iki katından fazla.</li>
+<li>İhracat ithalatın üstünde: Temmuz 2025’te ithalat 9,4 milyon $ idi. Öne çıkan ürünler hububat, bakliyat ve yağlı tohumlar, tekstil, çimento-cam-seramik, çelik ve makine; Ekim 2026’da kimyevi maddeler başa geçti.</li>
+<li>Pazarlar: Bulgaristan, İtalya, ABD, Almanya, Gana ve Çorlu Avrupa Serbest Bölgesi sık anılıyor; Ekim 2026’da Tanzanya zirvede.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ekim 2026’da KTSO ölçüsünde ihracat yıllık %47,2 arttı; kayıp Ocak–Eylül’deki %14,3’ten Ocak–Ekim’de %8,9’a indi.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Ölçek küçük: Eylül 2026’da Trakya’nın 343,9 milyon $’lık ihracatında Kırklareli’nin payı 18,1 milyon $ (Tekirdağ 314,7 milyon $); 2025’te kayıp %20’yi aştı.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>2025 yıllık ihracatı ve ürün–ülke kırılımını bulamadım. KTSO’nun “merkezli firma” ölçüsü ile TÜİK’in il ölçüsü ve serbest bölge çıkışları aynı şey değil; kıyaslarken ikisini ayrı okudum.</li>
+<li>Ocak–Ekim 2025’in 115,3 milyon $ olması KTSO’nun %8,9 yüzdesinden türetildi (kendi hesabım); resmî rakamla küçük sapma olabilir. KTSO OSB için “yıllık 400 milyon $ ihracat kapasitesi” hedefliyor; bu, gerçekleşen değil hedef.</li></ul></div></section>
+
+<section id="sanayi"><h2>Sanayi: Lüleburgaz ve Üç OSB</h2>
+<p class="sub">Tekstil, çelik, makine, çimento (Pınarhisar), gıda ve yem sanayisi tarım üretimiyle iç içe.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Bakan Kacır’a göre son 23 yılda ilde 2 yeni OSB kuruldu, toplam büyüklük 400’den 1.440 hektara çıktı ve OSB’lerde 15.700 ek istihdam doğdu.</li>
+<li>Kırklareli OSB yönetimine göre OSB’de 87 ruhsatlı fabrika var, yaklaşık 5.000–5.500 kişi çalışıyor; hedef 13 bin kişi ve yıllık 400 milyon $ ihracat. Trakya’nın firma sayısına göre ikinci büyük OSB’si olduğu söyleniyor.</li>
+<li>Bir vali açıklamasında OSB alanları: Kırklareli 505, Büyükkarıştıran 596, Evrensekiz 212 ve bir özel OSB 65 hektar (toplam 1.378 hektar; tarihsiz).</li>
+<li>Halkalı–Kapıkule çift hatlı, saatte 200 km’ye uygun hızlı demiryolu Babaeski, Lüleburgaz ve Büyükkarıştıran’dan geçiyor; çalışmalar sürüyor (Bakan Kacır). Yerel kalkınma programıyla maya tesisi ve jeotermal sera destekleniyor.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Trakya’nın sanayi hattında, İstanbul’a yakın; OSB alanı 3,6 kat büyüdü ve ulaşım yatırımı sürüyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Fabrika sayısı hedefin gerisinde; 2025’te Lüleburgaz’da işten çıkarma haberleri vardı (CHP ekonomi heyeti aktarımı, doğrulanmadı).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>OSB istihdam ve fabrika sayıları kurum ve yönetici beyanıdır; tarihleri tam belli değil. İlin sanayi üretim değeri, sektörel istihdamı ve en büyük firmaları doğrulanmış tabloyla bulunamadı.</li>
+<li>İki bakan–vali alıntısındaki hektarlar (1.440 ve 1.378) farklı tarihlere ait.</li></ul></div></section>
+
+<section id="tarim"><h2>Tarım: Ayçiçeği, Buğday, Kuraklık</h2>
+<p class="sub">Kırklareli Türkiye’nin ayçiçeği üretiminde ilk dört il arasında (2024); iklim yıldan yıla ürünü belirliyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>2025’te Kırklareli Ziraat Odası’na göre ayçiçeğinde dekar başına verim 80–100 kg’dan 40–50 kg’a düştü; bazı tarlalar hasat edilemedi. Buğdayda 2025’te verim ve kalite geçen yılın altında kaldı.</li>
+<li>Bir kanun teklifi Tekirdağ, Edirne ve Kırklareli’yi 2025 aşırı kuraklığı nedeniyle afet bölgesi sayıyor; kredi borçlarının 2 yıl faizsiz ertelenmesini öngörüyor (teklifin akıbetini doğrulamadım).</li>
+<li>2026’da yağışlar iyi gitti; Ziraat Odası ayçiçeğinde verimlerin yer yer iki kat arttığını söyledi.</li>
+<li>Coğrafi işaretli ürünler: Kıvırcık kuzu eti, meşe balı, eski kaşar, Babaeski sarımsağı, Brakana tatlısı.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Yağışlı yılda verim hızla toparlıyor; yerli hibrit ayçiçeği tohumu kuraklıkta yüzde 25–30 verim farkı yarattı (tohumcular derneği iddiası).</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kuru tarım ve kış–yaz kuraklığı arka arkaya vuruyor; hasadın büyük kısmı tek bir yağış rejimine bağlı.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>İl bazında 2025 ve 2026 üretim tonajlarını bulamadım; veriler ziraat odası beyanı. “Geçen yıl” ifadeleri haber tarihine göre 2024–2025 sayıldı. Pay oranları (ayçiçeği %8, buğday %2,1, pirinç %2,3) bir vali açıklamasından ve tarihsiz.</li></ul></div></section>
+
+<section id="turizm"><h2>Turizm: Kıyı, Orman, Mağara</h2>
+<p class="sub">İğneada longozları, Kıyıköy, Dupnisa Mağarası, Vize ve Dereköy sınır kapısı.</p>
+<div class="g2"><div class="card"><div class="tabs" id="tu"></div><h3 id="tutitle"></h3><div class="bars" id="tubars"></div><p class="note" id="tunote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>İl Kültür ve Turizm Müdürlüğü’ne göre konaklayan turist 2023’te 244 bin (35 bini yabancı), 2024’te 271 bin (29 bin), 2025’te 564 bin (39 bin) oldu; 2026’nın ilk altı ayında 219 bin (10 bin yabancı).</li>
+<li>Kapadokya Üniversitesi’nin yol haritası turizm gelirini yaklaşık 26,6 milyon $ (2,6 yabancı + 24 yerli) ve kalış süresini 1,92 gece veriyor (yıl belirtilmemiş); 2029 hedefi yaklaşık 201 bin turist.</li>
+<li>Bölgede turizme açık tek mağara Dupnisa; bir bayram tatilinde yaklaşık 15 bin ziyaret (yıl belirsiz).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Sayı bir yılda yaklaşık iki katına çıktı; İstanbul’a yaklaşık 200 km mesafe avantajı.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Kıyı yaz sezonuna bağımlı; yabancı turist payı küçük (2025: yaklaşık %7, kendi hesabım); yaz sellerinde can kaybı yaşandı.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>564 bin ile yol haritasının 2029 hedefi (yaklaşık 201 bin) farklı yöntemlerle ölçülmüş olabilir; 2025’teki artışın nedenini ve gelirini doğrulayamadım. Doluluk ve gelir için güncel veri bulunamadı.</li></ul></div></section>
+
+<section id="gelir"><h2>Gelir, İşgücü ve Nüfus</h2>
+<p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar), ADNKS 2023–2025 ve 2023 işgücü verisi</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kişi başına 16.188 $ (531.388 TL) ile 81 il arasında 8.; Bolu’nun (16.703 $) arkasında, Eskişehir’in (16.171 $) önünde. Oran Türkiye ortalamasının (15.325 $) yaklaşık %105,6’sı (kendi hesabım).</li>
+<li>Toplam ekonomi: 2024 nüfusuyla yaklaşık 6,1 milyar $; nüfus payı yaklaşık %0,44 (kendi hesabım).</li>
+<li>Nüfus artış hızı 2023’te binde 20,9’dan 2024’te binde 5,0’a düştü. 2024’te Kırklareli yaş ortalamasına göre en yaşlı onuncu il; beş ilçenin nüfusu azaldı.</li>
+<li>2023’te işgücüne katılma %54,1, istihdam %49,4, işsizlik %8,7 (TÜİK, İŞKUR aktarımı).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Gelir Türkiye ortalamasının üstünde ve Edirne’nin (12.711 $) belirgin önünde; nüfus 2025’te de arttı.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Nüfus artışı neredeyse durdu, nüfus yaşlanıyor ve kırsal ilçeler küçülüyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>İşgücü verisi 2023’e ait (TÜİK 2024 verisini il için yayımlamamış görünüyor); güncel işsizliği bulamadım. Kişi başına GSYH üretimin yapıldığı yere göre hesaplanır; İstanbul ve Tekirdağ’a gidip gelenlerin gelirini yansıtmaz (yorum).</li>
+<li>GSYH’nin reel değişimini, sektörel payları ve net göçü doğrulanmış kaynakta bulamadım. Yaş ortalaması ve sıralama 2024 haberinden.</li></ul></div></section>
+
+<section id="ilceler"><h2>İlçe Kırılımı</h2>
+<p class="sub">Sekiz ilçe; 2025 ilçe nüfuslarını bulamadığım için tablo 2024 ADNKS değerlerini kullanıyor.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2024)</th><th>Bulunan ekonomik ipucu</th></tr>
+<tr><td>Lüleburgaz</td><td>156.648</td><td>Trakya’nın sanayi lokomotiflerinden; Lüleburgaz OSB, buğday ve ayçiçeği, tarımsal sanayi</td></tr>
+<tr><td>Merkez</td><td>114.800</td><td>Kırklareli OSB; Kırklareli Üniversitesi; nüfus 2024’te +2.477</td></tr>
+<tr><td>Babaeski</td><td>46.656</td><td>Tarım ve hayvancılık, ayçiçeği; Babaeski sarımsağı (coğrafi işaret)</td></tr>
+<tr><td>Vize</td><td>29.024</td><td>Küçük Ayasofya, antik tiyatro, Kıyıköy kıyısı</td></tr>
+<tr><td>Pınarhisar</td><td>17.499</td><td>Çimento sanayisi ve taş ocakçılığı</td></tr>
+<tr><td>Demirköy</td><td>8.970</td><td>İğneada, Dupnisa Mağarası, Fatih Dökümhanesi; 2024’te −686 ile en çok kayıp</td></tr>
+<tr><td>Pehlivanköy</td><td>3.278</td><td>Gar binası, Akarca Köprüsü; ekonomik veri bulunamadı</td></tr>
+<tr><td>Kofçaz</td><td>2.156</td><td>Tümülüs ve dolmenler; ekonomik veri bulunamadı</td></tr></table>
+<p class="note" style="margin:10px 0 0">İl toplamı 2024: 379.031, 2025: 379.595 (ADNKS). Toplamın ilçe değerleriyle tutarlı olduğunu kontrol ettim. İlçe bazında GSYH, tarım ve istihdam verisi bulunamadı.</p></div>
+<div class="card" style="margin-top:14px"><div class="tabs" id="ik"></div><h3 id="iktitle"></h3><div class="bars" id="ikbars"></div><p class="note" id="iknote"></p></div></section>
+
+<section id="sonuc"><h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Kırklareli</h3>
+<p style="margin:0">Kırklareli’nin ekonomisi Trakya’nın sanayi koridoru ve OSB’leri, ayçiçeği–buğday tarımı ve hızla artan kıyı turizmi üzerine kurulu; kişi başına gelir 16.188 $ ile 8. sırada ve Türkiye ortalamasının üzerinde. Güçlü tarafı İstanbul–Tekirdağ hattına yakınlık, büyüyen OSB alanı ve ulaşım yatırımları; zayıf tarafı 2025–2026’da gerileyen ihracat, kuraklığa açık kuru tarım ve yaşlanan, neredeyse büyümeyen nüfus. İl varlıklı ama küçük bir dış ticaret ölçeğine sahip (yorum).</p></div>
+<div class="three">
+<div><b>HAMLE 1</b>OSB’deki fabrikaları ihracata yöneltmek: 400 milyon $’lık hedefle gerçekleşen ihracat arasındaki farkı kapatmak.</div>
+<div><b>HAMLE 2</b>Kuraklığa dayanıklı üretim: yerli hibrit tohum, sulama ve sigorta ile ayçiçeği–buğday gelirini yağıştan bağımsızlaştırmak.</div>
+<div><b>HAMLE 3</b>Turizmi mevsime yaymak: kıyıyı, Dupnisa ve Istranca ormanlarını, tescilli lezzetleri ve sınır kapısını paketleyerek kalış süresini uzatmak.</div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. İhracat ölçüleri arasındaki fark nedeniyle ilin gerçek dış ticaret gücü kesin bilinmiyor.</li></ul></div></section>
+
+<section id="tartisma"><h2>Tartışma Köşesi</h2>
+<div class="card"><ul>
+<li>Aynı ay için KTSO 11,8, TÜİK 28,0 milyon $ gösteriyorsa, ilin ihracat gücü hangi rakamla ölçülmeli?</li>
+<li>Tekirdağ bir ayda 314,7 milyon $ ihraç ederken Kırklareli 18,1 milyon $’da kalıyorsa, Trakya’nın sanayi büyümesinden il hangi payı alıyor?</li>
+<li>Kuraklık iki yılda bir hasadı vuruyorsa, ayçiçeği ve buğday ilin motoru mu yoksa riski mi?</li>
+<li>Turist sayısı bir yılda ikiye katlanırken doluluk ve gelir verisi yoksa, bu bir başarı mı yoksa ölçüm sorunu mu?</li></ul>
+<a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div></section>
+
+<section id="kaynak"><h2>Kaynaklar ve Veri Notu</h2>
+<ul class="src">
+<li>Gelir ve nüfus: TÜİK il bazında GSYH 2024 (Habertürk, Alomaliye aktarımları) ve ADNKS 2024–2025 (Karar, Gazete Oksijen, Yeşilyurt Gazete, Küre Ansiklopedi, CityPopulation)</li>
+<li>İhracat: Kırklareli TSO aylık açıklamaları (Görünüm Gazetesi, Gazete Balkan, Marmara Haber, Haberler.com, SonDakika, Kırklareli Gazetesi, Babaeski Söz Gazetesi); TÜİK genel ticaret sistemi (Türkiye Gazetesi, Yeşilyurt Gazete, Habertürk Yerel, Haberler.com)</li>
+<li>Sanayi: Bakan Kacır açıklamaları (Milliyet, Sanayi Gazetesi); Kırklareli OSB (Haberler.com, SonDakika); Sanayi Gazetesi (Vali Ekici); Türkiye Ekonomi Kurumu; İŞKUR Kırklareli raporu</li>
+<li>Tarım: Kırklareli Ziraat Odası açıklamaları (Birgün, Benguturk, Politikam, Habertürk Yerel, Milliyet); TBMM kanun teklifi metni; Tarım ve Orman Bakanlığı ayçiçeği raporu; DHA (TRAKTOD)</li>
+<li>Turizm: AA, Haberler.com ve SonDakika (İl Kültür ve Turizm Müdürlüğü); Kapadokya Üniversitesi Kırklareli Turizm Yol Haritası; Turizm Güncel; NTV</li>
+<li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168: önceki il dosyalarıyla aynı kaynaklar</li></ul>
+<p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Kırklareli’ye özgü 2025 yıllık ihracat, güncel işsizlik, 2025 ilçe nüfusları, ürün tonajları, doluluk ve turizm geliri, GSYH’nin reel değişimi ve OSB doluluğu doğrulanmış kaynakla bulunamadığı için sayfada yok. %105,6 (gelir oranı), %0,15 (nüfus değişimi), %0,44 (nüfus payı), 6,1 milyar $ (toplam ekonomi), binde 1,5 (2025 artış hızı), 115,3 milyon $ (Ocak–Ekim 2025), %7 (yabancı turist payı) ve ilçe nüfus kontrolü kendi hesabımdır. Tarih belirtilmeyen beyanlar (vali, oda başkanı, OSB yöneticisi, sendika veya dernek) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p></section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+{c:'good',chip:'MOTOR: OSB VE SANAYİ',ad:'Lüleburgaz ve OSB’ler',big:'1.440 ha',alt:'Toplam OSB büyüklüğü (Bakan Kacır); yaklaşık 23 yıl önce 400 ha',y:'OSB’lerde 15.700 ek istihdam; Kırklareli OSB’de 87 fabrika, 5.000–5.500 kişi.',n:'Güncel doluluk ve fabrika sayısı hedefin altında; kesin tablo yok.'},
+{c:'bad',chip:'BASKI: İHRACAT',ad:'Dış ticaret',big:'105 mn $',alt:'Ocak–Ekim 2026, Kırklareli merkezli firmalar (KTSO); 2025’in %8,9 altında',y:'Ekim 2026 yıllık %47,2 arttı (14,8 mn $).',n:'2025 ilk 9 ay %20,5 düştü; il ölçeği Tekirdağ’ın çok altında.'},
+{c:'warn',chip:'KIRILGAN: KURAKLIK',ad:'Ayçiçeği',big:'40–50 kg/da',alt:'2025 verim (önceki yıl 80–100 kg); ekim alanı yaklaşık 1,1 mn dekar',y:'Türkiye’nin ilk dört ayçiçeği ilinden; 2026’da verimler yer yer iki kat.',n:'2025’te kuraklık verimi yarıya indirdi; afet bölgesi kanun teklifi gündemde.'},
+{c:'warn',chip:'KIRILGAN: HUBUBAT',ad:'Buğday ve arpa',big:'1,2 mn dekar',alt:'Buğday ekim alanı (2025); verim ve kalite geçen yıldan düşük',y:'Yağışlı yılda dekara 450–500 kg verim alınabiliyor.',n:'Güncel il tonajı bulunamadı; kuru tarım iklime bağlı.'},
+{c:'good',chip:'GÜÇLÜ: GELİR',ad:'Kişi başına gelir',big:'8 / 81',alt:'Kişi başına GSYH sırası (2024; 16.188 $, Türkiye ort. yaklaşık %105,6)',y:'Edirne’nin (12.711 $) ve Türkiye ortalamasının önünde; Eskişehir’in (16.171 $) önünde.',n:'İstanbul (24.452 $) ve Tekirdağ’ın (18.406 $) gerisinde.'},
+{c:'warn',chip:'KIRILGAN: NÜFUS',ad:'Nüfus',big:'379.595',alt:'ADNKS 2025; 2024: 379.031 (+564, +%0,15; kendi hesabım)',y:'Merkez ve Lüleburgaz büyüyor.',n:'Artış hızı binde 20,9’dan 5,0’a düştü; beş ilçe küçülüyor; en yaşlı onuncu il (2024).'},
+{c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İstihdam',big:'%8,7',alt:'İşsizlik oranı (2023; katılım %54,1, istihdam %49,4)',y:'OSB’lerde istihdam artıyor.',n:'Veri eski; 2024 ve 2025 il işsizliği bulunamadı.'},
+{c:'sleep',chip:'UYUYAN: KIYI TURİZMİ',ad:'İğneada, Kıyıköy, Dupnisa',big:'564 bin',alt:'2025’te konaklayan turist (2024: 271 bin); yabancı yalnızca 39 bin',y:'Bir yılda yaklaşık iki katına çıktı.',n:'Yaz ağırlıklı; gelir ve doluluk verisi yok, yol haritasıyla sayılar tutmuyor.'},
+{c:'sleep',chip:'UYUYAN: ULAŞIM VE GIDA',ad:'Hızlı tren, sınır kapısı, coğrafi işaret',big:'200 km/s',alt:'Halkalı–Kapıkule hattının tasarım hızı; çalışmalar sürüyor (Bakan Kacır)',y:'Dereköy sınır kapısı, Bulgaristan komşuluğu ve 5 tescilli yöresel ürün.',n:'Tamamlanma takvimi ve ekonomik etkisi ölçülmüş değil.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve orta'],['sleep','Uyuyanlar']];
+function karne(f){
+var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+$('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['Kırklareli merkezli firmaların aylık ihracatı, KTSO (milyon $)',[['Haziran 2025',9.1],['Temmuz 2025',11.8],['Ağustos 2025',10.9],['Eylül 2025',9.1],['Aralık 2025',10.9],['Ağustos 2026',8.9],['Eylül 2026',10.2],['Ekim 2026',14.8]],[7],'Yalnızca bulabildiğim aylar. 2026 yıllık değişimleri: Ağustos −%17,5, Eylül +%12,7, Ekim +%47,2. Kaynak: Kırklareli TSO (Görünüm Gazetesi, Gazete Balkan, Marmara Haber).'],
+['İlden yapılan ihracat, TÜİK genel ticaret sistemi (milyon $)',[['Ocak 2025',21.8],['Şubat 2025',23.5],['Temmuz 2025',28.0],['Mayıs 2026',22.1],['Eylül 2026',18.1]],[4],'Aynı aylarda ithalat: Ocak 2025 6,0, Şubat 2025 8,0, Temmuz 2025 9,4 milyon $ (2026 il ithalatı bulunamadı). Temmuz 2025’te KTSO ölçüsü 11,8 milyon $ idi. Kaynak: TÜİK (Yeşilyurt Gazete, Türkiye Gazetesi, Haberler.com, SonDakika).'],
+['Kümülatif ihracat, KTSO (milyon $)',[['Ocak–Eylül 2025',105.4],['Ocak–Eylül 2026',90.2],['Ocak–Ekim 2025 (türetilmiş)',115.3],['Ocak–Ekim 2026',105.0]],[3],'Ocak–Ekim 2025, KTSO’nun %8,9’luk düşüş yüzdesinden türetildi (kendi hesabım). Ocak–Ağustos 2026 80,1 milyon $ (−%16,8). Kaynak: Kırklareli TSO.']];
+mk('ih',IH,['KTSO aylık','TÜİK aylık','Kümülatif']);
+var SA=[['OSB büyüklükleri (hektar)',[['Büyükkarıştıran OSB',596],['Kırklareli OSB',505],['Evrensekiz OSB',212],['Özel OSB',65]],[1],'Toplam 1.378 hektar (tarihsiz vali açıklaması); Bakan Kacır güncel toplamı 1.440 hektar veriyor. Kaynak: Sanayi Gazetesi, Milliyet.'],
+['OSB istihdamı (bin kişi)',[['Kırklareli OSB, bugün (orta değer)',5.25],['Kırklareli OSB, hedef',13],['Tüm OSB’lerde 23 yılda eklenen',15.7]],[0],'Farklı kapsamlar: ilk iki çubuk yalnızca Kırklareli OSB, üçüncüsü ilin tüm OSB’leri. Kaynak: Kırklareli OSB yönetimi (Haberler.com), Bakan Kacır (Milliyet).']];
+mk('sa',SA,['OSB alanı','İstihdam']);
+var TA=[['Ayçiçeği verimi (kg/dekar)',[['Önceki yıl, alt',80],['Önceki yıl, üst',100],['2025, alt',40],['2025, üst',50]],[2,3],'Ziraat Odası “geçen yıl” 80–100, “bu yıl” 40–50 kg dedi; yılları haber tarihine göre 2024 ve 2025 saydım. Bazı tarlalarda dekarda 30 kg’a inildi. Kaynak: Birgün (Kırklareli Ziraat Odası).'],
+['Ekim alanı, 2025 (milyon dekar)',[['Tekirdağ, ayçiçeği',1.6],['Edirne, ayçiçeği',1.21],['Kırklareli, buğday',1.2],['Kırklareli, ayçiçeği',1.1]],[3],'Ayçiçeği alanları “bu yıl” ifadesiyle, 2025 kuraklığı haberinden. Kaynak: Politikam (AA), Benguturk (AA).'],
+['Kırklareli’nin Türkiye üretimindeki payı (%)',[['Ayçiçeği',8],['Pirinç',2.3],['Buğday',2.1]],[0],'Vali Birol Ekici’nin açıklaması; yıl belirtilmemiş. Kaynak: Sanayi Gazetesi.']];
+mk('ta',TA,['Verim','Alan','Pay']);
+var TU=[['Kırklareli’nde konaklayan turist (bin kişi)',[['2023',244],['2024',271],['2025',564],['Ocak–Haziran 2026',219]],[2],'Yabancı turist: 2023’te 35 bin, 2024’te 29 bin, 2025’te 39 bin, 2026’nın ilk yarısında 10 bin. Kaynak: Kırklareli İl Kültür ve Turizm Müdürlüğü (AA, Haberler.com).']];
+mk('tu',TU,['Turist']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Türkiye ort.',15325],['İstanbul',24452],['Tekirdağ',18406],['Kırklareli',16188],['Edirne',12711]],[3],'Kırklareli 81 il arasında 8.; Tekirdağ 4., İstanbul 1., Edirne 24. Oran Türkiye ortalamasının yaklaşık %105,6’sı (kendi hesabım). Kaynak: TÜİK (Habertürk aktarımı).'],
+['Nüfus artış hızı (binde)',[['Kırklareli 2023',20.9],['Kırklareli 2024',5.0],['Türkiye 2024',3.4],['Kırklareli 2025 (kendi hesabım)',1.5]],[3],'2025 değeri 379.031’den 379.595’e +564 kişiden hesaplandı. Kaynak: TÜİK ADNKS (Yeşilyurt Gazete, Karar).'],
+['İşgücü göstergeleri, 2023 (%)',[['İşgücüne katılma',54.1],['İstihdam oranı',49.4],['İşsizlik',8.7]],[2],'2023 verisi; 2024 il verisi bulunamadı. Kaynak: TÜİK (İŞKUR Kırklareli raporu).']];
+mk('gt',GT,['Gelir','Artış hızı','İşgücü']);
+var IK=[['İlçe nüfusu, 2024 (bin kişi)',[['Lüleburgaz',156.6],['Merkez',114.8],['Babaeski',46.7],['Vize',29.0],['Pınarhisar',17.5],['Demirköy',9.0],['Pehlivanköy',3.3],['Kofçaz',2.2]],[0],'Toplam 379.031. Kaynak: TÜİK ADNKS 2024 (Yeşilyurt Gazete); 2025 ilçe değerleri bulunamadı.'],
+['Nüfus kaybı veren ilçeler, 2024 (kişi)',[['Demirköy',686],['Vize',442],['Pınarhisar',239],['Kofçaz',152],['Pehlivanköy',122]],[0],'Beş ilçe 2023’e göre küçüldü. Kaynak: Yeşilyurt Gazete (TÜİK).'],
+['Nüfus artışı olan ilçeler, 2024 (kişi)',[['Merkez',2477],['Lüleburgaz',978],['Babaeski',61]],[0],'Üç ilçe büyüdü; il toplamı +1.875. Kaynak: Yeşilyurt Gazete (TÜİK).']];
+mk('ik',IK,['Nüfus','Kayıp','Artış']);
+</script>
+</body>
+</html>

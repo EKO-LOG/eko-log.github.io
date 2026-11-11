@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kırşehir | İl Ekonomi Dosyası – Ekonomi ve Diyalog Topluluğu</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script>window.__dbo=function(f,ms){var t;return function(){clearTimeout(t);t=setTimeout(f,ms||120)}};(function(){try{var r=document.documentElement,g=function(k){return localStorage.getItem(k)},t=g('eko-tema');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);r.setAttribute('data-fs',+g('eko-fs')||0);if(g('eko-hc')==='1')r.setAttribute('data-hc','1');if(g('eko-rm')==='1')r.setAttribute('data-rm','1')}catch(e){}})();</script>
+<style>
+:root{--red:#c4202e;--bg:#fbf6f7;--surf:#fff;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6;--soft:#f5ecef;--g1:#c4202e;--g2:#ff7a45;--glass:rgba(255,255,255,.72);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}}
+:root[data-theme="dark"]{--red:#ff6470;--bg:#120c1a;--surf:#1c1328;--ink:#f6f0fb;--mut:#b6a8c8;--line:#2f2340;--soft:#241a33;--glass:rgba(28,19,40,.72)}
+*{box-sizing:border-box}html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.08;margin:0;font-weight:700;letter-spacing:-.015em}
+a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--g2);outline-offset:3px}
+/* nav */
+header{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;padding:0 12px}
+.bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 8px 6px 8px;box-shadow:0 10px 40px -12px rgba(60,10,40,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px "Bricolage Grotesque",sans-serif;padding-right:8px}
+.brand img{width:38px;height:38px;border-radius:50%;background:#fff}
+nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;transition:background .3s,color .3s}
+nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+/* PC: menü tek satırda, kaydırmadan tam görünsün (telefon/tablet kaydırması aynen kalır) */
+@media (min-width:900px){
+.bar{max-width:1280px}
+.brand{flex:none}
+nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
+nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
+}
+@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+.page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* aurora */
+.aurora{position:relative;overflow:hidden;color:#fff;background:#1a0b1f;isolation:isolate}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:46vw;height:46vw;max-width:520px;max-height:520px;background:var(--a1,#e0243a);left:-8%;top:-20%}
+.aurora i:nth-child(2){width:40vw;height:40vw;max-width:460px;max-height:460px;background:var(--a2,#ff8a3d);right:-6%;top:10%;animation-delay:-5s}
+.aurora i:nth-child(3){width:34vw;height:34vw;max-width:400px;max-height:400px;background:var(--a3,#7c3aed);left:36%;bottom:-30%;animation-delay:-9s}
+@keyframes drift{to{transform:translate(60px,-40px) scale(1.2)}}
+.hero{padding:150px 0 130px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,84px);font-weight:800}
+.hero p{font-size:19px;max-width:46ch;margin:20px 0 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;background:#fff;color:#2a0b22;text-decoration:none;font:700 16px "Bricolage Grotesque",sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px rgba(0,0,0,.45)}
+.btn.grad{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}
+.btn.line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.wave{display:block;width:100%;height:70px;margin-top:-69px;position:relative}
+.wave path{fill:var(--bg)}
+/* sub-page banner */
+.banner{padding:140px 0 110px}
+.banner h2{font-size:clamp(38px,7vw,70px);font-weight:800}.banner p{max-width:52ch;margin:16px 0 0;font-size:19px;color:rgba(255,255,255,.92)}
+.crumb{display:inline-block;font-weight:600;font-size:14px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px;margin-bottom:18px}.crumb a{text-decoration:none}
+
+:root{--card:var(--surf);--ac:var(--red);--ac2:#2a2d8f;--ok:#1f9d6b;--bad:#c4202e;--amb:#d97706;--slp:#5b54d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}}
+:root[data-theme="dark"]{--ac2:#8b9bff;--ok:#5fd6a0;--bad:#ff6470;--amb:#fbbf24;--slp:#a5a0ff}
+.banner h1{font-size:clamp(36px,7vw,68px);font-weight:800}
+.banner{padding:130px 0 100px}
+.w{max-width:1100px;margin:0 auto;padding:6px 22px 70px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0 6px}
+.k{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.k b{display:block;font:800 clamp(24px,3.4vw,32px) "Bricolage Grotesque",sans-serif;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+.k span{color:var(--mut);font-size:14px}
+.secnav{position:sticky;top:calc(76px + env(safe-area-inset-top,0px));z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 0;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.secnav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+.secnav a:hover{background:var(--soft)}
+section{margin-top:48px}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px;padding-left:14px;border-left:5px solid;border-image:linear-gradient(var(--g1),var(--g2)) 1}
+.sub{color:var(--mut);font-size:15px;margin:0 0 14px 19px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.g2 .card{margin:0}
+h3{font-size:19px;margin:0 0 8px}
+ul{padding-left:20px;margin:6px 0}li{margin:6px 0}
+.bars{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.row{display:grid;grid-template-columns:minmax(110px,34%) 1fr 58px;gap:10px;align-items:center}
+.row .t{height:20px;background:var(--soft);border-radius:99px;overflow:hidden}
+.row .t i{display:block;height:100%;background:linear-gradient(90deg,#2a2d8f,#12b5c4);border-radius:99px;transition:width .6s}
+.row.hl .t i{background:linear-gradient(90deg,var(--g1),var(--g2))}
+.row em{font-style:normal;text-align:right;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 16px;border-radius:99px;border:0;background:var(--surf);color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.tabs button.on{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+.up{color:var(--ok);font-weight:700}.dn{color:var(--bad);font-weight:700}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:20px}
+.tl p{margin:0 0 14px;position:relative}.tl p:before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.note{font-size:13.5px;line-height:1.5;color:var(--mut)}
+.src li{font-size:14px;color:var(--mut)}
+.w .btn{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;margin:6px 8px 0 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;min-width:480px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600}
+summary{cursor:pointer;font-weight:600}
+code{background:var(--soft);padding:1px 6px;border-radius:6px;font-size:.92em}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---- Karaman'a özgü: sektör karnesi ve iyi/kötü haber kartları ---- */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px 19px;font-size:13.5px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kc{--vc:linear-gradient(180deg,#1f9d6b,#12b5c4);position:relative;overflow:hidden;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:20px 20px 18px 26px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -24px rgba(60,10,40,.4)}
+.kc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--vc)}
+.kc[data-c="warn"]{--vc:linear-gradient(180deg,#f59e0b,#ff7a45)}
+.kc[data-c="sleep"]{--vc:linear-gradient(180deg,#5b54d6,#12b5c4)}
+.kc[data-c="bad"]{--vc:linear-gradient(180deg,#c4202e,#ff7a45)}
+.chip{align-self:flex-start;font:700 11.5px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;padding:4px 11px;border-radius:99px;color:#fff;background:var(--vc)}
+.kc h3{margin:0;font-size:20px}
+.kc .big{font:800 24px "Bricolage Grotesque",sans-serif;line-height:1.15}
+.kc .big small{display:block;font:500 13px "Instrument Sans",sans-serif;color:var(--mut);margin-top:2px}
+.kc .pc{display:grid;gap:6px;font-size:14px;line-height:1.5}
+.kc .pc div{padding:8px 11px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.kc .pc .y b{color:var(--ok)}.kc .pc .n b{color:var(--bad)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.pcg .card{margin:0}
+.pcg .y{border-left:7px solid var(--ok)}.pcg .n{border-left:7px solid var(--bad)}
+.pcg h3.y2{color:var(--ok)}.pcg h3.n2{color:var(--bad)}
+.verdict{background:linear-gradient(120deg,rgba(31,157,107,.12),rgba(217,119,6,.12));border:1px solid var(--line);border-radius:26px;padding:22px;margin:14px 0}
+.verdict h3{margin-bottom:10px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.three div{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:14px 16px;font-size:15px;line-height:1.5}
+.three b{display:block;font:800 13px "Bricolage Grotesque",sans-serif;letter-spacing:.06em;background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="../index.html"><img src="../favicon.png" alt=""><span>Eko-Log</span></a><nav aria-label="Ana menü"><a href="../simulasyon-merkezi.html">Simülasyon Merkezi</a><a href="../index.html#/meslekler">Meslekler</a><a href="../ansiklopedi.html#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../index.html#/piyasa">Veri ve Pariteler</a><a href="index.html" class="on">Kalkınma</a><a href="../index.html#/yayin">Gazete ve Dergi</a><a href="../index.html#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="../mevzuat/">Mevzuat</a><a href="../index.html#/katil">Katıl</a></nav></div></header>
+<div class="aurora banner" style="--a1:#b91c1c;--a2:#f59e0b;--a3:#0e7490"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a> › Kırşehir</span><h1>Kırşehir: Lastik, Tahıl, Ahilik</h1><p>242.777 nüfuslu Kırşehir; Türkiye’nin 500 büyük sanayi kuruluşu arasındaki Petlas lastik fabrikasına, kurak bir bozkırda geniş tahıl ekimine ve Ahilik geleneğine ev sahipliği yapıyor. Kişi başına GSYH 10.572 $ ile 81 il arasında 48.; Türkiye ortalamasının yaklaşık %69,0’ı. 2024’te reel GSYH %5,7 küçülerek en çok daralan ikinci il oldu. Haziran 2026’da ihracat 19,8 milyon $, ithalat 33,8 milyon $. Bulamadığım ya da kaynakları çeliştiği yerleri her bölümde işaretledim.</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>10.572 $</b><span>Kişi başına GSYH (2024), 81 il arasında 48.; Türkiye ort. 15.325 $’ın yaklaşık %69,0’ı (oran kendi hesabım)</span></div>
+<div class="k"><b>242.777</b><span>Nüfus (ADNKS 2025); 2024: 244.546 (−1.769, −%0,72; kendi hesabım)</span></div>
+<div class="k"><b>−%5,7</b><span>2024 reel GSYH değişimi (zincirlenmiş hacim); Erzincan’dan (−%7,9) sonra en büyük ikinci daralma (TÜİK)</span></div>
+<div class="k"><b>~%90</b><span>Lastiğin ihracattaki payı (2021, Ahiler Kalkınma Ajansı rehberi); güncel pay bulunamadı</span></div>
+<div class="k"><b>19,8 mn $</b><span>Haziran 2026 ihracatı; aynı ay ithalat 33,8 mn $ (genel ticaret sistemi)</span></div>
+<div class="k"><b>219.909</b><span>Kırşehir’de kayıtlı olup Ankara’da oturan kişi (2025); ilin kendi nüfusunun yaklaşık %90,6’sı (kendi hesabım)</span></div>
+</div>
+<div class="secnav"><a href="#karne">Sektör Karnesi</a><a href="#ihracat">İhracat</a><a href="#sanayi">Sanayi</a><a href="#tarim">Tarım</a><a href="#turizm">Turizm</a><a href="#gelir">Gelir-Nüfus</a><a href="#ilceler">İlçeler</a><a href="#sonuc">Sonuç</a><a href="#tartisma">Tartışma</a><a href="#kaynak">Kaynaklar</a></div>
+
+<section id="karne"><h2>Sektör Karnesi</h2>
+<p class="sub">9 başlık, dört etiket. Etiketler kaynaklardaki rakamlardan çıkardığım yorumdur; resmî bir sınıflama değildir.</p>
+<div class="legend"><span><i style="background:#1f9d6b"></i>Motor: ekonomiyi taşıyan</span><span><i style="background:#f59e0b"></i>Kırılgan ya da dar</span><span><i style="background:#5b54d6"></i>Uyuyan potansiyel</span><span><i style="background:#c4202e"></i>Baskı altında</span></div>
+<div class="tabs" id="kf"></div><div class="kg" id="kg"></div>
+<div class="card" style="margin-top:14px"><h3>Dikkat</h3><ul>
+<li>Sayılar farklı yıllara ve kaynaklara ait (TÜİK, TİM, kalkınma ajansı rehberi, şirket açıklamaları, yerel haberler). Yan yana okunmaları kesin karşılaştırma değildir.</li>
+<li>Sektörlerin il GSYH’sindeki payını, istihdamını ve kârlılığını doğrulanmış bir tabloyla bulamadım. “Motor” etiketi ihracat ve üretim izlerine dayanıyor, katma değer ölçümüne değil.</li>
+<li>Kırşehir’e özgü güncel işsizlik, 2025 yıllık ihracat, ilçe nüfusu ve güncel turist sayısı bulunamadı; ilgili bölümlerde ayrıca yazdım.</li></ul></div></section>
+
+<section id="ihracat"><h2>İhracat: Tek Ürün, Dar Hacim</h2>
+<p class="sub">Aylık veriler TÜİK–Ticaret Bakanlığı genel ticaret sistemine, eski yıllık veriler TÜİK ve TİM’e ait; ölçüler birebir aynı değil.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ih"></div><h3 id="ihtitle"></h3><div class="bars" id="ihbars"></div><p class="note" id="ihnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>İhracat 2018’de 213,8 milyon $, 2019’da 222,9 milyon $, 2021’de 311 milyon $ (TÜİK; ithalat 370 milyon $) idi. Ahiler Kalkınma Ajansı’nın rehberine göre ihracatın yaklaşık %90’ı lastik, ithalatın yaklaşık %50’si lastik hammaddesi.</li>
+<li>Haziran 2026’da ihracat 19,8 milyon $, ithalat 33,8 milyon $; aradaki yaklaşık 14,0 milyon $’lık açık kendi hesabım. Eylül 2026’da ise ihracat yaklaşık 26,2, ithalat yaklaşık 28,5 milyon $ (açık yaklaşık 2,3 milyon $).</li>
+<li>Aynı ay Türkiye genelinde ihracat %21,7 artarken Kırşehir’in yıllık değişimini bulamadım.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kasım 2025’te Kırşehir (24,8 milyon $), TR71 bölgesindeki beş il (Nevşehir, Kırşehir, Aksaray, Kırıkkale, Niğde) arasında en çok ihracat yapan il oldu; Nevşehir o ay 23,1 milyon $’da kaldı.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>İhracat tek firmaya ve tek ürün ailesine yaslanıyor; aylık ihracat ithalatın altında kalabiliyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>2025 yıllık ihracatı ve ürün–ülke kırılımını bulamadım. Grafikte yalnızca elimdeki aylar var; Temmuz 2025’ten Haziran 2026’ya arada boşluklar bulunuyor.</li>
+<li>Eylül 2026 değerleri haberde yuvarlanmış verildi. 2021 ve 2022 Ocak–Ekim değerleri TİM verisidir (Kırşehir TSO aktarımı); TÜİK değerleriyle tam örtüşmeyebilir.</li></ul></div></section>
+
+<section id="sanayi"><h2>Sanayi: Petlas Merkezli Küçük Küme</h2>
+<p class="sub">Lastiğin yanında döküm, tarım makineleri, mobilya, maden-taş ocağı ve gıda işleme sayılıyor.</p>
+<div class="g2"><div class="card"><div class="tabs" id="sa"></div><h3 id="satitle"></h3><div class="bars" id="sabars"></div><p class="note" id="sanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>2021’de ilde 396 sanayi işletmesi vardı: 41’i OSB’lerde, 211’i sanayi sitelerinde, 144’ü planlı bölgeler dışında (Ahiler rehberi).</li>
+<li>KTSO’ya göre ilin en büyük istihdamını Petlas sağlıyor; arkasından ÇEMAŞ Döküm, Eraslan Güneş Enerji ve Kırşehir Şeker Fabrikası geliyor (2020 yazısı).</li>
+<li>Petlas 130’dan fazla ülkeye satış yapıyor ve 2023’te 14,7 milyar TL ciro açıkladı. Yeni fabrikanın birinci fazı Haziran 2025’te tamamlandı; kalan aşamalar sektördeki kapasite kullanımı düştüğü için ertelendi. 830 milyon $’lık ikinci fabrika 2027’den itibaren planlanıyor (AKO Grup).</li>
+<li>Mucur OSB ilan edildi, altyapısı tamamlandı; Kırşehir OSB’nin 141 hektarlık ilave alanı yatırım programında (Bakan Kacır, tarihsiz).</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Ana tesis genişliyor; OSB alanı büyüyor. Kırşehir, Samsun–Mersin sanayi aksındaki teşvikli iller arasında.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yeni fabrikanın büyük kısmı ertelendi; planlanan yaklaşık 1.850–2.000 yeni istihdam hemen gelmiyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Yeni fabrikanın tutarı kaynaklara göre 360, 553 ve 550 milyon $ olarak geçiyor; kapsam farkı olabilir. Güncel OSB doluluğu ve istihdamı bulunamadı.</li>
+<li>İşletme sayıları 2021’e, KTSO yorumları 2020’ye ait; bugünün tablosu olmayabilir.</li></ul></div></section>
+
+<section id="tarim"><h2>Tarım: Tahıl, Kuraklık ve Ceviz</h2>
+<p class="sub">Buğday, arpa, şeker pancarı, nohut, patates ve ayçiçeği öne çıkan ürünler; yağış belirleyici.</p>
+<div class="g2"><div class="card"><div class="tabs" id="ta"></div><h3 id="tatitle"></h3><div class="bars" id="tabars"></div><p class="note" id="tanote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Ziraat Odası’na göre 2025’te arpa, buğday ve mercimek daha geniş alana ekildi ama kuraklık ve zirai don yüzünden verim düştü; yıl zararla kapandı. Bir TZOB aktarımı Kırşehir’de yüzde 90’a varan verim kaybı diyor (yıl yazmıyor; içeriğe göre 2025 hasadı sayıldı).</li>
+<li>2026 hasadında yağışlar iyi gitti; Ziraat Odası rekoltenin yüksek olduğunu söyledi.</li>
+<li>Kaman, ilin ceviz merkezi: 2019’da ildeki yaklaşık 261.800 meyve veren ceviz ağacının yaklaşık %76’sı Kaman’daydı (kendi hesabım).</li>
+<li>Kırşehir Şeker Fabrikası 2001’de üretime başladı; Ahi Evran Üniversitesi kuraklığa dayanıklı buğday çeşitleriyle deneme yapıyor.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>İyi yağışlı yıl rekolteyi hızla yükseltiyor; dayanıklı tohum ve sertifikalı tohum üretimi (Malya) var.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Yağış yıllar içinde azalma eğiliminde; kuru tarım iki yıl arayla zarar ile rekor arasında gidip geliyor.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>İl bazında ürün tonajları, sulu alan oranı ve hayvancılık sayıları bulunamadı. Ceviz verisi 2019’a ait. Yağış haberi “geçen yıl” diyor; 2025 sayıldı.</li></ul></div></section>
+
+<section id="turizm"><h2>Turizm: Küçük Ama Büyüyebilir</h2>
+<p class="sub">Güncel ziyaretçi verisi yok; elimdeki en güvenilir kaynak Temmuz 2024 tarihli turizm yol haritası.</p>
+<div class="card"><h3>Bulabildiklerim</h3><ul>
+<li>Kapadokya Üniversitesi’nin yol haritası ilin turizm gelirini yaklaşık 15,8 milyon $, ortalama kalışı 1,73 gece, tesis doluluğunu %28,6 veriyor (veri yılı metinde net değil).</li>
+<li>Simgeler: Ahi Evran Külliyesi, Cacabey Medresesi, Neşet Ertaş’ın kabri, Kaman Kalehöyük Arkeoloji Müzesi, Japon Bahçesi ve termal tesisler (ör. Karalar köyündeki Terme).</li>
+<li>Karşılaştırma: komşu Nevşehir 2025’te 2,2 milyon giriş ve 4,3 milyon geceleme kaydetti (yaklaşık 1,95 gece kalış).</li></ul></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Kültür, termal ve doğa seçenekleri var; Kapadokya’ya yakınlık fırsat.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Doluluk düşük ve kalış kısa; il geçiş güzergâhı olmaktan çıkamamış olabilir (yorum).</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Kırşehir’in 2025 turist ve geceleme sayısını bulamadım. 15,8 milyon $ ve %28,6 yol haritasında yıl belirtilmeden geçiyor; 2024 sayısı gibi okumadım. Kırşehir ile Nevşehir sayıları aynı yöntemle derlenmemiş olabilir.</li></ul></div></section>
+
+<section id="gelir"><h2>Gelir, İşgücü ve Nüfus</h2>
+<p class="sub">TÜİK il bazında GSYH (cari, 2024; dolar) ve ADNKS 2024–2025</p>
+<div class="g2"><div class="card"><div class="tabs" id="gt"></div><h3 id="gttitle"></h3><div class="bars" id="gtbars"></div><p class="note" id="gtnote"></p></div>
+<div class="card"><h3>Okuma notu</h3><ul>
+<li>Kişi başına 10.572 $ ile 81 il arasında 48.; Amasya (10.552 $) ve Hatay (10.570 $) hemen yanında, Kırıkkale 22., Aksaray 27., Nevşehir 41. ve Yozgat 65. sırada. Oran Türkiye ortalamasının (15.325 $) yaklaşık %69,0’ı (kendi hesabım).</li>
+<li>Toplam ekonomi: 2024 nüfusuyla yaklaşık 2,6 milyar $; nüfus payı yaklaşık %0,28 (kendi hesabım).</li>
+<li>Nüfus 244.546’dan 242.777’ye indi (−%0,72). İl merkezinde artış, kırsalda azalış olduğu bildirildi.</li>
+<li>Ankara’da oturup Kırşehir’de kayıtlı 219.909 kişi var (ATO Rakamlarla Ankara, 2025). Yerel işgücü ve talep için bu büyük bir “dışarıdaki nüfus”.</li></ul></div></div>
+<div class="pcg"><div class="card y"><h3 class="y2">İyi haber</h3><ul><li>Başkent Ankara’ya yakınlık, hem pazar hem hemşehri ağı sağlıyor; il merkezinde nüfus artıyor.</li></ul></div>
+<div class="card n"><h3 class="n2">Kötü haber</h3><ul><li>Gelir Türkiye ortalamasının yaklaşık üçte iki düzeyinde; reel GSYH 2024’te küçüldü ve nüfus azalan iller arasında.</li></ul></div></div>
+<div class="card"><h3>Dikkat</h3><ul>
+<li>Güncel işgücü verisini bulamadım; KTSO başkanı 2020’de faal nüfusun yaklaşık %80’inin tarım ve hayvancılıkta olduğunu söylemişti (beyan, eski, doğrulanmadı).</li>
+<li>Nüfus azalışının nedeni, net göç ve sektörel GSYH payları, GSYH’nin TL değeri doğrulanamadı. Kişi başına GSYH üretimin yapıldığı ile göre hesaplanır; Ankara’da çalışıp Kırşehir’de oturanlar buna yansımaz (yorum).</li></ul></div></section>
+
+<section id="ilceler"><h2>İlçe Kırılımı</h2>
+<p class="sub">Yedi ilçe; güvenilir güncel ilçe nüfuslarını bulamadığım için tablo yalnızca bulduğum ipuçlarını içeriyor.</p>
+<div class="card tw"><table>
+<tr><th>İlçe</th><th>Nüfus (2025)</th><th>Bulunan ekonomik ipucu</th></tr>
+<tr><td>Merkez</td><td>Bulunamadı</td><td>Petlas, Kırşehir OSB, Ahi Evran Külliyesi, Cacabey Medresesi; Terme termal tesisi</td></tr>
+<tr><td>Kaman</td><td>Bulunamadı</td><td>Ceviz merkezi (ilin ceviz ağaçlarının yaklaşık %76’sı); Kalehöyük Müzesi ve Japon Bahçesi</td></tr>
+<tr><td>Mucur</td><td>Bulunamadı</td><td>Mucur OSB (ilan edildi, altyapı tamamlandı)</td></tr>
+<tr><td>Çiçekdağı</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Akpınar</td><td>Bulunamadı</td><td>Ekonomik veri bulunamadı</td></tr>
+<tr><td>Akçakent</td><td>Bulunamadı</td><td>İlin en dağlık ilçesi, yüzölçümü 459 km²</td></tr>
+<tr><td>Boztepe</td><td>Bulunamadı</td><td>Malya Tarım İşletmesi: 218.800 dekar arazi, yılda ortalama 8 bin ton hububat tohumu</td></tr></table>
+<p class="note" style="margin:10px 0 0">İl toplamı 242.777 (ADNKS 2025). İlçe adları ve ipuçları haber ve kurum metinlerinden; ilçe bazında güncel nüfus, GSYH ve istihdam verisi bulunamadı. Boztepe’nin Malya ile ilişkisi bir akademik çalışmadaki istasyon adından çıkarıldı.</p></div>
+<div class="card" style="margin-top:14px"><div class="tabs" id="ik"></div><h3 id="iktitle"></h3><div class="bars" id="ikbars"></div><p class="note" id="iknote"></p></div></section>
+
+<section id="sonuc"><h2>Sonuç: Karne Özeti</h2>
+<p class="sub">Yukarıdaki verilerden çıkarılan yorumlardır; kesin tahmin değildir.</p>
+<div class="verdict"><h3>Üç cümlede Kırşehir</h3>
+<p style="margin:0">Kırşehir’in ekonomisi bir lastik fabrikasının ihracatına, yağışa bağlı tahıl üretimine ve başkent Ankara’ya yakınlığa yaslanıyor; kişi başına gelir 10.572 $ ile Türkiye ortalamasının yaklaşık %69,0’ı ve 2024’te reel olarak küçüldü. Güçlü tarafı Petlas’ın ölçeği, genişleyen OSB alanı ve büyük bir hemşehri ağı; zayıf tarafı tek ürüne bağımlılık, ertelenen yeni fabrika, kuraklık riski ve küçülen nüfus. İl, Ankara ile Kapadokya arasında konumlanıyor ama bu konumu henüz gelire çevirmiş görünmüyor (yorum).</p></div>
+<div class="three">
+<div><b>HAMLE 1</b>Lastik dışı ihracatı büyütmek: döküm, tarım makineleri ve gıda işlemede ihracatçı sayısını artırıp tek firmaya bağımlılığı azaltmak.</div>
+<div><b>HAMLE 2</b>Kuraklığa dayanıklı tarım: dayanıklı tohum, sulama ve jeotermal seracılıkla rekolteyi yağıştan bağımsızlaştırmak.</div>
+<div><b>HAMLE 3</b>Kapadokya hattına bağlanmak: kültür ve termal ürünleri paketleyip geceleme süresini ve doluluğu artırmak.</div></div>
+<div class="card"><h3>Dikkat</h3><ul><li>Bu üç hamle bir yorum ve tartışma çerçevesidir; maliyetini ya da getirisini hesaplayan veri bulamadım. Nüfus azalışının nedenleri kaynaklarda ayrıştırılmamış.</li></ul></div></section>
+
+<section id="tartisma"><h2>Tartışma Köşesi</h2>
+<div class="card"><ul>
+<li>İhracatın yaklaşık %90’ı tek sektörden geliyorsa, Petlas’ın yatırım takvimi bir ilin kaderini ne kadar belirler?</li>
+<li>Kırşehir’de kayıtlı 219.909 kişi Ankara’da yaşıyorsa, il nüfusu ve il GSYH’si gerçek ekonomik büyüklüğü ne kadar yansıtır?</li>
+<li>Kuraklık iki yılda bir zarara yol açıyorsa, tahıl ekonominin temeli mi yoksa riski mi?</li>
+<li>Kapadokya’ya bu kadar yakın bir il, doluluğu %28,6 düzeyinde kalarak neyi kaçırıyor?</li></ul>
+<a class="btn" href="../index.html#/fikir">Fikir Muharebesi’nde tartış</a></div></section>
+
+<section id="kaynak"><h2>Kaynaklar ve Veri Notu</h2>
+<ul class="src">
+<li>Gelir ve nüfus: TÜİK il bazında GSYH 2024 (Habertürk, Rudaw, Alomaliye aktarımları) ve ADNKS 2025 (Karar, Gazete Oksijen, Rudaw, Yeni Şafak); ATO “Rakamlarla Ankara” (2025)</li>
+<li>İhracat: TÜİK–Ticaret Bakanlığı genel ticaret sistemi aylık verileri (Kırşehir Memleket, Kırşehir Haber 40, Nevşehir Kent Haber, Müskara Haber, Kırıkkale Haber, Yeni Gün); Ahiler Kalkınma Ajansı Kırşehir Yatırım Rehberi (2023); Kırşehir TSO (TİM verileri); Vikipedi (2018)</li>
+<li>Sanayi: TOBB Ekonomik Forum (Kırşehir TSO, 2020); AKO Grup bültenleri; Karar (AKO Grup röportajı); Habertürk (Petlas); Hürriyet/DHA (Bakan Kacır); Sanayi Gazetesi; Küre Ansiklopedi</li>
+<li>Tarım: Kırşehir Ziraat Odası açıklamaları (Yeni Ankara, Haberler.com, SonDakika); Aydınlık (TZOB aktarımı); Daily Sabah (yağış); Ekonomist/AA (Malya); Tarım ve Orman Bakanlığı/akademik ceviz çalışması (TURJAF)</li>
+<li>Turizm: Kapadokya Üniversitesi Kırşehir Turizm Yol Haritası (Temmuz 2024); İşçi Haber/İHA (Nevşehir 2025); Goturkiye, Yolcu360</li>
+<li>Türkiye ortalaması 15.325 $ ve nüfus 86.092.168: Karaman dosyasıyla aynı kaynaklar</li></ul>
+<p class="note">Çoğu veri basın aktarımı, kurum açıklaması veya yerel haberdir; resmî tabloların doğrudan alıntısı değildir. Kırşehir’e özgü 2025 yıllık ihracat, güncel işsizlik, ilçe nüfusları, turist ve geceleme sayıları, OSB doluluğu, ürün tonajları ve il GSYH’sinin TL değeri doğrulanmış kaynakla bulunamadığı için sayfada yok. %69,0 (gelir oranı), %0,72 (nüfus değişimi), %0,28 (nüfus payı), 2,6 milyar $ (toplam ekonomi), %90,6 (Ankara’daki kayıtlı nüfusun il nüfusuna oranı), %76 (Kaman’ın ceviz payı), 14,0 milyon $ (Haziran 2026 ticaret açığı) ve diğer illerin nüfus değişim yüzdeleri kendi hesabımdır. Tarih belirtilmeyen beyanlar (oda başkanı, bakan, eski rapor) kaynağın kendi ifadesidir ve doğrulanmamıştır.</p></section>
+</div>
+
+<footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+var N=function(v){return String(v).replace('.',',')};
+function bars(el,data,hl){hl=hl||[];var m=Math.max.apply(null,data.map(function(d){return d[1]}));
+ el.innerHTML=data.map(function(d,i){return '<div class="row'+(hl.indexOf(i)>-1?' hl':'')+'"><span class="t0">'+d[0]+'</span><div class="t"><i style="width:'+Math.max(.6,d[1]/m*100)+'%"></i></div><em>'+N(d[1])+'</em></div>'}).join('')}
+function tabs(id,items,cb){var el=document.getElementById(id);
+ el.innerHTML=items.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-i="'+i+'">'+t+'</button>'}).join('');
+ el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');cb(+b.dataset.i)};cb(0)}
+var $=function(i){return document.getElementById(i)};
+function mk(id,items,names){tabs(id,names,function(i){$(id+'title').textContent=items[i][0];bars($(id+'bars'),items[i][1],items[i][2]);$(id+'note').textContent=items[i][3]})}
+
+/* Sektör karnesi */
+var KARNE=[
+{c:'good',chip:'MOTOR: LASTİK',ad:'Petlas ve lastik sanayi',big:'~%90',alt:'Lastiğin ihracattaki payı (2021, Ahiler rehberi); güncel pay yok',y:'İlin en büyük işvereni; 130’dan fazla ülkeye satış; OSB ve fabrika genişlemesi.',n:'Yeni fabrikanın büyük kısmı ertelendi; tek firmaya bağımlılık.'},
+{c:'warn',chip:'KIRILGAN: İHRACAT',ad:'Dış ticaret',big:'19,8 mn $',alt:'Haziran 2026 ihracatı; ithalat 33,8 mn $',y:'Eylül 2026’da ihracat yaklaşık 26,2 mn $; Kasım 2025’te bölgenin zirvesi.',n:'Aylık ihracat ithalatın altında kalabiliyor; 2025 yıllık değer bulunamadı.'},
+{c:'warn',chip:'KIRILGAN: KURAKLIK',ad:'Tahıl (buğday, arpa, mercimek)',big:'~213 mm',alt:'Yıllık yağış (haberde “geçen yıl”); Türkiye 378,3 mm',y:'2026’da yağış iyi, rekolte yüksek (Ziraat Odası).',n:'2025’te yağış ve don zarara yol açtı; yağış eğilimi azalıyor.'},
+{c:'sleep',chip:'UYUYAN: CEVİZ',ad:'Kaman cevizi',big:'~%76',alt:'İldeki meyve veren ceviz ağaçlarının Kaman’daki payı (2019; kendi hesabım)',y:'Yoğunlaşmış, tanınan bir ürün; ağaç sayısı 2019’da ~199 bin.',n:'Üretim tonajı, fiyat ve ihracat verisi bulunamadı.'},
+{c:'bad',chip:'BASKI: GELİR',ad:'Kişi başına gelir',big:'48 / 81',alt:'Kişi başına GSYH sırası (2024; 10.572 $, Türkiye ort. yaklaşık %69,0)',y:'Komşu Yozgat’ın (9.233 $) önünde.',n:'Reel GSYH 2024’te %5,7 daraldı; Ankara (24.031 $), Kırıkkale ve Aksaray geride bırakıyor.'},
+{c:'bad',chip:'BASKI: NÜFUS',ad:'Nüfus',big:'242.777',alt:'ADNKS 2025; 2024: 244.546 (−1.769, −%0,72; kendi hesabım)',y:'İl merkezinde artış var.',n:'Kırsal nüfus azalıyor; 219.909 Kırşehir kayıtlı kişi Ankara’da oturuyor.'},
+{c:'warn',chip:'KIRILGAN: İŞGÜCÜ',ad:'İstihdam',big:'Veri yok',alt:'Güncel il verisi bulunamadı; KTSO 2020: faal nüfusun ~%80’i tarımda (beyan)',y:'Lastik fabrikası düzenli sanayi istihdamı sağlıyor.',n:'Güncel işsizlik, katılım ve sektörel istihdam yok.'},
+{c:'sleep',chip:'UYUYAN: TURİZM',ad:'Ahilik, Kalehöyük, termal',big:'%28,6',alt:'Tesis doluluğu (turizm yol haritası; yılı belirsiz); kalış 1,73 gece',y:'Kültür, termal ve Kapadokya yakınlığı; gelir yaklaşık 15,8 mn $.',n:'Düşük doluluk ve kısa kalış; güncel ziyaretçi verisi yok.'},
+{c:'sleep',chip:'UYUYAN: YATIRIM',ad:'OSB, ikinci fabrika, jeotermal sera',big:'830 mn $',alt:'Planlanan ikinci Petlas fabrikası (2027’den itibaren; AKO Grup)',y:'Mucur OSB hazır, Kırşehir OSB’ye 141 hektar ilave alan planlı.',n:'Takvim ertelenebiliyor; güncel doluluk ve istihdam verisi yok.'}
+];
+var KF=[['all','Hepsi'],['good','Motorlar'],['warn','Kırılgan ve orta'],['sleep','Uyuyanlar']];
+function karne(f){
+var L=KARNE.filter(function(k){return f==='all'||k.c===f});
+$('kg').innerHTML=L.map(function(k){return '<div class="kc" data-c="'+k.c+'"><span class="chip">'+k.chip+'</span><h3>'+k.ad+'</h3><div class="big">'+k.big+'<small>'+k.alt+'</small></div><div class="pc"><div class="y"><b>İyi: </b>'+k.y+'</div><div class="n"><b>Kötü: </b>'+k.n+'</div></div></div>'}).join('')}
+(function(){var el=$('kf');el.innerHTML=KF.map(function(t,i){return '<button class="'+(i?'':'on')+'" data-f="'+t[0]+'">'+t[1]+'</button>'}).join('');
+el.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(el.children,function(c){c.classList.remove('on')});b.classList.add('on');karne(b.dataset.f)};karne('all')})();
+
+
+var IH=[['İhracat, farklı yıllar ve kaynaklar (milyon $)',[['2018 (TÜİK)',213.8],['2019 (KTSO)',222.9],['2021 (TÜİK)',311],['Ocak–Ekim 2021 (TİM)',247.6],['Ocak–Ekim 2022 (TİM)',322.8]],[4],'Seriler farklı ölçülere ait; yıllık 2020 ve 2023–2025 değerleri bulunamadı. Ocak–Ekim 2022, 2021’in aynı dönemine göre %30 artmış. Kaynak: Vikipedi (TÜİK 2018), TOBB Ekonomik Forum, Ahiler rehberi, Kırşehir TSO.'],
+['Aylık ihracat, genel ticaret sistemi (milyon $)',[['Temmuz 2025',25.5],['Kasım 2025',24.8],['Haziran 2026',19.8],['Ağustos 2026',22.6],['Eylül 2026',26.2]],[2],'Yalnızca bulabildiğim aylar; aralar boş. Eylül değeri yuvarlanmış. Kaynak: TÜİK–Ticaret Bakanlığı (Kırıkkale Haber, Nevşehir Kent Haber, Kırşehir Memleket, Müskara Haber, Yeni Gün).'],
+['Aynı aylarda ithalat (milyon $)',[['Temmuz 2025',25.8],['Kasım 2025',26.2],['Haziran 2026',33.8],['Ağustos 2026',25.3],['Eylül 2026',28.5]],[2],'İthalatın yaklaşık yarısı lastik hammaddesi (Ahiler rehberi, 2021). Haziran 2026’da ithalat ihracatı yaklaşık 14,0 milyon $ aşıyor (kendi hesabım). Kaynak: aynı haberler.']];
+mk('ih',IH,['Yıllar','İhracat','İthalat']);
+var SA=[['Sanayi işletmeleri, 2021 (adet)',[['OSB’lerde',41],['Sanayi sitelerinde',211],['Planlı bölge dışında',144]],[1],'Toplam 396 işletme. Güncel sayı bulunamadı. Kaynak: Ahiler Kalkınma Ajansı Kırşehir Yatırım Rehberi.'],
+['Petlas yatırım rakamları (milyon $)',[['Yeni fabrika, ilk duyuru (2023)',360],['Yeni fabrika, AKO bülteni',553],['Yeni fabrika, Faz 1 sonrası',550],['İkinci fabrika (2027+)',830],['2005–2025 toplam yatırım',890]],[3],'Rakamlar farklı kapsam ve tarihlere ait; birbirine eklenemez. Kaynak: AKO Grup, Karar, Habertürk (Petlas Genel Müdürü).']];
+mk('sa',SA,['İşletmeler','Petlas']);
+var TA=[['Yıllık yağış (mm)',[['Türkiye',378.3],['İç Anadolu',230.3],['Kırşehir (yaklaşık)',213]],[2],'Haber “geçen yıl” diyor; 2025 sayıldı. Kırşehir yağışı yıllar içinde azalma eğiliminde. Kaynak: Daily Sabah (Meteoroloji verisi).'],
+['Meyve veren ceviz ağacı, 2019 (bin adet)',[['Kaman',199.2],['Merkez',27.6],['Mucur',22.3],['Çiçekdağı',7.6],['Akpınar',4.1],['Akçakent',0.8],['Boztepe',0.1]],[0],'Toplam yaklaşık 261,8 bin; Kaman’ın payı yaklaşık %76 (kendi hesabım). Kaynak: TURJAF makalesi (Kırşehir ceviz üretimi, 2019–2023).'],
+['Malya Tarım İşletmesi (bin dekar)',[['Toplam arazi',218.8],['Kültür altı arazi',157],['Kuru ziraat',154],['2026 için güzlük ekim',77]],[0],'Kuraklığa dayanıklı sertifikalı tohum ekimi; 2026’da 10 bin ton arpa ve 6 bin ton buğday hedefi. Kaynak: Ekonomist (AA).']];
+mk('ta',TA,['Yağış','Ceviz','Malya']);
+var GT=[['Kişi başına GSYH, 2024 ($)',[['Türkiye ort.',15325],['Ankara',24031],['Kırıkkale',13284],['Aksaray',12319],['Nevşehir',11126],['Kırşehir',10572],['Yozgat',9233]],[5],'Kırşehir 81 il arasında 48.; yakın komşuları Ankara 3., Kırıkkale 22., Aksaray 27., Nevşehir 41., Yozgat 65. Oran Türkiye ortalamasının yaklaşık %69,0’ı (kendi hesabım). Kaynak: TÜİK (Habertürk aktarımı).'],
+['Nüfusu azalan iller, 2024–2025 (%)',[['Ağrı',1.66],['Kars',1.22],['Artvin',1.03],['Muş',0.81],['Kırşehir',0.72],['Kastamonu',0.54],['Bingöl',0.34],['Ordu',0.34],['Isparta',0.25]],[4],'33 ilin nüfusu azaldı; listenin yalnızca gördüğüm kısmı gösteriliyor, sıralama tam değildir. Yüzdeler kendi hesabım. Kaynak: Karar (ADNKS 2025).'],
+['Reel GSYH daralması, 2024 (%)',[['Erzincan',7.9],['Kırşehir',5.7],['Bilecik',2.4]],[1],'Zincirlenmiş hacim endeksine göre önceki yıla kıyasla en büyük üç düşüş. Kırşehir ayrıca büyümeye −0,012 puan katkı verdi. Kaynak: TÜİK (Habertürk).']];
+mk('gt',GT,['Gelir','Nüfus','Daralma']);
+var IK=[['Ankara Keçiören’de yaşayan hemşehri sayısı (ilçe kökenine göre)',[['Kaman',20607],['Merkez',14057],['Akpınar',7041],['Çiçekdağı',6135],['Akçakent',6134],['Mucur',4791],['Boztepe',1720]],[0],'Kırşehir ilçelerinde kayıtlı olup Keçiören’de oturanlar; Ankara’nın tamamı değil. İlçelerin göç veren yapısına işaret eder, nedenini göstermez. Kaynak: Yeni Ankara (TÜİK verisine dayandırılmış).']];
+mk('ik',IK,['Keçiören']);
+</script>
+</body>
+</html>
