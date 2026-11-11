@@ -19,10 +19,24 @@ header nav a{white-space:nowrap}header nav a.opt{display:inline-block!important}
 .mzg-card .mzg-primary{display:block;width:100%;padding:15px 20px!important;border:0!important;border-radius:999px!important;font:700 17px system-ui,sans-serif!important;color:#fff!important;text-decoration:none;text-align:center;cursor:pointer;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45))!important;box-shadow:0 12px 28px -12px rgba(196,32,46,.8)}
 .mzg-card .mzg-secondary{display:block;width:100%;padding:13px 20px!important;border-radius:999px!important;font:600 15px system-ui,sans-serif!important;color:var(--ink,#f6f0fb)!important;text-decoration:none;text-align:center;cursor:pointer;background:transparent!important;border:1px solid var(--line,#2f2340)!important}
 </style>
+<style id="nav-std">
+/* Ortak menü: kapsül çubuk, sola yaslı kayan menü, aktif öğe degrade hap */
+header .bar{gap:8px!important}
+header .brand{flex:none!important;padding-right:0!important}
+header .brand span,header .brand-txt{display:none!important}
+header nav{flex:1 1 auto!important;min-width:0!important;justify-content:flex-start!important;gap:2px!important;overflow-x:auto!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+header nav::-webkit-scrollbar{display:none}
+header nav a{flex:none;white-space:nowrap;padding:9px 11px!important;font-size:13px!important;font-weight:700!important;letter-spacing:-.01em}
+@media (min-width:1100px){header nav{justify-content:flex-end!important}header nav a{padding:9px clamp(7px,.85vw,14px)!important;font-size:clamp(12px,1.05vw,15px)!important}}
+</style>
+<script id="nav-std-js">
+(function(){function f(){var n=document.querySelector('header nav'),a=n&&n.querySelector('a.on');if(!a)return;n.scrollLeft=a.offsetLeft-(n.clientWidth-a.offsetWidth)/2}
+addEventListener('load',function(){f();setTimeout(f,400)});addEventListener('hashchange',function(){setTimeout(f,60)})})();
+</script>
 </head><body>
 <header><div class="bar">
 <a class="brand" href="../#/"><img src="../favicon.png" alt="Eko-Log logosu"><span>Eko-Log</span></a>
-<nav aria-label="Ana menü"><a href="../#/merkez">Simülasyon Merkezi</a><a href="../#/meslekler">Meslekler</a><a href="../#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../#/piyasa">Veri ve Pariteler</a><a href="../#/yayin">Gazete ve Dergi</a><a href="../#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="./" class="on">Mevzuat</a><a href="../#/katil">Katıl</a></nav>
+<nav aria-label="Ana menü"><a href="../#/merkez">Simülasyon Merkezi</a><a href="../#/meslekler">Meslekler</a><a href="../#/ansiklopedi">İktisadi Ansiklopedi</a><a href="../#/piyasa">Veri ve Pariteler</a><a href="../kalkinma/">Kalkınma</a><a href="../#/yayin">Gazete ve Dergi</a><a href="../#/etkinlik">Etkinlikler</a><a href="../eko-plus/">Eko-Plus</a><a href="./" class="on">Mevzuat</a><a href="../#/katil">Katıl</a></nav>
 </div></header>
 <main id="app"></main>
 <footer><div class="wrap"><span>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span>Üyelere özel · Metinler mevzuat.gov.tr kaynaklıdır; resmî metin için kaynağa bakınız.</span></div></footer>
