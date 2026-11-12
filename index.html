@@ -4918,6 +4918,14 @@ const mk=(g,i,dd)=>{
 .hero .fmh .btn{padding:9px 18px;font-size:14px}
 .hero .fmh #fmhr{font-size:14px;opacity:.92}
 </style>
+<script id="fm-ref">
+/* İl sayfasındaki eski tuş (#/fikir) ilin kendi muharebesine gider: gelinen il adresten okunur (kalkinma/il-<ad>.html).
+   Yalnızca o sayfadan gelişte ve sayfa ilk açılırken çalışır; yenileme ya da "Haftanın iddiasına dön" etkilenmez. */
+(function(){try{
+ var m=document.referrer.match(/\/kalkinma\/il-([a-z0-9-]+)\.html(?:[?#].*)?$/),n=(performance.getEntriesByType('navigation')[0]||{}).type;
+ if(m&&n==='navigate'&&location.hash.replace(/^#\/?/,'')==='fikir')location.replace('#/fikir/'+m[1])
+}catch(e){}})();
+</script>
 <script>
 /* ===== FİKİR MUHAREBESİ =====
    Her pazartesi yeni bir iddia gelir (aşağıdaki liste sırayla döner, sona gelince başa sarar).
