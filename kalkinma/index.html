@@ -158,6 +158,10 @@ a.chip.on:hover{filter:brightness(1.08)}
 .ag .m b{color:var(--ink);font-weight:700}
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px}
 footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;justify-content:space-between}
+
+.cwrap{display:flex;flex-direction:column;gap:8px}.cwrap>a.card{margin:0;flex:1}
+.fm-go{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:var(--surf);color:var(--ink);text-decoration:none;font:700 14px system-ui,sans-serif}
+.fm-go:hover{border-color:var(--ink)}
 </style>
 </head>
 <body>
@@ -361,6 +365,17 @@ bars3(document.getElementById('od'),[['GAP',5.9],['DOKAP',4.45],['KOP',2.73],['D
    SAYFA[k]=f;cards[k]={f:f,d:String(e.d||(cards[k]&&cards[k].d)||'')}});
   ciz();
  });
+})();
+</script>
+<script>
+/* Fikir Muharebesi: her il kartına, o ilin Kalkınma sekmesini açan düğme ekler (../index.html#/fikir-kalkinma/<il>) */
+(function(){
+ [].forEach.call(document.querySelectorAll('a.card[href^="il-"]'),function(c){
+  var slug=c.getAttribute('href').replace(/^il-|\.html$/g,''),ad=(c.querySelector('h3')||{}).textContent||'';
+  ad=ad.replace(/\s*→\s*$/,'');
+  var w=document.createElement('div');w.className='cwrap';c.parentNode.insertBefore(w,c);w.appendChild(c);
+  var a=document.createElement('a');a.className='fm-go';a.href='../index.html#/fikir-kalkinma/'+slug;
+  a.setAttribute('aria-label',ad+' için Fikir Muharebesi');a.textContent='Fikir Muharebesi';w.appendChild(a)})
 })();
 </script>
 </body>
