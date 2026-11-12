@@ -355,7 +355,7 @@ bars3(document.getElementById('od'),[['GAP',5.9],['DOKAP',4.45],['KOP',2.73],['D
    var p=document.createElement('p');p.className='note';p.style.margin='0';p.textContent=cards[k].d;a.appendChild(t);a.appendChild(p);var tg=etiket(IL[k-1]);if(tg){var dv=document.createElement('div');dv.className='tags';dv.innerHTML=tg;a.appendChild(dv)}
    /* Fikir Muharebesi düğmesi: kartlar her çizimde yeniden kurulduğu için burada eklenir */
    var w=document.createElement('div');w.className='cwrap';w.appendChild(a);
-   var g=document.createElement('a');g.className='fm-go';g.href='../index.html#/fikir-kalkinma/'+cards[k].f.replace(/^il-|\.html$/g,'');g.textContent='Fikir Muharebesi';g.setAttribute('aria-label',IL[k-1]+' için Fikir Muharebesi');w.appendChild(g);box.appendChild(w)});
+   var g=document.createElement('a');g.className='fm-go';g.href='../index.html#/fikir/'+cards[k].f.replace(/^il-|\.html$/g,'');g.textContent='Fikir Muharebesi';g.setAttribute('aria-label',IL[k-1]+' için Fikir Muharebesi');w.appendChild(g);box.appendChild(w)});
   draw(document.getElementById('ara').value||'');
   cizPj();cizAj(document.getElementById('ara2').value||'');
  }
