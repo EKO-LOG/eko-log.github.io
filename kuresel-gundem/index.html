@@ -215,7 +215,7 @@ button.gp{cursor:pointer}button.gp:hover{background:rgba(255,255,255,.28)}
 #gli .gr span{flex:none;width:76px;color:rgba(255,255,255,.62)}
 #gli .gr b{font-weight:600}
 #gli .rk{border-left:3px solid var(--rk,#ff6470);padding-left:11px;margin-top:12px}
-</style>
+.tc.tx{fill:var(--ink);stroke:var(--red);stroke-width:5}.tkp{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tkp select{max-width:100%}.tkx td,.tkx th{padding:4px 6px;text-align:left}</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
@@ -311,7 +311,7 @@ button.gp{cursor:pointer}button.gp:hover{background:rgba(255,255,255,.28)}
 <label style="display:block">Telafi (stok, stratejik rezerv, yedek kapasite): <b id="ev1">50</b>%<input type="range" id="et" min="0" max="90" value="50"></label>
 <label style="display:block">Kısa dönem fiyat esnekliği (düşük olması fiyatı daha çok oynatır): <b id="ev2">0,10</b><input type="range" id="ee" min="5" max="30" value="10"></label>
 <div class="grid" id="eout" style="margin-top:10px"></div>
-<small style="color:var(--mut)">Varsayımlar: dünya petrol talebi ≈ 104 mb/g, doğalgaz ≈ 4.100 mrd m³/yıl. Fiyat değişimi ≈ net arz kaybı payı ÷ esneklik. Büyüme etkisi için kaba kural: petrolde %10 artış, küresel büyümeyi yaklaşık 0,13 puan düşürür.</small></div>
+<small style="color:var(--mut)">Varsayımlar: dünya petrol talebi ≈ 104 mb/g, doğalgaz ≈ 4.100 mrd m³/yıl. Fiyat değişimi ≈ net arz kaybı payı ÷ esneklik. Büyüme etkisi için kaba kural: petrolde %10 artış, küresel büyümeyi yaklaşık 0,1 puan düşürür (IMF WP/17/15).</small></div>
 <small style="color:var(--mut);display:block;margin-top:14px">Durum bilgisi Kasım 2026 itibarıyladır ve hızla değişir (Hürmüz Boğazı krizi, Irak-Türkiye anlaşması, Rusya-AB gazı). Karar vermeden önce IEA, EIA, BOTAŞ ve ilgili şirket açıklamalarını kontrol et.</small>
 </section>
 <section id="s14"><h2>Ticaret yolları</h2>
@@ -344,10 +344,16 @@ button.gp{cursor:pointer}button.gp:hover{background:rgba(255,255,255,.28)}
 <div class="card ek" id="tk"><p style="margin-top:0">Hangi geçitlerin kapandığını işaretle. Sonuç <b>öğretici bir kaba hesaptır</b>, tahmin değildir.</p>
 <div class="grid" id="tkc"></div>
 <label style="display:block">Alternatif rotaya kayabilen yük payı: <b id="tkv0">50</b>%<input type="range" id="tkr" min="0" max="100" value="50"></label>
-<label style="display:block">Telafi (stok, stratejik rezerv, yedek kapasite): <b id="tkv1">50</b>%<input type="range" id="tkt" min="0" max="90" value="50"></label>
-<label style="display:block">Kısa dönem petrol fiyat esnekliği (düşük olması fiyatı daha çok oynatır): <b id="tkv2">0,10</b><input type="range" id="tke" min="5" max="30" value="10"></label>
+<label style="display:block">Telafi (stok, stratejik rezerv, yedek kapasite): <b id="tkv1">60</b>%<input type="range" id="tkt" min="0" max="90" value="60"></label>
+<label style="display:block">Kısa dönem petrol fiyat esnekliği (literatür ≈ 0,04–0,09; düşük olması fiyatı daha çok oynatır): <b id="tkv2">0,08</b><input type="range" id="tke" min="5" max="30" value="8"></label>
 <div class="grid" id="tko" style="margin-top:10px"></div>
-<small style="color:var(--mut)">Varsayımlar (kaba büyüklükler): her geçidin payı bu sayfadaki hacimlerden ve yaygın tahminlerden alındı; kesişen yükler (ör. Körfez petrolü hem Hürmüz’den hem Malakka’dan geçer) bağımsız sayılarak tekrar sayılmamaya çalışıldı, gerçekte örtüşme daha yüksektir. Hürmüz için bypass hatlarının yedek kapasitesi ≈ 4,5 mb/g alındı. Ek sefer süresi ve filo kapasitesi kaybı için ortalama sefer ≈ 35 gün varsayıldı. Petrol fiyat hesabı <b>Enerji</b> sekmesindeki simülatörle aynı mantıktadır (dünya talebi ≈ 104 mb/g).</small></div>
+<small style="color:var(--mut)">Varsayımlar (kaba büyüklükler): her geçidin payı bu sayfadaki hacimlerden ve yaygın tahminlerden alındı; kesişen yükler (ör. Körfez petrolü hem Hürmüz’den hem Malakka’dan geçer) bağımsız sayılarak tekrar sayılmamaya çalışıldı, gerçekte örtüşme daha yüksektir. Hürmüz için bypass hatlarının yedek kapasitesi ≈ 4,5 mb/g alındı. Ek sefer süresi ve filo kapasitesi kaybı için ortalama sefer ≈ 35 gün varsayıldı. Petrol fiyat hesabı <b>Enerji</b> sekmesindeki simülatörle aynı mantıktadır (dünya talebi ≈ 104 mb/g).</small><details style="margin-top:8px"><summary><b>Doğrulama notları (13 Kasım 2026)</b></summary><p><small><b>Geriye dönük test, Hürmüz (Mart–Nisan 2026).</b> Gerçek: Brent savaş öncesi ≈ 71–72 $, Nisan ortalaması ≈ 117 $ (≈ +%63), en yüksek ≈ 126 $ (≈ +%75, 30 Nisan; bir kaynak 138 $ yazıyor, çoğu 126 $). Model (Hürmüz kapalı, esneklik 0,08): telafi %50 → +%93, %60 → +%75, %66 → +%63. Varsayılan telafi bu yüzden %60; tek olaya kalibre, tek veri noktası. <b>Kızıldeniz (Aralık 2023–Ocak 2024):</b> gerçek Şanghay–Avrupa navlunu tepede +%256, kalıcı +%25–40; model (kayabilen yük %70) ≈ +%119 verir, yani ikisinin arasında kalır. Panik ve konteyner sıkışıklığı modellenmediği için tepeyi düşük, kalıcı seviyeyi yüksek tahmin eder.<br><b>Kaynakla doğrulandı.</b> Petrol hacimleri, EIA (3 Mart 2026, 2025 ilk yarı), mb/g: Malakka 23,2; Hürmüz 20,9; Süveyş+SUMED 4,9; Babülmendeb 4,2; Danimarka 4,9; Türk Boğazları 3,7; Panama 2,3; Ümit Burnu 9,1. Lombok ≈ 0,4 (EIA 2013, eski veri). Hürmüz: deniz petrol ticaretinin ≈ %25’i, LNG’nin ≈ %20’si (IEA; EIA 11,4 milyar ft³/g). Bypass boş kapasitesi 3,5–5,5 mb/g (IEA/EIA; modelde 4,5). Dünya talebi ≈ 104 mb/g (IEA/EIA).<br>
+<b>Kaynaktan türetildi.</b> LNG payları: Malakka 9,0 ve Danimarka 1,6 milyar ft³/g, dünya toplamı Hürmüz’den (11,4 ÷ 0,20 ≈ 57) çıkarıldı: ≈ %16 ve ≈ %3. Hürmüz’ün genel hacim payı ≈ %9: 20,9 mb/g ≈ 1,04 Gt/yıl (standart ≈ 7,3 varil/ton) ve LNG, UNCTAD’ın 12,72 Gt deniz ticaretine oranlandı. Danimarka (≈ %2) ve Türk Boğazları (≈ %1,5) için yalnız petrol payı hesaplandı. Lombok ≈ %1: ticaret değeri 133 milyar $ ÷ PortWatch 14 trilyon $.<br>
+<b>Kaynakta var, kaynaklar birbirinden farklı.</b> Süveyş normal yılda dünya ticaretinin %12–15’i ve konteynerin ≈ %30’u (şu an çok altında); Malakka ≈ %22–30 (modelde 25); Panama ≈ %1–5 (modelde 5); Tayvan konteyner filosunun ≈ %48’i (Bloomberg, 2022), genel hacim payı için güvenilir kaynak zayıf (modelde 20).<br>
+<b>Rota ve maliyet.</b> Ümit Burnu +10–14 gün (modelde 12), Asya–ABD Doğu Kıyısı Süveyş üzerinden +8–12 gün (10), Lombok +1–3 gün (3). Ümit Burnu sapması küresel konteyner kapasitesinin ≈ %6’sını emdi; 35 günlük sefer varsayımı buna göre kalibre. Navlun: kalıcı +%25–40, tepe +%256 (UNCTAD). Savaş riski primi: Hürmüz kriz öncesi ≈ %0,25, şimdi %3–8; Babülmendeb ≈ %0,5. Brent ≈ 92–93 $ (9–10 Kasım 2026). Telafi: IEA üyeleri en az 90 gün net ithalat stoku tutar. Kısa dönem fiyat esnekliği 0,04–0,09 (IMF WP/06/62, WP/05/32); kalıcı %10 petrol artışı ≈ −0,1 puan büyüme (IMF WP/17/15, OeNB).<br>
+<b>Ülke ve sektör.</b> Hürmüz: Çin ham petrolünün ≈ üçte biri, Hürmüz ham petrolünün %37,7’sinin alıcısı; Hindistan ham petrolünün ≈ %40’ı Körfez’den; Japonya’da Körfez payı %90–95; Avrupa Hürmüz ham petrolünün ≈ %4’ü; ABD ham ithalatının ≈ %7’si (EIA/IEA). Hürmüz dünya gübresinin ≈ üçte biri. Bosfor, Cebelitarık, Panama ve Malakka dünya tahıl ihracatının %10’undan fazlasını taşır.<br>
+<b>Veri bulunamadı (0 alındı, sonuç alt sınır).</b> Cebelitarık’ın petrol ve ticaret payı; Hürmüz, Danimarka ve Türk Boğazları’nın konteyner payı; Süveyş, Panama ve Ümit Burnu LNG’si; Danimarka ve Türk Boğazları’nın petrol dışı yükleri.<br>
+<b>Model yargısı, doğrulanamaz.</b> Hürmüz dışındaki ülke ve sektör maruziyeti sınıflandırmaları (0–3), Türkiye ve Mısır’ın Hürmüz ağırlığı, Malakka konteyner payı için genel payın vekil alınması. Cebelitarık payı, Tayvan sapma günü ve navlun duyarlılığı simülatördeki “kendin ayarla” bölümünden değiştirilebilir. Ülke ve sektör sınıflamaları ölçüm değil, öğretici sınıflamadır.</small></p></details></div>
 <small style="color:var(--mut);display:block;margin-top:14px">Durum bilgisi 13 Kasım 2026 itibarıyladır ve günlük değişir (Hürmüz Boğazı, Kızıldeniz, Babülmendeb). Karar vermeden önce IEA, EIA, UNCTAD, Süveyş Kanalı İdaresi, Lloyd’s List, Kpler ve ilgili şirket ya da bakanlık açıklamalarını kontrol et.</small>
 </section>
 </main>
@@ -1526,7 +1532,7 @@ const tl=+$("#et").value,el=+$("#ee").value/100;$("#ev1").textContent=tl;$("#ev2
 let o=0,gz=0;document.querySelectorAll("#ek input:checked").forEach(c=>{const l=g(c.value);l.t=="o"?o+=l.flow:gz+=l.flow});
 const op=o/104000*100*(1-tl/100),gp=gz/4100*100*(1-tl/100),pr=op/el;
 $("#eout").innerHTML=`<div class="card"><small>Kesilen petrol</small><div class="eo">${o.toLocaleString("tr")} kb/g</div><p>Dünya talebinin ≈%${(o/1040).toFixed(1).replace(".",",")}'i; telafiden sonra net %${op.toFixed(1).replace(".",",")}</p></div>
-<div class="card"><small>Öğretici fiyat sıçraması (Brent)</small><div class="eo">+%${pr.toFixed(0)}</div><p>Büyüme etkisi ≈ −${(pr/10*.13).toFixed(2).replace(".",",")} puan; enflasyonda yukarı baskı, ithalatçıda cari açık artışı.</p></div>
+<div class="card"><small>Öğretici fiyat sıçraması (Brent)</small><div class="eo">+%${pr.toFixed(0)}</div><p>Büyüme etkisi ≈ −${(pr/10*.1).toFixed(2).replace(".",",")} puan; enflasyonda yukarı baskı, ithalatçıda cari açık artışı.</p></div>
 <div class="card"><small>Kesilen doğalgaz</small><div class="eo">${gz.toLocaleString("tr")} mrd m³/yıl</div><p>Dünya talebinin ≈%${(gz/41).toFixed(1).replace(".",",")}'i; telafiden sonra net %${gp.toFixed(1).replace(".",",")}. Gazda bölgesel piyasa ve LNG kapasitesi belirleyicidir.</p></div>`}
 window.eInit=function(){
 if(inited){draw();return}
@@ -1682,7 +1688,7 @@ sv.append("path").attr("class","eh").attr("d",d).on("click",()=>pick(r.id));
 if(on){[r.p[0][0],r.p[r.p.length-1].slice(-1)[0]].forEach((c,i)=>{const q=PR(c);if(!q)return;sv.append("circle").attr("cx",q[0]).attr("cy",q[1]).attr("r",4).attr("fill","var(--ink)");sv.append("text").attr("class","et").attr("x",q[0]+7).attr("y",q[1]-6).text(i?r.b:r.a)})}
 });
 if(tf!="k")CP.forEach(c=>{const q=PR(c.c);if(!q)return;const on=sel&&sel.id==c.id;
-sv.append("circle").attr("class","tc").attr("cx",q[0]).attr("cy",q[1]).attr("r",on?9:6.5);
+sv.append("circle").attr("class","tc"+(window.TKX&&window.TKX.has(c.id)?" tx":"")).attr("cx",q[0]).attr("cy",q[1]).attr("r",on?9:6.5);
 sv.append("circle").attr("class","th").attr("cx",q[0]).attr("cy",q[1]).attr("r",16).on("click",()=>pick(c.id));
 if(tv=="a"||on)sv.append("text").attr("class","et").attr("x",q[0]+9).attr("y",q[1]-8).text(c.n.replace(" Boğazı","").replace(" Kanalı",""))});
 }
@@ -1690,7 +1696,7 @@ function card(x){
 if(isCP(x))return`<h3>${x.n}</h3><span class="pill b">Kritik geçit</span><p style="color:var(--mut)">${x.w}</p><p><b>Ne taşır:</b> ${x.v}</p><h4 style="margin:12px 0 4px">Ekonomik önemi</h4><p>${x.eko}</p><h4 style="margin:12px 0 4px">Jeopolitik risk</h4><p>${x.risk}</p>`;
 return`<h3>${x.n}</h3><span class="pill b">${x.k=="d"?"Deniz yolu":"Kara / demiryolu"}</span><span class="pill">${SN[x.s]}</span><p style="color:var(--mut)">${x.ct}</p><p><b>Uzunluk:</b> ${x.len} · <b>Taşıma:</b> ${x.vol}</p><h4 style="margin:12px 0 4px">Ekonomik önemi</h4><p>${x.eko}</p><h4 style="margin:12px 0 4px">Jeopolitik risk</h4><p>${x.risk}</p>`}
 function pick(id){sel=g(id);$("#ti").innerHTML=card(sel);chips();draw()}
-window.TRX=TR;window.CPX=CP;window.TCARD=card;
+window.TKD=function(){if(inited)draw()};window.TRX=TR;window.CPX=CP;window.TCARD=card;
 window.tInit=function(){
 if(inited){draw();return}
 if(typeof Datamap=="undefined"||typeof topojson=="undefined"){$("#tm").innerHTML='<div class="fb">Harita kütüphanesi yüklenemedi. Yeniden dene.</div>';return}
@@ -1812,28 +1818,68 @@ openP(countryHTML(id,p,fb))};
 <script>
 (function(){
 const TS=[
-{id:"hrm",n:"Hürmüz Boğazı",oil:20,lng:20,box:3,gen:10,alt:0,d:0,t:"≈ 20 mb/g petrol, LNG’nin ≈ beşte biri"},
-{id:"sue",n:"Kızıldeniz–Babülmendeb–Süveyş",oil:9,lng:8,box:30,gen:12,alt:1,d:10,t:"konteynerin ≈ üçte biri; Ümit Burnu +≈ 10 gün"},
-{id:"mal",n:"Malakka Boğazı",oil:23,lng:25,box:25,gen:25,alt:1,d:3,t:"deniz ticaretinin ≈ dörtte biri; Lombok/Sunda +≈ 3 gün"},
-{id:"bos",n:"Türk Boğazları",oil:3,lng:0,box:1,gen:3,alt:0,d:0,t:"Karadeniz tahıl ve petrolü; deniz alternatifi yok"},
-{id:"pnm",n:"Panama Kanalı",oil:1,lng:2,box:6,gen:5,alt:1,d:10,t:"deniz ticaretinin ≈ %5’i; Süveyş veya Horn Burnu +≈ 10 gün"},
-{id:"twn",n:"Tayvan Boğazı",oil:0,lng:0,box:50,gen:8,alt:1,d:1,t:"konteyner filosunun ≈ yarısı; çevresinden dolaşmak mümkün"}];
+{id:"hrm",m:["hrm"],n:"Hürmüz Boğazı",oil:20,lng:20,box:0,gen:9,alt:0,d:0,t:"≈ 20 mb/g petrol (deniz petrol ticaretinin ≈ %25’i), LNG’nin ≈ %20’si"},
+{id:"sue",m:["sue","bab"],n:"Kızıldeniz–Babülmendeb–Süveyş",oil:5,lng:0,box:30,gen:12,alt:1,d:12,t:"normal yılda konteynerin ≈ %30’u, dünya ticaretinin ≈ %12–15’i; Ümit Burnu +10–14 gün"},
+{id:"mal",m:["mal"],n:"Malakka Boğazı",oil:23,lng:16,box:25,gen:25,alt:1,d:3,t:"deniz ticaretinin ≈ %25’i, LNG’nin ≈ %16’sı; Lombok/Sunda +1–3 gün"},
+{id:"lom",m:["lom"],n:"Lombok Boğazı",oil:.4,lng:0,box:0,gen:1,alt:0,d:0,t:"Malakka’nın derin su alternatifi (≈ 0,4 mb/g petrol); ikisi kapanırsa yedek kalmaz"},
+{id:"bos",m:["bos"],n:"Türk Boğazları",oil:4,lng:0,box:0,gen:1.5,alt:0,d:0,t:"≈ 3,7 mb/g petrol; Karadeniz tahıl ve petrolü; deniz alternatifi yok"},
+{id:"pnm",m:["pnm"],n:"Panama Kanalı",oil:2,lng:0,box:5,gen:5,alt:1,d:10,t:"konteyner ticaretinin ≈ %5’i; Asya–ABD Doğu Kıyısı Süveyş’ten +8–12 gün"},
+{id:"twn",m:["twn"],n:"Tayvan Boğazı",oil:0,lng:0,box:48,gen:20,alt:1,d:1,t:"konteyner filosunun ≈ %48’i (2022); Tayvan’ın doğusundan dolaşılabilir"},
+{id:"dan",m:["dan"],n:"Danimarka Boğazları",oil:5,lng:3,box:0,gen:2,alt:0,d:0,t:"≈ 4,9 mb/g petrol, LNG’nin ≈ %3’ü; Kiel Kanalı sınırlı"},
+{id:"gib",m:["gib"],n:"Cebelitarık Boğazı",oil:0,lng:0,box:0,gen:0,alt:0,d:0,t:"≈ 100.000 gemi/yıl; güvenilir hacim verisi bulunamadı, hesaba katılmaz"},
+{id:"cap",m:["cap"],n:"Ümit Burnu rotası",oil:9,lng:0,box:0,gen:0,alt:0,d:0,t:"≈ 9 mb/g petrol bu rotadan geçiyor; kapanırsa Süveyş yükü kaydırılamaz"}];
+const SC=[["Hürmüz kapanır",["hrm"]],["Kızıldeniz + Süveyş",["sue"]],["Hürmüz + Kızıldeniz",["hrm","sue"]],["Süveyş + Ümit Burnu",["sue","cap"]],["Malakka + Lombok",["mal","lom"]],["Tayvan ablukası",["twn"]],["Karadeniz",["bos"]],["Temizle",[]]];
+const ORD=["hrm","sue","mal","lom","bos","pnm","twn","dan","gib","cap"];
+const W={"Türkiye":[1,2,1,0,3,0,1,1,1,0],"Almanya":[1,3,2,0,0,0,2,3,1,1],"Çin":[3,2,3,2,0,1,3,1,1,1],"Japonya":[3,1,3,2,0,1,3,0,0,0],"Hindistan":[3,2,2,1,0,0,1,0,1,2],"ABD":[1,1,1,0,0,2,3,0,0,0],"Mısır":[1,3,0,0,0,0,0,0,1,0]};
 const el=id=>document.getElementById(id),fm=(x,n)=>x.toFixed(n==null?1:n).replace(".",","),un=a=>100*(1-a.reduce((p,x)=>p*(1-x/100),1));
 const box=el("tkc");if(!box)return;
 box.innerHTML=TS.map(x=>`<label><input type="checkbox" value="${x.id}"><span>${x.n} <small style="color:var(--mut)">(${x.t})</small></span></label>`).join("");
+box.insertAdjacentHTML("beforebegin",'<div class="tkp" id="tksc">'+SC.map((s,i)=>`<button class="st" type="button" data-sc="${i}">${s[0]}</button>`).join("")+'</div>');
+el("tkt").parentNode.insertAdjacentHTML("beforebegin",'<label style="display:block">Ülke etkisi: <select id="tkcn">'+Object.keys(W).map(k=>`<option>${k}</option>`).join("")+'</select></label>');
+el("tkt").parentNode.insertAdjacentHTML("beforebegin",'<label style="display:block">Kesinti süresi: <b id="tkv3">4</b> hafta<input type="range" id="tkw" min="1" max="52" value="4"></label>');
+el("tko").insertAdjacentHTML("beforebegin",'<label style="display:block;margin-top:8px"><input type="checkbox" id="tken"> Enerji sekmesinde işaretli hatları da kapalı say <small id="tkenn" style="color:var(--mut)"></small></label><div class="tkp"><button class="st" type="button" id="tkA">Bu sonucu A olarak sakla</button><button class="st" type="button" id="tkB">Çalışma brifingine aktar</button><button class="st" type="button" id="tkL">Bağlantıyı kopyala</button><button class="st" type="button" id="tkP">PDF özeti</button></div>');
+el("tko").insertAdjacentHTML("beforebegin",'<details style="margin:8px 0"><summary>Doğrulanamayan değerleri kendin ayarla</summary><label style="display:block">Cebelitarık’ın deniz ticareti payı: <b id="tkvg">0</b>%<input type="range" id="tkg" min="0" max="15" value="0"></label><label style="display:block">Tayvan Boğazı’nı dolaşma süresi: +<b id="tkvd">1</b> gün<input type="range" id="tkd" min="0" max="5" value="1"></label><label style="display:block">Navlun duyarlılığı ×<b id="tkvf">1,0</b><input type="range" id="tkf" min="5" max="20" value="10"></label></details>');
+let A=null,last=null;
+const SEC={"Çip ve elektronik":{twn:3,mal:2,sue:1,pnm:1,lom:1},"Gübre":{hrm:3,bos:3,sue:1},"Tahıl":{bos:3,pnm:2,sue:1,gib:1},"Kimya ve ilaç":{sue:2,mal:2,dan:1,gib:1},"Otomotiv parça":{twn:2,mal:2,sue:2,pnm:1,bos:1},"Enerji ürünleri":{hrm:3,sue:1,mal:2,dan:1,bos:1}};
+const lvl=(s,m)=>m==3||s>=5?"Yüksek":s>=2?"Orta":"Düşük",PM={hrm:5,sue:.5};
+const ck=id=>box.querySelector('input[value="'+id+'"]').checked;
 function calc(){
-const rr=+el("tkr").value/100,tl=+el("tkt").value/100,ep=+el("tke").value/100;
-el("tkv0").textContent=Math.round(rr*100);el("tkv1").textContent=Math.round(tl*100);el("tkv2").textContent=fm(ep,2);
-const S=TS.filter(x=>box.querySelector('input[value="'+x.id+'"]').checked),out=el("tko");
-if(!S.length){out.innerHTML='<div class="card"><p>Bir geçit işaretle.</p></div>';return}
-const gen=un(S.map(x=>x.gen)),str=un(S.map(x=>x.gen*(x.alt?1-rr:1))),lng=un(S.map(x=>x.lng)),bx=un(S.map(x=>x.box));
-const cap=S.reduce((a,x)=>a+(x.alt?x.box*rr*x.d/35:0),0),days=Math.max.apply(null,S.map(x=>x.alt?x.d:0));
-const oilU=un(S.map(x=>x.oil/104*100))*1.04,byp=S.some(x=>x.id=="hrm")?4.5:0,oilN=Math.max(0,oilU-byp)*(1-tl),pr=oilN/104*100/ep;
-out.innerHTML=`<div class="card"><small>Etkilenen deniz ticareti (hacim, kaba)</small><div class="eo">%${fm(gen,0)}</div><p>Alternatifsiz ya da kaydırılamayan kısım: ≈ %${fm(str,0)}. Konteynerde etkilenen pay ≈ %${fm(bx,0)}.</p></div>
-<div class="card"><small>Rota uzaması ve filo kapasitesi</small><div class="eo">+${fm(days,0)} gün</div><p>Kaydırılan yükler daha uzun yola girdiği için küresel konteyner filosunun kabaca %${fm(cap)}’i boşa zaman harcar; navlun ve sigorta primi yükselir, ithal ara mal ve tüketici fiyatlarına yansır.</p></div>
-<div class="card"><small>Öğretici petrol fiyat sıçraması (Brent)</small><div class="eo">+%${fm(pr,0)}</div><p>Net arz kaybı ≈ ${fm(oilN,1)} mb/g (dünya talebinin %${fm(oilN/1.04)}’i, telafi ve varsa bypass sonrası). Büyüme etkisi ≈ −${fm(pr/10*.13,2)} puan; enflasyonda yukarı baskı, ithalatçıda cari açık artışı.</p></div>
-<div class="card"><small>Etkilenen LNG</small><div class="eo">%${fm(lng,0)}</div><p>Küresel LNG ticaretinin bu kadarı işaretlenen geçitlerden geçer; LNG’de alternatif rota ve boru hattı daha sınırlı olduğu için bölgesel gaz fiyatı petrolden daha sert oynar.</p></div>`}
-el("tk").addEventListener("input",calc);calc();
+const rr=+el("tkr").value/100,tl0=+el("tkt").value/100,ep=+el("tke").value/100,wk=+el("tkw").value,tl=tl0*Math.max(0,1-wk/13);el("tkv3").textContent=wk;const gb=+el("tkg").value,tw=+el("tkd").value,fk=+el("tkf").value/10;el("tkvg").textContent=gb;el("tkvd").textContent=tw;el("tkvf").textContent=fm(fk,1);TS.find(x=>x.id=="gib").gen=gb;TS.find(x=>x.id=="twn").d=tw;
+el("tkv0").textContent=Math.round(rr*100);el("tkv1").textContent=Math.round(tl0*100);el("tkv2").textContent=fm(ep,2);
+const S=TS.filter(x=>ck(x.id)),out=el("tko"),X=new Set();S.forEach(x=>x.m.forEach(i=>X.add(i)));window.TKX=X;if(window.TKD)window.TKD();
+if(!S.length){out.innerHTML='<div class="card"><p>Bir geçit işaretle ya da hazır senaryo seç.</p></div>';return}
+const al=x=>x.alt&&!(x.id=="sue"&&ck("cap"))&&!(x.id=="mal"&&ck("lom"));
+const gen=un(S.map(x=>x.gen)),str=un(S.map(x=>x.gen*(al(x)?1-rr:1))),lng=un(S.map(x=>x.lng)),bx=un(S.map(x=>x.box));
+const cap=S.reduce((a,x)=>a+(al(x)?x.box*rr*x.d/35:0),0),days=Math.max.apply(null,S.map(x=>al(x)?x.d:0));
+let eo=0,eg=0;const eis=[...document.querySelectorAll("#ek input:checked")];el("tkenn").textContent=document.querySelector("#ek input")?"("+eis.length+" hat işaretli)":"(önce Enerji sekmesini aç)";if(el("tken").checked)eis.forEach(c=>{const m=c.parentNode.textContent.match(/\((\d+(?:\.\d+)?) (kb\/g|mrd)/);if(m)m[2]=="kb/g"?eo+=+m[1]/1000:eg+=+m[1]});const oilU=un(S.map(x=>x.oil/104*100))*1.04+eo,byp=ck("hrm")?4.5:0,oilN=Math.max(0,oilU-byp)*(1-tl),pr=oilN/104*100/ep;
+const cn=el("tkcn").value,w=W[cn],ex=S.map(x=>[x,w[ORD.indexOf(x.id)]]),sum=ex.reduce((a,b)=>a+b[1],0),mx=Math.max.apply(null,ex.map(b=>b[1])),lv=mx==3||sum>=5?"Yüksek":sum>=2?"Orta":"Düşük",ln=["yok","düşük","orta","yüksek"];
+const frg=fk*(15*cap+1.2*un(S.map(x=>x.box*(al(x)?1-rr:1)))),prm=Math.max.apply(null,S.map(x=>PM[x.id]||1)),cost=.067*wk*pr,cl=S.map(x=>x.n.split("–")[0]).join(" + ");
+const sr=Object.keys(SEC).map(k=>{let s=0,m=0;S.forEach(x=>{const v=SEC[k][x.id]||0;s+=v;m=Math.max(m,v)});return[k,lvl(s,m)]});
+last={cl,gen,days,pr,frg,cost,lv,cn,wk,oilN,lng,str,sr,prm,rr,tl0,ep};
+const row=(l,a,b)=>`<tr><th>${l}</th><td>${a}</td><td>${b}</td></tr>`,cur=o=>[o.cl,"%"+fm(o.gen,0),"+"+fm(o.days,0)+" gün","+%"+fm(o.pr,0),"+%"+fm(o.frg,0),fm(o.cost,0)+" mrd $",o.wk+" hf"];
+const extra=`<div class="card"><small>Konteyner navlunu ve sigorta</small><div class="eo">+%${fm(frg,0)}</div><p>Kısa dönem spot navlun için kaba tahmin (kalıcı seviye Asya–Avrupa’da +%25–40, tepe +%256); Kızıldeniz krizinde Şanghay–Avrupa navlunu iki ayda %256 arttı (UNCTAD). Savaş riski primi: Hürmüz’de kriz döneminde gemi değerinin %3–8’i (kriz öncesi ≈ %0,25), Babülmendeb’de ≈ %0,5. Modelin kullandığı üst değer ≈ %${fm(prm,1)}; diğer geçitlerde piyasa verisi yok, varsayım.</p></div>
+<div class="card"><small>${wk} haftalık ek petrol faturası</small><div class="eo">≈ ${fm(cost,0)} mrd $</div><p>Brent ≈ 92 $ (9–10 Kasım 2026 seviyesi) varsayımıyla. Telafi süre uzadıkça erir (IEA üyelerinin zorunlu 90 günlük stoku ≈ 13 hafta); etkin telafi şu an %${fm(tl*100,0)}.${eo||eg?` Enerji hatlarından ${fm(eo,1)} mb/g petrol ve ${fm(eg,0)} mrd m³/yıl gaz da kapalı sayıldı.`:""}</p></div>
+<div class="card" style="grid-column:1/-1"><small>Sektör maruziyeti (model yargısı)</small><p>${sr.map(s=>s[0]+": <b>"+s[1]+"</b>").join(" · ")}</p></div>${A?`<div class="card sc" style="grid-column:1/-1"><small>Senaryo karşılaştırma</small><table class="tkx"><tr><th></th><th>A</th><th>Şimdi</th></tr>${["Kapalı","Etkilenen ticaret","Rota uzaması","Brent","Navlun","Petrol faturası","Süre"].map((l,i)=>row(l,cur(A)[i],cur(last)[i])).join("")}</table></div>`:""}`;
+const nob=S.filter(x=>!al(x)&&x.alt).map(x=>x.n.split("–")[0]);
+out.innerHTML=`<div class="card"><small>Etkilenen deniz ticareti (hacim, kaba)</small><div class="eo">%${fm(gen,0)}</div><p>Alternatifsiz ya da kaydırılamayan kısım: ≈ %${fm(str,0)}. Konteynerde etkilenen pay ≈ %${fm(bx,0)}.${nob.length?" Yedek rota da kapalı olduğu için kaydırma imkânı yok: "+nob.join(", ")+".":""}</p></div>
+<div class="card"><small>Rota uzaması ve filo kapasitesi</small><div class="eo">+${fm(days,0)} gün</div><p>Kaydırılan yükler daha uzun yola girdiği için küresel konteyner filosunun kabaca %${fm(cap)}’i boşa zaman harcar; navlun ve sigorta primi yükselir, ithal ara mal ve tüketici fiyatlarına yansır. Sıkışıklıkla gerçek kayıp daha yüksek olur: Kızıldeniz krizinde analistler küresel kapasite kaybını ≈ %20 saydı.</p></div>
+<div class="card"><small>Öğretici petrol fiyat sıçraması (Brent)</small><div class="eo">+%${fm(pr,0)}</div><p>Net arz kaybı ≈ ${fm(oilN,1)} mb/g (dünya talebinin %${fm(oilN/1.04)}’i, telafi ve varsa bypass sonrası). Büyüme etkisi ≈ −${fm(pr/10*.1,2)} puan; enflasyonda yukarı baskı, ithalatçıda cari açık artışı.</p></div>
+<div class="card"><small>Etkilenen LNG</small><div class="eo">%${fm(lng,0)}</div><p>Küresel LNG ticaretinin bu kadarı işaretlenen geçitlerden geçer; LNG’de alternatif rota ve boru hattı daha sınırlı olduğu için bölgesel gaz fiyatı petrolden daha sert oynar.</p></div>
+<div class="card" style="grid-column:1/-1"><small>${cn}: maruz kalma (Hürmüz dışında model yargısı)</small><div class="eo">${lv}</div><p>${ex.map(b=>`${b[0].n.split("–")[0]}: ${ln[b[1]]}`).join(" · ")}. Ağırlıklar (0–3) ülkenin enerji, ihracat ve ara malı bağlarına göre <b>kaba ve öğreticidir</b>; gerçek ticaret verisiyle (UN Comtrade, IEA) doğrula.</p></div>
+<div class="card" style="grid-column:1/-1"><small>Veri notu</small><p>Hesap yalnızca kaynaklı hacimleri kullanır. Hacmi bulunamayan alanlar 0 alındığı için sonuçlar <b>alt sınırdır</b>. Malakka’da konteyner payı verisi olmadığından genel deniz ticareti payı vekil alındı.${ck("gib")&&!gb?" <b>Cebelitarık hesaba katılmadı</b>: güvenilir hacim verisi yok; payı “kendin ayarla” bölümünden girebilirsin.":""}</p></div><div class="card" style="grid-column:1/-1"><small>Haritada gör</small><p>Kapalı geçitler yukarıdaki haritada koyu halkayla işaretli (Kızıldeniz seçeneği Süveyş ve Babülmendeb’i birlikte kapatır).</p></div>${extra}`}
+el("tk").addEventListener("input",calc);
+el("tksc").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const ids=SC[+b.dataset.sc][1];TS.forEach(x=>box.querySelector('input[value="'+x.id+'"]').checked=ids.includes(x.id));calc()});
+el("tk").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+if(b.id=="tkA"&&last){A=Object.assign({},last);calc()}
+else if(b.id=="tkB"&&last){const v=(i,s)=>{document.getElementById("f"+i).value=s},o=last;v(1,"Kesinti senaryosu: "+o.cl);v(2,o.cl+" "+o.wk+" hafta kapalı varsayıldı (öğretici model).");v(3,"Etkilenen deniz ticareti ≈ %"+fm(o.gen,0)+"; rota uzaması +"+fm(o.days,0)+" gün.");v(4,"Brent ≈ +%"+fm(o.pr,0)+"; konteyner navlunu ≈ +%"+fm(o.frg,0)+"; ek petrol faturası ≈ "+fm(o.cost,0)+" mrd $; "+o.cn+" maruziyeti: "+o.lv+".");v(5,"Kaba varsayımlar, geçit örtüşmesi ve telafi belirsiz; gerçek veriyle doğrula.");v(6,"Alternatif rota, stok ve diplomasiyi izle.");brif();show(12)}
+else if(b.id=="tkP"&&last){const o=last,f2=x=>fm(x,0),R=[["Kapalı geçitler",o.cl],["Süre",o.wk+" hafta"],["Varsayımlar","Kayabilen yük %"+f2(o.rr*100)+", telafi %"+f2(o.tl0*100)+", fiyat esnekliği "+fm(o.ep,2)],["Etkilenen deniz ticareti","%"+f2(o.gen)+" (kaydırılamayan ≈ %"+f2(o.str)+")"],["Rota uzaması","+"+f2(o.days)+" gün"],["Brent sıçraması","+%"+f2(o.pr)+" (net arz kaybı "+fm(o.oilN,1)+" mb/g)"],["Konteyner navlunu (spot, kaba)","+%"+f2(o.frg)],["Savaş riski primi (üst değer)","%"+fm(o.prm,1)+" gemi değeri"],["Ek petrol faturası ("+o.wk+" hf)","≈ "+f2(o.cost)+" mrd $"],["Etkilenen LNG","%"+f2(o.lng)],[o.cn+" maruziyeti",o.lv],["Sektörler",o.sr.map(s=>s[0]+": "+s[1]).join(", ")]];
+const cmp=A?"<h2>Karşılaştırma: A senaryosu</h2><table><tr><th>Kapalı</th><td>"+A.cl+"</td></tr><tr><th>Etkilenen ticaret</th><td>%"+f2(A.gen)+"</td></tr><tr><th>Brent</th><td>+%"+f2(A.pr)+"</td></tr><tr><th>Navlun</th><td>+%"+f2(A.frg)+"</td></tr><tr><th>Petrol faturası</th><td>≈ "+f2(A.cost)+" mrd $ ("+A.wk+" hf)</td></tr></table>":"";
+const h="<!doctype html><meta charset=utf-8><title>Kesinti özeti</title><style>body{font:14px/1.5 system-ui,sans-serif;margin:28px;color:#111}h1{font-size:20px;margin:0 0 4px}h2{font-size:15px;margin:18px 0 6px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #bbb;padding:5px 8px;text-align:left;vertical-align:top}th{width:34%;background:#f2f2f2}small{color:#555}</style><h1>Ticaret yolları kesinti özeti</h1><small>"+new Date().toLocaleDateString("tr-TR")+" · öğretici kaba model</small><h2>Senaryo</h2><table>"+R.map(r=>"<tr><th>"+r[0]+"</th><td>"+r[1]+"</td></tr>").join("")+"</table>"+cmp+"<h2>Notlar</h2><p><small>Petrol hacimleri EIA (Mart 2026) ve IEA, ticaret payları UNCTAD ve PortWatch kaynaklıdır; Brent ve savaş riski primleri Kasım 2026 piyasa verisidir. Hacmi bulunamayan alanlar (ör. Cebelitarık) 0 alındığı için sonuçlar alt sınırdır. Hürmüz dışındaki ülke ve sektör sınıflamaları ve navlun katsayıları model yargısıdır, ölçüm değildir. Tahmin değildir; karar öncesi IEA, EIA, UNCTAD ve ilgili kurum verilerini kontrol et.</small></p>",fr=document.createElement("iframe");fr.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";document.body.appendChild(fr);const d=fr.contentWindow.document;d.open();d.write(h);d.close();setTimeout(()=>{fr.contentWindow.focus();fr.contentWindow.print();setTimeout(()=>fr.remove(),3000)},300)}
+else if(b.id=="tkL"){const q=new URLSearchParams({tk:TS.filter(x=>ck(x.id)).map(x=>x.id).join("."),r:el("tkr").value,t:el("tkt").value,e:el("tke").value,w:el("tkw").value,c:el("tkcn").value}),u=location.href.split("#")[0]+"#"+q;try{navigator.clipboard.writeText(u)}catch(x){}b.textContent="Kopyalandı";setTimeout(()=>b.textContent="Bağlantıyı kopyala",1500)}});
+const H=new URLSearchParams(location.hash.slice(1));
+if(H.has("tk")){const ids=H.get("tk").split(".");TS.forEach(x=>box.querySelector('input[value="'+x.id+'"]').checked=ids.includes(x.id));[["r","tkr"],["t","tkt"],["e","tke"],["w","tkw"],["c","tkcn"]].forEach(p=>{if(H.has(p[0]))el(p[1]).value=H.get(p[0])});calc();setTimeout(()=>{show(14);el("tk").scrollIntoView()},300)}
+document.getElementById("s13").addEventListener("input",()=>{if(el("tken").checked)calc()});
+calc();
 })();
 </script>
 </body></html>
