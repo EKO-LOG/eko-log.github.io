@@ -424,21 +424,26 @@ let gcur=null;
 const GI=[0,3,5,6,7,11,12],TI=[1,2,4,8,9,10,13];
 const WBI=[["Reel GSYH büyümesi (yıllık %)","NY.GDP.MKTP.KD.ZG","p"],["Enflasyon, TÜFE (yıllık %)","FP.CPI.TOTL.ZG","p"],["GSYH (cari $)","NY.GDP.MKTP.CD","b"],["Kişi başı GSYH (cari $)","NY.GDP.PCAP.CD","n"],["Cari işlemler dengesi (GSYH %)","BN.CAB.XOKA.GD.ZS","p"],["Mal ve hizmet ihracatı (GSYH %)","NE.EXP.GNFS.ZS","p"],["Mal ve hizmet ithalatı (GSYH %)","NE.IMP.GNFS.ZS","p"],["Genel devlet borcu (GSYH %)","GC.DOD.TOTL.GD.ZS","p"],["İşsizlik oranı (%)","SL.UEM.TOTL.ZS","p"],["Nüfus","SP.POP.TOTL","n"]];
 function wbFmt(v,t){if(t==="p")return "%"+fx(v,1);if(t==="b")return fx(v/1e9,1)+" mlr $";return fx(v,0)}
-const WBX={KOS:"XKX"};let WBA=null,WBP=null,WBERR=0,WBPART=0;
+const WBX={KOS:"XKX"};let WBA=null,WBP=null,WBERR=0,WBPART=0,WBLAST="";
 /* Dünya Bankası isteği: önce fetch, olmazsa script etiketiyle (JSONP). Yerel dosya/önizleme ekranlarında da çalışır. */
 function wbReq(url,cb){let fin=false;const done=j=>{if(fin)return;fin=true;cb(j)};
 const jp=()=>{if(fin)return;const n="wbcb"+Math.random().toString(36).slice(2),sc=document.createElement("script");
 const clean=()=>{window[n]=function(){};sc.remove()};
-window[n]=j=>{clean();done(j)};sc.onerror=()=>{clean();done(null)};sc.src=url+"&format=jsonP&prefix="+n;document.head.appendChild(sc);setTimeout(()=>{clean();done(null)},25000)};
-try{const ac=window.AbortController?new AbortController():null;if(ac)setTimeout(()=>ac.abort(),10000);
-fetch(url+"&format=json",ac?{signal:ac.signal}:{}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(done,jp)}catch(e){jp()}}
+window[n]=j=>{clean();done(j)};sc.onerror=()=>{clean();WBLAST+=" | script: yüklenemedi";done(null)};sc.src=url+"&format=jsonP&prefix="+n;document.head.appendChild(sc);setTimeout(()=>{clean();WBLAST+=" | script: zaman aşımı";done(null)},25000)};
+try{const ac=window.AbortController?new AbortController():null;if(ac)setTimeout(()=>ac.abort(),15000);
+fetch(url+"&format=json",ac?{signal:ac.signal}:{}).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(done,e=>{WBLAST="fetch: "+(e&&e.message||e);jp()})}catch(e){WBLAST="fetch: "+(e&&e.message||e);jp()}}
+/* Dünya Bankası sayfa başına en fazla 1000 satır verir; sayfaları birleştirir */
+function wbPaged(code,cb){const base="https://api.worldbank.org/v2/country/all/indicator/"+code+"?date=2018:2026&per_page=1000";
+wbReq(base+"&page=1",j=>{if(!j||!j[1]){if(j&&j[0]&&j[0].message)WBLAST="API: "+JSON.stringify(j[0].message).slice(0,120);cb(null);return}
+const pages=(j[0]&&+j[0].pages)||1;let rows=j[1],left=pages-1,bad=0;if(!left){cb(rows);return}
+for(let p=2;p<=pages;p++)wbReq(base+"&page="+p,k=>{if(k&&k[1])rows=rows.concat(k[1]);else bad=1;if(!--left)cb(bad?null:rows)})})}
 /* Tüm ülkelerin göstergeleri: gösterge başına tek istek (toplam 10), 7 gün tarayıcıda saklanır */
 function wbAll(cb){if(WBA){cb();return}
 const c=K("kg_wball2",null);if(c&&c.d&&Date.now()-c.t<6048e5){WBA=c.d;cb();return}
 if(WBP){WBP.push(cb);return}WBP=[cb];
 const d={};let left=WBI.length,ok=0;
-WBI.forEach((x,k)=>wbReq("https://api.worldbank.org/v2/country/all/indicator/"+x[1]+"?mrv=6&per_page=5000",j=>{
-if(j&&j[1]){ok++;j[1].forEach(o=>{if(o.value===null||o.value===undefined||!o.countryiso3code)return;const a=d[o.countryiso3code]||(d[o.countryiso3code]=[]);if(!a[k]||o.date>a[k][1])a[k]=[o.value,o.date]})}
+WBI.forEach((x,k)=>wbPaged(x[1],rows=>{
+if(rows){ok++;rows.forEach(o=>{if(o.value===null||o.value===undefined||!o.countryiso3code)return;const a=d[o.countryiso3code]||(d[o.countryiso3code]=[]);if(!a[k]||o.date>a[k][1])a[k]=[o.value,o.date]})}
 if(--left)return;const fl=WBP;WBP=null;WBPART=WBI.length-ok;
 if(ok){WBA=d;WBERR=0;if(!WBPART)S("kg_wball2",{t:Date.now(),d})}else WBERR=1;
 fl.forEach(f=>f())}))}
@@ -449,7 +454,7 @@ else if(gcur){if(!WBA&&!WBERR&&!WBP)wbAll(()=>ri());
 const rw=(v)=>WBI.map(x=>rr({n:x[0],v:v,d:"",s:"Dünya Bankası"})).join("");let rows,note="";
 if(WBA){const a=WBA[WBX[gcur]||gcur]||[];rows=WBI.map((x,k)=>{const o=a[k];return rr({n:x[0],v:o?wbFmt(o[0],x[2]):"—",d:o?o[1]:"",s:"Dünya Bankası"})}).join("");
 if(!a.some(Boolean))note="Dünya Bankası bu ülke için güncel veri yayımlamıyor ya da kodu eşleşmedi.";else if(WBPART)note="Bazı göstergeler yüklenemedi. "}
-else if(WBERR){rows=rw("Bağlanamadı");note="Dünya Bankası verilerine bağlanılamadı. İnternet bağlantını kontrol et; dosya bir önizleme ekranında açıksa tarayıcıda ya da https adresinden aç. "}
+else if(WBERR){rows=rw("Bağlanamadı");note="Dünya Bankası verilerine bağlanılamadı. İnternet bağlantını kontrol et; sayfa bir önizleme ekranında açıksa tarayıcıda aç. "+(WBLAST?"<small>(Ayrıntı: "+esc(WBLAST)+")</small> ":"")}
 else rows=rw("Yükleniyor…");
 const msg=(note||WBERR||WBPART)?`<tr><td colspan="4" style="color:var(--mu)">${note}${WBERR||WBPART?'<button class="btn g" id="wr">Yeniden dene</button>':""}</td></tr>`:"";
 h+=hd(nm3(gcur)+" (Dünya Bankası, en son mevcut yıl)")+msg+rows}
