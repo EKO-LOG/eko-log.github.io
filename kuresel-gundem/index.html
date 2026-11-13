@@ -156,6 +156,65 @@ html[data-hc] :focus-visible{outline:3px solid #ffbf00!important;outline-offset:
 html[data-rm] *,html[data-rm] *::before,html[data-rm] *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 @media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:112px}.brand span{display:none}#mi ol{columns:1}.sheet{padding:16px}.card{padding:18px}main{padding-top:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* enerji hatları */
+#em{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--surf)}
+#em svg{width:100%;height:100%;display:block}
+.el{fill:#e6d8df;stroke:#bfaab8;stroke-width:.4}
+.el.hl{fill:rgba(255,122,69,.38);stroke:var(--red)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .el{fill:#3a2c4f;stroke:#5a476f}:root:not([data-theme="light"]) .el.hl{fill:rgba(255,154,115,.4)}}
+:root[data-theme="dark"] .el{fill:#3a2c4f;stroke:#5a476f}:root[data-theme="dark"] .el.hl{fill:rgba(255,154,115,.4)}
+.ep{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;transition:opacity .25s}
+.ep.o{stroke:var(--red)}.ep.g{stroke:var(--ac)}
+.eh{fill:none;stroke:transparent;stroke-width:16;cursor:pointer;pointer-events:stroke}
+.et{font:600 11px "Instrument Sans",sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--surf);stroke-width:3px;pointer-events:none}
+.lg{display:inline-block;width:22px;height:0;border-top:4px solid;vertical-align:middle;margin-right:6px}
+.lg.o{border-color:var(--red)}.lg.g{border-color:var(--ac)}.lg.k{border-top-style:dashed}
+.ek label{display:flex;gap:10px;padding:5px 0;align-items:flex-start;cursor:pointer}
+.ek input[type=range]{width:100%;padding:0;accent-color:var(--red)}
+.eo{font:700 clamp(26px,5vw,38px) "Bricolage Grotesque",sans-serif;color:var(--red)}
+
+/* ticaret yolları */
+:root{--ts:#6d3fd8;--tk:#d9731a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ts:#a98bff;--tk:#ffa766}}
+:root[data-theme="dark"]{--ts:#a98bff;--tk:#ffa766}
+#tm{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--surf)}
+#tm svg{width:100%;height:100%;display:block}
+.tp{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;transition:opacity .25s}
+.tp.d{stroke:var(--ts)}.tp.k{stroke:var(--tk)}
+.tc{fill:var(--red);stroke:var(--surf);stroke-width:2;pointer-events:none}
+.th{fill:transparent;cursor:pointer}
+.lg.s{border-color:var(--ts)}.lg.l{border-color:var(--tk)}.lg.q{border-top-style:dashed}
+#s14 .st[aria-pressed=true]{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;box-shadow:none}
+#trc .st{font-size:13px;padding:6px 12px}
+
+.gw .st.lyr{width:auto;height:36px;padding:0 14px;letter-spacing:0;font-size:13px;font-weight:600}
+.gw .st.lyr[aria-pressed=true]{background:linear-gradient(120deg,#ff7a45,#c4202e);box-shadow:none}
+#glg{display:none;margin-top:6px;font-size:12.5px;line-height:1.7}
+#glg span{margin:0 6px;white-space:nowrap;display:inline-block}
+
+.gc.lyrs{gap:6px}
+#glg i{display:inline-block;width:16px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+#glg i.o{width:9px;height:9px;border-radius:50%}
+.lf{fill:none;stroke:#fff;stroke-linecap:round;stroke-dasharray:1 14;pointer-events:none;animation:gflow 1.8s linear infinite}
+@keyframes gflow{to{stroke-dashoffset:-15}}
+.gpr{fill:none;stroke-width:1.6;transform-box:fill-box;transform-origin:center;pointer-events:none;animation:gpulse 2.4s ease-out infinite}
+@keyframes gpulse{0%{transform:scale(.45);opacity:.9}100%{transform:scale(2.3);opacity:0}}
+.glt{font:600 10.5px "Instrument Sans",sans-serif;fill:#fff;paint-order:stroke;stroke:rgba(20,8,30,.88);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+#gli{display:none;margin-top:12px;text-align:left;color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.15),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:16px 16px 14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 18px 40px -22px rgba(0,0,0,.6)}
+#gli.on{display:block;animation:fin .35s both}
+#gli .gh{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+#gli .gh b{font:700 19px/1.2 "Bricolage Grotesque",sans-serif}
+#gli .gx{flex:none;width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+.gp{display:inline-block;font:600 12.5px "Instrument Sans",sans-serif;color:#fff;background:rgba(255,255,255,.14);border:0;border-radius:999px;padding:4px 11px;margin:6px 6px 0 0}
+button.gp{cursor:pointer}button.gp:hover{background:rgba(255,255,255,.28)}
+.gp.hl{background:linear-gradient(120deg,#ff7a45,#c4202e)}
+#gli .gs{font:700 11.5px "Instrument Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.68);margin:14px 0 0}
+#gli p{margin:6px 0 0;font-size:14px;line-height:1.5}
+#gli .gr{display:flex;gap:10px;font-size:13px;margin-top:5px;line-height:1.4}
+#gli .gr span{flex:none;width:76px;color:rgba(255,255,255,.62)}
+#gli .gr b{font-weight:600}
+#gli .rk{border-left:3px solid var(--rk,#ff6470);padding-left:11px;margin-top:12px}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
@@ -174,7 +233,8 @@ html[data-rm] *,html[data-rm] *::before,html[data-rm] *::after{animation-duratio
 <p class="rise">Uluslararası ilişkiler, dış ticaret ve iktisat için tek ekranda: izleme listesi, göstergeler, takvim, kariyer haritası ve sözlük. Her şey düzenlenebilir ve tarayıcında saklanır.</p>
 <div class="rise btns"><a class="btn" href="#nv">Bölümlere git</a> <a class="btn line" href="../">Eko-Log’a dön</a></div>
 </div>
-<div class="gw"><div id="gl" aria-label="Dönen dünya"></div><div class="tag" id="tg">Her yöne sürükle, iki parmakla yakınlaştır. Ülkeye dokun.</div><div class="gc"><button class="st" id="gzo" aria-label="Uzaklaştır">−</button><button class="st" id="gzi" aria-label="Yakınlaştır">+</button><button class="st" id="grs" aria-label="Sıfırla">⟲</button><button class="st" id="ga" aria-label="Dönmeyi durdur veya başlat">❚❚</button></div></div>
+<div class="gw"><div id="gl" aria-label="Dönen dünya"></div><div class="tag" id="tg">Her yöne sürükle, iki parmakla yakınlaştır. Ülkeye dokun.</div><div class="gc"><button class="st" id="gzo" aria-label="Uzaklaştır">−</button><button class="st" id="gzi" aria-label="Yakınlaştır">+</button><button class="st" id="grs" aria-label="Sıfırla">⟲</button><button class="st" id="ga" aria-label="Dönmeyi durdur veya başlat">❚❚</button></div>
+<div class="gc" id="gly" style="flex-wrap:wrap"><button class="st lyr" id="gle" type="button" aria-pressed="false">Enerji hatları</button><button class="st lyr" id="glt" type="button" aria-pressed="false">Ticaret yolları</button><button class="st lyr" id="glc" type="button" aria-pressed="false">Kritik geçitler</button></div><div class="tag" id="glg"></div><div id="gli" aria-live="polite"></div></div>
 </div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="marq" aria-hidden="true"><div><span>Diplomasi</span><span>Ticaret</span><span>Yaptırım</span><span>Kur</span><span>Bloklar</span><span>Krizler</span><span>Diplomasi</span><span>Ticaret</span><span>Yaptırım</span><span>Kur</span><span>Bloklar</span><span>Krizler</span></div></div>
@@ -230,6 +290,66 @@ html[data-rm] *,html[data-rm] *::before,html[data-rm] *::after{animation-duratio
 <h3 style="margin-top:20px">Brifing hazırlayıcı</h3><p style="color:var(--mu);margin:0 0 6px">Karar vericiye tek sayfalık not yazarken iskelet olarak kullan.</p>
 <div class="grid"><textarea id="f1" rows="2" placeholder="Konu"></textarea><textarea id="f2" rows="2" placeholder="Ne oldu?"></textarea><textarea id="f3" rows="2" placeholder="Neden önemli?"></textarea><textarea id="f4" rows="2" placeholder="Etki (ticaret, iktisat, güvenlik)"></textarea><textarea id="f5" rows="2" placeholder="Riskler ve belirsizlikler"></textarea><textarea id="f6" rows="2" placeholder="Öneri ve izlenecekler"></textarea></div>
 <textarea id="fo" rows="9" style="width:100%;margin-top:8px" readonly></textarea><div class="row"><button class="btn" id="fc">Kopyala</button></div></section>
+<section id="s13"><h2>Enerji hatları ve jeopolitik risk</h2>
+<p style="color:var(--mut);max-width:70ch">Boru hattına dokun: geçtiği ülkeler küre üzerinde boyanır, ekonomik ve jeopolitik etkisi altta açılır. Rakamlar yaklaşık büyüklüklerdir; akışlar günlük değişir. Kanada, Afrika ve Asya hatları için <b>Dünya</b> görünümünü aç.</p>
+<div class="row"><button class="st on" data-ef="all">Tümü</button><button class="st" data-ef="o">Petrol</button><button class="st" data-ef="g">Doğalgaz</button><span style="flex:1"></span><button class="st on" data-ev="a">Avrasya</button><button class="st" data-ev="t">Türkiye çevresi</button><button class="st" data-ev="w">Dünya</button></div>
+<div id="em" role="img" aria-label="Petrol ve doğalgaz boru hatları haritası"></div>
+<div class="row" style="font-size:14px;color:var(--mut)"><span><i class="lg o"></i>Petrol</span><span><i class="lg g"></i>Doğalgaz</span><span><i class="lg o k"></i>Kesikli: riskli veya kapalı</span><span>Noktalı: yapım aşamasında veya planlanan</span></div>
+<div class="card" id="ei">Haritada bir hatta dokun.</div>
+<h3 style="margin:22px 0 8px">Boru hattı ekonomiyi nasıl etkiler?</h3>
+<div class="grid">
+<div class="card"><h3>Enflasyon</h3><p>Ham petrol ve gaz fiyatı üretici maliyetine, ulaştırmaya ve elektrik tarifesine yansır. Kaba kural: ham petrol %10 artınca küresel enflasyon birkaç onda puan yükselir; ithalatçı ve kurunda baskı olan ülkelerde etki daha büyüktür.</p></div>
+<div class="card"><h3>Akaryakıt fiyatı</h3><p>Pompa fiyatı ham petrol, rafineri marjı, kur ve vergiden oluşur. Vergi payı yüksek ülkelerde (ör. Türkiye, AB) ham petroldeki oynaklık pompaya daha sönük yansır; ama kur zayıfsa fark kapanır.</p></div>
+<div class="card"><h3>Dış ticaret dengesi</h3><p>İthalatçıda enerji faturası cari açığı büyütür, ihracatçıda bütçe ve kur desteklenir. Tek hatta bağımlı ülke (Macaristan, Slovakya, Irak) kesintide hem gelir hem pazarlık gücü kaybeder.</p></div>
+<div class="card"><h3>Geçiş rantı ve pazarlık</h3><p>Transit ülke (Gürcistan, Türkiye, Ukrayna) transit ücreti ve stratejik ağırlık kazanır. Hat, ihracatçıyı tek müşteriye ya da tek rotaya bağlayarak yaptırım ve kesinti silahına da dönüşür.</p></div>
+</div>
+<h3 style="margin:22px 0 8px">Ülke notları</h3>
+<div class="sc card"><table><thead><tr><th>Ülke</th><th>Rolü</th><th>Hatlarla ilişkisi ve risk</th></tr></thead><tbody id="ec"></tbody></table></div>
+<h3 style="margin:22px 0 8px">Kesinti simülatörü</h3>
+<div class="card ek"><p style="margin-top:0">Hangi hatların durduğunu işaretle. Sonuç <b>öğretici bir kaba hesaptır</b>, tahmin değildir.</p>
+<div class="grid" id="ek"></div>
+<label style="display:block">Telafi (stok, stratejik rezerv, yedek kapasite): <b id="ev1">50</b>%<input type="range" id="et" min="0" max="90" value="50"></label>
+<label style="display:block">Kısa dönem fiyat esnekliği (düşük olması fiyatı daha çok oynatır): <b id="ev2">0,10</b><input type="range" id="ee" min="5" max="30" value="10"></label>
+<div class="grid" id="eout" style="margin-top:10px"></div>
+<small style="color:var(--mut)">Varsayımlar: dünya petrol talebi ≈ 104 mb/g, doğalgaz ≈ 4.100 mrd m³/yıl. Fiyat değişimi ≈ net arz kaybı payı ÷ esneklik. Büyüme etkisi için kaba kural: petrolde %10 artış, küresel büyümeyi yaklaşık 0,13 puan düşürür.</small></div>
+<small style="color:var(--mut);display:block;margin-top:14px">Durum bilgisi Kasım 2026 itibarıyladır ve hızla değişir (Hürmüz Boğazı krizi, Irak-Türkiye anlaşması, Rusya-AB gazı). Karar vermeden önce IEA, EIA, BOTAŞ ve ilgili şirket açıklamalarını kontrol et.</small>
+</section>
+<section id="s14"><h2>Ticaret yolları</h2>
+<p style="color:var(--mut);max-width:70ch">Dünya ticaretinin büyük bölümü az sayıda deniz yolundan ve dar geçitten (boğaz, kanal) akar; kara koridorları ise bunlara alternatif arar. Bir yola ya da kırmızı noktaya dokun: geçtiği ülkeler boyanır, ekonomik önemi ve riski altta açılır. İstersen boru hatlarını da üstüne bindir. Rakamlar yaklaşık büyüklüklerdir.</p>
+<div class="row"><button class="st on" data-tf="all">Tümü</button><button class="st" data-tf="d">Deniz</button><button class="st" data-tf="k">Kara ve demiryolu</button><span style="flex:1"></span><button class="st on" data-tv="w">Dünya</button><button class="st" data-tv="a">Avrasya</button></div>
+<div class="row"><button class="st" id="tpb" aria-pressed="false">Boru hatlarını da göster</button></div>
+<div id="tm" role="img" aria-label="Deniz ticaret yolları, kara koridorları ve kritik geçitler haritası"></div>
+<div class="row" style="font-size:14px;color:var(--mut)"><span><i class="lg s"></i>Deniz yolu</span><span><i class="lg l"></i>Kara / demiryolu</span><span><i class="lg s q"></i>Kesikli: riskli, kısmi veya planlanan</span><span><i class="dot" style="background:var(--red)"></i>Kritik geçit</span></div>
+<div class="row" id="trc" aria-label="Yol ve geçit seçimi"></div>
+<div class="card" id="ti">Haritada bir yola ya da geçide dokun, ya da yukarıdaki düğmelerden seç.</div>
+<h3 style="margin:22px 0 8px">Kritik geçitler (darboğazlar)</h3>
+<div class="sc card"><table><thead><tr><th>Geçit</th><th>Ne taşır, neden önemli</th><th>Güncel risk (Kasım 2026)</th></tr></thead><tbody id="tcp"></tbody></table></div>
+<h3 style="margin:22px 0 8px">Asya–Avrupa: seçenekler nasıl karşılaşır?</h3>
+<div class="sc card"><table><thead><tr><th>Yol</th><th>Süre (kaba)</th><th>Güçlü yanı</th><th>Zayıf yanı</th></tr></thead><tbody>
+<tr><td><b>Süveyş (deniz)</b></td><td>Şanghay–Rotterdam ≈ 10.500 deniz mili, ≈ 30–35 gün</td><td>En ucuz birim maliyet, dev gemi ölçeği</td><td>Kızıldeniz ve Babülmendeb güvenliği, kanal geliri/ücreti</td></tr>
+<tr><td><b>Ümit Burnu (deniz)</b></td><td>Süveyş’e göre ≈ +10 gün, ≈ +3.000–3.500 deniz mili</td><td>Husi ve Kızıldeniz riskinden kaçınır</td><td>Yakıt, süre ve navlun artar; gemi ihtiyacı büyür</td></tr>
+<tr><td><b>Orta Koridor (kara + Hazar)</b></td><td>≈ 15–25 gün</td><td>Rusya’yı ve Hürmüz/Süveyş’i atlar; Türkiye üzerinden geçer</td><td>Küçük kapasite, aktarma, Hazar feribotu, sınır ve tarife farkları</td></tr>
+<tr><td><b>Trans-Sibirya (demiryolu)</b></td><td>≈ 14–18 gün</td><td>Düz ve hızlı hat</td><td>Yaptırımlar, AB sınır kısıtları, sigorta ve şirket çekingenliği</td></tr>
+<tr><td><b>Kuzey Deniz Yolu (Arktik)</b></td><td>Kuzey Avrupa–Doğu Asya mesafesi ≈ %30–40 kısa (yaz–güz)</td><td>Kısa mesafe, Süveyş ve Malakka’dan bağımsız</td><td>Buz, buzkıran zorunluluğu, kısa sezon, yaptırımlar ve Rusya denetimi</td></tr>
+</tbody></table></div>
+<h3 style="margin:22px 0 8px">Yollar enerji ve ekonomiyle nasıl bağlanır?</h3>
+<div class="grid">
+<div class="card"><h3>Tanker ve LNG yolları</h3><p>Boru hattının ulaşmadığı yerde petrol ve LNG gemiyle gider: Körfez’den Asya’ya (Hürmüz ve Malakka), Katar’dan Avrupa’ya (Hürmüz, Babülmendeb, Süveyş), ABD’den Avrupa’ya (Atlantik). Hürmüz’den çıkan petrolün yaklaşık beşte dördü Asya’ya gider; bu yüzden Asya ithalatçıları krizden ilk etkilenenlerdir.</p></div>
+<div class="card"><h3>Boru hattı bypass’ı</h3><p>Suudi Doğu-Batı hattı ve BAE’nin Habşan-Füceyre hattı Hürmüz’ü atlar ama IEA’ya göre toplam yedek kapasite yaklaşık 3,5–5,5 mb/g’dir; Hürmüz’ün ≈ 20 mb/g’lik hacmini karşılamaz. Yanbu’dan çıkan tanker de Kızıldeniz’e ve Babülmendeb’e muhtaçtır. Yani bir darboğazı atlamak çoğu zaman riski başka bir darboğaza taşır. Hatlar için <b>Enerji</b> sekmesine bak.</p></div>
+<div class="card"><h3>Navlun, sigorta ve enflasyon</h3><p>Rota uzaması, savaş riski sigorta primi, gemi bekleme süresi ve yakıt navlunu yükseltir. Bu maliyet ithal ara mala, gıdaya ve akaryakıta yansır; ithalatçıda enflasyon ve cari açık baskısı artar. Hürmüz ayrıca küresel gübre ihracatının yaklaşık beşte biri ile üçte biri arasındaki bir bölümü etkiler (IFPRI tahmini).</p></div>
+<div class="card"><h3>Koridor çeşitlendirme</h3><p>Orta Koridor, IMEC, Kalkınma Yolu ve Kuzey-Güney Koridoru, tek geçide bağımlılığı azaltma arayışıdır. Çoğu henüz küçük kapasitelidir: eksik demiryolu halkaları, aktarma ve sınır maliyeti, finansman ve siyasi risk deniz yolunun ölçeğine yetişmeyi zorlaştırır.</p></div>
+<div class="card"><h3>Türkiye’nin konumu</h3><p>Türk Boğazları (Montrö Sözleşmesi), Orta Koridor’un Kars-Edirne hattı, Kalkınma Yolu’nun varış noktası ve BTC, TANAP ile Ceyhan terminali Türkiye’yi hem ticaret hem enerji geçiş ülkesi yapar. Bunun ekonomik karşılığı transit geliri, pazarlık gücü ve bölgesel krize açıklıktır.</p></div>
+</div>
+<h3 style="margin:22px 0 8px">Kesinti simülatörü</h3>
+<div class="card ek" id="tk"><p style="margin-top:0">Hangi geçitlerin kapandığını işaretle. Sonuç <b>öğretici bir kaba hesaptır</b>, tahmin değildir.</p>
+<div class="grid" id="tkc"></div>
+<label style="display:block">Alternatif rotaya kayabilen yük payı: <b id="tkv0">50</b>%<input type="range" id="tkr" min="0" max="100" value="50"></label>
+<label style="display:block">Telafi (stok, stratejik rezerv, yedek kapasite): <b id="tkv1">50</b>%<input type="range" id="tkt" min="0" max="90" value="50"></label>
+<label style="display:block">Kısa dönem petrol fiyat esnekliği (düşük olması fiyatı daha çok oynatır): <b id="tkv2">0,10</b><input type="range" id="tke" min="5" max="30" value="10"></label>
+<div class="grid" id="tko" style="margin-top:10px"></div>
+<small style="color:var(--mut)">Varsayımlar (kaba büyüklükler): her geçidin payı bu sayfadaki hacimlerden ve yaygın tahminlerden alındı; kesişen yükler (ör. Körfez petrolü hem Hürmüz’den hem Malakka’dan geçer) bağımsız sayılarak tekrar sayılmamaya çalışıldı, gerçekte örtüşme daha yüksektir. Hürmüz için bypass hatlarının yedek kapasitesi ≈ 4,5 mb/g alındı. Ek sefer süresi ve filo kapasitesi kaybı için ortalama sefer ≈ 35 gün varsayıldı. Petrol fiyat hesabı <b>Enerji</b> sekmesindeki simülatörle aynı mantıktadır (dünya talebi ≈ 104 mb/g).</small></div>
+<small style="color:var(--mut);display:block;margin-top:14px">Durum bilgisi 13 Kasım 2026 itibarıyladır ve günlük değişir (Hürmüz Boğazı, Kızıldeniz, Babülmendeb). Karar vermeden önce IEA, EIA, UNCTAD, Süveyş Kanalı İdaresi, Lloyd’s List, Kpler ve ilgili şirket ya da bakanlık açıklamalarını kontrol et.</small>
+</section>
 </main>
 <footer><div class="wrap"><span>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span>İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Küresel Gündem: izleme listesi, takvim ve düzenlemeler yalnızca tarayıcında saklanır.</span></div></footer>
 <script>
@@ -351,7 +471,7 @@ const $=s=>document.querySelector(s);
 const K=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
 const S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const tabs=["Genel","İzleme","Göstergeler","Takvim","Kariyer","Kaynaklar","Sözlük","Harita","Araçlar","Kriz ve blok","Kuram","El kitabı","Çalışma"];
+const tabs=["Genel","İzleme","Göstergeler","Takvim","Kariyer","Kaynaklar","Sözlük","Harita","Araçlar","Kriz ve blok","Kuram","El kitabı","Çalışma","Enerji","Ticaret yolları"];
 const nv=$("#nv");
 tabs.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t;b.setAttribute("role","tab");b.onclick=()=>show(i);nv.append(b)});
 function show(i){[...nv.children].forEach((b,j)=>b.setAttribute("aria-selected",i==j));document.querySelectorAll("section").forEach((s,j)=>s.classList.toggle("on",i==j));}
@@ -410,7 +530,7 @@ addEventListener("resize",()=>{gsize();redraw()});
 $("#ga").onclick=function(){auto=!auto;this.textContent=auto?"❚❚":"▶︎"};
 $("#hubs").onclick=e=>{const b=e.target.closest(".hub");if(!b||!gp)return;const h=H[+b.dataset.i];gclear();auto=false;$("#ga").textContent="▶︎";goTo([h[2],h[1]]);$("#tg").textContent=h[0];$("#hi").innerHTML=`<h3>${h[0]}</h3><p style="margin:4px 0 0">${h[3]}</p>`};
 /* İzleme */
-let T=K("kg_tk",[{t:"AB’nin karbon sınır düzenlemesi (CBAM) ve Türk ihracatı",a:"Uluslararası Ticaret",r:"AB",p:"Yüksek",s:"İzleniyor"},{t:"Kızıldeniz ve Süveyş hattında navlun etkisi",a:"Uluslararası Ticaret",r:"Orta Doğu",p:"Yüksek",s:"İzleniyor"},{t:"Büyük merkez bankalarının faiz yönü",a:"Uluslararası İktisat",r:"Küresel",p:"Orta",s:"İzleniyor"},{t:"ABD-Çin teknoloji ve tarife gerilimi",a:"Uluslararası İlişkiler",r:"Hint-Pasifik",p:"Yüksek",s:"İzleniyor"}]);
+let T=K("kg_tk",[{t:"AB’nin karbon sınır düzenlemesi (CBAM) ve Türk ihracatı",a:"Uluslararası Ticaret",r:"AB",p:"Yüksek",s:"İzleniyor"},{t:"Kızıldeniz ve Süveyş hattında navlun etkisi",a:"Uluslararası Ticaret",r:"Orta Doğu",p:"Yüksek",s:"İzleniyor"},{t:"Büyük merkez bankalarının faiz yönü",a:"Uluslararası İktisat",r:"Küresel",p:"Orta",s:"İzleniyor"},{t:"ABD-Çin teknoloji ve tarife gerilimi",a:"Uluslararası İlişkiler",r:"Hint-Pasifik",p:"Yüksek",s:"İzleniyor"},{t:"Hürmüz Boğazı geçişleri ve Körfez petrol-LNG akışı",a:"Uluslararası Ticaret",r:"Orta Doğu",p:"Yüksek",s:"İzleniyor"},{t:"Orta Koridor ve alternatif Asya-Avrupa kara rotaları",a:"Uluslararası Ticaret",r:"Avrasya",p:"Orta",s:"İzleniyor"}]);
 const SS=["İzleniyor","Analiz","Not alındı","Kapandı"];
 function rt(){const a=$("#fa").value,q=$("#fq").value.toLowerCase();const L=T.map((x,i)=>[x,i]).filter(([x])=>(!a||x.a==a)&&(!q||(x.t+x.r).toLowerCase().includes(q)));
 $("#tl").innerHTML=L.length?L.map(([x,i])=>`<div class="card"><div class="it"><h3>${esc(x.t)}</h3><button class="x" data-d="${i}" aria-label="Sil">×</button></div><span class="pill">${x.a}</span><span class="pill b">${esc(x.r)}</span><span class="pill b">${x.p}</span><div class="row"><button class="st" data-s="${i}">${x.s}</button></div></div>`).join(""):`<div class="card">Liste boş. Yukarıdan yeni bir konu ekle.</div>`;}
@@ -481,13 +601,13 @@ $("#cg").onchange=e=>{if(e.target.dataset.c){cl[e.target.dataset.c]=e.target.che
 const RS=[["Veri","IMF Veri","https://www.imf.org/en/Data"],["Veri","Dünya Bankası Açık Veri","https://data.worldbank.org"],["Veri","UN Comtrade","https://comtradeplus.un.org"],["Veri","OECD Veri","https://data.oecd.org"],["Ticaret","Dünya Ticaret Örgütü","https://www.wto.org"],["Ticaret","UNCTAD","https://unctad.org"],["Ticaret","T.C. Ticaret Bakanlığı","https://ticaret.gov.tr"],["Ticaret","Türkiye İhracatçılar Meclisi","https://tim.org.tr"],["Türkiye","TCMB","https://www.tcmb.gov.tr"],["Türkiye","TÜİK","https://www.tuik.gov.tr"],["Analiz","Chatham House","https://www.chathamhouse.org"],["Analiz","International Crisis Group","https://www.crisisgroup.org"],["Analiz","Foreign Affairs","https://www.foreignaffairs.com"],["Analiz","Peterson Institute (PIIE)","https://www.piie.com"]];
 $("#rs").innerHTML=RS.map(x=>`<div class="card"><span class="pill b">${x[0]}</span><br><a href="${x[2]}" target="_blank" rel="noopener">${x[1]}</a></div>`).join("");
 /* Sözlük */
-const GL=[["Tarife","İthal mala uygulanan vergi; korumacılığın en klasik aracı."],["Tarife dışı engel","Kota, standart, lisans gibi vergi olmayan ticaret kısıtları."],["Incoterms","ICC’nin teslim şartları kuralları (EXW, FOB, CIF, DDP…). Risk ve maliyet devrini belirler."],["Ticaret hadleri (ToT)","İhracat fiyat endeksinin ithalat fiyat endeksine oranı."],["Ödemeler dengesi","Bir ülkenin dış dünyayla tüm parasal işlemleri: cari işlemler, finans hesabı, sermaye hesabı."],["Cari açık","Mal, hizmet ve gelir dengesinin toplamının negatif olması; dış finansman ihtiyacı doğurur."],["En çok kayrılan ülke (MFN)","DTÖ ilkesi: bir üyeye tanınan avantaj tüm üyelere tanınır."],["Damping","Bir malı maliyetinin ya da yurt içi fiyatının altında ihraç etmek."],["Menşe kuralı","Ürünün hangi ülkeye ait sayılacağını belirleyen kriterler; tercihli tarife için kritik."],["Yaptırım","Ekonomik araçlarla politik baskı: ihracat kontrolü, varlık dondurma, finans kısıtı."],["Reel efektif döviz kuru","Enflasyon farkı ve ticaret ağırlıklarıyla düzeltilmiş kur; rekabet gücünün göstergesi."],["Gümrük birliği","Üyeler arası tarifesiz ticaret ve üçüncü ülkelere ortak dış tarife."],["Küresel değer zinciri","Üretimin birçok ülkeye bölünmüş aşamaları; kırılganlık ve verimlilik birlikte gelir."],["Yumuşak güç","Zorlama yerine çekicilik, kültür ve kurumlarla etki kurma (Joseph Nye)."],["Güvenlik ikilemi","Bir devletin güvenlik arayışının diğerini tehdit hissettirmesi ve silahlanma döngüsü."],["Kur şoku geçişkenliği","Kur değişiminin yurt içi fiyatlara yansıma oranı."]];
+const GL=[["Darboğaz (chokepoint)","Deniz ticaretinin dar bir geçitten geçmek zorunda kaldığı yer (Hürmüz, Malakka, Süveyş, Babülmendeb, Türk Boğazları). Kesinti etkisi çok büyüktür."],["Savaş riski primi","Çatışma bölgesinden geçen gemi için sigortacının aldığı ek ücret; navlunu ve ithal mal fiyatını yükseltir."],["Bypass boru hattı","Bir darboğazı atlamak için kurulan hat (ör. Suudi Doğu-Batı hattı). Kapasitesi genelde darboğazın hacmini karşılamaz."],["Tarife","İthal mala uygulanan vergi; korumacılığın en klasik aracı."],["Tarife dışı engel","Kota, standart, lisans gibi vergi olmayan ticaret kısıtları."],["Incoterms","ICC’nin teslim şartları kuralları (EXW, FOB, CIF, DDP…). Risk ve maliyet devrini belirler."],["Ticaret hadleri (ToT)","İhracat fiyat endeksinin ithalat fiyat endeksine oranı."],["Ödemeler dengesi","Bir ülkenin dış dünyayla tüm parasal işlemleri: cari işlemler, finans hesabı, sermaye hesabı."],["Cari açık","Mal, hizmet ve gelir dengesinin toplamının negatif olması; dış finansman ihtiyacı doğurur."],["En çok kayrılan ülke (MFN)","DTÖ ilkesi: bir üyeye tanınan avantaj tüm üyelere tanınır."],["Damping","Bir malı maliyetinin ya da yurt içi fiyatının altında ihraç etmek."],["Menşe kuralı","Ürünün hangi ülkeye ait sayılacağını belirleyen kriterler; tercihli tarife için kritik."],["Yaptırım","Ekonomik araçlarla politik baskı: ihracat kontrolü, varlık dondurma, finans kısıtı."],["Reel efektif döviz kuru","Enflasyon farkı ve ticaret ağırlıklarıyla düzeltilmiş kur; rekabet gücünün göstergesi."],["Gümrük birliği","Üyeler arası tarifesiz ticaret ve üçüncü ülkelere ortak dış tarife."],["Küresel değer zinciri","Üretimin birçok ülkeye bölünmüş aşamaları; kırılganlık ve verimlilik birlikte gelir."],["Yumuşak güç","Zorlama yerine çekicilik, kültür ve kurumlarla etki kurma (Joseph Nye)."],["Güvenlik ikilemi","Bir devletin güvenlik arayışının diğerini tehdit hissettirmesi ve silahlanma döngüsü."],["Kur şoku geçişkenliği","Kur değişiminin yurt içi fiyatlara yansıma oranı."]];
 function rg(){const q=$("#sq").value.toLowerCase();$("#sl").innerHTML=GL.filter(x=>(x[0]+x[1]).toLowerCase().includes(q)).map(x=>`<div class="card"><h3>${x[0]}</h3>${x[1]}</div>`).join("")||`<div class="card">Sonuç yok. Başka bir terim dene.</div>`}
 $("#sq").oninput=rg;rg();
 /* Harita */
-const BL={"Blok seçme":[],"AB":"AUT BEL BGR HRV CYP CZE DNK EST FIN FRA DEU GRC HUN IRL ITA LVA LTU LUX MLT NLD POL PRT ROU SVK SVN ESP SWE".split(" "),"NATO":"USA CAN GBR FRA DEU ITA ESP PRT NLD BEL LUX DNK NOR ISL TUR GRC POL CZE HUN ROU BGR SVK SVN HRV EST LVA LTU ALB MNE MKD FIN SWE".split(" "),"G7":"USA CAN GBR FRA DEU ITA JPN".split(" "),"G20 (ülkeler)":"ARG AUS BRA CAN CHN FRA DEU IND IDN ITA JPN KOR MEX RUS SAU ZAF TUR GBR USA".split(" "),"BRICS (üyelik değişebilir)":"BRA RUS IND CHN ZAF EGY ETH IRN ARE IDN".split(" "),"OPEC":"SAU IRN IRQ KWT ARE VEN NGA DZA LBY GAB GNQ COG".split(" "),"ASEAN":"BRN KHM IDN LAO MYS MMR PHL SGP THA VNM".split(" ")};
-const TN={TUR:"Türkiye",USA:"ABD",CHN:"Çin",DEU:"Almanya",FRA:"Fransa",GBR:"Birleşik Krallık",ITA:"İtalya",ESP:"İspanya",RUS:"Rusya",JPN:"Japonya",KOR:"Güney Kore",IND:"Hindistan",BRA:"Brezilya",CAN:"Kanada",MEX:"Meksika",AUS:"Avustralya",SAU:"Suudi Arabistan",ARE:"BAE",IRQ:"Irak",IRN:"İran",EGY:"Mısır",ZAF:"Güney Afrika",NLD:"Hollanda",BEL:"Belçika",POL:"Polonya",CZE:"Çekya",AUT:"Avusturya",CHE:"İsviçre",IDN:"Endonezya",THA:"Tayland",VNM:"Vietnam",TWN:"Tayvan",SGP:"Singapur",MYS:"Malezya",IRL:"İrlanda",BLR:"Belarus",KAZ:"Kazakistan",UZB:"Özbekistan",ARG:"Arjantin",CHL:"Şili",PRT:"Portekiz",NGA:"Nijerya"};
-const DT={TUR:["DEU RUS CHN GBR USA ITA IRQ FRA ESP ARE","Avrupa ile gümrük birliği, Rusya ve Çin’den enerji ve ara malı ithalatı."],USA:["CAN MEX CHN DEU JPN KOR GBR VNM IND","USMCA ağı ve Asya tedarik zincirleri."],CHN:["USA JPN KOR VNM DEU AUS RUS BRA IND MYS","Dünyanın büyük üretim ve ihracat merkezi."],DEU:["USA CHN NLD FRA POL ITA GBR CZE AUT CHE","AB’nin sanayi motoru."],JPN:["CHN USA KOR AUS THA VNM TWN DEU IDN SAU",""],IND:["USA CHN ARE SAU RUS IRQ SGP DEU IDN AUS","Enerji ithalatçısı, hizmet ihracatçısı."],GBR:["USA DEU NLD FRA CHN IRL CHE ITA BEL ESP",""],FRA:["DEU USA ITA ESP BEL GBR CHN NLD CHE POL",""],RUS:["CHN IND TUR BLR KAZ KOR ARE UZB","Yaptırımlar sonrası Asya ve komşu ülkelere yöneldi."],BRA:["CHN USA ARG NLD DEU IND CHL","Tarım ve maden ihracatında Çin ağırlığı."],SAU:["CHN IND JPN KOR USA ARE EGY","Petrol ihracatı Asya’ya yoğunlaşıyor."],ARE:["IND CHN SAU JPN USA TUR KOR","Yeniden ihracat ve lojistik merkezi."],KOR:["CHN USA VNM JPN AUS IND DEU",""],CAN:["USA CHN MEX GBR JPN","Dış ticaretin ağırlıklı kısmı ABD ile."],MEX:["USA CHN CAN KOR JPN DEU",""],AUS:["CHN JPN KOR IND USA SGP GBR",""],ZAF:["CHN USA DEU IND GBR JPN",""],EGY:["CHN SAU USA TUR ITA ARE DEU",""],IRN:["CHN TUR ARE IRQ IND",""],ITA:["DEU FRA USA CHN ESP CHE GBR POL",""],ESP:["FRA DEU PRT ITA GBR USA CHN",""],NLD:["DEU BEL GBR FRA USA CHN ITA","Rotterdam limanı üzerinden transit."],POL:["DEU CZE CHN FRA ITA GBR NLD",""],IDN:["CHN JPN USA SGP IND KOR MYS",""],NGA:["CHN IND NLD ESP USA BRA",""],KAZ:["CHN RUS ITA NLD TUR",""],ARG:["BRA CHN USA CHL",""]};
+const BL={"Blok seçme":[],"AB":"AUT BEL BGR HRV CYP CZE DNK EST FIN FRA DEU GRC HUN IRL ITA LVA LTU LUX MLT NLD POL PRT ROU SVK SVN ESP SWE".split(" "),"NATO":"USA CAN GBR FRA DEU ITA ESP PRT NLD BEL LUX DNK NOR ISL TUR GRC POL CZE HUN ROU BGR SVK SVN HRV EST LVA LTU ALB MNE MKD FIN SWE".split(" "),"G7":"USA CAN GBR FRA DEU ITA JPN".split(" "),"G20 (ülkeler)":"ARG AUS BRA CAN CHN FRA DEU IND IDN ITA JPN KOR MEX RUS SAU ZAF TUR GBR USA".split(" "),"BRICS (üyelik değişebilir)":"BRA RUS IND CHN ZAF EGY ETH IRN ARE IDN".split(" "),"OPEC":"SAU IRN IRQ KWT ARE VEN NGA DZA LBY GAB GNQ COG".split(" "),"ASEAN":"BRN KHM IDN LAO MYS MMR PHL SGP THA VNM".split(" "),"ŞİÖ (Şanghay İşbirliği)":"CHN RUS IND PAK KAZ KGZ TJK UZB IRN BLR".split(" "),"Körfez İşbirliği Konseyi":"SAU ARE QAT KWT OMN BHR".split(" "),"Türk Devletleri Teşkilatı":"TUR AZE KAZ KGZ UZB".split(" ")};
+const TN={TUR:"Türkiye",USA:"ABD",CHN:"Çin",DEU:"Almanya",FRA:"Fransa",GBR:"Birleşik Krallık",ITA:"İtalya",ESP:"İspanya",RUS:"Rusya",JPN:"Japonya",KOR:"Güney Kore",IND:"Hindistan",BRA:"Brezilya",CAN:"Kanada",MEX:"Meksika",AUS:"Avustralya",SAU:"Suudi Arabistan",ARE:"BAE",IRQ:"Irak",IRN:"İran",EGY:"Mısır",ZAF:"Güney Afrika",NLD:"Hollanda",BEL:"Belçika",POL:"Polonya",CZE:"Çekya",AUT:"Avusturya",CHE:"İsviçre",IDN:"Endonezya",THA:"Tayland",VNM:"Vietnam",TWN:"Tayvan",SGP:"Singapur",MYS:"Malezya",IRL:"İrlanda",BLR:"Belarus",KAZ:"Kazakistan",UZB:"Özbekistan",ARG:"Arjantin",CHL:"Şili",PRT:"Portekiz",NGA:"Nijerya",PAK:"Pakistan",BGD:"Bangladeş",LKA:"Sri Lanka",AFG:"Afganistan",ISR:"İsrail",JOR:"Ürdün",SYR:"Suriye",KWT:"Kuveyt",QAT:"Katar",OMN:"Umman",YEM:"Yemen",AZE:"Azerbaycan",GEO:"Gürcistan",ARM:"Ermenistan",UKR:"Ukrayna",ROU:"Romanya",BGR:"Bulgaristan",GRC:"Yunanistan",HUN:"Macaristan",SWE:"İsveç",NOR:"Norveç",DNK:"Danimarka",FIN:"Finlandiya",PHL:"Filipinler",MMR:"Myanmar",MNG:"Moğolistan",TKM:"Türkmenistan",KGZ:"Kırgızistan",TJK:"Tacikistan",DZA:"Cezayir",MAR:"Fas",TUN:"Tunus",LBY:"Libya",ETH:"Etiyopya",DJI:"Cibuti",KEN:"Kenya",GHA:"Gana",AGO:"Angola",COD:"Kongo DC",ZMB:"Zambiya",TZA:"Tanzanya",UGA:"Uganda",COL:"Kolombiya",PER:"Peru",VEN:"Venezuela",ECU:"Ekvador",URY:"Uruguay",PAN:"Panama",CRI:"Kosta Rika",NZL:"Yeni Zelanda",SRB:"Sırbistan",BIH:"Bosna-Hersek",LBN:"Lübnan",SVK:"Slovakya",BHR:"Bahreyn",ERI:"Eritre",SOM:"Somali",SDN:"Sudan",CYP:"Kıbrıs",HRV:"Hırvatistan",LAO:"Laos",KHM:"Kamboçya",NPL:"Nepal",EST:"Estonya",LVA:"Letonya",LTU:"Litvanya",SEN:"Senegal",MLI:"Mali",GAB:"Gabon",COG:"Kongo",GNQ:"Ekvator Ginesi",BRN:"Brunei"};
+const DT={TUR:["DEU RUS CHN GBR USA ITA IRQ FRA ESP ARE","Avrupa ile gümrük birliği, Rusya ve Çin’den enerji ve ara malı ithalatı."],USA:["CAN MEX CHN DEU JPN KOR GBR VNM IND","USMCA ağı ve Asya tedarik zincirleri."],CHN:["USA JPN KOR VNM DEU AUS RUS BRA IND MYS","Dünyanın büyük üretim ve ihracat merkezi."],DEU:["USA CHN NLD FRA POL ITA GBR CZE AUT CHE","AB’nin sanayi motoru."],JPN:["CHN USA KOR AUS THA VNM TWN DEU IDN SAU",""],IND:["USA CHN ARE SAU RUS IRQ SGP DEU IDN AUS","Enerji ithalatçısı, hizmet ihracatçısı."],GBR:["USA DEU NLD FRA CHN IRL CHE ITA BEL ESP",""],FRA:["DEU USA ITA ESP BEL GBR CHN NLD CHE POL",""],RUS:["CHN IND TUR BLR KAZ KOR ARE UZB","Yaptırımlar sonrası Asya ve komşu ülkelere yöneldi."],BRA:["CHN USA ARG NLD DEU IND CHL","Tarım ve maden ihracatında Çin ağırlığı."],SAU:["CHN IND JPN KOR USA ARE EGY","Petrol ihracatı Asya’ya yoğunlaşıyor."],ARE:["IND CHN SAU JPN USA TUR KOR","Yeniden ihracat ve lojistik merkezi."],KOR:["CHN USA VNM JPN AUS IND DEU",""],CAN:["USA CHN MEX GBR JPN","Dış ticaretin ağırlıklı kısmı ABD ile."],MEX:["USA CHN CAN KOR JPN DEU",""],AUS:["CHN JPN KOR IND USA SGP GBR",""],ZAF:["CHN USA DEU IND GBR JPN",""],EGY:["CHN SAU USA TUR ITA ARE DEU",""],IRN:["CHN TUR ARE IRQ IND",""],ITA:["DEU FRA USA CHN ESP CHE GBR POL",""],ESP:["FRA DEU PRT ITA GBR USA CHN",""],NLD:["DEU BEL GBR FRA USA CHN ITA","Rotterdam limanı üzerinden transit."],POL:["DEU CZE CHN FRA ITA GBR NLD",""],IDN:["CHN JPN USA SGP IND KOR MYS",""],NGA:["CHN IND NLD ESP USA BRA",""],KAZ:["CHN RUS ITA NLD TUR",""],ARG:["BRA CHN USA CHL",""],PAK:["CHN ARE USA SAU GBR DEU IDN AFG KWT QAT","Çin-Pakistan Ekonomik Koridoru (ÇPEK) ve Gwadar Limanı Çin bağını taşır; petrol ve LNG ithalatı Körfez’e ve Hürmüz’e bağımlıdır. Dış finansman ve IMF programları belirleyicidir."],BGD:["CHN IND USA DEU GBR ESP FRA SGP IDN JPN","Hazır giyim ihracatı (AB ve ABD pazarı) ekonominin omurgasıdır; enerji ve gıda ithalatı döviz baskısı yaratır."],LKA:["IND CHN USA GBR DEU ITA JPN ARE","Hint Okyanusu’nun ana deniz yolu üzerindedir; Kolombo önemli bir aktarma limanıdır. Borç yeniden yapılandırması sonrası toparlanma sürüyor."],AFG:["PAK IRN ARE IND CHN KAZ UZB TKM","Denize kıyısı yoktur; ticareti Pakistan ve İran limanlarına ve sınır kapılarına bağlıdır."],IRQ:["CHN IND KOR USA TUR ARE ITA GRC","Gelirinin büyük kısmı petroldür: Basra-Hürmüz çıkışı ve Kerkük-Ceyhan hattı. Kalkınma Yolu ile Türkiye’ye bağlanmayı hedefliyor."],ISR:["USA CHN GBR DEU IND NLD ITA ARE","Yüksek teknoloji ve elmas ihracatı; Doğu Akdeniz gaz sahaları. IMEC koridorunun planlanan düğümlerinden biridir."],JOR:["SAU USA IRQ CHN IND EGY ARE TUR","Enerji ve su kıtlığı yaşar; Akabe Limanı ve Irak-Suriye kara yolları transit önemlidir."],SYR:["TUR IRQ SAU ARE CHN EGY","Savaş sonrası yeniden yapılanma; ticaret yolları Türkiye, Irak ve Ürdün sınırlarına bağlıdır."],KWT:["CHN JPN KOR IND USA ARE SAU","Gelirin büyük kısmı petroldür; Hürmüz’e doğrudan bağımlıdır, bypass hattı yoktur."],QAT:["IND CHN JPN KOR ARE GBR ITA SGP","Dünyanın en büyük LNG ihracatçılarından biridir; LNG’nin tamamı Hürmüz Boğazı’ndan çıkar."],OMN:["CHN ARE IND KOR JPN SAU USA","Hürmüz’ün güney kıyısıdır; Duqm ve Salalah limanları boğazın dışında çıkış sağlar."],YEM:["CHN SAU ARE IND TUR EGY","Babülmendeb’in kıyısıdır; savaş ve Husi denetimi Kızıldeniz ticaretini doğrudan etkiler."],AZE:["ITA TUR RUS ISR CHN DEU GEO IND","BTC ve TANAP’ın kaynağıdır; Orta Koridor’un Hazar kapısıdır."],GEO:["TUR RUS CHN AZE ARM USA UKR DEU","BTC ve TANAP geçer; Poti ve Batum limanları ile Orta Koridor’un transit düğümüdür."],ARM:["RUS CHN ARE IRN GEO USA DEU",""],UKR:["POL DEU CHN TUR ROU ITA USA SVK","Karadeniz limanlarına ve Tuna çıkışına bağımlıdır; savaş tahıl ve metal ihracat yollarını değiştirdi."],ROU:["DEU ITA FRA HUN TUR POL BGR CHN","Köstence Limanı Karadeniz ve Tuna çıkışıdır; Ukrayna ticaretinde transit rolü büyüdü."],BGR:["DEU ROU ITA TUR GRC CHN POL","TürkAkım gazı Bulgaristan üzerinden Avrupa’ya gider."],GRC:["ITA DEU TUR BGR CYP CHN ROU USA","Pire Limanı Doğu Akdeniz’in kapısıdır; IMEC’in planlanan Avrupa ayağıdır."],HUN:["DEU AUT SVK ROU ITA CHN POL CZE","Rus petrol ve gazına (Drujba, TürkAkım) bağımlıdır."],CZE:["DEU POL SVK CHN AUT FRA NLD ITA",""],CHE:["DEU USA CHN ITA FRA GBR IND AUT","Finans, ilaç ve altın ticareti merkezidir."],AUT:["DEU ITA CHE CZE USA CHN HUN POL",""],BEL:["DEU NLD FRA GBR USA CHN ITA IND","Anvers Limanı Avrupa’nın ikinci büyük limanlarındandır."],SWE:["DEU NOR DNK FIN NLD GBR USA CHN",""],NOR:["GBR DEU NLD SWE FRA USA CHN DNK","Avrupa’nın en büyük boru hattı gazı ve petrol tedarikçilerinden biridir."],DNK:["DEU SWE NOR GBR NLD USA CHN POL","Danimarka Boğazları Baltık Denizi’nin çıkışıdır."],FIN:["DEU SWE NLD USA CHN EST POL GBR",""],PRT:["ESP DEU FRA GBR USA ITA NLD CHN",""],IRL:["USA GBR DEU NLD BEL FRA CHN CHE","Çok uluslu şirketlerin ihracat ve vergi merkezidir."],THA:["CHN JPN USA MYS SGP VNM IDN IND",""],VNM:["CHN USA KOR JPN THA TWN MYS IND","Tedarik zincirlerinin Çin’den kayışında öne çıkan üretim üssüdür."],MYS:["SGP CHN USA JPN THA IDN KOR IND","Malakka Boğazı kıyısındadır; Port Klang ve Tanjung Pelepas önemli limanlardır."],SGP:["CHN MYS USA IDN KOR JPN TWN ARE","Dünyanın en yoğun aktarma (transshipment) limanlarından biridir."],PHL:["CHN JPN USA KOR SGP THA IDN VNM","Güney Çin Denizi gerilimlerinin merkezindeki ülkelerden biridir."],TWN:["CHN USA JPN KOR VNM SGP MYS DEU","Yarı iletken tedarik zincirinin kilit düğümüdür; ihracatı Tayvan Boğazı üzerinden akar."],MMR:["CHN THA SGP IND JPN MYS",""],MNG:["CHN RUS KOR JPN CAN DEU","Denize kıyısı yoktur; kömür ve bakır ihracatı neredeyse tamamen Çin’edir."],UZB:["CHN RUS KAZ TUR KOR KGZ AFG","İki kat denize kapalı ülkedir; Orta Koridor ve Afganistan hattı alternatif arayışıdır."],TKM:["CHN TUR RUS UZB ARE IRN","Doğalgazı büyük oranda Orta Asya-Çin boru hattıyla Çin’e satar."],KGZ:["CHN RUS KAZ TUR UZB",""],DZA:["ITA ESP FRA CHN TUR DEU USA BRA","Avrupa’ya TransMed ve Medgaz boru hatlarıyla gaz verir."],MAR:["ESP FRA CHN USA ITA TUR IND DEU","Tanger Med Limanı Cebelitarık’ın hemen yanında büyük bir aktarma merkezidir."],TUN:["FRA ITA DEU CHN TUR LBY ESP DZA",""],LBY:["ITA TUR CHN ESP FRA DEU EGY ARE","Petrol ihracatı Akdeniz terminallerinden yapılır; iç siyasi bölünme üretimi etkiler."],ETH:["CHN USA IND ARE SAU TUR DEU DJI","Denize kıyısı yoktur; deniz ticareti büyük ölçüde Cibuti üzerinden yürür."],DJI:["ETH CHN SAU ARE IND","Babülmendeb’in kıyısındadır; Etiyopya’nın deniz kapısıdır, birçok ülkenin askerî üssü vardır."],KEN:["UGA CHN IND ARE USA PAK TZA","Mombasa Limanı Doğu Afrika’nın kapısıdır."],GHA:["CHN IND CHE USA TUR NLD GBR","Altın, kakao ve petrol ihracatçısıdır."],AGO:["CHN IND USA PRT ESP ZAF FRA","Petrol ihracatının büyük kısmı Çin ve Hindistan’adır."],COD:["CHN ZMB ZAF BEL USA","Kobalt ve bakır madenciliğine dayanır."],ZMB:["CHN ZAF CHE COD IND","Bakır ihracatına bağımlıdır."],TZA:["IND CHN ZAF ARE KEN JPN","Dar es Selam Limanı komşu kara ülkelerinin çıkışıdır."],CHL:["CHN USA JPN KOR BRA ARG PER","Bakır ve lityum ihracatçısıdır."],COL:["USA CHN PAN BRA MEX IND ECU",""],PER:["CHN USA BRA CAN KOR JPN CHL ARG","Chancay Limanı Çin’e doğrudan Pasifik bağlantısı sağlar."],VEN:["CHN IND USA ESP TUR","Petrol rezervi büyüktür; yaptırımlar ihracat yönünü belirler."],ECU:["USA CHN PAN PER COL KOR ESP",""],URY:["CHN BRA ARG USA NLD",""],PAN:["USA CHN COL MEX CRI SGP","Panama Kanalı ülkenin ekonomik omurgasıdır."],NZL:["CHN AUS USA JPN KOR SGP IND",""],SRB:["DEU CHN ITA HUN ROU TUR RUS BIH",""]};
 let P=K("kg_pt",{}),MP=null,cent={},GN={},zt="",sel=null;
 const nm=c=>TN[c]||GN[c]||c;
 const partners=c=>P[c]||(DT[c]?DT[c][0].split(" "):[]);
@@ -1201,4 +1321,519 @@ b.onclick=()=>{const n=ORD[(ORD.indexOf(cur())+1)%3];try{n==="auto"?localStorage
 try{matchMedia("(prefers-color-scheme:dark)").addEventListener("change",()=>{if(cur()==="auto")apply()})}catch(e){}
 lab()})();
 
-</script></body></html>
+
+(function(){
+const L=[
+{id:"btc",n:"Bakü-Tiflis-Ceyhan (BTC)",t:"o",s:"a",len:"≈1.770 km",cap:"≈1 mb/g (tasarım 1,2)",yr:"2006",flow:1000,cc:["AZE","GEO","TUR"],ct:"Azerbaycan · Gürcistan · Türkiye",
+p:[[[49.4,40.2],[46.4,41],[44.8,41.7],[42.8,41.1],[41.3,39.9],[39.5,39.7],[37,39.5],[36.9,37.6],[35.9,36.9]]],a:"Sangaçal",b:"Ceyhan",
+eko:"Hazar petrolünü Rusya ve Hürmüz'ü dışarıda bırakarak Akdeniz'e taşır. Azerbaycan'ın ihracat ve bütçe gelirinin omurgasıdır; Türkiye'ye transit geliri ve Ceyhan terminalinde hizmet geliri sağlar.",
+risk:"Üç ülkeden geçtiği için en küçük çatışma (Gürcistan, Güney Kafkasya) ve terör saldırısı riski bile prim yaratır. Ceyhan'daki tek terminal darboğaz oluşturur."},
+{id:"kyh",n:"Kerkük-Yumurtalık (Irak-Türkiye)",t:"o",s:"r",len:"≈970 km (Türkiye kesimi)",cap:"Kâğıtta ≈1,5 mb/g; fiilen 0,25-0,5",yr:"1970'ler",flow:450,cc:["IRQ","TUR"],ct:"Irak · Türkiye",
+p:[[[44.4,35.5],[43,37.1],[41.2,37.9],[38.5,37.8],[36.2,37.1],[35.9,36.9]]],a:"Kerkük",b:"Ceyhan",
+eko:"Irak'a Basra-Hürmüz dışında ikinci bir çıkış kapısı verir. Mart 2023'te tahkim kararıyla durmuş, Mart 2026'da Bağdat-Erbil mutabakatı ile yeniden başlamıştır; Ağustos 2026'da Irak ve Türkiye 1 yıllık yeni bir anlaşma duyurmuştur. Türkiye için transit ve terminal geliri, Irak için ihracat çeşitlendirmesidir.",
+risk:"Bağdat-Erbil gelir paylaşımı, boru kaçakçılığı/kaçak kesmeler, güvenlik ve Hürmüz krizinin seyri hattın kaderini belirler. Düşük akış kapasite kullanımını düşük tutuyor."},
+{id:"ew",n:"Doğu-Batı (Petroline), Suudi Arabistan",t:"o",s:"r",len:"≈1.200 km",cap:"≈5 mb/g (geçici 7'ye kadar)",yr:"1981",flow:5000,cc:["SAU"],ct:"Suudi Arabistan",
+p:[[[49.7,25.9],[46.7,24.7],[42.5,24.3],[38.1,24.1]]],a:"Abkayk",b:"Yanbu",
+eko:"Basra Körfezi'ndeki petrolü Kızıldeniz'deki Yanbu'ya taşıyarak Hürmüz'ü atlar. Kriz döneminde Suudi gelirini ve küresel arzı ayakta tutan en kritik bypass hattıdır.",
+risk:"2026 krizinde insansız hava aracı saldırıları ve hasarlarla hedef olmuştur; Bab-el-Mandeb ve Kızıldeniz güvenliği de Yanbu rotasını etkiler."},
+{id:"hf",n:"Habşan-Füceyra (BAE)",t:"o",s:"r",len:"≈400 km",cap:"≈1,5-1,8 mb/g",yr:"2012",flow:1500,cc:["ARE"],ct:"Birleşik Arap Emirlikleri",
+p:[[[53.6,23.8],[56.35,25.1]]],a:"Habşan",b:"Füceyra",
+eko:"Abu Dhabi ham petrolünü Umman Körfezi'ne çıkarır. Suudi hattıyla birlikte Hürmüz dışı kapasitenin büyük bölümünü oluşturur; Kuveyt, Katar ve Bahreyn'in benzer bir alternatifi neredeyse yoktur.",
+risk:"Füceyra limanı ve çevresi çatışma hattına yakındır; kapasite Hürmüz'den geçen hacmin yarısından azını karşılar."},
+{id:"dr",n:"Drujba (Dostluk)",t:"o",s:"r",len:"≈4.000 km",cap:"Dönemsel, AB'ye ≈0,5-1 mb/g",yr:"1964",flow:700,cc:["RUS","BLR","UKR","POL","DEU","SVK","HUN"],ct:"Rusya · Belarus · Ukrayna · Polonya · Almanya · Slovakya · Macaristan",
+p:[[[52.3,54.9],[50.1,53.2],[34.4,53.2],[29.2,52],[19.7,52.5],[14.3,53.1]],[[29.2,52],[24,49.8],[18.9,47.3]]],a:"Almetyevsk",b:"Schwedt / Százhalombatta",
+eko:"Rus petrolünü Orta Avrupa rafinerilerine taşır. Almanya ve Polonya yaptırımlarla ham petrolü bıraktı; Macaristan ve Slovakya kara kilitli oldukları için hâlâ bağımlıdır ve yaptırım muafiyeti için pazarlık yapar.",
+risk:"Ukrayna savaşında saldırılar ve transit ücret/ödeme anlaşmazlıkları akışı keser; AB içinde enerji politikasını ve Macaristan'ın Brüksel ile ilişkisini şekillendirir."},
+{id:"cpc",n:"Hazar Boru Hattı Konsorsiyumu (CPC)",t:"o",s:"a",len:"≈1.500 km",cap:"≈1,5 mb/g",yr:"2001",flow:1500,cc:["KAZ","RUS"],ct:"Kazakistan · Rusya",
+p:[[[53.4,46.2],[47.5,46.3],[44,45.5],[40,45],[37.8,44.7]]],a:"Tengiz",b:"Novorossiysk",
+eko:"Kazakistan'ın petrol ihracatının büyük bölümü bu hattan çıkar; Astana'nın bütçesi ve tengesi büyük ölçüde Rus topraklarındaki terminale bağlıdır. Rusya ise transit geliri ve etkisi kazanır.",
+risk:"Terminalin Karadeniz'deki savaş sahasında olması, hava saldırısı ve fırtına riski taşır; Kazakistan alternatifi (BTC üzerinden) için ek kapasite arıyor."},
+{id:"ts",n:"TürkAkım (TurkStream)",t:"g",s:"a",len:"≈930 km (2 hat, kısmen deniz altı)",cap:"31,5 mrd m³/yıl",yr:"2020",flow:31.5,cc:["RUS","TUR","BGR","SRB","HUN"],ct:"Rusya · Türkiye · Bulgaristan · Sırbistan · Macaristan",
+p:[[[37.3,44.9],[32,43.3],[28.1,41.6],[26.3,41.7],[22,44],[19,47.4]]],a:"Anapa",b:"Macaristan",
+eko:"Ukrayna transiti 1 Ocak 2025'te bitince Rus gazının AB'ye boru ile gittiği temel rota oldu. Türkiye hem tüketici hem 'hub' olmayı hedefliyor; Güneydoğu Avrupa ise enerji güvenliği için bu hatta ve LNG'ye bağlı.",
+risk:"AB'nin Rus gazından çıkış takvimi ve yaptırım ihtimali talebi belirler; Karadeniz'deki deniz altı hattın fiziksel güvenliği endişe konusudur."},
+{id:"bs",n:"Mavi Akım (Blue Stream)",t:"g",s:"a",len:"≈1.200 km",cap:"16 mrd m³/yıl",yr:"2003",flow:16,cc:["RUS","TUR"],ct:"Rusya · Türkiye",
+p:[[[38.7,44.3],[37.5,42.9],[36.3,41.3],[32.8,39.9]]],a:"Dzhubga",b:"Ankara",
+eko:"Rusya'dan Türkiye'ye doğrudan, Karadeniz altından gaz verir. Türkiye'nin gaz arzının önemli bir kısmı Rusya'ya bağlı olduğu için BOTAŞ'ın maliyeti ve elektrik tarifeleri bu sözleşmelere duyarlıdır.",
+risk:"Tek tedarikçiye bağımlılık, dolar/euro endeksli fiyat ve sözleşme yenileme dönemleri pazarlık anıdır."},
+{id:"tanap",n:"TANAP + Güney Kafkasya Hattı",t:"g",s:"a",len:"≈1.850 km (TANAP)",cap:"16 mrd m³/yıl (6 Türkiye, 10 Avrupa)",yr:"2018",flow:16,cc:["AZE","GEO","TUR"],ct:"Azerbaycan · Gürcistan · Türkiye",
+p:[[[49.8,40.2],[44.8,41.7],[42.7,41.1],[39.5,39.9],[35,39.8],[30.5,39.8],[26.4,40.9]]],a:"Şah Deniz",b:"İpsala",
+eko:"Güney Gaz Koridoru'nun orta halkası. Türkiye'ye ucuz alternatif tedarik sağlar, Azerbaycan'a Avrupa pazarını açar; AB için Rusya dışı gazdır.",
+risk:"Azerbaycan'ın üretim artışı sınırlı; kapasite genişlemesi yeni yatırım ve fiyat garantisi ister. Güney Kafkasya'daki barış ve güvenlik sürecine bağlıdır."},
+{id:"tap",n:"Trans-Adriyatik (TAP)",t:"g",s:"a",len:"≈880 km",cap:"10 mrd m³/yıl (20'ye genişleyebilir)",yr:"2020",flow:10,cc:["TUR","GRC","ALB","ITA"],ct:"Türkiye sınırı · Yunanistan · Arnavutluk · İtalya",
+p:[[[26.4,40.9],[22.9,40.7],[20.5,40.8],[19.4,40.5],[18.3,40.3]]],a:"İpsala",b:"Melendugno",
+eko:"TANAP'ı Güney İtalya'ya bağlar. İtalya, Yunanistan ve Bulgaristan'a Rus gazına alternatif verir; Arnavutluk'a transit ve altyapı yatırımı getirir.",
+risk:"Kapasite artışı kararı AB talep tahminlerine ve Azeri arzına bağlı; Doğu Akdeniz'deki gerilimler ek risktir."},
+{id:"tab",n:"Tebriz-Ankara (İran-Türkiye)",t:"g",s:"r",len:"≈2.577 km (hat)",cap:"≈10 mrd m³/yıl (sözleşme)",yr:"2001",flow:9,cc:["IRN","TUR"],ct:"İran · Türkiye",
+p:[[[46.3,38.1],[44.1,39.5],[41.3,39.9],[36,39.8],[32.8,39.9]]],a:"Tebriz",b:"Ankara",
+eko:"Türkiye'nin ikinci büyük boru gazı kaynaklarından biridir. Uzun vadeli sözleşme 2026 ortasında sona eriyordu; yenileme, fiyat ve yaptırım riskleri BOTAŞ ve cari denge için önemlidir (güncel durumu doğrula).",
+risk:"ABD yaptırımları, İran'daki savaş/çatışma ve sık bakım-arıza kesintileri; kış aylarında Türkiye için arz güvenliği sorunu yaratır."},
+{id:"ns",n:"Kuzey Akım 1-2 (Nord Stream)",t:"g",s:"k",len:"≈1.220 km",cap:"2×55 mrd m³/yıl (kapalı)",yr:"2011/2021",flow:0,cc:["RUS","DEU"],ct:"Rusya · Almanya",
+p:[[[28,60.6],[20,59.5],[15.5,55.2],[13.6,54.1]]],a:"Vyborg",b:"Greifswald",
+eko:"Rus gazını Baltık altından doğrudan Almanya'ya taşıyordu. Eylül 2022 sabotajıyla durmasının ardından Avrupa gaz fiyatları sıçradı, Alman sanayisi ucuz enerji avantajını kaybetti ve LNG ithalatı hızla büyüdü.",
+risk:"Hat kullanılamaz durumda; yeniden açılma siyasi olarak AB'de tartışmalı ve belirsizdir. Örnek olay: tek tedarikçiye bağımlılığın bedeli."},
+{id:"espo",n:"Doğu Sibirya–Pasifik (ESPO) + Çin kolu",t:"o",s:"a",len:"≈4.700 km (Kozmino’ya) + Çin kolu",cap:"Toplam ≈1,6–2 mb/g (Kozmino + Çin kolu)",yr:"2009/2011",flow:1600,cc:["RUS","CHN"],ct:"Rusya · Çin",
+p:[[[97.9,56.1],[105.7,56.8],[114.9,60.7],[120.4,60.4],[125.4,58.6],[123.9,54],[130.5,50.2],[135,48.5],[133.5,45.5],[132.9,42.8]],[[123.9,54],[122.4,52.97],[124.5,49.5],[125,46.6]]],a:"Taişet",b:"Kozmino / Daqing",
+eko:"Rus petrolünü Avrupa yerine Asya’ya yönlendiren ana omurgadır. 2022’den sonra Avrupa pazarını yitiren Rusya’nın Çin, Hindistan ve Güney Kore’ye satışı büyük ölçüde bu hat ve Kozmino terminali üzerinden yürür; Çin için boğazlardan bağımsız, karadan gelen bir tedarik yoludur.",
+risk:"Rusya’nın Çin’e bağımlılığını artırır ve fiyat indirimi pazarlığında gücü alıcıya kaydırır. Yaptırımlar, fiyat tavanı ve Pasifik terminalinin tek noktaya bağlılığı kırılganlık yaratır."},
+{id:"kcp",n:"Kazakistan–Çin petrol hattı (Atasu–Alaşankou)",t:"o",s:"a",len:"≈2.800 km (Atırau’dan)",cap:"≈0,4 mb/g (20 mt/yıl)",yr:"2006",flow:400,cc:["KAZ","CHN"],ct:"Kazakistan · Çin",
+p:[[[51.9,47.1],[58,47.8],[66,48.6],[71.6,48.7],[76.9,46.8],[80,45.5],[82.6,45.2]]],a:"Atırau",b:"Alaşankou",
+eko:"Kazakistan’a CPC’ye alternatif bir çıkış, Çin’e ise Hürmüz ve Malakka’dan bağımsız bir kara tedariki sağlar. Astana’nın Rusya dışındaki ihracat kapısıdır.",
+risk:"Kapasite küçüktür; Kazakistan ihracatının büyük kısmı hâlâ CPC’ye bağlıdır. Tek alıcı olarak Çin’in fiyat pazarlığı gücü yüksektir."},
+{id:"cmo",n:"Çin–Myanmar petrol hattı (Kyaukphyu–Kunming)",t:"o",s:"a",len:"≈770 km (Myanmar kesimi)",cap:"≈0,44 mb/g (22 mt/yıl)",yr:"2017",flow:400,cc:["MMR","CHN"],ct:"Myanmar · Çin",
+p:[[[93.54,19.43],[95.2,20.9],[96.1,21.95],[97.9,23.9],[98.6,24.3],[100.2,25.6],[102.7,25.04]]],a:"Kyaukphyu",b:"Kunming",
+eko:"Çin’e Orta Doğu ve Afrika petrolünü Malakka Boğazı’na girmeden Hint Okyanusu’ndan karaya çıkarma imkânı verir (Malakka ikilemine bir yanıt). Myanmar için transit ve liman geliri demektir.",
+risk:"Myanmar’daki iç savaş ve silahlı grupların denetimindeki bölgeler hattın güvenliğini zayıflatır; kapasite Çin’in Malakka’dan geçen ithalatının küçük bir bölümüdür."},
+{id:"cmg",n:"Çin–Myanmar doğalgaz hattı",t:"g",s:"a",len:"≈790 km (Myanmar kesimi)",cap:"≈12 mrd m³/yıl",yr:"2013",flow:12,cc:["MMR","CHN"],ct:"Myanmar · Çin",
+p:[[[93.54,19.6],[95.2,21.1],[96.1,22.15],[97.9,24.1],[98.6,24.5],[100.2,25.8],[102.7,25.24]]],a:"Kyaukphyu",b:"Kunming",
+eko:"Myanmar açıklarındaki sahaların gazını Çin’in Yunnan eyaletine taşır; Myanmar için önemli bir döviz kaynağı, Çin için karadan gelen ek bir tedarik yoludur.",
+risk:"Myanmar’daki çatışma ve yaptırımlar altyapıyı ve gelir akışını riske atar. Petrol hattıyla aynı koridoru izlediği için güvenlik sorunu ikisini birlikte etkiler."},
+{id:"eacop",n:"Doğu Afrika Ham Petrol Boru Hattı (EACOP)",t:"o",s:"p",len:"≈1.443 km",cap:"≈0,25 mb/g",yr:"Yapım aşamasında (≈%92 tamamlandı, Eylül–Ekim 2026)",flow:0,cc:["UGA","TZA"],ct:"Uganda · Tanzanya",
+p:[[[31.3,1.4],[31.6,-0.6],[32,-2.5],[33,-4.2],[35.5,-4.6],[37.5,-4.8],[39.1,-5.07]]],a:"Hoima",b:"Tanga",
+eko:"Uganda’nın Albert Gölü petrolünü Hint Okyanusu’ndaki Tanga limanına taşıması planlanan hat, denize kıyısı olmayan Uganda için tek ihracat yoludur. Tanzanya’ya transit geliri ve yatırım getirir.",
+risk:"İlk petrol hedefi birkaç kez kaydı (2025 sonu, Haziran 2026, 31 Temmuz 2026); Uganda şimdi Haziran 2027 öncesini hedefliyor. İklim ve çevre kampanyaları, finansman ve sigorta çekingenliği ile Orta Doğu savaşının geciktirdiği ekipman gecikmeyi artırdı."},
+{id:"gj",n:"Goreh–Jask (İran Hürmüz bypass hattı)",t:"o",s:"r",len:"≈1.000 km",cap:"Tasarım ≈1 mb/g; fiilen çok düşük",yr:"2021",flow:0,cc:["IRN"],ct:"İran",
+p:[[[50.5,29.6],[53,28.4],[55.3,27.4],[57,26.2],[57.8,25.65]]],a:"Goreh",b:"Jask",
+eko:"İran’ın Hürmüz’ü atlayıp Umman Körfezi’nden petrol çıkarmasını hedefleyen hattır; Suudi ve BAE bypass hatlarının İran’daki karşılığı olarak tasarlandı.",
+risk:"Yaptırımlar, düşük yatırım ve savaş riski yüzünden çok düşük kapasiteyle çalışıyor; Jask terminali de çatışma bölgesine yakındır. Güzergâh şematiktir."},
+{id:"tmtn",n:"Trans Mountain (Kanada)",t:"o",s:"a",len:"≈1.150 km",cap:"≈0,89 mb/g (genişleme sonrası)",yr:"1953; genişleme 2024",flow:890,cc:["CAN"],ct:"Kanada",
+p:[[[-113.5,53.5],[-117,52.8],[-120.3,50.7],[-122.9,49.3]]],a:"Edmonton",b:"Burnaby",
+eko:"Alberta ağır petrolünü Pasifik kıyısına taşıyarak Kanada ihracatını tek müşteri olan ABD’nin dışında Asya’ya açar ve Kanada petrolündeki fiyat indirimini azaltmayı amaçlar.",
+risk:"Genişleme maliyeti ve yerli halkların itirazları siyasi tartışma yarattı; tek terminal ve tanker trafiği kıyı için çevre riski taşır."},
+{id:"keyst",n:"Keystone hattı (Kanada–ABD)",t:"o",s:"a",len:"≈4.300 km",cap:"≈0,6 mb/g",yr:"2010",flow:600,cc:["CAN","USA"],ct:"Kanada · ABD",
+p:[[[-111.3,52.7],[-104.6,50.4],[-98,45],[-97,40],[-96.8,36],[-94,29.9]]],a:"Hardisty",b:"ABD Körfezi",
+eko:"Kanada ağır petrolünü ABD Orta Batısı ve Körfez rafinerilerine taşır; bu rafineriler ağır petrol için kurulduğundan karşılıklı bağımlılık yüksektir. Keystone XL uzantısı 2021’de iptal edildi.",
+risk:"Sızıntı olayları, çevre davaları ve ABD–Kanada ticaret ve tarife gerilimi başlıca risklerdir."},
+{id:"tmed",n:"Trans-Akdeniz (Enrico Mattei) hattı",t:"g",s:"a",len:"≈2.500 km",cap:"≈33 mrd m³/yıl (tasarım)",yr:"1983",flow:20,cc:["DZA","TUN","ITA"],ct:"Cezayir · Tunus · İtalya",
+p:[[[3.2,32.9],[6.5,35.5],[8.8,36.9],[11,37],[12.6,37.65],[15.6,38.2],[15.8,39.5],[14,41.5],[11.5,44.6]]],a:"Hassi R’Mel",b:"Kuzey İtalya",
+eko:"Cezayir gazını Tunus ve Sicilya üzerinden İtalya’ya taşır; 2022’den beri Rus gazının yerini tutma çabasının ana taşıyıcılarından biridir. Tunus transit payı olarak gaz ve gelir alır.",
+risk:"Cezayir’in üretim ve iç tüketim dengesi ile Cezayir–Fas ve Cezayir–İspanya siyasi gerilimleri akışı etkiler; fiili akış tasarım kapasitesinin altındadır."},
+{id:"medg",n:"Medgaz (Cezayir–İspanya)",t:"g",s:"a",len:"≈760 km (≈210 km deniz altı)",cap:"≈10,7 mrd m³/yıl",yr:"2011",flow:10,cc:["DZA","ESP"],ct:"Cezayir · İspanya",
+p:[[[3.2,32.9],[1,34],[-1.35,35.3],[-2.4,36.8]]],a:"Hassi R’Mel",b:"Almería",
+eko:"Fas’ı atlayarak Cezayir gazını doğrudan İspanya’ya taşır; Mağrip–Avrupa hattının kapanmasından sonra Cezayir gazının İspanya’ya ulaştığı tek boru yoludur.",
+risk:"Cezayir–İspanya ilişkileri ve Batı Sahra tartışması fiyat ve hacim üzerinde siyasi baskı yaratabilir."},
+{id:"gme",n:"Mağrip–Avrupa (GME) hattı",t:"g",s:"k",len:"≈1.400 km",cap:"≈13 mrd m³/yıl (kapalı)",yr:"1996",flow:0,cc:["DZA","MAR","ESP"],ct:"Cezayir · Fas · İspanya",
+p:[[[3.2,32.9],[-1.5,34],[-4.5,34.8],[-5.8,35.8],[-5.4,36.1],[-4.8,37.9]]],a:"Hassi R’Mel",b:"Córdoba",
+eko:"Cezayir gazını Fas üzerinden İspanya ve Portekiz’e taşıyordu; Fas transit ücreti olarak gaz alıyordu.",
+risk:"Cezayir, Batı Sahra anlaşmazlığı nedeniyle sözleşmeyi Kasım 2021’de yenilemedi ve hat kapandı. Örnek olay: siyasi kriz altyapıyı kapatır ve transit ülkenin gelirini keser."},
+{id:"lang",n:"Langeled (Norveç–İngiltere)",t:"g",s:"a",len:"≈1.200 km (deniz altı)",cap:"≈25 mrd m³/yıl",yr:"2007",flow:25,cc:["NOR","GBR"],ct:"Norveç · Birleşik Krallık",
+p:[[[7.9,63.1],[5,60],[3,57.5],[1.5,55.2],[0.1,53.7]]],a:"Nyhamna",b:"Easington",
+eko:"Dünyanın en uzun deniz altı gaz hatlarından biridir; Norveç gazını İngiltere’ye taşır. 2022’den sonra Avrupa’nın Rus gazının yerine koyduğu ana kaynak Norveç boru gazı oldu.",
+risk:"Planlı ve plansız bakım duruşları, Kuzey Denizi altyapısının güvenliği (sabotaj kaygısı) ve olgunlaşan sahalarda üretimin gerilemesi ana risklerdir."},
+{id:"bpipe",n:"Baltic Pipe (Norveç–Danimarka–Polonya)",t:"g",s:"a",len:"≈900 km",cap:"≈10 mrd m³/yıl",yr:"2022",flow:10,cc:["NOR","DNK","POL"],ct:"Norveç · Danimarka · Polonya",
+p:[[[8.2,55.7],[9.7,55.5],[11.4,55.3],[12.2,55.3],[13.5,54.6],[15.07,54.1]]],a:"Nybro",b:"Niechorze",
+eko:"Polonya’nın Rus gazı sözleşmesinden çıkmasının ardından Norveç gazına doğrudan erişim sağlar; Baltık bölgesinde Rus gazının yerini alan kilit hatlardan biridir.",
+risk:"Kapasite Polonya talebini tek başına karşılamaz; Baltık Denizi’ndeki deniz altı altyapıya yönelik sabotaj kaygıları (Kuzey Akım örneği) güvenlik riski yaratır."},
+{id:"ps1",n:"Sibirya Gücü 1 (Rusya–Çin)",t:"g",s:"a",len:"≈2.200 km (Rusya kesimi)",cap:"≈38 mrd m³/yıl (44’e çıkarılması kararlaştırıldı)",yr:"2019",flow:38,cc:["RUS","CHN"],ct:"Rusya · Çin",
+p:[[[112.7,60.4],[118,59.5],[124.5,57],[127.4,53.6],[127.5,50.3],[126.5,48.5],[124.5,45.5],[123.9,44.2]]],a:"Çayanda",b:"Çin şebekesi",
+eko:"Rus gazını Avrupa yerine Çin’e yönlendiren ilk büyük boru hattıdır; Gazprom’un Avrupa kaybını kısmen telafi eder, Çin’e uzun vadeli ve denizden bağımsız bir gaz kaynağı sağlar.",
+risk:"Fiyat pazarlığında Çin’in eli güçlüdür ve hacim Avrupa’daki kayıpları karşılamaz; Rusya tek müşteriye bağımlılığını artırır."},
+{id:"ps2",n:"Sibirya Gücü 2 (Moğolistan üzerinden)",t:"g",s:"p",len:"≈2.600 km (Moğolistan kesimi dahil, tahmini)",cap:"≈50 mrd m³/yıl (planlanan)",yr:"Planlanan",flow:0,cc:["RUS","MNG","CHN"],ct:"Rusya · Moğolistan · Çin",
+p:[[[72,66.5],[80,62],[88,56],[96,52],[103,50],[106.9,47.9],[111.9,43.7]]],a:"Yamal",b:"Erenhot",
+eko:"Avrupa’ya giden Yamal gazını Çin’e yönlendirmeyi hedefleyen proje; gerçekleşirse Rusya’nın Çin’e bağımlılığını ve Moğolistan’ın transit gücünü artırır.",
+risk:"Eylül 2025’te Gazprom ve CNPC bağlayıcı olduğu belirtilen bir mutabakat imzaladı; fiyat ve finansman anlaşması hâlâ netleşmedi. Proje siyasi bir pazarlık kozu olarak da okunuyor."},
+{id:"cag",n:"Orta Asya–Çin doğalgaz hattı",t:"g",s:"a",len:"≈1.830 km (hat başına)",cap:"≈55 mrd m³/yıl (A-B-C hatları)",yr:"2009",flow:40,cc:["TKM","UZB","KAZ","CHN"],ct:"Türkmenistan · Özbekistan · Kazakistan · Çin",
+p:[[[62.3,37.8],[64.4,39.8],[67,41],[69.6,42.3],[76.9,43.2],[80.4,44.2]]],a:"Türkmenistan",b:"Horgos",
+eko:"Türkmen gazının neredeyse tamamını tek alıcıya, Çin’e bağlar ve Çin’in ithal gazının önemli bir kısmını karadan tedarik eder. Özbekistan ve Kazakistan transit geliri alır.",
+risk:"Türkmenistan tek müşteriye bağımlıdır; planlanan D hattı ertelendi ve fiyat pazarlığı gücü Çin’dedir."},
+{id:"tapi",n:"TAPI (Türkmenistan–Afganistan–Pakistan–Hindistan)",t:"g",s:"p",len:"≈1.800 km",cap:"≈33 mrd m³/yıl (planlanan)",yr:"Yapım aşamasında (yalnız Herat kesimi)",flow:0,cc:["TKM","AFG","PAK","IND"],ct:"Türkmenistan · Afganistan · Pakistan · Hindistan",
+p:[[[62.1,37.8],[62.2,34.3],[65.7,31.6],[67,30.2],[71.5,30.2],[74,30.4]]],a:"Galkınış",b:"Fazilka",
+eko:"Türkmen gazını Güney Asya’ya taşıyarak Türkmenistan’a Çin dışında ikinci bir pazar vaat eder; Afganistan transit geliri alır, Pakistan ve Hindistan için Hürmüz’e bağlı olmayan kara tedariki sağlar.",
+risk:"Afganistan’daki güvenlik, Pakistan–Hindistan gerilimi ve finansman eksikliği nedeniyle yıllardır ertelenen bir projedir. Türkmenistan sınırından Herat’a uzanan ilk 153 km’lik kesim 2024’te inşaata başladı (Eylül 2026’da yaklaşık %80 bildirildi, hedef 2026 sonu); Herat’ın ötesi ve Pakistan kesimi henüz yapılmadı."},
+{id:"dolp",n:"Dolphin (Katar–BAE)",t:"g",s:"a",len:"≈360 km (deniz altı)",cap:"≈20 mrd m³/yıl",yr:"2007",flow:20,cc:["QAT","ARE","OMN"],ct:"Katar · BAE · Umman",
+p:[[[51.55,25.9],[53.1,25.3],[54.7,24.8]]],a:"Ras Laffan",b:"Taweelah",
+eko:"Katar’ın gaz ihracatını LNG dışında boruyla da yapmasını sağlayan hattır; BAE ve Umman’ın elektrik üretimi bu gaza bağlıdır.",
+risk:"Hat Körfez içinde olduğu için Hürmüz krizinde çatışma bölgesinde kalır. 2017 Katar ablukası sırasında durdurulmadı, ancak siyasi baskı unsuru olarak okundu."},
+{id:"eastmed",n:"EastMed (Doğu Akdeniz) hattı",t:"g",s:"p",len:"≈1.900 km (planlanan)",cap:"≈10 mrd m³/yıl (planlanan)",yr:"Planlanan; fiilen askıda",flow:0,cc:["ISR","CYP","GRC","ITA"],ct:"İsrail · Kıbrıs · Yunanistan · İtalya",
+p:[[[34,33.2],[32.8,34.6],[27,35.2],[23.5,35.5],[22,36.8],[20.5,38.3],[18.2,40.2]]],a:"Leviathan",b:"Otranto",
+eko:"İsrail ve Kıbrıs gazını Yunanistan üzerinden İtalya’ya taşımak için tasarlanan hat; Türkiye’yi dışarıda bıraktığı için Doğu Akdeniz enerji rekabetinin simgesidir.",
+risk:"Maliyet, derin deniz mühendisliği, ticari uygunluk eksikliği ve ABD desteğinin 2022’de çekilmesiyle proje fiilen askıdadır; deniz yetki alanı anlaşmazlıkları siyasi riski yükseltir."},
+{id:"yam",n:"Yamal–Avrupa (kapalı)",t:"g",s:"k",len:"Toplam ≈4.100 km",cap:"≈33 mrd m³/yıl (kapalı)",yr:"1994–1999",flow:0,cc:["RUS","BLR","POL","DEU"],ct:"Rusya · Belarus · Polonya · Almanya",
+p:[[[34.9,57],[30,54.2],[23.7,52.1],[19,52.4],[14.5,52.35]]],a:"Torjok",b:"Frankfurt (Oder)",
+eko:"Rus gazını Belarus ve Polonya üzerinden Almanya’ya taşıyordu; Orta Avrupa’nın Rus gazına bağımlılığının ana damarlarından biriydi.",
+risk:"2022’de Rusya–Polonya gaz anlaşmazlığı ve karşılıklı yaptırımlar sonrası sevkiyat durdu; Polonya Rus gazını bırakıp Baltic Pipe ve LNG’ye yöneldi."},
+{id:"ukr",n:"Ukrayna transit hattı (Bratstvo / Soyuz)",t:"g",s:"k",len:"≈4.000 km (Ukrayna ağı)",cap:"Son sözleşme: ≈40 mrd m³/yıl (sona erdi)",yr:"1967 / 1980’ler",flow:0,cc:["RUS","UKR","SVK","AUT"],ct:"Rusya · Ukrayna · Slovakya · Avusturya",
+p:[[[35.3,51.2],[31,49.5],[26,49.6],[22.5,48.6],[19,48.5],[16.9,48.3]]],a:"Sudja",b:"Baumgarten",
+eko:"Rus gazının uzun yıllar Avrupa’ya aktığı ana güzergâhtı; Ukrayna transit ücreti ve pazarlık gücü kazanıyordu. Hat kapanınca Rus gazının Avrupa’ya girişi TürkAkım’a kaldı.",
+risk:"Transit sözleşmesinin yenilenmemesiyle akış 1 Ocak 2025’te sona erdi; Slovakya ve Avusturya gibi bağımlı ülkelerde tedarik ve fiyat tartışmaları sürdü."},
+{id:"tsgp",n:"Trans-Sahra Gaz Boru Hattı",t:"g",s:"p",len:"≈4.100 km (planlanan)",cap:"≈30 mrd m³/yıl (planlanan)",yr:"Planlanan",flow:0,cc:["NGA","NER","DZA"],ct:"Nijerya · Nijer · Cezayir",
+p:[[[5.7,5.5],[7,9],[8.5,12],[9,13.8],[8,17],[5.5,22.8],[3.2,32.9]]],a:"Warri",b:"Hassi R’Mel",
+eko:"Nijerya gazını Nijer ve Cezayir üzerinden Avrupa’ya taşıyarak Afrika’nın en büyük gaz rezervlerinden birini Güney Avrupa’ya bağlamayı hedefler; Nijer ve Cezayir’e transit geliri sağlar.",
+risk:"Sahel’deki güvenlik sorunları, finansman, Nijerya’nın üretim sorunları ve Nijer’deki siyasi kırılganlık nedeniyle yıllardır ilerleyemedi."},
+{id:"igb",n:"Yunanistan–Bulgaristan Bağlantı Hattı (IGB)",t:"g",s:"a",len:"≈182 km",cap:"≈3 mrd m³/yıl (5’e genişleyebilir)",yr:"2022",flow:3,cc:["GRC","BGR"],ct:"Yunanistan · Bulgaristan",
+p:[[[25.4,41.12],[25.5,41.8],[25.62,42.42]]],a:"Komotini",b:"Stara Zagora",
+eko:"TAP’a bağlanarak Azeri gazını ve Yunanistan’daki LNG terminallerinden gelen gazı Bulgaristan’a ve oradan Güneydoğu Avrupa’ya taşır. Bulgaristan’ın 2022’de Rus gazı kesildikten sonra tedarik çeşitlendirmesinin temel halkasıdır.",
+risk:"Kapasite küçüktür; Azeri arzı ve LNG terminallerine bağlıdır. Tarife yapısı ve talep kullanımını belirler."},
+{id:"vgc",n:"Dikey Koridor (Yunanistan–Ukrayna, Trans-Balkan ters akış)",t:"g",s:"r",len:"Mevcut hatların birleşimi (Aleksandrupoli–Ukrayna sınırı)",cap:"İhaleyle satılan ortak kapasite ürünleri; hat ters yönde çalışır",yr:"2022’den beri kademeli (ortak ürünler 2025–2026)",flow:0,cc:["GRC","BGR","ROU","MDA","UKR"],ct:"Yunanistan · Bulgaristan · Romanya · Moldova · Ukrayna",
+p:[[[25.9,40.84],[25.4,41.12],[25.6,42.4],[25.97,43.85],[26.1,44.4],[28.4,45.3],[29.6,46]]],a:"Aleksandrupoli",b:"Ukrayna sınırı",
+eko:"Güneyden gelen LNG ve Azeri gazını (Aleksandrupoli LNG, TAP) Balkanlar üzerinden Ukrayna ve Orta Avrupa’ya taşımayı amaçlar; eski Rus gazı Trans-Balkan hattının yönü tersine çevrildi. Yunanistan kendini enerji geçidi olarak konumlandırıyor, ABD LNG’sinin Avrupa’nın doğusuna girişini destekliyor.",
+risk:"Ticari kullanım yavaş kaldı; 2026’da tarifeler indirildi ve ortak kapasite ürünleri satışa çıktı (yıllık kapasitenin yaklaşık %45’i rezerve edildi). Fiili akışın rezervasyonla örtüşüp örtüşmeyeceği 2026/27 gaz yılında görülecek; Ukrayna’ya kuzey rotaları (Polonya, Baltic Pipe) ile rekabet var."},
+{id:"gstr",n:"Greenstream (Libya–İtalya)",t:"g",s:"r",len:"≈520 km (deniz altı)",cap:"≈8 mrd m³/yıl (tasarım)",yr:"2004",flow:0,cc:["LBY","ITA"],ct:"Libya · İtalya",
+p:[[[12.3,32.8],[13,34.6],[13.8,36],[14.25,37.07]]],a:"Mellitah",b:"Gela",
+eko:"Libya gazını Sicilya’ya taşır; İtalya’nın Akdeniz çevresinden tedarik çeşitlendirmesinin bir parçasıdır.",
+risk:"Libya’daki siyasi bölünme ve silahlı grupların tesisleri tehdit etmesi akışı kesintiye uğratır; fiili akış tasarım kapasitesinin altındadır."},
+{id:"kilis",n:"Kilis–Halep hattı (Türkiye–Suriye)",t:"g",s:"a",len:"≈64 km (Kilis–Halep)",cap:"Günlük ≈6 mcm’ye kadar (yıllık ≈2 mrd m³ üst sınır)",yr:"2025",flow:1.2,cc:["TUR","SYR","AZE","QAT"],ct:"Türkiye · Suriye (Azerbaycan gazı, Katar finansmanı)",
+p:[[[36.85,37.38],[37.12,36.72],[37.16,36.2]]],a:"Türkoğlu",b:"Halep",
+eko:"Azeri gazı Türkiye üzerinden swap anlaşmasıyla Suriye’ye verilir ve Halep ile Humus santrallerinin elektrik üretimini canlandırır. Türkiye için transit ve bölgesel etki aracıdır; Katar finansman desteği sağlıyor.",
+risk:"Suriye’nin istikrarı, ödeme ve finansman düzeni ile hattın güneye uzantılarının (Arap Gaz Hattı) onarımı belirleyicidir. 2026’nın ilk yarısında ≈0,7 mrd m³ gaz sevk edildi, yani kapasitenin altında kaldı."}
+];
+window.EL=L;
+const CT=[["Azerbaycan","İhracatçı","BTC, TANAP ve Güney Kafkasya hattının kaynağı; ihracat ve bütçe geliri enerjiye çok bağlı."],
+["Gürcistan","Transit","BTC ve TANAP geçer; transit ücreti ve stratejik önem kazanır, bölgesel istikrara duyarlıdır."],
+["Türkiye","İthalatçı + transit","Gazın büyük kısmını boru ile alır (Rusya, Azerbaycan, İran); BTC, Kerkük-Ceyhan ve TANAP transit hizmeti sağlar. Enerji faturası cari açığı ve enflasyonu belirler."],
+["Irak","İhracatçı","Gelirinin çok büyük bölümü petrol; Basra-Hürmüz dışında Kerkük-Ceyhan yoluyla çıkış arıyor."],
+["Rusya","İhracatçı + transit","Druzhba, TürkAkım, Mavi Akım ve CPC ile Avrupa ve Türkiye'ye bağlı; yaptırımlar rotayı Asya'ya kaydırıyor."],
+["Kazakistan","İhracatçı","CPC üzerinden Rus terminaline bağımlı; BTC ile çeşitlendirme arıyor."],
+["Almanya, Polonya","İthalatçı","Rus ham petrolünü yaptırımla bıraktılar; Nord Stream'in yokluğu sanayi maliyetini yükseltti."],
+["Macaristan, Slovakya","İthalatçı","Druzhba ve TürkAkım'a bağımlı; AB'de muafiyet ve yaptırım pazarlığı yapıyorlar."],
+["İtalya, Yunanistan, Bulgaristan","İthalatçı","TAP ve TürkAkım ile tedarik çeşitlendiriyor; LNG terminalleri tamamlayıcıdır."],
+["Suudi Arabistan, BAE","İhracatçı","Hürmüz'ü atlayan hatlara sahip tek Körfez ülkeleridir; kriz döneminde bütçeleri daha sağlam."],
+["Kuveyt, Katar, Bahreyn","İhracatçı","Neredeyse hiç bypass hattı yok; Hürmüz'e doğrudan bağımlı."],
+["İran","İhracatçı","Tebriz-Ankara ile Türkiye'ye gaz verir; yaptırımlar ve çatışma ihracatı kısıtlıyor."],
+["Çin","İthalatçı","Rus petrol ve gazını (ESPO, Sibirya Gücü 1), Kazak petrolünü, Türkmen gazını ve Myanmar hatlarını karadan alarak Malakka ve Hürmüz bağımlılığını azaltmaya çalışır."],
+["Norveç","İhracatçı","Langeled ve Baltic Pipe gibi hatlarla Avrupa’nın en güvenilir boru gazı kaynağıdır; 2022’den sonra ağırlığı arttı."],
+["Cezayir, Tunus, Fas","İhracatçı + transit","Trans-Akdeniz ve Medgaz ile Güney Avrupa’ya gaz verir; GME’nin kapanması Fas’ı transit gelirinden mahrum etti."],
+["Türkmenistan","İhracatçı","Gazının neredeyse tamamı Çin’e gider; TAPI ile ikinci bir pazar arıyor."],
+["Kanada","İhracatçı","Keystone ile ABD’ye, Trans Mountain ile Pasifik kıyısına ağır petrol taşır."],
+["Uganda, Tanzanya","İhracatçı + transit","EACOP tamamlanırsa Uganda petrolü Tanzanya üzerinden Hint Okyanusu’na açılacak."],
+["İsrail, Kıbrıs, Yunanistan","İhracatçı / transit","EastMed fiilen askıda; Doğu Akdeniz gazının hangi yoldan çıkacağı Türkiye ile gerilimin parçasıdır."],
+["Yunanistan, Bulgaristan, Romanya","Transit","IGB ve Dikey Koridor ile Azeri gazı ve LNG’yi Balkanlar üzerinden Ukrayna ve Orta Avrupa’ya taşımayı hedefliyorlar."],
+["Suriye","İthalatçı","Azeri gazını Türkiye üzerinden alarak elektrik üretimini toparlamaya çalışıyor."]];
+const ST={a:"Aktif",r:"Riskli / kısmi",k:"Kapalı",p:"Yapım aşamasında / planlanan"},W=960,H=540;
+let inited=0,flt="all",vw="a",sel=null,feats,PR;
+const g=id=>L.find(x=>x.id==id);
+function draw(){
+const el=$("#em");el.innerHTML="";
+PR=vw=="w"?d3.geo.mercator().center([10,30]).scale(150):vw=="a"?d3.geo.mercator().center([60,45]).scale(320):d3.geo.mercator().center([38,39]).scale(1100);
+PR.translate([W/2,H/2]);const pa=d3.geo.path().projection(PR);
+const sv=d3.select(el).append("svg").attr("viewBox","0 0 "+W+" "+H).attr("preserveAspectRatio","xMidYMid slice");
+const hs=sel?g(sel).cc:[];
+sv.selectAll("path.el").data(feats).enter().append("path").attr("class",d=>"el"+(hs.indexOf(d.id)>-1?" hl":"")).attr("d",pa);
+L.filter(l=>flt=="all"||l.t==flt).forEach(l=>{
+const geo={type:"MultiLineString",coordinates:l.p},d=pa(geo),on=sel==l.id;
+sv.append("path").attr("class","ep "+l.t).attr("d",d).style("stroke-width",on?5:3).style("opacity",sel&&!on?.35:1).style("stroke-dasharray",l.s=="k"?"3 6":l.s=="p"?"2 6":l.s=="r"?"9 5":null);
+sv.append("path").attr("class","eh").attr("d",d).on("click",()=>pick(l.id));
+if(on){[l.p[0][0],l.p[0].slice(-1)[0]].forEach((c,i)=>{const q=PR(c);if(!q)return;sv.append("circle").attr("cx",q[0]).attr("cy",q[1]).attr("r",4).attr("fill","var(--ink)");sv.append("text").attr("class","et").attr("x",q[0]+7).attr("y",q[1]-6).text(i?l.b:l.a)})}
+});
+const tq=PR([32.8,39.9]);sv.append("text").attr("class","et").attr("x",tq[0]).attr("y",tq[1]+16).attr("text-anchor","middle").style("opacity",.8).text("TÜRKİYE");
+}
+function pick(id){sel=id;const l=g(id);
+$("#ei").innerHTML=`<h3>${l.n}</h3><span class="pill b">${l.t=="o"?"Petrol":"Doğalgaz"}</span><span class="pill">${ST[l.s]}</span><p style="color:var(--mut)">${l.ct}</p>
+<p><b>Uzunluk:</b> ${l.len} · <b>Kapasite:</b> ${l.cap} · <b>Devreye:</b> ${l.yr}</p>
+<h4 style="margin:12px 0 4px">Ekonomik önemi</h4><p>${l.eko}</p><h4 style="margin:12px 0 4px">Jeopolitik risk</h4><p>${l.risk}</p>`;draw()}
+function sim(){
+const tl=+$("#et").value,el=+$("#ee").value/100;$("#ev1").textContent=tl;$("#ev2").textContent=el.toFixed(2).replace(".",",");
+let o=0,gz=0;document.querySelectorAll("#ek input:checked").forEach(c=>{const l=g(c.value);l.t=="o"?o+=l.flow:gz+=l.flow});
+const op=o/104000*100*(1-tl/100),gp=gz/4100*100*(1-tl/100),pr=op/el;
+$("#eout").innerHTML=`<div class="card"><small>Kesilen petrol</small><div class="eo">${o.toLocaleString("tr")} kb/g</div><p>Dünya talebinin ≈%${(o/1040).toFixed(1).replace(".",",")}'i; telafiden sonra net %${op.toFixed(1).replace(".",",")}</p></div>
+<div class="card"><small>Öğretici fiyat sıçraması (Brent)</small><div class="eo">+%${pr.toFixed(0)}</div><p>Büyüme etkisi ≈ −${(pr/10*.13).toFixed(2).replace(".",",")} puan; enflasyonda yukarı baskı, ithalatçıda cari açık artışı.</p></div>
+<div class="card"><small>Kesilen doğalgaz</small><div class="eo">${gz.toLocaleString("tr")} mrd m³/yıl</div><p>Dünya talebinin ≈%${(gz/41).toFixed(1).replace(".",",")}'i; telafiden sonra net %${gp.toFixed(1).replace(".",",")}. Gazda bölgesel piyasa ve LNG kapasitesi belirleyicidir.</p></div>`}
+window.eInit=function(){
+if(inited){draw();return}
+if(typeof Datamap=="undefined"||typeof topojson=="undefined"){$("#em").innerHTML='<div class="fb">Harita kütüphanesi yüklenemedi. Yeniden dene.</div>';return}
+inited=1;const T=Datamap.prototype.worldTopo;feats=topojson.feature(T,T.objects.world).features;
+$("#ek").innerHTML=L.filter(l=>l.flow>0).map(l=>`<label><input type="checkbox" value="${l.id}"><span>${l.n} <small style="color:var(--mut)">(${l.t=="o"?l.flow+" kb/g":l.flow+" mrd m³/yıl"})</small></span></label>`).join("");
+$("#ec").innerHTML=CT.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("");
+$("#s13").onclick=e=>{const d=e.target.dataset;if(d.ef){flt=d.ef;document.querySelectorAll("[data-ef]").forEach(b=>b.classList.toggle("on",b==e.target));draw()}else if(d.ev){vw=d.ev;document.querySelectorAll("[data-ev]").forEach(b=>b.classList.toggle("on",b==e.target));draw()}};
+$("#s13").oninput=e=>{if(e.target.closest(".ek"))sim()};
+pick("btc");sim();
+};
+const _s=show;show=function(i){_s(i);if(i==13)eInit()};
+})();
+</script>
+<script>
+(function(){
+const ASIA=[[121.9,31],[120.5,25],[118.5,22.5],[114,18],[110,10],[107.5,7.5],[104.6,3],[104.4,1.3],[103.7,1.1],[102,1.9],[100.5,3.5],[98.5,5.4],[95.5,6],[90,5.8],[80.5,5.5],[73,7.5]];
+const TR=[
+{id:"suv",n:"Asya–Avrupa ana hattı (Malakka–Babülmendeb–Süveyş)",k:"d",s:"r",len:"Şanghay–Rotterdam ≈ 10.500 deniz mili",vol:"Kriz öncesinde küresel ticaretin yaklaşık onda biri, konteyner trafiğinin yaklaşık üçte biri",ct:"Çin · Malezya · Hindistan · Yemen · Mısır · Suudi Arabistan · Hollanda",cc:["CHN","MYS","IND","YEM","EGY","SAU","NLD"],a:"Şanghay",b:"Rotterdam",
+p:[ASIA.concat([[64,11],[54,11.3],[47,12],[43.4,12.6],[40,18],[38.5,21.5],[36,25.5],[34.3,27.3],[33.7,27.75],[33,28.8],[32.6,29.9],[32.4,31.3],[28,33.8],[20,35.6],[14.8,34.9],[11.8,37.5],[8,38.2],[3,38.3],[-1,36.5],[-5.6,36],[-9.5,36.6],[-10,40],[-10.5,43.5],[-6,46.5],[-6,48.8],[-3,49.8],[1.5,51],[3.2,52],[4.1,51.95]])],
+eko:"Dünyanın en yoğun deniz koridorudur: Çin ve Doğu Asya’nın hazır mal ihracatı Avrupa’ya, Avrupa’nın makine ve kimyasalı Asya’ya bu hattan gider. Süveyş Kanalı Mısır için ana döviz kaynaklarından biridir; kriz boyunca Mısır’ın yaklaşık 10 milyar dolar kaybettiği açıklandı.",
+risk:"Yemen’deki Husilerin saldırıları 2023’ten beri gemileri Ümit Burnu’na yöneltti. Ağustos 2026’da Süveyş’ten 1.232 gemi geçti (Lloyd’s List verisi): kanal Hürmüz krizinin etkisiyle toparlanıyor, ama Babülmendeb’in tam dönüşü yok. Gerilim tırmanırsa hem Asya–Avrupa konteyner ticareti hem Yanbu çıkışlı petrol zarar görür."},
+{id:"cape",n:"Ümit Burnu rotası (Süveyş alternatifi)",k:"d",s:"r",len:"Süveyş’e göre ≈ +3.000–3.500 deniz mili",vol:"Kızıldeniz’den kaçınan konteyner ve tanker gemileri",ct:"Güney Afrika · Namibya · Fas",cc:["ZAF","NAM","MAR","SEN"],a:"Hint Okyanusu",b:"Kuzey Avrupa",
+p:[[[64,11],[56,-8],[50,-28],[38,-34.5],[27,-35.5],[19,-36.5],[12,-34.5],[5,-22],[-1,-6],[-12,2],[-19,12],[-19,26],[-19,34],[-13,37],[-10.5,41],[-10.5,43.5]]],
+eko:"Güvenli ama pahalıdır: yaklaşık 10 gün ek süre, daha çok yakıt ve daha çok gemi ihtiyacı. Bu, navlunu ve sigorta maliyetini artırır; ithal ara mal ve tüketici fiyatlarına yansır.",
+risk:"Konteyner hatları bu rotayı Kızıldeniz kapanınca kullanır, güvenlik düzelince geri döner. Rotanın büyüklüğü Süveyş geliri, liman yoğunluğu (Avrupa limanlarında gecikme) ve gemi arzı üzerinden etkisini gösterir."},
+{id:"pac",n:"Trans-Pasifik hattı (Çin–ABD Batı Kıyısı)",k:"d",s:"a",len:"Şanghay–Los Angeles ≈ 5.800 deniz mili",vol:"Dünyanın en büyük konteyner ticaret koridorlarından biri",ct:"Çin · Japonya · ABD",cc:["CHN","JPN","USA"],a:"Şanghay",b:"Los Angeles",
+p:[[[121.9,31],[127,29.8],[131.8,31.2],[135.5,32.3],[150,36],[165,40],[179.9,43]],[[-179.9,43],[-160,44],[-140,40],[-126,34.8],[-118.4,33.7]]],
+eko:"Çin’in ABD’ye elektronik, mobilya ve tüketim malı ihracatı bu hattan gider. Hat, ABD–Çin ticaret dengesi, tarifeler ve tedarik zincirlerinin yeniden yapılanması için temel göstergedir.",
+risk:"Boğaz sorunu yoktur; asıl risk siyasidir: ABD–Çin tarife gerilimi, ihracat kontrolleri ve liman işçisi grevleri. Tarifeler hacmi Meksika ve Vietnam üzerinden dolaylı rotalara kaydırabilir."},
+{id:"atl",n:"Trans-Atlantik hattı (Avrupa–ABD)",k:"d",s:"a",len:"Rotterdam–New York ≈ 3.500 deniz mili",vol:"Mal, ham petrol ve LNG ticareti",ct:"Hollanda · Birleşik Krallık · ABD",cc:["NLD","GBR","FRA","USA"],a:"Rotterdam",b:"New York",
+p:[[[4.1,51.95],[3.2,52],[1.5,51],[-3,49.8],[-8,49.5],[-30,46],[-52,42],[-67,40],[-73.8,40.4]]],
+eko:"Köklü ve dengeli bir ticaret hattıdır; hizmet, ilaç, makine ve enerji taşır. 2022’den beri ABD LNG’si Rus gazının yerine Avrupa’ya bu hattan ulaşıyor; hat Avrupa’nın enerji güvenliğinin yeni ayağıdır.",
+risk:"Fiziksel kesinti riski düşüktür. Risk, ABD–AB tarife ve düzenleme anlaşmazlıkları ile Avrupa’nın ABD LNG’sine yeni bağımlılığıdır."},
+{id:"pan",n:"Panama Kanalı koridoru (Doğu ABD–Pasifik)",k:"d",s:"r",len:"Kanal ≈ 82 km",vol:"Küresel deniz ticaretinin yaklaşık %5’i",ct:"ABD · Panama · Meksika",cc:["PAN","USA","MEX"],a:"New York",b:"Los Angeles",
+p:[[[-73.8,40.4],[-72,34],[-71,26],[-72.5,21.5],[-74.1,20.1],[-75.2,19],[-75.5,16.5],[-79.9,9.4],[-79.55,8.95],[-90,10],[-105,16],[-111,21],[-116,27],[-118.4,33.7]]],
+eko:"Doğu ABD kıyısı ile Pasifik arasında Güney Amerika’yı dolaşmayı gereksiz kılar; ABD’nin LNG ve tahıl ihracatı için Asya’ya kısa yol sağlar. Kanal geçiş ücretleri Panama’nın önemli gelir kalemidir.",
+risk:"Kanal tatlı su gölüne (Gatun) bağlıdır: 2023–2024 kuraklığı günlük geçişi kısıtladı. İklim ve su yönetimi ile ABD–Panama siyasi gerilimi ana risklerdir."},
+{id:"gulf",n:"Körfez–Asya petrol ve LNG hattı",k:"d",s:"r",len:"Ras Tanura–Şanghay ≈ 6.000 deniz mili",vol:"Hürmüz’de ≈ 20 mb/g petrol ve ürün; bunun yaklaşık %80’i Asya’ya",ct:"Suudi Arabistan · BAE · Katar · Irak · İran · Hindistan · Çin",cc:["SAU","ARE","QAT","IRQ","IRN","IND","CHN"],a:"Ras Tanura",b:"Şanghay",
+p:[[[50.2,26.6],[52.5,26.7],[55,26.3],[56.6,26.5],[58.5,24.8],[64,18],[73,7.5]].concat(ASIA.slice().reverse().slice(1))],
+eko:"Çin, Hindistan, Japonya ve Güney Kore’nin ham petrol ve LNG’sinin büyük kısmı bu hattan gelir. Katar’ın LNG’si ve BAE, Suudi, Irak ve Kuveyt petrolü Hürmüz’e bağlıdır; Asya’nın enerji faturası ve Körfez bütçeleri doğrudan etkilenir.",
+risk:"Şubat 2026’da başlayan ABD/İsrail–İran savaşı sonrası İran boğazı trafiğe kapattığını açıkladı; ABD İran limanlarına abluka uyguluyor, Temmuz’daki yeni çatışmalardan sonra tanker olayları Kasım başında da sürdü. Geçişler savaş öncesinin çok altında."},
+{id:"blk",n:"Karadeniz–Türk Boğazları hattı",k:"d",s:"r",len:"Odessa–Çanakkale ≈ 400 deniz mili",vol:"Tahıl, Hazar-Kazakistan petrolü (CPC), demir-çelik, konteyner",ct:"Ukrayna · Romanya · Bulgaristan · Türkiye · Rusya · Gürcistan",cc:["UKR","ROU","BGR","TUR","RUS","GEO"],a:"Odessa",b:"Ege Denizi",
+p:[[[30.7,46.4],[30.5,44],[29.5,41.6],[29.05,41.1],[28.3,40.75],[26.8,40.5],[26.38,40.15],[26.2,40],[25.9,39.5],[25.2,38.2],[24.5,36]]],
+eko:"Karadeniz’in tahıl, petrol, gübre ve metal ihracatı Türk Boğazları’ndan dünyaya açılır. Ukrayna’nın ve Rusya’nın tahıl ve enerji geliri, Türkiye’nin ise geçiş ve limanlar üzerinden hizmet geliri buraya bağlıdır.",
+risk:"Rusya–Ukrayna Savaşı Karadeniz’de sigorta primini ve saldırı riskini yükseltti. Boğazlar Montrö Sözleşmesi’ne tabidir; sivil geçiş serbest, savaş gemisi geçişi sınırlıdır. İstanbul Boğazı çok dar ve yoğundur, kaza ve tanker kuyruğu riski vardır."},
+{id:"nsr",n:"Kuzey Deniz Yolu (Arktik)",k:"d",s:"r",len:"Murmansk–Bering ≈ 3.000+ deniz mili",vol:"Rus LNG ve petrolü, sınırlı transit; yaz–güz sezonu",ct:"Rusya · Çin (kullanıcı ülke)",cc:["RUS","CHN"],a:"Murmansk",b:"Bering Boğazı",
+p:[[[33,69.2],[45,69.8],[60,70.6],[80,73.7],[100,77.4],[113,76.3],[130,73.8],[150,71.8],[160,71.6],[172,71]]],
+eko:"Kuzey Avrupa ile Doğu Asya arasındaki mesafeyi yaklaşık %30–40 kısaltabilir; Süveyş, Malakka ve Hürmüz’den bağımsızdır. Rusya için Arktik LNG ve maden ihracatının çıkış yoludur; Çin ilgi duyar.",
+risk:"Buz, buzkıran maliyeti, kısa sezon, sınırlı liman ve kurtarma altyapısı kapasiteyi düşük tutar. Batı yaptırımları ve Rusya’nın geçiş denetimi çekingenliği artırır."},
+{id:"mid",n:"Orta Koridor (Trans-Hazar Uluslararası Taşıma Rotası)",k:"k",s:"a",len:"Çin–Avrupa ≈ 7.000+ km",vol:"Yılda birkaç milyon ton; Süveyş’e göre küçük ama büyüyor",ct:"Çin · Kazakistan · Azerbaycan · Gürcistan · Türkiye · Bulgaristan · Sırbistan · Macaristan",cc:["CHN","KAZ","AZE","GEO","TUR","BGR","SRB","HUN"],a:"Xi’an",b:"Budapeşte",
+p:[[[108.9,34.3],[100,37.5],[93,41],[87.6,43.8],[82.4,45.2],[76.9,43.2],[69.6,42.3],[65.5,44.8],[55.2,45.3],[51.2,43.6],[49.4,39],[49.9,40.4],[46.4,41.1],[44.8,41.7],[43.1,40.6],[41.3,39.9],[37,39.75],[32.9,39.9],[29,41],[26.6,41.7],[23.3,42.7],[20.5,44.8],[19,47.5]]],
+eko:"Rusya ve Hürmüz–Süveyş hattını atlayarak Çin’i Avrupa’ya Türkiye üzerinden bağlar. Bakü–Tiflis–Kars demiryolu ve Marmaray ile Çin’den Avrupa’ya 15–25 gün gibi bir süre mümkündür. Türkiye, Azerbaycan, Gürcistan ve Kazakistan transit geliri ve yatırım çeker.",
+risk:"Kapasite küçüktür: Hazar’daki liman ve gemi sayısı, Bakü–Tiflis–Kars hattının sınırlı kapasitesi, farklı gümrük ve tarifeler ve aktarma yükü darboğazdır. Bölgesel istikrar (Güney Kafkasya) ve Çin’in ilgisi belirleyicidir."},
+{id:"tsib",n:"Trans-Sibirya demiryolu (Çin–Rusya–Avrupa)",k:"k",s:"r",len:"Vladivostok–Varşova ≈ 10.000 km",vol:"Çin–Avrupa treni ve Rusya içi yük",ct:"Rusya · Belarus · Polonya",cc:["RUS","BLR","POL","CHN"],a:"Vladivostok",b:"Varşova",
+p:[[[131.9,43.1],[135.1,48.5],[127.5,51],[113.5,52],[107.6,51.8],[104.3,52.3],[92.9,56],[83,55],[73.4,55],[60.6,56.8],[49.1,55.8],[37.6,55.8],[27.6,53.9],[21,52.2]]],
+eko:"Çin’den Avrupa’ya en kısa kara hattıdır; Rusya için transit geliri ve Asya ile bağ demektir. Uzak Doğu limanları ve Rusya–Çin ticareti için omurgadır.",
+risk:"2022’den sonra yaptırımlar, sigorta ve ödeme sorunları, Avrupa şirketlerinin çekingenliği ve AB–Rusya/Belarus sınırındaki kısıtlar Avrupa’ya yük akışını daralttı. Hat Rusya–Çin ticaretine yöneliyor."},
+{id:"instc",n:"Uluslararası Kuzey-Güney Ulaştırma Koridoru (INSTC)",k:"k",s:"p",len:"Mumbai–Moskova ≈ 7.200 km",vol:"Küçük ama stratejik; Rusya–İran–Hindistan ticareti",ct:"Hindistan · İran · Azerbaycan · Rusya",cc:["IND","IRN","AZE","RUS"],a:"Mumbai",b:"Moskova",
+p:[[[72.8,18.9],[65,22],[58.5,24.8],[56.6,26.5],[56.3,27.2],[54.4,31.9],[51.4,35.7],[49.6,37.3],[48.9,38.4],[49.4,39.9],[49.9,40.4],[48.3,42.1],[46.7,43.8],[48,46.3],[44.5,48.7],[39.2,51.7],[37.6,55.8]]],
+eko:"Hindistan malını Süveyş yerine İran ve Hazar üzerinden Rusya’ya taşıyarak süreyi ve maliyeti düşürmeyi hedefler. İran limanları (Bender Abbas, Çabahar) ve Azerbaycan transit gelir ve stratejik ağırlık kazanır.",
+risk:"Rasht–Astara demiryolu eksik halkasıdır; İran yaptırımları, savaş ve Hürmüz riski ile Rusya yaptırımları hattı kırılgan kılar. Tam kapasiteyle çalışmaz."},
+{id:"imec",n:"Hindistan–Orta Doğu–Avrupa Koridoru (IMEC)",k:"k",s:"p",len:"Mumbai–Marsilya, deniz + demiryolu",vol:"Planlanan; henüz sınırlı",ct:"Hindistan · BAE · Suudi Arabistan · Ürdün · İsrail · Yunanistan · Fransa",cc:["IND","ARE","SAU","JOR","ISR","GRC","FRA"],a:"Mumbai",b:"Marsilya",
+p:[[[72.8,18.9],[65,21.5],[60,23.5],[58.5,24.8],[56.35,25.1],[54.4,24.5],[51.6,24.1],[46.7,24.7],[41.7,27.5],[37,31.6],[36,31.95],[35,32.8],[34.2,33],[29,34.6],[24,36],[23.65,37.93],[24,36.6],[22,35.8],[17,35.3],[14.8,34.9],[11.8,37.5],[7.5,38.4],[5.4,43.2]]],
+eko:"Eylül 2023’te G20’de duyurulan proje, Hindistan–Avrupa arasında Süveyş’e alternatif deniz-demiryolu zinciri kurmayı ve Körfez’le enerji, veri ve hidrojen bağlantısını amaçlıyor. Gerçekleşirse Körfez ve Doğu Akdeniz ülkelerine transit gelir getirir.",
+risk:"Bölgesel savaşlar, İsrail–Arap normalleşme belirsizliği, finansman ve ortak standart eksikliği nedeniyle ilerleme sınırlıdır. Kasım 2026’da Hürmüz krizi Körfez çıkış noktasını da belirsizleştiriyor."},
+{id:"dev",n:"Kalkınma Yolu (Irak–Türkiye)",k:"k",s:"p",len:"≈ 1.200 km demiryolu ve karayolu",vol:"Planlanan; Basra Körfezi–Avrupa bağlantısı",ct:"Irak · Türkiye",cc:["IRQ","TUR"],a:"Fav Limanı",b:"Mersin",
+p:[[[48.5,29.95],[47.8,30.5],[44.4,33.3],[43.1,36.3],[42,37.2],[39,37.2],[36.8,37.1],[34.6,36.8]]],
+eko:"Irak’ın Fav Limanı’ndan Türkiye üzerinden Avrupa’ya uzanan hat; Irak’a yeni bir ticaret ve ihracat kapısı, Türkiye’ye transit geliri ve Körfez–Avrupa ticaretinde pay hedefler. Irak’ın petrol dışı ekonomisini ve Kerkük-Ceyhan ile birlikte Türkiye bağlantısını güçlendirebilir.",
+risk:"Güvenlik, Irak içi siyasi uzlaşma ve finansman belirsizdir. Fav Limanı Hürmüz’ün içinde olduğundan, boğaz kapanınca deniz ayağı da kesilir."},
+{id:"usgulf",n:"ABD Körfezi–Avrupa LNG ve petrol hattı",k:"d",s:"a",len:"Sabine Pass–Rotterdam ≈ 5.000 deniz mili",vol:"ABD LNG ihracatının büyük bölümü ve ham petrol",ct:"ABD · Hollanda · Birleşik Krallık",cc:["USA","NLD","GBR"],a:"Sabine Pass",b:"Rotterdam",
+p:[[[-93.9,29.7],[-89,28.5],[-85,26],[-81.5,24.6],[-79.8,26],[-76,33],[-66,39],[-45,46],[-25,49],[-10,49.8],[-3,49.9],[1.5,51],[3.2,52],[4.1,51.95]]],
+eko:"2022’den sonra Rus gazının yerini tutan ABD LNG’sinin ana yoludur; ABD’yi dünyanın en büyük LNG ihracatçılarından biri yaptı ve Avrupa’nın enerji faturasını ve kış güvenliğini bu hat belirliyor.",
+risk:"Fiziksel kesinti riski düşüktür; asıl risk fiyat ve siyasettir: ABD’nin ihracat politikası, Avrupa’nın yeni tek tedarikçiye bağımlılığı ve kış fiyat oynaklığı. Atlantik fırtınaları ve Körfez kasırgaları geçici kesinti yaratır."},
+{id:"pasam",n:"Çin–Latin Amerika hattı (Şanghay–Chancay)",k:"d",s:"a",len:"Şanghay–Chancay ≈ 10.000 deniz mili",vol:"Çin’in Peru, Şili ve bölgeden bakır, demir cevheri, soya ve lityum ithalatı",ct:"Çin · Peru · Şili",cc:["CHN","PER","CHL"],a:"Şanghay",b:"Chancay",
+p:[[[121.9,31],[128,22],[140,10],[160,0],[179.9,-5]],[[-179.9,-5],[-160,-8],[-130,-10.5],[-100,-11.5],[-80,-11.9],[-77.3,-11.6]]],
+eko:"Çin’in Latin Amerika madenlerini ve tarım ürünlerini Pasifik’ten taşır; 2024’te açılan Chancay Limanı bu rotayı kısaltarak Çin’in bölgedeki ağırlığını artırdı.",
+risk:"Tek ürün ihracatına ve Çin talebine bağımlılık, ABD’nin bölgedeki Çin liman yatırımlarına itirazı ve Peru’daki siyasi istikrarsızlık hattın başlıca risklerindendir."},
+{id:"brchn",n:"Brezilya–Çin demir cevheri ve soya hattı",k:"d",s:"a",len:"Tubarão–Şanghay ≈ 11.000+ deniz mili",vol:"Dünya demir cevheri ve soya ticaretinin büyük bölümü",ct:"Brezilya · Güney Afrika (açıkları) · Endonezya (açıkları) · Çin",cc:["BRA","ZAF","IDN","CHN"],a:"Tubarão",b:"Şanghay",
+p:[[[-40.2,-20.3],[-30,-27],[-15,-36],[5,-39],[19,-37.5],[40,-35],[70,-28],[100,-19],[112,-15],[115.7,-9],[117.8,-3],[119.2,1.5],[122,3.2],[126.5,4.5],[128,9],[127,16],[125,24],[123,28],[121.9,31]]],
+eko:"Çin’in demir cevheri ve soyasının büyük kısmı Brezilya’dan Ümit Burnu üzerinden gelir; hat Brezilya’nın ihracat gelirini, Çin’in çelik ve hayvan yemi maliyetini belirler. Güzergâh şematiktir.",
+risk:"Yaklaşık 40 günlük sefer süresi, navlun oynaklığı (Baltic Dry), Çin talebindeki dalgalanma ve liman yoğunluğu riski taşır. Hürmüz–Süveyş krizinden bağımsız olduğu için kriz dönemlerinde önemini korur."},
+{id:"aus",n:"Avustralya–Doğu Asya demir cevheri ve LNG hattı",k:"d",s:"a",len:"Port Hedland–Şanghay ≈ 3.500–4.000 deniz mili",vol:"Deniz yoluyla taşınan demir cevherinin yarısından fazlası; kömür ve LNG",ct:"Avustralya · Endonezya · Çin · Japonya · Güney Kore",cc:["AUS","IDN","CHN","JPN","KOR"],a:"Port Hedland",b:"Şanghay",
+p:[[[118.6,-20.3],[117,-15],[115.7,-9],[117.8,-3],[119.2,1.5],[122,3.2],[126.5,4.5],[128,9],[127,16],[125,24],[123,28],[121.9,31]]],
+eko:"Pilbara demir cevheri ve Queensland kömürüyle Çin, Japonya ve Güney Kore’nin çelik ve enerji sanayisini besler; Avustralya’nın en büyük ihracat damarıdır.",
+risk:"Çoğu sefer Malakka’ya girmeden Lombok ve Makassar üzerinden geçer; fiziksel kesinti riski düşüktür. Asıl kırılganlık fiyat, Çin’in alıcı yoğunlaşması ve ikili ticaret gerilimleridir."},
+{id:"cpec",n:"Çin–Pakistan Ekonomik Koridoru (ÇPEK)",k:"k",s:"r",len:"Kaşgar–Gwadar ≈ 3.000 km",vol:"Yol, enerji ve liman yatırımı; ticaret hacmi sınırlı",ct:"Çin · Pakistan",cc:["CHN","PAK"],a:"Kaşgar",b:"Gwadar",
+p:[[[75.99,39.47],[75.4,36.85],[74.3,36.2],[72.7,34.3],[73,33.7],[71.5,30.2],[68.9,27.7],[66.6,27.8],[63,26],[62.3,25.1]]],
+eko:"Çin’e Hint Okyanusu’na Malakka’yı ve Hürmüz’ü atlayan kısa bir kara yolu vaat eder; Pakistan için enerji santralleri, otoyol ve Gwadar Limanı yatırımı getirir. Güzergâh şematiktir.",
+risk:"Beluc ayrılıkçı saldırıları, Pakistan’ın borç yükü, Hindistan’ın Keşmir itirazı ve düşük ticaret hacmi nedeniyle koridor beklenen akışı sağlayamadı."},
+{id:"ckuz",n:"Çin–Kırgızistan–Özbekistan demiryolu",k:"k",s:"p",len:"≈ 490–520 km",vol:"Yapım aşamasında; yılda ≈15 milyon ton hedefi",ct:"Çin · Kırgızistan · Özbekistan",cc:["CHN","KGZ","UZB"],a:"Kaşgar",b:"Andican",
+p:[[[75.99,39.47],[73.9,39.7],[72.8,40.5],[72.3,40.8]]],
+eko:"Çin’i Orta Asya’ya Kazakistan ve Rusya’yı atlayarak bağlamayı hedefleyen demiryolu; gerçekleşirse Orta Koridor’a ve Türkiye bağlantısına yeni bir giriş sağlar.",
+risk:"Yapımı Aralık 2024’te başladı; 4,7 milyar dolarlık kredi 2025 sonunda imzalandı ve 2026’da inşaat ilerliyor (yaklaşık %17–22). Dağlık arazi (çok sayıda tünel ve köprü) ile Çin’in standart ray ölçüsü ile Kırgız–Özbek geniş ölçü arasındaki fark aktarma maliyeti doğuracak."},
+{id:"usasia",n:"ABD Körfezi–Asya LNG hattı (Panama / Ümit Burnu)",k:"d",s:"r",len:"Sabine Pass–Tokyo ≈ 9.000 deniz mili (Panama üzerinden)",vol:"ABD LNG’sinin Asya’ya giden payı",ct:"ABD · Panama · Japonya · Güney Kore",cc:["USA","PAN","JPN","KOR"],a:"Sabine Pass",b:"Tokyo Körfezi",
+p:[[[-93.9,29.7],[-87,25],[-85.5,21.8],[-80,15],[-79.9,9.4],[-79.55,8.95],[-85,7],[-110,15],[-140,22],[-170,30],[-179.9,33]],[[179.9,33],[165,34],[150,34.5],[139.8,35.4]]],
+eko:"ABD, Katar’a rakip büyük bir LNG ihracatçısı oldu; Japonya, Güney Kore ve diğer Asya alıcıları Hürmüz bağımlılığını azaltmak için ABD LNG’sine yöneliyor. Güzergâh şematiktir.",
+risk:"Panama Kanalı’ndaki su sıkıntısı ve sıra sorunları LNG gemilerinin çoğunu daha uzun ve pahalı Ümit Burnu rotasına yönlendiriyor; ABD–Çin tarife gerilimi Çin’in ABD LNG alımını sınırladı."},
+{id:"arlng",n:"Rus Arktik LNG hattı (Yamal–Avrupa)",k:"d",s:"r",len:"Sabetta–Zeebrugge ≈ 4.000 deniz mili",vol:"Yamal LNG’nin Avrupa’ya giden kısmı; buzkıran sınıfı LNG gemileri",ct:"Rusya · Norveç · Belçika",cc:["RUS","NOR","BEL"],a:"Sabetta",b:"Zeebrugge",
+p:[[[72,71.3],[60,72],[45,70.5],[33,70],[20,70.5],[8,64],[3,58],[2,53],[3.2,51.35]]],
+eko:"Rusya’nın Yamal LNG’si özel buzkıran gemilerle Avrupa terminallerine, yaz–güz sezonunda Kuzey Deniz Yolu üzerinden Asya’ya da LNG satar; Rusya için boru gazı kaybının kısmi telafisidir.",
+risk:"AB, Rus LNG ithalatını kademeli olarak bırakma kararı aldı (takvimi doğrula). Yaptırım altındaki Arktik LNG 2 sevkiyatları ise Çin’e gölge filo ve sınırlı alıcılarla yönelmiş durumda."},
+{id:"lobito",n:"Lobito Koridoru (Angola–Kongo–Zambiya)",k:"k",s:"a",len:"Lobito–Lubumbashi ≈ 1.800 km (Zambiya bağlantısı ≈ 800 km planlı)",vol:"Bakır ve kobalt ihracatı; Angola kesimi yenilenmiş Benguela demiryolu",ct:"Angola · Demokratik Kongo · Zambiya",cc:["AGO","COD","ZMB"],a:"Lobito",b:"Lubumbashi",
+p:[[[13.55,-12.35],[13.4,-12.6],[15.74,-12.78],[16.9,-12.4],[19.9,-11.8],[22.2,-10.7],[25.47,-10.7],[27.5,-11.66]]],
+eko:"Orta Afrika’nın bakır ve kobalt kuşağını Atlantik’e en kısa yoldan bağlar; Dar es Selam ve Güney Afrika koridorlarına alternatiftir. Batı’nın kritik mineral tedarikini çeşitlendirme planlarının (G7 PGII) amiral gemisidir.",
+risk:"Kongo’daki güvenlik, finansman, Angola kesiminde ray ve liman kapasitesi ve Zambiya’ya uzanan yeni hattın (≈ 800 km) erken aşamada olması ana risklerdir; Çin destekli TAZARA ile rekabet vardır. Zambiya bağlantısının durumunu doğrula."},
+{id:"laos",n:"Çin–Laos–Tayland demiryolu",k:"k",s:"a",len:"Kunming–Vientiane ≈ 1.035 km",vol:"Yük ve yolcu treni; Tayland kesimi kısmen yapım aşamasında",ct:"Çin · Laos · Tayland",cc:["CHN","LAO","THA"],a:"Kunming",b:"Bangkok",
+p:[[[102.7,25],[101.7,21.2],[102.1,19.9],[102.6,17.97],[102.74,17.88],[100.5,13.75]]],
+eko:"Denize kıyısı olmayan Laos’u kara bağlantılı hale getirir ve Çin’i Güneydoğu Asya’ya Malakka’yı atlayarak bağlar; Çin’in Kuşak ve Yol projelerinin amiral gemilerindendir.",
+risk:"Laos’un Çin kredisi nedeniyle borç yükü, düşük yerel kullanım ve Tayland tarafındaki standart ray ölçüsü çalışmalarının gecikmesi ana risklerdir. Güzergâh şematiktir."},
+{id:"danube",n:"Ren–Ana–Tuna iç su yolu (Rotterdam–Köstence)",k:"k",s:"a",len:"≈ 3.500 km",vol:"Tahıl, demir cevheri, kimyasal ve konteyner; Ukrayna ihracatı için yedek yol",ct:"Hollanda · Almanya · Avusturya · Macaristan · Sırbistan · Bulgaristan · Romanya",cc:["NLD","DEU","AUT","HUN","SRB","BGR","ROU"],a:"Rotterdam",b:"Köstence",
+p:[[[4.5,51.9],[6.96,50.94],[8.7,50.1],[11.1,49.45],[12.1,49],[16.4,48.2],[19.05,47.5],[20.45,44.8],[25.97,43.9],[28,44.3],[28.65,44.17]]],
+eko:"Kuzey Denizi’ni Karadeniz’e bağlayan tek iç su yoludur; savaştan sonra Ukrayna’nın Tuna limanları (İsmail, Reni) tahıl ihracatı için hayati hale geldi. Güzergâh şematiktir.",
+risk:"Kuraklıkta düşük su seviyesi seferleri kısıtlar; Tuna’daki Ukrayna limanlarına saldırılar, ray ve karayolu ile rekabet ve sınır geçişlerindeki gecikmeler risk yaratır."}
+];
+const CP=[
+{id:"hrm",n:"Hürmüz Boğazı",c:[56.5,26.5],cc:["IRN","OMN","ARE"],w:"En dar ≈ 33 km",v:"≈ 20 mb/g petrol ve ürün (dünya sıvı petrol tüketiminin yaklaşık beşte biri), küresel LNG’nin yaklaşık beşte biri, gübre ihracatının önemli bir kısmı",eko:"Körfez’in çıkış kapısıdır. Kesinti petrol, LNG ve gübre fiyatını, Asya’nın ithalat faturasını ve Körfez bütçelerini doğrudan etkiler.",risk:"Şubat 2026’daki savaştan beri trafik savaş öncesinin çok altında; İran geçişi kendi koridorlarına bağlıyor, ABD abluka uyguluyor. Kasım başında iki süper tankerde patlama bildirildi. Bypass hatlarının kapasitesi yetersiz."},
+{id:"bab",n:"Babülmendeb Boğazı",c:[43.4,12.6],cc:["YEM","DJI","ERI"],w:"En dar ≈ 30 km",v:"Kriz öncesinde ≈ 9 mb/g petrol; Asya–Avrupa konteyneri ve Yanbu çıkışlı petrol bu geçide bağlı",eko:"Kızıldeniz’i Hint Okyanusu’na açar. Süveyş trafiğinin ön şartıdır; Suudi Arabistan’ın Yanbu çıkışlı ihracatı da buradan geçer.",risk:"Husilerin Yemen’deki ilerleyişi ve gemi saldırıları yeniden artıyor; geçişlerin Hürmüz krizi nedeniyle önemi daha da büyüdü, ama güvenlik zayıf."},
+{id:"sue",n:"Süveyş Kanalı",c:[32.5,30.4],cc:["EGY"],w:"≈ 193 km kanal",v:"2024’te 13.213, 2025’te 12.758 gemi; Ağustos 2026’da 1.232 gemi",eko:"Asya–Avrupa deniz ticaretinin ana kısayoludur; Mısır’ın döviz gelirinde büyük pay sahibidir. Geçişler arttıkça gelir ve Mısır’ın dış dengesi düzelir.",risk:"Husi saldırıları ve Hürmüz krizi arasında kalır. Mısır’ın açıklamasına göre kriz boyunca kanal gelirinde kayıp yaklaşık 10 milyar dolar oldu; toparlanma Babülmendeb güvenliğine bağlı."},
+{id:"mal",n:"Malakka Boğazı",c:[101.3,2.5],cc:["MYS","IDN","SGP"],w:"Singapur Boğazı’nda en dar ≈ 2,7 km",v:"≈ 23 mb/g petrol; dünya deniz ticaretinin yaklaşık dörtte biri",eko:"Hint Okyanusu ile Güney Çin Denizi arasındaki ana yoldur. Çin, Japonya ve Güney Kore’nin enerji ve ihracatı buradan geçer; Singapur transshipment (aktarma) merkezi olarak büyümüştür.",risk:"Çin’in “Malakka ikilemi”: ithal petrolünün büyük kısmı tek dar geçide bağlı. Kaza, korsanlık ve Güney Çin Denizi gerilimi risk yaratır."},
+{id:"bos",n:"Türk Boğazları (İstanbul–Çanakkale)",c:[29,41.1],cc:["TUR","UKR","ROU","BGR"],w:"İstanbul Boğazı’nda en dar ≈ 700 m",v:"Yılda ≈ 40 bin gemi; Karadeniz tahılı, petrolü, gübre ve metali",eko:"Karadeniz’in tek denize çıkışıdır. Ukrayna ve Rusya tahıl-enerji ihracatı ile Hazar-Kazakistan petrolü (CPC) buradan geçer.",risk:"Montrö Sözleşmesi (1936) rejimi ve savaş gemisi kısıtları siyasi ağırlık taşır. Karadeniz’deki savaş sigorta primini yükseltir; tanker yoğunluğu çevre ve kaza riski yaratır."},
+{id:"gib",n:"Cebelitarık Boğazı",c:[-5.6,36],cc:["ESP","MAR","GBR"],w:"En dar ≈ 14 km",v:"Yılda yaklaşık 100 bin gemi; Akdeniz–Atlantik kapısı",eko:"Süveyş’ten gelen Asya yükü ile Akdeniz limanlarının Atlantik bağlantısıdır. Avrupa’nın güney limanları (Algeciras, Valensiya) buna bağlıdır.",risk:"Doğrudan kriz riski düşük; Kızıldeniz–Doğu Akdeniz krizi ve Akdeniz limanlarındaki yoğunluk dolaylı etki yaratır."},
+{id:"pnm",n:"Panama Kanalı",c:[-79.7,9.1],cc:["PAN"],w:"≈ 82 km kanal",v:"Yılda ≈ 13–14 bin geçiş; küresel deniz ticaretinin yaklaşık %5’i",eko:"Atlantik ile Pasifik’i birleştirir. ABD LNG ve tahıl ihracatı ile Asya–Doğu ABD konteyneri için kısayoldur.",risk:"2023–2024 kuraklığı geçişleri kısıtladı; su, iklim ve ABD–Panama tartışmaları ana risklerdir."},
+{id:"twn",n:"Tayvan Boğazı",c:[119.8,24.5],cc:["TWN","CHN"],w:"En dar ≈ 130 km",v:"Dünya konteyner filosunun kabaca yarısı bu boğazdan geçer; yarı iletken ihracatı da buradan çıkar",eko:"Çin, Tayvan, Japonya ve Güney Kore’nin ihracat rotasıdır. Dünya yarı iletken tedarik zincirinin (Tayvan) bağlantı noktasıdır.",risk:"Çin–Tayvan gerilimi, askeri tatbikat ve olası abluka riski; en yüksek sonuçlu ama düşük olasılıklı senaryolardan biridir."},
+{id:"cap",n:"Ümit Burnu",c:[18.5,-34.8],cc:["ZAF"],w:"Boğaz değil; açık okyanus rotası",v:"Kızıldeniz krizinde Süveyş’ten kaçan konteyner ve tanker trafiği; Atlantik–Hint Okyanusu geçişi",eko:"Süveyş’e güvenli alternatiftir; Güney Afrika limanları (Durban, Cape Town) yakıt ikmali ve liman hizmeti geliri kazanır.",risk:"Süveyş trafiği yükseldikçe rota boşalır; fırtına ve yüksek dalga riski vardır, ek süre ve yakıt maliyeti navluna yansır."},
+{id:"lom",n:"Lombok Boğazı",c:[115.7,-8.7],cc:["IDN"],w:"En dar ≈ 20 km",v:"Malakka’ya sığmayan derin draftlı büyük gemiler (VLCC, Capesize) ve Avustralya–Doğu Asya demir cevheri",eko:"Malakka’nın yedeği olarak Hint Okyanusu’ndan Güney Çin Denizi ve Pasifik’e geçişi sağlar; Endonezya’nın stratejik deniz yolu önemini artırır.",risk:"Malakka aksarsa trafik bu geçide kayabilir ama mesafe ve süre uzar; Endonezya’nın deniz güvenliği kapasitesi ve sismik risk sınırlayıcıdır."},
+{id:"dan",n:"Danimarka Boğazları (Büyük Belt, Öresund)",c:[11,55.4],cc:["DNK","SWE","DEU"],w:"Öresund’da en dar ≈ 4 km",v:"Rusya’nın Baltık limanlarından (Primorsk, Ust-Luga) petrol ve ürün ihracatı, Baltık ticareti",eko:"Baltık Denizi’nin denize çıkışıdır; Rus Baltık petrolü, Polonya, Almanya ve İsveç ticareti buradan geçer.",risk:"Rus gölge filo tankerlerinin kaza, sigorta ve çevre riski ile deniz altı kablo ve boru sabotajı kaygıları vardır; NATO’nun Baltık’taki varlığı geçişi siyasileştiriyor."},
+{id:"kerc",n:"Kerç Boğazı",c:[36.6,45.3],cc:["RUS","UKR"],w:"≈ 4–15 km genişlik",v:"Azak Denizi limanlarının (Rostov, Mariupol, Berdyansk) Karadeniz çıkışı; Kerç Köprüsü",eko:"Azak Denizi’nin denize çıkışıdır; tahıl, kömür ve metal sevkiyatı buradan geçer.",risk:"Savaşta Ukrayna’nın Azak çıkışı kapandı; Rusya’nın denetimi ve Kerç Köprüsü’ne saldırılar geçişi riskli kılıyor."},
+{id:"sun",n:"Sunda Boğazı",c:[105.9,-6],cc:["IDN"],w:"En dar ≈ 24 km",v:"Hint Okyanusu–Java Denizi geçişi; Malakka ve Lombok’a alternatif",eko:"Orta boy gemilerin Malakka’ya girmeden Java Denizi’ne geçmesini sağlar; Endonezya’nın Cakarta çevresindeki limanlarının erişim yoludur.",risk:"Sığ ve dar bölümler, yoğun feribot trafiği ve Krakatau çevresindeki volkanik ve tsunami riski vardır."},
+{id:"kor",n:"Kore Boğazı",c:[129.5,34.2],cc:["KOR","JPN"],w:"≈ 180 km (Kore–Tsushima)",v:"Güney Kore ve Japonya limanlarının, Rusya’nın Vladivostok çıkışının Pasifik bağlantısı",eko:"Japonya Denizi ile Doğu Çin Denizi’ni bağlar; Busan ve Japon limanları buradan açılır.",risk:"Kuzey Kore füze denemeleri ve Kore–Japonya deniz yetki alanı tartışmaları bölgesel risk yaratır."},
+{id:"moz",n:"Mozambik Kanalı",c:[41,-17],cc:["MOZ","MDG"],w:"En dar ≈ 400 km",v:"Ümit Burnu rotasını izleyen gemiler ve Mozambik LNG projeleri",eko:"Doğu Afrika’yı Madagaskar’dan ayırır; Kızıldeniz krizinde Ümit Burnu rotasına kayan ticaretin kıyı şeridini oluşturur.",risk:"Mozambik’in kuzeyindeki isyan (Cabo Delgado) LNG projelerini geciktirdi; siklon ve korsanlık riski vardır."},
+{id:"ber",n:"Bering Boğazı",c:[-169,65.8],cc:["USA","RUS"],w:"≈ 82 km",v:"Kuzey Deniz Yolu ve Arktik ticaretinin Pasifik kapısı",eko:"Arktik buzu azaldıkça Asya–Avrupa kısayolunun Pasifik çıkışı olur; Rus ve Çin gemi trafiği artıyor.",risk:"Trafik çok sınırlıdır; ABD–Rusya askerî varlığı, çevre ve kurtarma altyapısı eksikliği ana risklerdir."}
+];
+const SN={a:"Aktif",r:"Riskli / kısmi",p:"Planlanan / yapım aşamasında"},W=960,H=540;
+let inited=0,tf="all",tv="w",sel=null,showP=0,feats,PR;
+const g=id=>TR.find(x=>x.id==id)||CP.find(x=>x.id==id);
+const isCP=x=>!!x&&!!x.c;
+function chips(){
+const L=TR.filter(r=>tf=="all"||r.k==tf),C=tf=="k"?[]:CP;
+$("#trc").innerHTML=L.map(r=>`<button class="st${sel&&sel.id==r.id?" on":""}" data-r="${r.id}">${esc(r.n.split(" (")[0])}</button>`).join("")+C.map(c=>`<button class="st${sel&&sel.id==c.id?" on":""}" data-r="${c.id}">● ${esc(c.n.replace(" Boğazı","").replace(" Kanalı",""))}</button>`).join("")}
+function draw(){
+const el=$("#tm");el.innerHTML="";
+PR=tv=="w"?d3.geo.mercator().center([12,28]).scale(150):d3.geo.mercator().center([62,34]).scale(330);
+PR.translate([W/2,H/2]);const pa=d3.geo.path().projection(PR);
+const sv=d3.select(el).append("svg").attr("viewBox","0 0 "+W+" "+H).attr("preserveAspectRatio","xMidYMid slice");
+const hs=sel?sel.cc:[];
+sv.selectAll("path.el").data(feats).enter().append("path").attr("class",d=>"el"+(hs.indexOf(d.id)>-1?" hl":"")).attr("d",pa);
+if(showP&&window.EL)window.EL.forEach(l=>{const d=pa({type:"MultiLineString",coordinates:l.p});if(d)sv.append("path").attr("class","ep "+l.t).attr("d",d).style("stroke-width",1.8).style("opacity",.8).style("stroke-dasharray",l.s=="k"?"3 6":l.s=="p"?"2 6":l.s=="r"?"9 5":null)});
+TR.filter(r=>tf=="all"||r.k==tf).forEach(r=>{
+const d=pa({type:"MultiLineString",coordinates:r.p}),on=sel&&sel.id==r.id;if(!d)return;
+sv.append("path").attr("class","tp "+r.k).attr("d",d).style("stroke-width",on?5:2.6).style("opacity",sel&&!on?.3:1).style("stroke-dasharray",r.s=="r"?"9 5":r.s=="p"?"2 6":null);
+sv.append("path").attr("class","eh").attr("d",d).on("click",()=>pick(r.id));
+if(on){[r.p[0][0],r.p[r.p.length-1].slice(-1)[0]].forEach((c,i)=>{const q=PR(c);if(!q)return;sv.append("circle").attr("cx",q[0]).attr("cy",q[1]).attr("r",4).attr("fill","var(--ink)");sv.append("text").attr("class","et").attr("x",q[0]+7).attr("y",q[1]-6).text(i?r.b:r.a)})}
+});
+if(tf!="k")CP.forEach(c=>{const q=PR(c.c);if(!q)return;const on=sel&&sel.id==c.id;
+sv.append("circle").attr("class","tc").attr("cx",q[0]).attr("cy",q[1]).attr("r",on?9:6.5);
+sv.append("circle").attr("class","th").attr("cx",q[0]).attr("cy",q[1]).attr("r",16).on("click",()=>pick(c.id));
+if(tv=="a"||on)sv.append("text").attr("class","et").attr("x",q[0]+9).attr("y",q[1]-8).text(c.n.replace(" Boğazı","").replace(" Kanalı",""))});
+}
+function card(x){
+if(isCP(x))return`<h3>${x.n}</h3><span class="pill b">Kritik geçit</span><p style="color:var(--mut)">${x.w}</p><p><b>Ne taşır:</b> ${x.v}</p><h4 style="margin:12px 0 4px">Ekonomik önemi</h4><p>${x.eko}</p><h4 style="margin:12px 0 4px">Jeopolitik risk</h4><p>${x.risk}</p>`;
+return`<h3>${x.n}</h3><span class="pill b">${x.k=="d"?"Deniz yolu":"Kara / demiryolu"}</span><span class="pill">${SN[x.s]}</span><p style="color:var(--mut)">${x.ct}</p><p><b>Uzunluk:</b> ${x.len} · <b>Taşıma:</b> ${x.vol}</p><h4 style="margin:12px 0 4px">Ekonomik önemi</h4><p>${x.eko}</p><h4 style="margin:12px 0 4px">Jeopolitik risk</h4><p>${x.risk}</p>`}
+function pick(id){sel=g(id);$("#ti").innerHTML=card(sel);chips();draw()}
+window.TRX=TR;window.CPX=CP;window.TCARD=card;
+window.tInit=function(){
+if(inited){draw();return}
+if(typeof Datamap=="undefined"||typeof topojson=="undefined"){$("#tm").innerHTML='<div class="fb">Harita kütüphanesi yüklenemedi. Yeniden dene.</div>';return}
+inited=1;const T=Datamap.prototype.worldTopo;feats=topojson.feature(T,T.objects.world).features;
+$("#tcp").innerHTML=CP.map(c=>`<tr><td><b>${c.n}</b><br><small style="color:var(--mut)">${c.w}</small></td><td>${c.v}</td><td>${c.risk}</td></tr>`).join("");
+$("#s14").onclick=e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+if(d.tf){tf=d.tf;document.querySelectorAll("[data-tf]").forEach(x=>x.classList.toggle("on",x==b));if(sel&&isCP(sel)==false&&tf!="all"&&sel.k!=tf)sel=null;if(sel&&isCP(sel)&&tf=="k")sel=null;if(!sel)$("#ti").innerHTML="Haritada bir yola ya da geçide dokun, ya da yukarıdaki düğmelerden seç.";chips();draw()}
+else if(d.tv){tv=d.tv;document.querySelectorAll("[data-tv]").forEach(x=>x.classList.toggle("on",x==b));draw()}
+else if(b.id=="tpb"){showP=showP?0:1;b.setAttribute("aria-pressed",showP?"true":"false");draw()}
+else if(d.r)pick(d.r)};
+chips();draw();
+};
+const _s2=show;show=function(i){_s2(i);if(i==14)tInit()};
+})();
+</script>
+
+<script>
+(function(){
+const sh={e:0,t:0,c:0},CO={o:"#ff5d73",g:"#32e0d2",d:"#ffffff",k:"#ffd166"},HA={o:"#ff5d73",g:"#32e0d2",d:"#b8a2ff",k:"#ffd166"};
+const LV={3:["#ff3b52","yüksek"],2:["#ff9f43","orta"],1:["#ffd84d","düşük"]},RISK={hrm:3,bab:3,sue:2,bos:2,twn:2,mal:1,gib:1,pnm:1};
+const PS={a:"Aktif",r:"Riskli / kısmi",k:"Kapalı",p:"Planlanan"};
+let G=null,sel=null,items=[],pg,pp,pq,ps,pr,labG,sH,sC,sF,sQ,sE,sR,sP,sK,nbr=null,gids=null;
+const short=n=>n.replace(" Boğazı","").replace(" Kanalı","").replace(/ \(.*\)/,"");
+function build(){
+items=[];
+(window.EL||[]).forEach(l=>items.push({lid:l.id,grp:"e",col:CO[l.t],ha:HA[l.t],st:l.s,p:l.p,g:{type:"MultiLineString",coordinates:l.p},ends:[l.p[0][0],l.p[l.p.length-1].slice(-1)[0]],src:"pipe",o:l}));
+(window.TRX||[]).forEach(r=>items.push({lid:r.id,grp:"t",col:CO[r.k],ha:HA[r.k],st:r.s,p:r.p,g:{type:"MultiLineString",coordinates:r.p},ends:[r.p[0][0],r.p[r.p.length-1].slice(-1)[0]],src:"route",o:r}));
+(window.CPX||[]).forEach(c=>items.push({lid:c.id,grp:"c",pt:c.c,g:{type:"Point",coordinates:c.c},src:"cp",lv:RISK[c.id]||1,o:c}))}
+function setup(){
+pg=d3.geo.path().projection(gp);ps=d3.geo.path().projection(gp).pointRadius(2.6);pp=d3.geo.path().projection(gp).pointRadius(4.6);pr=d3.geo.path().projection(gp).pointRadius(8);pq=d3.geo.path().projection(gp).pointRadius(13);
+G=gsv.insert("g",function(){return ga.node()});
+const ln=items.filter(i=>i.p),pt=items.filter(i=>i.pt),en=[];
+ln.forEach(i=>i.ends.forEach(c=>en.push({lid:i.lid,grp:i.grp,col:i.col,g:{type:"Point",coordinates:c}})));
+const mk=(cls,data,st)=>{const g=G.append("g"),x=g.selectAll("path").data(data).enter().append("path").attr("class",cls);Object.keys(st||{}).forEach(k=>x.style(k,st[k]));return x};
+sH=mk("lg",ln,{fill:"none","stroke-linecap":"round","pointer-events":"none"});
+sC=mk("ly",ln,{fill:"none","stroke-linecap":"round","pointer-events":"none"});
+sF=mk("lf",ln);
+sQ=mk("lh",ln,{fill:"none",stroke:"transparent","stroke-width":14,"pointer-events":"stroke",cursor:"pointer"});
+sE=mk("le",en,{fill:"#fff","stroke-width":1.4,"pointer-events":"none"});
+sR=mk("gpr",pt);
+sP=mk("lp",pt,{stroke:"#fff","pointer-events":"none"});
+sK=mk("lq",pt,{fill:"rgba(0,0,0,0)","pointer-events":"all",cursor:"pointer"});
+labG=G.append("g");
+gsv.node().addEventListener("pointerup",e=>{if(typeof moved!=="undefined"&&moved>=8)return;const t=document.elementFromPoint(e.clientX,e.clientY),d=t&&t.__data__;if(d&&d.lid&&d.pt!==undefined?true:d&&d.lid&&d.p)choose(d.lid)})}
+function labels(){
+const cen=[-rot[0],-rot[1]],labs=[];
+const add=(k,c,t)=>{if(d3.geo.distance(cen,c)>1.48)return;const q=gp(c);if(q)labs.push({k:k,x:q[0],y:q[1],t:t})};
+const it=sel&&items.find(x=>x.lid===sel);
+if(it){if(it.pt)add(it.lid,it.pt,short(it.o.n));else{add(it.lid+"a",it.ends[0],it.o.a);add(it.lid+"b",it.ends[1],it.o.b)}}
+if(sh.c&&gk>=1.35)items.filter(i=>i.pt&&i.lid!==sel).forEach(i=>add(i.lid,i.pt,short(i.o.n)));
+const t=labG.selectAll("text").data(labs,d=>d.k);
+t.enter().append("text").attr("class","glt");
+t.attr("x",d=>d.x+8).attr("y",d=>d.y-7).text(d=>d.t);
+t.exit().remove()}
+function upd(){
+if(typeof gsv==="undefined"||!gsv||!gp)return;
+gc.style("opacity",(sh.e||sh.t||sh.c)?.8:1);
+if(!G){if(!window.EL||!window.TRX)return;build();setup()}
+const kw=Math.min(1.6,Math.sqrt(gk)),cache={},v=d=>sh[d.grp],dd=d=>d.lid in cache?cache[d.lid]:(cache[d.lid]=v(d)?pg(d.g):null),on=d=>sel===d.lid,dim=d=>sel&&!on(d);
+sH.attr("d",dd).style("stroke",d=>d.ha).style("stroke-width",d=>(on(d)?9:5)*kw).style("opacity",d=>dim(d)?.06:(on(d)?.38:.2));
+sC.attr("d",dd).style("stroke",d=>d.col).style("stroke-width",d=>(on(d)?3.4:1.8)*kw).style("opacity",d=>dim(d)?.3:.95).style("stroke-dasharray",d=>d.st=="r"?"7 4":d.st=="p"?"2 5":d.st=="k"?"3 6":null);
+sF.attr("d",d=>(d.st=="a"||on(d))?dd(d):null).style("opacity",d=>dim(d)?0:.9).style("stroke-width",d=>(on(d)?2.6:1.8)*kw);
+sQ.attr("d",dd);
+sE.attr("d",d=>v(d)?ps(d.g):null).style("stroke",d=>d.col).style("opacity",d=>sel&&sel!==d.lid?.3:1);
+sR.attr("d",d=>v(d)&&d.lv>=2?pr(d.g):null).style("stroke",d=>LV[d.lv][0]);
+sP.attr("d",d=>v(d)?pp(d.g):null).style("fill",d=>LV[d.lv][0]).style("stroke-width",d=>on(d)?2.6:1.4).style("opacity",d=>dim(d)?.55:1);
+sK.attr("d",d=>v(d)?pq(d.g):null);
+labels()}
+const chipsC=cc=>(cc||[]).filter(c=>fm[c]).map(c=>`<button class="gp" data-c="${c}">${esc(n2(c))}</button>`).join("");
+function itemHTML(it){const o=it.o;let pills,rows;
+if(it.src=="pipe"){pills=`<span class="gp hl">${o.t=="o"?"Petrol hattı":"Doğalgaz hattı"}</span><span class="gp">${PS[o.s]}</span>`;rows=[["Güzergâh",o.ct],["Uzunluk",o.len],["Kapasite",o.cap],["Devreye",o.yr]]}
+else if(it.src=="route"){pills=`<span class="gp hl">${o.k=="d"?"Deniz yolu":"Kara / demiryolu"}</span><span class="gp">${PS[o.s]}</span>`;rows=[["Güzergâh",o.ct],["Uzunluk",o.len],["Taşıma",o.vol]]}
+else{const L=LV[it.lv];pills=`<span class="gp hl">Kritik geçit</span><span class="gp" style="background:${L[0]};color:#1a0b1f">Risk: ${L[1]}</span>`;rows=[["Genişlik",o.w],["Taşıma",o.v]]}
+const rc=it.lv?LV[it.lv][0]:(o.s=="a"?"#ffd166":"#ff5d73");
+return `<div class="gh"><b>${o.n}</b><button class="gx" aria-label="Kapat">×</button></div><div>${pills}</div>${rows.map(r=>`<div class="gr"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("")}<div class="gs">Ekonomik önemi</div><p>${o.eko}</p><div class="rk" style="--rk:${rc}"><div class="gs" style="margin-top:0">Jeopolitik risk</div><p>${o.risk}</p></div>${o.cc&&o.cc.length?`<div class="gs">İlgili ülkeler</div><div>${chipsC(o.cc)}</div>`:""}`}
+function countryHTML(id,p,fb){
+const bs=Object.keys(BL).filter(k=>BL[k].includes(id)),n=DT[id]&&DT[id][1],thr=items.filter(i=>i.o.cc&&i.o.cc.indexOf(id)>-1);
+return `<div class="gh"><b>${esc(n2(id))}</b><button class="gx" aria-label="Kapat">×</button></div>${bs.length?`<div>${bs.map(b=>`<span class="gp hl">${esc(b)}</span>`).join("")}</div>`:""}<div class="gs">${fb?"Komşu ülkeler (ticaret ortağı verisi yok)":"Ana ticaret ortakları (yaklaşık sıra)"}</div><div>${chipsC(p)||"<span style='opacity:.7;font-size:13px'>Veri yok.</span>"}</div>${n?`<p>${n}</p>`:""}${thr.length?`<div class="gs">Buradan geçen hatlar ve yollar</div><div>${thr.map(i=>`<button class="gp" data-it="${i.lid}">${esc(short(i.o.n))}</button>`).join("")}</div>`:""}`}
+function nbrs(id){if(!nbr){const g=Datamap.prototype.worldTopo.objects.world.geometries;gids=g.map(x=>x.id);nbr=topojson.neighbors(g)}
+const i=gids.indexOf(id);return i<0?[]:nbr[i].map(j=>gids[j]).filter(c=>fm[c]&&c!==id)}
+function openP(h){const g=$("#gli");g.innerHTML=h;g.classList.add("on")}
+function closeP(){sel=null;$("#gli").classList.remove("on")}
+function syncBtns(){[["e","#gle"],["t","#glt"],["c","#glc"]].forEach(([k,b])=>$(b).setAttribute("aria-pressed",sh[k]?"true":"false"))}
+function sw(c,t,o){return `<span><i${o?' class="o"':""} style="background:${c}"></i>${t}</span>`}
+function legend(){const L=[];
+if(sh.e)L.push(sw("#ff5d73","Petrol"),sw("#32e0d2","Doğalgaz"));
+if(sh.t)L.push(sw("#fff","Deniz yolu"),sw("#ffd166","Kara koridoru"));
+if(sh.c)L.push(sw("#ff3b52","Geçit: yüksek risk",1),sw("#ff9f43","orta",1),sw("#ffd84d","düşük",1));
+if(sh.e||sh.t)L.push('<span style="opacity:.85">Kesikli: riskli, kısmi veya planlanan</span>');
+const g=$("#glg");g.innerHTML=L.join("");g.style.display=L.length?"block":"none"}
+function choose(id){
+const it=items.find(x=>x.lid===id);if(!it)return;
+if(!sh[it.grp]){sh[it.grp]=1;syncBtns();legend()}
+sel=id;auto=false;$("#ga").textContent="▶︎";
+gsel=null;gpart=new Set();ga.selectAll("path").remove();
+openP(itemHTML(it));
+$("#tg").textContent=it.o.n;
+$("#hi").innerHTML=`<h3>${it.o.n}</h3><p>${it.o.eko}</p><p style="color:var(--mu)">${it.o.risk}</p>`;
+let c;if(it.pt)c=it.pt;else{const ln=it.p.reduce((a,b)=>b.length>a.length?b:a);c=ln[Math.floor(ln.length/2)]}
+goTo(c);redraw()}
+function tog(k){sh[k]=sh[k]?0:1;syncBtns();
+if(sel){const it=items.find(x=>x.lid===sel);if(it&&!sh[it.grp]){sel=null;$("#gli").classList.remove("on")}}
+legend();redraw()}
+$("#gle").onclick=()=>tog("e");$("#glt").onclick=()=>tog("t");$("#glc").onclick=()=>tog("c");
+$("#gli").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+if(b.classList.contains("gx")){closeP();gclear();return}
+if(b.dataset.c){gpick(b.dataset.c);return}
+if(b.dataset.it)choose(b.dataset.it)};
+const _rd=redraw;redraw=function(){_rd();upd()};
+const _gc=gclear;gclear=function(){sel=null;_gc();$("#gli").classList.remove("on")};
+const _gk=gpick;gpick=function(id){sel=null;_gk(id);if(!fm[id])return;
+let p=partners(id).filter(c=>fm[c]&&c!==id),fb=0;
+if(!p.length){p=nbrs(id);fb=1;const c0=d3.geo.centroid(fm[id]);gpart=new Set(p);ga.selectAll("path").remove();
+ga.selectAll("path").data(p.map(c=>({type:"LineString",coordinates:[c0,d3.geo.centroid(fm[c])]}))).enter().append("path").style("fill","none").style("stroke-width",1.6);
+$("#hi").innerHTML=`<h3>${esc(n2(id))}</h3><p>Bu ülke için ticaret ortağı verisi yok. Komşuları vurgulandı: ${p.map(c=>esc(n2(c))).join(", ")||"yok"}.</p>`;redraw()}
+openP(countryHTML(id,p,fb))};
+})();
+</script>
+<script>
+(function(){
+const TS=[
+{id:"hrm",n:"Hürmüz Boğazı",oil:20,lng:20,box:3,gen:10,alt:0,d:0,t:"≈ 20 mb/g petrol, LNG’nin ≈ beşte biri"},
+{id:"sue",n:"Kızıldeniz–Babülmendeb–Süveyş",oil:9,lng:8,box:30,gen:12,alt:1,d:10,t:"konteynerin ≈ üçte biri; Ümit Burnu +≈ 10 gün"},
+{id:"mal",n:"Malakka Boğazı",oil:23,lng:25,box:25,gen:25,alt:1,d:3,t:"deniz ticaretinin ≈ dörtte biri; Lombok/Sunda +≈ 3 gün"},
+{id:"bos",n:"Türk Boğazları",oil:3,lng:0,box:1,gen:3,alt:0,d:0,t:"Karadeniz tahıl ve petrolü; deniz alternatifi yok"},
+{id:"pnm",n:"Panama Kanalı",oil:1,lng:2,box:6,gen:5,alt:1,d:10,t:"deniz ticaretinin ≈ %5’i; Süveyş veya Horn Burnu +≈ 10 gün"},
+{id:"twn",n:"Tayvan Boğazı",oil:0,lng:0,box:50,gen:8,alt:1,d:1,t:"konteyner filosunun ≈ yarısı; çevresinden dolaşmak mümkün"}];
+const el=id=>document.getElementById(id),fm=(x,n)=>x.toFixed(n==null?1:n).replace(".",","),un=a=>100*(1-a.reduce((p,x)=>p*(1-x/100),1));
+const box=el("tkc");if(!box)return;
+box.innerHTML=TS.map(x=>`<label><input type="checkbox" value="${x.id}"><span>${x.n} <small style="color:var(--mut)">(${x.t})</small></span></label>`).join("");
+function calc(){
+const rr=+el("tkr").value/100,tl=+el("tkt").value/100,ep=+el("tke").value/100;
+el("tkv0").textContent=Math.round(rr*100);el("tkv1").textContent=Math.round(tl*100);el("tkv2").textContent=fm(ep,2);
+const S=TS.filter(x=>box.querySelector('input[value="'+x.id+'"]').checked),out=el("tko");
+if(!S.length){out.innerHTML='<div class="card"><p>Bir geçit işaretle.</p></div>';return}
+const gen=un(S.map(x=>x.gen)),str=un(S.map(x=>x.gen*(x.alt?1-rr:1))),lng=un(S.map(x=>x.lng)),bx=un(S.map(x=>x.box));
+const cap=S.reduce((a,x)=>a+(x.alt?x.box*rr*x.d/35:0),0),days=Math.max.apply(null,S.map(x=>x.alt?x.d:0));
+const oilU=un(S.map(x=>x.oil/104*100))*1.04,byp=S.some(x=>x.id=="hrm")?4.5:0,oilN=Math.max(0,oilU-byp)*(1-tl),pr=oilN/104*100/ep;
+out.innerHTML=`<div class="card"><small>Etkilenen deniz ticareti (hacim, kaba)</small><div class="eo">%${fm(gen,0)}</div><p>Alternatifsiz ya da kaydırılamayan kısım: ≈ %${fm(str,0)}. Konteynerde etkilenen pay ≈ %${fm(bx,0)}.</p></div>
+<div class="card"><small>Rota uzaması ve filo kapasitesi</small><div class="eo">+${fm(days,0)} gün</div><p>Kaydırılan yükler daha uzun yola girdiği için küresel konteyner filosunun kabaca %${fm(cap)}’i boşa zaman harcar; navlun ve sigorta primi yükselir, ithal ara mal ve tüketici fiyatlarına yansır.</p></div>
+<div class="card"><small>Öğretici petrol fiyat sıçraması (Brent)</small><div class="eo">+%${fm(pr,0)}</div><p>Net arz kaybı ≈ ${fm(oilN,1)} mb/g (dünya talebinin %${fm(oilN/1.04)}’i, telafi ve varsa bypass sonrası). Büyüme etkisi ≈ −${fm(pr/10*.13,2)} puan; enflasyonda yukarı baskı, ithalatçıda cari açık artışı.</p></div>
+<div class="card"><small>Etkilenen LNG</small><div class="eo">%${fm(lng,0)}</div><p>Küresel LNG ticaretinin bu kadarı işaretlenen geçitlerden geçer; LNG’de alternatif rota ve boru hattı daha sınırlı olduğu için bölgesel gaz fiyatı petrolden daha sert oynar.</p></div>`}
+el("tk").addEventListener("input",calc);calc();
+})();
+</script>
+</body></html>
