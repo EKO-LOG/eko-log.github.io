@@ -1,64 +1,26 @@
-/* Eko-Log çevrimdışı mod
-   - Sayfalar ve içerik verisi: önce ağ (kısa zaman aşımıyla), ağ yavaşsa/yoksa önbellek
-   - Diğer dosyalar (görsel, font vb.): önbellekten hemen ver, arkadan tazele */
-const V = 'eko-v3';
-const CORE = ['./', 'index.html', 'ansiklopedi.html', 'simulasyon-merkezi.html', 'manifest.webmanifest', 'favicon.png', 'ikon-192.png', 'ikon-512.png'];
-
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(V)
-      .then(c => Promise.all(CORE.map(u => c.add(u).catch(() => {}))))
-      .then(() => self.skipWaiting())
-  );
+/* Eko-Log service worker. Sürümü değiştirirsen eski önbellek silinir. */
+const V='eko-v2',STATIC=V+'-static',PAGES=V+'-pages';
+const PRE=['./','index.html','ansiklopedi.html','simulasyon-merkezi.html','eko-plus/','offline.html','manifest.webmanifest','favicon.png','icon-192.png'];
+self.addEventListener('install',e=>{
+  e.waitUntil(caches.open(PAGES).then(c=>Promise.allSettled(PRE.map(u=>c.add(new Request(u,{cache:'reload'}))))).then(()=>self.skipWaiting()));
 });
-
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys()
-      .then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+self.addEventListener('activate',e=>{
+  e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(n=>n.startsWith('eko-')&&!n.startsWith(V)).map(n=>caches.delete(n)))).then(()=>self.clients.claim()));
 });
-
-/* Ağ önce; ms içinde cevap gelmezse önbellekteki kopya verilir, ağ cevabı yine de önbelleği tazeler */
-function networkFirst(r, key, ms, isPage) {
-  return new Promise(resolve => {
-    let done = false;
-    const give = x => { if (!done) { done = true; resolve(x); } };
-    const t = setTimeout(() => {
-      caches.match(key).then(x => { if (x) give(x); });
-    }, ms);
-    fetch(r).then(x => {
-      clearTimeout(t);
-      if (x && x.ok) { const c = x.clone(); caches.open(V).then(h => h.put(key, c)); }
-      give(x);
-    }).catch(() => {
-      clearTimeout(t);
-      caches.match(key)
-        .then(x => x || (isPage ? caches.match('index.html') : null))
-        .then(x => give(x || Response.error()));
-    });
-  });
-}
-
-self.addEventListener('fetch', e => {
-  const r = e.request;
-  const u = new URL(r.url);
-  if (r.method !== 'GET' || u.origin !== location.origin) return;
-  const isPage = r.mode === 'navigate' || (r.headers.get('accept') || '').includes('text/html');
-  const isData = /\/(content|[^/]+)\.json$/.test(u.pathname);
-  if (isPage || isData) {
-    /* sorgu parametresi (?v=...) önbelleği şişirmesin diye anahtar sadece yol */
-    e.respondWith(networkFirst(r, u.origin + u.pathname, isData ? 6000 : 4000, isPage));
-  } else {
-    e.respondWith(
-      caches.match(r).then(hit => {
-        const net = fetch(r).then(x => {
-          if (x && x.ok) { const c = x.clone(); caches.open(V).then(h => h.put(r, c)); }
-          return x;
-        }).catch(() => hit);
-        return hit || net;
-      })
-    );
+self.addEventListener('message',e=>{if(e.data==='skipWaiting')self.skipWaiting()});
+const fresh=(req,cache,ms)=>new Promise((ok,no)=>{
+  const t=setTimeout(()=>no(new Error('timeout')),ms);
+  fetch(req).then(r=>{clearTimeout(t);if(r&&r.ok){const c=r.clone();caches.open(cache).then(x=>x.put(req,c))}ok(r)},e=>{clearTimeout(t);no(e)});
+});
+self.addEventListener('fetch',e=>{
+  const req=e.request;if(req.method!=='GET')return;
+  const u=new URL(req.url);
+  if(u.pathname.endsWith('/admin.html')||u.searchParams.has('admin'))return;           /* yönetim paneli hiç önbelleğe alınmaz */
+  const font=/(^|\.)fonts\.(googleapis|gstatic)\.com$/.test(u.hostname);
+  if(u.origin!==location.origin&&!font)return;                                            /* veritabanı ve API istekleri doğrudan ağa gider */
+  if(font||/\.(png|jpe?g|webp|svg|ico|woff2?|css|js)$/i.test(u.pathname)){               /* statik: önce önbellek, arkada yenile */
+    e.respondWith(caches.match(req).then(c=>{const n=fetch(req).then(r=>{if(r&&(r.ok||r.type==='opaque'))caches.open(STATIC).then(x=>x.put(req,r.clone()));return r}).catch(()=>c);return c||n}));return;
   }
+  /* sayfalar ve content.json: önce ağ (4 sn), olmazsa önbellek, o da yoksa çevrimdışı sayfası */
+  e.respondWith(fresh(req,PAGES,4000).catch(()=>caches.match(req,{ignoreSearch:true}).then(c=>c||(req.mode==='navigate'?caches.match('offline.html'):Response.error()))));
 });
