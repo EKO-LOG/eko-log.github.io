@@ -2069,7 +2069,7 @@ const NAV=[
   {g:'Gelenler',items:[['pmakale','Gelen makaleler'],['members','Üyelik başvuruları'],['comments','Yorumlar'],['itab','Gelen tablolar'],['joins','Katılımcılar']]},
   {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['poll','Anket']]},
   {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['gallery','Galeri'],['xc-ceviri','Çeviri Köşesi'],['xc-arastirma','Ortak Araştırma Projeleri'],['yayinsira','Kutu sırası'],['yayinpg','Sayfa anahtarları']]},
-  {g:'Ek Yayınlar',items:YY_KEYS.map((k,i)=>[k,'Yayın '+(i+1)])},
+  {g:'Ek Yayınlar',items:[['klup','Kulüp hesapları'],...YY_KEYS.map((k,i)=>[k,'Yayın '+(i+1)])]},
   {g:'Etkinlikler',items:[['e','Etkinlikler ve QR araçları'],['quota','Etkinlik kontenjanı'],['konf','Konferanslar'],['yb','Yatay Bakış'],['xc-arastirma2','Proje Araştırma Grupları'],['etkpg','Sayfa anahtarları']]},
   {g:'Fikir Muharebesi',items:[['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['fmarg','Muharebe argümanları']]},
   {g:'Simülasyon ve Meslekler',items:[['sims','Simülasyon fotoğrafları'],['pmulakat','Mülakat sayfası'],['borsa','Borsa oyunu kayıtları'],['meslek','Meslek tanıtımı'],['pmeslek','Meslek sayfası'],['ex','Sınav takvimi']]},
@@ -2720,6 +2720,7 @@ const FB={
 function rulesText(email){
   const E=(email||'ADMIN_E_POSTA_ADRESIN').replace(/[^\w.@+\-]/g,'').toLowerCase();
   const A=`(auth != null && auth.token.email === '${E}')`;
+  const KL=`(auth != null && root.child('klup').child(auth.uid).exists() && data.exists() && data.child('p').val().beginsWith('ek' + root.child('klup').child(auth.uid).val() + '_') && (!newData.exists() || newData.child('p').val() === data.child('p').val()))`;
   const str=(n)=>`newData.isString() && newData.val().length > 0 && newData.val().length <= ${n}`;
   const ST=`(auth != null && auth.token.email_verified === true && auth.token.email.matches(/^[^@]+@([a-z0-9-]+\\.)*inonu\\.edu\\.tr$/))`;
   const STE=`(auth != null && auth.token.email.matches(/^[^@]+@([a-z0-9-]+\\.)*inonu\\.edu\\.tr$/))`;
@@ -2728,7 +2729,7 @@ function rulesText(email){
   const opt=(n)=>`newData.isString() && newData.val().length <= ${n}`;
   const rules={rules:{
     comments:{'.read':true,'$id':{
-      '.write':`${A} || (!data.exists() && newData.exists())`,
+      '.write':`${A} || (!data.exists() && newData.exists()) || ${KL}`,
       '.validate':"newData.hasChildren(['p','n','t','d'])",
       p:{'.validate':str(40)},n:{'.validate':str(60)},t:{'.validate':str(800)},d:{'.validate':'newData.isNumber()'},
       r:{'.validate':A,t:{'.validate':str(800)},d:{'.validate':'newData.isNumber()'},'$o':{'.validate':false}},
@@ -2753,6 +2754,7 @@ function rulesText(email){
       n:{'.validate':opt(120)},y:{'.validate':opt(100)},z:{'.validate':'newData.isNumber()'},
       x:{'.validate':'newData.isString() && newData.val().length <= 3000000'},
       '$other':{'.validate':false}}},
+    klup:{'.read':A,'.write':A},
     borsa:{'.read':A,'.write':A},
     ilanlar:{'.read':true,'.write':A},
     ilanlar_bek:{'.read':A,'$id':{'.write':`${A} || (!data.exists() && newData.exists())`,'.validate':"newData.hasChildren(['baslik','acik','iletisim','t'])",t:{'.validate':'newData.isNumber()'},tur:{'.validate':opt(30)},kat:{'.validate':opt(40)},baslik:{'.validate':str(80)},bolum:{'.validate':opt(60)},beceri:{'.validate':opt(200)},acik:{'.validate':str(800)},iletisim:{'.validate':str(100)},'$other':{'.validate':false}}},
@@ -4677,6 +4679,113 @@ async function doPublish(count){
 }
 
 /* ---------- giriş ve bağlanma ---------- */
+/* şifreleme: kulüp şifresi, GitHub anahtarını açan anahtardır (PBKDF2 + AES-GCM) */
+const kb64=u=>{let s='';u.forEach(c=>s+=String.fromCharCode(c));return btoa(s)};
+const kun64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function kKey(pw,salt){
+  const m=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+async function kSeal(pw,obj){
+  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),key=await kKey(pw,salt);
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(obj)));
+  return{v:1,s:kb64(salt),i:kb64(iv),c:kb64(new Uint8Array(ct))};
+}
+async function kOpen(pw,rec){
+  try{const key=await kKey(pw,kun64(rec.s));
+    const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:kun64(rec.i)},key,kun64(rec.c));
+    return JSON.parse(new TextDecoder().decode(pt));
+  }catch(e){throw new Error('Şifre hatalı.')}
+}
+
+{const _s=summarize;summarize=function(){
+  const o=_s();if(!S.remote||!S.work)return o;
+  const a=S.remote.data.yk||{},b=S.work.yk||{};
+  YY_KEYS.forEach((k,i)=>{if(JSON.stringify(a[k]||null)!==JSON.stringify(b[k]||null))o.push('Kulüp şifresi '+(b[k]?(a[k]?'değiştirildi':'tanımlandı'):'kaldırıldı')+': “'+yyName(S.work.yy[i],i+1)+'”')});
+  return o}}
+
+SEC.klup=w=>w.yk||{};
+/* ---------- kulüp erişimi: şifre ve giriş maili oluşturma (yalnızca genel editör) ---------- */
+const kGen=()=>{const c='abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789',a=crypto.getRandomValues(new Uint8Array(12));return[...a].map(x=>c[x%c.length]).join('')};
+const kUrl=()=>new URL('kulup.html',location.href).href.split('#')[0];
+async function kSignUp(email,pw){
+  let r;try{r=await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='+encodeURIComponent(String(S.work.fb.key||'').trim()),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw,returnSecureToken:false})})}
+  catch(e){throw new Error('Firebase’e ulaşılamadı.')}
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const c=String(j.error&&j.error.message||'');
+    if(/EMAIL_EXISTS/.test(c))throw new Error('EXISTS');
+    if(/WEAK_PASSWORD/.test(c))throw new Error('Şifre Firebase için çok zayıf.');
+    if(/OPERATION_NOT_ALLOWED/.test(c))throw new Error('Firebase’de E-posta/Parola girişi kapalı.');
+    throw new Error('Hesap açılamadı ('+c+').')}
+  return j.localId;
+}
+function kCard(ad,email,pw,ok){
+  const txt='Kulüp paneli girişi\nAdres: '+kUrl()+'\nYayın: '+ad+'\nKulüp şifresi: '+pw+'\nYorum girişi e-postası: '+email+'\nYorum girişi parolası: '+pw+'\n(Aynı şifre iki yerde de geçerlidir.)';
+  const pre=h('pre',{style:'white-space:pre-wrap;user-select:all;background:var(--soft);padding:12px;border-radius:10px;font:13px/1.5 ui-monospace,monospace',text:txt});
+  return modal({title:'Kulübe verilecek bilgiler',body:h('div',{class:'stack'},
+    h('p',{class:'mut',text:'Şifre bir daha gösterilmez; şimdi kopyala. '+ok}),pre,
+    h('button',{class:'btn solid',type:'button',text:'Kopyala',onclick:e=>{navigator.clipboard.writeText(txt).then(()=>{e.target.textContent='Kopyalandı'}).catch(()=>toast('Kopyalanamadı, metni elle seç.'))}})),
+    actions:[{label:'Kapat',value:'ok',cls:'solid'}]});
+}
+VIEWS.klup=()=>{
+  const w=S.work;w.yk=w.yk||{};
+  const root=h('div',{class:'stack'});
+  root.append(pageHead('Kulüp hesapları','Her yayın için bir giriş e-postası ve şifre oluştur. Kulüp, “kulup.html” adresinde yayınını seçip şifresiyle girer; yorumları aynı e-posta ve şifreyle yönetir. Kaydettikten sonra Yayınla’ya basmayı unutma.'));
+  const tk=h('input',{type:'password',autocomplete:'off',spellcheck:'false',placeholder:'Boş bırakırsan şu an kullandığın anahtar kullanılır'});
+  root.append(h('div',{class:'panel stack'},h('h3',{text:'Kulüplerin kullanacağı GitHub anahtarı'}),
+    h('p',{class:'mut',text:'Kulüp şifresi bu anahtarı açar; kulüp yayınını bu anahtarla kaydeder. Güvenlik için yalnızca bu depoya “Contents: Read and write” izni veren ayrı bir anahtar oluşturup yapıştır.'}),
+    h('div',{class:'fld',style:'margin:0'},h('label',{text:'Anahtar (isteğe bağlı)'}),tk)));
+  const fbFail=e=>{if(e&&e.message==='auth')toast('Önce Yorumlar sayfasında Firebase yönetici girişi yap, sonra tekrar dene.');else if(e&&e.message==='perm')modal({title:'Veritabanı kuralları güncellenmeli',body:h('div',{class:'stack'},h('p',{class:'mut',text:'Kulüp yetkisi için yeni kurallar var. Aşağıdakini Firebase’e bir kez yapıştır.'}),rulesBox())});else toast((e&&e.message)||'İşlem başarısız.')};
+  YY_KEYS.forEach((k,i)=>{
+    const p=w.yy[i],has=!!w.yk[k];
+    const em=h('input',{type:'text',inputmode:'email',autocomplete:'off',spellcheck:'false',placeholder:'kulup@ornek.com'});
+    const pw=h('input',{type:'text',autocomplete:'off',spellcheck:'false',placeholder:'En az 10 karakter'});
+    const gen=h('button',{class:'btn sm',type:'button',text:'Şifre üret',onclick:()=>{pw.value=kGen()}});
+    const save=h('button',{class:'btn sm solid',type:'button',text:has?'Hesabı ve şifreyi yenile':'Hesabı oluştur'});
+    save.addEventListener('click',async()=>{
+      const mail=em.value.trim().toLowerCase();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)){toast('Geçerli bir e-posta yaz.');return}
+      if(pw.value.length<10){toast('Şifre en az 10 karakter olmalı.');return}
+      save.disabled=true;save.textContent='Hazırlanıyor…';
+      const reset=()=>{save.disabled=false;save.textContent=has?'Hesabı ve şifreyi yenile':'Hesabı oluştur'};
+      try{
+        const t=tk.value.trim()||S.token;
+        const r=await fetch(API+'/repos/'+S.cfg.owner+'/'+S.cfg.repo,{headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json'}});
+        if(!r.ok)throw new Error('Anahtar bu depoya erişemiyor ('+r.status+').');
+        const inf=await r.json();if(inf.permissions&&inf.permissions.push===false)throw new Error('Anahtarın yazma izni yok.');
+        w.yk[k]=await kSeal(pw.value,{y:k,t,o:S.cfg.owner,r:S.cfg.repo,b:S.cfg.branch});
+        let note='Panel şifresi hazır; Yayınla’ya basınca geçerli olur.';
+        try{
+          if(!FB.sess())throw new Error('auth');
+          const uid=await kSignUp(mail,pw.value);
+          await FB.req('klup/'+uid,{method:'PUT',body:k});
+          note+=' Yorum hesabı açıldı ve bu yayına bağlandı.';
+        }catch(e){
+          if(e.message==='EXISTS')note+=' Bu e-posta Firebase’de zaten var; şifresi değişmedi. Aşağıdaki “Var olan hesabı bağla”dan UID gir.';
+          else if(e.message==='auth'||e.message==='perm'){note+=' Yorum hesabı bağlanamadı: önce Yorumlar sayfasında Firebase yönetici girişi yap (kurallar güncel olmalı), sonra tekrar dene.'}
+          else note+=' Yorum hesabı açılamadı: '+e.message}
+        touch();render();await kCard(yyName(p,i+1),mail,pw.value,note);
+      }catch(e){toast(e.message||'Kaydedilemedi.');reset()}
+    });
+    const rm=h('button',{class:'btn sm ghost',type:'button',text:'Panel şifresini kaldır',onclick:async()=>{
+      if(!(await ask('Şifreyi kaldır','Yayınla’dan sonra bu kulüp panele giremez.','Şifreyi kaldır',true)))return;
+      delete w.yk[k];touch();render()}});
+    const uid=h('input',{type:'text',autocomplete:'off',spellcheck:'false',placeholder:'Firebase User UID'});
+    const link=h('button',{class:'btn sm',type:'button',text:'Hesabı bağla',onclick:async()=>{
+      const u=uid.value.trim();if(!/^[A-Za-z0-9]{20,40}$/.test(u)){toast('Firebase Authentication, Users sayfasındaki “User UID” değerini yapıştır.');return}
+      try{await FB.req('klup/'+u,{method:'PUT',body:k});uid.value='';toast('Hesap bu yayının yorumlarını yönetebilir.')}catch(e){fbFail(e)}}});
+    root.append(h('div',{class:'panel stack'},
+      h('div',{class:'row',style:'justify-content:space-between;gap:8px'},h('h3',{style:'margin:0',text:yyName(p,i+1)}),h('span',{class:'chip '+(has?'ok':''),text:has?'Şifre tanımlı':'Şifre yok'})),
+      h('div',{class:'grid2'},h('div',{class:'fld',style:'margin:0'},h('label',{text:'Giriş e-postası'}),em),h('div',{class:'fld',style:'margin:0'},h('label',{text:'Şifre'}),h('div',{class:'row',style:'flex-wrap:nowrap'},pw,gen))),
+      h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},save,has?rm:null),
+      h('details',{class:'how'},h('summary',{text:'Var olan hesabı bağla'}),
+        h('div',{class:'row',style:'gap:8px;flex-wrap:wrap;margin-top:10px'},uid,link))));
+  });
+  root.append(h('div',{class:'panel stack'},h('h3',{text:'Firebase kuralları'}),h('p',{class:'mut',text:'Kulüp yorum yetkisi için kuralların bir kez güncellenmesi gerekir.'}),h('div',{class:'row'},h('button',{class:'btn',type:'button',text:'Güncel kuralları göster',onclick:()=>modal({title:'Firebase kuralları',body:rulesBox()})}))));
+  return root;
+};
+
+
 async function connect(token,cfg,remember){
   S.token=token;S.cfg=cfg;
   let r;try{r=await gh('')}catch(e){throw new Error('GitHub’a ulaşılamadı. İnternet bağlantını kontrol et.')}

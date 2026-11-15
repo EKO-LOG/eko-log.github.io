@@ -5236,7 +5236,7 @@ function reader(root,p,x){
  const bd=el('div','fe-b'),used=new Set();(window.EKO_RICH||function(){})(x.body,bd,ex,used,x.vids);b.append(bd);
  const left=ex.filter((q,k)=>!used.has(k));
  if(left.length){const gl=el('div','rd-gal g'+Math.min(left.length,3));left.forEach(q=>{const i=el('img');i.src=q;i.alt='';i.loading='lazy';i.setAttribute('data-lb','');gl.append(i)});b.append(gl)}
- a.append(b);root.append(a,back(href(p.id),'← '+nm(p)))}
+ a.append(b);const cm=el('div');root.append(a,cm,back(href(p.id),'← '+nm(p)));if(window.EKO_CMT)window.EKO_CMT.mount(cm,'ek'+p.id+'_'+x.id)}
 function draw(){
  tiles();
  const seg=location.hash.replace(/^#\/?/,'').split('/');if(seg[0]!=='ek')return;
