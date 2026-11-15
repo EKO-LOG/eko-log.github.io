@@ -4798,6 +4798,7 @@ VIEWS.klup=()=>{
       const p=w.yy[f];p.ad=nn.value.trim();p.tur=nt.value;w.yo=yoNorm(w.yo);if(np.value==='ust')w.yo=[YY_KEYS[f],...w.yo.filter(x=>x!==YY_KEYS[f])];touch();render();toast('“'+p.ad+'” eklendi. Altta şifresini oluştur.')}}))));
   /* sıra: hangisi üstte, hangisi altta */
   const ordP=h('div',{class:'panel stack'});
+  const yoName=key=>{const n=+key.slice(2);return yyName(w.yy[n-1],n)},yoOn=key=>!!w.yy[+key.slice(2)-1].on;
   const pubs=()=>{w.yo=yoNorm(w.yo);return w.yo.filter(x=>/^yy\d+$/.test(x)&&kUsed(+x.slice(2)-1))};
   const ykMove=(key,d)=>{const ks=pubs(),o=ks[ks.indexOf(key)+d];if(!o)return;const a=w.yo.indexOf(key),b=w.yo.indexOf(o);[w.yo[a],w.yo[b]]=[w.yo[b],w.yo[a]];touch();drawOrd()};
   const drawOrd=()=>{const ks=pubs();ordP.replaceChildren(h('h3',{text:'Sıra: hangisi üstte, hangisi altta'}),
