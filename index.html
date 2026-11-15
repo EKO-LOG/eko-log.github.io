@@ -5201,7 +5201,8 @@ const $=(q,r=document)=>r.querySelector(q);
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const RK=[['#1d4ed8','#7c3aed','#0e9aa7'],['#c4202e','#ff5f8f','#1d4ed8'],['#0e7490','#10b981','#1d4ed8'],['#c2410c','#f59e0b','#c4202e'],['#6d3fd8','#e23fa5','#2a2d8f'],['#1e3a8a','#0e9aa7','#7c3aed']];
 const adm=()=>document.body.classList.contains('adm');
-const all=()=>{const a=(window.EKO_C||{}).yy;return Array.isArray(a)?a.filter(p=>p&&/^yy\d+$/.test(String(p.id))):[]};
+const yoL=()=>{const y=(window.EKO_C||{}).yo;return Array.isArray(y)?y:[]};
+const all=()=>{const a=(window.EKO_C||{}).yy,y=yoL();const L=Array.isArray(a)?a.filter(p=>p&&/^yy\d+$/.test(String(p.id))):[];if(y.length){const ix=p=>{const i=y.indexOf(p.id);return i<0?999:i};return L.map((p,i)=>[p,i]).sort((s,u)=>ix(s[0])-ix(u[0])||s[1]-u[1]).map(s=>s[0])}return L};
 const visible=p=>p.on===true||adm();
 const nm=p=>String(p.ad||'').trim()||('Yayın '+String(p.id).slice(2));
 const col=p=>RK[Math.max(0,Math.min(RK.length-1,parseInt(p&&p.r,10)||0))];
@@ -5215,7 +5216,9 @@ function tiles(){
  const g=$('#p-yayin .wrap.content>div');if(!g)return;
  g.querySelectorAll('.ek-tile').forEach(e=>e.remove());
  all().filter(visible).forEach(p=>{const c=col(p),a=el('a','tile ek-tile');a.href=href(p.id);a.style.cssText='--bg1:'+c[0]+';--bg2:'+c[1];
-  a.append(el('span','go','→'),el('small',null,turT(p)+(p.on?'':' · kapalı (yalnızca yönetici görür)')),el('h3',null,nm(p)),el('p',null,p.slogan||''));g.append(a)})}
+  a.append(el('span','go','→'),el('small',null,turT(p)+(p.on?'':' · kapalı (yalnızca yönetici görür)')),el('h3',null,nm(p)),el('p',null,p.slogan||''));g.append(a)});
+ const y=yoL();if(y.length){const key=a=>{const h=a.getAttribute('href')||'',m=/^#\/ek\/(yy\d+)$/.exec(h)||/^#\/([a-z]+)$/.exec(h);return m?m[1]:''},ix=a=>{const i=y.indexOf(key(a));return i<0?999:i};
+  [...g.children].filter(e=>e.matches&&e.matches('a.tile')).map((e,i)=>[e,i]).sort((s,u)=>ix(s[0])-ix(u[0])||s[1]-u[1]).forEach(s=>g.append(s[0]))}}
 function meta(x){return [x.kind,x.dt,x.by].map(v=>String(v||'').trim()).filter(Boolean).join(' · ')}
 function card(p,x){
  const a=el('article','fe-card'),go=()=>{location.hash=href(p.id,x.id)};
