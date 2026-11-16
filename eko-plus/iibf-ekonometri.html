@@ -45,6 +45,7 @@ label.lb-f{display:flex;flex-direction:column;gap:4px;font:600 13px "Instrument 
 .lb-st li{padding:10px 14px;border-radius:12px;background:var(--soft);display:flex;gap:10px;align-items:flex-start;font-size:15px}
 .lb-bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 12px;font-size:14.5px}
 .lb-home{font-weight:700;margin-right:10px;text-decoration:none}
+.lb-bar>span{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.lb-bar .btn{padding:8px 16px;font-size:14.5px}
 .lb-row{display:flex;gap:8px;flex-wrap:wrap}
 #lab-box iframe{width:100%;border:0;min-height:560px;display:block;border-radius:16px;background:var(--surf)}
 footer{background:#1a0b1f;color:#cdbfe0;padding:28px 0 34px;font-size:15px}
@@ -173,20 +174,20 @@ const LOPT=[['isletme', 'İşletme & Finans'], ['iktisat', 'İktisat'], ['ekonom
 const LF={isletme:'iibf-isletme.html',iktisat:'iibf-iktisat.html',ekonometri:'iibf-ekonometri.html',maliye:'iibf-maliye.html',kamu:'iibf-kamu.html',uluslararasi:'iibf-uluslararasi.html',ceko:'iibf-ceko.html'};
 function labOf(r){if(r.l&&LF[r.l])return r.l;const b=String(r.b||'').toLocaleLowerCase('tr');for(const[k,re]of[['ekonometri',/ekonometri/],['uluslararasi',/uluslararas/],['maliye',/maliye/],['kamu',/kamu|siyaset/],['ceko',/çalışma|calisma|endüstri|ceko/],['isletme',/işletme|isletme/],['iktisat',/iktisat|ekonomi/]])if(re.test(b))return k;return''}
 function deny(t,p,own){gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:t}),el('p',{class:'lb-n',text:p}),el('div',{class:'lb-tabs'},own?el('a',{class:'btn',href:LF[own],text:'Kendi laboratuvarına git'}):null,el('a',{class:'btn line',href:BACK,text:'Eko-Plus’a dön'}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout}))));box.hidden=true}
+function lbSrc(rec){let s=window.IIBFSRC();if(LK==='hub'&&!rec.adm&&!rec.hoca){const k=labOf(rec);if(k){s=s.replace('const AK=LABS.filter(l=>l.s==="aktif");','const AK=LABS.filter(l=>l.s==="aktif"&&l.h==="'+LF[k]+'");').replace('<a class="btn" href="iibf-isletme.html">İşletme Laboratuvarı’nı aç</a>','<a class="btn" href="'+LF[k]+'">Laboratuvarını aç</a>')}}return s}
 function allow(rec){if(rec.adm||rec.hoca)return true;const k=labOf(rec);
   if(!k){deny('Bölümün belli değil','Kayıtlı bölümün laboratuvarlardan biriyle eşleşmedi. Yöneticiye ekologtopluluk0@gmail.com adresinden yaz, bölümün tanımlansın.');return false}
-  if(LK==='hub'){gate.replaceChildren(el('div',{class:'card lb-card'},el('p',{class:'lb-n',text:'Laboratuvarına yönlendiriliyorsun…'})));location.replace(LF[k]);return false}
+  if(LK==='hub')return true;
   if(k!==LK){deny('Bu laboratuvar bölümüne ait değil','Üyeliğin yalnızca kendi bölümünün laboratuvarını açar.',k);return false}
   return true}
 function mount(rec){
   if(!allow(rec))return;
-  if(rec.adm||rec.hoca){const bk=document.querySelector('.bar .back');if(bk&&!document.getElementById('lb-hub')){const hb=el('a',{class:'back',id:'lb-hub',href:'iibf-laboratuvar.html',text:'Tüm laboratuvarlar'});bk.style.marginLeft='0';bk.before(hb)}}
   try{localStorage.setItem('eko_uye_ok',S.uid)}catch(e){}
   gate.replaceChildren();box.hidden=false;
   if(fr){send();full();return}
-  fr=document.createElement('iframe');fr.title='Ekonometri Laboratuvarı';fr.srcdoc=window.IIBFSRC();
+  fr=document.createElement('iframe');fr.title='Ekonometri Laboratuvarı';fr.srcdoc=lbSrc(rec);
   const who=rec.adm?'Yönetici · '+rec.e:rec.hoca?'Hoca · '+(rec.n||rec.e):'Merhaba '+rec.n+' · onaylı üye';
-  box.replaceChildren(el('div',{class:'lb-bar'},el('span',null,el('a',{class:'lb-home',href:BACK,text:'← İİBF Laboratuvarı'}),el('b',{text:'Ekonometri Laboratuvarı'})),el('span',{text:who}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout})),fr);
+  box.replaceChildren(el('div',{class:'lb-bar'},el('span',null,el('a',{class:'btn line',href:BACK,text:'← Eko-Plus'}),((rec.adm||rec.hoca)&&LK!=='hub')?el('a',{class:'btn line',href:'iibf-laboratuvar.html',text:'Tüm laboratuvarlar'}):null,el('b',{text:'Ekonometri Laboratuvarı'})),el('span',{text:who}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout})),fr);
   full();
 }
 addEventListener('message',e=>{if(!fr||e.source!==fr.contentWindow)return;if(e.data==='eko-close-lab'){location.href=BACK;return}const d=e.data||{};if(d.eko==='lab-hazir')send();else if(d.eko==='lab-h'&&d.h>0&&!document.body.classList.contains('lab-full'))fr.style.height=Math.max(560,Math.min(9000,Math.round(d.h)+6))+'px'});
