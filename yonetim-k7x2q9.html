@@ -2803,6 +2803,7 @@ function rulesText(email){
       '.validate':"newData.hasChildren(['n','e','s','d'])",
       n:{'.validate':str(80)},e:{'.validate':str(80)},b:{'.validate':opt(80)},c:{'.validate':opt(40)},
       l:{'.validate':"newData.val() === 'isletme' || newData.val() === 'iktisat' || newData.val() === 'ekonometri' || newData.val() === 'maliye' || newData.val() === 'kamu' || newData.val() === 'uluslararasi' || newData.val() === 'ceko'"},
+      ll:{'.validate':"newData.hasChildren()",'isletme':{'.validate':'newData.val() === true'},'iktisat':{'.validate':'newData.val() === true'},'ekonometri':{'.validate':'newData.val() === true'},'maliye':{'.validate':'newData.val() === true'},'kamu':{'.validate':'newData.val() === true'},'uluslararasi':{'.validate':'newData.val() === true'},'ceko':{'.validate':'newData.val() === true'},'$other':{'.validate':false}},
       s:{'.validate':"newData.val() === 'bekliyor' || newData.val() === 'onay' || newData.val() === 'red'"},
       d:{'.validate':'newData.isNumber()'},o:{'.validate':'newData.isNumber()'},
       '$other':{'.validate':false}}},
@@ -2972,10 +2973,10 @@ function downloadCsv(name,rows){
   const a=h('a',{href:URL.createObjectURL(blob),download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
 /* ---- Üyelik başvuruları: İktisat Laboratuvarı üyeliği için yönetici onayı ---- */
-VIEWS.members=()=>fbGate('Üyelik başvuruları','Sitedeki Üyelere Özel bölüm (İİBF Laboratuvarı, Borsa Oyunu, Hâkimlik Simülasyonu) için “Üye ol” diyenler burada listelenir. Onayladığın kişi e-postasını da doğruladığında bu bölüme girer; İİBF Laboratuvarı’nda yalnızca kendi bölümünün laboratuvarını açabilir. Her kişinin bölümünü kartındaki listeden değiştirebilirsin. Bekleyen ve reddedilen kişiler giremez. Kaydet dediğin anda uygulanır, “Yayınla” gerekmez.',root=>{
+VIEWS.members=()=>fbGate('Üyelik başvuruları','Sitedeki Üyelere Özel bölüm (İİBF Laboratuvarı, Borsa Oyunu, Hâkimlik Simülasyonu) için “Üye ol” diyenler burada listelenir. Onayladığın kişi e-postasını da doğruladığında bu bölüme girer; İİBF Laboratuvarı’nda yalnızca kendi bölümünün laboratuvarını açabilir. Her kişi için bir, birkaç ya da hepsi (örn. Siyaset Bilimi ve Kamu Yönetimi okuyan için Kamu + Uluslararası) laboratuvar işaretleyebilirsin. Bekleyen ve reddedilen kişiler giremez. Kaydet dediğin anda uygulanır, “Yayınla” gerekmez.',root=>{
   const st={q:'',f:'bekliyor',l:'',rows:[]};
   const LABL=[['isletme','İşletme & Finans'],['iktisat','İktisat'],['ekonometri','Ekonometri'],['maliye','Maliye & Vergi'],['kamu','Kamu Yönetimi'],['uluslararasi','Uluslararası İlişkiler'],['ceko','Çalışma Ekonomisi ve Endüstri İlişkileri']];
-  const labOf=r=>{if(r.l&&LABL.some(x=>x[0]===r.l))return r.l;const b=String(r.b||'').toLocaleLowerCase('tr');for(const[k,re]of[['ekonometri',/ekonometri/],['uluslararasi',/uluslararas/],['maliye',/maliye/],['kamu',/kamu|siyaset/],['ceko',/çalışma|calisma|endüstri|ceko/],['isletme',/işletme|isletme/],['iktisat',/iktisat|ekonomi/]])if(re.test(b))return k;return''};
+  const labsOf=r=>{let a=[];if(r.ll&&typeof r.ll==='object')a=LABL.map(x=>x[0]).filter(k=>r.ll[k]);if(!a.length&&r.l&&LABL.some(x=>x[0]===r.l))a=[r.l];if(a.length)return a;const b=String(r.b||'').toLocaleLowerCase('tr');for(const[k,re]of[['ekonometri',/ekonometri/],['uluslararasi',/uluslararas/],['maliye',/maliye/],['kamu',/kamu|siyaset/],['ceko',/çalışma|calisma|endüstri|ceko/],['isletme',/işletme|isletme/],['iktisat',/iktisat|ekonomi/]])if(re.test(b))return[k];return[]};
   const labN=k=>(LABL.find(x=>x[0]===k)||['',''])[1];
   const lsel=h('select',{'aria-label':'Laboratuvara göre süz'},h('option',{value:'',text:'Tüm laboratuvarlar'}),...LABL.map(x=>h('option',{value:x[0],text:x[1]})),h('option',{value:'-',text:'Laboratuvarı belli olmayanlar'}));
   const q=h('input',{type:'search',placeholder:'Ad, e-posta, bölüm ya da sınıfta ara','aria-label':'Üyelerde ara'});
@@ -2985,13 +2986,13 @@ VIEWS.members=()=>fbGate('Üyelik başvuruları','Sitedeki Üyelere Özel bölü
   const LB={bekliyor:['Bekleyen','warn'],onay:['Onaylı','ok'],red:['Reddedilen','']};
   const cur=r=>LB[r.s]?r.s:'bekliyor';
   const fail=e=>{if(e&&e.message==='auth'){FB.out();render()}else if(e&&e.message==='perm')modal({title:'Veritabanı kuralları güncellenmeli',body:h('div',{class:'stack'},h('p',{class:'mut',text:'Üyelik için yeni bir kural bölümü eklendi. Aşağıdaki kuralların tamamını Firebase’e bir kez yapıştırman yeterli.'}),rulesBox())});else toast((e&&e.message)||'İşlem başarısız.')};
-  async function setL(r,k,sel){try{const o={l:k,b:labN(k)};await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});Object.assign(r,o);draw();toast('Laboratuvar “'+labN(k)+'” olarak atandı.')}catch(e){if(sel)sel.value=labOf(r);fail(e)}}
+  async function setL(r,ks){try{const o={ll:ks.length?Object.fromEntries(ks.map(k=>[k,true])):null,l:ks[0]||null};await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});if(ks.length){r.ll=o.ll;r.l=o.l}else{delete r.ll;delete r.l}draw();toast(ks.length===LABL.length?'Tüm laboratuvarlar açıldı.':ks.length?ks.length+' laboratuvar yetkisi kaydedildi.':'Laboratuvar yetkisi kaldırıldı.')}catch(e){draw();fail(e)}}
   async function setS(r,s,t){try{const o={s,o:Date.now()};await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});Object.assign(r,o);draw();toast(t)}catch(e){fail(e)}}
   function draw(){
     const cnt=k=>st.rows.filter(r=>cur(r)===k).length;
     bar.replaceChildren(...[['bekliyor','Bekleyen'],['onay','Onaylı'],['red','Reddedilen'],['','Tümü']].map(([k,t])=>h('button',{class:'btn sm'+(st.f===k?' solid':''),type:'button','aria-pressed':String(st.f===k),text:t+' ('+(k?cnt(k):st.rows.length)+')',onclick:()=>{st.f=k;draw()}})));
     const qq=st.q.trim().toLocaleLowerCase('tr');
-    const rows=st.rows.filter(r=>(!st.f||cur(r)===st.f)&&(!st.l||(st.l==='-'?!labOf(r):labOf(r)===st.l))&&(!qq||[r.n,r.e,r.b,r.c].join(' ').toLocaleLowerCase('tr').includes(qq)));
+    const rows=st.rows.filter(r=>(!st.f||cur(r)===st.f)&&(!st.l||(st.l==='-'?!labsOf(r).length:labsOf(r).includes(st.l)))&&(!qq||[r.n,r.e,r.b,r.c].join(' ').toLocaleLowerCase('tr').includes(qq)));
     stat.textContent=st.rows.length?rows.length+' kayıt gösteriliyor, toplam '+st.rows.length+'.':'';
     box.replaceChildren();
     if(!rows.length){box.append(h('div',{class:'empty'},h('b',{text:st.rows.length?'Bu filtrede kayıt yok':'Henüz üyelik başvurusu yok'}),h('span',{text:st.rows.length?'Filtreyi ya da aramayı değiştir.':'Biri Üyelere Özel girişinde “Üye ol” dediğinde burada görünür.'})));return}
@@ -2999,8 +3000,15 @@ VIEWS.members=()=>fbGate('Üyelik başvuruları','Sitedeki Üyelere Özel bölü
       box.append(h('div',{style:'padding:12px 0;border-top:1px solid var(--line)',class:'stack'},
         h('div',{class:'row',style:'justify-content:space-between;gap:8px'},h('div',null,h('b',{text:r.n}),h('span',{class:'chip'+(LB[c][1]?' '+LB[c][1]:''),style:'margin-left:8px',text:LB[c][0]})),h('span',{class:'mut',text:fmtTs(r.d)})),
         h('div',{class:'mut',text:[r.e,r.b,r.c].filter(Boolean).join(' · ')}),
-        (()=>{const k=labOf(r),sel=h('select',{'aria-label':r.n+' için laboratuvar'},h('option',{value:'',text:'Laboratuvar seç…',disabled:true}),...LABL.map(x=>h('option',{value:x[0],text:x[1]})));sel.value=k;sel.addEventListener('change',()=>setL(r,sel.value,sel));
-          return h('div',{class:'row',style:'gap:8px;flex-wrap:wrap;align-items:center'},h('span',{class:'mut',text:'Laboratuvarı:'}),sel,!k?h('span',{class:'chip warn',text:'Atanmadı: giremez'}):!r.l?h('span',{class:'chip',text:'Bölüm yazısından tahmin edildi'}):null)})(),
+        (()=>{const cur=labsOf(r),wrap=h('div',{class:'row',style:'gap:6px;flex-wrap:wrap;align-items:center'});
+          const mk=t=>{const c=h('input',{type:'checkbox'});return{c,l:h('label',{class:'chip',style:'cursor:pointer;display:inline-flex;gap:6px;align-items:center'},c,t)}};
+          const A=mk('Hepsi'),I=LABL.map(([k,n])=>Object.assign(mk(n),{k}));
+          I.forEach(o=>{o.c.checked=cur.includes(o.k)});A.c.checked=I.every(o=>o.c.checked);
+          const save=()=>{A.c.disabled=true;I.forEach(o=>{o.c.disabled=true});setL(r,I.filter(o=>o.c.checked).map(o=>o.k))};
+          A.c.addEventListener('change',()=>{I.forEach(o=>{o.c.checked=A.c.checked});save()});
+          I.forEach(o=>o.c.addEventListener('change',()=>{A.c.checked=I.every(x=>x.c.checked);save()}));
+          wrap.append(A.l,...I.map(o=>o.l));
+          return h('div',{class:'stack',style:'gap:6px'},h('div',{class:'mut',text:'Girebildiği laboratuvarlar (birden fazla seçilebilir):'}),wrap,!cur.length?h('span',{class:'chip warn',text:'Atanmadı: hiçbir laboratuvara giremez'}):(!r.ll&&!r.l)?h('span',{class:'chip',text:'Bölüm yazısından tahmin edildi, işaretleyip kaydedebilirsin'}):null)})(),
         h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},
           c!=='onay'?h('button',{class:'btn sm solid',type:'button',text:'Onayla',onclick:()=>setS(r,'onay','Üyelik onaylandı.')}):null,
           c!=='red'?h('button',{class:'btn sm',type:'button',text:'Reddet',onclick:()=>setS(r,'red','Başvuru reddedildi.')}):null,
