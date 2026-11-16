@@ -546,6 +546,7 @@ header nav a{flex:none;white-space:nowrap;padding:9px 11px!important;font-size:1
 #p-lab .lb-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
 #p-lab .lb-tabs button[aria-pressed=true]{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff;border-color:transparent}
 #p-lab label.lb-f{display:flex;flex-direction:column;gap:4px;font:600 13px "Instrument Sans",sans-serif;color:var(--mut);margin:0 0 12px}
+#p-lab .lb-f select{font:500 16px "Instrument Sans",sans-serif;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surf);color:var(--ink);width:100%}
 #p-lab .lb-f input{font:500 16px "Instrument Sans",sans-serif;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surf);color:var(--ink);width:100%}
 #p-lab .lb-m{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:var(--soft);color:var(--ink);font-size:14.5px}
 #p-lab .lb-st{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
@@ -3604,6 +3605,7 @@ const DBU=String(window.EKO_DB||'').replace(/\/+$/,''),KEY=String(window.EKO_KEY
 const gate=document.getElementById('lab-gate');
 if(!gate)return;
 const LAB='iibf-laboratuvar.html';
+const LOPT=[['isletme', 'İşletme & Finans'], ['iktisat', 'İktisat'], ['ekonometri', 'Ekonometri'], ['maliye', 'Maliye & Vergi'], ['kamu', 'Kamu Yönetimi'], ['uluslararasi', 'Uluslararası İlişkiler'], ['ceko', 'Çalışma Ekonomisi ve Endüstri İlişkileri']];
 const el=(t,a,...k)=>{const e=document.createElement(t);for(const x in(a||{})){const v=a[x];if(x==='text')e.textContent=v;else if(x.slice(0,2)==='on')e.addEventListener(x.slice(2),v);else if(v===true)e.setAttribute(x,'');else if(v!==false&&v!=null)e.setAttribute(x,v)}k.flat().forEach(c=>{if(c!=null)e.append(c)});return e};
 let S=null,okm=false,busy=false,ADM=false,HOCA=false,HM=false;
 const hk=e=>String(e||'').trim().toLowerCase().replace(/\./g,',');
@@ -3629,7 +3631,7 @@ function showAuth(note,tab){
   const mkb=hc?el('button',{class:'btn line',type:'submit',text:'Hesap oluştur',onclick:()=>{mkf=true}}):null;
   const f=el('form',{novalidate:true},
     sg?fld('lb-n','Ad soyad','text',{autocomplete:'name',maxlength:'80'}):null,
-    sg?fld('lb-b','Bölüm','text',{maxlength:'80',placeholder:'Örn. İktisat'}):null,
+    sg?el('label',{class:'lb-f','for':'lb-b'},'Bölüm',el('select',{id:'lb-b',required:true},el('option',{value:'',text:'Bölümünü seç'}),LOPT.map(x=>el('option',{value:x[0],text:x[1]})))):null,
     sg?fld('lb-c','Sınıf','text',{maxlength:'40',placeholder:'Örn. 2. sınıf'}):null,
     fld('lb-e','Üniversite e-postası','email',{autocomplete:'username',inputmode:'email',placeholder:hc?'ad.soyad@inonu.edu.tr':'ad.soyad@ogr.inonu.edu.tr'}),
     fld('lb-p','Parola','password',{autocomplete:sg?'new-password':'current-password',minlength:'6'}),
@@ -3641,12 +3643,13 @@ function showAuth(note,tab){
     if(!/^\S+@\S+\.\S+$/.test(em)){say(out,'E-posta adresi geçersiz.');return}
     if(pw.length<6){say(out,'Parola en az 6 karakter olmalı.');return}
     if(sg&&v('lb-n').length<3){say(out,'Ad soyadını yaz.');return}
+    if(sg&&!v('lb-b')){say(out,'Bölümünü seç.');return}
     btn.disabled=true;
     try{
       if(!KEY||!DBU)throw new Error('Üyelik henüz yapılandırılmadı.');
       if(sg||mk){const j=await idt('signUp',{email:em,password:pw,returnSecureToken:true});setS(j,em,sg?v('lb-n'):'');
         try{await idt('sendOobCode',{requestType:'VERIFY_EMAIL',idToken:j.idToken})}catch(e){}
-        if(sg){try{await db('uyeler/'+S.uid,'PUT',{n:v('lb-n'),e:em,b:v('lb-b'),c:v('lb-c'),s:'bekliyor',d:Date.now()})}catch(e){}}}
+        if(sg){try{await db('uyeler/'+S.uid,'PUT',{n:v('lb-n'),e:em,b:(LOPT.find(x=>x[0]===v('lb-b'))||['',''])[1],l:v('lb-b'),c:v('lb-c'),s:'bekliyor',d:Date.now()})}catch(e){}}}
       else{const j=await idt('signInWithPassword',{email:em,password:pw,returnSecureToken:true});setS(j,em,'')}
       await check();
       if(S&&okm){let r=null;try{r=sessionStorage.getItem('eko_ret');sessionStorage.removeItem('eko_ret')}catch(e){}if(r)location.hash=r}
