@@ -3605,7 +3605,8 @@ const DBU=String(window.EKO_DB||'').replace(/\/+$/,''),KEY=String(window.EKO_KEY
 const gate=document.getElementById('lab-gate');
 if(!gate)return;
 const LAB='iibf-laboratuvar.html';
-const LOPT=[['isletme', 'İşletme & Finans'], ['iktisat', 'İktisat'], ['ekonometri', 'Ekonometri'], ['maliye', 'Maliye & Vergi'], ['kamu', 'Kamu Yönetimi'], ['uluslararasi', 'Uluslararası İlişkiler'], ['ceko', 'Çalışma Ekonomisi ve Endüstri İlişkileri']];
+const LOPT=[['isletme','İşletme & Finans',['isletme']],['iktisat','İktisat',['iktisat']],['ekonometri','Ekonometri',['ekonometri']],['maliye','Maliye & Vergi',['maliye']],['kamu','Kamu Yönetimi',['kamu']],['uluslararasi','Uluslararası İlişkiler',['uluslararasi']],['ceko','Çalışma Ekonomisi ve Endüstri İlişkileri',['ceko']],['siyaset-kamu','Siyaset Bilimi ve Kamu Yönetimi',['kamu']],['siyaset-ub','Siyaset Bilimi ve Uluslararası İlişkiler',['uluslararasi']]];
+const LPICK=k=>LOPT.find(x=>x[0]===k)||['','',[]];
 const el=(t,a,...k)=>{const e=document.createElement(t);for(const x in(a||{})){const v=a[x];if(x==='text')e.textContent=v;else if(x.slice(0,2)==='on')e.addEventListener(x.slice(2),v);else if(v===true)e.setAttribute(x,'');else if(v!==false&&v!=null)e.setAttribute(x,v)}k.flat().forEach(c=>{if(c!=null)e.append(c)});return e};
 let S=null,okm=false,busy=false,ADM=false,HOCA=false,HM=false;
 const hk=e=>String(e||'').trim().toLowerCase().replace(/\./g,',');
@@ -3649,7 +3650,7 @@ function showAuth(note,tab){
       if(!KEY||!DBU)throw new Error('Üyelik henüz yapılandırılmadı.');
       if(sg||mk){const j=await idt('signUp',{email:em,password:pw,returnSecureToken:true});setS(j,em,sg?v('lb-n'):'');
         try{await idt('sendOobCode',{requestType:'VERIFY_EMAIL',idToken:j.idToken})}catch(e){}
-        if(sg){try{await db('uyeler/'+S.uid,'PUT',{n:v('lb-n'),e:em,b:(LOPT.find(x=>x[0]===v('lb-b'))||['',''])[1],l:v('lb-b'),c:v('lb-c'),s:'bekliyor',d:Date.now()})}catch(e){}}}
+        if(sg){try{await db('uyeler/'+S.uid,'PUT',{n:v('lb-n'),e:em,b:LPICK(v('lb-b'))[1],l:LPICK(v('lb-b'))[2][0]||'',ll:Object.fromEntries(LPICK(v('lb-b'))[2].map(k=>[k,true])),c:v('lb-c'),s:'bekliyor',d:Date.now()})}catch(e){}}}
       else{const j=await idt('signInWithPassword',{email:em,password:pw,returnSecureToken:true});setS(j,em,'')}
       await check();
       if(S&&okm){let r=null;try{r=sessionStorage.getItem('eko_ret');sessionStorage.removeItem('eko_ret')}catch(e){}if(r)location.hash=r}

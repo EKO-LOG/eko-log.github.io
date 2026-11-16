@@ -115,7 +115,7 @@ function showAuth(note,tab){
       if(!KEY||!DBU)throw new Error('Üyelik henüz yapılandırılmadı.');
       if(sg||mk){const j=await idt('signUp',{email:em,password:pw,returnSecureToken:true});setS(j,em,sg?v('lb-n'):'');
         try{await idt('sendOobCode',{requestType:'VERIFY_EMAIL',idToken:j.idToken})}catch(e){}
-        if(sg){try{await db('uyeler/'+S.uid,'PUT',{n:v('lb-n'),e:em,b:(LOPT.find(x=>x[0]===v('lb-b'))||['',''])[1],l:v('lb-b'),c:v('lb-c'),s:'bekliyor',d:Date.now()})}catch(e){}}}
+        if(sg){try{await db('uyeler/'+S.uid,'PUT',{n:v('lb-n'),e:em,b:LPICK(v('lb-b'))[1],l:LPICK(v('lb-b'))[2][0]||'',ll:Object.fromEntries(LPICK(v('lb-b'))[2].map(k=>[k,true])),c:v('lb-c'),s:'bekliyor',d:Date.now()})}catch(e){}}}
       else{const j=await idt('signInWithPassword',{email:em,password:pw,returnSecureToken:true});setS(j,em,'')}
       await check();
       
@@ -170,15 +170,18 @@ async function check(){
 /* ---- laboratuvar çerçevesi ---- */
 const send=()=>{if(fr&&fr.contentWindow&&S)fr.contentWindow.postMessage({eko:'uye',o:{uid:S.uid,n:S.n,e:S.e,t:S.t,ok:true,db:DBU,adm:ADM,hoca:HOCA}},'*')};
 const LK='uluslararasi';
-const LOPT=[['isletme', 'İşletme & Finans'], ['iktisat', 'İktisat'], ['ekonometri', 'Ekonometri'], ['maliye', 'Maliye & Vergi'], ['kamu', 'Kamu Yönetimi'], ['uluslararasi', 'Uluslararası İlişkiler'], ['ceko', 'Çalışma Ekonomisi ve Endüstri İlişkileri']];
+const LOPT=[['isletme','İşletme & Finans',['isletme']],['iktisat','İktisat',['iktisat']],['ekonometri','Ekonometri',['ekonometri']],['maliye','Maliye & Vergi',['maliye']],['kamu','Kamu Yönetimi',['kamu']],['uluslararasi','Uluslararası İlişkiler',['uluslararasi']],['ceko','Çalışma Ekonomisi ve Endüstri İlişkileri',['ceko']],['siyaset-kamu','Siyaset Bilimi ve Kamu Yönetimi',['kamu']],['siyaset-ub','Siyaset Bilimi ve Uluslararası İlişkiler',['uluslararasi']]];
+const LPICK=k=>LOPT.find(x=>x[0]===k)||['','',[]];
+const LKEYS=['isletme','iktisat','ekonometri','maliye','kamu','uluslararasi','ceko'];
 const LF={isletme:'iibf-isletme.html',iktisat:'iibf-iktisat.html',ekonometri:'iibf-ekonometri.html',maliye:'iibf-maliye.html',kamu:'iibf-kamu.html',uluslararasi:'iibf-uluslararasi.html',ceko:'iibf-ceko.html'};
-function labOf(r){if(r.l&&LF[r.l])return r.l;const b=String(r.b||'').toLocaleLowerCase('tr');for(const[k,re]of[['ekonometri',/ekonometri/],['uluslararasi',/uluslararas/],['maliye',/maliye/],['kamu',/kamu|siyaset/],['ceko',/çalışma|calisma|endüstri|ceko/],['isletme',/işletme|isletme/],['iktisat',/iktisat|ekonomi/]])if(re.test(b))return k;return''}
-function deny(t,p,own){gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:t}),el('p',{class:'lb-n',text:p}),el('div',{class:'lb-tabs'},own?el('a',{class:'btn',href:LF[own],text:'Kendi laboratuvarına git'}):null,el('a',{class:'btn line',href:BACK,text:'Eko-Plus’a dön'}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout}))));box.hidden=true}
-function lbSrc(rec){let s=window.IIBFSRC();if(LK==='hub'&&!rec.adm&&!rec.hoca){const k=labOf(rec);if(k){s=s.replace('const AK=LABS.filter(l=>l.s==="aktif");','const AK=LABS.filter(l=>l.s==="aktif"&&l.h==="'+LF[k]+'");').replace('<a class="btn" href="iibf-isletme.html">İşletme Laboratuvarı’nı aç</a>','<a class="btn" href="'+LF[k]+'">Laboratuvarını aç</a>')}}return s}
-function allow(rec){if(rec.adm||rec.hoca)return true;const k=labOf(rec);
-  if(!k){deny('Bölümün belli değil','Kayıtlı bölümün laboratuvarlardan biriyle eşleşmedi. Yöneticiye ekologtopluluk0@gmail.com adresinden yaz, bölümün tanımlansın.');return false}
+const LN={isletme:'İşletme & Finans',iktisat:'İktisat',ekonometri:'Ekonometri',maliye:'Maliye & Vergi',kamu:'Kamu Yönetimi',uluslararasi:'Uluslararası İlişkiler',ceko:'Çalışma Ekonomisi'};
+function labsOf(r){let a=[];if(r.ll&&typeof r.ll==='object')a=LKEYS.filter(k=>r.ll[k]);if(!a.length&&r.l&&LF[r.l])a=[r.l];if(a.length)return a;const b=String(r.b||'').toLocaleLowerCase('tr');for(const[k,re]of[['ekonometri',/ekonometri/],['uluslararasi',/uluslararas/],['maliye',/maliye/],['kamu',/kamu|siyaset/],['ceko',/çalışma|calisma|endüstri|ceko/],['isletme',/işletme|isletme/],['iktisat',/iktisat|ekonomi/]])if(re.test(b))return[k];return[]}
+function deny(t,p,own){gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:t}),el('p',{class:'lb-n',text:p}),el('div',{class:'lb-tabs'},(own||[]).map(k=>el('a',{class:'btn',href:LF[k],text:own.length>1?LN[k]+' laboratuvarı':'Kendi laboratuvarına git'})),el('a',{class:'btn line',href:BACK,text:'Eko-Plus’a dön'}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout}))));box.hidden=true}
+function lbSrc(rec){let s=window.IIBFSRC();if(LK==='hub'&&!rec.adm&&!rec.hoca){const ks=labsOf(rec);if(ks.length){const set=ks.map(k=>'"'+LF[k]+'"').join(',');s=s.replace('const AK=LABS.filter(l=>l.s==="aktif");','const AK=LABS.filter(l=>l.s==="aktif"&&['+set+'].includes(l.h));').replace('<a class="btn" href="iibf-isletme.html">İşletme Laboratuvarı’nı aç</a>',ks.length===1?'<a class="btn" href="'+LF[ks[0]]+'">Laboratuvarını aç</a>':'<a class="btn" href="#lg">Laboratuvarlarını gör</a>')}}return s}
+function allow(rec){if(rec.adm||rec.hoca)return true;const ks=labsOf(rec);
+  if(!ks.length){deny('Laboratuvarın belli değil','Kayıtlı bölümün laboratuvarlardan biriyle eşleşmedi. Yöneticiye ekologtopluluk0@gmail.com adresinden yaz, yetkin tanımlansın.');return false}
   if(LK==='hub')return true;
-  if(k!==LK){deny('Bu laboratuvar bölümüne ait değil','Üyeliğin yalnızca kendi bölümünün laboratuvarını açar.',k);return false}
+  if(!ks.includes(LK)){deny('Bu laboratuvar sana açık değil','Üyeliğin yalnızca yetkilendirildiğin laboratuvarları açar.',ks);return false}
   return true}
 function mount(rec){
   if(!allow(rec))return;
