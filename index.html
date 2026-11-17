@@ -9136,6 +9136,9 @@ document.querySelectorAll("#gnav [data-go]").forEach(b=>b.onclick=()=>{const t=d
 (function(){
 var D=document,FI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8.5V20l-4-2v-4.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>';
 var CFG=[
+ {page:'p-parite',group:'#pr-ct',title:'Kategori filtresi'},
+ {page:'p-quiz',group:'.sz-chips',title:'Alan seç',label:'Alan seç'},
+ {page:'p-mulakat',group:'.sz-chips',title:'Konu seç',label:'Konu seç'},
  {page:'p-kadrolar',group:'#ms-chips',extras:['#ms-sx','.mf-c:has(#ms-dl)','#ms-rs'],host:'.ms-tools',after:'#ms-q',title:'Kadro filtreleri'},
  {page:'p-sozluk',group:'#szc',title:'Alan filtresi'},
  {page:'p-anatomi',group:'#ka-tags',host:'.vt-bar',title:'Konu filtresi'},
@@ -9145,16 +9148,16 @@ function q(r,s){try{return r.querySelector(s)}catch(e){return null}}
 function init(c){
   var pg=D.getElementById(c.page),g=pg&&q(pg,c.group);
   if(!g||g.getAttribute('data-fp'))return;
-  g.setAttribute('data-fp','1');
+  g.setAttribute('data-fp','1');var KEY=c.page+c.group;[].forEach.call(D.querySelectorAll('[data-fpk="'+KEY+'"]'),function(x){x.remove()});
   var ex=(c.extras||[]).map(function(s){return q(pg,s)}).filter(Boolean);
   var w=D.createElement('span');w.className='fp-w';
   var b=D.createElement('button');b.type='button';b.className='fp-btn';b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-expanded','false');
-  b.innerHTML=FI+'<span>Filtre</span><span class="fp-n"></span>';
+  b.innerHTML=FI+'<span></span><span class="fp-n"></span>';b.firstChild.nextSibling.textContent=c.label||'Filtre';
   var pop=D.createElement('div');pop.className='fp-pop';pop.setAttribute('role','dialog');pop.setAttribute('aria-label',c.title||'Filtre');
   pop.innerHTML='<div class="fp-h"><b></b><span><button type="button" class="fp-cl">Temizle</button><button type="button" class="fp-ok">Tamam</button></span></div><div class="fp-b"></div>';
   pop.querySelector('b').textContent=c.title||'Filtre';
   var body=pop.querySelector('.fp-b');
-  w.appendChild(b);
+  w.appendChild(b);w.setAttribute('data-fpk',KEY);pop.setAttribute('data-fpk',KEY);
   var host=c.host&&q(pg,c.host),aft=host&&c.after&&q(host,c.after);
   if(host&&!(g.parentNode===host)){
     if(aft&&aft.nextSibling)host.insertBefore(w,aft.nextSibling);else if(aft)host.appendChild(w);else host.insertBefore(w,host.querySelector('.hs-n')||null);
@@ -9198,6 +9201,8 @@ function closeAll(){[].forEach.call(D.querySelectorAll('.fp-pop.open'),function(
 function run(){CFG.forEach(init)}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',run);else run();
 addEventListener('load',function(){run();setTimeout(run,600)});
+var _t;addEventListener('hashchange',function(){setTimeout(run,250);setTimeout(run,900)});
+try{new MutationObserver(function(){clearTimeout(_t);_t=setTimeout(run,300)}).observe(D.querySelector('main')||D.body,{childList:true,subtree:true})}catch(e){}
 })();
 </script>
 </body></html>
