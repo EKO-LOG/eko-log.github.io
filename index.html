@@ -30,7 +30,7 @@ nav a:hover{background:var(--soft)}nav a.on{background:linear-gradient(120deg,va
 nav{flex:1 1 auto;min-width:0;justify-content:flex-end}
 nav a{padding:9px clamp(7px,.85vw,14px);font-size:clamp(12px,1.05vw,15px)}
 }
-@media (min-width:761px) and (max-width:1099px){.brand span{display:none}}
+@media (min-width:761px) and (max-width:99999px){.brand span{display:none}}
 .page{display:none}.page.on{display:block;animation:in .6s cubic-bezier(.2,.8,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 /* aurora */
@@ -316,12 +316,12 @@ body:not(.uye-ok) .page.xp:not(#p-kitaplik):not(#p-forum){display:none!important
 .xhub{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding-bottom:30px}
 .xhub .tile{grid-column:auto!important;min-height:210px}
 .brand-txt{display:none}
-@media (max-width:1099px){.brand-txt{display:inline-flex;align-items:center;flex:none;margin:0 4px 0 -4px;padding:6px 4px;text-decoration:none;white-space:nowrap;font:800 clamp(19px,5.2vw,24px)/1 "Bricolage Grotesque","Trebuchet MS",sans-serif;letter-spacing:-.03em;background:linear-gradient(120deg,#c4202e 10%,#f0561f 70%,#ff8a3d);-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform .25s,filter .25s}
+@media (max-width:99999px){.brand-txt{display:inline-flex;align-items:center;flex:none;margin:0 4px 0 -4px;padding:6px 4px;text-decoration:none;white-space:nowrap;font:800 clamp(19px,5.2vw,24px)/1 "Bricolage Grotesque","Trebuchet MS",sans-serif;letter-spacing:-.03em;background:linear-gradient(120deg,#c4202e 10%,#f0561f 70%,#ff8a3d);-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform .25s,filter .25s}
 .brand-txt:hover{transform:translateY(-1px);filter:brightness(1.12)}
 .brand-txt::after{content:"";width:6px;height:6px;border-radius:50%;margin:6px 0 0 4px;background:#ff8a3d;flex:none}
 header nav{min-width:0}}
-@media (max-width:1099px) and (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand-txt{background-image:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371)}}
-@media (max-width:1099px){:root[data-theme="dark"] .brand-txt{background-image:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371)}}
+@media (max-width:99999px) and (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand-txt{background-image:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371)}}
+@media (max-width:99999px){:root[data-theme="dark"] .brand-txt{background-image:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371)}}
 </style>
 
 
@@ -577,7 +577,7 @@ addEventListener('load',function(){f();setTimeout(f,400)});addEventListener('has
    Kaydırmalı üst menü yerine: Eko-Log simgesine dokun -> sağdan açılan menü sayfası.
    Masaüstü sınırını değiştirmek için 1099px değerlerini (CSS + JS'teki matchMedia) birlikte güncelle. */
 header .mbtn{display:none}
-@media (max-width:1099px){
+@media (max-width:99999px){
 html.dm-on header nav{display:none!important}
 html.dm-on header .brand{display:none!important}
 html.dm-on header .mbtn{display:grid}
@@ -614,6 +614,15 @@ body.dm-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.dm,.dm-ov,.dm-panel{transition:none}}
 @media print{.dm,header .mbtn{display:none!important}}
 </style>
+<style id="bar-off">
+/* Yatay menü çubuğu kutusu kaldırıldı: yalnızca yuvarlak logo (menü) ve Eko-Log (ana sayfa) kalır */
+header,#site-hd{pointer-events:none!important}
+header .bar,#site-hd .sbar{pointer-events:none;background:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important;max-width:none!important;width:max-content}
+header .mbtn,header .brand-txt,#site-hd .mbtn,#site-hd .brand-txt,header .eu-tools,header .eu-tools *{pointer-events:auto}
+header .brand-txt,#site-hd .brand-txt{text-shadow:0 1px 6px rgba(255,255,255,.55)}
+:root[data-theme="dark"] header .brand-txt{text-shadow:0 1px 6px rgba(0,0,0,.5)}
+body.eu-min header .bar{box-shadow:none!important}
+</style>
 </head><body>
 <header><div class="bar">
 <button type="button" class="mbtn" id="mbtn" aria-label="Menüyü aç" title="Menü" aria-haspopup="dialog" aria-expanded="false" aria-controls="dmenu"></button>
@@ -625,7 +634,7 @@ body.dm-lock{overflow:hidden}
 (function(){
 var D=document,R=D.documentElement,H=D.querySelector('header'),nav=H&&H.querySelector('nav'),btn=D.getElementById('mbtn'),logo=H&&H.querySelector('.brand img');
 if(!H||!nav||!btn)return;
-var isOpen=false,lastF=null,mq=matchMedia('(max-width:1099px)');
+var isOpen=false,lastF=null,mq=matchMedia('(max-width:99999px)');
 function mk(t,c){var e=D.createElement(t);if(c)e.className=c;return e}
 var CHEV='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5l7.5 7.5L9 19.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var XI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
@@ -9097,6 +9106,98 @@ document.addEventListener("eko:ready",()=>{ext();if(location.hash==="#/girisimci
 addEventListener("hashchange",route);route();
 document.querySelectorAll("#gnav [data-go]").forEach(b=>b.onclick=()=>{const t=document.getElementById(b.dataset.go);if(t)t.scrollIntoView({behavior:"smooth"})});
 
+})();
+</script>
+<style id="fpop-css">
+.fp-w{position:relative;display:inline-flex;flex:none;margin:0 0 12px}
+.vt-bar .fp-w,.ms-tools .fp-w,.kt-bar .fp-w{margin:0}
+.fp-btn{display:inline-flex;align-items:center;gap:8px;font:700 14px "Instrument Sans",system-ui,sans-serif;padding:10px 16px;border-radius:999px;border:0;cursor:pointer;color:var(--ink,#1d1526);background:var(--surf,#fff);box-shadow:inset 0 0 0 1px var(--line,#eee3e6);-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:box-shadow .2s,background-color .2s}
+.fp-btn svg{width:17px;height:17px;flex:none}
+.fp-btn[aria-expanded="true"],.fp-btn.has{box-shadow:inset 0 0 0 2px var(--g2,#ff7a45)}
+.fp-n{display:none;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45));color:#fff;font-size:12px;line-height:20px;text-align:center}
+.fp-btn.has .fp-n{display:inline-block}
+.fp-pop{position:fixed;z-index:99980;display:none;flex-direction:column;width:min(92vw,560px);max-height:min(72vh,560px);background:var(--surf,#fff);color:var(--ink,#1d1526);border-radius:20px;box-shadow:0 0 0 1px var(--line,#eee3e6),0 24px 60px -16px rgba(30,10,40,.45)}
+.fp-pop.open{display:flex;animation:fpIn .22s cubic-bezier(.22,1,.36,1)}
+.fp-pop::before{content:"";position:absolute;top:-7px;left:var(--ax,28px);width:14px;height:14px;background:inherit;transform:rotate(45deg);box-shadow:-1px -1px 0 0 var(--line,#eee3e6);border-radius:3px 0 0 0}
+@keyframes fpIn{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+.fp-h{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px 10px 18px;border-bottom:1px solid var(--line,#eee3e6);border-radius:20px 20px 0 0;background:inherit}
+.fp-h b{font:800 16px "Bricolage Grotesque","Instrument Sans",sans-serif}
+.fp-h span{display:flex;gap:6px}
+.fp-h button{font:700 13px "Instrument Sans",sans-serif;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;background:var(--soft,#f5ecef);color:inherit}
+.fp-h .fp-ok{background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45));color:#fff}
+.fp-b{overflow-y:auto;overscroll-behavior:contain;padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.fp-b>.chips,.fp-b>.sz-chips,.fp-b>.ki-chips,.fp-b>.kt-bar,.fp-b>div{margin:0!important}
+.fp-b select{font:inherit;font-size:15px;padding:9px 14px;border-radius:12px;border:1px solid var(--soft,#0002);background:var(--bg,#fff);color:inherit;width:100%}
+.fp-b #ms-rs{align-self:flex-start;font:inherit;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;border:1px solid var(--soft,#0002);background:var(--soft,#0001);color:inherit;cursor:pointer}
+@media print{.fp-w,.fp-pop{display:none!important}}
+@media (prefers-reduced-motion:reduce){.fp-pop.open{animation:none}}
+</style>
+<script id="fpop-js">
+(function(){
+var D=document,FI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8.5V20l-4-2v-4.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+var CFG=[
+ {page:'p-kadrolar',group:'#ms-chips',extras:['#ms-sx','.mf-c:has(#ms-dl)','#ms-rs'],host:'.ms-tools',after:'#ms-q',title:'Kadro filtreleri'},
+ {page:'p-sozluk',group:'#szc',title:'Alan filtresi'},
+ {page:'p-anatomi',group:'#ka-tags',host:'.vt-bar',title:'Konu filtresi'},
+ {page:'p-efsane',group:'#se-tags',host:'.vt-bar',title:'Konu filtresi'}
+];
+function q(r,s){try{return r.querySelector(s)}catch(e){return null}}
+function init(c){
+  var pg=D.getElementById(c.page),g=pg&&q(pg,c.group);
+  if(!g||g.getAttribute('data-fp'))return;
+  g.setAttribute('data-fp','1');
+  var ex=(c.extras||[]).map(function(s){return q(pg,s)}).filter(Boolean);
+  var w=D.createElement('span');w.className='fp-w';
+  var b=D.createElement('button');b.type='button';b.className='fp-btn';b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-expanded','false');
+  b.innerHTML=FI+'<span>Filtre</span><span class="fp-n"></span>';
+  var pop=D.createElement('div');pop.className='fp-pop';pop.setAttribute('role','dialog');pop.setAttribute('aria-label',c.title||'Filtre');
+  pop.innerHTML='<div class="fp-h"><b></b><span><button type="button" class="fp-cl">Temizle</button><button type="button" class="fp-ok">Tamam</button></span></div><div class="fp-b"></div>';
+  pop.querySelector('b').textContent=c.title||'Filtre';
+  var body=pop.querySelector('.fp-b');
+  w.appendChild(b);
+  var host=c.host&&q(pg,c.host),aft=host&&c.after&&q(host,c.after);
+  if(host&&!(g.parentNode===host)){
+    if(aft&&aft.nextSibling)host.insertBefore(w,aft.nextSibling);else if(aft)host.appendChild(w);else host.insertBefore(w,host.querySelector('.hs-n')||null);
+  }else g.parentNode.insertBefore(w,g);
+  body.appendChild(g);ex.forEach(function(e){body.appendChild(e)});
+  D.body.appendChild(pop);
+  var def=g.children[0];
+  function cnt(){
+    var n=0;[].forEach.call(g.children,function(k,i){if(k.getAttribute('aria-pressed')==='true'&&k!==g.children[0])n++});
+    ex.forEach(function(e){var i=e.matches('select')?e:q(e,'select,input');if(!i)return;if(i.type==='checkbox'){if(i.checked)n++}else if(i.value)n++});
+    b.classList.toggle('has',n>0);b.querySelector('.fp-n').textContent=n;
+  }
+  new MutationObserver(cnt).observe(g,{subtree:true,childList:true,attributes:true,attributeFilter:['aria-pressed','class']});
+  ex.forEach(function(e){e.addEventListener('change',function(){setTimeout(cnt,0)});e.addEventListener('click',function(){setTimeout(cnt,60)})});
+  cnt();
+  function place(){
+    var r=b.getBoundingClientRect(),vw=D.documentElement.clientWidth,pw=pop.offsetWidth,l=Math.max(8,Math.min(r.left,vw-pw-8));
+    pop.style.left=l+'px';pop.style.top=(r.bottom+10)+'px';pop.style.setProperty('--ax',Math.max(14,Math.min(r.left+r.width/2-l-7,pw-30))+'px');
+    pop.style.maxHeight=Math.min(560,innerHeight-r.bottom-24)+'px';
+  }
+  function open(){closeAll();var r0=b.getBoundingClientRect();if(r0.top>innerHeight*.4||r0.top<70)scrollBy(0,r0.top-110);pop.classList.add('open');b.setAttribute('aria-expanded','true');place();pop._b=b}
+  function close(){pop.classList.remove('open');b.setAttribute('aria-expanded','false')}
+  pop._close=close;pop._place=place;pop._w=w;
+  b.addEventListener('click',function(e){e.stopPropagation();pop.classList.contains('open')?close():open()});
+  pop.querySelector('.fp-ok').addEventListener('click',close);
+  pop.querySelector('.fp-cl').addEventListener('click',function(){
+    var rs=D.getElementById('ms-rs');
+    if(c.page==='p-kadrolar'&&rs){rs.click()}
+    else if(def&&def.getAttribute('aria-pressed')!=='true')def.click();
+    setTimeout(cnt,80);
+  });
+  /* seçimden sonra baloncuğu kapat (çoklu seçim gerektirmeyen tek seçimli gruplar) */
+  g.addEventListener('click',function(e){var k=e.target.closest&&e.target.closest('button');if(k&&k.parentNode===g)setTimeout(function(){close();var f=pg.querySelector('[id$="-q"],[id="ms-q"]');},120)});
+  D.addEventListener('click',function(e){if(pop.classList.contains('open')&&!pop.contains(e.target)&&!w.contains(e.target))close()});
+  D.addEventListener('keydown',function(e){if(e.key==='Escape'&&pop.classList.contains('open')){close();b.focus()}});
+  addEventListener('resize',function(){if(pop.classList.contains('open'))place()});
+  addEventListener('scroll',function(){if(pop.classList.contains('open'))place()},{passive:true});
+  addEventListener('hashchange',close);
+}
+function closeAll(){[].forEach.call(D.querySelectorAll('.fp-pop.open'),function(p){p._close&&p._close()})}
+function run(){CFG.forEach(init)}
+if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',run);else run();
+addEventListener('load',function(){run();setTimeout(run,600)});
 })();
 </script>
 </body></html>
