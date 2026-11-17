@@ -1,0 +1,27 @@
+name: il-ortak.js satırını tüm il sayfalarına ekle
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'kalkinma/il-*.html'
+permissions:
+  contents: write
+jobs:
+  ekle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Satırı ekle
+        run: |
+          for f in kalkinma/il-*.html; do
+            if ! grep -q 'il-ortak.js' "$f"; then
+              sed -i 's#</body>#<script src="il-ortak.js" defer></script>\n</body>#' "$f"
+              echo "eklendi: $f"
+            fi
+          done
+      - name: Değişiklik varsa kaydet
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "il sayfalarına il-ortak.js eklendi" && git push)
