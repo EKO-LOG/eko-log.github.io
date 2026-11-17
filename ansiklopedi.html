@@ -540,6 +540,33 @@ body.dm-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.dm,.dm-ov,.dm-panel{transition:none}}
 @media print{.dm,header .mbtn{display:none!important}}
 </style>
+<style id="drawer-sub-css">
+/* ===== Çekmece alt menüleri =====
+   Satır = [sayfa bağlantısı] + [yuvarlak ok düğmesi]. Yazıya dokunmak sayfaya götürür,
+   yuvarlak oka dokunmak o bölümün alt sayfalarını açar/kapatır. */
+header nav a[hidden],#site-hd nav a[hidden]{display:none!important}
+.dm-row{display:flex;align-items:center}
+.dm-row>a{flex:1 1 auto;min-width:0}
+.dm-row>a:only-child{padding-right:28px}
+.dm-row>a:only-child>svg{opacity:.55}
+.dm-list .dm-tg{flex:none;width:40px;height:40px;margin:0 16px 0 4px;padding:0;display:grid;place-items:center;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s,border-color .2s,box-shadow .25s,transform .3s cubic-bezier(.22,1,.36,1)}
+.dm-list .dm-tg svg{width:18px;height:18px;opacity:1;transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.dm-list .dm-tg:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.65)}
+.dm-list .dm-tg:active{transform:scale(.9)}
+.dm-list .dm-tg:focus-visible{outline:3px solid #ff8f5a;outline-offset:2px}
+.dm-item.open>.dm-row .dm-tg{background:linear-gradient(135deg,#ff6470,#ff8f5a);border-color:transparent;box-shadow:0 5px 16px -5px rgba(255,100,112,.75)}
+.dm-item.open>.dm-row .dm-tg svg{transform:rotate(180deg)}
+.dm-sub-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s cubic-bezier(.22,1,.36,1)}
+.dm-item.open>.dm-sub-wrap{grid-template-rows:1fr}
+.dm-list .dm-sub{position:relative;list-style:none;margin:0;padding:0;min-height:0;overflow:hidden;visibility:hidden;background:rgba(255,255,255,.035);transition:visibility 0s linear .32s}
+.dm-item.open>.dm-sub-wrap>.dm-sub{visibility:visible;transition-delay:0s}
+.dm-list .dm-sub::before{content:"";position:absolute;left:30px;top:8px;bottom:8px;width:2px;border-radius:2px;background:rgba(255,255,255,.16)}
+.dm-list .dm-sub li{margin:0;border:0}
+.dm-list .dm-sub a{min-height:48px;padding:10px 22px 10px 50px;font-size:17px;font-weight:400;color:rgba(246,240,251,.92)}
+.dm-list .dm-sub a.on{font-weight:700;color:#fff;background:rgba(255,255,255,.08)}
+.dm-list .dm-sub a.on::before{left:28px;top:12px;bottom:12px;width:5px}
+@media (prefers-reduced-motion:reduce){.dm-sub-wrap,.dm-list .dm-sub,.dm-list .dm-tg,.dm-list .dm-tg svg{transition:none}}
+</style>
 <style id="bar-off">
 /* Yatay menü çubuğu kutusu kaldırıldı: yalnızca yuvarlak logo (menü) ve Eko-Log (ana sayfa) kalır */
 header,#site-hd{pointer-events:none!important}
@@ -560,28 +587,98 @@ body.eu-min header .bar{box-shadow:none!important}
 (function(){
 var D=document,R=D.documentElement,H=D.getElementById('site-hd')||D.querySelector('header'),nav=H&&H.querySelector('nav'),btn=D.getElementById('mbtn'),logo=H&&H.querySelector('.brand img');
 if(!H||!nav||!btn)return;
-var isOpen=false,lastF=null,mq=matchMedia('(max-width:99999px)');
+var isOpen=false,lastF=null,uidN=0,mq=matchMedia('(max-width:99999px)');
 function mk(t,c){var e=D.createElement(t);if(c)e.className=c;return e}
 var CHEV='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5l7.5 7.5L9 19.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var DOWN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 9l6.5 6.5L18.5 9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var XI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
-/* Düğmeye ve menü başlığına mevcut logoyu kopyala (dosyaya ikinci kez gömülmez) */
-if(logo){var im=logo.cloneNode(false);im.alt='';im.setAttribute('aria-hidden','true');btn.appendChild(im)}
+
+/* ---- Üyelik: sitedeki mevcut kuralla aynı (giriş yapılmış VE yönetici onaylı) ---- */
+function isMember(){
+  try{var s=JSON.parse(localStorage.getItem('eko_uye')||'null');
+    if(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)return true}catch(e){}
+  return !!(D.body&&D.body.classList.contains('uye-ok'));
+}
+function isPlus(a){return /^eko[\s\-\u2010-\u2015]*plus$/i.test((a.textContent||'').trim())}
+/* Eko-Plus bağlantısı üye değilse üstteki (yedek) menüde de görünmesin */
+function syncNav(){var m=isMember();[].forEach.call(nav.querySelectorAll('a'),function(a){if(isPlus(a))a.hidden=!m})}
+
+/* ---- Alt sayfalar: yalnızca sitede gerçekten var olan rotalar ----
+   Hedef = ana öğenin dosya yolu + '#/' + rota  (her dosyada kendi göreli yoluna uyar). */
+var SUB={
+ 'Simülasyon Merkezi':[['vaka','Vaka Analizi'],['ppk','Başkan Simülasyonu'],['borsa','Borsa Simülasyonu'],['bakan','Bakanlık Simülasyonu'],['girisim','Girişimci'],['kur','Dış Ticaret'],['burokrat','Kamu Bürokratı'],['muzakere','Müzakere Masası'],['ihale','Kamu İhalesi'],['hakimlik','Hâkimlik Simülasyonu'],['valilik','Kaymakamlık ve Valilik'],['smmm','Mali Müşavirlik']],
+ 'Meslekler':[['meslek','Kariyer Meslek Tanıtımı'],['kadrolar','Kariyer Kadroları'],['mulakat','Mülakat Prova Modu'],['mulakat-bilgi','Kurum Mülakatı Bilgilendirme'],['mulakat-basvuru','Mülakat Simülasyonu Başvuruları'],['quiz','Terim Quiz']],
+ 'İktisadi Ansiklopedi':[['sozluk','Ekonomi Sözlüğü'],['anatomi','Kavramın Anatomisi'],['efsane','İktisadi Şehir Efsaneleri'],['kisiler','İktisat Düşünürleri'],['tarih','Ekonomi Tarihi Çizelgesi'],['sektor','Sektör Dosyaları']],
+ 'Veri ve Pariteler':[['pariteler','Pariteler'],['veri','İktisat Grafikleri'],['hesap','Hesaplayıcılar'],['kaynak','Kaynaklar'],['ulke','Ülke Karşılaştırma'],['turkiye','Türkiye Ekonomisi Dosyaları'],['urun','Bir Ürünün Hikâyesi'],['iktisatci','İktisatçı Gözünden']],
+ 'Gazete ve Dergi':[['gazete','Diyalog Gazetesi'],['dergi','İktisadi Kalkınma Dergisi'],['makale','Makale Yazımı'],['ceviri','Çeviri Köşesi'],['arastirma','Ortak Araştırma Projeleri'],['arsiv','Arşiv']],
+ 'Etkinlikler':[['fikir','Fikir Muharebesi'],['yatay','Yatay Bakış'],['konferanslar','Konferanslar'],['arastirma','Ortak Araştırma Projeleri']]
+};
+/* Kalkınma, Katıl, Ana Sayfa ve Eko-Plus: alt sayfa yok → doğrudan sayfaya gider */
+
+function norm(p){return p.replace(/index\.html$/,'').replace(/\/$/,'')}
+function seg(h){return h.replace(/^#\/?/,'').split('/')[0]}
+function childOn(href){
+  try{var u=new URL(href,location.href);
+    if(norm(u.pathname)!==norm(location.pathname))return false;
+    var a=seg(u.hash);return !!a&&a===seg(location.hash)}catch(e){return false}
+}
+
 var root=mk('div','dm');root.id='dmenu';
 root.innerHTML='<div class="dm-ov"></div><div class="dm-panel" role="dialog" aria-modal="true" aria-label="Ana menü"><div class="dm-top"><b>Eko-Log</b><button type="button" class="dm-x" aria-label="Menüyü kapat">'+XI+'</button></div><ul class="dm-list"></ul></div>';
+/* Düğmeye ve menü başlığına mevcut logoyu kopyala (dosyaya ikinci kez gömülmez) */
+if(logo){var im=logo.cloneNode(false);im.alt='';im.setAttribute('aria-hidden','true');btn.appendChild(im)}
 var top=root.querySelector('.dm-top');
 if(logo){var im2=logo.cloneNode(false);im2.alt='';im2.setAttribute('aria-hidden','true');top.insertBefore(im2,top.firstChild)}
 D.body.appendChild(root);
 var list=root.querySelector('.dm-list'),panel=root.querySelector('.dm-panel');
-/* Öğeler üstteki menüden (header nav) okunur: tek kaynak, ayrıca bakım gerekmez */
+
+function setSub(li,tg,label,open){
+  li.classList.toggle('open',open);
+  tg.setAttribute('aria-expanded',open?'true':'false');
+  tg.setAttribute('aria-label',label+(open?' alt sayfalarını kapat':' alt sayfalarını aç'));
+}
+function add(href,text,on,kids,base){
+  var li=mk('li','dm-item'),row=mk('div','dm-row'),a=mk('a'),s=mk('span');
+  a.href=href;s.textContent=text;a.appendChild(s);
+  var hasKids=!!(kids&&kids.length),anyKidOn=false;
+  if(!hasKids)a.insertAdjacentHTML('beforeend',CHEV);   /* düz ok = doğrudan git */
+  row.appendChild(a);li.appendChild(row);
+  if(hasKids){
+    var id='dms'+(++uidN),tg=mk('button','dm-tg'),wrap=mk('div','dm-sub-wrap'),ul=mk('ul','dm-sub');
+    tg.type='button';tg.setAttribute('aria-controls',id);tg.innerHTML=DOWN;
+    ul.id=id;
+    kids.forEach(function(k){
+      var l=mk('li'),b=mk('a'),h=base+'#/'+k[0],o=childOn(h);
+      b.href=h;b.textContent=k[1];
+      if(o){b.className='on';b.setAttribute('aria-current','page');anyKidOn=true}
+      l.appendChild(b);ul.appendChild(l);
+    });
+    wrap.appendChild(ul);li.appendChild(wrap);row.appendChild(tg);
+    tg.addEventListener('click',function(){
+      var willOpen=!li.classList.contains('open');
+      if(willOpen)[].forEach.call(list.querySelectorAll('.dm-item.open'),function(o){
+        var ot=o.querySelector('.dm-tg');if(ot)setSub(o,ot,o.getAttribute('data-l'),false)});
+      setSub(li,tg,text,willOpen);
+    });
+    li.setAttribute('data-l',text);
+    setSub(li,tg,text,anyKidOn);                          /* bulunduğun bölüm açık gelsin */
+  }
+  if(on||anyKidOn){a.className='on';if(on)a.setAttribute('aria-current','page')}
+  list.appendChild(li);
+}
+/* Öğeler üstteki menüden (header nav) okunur; alt sayfalar SUB tablosundan eklenir */
 function build(){
+  syncNav();
   list.textContent='';
-  var h=location.hash,hb=H.querySelector('.brand'),HOME=hb?hb.getAttribute('href'):'#/',home=(HOME==='#/')&&(!h||h==='#'||h==='#/');
-  function add(href,text,on){var li=mk('li'),a=mk('a'),s=mk('span');a.href=href;s.textContent=text;a.appendChild(s);a.insertAdjacentHTML('beforeend',CHEV);if(on){a.className='on';a.setAttribute('aria-current','page')}li.appendChild(a);list.appendChild(li)}
+  var member=isMember();lastM=member;var h=location.hash,hb=H.querySelector('.brand'),HOME=hb?hb.getAttribute('href'):'#/',
+      home=(HOME==='#/')&&(!h||h==='#'||h==='#/');
   add(HOME,'Ana Sayfa',home);
   [].forEach.call(nav.querySelectorAll('a'),function(a){
     var t=a.textContent.trim(),hr=a.getAttribute('href');
-    if(!t||!hr||getComputedStyle(a).display==='none')return;
-    add(hr,t,a.classList.contains('on'));
+    if(!t||!hr)return;
+    if(isPlus(a)){if(!member)return;add(hr,t,a.classList.contains('on'));return}   /* Eko-Plus: yalnızca onaylı üye */
+    if(getComputedStyle(a).display==='none')return;
+    add(hr,t,a.classList.contains('on'),SUB[t],hr.split('#')[0]);
   });
 }
 function openM(){
@@ -599,12 +696,13 @@ function closeM(restore){
 btn.addEventListener('click',function(){isOpen?closeM(true):openM()});
 root.querySelector('.dm-ov').addEventListener('click',function(){closeM(true)});
 root.querySelector('.dm-x').addEventListener('click',function(){closeM(true)});
+/* Yalnızca bağlantılar menüyü kapatır; ok düğmesi sadece alt listeyi açıp kapatır */
 root.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.dm-list a');if(a)closeM(false)});
 D.addEventListener('keydown',function(e){
   if(!isOpen)return;
   if(e.key==='Escape'){e.preventDefault();closeM(true);return}
   if(e.key==='Tab'){
-    var f=[].slice.call(root.querySelectorAll('.dm-x,.dm-list a')),i=f.indexOf(D.activeElement);
+    var f=[].slice.call(root.querySelectorAll('.dm-x,.dm-list a,.dm-tg')).filter(function(x){return getComputedStyle(x).visibility!=='hidden'}),i=f.indexOf(D.activeElement);
     if(!f.length)return;
     if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}
     else if(!e.shiftKey&&(i===-1||i===f.length-1)){e.preventDefault();f[0].focus()}
@@ -617,6 +715,15 @@ panel.addEventListener('touchend',function(e){var t=e.changedTouches[0],dx=t.cli
 addEventListener('hashchange',function(){closeM(false)});
 var onMq=function(){if(!mq.matches)closeM(false)};
 mq.addEventListener?mq.addEventListener('change',onMq):mq.addListener(onMq);
+
+/* Üyelik durumu değişince (giriş/çıkış, başka sekme, geri dönüş) menü kendini günceller */
+var lastM=isMember();
+function refresh(){syncNav();var m=isMember();if(m!==lastM){lastM=m;if(isOpen)build()}}
+addEventListener('storage',function(e){if(!e.key||e.key==='eko_uye'||e.key==='eko_uye_ok')refresh()});
+addEventListener('pageshow',refresh);
+addEventListener('focus',refresh);
+try{new MutationObserver(refresh).observe(D.body,{attributes:true,attributeFilter:['class']})}catch(e){}
+syncNav();
 /* Her şey hazırsa eski kaydırmalı menüyü gizle; betik çalışmazsa eski menü kalır */
 R.classList.add('dm-on');
 })();
