@@ -1783,6 +1783,7 @@
     "urun": true,
     "ceviri": true,
     "arastirma": true,
+    "ikalgoritma": true,
     "x-bildirim": true
   },
   "fm": {
@@ -2716,7 +2717,7 @@
   "yy": [
     {
       "id": "yy1",
-      "on": false,
+      "on": true,
       "ad": "Kampüs Ekonomisi",
       "tur": "dergi",
       "slogan": "Telefonda ana ekrandaki Eko-Log simgesini silip siteyi yeniden \"Ana ekrana ekle\" ile ekle. Android eski simgeyi önbellekte tutar.",
