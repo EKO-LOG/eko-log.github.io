@@ -1343,7 +1343,7 @@ drawChips();drawTerms();
 <div class="aurora banner" style="--a1:#0f766e;--a2:#34d399;--a3:#f59e0b"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / <a href="#/ansiklopedi">İktisadi Ansiklopedi</a> / Finansal Okuryazarlık</span><h2>Finansal Okuryazarlık</h2><p>Bütçeden enflasyona, borçtan yatırıma: parayla ilgili kararları bilinçli almak için temel bilgiler, hesaplayıcılar ve kısa bir test.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content" style="--g1:#0f766e;--g2:#34d399"><div class="fo-nav">
-<a href="#/finans" data-fo="fo-neden">Neden önemli</a><a href="#/finans" data-fo="fo-butce">Bütçe</a><a href="#/finans" data-fo="fo-ogrenci">Öğrenci bütçesi</a><a href="#/finans" data-fo="fo-acil">Acil durum fonu</a><a href="#/finans" data-fo="fo-enflasyon">Enflasyon ve getiri</a><a href="#/finans" data-fo="fo-borc">Borç</a><a href="#/finans" data-fo="fo-yatirim">Yatırım</a><a href="#/finans" data-fo="fo-guvence">Sigorta ve emeklilik</a><a href="#/finans" data-fo="fo-dolandirici">Dolandırıcılık</a><a href="#/finans" data-fo="fo-hesap">Hesaplayıcılar</a><a href="#/finans" data-fo="fo-vergi">Vergi</a><a href="#/finans" data-fo="fo-davranis">Davranış</a><a href="#/finans" data-fo="fo-evre">Hayat evreleri</a><a href="#/finans" data-fo="fo-haber">Haberler</a><a href="#/finans" data-fo="fo-efsane">Efsaneler</a><a href="#/finans" data-fo="fo-skor">Sağlık skoru</a><a href="#/finans" data-fo="fo-tartisma">Tartışma</a><a href="#/finans" data-fo="fo-kaynak">Kaynaklar</a><a href="#/finans" data-fo="fo-sozluk">Sözlük</a><a href="#/finans" data-fo="fo-test">Test</a>
+<a href="#/finans" data-fo="fo-neden">Neden önemli</a><a href="#/finans" data-fo="fo-butce">Bütçe</a><a href="#/finans" data-fo="fo-ogrenci">Öğrenci bütçesi</a><a href="#/finans" data-fo="fo-acil">Acil durum fonu</a><a href="#/finans" data-fo="fo-enflasyon">Enflasyon ve getiri</a><a href="#/finans" data-fo="fo-borc">Borç</a><a href="#/finans" data-fo="fo-yatirim">Yatırım</a><a href="#/finans" data-fo="fo-zdd">Zaman değeri</a><a href="#/finans" data-fo="fo-risk">Risk ve portföy</a><a href="#/finans" data-fo="fo-tahvil">Tahvil</a><a href="#/finans" data-fo="fo-deger">Finansal tablo ve değerleme</a><a href="#/finans" data-fo="fo-emk">Emeklilik matematiği</a><a href="#/finans" data-fo="fo-guvence">Sigorta ve emeklilik</a><a href="#/finans" data-fo="fo-dolandirici">Dolandırıcılık</a><a href="#/finans" data-fo="fo-hesap">Hesaplayıcılar</a><a href="#/finans" data-fo="fo-vergi">Vergi</a><a href="#/finans" data-fo="fo-davranis">Davranış</a><a href="#/finans" data-fo="fo-evre">Hayat evreleri</a><a href="#/finans" data-fo="fo-haber">Haberler</a><a href="#/finans" data-fo="fo-efsane">Efsaneler</a><a href="#/finans" data-fo="fo-skor">Sağlık skoru</a><a href="#/finans" data-fo="fo-tartisma">Tartışma</a><a href="#/finans" data-fo="fo-kaynak">Kaynaklar</a><a href="#/finans" data-fo="fo-sozluk">Sözlük</a><a href="#/finans" data-fo="fo-test">Test</a>
 </div>
 
 <section id="fo-neden">
@@ -1753,6 +1753,113 @@ drawChips();drawTerms();
 </ul>
 </section>
 
+<section id="fo-zdd">
+<h2>Paranın zaman değeri ve iskonto</h2>
+<p>Finansın temel ilkesi: <b>bugünkü 1 ₺, gelecekteki 1 ₺’den değerlidir</b>. Çünkü bugünkü para değerlendirilebilir (fırsat maliyeti), enflasyon alım gücünü aşındırır ve gelecek belirsizdir. Farklı tarihlerdeki nakit akışlarını karşılaştırmanın tek tutarlı yolu, hepsini aynı tarihe taşımaktır.</p>
+<div class="fo-box"><h3 style="margin-top:0">Temel formüller</h3>
+<ul><li><b>Gelecek değer:</b> GD = BD × (1 + r)<sup>n</sup></li>
+<li><b>Bugünkü değer (iskonto):</b> BD = GD ÷ (1 + r)<sup>n</sup></li>
+<li><b>Eşit taksitli akış (anüite) bugünkü değeri:</b> BD = C × [1 − (1 + r)<sup>−n</sup>] ÷ r</li>
+<li><b>Taksit tutarı (kredi):</b> C = Anapara × r ÷ [1 − (1 + r)<sup>−n</sup>]</li>
+<li><b>Sonsuz akış (perpetüite):</b> BD = C ÷ r; büyüyen akışta BD = C₁ ÷ (r − g)</li>
+<li><b>Fisher denklemi:</b> (1 + nominal) = (1 + reel) × (1 + enflasyon)</li></ul></div>
+<h3>Faiz oranlarını aynı dile çevirmek</h3>
+<p>Aylık faiz yıllığa çarpmakla değil <b>bileşik</b> hesapla çevrilir: efektif yıllık oran = (1 + r<sub>aylık</sub>)<sup>12</sup> − 1. Aylık %3 “sadece %36” değildir; (1,03)<sup>12</sup> − 1 ≈ <b>%42,6</b>’dır. Kredi ve kart tekliflerini karşılaştırırken tek geçerli ölçü, aynı döneme çevrilmiş efektif orandır; “basit yıllık oran”, “aylık oran” ve “yıllık maliyet oranı” birbirinin yerine kullanılamaz.</p>
+<h3>Net bugünkü değer (NBD) ve iç verim oranı (İVO)</h3>
+<p>Bir karar (yatırım, makine alımı, ek eğitim) bir dizi nakit akışı yaratır. <b>NBD</b> = tüm akışların iskonto edilmiş toplamı − başlangıç maliyeti. NBD &gt; 0 ise karar, seçilen iskonto oranının üzerinde değer yaratır. <b>İVO</b> ise NBD’yi sıfır yapan orandır; “bu işlemin gizli faizi” olarak okunur. İVO, kredi veya taksit tekliflerinde <i>ödediğiniz gerçek faizi</i> görmenin en sağlam yoludur.</p>
+<details class="fo-deep"><summary>Gerçek hayat: “faizsiz taksit” gerçekten faizsiz mi?</summary><div>
+<p>Peşin fiyatı 60.000 ₺ olan bir ürün 6 ay boyunca aylık 11.500 ₺’ye (toplam 69.000 ₺) satılıyor. Taksit sayısı ve tutarı sabittir; peşin fiyat ise ödemenin “ilk gün” nakit akışıdır. 60.000 = 11.500 × [1 − (1 + r)<sup>−6</sup>] ÷ r denklemini çözen oran aylık yaklaşık <b>%4,1</b>, yani yıllık bileşik yaklaşık <b>%63</b> eder. Mağaza “faizsiz” dese de, peşin fiyatla taksitli fiyat arasındaki fark gizli faizdir.</p>
+<p><b>Karar kuralı:</b> Alternatif getiriniz (örn. mevduat veya borcunuzun faizi) bu orandan düşükse peşin ödemek (ya da peşin pazarlığı yapmak) kazandırır; yüksekse taksit lehinedir. Enflasyonun yüksek olduğu dönemlerde sabit taksit, değer kaybeden parayla ödendiği için gerçek yükü azaltır; bu nedenle karşılaştırma nominal değil, aynı iskonto oranıyla yapılmalıdır. Aşağıdaki araç bunu hesaplar.</p></div></details>
+<div class="fo-box fo-calc"><h3 style="margin-top:0">Taksit mi, peşin mi? Gizli faiz hesaplayıcı</h3>
+<div class="fo-grid"><div><label for="fz-p">Peşin fiyat (₺)</label><input type="number" id="fz-p" value="60000" min="1" step="500" inputmode="numeric"></div>
+<div><label for="fz-t">Aylık taksit (₺)</label><input type="number" id="fz-t" value="11500" min="1" step="100" inputmode="numeric"></div>
+<div><label for="fz-n">Taksit sayısı (ay)</label><input type="number" id="fz-n" value="6" min="1" max="120" step="1" inputmode="numeric"></div>
+<div><label for="fz-a">Alternatif yıllık getiri (%)</label><input type="number" id="fz-a" value="45" min="0" step="1" inputmode="decimal"></div></div>
+<div class="fo-res" id="fz-res"></div>
+<p class="fo-note" style="margin-top:12px">Taksitlerin ay sonunda ödendiği ve ilk ödemenin bir ay sonra başladığı varsayılır. Vergi, komisyon ve kur etkisi yoktur; eğitim amaçlıdır.</p></div>
+</section>
+
+<section id="fo-risk">
+<h2>Risk, getiri ve portföy kuramı</h2>
+<p>Modern portföy kuramı (Markowitz, 1952) iki soruyu birlikte sorar: <b>beklenen getiri</b> nedir ve <b>risk</b> (getirinin standart sapması, σ) ne kadardır? Önemli sonuç: bir varlığın riski tek başına değil, <b>portföye katkısı</b> açısından değerlendirilmelidir.</p>
+<div class="fo-box"><h3 style="margin-top:0">İki varlıklı portföy</h3>
+<ul><li><b>Beklenen getiri:</b> E(R<sub>p</sub>) = w₁E₁ + w₂E₂</li>
+<li><b>Varyans:</b> σ<sub>p</sub>² = w₁²σ₁² + w₂²σ₂² + 2w₁w₂ρσ₁σ₂</li>
+<li><b>Sharpe oranı:</b> (E(R<sub>p</sub>) − R<sub>f</sub>) ÷ σ<sub>p</sub>; birim risk başına kazanılan “fazla getiri”</li></ul></div>
+<p>İki varlığın σ’sı %20, korelasyonu ρ = 0,3 ve ağırlıkları %50/%50 ise portföy riski √0,026 ≈ <b>%16,1</b>’dir; ortalama getiri aynı kalırken risk düşer. Korelasyon 1 olsaydı kazanç sıfır olurdu (%20). Buna <b>çeşitlendirme</b> denir ve finansın “bedava öğle yemeği” olarak bilinen tek örneğidir. Ancak yalnızca <i>şirkete özgü (sistematik olmayan)</i> riski siler; piyasanın tamamını etkileyen <i>sistematik</i> riski (faiz, kur şoku, kriz) silemez.</p>
+<h3>CAPM ve beta</h3>
+<p>Sharpe, Lintner ve Mossin’in sermaye varlıkları fiyatlama modeline göre beklenen getiri: <b>E(R<sub>i</sub>) = R<sub>f</sub> + β<sub>i</sub> × [E(R<sub>m</sub>) − R<sub>f</sub>]</b>. Beta, bir varlığın piyasa hareketine duyarlılığıdır (β = 1,2: piyasa %10 hareket ederse varlık ortalama %12). Örnek: R<sub>f</sub> = %5, piyasa risk primi %6, β = 1,2 ise gerekli getiri <b>%12,2</b>’dir; hisse bundan daha az getiri vaat ediyorsa “pahalı”dır. Model basittir ve birçok varsayımı tartışmalıdır; yine de “daha fazla getiri için daha fazla sistematik risk alınmalı” fikrinin temel çerçevesidir.</p>
+<details class="fo-deep"><summary>Etkin piyasa hipotezi ve aktif–pasif tartışması</summary><div>
+<p>Fama’nın (1970) etkin piyasa hipotezi, fiyatların mevcut bilgiyi yansıttığını söyler (zayıf, yarı güçlü, güçlü biçimler). Bu doğruysa bilgiyle sürekli piyasayı yenmek zordur. Sharpe’ın “aktif yönetimin aritmetiği” (1991) argümanı basittir: aktif yatırımcıların ortalaması piyasa getirisine eşittir, <b>maliyetler düşüldükten sonra</b> ortalama aktif yatırımcı pasifin gerisinde kalır. Birçok ülkenin fon verisi, uzun dönemde fonların çoğunun ölçütünü yenemediğini gösterir.</p>
+<p><b>Pratik sonuç:</b> Ücret en kesin belirleyicidir (yönetim ücreti yüzde 2 ise önceki bölümdeki örnekte sonucun üçte biri gider). Düşük maliyetli endeks fonu/BYF çekirdek, bilinçli küçük bir “uydu” portföyü ise ihtiyaç duyulursa ek olarak düşünülebilir. Tartışma bitmiş değildir: yeni piyasalarda, küçük şirketlerde ve kriz dönemlerinde fiyatlama hataları daha sık görülebilir; ancak bunu öngörmek de zordur.</p>
+<p><b>Düzenli alım ve yeniden dengeleme:</b> Eşit tutarda düzenli alım (maliyet ortalaması) zamanlama riskini azaltır; ancak araştırmalar, elinizde toplu para varsa onu hemen yatırmanın, ortalamada, parçalayarak yatırmaktan çoğu zaman daha yüksek getiri verdiğini gösterir; fark pişmanlık riskini yönetmektir. <b>Yeniden dengeleme</b> (yılda bir hedef ağırlıklara dönmek) pahalı olanı satıp ucuz olanı almayı otomatik hâle getirir.</p></div></details>
+<div class="fo-box fo-calc"><h3 style="margin-top:0">İki varlıklı portföy hesaplayıcı</h3>
+<div class="fo-grid"><div><label for="fz-e1">Varlık 1 beklenen getiri (%)</label><input type="number" id="fz-e1" value="25" step="1" inputmode="decimal"></div>
+<div><label for="fz-s1">Varlık 1 risk σ (%)</label><input type="number" id="fz-s1" value="35" min="0" step="1" inputmode="decimal"></div>
+<div><label for="fz-e2">Varlık 2 beklenen getiri (%)</label><input type="number" id="fz-e2" value="12" step="1" inputmode="decimal"></div>
+<div><label for="fz-s2">Varlık 2 risk σ (%)</label><input type="number" id="fz-s2" value="8" min="0" step="1" inputmode="decimal"></div>
+<div><label for="fz-r">Korelasyon (−1 ile 1)</label><input type="number" id="fz-r" value="0.2" min="-1" max="1" step="0.1" inputmode="decimal"></div>
+<div><label for="fz-w">Varlık 1 ağırlığı (%)</label><input type="number" id="fz-w" value="40" min="0" max="100" step="5" inputmode="decimal"></div>
+<div><label for="fz-rf">Risksiz getiri (%)</label><input type="number" id="fz-rf" value="10" step="1" inputmode="decimal"></div></div>
+<div class="fo-res" id="fz-pres"></div>
+<p class="fo-note" style="margin-top:12px">Değerler varsayımsaldır, tahmin değildir. “Korelasyonu düşürmek riski düşürür” fikrini görmek için ρ’yu 1 ile −1 arasında değiştirin.</p></div>
+</section>
+
+<section id="fo-tahvil">
+<h2>Tahvil, faiz riski ve getiri eğrisi</h2>
+<p>Tahvil, borçlananın (devlet, şirket) belli tarihlerde kupon ve vade sonunda anapara ödemeyi taahhüt ettiği senettir. Fiyatı, bu nakit akışlarının <b>piyasa faizi (getiri, YTM)</b> ile iskonto edilmiş toplamıdır: P = Σ Kupon ÷ (1 + y)<sup>t</sup> + Nominal ÷ (1 + y)<sup>n</sup>.</p>
+<p><b>Örnek:</b> 3 yıl vadeli, yıllık %10 kuponlu, 1.000 ₺ nominalli tahvil. Piyasa getirisi %12 ise fiyat 100/1,12 + 100/1,12² + 1.100/1,12³ ≈ <b>951,96 ₺</b>; getiri %8’e inerse fiyat ≈ <b>1.051,47 ₺</b>’ye çıkar. <b>Faiz ile fiyat ters yönde hareket eder</b>; bu, tahvil fonlarının faiz artışlarında neden zarar yazabildiğini açıklar.</p>
+<div class="fo-box"><h3 style="margin-top:0">Süre (duration) ve faize duyarlılık</h3>
+<p>Değiştirilmiş süre (D<sub>m</sub>), faiz değişimine fiyat duyarlılığını verir: ΔP ÷ P ≈ −D<sub>m</sub> × Δy. D<sub>m</sub> = 5 ise faiz 1 puan artınca fiyat yaklaşık %5 düşer. Vadesi uzun ve kuponu düşük tahvilin süresi daha yüksek, dolayısıyla faiz riski daha büyüktür.</p></div>
+<h3>Risk kaynakları</h3>
+<ul><li><b>Faiz riski:</b> yukarıda gösterilen fiyat kaybı; vadeye kadar tutan için gerçekleşmez ama fırsat maliyeti oluşur.</li>
+<li><b>Kredi (temerrüt) riski:</b> borçlunun ödeyememesi; getiri farkı (spread) bunun karşılığıdır.</li>
+<li><b>Enflasyon riski:</b> sabit kupon enflasyonda reel değer kaybeder; <b>TÜFE’ye endeksli</b> tahviller kuponu enflasyona bağlayarak bunu azaltır.</li>
+<li><b>Kur riski:</b> döviz cinsi (Eurobond) ihraçta TL değer kaybı belirleyicidir.</li>
+<li><b>Likidite riski:</b> işlem görmeyen şirket tahvillerini satmak güçleşebilir.</li></ul>
+<details class="fo-deep"><summary>Getiri eğrisi ne anlatır?</summary><div>
+<p>Getiri eğrisi, farklı vadeli tahvillerin getirisini gösterir. Normalde uzun vade daha yüksektir (vade primi). <b>Ters eğri</b> (kısa vade &gt; uzun vade), piyasanın ileride faizlerin düşeceğini, yani yavaşlama beklediğini gösterir ve geçmişte birçok ekonomide durgunluğun öncü göstergesi olmuştur. Türkiye’de politika faizi ile devlet tahvili getirileri (DİBS) ve TLREF gibi referans oranlar, mevduat, kredi ve fon getirilerinin temel göstergeleridir; TCMB ve Hazine duyurularından izlenir.</p>
+<p><b>Pratik:</b> Mevduat faizi ile tahvil/bono fonu getirisini kıyaslarken vadeyi, vergiyi ve fonun ortalama portföy vadesini mutlaka kontrol edin. Aynı “getiri”, vadesi farklı iki araçta farklı risk demektir.</p></div></details>
+</section>
+
+<section id="fo-deger">
+<h2>Finansal tablo okuma ve değerleme</h2>
+<p>Bir şirketi anlamak için üç tablo birlikte okunur: <b>bilanço</b> (varlık = borç + özkaynak), <b>gelir tablosu</b> (dönemin kârı) ve <b>nakit akış tablosu</b> (kâr ile nakit arasındaki fark). Kâr muhasebe sonucudur, nakit ise gerçektir; sürekli kâr edip nakit üretemeyen şirket tehlike işareti verir.</p>
+<div class="fo-tbl"><table><thead><tr><th>Oran</th><th>Formül</th><th>Ne söyler?</th></tr></thead><tbody>
+<tr><td>Cari oran</td><td>Dönen varlık ÷ kısa vadeli borç</td><td>Kısa vadeli borcu ödeme gücü (1’in altı dikkat)</td></tr>
+<tr><td>Kaldıraç</td><td>Toplam borç ÷ özkaynak</td><td>Borç yükü; yüksekse faiz artışına duyarlılık</td></tr>
+<tr><td>Faiz karşılama</td><td>FVÖK ÷ finansman gideri</td><td>Faizi kârla ödeyebilme düzeyi</td></tr>
+<tr><td>Net kâr marjı</td><td>Net kâr ÷ satışlar</td><td>Satış başına kâr</td></tr>
+<tr><td>Özkaynak kârlılığı (ROE)</td><td>Net kâr ÷ özkaynak</td><td>Ortaklara yaratılan getiri</td></tr>
+<tr><td>F/K</td><td>Fiyat ÷ hisse başı kâr</td><td>Kârın kaç katına işlem gördüğü</td></tr></tbody></table></div>
+<p><b>DuPont ayrıştırması:</b> ROE = net kâr marjı × varlık devir hızı × özkaynak çarpanı (kaldıraç). Aynı ROE, düşük marjla yüksek kaldıraçtan da gelebilir; ikincisi riskli bir kaynaktır.</p>
+<details class="fo-deep"><summary>Değerleme: iskontolu nakit akışı ve Gordon modeli</summary><div>
+<p>Bir hissenin değeri, beklenen gelecek nakit akışlarının (temettü veya serbest nakit akışı) iskonto edilmiş toplamıdır. Akış sabit oranda g büyüyorsa <b>Gordon modeli</b> (1959): P₀ = D₁ ÷ (r − g). Örnek: D₁ = 5 ₺, r = %12, g = %4 → P₀ = 5 ÷ 0,08 = <b>62,5 ₺</b>. Buradan F/K = temettü dağıtım oranı ÷ (r − g) bağı çıkar: yüksek F/K ya yüksek beklenen büyümeyi ya da düşük gerekli getiriyi yansıtır.</p>
+<p><b>Duyarlılık:</b> r − g farkı küçüldükçe değer sert artar; g’deki küçük hata değerlemeyi büyük ölçüde değiştirir. Bu yüzden profesyoneller tek bir rakam yerine senaryo aralığı verir.</p></div></details>
+<details class="fo-deep"><summary>Türkiye uygulaması: enflasyon muhasebesi ve KAP</summary><div>
+<p>Yüksek enflasyon, nominal tabloları yanıltır: eski maliyetli varlık ve stoklar bugünün parasıyla az gösterilir, kâr şişer. Bu nedenle borsa şirketleri 2023 yıl sonu tablolarından itibaren <b>TMS 29 (yüksek enflasyonlu ekonomilerde finansal raporlama)</b> uygular; tablolar dönem sonu satın alma gücüne göre yeniden ifade edilir. Okurken “net parasal pozisyon kazanç/kaybı” kalemine bakın: kâr bazen operasyondan değil, borçluluğun enflasyonla erimesinden gelir.</p>
+<p><b>Adımlar:</b> KAP’ta şirketin son faaliyet raporunu açın; bağımsız denetim görüşünü okuyun (şartlı ya da olumsuz görüş kırmızı bayraktır); dipnotlarda borç vadelerini, kur riskini ve ilişkili taraf işlemlerini kontrol edin; tek yıla değil 3–5 yıllık eğilime bakın.</p></div></details>
+</section>
+
+<section id="fo-emk">
+<h2>Yaşam boyu planlama ve emeklilik matematiği</h2>
+<p>Modigliani ve Brumberg’in yaşam döngüsü hipotezi (1954) ile Friedman’ın sürekli gelir hipotezi (1957), insanların tüketimi yaşam boyunca <b>düzgünleştirmek</b> istediğini söyler: gençken borçlanır, çalışırken biriktirir, emekli olunca birikimi harcarız. Gençlikteki en büyük “varlık” <b>beşeri sermayedir</b> (eğitim, beceri, gelecekteki kazanç); bu yüzden eğitim ve sağlık yatırımı çoğu kişi için en yüksek getirili yatırım olabilir.</p>
+<div class="fo-box"><h3 style="margin-top:0">Reel hesap: enflasyonu denklemden çıkarın</h3>
+<p>Uzun vadeli planlarda her şeyi <b>bugünün parasıyla (reel)</b> yazmak en sağlıklısıdır. Reel getiri = (1 + nominal) ÷ (1 + enflasyon) − 1. Emeklilik hedefi: bugünün parasıyla aylık ihtiyacı belirleyin, emeklilikte N yıl çekim için gereken sermayeyi <b>anüite formülüyle</b> bulun: Sermaye = Aylık ihtiyaç × [1 − (1 + r<sub>aylık</sub>)<sup>−12N</sup>] ÷ r<sub>aylık</sub>; sonra bu sermayeyi biriktirecek aylık tasarrufu hesaplayın.</p></div>
+<details class="fo-deep"><summary>Gerçek hayat: SGK, BES ve “yetmez” riski</summary><div>
+<ul><li><b>Replasman oranı:</b> emekli geliri ÷ son çalışma geliri. Kamu emeklilik sistemlerinin bu oranı gelişmiş ülkelerde bile birçok kişi için %50–70 aralığında seyreder; kendi oranınızı SGK bilgilerinizden ve prim gün sayınızdan hesaplayın.</li>
+<li><b>Uzun yaşam riski:</b> hedef yaşı gerçekçi koyun; bugünün 65 yaşındaki bireyinin 20–25 yıl daha yaşaması şaşırtıcı değildir.</li>
+<li><b>BES:</b> devlet katkısı, fon seçimi ve kesinti oranları birlikte değerlendirilmeli; sistemden çıkış maliyetini önceden öğrenin.</li>
+<li><b>Sıralama riski:</b> emekliliğin hemen başında yaşanan düşüş, sonradan toparlanan portföyden bile daha zararlı olabilir; emekliliğe yaklaşırken risk azaltmak bu yüzdendir.</li></ul></div></details>
+<div class="fo-box fo-calc"><h3 style="margin-top:0">Emeklilik sermaye hesaplayıcı (reel)</h3>
+<div class="fo-grid"><div><label for="fz-ih">Emeklilikte aylık ihtiyaç (bugünün ₺’si)</label><input type="number" id="fz-ih" value="40000" min="0" step="1000" inputmode="numeric"></div>
+<div><label for="fz-ty">Emekliliğe kalan yıl</label><input type="number" id="fz-ty" value="30" min="1" max="60" step="1" inputmode="numeric"></div>
+<div><label for="fz-ny">Emeklilikte çekim yılı</label><input type="number" id="fz-ny" value="25" min="1" max="60" step="1" inputmode="numeric"></div>
+<div><label for="fz-rg">Yıllık reel getiri (%)</label><input type="number" id="fz-rg" value="3" step="0.5" inputmode="decimal"></div></div>
+<div class="fo-res" id="fz-eres"></div>
+<p class="fo-note" style="margin-top:12px">Tüm tutarlar bugünün paradaki satın alma gücüyle ifade edilir. Vergi, ücret ve diğer gelirler (SGK) dikkate alınmamıştır; eğitim amaçlıdır.</p></div>
+</section>
+
 <section id="fo-hesap">
 <h2>Hesaplayıcılar</h2>
 <p>Dört basit araçla kararlarınızın rakamsal sonucunu görün. Hepsi sadeleştirilmiş modeldir; vergi, masraf ve sigorta gibi kalemler hariçtir.</p>
@@ -1984,6 +2091,22 @@ Q.forEach((x,i)=>{
 
 root.querySelectorAll('.fo-nav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=root.querySelector('#'+a.dataset.fo);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
 })();</script>
+<script id="fz-js">(function(){const root=document.getElementById('p-finans');if(!root)return;const $=id=>root.querySelector('#fz-'+id);
+const n=id=>parseFloat($(id).value)||0;const tl=x=>(x<0?'−':'')+new Intl.NumberFormat('tr-TR',{maximumFractionDigits:0}).format(Math.abs(Math.round(x)))+' ₺';const pc=x=>(x*100).toFixed(1).replace('.',',')+'%';
+const out=(id,a)=>{$(id).innerHTML=a.map(i=>`<div class="${i[2]?'fo-'+i[2]:''}"><b>${i[0]}</b><span>${i[1]}</span></div>`).join('')};
+const af=(r,k)=>r===0?k:(1-Math.pow(1+r,-k))/r;
+function taksit(){const P=n('p'),C=n('t'),k=Math.max(1,Math.round(n('n'))),a=n('a')/100;if(!P||!C){out('res',[['—','Tutarları girin']]);return}
+ if(C*k<=P){out('res',[['%0','Taksitli toplam peşin fiyattan düşük ya da eşit: gizli faiz yok']]);return}
+ let lo=0,hi=1;for(let i=0;i<80;i++){const m=(lo+hi)/2;if(C*af(m,k)>P)lo=m;else hi=m}const m=(lo+hi)/2,ey=Math.pow(1+m,12)-1;
+ const am=Math.pow(1+a,1/12)-1,pv=C*af(am,k),d=pv-P;
+ out('res',[[pc(m),'Aylık gizli faiz'],[pc(ey),'Yıllık efektif faiz','warm'],[tl(C*k-P),'Toplam ek ödeme'],[tl(pv),'Taksitlerin bugünkü değeri (alternatif getiriyle)'],[d>0?'Peşin avantajlı':'Taksit avantajlı',(d>0?tl(d)+' kazanç peşinde':tl(-d)+' kazanç taksitte'),'warm']])}
+function port(){const e1=n('e1')/100,e2=n('e2')/100,s1=n('s1')/100,s2=n('s2')/100,r=Math.max(-1,Math.min(1,n('r'))),w=Math.max(0,Math.min(100,n('w')))/100,rf=n('rf')/100;
+ const ep=w*e1+(1-w)*e2,v=w*w*s1*s1+(1-w)*(1-w)*s2*s2+2*w*(1-w)*r*s1*s2,sp=Math.sqrt(Math.max(0,v)),avg=w*s1+(1-w)*s2;
+ out('pres',[[pc(ep),'Beklenen getiri'],[pc(sp),'Portföy riski (σ)','warm'],[pc(avg-sp),'Çeşitlendirme kazancı (σ ortalamasına göre)'],[sp?((ep-rf)/sp).toFixed(2).replace('.',','):'—','Sharpe oranı']])}
+function emk(){const need=n('ih'),T=Math.max(1,Math.round(n('ty'))),N=Math.max(1,Math.round(n('ny'))),r=n('rg')/100,rm=Math.pow(1+r,1/12)-1;
+ const cap=need*af(rm,12*N),fv=rm===0?12*T:(Math.pow(1+rm,12*T)-1)/rm,s=cap/fv;
+ out('eres',[[tl(cap),'Emekliliğin başında gereken sermaye'],[tl(s),'Gereken aylık tasarruf (bugünün parasıyla)','warm'],[tl(s*12*T),'Toplam katkı (reel)']])}
+[['p','t','n','a'],['e1','s1','e2','s2','r','w','rf'],['ih','ty','ny','rg']].forEach((ids,i)=>ids.forEach(id=>$(id)&&$(id).addEventListener('input',[taksit,port,emk][i])));taksit();port();emk()})();</script>
 <script id="og-js">(function(){
 const root=document.getElementById('p-finans'),sec=root&&root.querySelector('#fo-ogrenci');if(!sec)return;
 const $=s=>sec.querySelector(s),KEY='eko-og-v1';
