@@ -4766,14 +4766,14 @@ function showLogin(err){
   const go=h('button',{class:'btn solid',type:'submit',text:'Giriş yap'});
   let pub=null;
   const form=h('form',{class:'lcard',novalidate:true},
-    h('div',null,h('h1',{text:'Kulüp paneli'}),h('p',{class:'lead',style:'margin-top:8px',text:'Kendi yayınının, Diyalog Gazetesi’nin, etkinliklerin ve derginin yazılarını buradan ekle, düzenle ve kaldır; hepsi genel editör onayından sonra yayınlanır. Yayınını seç, sana verilen şifreyi yaz.'})),
+    h('div',null,h('h1',{text:'Kulüp paneli'}),h('p',{class:'lead',style:'margin-top:8px',text:'Kendi yayınının, Diyalog Gazetesi’nin, etkinliklerin ve derginin yazılarını buradan ekle, düzenle ve kaldır; hepsi genel editör onayından sonra yayınlanır. Yayınını seç, sana verilen şifreyi yaz. (Sürüm: onay akışı v3)'})),
     errBox,
     h('div',{class:'fld',style:'margin:0'},h('label',{for:'kyy',text:'Yayın'}),sel),
     h('div',{class:'fld',style:'margin:0'},h('label',{for:'kpw',text:'Kulüp şifresi'}),h('div',{class:'row',style:'flex-wrap:nowrap'},pw,show)),
     go,
     h('details',{class:'how'},h('summary',{text:'Genel editör girişi'}),
       h('div',{class:'stack',style:'margin-top:12px'},
-        h('p',{class:'mut',text:'GitHub erişim anahtarınla girersin; tüm yayınların yazılarını ekleyip düzenleyebilirsin. Yayın oluşturma, kaldırma, sıralama ve şifreler Yayın masasındadır.'}),
+        h('p',{class:'mut',text:'GitHub erişim anahtarınla girersin; her şey yine genel editör onayına gider. Yayın oluşturma, kaldırma, sıralama ve şifreler Yayın masasındadır.'}),
         h('button',{class:'btn',type:'button',text:'Erişim anahtarıyla gir',onclick:()=>{showLoginEditor();const f=$('#login form');if(f)f.append(h('button',{class:'btn ghost',type:'button',text:'← Kulüp girişine dön',onclick:()=>showLogin()}))}}))));
   const fail=m=>{errBox.hidden=false;errBox.textContent=m;go.disabled=false;go.textContent='Giriş yap'};
   form.addEventListener('submit',async e=>{
@@ -6280,13 +6280,14 @@ const bkWhen=t=>t?new Date(t).toLocaleString('tr-TR',{dateStyle:'short',timeStyl
 /* ===== KULÜP PANELİ: yazılar onaya gönderilir ===== */
 const KQ={items:[],pub:null,loaded:false,err:null,draw:null};
 const KQ_EXTRA=['n','e','dg'],KQ_NAME={n:'Diyalog Gazetesi',e:'Etkinlikler',dg:'Dergi'};
-const kqSecs=()=>[KM.club,...KQ_EXTRA];
+const kqMe=()=>KM.club||'editor';
+const kqSecs=()=>KM.club?[KM.club,...KQ_EXTRA]:[...KQ_EXTRA,...YY_KEYS];
 const kqL=(sec,w)=>COLS[sec].get(w);
 const kqName=sec=>KQ_NAME[sec]||yyName(S.work.yy[+sec.slice(2)-1],+sec.slice(2));
-const kqMine=x=>x&&(x.club===KM.club||x.yy===KM.club);
-KM.views=function(){return new Set(this.club?['home',this.club,'kanket',...KQ_EXTRA]:['home','kanket',...YY_KEYS])};
+const kqMine=x=>x&&(x.club===kqMe()||(KM.club&&x.yy===KM.club));
+KM.views=function(){return new Set(this.club?['home',this.club,'kanket',...KQ_EXTRA]:['home','kanket',...KQ_EXTRA,...YY_KEYS])};
 KM.buildNav=function(){
-  if(!this.club){NAV=[{g:'Yayınlar',items:[['home','Genel bakış'],['kanket','Kulüp anketleri'],...YY_KEYS.map(k=>[k,'Yayın '+k.slice(2)])]}];return}
+  if(!this.club){NAV=[{g:'Gazete, Etkinlik, Dergi',items:[['n','Diyalog Gazetesi'],['e','Etkinlikler'],['dg','Dergi']]},{g:'Yayınlar',items:[['home','Genel bakış'],['kanket','Kulüp anketleri'],...YY_KEYS.map(k=>[k,'Yayın '+k.slice(2)])]}];return}
   NAV=[{g:'Yayınım',items:[[this.club,'Yazılar'],['kanket','Anket']]},{g:'Gazete, Etkinlik, Dergi',items:[['n','Diyalog Gazetesi'],['e','Etkinlikler'],['dg','Dergi']]}];
 };
 async function kqRefresh(first){
@@ -6343,11 +6344,11 @@ async function kqStart(){
   const now=Date.now(),items=[],ids=new Set();
   for(const sec of kqSecs()){
     const nb=x=>x&&!isBlank(sec,x),base=kqL(sec,S.remote.data).filter(nb),cur=kqL(sec,S.work).filter(nb),d=diffList(base,cur);
-    const mk=(op,x,i)=>({id:sec+'_'+x.id,yy:sec,club:KM.club,op,pid:String(x.id),i,t:String(x.title||''),post:op==='del'?undefined:clone(x),st:'bekliyor',at:now,by:kqName(sec)});
+    const mk=(op,x,i)=>({id:sec+'_'+x.id,yy:sec,club:kqMe(),op,pid:String(x.id),i,t:String(x.title||''),post:op==='del'?undefined:clone(x),st:'bekliyor',at:now,by:kqName(sec)});
     items.push(...d.add.map(x=>mk('add',x,cur.indexOf(x))),...d.edit.map(x=>mk('edit',x,cur.indexOf(x))),...d.del.map(x=>mk('del',x,base.indexOf(x))));
     [...d.add,...d.edit].forEach(x=>ids.add(sec+'_'+x.id));
   }
-  const probs=validate().filter(p=>p.id==null||ids.has(p.view+'_'+p.id));
+  const probs=validate().filter(p=>p.id!=null&&ids.has(p.view+'_'+p.id));
   if(probs.length){
     const v=await modal({title:'Göndermeden önce düzelt',
       body:h('div',{class:'stack'},h('p',{class:'mut',text:'Şu kayıtlar eksik ya da hatalı:'}),
@@ -6394,7 +6395,7 @@ async function kqSend(items){
   finally{S.busy=false;render()}
 }
 {const _e=enterApp;enterApp=function(){
-  _e();if(!KM.club)return;kqInit();
+  _e();kqInit();
 }}
 function kqInit(){
   if(KQ.pub||!S.remote)return;
@@ -6407,18 +6408,21 @@ function kqInit(){
   kqRefresh(true);
 }
 {const _r=refreshChrome;refreshChrome=function(){
-  _r();if(!KM.club||!S.work)return;
+  _r();if(!S.work||!KQ.pub)return;
   const n=summarize().length,w=KQ.items.filter(x=>x.st==='bekliyor').length;
   const s=$('#railState');if(s){s.replaceChildren(h('span',null,n?h('b',{text:n+' gönderilmemiş değişiklik'}):w?('Onay bekleyen: '+w+' yazı'):'Her şey gönderildi'))}
   document.title=(n?'• ':'')+'Kulüp paneli · Eko-Log';
 }}
 const KQ_DROP=['Haftalık yayın','Sayıyı bitir','Sitedeki hazır etkinlikleri ekle','Yayın ayarları'];
 [...YY_KEYS,...KQ_EXTRA].forEach(k=>{const f=VIEWS[k];VIEWS[k]=()=>{const v=f();
-  if(KM.club&&(k===KM.club||KQ_EXTRA.includes(k))){
+  if(KQ.pub){
     [...v.querySelectorAll('.panel')].forEach(p=>{const t=p.querySelector('h3');if(t&&KQ_DROP.includes(t.textContent))p.remove()});
     const hd=v.firstElementChild,p=kqPanel(k);if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p)}
   return v}});
-if(S.work&&S.remote&&!$('#app').hidden&&KM.club)kqInit();
+if(S.work&&S.remote&&!$('#app').hidden)kqInit();
+
+/* bu panelden doğrudan yayın yok: her şey onaya gider */
+doPublish=async function(){toast('Bu panelden doğrudan yayınlanamaz. “Onaya gönder” de; genel editör Yayın masasından onaylar.')};
 
 </script>
 </body>

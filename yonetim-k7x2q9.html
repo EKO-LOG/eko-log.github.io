@@ -6242,7 +6242,7 @@ function aqCard(it,onDone){
     if(v!=='ok')return;run(()=>aqReject(it,ta.value.trim()),'Kulübe geri gönderildi.')}});
   const card=h('div',{class:'panel stack'},
     h('div',{class:'row',style:'justify-content:space-between;gap:8px'},
-      h('div',null,h('h3',{style:'margin:0',text:title}),h('p',{class:'mut',text:aqName(sec)+(it.club&&it.club!==sec?' · '+aqName(it.club):'')+' · '+bkLabel[it.op]+' · '+bkWhen(it.at)})),
+      h('div',null,h('h3',{style:'margin:0',text:title}),h('p',{class:'mut',text:aqName(sec)+(it.club&&it.club!==sec?' · '+(it.club==='editor'?'Editör':aqName(it.club)):'')+' · '+bkLabel[it.op]+' · '+bkWhen(it.at)})),
       h('div',{class:'row'},red?h('span',{class:'chip warn',text:'Geri gönderildi'}):null,(isYy&&!p.on)?h('span',{class:'chip',text:'Yayın sitede kapalı'}):null)),
     red?h('p',{class:'hint',text:'Not: '+(it.rnote||'yazılmadı')+' · Kulübün düzeltmesini bekliyor.'}):null,
     it.op==='del'?h('p',{class:'mut',text:'Kulüp bu yazının sitede kaldırılmasını istiyor.'}):h('div',{class:'stack',style:'gap:8px'},
