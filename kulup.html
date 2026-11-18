@@ -4753,7 +4753,7 @@ async function clubMerge(sha){
   (S.work.yy||[]).forEach((p,i)=>(p.yazilar||[]).forEach(x=>{t['ek'+p.id+'_'+x.id]=yyName(p,i+1)+' · '+(x.title||'(başlıksız yazı)')}));
   return t}}
 SEC.klup=w=>w.yk||{};
-{const _v=validate;validate=function(){const p=_v();return KM.club?p.filter(x=>x.view===KM.club):p}}
+{const _v=validate;validate=function(){const p=_v();return KM.club?p.filter(x=>x.view===KM.club||['n','e','dg'].includes(x.view)):p}}
 
 /* ---------- giriş ---------- */
 function showLogin(err){
@@ -4766,7 +4766,7 @@ function showLogin(err){
   const go=h('button',{class:'btn solid',type:'submit',text:'Giriş yap'});
   let pub=null;
   const form=h('form',{class:'lcard',novalidate:true},
-    h('div',null,h('h1',{text:'Kulüp paneli'}),h('p',{class:'lead',style:'margin-top:8px',text:'Kendi yayınının yazılarını buradan ekle, düzenle ve kaldır. Yayınını seç, sana verilen şifreyi yaz.'})),
+    h('div',null,h('h1',{text:'Kulüp paneli'}),h('p',{class:'lead',style:'margin-top:8px',text:'Kendi yayınının, Diyalog Gazetesi’nin, etkinliklerin ve derginin yazılarını buradan ekle, düzenle ve kaldır; hepsi genel editör onayından sonra yayınlanır. Yayınını seç, sana verilen şifreyi yaz.'})),
     errBox,
     h('div',{class:'fld',style:'margin:0'},h('label',{for:'kyy',text:'Yayın'}),sel),
     h('div',{class:'fld',style:'margin:0'},h('label',{for:'kpw',text:'Kulüp şifresi'}),h('div',{class:'row',style:'flex-wrap:nowrap'},pw,show)),
@@ -6226,6 +6226,200 @@ box.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=menu.querySelecto
 new MutationObserver(apply).observe(menu,{childList:true});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')&&!(document.activeElement&&document.activeElement.isContentEditable)){e.preventDefault();document.getElementById('rail')&&document.getElementById('rail').classList.add('open');box.focus()}});
 })();
+</script>
+<script id="onay-akisi">
+/* ===== ONAY AKIŞI (ortak) =====
+   Kulüp editörleri yazıyı doğrudan yayınlamaz: değişiklik "onay kuyruğuna" (onay-q4m7x2.json) yazılır.
+   Genel editör Yayın masasından onaylayınca yazı content.json'a işlenir ve sitede görünür. */
+const BK_PATH='onay-q4m7x2.json';
+const bkEmpty=()=>({v:1,items:{}});
+const bkLabel={add:'Yeni yazı',edit:'Düzenleme',del:'Silme'};
+async function bkRead(){
+  const q='contents/'+BK_PATH+'?ref='+encodeURIComponent(S.cfg.branch);
+  const r=await gh(q);
+  if(r.status===404)return{data:bkEmpty(),sha:null};
+  if(!r.ok)throw new Error(httpErr(r.status,await ghMsg(r)));
+  const j=await r.json();let d;
+  try{
+    let txt=j.content?dec(j.content):'';
+    if(!txt){const rr=await gh(q,{raw:true});txt=rr.ok?await rr.text():''}
+    d=JSON.parse(txt||'null');
+  }catch(e){d=null}
+  if(!d||typeof d!=='object'||!d.items||typeof d.items!=='object'||Array.isArray(d.items))d=bkEmpty();
+  return{data:d,sha:j.sha};
+}
+/* fn(data) kuyruğu değiştirir; false dönerse yazılmaz. Çakışmada yeniden dener. */
+async function bkMutate(fn){
+  for(let t=0;t<4;t++){
+    const{data,sha}=await bkRead();
+    if(fn(data)===false)return data;
+    const body={message:'Onay kuyruğu güncellendi',content:enc(JSON.stringify(data,null,1)),branch:S.cfg.branch};
+    if(sha)body.sha=sha;
+    const r=await gh('contents/'+BK_PATH,{method:'PUT',body});
+    if(r.ok)return data;
+    if(r.status!==409&&r.status!==422)throw new Error(httpErr(r.status,await ghMsg(r)));
+  }
+  throw new Error('Onay kuyruğu başka bir işlemle çakıştı. Birkaç saniye sonra tekrar dene.');
+}
+/* bir kuyruk kaydını yazı listesine işler (list yerinde değişir) */
+function bkApply(list,it){
+  const i=list.findIndex(x=>String(x.id)===String(it.pid));
+  if(it.op==='del'){if(i>-1)list.splice(i,1);return}
+  const p=clone(it.post);
+  if(i>-1)list[i]=p;else list.splice(Math.min(Math.max(+it.i||0,0),list.length),0,p);
+}
+function bkBusy(title){
+  const msg=h('p',{text:'Hazırlanıyor…'}),bar=h('i'),foot=h('div',{class:'dfoot',hidden:true});
+  const d=h('dialog',null,h('div',{class:'dbody'},h('h2',{text:title}),msg,h('div',{class:'prog'},bar)),foot);
+  d.addEventListener('cancel',e=>e.preventDefault());document.body.append(d);d.showModal();
+  return{set:(t,p)=>{msg.textContent=t;if(p!=null)bar.style.width=Math.round(p*100)+'%'},
+    done:(t,x)=>{d.querySelector('h2').textContent=t;msg.textContent=x;bar.style.width='100%';foot.hidden=false;
+      foot.replaceChildren(h('button',{class:'btn solid',type:'button',text:'Tamam',onclick:()=>{d.close();d.remove()}}))}};
+}
+const bkWhen=t=>t?new Date(t).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'}):'';
+/* ===== KULÜP PANELİ: yazılar onaya gönderilir ===== */
+const KQ={items:[],pub:null,loaded:false,err:null,draw:null};
+const KQ_EXTRA=['n','e','dg'],KQ_NAME={n:'Diyalog Gazetesi',e:'Etkinlikler',dg:'Dergi'};
+const kqSecs=()=>[KM.club,...KQ_EXTRA];
+const kqL=(sec,w)=>COLS[sec].get(w);
+const kqName=sec=>KQ_NAME[sec]||yyName(S.work.yy[+sec.slice(2)-1],+sec.slice(2));
+const kqMine=x=>x&&(x.club===KM.club||x.yy===KM.club);
+KM.views=function(){return new Set(this.club?['home',this.club,'kanket',...KQ_EXTRA]:['home','kanket',...YY_KEYS])};
+KM.buildNav=function(){
+  if(!this.club){NAV=[{g:'Yayınlar',items:[['home','Genel bakış'],['kanket','Kulüp anketleri'],...YY_KEYS.map(k=>[k,'Yayın '+k.slice(2)])]}];return}
+  NAV=[{g:'Yayınım',items:[[this.club,'Yazılar'],['kanket','Anket']]},{g:'Gazete, Etkinlik, Dergi',items:[['n','Diyalog Gazetesi'],['e','Etkinlikler'],['dg','Dergi']]}];
+};
+async function kqRefresh(first){
+  try{const{data}=await bkRead();
+    KQ.items=Object.values(data.items).filter(kqMine).sort((a,b)=>(a.at||0)-(b.at||0));KQ.err=null}
+  catch(e){KQ.err=e&&e.message||'Okunamadı.';KQ.items=[]}
+  if(first&&!KQ.err){
+    /* gönderilmiş ama henüz yayınlanmamış yazılar, kulübün listesinde de görünsün */
+    KQ.items.forEach(it=>{
+      if(it.op==='del'&&it.st==='red')return;
+      if(it.op!=='del'&&!it.post)return;
+      if(!COLS[it.yy])return;
+      bkApply(kqL(it.yy,S.work),it);bkApply(kqL(it.yy,S.remote.data),it);
+    });
+  }
+  KQ.loaded=true;
+  if(first)render();else if(KQ.draw)KQ.draw();
+}
+async function kqWithdraw(it){
+  await bkMutate(d=>{if(!d.items[it.id])return false;delete d.items[it.id]});
+  const pl=KQ.pub[it.yy]||[],pi=pl.findIndex(x=>String(x.id)===it.pid),pp=pi>-1?pl[pi]:null;
+  for(const list of[kqL(it.yy,S.work),kqL(it.yy,S.remote.data)]){
+    const i=list.findIndex(x=>String(x.id)===it.pid);
+    if(pp){const c=clone(pp);if(i>-1)list[i]=c;else list.splice(Math.min(pi,list.length),0,c)}
+    else if(i>-1)list.splice(i,1);
+  }
+}
+function kqPanel(sec){
+  const body=h('div',{class:'stack',style:'gap:10px'}),box=h('div',{class:'panel'},h('h3',{text:'Onay durumu'}),body);
+  const row=it=>{
+    const red=it.st==='red';
+    return h('div',{class:'xp-row'},
+      h('div',{class:'xp-txt'},h('b',{text:(it.t||'').trim()||'(başlıksız yazı)'}),
+        h('small',{text:bkLabel[it.op]+' · '+bkWhen(it.at)}),
+        red?h('small',{style:'color:var(--bad)',text:'Geri gönderildi: '+(it.rnote||'Not yazılmadı.')+' Düzeltip yeniden onaya gönderebilir ya da vazgeçebilirsin.'}):null),
+      h('div',{class:'row'},h('span',{class:'chip '+(red?'warn':''),text:red?'Geri gönderildi':'Onay bekliyor'}),
+        h('button',{class:'btn sm ghost',type:'button',text:red?'Vazgeç':'Geri çek',onclick:async()=>{
+          if(!(await ask(red?'Vazgeç':'Geri çek','Bu yazıdaki gönderilmiş değişiklik kaldırılır; yazı yayındaki haline döner (yeni yazıysa silinir).',red?'Vazgeç':'Geri çek',true)))return;
+          try{await kqWithdraw(it);await kqRefresh(false);render();toast('Geri çekildi.')}catch(e){toast(e&&e.message||'Geri çekilemedi.')}}})));
+  };
+  const draw=()=>{
+    if(!KQ.loaded){body.replaceChildren(h('div',{class:'skel'}));return}
+    body.replaceChildren(
+      h('p',{class:'hint',text:'Gönderdiğin yazılar hemen yayınlanmaz; genel editör onaylayınca sitede görünür. Onaylananlar bu listeden kaybolur.'}),
+      KQ.err?h('p',{class:'hint',style:'color:var(--bad)',text:'Durum okunamadı: '+KQ.err}):null,
+      ...KQ.items.filter(x=>x.yy===sec).map(row),
+      (!KQ.items.some(x=>x.yy===sec)&&!KQ.err)?h('p',{class:'clean',text:'Onay bekleyen yazı yok.'}):null,
+      h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Durumu yenile',onclick:async()=>{await kqRefresh(false);toast('Güncellendi.')}})));
+  };
+  KQ.draw=draw;draw();return box;
+}
+async function kqStart(){
+  if(S.busy)return;
+  const now=Date.now(),items=[],ids=new Set();
+  for(const sec of kqSecs()){
+    const nb=x=>x&&!isBlank(sec,x),base=kqL(sec,S.remote.data).filter(nb),cur=kqL(sec,S.work).filter(nb),d=diffList(base,cur);
+    const mk=(op,x,i)=>({id:sec+'_'+x.id,yy:sec,club:KM.club,op,pid:String(x.id),i,t:String(x.title||''),post:op==='del'?undefined:clone(x),st:'bekliyor',at:now,by:kqName(sec)});
+    items.push(...d.add.map(x=>mk('add',x,cur.indexOf(x))),...d.edit.map(x=>mk('edit',x,cur.indexOf(x))),...d.del.map(x=>mk('del',x,base.indexOf(x))));
+    [...d.add,...d.edit].forEach(x=>ids.add(sec+'_'+x.id));
+  }
+  const probs=validate().filter(p=>p.id==null||ids.has(p.view+'_'+p.id));
+  if(probs.length){
+    const v=await modal({title:'Göndermeden önce düzelt',
+      body:h('div',{class:'stack'},h('p',{class:'mut',text:'Şu kayıtlar eksik ya da hatalı:'}),
+        h('ul',{class:'probs'},probs.map((p,i)=>h('li',null,h('span',{text:p.text}),h('button',{class:'btn sm',type:'button',onclick:()=>$('dialog[open]').close('fix:'+i),text:'Düzelt'}))))),
+      actions:[{label:'Kapat',value:'x',cls:'ghost'}]});
+    if(v.startsWith('fix:')){const p=probs[+v.slice(4)];if(p.id)S.sel[p.view]=p.id,S.mode[p.view]='detail';go(p.view)}
+    return;
+  }
+  if(!items.length){toast('Onaya gönderilecek değişiklik yok.');return}
+  const v=await modal({title:'Bunlar onaya gönderilecek',
+    body:h('div',{class:'stack'},
+      h('ul',{class:'changes'},items.map(it=>h('li',{text:kqName(it.yy)+' · '+bkLabel[it.op]+': “'+(it.t.trim()||'başlıksız')+'”'}))),
+      h('p',{class:'hint',text:'Yazılar hemen yayınlanmaz. Genel editör onaylayınca sitede görünür; düzeltme isterse notu ilgili sayfanın üstünde görünür.'})),
+    actions:[{label:'Vazgeç',value:'no',cls:'ghost'},{label:'Onaya gönder',value:'go',cls:'pub'}]});
+  if(v!=='go')return;
+  await kqSend(items);
+}
+async function kqSend(items){
+  S.busy=true;$('#pubBtn').disabled=true;
+  const ui=bkBusy('Onaya gönderiliyor');
+  try{
+    const refs=[...new Set(items.flatMap(it=>it.post?[it.post.img,...(Array.isArray(it.post.imgs)?it.post.imgs:[])]:[]).filter(Boolean))]
+      .filter(p=>isSafePath(p)&&S.pending.has(p)&&!S.uploaded.has(p));
+    for(let i=0;i<refs.length;i++){
+      ui.set(`Fotoğraflar yükleniyor (${i+1}/${refs.length})`,i/(refs.length+1));
+      const r=await gh('contents/'+refs[i],{method:'PUT',body:{message:'Kulüp paneli: fotoğraf yüklendi',content:S.pending.get(refs[i]).b64,branch:S.cfg.branch}});
+      if(!r.ok){
+        let var_=false;
+        if(r.status===422){const c=await gh('contents/'+refs[i]+'?ref='+encodeURIComponent(S.cfg.branch));var_=c.ok}
+        if(!var_)throw new Error('“'+refs[i]+'” fotoğrafı yüklenemedi. '+httpErr(r.status,await ghMsg(r)));
+      }
+      S.uploaded.add(refs[i]);
+    }
+    ui.set('Onay kuyruğuna ekleniyor…',refs.length/(refs.length+1));
+    await bkMutate(data=>{items.forEach(it=>{
+      const prev=data.items[it.id];
+      /* henüz yayınlanmamış yeni yazı: silinirse kayıt tamamen kalkar, düzenlenirse yeni yazı olarak kalır */
+      if(prev&&prev.op==='add'){if(it.op==='del'){delete data.items[it.id];return}it.op='add';it.i=prev.i}
+      data.items[it.id]=it})});
+    for(const sec of kqSecs()){const L=kqL(sec,S.remote.data);L.splice(0,L.length,...clone(kqL(sec,S.work)))}
+    await kqRefresh(false);
+    ui.done('Onaya gönderildi',items.length+' değişiklik genel editörün onayına gönderildi. Onaylanınca sitede yayınlanır; durumu bu sayfanın üstünden izleyebilirsin.');
+  }catch(e){ui.done('Gönderilemedi',e&&e.message?e.message:'Bağlantı hatası. İnternetini kontrol edip tekrar dene.')}
+  finally{S.busy=false;render()}
+}
+{const _e=enterApp;enterApp=function(){
+  _e();if(!KM.club)return;kqInit();
+}}
+function kqInit(){
+  if(KQ.pub||!S.remote)return;
+  KQ.pub={};kqSecs().forEach(s=>KQ.pub[s]=clone(kqL(s,S.remote.data)));
+  KM.buildNav();drawNav();
+  const b=$('#pubBtn'),nb=b.cloneNode(true);b.replaceWith(nb);nb.addEventListener('click',kqStart);
+  const L=nb.querySelectorAll('.publbl');if(L[0])L[0].textContent='Gözden geçir ve onaya gönder';const sh=nb.querySelector('#pubShort');if(sh)sh.textContent='Onaya gönder';
+  startPublish=kqStart;
+  kqSecs().forEach(s=>{COLS[s].note='Ekle, düzenle ya da kaldır; “Onaya gönder” dediğinde genel editöre iletilir ve onaylanınca sitede yayınlanır.'});
+  kqRefresh(true);
+}
+{const _r=refreshChrome;refreshChrome=function(){
+  _r();if(!KM.club||!S.work)return;
+  const n=summarize().length,w=KQ.items.filter(x=>x.st==='bekliyor').length;
+  const s=$('#railState');if(s){s.replaceChildren(h('span',null,n?h('b',{text:n+' gönderilmemiş değişiklik'}):w?('Onay bekleyen: '+w+' yazı'):'Her şey gönderildi'))}
+  document.title=(n?'• ':'')+'Kulüp paneli · Eko-Log';
+}}
+const KQ_DROP=['Haftalık yayın','Sayıyı bitir','Sitedeki hazır etkinlikleri ekle','Yayın ayarları'];
+[...YY_KEYS,...KQ_EXTRA].forEach(k=>{const f=VIEWS[k];VIEWS[k]=()=>{const v=f();
+  if(KM.club&&(k===KM.club||KQ_EXTRA.includes(k))){
+    [...v.querySelectorAll('.panel')].forEach(p=>{const t=p.querySelector('h3');if(t&&KQ_DROP.includes(t.textContent))p.remove()});
+    const hd=v.firstElementChild,p=kqPanel(k);if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p)}
+  return v}});
+if(S.work&&S.remote&&!$('#app').hidden&&KM.club)kqInit();
+
 </script>
 </body>
 </html>

@@ -4810,7 +4810,7 @@ function kCard(ad,email,pw,ok){
 VIEWS.klup=()=>{
   const w=S.work;w.yk=w.yk||{};
   const root=h('div',{class:'stack'});
-  root.append(pageHead('Yayın yönetimi','Yeni yayın oluştur, kaldır, açıp kapat, hangisinin üstte hangisinin altta olacağını belirle ve her kulübe giriş şifresi ver. Kulüpler “kulup.html” üzerinden yalnızca yazı ekler, düzenler ve kaldırır; geri kalan her şey burada. Kaydettikten sonra Yayınla’ya basmayı unutma.'));
+  root.append(pageHead('Yayın yönetimi','Yeni yayın oluştur, kaldır, açıp kapat, hangisinin üstte hangisinin altta olacağını belirle ve her kulübe giriş şifresi ver. Kulüpler “kulup.html” üzerinden kendi yayınlarına, Diyalog Gazetesi’ne, Etkinlikler’e ve Dergi’ye yazı ekler, düzenler ve kaldırır; bunlar yayınlanmaz, “Onay bekleyenler” sayfasında senin onayına düşer. Geri kalan her şey burada. Kaydettikten sonra Yayınla’ya basmayı unutma.'));
   const tk=h('input',{type:'password',autocomplete:'off',spellcheck:'false',placeholder:'Boş bırakırsan şu an kullandığın anahtar kullanılır'});
   root.append(h('div',{class:'panel stack'},h('h3',{text:'Kulüplerin kullanacağı GitHub anahtarı'}),
     h('p',{class:'mut',text:'Kulüp şifresi bu anahtarı açar; kulüp yayınını bu anahtarla kaydeder. Güvenlik için yalnızca bu depoya “Contents: Read and write” izni veren ayrı bir anahtar oluşturup yapıştır.'}),
@@ -6128,6 +6128,159 @@ box.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=menu.querySelecto
 new MutationObserver(apply).observe(menu,{childList:true});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')&&!(document.activeElement&&document.activeElement.isContentEditable)){e.preventDefault();document.getElementById('rail')&&document.getElementById('rail').classList.add('open');box.focus()}});
 })();
+</script>
+<script id="onay-akisi">
+/* ===== ONAY AKIŞI (ortak) =====
+   Kulüp editörleri yazıyı doğrudan yayınlamaz: değişiklik "onay kuyruğuna" (onay-q4m7x2.json) yazılır.
+   Genel editör Yayın masasından onaylayınca yazı content.json'a işlenir ve sitede görünür. */
+const BK_PATH='onay-q4m7x2.json';
+const bkEmpty=()=>({v:1,items:{}});
+const bkLabel={add:'Yeni yazı',edit:'Düzenleme',del:'Silme'};
+async function bkRead(){
+  const q='contents/'+BK_PATH+'?ref='+encodeURIComponent(S.cfg.branch);
+  const r=await gh(q);
+  if(r.status===404)return{data:bkEmpty(),sha:null};
+  if(!r.ok)throw new Error(httpErr(r.status,await ghMsg(r)));
+  const j=await r.json();let d;
+  try{
+    let txt=j.content?dec(j.content):'';
+    if(!txt){const rr=await gh(q,{raw:true});txt=rr.ok?await rr.text():''}
+    d=JSON.parse(txt||'null');
+  }catch(e){d=null}
+  if(!d||typeof d!=='object'||!d.items||typeof d.items!=='object'||Array.isArray(d.items))d=bkEmpty();
+  return{data:d,sha:j.sha};
+}
+/* fn(data) kuyruğu değiştirir; false dönerse yazılmaz. Çakışmada yeniden dener. */
+async function bkMutate(fn){
+  for(let t=0;t<4;t++){
+    const{data,sha}=await bkRead();
+    if(fn(data)===false)return data;
+    const body={message:'Onay kuyruğu güncellendi',content:enc(JSON.stringify(data,null,1)),branch:S.cfg.branch};
+    if(sha)body.sha=sha;
+    const r=await gh('contents/'+BK_PATH,{method:'PUT',body});
+    if(r.ok)return data;
+    if(r.status!==409&&r.status!==422)throw new Error(httpErr(r.status,await ghMsg(r)));
+  }
+  throw new Error('Onay kuyruğu başka bir işlemle çakıştı. Birkaç saniye sonra tekrar dene.');
+}
+/* bir kuyruk kaydını yazı listesine işler (list yerinde değişir) */
+function bkApply(list,it){
+  const i=list.findIndex(x=>String(x.id)===String(it.pid));
+  if(it.op==='del'){if(i>-1)list.splice(i,1);return}
+  const p=clone(it.post);
+  if(i>-1)list[i]=p;else list.splice(Math.min(Math.max(+it.i||0,0),list.length),0,p);
+}
+function bkBusy(title){
+  const msg=h('p',{text:'Hazırlanıyor…'}),bar=h('i'),foot=h('div',{class:'dfoot',hidden:true});
+  const d=h('dialog',null,h('div',{class:'dbody'},h('h2',{text:title}),msg,h('div',{class:'prog'},bar)),foot);
+  d.addEventListener('cancel',e=>e.preventDefault());document.body.append(d);d.showModal();
+  return{set:(t,p)=>{msg.textContent=t;if(p!=null)bar.style.width=Math.round(p*100)+'%'},
+    done:(t,x)=>{d.querySelector('h2').textContent=t;msg.textContent=x;bar.style.width='100%';foot.hidden=false;
+      foot.replaceChildren(h('button',{class:'btn solid',type:'button',text:'Tamam',onclick:()=>{d.close();d.remove()}}))}};
+}
+const bkWhen=t=>t?new Date(t).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'}):'';
+/* ===== YAYIN MASASI: kulüp yazılarını onayla / geri gönder ===== */
+const AQ={items:[],loaded:false,err:null};
+const AQ_NAME={n:'Diyalog Gazetesi',e:'Etkinlikler',dg:'Dergi'};
+const aqOK=s=>/^yy\d+$/.test(s||'')||!!AQ_NAME[s];
+const aqName=s=>AQ_NAME[s]||yyName(S.work.yy[+s.slice(2)-1],+s.slice(2));
+{const g=NAV.find(x=>x.g==='Ek Yayınlar');if(g&&!g.items.some(x=>x[0]==='onay'))g.items.unshift(['onay','Onay bekleyenler'])}
+const aqPend=()=>AQ.items.filter(x=>x.st!=='red').sort((a,b)=>(a.at||0)-(b.at||0));
+const aqRed=()=>AQ.items.filter(x=>x.st==='red').sort((a,b)=>(b.rat||0)-(a.rat||0));
+function aqNav(){
+  const g=NAV.find(x=>x.g==='Ek Yayınlar'),it=g&&g.items.find(x=>x[0]==='onay');
+  if(it){const n=aqPend().length;it[1]='Onay bekleyenler'+(n?' ('+n+')':'')}
+}
+async function aqRefresh(){
+  try{const{data}=await bkRead();AQ.items=Object.values(data.items).filter(x=>x&&aqOK(x.yy));AQ.err=null}
+  catch(e){AQ.err=e&&e.message||'Okunamadı.'}
+  AQ.loaded=true;aqNav();
+}
+async function aqApprove(it){
+  const br=encodeURIComponent(S.cfg.branch);
+  if(it.op!=='del'&&!it.post)throw new Error('Kayıt bozuk: yazı içeriği yok.');
+  let newSha,oldSha;
+  for(let t=0;t<3;t++){
+    const g=await gh('contents/content.json?ref='+br);
+    if(!g.ok)throw new Error(httpErr(g.status,await ghMsg(g)));
+    const j=await g.json();oldSha=j.sha;
+    let txt=j.content?dec(j.content):'';
+    if(!txt){const rr=await gh('contents/content.json?ref='+br,{raw:true});txt=await rr.text()}
+    let fresh;try{fresh=seedSlots(norm(JSON.parse(txt)))}catch(e){throw new Error('content.json okunamadı.')}
+    bkApply(COLS[it.yy].get(fresh),it);
+    const r=await gh('contents/content.json',{method:'PUT',body:{message:'Onaylandı: '+(it.by||it.yy)+' · '+(it.t||'yazı'),content:enc(JSON.stringify(fresh,null,2)),branch:S.cfg.branch,sha:oldSha}});
+    if(r.ok){newSha=(await r.json()).content.sha;break}
+    if(r.status!==409&&r.status!==422)throw new Error(httpErr(r.status,await ghMsg(r)));
+    if(t===2)throw new Error('content.json başka bir işlemle çakıştı. Tekrar dene.');
+  }
+  /* Yayın masasındaki taslak ve “yayındaki” kopya da aynı değişikliği alsın; böylece sonraki Yayınla bunu ezmez */
+  bkApply(COLS[it.yy].get(S.work),it);bkApply(COLS[it.yy].get(S.remote.data),it);
+  if(S.remote.sha===oldSha)S.remote.sha=newSha;
+  try{await bkMutate(d=>{if(!d.items[it.id])return false;delete d.items[it.id]})}
+  catch(e){throw new Error('Yazı yayınlandı ama kuyruktan silinemedi. “Yenile”ye bas; hâlâ görünüyorsa tekrar onaylama, kuyruk dosyasını kontrol et.')}
+}
+async function aqReject(it,note){
+  await bkMutate(d=>{const x=d.items[it.id];if(!x)return false;x.st='red';x.rnote=note;x.rat=Date.now()});
+}
+function aqCard(it,onDone){
+  const sec=it.yy,C=COLS[sec],isYy=/^yy/.test(sec),p=isYy?(S.work.yy[+sec.slice(2)-1]||{}):{on:true},pubP=C.get(S.remote.data).find(x=>String(x.id)===it.pid),post=it.post||pubP||{};
+  const red=it.st==='red',title=(it.t||post.title||'').trim()||'(başlıksız yazı)';
+  const FL=k=>((C.fields||[]).find(f=>f.k===k)||{}).l||({title:'başlık',text:'özet',body:'metin',img:'kapak fotoğrafı',imgs:'yazı içi fotoğraflar',kind:'etiket',by:'yazar',dt:'tarih'}[k])||k;
+  const isEmpty=v=>v==null||v===''||(Array.isArray(v)&&!v.length);
+  const changed=it.op==='edit'&&pubP&&!isBlank(sec,pubP)?[...new Set([...Object.keys(pubP),...Object.keys(post)])].filter(k=>k!=='id'&&!same(isEmpty(pubP[k])?'':pubP[k],isEmpty(post[k])?'':post[k])).map(FL):null;
+  const meta=(C.fields||[]).filter(f=>!['title','text','body'].includes(f.k)&&!isEmpty(post[f.k])).map(f=>f.l+': '+post[f.k]);
+  const imgs=[post.img,...(Array.isArray(post.imgs)?post.imgs:[])].filter(Boolean);
+  const busy=b=>card.querySelectorAll('button').forEach(x=>x.disabled=b);
+  const run=async(fn,okMsg)=>{busy(true);try{await fn();toast(okMsg)}catch(e){toast(e&&e.message||'İşlem yapılamadı.')}await aqRefresh();onDone()};
+  const approve=h('button',{class:'btn '+(it.op==='del'?'danger':'solid'),type:'button',text:it.op==='del'?'Onayla ve sitede kaldır':'Onayla ve yayınla',onclick:async()=>{
+    if(!(await ask(it.op==='del'?'Yazıyı kaldır':'Onayla ve yayınla',it.op==='del'?'“'+title+'” sitede hemen kaldırılacak.':'“'+title+'” hemen sitede yayınlanacak.'+((isYy&&!p.on)?' Yayın şu an sitede kapalı; yayını açana kadar ziyaretçiler görmez.':''),it.op==='del'?'Kaldır':'Yayınla',it.op==='del')))return;
+    run(()=>aqApprove(it),'Onaylandı.')}});
+  const reject=h('button',{class:'btn ghost',type:'button',text:red?'Notu değiştir':'Geri gönder',onclick:async()=>{
+    const ta=h('textarea',{rows:4,placeholder:'Kulübe iletilecek not (örn. “Görsel kaynağı belirtilmemiş.”)'});ta.value=it.rnote||'';
+    const v=await modal({title:'Düzeltme için geri gönder',body:h('div',{class:'stack'},h('p',{class:'mut',text:'“'+title+'” yayınlanmaz. Notun kulüp panelinde görünür; kulüp düzeltip yeniden onaya gönderebilir.'}),ta),
+      actions:[{label:'Vazgeç',value:'no',cls:'ghost'},{label:'Geri gönder',value:'ok',cls:'danger'}]});
+    if(v!=='ok')return;run(()=>aqReject(it,ta.value.trim()),'Kulübe geri gönderildi.')}});
+  const card=h('div',{class:'panel stack'},
+    h('div',{class:'row',style:'justify-content:space-between;gap:8px'},
+      h('div',null,h('h3',{style:'margin:0',text:title}),h('p',{class:'mut',text:aqName(sec)+(it.club&&it.club!==sec?' · '+aqName(it.club):'')+' · '+bkLabel[it.op]+' · '+bkWhen(it.at)})),
+      h('div',{class:'row'},red?h('span',{class:'chip warn',text:'Geri gönderildi'}):null,(isYy&&!p.on)?h('span',{class:'chip',text:'Yayın sitede kapalı'}):null)),
+    red?h('p',{class:'hint',text:'Not: '+(it.rnote||'yazılmadı')+' · Kulübün düzeltmesini bekliyor.'}):null,
+    it.op==='del'?h('p',{class:'mut',text:'Kulüp bu yazının sitede kaldırılmasını istiyor.'}):h('div',{class:'stack',style:'gap:8px'},
+      changed?h('p',{class:'hint',text:changed.length?'Değişenler: '+changed.join(', ')+'.':'Yayındaki kayıtla aynı.'}):(it.op==='edit'?h('p',{class:'hint',text:'Yayında bu kayıt yok; yeni kayıt olarak eklenir.'}):null),
+      meta.length?h('p',{class:'mut',text:meta.join(' · ')}):null,
+      post.text?h('p',{style:'font-weight:600',text:post.text}):null,
+      imgs.length?h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},imgs.map(s=>h('img',{src:imgSrc(s),alt:'',style:'max-width:140px;max-height:100px;border-radius:8px;object-fit:cover'}))):null,
+      post.body?h('details',{class:'how'},h('summary',{text:'Yazının tamamını oku'}),h('div',{style:'white-space:pre-wrap;margin-top:10px',text:post.body})):null),
+    h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},approve,reject));
+  return card;
+}
+VIEWS.onay=()=>{
+  const root=h('div',{class:'stack'}),list=h('div',{class:'stack'});
+  root.append(pageHead('Onay bekleyenler','Kulüp editörlerinin gönderdiği yazılar burada bekler. Onayladığın yazı hemen sitede yayınlanır (ayrıca Yayınla’ya basman gerekmez); geri gönderirsen notunla kulübe döner.'));
+  const redraw=()=>{
+    if(!AQ.loaded){list.replaceChildren(h('div',{class:'skel'}),h('div',{class:'skel'}));return}
+    const P=aqPend(),R=aqRed();
+    list.replaceChildren(
+      AQ.err?h('div',{class:'panel'},h('p',{class:'hint',style:'color:var(--bad)',text:'Kuyruk okunamadı: '+AQ.err})):null,
+      ...(P.length?P.map(it=>aqCard(it,()=>{drawNav();redraw()})):[h('div',{class:'empty'},h('b',{text:'Onay bekleyen yazı yok'}),h('span',{text:'Kulüplerden yeni yazı geldiğinde burada görünür.'}))]),
+      R.length?h('h3',{text:'Geri gönderilenler · kulübün düzeltmesini bekliyor'}):null,
+      ...R.map(it=>aqCard(it,()=>{drawNav();redraw()})));
+  };
+  const refresh=h('button',{class:'btn sm',type:'button',text:'Yenile',onclick:async()=>{AQ.loaded=false;redraw();await aqRefresh();drawNav();redraw()}});
+  root.append(h('div',{class:'row'},refresh),list);redraw();
+  if(!AQ.loaded)aqRefresh().then(()=>{drawNav();redraw()});
+  return root;
+};
+{const f=VIEWS.home;VIEWS.home=()=>{const v=f(),n=aqPend().length;
+  if(n){const p=h('div',{class:'panel row',style:'justify-content:space-between'},
+    h('div',null,h('h3',{style:'margin:0',text:n+' yazı onayını bekliyor'}),h('p',{class:'mut',text:'Kulüp editörleri yazı gönderdi.'})),
+    h('button',{class:'btn solid',type:'button',text:'Onay bekleyenlere git',onclick:()=>go('onay')}));
+    const hd=v.firstElementChild;if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p)}
+  return v}}
+function aqInit(){aqRefresh().then(()=>{drawNav();const n=aqPend().length;if(n)toast(n+' yazı onayınızı bekliyor. “Ek Yayınlar › Onay bekleyenler”');if(S.view==='home')render()})}
+{const _e=enterApp;enterApp=function(){_e();aqInit()}}
+if(S.work&&S.remote&&!$('#app').hidden)aqInit();
+
 </script>
 </body>
 </html>
