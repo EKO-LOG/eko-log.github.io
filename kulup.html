@@ -435,6 +435,46 @@ nav.menu .grp,nav.menu .grp+.grp{border:1px solid var(--line);border-radius:16px
 @media(max-width:600px){#top .eklink{font-size:19px}}
 </style>
 
+<style id="drawer-menu-adm">
+/* ===== Menü çekmecesi: sayfanın kendi tasarımıyla (açık/koyu temaya uyar) =====
+   Menü düğmesine basınca sağdan panel açılır. Her bölüm bir satırdır; yuvarlak oka
+   basınca altındaki sayfalar açılır, diğer bölüm kapanır. */
+body.dm-lock{overflow:hidden}
+#scrim.on{display:block;position:fixed;inset:0;z-index:85;background:rgba(8,12,28,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#rail{position:fixed;top:0;right:0;left:auto;bottom:0;width:min(88vw,400px);height:auto;max-height:none;margin:0;padding:calc(14px + env(safe-area-inset-top,0px)) 0 env(safe-area-inset-bottom,0px);display:flex;flex-direction:column;gap:10px;overflow:hidden;background:var(--surf);color:var(--ink);border:0;border-left:1px solid var(--line);border-radius:26px 0 0 26px;z-index:90;transform:translateX(104%);visibility:hidden;box-shadow:none;transition:transform .34s cubic-bezier(.22,1,.36,1),visibility 0s linear .34s}
+#rail.open{transform:none;visibility:visible;transition-delay:0s;box-shadow:-30px 0 70px -26px rgba(8,12,28,.55)}
+#rail .brand{flex:none;display:grid;grid-template-columns:40px minmax(0,1fr) 44px;column-gap:12px;align-items:center;padding:2px 12px 4px 18px}
+#rail .brand b{white-space:nowrap}
+#rail .brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#railX{grid-row:1/3;grid-column:3;width:44px;height:44px;border:0;border-radius:50%;background:var(--soft);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0;transition:background-color .2s,transform .3s cubic-bezier(.22,1,.36,1)}
+#railX:hover{background:color-mix(in srgb,var(--ink) 12%,var(--soft))}#railX:active{transform:scale(.9)}
+#railX svg{width:20px;height:20px}
+#rail nav.menu{display:block;flex:1;min-height:0;margin:0;padding:4px 10px 10px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#rail #menuSearch{display:block;width:100%;margin:2px 0 8px}
+#rail nav.menu .grp,#rail nav.menu .grp+.grp{display:block;margin:2px 0;padding:0;border:0;border-radius:16px;background:none;transition:background-color .2s}
+#rail nav.menu .grp:not(.closed){background:color-mix(in srgb,var(--g1) 7%,var(--surf));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--g1) 18%,var(--line))}
+#rail nav.menu h3{margin:0;padding:0}
+#rail .grph{position:relative;width:100%;min-height:54px;padding:8px 10px 8px 16px;gap:12px;border-radius:16px;font:600 18px/1.25 var(--serif);text-transform:none;letter-spacing:-.005em;text-align:left;color:var(--ink);background:none}
+#rail .grph:hover{background:var(--soft)}
+#rail nav.menu .grp:not(.closed) .grph:hover{background:none}
+#rail .grph:focus-visible,#rail nav.menu .grp>a:focus-visible{outline:3px solid color-mix(in srgb,var(--g1) 55%,transparent);outline-offset:-3px}
+#rail .grph.here{color:var(--g1)}
+#rail .grph.here span:first-child::after{content:none}
+#rail .grph.here::before{content:"";position:absolute;left:5px;top:16px;bottom:16px;width:4px;border-radius:4px;background:var(--acc)}
+#rail .grph .chev{position:relative;width:34px;height:34px;margin:0;border:1px solid var(--line);border-radius:50%;background:var(--soft);color:var(--mut);transform:none;transition:background-color .2s,border-color .2s,box-shadow .25s,color .2s;flex:none}
+#rail .grph .chev::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-right:2.2px solid currentColor;border-bottom:2.2px solid currentColor;transform:translate(-50%,-70%) rotate(-135deg);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+#rail .grp.closed .chev{transform:none}
+#rail .grp.closed .chev::after{transform:translate(-50%,-30%) rotate(45deg)}
+#rail .grp:not(.closed) .chev{background:var(--acc);border-color:transparent;color:#fff;box-shadow:0 6px 16px -6px var(--g1)}
+#rail nav.menu .grp>a{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;margin:1px 8px 1px 22px;padding:8px 12px;border:0;border-radius:12px;font:500 15.5px/1.3 var(--sans);color:var(--ink);text-decoration:none;background:none;-webkit-tap-highlight-color:transparent}
+#rail nav.menu .grp>a:last-child{margin-bottom:8px}
+#rail nav.menu .grp>a:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+#rail nav.menu .grp>a[aria-current=page]{background:var(--ink);color:var(--surf)}
+#rail nav.menu .grp.closed>a{display:none}
+#rail #menu.searching .grp.closed>a{display:flex}
+#rail .railfoot{flex:none;margin:0;padding:12px 20px 4px;border-top:1px solid var(--line);color:var(--mut)}
+@media (prefers-reduced-motion:reduce){#rail,#rail .grph .chev,#rail .grph .chev::after{transition:none}}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 </head>
 <body>
@@ -443,7 +483,7 @@ nav.menu .grp,nav.menu .grp+.grp{border:1px solid var(--line);border-radius:16px
 
 <div id="app" hidden>
   <aside id="rail" aria-label="Bölümler">
-    <div class="brand"><b>Eko-Log</b><span>Ek yayınlar paneli</span></div>
+    <div class="brand"><b>Eko-Log</b><span>Ek yayınlar paneli</span><button type="button" id="railX" aria-label="Menüyü kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
     <nav class="menu" id="menu"></nav>
     <div class="railfoot">
       <div class="conn"><i></i><span id="connTxt">Bağlı</span></div>
@@ -5054,8 +5094,10 @@ function enterApp(){
   window.addEventListener('hashchange',()=>{if(S.work)route()});
   $('#pubBtn').addEventListener('click',startPublish);
   const rail=$('#rail'),scrim=$('#scrim');
-  const setDrawer=o=>{const t=$('#top'),b=$('#menuBtn');if(o){const th=t.offsetHeight;rail.style.top=th+'px';rail.style.maxHeight='calc(100dvh - '+(th+16)+'px)'}
-    rail.classList.toggle('open',o);scrim.classList.toggle('on',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Menüyü kapat':'Menüyü aç')};
+  const setDrawer=o=>{const b=$('#menuBtn');
+    rail.classList.toggle('open',o);scrim.classList.toggle('on',o);document.body.classList.toggle('dm-lock',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Menüyü kapat':'Menüyü aç');
+    if(o){const x=$('#railX');if(x)setTimeout(()=>x.focus(),60)}else if(rail.contains(document.activeElement))b.focus()};
+  $('#railX').addEventListener('click',()=>setDrawer(false));
   $('#menuBtn').setAttribute('aria-expanded','false');
   $('#menuBtn').addEventListener('click',()=>setDrawer(!rail.classList.contains('open')));
   window._admCloseMenu=()=>setDrawer(false);
