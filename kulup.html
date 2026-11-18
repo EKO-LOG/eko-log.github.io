@@ -4891,6 +4891,16 @@ function kCard(ad,email,pw,ok){
     h('button',{class:'btn solid',type:'button',text:'Kopyala',onclick:e=>{navigator.clipboard.writeText(txt).then(()=>{e.target.textContent='Kopyalandı'}).catch(()=>toast('Kopyalanamadı, metni elle seç.'))}})),
     actions:[{label:'Kapat',value:'ok',cls:'solid'}]});
 }
+/* kulüp temizliği: şifre ya da kulüp kaldırılınca Firebase'de kalan hesap bağlantısı, anket ve yorumlar da silinir */
+async function kLinked(k){const m=(await FB.req('klup'))||{};return Object.entries(m).filter(([u,v])=>v===k).map(([u])=>u)}
+async function kUnlink(k){const us=await kLinked(k);for(const u of us)await FB.req('klup/'+u,{method:'DELETE'});return us.length}
+async function kWipe(k){
+  const r={links:0,cmts:0};
+  r.links=await kUnlink(k);
+  await FB.req('kanket/'+k,{method:'DELETE'});await FB.req('kanketoy/'+k,{method:'DELETE'});
+  const c=(await FB.req('comments'))||{};
+  for(const[id,v]of Object.entries(c)){if(v&&String(v.p||'').startsWith('ek'+k+'_')){await FB.req('comments/'+id,{method:'DELETE'});r.cmts++}}
+  return r}
 VIEWS.klup=()=>{
   const w=S.work;w.yk=w.yk||{};
   const root=h('div',{class:'stack'});
@@ -4944,15 +4954,25 @@ VIEWS.klup=()=>{
       }catch(e){toast(e.message||'Kaydedilemedi.');reset()}
     });
     const rm=h('button',{class:'btn sm ghost',type:'button',text:'Panel şifresini kaldır',onclick:async()=>{
-      if(!(await ask('Şifreyi kaldır','Yayınla’dan sonra bu kulüp panele giremez.','Şifreyi kaldır',true)))return;
-      delete w.yk[k];touch();render()}});
+      if(!(await ask('Şifreyi kaldır','Yayınla’dan sonra bu kulüp panele giremez. Yorum hesabı bağlantısı da kaldırılır.','Şifreyi kaldır',true)))return;
+      delete w.yk[k];touch();render();
+      if(!FB.sess()){toast('Şifre kaldırıldı. Yorum hesabı bağlantısı duruyor; Firebase girişi yapıp “Bağlı yorum hesapları”ndan kaldır.');return}
+      try{const n=await kUnlink(k);toast('Şifre kaldırıldı.'+(n?' '+n+' yorum hesabı bağlantısı da kaldırıldı.':''))}catch(e){fbFail(e)}}});
     const an=h('input',{type:'text',autocomplete:'off',value:p.ad||''});an.addEventListener('input',()=>{p.ad=an.value;touch()});
     const at=h('select',null,h('option',{value:'dergi',text:'Dergi'}),h('option',{value:'gazete',text:'Gazete'}));at.value=p.tur;at.addEventListener('change',()=>{p.tur=at.value;touch()});
     const del=h('button',{class:'btn sm danger',type:'button',text:'Kulübü kaldır',onclick:async()=>{
-      if(!(await ask('Kulübü kaldır','“'+yyName(p,i+1)+'” yayını, tüm yazıları ve kulüp şifresi silinir. Yayınla’ya basınca sitede de kalkar. Yayınlamadan önce “Değişiklikleri at” ile geri dönebilirsin.','Kulübü kaldır',true)))return;
-      w.yy[i]=kBlank(i+1);delete w.yk[k];
-      try{if(FB.sess()){const m=(await FB.req('klup'))||{};for(const[u,v]of Object.entries(m))if(v===k)await FB.req('klup/'+u,{method:'DELETE'})}}catch(e){}
-      touch();render();toast('Kulüp kaldırıldı. Yayınlayınca sitede ve panelde geçerli olur.')}});
+      const nm=yyName(p,i+1);
+      if(!(await ask('Kulübü kaldır','“'+nm+'” yayını, tüm yazıları, arşivdeki sayıları ve kulüp şifresi silinir. Firebase’deki anket, oylar, yorumlar ve yorum hesabı bağlantısı da silinir. Yayınla’ya basınca sitede de kalkar.','Kulübü kaldır',true)))return;
+      let fbNote='';
+      if(FB.sess()){
+        try{const r=await kWipe(k);fbNote=' Firebase: '+r.links+' hesap bağlantısı, anket ve '+r.cmts+' yorum silindi.'}
+        catch(e){fbNote=e&&e.message==='auth'?' Firebase oturumu bitti; anket, yorum ve hesap bağlantıları silinemedi.':' Firebase temizliği tamamlanamadı: '+(e&&e.message==='perm'?'kurallar izin vermedi.':(e&&e.message)||'hata')}
+      }else{
+        if(!(await ask('Firebase temizliği yapılamıyor','Firebase yönetici girişi yok. Şimdi kaldırırsan anket, yorumlar ve yorum hesabı bağlantısı veritabanında kalır; bu yer sonradan yeni bir kulübe verilirse eski veriler ona görünür. Önce Yorumlar sayfasında giriş yapman önerilir. Yine de kaldırılsın mı?','Yine de kaldır',true)))return;
+        fbNote=' Firebase verileri duruyor.';
+      }
+      w.yy[i]=kBlank(i+1);delete w.yk[k];w.c.archive=(w.c.archive||[]).filter(x=>!(x&&x.yy===k));
+      touch();render();toast('Kulüp kaldırıldı. Yayınlayınca sitede geçerli olur.'+fbNote)}});
     const uid=h('input',{type:'text',autocomplete:'off',spellcheck:'false',placeholder:'Firebase User UID'});
     const link=h('button',{class:'btn sm',type:'button',text:'Hesabı bağla',onclick:async()=>{
       const u=uid.value.trim();if(!/^[A-Za-z0-9]{20,40}$/.test(u)){toast('Firebase Authentication, Users sayfasındaki “User UID” değerini yapıştır.');return}
@@ -4963,7 +4983,15 @@ VIEWS.klup=()=>{
       h('div',{class:'grid2'},h('div',{class:'fld',style:'margin:0'},h('label',{text:'Giriş e-postası'}),em),h('div',{class:'fld',style:'margin:0'},h('label',{text:'Şifre'}),h('div',{class:'row',style:'flex-wrap:nowrap'},pw,gen))),
       h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},save,has?rm:null,h('button',{class:'btn sm',type:'button',text:'Yazıları ve ayarları düzenle',onclick:()=>go(k)}),h('span',{style:'flex:1'}),del),
       h('details',{class:'how'},h('summary',{text:'Var olan hesabı bağla'}),
-        h('div',{class:'row',style:'gap:8px;flex-wrap:wrap;margin-top:10px'},uid,link))));
+        h('div',{class:'row',style:'gap:8px;flex-wrap:wrap;margin-top:10px'},uid,link)),
+      (()=>{const box=h('div',{class:'stack',style:'margin-top:10px'}),btn=h('button',{class:'btn sm',type:'button',text:'Bağlı hesapları göster'});
+        const show=async()=>{box.replaceChildren(h('p',{class:'hint',text:'Yükleniyor…'}));
+          try{const us=await kLinked(k);box.replaceChildren(...(us.length?us.map(u=>h('div',{class:'row',style:'gap:8px;justify-content:space-between'},h('code',{text:u}),h('button',{class:'btn sm ghost danger',type:'button',text:'Bağlantıyı kaldır',onclick:async()=>{
+            if(!(await ask('Bağlantıyı kaldır','Bu hesap artık bu yayının yorumlarını yönetemez. Hesabın kendisi Firebase’de kalır; tamamen silmek için Firebase Authentication, Users sayfasını kullan.','Kaldır',true)))return;
+            try{await FB.req('klup/'+u,{method:'DELETE'});toast('Bağlantı kaldırıldı.');show()}catch(e){fbFail(e)}}}))):[h('p',{class:'hint',text:'Bu yayına bağlı yorum hesabı yok.'})]))}
+          catch(e){box.replaceChildren(btn);fbFail(e)}};
+        btn.addEventListener('click',show);box.append(btn);
+        return h('details',{class:'how'},h('summary',{text:'Bağlı yorum hesapları'}),box)})()));
   });
   root.append(h('div',{class:'panel stack'},h('h3',{text:'Firebase kuralları'}),h('p',{class:'mut',text:'Kulüp yorum yetkisi için kuralların bir kez güncellenmesi gerekir.'}),h('div',{class:'row'},h('button',{class:'btn',type:'button',text:'Güncel kuralları göster',onclick:()=>modal({title:'Firebase kuralları',body:rulesBox()})}))));
   return root;
