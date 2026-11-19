@@ -212,9 +212,13 @@
     {
       "id": "slotn5",
       "kind": "Haber",
-      "title": "",
-      "text": "",
-      "img": ""
+      "title": "Nvidia’da CEO Krizi ve Çin Kısıtlamaları Bilanço Sevincini Gölgeliyor",
+      "text": "Rekor bilançosuna rağmen CEO Jensen Huang’ın ayrılığı sonrası başlayan yönetim belirsizliği, Moody’s’in görünüm indirimi ve Çin’e çip satışlarının durdurulması nedeniyle Nvidia hisseleri %2,9 geriledi. ",
+      "img": "images/179507710904404.jpg",
+      "body": "Küresel yapay zeka donanım devi Nvidia, finansal açıdan rekor sonuçlar açıklamasına karşın üst yönetim krizi ve jeopolitik kısıtlamalar nedeniyle sert satış baskısı altında. Şirketin kurucusu ve CEO’su Jensen Huang’ın istifasının ardından yönetim kurulunun yeni bir CEO arayışına girmesi (Arm CEO'su Rene Haas ile temas kurulduğu belirtiliyor) ve kredi derecelendirme kuruluşu Moody’s’in bu ayrılık sonrası şirketin kredi görünümünü \"Durağan\"a çekmesi yatırımcı güvenini sarstı. Öte yandan, ABD’nin gelişmiş yarı iletken ihracatına yönelik kısıtlamaları kapsamında şirketin Çin’e H200 ve Hopper serisi yapay zeka çipi satışlarını durdurma kararı alması da hisseler üzerindeki baskıyı artırdı. Açıklanan son bilançoda hasılatın yıllık %103,2 artışla 115,8 milyar dolara, net kârın ise 65,3 milyar dolara yükselmesine rağmen yönetimdeki belirsizlik ve ABD-Çin hattındaki ticaret engelleri nedeniyle Nvidia hisseleri %2,9 düşüşle 150,96 dolar seviyesine geriledi.\n\n[foto 1]\n\nŞirketin hisselerindeki bu %2,9'luk düşüş, piyasaların rekor gelir tablolarına değil, gelecekteki yönetim yapısına ve Çin pazarındaki belirsizliklere odaklandığını net bir şekilde ortaya koydu. Analistler, Nvidia'nın önümüzdeki dönemdeki büyüme stratejisinin, özellikle üretken yapay zeka alanında devam eden pazar hakimiyetinin, yeni CEO'nun liderlik tarzına ve ABD ile Çin arasındaki ticari gerilimi yönetme kabiliyetine bağlı olacağını vurguluyor. Yatırımcılar, yönetim kurulunun 1 Aralık'taki olağanüstü toplantısında yeni CEO isminin netleşmesini ve bu ismin stratejik yönünü beklerken, özellikle hisse fiyatındaki oynaklığın kısa vadede devam etmesi öngörülüyor; Moody's'in \"Durağan\" görünümü, şirketin mevcut kredi notunu koruduğuna işaret etse de yönetimsel belirsizliğin olası bir not düşüşü riskini canlı tuttuğu da raporlarda yer alıyor.",
+      "imgs": [
+        "images/179507724341705.jpg"
+      ]
     },
     {
       "id": "slotn6",
