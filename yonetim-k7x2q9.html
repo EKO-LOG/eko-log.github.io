@@ -1816,6 +1816,7 @@ function norm(src){
   ['team','gallery','archive'].forEach(k=>{if(!Array.isArray(x.c[k]))x.c[k]=[]});
   x.show=Object.assign({ex:true,gs:true,kt:false},s.show);x.show.ex=x.show.ex!==false;x.show.gs=x.show.gs!==false;x.show.kt=x.show.kt===true;
   x.xt=(Array.isArray(s.xt)?s.xt:[]).filter(it=>it&&typeof it==='object').map(it=>({id:String(it.id||uid()),title:String(it.title||''),date:String(it.date||''),type:String(it.type||'diger'),link:String(it.link||''),note:String(it.note||'')}));
+  x.pw={on:!!(s.pw&&s.pw.on===true),code:String((s.pw&&s.pw.code)||'').trim().slice(0,40)};
   x.xp={};XP_IDS.forEach(k=>{x.xp[k]=!(s.xp&&s.xp[k]===false)});
   x.pg={};PG_IDS.forEach(k=>{x.pg[k]=!(s.pg&&s.pg[k]===false)});
   x.xc=normXc(s.xc);
@@ -2043,6 +2044,7 @@ function summarize(){
   if(!same(a.fb,b.fb))out.push('Yorum ve katılım veritabanı ayarları değişti');
   {const d=diffList(a.xt,b.xt),nm=x=>'“'+((x.title||'').trim()||'başlıksız')+'”';
    d.add.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi eklendi: '+nm(x)));d.edit.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi düzenlendi: '+nm(x)));d.del.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi silindi: '+nm(x)));}
+  if(!same(a.pw,b.pw))out.push('Eko-Plus şifresi '+(b.pw&&b.pw.on?'açıldı':'kapatıldı')+(b.pw&&b.pw.on&&(!a.pw||a.pw.code!==b.pw.code)?' (şifre güncellendi)':''));
   XP_IDS.forEach(k=>{if(a.xp[k]!==b.xp[k])out.push('Eko-Plus “'+XP_NAME[k]+'” sayfası '+(b.xp[k]?'sitede açılacak':'sitede kapatılacak'))});
   PG_IDS.forEach(k=>{if(a.pg[k]!==b.pg[k])out.push((YP_PG.includes(k)?'Gazete ve Dergi “'+YP_NAME[k]:'Etkinlikler “'+EV_NAME[k])+'” sayfası '+(b.pg[k]?'sitede açılacak':'sitede kapatılacak'))});
   if(!same(a.yo,b.yo))out.push('Gazete ve Dergi sayfasındaki kutu sırası değişti');
@@ -5311,6 +5313,17 @@ VIEWS.xplus=()=>{
     h('button',{class:'btn sm solid',type:'button',text:'Hepsini aç',onclick:()=>{XP_IDS.forEach(k=>setOne(k,true));upd();touch();toast('Tüm Eko-Plus sayfaları açıldı. Yayınlayınca sitede etkili olur.')}}),
     h('button',{class:'btn sm',type:'button',text:'Hepsini kapat',onclick:()=>{XP_IDS.forEach(k=>setOne(k,false));upd();touch();toast('Tüm Eko-Plus sayfaları kapatıldı. Yayınlayınca sitede etkili olur.')}})),sumEl);
   root.append(bulk);
+  {const pw=w.pw||(w.pw={on:false,code:''});
+    const sw=h('input',{type:'checkbox',checked:!!pw.on,'aria-label':'Eko-Plus şifresi'}),st=h('span',{class:'xp-st '+(pw.on?'on':'off'),text:pw.on?'Açık':'Kapalı'});
+    const ci=h('input',{type:'text',value:pw.code||'',placeholder:'Örn. eko2026',maxlength:'40',autocomplete:'off','aria-label':'Şifre',style:'max-width:260px'});
+    const chk=()=>{if(pw.on&&!pw.code.trim()){toast('Şifre boş. Önce bir şifre yaz.')}};
+    sw.addEventListener('change',()=>{pw.on=sw.checked;st.textContent=pw.on?'Açık':'Kapalı';st.className='xp-st '+(pw.on?'on':'off');chk();touch()});
+    ci.addEventListener('input',()=>{pw.code=ci.value.trim();touch()});
+    root.append(h('div',{class:'panel'},h('h3',{text:'Eko-Plus şifresi'}),
+      h('div',{class:'xp-row'},h('div',{class:'xp-txt'},h('b',{text:'Şifreyle giriş'}),h('small',{text:'Ortak ekranda ya da ortak ağda görüşme yaparken aç. Açıkken Eko-Plus sayfaları onaylı üyeler dahil herkese kilitlenir; şifre yazılınca o sekme için açılır, sekme kapanınca yeniden kilitlenir. Kapalıyken hiçbir şey değişmez (varsayılan). Şifre değişince herkesten yeniden istenir. İİBF Laboratuvarı kendi sayfalarında çalıştığı için bu kilitten etkilenmez.'})),
+        h('label',{class:'switch'},sw,h('span',{class:'tr'}),st)),
+      h('div',{class:'row',style:'margin-top:10px'},h('label',{text:'Şifre'}),ci),
+      h('p',{class:'hint',text:'Basit bir ortak şifredir; sayfa kodunda görünür, yüksek güvenlik için değildir. Yayınlayınca sitede etkili olur; görüşme bitince kapatıp yeniden yayınla.'})))}
   for(const g of XPG){
     const p=h('div',{class:'panel'},h('h3',{text:g.g}));
     for(const[k,t,d]of g.items){
