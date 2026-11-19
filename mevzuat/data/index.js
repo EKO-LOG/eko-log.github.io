@@ -1,4 +1,4 @@
-window.MZ={data:{},groups:["İdari yargı ve yargılama usulü", "İdare hukuk ve kamu düzeni", "Anayasa ve temel kanunlar", "Vergi hukuku", "Bankacılık ve sermaye piyasası hukuku"],index:[
+window.MZ={data:{},groups:["İdari yargı ve yargılama usulü", "İdare hukuk ve kamu düzeni", "Anayasa ve temel kanunlar", "Vergi hukuku", "Bankacılık ve sermaye piyasası hukuku", "Çalışma hukuku", "Sosyal güvenlik, meslek ve idare hukuku", "Kamu maliyesi, ihale ve yerel yönetim"],index:[
 {"no":"2576","kisa":"2576","ad":"Bölge İdare Mahkemeleri, İdare Mahkemeleri ve Vergi Mahkemelerinin Kuruluşu ve Görevleri Hakkında Kanun","rg":"RG 20/1/1982 - 17580","n":49,"g":0},
 {"no":"2577","kisa":"İYUK","ad":"İdari Yargılama Usulü Kanunu","rg":"RG 20/1/1982 - 17580","n":84,"g":0},
 {"no":"2575","kisa":"Danıştay K.","ad":"Danıştay Kanunu","rg":"RG 20/1/1982 - 17580","n":143,"g":0},
@@ -28,5 +28,17 @@ window.MZ={data:{},groups:["İdari yargı ve yargılama usulü", "İdare hukuk v
 {"no":"4483","kisa":"4483","ad":"Memurlar ve Diğer Kamu Görevlilerinin Yargılanması Hakkında Kanun","rg":"RG 4/12/1999 - 23896","n":25,"g":1},
 {"no":"5411","kisa":"Bankacılık K.","ad":"Bankacılık Kanunu","rg":"RG 1/11/2005 - 25983 (Mükerrer)","n":209,"g":4},
 {"no":"6362","kisa":"SPKn","ad":"Sermaye Piyasası Kanunu","rg":"RG 30/12/2012 - 28513","n":172,"g":4},
-{"no":"1211","kisa":"TCMB K.","ad":"Türkiye Cumhuriyet Merkez Bankası Kanunu","rg":"RG 26/1/1970 - 13409","n":89,"g":4}
+{"no":"1211","kisa":"TCMB K.","ad":"Türkiye Cumhuriyet Merkez Bankası Kanunu","rg":"RG 26/1/1970 - 13409","n":89,"g":4},
+{"no":"4857","kisa":"İş K.","ad":"İş Kanunu","rg":"RG 10/6/2003 - 25134","n":137,"g":5},
+{"no":"6356","kisa":"STİS K.","ad":"Sendikalar ve Toplu İş Sözleşmesi Kanunu","rg":"RG 7/11/2012 - 28460","n":92,"g":5},
+{"no":"7036","kisa":"İş Mah. K.","ad":"İş Mahkemeleri Kanunu","rg":"RG 25/10/2017 - 30221","n":40,"g":5},
+{"no":"4688","kisa":"KGSTSK","ad":"Kamu Görevlileri Sendikaları ve Toplu Sözleşme Kanunu","rg":"RG 12/7/2001 - 24460","n":63,"g":5},
+{"no":"5510","kisa":"SSGSSK","ad":"Sosyal Sigortalar ve Genel Sağlık Sigortası Kanunu","rg":"RG 16/6/2006 - 26200","n":246,"g":6},
+{"no":"3568","kisa":"3568","ad":"SMMM ve YMM Kanunu","rg":"RG 13.6.1989 - 20194","n":67,"g":6},
+{"no":"4982","kisa":"Bilgi Edinme K.","ad":"Bilgi Edinme Hakkı Kanunu","rg":"RG 24/10/2003 - 25269","n":33,"g":6},
+{"no":"2911","kisa":"TGYK","ad":"Toplantı ve Gösteri Yürüyüşleri Kanunu","rg":"RG 8/10/1983 - 18185","n":45,"g":6},
+{"no":"2464","kisa":"Belediye Gelirleri K.","ad":"Belediye Gelirleri Kanunu","rg":"RG 29/5/1981 - 17354","n":125,"g":7},
+{"no":"4734","kisa":"KİK","ad":"Kamu İhale Kanunu","rg":"RG 22/1/2002 - 24648","n":104,"g":7},
+{"no":"6085","kisa":"Sayıştay K.","ad":"Sayıştay Kanunu","rg":"RG 19/12/2010 - 27790","n":90,"g":7},
+{"no":"5779","kisa":"5779","ad":"İl Özel İdareleri ve Belediyelere Genel Bütçe Vergi Gelirlerinden Pay Verilmesi Hakkında Kanun","rg":"RG 15/7/2008 - 26937","n":13,"g":7}
 ]};
