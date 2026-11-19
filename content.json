@@ -191,13 +191,6 @@
       ]
     },
     {
-      "id": "slotn4",
-      "kind": "Haber",
-      "title": "",
-      "text": "",
-      "img": ""
-    },
-    {
       "id": "slotn3",
       "kind": "Haber",
       "title": "Finansal İstikrar Komitesi, Güncel Küresel ve Yerel Ekonomik Gelişmeleri Değerlendirdi",
@@ -207,6 +200,14 @@
       "imgs": [
         "images/179507679343002.jpg"
       ]
+    },
+    {
+      "id": "slotn4",
+      "kind": "Haber",
+      "title": "Yapay Zeka Devi Anthropic Hisseleri Piyasada İşleme Açılıyor",
+      "text": "Yapay zeka şirketi Anthropic'in hisseleri bugün borsada işlem görmeye başlıyor; yatırımcılar şirketin piyasa değerlemesine ve sektöre getireceği sermaye hareketliliğine odaklandı.",
+      "img": "images/179507699553803.jpg",
+      "body": "Küresel teknoloji ve finans piyasaları, yapay zeka ekosisteminin önde gelen aktörlerinden Anthropic'in halka arz sürecine odaklandı. Şirket hisselerinin bugün borsada işlem görmeye başlaması beklenirken, yatırımcılar Anthropic'in piyasa değerlemesini ve yapay zeka sektörüne çekeceği yeni sermaye girişini yakından izliyor. Bu adımın, teknoloji hisselerindeki likidite ve sektör rekabeti açısından önemli bir eşik oluşturması öngörülüyor."
     },
     {
       "id": "slotn5",
