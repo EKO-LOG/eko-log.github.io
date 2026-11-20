@@ -1756,7 +1756,7 @@ function seedSlots(d){
   if(d.sd)return d;
   for(let i=1;i<=8;i++)d.n.push({id:'slotn'+i,kind:'Haber',title:'',text:'',img:''});
   for(let i=1;i<=6;i++)d.e.push({id:'slote'+i,date:'',title:'',place:'',text:'',img:''});
-  for(let i=1;i<=6;i++)d.c.archive.push({id:'slota'+i,t:'',s:'',x:'',img:'',pdf:''});
+  for(let i=1;i<=6;i++)d.c.archive.push({id:'slota'+i,t:'',s:'',x:'',img:''});
   d.d=[...new Set([...d.d,...SAMPLE_IDS])];d.sd=1;return d;
 }
 function isBlank(k,x){
@@ -1765,7 +1765,7 @@ function isBlank(k,x){
   if(k==='e')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.text)&&e(x.img);
   if(k==='konf')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.speaker)&&e(x.text)&&e(x.body)&&e(x.img)&&!(x.imgs&&x.imgs.length)&&!(x.vids&&x.vids.length);
   if(k==='fme')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.text)&&e(x.body)&&e(x.img)&&!(x.imgs&&x.imgs.length);
-  if(k==='archive')return e(x.t)&&e(x.s)&&e(x.x)&&e(x.img)&&e(x.pdf);
+  if(k==='archive')return e(x.t)&&e(x.s)&&e(x.x)&&e(x.img);
   return e(x.t)&&e(x.s)&&e(x.img);
 }
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -1816,7 +1816,6 @@ function norm(src){
   ['team','gallery','archive'].forEach(k=>{if(!Array.isArray(x.c[k]))x.c[k]=[]});
   x.show=Object.assign({ex:true,gs:true,kt:false},s.show);x.show.ex=x.show.ex!==false;x.show.gs=x.show.gs!==false;x.show.kt=x.show.kt===true;
   x.xt=(Array.isArray(s.xt)?s.xt:[]).filter(it=>it&&typeof it==='object').map(it=>({id:String(it.id||uid()),title:String(it.title||''),date:String(it.date||''),type:String(it.type||'diger'),link:String(it.link||''),note:String(it.note||'')}));
-  x.pw={on:!!(s.pw&&s.pw.on===true),code:String((s.pw&&s.pw.code)||'').trim().slice(0,40)};
   x.xp={};XP_IDS.forEach(k=>{x.xp[k]=!(s.xp&&s.xp[k]===false)});
   x.pg={};PG_IDS.forEach(k=>{x.pg[k]=!(s.pg&&s.pg[k]===false)});
   x.xc=normXc(s.xc);
@@ -1835,7 +1834,7 @@ function norm(src){
   ['t','i'].forEach(k=>{if(!x[k]||typeof x[k]!=='object'||Array.isArray(x[k]))x[k]={}});
   ['n','dg','e','d','fme','konf'].forEach(k=>{if(!Array.isArray(x[k]))x[k]=[]});
   ['w','ig','li'].forEach(k=>x[k]=String(x[k]||''));
-  [...x.n,...x.dg,...x.e,...x.fme,...x.konf,...x.c.gallery,...x.c.archive].forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
+  x.c.archive.forEach(it=>{delete it.pdf});[...x.n,...x.dg,...x.e,...x.fme,...x.konf,...x.c.gallery,...x.c.archive].forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
   x.yy=yyNorm(s.yy);
   x.yo=yoNorm(s.yo);
   x.ks=ksNorm(s.ks,i=>'k'+uid()+i);
@@ -1920,14 +1919,6 @@ async function processImage(file){
     return path;
   }finally{URL.revokeObjectURL(url)}
 }
-function processPdf(file){
-  return new Promise((ok,no)=>{
-    if(file.size>50*1024*1024)return no(new Error('big'));
-    const r=new FileReader();
-    r.onload=()=>{const path='pdf/'+uid()+'.pdf';S.pending.set(path,{b64:String(r.result).split(',')[1]});ok(path)};
-    r.onerror=no;r.readAsDataURL(file);
-  });
-}
 const imgSrc=p=>S.preview.get(p)||p;
 const isSafePath=p=>/^(images|pdf)\/[\w.\-]+$/.test(p||'');
 
@@ -1963,12 +1954,12 @@ const COLS={
     label:x=>x.title,sub:x=>[x.kind,x.date].filter(Boolean).join(' · '),img:1,
     empty:'Henüz etkinlik yok. Yaklaşan bir buluşmayı ekleyerek başla.',
     note:'Etkinlik sitede Gazete ve Dergi gibi Google Haberler tarzı kart olarak görünür; karta basınca tam sayfa açılır. Tam sayfada tarih ve yer kutuları, katılım formu ve yorumlar kendiliğinden gelir. Fotoğraf eklemezsen kartta büyük bir tarih görseli çıkar. Listenin en üstündeki etkinlik sitede de en üstte görünür.'},
-  archive:{title:'Gazete arşivi',noun:'Arşiv kaydı',nav:'Gazete arşivi',get:w=>w.c.archive,
-    make:()=>({id:uid(),t:'',s:'',x:'',img:'',pdf:''}),
+  archive:{title:'Dijital arşiv',noun:'Arşiv kaydı',nav:'Dijital arşiv',get:w=>w.c.archive,
+    make:()=>({id:uid(),t:'',s:'',x:'',img:''}),
     fields:[{k:'t',l:'Başlık',req:1,ph:'Diyalog Gazetesi · 2. Sayı'},{k:'s',l:'Tarih aralığı',ph:'12 Ekim – 18 Ekim 2026'},{k:'yer',l:'Yer (etkinlik kaydıysa)'},{k:'x',l:'Kısa özet / açıklama',area:1,rows:4}],
-    label:x=>x.t,sub:x=>(x.tur==='etkinlik'?'Etkinlik · ':x.tur==='gazete'?'Gazete · ':x.tur==='dergi'?'Dergi · ':'')+(x.s||''),img:1,pdf:1,
-    empty:'Arşiv boş. Yayımlanan gazete sayılarını PDF olarak buraya ekle.',
-    note:'Kapak fotoğrafı ve PDF isteğe bağlıdır. PDF en fazla 50 MB olabilir.'},
+    label:x=>x.t,sub:x=>(x.tur==='etkinlik'?'Etkinlik · ':x.tur==='gazete'?'Gazete · ':x.tur==='dergi'?'Dergi · ':'')+(x.s||''),img:1,
+    empty:'Arşiv boş. Haftalık yayını ya da dergi sayısını bitirince sayı burada dijital olarak görünür.',
+    note:'Sayılar PDF değil, sitede okunan dijital sayfalar olarak yayınlanır. Kapak fotoğrafı isteğe bağlıdır; yazılar “Haftalık yayın” ve “Dergi sayısı hazırla” ile sayıya girer.'},
   gallery:{title:'Galeri',noun:'Fotoğraf',nav:'Galeri',get:w=>w.c.gallery,
     make:()=>({id:uid(),t:'',s:'',img:''}),
     fields:[{k:'t',l:'Etkinlik adı',req:1},{k:'s',l:'Tarih',ph:'Kasım 2026'}],
@@ -2044,7 +2035,6 @@ function summarize(){
   if(!same(a.fb,b.fb))out.push('Yorum ve katılım veritabanı ayarları değişti');
   {const d=diffList(a.xt,b.xt),nm=x=>'“'+((x.title||'').trim()||'başlıksız')+'”';
    d.add.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi eklendi: '+nm(x)));d.edit.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi düzenlendi: '+nm(x)));d.del.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi silindi: '+nm(x)));}
-  if(!same(a.pw,b.pw))out.push('Eko-Plus şifresi '+(b.pw&&b.pw.on?'açıldı':'kapatıldı')+(b.pw&&b.pw.on&&(!a.pw||a.pw.code!==b.pw.code)?' (şifre güncellendi)':''));
   XP_IDS.forEach(k=>{if(a.xp[k]!==b.xp[k])out.push('Eko-Plus “'+XP_NAME[k]+'” sayfası '+(b.xp[k]?'sitede açılacak':'sitede kapatılacak'))});
   PG_IDS.forEach(k=>{if(a.pg[k]!==b.pg[k])out.push((YP_PG.includes(k)?'Gazete ve Dergi “'+YP_NAME[k]:'Etkinlikler “'+EV_NAME[k])+'” sayfası '+(b.pg[k]?'sitede açılacak':'sitede kapatılacak'))});
   if(!same(a.yo,b.yo))out.push('Gazete ve Dergi sayfasındaki kutu sırası değişti');
@@ -2122,7 +2112,7 @@ function validate(){
 let NAV=[
   {g:'Gelenler',items:[['pmakale','Gelen makaleler'],['members','Üyelik başvuruları'],['comments','Yorumlar'],['itab','Gelen tablolar'],['joins','Katılımcılar']]},
   {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['poll','Anket']]},
-  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Gazete arşivi'],['parsiv','Arşiv sayfası'],['gallery','Galeri'],['xc-ceviri','Çeviri Köşesi'],['xc-arastirma','Ortak Araştırma Projeleri'],['yayinsira','Kutu sırası'],['yayinpg','Sayfa anahtarları']]},
+  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Dijital arşiv'],['parsiv','Arşiv sayfası'],['gallery','Galeri'],['xc-ceviri','Çeviri Köşesi'],['xc-arastirma','Ortak Araştırma Projeleri'],['yayinsira','Kutu sırası'],['yayinpg','Sayfa anahtarları']]},
   {g:'Ek Yayınlar',items:[['klup','Yayın yönetimi'],['kanket','Kulüp anketleri'],...YY_KEYS.map((k,i)=>[k,'Yayın '+(i+1)])]},
   {g:'Etkinlikler',items:[['e','Etkinlikler ve QR araçları'],['quota','Etkinlik kontenjanı'],['konf','Konferanslar'],['yb','Yatay Bakış'],['xc-arastirma2','Proje Araştırma Grupları'],['etkpg','Sayfa anahtarları']]},
   {g:'Fikir Muharebesi',items:[['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['fmarg','Muharebe argümanları']]},
@@ -2389,24 +2379,6 @@ function blocksField(item,onChange){
   }
   redraw();return box;
 }
-function pdfField(item){
-  const box=h('div',{class:'media'});
-  const draw=()=>{
-    box.replaceChildren();const p=item.pdf;
-    const pick=async()=>{
-      const f=await chooseFile('application/pdf');if(!f)return;
-      try{item.pdf=await processPdf(f);draw();touch()}
-      catch(e){toast(e.message==='big'?'PDF 50 MB’tan büyük. Daha küçük bir dosya seç.':'PDF okunamadı.')}
-    };
-    if(p){const pend=S.pending.has(p)&&!S.uploaded.has(p);
-      box.append(h('div',{class:'filechip'},h('span',{class:'chip ok',text:'PDF ekli'}),h('span',{class:'hint',text:pend?'Yayınlanınca yüklenecek':p}),
-        pend?null:h('a',{class:'btn sm',href:p,target:'_blank',rel:'noopener',text:'Aç'})),
-        h('div',{class:'mrow'},h('button',{class:'btn sm',type:'button',onclick:pick,text:'PDF’i değiştir'}),
-          h('button',{class:'btn sm ghost',type:'button',onclick:()=>{item.pdf='';draw();touch()},text:'Kaldır'})));}
-    else box.append(h('div',{class:'mempty',text:'PDF yok'}),h('button',{class:'btn sm',type:'button',onclick:pick,text:'PDF seç'}));
-  };
-  draw();return box;
-}
 function evPreview(item){
   const box=h('div',{class:'panel',style:'background:var(--soft);margin-bottom:16px'}),card=h('div',{style:'max-width:420px;border-radius:20px;overflow:hidden;background:var(--surf);border:1px solid var(--line)'});
   box.append(h('h3',{text:'Sitede böyle görünecek'}),card,h('p',{class:'hint',style:'margin-top:10px',text:'Karta basınca tam sayfa açılır: tarih ve yer kutuları, açıklama, katılım formu ve yorumlar.'}));
@@ -2487,7 +2459,6 @@ function collView(key){
           h('span',{class:'hint',text:'Kart (liste) görünümünde kapak fotoğrafı kalır. Haber açılınca üstte, kapak yerine “Foto 1” görünür.'})));
       }
     }
-    if(C.pdf)panel.append(h('div',{class:'fld'},h('span',{class:'lab',text:'PDF dosyası'}),pdfField(item)));
     if(pv)panel.append(pv.box);
     panel.append(h('div',{class:'actions'},
       key==='e'?h('button',{class:'btn sm solid',type:'button',text:'Etkinlik bitti, arşive al',onclick:()=>endEvent(item,idx)}):null,
@@ -2526,8 +2497,8 @@ YY_KEYS.forEach((k,i)=>{VIEWS[k]=()=>{
       up.addEventListener('click',()=>{yoMove(k,-1);u()});dn.addEventListener('click',()=>{yoMove(k,1);u()});u();
       return fld('Kutu sırası',h('div',{class:'row'},up,dn,tx),'Gazete ve Dergi sayfasındaki kutunun yeri. Tüm kutuları birlikte görmek için “Kutu sırası” bölümüne bak.')})(),
     fld('Kapak fotoğrafı',mediaField(p,'img',()=>{}),'İsteğe bağlı; sayfanın üstünde görünür.'),
-    h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Sayıyı bitir (PDF)',onclick:()=>yyBitir(n)})),
-    h('p',{class:'hint',text:'Sayıyı bitirince aşağıdaki yazılar PDF yapılıp Gazete arşivine eklenir, yazı listesi temizlenir ve yedek dosyası iner. Sitede görünmesi için sonra Yayınla’ya bas.'}));
+    h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Sayıyı dijital arşive al',onclick:()=>yyBitir(n)})),
+    h('p',{class:'hint',text:'Sayıyı bitirince aşağıdaki yazılar dijital sayı olarak Dijital arşive eklenir, yazı listesi temizlenir ve yedek dosyası iner. Sitede görünmesi için sonra Yayınla’ya bas.'}));
   if(hd&&hd.classList.contains('pagehead'))hd.after(panel);else v.prepend(panel);
   return v}});
 
@@ -3451,11 +3422,11 @@ function pageEditorV2(page,title,desc,labels){
 VIEWS.pmulakat=()=>pageEditorV2('mulakat','Mülakat sayfası','Sayfa bölümlere ayrıldı. Bir bölüme tıkla, açılınca içindeki yazıları düzenle. Değiştirdiğin yazı turuncu işaretlenir.',{P:'Açıklama / ipucu',H4:'Adım / soru başlığı'});
 VIEWS.pmakale=()=>pageEditorV2('makale','Makale sayfası','Makale formunun yazıları bölümlere ayrıldı. Bir bölüme tıkla, açılınca içindeki yazıları düzenle. Gönderilen makaleler e-postayla ulaşır ve “Gelen makaleler” sekmesinde listelenir.',{LABEL:'Form alanı adı',H4:'Kategori / başlık'});
 
-VIEWS.parsiv=()=>pageEditor('arsiv','Arşiv sayfası','Arşiv sayfasının başlıklarını ve boş durum yazılarını düzenle. Sayıları ve fotoğrafları aşağıdaki kısayollardan yönet.',()=>{
+VIEWS.parsiv=()=>pageEditor('arsiv','Arşiv sayfası','Arşiv artık ayrı sayfada (arsiv.html): dijital haber arşivi ve dijital dergi arşivi. Sayıları ve fotoğrafları aşağıdaki kısayollardan yönet.',()=>{
   const w=S.work;
   return h('div',{class:'panel'},h('h3',{text:'Arşiv içeriği'}),
     h('div',{class:'row',style:'gap:14px'},
-      h('div',null,h('b',{text:w.c.archive.length+' gazete sayısı'}),h('div',{class:'row',style:'margin-top:8px'},h('a',{class:'btn sm solid',href:'#/archive',text:'Sayıları düzenle'}))),
+      h('div',null,h('b',{text:w.c.archive.length+' dijital sayı'}),h('div',{class:'row',style:'margin-top:8px'},h('a',{class:'btn sm solid',href:'#/archive',text:'Sayıları düzenle'}))),
       h('div',null,h('b',{text:w.c.gallery.length+' fotoğraf'}),h('div',{class:'row',style:'margin-top:8px'},h('a',{class:'btn sm solid',href:'#/gallery',text:'Fotoğrafları düzenle'})))));
 });
 
@@ -4497,157 +4468,68 @@ function showPanel(k,label){
   return h('div',{class:'panel'},h('label',{class:'switch'},sw,h('span',{class:'tr'}),h('span',{text:label+': '}),state),h('p',{class:'hint',text:'Kapatırsan bu bölüm sitede hiç görünmez; verilerin silinmez, tekrar açınca geri gelir.'}));
 }
 
-/* ---------- haftalık gazete PDF'i ve etkinlik arşivi ---------- */
+/* ---------- haftalık dijital gazete ve etkinlik arşivi ---------- */
 function endEvent(item,idx){
   const w=S.work;if(!(item.title||'').trim()){toast('Başlıksız etkinlik arşive alınamaz.');return}
   if(!confirm('“'+item.title+'” etkinliği arşive alınsın mı? Etkinlikler sayfasından kalkar, arşivde “Etkinlik” alanına düşer.'))return;
-  w.c.archive.unshift({id:uid(),tur:'etkinlik',t:item.title,s:item.date||'',yer:item.place||'',x:item.text||'',img:item.img||'',pdf:''});
+  w.c.archive.unshift({id:uid(),tur:'etkinlik',t:item.title,s:item.date||'',yer:item.place||'',x:item.text||'',img:item.img||''});
   w.e.splice(idx,1);S.sel.e=(w.e[idx]||w.e[idx-1]||{}).id||null;S.mode.e='list';touch();render();
   toast('Etkinlik arşive alındı. Yayınlayınca sitede görünür.');
 }
-const loadJs=u=>new Promise((ok,no)=>{if(document.querySelector('script[src="'+u+'"]'))return ok();const e=document.createElement('script');e.src=u;e.onload=ok;e.onerror=()=>no(new Error('lib'));document.head.append(e)});
-async function gazeteSayfalari(items,baslik,opt){
-  opt=opt||{};const AD=opt.ad||'Diyalog Gazetesi',RED='#c4202e',PW=794,PH=1123,PM=40,GAP=22,CW=Math.floor((PW-2*PM-2*GAP)/3),HH=34,TOP=PM+HH+10,CH=PH-TOP-PM;
-  const D=(css,t)=>{const e=document.createElement('div');e.style.cssText=css||'';if(t!=null)e.textContent=t;return e};
-  const KC='font:800 12px sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:'+RED;
-  const clip=(t,n)=>{t=String(t||'').replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t};
-  const plain=b=>String(b||'').replace(/^##\s+/gm,'').replace(/^>\s?/gm,'');
-  const NAT={};await Promise.all(items.filter(x=>x.img).map(x=>new Promise(ok=>{const i=new Image();i.onload=()=>{if(i.naturalWidth)NAT[x.img]=i.naturalHeight/i.naturalWidth;ok()};i.onerror=()=>ok();i.src=imgSrc(x.img)})));
-  const mk=(x,w,mx,css)=>{const r=NAT[x.img]||.625;let h=Math.round(w*r),wd=w;if(h>mx){h=mx;wd=Math.round(mx/r)}const i=document.createElement('img');i.src=imgSrc(x.img);i.style.cssText='display:block;width:'+wd+'px;height:'+h+'px;margin-left:auto;margin-right:auto;'+(css||'');return i};
-  const host=D('position:fixed;left:-9999px;top:0;width:'+CW+'px;font:14px/1.5 Georgia,serif;color:#111');document.body.append(host);
-  const pages=[];
-  const page=n=>{const p=D('box-sizing:border-box;position:relative;width:'+PW+'px;height:'+PH+'px;background:#fff;color:#111;font:14px/1.5 Georgia,serif;overflow:hidden');p.lang='tr';return p};
-  /* ---- 1. sayfa: ön kapak ---- */
-  const f=page(1);f.style.padding=PM+'px';
-  const mast=D('background:'+RED+';color:#fff;text-align:center;padding:16px 10px 12px');mast.append(D('font:900 '+(AD.length>16?Math.max(28,Math.floor(1000/AD.length)):64)+'px/1 Georgia,serif;letter-spacing:-1px',AD));
-  const strip=D('display:flex;justify-content:space-between;border-bottom:3px double #111;padding:7px 2px;font:700 12px sans-serif;letter-spacing:1px;text-transform:uppercase');strip.append(D('',baslik),D('','Ücretsizdir'));
-  f.append(mast,strip);
-  const m=items[0];
-  if(m){const w=D('padding:14px 0 14px;border-bottom:1px solid #999');
-    w.append(D(KC,m.kind||'Manşet'),D('font:900 40px/1.08 Georgia,serif;margin:6px 0 12px',m.title));
-    if(m.img)w.append(mk(m,PW-2*PM,360));
-    const sp=clip(m.text||plain(m.body),230);if(sp)w.append(D('font:italic 17px/1.45 Georgia,serif;color:#333;margin-top:10px',sp));
-    f.append(w);
-    const tz=items.slice(1,4);
-    if(tz.length){const g=D('display:flex;gap:'+GAP+'px;padding-top:14px');
-      tz.forEach((x,i)=>{const c=D('flex:1;min-width:0;'+(i?'border-left:1px solid #ccc;padding-left:'+(GAP/2)+'px':''));
-        c.append(D(KC,x.kind||'Haber'));c.append(D('font:800 20px/1.2 Georgia,serif;margin:4px 0 8px;max-height:72px;overflow:hidden',x.title));
-        if(x.img)c.append(mk(x,210,100,'margin-bottom:8px'));
-        c.append(D('font:13.5px/1.45 Georgia,serif;color:#333',clip(x.text||plain(x.body),110)));g.append(c)});
-      f.append(g)}
-    const rest=items.slice(4,8);
-    if(rest.length){const b=D('margin-top:14px;border-top:3px solid #111;padding-top:8px');b.append(D(KC,'Bu sayıda'));
-      rest.forEach(x=>b.append(D('font:700 14px/1.4 Georgia,serif;padding:3px 0;border-bottom:1px dotted #bbb','• '+clip(x.title,90))));f.append(b)}
-  }
-  pages.push(f);
-  /* ---- iç sayfalar: 3 sütun ---- */
-  let cols=[],ci=3,used=0,pn=1;
-  const H=el=>{host.replaceChildren(el);return el.getBoundingClientRect().height};
-  const nextCol=()=>{ci++;used=0;if(ci>=3){pn++;const pg=page(pn),hd=D('position:absolute;left:'+PM+'px;right:'+PM+'px;top:'+PM+'px;height:'+HH+'px;border-bottom:2px solid #111;display:flex;justify-content:space-between;align-items:baseline;font:700 12px sans-serif;letter-spacing:1px;text-transform:uppercase');
-    hd.append(D('color:'+RED,AD),D('',baslik),D('','Sayfa '+pn));pg.append(hd);
-    cols=[0,1,2].map(c=>{if(c)pg.append(D('position:absolute;top:'+TOP+'px;left:'+(PM+c*(CW+GAP)-GAP/2)+'px;width:1px;height:'+CH+'px;background:#ccc'));const k=D('position:absolute;top:'+TOP+'px;left:'+(PM+c*(CW+GAP))+'px;width:'+CW+'px;height:'+CH+'px;overflow:hidden');pg.append(k);return k});
-    pages.push(pg);ci=0}};
-  const put=(el,keep)=>{const h=H(el);if(ci>2||used+h>CH||(keep&&used>0&&used+h+keep>CH))nextCol();cols[ci].append(el);used+=h};
-  items.forEach((x,i)=>{
-    const hd=D('border-top:3px solid #111;padding:'+(i?'10px':'8px')+' 0 6px');
-    hd.append(D(KC,x.kind||'Haber'),D('font:800 23px/1.15 Georgia,serif;margin:4px 0 6px',x.title));
-    const by=[x.by,x.dt].filter(v=>(v||'').trim()).join(' · ');if(by)hd.append(D('font:italic 12px Georgia,serif;color:#555;margin-bottom:6px',by));
-    if(x.img)hd.append(mk(x,CW,260,'margin-top:6px;margin-bottom:4px'));
-    put(hd,90);
-    if((x.text||'').trim())put(D('font-weight:700;padding:2px 0 6px;text-align:left',x.text.trim()));
-    let raw=String(x.body||'');if(!opt.tam&&raw.length>1500)raw=raw.slice(0,1500).replace(/\s+\S*$/,'')+'…';
-    raw.split(/\n{2,}/).map(t=>t.trim()).filter(Boolean).forEach(t=>{
-      if(/^##\s+/.test(t)){put(D('font:800 17px/1.25 Georgia,serif;padding:8px 0 3px',t.replace(/^##\s+/,'')),60);return}
-      if(/^>\s?/.test(t)){put(D('font-style:italic;border-left:3px solid '+RED+';padding:4px 0 4px 10px;margin:6px 0',t.replace(/^>\s?/gm,'')));return}
-      t.replace(/\s+/g,' ').split(/(?<=[.!?…])\s+/).reduce((a,s,j)=>{(j%2?a[a.length-1]+=' '+s:a.push(s));return a},[]).forEach((s,j)=>put(D('text-align:justify;hyphens:auto;'+(j?'':'padding-top:5px;text-indent:12px'),s)));
-    });
-  });
-  host.remove();return pages;
+window.slimArt=x=>{const o={title:x.title||'',kind:x.kind||'',by:x.by||'',dt:x.dt||'',text:x.text||'',body:x.body||'',img:x.img||''};const im=Array.isArray(x.imgs)?x.imgs.filter(Boolean):[];if(im.length)o.imgs=im;return o};
+async function gzFonts(){
+  if(!document.getElementById('gz-fonts')){const l=document.createElement('link');l.id='gz-fonts';l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Sans:wght@400;500;600;700&display=swap';document.head.append(l)}
+  const T='ğĞşŞıİçÇöÖüÜ';
+  await Promise.race([Promise.all(['700 24px Cardo','italic 400 24px Cardo','400 24px "Crimson Text"','italic 400 24px "Crimson Text"','700 24px "Crimson Text"','600 24px "Crimson Text"','500 24px "Fira Sans"','700 24px "Fira Sans"'].map(f=>document.fonts.load(f,T).catch(()=>0))),new Promise(r=>setTimeout(r,7000))]);
 }
-async function gazetePdf(items,baslik,tarih,opt){
-  opt=opt||{};
-  await loadJs('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
-  await loadJs('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
-  const {jsPDF}=window.jspdf,doc=new jsPDF({unit:'mm',format:'a4'});
-  const pages=await gazeteSayfalari(items,baslik,opt);
-  const host=document.createElement('div');host.style.cssText='position:fixed;left:-9999px;top:0;width:794px;background:#fff';document.body.append(host);
-  for(let i=0;i<pages.length;i++){
-    host.replaceChildren(pages[i]);
-    await Promise.all([...pages[i].querySelectorAll('img')].map(im=>im.decode().catch(()=>{})));
-    const c=await html2canvas(pages[i],{scale:2,backgroundColor:'#fff',useCORS:true,width:794,height:1123});
-    if(i)doc.addPage();
-    doc.addImage(c.toDataURL('image/jpeg',0.85),'JPEG',0,0,210,297);
-  }
-  host.remove();return doc.output('blob');
-}
+
 async function haftayiBitir(){
   const w=S.work,items=w.n.filter(x=>!isBlank('n',x)&&(x.title||'').trim());
   if(!items.length){toast('Yayınlanacak haber yok.');return}
-  if(!confirm(items.length+' haber PDF gazete yapılıp Gazete arşivine eklenecek, haber listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
+  if(!confirm(items.length+' haber dijital gazete sayısı olarak Dijital arşive eklenecek, haber listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
   const d=new Date(),fm={day:'numeric',month:'long'},son=d.toLocaleDateString('tr-TR',{...fm,year:'numeric'}),bas=new Date(d.getTime()-6*864e5).toLocaleDateString('tr-TR',fm),varsayilan=bas+' – '+son;
   const gz=w.c.archive.filter(x=>x&&x.tur==='gazete'&&!x.yy),no=Math.max(gz.length,...gz.map(x=>+x.no||0))+1;
   const ar=prompt('Diyalog Gazetesi '+no+'. Sayı hangi tarihler arası? İstersen düzenle:',varsayilan);
   if(ar===null)return;
   const aralik=(ar.trim()||varsayilan).slice(0,60),baslik=no+'. Sayı · '+aralik;
-  toast('PDF hazırlanıyor, bekle…');
   try{
-    const blob=await gazetePdf(items,baslik),path=await processPdf(new File([blob],'gazete.pdf',{type:'application/pdf'}));
-    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tarih:d.toISOString(),haberler:items},null,1)],{type:'application/json'}));
+        const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tarih:d.toISOString(),haberler:items},null,1)],{type:'application/json'}));
     a.download='gazete-yedek-'+d.toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();
-    w.c.archive.unshift({id:uid(),tur:'gazete',no,t:'Diyalog Gazetesi · '+no+'. Sayı',s:aralik,yer:'',x:items.length+' haber: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',pdf:path});
+    w.c.archive.unshift({id:uid(),tur:'gazete',no,t:'Diyalog Gazetesi · '+no+'. Sayı',s:aralik,yer:'',x:items.length+' haber: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',a:items.map(slimArt)});
     items.forEach(x=>{const i=w.n.indexOf(x);if(i>-1)w.n.splice(i,1)});
     touch();render();toast('Diyalog Gazetesi '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
-  }catch(e){toast(e&&e.message==='big'?'PDF 50 MB’tan büyük. Büyük fotoğrafları çıkar.':'PDF hazırlanamadı. İnternet bağlantını kontrol edip tekrar dene.')}
+  }catch(e){toast('Sayı arşive eklenemedi. Tekrar dene.')}
 }
 {const f=VIEWS.n;VIEWS.n=()=>{const v=f(),hd=v.firstElementChild,
-  p=h('div',{class:'panel'},h('h3',{text:'Haftalık yayın'}),h('p',{class:'hint',text:'Hafta sonunda bas: haberler PDF gazete olur, Gazete arşivine eklenir, haber listesi temizlenir ve yedek dosyası iner. Sitede görünmesi için sonra Yayınla’ya bas.'}),
+  p=h('div',{class:'panel'},h('h3',{text:'Haftalık yayın'}),h('p',{class:'hint',text:'Hafta sonunda bas: haberler dijital gazete sayısı olur, Dijital arşive eklenir, haber listesi temizlenir ve yedek dosyası iner. Sitede görünmesi için sonra Yayınla’ya bas.'}),
     h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Haftalık yayını bitir',onclick:haftayiBitir})));
   if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p);return v}}
 async function yyBitir(n){
   const w=S.work,p=w.yy[n-1],ad=yyName(p,n),items=p.yazilar.filter(x=>!isBlank('yy'+n,x)&&(x.title||'').trim());
-  if(!items.length){toast('Bu yayında PDF yapılacak yazı yok.');return}
-  if(!confirm(items.length+' yazı “'+ad+'” PDF’i yapılıp Gazete arşivine eklenecek, yazı listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
+  if(!items.length){toast('Bu yayında arşive alınacak yazı yok.');return}
+  if(!confirm(items.length+' yazı “'+ad+'” sayısı olarak Dijital arşive eklenecek, yazı listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
   const d=new Date(),ar0=w.c.archive.filter(x=>x&&x.yy===p.id),no=Math.max(ar0.length,...ar0.map(x=>+x.no||0))+1;
   const d0=d.toLocaleDateString('tr-TR',{month:'long',year:'numeric'}),ar=prompt(ad+' '+no+'. Sayı hangi dönem ya da tarihler arası?',d0);
   if(ar===null)return;
   const donem=(ar.trim()||d0).slice(0,60),baslik=no+'. Sayı · '+donem;
-  toast('PDF hazırlanıyor, bekle…');
   try{
-    const blob=await gazetePdf(items,baslik,null,{ad,birim:'yazı',tam:1}),path=await processPdf(new File([blob],'yayin.pdf',{type:'application/pdf'}));
-    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tarih:d.toISOString(),yayin:ad,yazilar:items},null,1)],{type:'application/json'}));
+        const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tarih:d.toISOString(),yayin:ad,yazilar:items},null,1)],{type:'application/json'}));
     a.download=p.id+'-yedek-'+d.toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();
-    w.c.archive.unshift({id:uid(),tur:p.tur,no,yy:p.id,t:ad+' · '+no+'. Sayı',s:donem,yer:'',x:items.length+' yazı: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',pdf:path});
+    w.c.archive.unshift({id:uid(),tur:p.tur,no,yy:p.id,t:ad+' · '+no+'. Sayı',s:donem,yer:'',x:items.length+' yazı: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',a:items.map(slimArt)});
     items.forEach(x=>{const i=p.yazilar.indexOf(x);if(i>-1)p.yazilar.splice(i,1)});
     touch();render();toast(ad+' '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
-  }catch(e){toast(e&&e.message==='big'?'PDF 50 MB’tan büyük. Büyük fotoğrafları çıkar.':'PDF hazırlanamadı. İnternet bağlantını kontrol edip tekrar dene.')}
+  }catch(e){toast('Sayı arşive eklenemedi. Tekrar dene.')}
 }
-async function dergiyiBitir(){
-  const w=S.work,items=w.dg.filter(x=>!isBlank('dg',x)&&(x.title||'').trim());
-  if(!items.length){toast('Yayınlanacak dergi yazısı yok.');return}
-  if(!confirm(items.length+' yazı PDF dergi yapılıp Gazete arşivine (Dergi bölümüne) eklenecek, dergi yazıları listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
-  const d=new Date(),dg=w.c.archive.filter(x=>x&&x.tur==='dergi'&&!x.yy),no=Math.max(dg.length,...dg.map(x=>+x.no||0))+1;
-  const ar=prompt('İktisadi Kalkınma Dergisi '+no+'. Sayı hangi dönem? (ör. Ekim 2026)',d.toLocaleDateString('tr-TR',{month:'long',year:'numeric'}));
-  if(ar===null)return;
-  const donem=(ar.trim()||d.toLocaleDateString('tr-TR',{month:'long',year:'numeric'})).slice(0,60),baslik=no+'. Sayı · '+donem;
-  toast('PDF hazırlanıyor, bekle…');
-  try{
-    const blob=await gazetePdf(items,baslik,null,{ad:'İktisadi Kalkınma Dergisi',birim:'yazı',tam:1}),path=await processPdf(new File([blob],'dergi.pdf',{type:'application/pdf'}));
-    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tarih:d.toISOString(),yazilar:items},null,1)],{type:'application/json'}));
-    a.download='dergi-yedek-'+d.toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();
-    w.c.archive.unshift({id:uid(),tur:'dergi',no,t:'İktisadi Kalkınma Dergisi · '+no+'. Sayı',s:donem,yer:'',x:items.length+' yazı: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',pdf:path});
-    items.forEach(x=>{const i=w.dg.indexOf(x);if(i>-1)w.dg.splice(i,1)});
-    touch();render();toast('Dergi '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
-  }catch(e){toast(e&&e.message==='big'?'PDF 50 MB’tan büyük. Büyük fotoğrafları çıkar.':'PDF hazırlanamadı. İnternet bağlantını kontrol edip tekrar dene.')}
-}
+function dergiyiBitir(){go('dgissue')}
 {const f=VIEWS.dg;VIEWS.dg=()=>{const v=f(),hd=v.firstElementChild,
-  p=h('div',{class:'panel'},h('h3',{text:'Sayıyı bitir'}),h('p',{class:'hint',text:'Sayı hazır olunca bas: yazılar PDF dergi olur, Gazete arşivinin Dergi bölümüne eklenir, yazı listesi temizlenir ve yedek dosyası iner. Sitede görünmesi için sonra Yayınla’ya bas.'}),
-    h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Dergi sayısını bitir',onclick:dergiyiBitir})));
+  p=h('div',{class:'panel'},h('h3',{text:'Sayıyı hazırla'}),h('p',{class:'hint',text:'Sayıya girecek yazıları seçip sıralayabilir ve sayıyı dijital arşive alabilirsin. Sayı sitede okunur; PDF üretilmez.'}),
+    h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Dergi sayısını hazırla',onclick:dergiyiBitir})));
   if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p);return v}}
-/* ---------- gazete PDF indirme sayıları ---------- */
+/* ---------- dijital sayı okunma sayıları ---------- */
 const dlKey=id=>String(id).replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,40);
 function dlPanel(){
   const body=h('div',{class:'stack',style:'gap:8px'});
-  const box=h('div',{class:'panel'},h('h3',{text:'PDF indirme sayıları'}),body);
+  const box=h('div',{class:'panel'},h('h3',{text:'Okunma sayıları'}),body);
   async function load(){
     if(!FB.ok()||!FB.sess()){
       body.replaceChildren(h('p',{class:'hint',text:'İndirme sayıları veritabanında tutulur. Görmek için İstatistikler sayfasında yönetici girişi yap.'}),
@@ -4656,13 +4538,13 @@ function dlPanel(){
     body.replaceChildren(h('div',{class:'skel'}),h('div',{class:'skel'}));
     try{
       const j=await FB.req('dl')||{};
-      const L=((S.work&&S.work.c.archive)||[]).filter(x=>x&&x.pdf&&(x.t||'').trim());
+      const L=((S.work&&S.work.c.archive)||[]).filter(x=>x&&Array.isArray(x.a)&&x.a.length&&(x.t||'').trim());
       const n=x=>+j[dlKey(x.id)]||0,tot=L.reduce((s,x)=>s+n(x),0);
       body.replaceChildren(
-        h('p',{class:'hint',text:L.length?'Toplam '+nfmt(tot)+' indirme. Yöneticinin kendi tıklamaları sayılmaz.':'PDF’i olan arşiv kaydı yok.'}),
+        h('p',{class:'hint',text:L.length?'Toplam '+nfmt(tot)+' okunma. Yöneticinin kendi tıklamaları sayılmaz.':'Dijital sayı yok.'}),
         L.map(x=>h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},
           h('span',{text:x.t+(x.s?' · '+x.s:''),style:'overflow:hidden;text-overflow:ellipsis;white-space:nowrap'}),
-          h('b',{text:nfmt(n(x))+' indirme',style:'flex:none;font-variant-numeric:tabular-nums'}))),
+          h('b',{text:nfmt(n(x))+' okunma',style:'flex:none;font-variant-numeric:tabular-nums'}))),
         h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Yenile',onclick:load})));
     }catch(e){
       body.replaceChildren(e&&e.message==='perm'
@@ -4682,7 +4564,7 @@ for(const [k,l] of [['ex','Sınav takvimi']]){
 /* ---------- yayınlama ---------- */
 function collectRefs(w){
   const s=new Set();
-  [...w.n,...(w.dg||[]),...(w.yy||[]),...(w.yy||[]).flatMap(p=>p.yazilar||[]),...w.e,...(w.fme||[]),...(w.konf||[]),...w.c.gallery,...w.c.archive,...w.c.team].forEach(x=>{if(x&&x.img)s.add(x.img);if(x&&x.pdf)s.add(x.pdf);if(x&&Array.isArray(x.imgs))x.imgs.forEach(q=>q&&s.add(q))});
+  [...w.n,...(w.dg||[]),...(w.yy||[]),...(w.yy||[]).flatMap(p=>p.yazilar||[]),...w.e,...(w.fme||[]),...(w.konf||[]),...w.c.gallery,...w.c.archive,...w.c.team].forEach(x=>{if(x&&x.img)s.add(x.img);if(x&&Array.isArray(x.imgs))x.imgs.forEach(q=>q&&s.add(q));if(x&&Array.isArray(x.a))x.a.forEach(y=>{if(y&&y.img)s.add(y.img);if(y&&Array.isArray(y.imgs))y.imgs.forEach(q=>q&&s.add(q))})});
   if(w.yb){if(w.yb.img)s.add(w.yb.img);(w.yb.imgs||[]).forEach(q=>q&&s.add(q))}
   Object.values(w.i).forEach(p=>p&&s.add(p));
   return[...s].filter(isSafePath);
@@ -5015,6 +4897,80 @@ function enterApp(){
     .then(()=>{L.hidden=true;enterApp()}).catch(e=>showLogin(e.message));
 })();
 </script>
+<script id="adm-issue">
+/* =====================================================================
+   Dergi sayısı hazırla: seçilen dergi yazılarından PDF üretir, arşive ekler.
+   Her yazı PDF'te ayrı sayfadır. Her şey taslak kalır; sitede görünmesi için “Yayınla” gerekir.
+   ===================================================================== */
+(()=>{
+const MAG='İktisadi Kalkınma Dergisi',PW=794,PH=1123;
+const PAL=[['#1d4ed8','#7c3aed'],['#0e9aa7','#1d4ed8'],['#7c3aed','#e23fa5'],['#c2410c','#f59e0b'],['#0e7490','#10b981'],['#c4202e','#ff5f8f']];
+const AY=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const FH='Cardo,"Iowan Old Style",Georgia,serif',FB='"Crimson Text",Georgia,serif',FS='"Fira Sans",system-ui,sans-serif',FA='Anton,Impact,"Arial Narrow",sans-serif';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tit=x=>String(x&&x.title||'').trim();
+try{const g=NAV.find(x=>x.g==='Gazete ve Dergi');if(g&&!g.items.some(i=>i[0]==='dgissue')){const i=g.items.findIndex(x=>x[0]==='dg');g.items.splice(i<0?0:i+1,0,['dgissue','Dergi sayısı hazırla'])}}catch(e){}
+let order=[],on=new Set(),busy=false,note='',meta=null,noteEl=null;
+const items=()=>((S.work&&S.work.dg)||[]).filter(x=>!isBlank('dg',x)&&tit(x));
+function sync(){const cur=items();order=order.filter(o=>cur.includes(o));cur.forEach(o=>{if(!order.includes(o)){order.push(o);on.add(o)}});[...on].forEach(o=>{if(!order.includes(o))on.delete(o)})}
+const chosen=()=>order.filter(o=>on.has(o));
+const say=(t,bad)=>{note=t;if(noteEl&&noteEl.isConnected){noteEl.textContent=t;noteEl.style.color=bad?'var(--bad)':'var(--mut)'}};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const PG='position:relative;width:'+PW+'px;height:'+PH+'px;overflow:hidden;background:#fff;box-sizing:border-box;font-family:'+FB;
+const gr=(a,b,d)=>'linear-gradient('+(d||'90deg')+','+a+','+b+')';
+let _xi=0;const xf=(label,input)=>{const id='dgi'+(++_xi);input.id=id;return h('div',{class:'fld'},h('label',{for:id,text:label}),input)};
+const slug=s=>String(s).toLowerCase().replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'sayi';
+async function run(final){
+  if(busy)return;
+  const list=chosen();
+  if(!list.length)return say('En az bir yazı seç.',1);
+  const m={name:meta.name.trim(),date:meta.date.trim(),desc:meta.desc.trim()};
+  if(!m.name)return say('Sayı adını yaz (ör. Sayı 1).',1);
+  if(!await ask('“'+m.name+'” dijital arşive alınsın mı?',list.length+' yazı dijital sayı olarak arşive eklenecek; seçilen yazılar Dergi yazıları listesinden kalkacak. Bunlar taslak olarak bekler, sitede görünmesi için ayrıca “Yayınla” dersin. İstersen “Değişiklikleri at” ile geri alabilirsin.','Arşive al'))return;
+  busy=true;render();
+  try{
+    const w=S.work;
+    w.c.archive.unshift({id:uid(),t:MAG+' · '+m.name,s:[m.name,m.date].filter(Boolean).join(' · '),x:(m.desc||'İçindekiler: '+list.map(tit).join(' · ')).slice(0,240),img:(list.find(o=>o.img)||{}).img||'',tur:'dergi',a:list.map(slimArt)});
+    const rm=new Set(list);w.dg=w.dg.filter(x=>!rm.has(x));
+    list.forEach(o=>on.delete(o));meta.name='Sayı '+(w.c.archive.filter(x=>x.tur==='dergi').length+1);
+    say('');touch();
+    toast('“'+m.name+'” dijital arşive eklendi (taslak). Sitede görünmesi için Yayınla de.',{label:'Yayınla',fn:startPublish});
+  }catch(e){say('Hata: '+(e&&e.message||e),1)}
+  finally{busy=false;render()}
+}
+VIEWS.dgissue=()=>{
+  const w=S.work;w.c=w.c||{};w.c.archive=w.c.archive||[];w.dg=w.dg||[];sync();
+  if(!meta)meta={name:'Sayı '+(w.c.archive.filter(x=>x.tur==='dergi').length+1),date:AY[new Date().getMonth()]+' '+new Date().getFullYear(),desc:''};
+  const root=h('div',{class:'stack'});
+  root.append(pageHead('Dergi sayısı hazırla','Sayıya girecek yazıları seç ve sırala. “Sayıyı dijital arşive al” dersen sayı arşive eklenir ve seçilen yazılar Dergi yazıları listesinden kalkar; seçmediklerin sonraki sayıya kalır. Her şey taslak olarak bekler, sitede görünmesi için ayrıca “Yayınla” dersin.'));
+  const fi=(k,ph)=>h('input',{type:'text',value:meta[k],placeholder:ph,oninput:e=>{meta[k]=e.target.value}});
+  root.append(h('div',{class:'panel'},h('h3',{text:'Sayı bilgisi'}),h('div',{class:'grid2'},xf('Sayı adı',fi('name','Sayı 1')),xf('Dönem',fi('date','Kasım 2026'))),xf('Kısa açıklama (kapakta ve arşivde görünür, isteğe bağlı)',fi('desc','Merakla başlayan, veriyle büyüyen yazılar.'))));
+  const lp=h('div',{class:'panel'},h('h3',{text:'Sayıya girecek yazılar'}));
+  const cnt=h('p',{class:'hint'});
+  const draw=()=>{
+    lp.replaceChildren(h('h3',{text:'Sayıya girecek yazılar'}));
+    if(!order.length){lp.append(h('div',{class:'empty'},h('p',{text:'Dergi yazıları listesinde henüz yazı yok. Önce “Dergi yazıları” bölümünden yazı ekle.'}),h('a',{class:'btn sm solid',href:'#/dg',text:'Dergi yazılarına git'})));return}
+    order.forEach((o,i)=>{
+      const cb=h('input',{type:'checkbox',checked:on.has(o),'aria-label':tit(o)+' yazısını sayıya ekle',onchange:e=>{e.target.checked?on.add(o):on.delete(o);upd()}});
+      lp.append(h('div',{class:'xp-row'},
+        h('label',{class:'row',style:'flex:1;min-width:0;cursor:pointer'},cb,h('span',{class:'xp-txt'},h('b',{text:tit(o)}),h('small',{text:[o.kind,o.by].filter(Boolean).join(' · ')||'Dergi yazısı'}))),
+        h('div',{class:'row'},
+          h('button',{class:'btn sm',type:'button',text:'↑',disabled:i===0||busy,'aria-label':'Yukarı al',onclick:()=>{[order[i],order[i-1]]=[order[i-1],order[i]];draw()}}),
+          h('button',{class:'btn sm',type:'button',text:'↓',disabled:i===order.length-1||busy,'aria-label':'Aşağı al',onclick:()=>{[order[i],order[i+1]]=[order[i+1],order[i]];draw()}}))));
+    });
+    lp.append(cnt);upd();
+  };
+  const upd=()=>{cnt.textContent=on.size+' / '+order.length+' yazı seçili'};
+  draw();root.append(lp);
+  noteEl=h('p',{class:'hint',role:'status','aria-live':'polite',text:note});
+  root.append(h('div',{class:'panel'},h('div',{class:'row'},
+    h('button',{class:'btn pub',type:'button',disabled:busy||!order.length,text:busy?'Hazırlanıyor…':'Sayıyı dijital arşive al',onclick:()=>run(true)})),noteEl,
+    h('p',{class:'hint',text:'Sayı arşive eklenince Dijital arşiv sayfasında okunur. PDF üretilmez; yazıların metni ve fotoğrafları olduğu gibi saklanır.'})));
+  return root;
+};
+})();
+
+</script>
 <script>
 /* =====================================================================
    Veri tabloları: siteden gelen tablolar burada bekler, yönetici onaylayınca
@@ -5313,17 +5269,6 @@ VIEWS.xplus=()=>{
     h('button',{class:'btn sm solid',type:'button',text:'Hepsini aç',onclick:()=>{XP_IDS.forEach(k=>setOne(k,true));upd();touch();toast('Tüm Eko-Plus sayfaları açıldı. Yayınlayınca sitede etkili olur.')}}),
     h('button',{class:'btn sm',type:'button',text:'Hepsini kapat',onclick:()=>{XP_IDS.forEach(k=>setOne(k,false));upd();touch();toast('Tüm Eko-Plus sayfaları kapatıldı. Yayınlayınca sitede etkili olur.')}})),sumEl);
   root.append(bulk);
-  {const pw=w.pw||(w.pw={on:false,code:''});
-    const sw=h('input',{type:'checkbox',checked:!!pw.on,'aria-label':'Eko-Plus şifresi'}),st=h('span',{class:'xp-st '+(pw.on?'on':'off'),text:pw.on?'Açık':'Kapalı'});
-    const ci=h('input',{type:'text',value:pw.code||'',placeholder:'Örn. eko2026',maxlength:'40',autocomplete:'off','aria-label':'Şifre',style:'max-width:260px'});
-    const chk=()=>{if(pw.on&&!pw.code.trim()){toast('Şifre boş. Önce bir şifre yaz.')}};
-    sw.addEventListener('change',()=>{pw.on=sw.checked;st.textContent=pw.on?'Açık':'Kapalı';st.className='xp-st '+(pw.on?'on':'off');chk();touch()});
-    ci.addEventListener('input',()=>{pw.code=ci.value.trim();touch()});
-    root.append(h('div',{class:'panel'},h('h3',{text:'Eko-Plus şifresi'}),
-      h('div',{class:'xp-row'},h('div',{class:'xp-txt'},h('b',{text:'Şifreyle giriş'}),h('small',{text:'Ortak ekranda ya da ortak ağda görüşme yaparken aç. Açıkken Eko-Plus sayfaları onaylı üyeler dahil herkese kilitlenir; şifre yazılınca o sekme için açılır, sekme kapanınca yeniden kilitlenir. Kapalıyken hiçbir şey değişmez (varsayılan). Şifre değişince herkesten yeniden istenir. İİBF Laboratuvarı kendi sayfalarında çalıştığı için bu kilitten etkilenmez.'})),
-        h('label',{class:'switch'},sw,h('span',{class:'tr'}),st)),
-      h('div',{class:'row',style:'margin-top:10px'},h('label',{text:'Şifre'}),ci),
-      h('p',{class:'hint',text:'Basit bir ortak şifredir; sayfa kodunda görünür, yüksek güvenlik için değildir. Yayınlayınca sitede etkili olur; görüşme bitince kapatıp yeniden yayınla.'})))}
   for(const g of XPG){
     const p=h('div',{class:'panel'},h('h3',{text:g.g}));
     for(const[k,t,d]of g.items){
