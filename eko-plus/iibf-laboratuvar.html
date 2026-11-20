@@ -349,7 +349,7 @@ function showAuth(note,tab){
   const f=el('form',{novalidate:true},
     sg?fld('lb-n','Ad soyad','text',{autocomplete:'name',maxlength:'80'}):null,
     sg?el('label',{class:'lb-f','for':'lb-b'},'Bölüm',el('select',{id:'lb-b',required:true},el('option',{value:'',text:'Bölümünü seç'}),LOPT.map(x=>el('option',{value:x[0],text:x[1]})))):null,
-    sg?fld('lb-c','Sınıf','text',{maxlength:'40',placeholder:'Örn. 2. sınıf'}):null,
+    sg?el('label',{class:'lb-f','for':'lb-c'},'Sınıf',el('select',{id:'lb-c',required:true},el('option',{value:'',text:'Sınıfını seç'}),['1. sınıf','2. sınıf','3. sınıf','4. sınıf'].map(x=>el('option',{value:x,text:x})))):null,
     fld('lb-e','Üniversite e-postası','email',{autocomplete:'username',inputmode:'email',placeholder:hc?'ad.soyad@inonu.edu.tr':'ad.soyad@ogr.inonu.edu.tr'}),
     fld('lb-p','Parola','password',{autocomplete:sg?'new-password':'current-password',minlength:'6'}),
     el('p',{class:'lb-n',text:hc?'Hocalar buradan girer ve doğrudan laboratuvara geçer. Hesabın yoksa “Hesap oluştur”a bas ve e-postanı doğrula; yönetici seni yetkilendirince giriş açılır.':sg?'Yalnızca inonu.edu.tr uzantılı e-postalar kabul edilir. Başvurun yönetici onayından geçince üyeliğin başlar; ayrıca e-postanı doğrulaman gerekir.':'Üyeliğin henüz onaylanmadıysa giriş yapınca durumunu görürsün.'}),
@@ -361,6 +361,7 @@ function showAuth(note,tab){
     if(pw.length<6){say(out,'Parola en az 6 karakter olmalı.');return}
     if(sg&&v('lb-n').length<3){say(out,'Ad soyadını yaz.');return}
     if(sg&&!v('lb-b')){say(out,'Bölümünü seç.');return}
+    if(sg&&!v('lb-c')){say(out,'Sınıfını seç.');return}
     btn.disabled=true;
     try{
       if(!KEY||!DBU)throw new Error('Üyelik henüz yapılandırılmadı.');
