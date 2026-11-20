@@ -2121,7 +2121,7 @@ let NAV=[
   {g:'Bilgi ve Veri',items:[['parite','Pariteler'],['igraf','İktisat Grafikleri'],['gs','Ekonomi göstergeleri'],['xc-ulke','Ülke Karşılaştırması'],['xc-turkiye','Türkiye Ekonomisi Dosyaları'],['xc-grafik','Grafik Okuma Okulu'],['xc-urun','Bir Ürünün Hikâyesi']]},
   {g:'Kalkınma',items:[['xc-kalkinma','İl dosyaları']]},
   {g:'Girişimcilik',items:[['gborsa','Fikir Borsası ilanları'],['xc-girisim','Atölye içerikleri']]},
-  {g:'Eko-Plus',items:[['teachers','Hocalar'],['xplus','Sayfa anahtarları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Resmî sınav takvimi']]},
+  {g:'Üye Alanı',items:[['teachers','Hocalar'],['xplus','Sayfa anahtarları'],['xpmentor','Mezun ve Mentor'],['xpnot','Not Paylaşımı'],['xpveri','Veri Analizi'],['xptakvim','Resmî sınav takvimi']]},
   {g:'Site',items:[['texts','Site metinleri'],['blocks','Örnek içerikler'],['stats','İstatistikler'],['links','Bağlantılar'],['settings','Ayarlar ve yedek']]}
 ];
 const VIEWS={};
@@ -2827,7 +2827,7 @@ function rulesText(email){
       n:{'.validate':str(80)},m:{'.validate':'newData.isNumber()'},s:{'.validate':'newData.isNumber()'},ti:{'.validate':opt(200)},a:{'.validate':opt(3000)},r:{'.validate':opt(600)},d:{'.validate':'newData.isNumber()'},lv:{'.validate':'newData.isNumber()'},
       '$other':{'.validate':false}}}},
     uyeler:{'.read':A,'$uid':{'.read':`auth != null && auth.uid === $uid`,
-      '.write':`${A} || (!data.exists() && newData.exists() && auth.uid === $uid && ${STE} && newData.child('s').val() === 'bekliyor' && newData.child('e').val() === auth.token.email)`,
+      '.write':`${A} || (!data.exists() && newData.exists() && auth.uid === $uid && ${STE} && newData.child('s').val() === 'bekliyor' && newData.child('e').val() === auth.token.email) || (data.exists() && newData.exists() && auth.uid === $uid && ${STE} && newData.child('s').val() === data.child('s').val() && newData.child('e').val() === data.child('e').val() && newData.child('d').val() === data.child('d').val() && newData.child('o').val() === data.child('o').val())`,
       '.validate':"newData.hasChildren(['n','e','s','d'])",
       n:{'.validate':str(80)},e:{'.validate':str(80)},b:{'.validate':opt(80)},c:{'.validate':opt(40)},
       l:{'.validate':"newData.val() === 'isletme' || newData.val() === 'iktisat' || newData.val() === 'ekonometri' || newData.val() === 'maliye' || newData.val() === 'kamu' || newData.val() === 'uluslararasi' || newData.val() === 'ceko'"},
@@ -3000,62 +3000,152 @@ function downloadCsv(name,rows){
   const blob=new Blob(['﻿'+[head.map(csvCell).join(';'),...body].join('\r\n')],{type:'text/csv;charset=utf-8'});
   const a=h('a',{href:URL.createObjectURL(blob),download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
-/* ---- Üyelik başvuruları: İktisat Laboratuvarı üyeliği için yönetici onayı ---- */
-VIEWS.members=()=>fbGate('Üyelik başvuruları','Sitedeki Üyelere Özel bölüm (İİBF Laboratuvarı, Borsa Oyunu, Hâkimlik Simülasyonu) için “Üye ol” diyenler burada listelenir. Onayladığın kişi e-postasını da doğruladığında bu bölüme girer; İİBF Laboratuvarı’nda yalnızca kendi bölümünün laboratuvarını açabilir. Her kişi için bir, birkaç ya da hepsi (örn. Siyaset Bilimi ve Kamu Yönetimi okuyan için Kamu + Uluslararası) laboratuvar işaretleyebilirsin. Bekleyen ve reddedilen kişiler giremez. Kaydet dediğin anda uygulanır, “Yayınla” gerekmez.',root=>{
-  const st={q:'',f:'bekliyor',l:'',rows:[]};
+/* ---- Üyelik başvuruları: yeni üyelik sistemine (uye.js) göre ---- */
+const MEM={rows:[],loaded:false,err:null};
+const memPend=()=>MEM.rows.filter(r=>(r.s||'bekliyor')==='bekliyor').length;
+function memNav(){const g=NAV.find(x=>x.g==='Gelenler'),it=g&&g.items.find(x=>x[0]==='members');if(it){const n=memPend();it[1]='Üyelik başvuruları'+(n?' ('+n+')':'')}}
+async function memRefresh(){
+  try{const j=await FB.req('uyeler')||{};MEM.rows=Object.entries(j).filter(([,x])=>x&&x.n).map(([id,x])=>Object.assign({id},x));MEM.err=null}
+  catch(e){MEM.err=e&&e.message||'Okunamadı.'}
+  MEM.loaded=true;memNav();
+}
+VIEWS.members=()=>fbGate('Üyelik başvuruları','“Üye ol” diyenler burada listelenir. Yeni sistemde yalnızca inonu.edu.tr uzantılı e-postalar kabul edilir; kişi e-postasını doğrulayıp sen onaylayınca Üye Alanı’na girer (Laboratuvar, Mevzuat, Veri Analizi, Soru-Cevap). Üye olurken seçtiği bölüm laboratuvarını, seçtiği sınıf ise İktisat Laboratuvarı’nda hangi derslerin ve modüllerin görüneceğini belirler; istersen aşağıdan değiştirebilirsin. Bekleyen ve reddedilen kişiler giremez. Kaydet dediğin anda uygulanır, “Yayınla” gerekmez.',root=>{
+  const st={q:'',f:'bekliyor',l:'',a:'',b:'',y:'',o:'yeni',sel:new Set()};
+  const CLS=['Hazırlık','1. sınıf','2. sınıf','3. sınıf','4. sınıf','Yüksek lisans'];
+  const clsOf=r=>{const c=String(r.c||'').toLocaleLowerCase('tr');if(!c.trim())return'';if(/hazırlık|hazirlik/.test(c))return'Hazırlık';if(/yüksek|lisansüstü|lisansustu|doktora/.test(c))return'Yüksek lisans';const m=c.match(/[1-4]/);return m?m[0]+'. sınıf':''};
   const LABL=[['isletme','İşletme & Finans'],['iktisat','İktisat'],['ekonometri','Ekonometri'],['maliye','Maliye & Vergi'],['kamu','Kamu Yönetimi'],['uluslararasi','Uluslararası İlişkiler'],['ceko','Çalışma Ekonomisi ve Endüstri İlişkileri']];
   const labsOf=r=>{let a=[];if(r.ll&&typeof r.ll==='object')a=LABL.map(x=>x[0]).filter(k=>r.ll[k]);if(!a.length&&r.l&&LABL.some(x=>x[0]===r.l))a=[r.l];if(a.length)return a;const b=String(r.b||'').toLocaleLowerCase('tr');for(const[k,re]of[['ekonometri',/ekonometri/],['uluslararasi',/uluslararas/],['maliye',/maliye/],['kamu',/kamu|siyaset/],['ceko',/çalışma|calisma|endüstri|ceko/],['isletme',/işletme|isletme/],['iktisat',/iktisat|ekonomi/]])if(re.test(b))return[k];return[]};
   const labN=k=>(LABL.find(x=>x[0]===k)||['',''])[1];
-  const lsel=h('select',{'aria-label':'Laboratuvara göre süz'},h('option',{value:'',text:'Tüm laboratuvarlar'}),...LABL.map(x=>h('option',{value:x[0],text:x[1]})),h('option',{value:'-',text:'Laboratuvarı belli olmayanlar'}));
-  const q=h('input',{type:'search',placeholder:'Ad, e-posta, bölüm ya da sınıfta ara','aria-label':'Üyelerde ara'});
-  const bar=h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'}),stat=h('p',{class:'hint'}),box=h('div');
-  const refresh=h('button',{class:'btn sm',type:'button',text:'Yenile',onclick:()=>load()});
-  root.append(h('div',{class:'toolbar'},q,lsel),bar,h('div',{class:'row'},refresh,stat),box);
+  const acct=r=>{const d=String(r.e||'').toLowerCase().split('@')[1]||'';return /(^|\.)ogr\.inonu\.edu\.tr$/.test(d)?['Öğrenci','ogr']:/(^|\.)inonu\.edu\.tr$/.test(d)?['Personel','per']:['Alan dışı','dis']};
   const LB={bekliyor:['Bekleyen','warn'],onay:['Onaylı','ok'],red:['Reddedilen','']};
   const cur=r=>LB[r.s]?r.s:'bekliyor';
-  const fail=e=>{if(e&&e.message==='auth'){FB.out();render()}else if(e&&e.message==='perm')modal({title:'Veritabanı kuralları güncellenmeli',body:h('div',{class:'stack'},h('p',{class:'mut',text:'Üyelik için yeni bir kural bölümü eklendi. Aşağıdaki kuralların tamamını Firebase’e bir kez yapıştırman yeterli.'}),rulesBox())});else toast((e&&e.message)||'İşlem başarısız.')};
-  async function setL(r,ks){try{const o={ll:ks.length?Object.fromEntries(ks.map(k=>[k,true])):null,l:ks[0]||null};await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});if(ks.length){r.ll=o.ll;r.l=o.l}else{delete r.ll;delete r.l}draw();toast(ks.length===LABL.length?'Tüm laboratuvarlar açıldı.':ks.length?ks.length+' laboratuvar yetkisi kaydedildi.':'Laboratuvar yetkisi kaldırıldı.')}catch(e){draw();fail(e)}}
-  async function setS(r,s,t){try{const o={s,o:Date.now()};await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});Object.assign(r,o);draw();toast(t)}catch(e){fail(e)}}
-  function draw(){
-    const cnt=k=>st.rows.filter(r=>cur(r)===k).length;
-    bar.replaceChildren(...[['bekliyor','Bekleyen'],['onay','Onaylı'],['red','Reddedilen'],['','Tümü']].map(([k,t])=>h('button',{class:'btn sm'+(st.f===k?' solid':''),type:'button','aria-pressed':String(st.f===k),text:t+' ('+(k?cnt(k):st.rows.length)+')',onclick:()=>{st.f=k;draw()}})));
+  const ini=n=>{const p=String(n||'?').trim().split(/\s+/);return((p[0]||'?')[0]+(p.length>1?p[p.length-1][0]:'')).toLocaleUpperCase('tr')};
+  const fail=e=>{if(e&&e.message==='auth'){FB.out();render()}else if(e&&e.message==='perm')modal({title:'Veritabanı kuralları güncellenmeli',body:h('div',{class:'stack'},h('p',{class:'mut',text:'Üyelik için kural bölümü güncellendi. Aşağıdaki kuralların tamamını Firebase’e bir kez yapıştırman yeterli.'}),rulesBox())});else toast((e&&e.message)||'İşlem başarısız.')};
+
+  /* üst şerit: sayaçlar (tıklayınca süzer) */
+  const cards=h('div',{style:'display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px'});
+  const q=h('input',{type:'search',placeholder:'Ad, e-posta, bölüm ya da sınıfta ara','aria-label':'Üyelerde ara'});
+  const lsel=h('select',{'aria-label':'Laboratuvara göre süz'});
+  const asel=h('select',{'aria-label':'Hesap türüne göre süz'},h('option',{value:'',text:'Tüm hesaplar'}),h('option',{value:'ogr',text:'Öğrenci (ogr.inonu.edu.tr)'}),h('option',{value:'per',text:'Personel (inonu.edu.tr)'}),h('option',{value:'dis',text:'Alan dışı (eski kayıt)'}));
+  const bsel=h('select',{'aria-label':'Bölüme göre süz'});
+  const ysel=h('select',{'aria-label':'Sınıfa göre süz'},h('option',{value:'',text:'Tüm sınıflar'}),...CLS.map(x=>h('option',{value:x,text:x})),h('option',{value:'-',text:'Sınıfı belli olmayanlar'}));
+  const osel=h('select',{'aria-label':'Sırala'},h('option',{value:'yeni',text:'Yeni başvuru önce'}),h('option',{value:'eski',text:'Eski başvuru önce'}),h('option',{value:'ad',text:'Ada göre (A-Z)'}));
+  const stat=h('p',{class:'hint'}),box=h('div'),bulk=h('div',{class:'panel row',style:'gap:8px;justify-content:space-between',hidden:true});
+  const refresh=h('button',{class:'btn sm',type:'button',text:'Yenile',onclick:()=>load()});
+  const csvB=h('button',{class:'btn sm',type:'button',text:'Excel için indir (CSV)',onclick:()=>exportCsv()});
+  const rulesB=h('button',{class:'btn sm ghost',type:'button',text:'Veritabanı kuralları',onclick:()=>modal({title:'Veritabanı kuralları',body:rulesBox()})});
+  const info=h('details',{class:'panel',style:'padding:12px 16px'},h('summary',{style:'cursor:pointer;font-weight:600',text:'Üyelik nasıl işliyor?'}),
+    h('ol',{class:'mut',style:'margin:10px 0 0;padding-left:20px;display:grid;gap:4px'},
+      h('li',{text:'Kişi sitede “Üye ol”a basar; ad soyad, bölüm, sınıf ve inonu.edu.tr e-postasıyla kayıt olur. Kayıt “Bekleyen” olarak buraya düşer.'}),
+      h('li',{text:'Kişiye e-posta doğrulama bağlantısı gider. Doğrulama durumu Firebase Authentication’da görünür; bu listede görünmez. Doğrulamayan onaylı üye de giremez.'}),
+      h('li',{text:'Sen “Onayla” dersin. Laboratuvarı boşsa bölümünden otomatik atanır; birden fazla laboratuvar işaretleyebilirsin.'}),
+      h('li',{text:'Sınıf artık seçmeli (Hazırlık, 1–4. sınıf, Yüksek lisans). İktisat Laboratuvarı üyeye yalnızca kendi sınıfının derslerini ve bu derslere bağlı modülleri gösterir; sınıfı belli olmayana tüm dersleri gösterir. Hoca ve yönetici hepsini görür. Eski serbest yazılı sınıflar (örn. “2.sınıf”) otomatik tanınır.'}),
+      h('li',{text:'Kişi Profilim’den ad, bölüm ve sınıfını güncelleyebilir (bölümünü değiştirirse laboratuvarı da değişir). Bunun için veritabanı kurallarının güncel olması gerekir.'}),
+      h('li',{text:'Hoca yetkisi “Üye Alanı › Hocalar” bölümünden verilir; hoca da aynı “Giriş yap” penceresini kullanır.'})));
+  root.append(cards,info,h('div',{class:'toolbar',style:'margin-bottom:0'},q),h('div',{class:'toolbar'},lsel,bsel,ysel,asel,osel),h('div',{class:'row'},refresh,csvB,rulesB,stat),bulk,box);
+
+  const rowsAll=()=>MEM.rows;
+  function filtered(){
     const qq=st.q.trim().toLocaleLowerCase('tr');
-    const rows=st.rows.filter(r=>(!st.f||cur(r)===st.f)&&(!st.l||(st.l==='-'?!labsOf(r).length:labsOf(r).includes(st.l)))&&(!qq||[r.n,r.e,r.b,r.c].join(' ').toLocaleLowerCase('tr').includes(qq)));
-    stat.textContent=st.rows.length?rows.length+' kayıt gösteriliyor, toplam '+st.rows.length+'.':'';
-    box.replaceChildren();
-    if(!rows.length){box.append(h('div',{class:'empty'},h('b',{text:st.rows.length?'Bu filtrede kayıt yok':'Henüz üyelik başvurusu yok'}),h('span',{text:st.rows.length?'Filtreyi ya da aramayı değiştir.':'Biri Üyelere Özel girişinde “Üye ol” dediğinde burada görünür.'})));return}
-    rows.forEach(r=>{const c=cur(r);
-      box.append(h('div',{style:'padding:12px 0;border-top:1px solid var(--line)',class:'stack'},
-        h('div',{class:'row',style:'justify-content:space-between;gap:8px'},h('div',null,h('b',{text:r.n}),h('span',{class:'chip'+(LB[c][1]?' '+LB[c][1]:''),style:'margin-left:8px',text:LB[c][0]})),h('span',{class:'mut',text:fmtTs(r.d)})),
-        h('div',{class:'mut',text:[r.e,r.b,r.c].filter(Boolean).join(' · ')}),
-        (()=>{const cur=labsOf(r),wrap=h('div',{class:'row',style:'gap:6px;flex-wrap:wrap;align-items:center'});
-          const mk=t=>{const c=h('input',{type:'checkbox'});return{c,l:h('label',{class:'chip',style:'cursor:pointer;display:inline-flex;gap:6px;align-items:center'},c,t)}};
-          const A=mk('Hepsi'),I=LABL.map(([k,n])=>Object.assign(mk(n),{k}));
-          I.forEach(o=>{o.c.checked=cur.includes(o.k)});A.c.checked=I.every(o=>o.c.checked);
-          const save=()=>{A.c.disabled=true;I.forEach(o=>{o.c.disabled=true});setL(r,I.filter(o=>o.c.checked).map(o=>o.k))};
-          A.c.addEventListener('change',()=>{I.forEach(o=>{o.c.checked=A.c.checked});save()});
-          I.forEach(o=>o.c.addEventListener('change',()=>{A.c.checked=I.every(x=>x.c.checked);save()}));
-          wrap.append(A.l,...I.map(o=>o.l));
-          return h('div',{class:'stack',style:'gap:6px'},h('div',{class:'mut',text:'Girebildiği laboratuvarlar (birden fazla seçilebilir):'}),wrap,!cur.length?h('span',{class:'chip warn',text:'Atanmadı: hiçbir laboratuvara giremez'}):(!r.ll&&!r.l)?h('span',{class:'chip',text:'Bölüm yazısından tahmin edildi, işaretleyip kaydedebilirsin'}):null)})(),
-        h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},
-          c!=='onay'?h('button',{class:'btn sm solid',type:'button',text:'Onayla',onclick:()=>setS(r,'onay','Üyelik onaylandı.')}):null,
-          c!=='red'?h('button',{class:'btn sm',type:'button',text:'Reddet',onclick:()=>setS(r,'red','Başvuru reddedildi.')}):null,
-          c!=='bekliyor'?h('button',{class:'btn sm',type:'button',text:'Beklemeye al',onclick:()=>setS(r,'bekliyor','Beklemeye alındı.')}):null,
-          h('button',{class:'btn sm ghost danger',type:'button',text:'Sil',onclick:async()=>{
-            if(!(await ask('Kaydı sil','“'+r.n+'” üyelik kaydı silinir. Kişinin giriş hesabı Firebase’de kalır; giriş yaparsa yeniden bekleyen başvuru olarak görünür.','Kaydı sil',true)))return;
-            try{await FB.req('uyeler/'+r.id,{method:'DELETE'});st.rows=st.rows.filter(x=>x.id!==r.id);draw();toast('Kayıt silindi.')}catch(e){fail(e)}}}))))});
+    let a=rowsAll().filter(r=>(!st.f||cur(r)===st.f)&&(!st.l||(st.l==='-'?!labsOf(r).length:labsOf(r).includes(st.l)))&&(!st.a||acct(r)[1]===st.a)&&(!st.b||(r.b||'')===st.b)&&(!st.y||(st.y==='-'?!clsOf(r):clsOf(r)===st.y))&&(!qq||[r.n,r.e,r.b,r.c].join(' ').toLocaleLowerCase('tr').includes(qq)));
+    a=a.slice().sort(st.o==='ad'?(p,r)=>String(p.n).localeCompare(String(r.n),'tr'):st.o==='eski'?(p,r)=>(p.d||0)-(r.d||0):(p,r)=>(r.d||0)-(p.d||0));
+    return a;
+  }
+  function fillSel(){
+    lsel.replaceChildren(h('option',{value:'',text:'Tüm laboratuvarlar'}),...LABL.map(x=>h('option',{value:x[0],text:x[1]})),h('option',{value:'-',text:'Laboratuvarı belli olmayanlar'}));lsel.value=st.l;
+    const bs=[...new Set(rowsAll().map(r=>r.b).filter(Boolean))].sort((x,y)=>x.localeCompare(y,'tr'));
+    if(st.b&&!bs.includes(st.b))st.b='';
+    bsel.replaceChildren(h('option',{value:'',text:'Tüm bölümler'}),...bs.map(b=>h('option',{value:b,text:b+' ('+rowsAll().filter(r=>r.b===b).length+')'})));bsel.value=st.b;
+  }
+  /* karar: tek istekte durum (+ gerekirse bölümden otomatik laboratuvar) */
+  function decBody(r,s){
+    const o={s,o:Date.now()};
+    if(s==='onay'&&!(r.ll&&Object.keys(r.ll).length)&&!r.l){const g=labsOf(r);if(g.length){o.ll=Object.fromEntries(g.map(k=>[k,true]));o.l=g[0]}}
+    return o;
+  }
+  async function decide(list,s,msg){
+    if(!list.length)return;
+    let ok=0,bad=null;
+    for(const r of list){try{const o=decBody(r,s);await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});Object.assign(r,o);st.sel.delete(r.id);ok++}catch(e){bad=e;break}}
+    memNav();drawNav();draw();
+    if(ok)toast(list.length>1?ok+' kişi için işlem yapıldı.':msg);
+    if(bad)fail(bad);
+  }
+  async function setL(r,ks){try{const o={ll:ks.length?Object.fromEntries(ks.map(k=>[k,true])):null,l:ks[0]||null};await FB.req('uyeler/'+r.id,{method:'PATCH',body:o});if(ks.length){r.ll=o.ll;r.l=o.l}else{delete r.ll;delete r.l}draw();toast(ks.length===LABL.length?'Tüm laboratuvarlar açıldı.':ks.length?ks.length+' laboratuvar yetkisi kaydedildi.':'Laboratuvar yetkisi kaldırıldı.')}catch(e){draw();fail(e)}}
+  async function setC(r,c){try{await FB.req('uyeler/'+r.id,{method:'PATCH',body:{c}});r.c=c;draw();toast(c?'Sınıf kaydedildi: '+c:'Sınıf bilgisi temizlendi.')}catch(e){draw();fail(e)}}
+  function exportCsv(){
+    const rows=filtered();if(!rows.length){toast('İndirilecek kayıt yok.');return}
+    const head=['Ad soyad','E-posta','Hesap','Bölüm','Sınıf','Durum','Laboratuvarlar','Başvuru','Karar'];
+    const body=rows.map(r=>[r.n,r.e,acct(r)[0],r.b,clsOf(r)||r.c,LB[cur(r)][0],labsOf(r).map(labN).join(', '),fmtTs(r.d),r.o?fmtTs(r.o):''].map(csvCell).join(';'));
+    const blob=new Blob(['\ufeff'+[head.map(csvCell).join(';'),...body].join('\r\n')],{type:'text/csv;charset=utf-8'});
+    const a=h('a',{href:URL.createObjectURL(blob),download:'uyeler.csv'});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }
+  function drawCards(){
+    const cnt=k=>rowsAll().filter(r=>cur(r)===k).length;
+    cards.replaceChildren(...[['bekliyor','Bekleyen',cnt('bekliyor'),'var(--warn)'],['onay','Onaylı',cnt('onay'),'var(--ok)'],['red','Reddedilen',cnt('red'),'var(--mut)'],['','Tümü',rowsAll().length,'var(--ink)']].map(([k,t,n,c])=>
+      h('button',{type:'button','aria-pressed':String(st.f===k),onclick:()=>{st.f=k;st.sel.clear();draw()},style:'text-align:left;cursor:pointer;background:var(--surf);color:var(--ink);border:'+(st.f===k?'2px solid var(--ink)':'1px solid var(--line)')+';border-radius:12px;padding:12px 14px;display:grid;gap:2px;font:inherit'},
+        h('span',{style:'font-size:28px;font-weight:700;line-height:1;color:'+c+';font-variant-numeric:tabular-nums',text:String(n)}),h('span',{class:'mut',style:'font-size:13.5px;font-weight:600',text:t}))));
+  }
+  function drawBulk(rows){
+    const n=st.sel.size,pick=rows.filter(r=>st.sel.has(r.id));
+    bulk.hidden=!rows.length;
+    const all=h('input',{type:'checkbox','aria-label':'Görünenlerin hepsini seç'});all.checked=rows.length>0&&rows.every(r=>st.sel.has(r.id));
+    all.addEventListener('change',()=>{rows.forEach(r=>all.checked?st.sel.add(r.id):st.sel.delete(r.id));draw()});
+    bulk.replaceChildren(h('label',{class:'row',style:'gap:8px;cursor:pointer'},all,h('span',{text:n?n+' kişi seçili':'Görünenlerin hepsini seç'})),
+      h('div',{class:'row',style:'gap:8px'},
+        h('button',{class:'btn sm solid',type:'button',disabled:!n,text:'Seçilenleri onayla',onclick:async()=>{if(await ask('Toplu onay',pick.length+' kişinin üyeliği onaylanır. Laboratuvarı boş olanlara bölümlerine göre laboratuvar atanır.','Onayla'))decide(pick,'onay')}}),
+        h('button',{class:'btn sm',type:'button',disabled:!n,text:'Seçilenleri reddet',onclick:async()=>{if(await ask('Toplu red',pick.length+' kişinin başvurusu reddedilir.','Reddet',true))decide(pick,'red')}})));
+  }
+  function labBlock(r){
+    const have=labsOf(r),wrap=h('div',{class:'row',style:'gap:6px;flex-wrap:wrap;align-items:center'});
+    const mk=t=>{const c=h('input',{type:'checkbox'});return{c,l:h('label',{class:'chip',style:'cursor:pointer;display:inline-flex;gap:6px;align-items:center'},c,t)}};
+    const A=mk('Hepsi'),I=LABL.map(([k,n])=>Object.assign(mk(n),{k}));
+    I.forEach(o=>{o.c.checked=have.includes(o.k)});A.c.checked=I.every(o=>o.c.checked);
+    const save=()=>{A.c.disabled=true;I.forEach(o=>{o.c.disabled=true});setL(r,I.filter(o=>o.c.checked).map(o=>o.k))};
+    A.c.addEventListener('change',()=>{I.forEach(o=>{o.c.checked=A.c.checked});save()});
+    I.forEach(o=>o.c.addEventListener('change',()=>{A.c.checked=I.every(x=>x.c.checked);save()}));
+    wrap.append(A.l,...I.map(o=>o.l));
+    return h('div',{class:'stack',style:'gap:6px'},h('div',{class:'mut',text:'Girebildiği laboratuvarlar (birden fazla seçilebilir):'}),wrap,!have.length?h('span',{class:'chip warn',text:'Atanmadı: hiçbir laboratuvara giremez'}):(!r.ll&&!r.l)?h('span',{class:'chip',text:'Bölüm yazısından tahmin edildi; onaylayınca kaydedilir'}):null);
+  }
+  function draw(){
+    fillSel();drawCards();
+    const rows=filtered();
+    stat.textContent=rowsAll().length?rows.length+' kayıt gösteriliyor, toplam '+rowsAll().length+'.':'';
+    drawBulk(rows);box.replaceChildren();
+    if(!rows.length){box.append(h('div',{class:'empty'},h('b',{text:rowsAll().length?'Bu filtrede kayıt yok':'Henüz üyelik başvurusu yok'}),h('span',{text:rowsAll().length?'Filtreyi ya da aramayı değiştir.':'Biri sitede “Üye ol” dediğinde burada görünür.'})));return}
+    rows.forEach(r=>{const c=cur(r),ac=acct(r),pick=h('input',{type:'checkbox','aria-label':r.n+' seç'});pick.checked=st.sel.has(r.id);
+      pick.addEventListener('change',()=>{pick.checked?st.sel.add(r.id):st.sel.delete(r.id);drawBulk(rows)});
+      box.append(h('div',{style:'padding:14px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto auto 1fr;gap:12px;align-items:start'},
+        pick,
+        h('div',{'aria-hidden':'true',style:'width:42px;height:42px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700;color:var(--ink)',text:ini(r.n)}),
+        h('div',{class:'stack',style:'gap:8px;min-width:0'},
+          h('div',{class:'row',style:'justify-content:space-between;gap:8px'},
+            h('div',{class:'row',style:'gap:6px'},h('b',{text:r.n}),h('span',{class:'chip'+(LB[c][1]?' '+LB[c][1]:''),text:LB[c][0]}),h('span',{class:'chip'+(clsOf(r)?'':' warn'),title:clsOf(r)?'':'Sınıf belli değil: İktisat Laboratuvarı bu üyeye tüm dersleri gösterir.',text:clsOf(r)||'Sınıf yok'}),h('span',{class:'chip'+(ac[1]==='dis'?' warn':''),title:ac[1]==='dis'?'Yeni sistem yalnızca inonu.edu.tr e-postalarını kabul eder; bu kayıt eski.':'',text:ac[0]})),
+            h('span',{class:'mut',style:'font-size:13.5px',text:'Başvuru: '+fmtTs(r.d)+(r.o&&c!=='bekliyor'?' · Karar: '+fmtTs(r.o):'')})),
+          h('div',{class:'mut',style:'overflow-wrap:anywhere',text:[r.e,r.b,clsOf(r)||r.c].filter(Boolean).join(' · ')}),
+          h('label',{class:'row',style:'gap:8px'},h('span',{class:'mut',text:'Sınıfı:'}),(()=>{const sl=h('select',{'aria-label':r.n+' sınıfı',style:'max-width:200px'},h('option',{value:'',text:'Belli değil'}),...CLS.map(x=>h('option',{value:x,text:x,selected:clsOf(r)===x})));sl.addEventListener('change',()=>setC(r,sl.value));return sl})()),
+          labBlock(r),
+          h('div',{class:'row',style:'gap:8px;flex-wrap:wrap'},
+            c!=='onay'?h('button',{class:'btn sm solid',type:'button',text:'Onayla',onclick:()=>decide([r],'onay','Üyelik onaylandı.')}):null,
+            c!=='red'?h('button',{class:'btn sm',type:'button',text:'Reddet',onclick:()=>decide([r],'red','Başvuru reddedildi.')}):null,
+            c!=='bekliyor'?h('button',{class:'btn sm',type:'button',text:'Beklemeye al',onclick:()=>decide([r],'bekliyor','Beklemeye alındı.')}):null,
+            h('button',{class:'btn sm ghost danger',type:'button',text:'Sil',onclick:async()=>{
+              if(!(await ask('Kaydı sil','“'+r.n+'” üyelik kaydı silinir. Kişinin giriş hesabı Firebase’de kalır; giriş yaparsa yeniden bekleyen başvuru olarak görünür.','Kaydı sil',true)))return;
+              try{await FB.req('uyeler/'+r.id,{method:'DELETE'});MEM.rows=MEM.rows.filter(x=>x.id!==r.id);st.sel.delete(r.id);memNav();drawNav();draw();toast('Kayıt silindi.')}catch(e){fail(e)}}})))))});
   }
   async function load(){
     box.replaceChildren(h('div',{class:'skel'}),h('div',{class:'skel'}));
-    try{const j=await FB.req('uyeler')||{};
-      st.rows=Object.entries(j).filter(([,x])=>x&&x.n).map(([id,x])=>Object.assign({id},x)).sort((p,r)=>(r.d||0)-(p.d||0));
-      if(st.f==='bekliyor'&&!st.rows.some(r=>cur(r)==='bekliyor')&&st.rows.length)st.f='';
-      draw()}catch(e){dbFail(box,e,load)}
+    await memRefresh();
+    if(MEM.err){dbFail(box,{message:MEM.err},load);return}
+    if(st.f==='bekliyor'&&!memPend()&&MEM.rows.length)st.f='';
+    drawNav();draw();
   }
-  q.addEventListener('input',()=>{st.q=q.value;draw()});lsel.addEventListener('change',()=>{st.l=lsel.value;draw()});
+  q.addEventListener('input',()=>{st.q=q.value;draw()});
+  lsel.addEventListener('change',()=>{st.l=lsel.value;draw()});asel.addEventListener('change',()=>{st.a=asel.value;draw()});ysel.addEventListener('change',()=>{st.y=ysel.value;draw()});
+  bsel.addEventListener('change',()=>{st.b=bsel.value;draw()});osel.addEventListener('change',()=>{st.o=osel.value;draw()});
   load();
 });
-VIEWS.teachers=()=>fbGate('Hocalar (Üyelere Özel)','Buraya yazdığın e-postalar İktisat Laboratuvarı’na hoca olarak girer: öğrenci cevaplarını görür, modülleri açıp kapatır, senaryoları ve canlı oturumu yönetir, simülasyonları kısıtsız dener. Admin paneline giremezler. Hoca önce laboratuvardaki “Hoca girişi” sekmesinden hesap oluşturup e-postasını doğrulamalı. Kaydet dediğin anda uygulanır, “Yayınla” gerekmez.',root=>{
+VIEWS.teachers=()=>fbGate('Hocalar (Üye Alanı)','Buraya yazdığın e-postalar İktisat Laboratuvarı’na hoca olarak girer: öğrenci cevaplarını görür, modülleri açıp kapatır, senaryoları ve canlı oturumu yönetir, simülasyonları kısıtsız dener. Admin paneline giremezler. Hoca, sitedeki “Giriş yap / Üye ol” penceresinden kendi e-postasıyla hesap açıp e-postasını doğrulamalı; ayrıca üyelik onayı beklemez, yetki burada verildiği anda geçerlidir. Kaydet dediğin anda uygulanır, “Yayınla” gerekmez.',root=>{
   const st={rows:[]};
   const em=h('input',{type:'email',placeholder:'hoca@inonu.edu.tr','aria-label':'Hoca e-postası',autocomplete:'off',spellcheck:'false'}),nm=h('input',{type:'text',placeholder:'Ad soyad (isteğe bağlı)','aria-label':'Hoca adı',maxlength:'80',autocomplete:'off'});
   const box=h('div'),stat=h('p',{class:'hint'});
@@ -6280,6 +6370,17 @@ VIEWS.onay=()=>{
 function aqInit(){aqRefresh().then(()=>{drawNav();const n=aqPend().length;if(n)toast(n+' yazı onayınızı bekliyor. “Ek Yayınlar › Onay bekleyenler”');if(S.view==='home')render()})}
 {const _e=enterApp;enterApp=function(){_e();aqInit()}}
 if(S.work&&S.remote&&!$('#app').hidden)aqInit();
+
+/* ---- Üyelik başvuruları: ana sayfada uyarı, menüde bekleyen sayısı ---- */
+{const f=VIEWS.home;VIEWS.home=()=>{const v=f(),n=memPend();
+  if(n){const p=h('div',{class:'panel row',style:'justify-content:space-between'},
+    h('div',null,h('h3',{style:'margin:0',text:n+' üyelik başvurusu onay bekliyor'}),h('p',{class:'mut',text:'Onayladığın kişi e-postasını doğrulayınca Üye Alanı’na girer.'})),
+    h('button',{class:'btn solid',type:'button',text:'Başvurulara git',onclick:()=>go('members')}));
+    const hd=v.firstElementChild;if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p)}
+  return v}}
+function memInit(){try{if(!(FB.ok()&&FB.sess()))return;memRefresh().then(()=>{drawNav();if(S.view==='home')render()})}catch(e){}}
+{const _e=enterApp;enterApp=function(){_e();memInit()}}
+try{if(S.work&&S.remote&&!$('#app').hidden)memInit()}catch(e){}
 
 </script>
 </body>

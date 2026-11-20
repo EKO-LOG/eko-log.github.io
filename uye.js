@@ -25,6 +25,14 @@
   var LOPT = [['isletme', 'İşletme & Finans', ['isletme']], ['iktisat', 'İktisat', ['iktisat']], ['ekonometri', 'Ekonometri', ['ekonometri']], ['maliye', 'Maliye & Vergi', ['maliye']], ['kamu', 'Kamu Yönetimi', ['kamu']], ['uluslararasi', 'Uluslararası İlişkiler', ['uluslararasi']], ['ceko', 'Çalışma Ekonomisi ve Endüstri İlişkileri', ['ceko']], ['siyaset-kamu', 'Siyaset Bilimi ve Kamu Yönetimi', ['kamu']], ['siyaset-ub', 'Siyaset Bilimi ve Uluslararası İlişkiler', ['uluslararasi']]];
   var lpick = function (k) { return LOPT.filter(function (x) { return x[0] === k; })[0] || ['', '', []]; };
   var lbyname = function (n) { return LOPT.filter(function (x) { return x[1] === n; })[0]; };
+  /* sınıf: serbest yazı yerine seçmeli; İktisat Laboratuvarı dersleri bu bilgiye göre süzer */
+  var CLS = ['Hazırlık', '1. sınıf', '2. sınıf', '3. sınıf', '4. sınıf', 'Yüksek lisans'];
+  var clsNorm = function (c) {
+    c = String(c || '').toLocaleLowerCase('tr');
+    if (/hazırlık|hazirlik/.test(c)) return 'Hazırlık';
+    if (/yüksek|lisansüstü|lisansustu|doktora/.test(c)) return 'Yüksek lisans';
+    var m = c.match(/[1-4]/); return m ? m[0] + '. sınıf' : '';
+  };
   var EMAIL_RE = /^[^@\s]+@([a-z0-9-]+\.)*inonu\.edu\.tr$/i;
   var hk = function (e) { return String(e || '').trim().toLowerCase().replace(/\./g, ','); };
 
@@ -239,10 +247,10 @@
     var f = h('form', { novalidate: true },
       sg ? fld('u-n', 'Ad soyad', 'text', { autocomplete: 'name', maxlength: '80' }) : null,
       sg ? h('label', { class: 'uye-f', for: 'u-b' }, 'Bölüm', sel) : null,
-      sg ? fld('u-c', 'Sınıf', 'text', { maxlength: '40', placeholder: 'Örn. 2. sınıf' }) : null,
+      sg ? h('label', { class: 'uye-f', for: 'u-c' }, 'Sınıf', h('select', { id: 'u-c', required: true }, h('option', { value: '', text: 'Sınıfını seç' }), CLS.map(function (x) { return h('option', { value: x, text: x }); }))) : null,
       fld('u-e', 'Üniversite e-postası', 'email', { autocomplete: 'username', inputmode: 'email', placeholder: 'ad.soyad@ogr.inonu.edu.tr' }),
       fg ? null : fld('u-p', 'Parola', 'password', { autocomplete: sg ? 'new-password' : 'current-password', minlength: '6' }),
-      h('p', { class: 'n', style: 'margin-top:10px', text: sg ? 'Yalnızca inonu.edu.tr uzantılı e-postalar kabul edilir. Başvurun yönetici onayından geçince Laboratuvar ve diğer özellikler açılır; e-postanı da doğrulaman gerekir.' : fg ? 'Parolanı sıfırlamak için kayıtlı e-postanı yaz.' : 'Üyeliğin henüz onaylanmadıysa giriş yapınca durumunu Profilim’de görürsün.' }),
+      h('p', { class: 'n', style: 'margin-top:10px', text: sg ? 'Yalnızca inonu.edu.tr uzantılı e-postalar kabul edilir. Başvurun yönetici onayından geçince Laboratuvar ve diğer özellikler açılır; e-postanı da doğrulaman gerekir. Laboratuvarda yalnızca bölümüne ve sınıfına ait dersler görünür.' : fg ? 'Parolanı sıfırlamak için kayıtlı e-postanı yaz.' : 'Üyeliğin henüz onaylanmadıysa giriş yapınca durumunu Profilim’de görürsün.' }),
       btn, out,
       sg || fg ? null : h('button', { class: 'uye-link', type: 'button', onclick: function () { openAuth('fg'); } }, 'Parolamı unuttum')
     );
@@ -255,6 +263,7 @@
       if (!fg && pw.length < 6) return note(out, 'Parola en az 6 karakter olmalı.', 'er');
       if (sg && v('u-n').length < 3) return note(out, 'Ad soyadını yaz.', 'er');
       if (sg && !v('u-b')) return note(out, 'Bölümünü seç.', 'er');
+      if (sg && !v('u-c')) return note(out, 'Sınıfını seç.', 'er');
       btn.disabled = true;
       var p;
       if (fg) {
@@ -316,7 +325,7 @@
       var form = h('form', { novalidate: true },
         fld('p-n', 'Ad soyad', 'text', { value: rec.n || S.n || '', maxlength: '80', autocomplete: 'name' }),
         h('label', { class: 'uye-f', for: 'p-b' }, 'Bölüm', sel),
-        fld('p-c', 'Sınıf', 'text', { value: rec.c || '', maxlength: '40', placeholder: 'Örn. 2. sınıf' }),
+        h('label', { class: 'uye-f', for: 'p-c' }, 'Sınıf', h('select', { id: 'p-c' }, h('option', { value: '', text: 'Sınıfını seç' }), CLS.map(function (x) { return h('option', { value: x, text: x, selected: clsNorm(rec.c) === x }); }))),
         fld('p-e', 'E-posta (değiştirilemez)', 'email', { value: S.e, readonly: true }),
         btn);
       form.addEventListener('submit', function (ev) {
@@ -324,10 +333,11 @@
         var n = form.querySelector('#p-n').value.trim(), bk = form.querySelector('#p-b').value, c = form.querySelector('#p-c').value.trim();
         if (n.length < 3) return note(out, 'Ad soyadını yaz.', 'er');
         var upd = { n: n, c: c };
+        if (!c) return note(out, 'Sınıfını seç.', 'er');
         if (bk) { var lp = lpick(bk); upd.b = lp[1]; upd.l = lp[2][0] || ''; upd.ll = lp[2].reduce(function (o, k) { o[k] = true; return o; }, {}); }
         btn.disabled = true;
         db('uyeler/' + S.uid, 'PATCH', upd).then(function () {
-          S.n = n; keep(); ST.rec = Object.assign({}, rec, upd); renderBox(); note(out, 'Bilgilerin güncellendi.', 'ok');
+          S.n = n; keep(); ST.rec = Object.assign({}, rec, upd); renderBox(); note(out, 'Bilgilerin güncellendi. Laboratuvarı yeniden açtığında dersler yeni sınıfına göre görünür.', 'ok');
         }).catch(function (e) {
           note(out, e.message === 'perm' ? 'Bilgiler kaydedilemedi: veritabanı kuralları üyelerin kendi kaydını güncellemesine izin vermiyor. Yöneticiye ilet.' : e.message === 'auth' ? 'Oturum süresi doldu, yeniden giriş yap.' : e.message, 'er');
         }).then(function () { btn.disabled = false; });
