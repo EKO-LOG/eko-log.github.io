@@ -110,6 +110,7 @@
 
   /* ---------- stil ---------- */
   var css = [
+    '.uye-box,.uye-box *{pointer-events:auto}',
     '.uye-box{display:flex;align-items:center;gap:6px;margin-left:auto;flex:none;position:relative}',
     'nav~.uye-box{margin-left:6px}',
     '.uye-b{font:600 14px/1 "Instrument Sans",system-ui,sans-serif;border:1px solid var(--line,#e5d8dc);background:var(--surf,#fff);color:var(--ink,#1d1526);border-radius:999px;padding:10px 15px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px}',
@@ -124,7 +125,7 @@
     '.uye-menu hr{border:0;border-top:1px solid var(--line,#e5d8dc);margin:6px 4px}',
     '.uye-menu .who{padding:8px 12px 6px;font-size:13px;color:var(--mut,#6a5f76);line-height:1.35;word-break:break-word}',
     '.uye-menu .who b{display:block;color:var(--ink,#1d1526);font-size:15px}',
-    '@media (max-width:560px){.uye-b{padding:9px 11px;font-size:13px}.uye-lab{display:none}}',
+    '@media (max-width:560px){.uye-b{padding:9px 11px;font-size:13px}.uye-lab{display:none}.uye-menu{position:fixed;right:12px;left:auto;top:calc(env(safe-area-inset-top,0px) + 66px);width:min(270px,calc(100vw - 24px));max-height:calc(100vh - 90px);overflow:auto}}',
     '.uye-ov{position:fixed;inset:0;z-index:100000;background:rgba(18,8,26,.55);backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:max(20px,env(safe-area-inset-top,0px)) 14px 30px}',
     '.uye-modal{width:100%;max-width:480px;margin:auto;background:var(--surf,#fff);color:var(--ink,#1d1526);border:1px solid var(--line,#e5d8dc);border-radius:26px;box-shadow:0 30px 80px -20px rgba(20,0,30,.6);padding:24px 22px;font:16px/1.5 "Instrument Sans",system-ui,sans-serif}',
     '.uye-modal h2{font:800 24px/1.1 "Bricolage Grotesque",sans-serif;margin:0 0 6px}',
@@ -177,9 +178,8 @@
   function mountBox() {
     var bar = D.querySelector('header .bar') || D.querySelector('header');
     if (!bar) return;
-    if (!box) { box = h('div', { class: 'uye-box' }); }
+    if (!box) { box = h('div', { class: 'uye-box' }); renderBox(); }
     if (box.parentNode !== bar) bar.appendChild(box);
-    renderBox();
   }
   function renderBox() {
     if (!box) return;
@@ -410,7 +410,7 @@
     mountBox(); tidy();
     try {
       new MutationObserver(function (ms) {
-        ms.forEach(function (m) { [].forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1 || n.nodeType === 3) { if (n.nodeType === 1 && (n.classList.contains('uye-ov') || n.classList.contains('uye-box'))) return; schedule(n); } }); });
+        ms.forEach(function (m) { [].forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1 || n.nodeType === 3) { var el = n.nodeType === 1 ? n : n.parentNode; if (el && el.closest && el.closest('.uye-box,.uye-ov')) return; schedule(n); } }); });
       }).observe(D.body, { childList: true, subtree: true });
     } catch (e) {}
     /* arka planda üyelik durumunu tazele; durum değiştiyse sayfa bir kez yenilenir */
