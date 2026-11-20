@@ -1828,15 +1828,15 @@ textarea#vt-in{min-height:130px;font-family:ui-monospace,Menlo,monospace;font-si
 #p-arsiv .ar-c p{margin:2px 0 0;color:var(--mut);font-size:14.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 #p-arsiv .ar-m{margin-top:8px;font-size:13px;font-weight:600}#p-arsiv .ar-m.n{color:var(--mut);font-weight:400}
 #p-arsiv .ar-em{color:var(--mut);padding:30px 0}
-#p-arsiv .ar-back{display:inline-block;margin:10px 0 8px;font:inherit;font-weight:600;color:var(--g1);background:none;border:0;cursor:pointer;padding:0}
+#p-arsiv .ar-back{display:block;margin:10px 0 12px;font:inherit;font-weight:600;color:var(--g1);background:none;border:0;cursor:pointer;padding:0}
 #p-arsiv .ar-rd h2{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:6px 0}
 #p-arsiv .ar-lead{color:var(--mut);max-width:70ch}
 #p-arsiv .ar-toc{border-left:4px solid var(--g2);padding:6px 0 6px 16px;margin:18px 0 26px}
-#p-arsiv .ar-toc a{display:block;padding:3px 0;text-decoration:none;color:inherit}#p-arsiv .ar-toc a:hover{color:var(--g1)}
+#p-arsiv .ar-toc{display:block}#p-arsiv .ar-toc a{display:block;padding:3px 0;text-decoration:none;color:inherit;font-weight:500}#p-arsiv .ar-toc a:hover{color:var(--g1)}
 #p-arsiv .ar-art{padding:26px 0;border-top:1px solid var(--line);max-width:74ch}
 #p-arsiv .ar-art h3{font-size:clamp(22px,3vw,28px);line-height:1.2;margin:4px 0}
 #p-arsiv .ar-by{color:var(--mut);font-size:14px;margin-bottom:12px}
-#p-arsiv .ar-k{display:inline-block;color:var(--g1);font-weight:700;font-size:12px;letter-spacing:.07em;text-transform:uppercase}
+#p-arsiv .ar-k{display:block;color:var(--g1);font-weight:700;font-size:12px;letter-spacing:.07em;text-transform:uppercase}
 #p-arsiv .ar-art img{max-width:100%;border-radius:10px;margin:8px 0}
 #p-arsiv .ar-art p{margin:0 0 1em}
 #p-arsiv .ar-art blockquote{margin:1em 0;padding:2px 0 2px 16px;border-left:4px solid var(--g2);color:var(--mut)}
@@ -1890,8 +1890,8 @@ function openIssue(id){
  if(!x||!arr(x.a).length){if(LOADED)back();return false}
  r.replaceChildren();var bk=el('button','ar-back','← Arşive dön');bk.type='button';bk.onclick=back;r.append(bk);
  if(x.s)r.append(el('span','ar-k',x.s));
- r.append(el('h2','',x.t));if(x.x)r.append(el('p','ar-lead',x.x));
- var toc=el('nav','ar-toc');toc.setAttribute('aria-label','İçindekiler');
+ r.append(el('h2','',x.t));if(x.x&&!/^\d+ (yazı|haber):/.test(x.x))r.append(el('p','ar-lead',x.x));
+ var toc=el('div','ar-toc');toc.setAttribute('aria-label','İçindekiler');
  x.a.forEach(function(y,i){var a=el('a','',(i+1)+'. '+(y.title||'Yazı'));a.href='#/arsiv/sayi/'+encodeURIComponent(x.id);a.onclick=function(e){e.preventDefault();var t=document.getElementById('ar-a'+i);if(t)t.scrollIntoView({behavior:'smooth'})};toc.append(a)});r.append(toc);
  x.a.forEach(function(y,i){
   var a=el('article','ar-art');a.id='ar-a'+i;
