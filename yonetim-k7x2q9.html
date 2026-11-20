@@ -1959,7 +1959,7 @@ const COLS={
     fields:[{k:'t',l:'Başlık',req:1,ph:'Diyalog Gazetesi · 2. Sayı'},{k:'s',l:'Tarih aralığı',ph:'12 Ekim – 18 Ekim 2026'},{k:'yer',l:'Yer (etkinlik kaydıysa)'},{k:'x',l:'Kısa özet / açıklama',area:1,rows:4}],
     label:x=>x.t,sub:x=>(x.tur==='etkinlik'?'Etkinlik · ':x.tur==='gazete'?'Gazete · ':x.tur==='dergi'?'Dergi · ':'')+(x.s||''),img:1,
     empty:'Arşiv boş. Haftalık yayını ya da dergi sayısını bitirince sayı burada dijital olarak görünür.',
-    note:'Sayılar PDF değil, sitede okunan dijital sayfalar olarak yayınlanır. Kapak fotoğrafı isteğe bağlıdır; yazılar “Haftalık yayın” ve “Dergi sayısı hazırla” ile sayıya girer.'},
+    note:'Sayılar PDF değil, sitede okunan dijital sayfalar olarak yayınlanır. Arşivdeki sayı, Gazete ve Dergi sayfasındaki görünümüyle aynı açılır: kartlar, kapak ve yazı içi fotoğraflar, videolar ve yorumlar yayındaki hâliyle gelir. Kapak fotoğrafı isteğe bağlıdır; yazılar “Haftalık yayın” ve “Dergi sayısı hazırla” ile sayıya girer.'},
   gallery:{title:'Galeri',noun:'Fotoğraf',nav:'Galeri',get:w=>w.c.gallery,
     make:()=>({id:uid(),t:'',s:'',img:''}),
     fields:[{k:'t',l:'Etkinlik adı',req:1},{k:'s',l:'Tarih',ph:'Kasım 2026'}],
@@ -4476,7 +4476,7 @@ function endEvent(item,idx){
   w.e.splice(idx,1);S.sel.e=(w.e[idx]||w.e[idx-1]||{}).id||null;S.mode.e='list';touch();render();
   toast('Etkinlik arşive alındı. Yayınlayınca sitede görünür.');
 }
-window.slimArt=x=>{const o={title:x.title||'',kind:x.kind||'',by:x.by||'',dt:x.dt||'',text:x.text||'',body:x.body||'',img:x.img||''};const im=Array.isArray(x.imgs)?x.imgs.filter(Boolean):[];if(im.length)o.imgs=im;return o};
+window.slimArt=x=>{const o={id:x.id==null?'':String(x.id),title:x.title||'',kind:x.kind||'',by:x.by||'',dt:x.dt||'',text:x.text||'',body:x.body||'',img:x.img||''};const im=Array.isArray(x.imgs)?x.imgs.filter(Boolean):[];if(im.length)o.imgs=im;const vd=Array.isArray(x.vids)?x.vids.filter(Boolean).map(String):[];if(vd.length)o.vids=vd;if(x.hideCover)o.hideCover=true;return o};
 async function gzFonts(){
   if(!document.getElementById('gz-fonts')){const l=document.createElement('link');l.id='gz-fonts';l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Sans:wght@400;500;600;700&display=swap';document.head.append(l)}
   const T='ğĞşŞıİçÇöÖüÜ';
