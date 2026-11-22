@@ -1,0 +1,5 @@
+{
+  "name": "eko-bot",
+  "main": "worker.js",
+  "compatibility_date": "2025-06-01"
+}

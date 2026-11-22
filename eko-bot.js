@@ -7,7 +7,7 @@ if(window.__ekoBot)return;window.__ekoBot=1;
 /* ===== TEK AYAR YERİ =====
    PROXY: Cloudflare Worker adresini buraya yaz (boşsa bot "arama modu"nda çalışır).
    YOL: bilgi tabanındaki sayfa adı → sitedeki gerçek yol. Bir bağlantı 404 verirse yalnızca burayı düzelt. */
-const PROXY='';
+const PROXY='https://eko-bot.bcelikel191.workers.dev';
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 const CFG=Object.assign({proxy:PROXY,bilgi:'eko-bot-bilgi.json',ad:'Eko Asistan'},window.EKO_BOT||{});
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
@@ -80,13 +80,15 @@ async function yukle(){
   const df={};IDX=DB.map(c=>{const t=tok(c.t+' '+c.t+' '+c.x),f={};t.forEach(w=>f[w]=(f[w]||0)+1);Object.keys(f).forEach(w=>df[w]=(df[w]||0)+1);return{f,n:t.length,tt:tl(c.t)}});
   IDX.df=df;
 }
+const STOP=new Set('nedir nelerdir kimdir midir mudur nasil neden niye hangi kac kim kimin nerede anlat anlatir misin misiniz acikla aciklar ver bana bize icin ile olan olarak bir var yok hakkinda konusunda ilgili gibi daha cok icinde simdi lutfen soyle goster ogret'.split(' '));
 function ara(q,k=6){
-  const qs=tok(q),N=DB.length,r=[];
+  const qs=tok(q).filter(w=>!STOP.has(w)),N=DB.length,r=[],qc=qs.join(' ');
+  if(!qs.length)return[];
   DB.forEach((c,i)=>{const d=IDX[i];let s=0;
     qs.forEach(w=>{const f=d.f[w];if(f)s+=Math.log(1+N/(IDX.df[w]||1))*f/(f+1.2)});
-    if(d.tt===tl(q).trim())s+=20;else if(qs.some(w=>d.tt.includes(w)))s+=1.5;
+    if(d.tt===qc)s+=20;else if(qs.every(w=>d.tt.includes(w)))s+=10;else if(qs.some(w=>d.tt.includes(w)))s+=1.5;
     if(s>0)r.push([s*((TERCIH[MOD]||[]).includes(c.c)?1.6:1),c])});
-  return r.sort((a,b)=>b[0]-a[0]).slice(0,k).map(x=>x[1]);
+  return r.sort((a,b)=>b[0]-a[0]).slice(0,k).map(x=>Object.assign({_s:x[0]},x[1]));
 }
 
 
@@ -257,13 +259,16 @@ async function sor(q){
     if(MOD==='gundem'&&!j.hata){const n=$('small','',`🗓 ${new Date().toLocaleDateString('tr-TR')} · Öğrenme amaçlı analizdir; Eko-Log Topluluğu'nun veya üniversitenin resmî görüşünü yansıtmaz. Olguları bağlantılardaki kaynaklardan doğrula.`);n.style.cssText='display:block;padding:8px 0 0;opacity:.8';m.appendChild(n)}
     if(j.hata){busy=false;return}
   }catch(e){
-    /* Arama modu: API yoksa/hatalıysa sitenin kendi içeriğinden en iyi eşleşmeleri göster */
-    if(MOD==='gundem'||MOD==='ders'){m.textContent='Şu an sunucuya ulaşamadım; güvenilir bir yanıt üretemiyorum. Biraz sonra tekrar dener misin?';busy=false;return}
-    m.textContent=cs.length?'Sitede şunları buldum:\n\n'+cs.slice(0,3).map(c=>`• ${c.t}: ${c.x.slice(0,180)}${c.x.length>180?'…':''}`).join('\n\n'):'Bununla ilgili sitede bir şey bulamadım. Farklı kelimelerle dener misin?';
+    /* API yoksa/hatalıysa: yalnızca GÜÇLÜ eşleşmeleri göster, zayıf (alakasız) sonuç dayatma */
+    const gl=cs.filter(c=>c._s>=3);
+    if(MOD==='gundem'){m.textContent=CFG.proxy?'Şu an güvenilir bir gündem analizi üretemiyorum, biraz sonra tekrar dener misin?':'Gündem analizi için yapay zekâ bağlantısı gerekiyor; bu bağlantı henüz kurulu değil.';busy=false;return}
+    if(CFG.proxy&&!gl.length){m.textContent='Şu an sunucuya ulaşamadım, biraz sonra tekrar dener misin?';busy=false;return}
+    m.textContent=gl.length?(CFG.proxy?'Sunucuya ulaşamadım; sitedeki en yakın içerikler:':'Yapay zekâ bağlantısı henüz açık değil; sitedeki en yakın içerikleri gösteriyorum:')+'\n\n'+gl.slice(0,3).map(c=>`• ${c.t}: ${c.x.slice(0,180)}${c.x.length>180?'…':''}`).join('\n\n')
+      :'Bunu sitedeki içeriklerde bulamadım.'+(CFG.proxy?'':' Yapay zekâ bağlantısı henüz açık olmadığı için sitede olmayan konulara cevap veremiyorum; sözlük, laboratuvar, düşünür ve mevzuat içeriğinde arayabilirim.');
   }
-  kaynaklar(m,cs.slice(0,4));yonlendir(m,q+' '+m.textContent,cs);log.scrollTop=log.scrollHeight;busy=false;
+  const gc=cs.filter(c=>c._s>=3);kaynaklar(m,gc.slice(0,4));yonlendir(m,q+' '+m.textContent,gc);log.scrollTop=log.scrollHeight;busy=false;
 }
-fab.onclick=()=>{delete fab.dataset.n;box.classList.toggle('on');if(box.classList.contains('on')){yukle();if(!log.children.length){mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları ve sayfaları sorabilirsin.','eb-b');chips()}inp.focus()}};
+fab.onclick=()=>{delete fab.dataset.n;box.classList.toggle('on');if(box.classList.contains('on')){yukle();if(!log.children.length){if(!CFG.proxy)mesaj('⚠️ Yapay zekâ bağlantısı henüz kurulu değil; şimdilik sadece sitedeki içeriklerde arama yapabiliyorum.','eb-b');mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları ve sayfaları sorabilirsin.','eb-b');chips()}inp.focus()}};
 box.querySelector('#eb-an').onclick=()=>{const a=izinli();localStorage.setItem(IZIN,a?'0':'1');mesaj(a?'Çalışma analizi kapatıldı; artık özet gönderilmeyecek.':'Çalışma analizi açıldı.','eb-b')};
 box.querySelector('header button:last-child').onclick=()=>box.classList.remove('on');
 box.querySelector('form').onsubmit=e=>{e.preventDefault();const q=inp.value;inp.value='';sor(q)};
