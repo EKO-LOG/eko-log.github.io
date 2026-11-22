@@ -17,10 +17,11 @@ const UI_SAYFA=/iibf-uluslararasi/;
 const LABK=(location.pathname.match(/iibf-(iktisat|ekonometri|isletme|ceko|kamu|maliye|uluslararasi)/)||[])[1]||'genel';
 const HUKUKLU=['kamu','ceko','maliye'];
 const LABAD={iktisat:'İktisat',ekonometri:'Ekonometri',isletme:'İşletme & Finans',ceko:'ÇEKO',kamu:'Kamu Yönetimi',maliye:'Maliye & Vergi',uluslararasi:'Uluslararası İlişkiler'};
-let MOD=LABK!=='genel'?'ders':'genel';
+const DERS_ACIK=false;   /* Ders anlatımı + 3 soruluk deneme: şimdilik KAPALI. Açmak için true yap (worker.js'deki DERS_ACIK'ı da). */
+let MOD=DERS_ACIK&&LABK!=='genel'?'ders':'genel';
 const HK=HUKUKLU.includes(LABK);
-const MODLAR={genel:['💬','Genel'],ders:HK?['⚖️','Hukuk Dersi']:['🎓','Ders Anlat'],gundem:['🌍','Gündem (Uİ)']};
-const TERCIH={ders:HK?['Kamu Yönetimi','ÇEKO','Maliye & Vergi']:LABK==='genel'?[]:[LABAD[LABK]],gundem:['Uluslararası İlişkiler']};
+const MODLAR=Object.assign({genel:['💬','Genel']},DERS_ACIK?{ders:HK?['⚖️','Hukuk Dersi']:['🎓','Ders Anlat']}:{},{gundem:['🌍','Gündem (Uİ)']});
+const TERCIH={genel:LABK!=='genel'?[LABAD[LABK]]:[],ders:HK?['Kamu Yönetimi','ÇEKO','Maliye & Vergi']:LABK==='genel'?[]:[LABAD[LABK]],gundem:['Uluslararası İlişkiler']};
 const DENE='📝 3 soruluk zor deneme';
 const DERSCHIP={
  kamu:['İptal davasını baştan sona anlat','Yetki unsurunu anlat','Tam yargı davası ile iptal davasını karşılaştır',DENE],
@@ -32,6 +33,7 @@ const DERSCHIP={
  uluslararasi:['Realizm ile liberalizmi karşılaştır','İnşacılığı anlat','Güvenlik ikilemini anlat',DENE],
  genel:['Bir konuyu anlat: örn. "enflasyon nedir, anlat"',DENE]};
 const MODCHIP={
+ genel:['🧭 Bu sitede neler yapabilirim?','📊 Çalışmamı değerlendir','Enflasyon nedir?','Simülasyon Merkezi nerede?'],
  ders:DERSCHIP[LABK]||DERSCHIP.genel,
  gundem:['Bu haftanın önemli uluslararası gelişmelerini özetle','Güncel bir krizi realist ve liberal gözle karşılaştır','Türkiye\'nin dış politikasında son gelişmeler','Bir gelişmeyi aktör-çıkar-senaryo çerçevesinde analiz et']};
 
@@ -127,6 +129,7 @@ function izciTak(){
     const d=f.contentDocument;if(!d||!d.body||d.__izci)return;d.__izci=1;
     const s=d.createElement('script');s.textContent='('+izci.toString()+')()';d.body.appendChild(s)}catch(e){}});
 }
+if(/eko-plus\/iibf-/.test(location.pathname))izci();   /* quiz/lab doğrudan bu sayfadaysa olaylar kendi sayfasına da bildirilir */
 new MutationObserver(izciTak).observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener('load',izciTak,true);setInterval(izciTak,2500);
 
@@ -184,10 +187,10 @@ function webKaynak(m,l){if(!l||!l.length)return;const w=$('div','eb-src eb-w');
 function oku(m){if(!('speechSynthesis' in window))return;const b=$('button','eb-say','🔊 Dinle');
   b.onclick=()=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(m.firstChild.textContent);u.lang='tr-TR';speechSynthesis.speak(u)};m.appendChild(b)}
 function modSec(k,sessiz){MOD=k;box.querySelectorAll('#eb-mod button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
-  if(sessiz)return;hist=[];mesaj(k==='ders'?(HK?'Hukuk dersi modundayım. Bir konuyu "anlat" de; kavram → kanun → örnek → sık hata → mini sınama sırasıyla işleriz.':'Ders modundayım. Bir konuyu "anlat" de; sezgi → kavram → örnek → sık hata → mini sınama sırasıyla işleriz.')+' "Beni sına" dersen 3 soruluk zor deneme yaparız.':k==='gundem'?'Gündem modundayım. Güncel gelişmeleri webde arayıp teorik çerçevelerle (realizm, liberalizm, inşacılık…) değerlendiririm; farklı tarafların argümanlarını da göstermeye çalışırım.':'Genel moddayım.','eb-b');
+  if(sessiz)return;hist=[];mesaj(k==='ders'?(HK?'Hukuk dersi modundayım. Bir konuyu "anlat" de; kavram → kanun → örnek → sık hata → mini sınama sırasıyla işleriz.':'Ders modundayım. Bir konuyu "anlat" de; sezgi → kavram → örnek → sık hata → mini sınama sırasıyla işleriz.')+' "Beni sına" dersen 3 soruluk zor deneme yaparız.':k==='gundem'?'Gündem modundayım. Güncel gelişmeleri webde arayıp teorik çerçevelerle (realizm, liberalizm, inşacılık…) değerlendiririm; farklı tarafların argümanlarını da göstermeye çalışırım.':'Genel moddayım. Sitedeki kavramları, laboratuvarları ve sayfaları sorabilir, "Çalışmamı değerlendir" diyerek laboratuvar/quiz hatalarının analizini isteyebilirsin.','eb-b');
   if(MODCHIP[k])chips(MODCHIP[k])}
 function chips(liste){const w=$('div','eb-chips');
-  (liste||['📊 Çalışmamı değerlendir','Enflasyon nedir?','Arz-talep simülasyonu nerede?','Mevzuat bölümünde ne var?','Hangi meslekleri simüle edebilirim?']).forEach(q=>{const b=$('button','',q);b.onclick=()=>{w.remove();if(q.startsWith('📝')){denemeBaslat();return}if(q.startsWith('📊')){if(!izinIste())return;sor('Bu oturumdaki çalışmamı değerlendir: nerede hata yapıyorum, neyi anlamamış olabilirim, ne çalışmalıyım?')}else sor(q)};w.appendChild(b)});log.appendChild(w)}
+  (liste||MODCHIP.genel).forEach(q=>{const b=$('button','',q);b.onclick=()=>{w.remove();if(q.startsWith('📝')){denemeBaslat();return}if(q.startsWith('📊')){sor('Bu oturumdaki çalışmamı değerlendir: nerede hata yapıyorum, neyi anlamamış olabilirim, ne çalışmalıyım?')}else sor(q)};w.appendChild(b)});log.appendChild(w)}
 
 const izinli=()=>localStorage.getItem(IZIN)==='1';
 function izinIste(){if(izinli())return true;
@@ -226,25 +229,46 @@ async function denemeAdim(q){
 
 /* ---------- SOHBET: selam / hal hatır / teşekkür / "kimsin" gibi mesajlara doğal karşılık (API gerekmez) ---------- */
 const SELAM=/^(merhaba+lar|merhaba|selam+lar|selam|slm|mrb|gunaydin|iyi gunler|iyi aksamlar|iyi geceler|hey|hi|hello)\b[\s,!.]*/;
+const SITE_TUR=[
+ ['🎮 Simülasyon Merkezi','Merkez bankası başkanı, bakanlık, girişimci, kamu bürokratı, müzakere masası, kamu ihalesi gibi 12 simülasyonda karar verip sonucunu görürsün.','simulasyon-merkezi.html'],
+ ['📖 İktisadi Ansiklopedi / Sözlük','1500\'den fazla terim ve 80 düşünür; terimi arayıp örnekle öğrenirsin.','ansiklopedi.html#/sozluk'],
+ ['🧪 İİBF Laboratuvarı (Üye Alanı)','İktisat, Ekonometri, İşletme & Finans, ÇEKO, Kamu Yönetimi, Maliye & Vergi ve Uluslararası İlişkiler için laboratuvarlar ve quizler.','eko-plus/iibf-laboratuvar.html'],
+ ['📜 Mevzuat','Kanun metinleri ve maddelere hızlı erişim.','mevzuat/'],
+ ['🗺 Kalkınma (81 il)','İl il ekonomi göstergeleri, sektörler ve simülatörler.','kalkinma/'],
+ ['📈 Borsa Oyunu · ⚖️ Hâkimlik Simülasyonu','Üye alanında oynayarak öğrenebileceğin oyunlar.','eko-plus/borsa-oyunu.html'],
+ ['📰 Veri ve Pariteler, Gazete ve Dergi, Etkinlikler, Mülakat, Quiz, Fikir, Girişimcilik ilanları, Katıl','Ana sayfanın menüsünden ulaşılır.','']];
+const SITE_NOT='Eko-Log, İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu\'nun öğrenme ve simülasyon sitesi. Burada şunları yapabilirsin:\n\n'
+ +SITE_TUR.map(x=>x[0]+' — '+x[1]).join('\n\n')
+ +'\n\nBen de bir kavramı açıklayabilir, seni doğru sayfaya götürebilir, laboratuvar/quizlerdeki cevaplarını değerlendirebilir (📊 Çalışmamı değerlendir) ve Gündem sekmesinde güncel uluslararası gelişmeleri kuramlarla yorumlayabilirim.';
+const DEGER=/(degerlendir|analiz).*(calisma|cevap|hata|yanlis|performans|quiz|lab|sonuc)|(calisma|cevap|hata|yanlis|performans|sonuc)\w*.*(degerlendir|analiz)/;
 const YETENEK={
  ders:HK?'Hukuk derslerini konu konu anlatabilir, "3 soruluk zor deneme" ile seni sınayabilir, kanun maddelerine bağlantı verebilirim.':'Bu laboratuvardaki konuları anlatabilir, "3 soruluk zor deneme" ile seni sınayabilir, hatalarını analiz edebilirim.',
  gundem:'Uluslararası gündemi güncel kaynaklarla arayıp kuramsal çerçevelerle değerlendirebilirim.',
- genel:'Sitedeki kavramları, düşünürleri, laboratuvarları ve mevzuatı sorabilirsin; ilgili sayfaya götürürüm.'};
+ genel:'Sitedeki kavramları, düşünürleri, simülasyonları, laboratuvarları ve mevzuatı sorabilirsin; seni ilgili sayfaya götürür, quiz/lab cevaplarını değerlendirebilirim.'};
 function sohbet(q){const t=tl(q).replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim();if(!t||t.length>60)return null;
+  const siteSor=/(ne yapabilirim|neler yapabilirim|ne yapilir|neler var|ne var|nelere bakabilirim|siteyi (anlat|tanit|gezdir)|site(de|nin)? .*(ne|neler|nedir|anlat|tanit)|burada .*(ne|neler)|(bu|bu site) .*(ne ise yarar|ne sitesi))/.test(t)&&/(site|burada|yapabilirim|neler var|ne var)/.test(t)&&!/(sozluk|ansiklopedi|simulasyon|lab|mevzuat) .*(nerede|nasil)/.test(t);
+  if(siteSor&&t.length<=60)return{t:(SELAM.test(t)?'Merhaba! 👋 ':'')+SITE_NOT,tur:1,chips:1};
   const rest=t.replace(SELAM,'').replace(/\b(nasilsin|naber|ne haber|nasil gidiyor|canim|hocam|arkadas|bot|asistan)\b/g,'').replace(/[?\s]+/g,' ').trim();
   const selam=SELAM.test(t);
-  if(selam&&rest.length<3)return{t:'Merhaba! 👋 Ben Eko-Log asistanıyım. '+YETENEK[MOD]+' Aklındaki soruyu doğrudan yazabilirsin.',chips:1};
+  if(selam&&rest.length<3)return{t:'Merhaba! 👋 Ben Eko-Log asistanıyım. '+YETENEK[MOD]+'\n\nSiteyi kısaca anlatmamı istersen "Bu sitede neler yapabilirim?" diye sor; ya da aklındaki soruyu doğrudan yazabilirsin.',chips:1};
   if(/^(nasilsin|naber|ne haber|nasil gidiyor)( ?\??)$/.test(t))return{t:'İyiyim, teşekkürler! Sen nasılsın? Çalışmak ya da öğrenmek istediğin bir konu var mı?'};
   if(/^(tesekkur|tesekkurler|tesekkur ederim|sagol|sag ol|eyvallah|saol|cok sagol|eline saglik)( .*)?$/.test(t))return{t:'Rica ederim! 🙂 Başka bir şey sorarsan buradayım.'};
-  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko-Log asistanıyım, yapay zekâ ile çalışıyorum. '+YETENEK[MOD]+' Sağ üstteki sekmelerden Genel, Ders ve Gündem modları arasında geçebilirsin.',chips:1};
+  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko-Log asistanıyım, yapay zekâ ile çalışıyorum. '+YETENEK[MOD]+' Alttaki sekmelerden Genel ve Gündem modları arasında geçebilirsin.',chips:1};
   if(/^(gorusuruz|hoscakal|hosca kal|bye|iyi calismalar|kolay gelsin|iyi gunler|iyi aksamlar|iyi geceler)( ?\??)$/.test(t))return{t:'Görüşürüz, kolay gelsin! 👋'};
   return null}
 async function sor(q){
   if(busy||!q.trim())return;
   const sh=sohbet(q);
-  if(sh){mesaj(q,'eb-u');mesaj(sh.t+(DEN?' (Denemede konu/cevabını bekliyorum; çıkmak için "iptal" yaz.)':''),'eb-b');if(sh.chips&&!DEN)chips(MODCHIP[MOD]);log.scrollTop=log.scrollHeight;return}
+  if(sh){mesaj(q,'eb-u');const mm=mesaj(sh.t+(DEN?' (Denemede konu/cevabını bekliyorum; çıkmak için "iptal" yaz.)':''),'eb-b');
+    if(sh.tur){const w=$('div','eb-src');SITE_TUR.filter(x=>x[2]).forEach(x=>{const a=$('a');a.href=hrefOf(x[2]);a.textContent=x[0].split(' · ')[0].slice(0,32);w.appendChild(a)});mm.appendChild(w)}
+    if(sh.chips&&!DEN)chips(MODCHIP[MOD]);log.scrollTop=log.scrollHeight;return}
   if(DEN){if(/^(çık|iptal|bitir)$/i.test(q.trim())){mesaj(q,'eb-u');DEN=null;mesaj('Deneme sonlandırıldı.','eb-b');return}return denemeAdim(q)}
   if(MOD==='ders'&&/(beni\s+sına|bana\s+(soru|deneme)|3\s*soru|deneme\s*(sınav|yap|başlat|çöz)|sınav\s*yap|test\s*et)/i.test(q)){mesaj(q,'eb-u');return denemeBaslat()}
+  if(DEGER.test(tl(q))){
+    const aktif=OL.filter(o=>['yanlis','dogru','yardim','sifirla','ayar','kontrol'].includes(o.tur));
+    if(!aktif.length){mesaj(q,'eb-u');const m0=mesaj('Bu oturumda henüz değerlendirebileceğim bir çalışma görmedim. İİBF Laboratuvarı\'nda bir quiz çöz ya da laboratuvarı kullan; ardından "Çalışmamı değerlendir" de, hata örüntülerini birlikte inceleyelim.','eb-b');
+      const w=$('div','eb-src'),a=$('a');a.href=hrefOf('eko-plus/iibf-laboratuvar.html');a.textContent='🧪 İİBF Laboratuvarı';w.appendChild(a);m0.appendChild(w);return}
+    if(!izinIste())return}
   busy=true;mesaj(q,'eb-u');await yukle();
   if(/gündem|son gelişme|bugün|güncel|haber/i.test(q)&&UI_SAYFA.test(location.pathname)&&MOD!=='gundem')modSec('gundem',true);
   const cs=ara(q),m=mesaj(MOD==='gundem'?'Güncel kaynaklara bakıyorum…':'…','eb-b');
