@@ -59,6 +59,12 @@ const fab=$('button','',null);fab.id='eb-fab';fab.textContent='💬';fab.setAttr
 const box=$('div');box.id='eb';box.setAttribute('role','dialog');box.setAttribute('aria-label',CFG.ad);
 box.innerHTML=`<header><b>${CFG.ad}</b><button id="eb-an" style="font-size:12px;border:1px solid #fff8;border-radius:999px;padding:3px 10px" aria-label="Analiz izni">Analiz</button><button aria-label="Kapat">✕</button></header><div id="eb-log" aria-live="polite"></div><div id="eb-mod" role="tablist"></div><small>Yapay zekâ hata yapabilir. Hukuk anlatımı bilgilendirme amaçlıdır, hukuki danışmanlık değildir; resmî metin için kaynağa bakın.</small><form><input placeholder="Bir kavram, simülasyon ya da sayfa sor…" autocomplete="off"><button>Gönder</button></form>`;
 document.body.append(fab,box);
+/* Sitenin kendi arama düğmesi (#pl-b) sağ altta varsa botun balonunu onun hemen üstüne diz */
+function yerles(){const p=document.getElementById('pl-b');let b=null;
+  if(p){const r=p.getBoundingClientRect();if(r.width&&getComputedStyle(p).display!=='none'&&r.top>innerHeight/2)b=Math.round(innerHeight-r.top+12)}
+  fab.style.bottom=b===null?'calc(16px + env(safe-area-inset-bottom,0px))':b+'px';
+  box.style.bottom=b===null?'calc(84px + env(safe-area-inset-bottom,0px))':(b+68)+'px'}
+yerles();addEventListener('resize',yerles);[800,2000,4500].forEach(t=>setTimeout(yerles,t));
 const log=box.querySelector('#eb-log'),inp=box.querySelector('input');
 Object.keys(MODLAR).forEach(k=>{const b=$('button','',MODLAR[k][0]+' '+MODLAR[k][1]);b.dataset.k=k;b.onclick=()=>modSec(k);box.querySelector('#eb-mod').appendChild(b)});
 modSec(MOD,true);

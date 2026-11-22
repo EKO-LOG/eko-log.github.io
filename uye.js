@@ -442,3 +442,6 @@
 
   window.EkoUye = { openAuth: openAuth, openProfile: openProfile, logout: logout };
 })();
+
+/* Eko-Log Asistanı yükleyici */
+(function(){function g(){if(window.__ekoBot||document.querySelector('script[src$="eko-bot.js"]'))return;var s=document.createElement('script');s.src='/eko-bot.js';document.body.appendChild(s)}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',g):g()})();
