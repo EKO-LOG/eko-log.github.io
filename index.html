@@ -6486,7 +6486,7 @@ function harita(){if($('#pl-hmd'))return;const bar=$('#szq')&&$('#szq').closest(
   const q=$('#hm-q');q.oninput=()=>{const t=idx.find(i=>i.n===tl(q.value.trim()));if(t)show(t.x)};
   const cur=idx.find(i=>i.n===tl(($('#szq')||{}).value||'').trim());const t=cur||idx.find(i=>i.n==='enflasyon')||idx[0];if(t){q.value=t.x.t;show(t.x)}})}
 /* Site içi arama */
-function search(){if($('#pl-b'))return;const b=el('button','','🔍 Ara');b.id='pl-b';b.type='button';const o=el('div');o.id='pl-s';o.innerHTML='<div class="bx"><input type="search" placeholder="Terim, düşünür, sayfa ara…" aria-label="Sitede ara"><div class="rs"></div></div>';document.body.append(b,o);
+function search(){return;/* arama düğmesi kaldırıldı */const b=el('button','','🔍 Ara');b.id='pl-b';b.type='button';const o=el('div');o.id='pl-s';o.innerHTML='<div class="bx"><input type="search" placeholder="Terim, düşünür, sayfa ara…" aria-label="Sitede ara"><div class="rs"></div></div>';document.body.append(b,o);
  const q=o.querySelector('input'),rs=o.querySelector('.rs');const close=()=>o.classList.remove('on');
  b.onclick=()=>{o.classList.add('on');q.focus()};o.onclick=e=>{if(e.target===o)close()};addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  const run=()=>{const v=tl(q.value.trim());rs.textContent='';if(v.length<2)return;const out=[];
