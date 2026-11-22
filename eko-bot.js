@@ -221,10 +221,28 @@ async function denemeAdim(q){
   }catch(e){mesaj('Deneme şu an çalışmadı, biraz sonra tekrar dene.','eb-b');DEN=null}
   busy=false;log.scrollTop=log.scrollHeight;
 }
+
+/* ---------- SOHBET: selam / hal hatır / teşekkür / "kimsin" gibi mesajlara doğal karşılık (API gerekmez) ---------- */
+const SELAM=/^(merhaba+lar|merhaba|selam+lar|selam|slm|mrb|gunaydin|iyi gunler|iyi aksamlar|iyi geceler|hey|hi|hello)\b[\s,!.]*/;
+const YETENEK={
+ ders:HK?'Hukuk derslerini konu konu anlatabilir, "3 soruluk zor deneme" ile seni sınayabilir, kanun maddelerine bağlantı verebilirim.':'Bu laboratuvardaki konuları anlatabilir, "3 soruluk zor deneme" ile seni sınayabilir, hatalarını analiz edebilirim.',
+ gundem:'Uluslararası gündemi güncel kaynaklarla arayıp kuramsal çerçevelerle değerlendirebilirim.',
+ genel:'Sitedeki kavramları, düşünürleri, laboratuvarları ve mevzuatı sorabilirsin; ilgili sayfaya götürürüm.'};
+function sohbet(q){const t=tl(q).replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim();if(!t||t.length>60)return null;
+  const rest=t.replace(SELAM,'').replace(/\b(nasilsin|naber|ne haber|nasil gidiyor|canim|hocam|arkadas|bot|asistan)\b/g,'').replace(/[?\s]+/g,' ').trim();
+  const selam=SELAM.test(t);
+  if(selam&&rest.length<3)return{t:'Merhaba! 👋 Ben Eko-Log asistanıyım. '+YETENEK[MOD]+' Aklındaki soruyu doğrudan yazabilirsin.',chips:1};
+  if(/^(nasilsin|naber|ne haber|nasil gidiyor)( ?\??)$/.test(t))return{t:'İyiyim, teşekkürler! Sen nasılsın? Çalışmak ya da öğrenmek istediğin bir konu var mı?'};
+  if(/^(tesekkur|tesekkurler|tesekkur ederim|sagol|sag ol|eyvallah|saol|cok sagol|eline saglik)( .*)?$/.test(t))return{t:'Rica ederim! 🙂 Başka bir şey sorarsan buradayım.'};
+  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko-Log asistanıyım, yapay zekâ ile çalışıyorum. '+YETENEK[MOD]+' Sağ üstteki sekmelerden Genel, Ders ve Gündem modları arasında geçebilirsin.',chips:1};
+  if(/^(gorusuruz|hoscakal|hosca kal|bye|iyi calismalar|kolay gelsin|iyi gunler|iyi aksamlar|iyi geceler)( ?\??)$/.test(t))return{t:'Görüşürüz, kolay gelsin! 👋'};
+  return null}
 async function sor(q){
   if(busy||!q.trim())return;
+  const sh=sohbet(q);
+  if(sh){mesaj(q,'eb-u');mesaj(sh.t+(DEN?' (Denemede konu/cevabını bekliyorum; çıkmak için "iptal" yaz.)':''),'eb-b');if(sh.chips&&!DEN)chips(MODCHIP[MOD]);log.scrollTop=log.scrollHeight;return}
   if(DEN){if(/^(çık|iptal|bitir)$/i.test(q.trim())){mesaj(q,'eb-u');DEN=null;mesaj('Deneme sonlandırıldı.','eb-b');return}return denemeAdim(q)}
-  if(MOD==='ders'&&/\b(sına|sinav|deneme|3 soru)/i.test(q)){mesaj(q,'eb-u');return denemeBaslat()}
+  if(MOD==='ders'&&/(beni\s+sına|bana\s+(soru|deneme)|3\s*soru|deneme\s*(sınav|yap|başlat|çöz)|sınav\s*yap|test\s*et)/i.test(q)){mesaj(q,'eb-u');return denemeBaslat()}
   busy=true;mesaj(q,'eb-u');await yukle();
   if(/gündem|son gelişme|bugün|güncel|haber/i.test(q)&&UI_SAYFA.test(location.pathname)&&MOD!=='gundem')modSec('gundem',true);
   const cs=ara(q),m=mesaj(MOD==='gundem'?'Güncel kaynaklara bakıyorum…':'…','eb-b');
