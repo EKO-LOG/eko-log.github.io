@@ -1,5 +1,23 @@
 {
   "name": "eko-bot",
   "main": "worker.js",
-  "compatibility_date": "2025-06-01"
+  "compatibility_date": "2025-06-01",
+
+  // Ücretsiz yapay zekâ (Cloudflare Workers AI). Bu bağlama olunca genel sohbet önce buradan cevaplanır.
+  // Yapay zekâ kapalı: aşağıdaki satırı yeniden açarsan (ve worker.js'de YAPAY_ZEKA=true yaparsan) Cloudflare Workers AI (Gemma) devreye girer.
+  // "ai": { "binding": "AI" },
+
+  // KV: saatlik hız sınırı + günlük harcama freni + gündem önbelleği (RL) ve kayıtlar (LOG).
+  // 1) Terminalde (bir kez):   npx wrangler kv namespace create RL
+  //                            npx wrangler kv namespace create LOG
+  // 2) Çıkan iki "id" değerini aşağıya yaz, sonra:   npx wrangler deploy
+  // Not: Bunlar olmadan hız sınırı, günlük 400 çağrı freni ve önbellek ÇALIŞMAZ.
+  "kv_namespaces": [
+    { "binding": "RL",  "id": "BURAYA_RL_ID" },
+    { "binding": "LOG", "id": "BURAYA_LOG_ID" }
+  ]
+
+  // Gizli değerler dosyaya yazılmaz; Cloudflare panelinde Settings > Variables > Secret olarak ekle:
+  //   ANTHROPIC_API_KEY   (Claude anahtarı)
+  //   TURNSTILE_SECRET    (isteğe bağlı bot doğrulaması; site anahtarı eko-bot.js içindeki TURNSTILE'a yazılır)
 }

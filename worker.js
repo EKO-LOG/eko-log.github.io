@@ -2,9 +2,16 @@
    Kurulum: Workers'a yapıştır → Settings > Variables: ANTHROPIC_API_KEY (Secret) ekle
             → (isteğe bağlı) KV namespace'i "RL" adıyla bağla (IP başına hız sınırı için). */
 const IZINLI=['https://eko-log.github.io'];           // sadece senin sitenden istek kabul et
+/* YAPAY ZEKÂ ANAHTARI: false iken Claude'a (api.anthropic.com) ve Workers AI'a (Gemma) HİÇBİR istek gitmez. Açmak için true yap. */
+const YAPAY_ZEKA=false;
 const MODEL='claude-haiku-5-5';                        // hızlı ve ucuz; derin cevap için 'claude-sonnet-5-5'
 const MODEL_DERIN='claude-sonnet-5-5';                 // hukuk anlatımı ve gündem analizi için daha güçlü model
 const DERS_ACIK=false;   /* Ders anlatımı ve deneme şimdilik kapalı (eko-bot.js'deki DERS_ACIK ile birlikte aç) */
+/* ÜCRETSİZ YAPAY ZEKÂ: wrangler.jsonc'ta "ai" bağlaması varsa genel sohbet önce Cloudflare Workers AI ile (günlük ücretsiz kota) cevaplanır.
+   Başarısız olursa ve ANTHROPIC_API_KEY varsa Claude'a düşer. Gündem modu (web arama + denetçi) yalnızca Claude ile çalışır.
+   Model env.AI_MODEL ile değiştirilebilir; Türkçe kalitesini deneyip seç. */
+const AI_MODEL='@cf/google/gemma-3-12b-it';
+const GUNLUK_CLAUDE=400;                               // günlük toplam Claude çağrısı üst sınırı (env.GUNLUK_LIMIT ile değiştirilir; KV "RL" gerekir)
 const SINIR=25, SINIR_DERIN=20;                        // derin modlar daha pahalı: IP başına saatte 20                                        // IP başına saatte en fazla soru
 
 const SISTEM=`Sen Eko-Log'un (İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu) site asistanısın.
@@ -94,6 +101,28 @@ const DENEME_DEGERLENDIR=`Sıkı ama adil bir sınav değerlendiricisisin. Öğr
 YALNIZCA JSON döndür: {"puan":0-100,"dogru":["en çok 3 madde"],"eksik":["en çok 3 madde"],"yanlis_anlama":"varsa tek cümle, yoksa boş","model_cevap":"anahtara dayalı örnek cevap, en çok 110 kelime"}`;
 const DENEME_OZET=`Öğrenciye hitap eden bir ders koçusun. Üç soruluk denemenin sonuçlarından (soru türü, puan, yanlış anlama) en çok 120 kelimelik bir değerlendirme yaz: neyi iyi yaptı, hangi kavram/akıl yürütme açığı var (muhtemelen de), önümüzdeki çalışma için 2 somut adım. Motive edici ama dürüst ol.`;
 
+
+/* ===== GÜNDEM: ücretsiz RSS kaynakları (gundem.html "Kaynaklardan çek" düğmesi kullanır) =====
+   Yeni kaynak eklemek için bir satır ekle. tur: ajans | resmi | kurum | basin. 'sahip' kısa ve olgusal bir ifade olmalı. */
+const RSS={
+ 'BM Haberleri':{u:'https://news.un.org/feed/subscribe/en/news/all/rss.xml',tur:'resmi',ulke:'BM',sahip:'Uluslararası örgüt'},
+ 'BBC World':{u:'https://feeds.bbci.co.uk/news/world/rss.xml',tur:'basin',ulke:'Birleşik Krallık',sahip:'Kamu yayıncısı'},
+ 'Al Jazeera':{u:'https://www.aljazeera.com/xml/rss/all.xml',tur:'basin',ulke:'Katar',sahip:'Katar devleti tarafından finanse edilir'},
+ 'Anadolu Ajansı':{u:'https://www.aa.com.tr/en/rss/default?cat=world',tur:'ajans',ulke:'Türkiye',sahip:'Devlet ajansı'},
+ 'Deutsche Welle':{u:'https://rss.dw.com/rdf/rss-en-world',tur:'basin',ulke:'Almanya',sahip:'Kamu yayıncısı'},
+ 'The Guardian':{u:'https://www.theguardian.com/world/rss',tur:'basin',ulke:'Birleşik Krallık',sahip:'Vakıf sahipliğinde gazete'},
+ 'France 24':{u:'https://www.france24.com/en/rss',tur:'basin',ulke:'Fransa',sahip:'Kamu grubu (France Médias Monde)'},
+ 'TASS':{u:'https://tass.com/rss/v2.xml',tur:'ajans',ulke:'Rusya',sahip:'Devlet ajansı'},
+ 'Xinhua':{u:'http://www.xinhuanet.com/english/rss/worldrss.xml',tur:'ajans',ulke:'Çin',sahip:'Devlet ajansı'}
+};
+const rssMetin=(s,t)=>{const m=s.match(new RegExp('<'+t+'(?:\\s[^>]*)?>([\\s\\S]*?)</'+t+'>','i'));if(!m)return'';
+  return m[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/<[^>]+>/g,' ').replace(/&quot;/g,'"').replace(/&#0?39;|&apos;/g,"'").replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()};
+const rssAyir=x=>{const out=[];for(const m of x.matchAll(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi)){const b=m[0];
+  let url=rssMetin(b,'link');if(!url){const h=b.match(/<link[^>]*href=["']([^"']+)["']/i);url=h?h[1]:''}
+  const t=rssMetin(b,'pubDate')||rssMetin(b,'published')||rssMetin(b,'updated')||rssMetin(b,'dc:date');
+  const d=t&&!isNaN(Date.parse(t))?new Date(t).toISOString().slice(0,10):'';
+  const baslik=rssMetin(b,'title');if(baslik&&/^https?:\/\//.test(url))out.push({baslik:baslik.slice(0,220),url,tarih:d,ozet:(rssMetin(b,'description')||rssMetin(b,'summary')).slice(0,300)})}
+  return out};
 const kes0=t=>String(t||'').slice(0,800);
 const jparse=t=>{t=String(t).replace(/```json|```/g,'');return JSON.parse(t.slice(t.indexOf('{'),t.lastIndexOf('}')+1))};
 
@@ -108,21 +137,55 @@ export default{
     const sf=req.headers.get('Sec-Fetch-Site'),sm=req.headers.get('Sec-Fetch-Mode');
     const siteIci=IZINLI.includes(o)&&(!sf||sf==='cross-site'||sf==='same-site'||sf==='same-origin')&&(!sm||sm==='cors');
     if(req.method==='OPTIONS')return new Response(null,{status:siteIci?204:403,headers:siteIci?cors:{}});
+    const ip=req.headers.get('CF-Connecting-IP')||'';
     if(req.method!=='POST'||!siteIci||!sf||sf==='none')return new Response('yasak',{status:403});
+    const kayit=async(on,o,gun=90)=>{if(env.LOG)try{await env.LOG.put(on+':'+Date.now()+Math.random().toString(36).slice(2,5),JSON.stringify(o),{expirationTtl:gun*86400})}catch(e){}};
+    const sinir=async(on,max,ttl=3700)=>{if(!env.RL)return true;const k='rl:'+on+':'+ip+':'+new Date().toISOString().slice(0,13);const n=+(await env.RL.get(k)||0);if(n>=max)return false;await env.RL.put(k,String(n+1),{expirationTtl:ttl});return true};
     let b;try{b=await req.json()}catch{return new Response('hatalı istek',{status:400,headers:cors})}
     const mod=(DERS_ACIK?['ders','hukuk','gundem']:['gundem']).includes(b.mod)?b.mod:'genel',derin=mod!=='genel',gorev=String(b.gorev||''),alan=mod==='hukuk'?'kamu':String(b.alan||'genel').replace(/[^a-z]/g,'');
     const hassas=HASSAS.test(kes0(b.soru)+' '+(b.gecmis||[]).map(m=>kes0(m.content)).join(' '));
 
+    if(gorev==='geri'){                                  // 👍/👎 geri bildirimi
+      if(await sinir('f',30))await kayit('gb',{puan:b.puan===1?1:-1,soru:kes0(b.soru).slice(0,300),cevap:String(b.cevap||'').slice(0,500),sayfa:String(b.baglam?.sayfa||'').slice(0,80)});
+      return js({tamam:true});
+    }
+    if(gorev==='rss'){                                   // gündem editörü: seçili RSS kaynaklarından başlık çek (yalnızca başlık+bağlantı+kısa özet)
+      if(!await sinir('r',20))return js({hata:true,mesaj:'Saatlik çekme sınırı doldu.'});
+      const ad=Object.keys(RSS).filter(k=>!Array.isArray(b.kaynaklar)||b.kaynaklar.includes(k)),hatalar=[];
+      const sonuc=await Promise.all(ad.map(async k=>{try{
+        const r=await fetch(RSS[k].u,{headers:{'User-Agent':'Mozilla/5.0 (compatible; EkoLogBot/1.0)','Accept':'application/rss+xml, application/xml, text/xml, */*'},cf:{cacheTtl:900,cacheEverything:true}});
+        if(!r.ok)throw new Error(r.status);const l=rssAyir(await r.text()).slice(0,15);if(!l.length)throw new Error('boş');
+        return l.map(i=>({...i,kaynak:k,tur:RSS[k].tur,ulke:RSS[k].ulke,sahip:RSS[k].sahip}))}catch(e){hatalar.push(k);return[]}}));
+      const haberler=sonuc.flat().sort((a,b)=>String(b.tarih).localeCompare(String(a.tarih)));
+      return js({haberler,hatalar});
+    }
+    if(env.TURNSTILE_SECRET){                            // isteğe bağlı bot doğrulaması (Cloudflare Turnstile)
+      let v={};try{v=await (await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:new URLSearchParams({secret:env.TURNSTILE_SECRET,response:String(b.tt||''),remoteip:ip})})).json()}catch(e){}
+      if(!v.success)return js({cevap:'Doğrulama yapılamadı; sayfayı yenileyip tekrar dene.',hata:true});
+    }
     if(env.RL){                                          // saatlik hız sınırı (derin modlar ayrı)
-      const k='rl:'+(derin?'d:':'g:')+req.headers.get('CF-Connecting-IP')+':'+new Date().toISOString().slice(0,13);
+      const k='rl:'+(derin?'d:':'g:')+ip+':'+new Date().toISOString().slice(0,13);
       const n=+(await env.RL.get(k)||0);
       if(n>=(derin?SINIR_DERIN:SINIR))return js({cevap:'Bu saatlik soru sınırına ulaştın, biraz sonra tekrar dene.'});
       await env.RL.put(k,String(n+1),{expirationTtl:3700});
     }
-    if(!env.ANTHROPIC_API_KEY)console.error('ANTHROPIC_API_KEY tanımlı değil!');
-    const claude=async(g)=>{const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
+    if(YAPAY_ZEKA&&!env.ANTHROPIC_API_KEY&&!env.AI)console.error('ANTHROPIC_API_KEY ve AI bağlaması yok: yanıt üretilemez!');
+    const claude=async(g)=>{
+      if(!YAPAY_ZEKA)throw new Error('yapay zeka kapali');
+      if(env.RL){const gk='cl:'+new Date().toISOString().slice(0,10),n=+(await env.RL.get(gk)||0);   // günlük harcama freni (yaklaşık)
+        if(n>=(+env.GUNLUK_LIMIT||GUNLUK_CLAUDE))throw new Error('gunluk limit');await env.RL.put(gk,String(n+1),{expirationTtl:90000})}
+      const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
       headers:{'x-api-key':env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01','content-type':'application/json'},body:JSON.stringify(g)});
       if(!r.ok){console.error('ANTHROPIC HATA',r.status,(await r.text()).slice(0,300));throw new Error('api '+r.status)}return (await r.json()).content||[]};
+    const ucretsiz=async g=>{
+      if(!YAPAY_ZEKA)throw new Error('yapay zeka kapali');                            // Workers AI: system + mesajlar → düz metin
+      const r=await env.AI.run(env.AI_MODEL||AI_MODEL,{messages:[{role:'system',content:g.system},...g.messages],max_tokens:g.max_tokens,temperature:0.3});
+      return String(r&&(r.response??(r.choices&&r.choices[0]&&r.choices[0].message&&r.choices[0].message.content))||'').replace(/<think>[\s\S]*?<\/think>/g,'').trim()};
+    const uret=async g=>{
+      if(!g.tools&&env.AI&&env.SAGLAYICI!=='claude'){
+        try{const t=await ucretsiz(g);if(t)return [{type:'text',text:t}]}catch(e){console.error('AI HATA',e&&e.message)}
+        if(!env.ANTHROPIC_API_KEY)throw new Error('ai yok')}
+      return claude(g)};
     const metin=bl=>bl.filter(x=>x.type==='text').map(x=>x.text).join('').trim();
     const kes=(t,n)=>String(t||'').slice(0,n);
     const kaynak=(b.kaynak||[]).slice(0,8).map((c,i)=>`[${i+1}] ${c.t} (${c.u})\n${kes(c.x,700)}`).join('\n\n');
@@ -155,11 +218,20 @@ export default{
         system:SISTEM+SOHBET+SITE+LINK_NOTU+((mod==='ders'||mod==='hukuk')?alanPrompt(alan):mod==='gundem'?GUNDEM:'')+(hassas?INSAN_HAKLARI:''),
         messages:[...gecmis,{role:'user',content:`<baglam>${baglam}</baglam>\n<kaynaklar>\n${kaynak}\n</kaynaklar>\n${og?`<ogrenci>${og}</ogrenci>\n`:''}\nSoru: ${kes(b.soru,500)}`}]};
       if(mod==='gundem')govde.tools=[{type:'web_search_20250305',name:'web_search',max_uses:4}];
-      const bl=await claude(govde);
+      if(mod==='gundem'&&!env.ANTHROPIC_API_KEY)return js({cevap:'Gündem modu şu an kapalı.',hata:true});
+      /* Gündem önbelleği: geçmişsiz aynı soru 6 saat içinde tekrar gelirse Claude'a gitmeden cevapla (KV "RL" gerekir) */
+      let gcKey='';
+      if(mod==='gundem'&&env.RL&&!(b.gecmis||[]).length&&!og){
+        const dz=new TextEncoder().encode(String(b.soru||'').toLocaleLowerCase('tr').replace(/\s+/g,' ').trim().slice(0,300));
+        gcKey='gc:'+[...new Uint8Array(await crypto.subtle.digest('SHA-256',dz))].slice(0,12).map(x=>x.toString(16).padStart(2,'0')).join('');
+        try{const c=await env.RL.get(gcKey);if(c)return js(JSON.parse(c))}catch(e){}
+      }
+      const bl=await uret(govde);
       const web=[],gor=new Set();
       bl.forEach(x=>(x.citations||[]).forEach(c=>{if(c.url&&!gor.has(c.url)){gor.add(c.url);web.push({baslik:c.title,url:c.url})}}));
       let cevap=metin(bl)||'Bu konuda yanıt üretemedim, soruyu biraz değiştirir misin?';
 
+      if(mod==='genel'&&/sitede (bu )?(yok|bulunmuyor|bulamad)/i.test(cevap))await kayit('bos',{soru:kes(b.soru,300),sayfa:kes(b.baglam?.sayfa,80)});   // sitede karşılığı olmayan sorular
       if(mod==='gundem'){                                // 2. geçiş: denetçi. Başarısızsa taslak ASLA yayımlanmaz.
         const kl=web.length?web.map((w,i)=>`${i+1}. ${w.baslik} — ${w.url}`).join('\n'):'(kaynak yok)';
         const son=metin(await claude({model:MODEL_DERIN,max_tokens:1300,system:DENETCI+(hassas?'\n<konu_kurali>'+INSAN_HAKLARI+'</konu_kurali>':''),
@@ -168,9 +240,11 @@ export default{
         cevap=son;
         if(env.LOG)await env.LOG.put('g:'+Date.now(),JSON.stringify({soru:kes(b.soru,300),cevap,web}),{expirationTtl:2592000});   // yönetici denetim kaydı (30 gün)
       }
+      if(gcKey&&!hassas)try{await env.RL.put(gcKey,JSON.stringify({cevap,web}),{expirationTtl:21600})}catch(e){}
       return js({cevap,web});
     }catch(e){
       console.error('ISTEK HATA',e&&e.message);
+      if(e&&e.message==='gunluk limit')return js({cevap:'Bugünkü yapay zekâ kotası doldu, yarın tekrar dene.',hata:true});
       return js({cevap:gorev.startsWith('deneme')?'Deneme şu an hazırlanamadı, biraz sonra tekrar dene.':'Şu an güvenilir bir yanıt üretemiyorum, lütfen sonra tekrar dene.',hata:true});
     }
   }
