@@ -7,11 +7,11 @@ if(window.__ekoBot)return;window.__ekoBot=1;
 /* ===== TEK AYAR YERİ =====
    PROXY: Cloudflare Worker adresini buraya yaz (boşsa bot "arama modu"nda çalışır).
    YOL: bilgi tabanındaki sayfa adı → sitedeki gerçek yol. Bir bağlantı 404 verirse yalnızca burayı düzelt. */
-const PROXY='';   /* Cloudflare kullanılmıyor: bot yalnızca sitedeki içeriklerde arama modunda çalışır */
+const PROXY='https://eko-bot.bcelikel191.workers.dev';
 const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; worker'da TURNSTILE_SECRET ile eşleşmeli) */
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */
-const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',ad:'Eko Asistan',ai:false},window.EKO_BOT||{});
+const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',ad:'Eko Asistan',ai:false,tam:false,host:''},window.EKO_BOT||{});
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 const tok=s=>tl(s).split(/[^a-z0-9]+/).filter(w=>w.length>2);
 let DB=null,IDX=null,hist=[],busy=false,KANUN=[],KRX=[];
@@ -62,14 +62,18 @@ const css=document.createElement('style');css.textContent=`
 #eb form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line,#eee3e6)}
 #eb input{flex:1;font:inherit;padding:11px 14px;border-radius:999px;border:1px solid var(--line,#eee3e6);background:var(--bg,#fbf6f7);color:inherit}
 #eb form button{border:0;border-radius:999px;padding:0 18px;font-weight:700;color:#fff;cursor:pointer;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45))}
-#eb-fab[data-n]::after{content:attr(data-n);position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--g1,#c4202e);font:800 14px/22px sans-serif}#eb-fab{position:fixed}#eb-mod{display:flex;gap:6px;padding:6px 12px 0;overflow-x:auto}#eb-mod button{font:inherit;font-size:12.5px;white-space:nowrap;padding:5px 11px;border-radius:999px;cursor:pointer;border:1px solid var(--line,#eee3e6);background:var(--surf,#fff);color:inherit}#eb-mod button.on{color:#fff;border-color:transparent;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45))}.eb-w a{border-color:var(--g2,#ff7a45)!important}.eb-say{background:none;border:0;cursor:pointer;font-size:14px;opacity:.7;padding:4px 0}#eb small{padding:0 14px 8px;color:var(--mut,#6a5f76);font-size:11.5px}`;
+#eb-fab[data-n]::after{content:attr(data-n);position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--g1,#c4202e);font:800 14px/22px sans-serif}#eb-fab{position:fixed}#eb-mod{display:flex;gap:6px;padding:6px 12px 0;overflow-x:auto}#eb-mod button{font:inherit;font-size:12.5px;white-space:nowrap;padding:5px 11px;border-radius:999px;cursor:pointer;border:1px solid var(--line,#eee3e6);background:var(--surf,#fff);color:inherit}#eb-mod button.on{color:#fff;border-color:transparent;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45))}.eb-w a{border-color:var(--g2,#ff7a45)!important}.eb-say{background:none;border:0;cursor:pointer;font-size:14px;opacity:.7;padding:4px 0}#eb small{padding:0 14px 8px;color:var(--mut,#6a5f76);font-size:11.5px}
+/* TAM SAYFA modu (eko-bot.html): balon yok, sohbet sayfayı doldurur */
+#eb.tam{position:relative!important;right:auto!important;bottom:auto!important;z-index:1;width:100%;max-width:920px;margin:0 auto;height:calc(100vh - 230px);height:calc(100dvh - 230px);min-height:460px;border-radius:22px;box-shadow:0 24px 60px -30px rgba(60,10,40,.45)}
+#eb.tam header button:last-child{display:none}#eb.tam .eb-m{max-width:80%;font-size:15.5px}#eb.tam #eb-log{padding:18px}
+@media(max-width:640px){#eb.tam{height:calc(100dvh - 190px);min-height:380px;border-radius:16px}#eb.tam .eb-m{max-width:92%}}`;
 document.head.appendChild(css);
 
 const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
 const fab=$('button','',null);fab.id='eb-fab';fab.textContent='💬';fab.setAttribute('aria-label',CFG.ad+'ı aç');
 const box=$('div');box.id='eb';box.setAttribute('role','dialog');box.setAttribute('aria-label',CFG.ad);
-box.innerHTML=`<header><b>${CFG.ad}</b><button id="eb-an" style="font-size:12px;border:1px solid #fff8;border-radius:999px;padding:3px 10px" aria-label="Analiz izni">Analiz</button><button aria-label="Kapat">✕</button></header><div id="eb-log" aria-live="polite"></div><div id="eb-mod" role="tablist"></div><small>Yapay zekâ hata yapabilir. Hukuki konularda bilgilendirme amaçlıdır; resmî metin için kaynağa bakın. Sorular ve geri bildirimler iyileştirme için kaydedilebilir.</small><form><input placeholder="Bir kavram, simülasyon ya da sayfa sor…" autocomplete="off"><button>Gönder</button></form>`;
-document.body.append(fab,box);
+box.innerHTML=`<header><b>${CFG.ad}</b><button id="eb-an" ${CFG.ai?'':'hidden'} style="font-size:12px;border:1px solid #fff8;border-radius:999px;padding:3px 10px" aria-label="Analiz izni">Analiz</button><button aria-label="Kapat">✕</button></header><div id="eb-log" aria-live="polite"></div><div id="eb-mod" role="tablist"></div><small>${CFG.ai?'Yapay zekâ hata yapabilir. Hukuki konularda bilgilendirme amaçlıdır; resmî metin için kaynağa bakın. Sorular ve geri bildirimler iyileştirme için kaydedilebilir.':'Bu asistan yapay zekâ kullanmaz: yalnızca sitedeki içeriklerde arama yapar ve sorularını bir sunucuya göndermez. Hukuki konularda bilgilendirme amaçlıdır; resmî metin için kaynağa bakın.'}</small><form><input placeholder="Bir kavram, simülasyon ya da sayfa sor…" autocomplete="off"><button>Gönder</button></form>`;
+if(CFG.tam){(document.querySelector(CFG.host||'#eko-bot-tam')||document.body).appendChild(box)}else document.body.append(fab,box);
 /* Sitenin kendi arama düğmesi (#pl-b) sağ altta varsa botun balonunu onun hemen üstüne diz */
 function yerles(){const p=document.getElementById('pl-b');let b=null;
   if(p){const r=p.getBoundingClientRect();if(r.width&&getComputedStyle(p).display!=='none'&&r.top>innerHeight/2)b=Math.round(innerHeight-r.top+12)}
@@ -512,7 +516,9 @@ async function sor(q){
   const gc=cs.filter(c=>c._s>=3);kaynaklar(m,gc.slice(0,4));yonlendir(m,q+' '+m.textContent,gc);log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();
 }
 sohbetYukle();
-fab.onclick=()=>{delete fab.dataset.n;box.classList.toggle('on');if(box.classList.contains('on')){yukle();if(!log.children.length){if(!CFG.proxy)mesaj('⚠️ Yapay zekâ bağlantısı henüz kurulu değil; şimdilik sadece sitedeki içeriklerde arama yapabiliyorum.','eb-b');mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları ve sayfaları sorabilirsin.','eb-b');chips()}inp.focus()}};
+const ilkAcilis=()=>{yukle();if(!log.children.length){if(!CFG.proxy)mesaj('⚠️ Yapay zekâ bağlantısı henüz kurulu değil; şimdilik sadece sitedeki içeriklerde arama yapabiliyorum.','eb-b');mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları, hukuk ve aktör bilgilerini, sayfaları sorabilirsin.','eb-b');chips()}};
+fab.onclick=()=>{delete fab.dataset.n;box.classList.toggle('on');if(box.classList.contains('on')){ilkAcilis();inp.focus()}};
+if(CFG.tam){box.classList.add('on','tam');ilkAcilis()}   /* tam sayfa: hep açık, klavye kendiliğinden açılmasın diye odaklanmaz */
 box.querySelector('#eb-an').onclick=()=>{const a=izinli();localStorage.setItem(IZIN,a?'0':'1');mesaj(a?'Çalışma analizi kapatıldı; artık özet gönderilmeyecek.':'Çalışma analizi açıldı.','eb-b')};
 box.querySelector('header button:last-child').onclick=()=>box.classList.remove('on');
 box.querySelector('form').onsubmit=e=>{e.preventDefault();const q=inp.value;inp.value='';sor(q)};
