@@ -17,14 +17,14 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-app
 .top a:hover{text-decoration:underline}
 /* Bot penceresini sayfaya yay: yüzen balon gizli, pencere hep açık ve ekranı kaplar */
 #eb-fab{display:none!important}
-#eb{position:fixed!important;display:flex!important;top:56px!important;bottom:0!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;
- width:min(920px,100%)!important;height:auto!important;border-radius:0!important;box-shadow:none!important;border-width:0 1px!important;z-index:1!important}
+#eb{position:fixed!important;display:flex!important;top:56px!important;bottom:0!important;left:0!important;right:0!important;transform:none!important;
+ width:100%!important;max-width:none!important;height:auto!important;border-radius:0!important;box-shadow:none!important;border:0!important;z-index:1!important}
 #eb header button:last-child{display:none!important}
-#eb-log{font-size:16px}
-@media(min-width:960px){#eb{top:76px!important;bottom:20px!important;border-radius:22px!important;border-width:1px!important;box-shadow:0 30px 70px -30px rgba(60,10,40,.5)!important}}
+#eb-log{font-size:16px;padding-left:max(14px,calc((100vw - 960px)/2))!important;padding-right:max(14px,calc((100vw - 960px)/2))!important}
+#eb form,#eb small,#eb #eb-mod{padding-left:max(14px,calc((100vw - 960px)/2))!important;padding-right:max(14px,calc((100vw - 960px)/2))!important}
 
 .top .ad{flex:none}.top .sy{flex:1;text-align:right;font-weight:600;font-size:14px;opacity:.9}
-.mbtn{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#fff;color:#c4202e;font:800 20px system-ui;cursor:pointer;display:grid;place-items:center;box-shadow:0 0 0 2px rgba(255,255,255,.5);-webkit-tap-highlight-color:transparent}
+.mbtn{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#fff;color:#c4202e;font:800 20px system-ui;cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 0 0 2px rgba(255,255,255,.5);-webkit-tap-highlight-color:transparent}
 body.dm-lock{overflow:hidden}
 .dm{position:fixed;inset:0;z-index:99990;visibility:hidden;pointer-events:none;transition:visibility 0s linear .38s}
 .dm.open{visibility:visible;pointer-events:auto;transition-delay:0s}
@@ -82,7 +82,7 @@ var M=[
 ['Topluluk','index.html#/etkinlik','index.html',[['paylas','Paylaşım Kartı'],['fikir','Fikir Muharebesi'],['yatay','Yatay Bakış'],['konferanslar','Konferanslar'],['arastirma','Ortak Araştırma Projeleri']]],
 ['Katıl','index.html#/katil'],
 ['Gündem','gundem.html'],
-['Eko Asistan','eko-bot.html']
+['Eko Bot','eko-bot.html']
 ];
 function mk(t,c){var e=D.createElement(t);if(c)e.className=c;return e}
 var root=mk('div','dm');root.id='dmenu';
@@ -92,7 +92,7 @@ var list=root.querySelector('.dm-list');
 M.forEach(function(m){
   var li=mk('li','dm-item'),row=mk('div','dm-row'),a=mk('a'),s=mk('span'),kids=m[3];
   a.href=m[1];s.textContent=m[0];a.appendChild(s);
-  if(m[0]==='Eko Asistan'){a.className='on';a.setAttribute('aria-current','page')}
+  if(m[0]==='Eko Bot'){a.className='on';a.setAttribute('aria-current','page')}
   if(!kids)a.insertAdjacentHTML('beforeend',CH);
   row.appendChild(a);li.appendChild(row);
   if(kids){
