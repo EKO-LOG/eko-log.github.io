@@ -433,11 +433,15 @@ let RSS=[];
 async function rssCek(){
  const d=$('#dlg');$('#dt').textContent='Kaynaklardan haber çek';
  $('#db').innerHTML='<p>Yükleniyor…</p>';if(!d.open)d.showModal();
+ let neden='';
  try{
-  const r=await fetch(CFG.proxy,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({gorev:'rss'})});
-  const j=await r.json();if(j.hata&&!j.haberler)throw new Error(j.mesaj||'hata');
-  RSS=j.haberler||[];rssCiz('',j.hatalar||[]);
- }catch(e){$('#db').innerHTML=`<div class="note bad">Çekilemedi. Bu özellik yalnızca sitenin kendi adresinden (izinli alan adı) ve Worker'da RSS eklenmişse çalışır. Elle de haber girebilirsin: <b>+ Yeni haber</b>.</div>`}
+  let r;try{r=await fetch(CFG.proxy,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({gorev:'rss'})})}
+  catch(e){neden='Worker\'a ulaşılamadı (adres yanlış, Worker kapalı ya da bu sayfanın alan adı izinli değil). Denenen adres: '+CFG.proxy;throw e}
+  if(!r.ok){neden='Worker HTTP '+r.status+' döndürdü. 403 ise bu sayfanın adresi worker.js içindeki IZINLI listesinde değil.';throw 0}
+  let j;try{j=await r.json()}catch(e){neden='Worker geçerli bir cevap vermedi.';throw e}
+  if(!j.haberler){neden=j.mesaj||'Worker RSS komutunu tanımıyor: Cloudflare\'e yüklü worker.js eski sürüm olabilir. Güncel worker.js\'i yükle.';throw 0}
+  RSS=j.haberler;rssCiz('',j.hatalar||[]);
+ }catch(e){$('#db').innerHTML=`<div class="note bad"><b>Çekilemedi.</b> ${E(neden||'Bilinmeyen hata.')}<br>Elle haber girebilirsin: <b>+ Yeni haber</b>.</div>`}
 }
 function rssCiz(q,hat){
  const k=tl(q);const L=RSS.filter(x=>!k||tl(x.baslik+' '+x.kaynak).includes(k)).slice(0,80);
