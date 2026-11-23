@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Eko Asistan · Eko-Log</title>
+<meta name="description" content="Eko-Log asistanı: sözlük, laboratuvar, mevzuat, hukuk bankası ve gündem içeriklerinde arama yapar.">
+<style>
+:root{--g1:#c4202e;--g2:#ff7a45;--bg:#fbf6f7;--surf:#fff;--soft:#f5ecef;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6}
+@media (prefers-color-scheme:dark){:root{--bg:#150f1b;--surf:#1f1727;--soft:#2a2034;--ink:#f3ecf7;--mut:#b0a4bd;--line:#372b43}}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.top{position:fixed;top:0;left:0;right:0;height:56px;z-index:2;display:flex;align-items:center;gap:16px;padding:0 16px;color:#fff;background:linear-gradient(120deg,var(--g1),var(--g2))}
+.top a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;white-space:nowrap}
+.top .ad{font-weight:800;font-size:17px;flex:1;white-space:nowrap}
+.top a:hover{text-decoration:underline}
+/* Bot penceresini sayfaya yay: yüzen balon gizli, pencere hep açık ve ekranı kaplar */
+#eb-fab{display:none!important}
+#eb{position:fixed!important;display:flex!important;top:56px!important;bottom:0!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;
+ width:min(920px,100%)!important;height:auto!important;border-radius:0!important;box-shadow:none!important;border-width:0 1px!important;z-index:1!important}
+#eb header button:last-child{display:none!important}
+#eb-log{font-size:16px}
+@media(min-width:960px){#eb{top:76px!important;bottom:20px!important;border-radius:22px!important;border-width:1px!important;box-shadow:0 30px 70px -30px rgba(60,10,40,.5)!important}}
+</style>
+</head>
+<body>
+<div class="top">
+ <a href="index.html">← Eko-Log</a>
+ <span class="ad">Eko Asistan</span>
+ <a href="gundem.html">Gündem</a>
+</div>
+<noscript><p style="padding:90px 16px">Eko Asistan'ı kullanmak için JavaScript gerekir.</p></noscript>
+<script src="eko-bot.js" defer></script>
+<script>
+/* Bot betiği yüklendikten sonra pencereyi bir kez aç (karşılama mesajı ve öneri düğmeleri gelsin) */
+addEventListener('load',function(){
+  var b=document.getElementById('eb'),f=document.getElementById('eb-fab');
+  if(b&&f&&!b.classList.contains('on'))f.click();
+  var i=b&&b.querySelector('input');if(i&&matchMedia('(min-width:700px)').matches)i.focus();
+});
+</script>
+</body>
+</html>
