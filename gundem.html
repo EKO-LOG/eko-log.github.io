@@ -108,6 +108,9 @@ dialog .db{padding:6px 18px 18px;overflow:auto;max-height:calc(90vh - 60px)}
 .rssi b{display:block}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;z-index:99;display:none;max-width:90vw}
 .sr{position:absolute;left:-9999px}
+#gyay[hidden],#gbot[hidden],#gnot[hidden],#notnormal[hidden]{display:none!important}
+.gom header.top,.gom .mbtn,.gom .mbrand,.gom footer.alt,.gom .dm,.gom #v-oku,.gom #tabs{display:none!important}
+.gom main.wrap{padding-top:10px}
 .tabs[hidden],#v-yonet[hidden],#v-oku[hidden]{display:none!important}
 .akish{font-size:20px;margin:30px 0 4px}.akis-uy{font-size:13px;color:var(--mut)}
 .qo{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.qo .ok{background:var(--okb);border-color:var(--ok)}.qo .no{background:var(--badb);border-color:var(--bad)}.qo button[disabled]{cursor:default}
@@ -191,8 +194,11 @@ footer.alt a{color:inherit}
    <label class="btn" style="cursor:pointer">İçe aktar<input type="file" id="ice" accept=".json,application/json" class="sr"></label>
    <button class="btn" id="indir">gundem.json indir</button>
    <button class="btn" id="bilgi">Bota işle…</button>
+    <button class="btn pri" id="gyay" hidden>🚀 Yayınla</button>
+    <button class="btn" id="gbot" hidden>🤖 Eko Can'a işle</button>
   </div>
-  <div class="note">Kayıtlar bu tarayıcıda taslak olarak saklanır. Sitede yayımlamak için <b>gundem.json indir</b> deyip dosyayı GitHub'daki sitenin klasörüne yükle; botun da bilmesi için <b>Bota işle…</b> ile <code>eko-bot-bilgi.json</code>'u güncelle. Sayfayı açan herkes editörü görebilir ama yayın yalnızca senin GitHub erişimin üzerinden olur.</div>
+  <div class="note" id="notnormal">Kayıtlar bu tarayıcıda taslak olarak saklanır. Sitede yayımlamak için <b>gundem.json indir</b> deyip dosyayı GitHub'daki sitenin klasörüne yükle; botun da bilmesi için <b>Bota işle…</b> ile <code>eko-bot-bilgi.json</code>'u güncelle. Sayfayı açan herkes editörü görebilir ama yayın yalnızca senin GitHub erişimin üzerinden olur.</div>
+  <div class="note" id="gnot" hidden>Kayıtlar bu tarayıcıda taslak olarak saklanır. <b>Yayınla</b> dediğinde <b>Yayında</b> durumundaki kayıtlar GitHub'a <code>gundem.json</code> olarak yazılır ve Gündem sayfasında görünür (1–2 dakika sürer). <b>Eko Can'a işle</b> da aynı kayıtları botun bilgi dosyasına ekler.</div>
   <div class="ed">
    <aside class="side" aria-label="Kayıtlar"><div id="kl"></div></aside>
    <div class="form" id="form"></div>
@@ -217,9 +223,9 @@ var M=[
 ['Kalkınma','kalkinma/'],
 ['Gazete ve Dergi','index.html#/yayin','index.html',[['gazete','Diyalog Gazetesi'],['dergi','İktisadi Kalkınma Dergisi'],['makale','Makale Yazımı'],['ceviri','Çeviri Köşesi'],['arastirma','Ortak Araştırma Projeleri'],['arsiv','Arşiv']]],
 ['Topluluk','index.html#/etkinlik','index.html',[['paylas','Paylaşım Kartı'],['fikir','Fikir Muharebesi'],['yatay','Yatay Bakış'],['konferanslar','Konferanslar'],['arastirma','Ortak Araştırma Projeleri']]],
-['Katıl','index.html#/katil'],
 ['Gündem','gundem.html'],
-['Eko Bot','eko-bot.html']
+['Eko Can','eko-bot.html'],
+['Katıl','index.html#/katil']
 ];
 function mk(t,c){var e=D.createElement(t);if(c)e.className=c;return e}
 var root=mk('div','dm');root.id='dmenu';
@@ -626,15 +632,18 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-quiz]');if
 function sekme(y){$('#v-oku').hidden=y;$('#v-yonet').hidden=!y;$('#tab-oku').setAttribute('aria-selected',!y);$('#tab-yonet').setAttribute('aria-selected',y);
  if(y){if(!CUR&&ITEMS[0])CUR=ITEMS[0].id;listeCiz();formCiz()}else yayinYukle()}
 $('#tab-oku').onclick=()=>{location.hash='#/';};$('#tab-yonet').onclick=()=>{location.hash='#/yonet'};
-/* Editör herkese kapalı. Yalnızca editör, bu tarayıcıda bir kez gundem.html#/editor-ac adresini açarak etkinleştirir. */
-function editorMu(){try{return localStorage.getItem('gundem-editor')==='1'}catch(e){return false}}
-function rota(){
- if(location.hash==='#/editor-ac'){try{localStorage.setItem('gundem-editor','1')}catch(e){}location.hash='#/yonet';return}
- if(location.hash==='#/editor-kapat'){try{localStorage.removeItem('gundem-editor')}catch(e){}location.hash='#/';return}
- const ed=editorMu();$('#tabs').hidden=!ed;
- let y=/^#\/yonet/.test(location.hash);
- if(y&&!ed){y=false;history.replaceState(null,'',location.pathname+location.search)}
- sekme(y)}
+/* Editör yalnızca yönetim panelinin (yonetim-…html) içinde, ona gömülü olarak açılır. Herkese açık sayfada editör yoktur. */
+let GOM=false;try{GOM=window.parent!==window&&!!window.parent.EKO_ADM_GUNDEM&&/[?&]gom=1/.test(location.search)}catch(e){}
+function rota(){sekme(GOM)}
+if(GOM){
+ document.documentElement.classList.add('gom');
+ const ADM=window.parent.EKO_ADM_GUNDEM;
+ $('#gyay').hidden=false;$('#gbot').hidden=false;$('#gnot').hidden=false;$('#notnormal').hidden=true;
+ $('#gyay').onclick=async()=>{const Y=yayinlar();if(!Y.length){toast('Yayında kayıt yok: önce bir kaydı "Yayında" yap.');return}
+  $('#gyay').disabled=true;try{await ADM.yayinla(JSON.stringify({surum:1,guncelleme:new Date().toISOString(),haberler:Y},null,1),Y.length)}catch(e){toast('Yayınlanamadı: '+(e&&e.message||'hata'))}$('#gyay').disabled=false};
+ $('#gbot').onclick=async()=>{const Y=yayinlar();if(!Y.length){toast('Yayında kayıt yok.');return}
+  $('#gbot').disabled=true;try{await ADM.botaIsle(Y.map(botKaydi))}catch(e){toast('İşlenemedi: '+(e&&e.message||'hata'))}$('#gbot').disabled=false};
+}
 addEventListener('hashchange',rota);
 rota();
 </script>

@@ -6383,5 +6383,47 @@ function memInit(){try{if(!(FB.ok()&&FB.sess()))return;memRefresh().then(()=>{dr
 try{if(S.work&&S.remote&&!$('#app').hidden)memInit()}catch(e){}
 
 </script>
+<script id="adm-gundem">
+/* ===== Gündem yönetimi: gundem.html'deki editör bu sayfaya gömülür; yayın doğrudan GitHub'a yazılır ===== */
+(function(){
+  /* Menüye "Gündem" grubu: "Site" grubundan önce */
+  const i=NAV.findIndex(g=>g.g==='Site');
+  NAV.splice(i<0?NAV.length:i,0,{g:'Gündem',items:[['gundem','Gündem yönetimi']]});
+
+  async function yaz(path,text,msg){
+    if(!S.token||!S.cfg)throw new Error('Önce yönetim paneline bağlan.');
+    const g=await gh('contents/'+path+'?ref='+encodeURIComponent(S.cfg.branch));
+    let sha;
+    if(g.ok)sha=(await g.json()).sha;
+    else if(g.status!==404)throw new Error(httpErr(g.status,await ghMsg(g)));
+    const body={message:msg,content:enc(text),branch:S.cfg.branch};
+    if(sha)body.sha=sha;
+    const r=await gh('contents/'+path,{method:'PUT',body});
+    if(!r.ok)throw new Error(httpErr(r.status,await ghMsg(r)));
+  }
+  window.EKO_ADM_GUNDEM={
+    async yayinla(text,n){
+      await yaz('gundem.json',text,'Gündem: '+n+' haber yayımlandı (yönetim paneli)');
+      toast(n+' haber yayınlandı. Sitede görünmesi 1–2 dakika sürebilir.');
+    },
+    async botaIsle(kayitlar){
+      const g=await gh('contents/eko-bot-bilgi.json?ref='+encodeURIComponent(S.cfg.branch),{raw:true});
+      if(!g.ok)throw new Error('eko-bot-bilgi.json okunamadı ('+g.status+'). Dosya sitenin ana klasöründe olmalı.');
+      const J=JSON.parse(await g.text());
+      if(!Array.isArray(J.chunks))throw new Error('eko-bot-bilgi.json beklenen biçimde değil (chunks yok).');
+      const eski=J.chunks.filter(c=>c.k==='haber').length;
+      J.chunks=J.chunks.filter(c=>c.k!=='haber').concat(kayitlar);
+      await yaz('eko-bot-bilgi.json',JSON.stringify(J),'Eko Can bilgisi: gündem haberleri güncellendi (yönetim paneli)');
+      toast('Eko Can güncellendi: '+eski+' eski haber çıkarıldı, '+kayitlar.length+' haber eklendi.');
+    }
+  };
+  VIEWS.gundem=()=>{
+    const root=h('div',{class:'stack'});
+    root.append(pageHead('Gündem yönetimi','Haber taslakları bu tarayıcıda saklanır. “Kaynaklardan çek” ile haber akışından taslak aç, analizi yaz, “Yayında” yap ve “Yayınla”ya bas. Bu bölümdeki Yayınla, üstteki “Gözden geçir ve yayınla”dan bağımsızdır ve doğrudan gundem.json dosyasını günceller.'));
+    root.append(h('iframe',{src:'gundem.html?gom=1',title:'Gündem editörü',style:'width:100%;height:calc(100vh - 190px);min-height:620px;border:1px solid var(--line);border-radius:14px;background:#fff'}));
+    return root;
+  };
+})();
+</script>
 </body>
 </html>

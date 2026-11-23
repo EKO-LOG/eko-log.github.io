@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Eko Asistan · Eko-Log</title>
+<title>Eko Can · Eko-Log</title>
 <meta name="description" content="Eko-Log asistanı: sözlük, laboratuvar, mevzuat, hukuk bankası ve gündem içeriklerinde arama yapar.">
 <style>
 :root{--g1:#c4202e;--g2:#ff7a45;--bg:#fbf6f7;--surf:#fff;--soft:#f5ecef;--ink:#1d1526;--mut:#6a5f76;--line:#eee3e6}
@@ -61,9 +61,9 @@ body.dm-lock{overflow:hidden}
 <div class="top">
  <button type="button" class="mbtn" id="mbtn" aria-label="Menüyü aç" aria-haspopup="dialog" aria-expanded="false" aria-controls="dmenu"><span>E</span></button>
  <a class="ad" href="index.html">Eko-Log</a>
- <span class="sy">Eko Asistan</span>
+ <span class="sy">Eko Can</span>
 </div>
-<noscript><p style="padding:90px 16px">Eko Asistan'ı kullanmak için JavaScript gerekir.</p></noscript>
+<noscript><p style="padding:90px 16px">Eko Can'ı kullanmak için JavaScript gerekir.</p></noscript>
 <script>
 (function(){
 var D=document,btn=D.getElementById('mbtn'),isOpen=false,n=0;
@@ -80,9 +80,9 @@ var M=[
 ['Kalkınma','kalkinma/'],
 ['Gazete ve Dergi','index.html#/yayin','index.html',[['gazete','Diyalog Gazetesi'],['dergi','İktisadi Kalkınma Dergisi'],['makale','Makale Yazımı'],['ceviri','Çeviri Köşesi'],['arastirma','Ortak Araştırma Projeleri'],['arsiv','Arşiv']]],
 ['Topluluk','index.html#/etkinlik','index.html',[['paylas','Paylaşım Kartı'],['fikir','Fikir Muharebesi'],['yatay','Yatay Bakış'],['konferanslar','Konferanslar'],['arastirma','Ortak Araştırma Projeleri']]],
-['Katıl','index.html#/katil'],
 ['Gündem','gundem.html'],
-['Eko Bot','eko-bot.html']
+['Eko Can','eko-bot.html'],
+['Katıl','index.html#/katil']
 ];
 function mk(t,c){var e=D.createElement(t);if(c)e.className=c;return e}
 var root=mk('div','dm');root.id='dmenu';
@@ -92,7 +92,7 @@ var list=root.querySelector('.dm-list');
 M.forEach(function(m){
   var li=mk('li','dm-item'),row=mk('div','dm-row'),a=mk('a'),s=mk('span'),kids=m[3];
   a.href=m[1];s.textContent=m[0];a.appendChild(s);
-  if(m[0]==='Eko Bot'){a.className='on';a.setAttribute('aria-current','page')}
+  if(m[0]==='Eko Can'){a.className='on';a.setAttribute('aria-current','page')}
   if(!kids)a.insertAdjacentHTML('beforeend',CH);
   row.appendChild(a);li.appendChild(row);
   if(kids){
