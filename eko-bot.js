@@ -11,7 +11,8 @@ const PROXY='https://eko-bot.bcelikel191.workers.dev';
 const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; worker'da TURNSTILE_SECRET ile eşleşmeli) */
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */
-const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',ad:'Eko Asistan',ai:false,tam:false,host:''},window.EKO_BOT||{});
+const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',ad:'Eko Can',ai:true,tam:false,host:'',acilis:'tam',sayfa:'eko-bot.html'},window.EKO_BOT||{});
+/* acilis:'tam' → yuvarlak düğmeye basınca tam sayfa (eko-bot.html) açılır. Eski küçük balon için sayfada window.EKO_BOT={acilis:'balon'} yaz. */
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 const tok=s=>tl(s).split(/[^a-z0-9]+/).filter(w=>w.length>2);
 let DB=null,IDX=null,hist=[],busy=false,KANUN=[],KRX=[];
@@ -65,12 +66,12 @@ const css=document.createElement('style');css.textContent=`
 #eb-fab[data-n]::after{content:attr(data-n);position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--g1,#c4202e);font:800 14px/22px sans-serif}#eb-fab{position:fixed}#eb-mod{display:flex;gap:6px;padding:6px 12px 0;overflow-x:auto}#eb-mod button{font:inherit;font-size:12.5px;white-space:nowrap;padding:5px 11px;border-radius:999px;cursor:pointer;border:1px solid var(--line,#eee3e6);background:var(--surf,#fff);color:inherit}#eb-mod button.on{color:#fff;border-color:transparent;background:linear-gradient(120deg,var(--g1,#c4202e),var(--g2,#ff7a45))}.eb-w a{border-color:var(--g2,#ff7a45)!important}.eb-say{background:none;border:0;cursor:pointer;font-size:14px;opacity:.7;padding:4px 0}#eb small{padding:0 14px 8px;color:var(--mut,#6a5f76);font-size:11.5px}
 /* TAM SAYFA modu (eko-bot.html): balon yok, sohbet sayfayı doldurur */
 #eb.tam{position:relative!important;right:auto!important;bottom:auto!important;z-index:1;width:100%;max-width:920px;margin:0 auto;height:calc(100vh - 230px);height:calc(100dvh - 230px);min-height:460px;border-radius:22px;box-shadow:0 24px 60px -30px rgba(60,10,40,.45)}
-#eb.tam header button:last-child{display:none}#eb.tam .eb-m{max-width:80%;font-size:15.5px}#eb.tam #eb-log{padding:18px}
+#eb.tam header button:last-child{display:none}#eb.tam.geri header button:last-child{display:inline-block}#eb.tam .eb-m{max-width:80%;font-size:15.5px}#eb.tam #eb-log{padding:18px}
 @media(max-width:640px){#eb.tam{height:calc(100dvh - 190px);min-height:380px;border-radius:16px}#eb.tam .eb-m{max-width:92%}}`;
 document.head.appendChild(css);
 
 const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
-const fab=$('button','',null);fab.id='eb-fab';fab.textContent='💬';fab.setAttribute('aria-label',CFG.ad+'ı aç');
+const fab=$('button','',null);fab.id='eb-fab';fab.textContent='💬';fab.setAttribute('aria-label',CFG.ad+"'ı aç");
 const box=$('div');box.id='eb';box.setAttribute('role','dialog');box.setAttribute('aria-label',CFG.ad);
 box.innerHTML=`<header><b>${CFG.ad}</b><button id="eb-an" ${CFG.ai?'':'hidden'} style="font-size:12px;border:1px solid #fff8;border-radius:999px;padding:3px 10px" aria-label="Analiz izni">Analiz</button><button aria-label="Kapat">✕</button></header><div id="eb-log" aria-live="polite"></div><div id="eb-mod" role="tablist"></div><small>${CFG.ai?'Yapay zekâ hata yapabilir. Hukuki konularda bilgilendirme amaçlıdır; resmî metin için kaynağa bakın. Sorular ve geri bildirimler iyileştirme için kaydedilebilir.':'Bu asistan yapay zekâ kullanmaz: yalnızca sitedeki içeriklerde arama yapar ve sorularını bir sunucuya göndermez. Hukuki konularda bilgilendirme amaçlıdır; resmî metin için kaynağa bakın.'}</small><form><input placeholder="Bir kavram, simülasyon ya da sayfa sor…" autocomplete="off"><button>Gönder</button></form>`;
 if(CFG.tam){(document.querySelector(CFG.host||'#eko-bot-tam')||document.body).appendChild(box)}else document.body.append(fab,box);
@@ -347,7 +348,7 @@ function sohbetKaydet(){try{const L=[];log.querySelectorAll(':scope > .eb-m').fo
   sessionStorage.setItem(SK,JSON.stringify({L:L.slice(-30),hist:hist.slice(-6),mod:MOD,on:box.classList.contains('on')}))}catch(e){}}
 function sohbetYukle(){try{const S=JSON.parse(sessionStorage.getItem(SK)||'null');if(!S||!S.L||!S.L.length)return false;
   if(S.mod&&MODLAR[S.mod])modSec(S.mod,true);
-  S.L.forEach(x=>mesaj(x.t,x.u?'eb-u':'eb-b'));hist=Array.isArray(S.hist)?S.hist:[];if(S.on){box.classList.add('on');yukle()}return true}catch(e){return false}}
+  S.L.forEach(x=>mesaj(x.t,x.u?'eb-u':'eb-b'));hist=Array.isArray(S.hist)?S.hist:[];if(S.on&&(CFG.tam||CFG.acilis==='balon')){box.classList.add('on');yukle()}return true}catch(e){return false}}
 addEventListener('pagehide',sohbetKaydet);document.addEventListener('visibilitychange',()=>{if(document.hidden)sohbetKaydet()});
 /* ---------- Sözlükte birebir eşleşen terim/düşünür: API'ye gitmeden sitedeki tanımı göster ---------- */
 const nt=s=>tl(s).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
@@ -462,15 +463,115 @@ const YETENEK={
  ders:HK?'Hukuk derslerini konu konu anlatabilir, "3 soruluk zor deneme" ile seni sınayabilir, kanun maddelerine bağlantı verebilirim.':'Bu laboratuvardaki konuları anlatabilir, "3 soruluk zor deneme" ile seni sınayabilir, hatalarını analiz edebilirim.',
  gundem:'Bilgi havuzundaki haberleri kuramsal çerçevelerle değerlendirebilirim.',
  genel:'Sitedeki kavramları, düşünürleri, simülasyonları, laboratuvarları ve mevzuatı sorabilirsin; seni ilgili sayfaya götürür, quiz/lab cevaplarını değerlendirebilirim.'};
-function sohbet(q){const t=tl(q).replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim();if(!t||t.length>60)return null;
+
+/* ---------- Yapay zekâ bağlıysa mesajı MODEL anlar; yerel kalıplar yalnızca güvenlik için çalışır ---------- */
+const AIVAR=()=>!!(CFG.proxy&&CFG.ai);
+function guvenlik(q){
+  const t=tl(q).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t||t.length>200)return null;
+  if(/\b(nedir|anlat|acikla|tanimi|quiz|lab)\b/.test(t))return null;
+  if(/(olmek istiyorum|intihar etmek|intihar edecegim|intihari dusunuyorum|yasamak istemiyorum|kendime zarar|kendimi oldur)/.test(t))
+    return{t:'Bunu ciddiye alıyorum. 💛 Şu an yalnız kalma; güvendiğin birine yaz ya da yanına git. Kendini tehlikede hissediyorsan 112\'yi ara. İstersen burada da dinlerim, ne oldu?'};
+  if(/\b(beni|bana|bizi)\b.*(vuruyor|dovuyor|dovdu|tehdit ediyor|zorluyor|zorla)|telefonumu kontrol ediyor|ondan korkuyorum/.test(t))
+    return{t:'Bunu duyduğuma üzüldüm, ve bu şaka konusu değil. 💛 Şiddet, tehdit, zorlama ya da seni korkutan davranışlar sağlıklı değildir, suç da olabilir. Güvendiğin birine anlat. Acil tehlikede 112\'yi ara; ALO 183 ve KADES uygulaması da var. İstersen buradan devam edelim, şu an güvende misin?'};
+  return null}
+
+/* ---------- EKO CAN: karakter, selam/hal hatır ve futbol goygoyu (API gerekmez, kısa tutulur) ----------
+   Yeni espri eklemek için ilgili diziye bir satır ekle; cevap rastgele seçilir. */
+let SON_FB='';
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function futbol(q){
+  const t=tl(q).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t||t.length>140)return null;
+  const son=SON_FB;SON_FB='';
+  if(son==='havlu'&&/^(yok |hayir |hic )?(havlu )?(atmadik|atmadim|atmadi|atmayiz)\b/.test(t))return{t:'Bilemem 🤷'};
+  if(/\b(nedir|anlat|acikla|hesapla|formul|tanimi|ornek|quiz|lab)\b/.test(t))return null;   // ders sorusunu kaçırma
+  const takim=/(hangi takim|takimin ne|takimin hangisi|tuttugun takim|kimi tutuyorsun|takimlisin|kimlisin|kimin takimi)/.test(t);
+  if(takim)return{t:rnd(['Efsane Yeni Malatyasporluyum! ⚽ Şimdi tozuna yetişmeye çalışan Yeşilyurtspor\'u destekliyorum.','Ben mi? Efsane Yeni Malatyaspor! Şimdi onun tozuna yetişmeye çalışan Yeşilyurtspor\'u tutuyorum 😄'])};
+  const bjk=/\b(besiktas|bjk|kartal|kara kartal)\b/.test(t);
+  const gs=/\b(galatasaray|gs|cimbom)\b/.test(t);
+  const fb=/\b(fenerbahce|fb|fener|kanarya)\b/.test(t);
+  const kaybet=/(kaybetti|kaybettik|kaybetmis|yenildi|yenildik|maglup|maglubiyet|dagildi|puan birakti|firca yedi)/.test(t);
+  const kazan=/(kazandi|kazandik|yendi|yendik|galip|galibiyet|3 puan|uc puan|farkli)/.test(t);
+  const bera=/(berabere|beraberlik|1 puan|bir puan)/.test(t);
+  if(bjk){
+    if(kaybet){SON_FB='havlu';return{t:'Havlu attınız ha? 😏'}}
+    if(kazan)return{t:rnd(['Eveeet! 🦅 Kartal uçtu, çok sevindim hocam!','Kazandık mı?! Kartal\'a helal olsun, bu akşam bayram! 🎉','Şampiyon gibi! 🦅 Sevindik, sevindik!'])};
+    if(bera)return{t:'Puan puandır ama biraz buruk kaldı 😅'};
+    return{t:rnd(['Kartal diyorsun, kulak kabarttım 🦅','Beşiktaş mı? Anlat bakalım, maç nasıldı?'])};
+  }
+  if(gs)return{t:rnd(['GS\'de Okan hocanın hamleleri hâlâ soru işareti 😅 Bir de kulüp iyi yönetilmiyor, o ayrı dert.','Galatasaray\'da Okan\'ın bu işi çözemediği belli, yönetim de iyi yönetmiyor bence 🤷','GS\'nin derdi tek değil: hem Okan hocanın tercihleri hem yönetim… iyi yönetilmiyor valla.'])};
+  if(fb)return{t:rnd(['Fener\'de Hacı İso\'nun ahı alındı, başka türlü izah edemiyorum 😄','Fenerbahçe\'nin bu hâli tesadüf değil, Hacı İso\'nun ahı var üstünde 🤲','Fener mi? Hacı İso\'nun ahı alındı, ne yapsalar nafile 😅'])};
+  return null}
+
+/* ---------- EKO CAN: sınav korkusu goygoyu ---------- */
+function sinav(q){
+  const t=tl(q).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t||t.length>100)return null;
+  if(/(panik|nefes|aglıyorum|aglıyorum|aglayacagim|dayanamiyorum|olmek|intihar|yapamiyorum artik|titriyorum)/.test(t))return null;   // gerçek sıkıntıda şakayı kes
+  if(/(sinav(dan|a)? (cok )?(korkuyorum|korkuyom|korkuyoruz)|(vize|final|butunleme)(den|e)? (cok )?korkuyorum|sinav(dan)? (cok )?(korku|stres)|sinavdan korktum)/.test(t))
+    return{t:rnd(['Çalışmadın nane yersin 😄 Şaka şaka… hangi dersten, ne zaman? Birlikte bakalım.','Çalışmadın ki nane yersin, kolay mı? 😏 Neyse hadi, hangi ders? Toparlarız.'])};
+  return null}
+
+/* ---------- EKO CAN: ilişki koçu (genel, sağlıklı iletişim önerileri; terapi/hüküm değil) ---------- */
+function koc(q){
+  const t=tl(q).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t||t.length>200)return null;
+  if(/\b(nedir|anlat|acikla|hesapla|formul|tanimi|quiz|lab)\b/.test(t))return null;
+  if(/(vuruyor|dovuyor|dovdu|telefonumu kontrol|istemedigim sey)/.test(t)||(/(siddet|tehdit|kontrol ediyor|izin vermiyor|korkuyorum|zorluyor|zorla)/.test(t)&&/(sevgil|esim|erkek arkadas|kiz arkadas|flort|ilisk|biri|\bo\b|\bona\b|\bondan\b)/.test(t)))
+    return{t:'Bunu duyduğuma üzüldüm, ve bu şaka konusu değil. 💛 Şiddet, tehdit, sürekli kontrol ya da seni korkutan davranışlar sağlıklı bir ilişki değil, suç da olabilir. Güvendiğin birine anlat. Acil tehlikede 112\'yi ara; ALO 183 ve KADES uygulaması da var. İstersen buradan devam edelim, şu an güvende misin?'};
+  if(/(kiskan)/.test(t))return{t:'Kıskançlık çoğu zaman güvensizlikten gelir. 🤔 Suçlamadan konuş: "Şu olunca ben böyle hissettim" de, "sen hep…" deme. Kontrol etmek, telefon karıştırmak işi büyütür. Seni ne tetikledi?'};
+  if(/(guvenemiyorum|guven sorunu|yalan soyledi|yalan soyluyor|aldatiyor|aldatti|aldatiyormus)/.test(t))return{t:'Güven sarsıldıysa bu çok yıpratıcı. 💔 Elinde somut bir şey mi var, yoksa içine mi doğdu? Önce sakin kafayla, suçlamadan açık konuş; cevabı ve davranışı görmek lazım. Karar acele verilmez.'};
+  if(/(tartistik|kavga ettik|kavga ettim|kustuk|konusmuyor|konusmuyoruz)/.test(t))return{t:'Tartışma normal, önemli olan nasıl toparladığın. Sakinleşmeden konuşma; bir mola ver. Sonra "kim haklı" değil "ne yaşadık" diye yaklaş, ilk adımı atmak yenilmek değil. Ne oldu?'};
+  if(/(barismak|barisalim|barissak|eski sevgil|eski askim|geri donsem|geri donmek|geri donmeli)/.test(t))return{t:'Barışmadan önce şuna bak: ayrılma sebebi çözüldü mü, yoksa özlem mi konuşuyor? İkisi farklı. Ayrılığın nedenini açık konuşmadan dönmek aynı döngüyü getirir. Neden ayrıldınız?'};
+  if(/(acilmak|acilsam|acilayim|itiraf|hislerimi soyle|cikma teklif)/.test(t)&&/(ona|ondan|sevgil|hoslan|\bask|kiz|erkek|hislerim)/.test(t))return{t:'Cesur olmak güzel şey. 💪 Sade ve samimi ol: "Seninle vakit geçirmek hoşuma gidiyor, kahve içelim mi?" gibi. Büyük itiraf yerine küçük bir adım at. Cevap hayır olursa da dostça kal, bu senin değerini düşürmez. Kimden bahsediyoruz? 😄'};
+  if(/(ayrilmali miyim|birakmali miyim|bitirmeli miyim|bitirsem mi|devam etmeli miyim)/.test(t))return{t:'Senin yerine karar veremem ama sorular verebilirim: bu ilişkide kendin gibi misin, saygı görüyor musun, mutlu olduğun anlar mutsuz olduklarından çok mu? Bir de yakın biri ne derdi? Ne hissediyorsun?'};
+  if(/(ilisk|sevgili).*(tavsiye|ne yapmaliyim|ne yapayim|nasil olmali|ipucu|sir)|(tavsiye|ne yapmaliyim|ne yapayim).*(ilisk|sevgili|flort)/.test(t))return{t:'Sağlıklı ilişkinin üç temeli: dürüstlük, saygı, açık iletişim. 💬 Beklentini söyle, karşındakini dinle, sınırlarını koru. Durumunu anlat, ona göre konuşalım.'};
+  return null}
+
+/* ---------- EKO CAN: gönül ve güzellik sohbeti (makyaj, cilt bakımı, kombin, aşk meşk) ----------
+   Cinsiyet tahmin etmez; konu açılınca arkadaş gibi dinler, şakalaşır, küçük öneri verir. Kullanıcıya romantik yaklaşmaz. */
+function gonul(q){
+  const t=tl(q).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t||t.length>140)return null;
+  if(/(olmek istiyorum|intihar|yasamak istemiyorum|kendime zarar|kendimi oldur)/.test(t))
+    return{t:'Bunu ciddiye alıyorum. 💛 Şu an yalnız kalma; güvendiğin birine yaz ya da yanına git. Kendini tehlikede hissediyorsan 112\'yi ara. İstersen burada da dinlerim, ne oldu?'};
+  if(/\b(nedir|anlat|acikla|hesapla|formul|tanimi|quiz|lab)\b/.test(t))return null;
+  if(/(sevgilin var mi|beni sever misin|bana ask misin|benimle evlenir misin|bana ask|seni seviyorum|benimle cikar misin)/.test(t))
+    return{t:rnd(['Ben bir botum 😄 sevgilim yok ama dert ortaklığına varım. Anlat, ne var?','Ay kıyma bana, ben bir botum 😅 Ama dinlemeye hazırım, kalp mi bozuldu?'])};
+  if(/(ayrildik|ayrildim|terk etti|terk edildim|aldatildim|kalbim kirik)/.test(t))
+    return{t:rnd(['Üzüldüm… 💛 Anlatmak istersen buradayım. Yanında konuşabileceğin biri var mı?','Çok zor, biliyorum. Biraz zaman ister; acele etme. İstersen anlat, dinliyorum.'])};
+  if(/(\bask\b|\basik oldum|hoslaniyorum|hoslandigim|\bcrush\b|platonik|birini seviyorum|kalbim carpiyor)/.test(t))
+    return{t:rnd(['Ooo kim o? 😏 Anlat bakalım, tanışıyor musunuz?','Vay vay, kalp çarpıntısı mı var? 😄 Ne kadar zamandır, o da seni biliyor mu?','Platonik mi, karşılıklı mı? Detay istiyorum 😄'])};
+  if(/(mesaj atti|mesaj yazdi|goruldu|cevap vermedi|cevap yazmadi|\bghost|\bseen\b)/.test(t))
+    return{t:rnd(['Bu en sinir bozucusu 😩 Ama derin nefes: bir gün bekle, sen kendi hayatına bak. Ne yazmıştın?','Görüldü atıp gitti mi? 😤 Hemen peşinden yazma, rahat ol. Ne dediğini anlat bakalım.'])};
+  if(/(sevgilim|erkek arkadasim|kiz arkadasim|flort|buluşma|bulusma|bulusacagiz|randevu)/.test(t))
+    return{t:rnd(['Sevgili işleri mi? 😄 Nasıl gidiyor, mutlu musun?','Randevu mu var? Heyecanlı mısın? Ne giyeceğini de konuşuruz 😄'])};
+  if(/\b(ruj|rujum)\b/.test(t))return{t:'Ruj mu? 💄 Mat mı parlak mı seversin? Kırmızı iddialı, nude her zaman kurtarır. Ton olarak ne düşünüyorsun?'};
+  if(/\b(fondoten|kapatici|pudra|allik|aydinlatici)\b/.test(t))return{t:'Fondötenin tonunu çenede ya da boyunda dene, yüzde değil; ışıkta bak. Cildin yağlı mı kuru mu? 😊'};
+  if(/\b(maskara|far|eyeliner|kirpik|kas)\b/.test(t)&&/(makyaj|surmek|surdum|nasil|oneri)/.test(t))return{t:'Göz makyajında az çoktur: ince eyeliner + maskara çoğu zaman yetiyor. Günlük mü, özel gün mü?'};
+  if(/(cilt bakimi|serum|nemlendirici|sivilce|guneş kremi|gunes kremi|temizleyici|akne)/.test(t))return{t:'Temel üçlü: temizleyici, nemlendirici, güneş kremi ☀️ Güneş kremi hiç atlanmasın. Cildin nasıl, sivilce var mı? (Ciddiyse dermatoloğa görün 🙂)'};
+  if(/(kombin|ne giyeyim|ne giysem|nasil giyinsem|elbise|ayakkabi|canta)/.test(t))return{t:'Kombin mi? 😄 Nereye giyeceksin: okul mu, çıkış mı, özel bir gün mü? Rahat edeceğin bir şey seç, gerisi gelir.'};
+  if(/(makyaj|\boje\b|\bparfum|sac boyasi|sac bakimi|sac modeli|manikur|\bguzellik)/.test(t))return{t:'Makyaj konusu mu açıldı? 💄 Ben bir botum ama çok iyi dinlerim; günlük mü, özel gün mü? Neyi merak ediyorsun?'};
+  return null}
+
+function hal(t,selam){
+  const k=t.replace(SELAM,' ').replace(/\b(canim|hocam|arkadas|abi|kanka|bot|asistan)\b/g,' ').replace(/[?\s]+/g,' ').trim();
+  if(!/^(nasilsin|naber|ne haber|nasil gidiyor|nasilsin bakalim|iyi misin)$/.test(k))return null;
+  return (selam?rnd(['Selam! ','Selam, hoş geldin! ','Selaaam! ']):'')+rnd(['İyiyim, senden? Derslerin nasıl gidiyor? 😄','İyilik sağlık! Sen nasılsın bakalım?','Bomba gibiyim! Sen naber?'])}
+
+function sohbet(q){const gv=guvenlik(q);if(gv)return gv;if(!AIVAR()){const fbr=futbol(q)||sinav(q)||koc(q)||gonul(q);if(fbr)return fbr}const t=tl(q).replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim();if(!t||t.length>60)return null;
   const siteSor=/(ne yapabilirim|neler yapabilirim|ne yapilir|neler var|ne var|nelere bakabilirim|siteyi (anlat|tanit|gezdir)|site(de|nin)? .*(ne|neler|nedir|anlat|tanit)|burada .*(ne|neler)|(bu|bu site) .*(ne ise yarar|ne sitesi))/.test(t)&&/(site|burada|yapabilirim|neler var|ne var)/.test(t)&&!/(sozluk|ansiklopedi|simulasyon|lab|mevzuat) .*(nerede|nasil)/.test(t);
   if(siteSor&&t.length<=60)return{t:(SELAM.test(t)?'Merhaba! 👋 ':'')+SITE_NOT,tur:1,chips:1};
+  const hh=hal(t,SELAM.test(t));if(hh)return{t:hh};
+  if(!AIVAR()&&/^(iyiyim|iyi ben|iyilik|fena degil|harikayim|super|cok iyi)\b/.test(t))return{t:/\bsen\b/.test(t)?'Ben de iyiyim, sağ ol! Hadi, bugün ne yapıyoruz?':'Sevindim! 😄 Hadi bakalım, bugün neye bakıyoruz?'};
+  if(!AIVAR()&&/^(yorgunum|kotuyum|moralim bozuk|idare eder)\b/.test(t))return{t:'Hadi ya, ne oldu? Dert etme; biraz kafa dağıtırız, istersen çalışmaya da bakarız.'};
   const rest=t.replace(SELAM,'').replace(/\b(nasilsin|naber|ne haber|nasil gidiyor|canim|hocam|arkadas|bot|asistan)\b/g,'').replace(/[?\s]+/g,' ').trim();
   const selam=SELAM.test(t);
-  if(selam&&rest.length<3)return{t:'Merhaba! 👋 Ben Eko-Log asistanıyım. '+YETENEK[MOD]+'\n\nSiteyi kısaca anlatmamı istersen "Bu sitede neler yapabilirim?" diye sor; ya da aklındaki soruyu doğrudan yazabilirsin.',chips:1};
+  if(selam&&rest.length<3)return{t:rnd(['Selam! 👋 Ben Eko Can. Nasılsın, ne var ne yok?','Selaaam! 👋 Hoş geldin, nasılsın?','Merhaba! 👋 Ben Eko Can; hayırdır, ne yapıyoruz bugün?']),chips:1};
   if(/^(nasilsin|naber|ne haber|nasil gidiyor)( ?\??)$/.test(t))return{t:'İyiyim, teşekkürler! Sen nasılsın? Çalışmak ya da öğrenmek istediğin bir konu var mı?'};
   if(/^(tesekkur|tesekkurler|tesekkur ederim|sagol|sag ol|eyvallah|saol|cok sagol|eline saglik)( .*)?$/.test(t))return{t:'Rica ederim! 🙂 Başka bir şey sorarsan buradayım.'};
-  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko-Log asistanıyım, yapay zekâ ile çalışıyorum. '+YETENEK[MOD]+' Alttaki sekmelerden Genel ve Gündem modları arasında geçebilirsin.',chips:1};
+  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko Can, Eko-Log asistanıyım. Derse de bakarım, futbol goygoyuna da 😄 '+YETENEK[MOD]+' Alttaki sekmelerden Genel ve Gündem modları arasında geçebilirsin.',chips:1};
   if(/^(gorusuruz|hoscakal|hosca kal|bye|iyi calismalar|kolay gelsin|iyi gunler|iyi aksamlar|iyi geceler)( ?\??)$/.test(t))return{t:'Görüşürüz, kolay gelsin! 👋'};
   return null}
 async function sor(q){
@@ -517,9 +618,16 @@ async function sor(q){
 }
 sohbetYukle();
 const ilkAcilis=()=>{yukle();if(!log.children.length){if(!CFG.proxy)mesaj('⚠️ Yapay zekâ bağlantısı henüz kurulu değil; şimdilik sadece sitedeki içeriklerde arama yapabiliyorum.','eb-b');mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları, hukuk ve aktör bilgilerini, sayfaları sorabilirsin.','eb-b');chips()}};
-fab.onclick=()=>{delete fab.dataset.n;box.classList.toggle('on');if(box.classList.contains('on')){ilkAcilis();inp.focus()}};
+const TAMURL=()=>{try{return new URL(CFG.sayfa,ROOT||location.href).href}catch(e){return CFG.sayfa}};
+fab.onclick=()=>{delete fab.dataset.n;
+  if(!CFG.tam&&CFG.acilis!=='balon'&&!location.pathname.endsWith(CFG.sayfa)){   /* sohbeti kaydet, geldiğin sayfayı hatırla, tam sayfaya geç */
+    try{sohbetKaydet();sessionStorage.setItem('eko_bot_geri',location.href)}catch(e){}
+    location.href=TAMURL();return}
+  box.classList.toggle('on');if(box.classList.contains('on')){ilkAcilis();inp.focus()}};
 if(CFG.tam){box.classList.add('on','tam');ilkAcilis()}   /* tam sayfa: hep açık, klavye kendiliğinden açılmasın diye odaklanmaz */
 box.querySelector('#eb-an').onclick=()=>{const a=izinli();localStorage.setItem(IZIN,a?'0':'1');mesaj(a?'Çalışma analizi kapatıldı; artık özet gönderilmeyecek.':'Çalışma analizi açıldı.','eb-b')};
 box.querySelector('header button:last-child').onclick=()=>box.classList.remove('on');
+if(CFG.tam){let g=null;try{g=sessionStorage.getItem('eko_bot_geri')}catch(e){}
+  if(g&&g!==location.href){box.classList.add('geri');const x=box.querySelector('header button:last-child');x.title=x.ariaLabel='Önceki sayfaya dön';x.onclick=()=>{location.href=g}}}
 box.querySelector('form').onsubmit=e=>{e.preventDefault();const q=inp.value;inp.value='';sor(q)};
 })();
