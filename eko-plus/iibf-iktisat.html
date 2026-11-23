@@ -262,6 +262,7 @@ function build(){
   addItem({text:'Ana Sayfa',href:'../'});
   SITE.forEach(function(it){
     var t=it[0],h=it[1];
+    if(t==='Eko Can'){addItem({text:t,click:window.EkoBotAc});return}
     if(t==='Üye Alanı'){
       if(!member)return;                       /* yalnızca onaylı üye */
       var lab=inLab();
@@ -310,6 +311,29 @@ addEventListener('pageshow',refresh);
 addEventListener('focus',refresh);
 /* Laboratuvar çerçevesinde üst sayfa üyelik bilgisini mesajla da gönderir */
 addEventListener('message',function(e){var d=e.data;if(d&&d.eko==='uye'&&d.o&&d.o.ok){flag=true;refresh()}});
+/* ---- Eko Can: laboratuvar içinde tam ekran katman ---- */
+(function(){
+var ov=null,fr=null,prevF=null;
+function css(){if(D.getElementById('ekobot-css'))return;var st=D.createElement('style');st.id='ekobot-css';
+st.textContent='#ekobot{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;background:#fff;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}#ekobot[hidden]{display:none}#ekobot .eb-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;background:#1c1328;color:#f6f0fb;font:700 15px "Instrument Sans",system-ui,sans-serif}#ekobot .eb-bar a,#ekobot .eb-bar button{font:600 14px "Instrument Sans",system-ui,sans-serif;color:#f6f0fb;background:rgba(255,255,255,.14);border:0;border-radius:999px;padding:8px 16px;cursor:pointer;text-decoration:none}#ekobot iframe{flex:1 1 auto;width:100%;border:0;min-height:0;background:#fff}';
+D.head.appendChild(st)}
+function kapat(){if(!ov)return;ov.hidden=true;D.documentElement.style.overflow=ov._o||'';if(prevF&&prevF.focus)prevF.focus()}
+window.EkoBotAc=function(){
+  prevF=D.activeElement;css();
+  if(!ov){
+    ov=mk('div');ov.id='ekobot';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Eko Can');
+    var bar=mk('div','eb-bar'),b=mk('b');b.textContent='Eko Can';
+    var r=mk('span');r.style.cssText='display:flex;gap:8px';
+    var nw=mk('a');nw.href=U('../eko-bot.html');nw.target='_blank';nw.rel='noopener';nw.textContent='Yeni sekmede aç';
+    var x=mk('button');x.type='button';x.textContent='\u2715 Kapat';x.addEventListener('click',kapat);
+    r.appendChild(nw);r.appendChild(x);bar.appendChild(b);bar.appendChild(r);
+    fr=mk('iframe');fr.title='Eko Can';fr.setAttribute('allow','clipboard-write; microphone');fr.src=U('../eko-bot.html');
+    ov.appendChild(bar);ov.appendChild(fr);D.body.appendChild(ov);
+    D.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov&&!ov.hidden)kapat()});
+  }
+  ov._o=D.documentElement.style.overflow;D.documentElement.style.overflow='hidden';ov.hidden=false;
+};
+})();
 window.EkoMenu={open:openM,close:function(){closeM(false)}};
 R.classList.add('dm-on');
 })();
@@ -438,6 +462,22 @@ function allow(rec){if(rec.adm||rec.hoca)return true;const ks=labsOf(rec);
   if(LK==='hub')return true;
   if(!ks.includes(LK)){deny('Bu laboratuvar sana açık değil','Üyeliğin yalnızca yetkilendirildiğin laboratuvarları açar.',ks);return false}
   return true}
+/* ---- Profil yuvarlağı: üst çubuğun yerine ---- */
+function profMenu(rec,who){
+  if(!document.getElementById('lbprof-css')){const st=document.createElement('style');st.id='lbprof-css';
+  st.textContent='#lab-box .lbp{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;z-index:6}#lab-box .lbp-b{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:linear-gradient(135deg,#ff6470,#ff8f5a);color:#fff;font:800 16px "Instrument Sans",system-ui,sans-serif;display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 6px 18px -6px rgba(0,0,0,.5)}#lab-box .lbp-m{position:absolute;top:52px;right:0;min-width:230px;max-width:calc(100vw - 24px);background:#1c1328;color:#f6f0fb;border-radius:16px;padding:8px;box-shadow:0 20px 50px -16px rgba(0,0,0,.65);display:flex;flex-direction:column;gap:4px;font:500 14.5px "Instrument Sans",system-ui,sans-serif}#lab-box .lbp-m[hidden]{display:none}#lab-box .lbp-w{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.18);margin-bottom:4px;word-break:break-word}#lab-box .lbp-m a,#lab-box .lbp-m button{display:block;width:100%;text-align:left;font:600 14.5px "Instrument Sans",system-ui,sans-serif;color:#f6f0fb;background:transparent;border:0;border-radius:10px;padding:11px 12px;cursor:pointer;text-decoration:none}#lab-box .lbp-m a:hover,#lab-box .lbp-m button:hover{background:rgba(255,255,255,.12)}';
+  document.head.appendChild(st)}
+  const ini=String(rec.n||rec.e||'?').trim().split(/\s+/).map(x=>x[0]).slice(0,2).join('').toLocaleUpperCase('tr')||'?';
+  const m=el('div',{class:'lbp-m',role:'menu',hidden:true},el('div',{class:'lbp-w',text:who}),
+    el('a',{href:BACK,text:'← Üye Alanı'}),
+    ((rec.adm||rec.hoca)&&LK!=='hub')?el('a',{href:'iibf-laboratuvar.html',text:'Tüm laboratuvarlar'}):null,
+    el('button',{type:'button',text:'Çıkış yap',onclick:logout}));
+  const b=el('button',{class:'lbp-b',type:'button',title:'Profil','aria-label':'Profil','aria-haspopup':'true','aria-expanded':'false',text:ini,onclick:e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))}});
+  const w=el('div',{class:'lbp'},b,m);
+  document.addEventListener('click',e=>{if(!w.contains(e.target)){m.hidden=true;b.setAttribute('aria-expanded','false')}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.hidden=true;b.setAttribute('aria-expanded','false')}});
+  return w;
+}
 function mount(rec){
   if(!allow(rec))return;
   RECM=rec;
@@ -446,7 +486,7 @@ function mount(rec){
   if(fr){send();full();return}
   fr=document.createElement('iframe');fr.title='İktisat Laboratuvarı';fr.srcdoc=lbSrc(rec);
   const who=rec.adm?'Yönetici · '+rec.e:rec.hoca?'Hoca · '+(rec.n||rec.e):'Merhaba '+rec.n+' · onaylı üye';
-  box.replaceChildren(el('div',{class:'lb-bar'},el('span',null,el('a',{class:'btn line',href:BACK,text:'← Eko-Plus'}),((rec.adm||rec.hoca)&&LK!=='hub')?el('a',{class:'btn line',href:'iibf-laboratuvar.html',text:'Tüm laboratuvarlar'}):null,el('b',{text:'İktisat Laboratuvarı'})),el('span',{text:who}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout})),fr);
+  box.replaceChildren(profMenu(rec,who),fr);
   full();
 }
 addEventListener('message',e=>{if(!fr||e.source!==fr.contentWindow)return;if(e.data==='eko-close-lab'){location.href=BACK;return}const d=e.data||{};if(d.eko==='lab-hazir')send();else if(d.eko==='lab-h'&&d.h>0&&!document.body.classList.contains('lab-full'))fr.style.height=Math.max(560,Math.min(9000,Math.round(d.h)+6))+'px'});
