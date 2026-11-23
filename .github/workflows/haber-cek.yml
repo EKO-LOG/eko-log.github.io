@@ -1,0 +1,19 @@
+name: Haberleri çek
+on:
+  schedule: [{cron: '0 */3 * * *'}]   # 3 saatte bir
+  workflow_dispatch:                   # elle de çalıştırılabilir
+permissions:
+  contents: write
+jobs:
+  cek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 20}
+      - run: node scripts/haber-cek.mjs
+      - run: |
+          git config user.name "haber-bot"
+          git config user.email "haber-bot@users.noreply.github.com"
+          git add haberler.json
+          git diff --staged --quiet || (git commit -m "haberler güncellendi" && git push)
