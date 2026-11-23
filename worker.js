@@ -115,19 +115,22 @@ const RSS={
  'TASS':{u:'https://tass.com/rss/v2.xml',tur:'ajans',ulke:'Rusya',sahip:'Devlet ajansı'},
  'Xinhua':{u:'http://www.xinhuanet.com/english/rss/worldrss.xml',tur:'ajans',ulke:'Çin',sahip:'Devlet ajansı'}
 };
-const rssMetin=(s,t)=>{const m=s.match(new RegExp('<'+t+'(?:\\s[^>]*)?>([\\s\\S]*?)</'+t+'>','i'));if(!m)return'';
-  return m[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/<[^>]+>/g,' ').replace(/&quot;/g,'"').replace(/&#0?39;|&apos;/g,"'").replace(/&amp;/g,'&').replace(/\s+/g,' ').trim()};
-const rssAyir=x=>{const out=[];for(const m of x.matchAll(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi)){const b=m[0];
-  let url=rssMetin(b,'link');if(!url){const h=b.match(/<link[^>]*href=["']([^"']+)["']/i);url=h?h[1]:''}
-  const t=rssMetin(b,'pubDate')||rssMetin(b,'published')||rssMetin(b,'updated')||rssMetin(b,'dc:date');
-  const d=t&&!isNaN(Date.parse(t))?new Date(t).toISOString().slice(0,10):'';
-  const baslik=rssMetin(b,'title');if(baslik&&/^https?:\/\//.test(url))out.push({baslik:baslik.slice(0,220),url,tarih:d,ozet:(rssMetin(b,'description')||rssMetin(b,'summary')).slice(0,300)})}
+const rssMetin=(s,t,max=400)=>{const a=s.indexOf('<'+t);if(a<0)return'';const b=s.indexOf('>',a);if(b<0)return'';const z=s.indexOf('</'+t+'>',b);if(z<0)return'';
+  return s.slice(b+1,Math.min(z,b+1+max*4)).replace(/<!\[CDATA\[|\]\]>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/<[^>]*>/g,' ').replace(/&quot;/g,'"').replace(/&#0?39;|&apos;/g,"'").replace(/&amp;/g,'&').replace(/\s+/g,' ').trim().slice(0,max)};
+/* CPU tasarrufu: ücretsiz Worker'da istek başına ~10 ms CPU var; bu yüzden metnin başı ve en çok 12 kayıt işlenir */
+const rssAyir=x=>{x=x.slice(0,60000);const out=[];let i=0;
+  for(let n=0;n<12;n++){
+    let a=x.indexOf('<item',i),tag='item';const a2=x.indexOf('<entry',i);if(a<0||(a2>=0&&a2<a)){a=a2;tag='entry'}
+    if(a<0)break;const z=x.indexOf('</'+tag+'>',a);if(z<0)break;i=z+1;const b=x.slice(a,z);
+    let url=rssMetin(b,'link',500);if(!/^https?:\/\//.test(url)){const h=b.match(/<link[^>]*href=["']([^"']+)["']/i);url=h?h[1]:''}
+    const t=rssMetin(b,'pubDate',60)||rssMetin(b,'published',60)||rssMetin(b,'updated',60)||rssMetin(b,'dc:date',60);
+    const d=t&&!isNaN(Date.parse(t))?new Date(t).toISOString().slice(0,10):'';
+    const baslik=rssMetin(b,'title',220);if(baslik&&/^https?:\/\//.test(url))out.push({baslik,url,tarih:d,ozet:(rssMetin(b,'description',300)||rssMetin(b,'summary',300))})}
   return out};
 const kes0=t=>String(t||'').slice(0,800);
 const jparse=t=>{t=String(t).replace(/```json|```/g,'');return JSON.parse(t.slice(t.indexOf('{'),t.lastIndexOf('}')+1))};
 
-export default{
-  async fetch(req,env){
+const ANA=async(req,env)=>{
     const o=req.headers.get('Origin')||'';
     const cors={'Access-Control-Allow-Origin':IZINLI.includes(o)?o:IZINLI[0],'Access-Control-Allow-Headers':'Content-Type','Vary':'Origin'};
     const js=x=>new Response(JSON.stringify(x),{headers:{...cors,'Content-Type':'application/json'}});
@@ -149,15 +152,17 @@ export default{
       if(await sinir('f',30))await kayit('gb',{puan:b.puan===1?1:-1,soru:kes0(b.soru).slice(0,300),cevap:String(b.cevap||'').slice(0,500),sayfa:String(b.baglam?.sayfa||'').slice(0,80)});
       return js({tamam:true});
     }
-    if(gorev==='rss'){                                   // gündem editörü: seçili RSS kaynaklarından başlık çek (yalnızca başlık+bağlantı+kısa özet)
-      if(!await sinir('r',20))return js({hata:true,mesaj:'Saatlik çekme sınırı doldu.'});
-      const ad=Object.keys(RSS).filter(k=>!Array.isArray(b.kaynaklar)||b.kaynaklar.includes(k)),hatalar=[];
+    if(gorev==='rss'){                                   // gündem editörü: RSS başlıkları. Önce kaynak listesi (hafif), sonra kaynak başına ayrı istek (CPU sınırı için)
+      if(!Array.isArray(b.kaynaklar))return js({liste:Object.keys(RSS)});
+      const ad=b.kaynaklar.filter(k=>RSS[k]).slice(0,2);
+      if(!ad.length)return js({haberler:[],hatalar:b.kaynaklar.slice(0,2).map(String)});
+      if(!await sinir('r',120))return js({hata:true,mesaj:'Saatlik çekme sınırı doldu, biraz sonra tekrar dene.',haberler:[],hatalar:ad});
+      const hatalar=[];
       const sonuc=await Promise.all(ad.map(async k=>{try{
         const r=await fetch(RSS[k].u,{headers:{'User-Agent':'Mozilla/5.0 (compatible; EkoLogBot/1.0)','Accept':'application/rss+xml, application/xml, text/xml, */*'},cf:{cacheTtl:900,cacheEverything:true}});
-        if(!r.ok)throw new Error(r.status);const l=rssAyir(await r.text()).slice(0,15);if(!l.length)throw new Error('boş');
+        if(!r.ok)throw new Error(r.status);const l=rssAyir(await r.text());if(!l.length)throw new Error('boş');
         return l.map(i=>({...i,kaynak:k,tur:RSS[k].tur,ulke:RSS[k].ulke,sahip:RSS[k].sahip}))}catch(e){hatalar.push(k);return[]}}));
-      const haberler=sonuc.flat().sort((a,b)=>String(b.tarih).localeCompare(String(a.tarih)));
-      return js({haberler,hatalar});
+      return js({haberler:sonuc.flat(),hatalar});
     }
     if(env.TURNSTILE_SECRET){                            // isteğe bağlı bot doğrulaması (Cloudflare Turnstile)
       let v={};try{v=await (await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:new URLSearchParams({secret:env.TURNSTILE_SECRET,response:String(b.tt||''),remoteip:ip})})).json()}catch(e){}
@@ -247,5 +252,9 @@ export default{
       if(e&&e.message==='gunluk limit')return js({cevap:'Bugünkü yapay zekâ kotası doldu, yarın tekrar dene.',hata:true});
       return js({cevap:gorev.startsWith('deneme')?'Deneme şu an hazırlanamadı, biraz sonra tekrar dene.':'Şu an güvenilir bir yanıt üretemiyorum, lütfen sonra tekrar dene.',hata:true});
     }
-  }
 };
+export default{async fetch(req,env){
+  try{return await ANA(req,env)}
+  catch(e){const o=req.headers.get('Origin')||'';console.error('WORKER HATA',e&&e.message);
+    return new Response(JSON.stringify({hata:true,mesaj:'Worker hatası: '+(e&&e.message||'bilinmiyor'),haberler:[],hatalar:[]}),{status:500,headers:{'Access-Control-Allow-Origin':IZINLI.includes(o)?o:IZINLI[0],'Content-Type':'application/json','Vary':'Origin'}})}
+}};

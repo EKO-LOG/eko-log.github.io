@@ -116,7 +116,7 @@ dialog .db{padding:6px 18px 18px;overflow:auto;max-height:calc(90vh - 60px)}
  <div class="wrap">
   <h1>🌍 Gündem · Uluslararası İlişkiler</h1>
   <p>Seçilmiş gelişmeler: ne oldu, neden oldu, kime yarar, kim etkilendi ve tarafların bakışı. Öğrenme amaçlıdır; her olgu kaynağına bağlıdır, yorumlar olgudan ayrı işaretlenir.</p>
-  <p style="font-size:12px;opacity:.8;margin:-8px 0 12px">sürüm 2026-11-23-c</p>
+  <p style="font-size:12px;opacity:.8;margin:-8px 0 12px">sürüm 2026-11-23-d</p>
   <div class="tabs" role="tablist">
    <button role="tab" id="tab-oku" aria-selected="true">Okuma</button>
    <button role="tab" id="tab-yonet" aria-selected="false">Yönet (editör)</button>
@@ -433,15 +433,25 @@ $('#bilgi').onclick=()=>{
 let RSS=[];
 async function rssCek(){
  const d=$('#dlg');$('#dt').textContent='Kaynaklardan haber çek';
- $('#db').innerHTML='<p>Yükleniyor…</p>';if(!d.open)d.showModal();
+ $('#db').innerHTML='<p>Kaynak listesi alınıyor…</p>';if(!d.open)d.showModal();
  let neden='';
+ const post=o=>fetch(CFG.proxy,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)});
  try{
-  let r;try{r=await fetch(CFG.proxy,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({gorev:'rss'})})}
+  let r;try{r=await post({gorev:'rss'})}
   catch(e){neden='Worker\'a ulaşılamadı (adres yanlış, Worker kapalı ya da bu sayfanın alan adı izinli değil). Denenen adres: '+CFG.proxy;throw e}
-  if(!r.ok){neden='Worker HTTP '+r.status+' döndürdü. 403 ise bu sayfanın adresi worker.js içindeki IZINLI listesinde değil.';throw 0}
+  if(!r.ok){let m='';try{m=(await r.json()).mesaj||''}catch(e){}neden='Worker HTTP '+r.status+' döndürdü. '+(m||(r.status===403?'Bu sayfanın adresi worker.js içindeki IZINLI listesinde değil.':''));throw 0}
   let j;try{j=await r.json()}catch(e){neden='Worker geçerli bir cevap vermedi.';throw e}
-  if(!j.haberler){neden=j.mesaj||'Worker RSS komutunu tanımıyor: Cloudflare\'e yüklü worker.js eski sürüm olabilir. Güncel worker.js\'i yükle.';throw 0}
-  RSS=j.haberler;rssCiz('',j.hatalar||[]);
+  if(!Array.isArray(j.liste)){neden='Worker RSS komutunu tanımıyor: Worker paneline yüklü worker.js eski sürüm. Güncel worker.js\'i yükle.';throw 0}
+  const hat=[];let bitti=0;RSS=[];
+  $('#db').innerHTML=`<p id="ilr">Haberler çekiliyor… 0 / ${j.liste.length}</p>`;
+  await Promise.all(j.liste.map(async ad=>{
+   try{const r2=await post({gorev:'rss',kaynaklar:[ad]});const x=await r2.json();
+    if(x.haberler&&x.haberler.length)RSS.push(...x.haberler);else hat.push(ad)}
+   catch(e){hat.push(ad)}
+   bitti++;const el=$('#ilr');if(el)el.textContent=`Haberler çekiliyor… ${bitti} / ${j.liste.length}`}));
+  RSS.sort((a,b)=>String(b.tarih).localeCompare(String(a.tarih)));
+  if(!RSS.length){neden='Worker çalışıyor ama hiçbir kaynaktan haber alınamadı. Kaynak adresleri değişmiş olabilir ya da Worker dış adreslere çıkamıyor. Denenen kaynaklar: '+hat.join(', ');throw 0}
+  rssCiz('',hat);
  }catch(e){$('#db').innerHTML=`<div class="note bad"><b>Çekilemedi.</b> ${E(neden||'Bilinmeyen hata.')}<br>Elle haber girebilirsin: <b>+ Yeni haber</b>.</div>`}
 }
 function rssCiz(q,hat){
