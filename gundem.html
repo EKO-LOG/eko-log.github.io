@@ -108,16 +108,58 @@ dialog .db{padding:6px 18px 18px;overflow:auto;max-height:calc(90vh - 60px)}
 .rssi b{display:block}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;z-index:99;display:none;max-width:90vw}
 .sr{position:absolute;left:-9999px}
+.tabs[hidden],#v-yonet[hidden],#v-oku[hidden]{display:none!important}
+.akish{font-size:20px;margin:30px 0 4px}.akis-uy{font-size:13px;color:var(--mut)}
 .qo{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.qo .ok{background:var(--okb);border-color:var(--ok)}.qo .no{background:var(--badb);border-color:var(--bad)}.qo button[disabled]{cursor:default}
+.mbtn{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#fff;color:#c4202e;font:800 20px system-ui;cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 0 0 2px rgba(255,255,255,.5);-webkit-tap-highlight-color:transparent}
+body.dm-lock{overflow:hidden}
+.dm{position:fixed;inset:0;z-index:99990;visibility:hidden;pointer-events:none;transition:visibility 0s linear .38s}
+.dm.open{visibility:visible;pointer-events:auto;transition-delay:0s}
+.dm-ov{position:absolute;inset:0;background:rgba(10,5,18,.58);opacity:0;transition:opacity .3s}
+.dm.open .dm-ov{opacity:1}
+.dm-panel{position:absolute;top:0;right:0;bottom:0;width:min(86vw,440px);display:flex;flex-direction:column;background:#1c1328;color:#f6f0fb;box-shadow:-24px 0 60px -20px rgba(0,0,0,.65);transform:translateX(100%);transition:transform .38s cubic-bezier(.22,1,.36,1);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dm.open .dm-panel{transform:none}
+.dm-top{display:flex;align-items:center;gap:12px;padding:12px 14px 12px 22px;border-bottom:1px solid rgba(255,255,255,.2)}
+.dm-top b{flex:1;font:800 22px/1 system-ui,sans-serif;background:linear-gradient(120deg,#ff6470 10%,#ff8f5a 65%,#ffc371);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dm-x{flex:none;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.09);color:#fff;display:grid;place-items:center;cursor:pointer;padding:0}
+.dm-x svg{width:22px;height:22px}
+.dm-list{list-style:none;margin:0;padding:0;flex:1;overflow-y:auto;overscroll-behavior:contain}
+.dm-list li{margin:0;border-bottom:1px solid rgba(255,255,255,.2)}
+.dm-list a{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding:12px 22px;color:#f6f0fb;text-decoration:none;font:500 20px/1.25 system-ui,sans-serif}
+.dm-list a:active{background:rgba(255,255,255,.13)}
+.dm-list a.on{font-weight:700;background:rgba(255,255,255,.06)}
+.dm-list a.on::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:0 4px 4px 0;background:linear-gradient(180deg,#ff6470,#ff8f5a)}
+.dm-list svg{width:20px;height:20px;flex:none;opacity:.7}
+.dm-row{display:flex;align-items:center}.dm-row>a{flex:1 1 auto;min-width:0}
+.dm-list .dm-tg{flex:none;width:40px;height:40px;margin:0 16px 0 4px;padding:0;display:grid;place-items:center;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
+.dm-list .dm-tg svg{opacity:1;transition:transform .3s}
+.dm-item.open>.dm-row .dm-tg{background:linear-gradient(135deg,#ff6470,#ff8f5a);border-color:transparent}
+.dm-item.open>.dm-row .dm-tg svg{transform:rotate(180deg)}
+.dm-sub-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+.dm-item.open>.dm-sub-wrap{grid-template-rows:1fr}
+.dm-list .dm-sub{list-style:none;margin:0;padding:0;min-height:0;overflow:hidden;visibility:hidden;background:rgba(255,255,255,.035);transition:visibility 0s linear .3s}
+.dm-item.open>.dm-sub-wrap>.dm-sub{visibility:visible;transition-delay:0s}
+.dm-list .dm-sub li{border:0}
+.dm-list .dm-sub a{min-height:48px;padding:10px 22px 10px 50px;font-size:17px;font-weight:400}
+@media (prefers-reduced-motion:reduce){.dm,.dm-ov,.dm-panel,.dm-sub-wrap{transition:none}}
+
+.mbtn{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:12px;z-index:30}
+.mbrand{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:60px;z-index:30;height:40px;padding:0 14px;border-radius:999px;display:flex;align-items:center;color:#fff;text-decoration:none;font:800 18px system-ui,sans-serif;background:rgba(28,19,40,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+header.top{padding-top:calc(58px + env(safe-area-inset-top,0px))!important}
+footer.alt{background:#1a0b1f;color:#cdbfe0;padding:34px 0 42px;font-size:15px;margin-top:40px}
+footer.alt .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+footer.alt a{color:inherit}
 </style>
 </head>
 <body>
+<button type="button" class="mbtn" id="mbtn" aria-label="Menüyü aç" aria-haspopup="dialog" aria-expanded="false" aria-controls="dmenu"><span>E</span></button>
+<a class="mbrand" href="index.html">Eko-Log</a>
 <header class="top">
  <div class="wrap">
   <h1>🌍 Gündem · Uluslararası İlişkiler</h1>
   <p>Seçilmiş gelişmeler: ne oldu, neden oldu, kime yarar, kim etkilendi ve tarafların bakışı. Öğrenme amaçlıdır; her olgu kaynağına bağlıdır, yorumlar olgudan ayrı işaretlenir.</p>
   <p style="font-size:12px;opacity:.8;margin:-8px 0 12px">sürüm 2026-11-23-d</p>
-  <div class="tabs" role="tablist">
+  <div class="tabs" role="tablist" id="tabs" hidden>
    <button role="tab" id="tab-oku" aria-selected="true">Okuma</button>
    <button role="tab" id="tab-yonet" aria-selected="false">Yönet (editör)</button>
   </div>
@@ -132,6 +174,10 @@ dialog .db{padding:6px 18px 18px;overflow:auto;max-height:calc(90vh - 60px)}
   </div>
   <div class="chips" id="ft" aria-label="Tema filtresi"></div>
   <div id="liste"></div>
+  <h2 class="akish">📡 Güncel haber akışı</h2>
+  <p class="hint" id="akis-n">Yükleniyor…</p>
+  <div id="akis"></div>
+  <button class="btn" id="akis-d" hidden>Daha fazla göster</button>
   <p class="foot">Bu sayfadaki analizler öğrenme amaçlıdır; Eko-Log Topluluğu'nun veya üniversitenin resmî görüşünü yansıtmaz. Yorum ve varsayımlar olgu sayılmaz; olgular bağlantısı verilen kaynağa dayanır.</p>
  </section>
 
@@ -153,6 +199,61 @@ dialog .db{padding:6px 18px 18px;overflow:auto;max-height:calc(90vh - 60px)}
   </div>
  </section>
 </main>
+
+<footer class="alt"><div class="wrap"><span>© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span>İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+(function(){
+var D=document,btn=D.getElementById('mbtn'),isOpen=false,n=0;
+var CH='<svg viewBox="0 0 24 24"><path d="M9 4.5l7.5 7.5L9 19.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var DN='<svg viewBox="0 0 24 24"><path d="M5.5 9l6.5 6.5L18.5 9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var XI='<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+/* [ad, adres, alt sayfa dosyası, alt sayfalar] — adresler index.html ile aynı klasöre göre */
+var M=[
+['Ana Sayfa','index.html'],
+['Simülasyon Merkezi','simulasyon-merkezi.html','simulasyon-merkezi.html',[['vaka','Vaka Analizi'],['ppk','Başkan Simülasyonu'],['borsa','Borsa Simülasyonu'],['bakan','Bakanlık Simülasyonu'],['girisim','Girişimci'],['kur','Dış Ticaret'],['burokrat','Kamu Bürokratı'],['muzakere','Müzakere Masası'],['ihale','Kamu İhalesi'],['hakimlik','Hâkimlik Simülasyonu'],['valilik','Kaymakamlık ve Valilik'],['smmm','Mali Müşavirlik']]],
+['Meslekler','index.html#/meslekler','index.html',[['meslek','Kariyer Meslek Tanıtımı'],['kadrolar','Kariyer Kadroları'],['mulakat','Mülakat Prova Modu'],['mulakat-bilgi','Kurum Mülakatı Bilgilendirme'],['mulakat-basvuru','Mülakat Simülasyonu Başvuruları'],['quiz','Terim Quiz'],['yol','Kariyer Testi']]],
+['İktisadi Ansiklopedi','ansiklopedi.html#/ansiklopedi','ansiklopedi.html',[['sozluk','Ekonomi Sözlüğü'],['anatomi','Kavramın Anatomisi'],['efsane','İktisadi Şehir Efsaneleri'],['kisiler','İktisat Düşünürleri'],['tarih','Ekonomi Tarihi Çizelgesi'],['sektor','Sektör Dosyaları']]],
+['Veri ve Pariteler','index.html#/piyasa','index.html',[['pariteler','Pariteler'],['veri','İktisat Grafikleri'],['hesap','Hesaplayıcılar'],['kaynak','Kaynaklar'],['ulke','Ülke Karşılaştırma'],['turkiye','Türkiye Ekonomisi Dosyaları'],['urun','Bir Ürünün Hikâyesi'],['iktisatci','İktisatçı Gözünden']]],
+['Kalkınma','kalkinma/'],
+['Gazete ve Dergi','index.html#/yayin','index.html',[['gazete','Diyalog Gazetesi'],['dergi','İktisadi Kalkınma Dergisi'],['makale','Makale Yazımı'],['ceviri','Çeviri Köşesi'],['arastirma','Ortak Araştırma Projeleri'],['arsiv','Arşiv']]],
+['Topluluk','index.html#/etkinlik','index.html',[['paylas','Paylaşım Kartı'],['fikir','Fikir Muharebesi'],['yatay','Yatay Bakış'],['konferanslar','Konferanslar'],['arastirma','Ortak Araştırma Projeleri']]],
+['Katıl','index.html#/katil'],
+['Gündem','gundem.html'],
+['Eko Bot','eko-bot.html']
+];
+function mk(t,c){var e=D.createElement(t);if(c)e.className=c;return e}
+var root=mk('div','dm');root.id='dmenu';
+root.innerHTML='<div class="dm-ov"></div><div class="dm-panel" role="dialog" aria-modal="true" aria-label="Ana menü"><div class="dm-top"><b>Eko-Log</b><button type="button" class="dm-x" aria-label="Menüyü kapat">'+XI+'</button></div><ul class="dm-list"></ul></div>';
+D.body.appendChild(root);
+var list=root.querySelector('.dm-list');
+M.forEach(function(m){
+  var li=mk('li','dm-item'),row=mk('div','dm-row'),a=mk('a'),s=mk('span'),kids=m[3];
+  a.href=m[1];s.textContent=m[0];a.appendChild(s);
+  if(m[0]==='Gündem'){a.className='on';a.setAttribute('aria-current','page')}
+  if(!kids)a.insertAdjacentHTML('beforeend',CH);
+  row.appendChild(a);li.appendChild(row);
+  if(kids){
+    var id='dms'+(++n),tg=mk('button','dm-tg'),w=mk('div','dm-sub-wrap'),ul=mk('ul','dm-sub');
+    tg.type='button';tg.innerHTML=DN;tg.setAttribute('aria-expanded','false');tg.setAttribute('aria-label',m[0]+' alt sayfalarını aç');ul.id=id;tg.setAttribute('aria-controls',id);
+    kids.forEach(function(k){var l=mk('li'),b=mk('a');b.href=m[2]+'#/'+k[0];b.textContent=k[1];l.appendChild(b);ul.appendChild(l)});
+    w.appendChild(ul);li.appendChild(w);row.appendChild(tg);
+    tg.onclick=function(){var o=!li.classList.contains('open');
+      [].forEach.call(list.querySelectorAll('.dm-item.open'),function(x){x.classList.remove('open');x.querySelector('.dm-tg').setAttribute('aria-expanded','false')});
+      li.classList.toggle('open',o);tg.setAttribute('aria-expanded',o?'true':'false')};
+  }
+  list.appendChild(li);
+});
+function openM(){isOpen=true;root.classList.add('open');D.body.classList.add('dm-lock');btn.setAttribute('aria-expanded','true')}
+function closeM(){isOpen=false;root.classList.remove('open');D.body.classList.remove('dm-lock');btn.setAttribute('aria-expanded','false')}
+btn.onclick=function(){isOpen?closeM():openM()};
+root.querySelector('.dm-ov').onclick=closeM;root.querySelector('.dm-x').onclick=closeM;
+root.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.dm-list a'))closeM()});
+D.addEventListener('keydown',function(e){if(isOpen&&e.key==='Escape')closeM()});
+var sx=0,sy=0,p=root.querySelector('.dm-panel');
+p.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+p.addEventListener('touchend',function(e){var t=e.changedTouches[0];if(t.clientX-sx>70&&Math.abs(t.clientY-sy)<50)closeM()},{passive:true});
+})();
+</script>
 
 <dialog id="dlg"><div class="dh"><b id="dt">Önizleme</b><button class="btn sm" id="dk">Kapat ✕</button></div><div class="db" id="db"></div></dialog>
 <div id="toast" role="status"></div>
@@ -280,8 +381,31 @@ async function yayinYukle(){
  let uzak=null;
  try{const r=await fetch(CFG.veri,{cache:'no-cache'});if(r.ok){const j=await r.json();uzak=(j.haberler||j||[])}}catch(e){}
  YAYIN=Array.isArray(uzak)&&uzak.length?uzak:ITEMS.filter(i=>i.durum==='yayinda'&&!i.ornek);
- okuHazirla();
+ okuHazirla();akisYukle();
 }
+
+/* ===================== Güncel haber akışı (haberler.json, GitHub Actions ile güncellenir) ===================== */
+let AKIS=[],akisN=30,akisYuklendi=false;
+function akisCiz(){
+ const q=tl($('#q').value),b=$('#fb').value;
+ const L=AKIS.filter(x=>!q||tl([x.baslik,x.kaynak,x.ulke].join(' ')).includes(q));
+ const g=L.slice(0,akisN);
+ $('#akis').innerHTML=g.length?g.map(x=>`<div class="rssi"><b><a href="${E(safeUrl(x.url))}" target="_blank" rel="noopener" style="color:inherit">${E(x.baslik)}</a></b><div class="meta">${E(x.kaynak)} · ${E(x.ulke||'')} · ${E(trTarih(x.tarih)||'')} · <span class="chip">${E(TUR[x.tur]||x.tur||'')}</span> <span class="chip">${E(x.sahip||'')}</span></div></div>`).join(''):'<div class="empty">'+(AKIS.length?'Aramayla eşleşen haber yok.':'Haber akışı şu an boş.')+'</div>';
+ $('#akis-d').hidden=L.length<=akisN;
+}
+async function akisYukle(){
+ if(akisYuklendi){akisCiz();return}
+ try{
+  const r=await fetch(CFG.rss+'?t='+Date.now(),{cache:'no-cache'});if(!r.ok)throw 0;const j=await r.json();
+  AKIS=(Array.isArray(j.haberler)?j.haberler:[]).sort((a,b)=>String(b.tarih).localeCompare(String(a.tarih)));
+  akisYuklendi=true;
+  $('#akis-n').innerHTML='Ajans ve basın kaynaklarından otomatik çekilen başlıklar'+(j.guncelleme?' · son güncelleme: '+E(new Date(j.guncelleme).toLocaleString('tr-TR')):'')+'. <span class="akis-uy">Bunlar ham haber başlıklarıdır; Eko-Log analizi değildir. Kaynakların sahipliği ve bakışı farklıdır, olguları kaynağından teyit et.</span>';
+  akisCiz();
+ }catch(e){$('#akis-n').textContent='Haber akışı şu an yüklenemedi.';$('#akis').innerHTML=''}
+}
+$('#akis-d').onclick=()=>{akisN+=30;akisCiz()};
+$('#q').addEventListener('input',akisCiz);
+
 $('#q').addEventListener('input',okuCiz);$('#fb').addEventListener('change',okuCiz);
 $('#ft').addEventListener('click',e=>{const dd=e.target.closest('[data-d]');if(dd){dFiltre=dFiltre===dd.dataset.d?'':dd.dataset.d;okuHazirla();return}const t=e.target.closest('[data-t]');if(!t)return;tFiltre.has(t.dataset.t)?tFiltre.delete(t.dataset.t):tFiltre.add(t.dataset.t);okuHazirla()});
 
@@ -502,7 +626,15 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-quiz]');if
 function sekme(y){$('#v-oku').hidden=y;$('#v-yonet').hidden=!y;$('#tab-oku').setAttribute('aria-selected',!y);$('#tab-yonet').setAttribute('aria-selected',y);
  if(y){if(!CUR&&ITEMS[0])CUR=ITEMS[0].id;listeCiz();formCiz()}else yayinYukle()}
 $('#tab-oku').onclick=()=>{location.hash='#/';};$('#tab-yonet').onclick=()=>{location.hash='#/yonet'};
-function rota(){sekme(/^#\/yonet/.test(location.hash))}
+/* Editör herkese kapalı. Yalnızca editör, bu tarayıcıda bir kez gundem.html#/editor-ac adresini açarak etkinleştirir. */
+function editorMu(){try{return localStorage.getItem('gundem-editor')==='1'}catch(e){return false}}
+function rota(){
+ if(location.hash==='#/editor-ac'){try{localStorage.setItem('gundem-editor','1')}catch(e){}location.hash='#/yonet';return}
+ if(location.hash==='#/editor-kapat'){try{localStorage.removeItem('gundem-editor')}catch(e){}location.hash='#/';return}
+ const ed=editorMu();$('#tabs').hidden=!ed;
+ let y=/^#\/yonet/.test(location.hash);
+ if(y&&!ed){y=false;history.replaceState(null,'',location.pathname+location.search)}
+ sekme(y)}
 addEventListener('hashchange',rota);
 rota();
 </script>
