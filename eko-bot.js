@@ -7,7 +7,7 @@ if(window.__ekoBot)return;window.__ekoBot=1;
 /* ===== TEK AYAR YERİ =====
    PROXY: Cloudflare Worker adresini buraya yaz (boşsa bot "arama modu"nda çalışır).
    YOL: bilgi tabanındaki sayfa adı → sitedeki gerçek yol. Bir bağlantı 404 verirse yalnızca burayı düzelt. */
-const PROXY='https://eko-bot.bcelikel191.workers.dev';
+const PROXY='';   /* Cloudflare kullanılmıyor: bot yalnızca sitedeki içeriklerde arama modunda çalışır */
 const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; worker'da TURNSTILE_SECRET ile eşleşmeli) */
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */

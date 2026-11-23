@@ -160,7 +160,7 @@ dialog .db{padding:6px 18px 18px;overflow:auto;max-height:calc(90vh - 60px)}
 <script>
 /* ===================== Ayar ===================== */
 const CFG=Object.assign({
-  proxy:'https://eko-bot.bcelikel191.workers.dev',   /* worker adresi: RSS çekme için */
+  rss:'haberler.json',                                 /* GitHub Actions'ın 3 saatte bir güncellediği haber listesi (Cloudflare gerekmez) */
   veri:'gundem.json',                                   /* yayımlanan haberlerin dosyası */
   anahtar:'ekolog-gundem-v1'
 },window.GUNDEM_CFG||{});
@@ -429,29 +429,23 @@ $('#bilgi').onclick=()=>{
  inp.click();
 };
 
-/* ---- Kaynaklardan çek (Worker üzerinden RSS) ---- */
+/* ---- Kaynaklardan çek (haberler.json, GitHub Actions ile güncellenir) ---- */
 let RSS=[];
 async function rssCek(){
  const d=$('#dlg');$('#dt').textContent='Kaynaklardan haber çek';
- $('#db').innerHTML='<p>Kaynak listesi alınıyor…</p>';if(!d.open)d.showModal();
+ $('#db').innerHTML='<p>Haberler yükleniyor…</p>';if(!d.open)d.showModal();
  let neden='';
- const post=o=>fetch(CFG.proxy,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)});
  try{
-  let r;try{r=await post({gorev:'rss'})}
-  catch(e){neden='Worker\'a ulaşılamadı (adres yanlış, Worker kapalı ya da bu sayfanın alan adı izinli değil). Denenen adres: '+CFG.proxy;throw e}
-  if(!r.ok){let m='';try{m=(await r.json()).mesaj||''}catch(e){}neden='Worker HTTP '+r.status+' döndürdü. '+(m||(r.status===403?'Bu sayfanın adresi worker.js içindeki IZINLI listesinde değil.':''));throw 0}
-  let j;try{j=await r.json()}catch(e){neden='Worker geçerli bir cevap vermedi.';throw e}
-  if(!Array.isArray(j.liste)){neden='Worker RSS komutunu tanımıyor: Worker paneline yüklü worker.js eski sürüm. Güncel worker.js\'i yükle.';throw 0}
-  const hat=[];let bitti=0;RSS=[];
-  $('#db').innerHTML=`<p id="ilr">Haberler çekiliyor… 0 / ${j.liste.length}</p>`;
-  await Promise.all(j.liste.map(async ad=>{
-   try{const r2=await post({gorev:'rss',kaynaklar:[ad]});const x=await r2.json();
-    if(x.haberler&&x.haberler.length)RSS.push(...x.haberler);else hat.push(ad)}
-   catch(e){hat.push(ad)}
-   bitti++;const el=$('#ilr');if(el)el.textContent=`Haberler çekiliyor… ${bitti} / ${j.liste.length}`}));
+  let r;try{r=await fetch(CFG.rss+'?t='+Date.now(),{cache:'no-cache'})}
+  catch(e){neden='haberler.json alınamadı (internet bağlantısı).';throw e}
+  if(!r.ok){neden=r.status===404?'haberler.json henüz yok. GitHub\'da Actions → "Haberleri çek" → Run workflow ile oluştur.':'haberler.json HTTP '+r.status+' döndürdü.';throw 0}
+  let j;try{j=await r.json()}catch(e){neden='haberler.json geçerli bir dosya değil.';throw e}
+  RSS=Array.isArray(j.haberler)?j.haberler:[];
   RSS.sort((a,b)=>String(b.tarih).localeCompare(String(a.tarih)));
-  if(!RSS.length){neden='Worker çalışıyor ama hiçbir kaynaktan haber alınamadı. Kaynak adresleri değişmiş olabilir ya da Worker dış adreslere çıkamıyor. Denenen kaynaklar: '+hat.join(', ');throw 0}
+  const hat=(j.hatalar||[]).map(x=>String(x).split(':')[0]);
+  if(!RSS.length){neden='haberler.json boş. Actions çalışmış ama hiçbir kaynaktan haber alınamamış olabilir: '+hat.join(', ');throw 0}
   rssCiz('',hat);
+  if(j.guncelleme){const p=document.createElement('p');p.className='hint';p.textContent='Son güncelleme: '+new Date(j.guncelleme).toLocaleString('tr-TR');$('#db').appendChild(p)}
  }catch(e){$('#db').innerHTML=`<div class="note bad"><b>Çekilemedi.</b> ${E(neden||'Bilinmeyen hata.')}<br>Elle haber girebilirsin: <b>+ Yeni haber</b>.</div>`}
 }
 function rssCiz(q,hat){
