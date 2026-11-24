@@ -86,6 +86,7 @@ body{background:radial-gradient(900px 500px at 80% -10%,rgba(217,52,43,.35),tran
 .bva-sim .bva-sec-btn{width:auto}
 .bva-card,.bva-case,.bva-view-sec,.bva-sim{border-radius:18px}
 .bva-bar i.you{background:#d9342b}
+html,body{min-height:100%}.bva{min-height:70vh}.bva-err{margin:20px;padding:14px;border:2px solid #fb7185;border-radius:10px;color:#fff;background:#3b1020;font:14px/1.5 monospace;white-space:pre-wrap}
 </style>
 </head>
 <body>
@@ -97,12 +98,15 @@ body{background:radial-gradient(900px 500px at 80% -10%,rgba(217,52,43,.35),tran
     <div id="bva-list"></div>
   </div>
   <div id="bva-view" hidden></div>
+  <noscript><p class="lead">Bu sayfa JavaScript gerektirir.</p></noscript>
 </main>
 
 <script>
+window.addEventListener('error',function(e){var d=document.createElement('div');d.className='bva-err';d.textContent='Hata: '+e.message+' (satır '+e.lineno+')';document.body.appendChild(d)});
 /* Entegrasyon: yalnızca BVA_DATA dizisini kendi sisteminize taşıyabilirsiniz. */
 let cur='';
 const fit=()=>{try{parent.postMessage({gh:document.documentElement.scrollHeight},'*')}catch(e){}};
+const up=()=>{try{window.scrollTo(0,0)}catch(e){}try{parent.postMessage({gh:0,top:1},'*')}catch(e){}fit()};
 /* Entegrasyon: yalnızca BVA_DATA dizisini kendi sisteminize taşıyabilirsiniz. */
 const BVA_DATA = [
 {id:"continental-illinois",ad:"Continental Illinois",yil:1984,ulke:"ABD",tema:"Likidite",
@@ -263,6 +267,117 @@ const BVA_DATA = [
  ders:["Güven kaybı yıllar içinde birikir, tek bir tetikleyici yeter","AT1 ve hissedar sıralamasındaki belirsizlik piyasayı sarstı","Büyük bir küresel bankanın çözümlemesi hâlâ zordur"],
  soru:"Sermaye araçlarında zarar sıralaması krizde esnetilebilir mi?"}
 ];
+/* EK: vaka başına ek ayrıntılar. a=aktörler, kv=kavramlar, g=ek rakamlar, son=sonrası, k=[eklenecek sıra, tarih, metin] */
+const BVA_EK={
+"continental-illinois":{a:[["Roger Anderson","Continental Illinois Başkanı ve CEO'su"],["William Isaac","FDIC Başkanı"],["Paul Volcker","Fed Başkanı"],["Todd Conover","Para Denetçisi (OCC)"]],
+ kv:[["Toptan fonlama","Perakende mevduat yerine kurumsal yatırımcıdan ve piyasadan kısa vadeli borçlanma. Büyümeyi hızlandırır ama güven kaybında ilk kaçan kaynaktır."],["Kredi katılım payı","Başka bir bankanın verdiği kredinin bir kısmını satın almak. Alıcı, kredi analizini çoğu zaman satıcıya güvenerek yapar."]],
+ g:[["FDIC sermaye girişi","~1 mlr $ (Temmuz 1984)"],["FDIC'in aldığı pay","~%80"],["Özel bankaların kredi hattı","4,5 mlr $ (16 banka)"]],
+ son:"Kriz, 1991 tarihli FDIC İyileştirme Yasası'nda en düşük maliyetli çözüm kuralının ve sistemik risk istisnasının şekillenmesinde etkili oldu. Continental'in yönetimi değişti, varlıkların bir kısmı elden çıkarıldı ve banka küçülerek yoluna devam etti.",
+ k:[[2,"Mayıs 1984","16 büyük bankanın oluşturduğu konsorsiyum 4,5 mlr $'lık kredi hattı açar; çıkışlar buna rağmen durmaz."],[3,"Eylül 1984","Kongre oturumunda Para Denetçisi Conover'ın sözleri, en büyük bankaların batmasına izin verilmeyeceği şeklinde yorumlanır; 'too big to fail' ifadesi böyle yerleşir."]]},
+"bcci":{a:[["Agha Hasan Abedi","Kurucu ve başkan"],["Swaleh Naqvi","Üst düzey yönetici"],["Price Waterhouse","Sahtecilik bulgularını içeren 'Sandstorm' raporunu hazırlayan denetçi"],["Robert Morgenthau","Manhattan Bölge Savcısı"]],
+ kv:[["Konsolide denetim","Bir grubun tüm ülkelerdeki şirketlerinin tek bir denetçi tarafından bütün olarak gözetilmesi."],["Kara para aklama","Suç gelirinin kaynağını gizlemek için bankacılık sistemi üzerinden dolaştırılması."]],
+ g:[["Sahtecilik raporu","Haziran 1991 (Sandstorm)"],["Kapatma","5 Temmuz 1991, birçok ülkede aynı gün"]],
+ son:"Bank of England hakkındaki Bingham soruşturmasının raporu 1992'de yayımlandı ve İngiltere'deki denetimin yetersizliğini ortaya koydu. Aynı yıl Basel Komitesi, sınır ötesi bankacılık gruplarının denetimine ilişkin asgari standartları yayımladı.",
+ k:[[2,"Haziran 1991","Price Waterhouse'un 'Sandstorm' raporu, yaygın sahtecilik ve gizli zarar bulgularıyla Bank of England'a sunulur."]]},
+"socgen":{a:[["Jérôme Kerviel","Türev ürünler taciri"],["Daniel Bouton","Başkan ve CEO"],["Fransız Bankacılık Komisyonu","Düzenleyici"]],
+ kv:[["Görevler ayrılığı","İşlemi yapan, kaydeden ve teyit eden kişilerin farklı olması. Tek kişi hepsini yaparsa hata ya da hile fark edilmez."],["Ön ofis / arka ofis","Ön ofis işlem yapar, arka ofis işlemi kaydeder ve teyit eder. Kerviel'in kontrol birimlerinde çalışmış olması, sistemin açıklarını bilmesini sağladı."]],
+ g:[["Kullanılan araç","Avrupa borsa endeksi vadelileri"],["Kerviel'in cezası (2010)","5 yıl hapis (2 yılı ertelenmiş)"],["Tazminat","4,9 mlr €; 2016'da 1 mn €'ya indirildi"]],
+ son:"Banka kaybı sermaye artırımıyla karşıladı. Fransız Bankacılık Komisyonu, bankaya yetersiz iç kontrol nedeniyle yaklaşık 4 mn € para cezası verdi.",
+ k:[[3,"22 Ocak 2008","Fed olağanüstü toplantıyla faizi 75 baz puan indirir; SocGen pozisyonlarının büyük bölümü bu çalkantılı günlerde kapatılır."]]},
+"bear-stearns":{a:[["Alan Schwartz","Bear Stearns CEO'su"],["Timothy Geithner","New York Fed Başkanı"],["Ben Bernanke","Fed Başkanı"],["Jamie Dimon","JPMorgan CEO'su"]],
+ kv:[["Repo","Menkul kıymet teminatıyla gecelik ya da kısa vadeli borçlanma. Teminata güven sarsılırsa karşı taraf işlemi yenilemez."],["Kaldıraç","Özkaynağın kaç katı varlık taşındığı. Kaldıraç yüksekse küçük bir değer kaybı sermayeyi eritir."]],
+ g:[["Likidite havuzu","~18 mlr $'dan ~2 mlr $'a (bir haftada)"],["Hisse zirvesi","~170 $ (2007)"],["Fed'in üstlendiği varlıklar","~29 mlr $ (Maiden Lane)"]],
+ son:"Fed, devraldığı riskli varlıkları yönetmek için Maiden Lane adlı bir şirket kurdu. Müdahale, Fed'in bir yatırım bankasına bu ölçekte destek vermesinin ilk örneği oldu ve Lehman'a giden sürecin ilk büyük işareti sayıldı.",
+ k:[[2,"14 Mart 2008","Fed, JPMorgan aracılığıyla Bear Stearns'e acil finansman sağlar; piyasa bunu yetersiz bulur."],[3,"24 Mart 2008","JPMorgan, hissedar tepkisi sonrası teklifini hisse başına 10 $'a çıkarır."]]},
+"wamu":{a:[["Kerry Killinger","Eylül 2008'e kadar CEO"],["Alan Fishman","Eylül 2008'de CEO olarak atandı"],["Sheila Bair","FDIC Başkanı"],["John Reich","OTS Direktörü"]],
+ kv:[["Opsiyonlu değişken faizli kredi","Borçlunun asgari ödemeyi seçebildiği, ödenmeyen faizin anaparaya eklendiği konut kredisi."],["Düşük belgelendirme","Gelir ve varlık belgesi sınırlı istenerek verilen kredi."]],
+ g:[["Nisan 2008 sermaye artırımı","7 mlr $ (TPG öncülüğünde)"],["JPMorgan'ın ödediği bedel","1,9 mlr $"],["Holding şirket","26 Eylül 2008'de iflas koruması istedi"]],
+ son:"OTS, 2010 tarihli Dodd-Frank Yasası ile kaldırıldı; yetkileri OCC ve Fed'e devredildi. WaMu vakası, belgesiz ve opsiyonlu konut kredilerinin krizdeki en sorunlu ürünler arasında olduğunu gösterdi.",
+ k:[[1,"Nisan 2008","TPG öncülüğünde yaklaşık 7 mlr $ sermaye artırımı yapılır; kısa süre sonra bu yatırımın büyük kısmı değer kaybeder."],[3,"26 Eylül 2008","Holding şirket Washington Mutual Inc. iflas koruması başvurusu yapar."]]},
+"iceland":{a:[["Geir Haarde","Başbakan"],["Davíð Oddsson","Merkez Bankası Başkanı"],["Landsbanki / Icesave","Yurt dışı internet mevduat markası"],["Alistair Darling","İngiltere Maliye Bakanı"]],
+ kv:[["Icesave","Landsbanki'nin İngiltere ve Hollanda'da sunduğu yüksek faizli internet mevduat hesabı. İzlanda'nın mevduat sigortası fonu yetmeyince iki hükümetle uyuşmazlık çıktı."],["Sermaye kontrolü","Paranın ülke dışına çıkışını sınırlayan yasal tedbirler."]],
+ g:[["IMF programı","~2,1 mlr $ (Kasım 2008)"],["Icesave referandumu (Mart 2010)","~%93 hayır"],["Icesave referandumu (Nisan 2011)","~%60 hayır"]],
+ son:"IMF programı 2011'de tamamlandı, sermaye kontrolleri 2017'de tamamen kaldırıldı. İzlanda mevduat sigortası ve çözümleme kurallarını yeniden yazdı; toparlanmada turizm önemli rol oynadı.",
+ k:[[2,"Ekim 2008","Başbakan Haarde ulusa seslenir; birkaç gün sonra İngiltere, Landsbanki varlıklarını terörle mücadele mevzuatına dayanarak dondurur."]]},
+"bes":{a:[["Ricardo Salgado","Banka Başkanı (Temmuz 2014'e kadar)"],["Espírito Santo International","Aile grubunun Lüksemburg merkezli üst holdingi"],["Carlos Costa","Portekiz Merkez Bankası Başkanı"],["Lone Star","Novo Banco'nun 2017'deki alıcısı"]],
+ kv:[["Çözümleme (resolution)","Başarısız bankanın iflas yerine düzenli biçimde bölünmesi: sağlıklı kısım devam eder, zarar eski bankada kalır."],["İyi banka / kötü banka","Sağlam varlıkların yeni bir bankaya, sorunlu olanların eski bankaya ayrılması."]],
+ g:[["2014 ilk yarıyıl zararı","~3,6 mlr €"],["Lone Star'ın aldığı pay","~%75 (1 mlr € sermaye ile, 2017)"],["Çözümleme Fonu sermayesi","4,9 mlr €"]],
+ son:"Novo Banco 2017'de Lone Star'a satıldı; Çözümleme Fonu'nun sonradan yaptığı ek ödemeler yıllarca tartışma konusu oldu. Eski başkan Salgado hakkında dava açıldı.",
+ k:[[2,"30 Temmuz 2014","BES, ilk yarıyılda yaklaşık 3,6 mlr € zarar açıklar; hisse çöker."]]},
+"popular":{a:[["Ángel Ron","Eski Başkan (Şubat 2017'ye kadar)"],["Emilio Saracho","Şubat 2017'de atanan Başkan"],["Ana Botín","Santander Başkanı"],["Tek Çözümleme Kurulu (SRB)","Çözümleme otoritesi"]],
+ kv:[["Bail-in","Zararın kamu parasıyla değil, hissedar ve borç verenler tarafından karşılanması."],["Sorunlu kredi (NPL)","Ödemesi aksayan veya aksaması beklenen kredi."]],
+ g:[["2016 zararı","~3,5 mlr €"],["Santander'in sermaye artırımı","~7 mlr €"],["Satın alma bedeli","1 €"]],
+ son:"Santander satın almayı yaklaşık 7 mlr €'luk sermaye artırımıyla finanse etti. Silinen sermaye araçlarının sahipleri hukuk mücadelesine girdi; bu davalar Avrupa'da bail-in kurallarının uygulanışını tartışmaya açtı.",
+ k:[[1,"Haziran 2016 – Şubat 2017","2,5 mlr €'luk sermaye artırımı güveni geri getirmez; banka 2016'yı yaklaşık 3,5 mlr € zararla kapatır."]]},
+"first-republic":{a:[["Michael Roffler","Banka CEO'su"],["Jim Herbert","Kurucu ve icra kurulu başkanı"],["Martin Gruenberg","FDIC Başkanı"],["Jamie Dimon","JPMorgan CEO'su"]],
+ kv:[["Sigortasız mevduat","FDIC güvence limitinin (hesap sahibi başına 250 bin $) üzerindeki mevduat. Sahipleri güven kaybında ilk çekenlerdir."],["Gerçekleşmemiş zarar","Henüz satılmadığı için bilançoya yazılmamış ama piyasa değeri maliyetin altında kalan varlıklardaki kayıp."]],
+ g:[["JPMorgan'ın devraldığı mevduat","~92 mlr $"],["Devralınan krediler","~173 mlr $"],["FDIC'in tahmini maliyeti","~13 mlr $"]],
+ son:"JPMorgan, FDIC ile zarar paylaşımı anlaşması yaptı. Kriz, bölgesel bankalarda sigortasız mevduat yoğunlaşmasını ve gerçekleşmemiş menkul zararlarını düzenleyicilerin gündeminin üst sıralarına taşıdı.",
+ k:[[2,"24 Nisan 2023","Banka, ilk çeyrekte mevduatının 100 mlr $'ı aşan bir kısmını kaybettiğini açıklar; hisse sert düşer."]]},
+"danske":{a:[["Thomas Borgen","CEO (Eylül 2018'de istifa etti)"],["Howard Wilkinson","İç uyarıcı, eski üst düzey çalışan"],["Estonya Mali Denetim Kurumu","Yerel düzenleyici"],["ABD Adalet Bakanlığı","Soruşturmacı"]],
+ kv:[["Yerleşik olmayan müşteri","Hesabın bulunduğu ülkenin dışında yaşayan veya kayıtlı müşteri; kimlik ve para kaynağını doğrulamak daha zordur."],["Müşterini tanı (KYC)","Bankanın müşterisinin kimliğini, faaliyetini ve para kaynağını doğrulama yükümlülüğü."],["İç uyarıcı","Kurum içindeki usulsüzlüğü yetkililere bildiren çalışan."]],
+ g:[["ABD ile uzlaşma","~2 mlr $ (Aralık 2022)"],["Estonya şubesi","2019'da kapatma kararı"],["Şüpheli akış","~200 mlr € (2007–2015)"]],
+ son:"Danske, 2022 sonunda ABD makamlarıyla yaklaşık 2 mlr $'lık uzlaşmaya vardı ve suçunu kabul etti. Skandal, Avrupa'da kara para aklamayla mücadelede merkezî bir otorite kurulması tartışmasını güçlendirdi (AMLA, 2024).",
+ k:[[3,"Şubat 2019","Banka, Estonya şubesini kapatma kararını duyurur."]]},
+"barings":{a:[["Nick Leeson","Barings Futures Singapore'da tacir"],["Peter Baring","Banka başkanı"],["James Bax","Singapur biriminin yöneticisi"],["Eddie George","Bank of England Başkanı"]],
+ kv:[["Hata hesabı","Yanlış girilen işlemlerin geçici tutulduğu hesap. Leeson bu hesabı zararları saklamak için kullandı."],["Vadeli işlem","Gelecekteki bir tarihte belirli fiyattan alım ya da satım sözleşmesi. Küçük bir teminatla büyük pozisyon açılmasını sağlar."]],
+ g:[["Gizli hesap","88888 numaralı hata hesabı"],["Leeson'un cezası","6,5 yıl hapis (Aralık 1995)"],["ING'nin üstlendiği yükümlülük","~660 mn £"]],
+ son:"İngiltere'de bankacılık denetimi sonraki yıllarda Bank of England'dan yeni kurulan FSA'ya kaydırıldı. Vaka, görevler ayrılığı ve bağımsız mutabakat gibi iç kontrol ilkelerinin tüm sektörde yeniden gözden geçirilmesine yol açtı.",
+ k:[[2,"23 Şubat 1995","Leeson Singapur'dan ayrılır; kayıp hesaplanınca bankanın sermayesini aştığı görülür."],[3,"Mart – Aralık 1995","Leeson Frankfurt'ta yakalanır; Aralık'ta Singapur'da 6,5 yıl hapse mahkûm edilir."]]},
+"northern-rock":{a:[["Adam Applegarth","CEO"],["Mervyn King","Bank of England Başkanı"],["Alistair Darling","Maliye Bakanı"],["FSA","Dönemin düzenleyicisi"]],
+ kv:[["Bankaya hücum","Mevduat sahiplerinin güven kaybıyla aynı anda paralarını çekmeye çalışması. Banka sağlam olsa bile likiditeyi tüketir."],["Sekürizasyon","İpotek kredilerini menkul kıymete çevirip piyasaya satarak yeni kredi kaynağı yaratma. Piyasa donunca bu kaynak kurur."]],
+ g:[["Toptan fonlama payı","Fonlamanın kabaca dörtte üçü"],["Mevduat güvencesi (2007)","İlk 2.000 £ tam, sonraki 33.000 £'ın %90'ı"],["Kamulaştırma","17 Şubat 2008"]],
+ son:"Banka 2010'da ikiye bölündü; mevduat ve ipoteklerin bulunduğu kısım 2012 başında Virgin Money'ye satıldı. 2009 tarihli Bankacılık Yasası, çözümleme yetkilerini Bank of England'a verdi.",
+ k:[[2,"17 Eylül 2007","Maliye Bakanı Darling, mevduatların devlet güvencesinde olduğunu açıklar; çıkışlar yavaşlar."],[1,"13 Eylül 2007","BBC, bankanın Bank of England'dan acil destek istediğini haber verir."]]},
+"lehman":{a:[["Richard Fuld","Lehman CEO'su"],["Henry Paulson","ABD Hazine Bakanı"],["Ben Bernanke","Fed Başkanı"],["Timothy Geithner","New York Fed Başkanı"]],
+ kv:[["Repo 105","Lehman'ın repo işlemini 'satış' olarak muhasebeleştirip dönem sonunda kaldıracı olduğundan düşük göstermesini sağlayan yöntem."],["Para piyasası fonu","Kısa vadeli borç kâğıtlarına yatıran, birim değerinin 1 $'da sabit kalması beklenen fon. Bir fon bu sınırı kırınca panik yayıldı."]],
+ g:[["Kaldıraç","~30 kat"],["3. çeyrek zararı","~3,9 mlr $"],["Reserve Primary Fonu","16 Eylül 2008'de değeri 1 $'ın altına düştü"]],
+ son:"Müşahit Anton Valukas'ın 2010 raporu, Lehman'ın bilançosunu dönem sonlarında küçük göstermek için 'Repo 105' işlemlerini kullandığını ortaya koydu. Dodd-Frank Yasası ile büyük kurumlar için düzenli tasfiye yetkisi getirildi.",
+ k:[[2,"14 Eylül 2008","Barclays'ın alımı İngiliz düzenleyicilerden onay alamaz; Bank of America aynı gün Merrill Lynch'i satın almak için anlaşır."],[2,"10 Eylül 2008","Lehman, üçüncü çeyrekte yaklaşık 3,9 mlr $ zarar açıklar; Koreli yatırımcıyla görüşmeler sonuçsuz kalır."]]},
+"turkiye-2001":{a:[["Bülent Ecevit","Başbakan"],["Ahmet Necdet Sezer","Cumhurbaşkanı"],["Kemal Derviş","Ekonomiden sorumlu Devlet Bakanı (Mart 2001)"],["Gazi Erçel","Merkez Bankası Başkanı"],["BDDK ve TMSF","Denetleyici ve sorunlu banka yönetimi"]],
+ kv:[["Kur çıpası","Enflasyonu düşürmek için döviz kurunu önceden ilan edilen bir patikaya bağlama politikası. Güven kaybolunca rezervler hızla erir."],["Görev zararı","Kamu bankalarının, devletin istediği düşük faizli kredileri vermesinden doğan ve bütçeden karşılanmayan kayıp."],["TMSF","Tasarruf Mevduatı Sigorta Fonu; sorunlu bankaları devralan ve tasfiye eden kurum."]],
+ g:[["Dolar kuru","Birkaç ayda yaklaşık iki kat"],["2001'de küçülme","Yaklaşık %5-6"],["Yeni Bankacılık Kanunu","2005 (5411 sayılı)"]],
+ son:"Batan ya da zayıflayan bankalar TMSF'ye devredildi; sistemdeki banka sayısı birkaç yıl içinde belirgin biçimde azaldı. 2005'te çıkan yeni Bankacılık Kanunu ve bağımsız BDDK bugünkü denetim çerçevesinin temelini oluşturdu. 2005 başında Türk lirasından altı sıfır atıldı.",
+ k:[[0,"Aralık 1999","IMF destekli enflasyonla mücadele programı başlar; kur çıpası ana araçtır."],[1,"19 Şubat 2001","Milli Güvenlik Kurulu'ndaki Başbakan–Cumhurbaşkanı gerginliği piyasaya yansır; gecelik faizler fırlar, rezerv kaybı hızlanır."],[2,"Mart – Nisan 2001","Kemal Derviş göreve getirilir; 'Güçlü Ekonomiye Geçiş Programı' açıklanır."]]},
+"svb":{a:[["Greg Becker","SVB CEO'su"],["Janet Yellen","ABD Hazine Bakanı"],["Jerome Powell","Fed Başkanı"],["Martin Gruenberg","FDIC Başkanı"]],
+ kv:[["Vadeye kadar elde tutulan menkul (HTM)","Satılmayacağı varsayılarak maliyetinden izlenen menkul kıymetler. Piyasa değeri düşünce zarar bilançoya yansımaz, satış zorunlu kalırsa gerçekleşir."],["Sistemik risk istisnası","Sigorta sınırının üzerindeki mevduatın da korunmasına izin veren, tüm sisteme zarar riski halinde kullanılan yasal yetki."]],
+ g:[["Satılan menkul","~21 mlr $, ~1,8 mlr $ zarar"],["Planlanan sermaye artırımı","2,25 mlr $"],["9 Mart çekim talebi","~42 mlr $"]],
+ son:"Fed'in Nisan 2023 tarihli iç incelemesi, denetimin sorunları gördüğünü ama yeterince hızlı harekete geçmediğini gösterdi. Holding şirket Mart 2023'te iflas başvurusu yaptı. Kriz, orta ölçekli bankalara uygulanan sermaye ve likidite kurallarını yeniden tartışmaya açtı.",
+ k:[[3,"12–13 Mart 2023","Sistemik risk istisnası ilan edilir, sigortasız mevduat korunur; Fed BTFP'yi açar. Signature Bank da kapatılır."],[2,"9 Mart 2023","Bir günde yaklaşık 42 mlr $'lık çekim talebi gelir; ertesi sabah için talebin çok daha yüksek olması beklenir."]]},
+"turkiye-1994":{a:[["Tansu Çiller","Başbakan"],["Türkiye Cumhuriyet Merkez Bankası","Kur ve rezerv yönetimi"],["IMF","Temmuz 1994 stand-by düzenlemesi"],["Derecelendirme kuruluşları","Ocak 1994'te Türkiye'nin notunu düşürdü"]],
+ kv:[["5 Nisan Kararları","Nisan 1994'te açıklanan istikrar programı: vergi artışı, kamu fiyatlarında ayarlama, harcama kısıntısı."],["Reel faiz","Nominal faizden enflasyonun çıkarılmasıyla bulunan gerçek getiri."]],
+ g:[["Program adı","5 Nisan Kararları"],["Enflasyon (1994)","%100'ün üzerinde"],["Mevduata güvence","Nisan 1994'te getirildi"]],
+ son:"Nisan 1994 paketi vergi artışlarını, kamu fiyat ayarlamalarını ve harcama kısıntılarını içeriyordu. 1994'te çözülemeyen yapısal sorunların (kamu açığı, kırılgan bankacılık) 2001 krizinin zeminini hazırladığı sıkça tartışılır.",
+ k:[[2,"Temmuz 1994","IMF ile stand-by düzenlemesi imzalanır."]]},
+"anglo-irish":{a:[["Seán FitzPatrick","Başkan (Aralık 2008'de istifa etti)"],["David Drumm","CEO"],["Brian Cowen","Başbakan"],["Brian Lenihan","Maliye Bakanı"]],
+ kv:[["Genel garanti","Devletin bankaların mevduat ve borçlarının neredeyse tamamını güvence altına alması."],["NAMA","Bankalardan sorunlu gayrimenkul kredilerini indirimli fiyatla devralan kamu varlık yönetim kuruluşu ('kötü banka')."],["Banka–devlet kısır döngüsü","Devletin banka kurtarmasıyla borçlanıp kredi notunun düşmesi, bunun da bankaları daha da zayıflatması."]],
+ g:[["Garantinin kapsamı","~400 mlr € (GSYH'nin iki katından fazla)"],["Kurtarma maliyeti (Anglo)","~30 mlr €"],["AB/IMF programı","85 mlr € (Kasım 2010)"]],
+ son:"Anglo Irish 2011'de Irish Nationwide ile birleştirilerek IBRC adını aldı; IBRC Şubat 2013'te tasfiye edildi. Genel garanti 2010'da sona erdi ve yerini daha dar kapsamlı düzenlemeler aldı.",
+ k:[[2,"Aralık 2008","Başkan FitzPatrick, yaklaşık 87 mn €'luk kredisini hissedarlardan gizlediği ortaya çıkınca istifa eder."],[3,"Kasım 2009","Sorunlu gayrimenkul kredilerini devralacak Ulusal Varlık Yönetim Ajansı (NAMA) kurulur."]]},
+"kibris-2013":{a:[["Nicos Anastasiades","Cumhurbaşkanı"],["Jeroen Dijsselbloem","Avro Grubu Başkanı"],["Troyka","AB Komisyonu, ECB ve IMF"],["Kıbrıs Merkez Bankası","Bankacılık düzenleyicisi"]],
+ kv:[["Haircut (kesinti)","Mevduat ya da tahvil sahibinin alacağının bir kısmından zorunlu olarak vazgeçmesi."],["Güvence sınırı (100 bin €)","AB'de bir bankadaki mevduatın hesap sahibi başına güvence altına alındığı üst sınır."]],
+ g:[["Bankacılık varlıkları / GSYH","~7-8 kat"],["Yunan tahvili (PSI) kaybı","~4,5 mlr €"],["Bank of Cyprus'ta kesinti","100 bin € üzeri mevduatın ~%47,5'i"]],
+ son:"Sermaye kontrolleri Nisan 2015'te tamamen kaldırıldı. Kıbrıs programını 2016'da tamamlayıp piyasalara döndü. Süreç, AB'de bail-in kurallarının tam uygulamaya girdiği döneme giden yolda emsal oldu.",
+ k:[[1,"Haziran 2012","Kıbrıs, AB'den resmî olarak mali yardım ister."],[3,"28 Mart 2013","Bankalar günlerce kapalı kaldıktan sonra sermaye kontrolleriyle yeniden açılır."]]},
+"arjantin-2001":{a:[["Fernando de la Rúa","Cumhurbaşkanı (20 Aralık 2001'de istifa etti)"],["Domingo Cavallo","Ekonomi Bakanı"],["Eduardo Duhalde","Ocak 2002'de göreve gelen Cumhurbaşkanı"],["IMF","Büyük dış kreditör"]],
+ kv:[["Konvertibilite","Merkez bankasının elindeki dolar rezervi kadar peso basabildiği, kurun yasayla 1'e 1 sabitlendiği rejim."],["Corralito / Corralón","Corralito: hesaplardan çekimi sınırlayan düzenleme. Corralón: vadeli dolar mevduatın dondurulup pesoya çevrilmesi."]],
+ g:[["Temerrüt","90 mlr $'ı aşan dış borç (Aralık 2001)"],["2002'de küçülme","~%11"],["Dönüşüm oranı","Mevduat 1,4 peso/$, kredi 1 peso/$"]],
+ son:"Peso 2002'de değerinin kabaca %70'ini kaybetti; yoksulluk oranı %50'nin üzerine çıktı, ekonomi 2003'ten sonra toparlandı. 2005 ve 2010 borç takaslarıyla alacaklıların %90'ından fazlası yeni tahvilleri kabul etti.",
+ k:[[2,"23 Aralık 2001","Geçici hükümet, 90 mlr $'ı aşan dış borç için ödeme yapılmayacağını açıklar."],[1,"Mart 2001","Cavallo ekonomi bakanlığına geri döner; yıl boyunca mevduat çıkışı hızlanır."]]},
+"credit-suisse":{a:[["Ulrich Körner","CEO"],["Axel Lehmann","Başkan"],["Colm Kelleher","UBS Başkanı"],["SNB ve FINMA","İsviçre Merkez Bankası ve düzenleyici"]],
+ kv:[["AT1 (ek ana sermaye) tahvili","Zarar anında silinebilen veya hisseye dönüşebilen, sermaye sayılan tahvil. Normalde hissedardan sonra zarar üstlenmesi beklenir."],["Zarar sıralaması","Bir bankanın zararını önce kimlerin üstleneceği sırası: hissedar, AT1, ikincil sermaye, ardından alacaklılar."]],
+ g:[["SNB likidite hattı","50 mlr CHF (16 Mart)"],["Federal zarar garantisi","9 mlr CHF"],["Silinen AT1","~16 mlr CHF"]],
+ son:"UBS'nin devralması Haziran 2023'te tamamlandı; birleşik bankanın sistemik riski ve sermaye gereksinimleri uzun süre tartışıldı. AT1 silinmesine karşı açılan davalar yıllarca sürdü.",
+ k:[[2,"16 Mart 2023","SNB, bankaya 50 mlr CHF'ye kadar likidite hattı açar; güven yine de geri gelmez."],[0,"Mart 2021","Archegos ve Greensill olayları, bankaya milyarlarca dolarlık zarar yazdırır."]]}
+};
+/* kronolojiye ek olayları sıralı yerleştir */
+BVA_DATA.forEach(v=>{const e=BVA_EK[v.id];if(!e||!e.k)return;
+  [...e.k].sort((a,b)=>b[0]-a[0]).forEach(x=>v.kron.splice(x[0],0,[x[1],x[2]]));});
+const ekA=id=>{const e=BVA_EK[id];if(!e)return'';
+  return `<h3>Kilit aktörler</h3><div class="bva-chips">${e.a.map(x=>`<span><b>${x[0]}:</b> ${x[1]}</span>`).join('')}</div><h3>Kavramlar</h3>${e.kv.map(x=>`<details><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join('')}`};
+const ekB=id=>{const e=BVA_EK[id];if(!e)return'';
+  return `<h3>Ek rakamlar</h3>${e.g.map(x=>`<div class="bva-row"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}<h3>Sonrası</h3><p>${e.son}</p>`};
+
 BVA_DATA.sort((a,b)=>a.yil-b.yil);
 
 const BVA_KARAR={
@@ -492,7 +607,7 @@ const bvaAvg=a=>Math.round(a.reduce((x,y)=>x+y,0)/a.length);
     const head=`<a class="bva-back" href="#">← Olaylara dön</a><h1>${v.ad}</h1><p class="lead">${v.yil} · ${v.ulke} · ${v.tema}</p>`;
     const draw=()=>{
       const c=BVA_SEC[id],ri=k.a.map((x,i)=>x[3]?i:-1).filter(i=>i>=0);
-      const dossier=`<section class="bva-view-sec"><h3 style="margin-top:0">Vaka dosyası</h3><p>${v.ozet}</p><div class="bva-fig"><b>${v.rakam[0]}</b><span>${v.rakam[1]}</span></div><h3>Olayların kronolojisi</h3><ul class="bva-tl">${v.kron.map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join('')}</ul><h3>Kök nedenler</h3><ul class="pl">${v.neden.map(x=>`<li>${x}</li>`).join('')}</ul></section>`;
+      const dossier=`<section class="bva-view-sec"><h3 style="margin-top:0">Vaka dosyası</h3><p>${v.ozet}</p><div class="bva-fig"><b>${v.rakam[0]}</b><span>${v.rakam[1]}</span></div><h3>Olayların kronolojisi</h3><ul class="bva-tl">${v.kron.map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join('')}</ul><h3>Kök nedenler</h3><ul class="pl">${v.neden.map(x=>`<li>${x}</li>`).join('')}</ul>${ekA(id)}</section>`;
       if(!c){
         view.innerHTML=head+dossier+`<section class="bva-sim"><h3>Rolünüz: ${k.rol}</h3><p>${k.d}</p><div class="bva-chips">${k.g.map(x=>`<span><b>${x[0]}:</b> ${x[1]}</span>`).join('')}</div><p><b>Kararınızı verin.</b> Bu durumda ilk ve en önemli adımınız hangisi olurdu? Tek bir seçenek işaretleyin.</p>`+
         k.a.map((a,i)=>`<label class="bva-act"><input type="radio" name="bva-o" value="${i}"><span><b>${a[0]}</b><br>Artısı: ${a[1]}<br>Riski: ${a[2]}</span></label>`).join('')+
@@ -503,7 +618,7 @@ const bvaAvg=a=>Math.round(a.reduce((x,y)=>x+y,0)/a.length);
         `<section class="bva-view-sec"><h3 style="margin-top:0">Seçiminiz: ${a[0]}</h3><p><i class="${ok?'you':'real'}" style="font-style:normal;color:#fff;padding:2px 8px;border-radius:999px;font-size:.8rem;background:var(${ok?'--accent':'--loss'})">${ok?'Gerçekte de uygulandı':'Gerçekte uygulanmadı'}</i></p><p>Artısı: ${a[1]}<br>Riski: ${a[2]}</p></section>`+
         `<section class="bva-view-sec"><h3 style="margin-top:0">Simülasyon sonucu</h3><div class="bva-cmp"><div class="you"><span>Seçiminiz</span><div class="bva-big">${ya}</div></div><div class="real"><span>Gerçekte uygulanan paket</span><div class="bva-big">${ra}</div></div></div>${BVA_M.map((n,i)=>`<div class="bva-m">${n}</div><div class="bva-bar"><i class="you" style="width:${you[i]}%"></i><em>Siz ${you[i]}</em></div><div class="bva-bar"><i class="real" style="width:${rs[i]}%"></i><em>Gerçek ${rs[i]}</em></div>`).join('')}<p class="bva-note">Skorlar 0-100 arasıdır; tek bir kararın etkisi, gerçekte uygulanan kararların toplam etkisiyle kıyaslanır. Basitleştirilmiş bir modeldir.</p><h3>Seçiminiz gerçekleşseydi</h3><ul class="pl">${you.map((x,i)=>`<li>${BVA_T[i][BVA_LV(x)]}</li>`).join('')}</ul><p>En kırılgan alan: <b>${BVA_M[weak]}</b>.</p></section>`+
         `<section class="bva-view-sec"><h3 style="margin-top:0">Tüm seçenekler</h3>${k.a.map((x,i)=>`<div class="bva-row"><span><b>${x[0]}</b><br><small>Artısı: ${x[1]}. Riski: ${x[2]}.</small></span><span>${i===ch?'<i class="you">Seçiminiz</i>':''}${x[3]?'<i class="real">Gerçekte uygulandı</i>':''}</span></div>`).join('')}</section>`+
-        `<section class="bva-view-sec"><h3 style="margin-top:0">Gerçekte ne oldu</h3><p>${k.s}</p></section>`+
+        `<section class="bva-view-sec"><h3 style="margin-top:0">Gerçekte ne oldu</h3><p>${k.s}</p>${ekB(id)}</section>`+
         `<section class="bva-view-sec"><h3 style="margin-top:0">Gelecek: vakanın bıraktığı sonuçlar</h3><ul class="pl">${v.ders.map(x=>`<li>${x}</li>`).join('')}</ul><div class="bva-q"><b>Tartışma sorusu:</b> ${v.soru}</div></section>`+
         `<div class="bva-sim" style="margin:0"><button type="button" class="bva-sec-btn" data-r="1">Yeniden dene</button></div>`;
       }
