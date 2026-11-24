@@ -384,9 +384,9 @@ R.classList.add('dm-on');
 })();
 </script>
 
-<div class="aurora banner" style=""><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a></span><h1>Türkiye’nin 81 İli: Kalkınma ve Ekonomi</h1><p>Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik 30 il hazır (Malatya, Adana, Gaziantep, Mersin, Konya, Van, Trabzon, Muğla, Şanlıurfa, Hatay, Manisa, Sinop, Hakkari, Bartın, Ardahan, Bingöl, Bitlis, Ankara, İstanbul, İzmir, Diyarbakır, Bursa, Erzurum, Kocaeli, Sakarya, Antalya, Kayseri, Eskişehir, Balıkesir, Sivas); diğer iller sırayla eklenecek.</p></div></div>
-<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
-<div class="w">
+<div class="aurora banner" id="vbanner" style=""><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="index.html">Genel Kalkınma</a></span><h1>Türkiye’nin 81 İli: Kalkınma ve Ekonomi</h1><p>Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik 30 il hazır (Malatya, Adana, Gaziantep, Mersin, Konya, Van, Trabzon, Muğla, Şanlıurfa, Hatay, Manisa, Sinop, Hakkari, Bartın, Ardahan, Bingöl, Bitlis, Ankara, İstanbul, İzmir, Diyarbakır, Bursa, Erzurum, Kocaeli, Sakarya, Antalya, Kayseri, Eskişehir, Balıkesir, Sivas); diğer iller sırayla eklenecek.</p></div></div>
+<svg id="vwave" class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w" id="vmain">
 <div class="kpis">
     <div class="k"><b>86.092.168</b><span>Türkiye nüfusu (2025)</span></div>
     <div class="k"><b>273,4 milyar $</b><span>İhracat (2025)</span></div>
@@ -439,6 +439,15 @@ R.classList.add('dm-on');
   </section>
 
   <section>
+    <h2>Kalkınma Projeleri ve Ajansları</h2>
+    <p class="sub">Bölgesel kalkınmanın iki kurumsal ayağı: dört proje idaresi ve 26 kalkınma ajansı.</p>
+    <div class="g2">
+      <a class="card" href="#projeler" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Kalkınma Projeleri →</h3><p style="margin:0" class="note">GAP, DAP, KOP ve DOKAP: 43 ilde 2024–2028 eylem planları, öncelikli dönüşüm programları ve 1,77 trilyon TL’lik kaynak dağılımı. İl yazıp hangi projenin kapsamında olduğunu bul.</p></a>
+      <a class="card" href="#ajanslar" style="text-decoration:none;color:inherit"><h3 style="color:var(--ac)">Kalkınma Ajansları →</h3><p style="margin:0" class="note">26 ajansın bölgeleri, illeri ve görevleri; ajans ile bölge kalkınma idaresi arasındaki fark. İl veya ajans adıyla ara.</p></a>
+    </div>
+  </section>
+
+  <section>
     <h2>Türkiye Geneli: Kısa Pano</h2>
     <p class="sub">Tüm illerin ortak göstergeleri; il sayfaları çoğaldıkça karşılaştırma bölümü de eklenecek.</p>
     <div class="card"><h3>İhracat, 2025, ilk 20 il (milyar $, TİM kanuni merkez esaslı) ve Malatya</h3><div class="bars" id="ihr"></div>
@@ -446,14 +455,189 @@ R.classList.add('dm-on');
     <div class="card"><h3>GSYH, 2024, ilk 10 il (trilyon TL)</h3><div class="bars" id="gs"></div>
       <p class="note">İstanbul GSYH’nin %29,2’sini, ilk on il %64,5’ini oluşturuyor. Kaynak: TÜİK il bazında GSYH 2024.</p></div>
   </section>
-
-  <section>
-    <h2>Sayfa Eklemek</h2>
-    <div class="card"><p style="margin:0">Yeni il eklemek için tek adım, dosyayı bu klasöre <code>il-&lt;il adı&gt;.html</code> adıyla koymaktır (küçük harf, Türkçe karakter yok: <code>il-sivas.html</code>, <code>il-sanliurfa.html</code>, <code>il-kahramanmaras.html</code>). Bu sayfa her açıldığında 81 ilin dosya adını dener; bulduğu ilin kutusunu etkinleştirir, kartını ekler, sayacı ve üstteki cümleyi günceller. Kart açıklaması dosyadaki <code>&lt;meta name="description"&gt;</code> etiketinden, yoksa başlık bandındaki paragraftan alınır. Bu dosyada elle değişiklik gerekmez.</p>
-    <p class="note" style="margin:10px 0 0">Koşullar: il dosyasının <code>&lt;title&gt;</code> etiketinde “İl Ekonomi Dosyası” geçmeli ve sayfa bir web sunucusundan açılmalı (dosyaya çift tıklayıp açınca tarayıcı komşu dosyaları okutmaz; o durumda yalnızca sayfaya gömülü kartlar görünür). Admin panelindeki Kalkınma › İl dosyaları ayarı eskisi gibi çalışır: açıklamayı değiştirebilir ya da ili gizleyebilirsin. Şu an bulunan dosyalar: <span id="hazirliste"></span></p></div>
-  </section>
 </div>
+<style>.bd{display:inline-block;font-weight:700;font-size:12.5px;padding:3px 10px;border-radius:99px;background:var(--soft);margin:2px 4px 2px 0}.bd.g{background:linear-gradient(120deg,var(--g1),var(--g2));color:#fff}.il{display:inline-block;font-size:13px;padding:2px 9px;border-radius:99px;box-shadow:inset 0 0 0 1px var(--line);margin:2px 3px 2px 0}.in{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:16px system-ui,sans-serif}.sec2{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}.sec2 .card{margin:0}</style>
+<div id="vprojeler" hidden><div class="aurora banner"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#">Genel Kalkınma</a></span><h1>Kalkınma Projeleri</h1><p>Dört bölge kalkınma idaresi, 43 il ve 2024–2028 eylem planları: neyi hedefliyorlar, kaynak nereye gidiyor?</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>4</b><span>Bölge Kalkınma İdaresi (GAP, DAP, KOP, DOKAP)</span></div>
+<div class="k"><b>43</b><span>Kapsanan il</span></div>
+<div class="k"><b>673</b><span>Proje (2024–2028 eylem planları)</span></div>
+<div class="k"><b>1,77 trilyon TL</b><span>Planlanan toplam kaynak</span></div>
+</div>
+<section><h2>Dört Bölgesel Proje</h2><p class="sub">Bir proje seç: kapsadığı iller, dönüşüm programları, öne çıkan yatırımlar ve hedefler.</p>
+<div class="tabs" id="tb"></div><div id="pj"></div></section>
+<section><h2>Kaynak Nereye Gidiyor?</h2><p class="sub">Eylem planı kaynağı (milyar TL) ve bunun ne kadarının “öncelikli dönüşüm programlarında” olduğu.</p>
+<div class="card"><h3>Toplam planlanan kaynak, 2024–2028 (milyar TL)</h3><div class="bars" id="b1"></div></div>
+<div class="card"><h3>Kaynağın öncelikli dönüşüm programlarına (ÖDÖP) ayrılan payı</h3><div class="bars" id="b2"></div>
+<p class="note">Payı, ÖDÖP kaynağını toplam kaynağa bölerek hesapladık. Plandaki kategoriler (ÖDÖP, büyük altyapı, küçük ölçekli yatırım) birbiriyle örtüşebilir; oran yaklaşık bir göstergedir. DAP’ta payın düşük çıkması, kaynağın büyük bölümünün büyük ölçekli altyapıda (özellikle sulama ve baraj) toplandığına işaret eder.</p></div></section>
+<section><h2>Benim İlim Hangisinde?</h2><p class="sub">İl adı yaz; hangi proje idaresinin ve hangi kalkınma ajansının kapsamında olduğunu gör.</p>
+<div class="card"><input id="pq" class="in" type="search" placeholder="İl ara (ör. Sivas)"><div id="pr" style="margin-top:12px"></div></div></section>
+<section><h2>Diğer Bölgesel Araçlar</h2>
+<div class="g2">
+<div class="card"><h3>Yerel Kalkınma Hamlesi Programı</h3><p class="note" style="font-size:15px">Kalkınma ajansları eliyle yürütülen teşvik programı: 81 ilde 324 yatırım alanı için destek öngörüyor; amaç illeri uzmanlaştırmak, atıl kaynakları değerlendirmek ve bölgeler arası farkı azaltmak. Uygulama usul ve esasları tebliği 9 Temmuz 2025’te Resmi Gazete’de yayımlandı.</p></div>
+<div class="card"><h3>Yeşilırmak Havzası Gelişim Projesi (YHGP)</h3><p class="note" style="font-size:15px">Amasya, Çorum, Samsun ve Tokat’ı kapsayan havza ölçekli proje; Orta Karadeniz Kalkınma Ajansı’nın bölge planı çalışmalarında YHGP Bölgesel Gelişme Ana Planı temel alınmıştır. Dört proje idaresinden ayrı, daha eski bir örnektir.</p></div>
+<div class="card"><h3>Zonguldak–Bartın–Karabük (ZBK)</h3><p class="note" style="font-size:15px">Maden havzasının dönüşümüne odaklanan bölgesel kalkınma programı; Türkiye’de uygulanan bölge programları arasında anılır. Bugün aynı illeri Batı Karadeniz Kalkınma Ajansı (BAKKA) kapsıyor.</p></div>
+<div class="card"><h3>AB destekli bölgesel programlar</h3><p class="note" style="font-size:15px">MEDA fonuyla Doğu Anadolu Kalkınma Programı ve GAP Bölgesel Kalkınma Programı, ardından IPA bileşenleri kapsamında düzey-2 bölge programları uygulandı; kalkınma ajansları bu birikimin ve AB uyum sürecinin ürünüdür.</p></div>
+</div></section>
+<section><h2>Tartışma Soruları</h2><div class="card"><ul>
+<li>Dört planda da sulama ve tarım öne çıkıyor. Tarıma dayalı kalkınma, bu illerde kalıcı istihdam ve gelir farkı kapatmak için yeterli mi?</li>
+<li>Plan kaynağı ile gerçekleşen harcama aynı şey değil. Hedef göstergeleri (sulanan alan, turist sayısı, ihracat) dönem sonunda nasıl denetlenmeli?</li>
+<li>Bölge idareleri (merkezî, 43 il) ile kalkınma ajansları (26 bölge, yerel ortaklıklar) görev bölüşümünde nerede örtüşüyor, nerede tamamlıyor?</li>
+</ul></div></section>
+<section><h2>Kaynaklar</h2><ul class="src">
+<li>Para Dergi, “Bölgesel kalkınmaya 1,77 trilyon lira” (18–21 Temmuz 2025): eylem planı rakamları, ÖDÖP programları, il listeleri.</li>
+<li>Anadolu Ajansı, “Bölgesel kalkınmaya 3 yılda 18,6 milyar lira ödenek planı”: 2027–2029 Bölgesel Kalkınma Programı ödeneği.</li>
+<li>DOKAP Bölge Kalkınma İdaresi faaliyet raporları (2022–2024); Sayıştay GAP BKİB denetim raporu (388 sayılı KHK).</li>
+<li>Sanayi ve Teknoloji Bakanlığı, Kalkınma Ajansları Genel Müdürlüğü ve ajans faaliyet raporları.</li></ul>
+<p class="note">Rakamlar basında yayımlanan eylem planı özetlerine dayanır; kesin değerler için Bakanlığın ve idarelerin resmî plan metinlerine bakın.</p></section>
+</div></div>
+<div id="vajanslar" hidden><div class="aurora banner"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#">Genel Kalkınma</a></span><h1>Kalkınma Ajansları</h1><p>26 Düzey-2 bölgesinde 81 ili kapsayan ajanslar: ne yaparlar, hangi illeri kapsarlar, proje idarelerinden farkı nedir?</p></div></div>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z"/></svg>
+<div class="w">
+<div class="kpis">
+<div class="k"><b>26</b><span>Kalkınma ajansı (26 Düzey-2 bölgesi)</span></div>
+<div class="k"><b>81</b><span>İlde yatırım destek ofisi</span></div>
+<div class="k"><b>2006</b><span>5449 sayılı Kanun; ilk ajanslar İzmir ve Çukurova</span></div>
+<div class="k"><b>1,375 milyar TL</b><span>2026 merkezî transfer ödeneği</span></div>
+</div>
+<section><h2>Kalkınma Ajansı Nedir?</h2><div class="g2">
+<div class="card"><h3>Görev</h3><ul><li>Bölge planını hazırlamak ve izlemek</li><li>Mali ve teknik destek programları yürütmek (ör. sosyal gelişme, KOBİ, yeşil dönüşüm hibeleri)</li><li>Yatırımcıya rehberlik eden yatırım destek ofisleri işletmek</li><li>Kamu, özel sektör ve sivil toplum arasında koordinasyon sağlamak</li></ul></div>
+<div class="card"><h3>Yapı ve koordinasyon</h3><ul><li>Organlar: Kalkınma Kurulu, Yönetim Kurulu, Genel Sekreterlik</li><li>Ulusal koordinasyon: Sanayi ve Teknoloji Bakanlığı, Kalkınma Ajansları Genel Müdürlüğü</li><li>Bölge sınırı: İstatistiki Bölge Birimleri Sınıflandırması (NUTS) Düzey-2</li><li>Kaynak: merkezî transfer ödeneği; 2026 payı sosyo-ekonomik gelişmişlik (SEGE) ve nüfusa göre dağıtılıyor</li></ul></div>
+<div class="card"><h3>Kuruluş</h3><p style="margin:0">İzmir ve Çukurova ajansları 2006’da, kalan 24 ajans 2008–2009’da Bakanlar Kurulu kararlarıyla kuruldu. Ajanslar, AB’ye uyum sürecinde merkezî anlayıştan bölgesel kalkınma anlayışına geçişin ürünüdür.</p></div>
+<div class="card"><h3>Yeni dönem</h3><p style="margin:0">2024–2028 Bölgesel Gelişme Ulusal Stratejisi ve 26 bölge planı yürürlükte. Yerel Kalkınma Hamlesi Programı da ajanslar eliyle yürütülüyor: 81 ilde 324 yatırım alanı.</p></div>
+</div></section>
+<section><h2>Ajansını Bul</h2><p class="sub">İl veya ajans adı/kısaltması yaz; hepsi için boş bırak.</p>
+<div class="card"><input id="aq" class="in" type="search" placeholder="Ör. Malatya, FKA, Karadeniz"><p class="note" id="an" style="margin:8px 0 0"></p></div>
+<div class="sec2" id="acards"></div></section>
+<section><h2>Tablo: 26 Ajans ve Bölgeleri</h2><div class="card tw"><table><thead><tr><th>Kod</th><th>Ajans</th><th>İller</th><th>Proje idaresi</th></tr></thead><tbody id="atbl"></tbody></table>
+<p class="note">“Proje idaresi” sütunu, ajansın illerinin hangi bölge kalkınma idaresinin (GAP, DAP, KOP, DOKAP) kapsamında olduğunu gösterir; bir ajansın illeri birden çok idareye dağılabilir. Örneğin Orta Anadolu (ORAN) bölgesinde Sivas DAP’ta, Yozgat KOP’tadır, Kayseri hiçbirinde değildir.</p></div></section>
+<section><h2>Ajans mı, Proje İdaresi mi?</h2><div class="g2">
+<div class="card"><h3>Kalkınma ajansı</h3><ul><li>26 bölge, 81 il</li><li>Plan, hibe, teknik destek, koordinasyon</li><li>Yerel kurulları (Kalkınma Kurulu) var</li><li>Küçük ve orta ölçekli, yerel projeleri destekler</li></ul></div>
+<div class="card"><h3>Bölge kalkınma idaresi</h3><ul><li>4 idare (GAP, DAP, KOP, DOKAP), 43 il</li><li>Eylem planı ve büyük kamu yatırımları (baraj, sulama, altyapı)</li><li>Doğrudan Sanayi ve Teknoloji Bakanlığına bağlı merkezî teşkilat</li></ul></div></div>
+<p class="note"><a href="#projeler">Dört proje için: Kalkınma Projeleri →</a></p></section>
+<section><h2>Kaynaklar</h2><ul class="src">
+<li>Sanayi ve Teknoloji Bakanlığı Kalkınma Ajansları Genel Müdürlüğü; ajans kuruluş ve faaliyet raporları (İSTKA, KUDAKA, SERKA, OKA, İKA).</li>
+<li>Sayıştay ajans denetim raporları; Resmî Gazete, 6 Temmuz 2006 (26220) ve 22 Kasım 2008 (27062).</li>
+<li>2026 yılı kalkınma ajansları transfer payı kararı (11067); Bölgesel Gelişme Ulusal Stratejisi ve Bölge Planları belgeleri.</li></ul></section>
+</div></div>
 <footer><div class="wrap"><span data-k="k116">© 2026 Eko-Log · İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu</span><span data-k="k117">İletişim: ekologtopluluk0@gmail.com</span><span style="opacity:.75;font-size:.9em">Anonim ziyaret sayısı tutulur; çerez ve kişisel veri kullanılmaz.</span></div></footer>
+<script>
+/* Kalkınma ajansları ve bölge kalkınma idareleri ortak verisi (kalkinma-projeleri.html ve kalkinma-ajanslari.html kullanır). */
+window.KV=(function(){
+var AJ=[
+{k:'TR10',ad:'İstanbul Kalkınma Ajansı',s:'İSTKA',i:['İstanbul']},
+{k:'TR21',ad:'Trakya Kalkınma Ajansı',s:'TRAKYAKA',i:['Edirne','Kırklareli','Tekirdağ']},
+{k:'TR22',ad:'Güney Marmara Kalkınma Ajansı',s:'GMKA',i:['Balıkesir','Çanakkale']},
+{k:'TR31',ad:'İzmir Kalkınma Ajansı',s:'İZKA',i:['İzmir']},
+{k:'TR32',ad:'Güney Ege Kalkınma Ajansı',s:'GEKA',i:['Aydın','Denizli','Muğla']},
+{k:'TR33',ad:'Zafer Kalkınma Ajansı',s:'ZAFER',i:['Afyonkarahisar','Kütahya','Manisa','Uşak']},
+{k:'TR41',ad:'Bursa Eskişehir Bilecik Kalkınma Ajansı',s:'BEBKA',i:['Bilecik','Bursa','Eskişehir']},
+{k:'TR42',ad:'Doğu Marmara Kalkınma Ajansı',s:'MARKA',i:['Bolu','Düzce','Kocaeli','Sakarya','Yalova']},
+{k:'TR51',ad:'Ankara Kalkınma Ajansı',s:'ANKARAKA',i:['Ankara']},
+{k:'TR52',ad:'Mevlana Kalkınma Ajansı',s:'MEVKA',i:['Karaman','Konya']},
+{k:'TR61',ad:'Batı Akdeniz Kalkınma Ajansı',s:'BAKA',i:['Antalya','Burdur','Isparta']},
+{k:'TR62',ad:'Çukurova Kalkınma Ajansı',s:'ÇKA',i:['Adana','Mersin']},
+{k:'TR63',ad:'Doğu Akdeniz Kalkınma Ajansı',s:'DOĞAKA',i:['Hatay','Kahramanmaraş','Osmaniye']},
+{k:'TR71',ad:'Ahiler Kalkınma Ajansı',s:'AHİKA',i:['Aksaray','Kırıkkale','Kırşehir','Nevşehir','Niğde']},
+{k:'TR72',ad:'Orta Anadolu Kalkınma Ajansı',s:'ORAN',i:['Kayseri','Sivas','Yozgat']},
+{k:'TR81',ad:'Batı Karadeniz Kalkınma Ajansı',s:'BAKKA',i:['Bartın','Karabük','Zonguldak']},
+{k:'TR82',ad:'Kuzey Anadolu Kalkınma Ajansı',s:'KUZKA',i:['Çankırı','Kastamonu','Sinop']},
+{k:'TR83',ad:'Orta Karadeniz Kalkınma Ajansı',s:'OKA',i:['Amasya','Çorum','Samsun','Tokat']},
+{k:'TR90',ad:'Doğu Karadeniz Kalkınma Ajansı',s:'DOKA',i:['Artvin','Giresun','Gümüşhane','Ordu','Rize','Trabzon']},
+{k:'TRA1',ad:'Kuzeydoğu Anadolu Kalkınma Ajansı',s:'KUDAKA',i:['Bayburt','Erzincan','Erzurum']},
+{k:'TRA2',ad:'Serhat Kalkınma Ajansı',s:'SERKA',i:['Ağrı','Ardahan','Iğdır','Kars']},
+{k:'TRB1',ad:'Fırat Kalkınma Ajansı',s:'FKA',i:['Bingöl','Elazığ','Malatya','Tunceli']},
+{k:'TRB2',ad:'Doğu Anadolu Kalkınma Ajansı',s:'DAKA',i:['Bitlis','Hakkari','Muş','Van']},
+{k:'TRC1',ad:'İpekyolu Kalkınma Ajansı',s:'İKA',i:['Adıyaman','Gaziantep','Kilis']},
+{k:'TRC2',ad:'Karacadağ Kalkınma Ajansı',s:'KARACADAĞ',i:['Diyarbakır','Şanlıurfa']},
+{k:'TRC3',ad:'Dicle Kalkınma Ajansı',s:'DİKA',i:['Batman','Mardin','Siirt','Şırnak']}
+];
+var BKI={
+GAP:['Adıyaman','Batman','Diyarbakır','Gaziantep','Kilis','Mardin','Siirt','Şanlıurfa','Şırnak'],
+DAP:['Ağrı','Ardahan','Bingöl','Bitlis','Elazığ','Erzincan','Erzurum','Hakkari','Iğdır','Kars','Malatya','Muş','Tunceli','Van','Sivas'],
+KOP:['Aksaray','Karaman','Konya','Niğde','Kırıkkale','Kırşehir','Nevşehir','Yozgat'],
+DOKAP:['Amasya','Artvin','Bayburt','Çorum','Giresun','Gümüşhane','Ordu','Rize','Samsun','Tokat','Trabzon']
+};
+function bki(il){return Object.keys(BKI).filter(function(k){return BKI[k].indexOf(il)>=0})}
+function ajans(il){return AJ.filter(function(a){return a.i.indexOf(il)>=0})[0]||null}
+function iller(){var r=[];AJ.forEach(function(a){a.i.forEach(function(x){r.push(x)})});return r.sort(function(a,b){return a.localeCompare(b,'tr')})}
+function fold(s){return String(s).toLocaleLowerCase('tr').replace(/[^a-z0-9ğüşıöç]/g,'')}
+return {AJ:AJ,BKI:BKI,bki:bki,ajans:ajans,iller:iller,fold:fold};
+})();
+
+</script>
+<script>(function(){
+
+var P={
+GAP:{ad:'Güneydoğu Anadolu Projesi (GAP)',idare:'GAP Bölge Kalkınma İdaresi Başkanlığı (388 sayılı KHK)',yz:'9,7',pr:198,kg:496.2,
+not:'Bölgesel kalkınma politikasının ilk örneği sayılan GAP, Fırat ve Dicle havzalarında su ve toprak kaynaklarının geliştirilmesiyle başladı, sonra çok sektörlü bir bölgesel kalkınma projesine dönüştü. Yeni dönemde “yeşil GAP” vurgusu, akıllı tarım ve sulama öne çıkıyor.',
+pg:[['Sulama',41,214.2],['Tarımda Hassas Dönüşüm',21,63.8],['Turizm Odaklı Ekonomik Büyüme',24,19.3],['Emek Yoğun Sanayi Sektörlerinde Dönüşüm',2,16.1],['GAP Entegre 2.0',5,4.6]],
+on:['Silvan Projesi, Kralkızı-Dicle, Mardin, Hilvan-Siverek ve Adıyaman sulamaları','İyi Pamuk Uygulamaları (çalışılan alan 380 binden 611 bin dekara)','Sulama pompalarında yenilenebilir enerji (GES) kurulumu','GAP Sosyal Etkili Tahvil Modeli: çocuk işçiliği, genç girişimcilik, kadın geliri'],
+hd:['Yeni sulamaya 475 bin 205 ha alan açılması','Bölgenin tarımsal katma değerdeki payının %19,1’e çıkması','AB’de tescilli coğrafi işaretli ürünün 3’ten 13’e çıkması','Yatak kapasitesinin 98 bin 696’ya ulaşması']},
+DAP:{ad:'Doğu Anadolu Projesi (DAP)',idare:'DAP Bölge Kalkınma İdaresi Başkanlığı (2011)',yz:'22,7',pr:151,kg:530.9,
+not:'Türkiye yüzölçümünün beşte birinden fazlasını kapsayan en geniş proje. Hayvancılık, mera ve sulama etrafında kurgulanan plan, kırsal nüfus oranının (%27) korunmasını da hedefliyor.',
+pg:[['Etkin Su ve Havza Yönetimi',34,21.7],['Bitkisel Üretimde Katma Değer Artışı',16,18.5],['Hayvancılık Altyapısında Dönüşüm',17,8.4]],
+on:['Buzağı Kayıplarının Önlenmesi Projesi (250 bin buzağının yaşatılması)','Mera Altyapısını Destekleme Projesi','Ağrı Ovası Yazıcı, Pasinler Söylemez Barajı, Kuzgun Daphan, Kars Çayı Havzası sulamaları','Et ve süt işleme ile dondurulmuş gıda yatırımlarının desteklenmesi'],
+hd:['Sulanan alanın 821 bin 250 ha’dan 1 milyon 50 bin ha’ya çıkması','Buzağı kayıp oranının %20–25’ten %15–20’ye inmesi','Bölgenin tarım GSYH payının %10’dan %13’e çıkması','İyileştirilmiş mera sayısının 150’ye ulaşması']},
+KOP:{ad:'Konya Ovası Projesi (KOP)',idare:'KOP Bölge Kalkınma İdaresi Başkanlığı (2011)',yz:'12,2',pr:166,kg:350.7,
+not:'Türkiye’nin tahıl ambarı Konya Ovası çevresinde su kullanım etkinliği ve tarımsal verimlilik önceliği taşıyor; plan kırsalda dengeli kalkınmayı da ayrı bir program yapıyor.',
+pg:[['Su Kaynaklarının Etkin Yönetimi',37,39.4],['Kırsalda Dengeli Kalkınma',29,11.6],['Tarımda Verimlilik Artışı',15,6.0],['Tarımsal ve Tarıma Dayalı Sanayi',8,0.9]],
+on:['Çumra 3. Merhale, İvriz ve Uzunlu sulaması yenileme projeleri','Yerköy İnandık, Ayrancı ve Delimahmutlu baraj-sulama projeleri','Ilgın Küspe Peleti Tesisi ve Akşehir Gıda İhtisas OSB','Göksu-Taşeli ve Çekerek havza kalkınma projeleri; Kapadokya çevre düzenlemeleri'],
+hd:['Kırsal nüfus oranının sabit tutulması','30 üretici örgütünün kapasitesinin geliştirilmesi','Mevcut sulama sistemlerinin rehabilitasyonu ve su kaynaklarının korunması']},
+DOKAP:{ad:'Doğu Karadeniz Projesi (DOKAP)',idare:'DOKAP Bölge Kalkınma İdaresi Başkanlığı (merkezi Giresun, 2011)',yz:'9,8',pr:158,kg:394.1,
+not:'Tarım, mavi ekonomi ve turizmin birlikte ele alındığı proje. Yeşil Yol ve Kafkasya koridoru üzerindeki lojistik yatırımlar, bölgeyi diğer üç projeden ayırıyor.',
+pg:[['Tarımsal Sulamada Etkin Yönetim',35,31.2],['Turizm Odaklı Ekonomik Büyüme',5,30.3],['Mavi Ekonomide Gelir Artışı',9,13.5],['Tarımda Gelir Artışı',17,8.6]],
+on:['Rize İyidere Lojistik Limanı','Trabzon Su Ürünleri İhtisas OSB ve Mükemmeliyet Merkezi','Sürmene Gemi İnşa ve Yat İhtisas OSB','Yeşil Yol Projesi (2 bin 864 km güzergâhın 1.432 km’sinde çalışma yapıldı), Kaçkar Dağları Milli Parkı alan düzenlemesi','Çarşamba Ovası ve Kelkit Sütveren sulamaları'],
+hd:['Bölgeyi ziyaret eden turistin 2,83 milyondan 4,5 milyona çıkması','Turizm gelirinin yaklaşık 2,8 milyar $’dan 5,6 milyar $’a çıkması','Su ürünleri ihracatının 178’den 220 milyon $’a çıkması','Sulanabilir tarım arazisinin yaklaşık %60 artması']}
+};
+var K=KV,N=function(v){return String(v).replace('.',',')};
+function lst(a){return '<ul>'+a.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'}
+function bar(el,d,hl){var m=Math.max.apply(null,d.map(function(x){return x[1]}));el.innerHTML=d.map(function(x,i){return '<div class="row'+(i===hl?' hl':'')+'"><span class="t0">'+x[0]+'</span><div class="t"><i style="width:'+Math.max(1,x[1]/m*100)+'%"></i></div><em>'+x[2]+'</em></div>'}).join('')}
+var keys=Object.keys(P),tb=document.getElementById('tb');
+tb.innerHTML=keys.map(function(k,i){return '<button class="'+(i?'':'on')+'" data-k="'+k+'">'+k+'</button>'}).join('');
+function show(k){var p=P[k],il=K.BKI[k],aj={};il.forEach(function(x){var a=K.ajans(x);if(a)aj[a.s]=1});
+ var od=p.pg.reduce(function(s,x){return s+x[2]},0);
+ document.getElementById('pj').innerHTML='<div class="card"><h3>'+p.ad+'</h3><p style="margin:6px 0">'+p.not+'</p><p class="note"><b>İdare:</b> '+p.idare+'</p>'
+ +'<div class="kpis"><div class="k"><b>'+il.length+'</b><span>il · yüzölçümün %'+p.yz+'’i</span></div><div class="k"><b>'+p.pr+'</b><span>proje</span></div><div class="k"><b>'+N(p.kg)+' mlr TL</b><span>planlanan kaynak</span></div></div>'
+ +'<p style="margin:12px 0 4px"><b>İller:</b> '+il.map(function(x){return '<span class="il">'+x+'</span>'}).join('')+'</p>'
+ +'<p style="margin:6px 0"><b>Bölgedeki kalkınma ajansları:</b> '+Object.keys(aj).map(function(s){return '<span class="bd">'+s+'</span>'}).join('')+'</p></div>'
+ +'<div class="g2"><div class="card"><h3>Öncelikli dönüşüm programları</h3><div class="bars" id="pg"></div><p class="note">Sağ sütun: kaynak, milyar TL. Parantez: proje sayısı.</p></div>'
+ +'<div class="card"><h3>Öne çıkan yatırımlar</h3>'+lst(p.on)+'</div></div>'
+ +'<div class="card"><h3>Dönem sonu hedefleri (2028)</h3>'+lst(p.hd)+'</div>';
+ bar(document.getElementById('pg'),p.pg.map(function(x){return [x[0]+' ('+x[1]+')',x[2],N(x[2])]}),0)}
+tb.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(tb.children,function(c){c.classList.remove('on')});b.classList.add('on');show(b.dataset.k)};
+show('GAP');
+var tot=keys.map(function(k){return [k,P[k].kg,N(P[k].kg)]});bar(document.getElementById('b1'),tot,-1);
+bar(document.getElementById('b2'),keys.map(function(k){var o=P[k].pg.reduce(function(s,x){return s+x[2]},0),r=Math.round(o/P[k].kg*100);return [k,r,'%'+r]}),-1);
+var q=document.getElementById('pq'),r=document.getElementById('pr'),ALL=K.iller();
+function find(){var f=K.fold(q.value);if(!f){r.innerHTML='<p class="note" style="margin:0">Bir il adı yazmaya başla.</p>';return}
+ var m=ALL.filter(function(x){return K.fold(x).indexOf(f)>=0}).slice(0,10);
+ r.innerHTML=m.length?m.map(function(x){var b=K.bki(x),a=K.ajans(x);return '<p style="margin:8px 0"><b>'+x+'</b> · Proje: '+(b.length?b.map(function(s){return '<span class="bd g">'+s+'</span>'}).join(''):'<span class="note">dört proje idaresi kapsamında değil</span>')+' · Ajans: <span class="bd">'+a.s+'</span> <span class="note">('+a.k+')</span></p>'}).join(''):'<p class="note" style="margin:0">Eşleşen il yok.</p>'}
+q.oninput=find;find();
+
+})();</script>
+<script>(function(){
+
+var K=KV,q=document.getElementById('aq'),cards=document.getElementById('acards'),n=document.getElementById('an'),tbl=document.getElementById('atbl');
+function pr(a){var s={};a.i.forEach(function(x){K.bki(x).forEach(function(b){s[b]=1})});return Object.keys(s)}
+tbl.innerHTML=K.AJ.map(function(a){var p=pr(a);return '<tr><td>'+a.k+'</td><td><b>'+a.s+'</b><br><span class="note">'+a.ad+'</span></td><td>'+a.i.join(', ')+'</td><td>'+(p.length?p.join(', '):'—')+'</td></tr>'}).join('');
+function draw(){var f=K.fold(q.value),m=K.AJ.filter(function(a){return !f||K.fold(a.ad+a.s+a.k+a.i.join('')).indexOf(f)>=0});
+ n.textContent=m.length+' ajans gösteriliyor';
+ cards.innerHTML=m.map(function(a){var p=pr(a);return '<div class="card"><h3>'+a.s+' <span class="note">· '+a.k+'</span></h3><p style="margin:4px 0 8px;font-weight:600">'+a.ad+'</p><div>'+a.i.map(function(x){return '<span class="il">'+x+'</span>'}).join('')+'</div><div style="margin-top:8px">'+p.map(function(b){return '<span class="bd g">'+b+'</span>'}).join('')+'</div></div>'}).join('')}
+q.oninput=draw;draw();
+
+})();</script>
+<script>(function(){
+var V={'#projeler':'vprojeler','#ajanslar':'vajanslar'},M=['vbanner','vwave','vmain'];
+function g(i){return document.getElementById(i)}
+function route(){var v=V[location.hash],on=!!v;
+ M.forEach(function(i){g(i).hidden=on});
+ Object.keys(V).forEach(function(k){g(V[k]).hidden=(V[k]!==v)});
+ if(on||g('vmain'))window.scrollTo(0,0)}
+addEventListener('hashchange',route);route();
+})();</script>
 <script>
 var N=function(v){return String(v).replace('.',',')};
 function cols(el,data){var m=Math.max.apply(null,data.map(function(d){return d[1]}));
@@ -508,7 +692,6 @@ bars3(document.getElementById('gs'),[['İstanbul',13.01],['Ankara',4.67],['İzmi
   document.getElementById('hz').textContent=Object.keys(SAYFA).length+' / 81';
   var names=Object.keys(SAYFA).map(Number).sort(function(a,b){return a-b}).map(function(k){return IL[k-1]});
   [].forEach.call(document.querySelectorAll('p'),function(p){if(/^Bir il seç/.test(p.textContent)&&/hazır/.test(p.textContent))p.textContent='Bir il seç, o ilin ekonomi ve kalkınma dosyası açılsın. Şimdilik '+names.length+' il hazır ('+names.join(', ')+'); diğer iller sırayla eklenecek.'});
-  var hl=document.getElementById('hazirliste');if(hl)hl.innerHTML=keys.map(function(k){return '<code>'+cards[k].f+'</code>'}).join(', ');
  }
  ciz();
  Promise.all(IL.map(function(n,i){return SAYFA[i+1]?0:dene(i+1)})).then(function(){return load(0)}).then(function(d){
@@ -538,5 +721,41 @@ load(0).then(function(d){if(d&&d.b)B=d.b;show()});
 })();
 </script>
 <script src="../uye.js"></script>
+<script id="ekobot-overlay">
+/* Eko Can / Eko Bot bağlantıları: tam ekran katmanda açılır */
+(function(){
+var D=document,ov=null,fr=null,prevF=null;
+function css(){if(D.getElementById('ekobot-css'))return;var st=D.createElement('style');st.id='ekobot-css';
+st.textContent='#ekobot{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;background:#120c1a;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}#ekobot[hidden]{display:none}#ekobot .eb-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;background:#1c1328;color:#f6f0fb;font:700 15px "Instrument Sans",system-ui,sans-serif}#ekobot .eb-bar a,#ekobot .eb-bar button{font:600 14px "Instrument Sans",system-ui,sans-serif;color:#f6f0fb;background:rgba(255,255,255,.14);border:0;border-radius:999px;padding:8px 16px;cursor:pointer;text-decoration:none}#ekobot iframe{flex:1 1 auto;width:100%;border:0;min-height:0;background:#120c1a}';
+D.head.appendChild(st)}
+function kapat(){if(!ov)return;ov.hidden=true;D.documentElement.style.overflow=ov._o||'';if(prevF&&prevF.focus)prevF.focus()}
+function ac(url){
+  prevF=D.activeElement;css();
+  if(!ov){
+    ov=D.createElement('div');ov.id='ekobot';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Eko Can');
+    var bar=D.createElement('div');bar.className='eb-bar';var b=D.createElement('b');b.textContent='Eko Can';
+    var r=D.createElement('span');r.style.cssText='display:flex;gap:8px';
+    var nw=D.createElement('a');nw.target='_blank';nw.rel='noopener';nw.textContent='Yeni sekmede aç';nw.id='eb-new';
+    var x=D.createElement('button');x.type='button';x.textContent='\u2715 Kapat';x.addEventListener('click',kapat);
+    r.appendChild(nw);r.appendChild(x);bar.appendChild(b);bar.appendChild(r);
+    fr=D.createElement('iframe');fr.title='Eko Can';fr.setAttribute('allow','clipboard-write; microphone');
+    ov.appendChild(bar);ov.appendChild(fr);D.body.appendChild(ov);
+    D.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov&&!ov.hidden)kapat()});
+  }
+  if(fr.getAttribute('src')!==url)fr.src=url;
+  D.getElementById('eb-new').href=url;
+  ov._o=D.documentElement.style.overflow;D.documentElement.style.overflow='hidden';ov.hidden=false;
+}
+window.EkoBotAc=ac;
+D.addEventListener('click',function(e){
+  if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  var a=e.target.closest&&e.target.closest('a[href]');
+  if(!a||a.target==='_blank'||a.closest('#ekobot'))return;
+  var h=a.getAttribute('href')||'';
+  if(!/(^|\/)eko-bot\.html(#.*)?$/.test(h))return;
+  e.preventDefault();e.stopPropagation();ac(a.href);
+},true);
+})();
+</script>
 </body>
 </html>
