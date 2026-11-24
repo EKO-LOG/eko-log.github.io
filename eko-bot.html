@@ -124,6 +124,44 @@ main.pg{padding:16px 0 28px}
 .links a{font-size:13.5px;padding:6px 13px;border-radius:999px;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surf)}
 .links a:hover{border-color:var(--g2)}
 </style>
+<style id="chat-fullpage">
+html,body{height:100%;margin:0;overflow:hidden;background:#120c1a}
+@media (prefers-color-scheme:light){html:not([data-theme="dark"]),html:not([data-theme="dark"]) body{background:var(--bg)}}
+.chat-page{position:fixed;left:0;right:0;bottom:0;top:calc(62px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;min-height:0;padding:0;margin:0}
+#eko-bot-tam{flex:1 1 auto;min-height:0;width:100%;max-width:none!important;margin:0!important;padding:0!important;display:flex;flex-direction:column}
+/* balon / kart görünümünü kaldır: tam sayfa */
+#eko-bot-tam>*{flex:1 1 auto;min-height:0;width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;position:relative!important;inset:auto!important;transform:none!important}
+#eko-bot-tam>*>*:first-child{border-radius:0!important}
+/* sayfa kapatılamaz; kapat (X) düğmesi gizli */
+#eko-bot-tam :is([aria-label*="apat" i],[title*="apat" i],[class*="close" i],[class*="kapat" i],[data-close]){display:none!important}
+html.in-frame header,html.in-frame #dmenu{display:none!important}
+html.in-frame .chat-page{top:0}
+</style>
+<script>
+try{if(self!==top)document.documentElement.classList.add('in-frame')}catch(e){document.documentElement.classList.add('in-frame')}
+</script>
+<script>
+/* Sohbet yüklenince otomatik açık gelsin */
+(function(){function go(){try{var B=window.EkoBot||window.ekoBot;if(B&&typeof B.open==='function')B.open();var h=document.querySelector('#eko-bot-tam');if(h){var i=h.querySelector('input,textarea');if(i&&matchMedia('(min-width:900px)').matches)i.focus()}}catch(e){}}
+addEventListener('load',function(){go();setTimeout(go,400)});})();
+</script>
+<script>
+(function(){
+function fit(){var h=document.getElementById('eko-bot-tam');if(!h)return;
+ var c=h.firstElementChild;if(!c)return;
+ var st=c.style;st.height='100%';st.maxHeight='none';st.borderRadius='0';st.border='0';st.boxShadow='none';st.margin='0';
+ /* kaydırılan mesaj alanı kalan boşluğu doldursun */
+ var all=c.querySelectorAll('*'),best=null,bh=0;
+ for(var i=0;i<all.length;i++){var e=all[i],cs=getComputedStyle(e);
+  if(/(auto|scroll)/.test(cs.overflowY)&&e.clientHeight>bh){best=e;bh=e.clientHeight}}
+ if(best){best.style.maxHeight='none';best.style.flex='1 1 auto';best.style.minHeight='0';
+  var p=best.parentElement;if(p&&p!==h){var pc=getComputedStyle(p);if(pc.display!=='flex'){p.style.display='flex';p.style.flexDirection='column';p.style.height='100%'}}}
+}
+function start(){fit();var h=document.getElementById('eko-bot-tam');if(h&&window.MutationObserver)new MutationObserver(function(){fit()}).observe(h,{childList:true});
+ addEventListener('resize',fit);setTimeout(fit,300);setTimeout(fit,1000)}
+if(document.readyState==='complete')start();else addEventListener('load',start);
+})();
+</script>
 </head>
 <body>
 <header><div class="bar">
@@ -277,16 +315,8 @@ syncNav();
 R.classList.add('dm-on');
 })();
 </script>
-<div class="hero"><div class="pwrap">
- <span class="crumb"><a href="index.html#/">Ana sayfa</a> / Eko Bot</span>
- <h1>🤖 Eko Bot</h1>
- <p>Sitedeki kavramları, hukuk ve aktör bilgilerini, simülasyonları ve yayımlanan gündem analizlerini sor. Bot yapay zekâ kullanmaz; yalnızca Eko-Log içeriğinde arar.</p>
-</div></div>
-<main class="pg"><div class="pwrap">
- <div class="links" aria-label="Önerilen sayfalar"><a href="gundem.html">🌍 Gündem sayfası</a><a href="ansiklopedi.html#/ansiklopedi">📖 Ansiklopedi ve sözlük</a><a href="simulasyon-merkezi.html">🎮 Simülasyonlar</a></div>
- <div id="eko-bot-tam"></div>
-</div></main>
-<script>window.EKO_BOT={tam:true,host:'#eko-bot-tam',ad:'Eko Bot'}</script>
+<main class="chat-page"><div id="eko-bot-tam"></div></main>
+<script>window.EKO_BOT={tam:true,host:'#eko-bot-tam',ad:'Eko Bot',open:true,autoOpen:true}</script>
 <script src="eko-bot.js" defer></script>
 </body>
 </html>
