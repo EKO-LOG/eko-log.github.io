@@ -12,7 +12,7 @@ const PROXY='';
 const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; worker'da TURNSTILE_SECRET ile eşleşmeli) */
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */
-const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',gundem:'gundem.json',lig:'superlig.json',ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
+const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',gundem:'gundem.json',lig:'superlig.json',kampus:{},ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 const tok=s=>tl(s).split(/[^a-z0-9]+/).filter(w=>w.length>2);
 let DB=null,IDX=null,hist=[],busy=false,KANUN=[],KRX=[],SINA=null;
@@ -44,7 +44,7 @@ const SAYFA_CHIP=(()=>{const p=location.pathname;
  if(/ansiklopedi/.test(p))return['Sözlükte nasıl arama yapılır?','Düşünürler bölümünde kimler var?'];
  return['Enflasyon nedir?','Simülasyon Merkezi nerede?']})();
 const MODCHIP={
- genel:['🧭 Bu sitede neler yapabilirim?','📊 Çalışmamı değerlendir',...SAYFA_CHIP],
+ genel:['🧭 Bu sitede neler yapabilirim?','📊 Çalışmamı değerlendir','💡 Nasıl çalışmalıyım?','💼 Mezun olunca ne iş yapılır?',...SAYFA_CHIP],
  ders:DERSCHIP[LABK]||DERSCHIP.genel,
  gundem:['Son gelişmede kim ne dedi?','Neden oldu, kime yarar?','Kim etkilendi, kimi etkilemez?','Taraflar ne düşünüyor?','Bu nasıl biter, ne olabilir?','Değerlendirmen ne?']};
 
@@ -115,7 +115,7 @@ function ligCevap(q){
   const tk=adlar.filter(a=>tl(a).split(/[^a-z0-9]+/).some(t=>t.length>=4&&!GEN.has(t)&&kel.some(w=>t.startsWith(w)||(t.length>=5&&w.startsWith(t)))));
   const lig=/\bsuper lig/.test(n);
   const puan=/puan durumu|puan tablosu|siralama|\blider\b|lideri|kacinci/.test(n)&&(lig||tk.length||/\blig\b/.test(n));
-  const mac=/\b(mac|maci|maclar|maclari|skor|sonuc|sonucu|kac kac|kim kazandi|kazandi|gol|goller|golcu|kart|istatistik|devre|sut|korner)\b/.test(n)&&(tk.length||lig);
+  const mac=/\b(mac\w*|skor\w*|sonuc\w*|kac kac|kim kazandi|kazandi|gol\w*|kart\w*|istatistik\w*|devre\w*|sut|korner\w*)\b/.test(n)&&(tk.length||lig);
   if(!puan&&!mac)return null;
   if(!LIG||!((LIG.maclar||[]).length||(LIG.puan||[]).length))return 'Süper Lig verisi henüz yok.';
   const zt=t=>{try{return new Date(t).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}};
@@ -1120,7 +1120,7 @@ const FARK=[
 const DSTOP=new Set('anlat anlatir misin misiniz acikla aciklar ornekle ornek ornekli bastan sona ders dersi konu konuyu konusunu bana bize detayli ayrintili kisaca sade nedir ne demek nasil kavrami kavramini hakkinda ver lutfen ogret ogretir'.split(' '));
 const konu=q=>nt(q).split(' ').filter(w=>w&&!DSTOP.has(w)).join(' ');
 const cum=x=>String(x||'').replace(/\s+/g,' ').split(/(?<=[.!?])\s+/).filter(s=>s.length>25);
-let SON=null,SONID='';
+let SON=null,SONID='',SONK=null;
 const dipnot=hk=>'\n\n📚 Eko-Log yerel ders kartı · yapay zekâ kullanılmadı. Bilgilendirme amaçlıdır'+(hk?'; resmî metin için mevzuat.gov.tr’ye bakınız.':'.');
 const miniSor=m=>'\n\n**❓ Mini soru**\n'+m[0]+'\n(Cevabını yaz; bilmiyorsan “pas” yaz.)';
 
@@ -1186,15 +1186,28 @@ function varyant(n){const ws=n.split(' ').filter(Boolean);if(ws.length>6)return[
   let acc=[''];for(const w of ws){const nxt=[];for(const a of acc)for(const x of kelimeVar(w))nxt.push(a?a+' '+x:x);acc=nxt}
   return acc.filter(x=>x!==n)}
 const esles=n=>{
-  for(const f of FARK)if(f.k.every(r=>r.test(n))){SON={s:f.ip};SONID=f.b;return{t:farkMetin(f),mini:{b:f.b,g:f.m[1],c:f.m[2]},ara:[]}}
-  for(const c of KART)if(c.k.test(n)){SON=c;SONID=c.id;
+  for(const f of FARK)if(f.k.every(r=>r.test(n))){SON={s:f.ip};SONID=f.b;SONK=null;return{kart:1,t:farkMetin(f),mini:{b:f.b,g:f.m[1],c:f.m[2]},ara:[]}}
+  for(const c of KART)if(c.k.test(n)){SON=c;SONID=c.id;SONK=c;
     const ar=DB?ara(c.ara||c.b,5).filter(x=>x._s>=3):[];
-    return{t:kartMetin(c),mini:{b:c.b,g:c.m[1],c:c.m[2]},ara:ar}}
+    return{kart:1,t:kartMetin(c),mini:{b:c.b,g:c.m[1],c:c.m[2]},ara:ar}}
   return null};
 
+/* Takip soruları: son ders kartına bağlı kısa sorular (“örnek ver”, “sık hatalar”, “hafıza ipucu”…) */
+const TAKIP=[[/ornek/,'o','🧪 Örnek'],[/hata|yanlis/,'h','⚠️ Sık yapılan hatalar'],[/ipucu|hafiza|ezber|aklda/,'ip','🧠 Hafıza ipucu'],[/adim/,'i','🪜 Adım adım'],[/kavram|temel/,'c','🧩 Temel kavramlar'],[/buyuk resim|ozet|kisaca/,'g','🎯 Büyük resim'],[/lab|dene|simulasyon/,'l','🎛 Laboratuvarda dene']];
+const TKS=new Set('sik yapilan hatalar hata yanlis ipucu hafiza ezber adim adim kavramlar kavram temel daha baska peki ya bu konuda konunun icin de da ki var mi goster bir ornek ornekler ozet kisaca lab dene buyuk resim'.split(' '));
+function takip(n){
+  if(!SONK)return null;
+  const w=nt(n).split(' ').filter(Boolean);
+  if(!w.length||w.length>6||w.some(x=>!TKS.has(x)&&!DSTOP.has(x)))return null;
+  const m=TAKIP.find(t=>t[0].test(nt(n)));if(!m)return null;
+  const v=SONK[m[1]];
+  if(!v||(Array.isArray(v)&&!v.length))return{t:'Bu konu kartında “'+m[2].replace(/^\S+\s/,'')+'” bölümü yok. Konunun tamamını yeniden anlatabilirim.',chips:[SONK.b+' konusunu anlat','Beni bir soruyla sına','Başka bir konu']};
+  const L=['**'+m[2]+'** — '+SONK.b,Array.isArray(v)?v.map((x,j)=>(m[1]==='i'?(j+1)+'. ':'• ')+x).join('\n'):v];
+  return{t:L.join('\n\n'),chips:['Sınavda nasıl yazılır?','Beni bir soruyla sına','Başka bir konu']}}
 return{
   cevap(q){
     const n=tl(q);
+    {const tk=takip(q);if(tk)return tk}
     if(SON&&SON.s&&/sinavda|sinav.*yaz|nasil yaz/.test(n))return{t:'✍️ **Sınavda nasıl yazılır?**\n'+SON.s,chips:['Beni bir soruyla sına','Başka bir konu']};
     if(/^baska (bir )?konu|^konu sec/.test(n))return{t:'Hangi konuyu çalışalım? Aşağıdan seç ya da konuyu yaz (ör. “net bugünkü değeri anlat”).',konu:1};
     let e=esles(n);if(e)return e;
@@ -1322,9 +1335,9 @@ function ttAl(){return new Promise(res=>{if(!CFG.turnstile||!window.turnstile)re
 /* Hafif biçimlendirme (innerHTML kullanmadan): **kalın**, "# başlık" ve "- madde" */
 function bi(m,t){m.textContent='';String(t).split('\n').forEach((ln,i,a)=>{
     ln=ln.replace(/^\s{0,3}#{1,4}\s+(.*)$/,'**$1**').replace(/^\s*[-*]\s+/,'• ');
-    ln.split(/(\*\*[^*]+\*\*)/).forEach(p=>{if(!p)return;if(/^\*\*[^*]+\*\*$/.test(p)){const s=document.createElement('strong');s.textContent=p.slice(2,-2);m.appendChild(s)}else m.appendChild(document.createTextNode(p))});
+    ln.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https:\/\/[^\s)]+\))/).forEach(p=>{if(!p)return;let lk;if(/^\*\*[^*]+\*\*$/.test(p)){const s=document.createElement('strong');s.textContent=p.slice(2,-2);m.appendChild(s)}else if(lk=p.match(/^\[([^\]]+)\]\((https:\/\/[^\s)]+)\)$/)){const a=document.createElement('a');a.textContent=lk[1];a.href=lk[2];a.target='_blank';a.rel='noopener noreferrer';a.style.cssText='text-decoration:underline;font-weight:700;color:inherit';m.appendChild(a)}else m.appendChild(document.createTextNode(p))});
     if(i<a.length-1)m.appendChild(document.createTextNode('\n'))})}
-const gm=m=>Array.from(m.childNodes).filter(n=>n.nodeType===3||n.nodeName==='STRONG').map(n=>n.textContent).join('');
+const gm=m=>Array.from(m.childNodes).filter(n=>n.nodeType===3||n.nodeName==='STRONG'||n.nodeName==='A').map(n=>n.nodeName==='A'?'['+n.textContent+']('+n.href+')':n.textContent).join('');
 function mesaj(t,c){const m=$('div','eb-m '+c);if(c.indexOf('eb-u')>=0)m.textContent=t;else bi(m,t);log.appendChild(m);log.scrollTop=log.scrollHeight;return m}
 const hrefOf=u=>{if(/^https?:/.test(u))return u;for(const k in YOL)if(u.startsWith(k))return ROOT+(k.endsWith('/')||k.endsWith('-')?YOL[k]+u:YOL[k]);return ROOT+u};
 const IKON={sozluk:'📖 ',dusunur:'🧠 ',quiz:'📝 ',lab:'🧪 ',hukuk:'⚖️ ',aktor:'🏛 ',kaynak:'📰 '};
@@ -1451,8 +1464,8 @@ function futbol(q){
     if(bera)return{t:'Puan puandır ama biraz buruk kaldı 😅'};
     return{t:rnd(['Kartal diyorsun, kulak kabarttım 🦅','Beşiktaş mı? Anlat bakalım, maç nasıldı?'])};
   }
-  if(gs)return{t:rnd(['GS\'de Okan hocanın hamleleri hâlâ soru işareti 😅 Bir de kulüp iyi yönetilmiyor, o ayrı dert.','Galatasaray\'da Okan\'ın bu işi çözemediği belli, yönetim de iyi yönetmiyor bence 🤷','GS\'nin derdi tek değil: hem Okan hocanın tercihleri hem yönetim… iyi yönetilmiyor valla.'])};
-  if(fb)return{t:rnd(['Fener\'de Hacı İso\'nun ahı alındı, başka türlü izah edemiyorum 😄','Fenerbahçe\'nin bu hâli tesadüf değil, Hacı İso\'nun ahı var üstünde 🤲','Fener mi? Hacı İso\'nun ahı alındı, ne yapsalar nafile 😅'])};
+  if(gs)return{t:rnd(['Galatasaray mı? Cimbom deyince ortalık hep şenlenir 😄','GS\'yle ilgili konuşmaya hazırım, hangi maçı konuşuyoruz? 🟡🔴','Aslan kükredi mi bu hafta? Anlat bakalım 🦁'])};
+  if(fb)return{t:rnd(['Fenerbahçe mi? Sarı-lacivert heyecanı hiç eksik olmaz 💛💙','Kanarya konuşuluyor, kulak kesildim! 🐤 Maç nasıldı?','Fener taraftarı hep iddialıdır 😄 Anlat bakalım.'])};
   return null}
 
 /* ---------- EKO CAN: sınav korkusu goygoyu ---------- */
@@ -1506,12 +1519,152 @@ function gonul(q){
   if(/(makyaj|\boje\b|\bparfum|sac boyasi|sac bakimi|sac modeli|manikur|\bguzellik)/.test(t))return{t:'Makyaj konusu mu açıldı? 💄 Ben bir botum ama çok iyi dinlerim; günlük mü, özel gün mü? Neyi merak ediyorsun?'};
   return null}
 
+/* ---------- SERBEST SORULAR (SSS): kampüs · çalışma/kariyer · ekonomi · bot hakkında · sohbet ----------
+   Yapay zekâsız, kural tabanlı. Yeni soru eklemek için KURALLAR dizisine [/regex/, 'cevap' ya da ['cevap1','cevap2']] satırı ekle.
+   Regex, aksan ve büyük harf silinmiş metne uygulanır (ş→s, ı→i, ö→o, ü→u, ç→c, ğ→g). */
+const KAMPUS=Object.assign({
+  /* İnönü Üniversitesi (Malatya) · kaynak: inonu.edu.tr Öğrenci İşleri/İİBF duyuruları, 24 Kasım 2026 itibarıyla. Tarihler değişebilir; boş bırakılan başlıkta bot “resmî kaynağa bak” der. */
+  takvim:'📅 İnönü Üniversitesi 2026-2027 akademik takvimi yayımlandı (Öğrenci İşleri ve İİBF duyuruları). Öne çıkanlar:\n• Lisansüstü takvimde güz dersleri 21 Eylül 2026’da başladı; finaller 4–17 Ocak 2027, bütünleme 25–31 Ocak 2027\n• Lisans bahar: ders ekle-sil 1–2 Mart 2027; dersler 13 Haziran’da biter; finaller 14–27 Haziran; bütünleme 5–11 Temmuz 2027\nLisans güz finali ve bütünleme günü için bölüm/fakülte duyurusuna bak: inonu.edu.tr/ogrencidb',
+  vize:'İnönü’de ara sınavlar ilgili birimin kararıyla bir hafta içinde yapılıyor; İİBF ve bölümün kendi vize programını duyurur (inonu.edu.tr/iibf). Ortak zorunlu derslerin (5i) bahar vizesi 12 Nisan 2027 Pazartesi 13:00–17:00. Güz vize programı için bölüm duyurusuna bak.',
+  butunleme:'Lisans bahar bütünlemesi 5–11 Temmuz 2027 (5i dersleri 5 Temmuz Pazartesi). Lisansüstü güz bütünlemesi 25–31 Ocak 2027. Lisans güz bütünlemesinin günü için fakülte/bölüm duyurusuna bak.',
+  devamsizlik:'Devam şartı İnönü Üniversitesi Önlisans ve Lisans Eğitim-Öğretim Yönetmeliği’nde, dersin türüne (teorik/uygulama) göre belirleniyor. Oranı yanlış söylememek için Öğrenci İşleri sayfasındaki ya da Resmî Gazete’deki yönetmelik metnine bak.',
+  yatay:'İnönü’de yatay geçiş ilanları Öğrenci İşleri ve fakülte sayfasında yayımlanıyor. 2026-27 güz için başarı durumuna göre yatay geçiş ilanı 9 Temmuz 2026’da, merkezi yerleştirme puanıyla (Ek Madde 1) başvuru duyurusu 3 Ağustos 2026’da çıktı. Şartlar her ilanda yazar; sonraki dönem için duyuruyu takip et.',
+  cift:'Çift anadal/yandal başvuruları ilanla yapılıyor; 2026-27 güz ilanı 28 Temmuz 2026’da İİBF sayfasında yayımlandı. Şartlar ilan ve yönergede yazar; sonraki dönem için duyuruyu bekle (inonu.edu.tr/iibf).',
+  mezuniyet:'Mezuniyet törenleri fakültelere göre ayrı yapılıyor (geçen yıl İletişim Fakültesi töreni Turgut Özal Kongre ve Kültür Merkezi’ndeydi). İİBF tarihini fakülte duyurusundan takip et.',
+  erasmus:'',staj:'',aktsSart:'',yemekhane:'',kutuphane:'',ulasim:'',dekan:''
+},CFG.kampus||{});
+const kf=(k,ad)=>KAMPUS[k]||('“'+ad+'” bilgisi dönem ve bölüme göre değişiyor, tahmin yürütüp seni yanlış yönlendirmek istemem. 📌 En doğru kaynak: fakülte/bölüm duyuruları, öğrenci işleri ya da bölüm sekreterliği.');
+const MESLEK={
+  iktisat:'İktisat: bankacılık ve finans, araştırma/analiz, kamu kurumları (Hazine, Kalkınma/Strateji birimleri), danışmanlık, yüksek lisans ve akademi.',
+  ekonometri:'Ekonometri: veri analisti, risk ve aktüerya, bankalarda modelleme, araştırma birimleri, istatistik/ML işleri, akademi.',
+  isletme:'İşletme & Finans: finans/muhasebe, pazarlama, insan kaynakları, operasyon ve tedarik zinciri, girişimcilik, bankacılık.',
+  ceko:'ÇEKO: çalışma hayatı ve işletme birimleri, insan kaynakları, iş müfettişliği/uzmanlığı, sendika ve kamu kurumları, danışmanlık.',
+  kamu:'Kamu Yönetimi: kamu kurumları (KPSS ile), belediyeler, yerel yönetimler, uzmanlık sınavları, politika analizi, akademi.',
+  maliye:'Maliye & Vergi: Gelir İdaresi, Hazine ve Maliye, denetim (vergi/hesap uzmanlığı), SMMM/YMM yolu, bankacılık ve muhasebe.',
+  uluslararasi:'Uluslararası İlişkiler: dışişleri ve kamu sınavları, uluslararası kuruluşlar, düşünce kuruluşları, medya/diplomasi, akademi.',
+  genel:'İktisat, işletme, kamu, maliye ve uluslararası ilişkiler mezunları; bankacılık, kamu, danışmanlık, analiz ve akademide çalışabiliyor. Bölümünü söylersen daha net yazarım.'
+};
+const SIRA=(a,n)=>a.map((x,i)=>(i+1)+'. '+x).join('\n');
+/* Yol tarifi: konum adını Google Haritalar bağlantısına çevirir (başlangıç = kullanıcının konumu; rota ve süreyi harita uygulaması hesaplar) */
+const YER=[
+ [/kongre|kultur merkezi/,'Turgut Özal Kongre ve Kültür Merkezi','Turgut Özal Kongre ve Kültür Merkezi, Malatya','Akademik yıl açılışı ve mezuniyet törenleri gibi etkinlikler burada yapılıyor.'],
+ [/hastane|tip merkezi|turgut ozal tip|saglik/,'İnönü Üniversitesi Turgut Özal Tıp Merkezi','İnönü Üniversitesi Turgut Özal Tıp Merkezi, Malatya','Acil durumda 112’yi ara. Toplu taşıma için “hastaneye hangi otobüs gidiyor” yaz (80 trambüsü durak veriyor).'],
+ [/iibf|iktisadi|idari bilimler|fakulte/,'İnönü Üniversitesi İktisadi ve İdari Bilimler Fakültesi','İnönü Üniversitesi İktisadi ve İdari Bilimler Fakültesi, Malatya','Fakülte duyuruları: inonu.edu.tr/iibf'],
+ [/okul|kampus|universite|inonu/,'İnönü Üniversitesi Merkez Kampüsü','İnönü Üniversitesi Merkez Kampüsü, Battalgazi, Malatya','Kampüs Battalgazi ilçesinde. Toplu taşıma için “okula hangi otobüs gidiyor” yaz (80 trambüsü, 17A/17B/17C).'],
+ [/otogar|otobus terminal|sehirlerarasi/,'Malatya Otogarı','Malatya Şehirlerarası Otobüs Terminali, Malatya','Sefer saatlerini ilgili otobüs firmasından teyit et.'],
+ [/havalimani|havaalani|erhac|ucak/,'Malatya Erhaç Havalimanı','Malatya Erhaç Havalimanı','Havalimanından şehre ulaşım seçeneklerini (servis, taksi) havayolu şirketi ve havalimanı duyurusundan teyit et.'],
+ [/\b(gar|gari|gara|garin)\b|tren istasyon/,'Malatya Garı','Malatya Garı, Malatya','Tren seferlerini TCDD’den kontrol et.'],
+ [/arslantepe|aslantepe/,'Arslantepe Höyüğü','Arslantepe Höyüğü, Malatya','UNESCO Dünya Mirası alanı; ziyaret saatlerini güncel kaynaktan doğrula.'],
+ [/eski malatya|battalgazi/,'Battalgazi (Eski Malatya)','Battalgazi Eski Malatya, Malatya','Tarihî Eski Malatya kalıntıları bu bölgede.']
+];
+const SH=u=>u.replace(/[()']/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase());
+function yolTarifi(q,t){
+  const tetik=/(nasil (gid|ulas)|yol tarif|konum|adres|nerede|yolu nasil|nasil giderim|nereden gid)/.test(t);
+  if(!tetik)return null;
+  const gen=/(nasil (gid|ulas)|yol tarif|nasil giderim|nereden gid)/.test(t);
+  /* kaynak/hedef ayıklama: tetik ifadesinden önceki metin */
+  let i=t.search(/\s*(nasil (gid|ulas)|yol tarif|konum|adres|nerede|yolu nasil|nasil giderim|nereden gid)/);
+  let raw=(i>0?q.slice(0,i):q).trim().replace(/^(ben|bana|bize)\s+/i,'');
+  let from='',to=raw;
+  const m=raw.match(/^(.+?)['’](?:dan|den|tan|ten)\s+(.+)$/i);
+  if(m){from=m[1].trim();to=m[2].trim()}
+  to=to.replace(/['’]\w{1,3}$/,'').trim();
+  const nt0=tl(to||t);
+  const y=YER.find(r=>r[0].test(nt0));
+  if(!y&&(!gen||!to||to.length<2||to.length>60))return null;
+  const ad=y?y[1]:to,sorgu=y?y[2]:to;
+  const base='https://www.google.com/maps/dir/?api=1&destination='+SH(encodeURIComponent(sorgu))+(from?'&origin='+SH(encodeURIComponent(from)):'');
+  return '📍 **'+ad+'** için yol tarifi'+(from?' ('+from+' çıkışlı)':'')+':\n[🚗 Araçla]('+base+'&travelmode=driving)\n[🚌 Toplu taşımayla]('+base+'&travelmode=transit)\n[🚶 Yürüyerek]('+base+'&travelmode=walking)'+(y&&y[3]?'\n\nℹ️ '+y[3]:'')+(from?'':'\n\nBaşlangıç noktası olarak telefonunun konumu kullanılır (konum izni gerekir). Rota ve süreyi harita uygulaması hesaplar.')}
+const KURALLAR=[
+ [/nasil (gid|ulas)|yol tarif|konum|adres|nerede|yolu nasil|nasil giderim|nereden gid/,yolTarifi],
+ /* ----- İnönü Üniversitesi · Malatya ----- */
+ [/trambus|tramvay|troleybus|tarmbus|\b80\b.*(hat|nolu|numarali)|(hat|nolu|numarali).*\b80\b/,'🚎 **Trambüs (80: Maşti – İnönü Üniv.)**\nMalatya’daki tek trambüs hattı; Yeşilyurt ve Battalgazi’den geçer. Başlıca duraklar:\nMaşti Otogar → Fahri Kayahan → Spor ve Yaşam Merkezi → Turgut Özal Mah. → Eğitim ve Araştırma Hastanesi → Dedekorkut → Büyükşehir Belediyesi/AVM → Sanayi → TSO → Çöşnük → Orduzu Pınarbaşı → Villakent → Turgut Özal Tıp Merkezi → Diş Hekimliği Fakültesi → Teknokent.\nHafta içi ilk sefer Maşti’den 05:20’de; yoğun saatlerde yaklaşık 10–12 dakikada bir.\nSaat ve durak değişebilir: [MOTAŞ hat sayfası](https://www.motas.com.tr/route/masti-inonu-uni.-trambus-hatti-43.html)'],
+ [/\b17\s?a\b|\b17\s?b\b|\b17\s?c\b|\b16\s?c\b/,'İnönü Üniversitesi hatları (MOTAŞ):\n• **17A:** Karakavak – İnönü Üniv.\n• **17B:** Güngör – Fahri Kayahan – Hasanbey – İnönü Üniv. (Malatya Lisesi, Tapu, Kernek Külliyesi, Mediko, BESYO, Spor Kompleksi, Stadyum, Teknokent)\n• **17C:** Şentepe – Tecde – Güney Kuşak – İnönü Üniv.\n• **16C:** İnönü Üniv. hattı\n• **80:** Maşti – İnönü Üniv. (trambüs)\nDurak ve saatler için: [MOTAŞ hat ve saatler](https://www.motas.com.tr)'],
+ [/(inonu|universite|kampus|okul).*(hangi|hat\b|hatlar|otobus|minibus|gidiyor|motas)|(otobus|hat\b|hatlar|motas).*(inonu|universite|kampus)/,'Kampüse giden başlıca MOTAŞ hatları 🚌\n• **80** Maşti – İnönü Üniv. (trambüs)\n• **17A** Karakavak – İnönü Üniv.\n• **17B** Güngör – Fahri Kayahan – Hasanbey – İnönü Üniv.\n• **17C** Şentepe – Tecde – Güney Kuşak – İnönü Üniv.\n• **16C** İnönü Üniv.\nHangisi sana uygun? Hangi semtten çıkacağını yaz, ona göre yön vereyim. Saatler için: [MOTAŞ hat ve saatler](https://www.motas.com.tr)'],
+ [/(hastane|tip merkezi).*(hangi|hat\b|hatlar|otobus|gidiyor|trambus|motas)|(hangi|otobus|hat\b|motas).*(hastane|tip merkezi)/,'Hastane ulaşımı 🏥\n• **Turgut Özal Tıp Merkezi:** 80 trambüsünün durağı var (Diş Hekimliği Fakültesi’nin yanı). Kampüse giden 17 serisi hatlarda da kampüs içi duraklar bulunuyor.\n• **Eğitim ve Araştırma Hastanesi:** 80 trambüsünün durağı var (Maşti tarafı).\n• Ayrıca 2D, 4H, 5A, 12V hatlarının güzergâhında “Hastane” durağı geçiyor; hangi hastane olduğunu hat sayfasından kontrol et.\nAcil durumda 112’yi ara. Hat ve saatler: [MOTAŞ hat ve saatler](https://www.motas.com.tr)'],
+ [/(masti|otogar).*(hangi|hat\b|hatlar|otobus|gidiyor|trambus|motas)|(hangi|otobus|hat\b|motas).*(masti|otogar)/,'Maşti (otogar) hatları 🚌 **80** trambüsü Maşti’den başlıyor ve İnönü Üniv.’ye gidiyor. Güzergâh adında Maşti geçen diğer MOTAŞ hatları: 2A, 2C, 2E, 13B. Kesin durak ve saatler için: [MOTAŞ hat ve saatler](https://www.motas.com.tr)'],
+ [/motas|belediye otobus|otobus (hatlari|saatleri|ucret|tarife)|hangi (hat|otobus)|toplu tasima/,'Malatya’da şehir içi toplu ulaşımı MOTAŞ (Büyükşehir Belediyesi) işletiyor. Hat numarası ve saatleri [MOTAŞ sitesinden](https://www.motas.com.tr) bakabilirsin.\nKampüse: 80 (trambüs), 17A, 17B, 17C, 16C. Hastane, Maşti ya da bir semt yazarsan hangi hattın geçtiğini söyleyeyim.\nℹ️ Hat ve saatler değişebilir; son hali için MOTAŞ’a bak.'],
+ [/tek ders/,'Tek ders: lisans bahar için başvurular 16–23 Temmuz 2027, ortak zorunlu (5i) tek ders sınavı 30 Temmuz 2027 Cuma 15:00–17:00. Diğer dersler için birim duyurusuna bak; şartlar yönetmelikte yazar.'],
+ [/ders (ekle|ekleme|silme|sil|birak)|ekle sil/,'Ders ekleme-silme: bahar dönemi için 1–2 Mart 2027 (öğrenci otomasyonu üzerinden). Güzün süresi geçti; sonraki dönemin tarihini akademik takvimden doğrula.'],
+ [/\b5i\b|ortak (zorunlu )?ders|\busd\b|universite secmeli/,'Ortak zorunlu dersler (5i) merkezi sınav saati kullanıyor: bahar vizesi 12 Nisan 2027, finali 21 Haziran, bütünleme 5 Temmuz (Pazartesi 13:00–17:00). Üniversite seçmeli dersler (ÜSD): vize 14 Nisan, final 23 Haziran, bütünleme 7 Temmuz 2027 (Çarşamba 15:00–17:00).'],
+ [/(inonu|universitemiz).*(ismi|adi|adini).*(nereden|kim)|neden inonu|inonu kim/,'Üniversite, Türkiye Cumhuriyeti’nin ikinci cumhurbaşkanı İsmet İnönü’nün adını taşıyor.'],
+ [/inonu.*(ne zaman kuruldu|kurulus|kac yil)|kurulus yili/,'İnönü Üniversitesi 1975’te kuruldu ve Malatya’nın en köklü üniversitesi.'],
+ [/hastane|turgut ozal tip|doktora git|saglik merkezi/,'Üniversite hastanesi Turgut Özal Tıp Merkezi. Randevu için MHRS (Alo 182) kullanılır; acil durumda 112’yi ara.'],
+ [/malatya.*(ne yenir|yemek|kayisi)|kayisi/,'Malatya denince akla kayısı gelir 🍑 Taze, kuru, pestil ve ezmesiyle meşhur. Yemek mekânları için kampüsteki yerli arkadaşlarına sor, en iyi tavsiyeler onlardan.'],
+ [/malatya.*(gezilecek|gez|tarihi|turistik)|arslantepe/,'Malatya’da: Arslantepe Höyüğü (UNESCO Dünya Mirası, 2021), Battalgazi’de Eski Malatya, tarihi çarşı ve hanlar. Hangi tür yerleri seversin, doğa mı tarih mi?'],
+ [/malatya.*(nasil gel|otogar|havalimani|ucak|tren)/,'Malatya’ya karayolu (otogar), havayolu (Malatya Erhaç Havalimanı) ve demiryoluyla ulaşabilirsin. Güncel sefer saatlerini ilgili firma/TCDD sitesinden doğrula.'],
+ [/\b(yurt|kyk|burs)\b/,'KYK yurt ve burs/kredi başvuruları e-Devlet ve KYK duyurularından yapılıyor; takvim her yıl KYK sayfasında ilan edilir. Özel yurt ya da ev tutarken sözleşmeyi dikkatle oku, depozito şartlarını yazılı al.'],
+ [/ogrenci belgesi|transkript|diploma|ogrenci kimlik/,'Öğrenci belgesi e-Devlet’ten barkodlu alınabilir. Transkript ve ders kaydı için üniversitenin öğrenci otomasyon sistemine gir. Diploma işlemleri için mezuniyet sonrası Öğrenci İşleri’ne başvur.'],
+ [/ydyo|hazirlik|yabanci dil (muafiyet|sinav)|muafiyet/,'Yabancı dil hazırlık ve muafiyet işleri YDYO’da. Takvim için inonu.edu.tr/ydyo adresindeki “Akademik Takvim” bölümüne bak; zorunlu olup olmadığı programa göre değişir.'],
+ [/yaz okulu/,'Yaz okulu ilanları Öğrenci İşleri duyurularında yayımlanıyor. Açılacak dersler, ücret ve şartlar ilan metninde yazar; birimine göre değişebilir.'],
+ [/\biibf\b|iktisadi ve idari|fakulte (sayfasi|duyuru)|duyuru(lar)? (nereden|nerede)/,'İİBF duyuruları: inonu.edu.tr/iibf. Üniversite geneli için Öğrenci İşleri: inonu.edu.tr/ogrencidb. Takvim, yatay geçiş ve çift anadal ilanları buralarda yayımlanıyor.'],
+ /* ----- Kampüs ----- */
+ [/(butunleme).*(ne zaman|tarih|takvim|ne vakit)|(ne zaman).*butunleme/,()=>kf('butunleme','Bütünleme tarihi')],
+ [/(vize|final|ara sinav|sinav).*(ne zaman|tarih|takvim|ne vakit|basliyor|kacinda)|(ne zaman).*(vize|final|sinav)/,()=>kf('vize','Sınav tarihi')],
+ [/akademik takvim|donem (ne zaman|basliyor|bitiyor)|ders kaydi.*(ne zaman|tarih)|kayit yenileme/,()=>kf('takvim','Akademik takvim')],
+ [/devamsizlik|devam zorunlu|yoklama/,()=>kf('devamsizlik','Devamsızlık sınırı')],
+ [/yatay gecis|dikey gecis|kurum ici gecis|kurumlar arasi gecis/,()=>kf('yatay','Yatay geçiş şartları')],
+ [/cift anadal|\bcap\b|yandal|cift dal/,()=>kf('cift','Çift anadal/yandal')],
+ [/erasmus|degisim programi|\bfarabi\b|mevlana/,()=>kf('erasmus','Erasmus/değişim başvurusu')],
+ [/\bstaj/,()=>kf('staj','Staj şartları ve tarihleri')+'\n\nİpucu: staj yerini erken ara, kabul yazısını ve sigorta işlemlerini son haftaya bırakma.'],
+ [/mezuniyet.*(ne zaman|tarih|toren)|toren.*ne zaman/,()=>kf('mezuniyet','Mezuniyet töreni tarihi')],
+ [/mezun.*(akts|kredi|sart|gerek)|kac akts|kac kredi|mezun olmak icin/,()=>kf('aktsSart','Mezuniyet şartları (AKTS/kredi)')],
+ [/(dekan|bolum baskani|rektor).*(kim|adi)|kim.*(dekan|bolum baskani|rektor)/,()=>kf('dekan','Yönetici bilgisi')],
+ [/yemekhane|yemek (saat|ucret|menu)/,()=>kf('yemekhane','Yemekhane bilgisi')],
+ [/kutuphane/,()=>kf('kutuphane','Kütüphane saatleri')],
+ [/(ulasim|servis|otobus|minibus).*(saat|nasil|nereden)|okula nasil gid/,()=>kf('ulasim','Ulaşım bilgisi')],
+ [/hoca(ya|m|mi|mizi)?.*(mail|eposta|e posta|yaz)|(mail|eposta).*(hoca|ogretim|danisman)/,'Hocaya mail için kısa bir kalıp:\n\nKonu: [Ders adı] – [Net konu]\n\nSayın Hocam,\nAdım Soyadım, [Ders], [Şube], [Öğrenci no]. [Tek cümlelik sorun/talep.] Uygun olduğunuz bir zamanda görüşebilir miyiz?\nİlginiz için teşekkür ederim.\nSaygılarımla,\n[Ad Soyad]\n\nİpucu: konu satırını boş bırakma, ders ve numaranı yaz, tek mailde tek istek ol.'],
+ /* ----- Çalışma ve kariyer ----- */
+ [/ders programi.*(yap|hazirla|olustur|cikar)|calisma (plani|programi).*(yap|hazirla|olustur|cikar)|plan yap/,'Plan için şunları yaz: kaç gün kaldı, hangi dersler, günde kaç saat ayırabilirsin. Genel iskelet:\n1. Zor/ağır dersi sabah ve ilk sıraya koy\n2. Her ders için konu listesi çıkar, her gün 1–2 konu bitir\n3. Son 3 günü yalnızca tekrar ve soru çözümüne ayır\n4. Haftada 1 yarım gün boş bırak (telafi)'],
+ [/ezber|nasil (calis|ogren)|calisma (teknigi|yontemi|taktigi)|verimli calis|ders calisma|calisamiyorum|odaklanamiyorum/,'İşe yarayan üç şey 📚\n1. Aktif hatırlama: konuyu kapatıp boş kâğıda kendin anlat\n2. Aralıklı tekrar: aynı konuya 1., 3., 7. günde dön\n3. Soru çöz: okumak öğrenmek değil, çözerek öğrenirsin\nPomodoro (25 dk çalış, 5 dk mola) odaklanmaya yardım eder. İstersen “Beni bir soruyla sına” de.'],
+ [/mezun (olunca|olunca|olduktan sonra|olursam|olsam).*(is|ne yap|kariyer)|(is|kariyer) (imkan|firsat|alan)|hangi alanlarda calis|ne is yapabilir/,()=>MESLEK[MESLEK[LABK]?LABK:'genel']],
+ [/\b(kpss|yuksek lisans|master|akademisyen|akademik kariyer)\b/,'Karar verirken şu sorular işe yarar:\n• Kamu güvencesi mi, araştırma/akademi mi, özel sektör mü seni çeker?\n• KPSS’ye çalışmak için net bir takvimin var mı?\n• Yüksek lisans seni hangi işe/ünvana götürecek, kaç yıl ve hangi maliyetle?\nİkisini birlikte de götürebilirsin; hangisi kafana daha yatıyor?',/\b(mi|mu|nasil|yapmali|hazirlan\w*|oner\w*|tavsiye|karar\w*|sence)\b/],
+ [/\bcv\b|ozgecmis/,'İyi bir CV: 1 sayfa, güncel iletişim, eğitim (not ortalaması 3.0+ ise yaz), staj/proje/gönüllülük (sonuç odaklı: “X yaptım, Y sağladı”), beceriler (Excel, SQL/Python, dil), tek sade şablon. Yazım hatası eleyici; bir arkadaşına okut.'],
+ [/mulakat|is gorusmesi/,'Mülakata hazırlık 🎯\n1. Şirketi/kurumu araştır, 1–2 güncel haberini bil\n2. “Kendini tanıt” cevabını 1 dakikaya sığdır\n3. “Güçlü/zayıf yönün” için gerçek örnek hazırla\n4. En az 2 soruyu sen sor\nSorunun cevabını bilmiyorsan uydurma; nasıl düşüneceğini anlat.'],
+ [/sertifika|\bspk\b|lisanslama|\bcfa\b|\bsmmm\b|\bymm\b/,'Alana göre sık görülenler:\n• Finans/bankacılık: SPK lisansları (Düzey 1-2-3), CFA\n• Muhasebe/vergi: SMMM, YMM, vergi müfettişliği sınavları\n• Veri/ekonometri: Excel, SQL, Python/R kursları\n• Genel: İngilizce (YDS/TOEFL/IELTS)\nSınav şartlarını ilgili kurumun (SPK, TÜRMOB, CFA Institute) sitesinden doğrula.'],
+ /* ----- Ekonomi ve güncel (yalnız Genel modda; ders modunda ders motoru cevaplar) ----- */
+ [/(dolar|euro|altin|hisse|bitcoin|kripto|borsa).*(alayim|alsam|almali|satayim|satsam|yatirim|tutayim)/,'Yatırım tavsiyesi veremem; kararı vadene, risk toleransına ve borsa/döviz dalgalanmasına göre sen (gerekirse lisanslı bir danışmanla) vermelisin. Ama kavramları, getiri-risk dengesini ve portföy mantığını anlatabilirim.',null,1],
+ [/(dolar|euro|\bkur\b|doviz).*(neden|niye|nicin|yukseliyor|artiyor|cikiyor|ne olacak)|(neden|niye).*(dolar|\bkur\b|doviz)/,'Kuru tek şey belirlemez. Etkileyenler: faiz ve enflasyon farkı, cari açık/dış finansman, rezervler, risk algısı ve beklentiler. Hangisinin ağır bastığı dönemden döneme değişir. Güncel rakamlar için TCMB sitesine bak; “kur nasıl belirlenir” diye ders olarak da anlatabilirim.',null,1],
+ [/enflasyon.*(neden|niye|nicin|sebep|artiyor|yukseliyor)|(neden|niye).*enflasyon/,'Enflasyonun tek sebebi yok: talep fazlası, maliyet artışları (enerji, kur, ücret), beklentiler ve para/maliye politikası birlikte etkiler. Güncel oranlar için TÜİK ve TCMB’ye bak. “Enflasyonu anlat” yazarsan konuyu ders olarak işleyelim.',null,1],
+ [/faiz.*(dus|art|indir|yuksel|ne olur|etki|neden)/,'Kısaca: faiz düşünce kredi ucuzlar, yatırım ve tüketim canlanabilir; ama kur ve enflasyon üzerinde baskı oluşabilir. Faiz artınca tersi olur: enflasyon baskısı azalabilir, büyüme yavaşlayabilir. Sonuç, beklentilere ve ekonominin durumuna bağlı. Güncel karar için TCMB duyurusuna bak.',null,1],
+ [/asgari ucret/,'Asgari ücret, Asgari Ücret Tespit Komisyonu’nda (işçi, işveren ve hükümet temsilcileri) belirlenir. Güncel tutar ve zam için Çalışma ve Sosyal Güvenlik Bakanlığı’nın duyurusuna bak; ekonomik etkilerini (maliyet, istihdam, gelir dağılımı) ders olarak anlatabilirim.',null,1],
+ [/\beyt\b|emeklilikte yasa takilanlar|emekli(lik)?.*(sart|kac yas|ne zaman)/,'EYT, 1999’dan önce sigortalı olanlara yaş şartı aranmadan, prim gün ve sigortalılık süresiyle emeklilik hakkı veren 2023 düzenlemesidir. Kişisel durumun için e-Devlet’teki SGK hizmet dökümünü ve SGK’yı baz al.',null,1],
+ [/vergi dilim|gelir vergisi (orani|dilim|tarife)/,'Gelir vergisi artan oranlı tarifeyle alınır: gelir yükseldikçe üst dilimdeki kısma daha yüksek oran uygulanır. Dilim tutarları her yıl güncellenir; güncel tarife için Gelir İdaresi (GİB) sitesine bak. Maliye derslerinde “artan oranlılık” konusunu anlatabilirim.',null,1],
+ [/ekonomi.*(ne olacak|kriz|duzelir|batiyor|nereye gidiyor)|kriz (var|olacak|gelecek)/,'Tahmin yürütmem; ama nasıl takip edeceğini söyleyebilirim: enflasyon (TÜİK), faiz ve rezerv (TCMB), büyüme ve işsizlik (TÜİK), cari denge. Bunlar birlikte okunur. Hangisini ders olarak anlatayım?',null,1],
+ /* ----- Bot hakkında ----- */
+ [/yapay zeka misin|chatgpt misin|gpt misin|claude misin|insan misin|bot musun|gercek misin/,()=>'Ben Eko Can, Eko-Log’un asistanıyım. '+(AIVAR()?'Yapay zekâ destekliyim ve hata yapabilirim.':'Yapay zekâ kullanmıyorum: sitedeki içeriklerde arama yapıyor, hazır ders kartlarıyla anlatıyorum.')],
+ [/(sen kimsin|kimsin sen|adin ne|ismin ne|sen nesin|kendini tanit)/,'Ben Eko Can 👋 Eko-Log’un asistanıyım: kavram anlatır, mini sınav yapar, çalışma ve kariyer sorularında yol gösteririm. Süper Lig sonuçlarını da takip ederim.'],
+ [/(seni kim yapti|kim yazdi|kim tasarladi|yapimcin|kurucun|kim gelistirdi)/,'Beni Eko-Log ekibi geliştirdi; ben sitenin asistanıyım. Resmî görüş değil, öğrenme amaçlı bir yardımcıyım.'],
+ [/odev(imi|ini|i)?.*(yap|yaz|hazirla)|(yap|yaz|hazirla)\w*.*odev/,'Ödevini senin yerine yazmam; ama konuyu anlatabilir, taslak planı çıkarabilir, yazdığını değerlendirebilirim. Hangi konu?'],
+ [/kopya/,'Kopya yok 😄 Ama sınavdan önce seni sorularla sınayabilirim, bu çok daha kalıcı. “Beni bir soruyla sına” yaz.'],
+ [/(neleri bilmiyorsun|neler bilmiyorsun|sinirlarin|ne yapamazsin|eksiklerin)/,'Bilmediklerim: sitede olmayan konular, kişiye özel kararlar (hukuk, yatırım, sağlık) ve güncel gelişmeler. Emin olmadığımda söylerim; resmî bilgi için kaynağa yönlendiririm.'],
+ [/ne (yapabilirsin|biliyorsun|bilirsin)/,()=>SITE_NOT],
+ /* ----- Sohbet ----- */
+ [/\b(saka|fikra|espri)\b/,['Neden iktisatçılar hava durumunu tahmin etmeye çalışmaz? Zaten kendi tahminlerinde yeterince yanılıyorlar 😄','İktisatçı yola çıkmış, bir yüz lira görmüş: “Gerçek olsa biri alırdı” diyip geçmiş 😅','Bir iktisatçı kapıyı çalmış, içerden “Kim o?” demişler: “Ceteris paribus, bir komşu.” 🚪','Maliyeci ile iktisatçı arasındaki fark: biri “bu neden oldu” der, diğeri “bu nereye yazılır” 😄']],
+ [/(film|dizi|kitap|belgesel|podcast).*(oner|tavsiye|var mi)|(oner|tavsiye).*(film|dizi|kitap|belgesel)/,'Ekonomi sevenlere 🍿\n• Film/belgesel: The Big Short, Margin Call, Inside Job\n• Kitap: Neden Bazı Ülkeler Zengin, Bazıları Fakirdir? (Acemoğlu & Robinson), Freakonomics, Hızlı ve Yavaş Düşünme (Kahneman)\nBaşka türde mi istersin?'],
+ [/motivasyon|moral ver|beni motive et|gunun sozu|bana (bir )?soz/,['Büyük sınavlar küçük günlerin toplamıdır. Bugün yalnızca bir konu bitir. 💪','Mükemmel olmak zorunda değilsin; devam etmen yeter. Bugün 25 dakikayla başla. ⏱️','Bilmediğin konu seni durdurmaz; bilmediğini bilip çalışmayan durdurur. Hadi bir konuyla başlayalım!']],
+ [/\bsikildim\b|canim sikiliyor|cok sikici/,'Sıkıldıysan kısa bir oyun: “Beni bir soruyla sına” yaz, ya da bana bir konu söyle, 1 dakikada anlatayım. İstersen şaka da yaparım 😄'],
+ [/\bburc\b|burcum|horoskop|\bfal\b/,'Burçlar bende yok 😄 Ama sınav haftan nasıl geçecek, onu planla konuşabiliriz.'],
+ [/^(tesekkur|tesekkurler|sag ol|saol|eyvallah|eline saglik)\b/,['Rica ederim! 😊 Başka bir şey olursa buradayım.','Ne demek! İyi çalışmalar 💪']]
+];
+function sss(q){
+  const t=tl(q).replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t||t.length>130)return null;
+  if(/(olmek|intihar|yasamak istemiyorum|kendime zarar|dayanamiyorum|titriyorum)/.test(t))return null;
+  if(/\b(nedir|ne demek|tanimi|hesapla|formul|quiz|lab)\b/.test(t))return null;   // ders sorusunu kaçırma
+  for(const k of KURALLAR){
+    if(k[3]&&MOD!=='genel')continue;                // ekonomi/güncel cevapları yalnız Genel modda
+    if(!k[0].test(t))continue;
+    if(k[2]&&!k[2].test(t))continue;
+    const v=typeof k[1]==='function'?k[1](q,t):Array.isArray(k[1])?rnd(k[1]):k[1];
+    if(v)return{t:v}}
+  return null}
 function hal(t,selam){
   const k=t.replace(SELAM,' ').replace(/\b(canim|hocam|arkadas|abi|kanka|bot|asistan)\b/g,' ').replace(/[?\s]+/g,' ').trim();
   if(!/^(nasilsin|naber|ne haber|nasil gidiyor|nasilsin bakalim|iyi misin)$/.test(k))return null;
   return (selam?rnd(['Selam! ','Selam, hoş geldin! ','Selaaam! ']):'')+rnd(['İyiyim, senden? Derslerin nasıl gidiyor? 😄','İyilik sağlık! Sen nasılsın bakalım?','Bomba gibiyim! Sen naber?'])}
 
-function sohbet(q){const gv=guvenlik(q);if(gv)return gv;if(!AIVAR()){const fbr=futbol(q)||sinav(q)||koc(q)||gonul(q);if(fbr)return fbr}const t=tl(q).replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim();if(!t||t.length>60)return null;
+function sohbet(q){const gv=guvenlik(q);if(gv)return gv;if(!AIVAR()){const fbr=sss(q)||futbol(q)||sinav(q)||koc(q)||gonul(q);if(fbr)return fbr}const t=tl(q).replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim();if(!t||t.length>60)return null;
   const siteSor=/(ne yapabilirim|neler yapabilirim|ne yapilir|neler var|ne var|nelere bakabilirim|siteyi (anlat|tanit|gezdir)|site(de|nin)? .*(ne|neler|nedir|anlat|tanit)|burada .*(ne|neler)|(bu|bu site) .*(ne ise yarar|ne sitesi))/.test(t)&&/(site|burada|yapabilirim|neler var|ne var)/.test(t)&&!/(sozluk|ansiklopedi|simulasyon|lab|mevzuat) .*(nerede|nasil)/.test(t);
   if(siteSor&&t.length<=60)return{t:(SELAM.test(t)?'Merhaba! 👋 ':'')+SITE_NOT,tur:1,chips:1};
   const hh=hal(t,SELAM.test(t));if(hh)return{t:hh};
@@ -1529,6 +1682,8 @@ async function sor(q){
   if(busy||!q.trim())return;
   if(SINA&&!guvenlik(q)){const sd=DERS.deger(SINA,q);SINA=null;
     if(!sd.yeni){mesaj(q,'eb-u');mesaj(sd.t,'eb-b');if(sd.chips)chips(sd.chips);log.scrollTop=log.scrollHeight;sohbetKaydet();return}}
+  await yukle();
+  {const lc0=ligCevap(q);if(lc0){mesaj(q,'eb-u');mesaj(lc0,'eb-b');log.scrollTop=log.scrollHeight;sohbetKaydet();return}}
   const sh=sohbet(q);
   if(sh){mesaj(q,'eb-u');const mm=mesaj(sh.t+(DEN?' (Denemede konu/cevabını bekliyorum; çıkmak için "iptal" yaz.)':''),'eb-b');
     if(sh.tur){const w=$('div','eb-src');SITE_TUR.filter(x=>x[2]).forEach(x=>{const a=$('a');a.href=hrefOf(x[2]);a.textContent=x[0].split(' · ')[0].slice(0,32);w.appendChild(a)});mm.appendChild(w)}
@@ -1544,6 +1699,7 @@ async function sor(q){
     if(!izinIste())return}
   busy=true;mesaj(q,'eb-u');await yukle();
   if(MOD==='genel'){const lc=ligCevap(q);if(lc){mesaj(lc,'eb-b');log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();return}}
+  if(MOD==='genel'&&DERS_ACIK){try{const dr=DERS.cevap(q);if(dr&&dr.t&&(dr.kart||(dr.ara&&dr.ara.length&&/\b(anlat|ogret|ders)\w*/.test(tl(q)))))modSec('ders',true)}catch(e){}}
   if(MOD==='ders'){                                   /* YEREL DERS MOTORU: sunucu/yapay zekâ yok */
     const r=DERS.cevap(q);
     if(r&&r.t){const m=mesaj(r.t,'eb-b');
