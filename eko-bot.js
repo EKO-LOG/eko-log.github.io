@@ -8,11 +8,11 @@ if(window.__ekoBot)return;window.__ekoBot=1;
 /* ===== TEK AYAR YERİ =====
    PROXY: Cloudflare Worker adresini buraya yaz (boşsa bot "arama modu"nda çalışır).
    YOL: bilgi tabanındaki sayfa adı → sitedeki gerçek yol. Bir bağlantı 404 verirse yalnızca burayı düzelt. */
-const PROXY='https://eko-bot.bcelikel191.workers.dev';
+const PROXY='';
 const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; worker'da TURNSTILE_SECRET ile eşleşmeli) */
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */
-const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
+const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',gundem:'gundem.json',lig:'superlig.json',ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 const tok=s=>tl(s).split(/[^a-z0-9]+/).filter(w=>w.length>2);
 let DB=null,IDX=null,hist=[],busy=false,KANUN=[],KRX=[],SINA=null;
@@ -90,10 +90,78 @@ modSec(MOD,true);
 const ctx=()=>({sayfa:document.title,rota:location.pathname.split('/').pop()+location.hash,
   gorunen:(document.querySelector('main h1,h1')||{}).textContent||''});
 
+/* gundem.json kaydı → bilgi havuzu kaydı (gundem.html'deki "Bota işle" ile aynı mantık) */
+function haberKaydi(it){
+  const A=x=>Array.isArray(x)?x:[],M=o=>String((o&&o.m)!=null?o.m:o||'').trim();
+  const C=t=>{t=String(t||'').trim().replace(/\s+/g,' ');if(!t)return'';t=t[0].toLocaleUpperCase('tr')+t.slice(1);return /[.!?…]$/.test(t)?t:t+'.'};
+  const P=[C(it.ozet)];
+  A(it.olgular).forEach(o=>P.push(C(M(o))));
+  A(it.iddialar).forEach(o=>M(o)&&P.push(C('İddia'+(o.kimden?' ('+o.kimden+')':'')+': '+M(o))));
+  A(it.neden).forEach(o=>{if(!M(o)||o.dayanak==='varsayim')return;P.push(C(o.dayanak==='yorum'?'Analist yorumuna göre nedeni: '+M(o):'Nedeni olarak gösterilen: '+M(o)))});
+  A(it.yarar).forEach(o=>M(o)&&o.dayanak!=='varsayim'&&P.push(C((o.aktor||'Bir taraf')+' açısından kazanç: '+M(o))));
+  A(it.zarar).forEach(o=>M(o)&&o.dayanak!=='varsayim'&&P.push(C((o.aktor||'Bir taraf')+' açısından etkilenen ve zarar gören durum: '+M(o))));
+  A(it.bakislar).forEach(b=>b&&String(b.aktor||'').trim()&&String(b.arguman||'').trim()&&P.push(C(b.aktor+' açıklamasında şunu savundu: '+b.arguman)));
+  const ks=A(it.kaynaklar),u0=ks[0]&&/^https?:\/\//i.test(String(ks[0].url||''))?ks[0].url:('gundem.html#'+(it.id||''));
+  return{k:'haber',t:String(it.baslik),x:P.filter(Boolean).join(' '),u:u0,c:ks.map(k=>k.ad).filter(Boolean).join(', '),s:(ks[0]&&ks[0].tur)||'basin',d:it.tarih};
+}
+/* ---------- Süper Lig soru-cevap (kural tabanlı; veri: superlig.json) ---------- */
+let LIG=null;
+function ligCevap(q){
+  const n=tl(q);
+  const AL={gs:'galatasaray',fb:'fenerbahce',bjk:'besiktas',ts:'trabzonspor'};
+  const GEN=new Set(['istanbul','kulubu','futbol','club','football','anonim','sirketi']);
+  const adlar=[...new Set([].concat((LIG&&LIG.maclar||[]).flatMap(m=>[m.ev,m.dep]),(LIG&&LIG.puan||[]).map(p=>p.takim)).filter(Boolean))];
+  const kel=n.split(/[^a-z0-9]+/).map(w=>AL[w]||w).filter(w=>w.length>=4);
+  const tk=adlar.filter(a=>tl(a).split(/[^a-z0-9]+/).some(t=>t.length>=4&&!GEN.has(t)&&kel.some(w=>t.startsWith(w)||(t.length>=5&&w.startsWith(t)))));
+  const lig=/\bsuper lig/.test(n);
+  const puan=/puan durumu|puan tablosu|siralama|\blider\b|lideri|kacinci/.test(n)&&(lig||tk.length||/\blig\b/.test(n));
+  const mac=/\b(mac|maci|maclar|maclari|skor|sonuc|sonucu|kac kac|kim kazandi|kazandi|gol|goller|golcu|kart|istatistik|devre|sut|korner)\b/.test(n)&&(tk.length||lig);
+  if(!puan&&!mac)return null;
+  if(!LIG||!((LIG.maclar||[]).length||(LIG.puan||[]).length))return 'Süper Lig verisi henüz yok.';
+  const zt=t=>{try{return new Date(t).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}};
+  const out=[];
+  if(puan&&!(mac&&tk.length&&!/puan|siralama|kacinci/.test(n))){
+    const P=LIG.puan||[];
+    if(!P.length)out.push('Puan durumu verisi henüz yok.');
+    else{
+      const sat=p=>p.sira+'. '+p.takim+' — '+p.puan+' puan (O'+p.o+' G'+p.g+' B'+p.b+' M'+p.m+', AV '+(p.av>0?'+':'')+p.av+')';
+      const sec=tk.length?P.filter(p=>tk.includes(p.takim)):/\blider\b|lideri/.test(n)?P.slice(0,1):P;
+      out.push('**Süper Lig puan durumu**',...(sec.length?sec:P).map(sat))}
+  }
+  if(mac){
+    let M=(LIG.maclar||[]).filter(m=>m.durum!=='once');
+    if(tk.length)M=M.filter(m=>tk.length>1?(tk.includes(m.ev)&&tk.includes(m.dep)):(tk.includes(m.ev)||tk.includes(m.dep)));
+    M=M.slice(0,/\bson\b/.test(n)?1:tk.length?3:5);
+    if(!M.length)out.push(tk.length?'Bu takım için Süper Lig verisinde maç yok.':'Süper Lig verisinde maç yok.');
+    const ikon={gol:'⚽',pen:'⚽ (penaltı)',kk:'⚽ (kendi kalesine)',sari:'🟨',kirmizi:'🟥'};
+    const kartIst=/kart|sari|kirmizi/.test(n),istIst=/istatistik|sut|korner|topla|faul|ofsayt/.test(n);
+    M.forEach(m=>{
+      const bitti=m.durum==='bitti';
+      out.push('**'+m.ev+' '+m.evSkor+'-'+m.depSkor+' '+m.dep+'** ('+(bitti?'maç sonu':m.durum==='devre'?'devre arası':'devre arası verisi')+', '+zt(m.tarih)+')');
+      const d=m.devre;
+      if(bitti&&d&&d.skor)out.push('İlk yarı: '+d.skor[0]+'-'+d.skor[1]);
+      const ol=(bitti?m.olaylar:(d&&d.olaylar))||[];
+      const gl=ol.filter(o=>/^(gol|pen|kk)$/.test(o.tur));
+      if(gl.length)out.push(...gl.map(o=>ikon[o.tur]+' '+o.dk+' '+o.oyuncu+(o.takim?' ('+o.takim+')':'')));
+      else if(bitti||d)out.push('Gol yok.');
+      if(kartIst){const kt=ol.filter(o=>/^(sari|kirmizi)$/.test(o.tur));out.push(...(kt.length?kt.map(o=>ikon[o.tur]+' '+o.dk+' '+o.oyuncu+(o.takim?' ('+o.takim+')':'')):['Kart kaydı yok.']))}
+      if(istIst){const I=(bitti?m.ist:d&&d.ist)||{},ks=Object.keys(I);out.push(...(ks.length?ks.map(k=>k+': '+I[k][0]+' – '+I[k][1]):['İstatistik kaydı yok.']))}
+      out.push('')});
+  }
+  if(LIG.guncelleme)out.push('🗓 Veri: '+zt(LIG.guncelleme)+' (devre arası ve maç sonunda güncellenir).');
+  return out.join('\n').replace(/\n{3,}/g,'\n\n').trim();
+}
 /* ---------- Yerel arama (BM25 benzeri, Türkçe normalizasyonlu) ---------- */
 async function yukle(){
   if(DB)return;
   try{const J=await (await fetch(/^https?:/.test(CFG.bilgi)?CFG.bilgi:ROOT+CFG.bilgi)).json();DB=J.chunks;KANUN=J.kanunlar||[];kanunKur()}catch(e){DB=[]}
+  /* Gündem: yayımlanan haberler (gundem.json) bilgi havuzuna k:'haber' olarak otomatik eklenir; elle "Bota işle" gerekmez */
+  try{const G=await (await fetch((/^https?:/.test(CFG.gundem)?CFG.gundem:ROOT+CFG.gundem)+'?t='+Date.now(),{cache:'no-cache'})).json();
+    const L=Array.isArray(G)?G:(G&&G.haberler)||[];
+    const hk=L.filter(it=>it&&it.baslik&&(!it.durum||it.durum==='yayinda')).map(haberKaydi).filter(Boolean);
+    if(hk.length)DB=DB.filter(c=>c.k!=='haber').concat(hk)}catch(e){}
+  /* Süper Lig verisi (devre arası ve maç sonunda güncellenen superlig.json) */
+  try{LIG=await (await fetch((/^https?:/.test(CFG.lig)?CFG.lig:ROOT+CFG.lig)+'?t='+Date.now(),{cache:'no-cache'})).json()}catch(e){LIG=null}
   const df={};IDX=DB.map(c=>{const t=tok(c.t+' '+c.t+' '+c.x),f={};t.forEach(w=>f[w]=(f[w]||0)+1);Object.keys(f).forEach(w=>df[w]=(df[w]||0)+1);return{f,n:t.length,tt:tl(c.t)}});
   IDX.df=df;
 }
@@ -264,7 +332,7 @@ function gundemCevap(q){
   if(/kuram|realist|realizm|liberal|insaci|elestirel|yapisal/.test(qq)&&!od.length)od.push('kuram');
   let secim=H.slice(0,3);
   if(terms.length){const sk=H.map(c=>{const W=tok(c.t+' '+c.x);return[terms.filter(w=>W.some(x=>x.startsWith(w))).length,c]}).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]);
-    if(!sk.length)return'Havuzdaki haberlerde "'+terms.join(' ')+'" ile ilgili bir şey bulamadım. En son eklenen haber: '+H[0].t+(H[0].d?' ('+H[0].d+')':'')+'. Onu analiz etmemi istersen "son haberi analiz et" yaz.';
+    if(!sk.length)return'Havuzdaki haberlerde "'+terms.join(' ')+'" ile ilgili bir şey yok.';
     secim=sk.slice(0,3).map(x=>x[1])}
   if(secim.some(c=>!c.c))return'Bazı haberlerin kaynak adı eksik; kaynaksız haber analiz edilmez. Bilgi dosyasında kaynak adını tamamla.';
   const hb=secim.map(c=>({metin:c.x,ad:c.c,tur:c.s||'basin',url:/^https?:/.test(c.u)?c.u:'',tarih:c.d||'',baslik:c.t}));
@@ -1148,7 +1216,7 @@ return{
     return{t,chips:h===T?['Beni bir soruyla sına','Başka bir konu']:[s.b+' konusunu anlat','Beni bir soruyla sına','Başka bir konu']}},
   liste(alan){
     const a=KART.filter(c=>c.a===alan).map(c=>c.b).concat(FARK.filter(f=>f.a===alan).map(f=>f.b));
-    return (a.length?'Bu alanda hazır ders kartları: '+a.join(', ')+'.\n\n':'')+'Bu konuyu sitede bulamadım. Konuyu başka sözcüklerle yazabilir ya da hazır konulardan birini seçebilirsin.'},
+    return 'Bu konu sitede yok.'},
   /* test için */_KART:KART,_FARK:FARK
 }})();
 /*DERS-BITIS*/
@@ -1475,6 +1543,7 @@ async function sor(q){
       const w=$('div','eb-src'),a=$('a');a.href=hrefOf('eko-plus/iibf-laboratuvar.html');a.textContent='🧪 İİBF Laboratuvarı';w.appendChild(a);m0.appendChild(w);return}
     if(!izinIste())return}
   busy=true;mesaj(q,'eb-u');await yukle();
+  if(MOD==='genel'){const lc=ligCevap(q);if(lc){mesaj(lc,'eb-b');log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();return}}
   if(MOD==='ders'){                                   /* YEREL DERS MOTORU: sunucu/yapay zekâ yok */
     const r=DERS.cevap(q);
     if(r&&r.t){const m=mesaj(r.t,'eb-b');
@@ -1483,7 +1552,7 @@ async function sor(q){
       if(r.mini)SINA=r.mini;
       hist.push({role:'user',content:q},{role:'assistant',content:r.t.slice(0,600)});
       chips(r.konu?MODCHIP.ders:(r.chips||['Sınavda nasıl yazılır?','Beni bir soruyla sına','Başka bir konu']))}
-    else{mesaj(DERS.liste(LABK),'eb-b');chips(MODCHIP.ders)}
+    else{mesaj(DERS.liste(LABK),'eb-b')}
     log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();return}
   if(MOD!=='gundem'){const sz=sozlukCevap(q);if(sz.length){
     const tx=sz.map(c=>`📖 ${c.t}${c.c?' ('+c.c+')':''}\n${c.x.slice(0,700)}${c.x.length>700?'…':''}`).join('\n\n');
@@ -1506,15 +1575,15 @@ async function sor(q){
   }catch(e){
     /* API yoksa/hatalıysa: yalnızca GÜÇLÜ eşleşmeleri göster, zayıf (alakasız) sonuç dayatma */
     const gl=cs.filter(c=>c._s>=3);
-    if(MOD==='gundem'){m.textContent=(CFG.proxy&&CFG.ai)?'Şu an güvenilir bir gündem analizi üretemiyorum, biraz sonra tekrar dener misin?':'Gündem analizi için yapay zekâ bağlantısı gerekiyor; bu bağlantı henüz kurulu değil.';busy=false;return}
+    if(MOD==='gundem'){m.textContent=(CFG.proxy&&CFG.ai)?'Şu an güvenilir bir gündem analizi üretemiyorum, biraz sonra tekrar dener misin?':'Bu konuda havuzda haber yok.';busy=false;return}
     if((CFG.proxy&&CFG.ai)&&!gl.length){m.textContent='Şu an sunucuya ulaşamadım, biraz sonra tekrar dener misin?';busy=false;return}
     m.textContent=gl.length?((CFG.proxy&&CFG.ai)?'Sunucuya ulaşamadım; sitedeki en yakın içerikler:':'Sitedeki en yakın içerikler:')+'\n\n'+gl.slice(0,3).map(c=>`• ${c.t}: ${c.x.slice(0,180)}${c.x.length>180?'…':''}`).join('\n\n')
-      :'Bunu sitedeki içeriklerde bulamadım.'+((CFG.proxy&&CFG.ai)?'':' Sitede olmayan konulara cevap veremiyorum; sözlük, laboratuvar, düşünür ve mevzuat içeriğinde arayabilirim.');
+      :'Bu konuda sitede bilgi yok.';
   }
-  const gc=cs.filter(c=>c._s>=3);kaynaklar(m,gc.slice(0,4));yonlendir(m,q+' '+m.textContent,gc);log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();
+  const gc=cs.filter(c=>c._s>=3);kaynaklar(m,gc.slice(0,4));if(gc.length||kanunlar(q+' '+m.textContent).length)yonlendir(m,q+' '+m.textContent,gc);log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();
 }
 sohbetYukle();
-const ilkAcilis=()=>{yukle();if(!log.children.length){if(!CFG.proxy)mesaj('⚠️ Yapay zekâ bağlantısı henüz kurulu değil; şimdilik sadece sitedeki içeriklerde arama yapabiliyorum.','eb-b');mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları, hukuk ve aktör bilgilerini, sayfaları sorabilirsin.','eb-b');chips()}};
+const ilkAcilis=()=>{yukle();if(!log.children.length){mesaj('Merhaba! Eko-Log\'u birlikte gezelim. Kavramları, laboratuvarları, hukuk ve aktör bilgilerini, sayfaları sorabilirsin.','eb-b');chips()}};
 fab.onclick=()=>{delete fab.dataset.n;box.classList.toggle('on');if(box.classList.contains('on')){ilkAcilis();inp.focus()}};
 if(CFG.tam){box.classList.add('on','tam');ilkAcilis()}   /* tam sayfa: hep açık, klavye kendiliğinden açılmasın diye odaklanmaz */
 box.querySelector('#eb-an').onclick=()=>{const a=izinli();localStorage.setItem(IZIN,a?'0':'1');mesaj(a?'Çalışma analizi kapatıldı; artık özet gönderilmeyecek.':'Çalışma analizi açıldı.','eb-b')};
