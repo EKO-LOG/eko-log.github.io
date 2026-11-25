@@ -244,6 +244,48 @@
   function fld(id, label, type, o) { return h('label', { class: 'uye-f', for: id }, label, h('input', Object.assign({ id: id, type: type, autocomplete: 'off' }, o || {}))); }
   function reloadSoon() { setTimeout(function () { location.reload(); }, 350); }
 
+  /* ---------- Üye Alanı içindeki sayfalar için şifre ----------
+     Üye Alanı'na girmek için yalnızca normal üye girişi yeter. Laboratuvar, Kariyer Simülasyonu (A Grubu)
+     ve Borsa Oyunu açılırken ayrıca şifre istenir (yönetim panelindeki şifre ayarı: content.json → pw {on, code}).
+     Şifre bir oturumda bir kez sorulur. Başka bir sayfayı da kilitlemek için LOCKED desenine ekle. */
+  var LOCKED = /(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?)(\?|#|$)/i;
+  var pwP = null;
+  function pwCode() {
+    if (!pwP) {
+      pwP = (window.EKO_C && window.EKO_C.pw ? Promise.resolve(window.EKO_C) : fetch(ROOT + 'content.json?v=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }))
+        .catch(function () { return {}; })
+        .then(function (c) { var q = c && c.pw; return q && q.on === true && q.code ? String(q.code) : ''; });
+    }
+    return pwP;
+  }
+  function pwOk(code) { try { return sessionStorage.getItem('eko_pw') === code; } catch (e) { return false; } }
+  function askPw(code, go) {
+    var out = h('p', { class: 'uye-m er', role: 'alert', hidden: true, text: 'Şifre yanlış.' });
+    var inp = h('input', { id: 'u-pw', type: 'password', autocomplete: 'off', placeholder: 'Şifre' });
+    var f = h('form', { novalidate: true },
+      h('p', { class: 'n', text: 'Üye Alanı’na girdin. Laboratuvar ve simülasyonlar için ayrıca şifre gerekir.' }),
+      h('label', { class: 'uye-f', for: 'u-pw' }, 'Şifre', inp),
+      h('button', { class: 'uye-b pri uye-go', type: 'submit', text: 'Aç' }), out);
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (inp.value.trim() === code) { try { sessionStorage.setItem('eko_pw', code); } catch (e) {} closeModal(); go(); }
+      else { out.hidden = false; inp.select(); }
+    });
+    modal('🔒 Şifre gerekli', [f]);
+  }
+  /* uye.js'in sonraki tıklama yakalayıcılarından (çekmece, üye menüsü) ÖNCE çalışsın diye burada kayıtlı */
+  D.addEventListener('click', function (e) {
+    if (e.defaultPrevented || !e.target.closest) return;
+    var a = e.target.closest('a[href]');
+    if (!a || a.closest('.uye-ov') || !LOCKED.test(a.getAttribute('href') || '')) return;
+    var url = a.href;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    pwCode().then(function (code) {
+      if (!code || pwOk(code)) location.href = url; else askPw(code, function () { location.href = url; });
+    });
+  }, true);
+  pwCode();
+
   /* giriş / üye ol / parola sıfırla */
   function openAuth(tab) {
     tab = tab || 'in';
