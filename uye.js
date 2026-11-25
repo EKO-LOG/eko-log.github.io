@@ -245,10 +245,10 @@
   function reloadSoon() { setTimeout(function () { location.reload(); }, 350); }
 
   /* ---------- Üye Alanı içindeki sayfalar için şifre ----------
-     Üye Alanı'na girmek için yalnızca normal üye girişi yeter. Laboratuvar, Kariyer Simülasyonu (A Grubu)
+     Üye Alanı'na girmek için yalnızca normal üye girişi yeter. Laboratuvar, Mevzuat, Kariyer Simülasyonu (A Grubu)
      ve Borsa Oyunu açılırken ayrıca şifre istenir (yönetim panelindeki şifre ayarı: content.json → pw {on, code}).
      Şifre bir oturumda bir kez sorulur. Başka bir sayfayı da kilitlemek için LOCKED desenine ekle. */
-  var LOCKED = /(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?)(\?|#|$)/i;
+  var LOCKED = /(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?|mevzuat\/?)(\?|#|$)/i;
   var pwP = null;
   function pwCode() {
     if (!pwP) {
@@ -263,7 +263,7 @@
     var out = h('p', { class: 'uye-m er', role: 'alert', hidden: true, text: 'Şifre yanlış.' });
     var inp = h('input', { id: 'u-pw', type: 'password', autocomplete: 'off', placeholder: 'Şifre' });
     var f = h('form', { novalidate: true },
-      h('p', { class: 'n', text: 'Üye Alanı’na girdin. Laboratuvar ve simülasyonlar için ayrıca şifre gerekir.' }),
+      h('p', { class: 'n', text: 'Üye Alanı’na girdin. Laboratuvar, Mevzuat ve simülasyonlar için ayrıca şifre gerekir.' }),
       h('label', { class: 'uye-f', for: 'u-pw' }, 'Şifre', inp),
       h('button', { class: 'uye-b pri uye-go', type: 'submit', text: 'Aç' }), out);
     f.addEventListener('submit', function (ev) {
@@ -430,7 +430,7 @@
     list.forEach(function (x) { var r = brandText(x.nodeValue); if (r !== x.nodeValue) x.nodeValue = r; });
   }
   var PLUS_HREF = /(^|\/)eko-plus\/?(#\/(ekstra)?)?$/i;
-  function isMem() { return ST.role === 'member'; }
+  function isMem() { return true; }   /* Üye Alanı giriş yapılsa da yapılmasa da görünür; içindeki sayfalarda şifre sorulur */
   function tidy(root) {
     root = root || D;
     var q = function (s) { return [].slice.call((root.querySelectorAll ? root : D).querySelectorAll(s)); };
@@ -487,7 +487,7 @@
         check().then(function () {
           try { sessionStorage.setItem('eko_uye_ts', String(Date.now())); } catch (e) {}
           renderBox(); tidy();
-          if (isMem() !== loadedMember) { var f = 0; try { f = Number(sessionStorage.getItem('eko_uye_rl') || 0); } catch (e) {} if (Date.now() - f > 60e3) { try { sessionStorage.setItem('eko_uye_rl', String(Date.now())); } catch (e) {} location.reload(); } }
+          if ((ST.role === 'member') !== loadedMember) { var f = 0; try { f = Number(sessionStorage.getItem('eko_uye_rl') || 0); } catch (e) {} if (Date.now() - f > 60e3) { try { sessionStorage.setItem('eko_uye_rl', String(Date.now())); } catch (e) {} location.reload(); } }
         });
       }
     }
@@ -500,8 +500,8 @@
   window.EkoUye = { openAuth: openAuth, openProfile: openProfile, logout: logout };
 })();
 
-/* Eko-Log Asistanı yükleyici */
-(function(){function g(){if(window.__ekoBot||document.querySelector('script[src$="eko-bot.js"]'))return;var s=document.createElement('script');s.src='/eko-bot.js';document.body.appendChild(s)}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',g):g()})();
+/* Eko-Log Asistanı: yuvarlak balon kaldırıldı, eko-bot.js artık her sayfaya otomatik yüklenmez.
+   Eko Can yalnızca çekmeceli menüdeki "Eko Can" satırından (eko-bot.html, tam sayfa) açılır. */
 
 
 /* ===== Eko-Log ortak ek: menü temizliği + Eko Can tam sayfa ===== */
