@@ -599,6 +599,7 @@
   function ac(url) {
     if (typeof window.EkoBotAc === 'function' && window.EkoBotAc !== ac) { window.EkoBotAc(url || BOT_URL); return; }
     prevF = D.activeElement; css();
+    try { var dmx = D.querySelector('#dmenu.open .dm-x'); if (dmx) dmx.click(); } catch (e) {}   /* çekmece açıksa kapat */
     if (!ov) {
       ov = D.createElement('div'); ov.id = 'ekobot';
       ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Eko Can');
@@ -694,4 +695,38 @@
     try { new MutationObserver(ekle).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();
+})();
+
+/* Eko-Log · Eko Can: yuvarlak balon HER SAYFADA gizlenir (sayfa eski eko-bot.js'i önbellekten yüklese bile),
+   Eko Can yalnızca çekmeceli menüdeki "Eko Can" satırından açılır (tam sayfa katman). */
+(function () {
+  if (window.top !== window) return;
+  if (/(^|\/)eko-bot\.html$/.test(location.pathname)) return;
+  var D = document;
+  var st = D.createElement('style');
+  st.textContent = '#eb-fab{display:none!important}';
+  (D.head || D.documentElement).appendChild(st);
+
+  function menu() {
+    var o = D.getElementById('eb-fab'); if (o) o.remove();
+    var dm = D.getElementById('dmenu'), list = dm && dm.querySelector('.dm-list');
+    if (!list || list.querySelector('[data-ek-can]')) return;
+    var var_mi = [].some.call(list.querySelectorAll('a'), function (a) {
+      return /(^|\/)eko-bot\.html(#.*)?$/.test(a.getAttribute('href') || '');
+    });
+    if (var_mi) return;
+    var li = D.createElement('li'), row = D.createElement('div'), a = D.createElement('a'), sp = D.createElement('span');
+    li.className = 'dm-item'; li.setAttribute('data-ek-can', '1'); row.className = 'dm-row';
+    a.href = '/eko-bot.html'; sp.textContent = 'Eko Can'; a.appendChild(sp);
+    row.appendChild(a); li.appendChild(row);
+    var katil = [].filter.call(list.querySelectorAll('.dm-item'), function (x) {
+      var l = x.querySelector('.dm-row a'); return l && /^Katıl$/.test((l.textContent || '').trim());
+    })[0];
+    if (katil) list.insertBefore(li, katil); else list.appendChild(li);
+  }
+  function basla() {
+    menu();
+    try { new MutationObserver(menu).observe(D.body, { childList: true, subtree: true }); } catch (e) {}
+  }
+  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', basla); else basla();
 })();

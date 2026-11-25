@@ -13,6 +13,8 @@ const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; w
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */
 const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',lig:'superlig.json',kampus:{},kampusDosya:'kampus.json',kayit:{url:'',alan:''},ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
+/* Yuvarlak balon kalıcı olarak kapalı: bot yalnızca tam sayfada (eko-bot.html, çekmeceli menüden) çalışır; başka sayfaya yanlışlıkla eklenirse hiçbir şey kurmaz ve eski balonu siler. */
+if(!CFG.tam&&!window.__EKO_TEST){try{const o=document.getElementById('eb-fab');if(o)o.remove()}catch(e){}return}
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 const tok=s=>tl(s).split(/[^a-z0-9]+/).filter(w=>w.length>2);
 
