@@ -1,7 +1,7 @@
 /* Eko-Log Asistanı · tek dosya, her sayfaya <script src="eko-bot.js" defer></script> ile eklenir.
    Ayar: sayfada window.EKO_BOT={proxy:'https://...workers.dev', bilgi:'eko-bot-bilgi.json', kampusDosya:'kampus.json', kayit:{url:'https://...'}} tanımlanabilir.
    proxy boşsa bot "arama modu"nda çalışır (sözlük/lab içinde arar, API gerekmez).
-   Gündem ve Ders modları tamamen yerelde (kural tabanlı, yapay zekâsız) çalışır. */
+   Ders modu tamamen yerelde (kural tabanlı, yapay zekâsız) çalışır. */
 (()=>{
 const ROOT=(()=>{try{return new URL('.',document.currentScript.src).href}catch(e){return ''}})();
 if(window.__ekoBot)return;window.__ekoBot=1;
@@ -12,7 +12,7 @@ const PROXY='';
 const TURNSTILE='';   /* Cloudflare Turnstile site anahtarı (isteğe bağlı; worker'da TURNSTILE_SECRET ile eşleşmeli) */
 const YOL={'iibf-':'eko-plus/','bvchiindex.html':'kalkinma/'};
 /* ai:false → sohbet soruları hiçbir yapay zekâya gönderilmez; yalnızca sitedeki içerik eşleşmeleri gösterilir. Açmak için sayfada window.EKO_BOT={ai:true} ya da buradaki değeri true yap (Worker'daki YAPAY_ZEKA da true olmalı). */
-const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',gundem:'gundem.json',lig:'superlig.json',kampus:{},kampusDosya:'kampus.json',kayit:{url:'',alan:''},ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
+const CFG=Object.assign({proxy:PROXY,turnstile:TURNSTILE,bilgi:'eko-bot-bilgi.json',lig:'superlig.json',kampus:{},kampusDosya:'kampus.json',kayit:{url:'',alan:''},ad:'Eko Can',ai:false,tam:false,host:''},window.EKO_BOT||{});
 const tl=s=>String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 const tok=s=>tl(s).split(/[^a-z0-9]+/).filter(w=>w.length>2);
 
@@ -45,17 +45,15 @@ const FZ=(()=>{
     duzelt(t){let ch=false;const o=String(t).split(' ').map(w=>{if(w.length<4||/\d/.test(w)||V.has(w))return w;const y=yakin(w);if(y&&y!==w){ch=true;return y}return w}).join(' ');return{t:o,degisti:ch}},
     _boyut:()=>V.size}})();
 let DB=null,IDX=null,hist=[],busy=false,KANUN=[],KRX=[],SINA=null;
-const UI_SAYFA=/iibf-uluslararasi/;
 const LABK=(location.pathname.match(/iibf-(iktisat|ekonometri|isletme|ceko|kamu|maliye|uluslararasi)/)||[])[1]||'genel';
 const HUKUKLU=['kamu','ceko','maliye'];
 const LABAD={iktisat:'İktisat',ekonometri:'Ekonometri',isletme:'İşletme & Finans',ceko:'ÇEKO',kamu:'Kamu Yönetimi',maliye:'Maliye & Vergi',uluslararasi:'Uluslararası İlişkiler'};
 const DERS_ACIK=true;    /* Ders anlatımı: AÇIK. Tamamen tarayıcıda çalışır (yerel ders motoru), sunucuya ve yapay zekâya HİÇBİR istek gitmez. */
-const GUNDEM_ACIK=false; /* Uluslararası İlişkiler “Gündem” değerlendirme sekmesi: şimdilik KAPALI. Açmak için true yap (sekme, otomatik geçiş ve tanıtım cümleleri birlikte döner). */
 const DENEME_ACIK=false; /* 3 soruluk deneme sunucu/yapay zekâ gerektirir; bağımsız (yapay zekâsız) sürümde KAPALI. */
 let MOD=DERS_ACIK&&LABK!=='genel'?'ders':'genel';
 const HK=HUKUKLU.includes(LABK);
-const MODLAR=Object.assign({genel:['💬','Genel']},DERS_ACIK?{ders:HK?['⚖️','Hukuk Dersi']:['🎓','Ders Anlat']}:{},GUNDEM_ACIK?{gundem:['🌍','Gündem (Uİ)']}:{});
-const TERCIH={genel:LABK!=='genel'?[LABAD[LABK]]:[],ders:HK?['Kamu Yönetimi','ÇEKO','Maliye & Vergi']:LABK==='genel'?[]:[LABAD[LABK]],gundem:['Uluslararası İlişkiler']};
+const MODLAR=Object.assign({genel:['💬','Genel']},DERS_ACIK?{ders:HK?['⚖️','Hukuk Dersi']:['🎓','Ders Anlat']}:{});
+const TERCIH={genel:LABK!=='genel'?[LABAD[LABK]]:[],ders:HK?['Kamu Yönetimi','ÇEKO','Maliye & Vergi']:LABK==='genel'?[]:[LABAD[LABK]]};
 const DENE='📝 3 soruluk zor deneme';
 const DERSCHIP={
  kamu:['İptal davasını baştan sona anlat','Yetki unsurunu anlat','Tam yargı davası ile iptal davasını karşılaştır',DENE],
@@ -76,7 +74,7 @@ const SAYFA_CHIP=(()=>{const p=location.pathname;
 const MODCHIP={
  genel:['🧭 Bu sitede neler yapabilirim?','📊 Çalışmamı değerlendir','💡 Nasıl çalışmalıyım?','💼 Mezun olunca ne iş yapılır?',...SAYFA_CHIP],
  ders:DERSCHIP[LABK]||DERSCHIP.genel,
- gundem:['Son gelişmede kim ne dedi?','Neden oldu, kime yarar?','Kim etkilendi, kimi etkilemez?','Taraflar ne düşünüyor?','Bu nasıl biter, ne olabilir?','Değerlendirmen ne?']};
+};
 
 /* ---------- Stil: sitenin kendi CSS değişkenlerini kullanır (açık/koyu tema otomatik) ---------- */
 const css=document.createElement('style');css.textContent=`
@@ -100,6 +98,7 @@ const css=document.createElement('style');css.textContent=`
 #eb.tam header button:last-child{display:none}#eb.tam .eb-m{max-width:80%;font-size:15.5px}#eb.tam #eb-log{padding:18px}
 @media(max-width:640px){#eb.tam{height:calc(100dvh - 190px);min-height:380px;border-radius:16px}#eb.tam .eb-m{max-width:92%}}`;
 document.head.appendChild(css);
+{const gs=document.createElement('style');gs.textContent='a[href$="gundem.html"]{display:none!important}';document.head.appendChild(gs)} /* Gündem kalıcı olarak kapalı: menü bağlantısı gizli */
 
 const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
 const fab=$('button','',null);fab.id='eb-fab';fab.textContent='💬';fab.setAttribute('aria-label',CFG.ad+"'ı aç");
@@ -120,20 +119,6 @@ modSec(MOD,true);
 const ctx=()=>({sayfa:document.title,rota:location.pathname.split('/').pop()+location.hash,
   gorunen:(document.querySelector('main h1,h1')||{}).textContent||''});
 
-/* gundem.json kaydı → bilgi havuzu kaydı (gundem.html'deki "Bota işle" ile aynı mantık) */
-function haberKaydi(it){
-  const A=x=>Array.isArray(x)?x:[],M=o=>String((o&&o.m)!=null?o.m:o||'').trim();
-  const C=t=>{t=String(t||'').trim().replace(/\s+/g,' ');if(!t)return'';t=t[0].toLocaleUpperCase('tr')+t.slice(1);return /[.!?…]$/.test(t)?t:t+'.'};
-  const P=[C(it.ozet)];
-  A(it.olgular).forEach(o=>P.push(C(M(o))));
-  A(it.iddialar).forEach(o=>M(o)&&P.push(C('İddia'+(o.kimden?' ('+o.kimden+')':'')+': '+M(o))));
-  A(it.neden).forEach(o=>{if(!M(o)||o.dayanak==='varsayim')return;P.push(C(o.dayanak==='yorum'?'Analist yorumuna göre nedeni: '+M(o):'Nedeni olarak gösterilen: '+M(o)))});
-  A(it.yarar).forEach(o=>M(o)&&o.dayanak!=='varsayim'&&P.push(C((o.aktor||'Bir taraf')+' açısından kazanç: '+M(o))));
-  A(it.zarar).forEach(o=>M(o)&&o.dayanak!=='varsayim'&&P.push(C((o.aktor||'Bir taraf')+' açısından etkilenen ve zarar gören durum: '+M(o))));
-  A(it.bakislar).forEach(b=>b&&String(b.aktor||'').trim()&&String(b.arguman||'').trim()&&P.push(C(b.aktor+' açıklamasında şunu savundu: '+b.arguman)));
-  const ks=A(it.kaynaklar),u0=ks[0]&&/^https?:\/\//i.test(String(ks[0].url||''))?ks[0].url:('gundem.html#'+(it.id||''));
-  return{k:'haber',t:String(it.baslik),x:P.filter(Boolean).join(' '),u:u0,c:ks.map(k=>k.ad).filter(Boolean).join(', '),s:(ks[0]&&ks[0].tur)||'basin',d:it.tarih};
-}
 /* ---------- Süper Lig soru-cevap (kural tabanlı; veri: superlig.json) ---------- */
 let LIG=null;
 function ligCevap(q){
@@ -182,14 +167,13 @@ function ligCevap(q){
   return out.join('\n').replace(/\n{3,}/g,'\n\n').trim();
 }
 /* ---------- Yerel arama (BM25 benzeri, Türkçe normalizasyonlu) ---------- */
-/* Yükleme iki parçaya ayrıldı: HAFİF (kampus.json + gündem + lig; küçük, kampüs/sohbet cevapları için yeter) ve AĞIR (bilgi tabanı + arama indeksi).
+/* Yükleme iki parçaya ayrıldı: HAFİF (kampus.json + lig; küçük, kampüs/sohbet cevapları için yeter) ve AĞIR (bilgi tabanı + arama indeksi).
    Böylece “vize ne zaman?” gibi sorular büyük dosya inmeden anında cevaplanır; ağır parça arka planda, paralel iner ve indeks dilim dilim kurulur. */
 const JSONAL=async(u,taze)=>{const r=await fetch(/^https?:/.test(u)?u:ROOT+u,taze?{cache:'no-cache'}:{});if(!r.ok)throw new Error(r.status);return r.json()};
-let HAFIFP=null,DBP=null,HABER=[],JKURAL=[];
+let HAFIFP=null,DBP=null,JKURAL=[];
 function yukleHafif(){return HAFIFP||(HAFIFP=(async()=>{
-  const [K,G,Lg]=await Promise.all([
+  const [K,Lg]=await Promise.all([
     JSONAL(CFG.kampusDosya,1).catch(()=>null),
-    JSONAL((/^https?:/.test(CFG.gundem)?CFG.gundem:ROOT+CFG.gundem)+'?t='+Date.now(),1).catch(()=>null),
     JSONAL((/^https?:/.test(CFG.lig)?CFG.lig:ROOT+CFG.lig)+'?t='+Date.now(),1).catch(()=>null)]);
   /* kampus.json: bilgi + soru kalıpları + konumlar (JS'e dokunmadan güncellenir) */
   if(K){try{
@@ -205,14 +189,11 @@ function yukleHafif(){return HAFIFP||(HAFIFP=(async()=>{
     JKURAL.forEach(k=>FZ.ekleRe(k[0]));
     Object.keys(KAMPUS).forEach(k=>FZ.ekle(k));
   }catch(e){}}
-  /* Gündem: yayımlanan haberler bilgi havuzuna k:'haber' olarak otomatik eklenir (ağır parça yüklenince birleştirilir) */
-  try{const L=Array.isArray(G)?G:(G&&G.haberler)||[];HABER=L.filter(it=>it&&it.baslik&&(!it.durum||it.durum==='yayinda')).map(haberKaydi).filter(Boolean)}catch(e){HABER=[]}
   LIG=Lg;
 })())}
 function yukleDB(){return DBP||(DBP=(async()=>{
   let chunks=[],kz=[],ok=true;
   try{const [J]=await Promise.all([JSONAL(CFG.bilgi,1),yukleHafif()]);chunks=J.chunks||[];kz=J.kanunlar||[]}catch(e){ok=false;chunks=[];kz=[]}
-  if(HABER.length)chunks=chunks.filter(c=>c.k!=='haber').concat(HABER);
   /* indeks dilim dilim kurulur: telefonda arayüz donmasın */
   const df={},ix=[],tit=new Set();
   for(let i=0;i<chunks.length;i+=250){
@@ -225,179 +206,6 @@ function yukleDB(){return DBP||(DBP=(async()=>{
 })())}
 function yukle(){return Promise.all([yukleHafif(),yukleDB()])}
 const STOP=new Set('nedir nelerdir kimdir midir mudur nasil neden niye hangi kac kim kimin nerede anlat anlatir misin misiniz acikla aciklar ver bana bize icin ile olan olarak bir var yok hakkinda konusunda ilgili gibi daha cok icinde simdi lutfen soyle goster ogret'.split(' '));
-/*GUNDEM-BASLA: kural tabanlı gündem analizi (yapay zekâ yok). Haberler bilgi havuzunda k:'haber' kaydı olarak durur.*/
-const GUNDEM=(()=>{
-const E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const tl=s=>String(s).toLocaleLowerCase('tr');
-const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-const TUR={ajans:'ajans',resmi:'resmî açıklama',kurum:'kurum/düşünce kuruluşu',basin:'basın'};
-
-/* Aktör sözlüğü: [haber metnindeki kök, gösterilecek ad]. Büyük harfle başlayan kökler ek almış hâlleriyle de eşleşir. */
-const AKT=[...'Türkiye,Rusya,Ukrayna,Çin,İsrail,Filistin,Gazze,İran,Suriye,Irak,Yunanistan,Kıbrıs,Ermenistan,Azerbaycan,Almanya,Fransa,İngiltere,Japonya,Hindistan,Pakistan,Suudi Arabistan,Mısır,Tayvan,Kuzey Kore,Güney Kore,Venezuela,Brezilya,Kanada,Meksika,Afganistan,Libya,Yemen,Sudan,Etiyopya,Lübnan,Ürdün,Katar,Hamas,Hizbullah,Taliban'.split(',').map(x=>[x,x]),
- ['Amerika Birleşik Devletleri','ABD'],['Beyaz Saray','ABD'],['Washington','ABD'],['Moskova','Rusya'],['Kremlin','Rusya'],['Pekin','Çin'],['Avrupa Birliği','AB'],['Brüksel','AB'],['Birleşmiş Milletler','BM'],['Uluslararası Para Fonu','IMF'],['Dünya Bankası','Dünya Bankası'],['Birleşik Arap Emirlikleri','BAE']];
-const KISA=['ABD','AB','BM','NATO','IMF','DTÖ','OPEC','G20','BRICS','OECD','AGİT'];
-const AKTRX=[...AKT.map(([k,ad])=>({re:new RegExp('(?<![\\p{L}])'+esc(k),'gu'),ad})),...KISA.map(k=>({re:new RegExp('(?<![\\p{L}])'+k+'(?![\\p{L}])','gu'),ad:k}))];
-const aktorlar=s=>{const m=new Map();AKTRX.forEach(({re,ad})=>{const n=(s.match(re)||[]).length;if(n)m.set(ad,(m.get(ad)||0)+n)});return m};
-
-/* Tema sözlüğü (küçük harf kökler) */
-const TEMA={
- g:['Güvenlik ve çatışma','saldırı,çatışma,ateşkes,füze,asker,savaş,işgal,operasyon,silah,bombardıman,drone,insansız hava,tatbikat,caydırıcı'],
- d:['Diplomasi ve müzakere','görüşme,müzakere,zirve,anlaşma,mutabakat,diplomat,arabulucu,toplantı,ziyaret,bildiri,barış'],
- e:['Ekonomi ve ticaret','gümrük,tarife,ticaret,ihracat,ithalat,faiz,enflasyon,büyüme,piyasa,yatırım,borç,bütçe'],
- y:['Yaptırımlar','yaptırım,ambargo,dondur,kara liste'],
- n:['Enerji','petrol,doğal gaz,enerji,boru hattı,lng,nükleer,elektrik'],
- i:['İnsani durum ve hukuk','sivil,insani,mülteci,göç,mahkeme,soykırım,savaş suçu,insan hakları,açlık,yerinden']};
-const TEMARX=Object.fromEntries(Object.entries(TEMA).map(([k,[ad,s]])=>[k,new RegExp('(?<![\\p{L}])(?:'+s.split(',').map(esc).join('|')+')','gu')]));
-
-/* Kuram × tema bankası: her kuramın genel merceği + temaya özgü soru */
-const KURAM={
- realizm:{ad:'Realizm',gen:'Realist okuma devletleri güç ve güvenlik hesabı yapan temel aktörler sayar.',t:{
-  g:'Güç dengesi ve güvenlik ikilemi: bir tarafın önlemi diğerinin tehdit algısını artırıyor mu?',
-  d:'Müzakere masası da güç ilişkisini yansıtır: pazarlık gücü kimde, masaya oturmak kimin göreli kazancına hizmet ediyor?',
-  e:'Ticaret ve gümrük bir güç aracı olarak okunur: ekonomik bağımlılık kimin elinde stratejik koz?',
-  y:'Yaptırım zorlayıcı bir güç aracıdır: hedefin maliyet hesabını değiştirebiliyor mu, delme yolları var mı?',
-  n:'Enerji arzı ve geçiş yolları stratejik güçtür: tedarik üzerinde kaldıraç kimde?',
-  i:'İnsani ve hukuki gerekçeler devlet çıkarlarıyla birlikte nasıl kullanılıyor; uygulama gücü kimde?'}},
- liberalizm:{ad:'Liberalizm',gen:'Liberal okuma karşılıklı bağımlılığa, kurumlara ve iş birliğinin ortak kazancına bakar.',t:{
-  g:'Kurumsal kanallar (BM, ittifaklar) ve güven artırıcı önlemler tırmanmayı sınırlayabilir mi?',
-  d:'Kurallar ve tekrarlanan görüşmeler iş birliğinin maliyetini düşürüyor mu?',
-  e:'Karşılıklı ekonomik bağımlılık çatışmanın maliyetini yükselterek tırmanmayı frenler mi?',
-  y:'Yaptırımlar çok taraflı kurum ve normlarla mı uygulanıyor; ticaret ağlarına yan etkisi ne?',
-  n:'Enerjide karşılıklı bağımlılık ve ortak kurallar iş birliği imkânı doğuruyor mu?',
-  i:'Mahkemeler ve BM organları gibi kurumlar davranışı kuralla bağlayabiliyor mu?'}},
- insacilik:{ad:'İnşacılık',gen:'İnşacı okuma çıkarları kimlik, norm ve söylemle birlikte ele alır.',t:{
-  g:'Tehdit nesnel mi, yoksa "düşman" ve "güvenlik" söylemiyle mi inşa ediliyor?',
-  d:'Taraflar birbirini nasıl tanımlıyor (ortak, rakip, düşman) ve bu söylem müzakere imkânını nasıl şekillendiriyor?',
-  e:'Ekonomik ilişkiler hangi kimlik ve adalet söylemleriyle çerçeveleniyor?',
-  y:'Yaptırım hangi normatif söylemle meşrulaştırılıyor, hedef taraf bunu nasıl karşılıyor?',
-  n:'Enerji "güvenlik" meselesi olarak nasıl çerçeveleniyor, bu çerçeve seçenekleri nasıl daraltıyor?',
-  i:'Hangi normlar (sivillerin korunması vb.) hatırlatılıyor, aktörler bağlılıklarını söylemle nasıl gösteriyor?'}},
- 'eleştirel':{ad:'Eleştirel/yapısal',gen:'Yapısal okuma merkez–çevre ilişkilerini ve eşitsiz yapıları sorgular.',t:{
-  g:'Bu güvenlik gerilimden hangi güçlü aktörler yarar sağlıyor, maliyeti kim taşıyor?',
-  d:'Masada temsil eşit mi; kimin sesi dışarıda kalıyor?',
-  e:'Ticaret düzeni merkez ile çevre arasındaki eşitsizliği nasıl yeniden üretiyor?',
-  y:'Yaptırımın maliyetini hedef devlet mi, sivil toplum mu daha çok taşıyor?',
-  n:'Kaynak ve geçiş yolları üzerindeki kontrol hangi yapısal avantajı sürdürüyor?',
-  i:'Mağduriyet ve sorumluluk dağılımı yapısal eşitsizliklerle nasıl bağlantılı?'}}};
-const SENARYO={
- g:['Gerilimin düşmesi: taraflar bir arabulucu kanalı kabul ederse','Gerilimin sürmesi: karşılıklı caydırıcılık adımları artarsa','Kapsamın genişlemesi: üçüncü aktörler doğrudan devreye girerse'],
- d:['Takvimli müzakere: taraflar somut görüşme tarihi açıklarsa','Sonuçsuz görüşme: temel talepler uzlaşmazsa','Üst düzey zirve: hazırlık görüşmeleri ilerlerse'],
- e:['Pazarlıkla gevşeme: taraflar tarife veya kota için görüşürse','Karşılıklı önlemler: karşı taraf eşdeğer adım atarsa','Kurumsal başvuru: ikili çözüm tıkanırsa uluslararası ticaret kurallarına gidilebilir'],
- y:['Yaptırımın sürmesi: hedef taraf politikasını değiştirmezse','Gevşetme: taraflar bir uzlaşıya varırsa','Delme yolları: üçüncü ülkeler üzerinden ticaret yeniden yönlenirse'],
- n:['Tedarik çeşitlendirmesi: alıcılar kaynaklarını çeşitlendirirse','Fiyat dalgalanması: arz yolları kesintiye uğrarsa','Enerji anlaşması: taraflar uzun vadeli sözleşme yaparsa'],
- i:['Hukuki süreç: ilgili mahkeme veya kurum süreci ilerletirse','İnsani erişim: yardım koridorları açılırsa','Normatif baskı: kurumlar ve kamuoyu açıklama yaparsa']};
-const DUZEYK={birey:['Birey düzeyi: karar vericilerin algı ve tercihleri','başkan,cumhurbaşkanı,lider,bakan,başbakan,kral,prens'],
- devlet:['Devlet düzeyi: iç politika, kurumlar ve ulusal çıkar','hükümet,parlamento,meclis,seçim,iç politika,ordu,bakanlığı'],
- sistem:['Sistem düzeyi: güç dağılımı ve uluslararası yapı','nato,bm ,ab ,ittifak,küresel,uluslararası,çok kutuplu,dünya']};
-
-/* Cümle sınıflandırma */
-const IDDIA=/iddia|öne sür|ileri sür|kulis|doğrulanma|teyit edilme|sözde|söylenti|ismi açıklanmayan|adı verilmeyen/;
-const YORUM=/muhtemel|bekleniyor|tahmin|öngör|olabilir|olacağı düşünül|analist|yorumcu|değerlendiriliyor|gerekir|gerektiğ/;
-const BEYAN=/açıkla|dedi|belirt|bildir|ifade et|vurgula|duyur|kaydet|savun|reddet|uyar|çağrı yap|['’][a-zçğıöşü]*\s+göre|[“"«]/;
-const HUKUKI=/soykırım|savaş suçu|insanlığa karşı suç|adalet divanı|ceza mahkemesi|güvenlik konseyi/;
-const HASSAS=/filistin|gazze|israil|hamas|batı şeria|doğu türkistan|uygur|sincan|xinjiang/;
-const NUMRX=/\d[\d.,]*\s?(?:milyar|milyon|bin|yüzde|%|dolar|avro|lira|tl|kişi|asker|sivil|ölü|yaralı|gün|saat|kilometre|ton|varil)?/giu;
-const cumleler=m=>String(m).replace(/\s+/g,' ').trim().split(/(?<=[.!?…])\s+(?=[A-ZÇĞİÖŞÜ0-9"“‘'])/u).map(s=>s.trim()).filter(s=>s.length>25);
-const kisalt=(s,n=260)=>s.length>n?s.slice(0,n).replace(/\s\S*$/,'')+'…':s;
-
-const UZLASI=/görüşme|müzakere|uzlaş|anlaşma|mutabakat|barış|diyalog|iş birliği|işbirliği|arabulucu|ateşkes|kabul etti|olumlu|destekle|inceled/;
-const SERT=/saldır|tehdit|uyar|reddet|yaptırım|tırman|karşılık ver|misilleme|hedef al|ültimatom|çatışma|işgal|engelle|kınad/;
-const SY={g:'uss',d:'usu',e:'usn',y:'sun',n:'nsu',i:'nun'};   // senaryoların yönü: u=uzlaşı, s=gerilim, n=nötr
-const IZLE={g:['Ateşkes ya da arabulucu kanalına dair açıklama','Yeni askeri hareket veya bölge dışı bir aktörün açıklaması'],d:['Somut görüşme tarihi ve gündemi','Heyet düzeyinin yükselmesi'],e:['Karşı tarife/kota açıklaması','İkili görüşme ya da kurumsal başvuru'],y:['Yaptırım listesinin genişlemesi veya gevşemesi','Üçüncü ülkelerin tutumu'],n:['Tedarik rotası ve fiyat açıklamaları','Yeni sözleşme duyurusu'],i:['Mahkeme/kurum kararı veya raporu','Yardım erişimi ve koridor açıklamaları']};
-const NEDENRX=/nedeniyle|nedenle|dolayı|yüzünden|çünkü|yanıt olarak|karşılık olarak|bunun üzerine|gerekçesiyle|amacıyla|hedefiyle|sebebiyle|kaynaklan|tepki olarak|nedeni|yol açtı/;
-const YARARRX=/kazandı|kazanç|yarar|fayda|kâr|avantaj|lehine|destek aldı|güçlendi|memnun|olumlu|başarı|artış sağla|pay(ını)? artır/;
-const NOETKI=/etkilemeyeceğ|etkilenmeyeceğ|etkilemez|etkilenmez|etkilenmedi|etkilemiyor|etkisi olmayacağ|sorun yaşamayacağ/;
-const ETKIRX=/etkilen|zarar|mağdur|kayıp|kaybetti|yerinden|tahliye|düştü|geriledi|arttı|yükseldi|maliyet|olumsuz|yaralı|açlık|kıtlık|mülteci|işsiz|pahalı|fiyat/;
-const GRUP=['sivil','mülteci','çiftçi','işçi','tüketici','ihracatçı','ithalatçı','üretici','yatırımcı','öğrenci','kadın','çocuk','esnaf','şirket','banka','halk','hane','piyasa','sanayi','tedarikçi'];
-const NEDEN={g:['tehdit algısı ve caydırıcılık hesabı','iç siyasi baskı ve liderlik hesapları','önceki bir olaya karşılık zinciri'],d:['ortak bir sorunun maliyetinin artması','dış baskı veya arabulucu girişimi','tarafların sürmekte olan gerilimden kaçınma isteği'],e:['yerli üreticiyi koruma ve ticaret dengesi hedefi','iç siyasi talep (sektör, seçmen)','karşı tarafın önceki bir ticaret adımı'],y:['davranışı değiştirmeye zorlama amacı','müttefiklere ve iç kamuoyuna mesaj verme','önceki bir ihlal ya da hukuki gerekçe'],n:['arz güvenliği ve fiyat kaygısı','tedarik bağımlılığını azaltma isteği','jeopolitik gerilimin enerji rotalarına yansıması'],i:['sivillerin korunması ve hukuki yükümlülükler','kitlesel yerinden edilme veya kıtlık','kurum ve kamuoyu baskısı']};
-const YARAR={g:'caydırıcılığı veya pazarlık gücü artan taraf ile savunma sanayii kazanabilir.',d:'gerilimi ve belirsizliği azaltan taraflar ile piyasalar kazanabilir.',e:'korunan yerli üretici ve gelir elde eden devlet kazanabilir.',y:'zorlama gücünü gösteren taraf kazanabilir.',n:'tedarikçiler ve alternatif kaynak sunanlar kazanabilir.',i:'süreç ilerlerse mağdurlar ve hukuki mekanizmaların meşruiyeti kazanabilir.'};
-const ZARAR={g:'çatışma bölgesindeki siviller, bölge ekonomisi ve ticaret yolları etkilenir.',d:'görüşmeler sonuçsuz kalırsa güveni zedelenen taraflar ve masada temsil edilmeyenler etkilenir.',e:'ithal girdi kullanan sanayi, tüketici (fiyat) ve karşılık riski taşıyan ihracatçı etkilenebilir.',y:'hedef ekonomi, sivil nüfus ve yaptırımı delen üçüncü ülke şirketleri etkilenebilir.',n:'ithalatçı ülkeler, sanayi ve hane halkı (fiyat) etkilenebilir.',i:'süreç tıkanırsa sivil nüfus ve insani erişim etkilenir.'};
-function metin(hb,sec,odak){
-  odak=odak||[];const F=k=>!odak.length||odak.includes(k);
-  const S=[],gor=new Set();
-  hb.forEach((h,i)=>cumleler(h.metin).forEach(s=>{const key=tl(s).replace(/[^\p{L}\d]/gu,'');if(gor.has(key))return;gor.add(key);S.push({s,t:tl(s),k:i+1,ak:aktorlar(s)})}));
-  if(!S.length)return'Haber metni analiz için çok kısa.';
-  const b={olgu:[],beyan:[],iddia:[],yorum:[]};
-  S.forEach(c=>{if(IDDIA.test(c.t))b.iddia.push(c);else if(YORUM.test(c.t))b.yorum.push(c);else if(BEYAN.test(c.t))b.beyan.push(c);else if(c.ak.size||/\d/.test(c.s))b.olgu.push(c)});
-  const tt=tl(hb.map(h=>h.metin).join(' ')),tem=Object.keys(TEMA).map(k=>[k,(tt.match(TEMARX[k])||[]).length]).filter(x=>x[1]>0).sort((x,y)=>y[1]-x[1]).slice(0,3).map(x=>x[0]);
-  const say=new Map();S.forEach(c=>c.ak.forEach((n,ad)=>{const o=say.get(ad)||{n:0,k:new Set()};o.n+=n;o.k.add(c.k);say.set(ad,o)}));
-  const top=[...say.entries()].sort((x,y)=>y[1].n-x[1].n).slice(0,4),adlar=top.map(x=>x[0]);
-  const uz=S.filter(c=>UZLASI.test(c.t)),se=S.filter(c=>SERT.test(c.t)),yon=uz.length>se.length?'u':se.length>uz.length?'s':'';
-  const L=[`📰 ${hb.length} haber, ${S.length} cümle işlendi.`];
-  const liste=(bas,a,n)=>{if(a.length)L.push('\n**'+bas+'**',...a.slice(0,n).map(c=>'• '+kisalt(c.s,210)+' ['+c.k+']'))};
-  if(!odak.length)L.push('🏷 '+(tem.length?tem.map(k=>TEMA[k][0]).join(', '):'belirgin tema bulunamadı (genel çerçeve kullanıldı)'));
-  if(b.olgu.length)liste('Ne oldu?',b.olgu,odak.length?2:4);else liste('Ne oldu? (haberin ilk cümleleri)',S.slice(0,2),2);
-  const nd=S.filter(c=>NEDENRX.test(c.t)),yr=S.filter(c=>YARARRX.test(c.t)),et=S.filter(c=>ETKIRX.test(c.t)&&!NOETKI.test(c.t)),no=S.filter(c=>NOETKI.test(c.t)),t0=tem[0];
-  const al=c=>'• '+kisalt(c.s,210)+' ['+c.k+']';
-  if(F('neden')){L.push('\n**Neden oldu?**');
-    L.push(...(nd.length?nd.slice(0,3).map(al):['• Haber nedeni açıkça belirtmiyor; nedeni tahmin etmem.']));
-    if(t0)L.push('Bakılacak olası nedenler (soru olarak; haberde yazmıyorsa iddia sayılmaz): '+NEDEN[t0].join('; ')+'.')}
-  if(F('yarar')){L.push('\n**Kime yarar?**');
-    L.push(...(yr.length?yr.slice(0,3).map(al):['• Haber kimin kazandığını açıkça yazmıyor.']));
-    if(t0)L.push('Genel mekanizma ('+TEMA[t0][0]+' teması; bu habere özgü kanıt değil): '+YARAR[t0])}
-  if(F('etki')){L.push('\n**Kim etkilendi, kimi etkilemez?**');
-    L.push(...(et.length?et.slice(0,3).map(al):['• Haber etkilenenleri açıkça yazmıyor.']));
-    const gr=[...new Set(et.flatMap(c=>GRUP.filter(g=>c.t.includes(g))))];if(gr.length)L.push('Metinde etkisi anılan gruplar: '+gr.join(', ')+'.');
-    if(t0)L.push('Genel mekanizma (bu habere özgü kanıt değil): '+ZARAR[t0]);
-    if(no.length)L.push('Haberde "etkilenmeyeceği" söylenenler:',...no.slice(0,2).map(al));
-    const nt=adlar.filter(a=>![...yr,...et].some(c=>c.ak.has(a)));
-    if(nt.length)L.push('Metinde etkisi veya kazancı belirtilmeyen aktörler: '+nt.join(', ')+'. (Etkilenmediklerini değil, haberin bunu söylemediğini gösterir.)')}
-  if(F('dedi')&&b.beyan.length)L.push('\n**Kim ne dedi?**',...b.beyan.slice(0,5).map(c=>'• '+(c.ak.size?[...c.ak.keys()].slice(0,2).join('/')+': ':'')+kisalt(c.s,200)+' ['+c.k+']'));
-  if(F('dusunuyor')&&top.length){
-    L.push('\n**Kim ne düşünüyor?** (metindeki dilden çıkarım; aktörün kendi beyanı değildir)');
-    top.forEach(([ad])=>{const m=S.filter(c=>c.ak.has(ad)),u=m.filter(c=>UZLASI.test(c.t)),z=m.filter(c=>SERT.test(c.t));
-      const et=u.length>z.length?'uzlaşmaya açık işaretler veriyor':z.length>u.length?'baskı/gerilim yönünde işaret veriyor':(u.length?'karışık sinyal veriyor':'metinde tutum işareti yok');
-      const ks=(u.length>z.length?u:z.length>u.length?z:[])[0];L.push('• '+ad+': '+et+(ks?' — "'+kisalt(ks.s,110)+'" ['+ks.k+']':''))})}
-  if(F('iddia')&&!odak.length){liste('Henüz doğrulanmamış iddialar',b.iddia,2);liste('Beklenti ve yorumlar (olgu sayılmaz)',b.yorum,2)}
-  if(!odak.length){const rk=[];S.forEach(c=>{for(const m of c.s.matchAll(NUMRX)){const v=m[0].trim();if(/^(19|20)\d\d$/.test(v)||!/\d/.test(v))continue;rk.push(v)}});
-    if(rk.length)L.push('\n**Rakamlar** (haberde geçtiği hâliyle, teyit edilmedi): '+[...new Set(rk)].slice(0,5).join(', '));
-    const hk=S.filter(c=>HUKUKI.test(c.t));if(hk.length)L.push('\n**Hukuki nitelendirme içeren cümleler**',...hk.slice(0,2).map(c=>'• '+kisalt(c.s,210)+' ['+c.k+']'),'Nitelendirmeyi yapan organı, tarihi ve kesinlik düzeyini kaynaktan kontrol et.')}
-  if(HASSAS.test(tt))L.push('\n⚠️ Hassas konu: sorumluluğu devlet/yönetim ve eylemiyle ilişkilendir, halkı veya dini hedef alan genelleme yapma; kaynağı belirsiz görüntü ve sayıları işaretle.');
-  if(F('kuram')){const tm=tem.slice(0,2);L.push('\n**Kuramsal okuma**',...sec.map(k=>{const K=KURAM[k];return '• '+K.ad+': '+K.gen+(adlar.length?' ('+adlar.join(', ')+' için) ':' ')+tm.map(t=>K.t[t]).join(' ')}))}
-  if(F('olabilir')&&tem[0]){
-    const t0=tem[0],sc=SENARYO[t0].map((x,i)=>({x,y:SY[t0][i],i}));
-    if(yon)sc.sort((p,q)=>(q.y===yon)-(p.y===yon)||p.i-q.i);
-    L.push('\n**Ne olabilir, nasıl biter?** (kesin tahmin değil; olasılık atanmadı)',...sc.map((p,i)=>'• '+p.x+(yon&&i===0&&p.y===yon?'  ← metindeki işaretlere en yakını':'')),'İzlenecek göstergeler: '+IZLE[t0].join('; ')+'.')}
-  if(F('degerlendirme')){
-    const lead=yon==='u'?uz:yon==='s'?se:[];
-    L.push('\n**Değerlendirme (haberler okunduktan sonra)**');
-    L.push(!uz.length&&!se.length?'• Metinde yön gösteren belirgin bir işaret yok; sonuç için daha fazla haber gerekir.':'• Metinde '+uz.length+' cümle uzlaşı/diplomasi, '+se.length+' cümle gerilim/baskı işareti taşıyor; '+(yon==='u'?'ağırlık diplomasiden yana.':yon==='s'?'ağırlık gerilimden yana.':'denge belirsiz.'));
-    if(lead[0])L.push('• En belirgin işaret: "'+kisalt(lead[0].s,140)+'" ['+lead[0].k+']');
-    L.push('• Belirsizlik: '+b.iddia.length+' iddia ve '+b.yorum.length+' yorum cümlesi olgu sayılmadı. '+(hb.length>1?'':'Tek haber olduğundan sonuç temkinli okunmalı. ')+'Bu, siyasi bir tercih değil, metindeki dilin okumasıdır.')}
-  const A=KURAM[sec[0]].ad,B=KURAM[sec[1]||sec[0]].ad;
-  if(!odak.length)L.push('\n**Tartışma sorusu:** '+A+' ve '+B+' okumaları bu gelişmede hangi noktada ayrışıyor'+(adlar.length>1?' ('+adlar.slice(0,2).join(' ve ')+' bakımından)':'')+' ve haberdeki hangi olgu bu ayrışmayı gösteriyor?');
-  const tur=new Set(hb.map(h=>h.tur));
-  L.push('\n**Doğrulama notu:** '+hb.length+' haber, '+tur.size+' kaynak türü. '+(hb.length>1&&tur.size>1?'Farklı türde kaynaklar var.':'Tek haber ya da tek tür kaynak: çapraz teyit önerilir.')+' Olgular yalnızca havuzdaki metne dayanır, bağımsız teyit edilmemiştir.');
-  L.push('**Kaynaklar:** '+hb.map((h,i)=>'['+(i+1)+'] '+h.ad+(h.tarih?' ('+h.tarih+')':'')).join('; '));
-  return L.join('\n');
-}
-return{metin};
-})();
-
-function gundemCevap(q){
-  const H=DB.filter(c=>c.k==='haber').sort((a,b)=>String(b.d||'').localeCompare(String(a.d||'')));
-  if(!H.length)return'Bilgi havuzunda henüz haber yok. Haberler bilgi dosyasına eklenince burada analiz ederim.';
-  const GEN='kimi kime neden niye sebep nicin yarar fayda kazanc etkile zarar kayip magdur kim nasil olabilir biter olur dedi dusun tutum sonuc senaryo gelecek yaklasim beyan taraflar sence hafta bugun son gelisme ozet gundem guncel onemli haber analiz yorumla degerlendir realist realizm liberal liberalizm insaci insacilik elestirel yapisal gozle kuram karsilastir kriz'.split(' ');
-  const terms=tok(q).filter(w=>!STOP.has(w)&&!GEN.some(g=>g.length>=4?w.startsWith(g):w===g)),qq=tl(q),sec=[];
-  [['realizm',/realist|realizm/],['liberalizm',/liberal/],['insacilik',/insaci/],['eleştirel',/elestirel|yapisal/]].forEach(([k,r])=>{if(r.test(qq))sec.push(k)});
-  const od=[];
-  if(/sence|ne dusunuyorsun|degerlendirmen|degerlendirme|sonuc|sen ne/.test(qq))od.push('degerlendirme');
-  if(/ne olur|ne olabilir|ne biter|nasil biter|nasil sonuc|senaryo|gelecek|sonra ne|ne olacak/.test(qq))od.push('olabilir');
-  if(/neden|niye|sebep|nicin|neyden/.test(qq))od.push('neden');
-  if(/kime yar|kim kazan|kazanc|fayda|kime yariyor/.test(qq))od.push('yarar');
-  if(/etkilen|etkilemez|etkilemiyor|zarar|kaybed|magdur|kime yansi/.test(qq))od.push('etki');
-  if(/ne dedi|kim ne|beyan|aciklama(lar)? yapti/.test(qq))od.push('dedi');
-  if(/ne dusunuyor|tutum|yaklasim|pozisyon|tavir|taraflar/.test(qq))od.push('dusunuyor');
-  if(/kuram|realist|realizm|liberal|insaci|elestirel|yapisal/.test(qq)&&!od.length)od.push('kuram');
-  let secim=H.slice(0,3);
-  if(terms.length){const sk=H.map(c=>{const W=tok(c.t+' '+c.x);return[terms.filter(w=>W.some(x=>x.startsWith(w))).length,c]}).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]);
-    if(!sk.length)return'Havuzdaki haberlerde "'+terms.join(' ')+'" ile ilgili bir şey yok.';
-    secim=sk.slice(0,3).map(x=>x[1])}
-  if(secim.some(c=>!c.c))return'Bazı haberlerin kaynak adı eksik; kaynaksız haber analiz edilmez. Bilgi dosyasında kaynak adını tamamla.';
-  const hb=secim.map(c=>({metin:c.x,ad:c.c,tur:c.s||'basin',url:/^https?:/.test(c.u)?c.u:'',tarih:c.d||'',baslik:c.t}));
-  return{t:GUNDEM.metin(hb,sec.length?sec:['realizm','liberalizm'],od)+((()=>{const d=hb.map(x=>Date.parse(x.tarih)).filter(Boolean);if(!d.length)return'';const g=Math.floor((Date.now()-Math.max(...d))/864e5);return g>30?'\n\n⏳ Dikkat: en yeni ilgili haber '+g+' gün önceye ait; durum bu sürede değişmiş olabilir, güncel kaynaktan doğrula.':''})())+'\n\n🗓 '+new Date().toLocaleDateString('tr-TR')+' · Öğrenme amaçlı analizdir; Eko-Log Topluluğu\'nun veya üniversitenin resmî görüşünü yansıtmaz.',web:hb.filter(x=>x.url).map(x=>({baslik:x.ad,url:x.url}))};
-}
-/*GUNDEM-BITIS*/
 /*DERS-BASLA: yerel ders motoru (yapay zekâ YOK). Elle yazılmış ders kartları + sitedeki içerikten derlenen genel ders + kural tabanlı mini soru.
    Yeni ders eklemek için KART dizisine bir nesne ekle:
    {id, a:alan, k:/tl() ile sadeleşmiş (küçük harf, aksansız) arama kalıbı/, b:başlık, g:büyük resim, c:[kavramlar], i:[adımlar], o:örnek, h:[sık hatalar], s:sınav cümlesi, l:laboratuvar yönlendirmesi, ip:hafıza ipucu, m:[soru,[cevap kalıpları],açıklama], ara:'kaynak arama sözcüğü'}
@@ -1302,7 +1110,7 @@ function ara(q,k=6){
   const qs=tok(q).filter(w=>!STOP.has(w)).map(w=>(w.length<5||IDX.df[w])?w:(FZ.yakin(w,IDX.keys)||w)),N=DB.length,r=[],qc=qs.join(' ');
   const tc=(TERCIH[MOD]||[]).concat(PROFIL.bolum&&LABAD[PROFIL.bolum]?[LABAD[PROFIL.bolum]]:[]);
   if(!qs.length)return[];
-  DB.forEach((c,i)=>{if(c.k==='haber')return;const d=IDX[i];let s=0;
+  DB.forEach((c,i)=>{const d=IDX[i];let s=0;
     qs.forEach(w=>{const f=d.f[w];if(f)s+=Math.log(1+N/(IDX.df[w]||1))*f/(f+1.2)});
     if(d.tt===qc)s+=20;else if(qs.every(w=>d.tt.includes(w)))s+=10;else if(qs.some(w=>d.tt.includes(w)))s+=1.5;
     if(s>0)r.push([s*(tc.includes(c.c)?1.6:1),c])});
@@ -1434,7 +1242,7 @@ function webKaynak(m,l){if(!l||!l.length)return;const w=$('div','eb-src eb-w');
 function oku(m){if(!('speechSynthesis' in window))return;const b=$('button','eb-say','🔊 Dinle');
   b.onclick=()=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(gm(m));u.lang='tr-TR';speechSynthesis.speak(u)};m.appendChild(b)}
 function modSec(k,sessiz){MOD=k;box.querySelectorAll('#eb-mod button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
-  if(sessiz)return;hist=[];mesaj(k==='ders'?(HK?'Hukuk dersi modundayım. Bir konuyu "anlat" de; kavram → kanun → örnek → sık hata → mini sınama sırasıyla işleriz.':'Ders modundayım. Bir konuyu "anlat" de; sezgi → kavram → örnek → sık hata → mini sınama sırasıyla işleriz.')+' "Beni sına" dersen kısa bir soruyla yoklarım. (Bu mod tamamen yerelde çalışır, yapay zekâ kullanmaz.)':k==='gundem'?'Gündem modundayım. Bilgi havuzuna eklenen haberleri okuyup olgu, beyan ve iddiaları ayırır, kuramlarla (realizm, liberalizm, inşacılık…) değerlendiririm. Örnek: "son gelişmeleri realist ve liberal gözle yorumla" ya da bir ülkeyi/konuyu yaz. Havuzda olmayan bir gelişmeyi bilemem.':'Genel moddayım. Sitedeki kavramları, laboratuvarları ve sayfaları sorabilir, "Çalışmamı değerlendir" diyerek laboratuvar/quiz hatalarının analizini isteyebilirsin.','eb-b');
+  if(sessiz)return;hist=[];mesaj(k==='ders'?(HK?'Hukuk dersi modundayım. Bir konuyu "anlat" de; kavram → kanun → örnek → sık hata → mini sınama sırasıyla işleriz.':'Ders modundayım. Bir konuyu "anlat" de; sezgi → kavram → örnek → sık hata → mini sınama sırasıyla işleriz.')+' "Beni sına" dersen kısa bir soruyla yoklarım. (Bu mod tamamen yerelde çalışır, yapay zekâ kullanmaz.)':'Genel moddayım. Sitedeki kavramları, laboratuvarları ve sayfaları sorabilir, "Çalışmamı değerlendir" diyerek laboratuvar/quiz hatalarının analizini isteyebilirsin.','eb-b');
   if(MODCHIP[k])chips(MODCHIP[k])}
 function chips(liste){const w=$('div','eb-chips');
   (liste||MODCHIP.genel).filter(q=>DENEME_ACIK||!q.startsWith('📝')).forEach(q=>{const b=$('button','',q);b.onclick=()=>{w.remove();if(q.startsWith('📝')){denemeBaslat();return}if(q.startsWith('📊')){sor('Bu oturumdaki çalışmamı değerlendir: nerede hata yapıyorum, neyi anlamamış olabilirim, ne çalışmalıyım?')}else sor(q)};w.appendChild(b)});log.appendChild(w)}
@@ -1486,11 +1294,10 @@ const SITE_TUR=[
  ['📰 Veri ve Pariteler, Gazete ve Dergi, Etkinlikler, Mülakat, Quiz, Fikir, Girişimcilik ilanları, Katıl','Ana sayfanın menüsünden ulaşılır.','']];
 const SITE_NOT='Eko-Log, İnönü Üniversitesi Ekonomi ve Diyalog Topluluğu\'nun öğrenme ve simülasyon sitesi. Burada şunları yapabilirsin:\n\n'
  +SITE_TUR.map(x=>x[0]+' — '+x[1]).join('\n\n')
- +'\n\nBen de bir kavramı açıklayabilir, seni doğru sayfaya götürebilir, laboratuvar/quizlerdeki cevaplarını değerlendirebilir (📊 Çalışmamı değerlendir)'+(GUNDEM_ACIK?' ve Gündem sekmesinde güncel uluslararası gelişmeleri kuramlarla yorumlayabilirim.':'.')+'';
+ +'\n\nBen de bir kavramı açıklayabilir, seni doğru sayfaya götürebilir, laboratuvar/quizlerdeki cevaplarını değerlendirebilir (📊 Çalışmamı değerlendir)'+'.';
 const DEGER=/(degerlendir|analiz).*(calisma|cevap|hata|yanlis|performans|quiz|lab|sonuc)|(calisma|cevap|hata|yanlis|performans|sonuc)\w*.*(degerlendir|analiz)/;
 const YETENEK={
  ders:HK?'Hukuk derslerini hazır ders kartlarıyla anlatabilir, mini sorularla seni yoklayabilir, kanun maddelerine bağlantı verebilirim.':'Bu laboratuvardaki konuları anlatabilir, mini sorularla seni yoklayabilir, hatalarını analiz edebilirim.',
- gundem:'Bilgi havuzundaki haberleri kuramsal çerçevelerle değerlendirebilirim.',
  genel:'Sitedeki kavramları, düşünürleri, simülasyonları, laboratuvarları ve mevzuatı sorabilirsin; seni ilgili sayfaya götürür, quiz/lab cevaplarını değerlendirebilirim.'};
 
 /* ---------- Yapay zekâ bağlıysa mesajı MODEL anlar; yerel kalıplar yalnızca güvenlik için çalışır ---------- */
@@ -1716,7 +1523,7 @@ function sohbet(q){const gv=guvenlik(q);if(gv)return gv;if(!AIVAR()){const fbr=s
   if(selam&&rest.length<3)return{t:rnd(['Selam! 👋 Ben Eko Can. Nasılsın, ne var ne yok?','Selaaam! 👋 Hoş geldin, nasılsın?','Merhaba! 👋 Ben Eko Can; hayırdır, ne yapıyoruz bugün?']),chips:1};
   if(/^(nasilsin|naber|ne haber|nasil gidiyor)( ?\??)$/.test(t))return{t:'İyiyim, teşekkürler! Sen nasılsın? Çalışmak ya da öğrenmek istediğin bir konu var mı?'};
   if(/^(tesekkur|tesekkurler|tesekkur ederim|sagol|sag ol|eyvallah|saol|cok sagol|eline saglik)( .*)?$/.test(t))return{t:'Rica ederim! 🙂 Başka bir şey sorarsan buradayım.'};
-  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko Can, Eko-Log asistanıyım. Derse de bakarım, futbol goygoyuna da 😄 '+YETENEK[MOD]+(GUNDEM_ACIK?' Alttaki sekmelerden Genel ve Gündem modları arasında geçebilirsin.':''),chips:1};
+  if(/^(kimsin|sen kimsin|nesin|ne yapiyorsun|ne yaparsin|neler yapabilirsin|ne ise yararsin|yardim|yardim et|yardim eder misin|nasil kullanilir|bu ne)( ?\??)$/.test(t))return{t:'Ben Eko Can, Eko-Log asistanıyım. Derse de bakarım, futbol goygoyuna da 😄 '+YETENEK[MOD],chips:1};
   if(/^(gorusuruz|hoscakal|hosca kal|bye|iyi calismalar|kolay gelsin|iyi gunler|iyi aksamlar|iyi geceler)( ?\??)$/.test(t))return{t:'Görüşürüz, kolay gelsin! 👋'};
   return null}
 /* ================= KİŞİSELLEŞTİRME · SINAV TEKRARI · ÇALIŞMA PLANI · CEVAPSIZ SORU KAYDI =================
@@ -2010,12 +1817,10 @@ async function sor(q){
       chips(r.konu?MODCHIP.ders:(r.chips||['Sınavda nasıl yazılır?','Beni bir soruyla sına','Başka bir konu']))}
     else{const mm=mesaj(DERS.liste(LABK),'eb-b');if(cevapsiz(q,'ders'))kayitNot(mm)}
     log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();return}
-  if(MOD!=='gundem'){const sz=sozlukCevap(q);if(sz.length){
+  {const sz=sozlukCevap(q);if(sz.length){
     const tx=sz.map(c=>`📖 ${c.t}${c.c?' ('+c.c+')':''}\n${c.x.slice(0,700)}${c.x.length>700?'…':''}`).join('\n\n');
     const m=mesaj(tx+'\n\n(Sitedeki sözlükten.)','eb-b');kaynaklar(m,sz);hist.push({role:'user',content:q},{role:'assistant',content:tx});
     chips(['"'+sz[0].t+'" kavramını bir örnekle açıkla']);sohbetKaydet();busy=false;return}}
-  if(GUNDEM_ACIK&&/gündem|son gelişme|bugün|güncel|haber/i.test(q)&&UI_SAYFA.test(location.pathname)&&MOD!=='gundem')modSec('gundem',true);
-  if(MOD==='gundem'){const r=gundemCevap(q),tx=typeof r==='string'?r:r.t,m=mesaj(tx,'eb-b');if(r.web)webKaynak(m,r.web);hist.push({role:'user',content:q},{role:'assistant',content:tx});log.scrollTop=log.scrollHeight;busy=false;sohbetKaydet();return}
   const cs=ara(q),m=mesaj('…','eb-b');
   try{
     if(!CFG.proxy||!CFG.ai)throw 0;
@@ -2026,12 +1831,10 @@ async function sor(q){
     if(!r.ok)throw new Error(r.status);
     const j=await r.json();bi(m,j.cevap);oku(m);if(!j.hata)geri(m,q,j.cevap);webKaynak(m,j.web);
     if(!j.hata)hist.push({role:'user',content:q},{role:'assistant',content:j.cevap});
-    if(MOD==='gundem'&&!j.hata){const n=$('small','',`🗓 ${new Date().toLocaleDateString('tr-TR')} · Öğrenme amaçlı analizdir; Eko-Log Topluluğu'nun veya üniversitenin resmî görüşünü yansıtmaz. Olguları bağlantılardaki kaynaklardan doğrula.`);n.style.cssText='display:block;padding:8px 0 0;opacity:.8';m.appendChild(n)}
     if(j.hata){busy=false;return}
   }catch(e){
     /* API yoksa/hatalıysa: yalnızca GÜÇLÜ eşleşmeleri göster, zayıf (alakasız) sonuç dayatma */
     const gl=cs.filter(c=>c._s>=3);
-    if(MOD==='gundem'){m.textContent=(CFG.proxy&&CFG.ai)?'Şu an güvenilir bir gündem analizi üretemiyorum, biraz sonra tekrar dener misin?':'Bu konuda havuzda haber yok.';busy=false;return}
     if((CFG.proxy&&CFG.ai)&&!gl.length){m.textContent='Şu an sunucuya ulaşamadım, biraz sonra tekrar dener misin?';busy=false;return}
     m.textContent=gl.length?((CFG.proxy&&CFG.ai)?'Sunucuya ulaşamadım; sitedeki en yakın içerikler:':'Sitedeki en yakın içerikler:')+'\n\n'+gl.slice(0,3).map(c=>`• ${c.t}: ${c.x.slice(0,180)}${c.x.length>180?'…':''}`).join('\n\n')
       :'Bu konuda sitede bilgi yok.';
