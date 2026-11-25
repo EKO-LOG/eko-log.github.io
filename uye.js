@@ -393,7 +393,15 @@
     root = root || D;
     var q = function (s) { return [].slice.call((root.querySelectorAll ? root : D).querySelectorAll(s)); };
     /* menülerdeki Eko-Plus bağlantısı */
-    q('header a, nav a, #dmenu a, .dmenu a').forEach(function (a) { if (/^Eko[\s\-\u2010-\u2015]?Plus$/i.test((a.textContent || '').trim()) || /^Üye Alanı$/.test((a.textContent || '').trim()) && PLUS_HREF.test(a.getAttribute('href') || '')) a.remove(); });
+    q('header a, nav a, #dmenu a, .dmenu a').forEach(function (a) {
+      if (a.closest('.uye-box')) return;
+      var t = (a.textContent || '').trim();
+      if (!/^(Eko[\s\-‐-―]?Plus|Üye Alanı)$/i.test(t)) return;
+      var k = a.closest('li') || a;
+      if (isMem()) { k.hidden = false; k.style.display = ''; }
+      else { k.hidden = true; k.style.display = 'none'; }
+    });
+    if (window.EkoDrawerEkle) window.EkoDrawerEkle(isMem());
     /* ana sayfa kutuları: Eko-Plus kutusu herkesten gizli (üyede "Üye Alanı" olarak kalır), üyelere özel kutular girişsizken gizli */
     q('a.tile, a.card, a[class*="tile"]').forEach(function (a) {
       var href = a.getAttribute('href') || '', sm = a.querySelector('small'), only = sm && /Üyelere özel/i.test(sm.textContent);
@@ -599,6 +607,7 @@
 /* Eko-Log · Çekmece menü: "Simülasyon Merkezi" altına Kariyer Simülasyonu ve Borsa Oyunu satırlarını ekler.
    Sayfaların kendi menü listesine dokunmaz; uye.js yüklü her sayfada çalışır. */
 (function () {
+  var uyeMi = false;
   function ekle() {
     var EK = window.EKO_SIM_LINKS || [];
     var ogeler = document.querySelectorAll('#dmenu .dm-item');
@@ -612,7 +621,32 @@
         l.appendChild(b); sub.appendChild(l);
       });
     }
+    /* onaylı üyeler için çekmeceye "Üye Alanı" satırı */
+    var dm = document.getElementById('dmenu');
+    if (dm && uyeMi && !dm.querySelector('[data-ek-uye]')) {
+      var var_mi = [].some.call(dm.querySelectorAll('a'), function (x) { return /^Üye Alanı$/.test((x.textContent || '').trim()); });
+      if (!var_mi) {
+        var ref = dm.querySelector('.dm-item'), kap = ref ? ref.parentNode : dm.querySelector('ul') || dm;
+        var yeni = document.createElement(kap.nodeName === 'UL' || kap.nodeName === 'OL' ? 'li' : 'div');
+        yeni.setAttribute('data-ek-uye', '1');
+        if (ref) yeni.className = ref.className.split(/\s+/).filter(function (c) { return c === 'dm-item'; }).join(' ');
+        var row = document.createElement('div'); row.className = 'dm-row';
+        var ua = document.createElement('a');
+        ua.href = (window.EKO_UYE_ALANI || '/eko-plus/'); ua.textContent = 'Üye Alanı';
+        row.appendChild(ua); yeni.appendChild(row);
+        kap.insertBefore(yeni, kap.firstChild);
+      }
+    }
   }
+  window.EkoDrawerEkle = function (m) { uyeMi = !!m; try { ekle(); } catch (e) {} };
+  /* çekmecedeki ek bağlantılara basınca doğrudan o adrese git (sayfanın kendi menü kodu üst satıra yönlendirmesin) */
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest && e.target.closest('a[data-ek],[data-ek-uye] a,.uye-menu a[href]');
+    if (!t || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var href = t.href; if (!href) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    location.href = href;
+  }, true);
   function basla() {
     ekle();
     try { new MutationObserver(ekle).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
