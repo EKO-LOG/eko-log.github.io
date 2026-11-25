@@ -614,12 +614,11 @@ var XI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 1
 
 /* ---- Üyelik: sitedeki mevcut kuralla aynı (giriş yapılmış VE yönetici onaylı) ---- */
 function isMember(){
-  if(window.PWLOCK&&PWLOCK())return false;
   try{var s=JSON.parse(localStorage.getItem('eko_uye')||'null');
     if(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)return true}catch(e){}
   return !!(D.body&&D.body.classList.contains('uye-ok'));
 }
-function isPlus(a){return /^eko[\s\-\u2010-\u2015]*plus$/i.test((a.textContent||'').trim())}
+function isPlus(a){return /^(eko[\s\-\u2010-\u2015]*plus|üye\s+alanı)$/i.test((a.textContent||'').trim())}
 /* Eko-Plus bağlantısı üye değilse üstteki (yedek) menüde de görünmesin */
 function syncNav(){var m=isMember();[].forEach.call(nav.querySelectorAll('a'),function(a){if(isPlus(a))a.hidden=!m})}
 
@@ -754,10 +753,10 @@ R.classList.add('dm-on');
 <div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üyelere Özel</span><h2 data-k="uo1">Üyelere Özel</h2><p data-k="uo2">Yalnızca onaylı üyelerin kullanabildiği simülasyonlar. Giriş yap ya da üye ol, yönetici onayından sonra hepsi açılır.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px">
-<a class="tile" href="iibf-laboratuvar.html" style="--bg1:#6d3fd8;--bg2:#1d4ed8"><span class="go">→</span><small data-k="pg_eplus_1">Eko-Plus</small><h3 data-k="ut1a">İİBF Laboratuvarı</h3><p data-k="ut1b">İşletme, iktisat, ekonometri, maliye, kamu yönetimi, uluslararası ilişkiler ve çalışma ekonomisi laboratuvarları tek çatı altında. Girişte üyelik istenir, yönetici onayından sonra açılır.</p></a>
+<a class="tile" href="iibf-laboratuvar.html" style="--bg1:#6d3fd8;--bg2:#1d4ed8"><span class="go">→</span><small data-k="pg_eplus_1">Üye Alanı</small><h3 data-k="ut1a">İİBF Laboratuvarı</h3><p data-k="ut1b">İşletme, iktisat, ekonometri, maliye, kamu yönetimi, uluslararası ilişkiler ve çalışma ekonomisi laboratuvarları tek çatı altında. Açarken şifre istenir.</p></a>
 </div><div class="next"><a class="btn" href="#/">← Ana sayfa</a></div></div></div>
 <div class="page" id="p-lab">
-<div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Eko-Plus</span><h2 data-k="ul1">Eko-Plus</h2><p data-k="ul2">İİBF Laboratuvarı yalnızca onaylı üyelere açıktır: giriş yap ya da üye ol, yönetici onayından sonra açılır. Hocalar için ayrı bir giriş sekmesi vardır.</p></div></div>
+<div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üye Alanı</span><h2 data-k="ul1">Üye Alanı</h2><p data-k="ul2">Üye Alanı yalnızca onaylı üyelere açıktır: giriş yap ya da üye ol, yönetici onayından sonra açılır. Laboratuvar ve simülasyonlar için ayrıca şifre istenir. Hocalar için ayrı bir giriş sekmesi vardır.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content"><div id="lab-gate"></div></div></div>
 <style id="lab-css">
@@ -781,7 +780,7 @@ R.classList.add('dm-on');
 
 <script>
 const $=s=>document.querySelector(s),toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200)};
-const SIMK=["vaka", "ppk", "bakan", "girisim", "kur", "burokrat", "muzakere", "ihale", "valilik", "smmm"],T={"":"Ana sayfa",kesfet:"Keşfet",uyeler:"Eko-Plus",merkez:"Simülasyon Merkezi",vaka:"Vaka Analizi",ppk:"Başkan Simülasyonu",bakan:"Bakanlık Simülasyonu",girisim:"Girişimci",kur:"Dış Ticaret",burokrat:"Kamu Bürokratı",muzakere:"Müzakere Masası",ihale:"Kamu İhalesi",valilik:"Kaymakamlık ve Valilik",smmm:"Mali Müşavirlik",mulakat:"Mülakat",meslekler:"Meslekler",meslek:"Meslek Tanıtımı","mulakat-bilgi":"Kurum Mülakatı Bilgilendirme","mulakat-basvuru":"Mülakat Simülasyonu Başvuruları","mulakat-yonetim":"Topluluk Yönetimi Mülakatı",makale:"Makale Yazımı",yayin:"Gazete ve Dergi",fikir:"Fikir Muharebesi","fikir-canli":"Canlı Muharebe","fikir-etkinlik":"Yapılan Etkinlikler",yatay:"Yatay Bakış","fikir-turler":"Münazara Çeşitleri",gazete:"Diyalog Gazetesi",dergi:"İktisadi Kalkınma Dergisi",etkinlik:"Etkinlikler",arsiv:"Arşiv",katil:"Katıl",ansiklopedi:"İktisadi Ansiklopedi",sozluk:"Ekonomi Sözlüğü",quiz:"Terim Quiz",hesap:"Hesaplayıcılar",veri:"İktisat Grafikleri",pariteler:"Pariteler",parite:"Tüm Pariteler","parite-doviz":"Döviz Pariteleri","parite-maden":"Değerli Madenler","parite-enerji":"Enerji Pariteleri","parite-sanayi":"Sanayi ve Stratejik Metaller","parite-tarim":"Tarım Ürünleri","parite-kripto":"Kripto Paralar","parite-borsa":"Borsa (BIST 100)",piyasa:"Veri ve Pariteler",anatomi:"Kavramın Anatomisi",efsane:"İktisadi Şehir Efsaneleri",kisiler:"İktisat Düşünürleri",yarisma:"Bilgi Yarışması",kaynak:"Kaynaklar",kadrolar:"Kariyer Kadroları",lab:"Eko-Plus"};
+const SIMK=["vaka", "ppk", "bakan", "girisim", "kur", "burokrat", "muzakere", "ihale", "valilik", "smmm"],T={"":"Ana sayfa",kesfet:"Keşfet",uyeler:"Üye Alanı",merkez:"Simülasyon Merkezi",vaka:"Vaka Analizi",ppk:"Başkan Simülasyonu",bakan:"Bakanlık Simülasyonu",girisim:"Girişimci",kur:"Dış Ticaret",burokrat:"Kamu Bürokratı",muzakere:"Müzakere Masası",ihale:"Kamu İhalesi",valilik:"Kaymakamlık ve Valilik",smmm:"Mali Müşavirlik",mulakat:"Mülakat",meslekler:"Meslekler",meslek:"Meslek Tanıtımı","mulakat-bilgi":"Kurum Mülakatı Bilgilendirme","mulakat-basvuru":"Mülakat Simülasyonu Başvuruları","mulakat-yonetim":"Topluluk Yönetimi Mülakatı",makale:"Makale Yazımı",yayin:"Gazete ve Dergi",fikir:"Fikir Muharebesi","fikir-canli":"Canlı Muharebe","fikir-etkinlik":"Yapılan Etkinlikler",yatay:"Yatay Bakış","fikir-turler":"Münazara Çeşitleri",gazete:"Diyalog Gazetesi",dergi:"İktisadi Kalkınma Dergisi",etkinlik:"Etkinlikler",arsiv:"Arşiv",katil:"Katıl",ansiklopedi:"İktisadi Ansiklopedi",sozluk:"Ekonomi Sözlüğü",quiz:"Terim Quiz",hesap:"Hesaplayıcılar",veri:"İktisat Grafikleri",pariteler:"Pariteler",parite:"Tüm Pariteler","parite-doviz":"Döviz Pariteleri","parite-maden":"Değerli Madenler","parite-enerji":"Enerji Pariteleri","parite-sanayi":"Sanayi ve Stratejik Metaller","parite-tarim":"Tarım Ürünleri","parite-kripto":"Kripto Paralar","parite-borsa":"Borsa (BIST 100)",piyasa:"Veri ve Pariteler",anatomi:"Kavramın Anatomisi",efsane:"İktisadi Şehir Efsaneleri",kisiler:"İktisat Düşünürleri",yarisma:"Bilgi Yarışması",kaynak:"Kaynaklar",kadrolar:"Kariyer Kadroları",lab:"Üye Alanı"};
 function route(){let k=location.hash.replace(/^#\/?/,"").split("/")[0];if(k==="olay")k="sozluk";if(!(k in T))k="";
 document.querySelectorAll(".page").forEach(p=>p.classList.toggle("on",p.id==="p-"+((k.indexOf("parite-")===0?"parite":k)||"home")));
 document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#/"+(SIMK.includes(k)?"merkez":(/^mulakat-/.test(k)||k==="mulakat"||k==="meslek"||k==="kadrolar"||k==="quiz"?"meslekler":(k==="sozluk"||k==="anatomi"||k==="efsane"||k==="kisiler"?"ansiklopedi":(k==="veri"||k.indexOf("parite")===0||k==="hesap"||k==="kaynak"?"piyasa":((k==="fikir"||k.indexOf("fikir-")===0||k==="yatay")?"etkinlik":(k==="gazete"||k==="dergi"||k==="makale"||k==="arsiv"?"yayin":k))))))));
@@ -3878,16 +3877,8 @@ function showAuth(note,tab){
     }catch(e){say(out,e.message==='auth'?'Oturum açılamadı.':e.message)}
     btn.disabled=false});
   const tb=(k,t)=>el('button',{class:'btn line',type:'button','aria-pressed':String(tab===k),text:t,onclick:()=>showAuth('',k)});
-  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Eko-Plus · üyelere özel'}),el('p',{class:'lb-n',text:'İİBF Laboratuvarı yalnızca onaylı üyelere açıktır.'}),el('div',{class:'lb-tabs'},tb('in','Giriş yap'),tb('up','Üye ol'),tb('hoca','Hoca girişi')),f));
+  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üye Alanı · giriş'}),el('p',{class:'lb-n',text:'Üye Alanı yalnızca onaylı üyelere açıktır. Laboratuvar ve simülasyonlar için ayrıca şifre istenir.'}),el('div',{class:'lb-tabs'},tb('in','Giriş yap'),tb('up','Üye ol'),tb('hoca','Hoca girişi')),f));
 }
-function showPwLock(){
-  const out=el('p',{class:'lb-m',role:'alert',hidden:true}),inp=el('input',{id:'lb-pw',type:'password',autocomplete:'off',placeholder:'Eko-Plus şifresi'});
-  const go=ev=>{ev.preventDefault();const q=window.EKO_C&&window.EKO_C.pw;if(q&&q.on===true&&inp.value.trim()===String(q.code||'')){try{sessionStorage.setItem('eko_pw',String(q.code))}catch(e){}
-      let r=null;try{r=sessionStorage.getItem('eko_ret');sessionStorage.removeItem('eko_ret')}catch(e){}dispatchEvent(new Event('focus'));location.hash=(r&&r!=='#/lab')?r:'#/ekstra'}else say(out,'Şifre yanlış.')};
-  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Eko-Plus kilitli'}),el('p',{class:'lb-n',text:'Eko-Plus şu an şifreyle korunuyor. Devam etmek için şifreyi yaz.'}),
-    el('form',{novalidate:true,onsubmit:go},el('label',{class:'lb-f','for':'lb-pw'},'Eko-Plus şifresi',inp),el('button',{class:'btn',type:'submit',text:'Aç'}),out)));
-  setTimeout(()=>inp.focus(),50)}
-document.addEventListener('eko:ready',()=>{dispatchEvent(new Event('focus'));if(window.PWLOCK&&PWLOCK()&&!gate.querySelector('#lb-pw'))check()});
 /* ---- üyelik durumu ---- */
 function showStatus(rec,ver){
   try{localStorage.removeItem('eko_uye_ok')}catch(e){}
@@ -3911,7 +3902,6 @@ function showErr(e){
   gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üyelik kontrol edilemedi'}),el('p',{class:'lb-n',text:e.message==='perm'?'Üyelik kaydı okunamadı ya da oluşturulamadı. Yönetici veritabanı kurallarını yayınlamış olmalı.':e.message}),el('div',{class:'lb-tabs'},el('button',{class:'btn',type:'button',text:'Tekrar dene',onclick:()=>check()}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout}))));
 }
 async function check(){
-  if(window.PWLOCK&&PWLOCK()){showPwLock();return}
   if(busy)return;
   if(!S){showAuth();return}
   busy=true;
@@ -3938,7 +3928,7 @@ function mount(rec){
   okm=true;
   const who=rec.adm?'Yönetici · '+rec.e:rec.hoca?'Hoca · '+(rec.n||rec.e):(rec.n?rec.n+' · ':'')+rec.e;
   gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üyeliğin onaylı'}),el('p',{class:'lb-n',text:who}),
-    el('div',{class:'lb-tabs'},el('a',{class:'btn',href:LAB,text:'İİBF Laboratuvarı’nı aç'}),el('a',{class:'btn line',href:'#/ekstra',text:'Eko-Plus’a dön'}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout}))));
+    el('div',{class:'lb-tabs'},el('a',{class:'btn',href:LAB,text:'İİBF Laboratuvarı’nı aç'}),el('a',{class:'btn line',href:'#/ekstra',text:'Üye Alanı’na dön'}),el('button',{class:'btn line',type:'button',text:'Çıkış yap',onclick:logout}))));
 }
 const go=()=>{if(/^#\/?lab(\/|$)/.test(location.hash)&&!okm)check().then(()=>{if(okm){let r=null;try{r=sessionStorage.getItem('eko_ret');sessionStorage.removeItem('eko_ret')}catch(e){}if(r)location.hash=r}})};
 addEventListener('hashchange',go);go();
@@ -4041,16 +4031,16 @@ const SIM={};
 const d=b=>new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0)));
 const brand=document.querySelector('header .brand'),bar=document.querySelector('header .bar');
 if(!brand||!bar)return;
-const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)&&!PWLOCK()}catch(e){return false}};
+const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
 const m=document.createElement('div');m.id='uyem';m.setAttribute('role','menu');
-m.innerHTML='<small>Eko-Plus</small><a role="menuitem" href="#/ekstra">⭐ Eko-Plus</a><a role="menuitem" href="iibf-laboratuvar.html">🧪 İİBF Laboratuvarı</a><a role="menuitem" href="../a-grubu/">🏛️ A Grubu Makam Simülasyonu</a><a role="menuitem" href="../mevzuat/">📚 Mevzuat</a><hr><a role="menuitem" href="#/">🏠 Ana sayfa</a>';
+m.innerHTML='<small>Üye Alanı</small><a role="menuitem" href="#/ekstra">⭐ Üye Alanı</a><a role="menuitem" href="iibf-laboratuvar.html">🧪 İİBF Laboratuvarı</a><a role="menuitem" href="../a-grubu/">🏛️ A Grubu Makam Simülasyonu</a><a role="menuitem" href="../mevzuat/">📚 Mevzuat</a><hr><a role="menuitem" href="#/">🏠 Ana sayfa</a>';
 bar.append(m);
 const ov=document.createElement('div');ov.id='uyem-sim';ov.innerHTML='<div class="tb"><span></span><button type="button">✕ Kapat</button></div>';document.body.append(ov);
 const tt=ov.querySelector('span'),cb=ov.querySelector('button');
 const set=o=>{m.classList.toggle('on',o);brand.setAttribute('aria-expanded',String(o))};
 const gate=()=>{if(/^#\/?uyeler(\/|$)/.test(location.hash)&&!isMember()){try{sessionStorage.setItem('eko_ret','#/uyeler')}catch(e){}location.hash='#/lab'}};
 const sync=()=>{sl();const on=isMember();brand.classList.remove('uyem-on')};
-const sl=()=>{const on=isMember();document.querySelectorAll('[data-uyem] [data-l]').forEach(x=>x.textContent=on?'✓ Eko-Plus · açık':'🔒 Eko-Plus · giriş gerekli')};
+const sl=()=>{const on=isMember();document.querySelectorAll('[data-uyem] [data-l]').forEach(x=>x.textContent=on?'✓ Üye Alanı · açık':'🔒 Üye Alanı · giriş gerekli')};
 const close=()=>{const f=ov.querySelector('iframe');if(f)f.remove();ov.classList.remove('on');document.body.classList.remove('uyem-open')};
 const open=k=>{if(!isMember())return;close();const f=document.createElement('iframe');f.title=SIM[k][0];f.srcdoc=d(SIM[k][1]);tt.textContent=SIM[k][0];ov.append(f);ov.classList.add('on');document.body.classList.add('uyem-open')};
 m.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;set(false);if(a.dataset.s){e.preventDefault();open(a.dataset.s)}});
@@ -4092,13 +4082,13 @@ const WAVE='<svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" a
 const fmtDate=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'][m-1]+' '+y};
 
 /* ---------- sayfa üretici ---------- */
-const PAGES={},REFRESH={},TITLES={ekstra:'Eko-Plus'};
+const PAGES={},REFRESH={},TITLES={ekstra:'Üye Alanı'};
 function page(id,title,sub,cols,body,init){
  TITLES[id]=title;
  const d=document.createElement('div');d.className='page xp';d.id='p-'+id;
  const OUT={kitaplik:['ansiklopedi','İktisadi Ansiklopedi'],forum:['','']},O=OUT[id];
- d.innerHTML='<div class="aurora banner" style="--a1:'+cols[0]+';--a2:'+cols[1]+';--a3:'+cols[2]+'"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a><span> / </span>'+(id==='ekstra'?'<span>Eko-Plus</span>':O?(O[0]?'<a href="#/'+O[0]+'">'+O[1]+'</a><span> / </span>':'')+'<span>'+title+'</span>':'<a href="#/ekstra">Eko-Plus</a><span> / </span><span>'+title+'</span>')+'</span><h2>'+title+'</h2><p>'+sub+'</p></div></div>'+WAVE+
- '<div class="wrap content" style="--g1:'+cols[0]+';--g2:'+cols[1]+'">'+body+'<div class="next x-np">'+(O?(O[0]?'<a class="btn" href="#/'+O[0]+'">← Ansiklopedi</a>':''):'<a class="btn" href="#/ekstra">← Eko-Plus</a>')+'<a class="btn grad" href="#/">Ana sayfa</a></div></div>';
+ d.innerHTML='<div class="aurora banner" style="--a1:'+cols[0]+';--a2:'+cols[1]+';--a3:'+cols[2]+'"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a><span> / </span>'+(id==='ekstra'?'<span>Üye Alanı</span>':O?(O[0]?'<a href="#/'+O[0]+'">'+O[1]+'</a><span> / </span>':'')+'<span>'+title+'</span>':'<a href="#/ekstra">Üye Alanı</a><span> / </span><span>'+title+'</span>')+'</span><h2>'+title+'</h2><p>'+sub+'</p></div></div>'+WAVE+
+ '<div class="wrap content" style="--g1:'+cols[0]+';--g2:'+cols[1]+'">'+body+'<div class="next x-np">'+(O?(O[0]?'<a class="btn" href="#/'+O[0]+'">← Ansiklopedi</a>':''):'<a class="btn" href="#/ekstra">← Üye Alanı</a>')+'<a class="btn grad" href="#/">Ana sayfa</a></div></div>';
  PAGES[id]=d;if(init)REFRESH[id]=init;return d;
 }
 
@@ -4564,19 +4554,19 @@ page('paylas','Paylaşım Kartı','Terim, alıntı ya da quiz sonucunu Instagram
 /* ---------- HUB (Eko-Plus ana sayfası) ---------- */
 const TILES=[
 ['Öğren',[['x-notlar','Not Paylaşımı','Üye özetleri, yönetici onayıyla yayında.','#0b8a4b','#1d4ed8'],['x-mevzuat','Mevzuat','Kanun ve yönetmelik maddelerini ara; simülasyonlardaki mevzuat atıflarına buradan ulaş.','#0f766e','#1d4ed8']]],
-['Simülasyonlar',[['sim-borsa','Borsa Oyunu','BIST 100 simülasyonu: sanal parayla al-sat, sezon ve turnuva tablosu.','#0b8a4b','#1d4ed8'],['sim-hak','Hâkimlik Simülasyonu','Mahkeme simülasyonunda dosyayı incele, karar ver.','#7a1f2b','#1b2a41'],['sim-agrubu','A Grubu Makam Simülasyonu','12 meslekte 24 aylık kariyer: gündem, dosya, kadro, ihale ve politika yönetimi.','#1e3a8a','#b45309']]],
+['Simülasyonlar',[['sim-borsa','Borsa Oyunu','BIST 100 simülasyonu: sanal parayla al-sat, sezon ve turnuva tablosu.','#0b8a4b','#1d4ed8'],['sim-agrubu','A Grubu Makam Simülasyonu','12 meslekte 24 aylık kariyer: gündem, dosya, kadro, ihale ve politika yönetimi.','#1e3a8a','#b45309']]],
 ['Ayarlar',[['x-bildirim','Bildirimler','Hatırlatıcılar ve ana ekrana ekleme.','#7a1f2b','#1b2a41']]]
 ];
 
-page('ekstra','Eko-Plus','Üyelere özel: laboratuvar, simülasyonlar, öğrenme, kariyer ve topluluk araçları tek yerde.',['#d9342b','#ff9a3d','#6d3fd8'],
+page('ekstra','Üye Alanı','Üyelere özel: laboratuvar, simülasyonlar, öğrenme, kariyer ve topluluk araçları tek yerde.',['#d9342b','#ff9a3d','#6d3fd8'],
  '<div class="x-hubd"><div class="panel" id="xhd"></div><div class="card"><h3>Hızlı bakış</h3><div id="xhs" class="x-qgrid"></div></div></div>'+
- TILES.map(([h,items])=>'<h3 class="sec">'+h+'</h3><div class="xhub">'+items.map(([id,t,d,a,b])=>'<a class="tile" href="'+(id==='sim-borsa'?'borsa-oyunu.html':id==='sim-hak'?'hakimlik-simulasyonu.html':id==='sim-agrubu'?'../a-grubu/':id==='x-mevzuat'?'../mevzuat/':'#/'+id)+'" style="--bg1:'+a+';--bg2:'+b+'"><span class="go">→</span><small>'+h+'</small><h3>'+t+'</h3><p>'+d+'</p></a>').join('')+'</div>').join(''),
+ TILES.map(([h,items])=>'<h3 class="sec">'+h+'</h3><div class="xhub">'+items.map(([id,t,d,a,b])=>'<a class="tile" href="'+(id==='sim-borsa'?'borsa-oyunu.html':id==='sim-agrubu'?'../a-grubu/':id==='x-mevzuat'?'../mevzuat/':'#/'+id)+'" style="--bg1:'+a+';--bg2:'+b+'"><span class="go">→</span><small>'+h+'</small><h3>'+t+'</h3><p>'+d+'</p></a>').join('')+'</div>').join(''),
  ()=>{const r=$('#p-ekstra');$('#xhd',r).innerHTML=dailyHTML();const s=stats();$('#xhs',r).innerHTML=[['Puan',s.pts],['Gün serisi',s.streak],['Kaydedilen ilan',s.saved]].map(([k,v])=>'<div class="x-qs"><b>'+v+'</b><span>'+k+'</span></div>').join('');applyLang()});
 
 /* ---------- DİL (TR/EN) ---------- */
 let LANG=rd('lang','tr');
 const EN={
-'Ana sayfa':'Home','İktisadi Ansiklopedi':'Economic Encyclopedia','← Ansiklopedi':'← Encyclopedia','Eko-Plus':'Eko-Plus','← Eko-Plus':'← Eko-Plus','Günün Kavramı':'Concept of the Day','Podcast':'Podcast','Kitaplık':'Library','Haftalık Bülten':'Weekly Newsletter','Mentor Eşleştirme':'Mentor Matching','Staj ve Burs Panosu':'Internship & Scholarship Board','CV ve Niyet Mektubu':'CV & Cover Letter','Katılım Sertifikası':'Participation Certificate','Soru-Cevap':'Q&A','Haftalık Tahmin':'Weekly Forecast','Haftalık Ekonomi Tahmini':'Weekly Economic Forecast','Üye Profili':'Member Profile','Paylaşım Kartı':'Share Card',
+'Ana sayfa':'Home','İktisadi Ansiklopedi':'Economic Encyclopedia','← Ansiklopedi':'← Encyclopedia','Üye Alanı':'Member Area','← Üye Alanı':'← Member Area','Günün Kavramı':'Concept of the Day','Podcast':'Podcast','Kitaplık':'Library','Haftalık Bülten':'Weekly Newsletter','Mentor Eşleştirme':'Mentor Matching','Staj ve Burs Panosu':'Internship & Scholarship Board','CV ve Niyet Mektubu':'CV & Cover Letter','Katılım Sertifikası':'Participation Certificate','Soru-Cevap':'Q&A','Haftalık Tahmin':'Weekly Forecast','Haftalık Ekonomi Tahmini':'Weekly Economic Forecast','Üye Profili':'Member Profile','Paylaşım Kartı':'Share Card',
 'Öğren':'Learn','Kariyer':'Career','Topluluk':'Community','Hızlı bakış':'Quick look','Puan':'Points','Gün serisi':'Day streak','Kaydedilen ilan':'Saved listings','Forum soruların':'Your questions',
 'Üyelere özel: laboratuvar, simülasyonlar, öğrenme, kariyer ve topluluk araçları tek yerde.':'Members only: lab, simulations, and learning, career and community tools in one place.',
 'Her gün bir kavram, bir örnek, bir seri.':'A concept, an example and a streak every day.','Haftalık kısa sesli özetler.':'Short weekly audio summaries.','Okuma ve izleme listesi.':'Reading and watching list.','Haftanın özeti tek mesajda.':'The week in one message.','Mezunlarla birebir konuş.':'Talk one-on-one with alumni.','Resmî kaynaklara giden ilanlar.':'Listings linking to official sources.','Doldur, önizle, PDF kaydet.':'Fill in, preview, save as PDF.','Etkinlik belgeni oluştur.':'Create your event certificate.','Sor, bilen yanıtlasın.':'Ask, let those who know answer.','Tahmin et, puan topla.':'Forecast and earn points.','Puan, rozet ve üye kartı.':'Points, badges and member card.','Instagram’a uygun görsel üret.':'Make an Instagram-ready image.',
@@ -4667,7 +4657,7 @@ function xroute(){
  if(STANDALONE){if(!mine&&k!=='lab'&&k!=='uyeler'&&!document.getElementById('p-'+k))k='ekstra';
   $$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+k));
   $$('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+k));
-  document.title='Eko-Log · '+(TITLES[k]||'Eko-Plus');scrollTo(0,0)}
+  document.title='Eko-Log · '+(TITLES[k]||'Üye Alanı');scrollTo(0,0)}
  if((mine||STANDALONE)&&REFRESH[k])REFRESH[k]();
  if(mine||STANDALONE)applyLang();
 }
@@ -4696,12 +4686,12 @@ const fillHub=()=>{try{const r=document.getElementById('p-ekstra'),h=r&&r.queryS
 /* Eko-Plus üyelik kapısı: onaylı üye değilse giriş sayfasına (#/lab) yollar, girişten sonra geri getirir */
 (()=>{
 const KEYS=["ekstra", "kavram", "ilanlar", "cv", "profil", "tahmin", "paylas", "x-yol", "x-takvim", "x-etkinlik", "x-yoklama", "x-notlar", "x-mentor", "x-panel", "x-bildirim"];
-const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)&&!PWLOCK()}catch(e){return false}};
+const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
 const cur=()=>location.hash.replace(/^#\/?/,'').split('/')[0]||'ekstra';
 const sync=()=>{
   const on=isMember();
   document.body.classList.toggle('uye-ok',on);
-  document.querySelectorAll('[data-xl]').forEach(x=>x.textContent=on?'✓ Eko-Plus · açık':'🔒 Eko-Plus · giriş gerekli');
+  document.querySelectorAll('[data-xl]').forEach(x=>x.textContent=on?'✓ Üye Alanı · açık':'🔒 Üye Alanı · giriş gerekli');
   /* Eko-Plus sayfalarında menüde "Üyelere Özel" seçili görünsün */
   const k=cur(),tg=k==='lab'?'#/ekstra':KEYS.includes(k)?(on?'#/ekstra':null):k==='kitaplik'?'#/ansiklopedi':null;
   if(tg)document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')===tg));
@@ -4739,9 +4729,37 @@ if(document.readyState==='loading')addEventListener('DOMContentLoaded',()=>{mv()
 addEventListener('focus',sync);
 setInterval(sync,1500);
 gate();
+
+/* ---- Üye Alanı içindeki Laboratuvar ve simülasyonlar için şifre ----
+   Giriş normal (e-posta + parola). Şifre yalnızca bu bağlantılar açılırken istenir;
+   yönetici panelindeki şifre ayarı (EKO_C.pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
+const LOCKED=/(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?)(\?|#|$)/i;
+const pwCfg=()=>{const q=window.EKO_C&&window.EKO_C.pw;return q&&q.on===true&&q.code?String(q.code):''};
+const needPw=()=>{try{return !!pwCfg()&&sessionStorage.getItem('eko_pw')!==pwCfg()}catch(e){return false}};
+(()=>{const st=document.createElement('style');st.textContent='#ua-pw{position:fixed;inset:0;z-index:99999;background:rgba(10,14,30,.6);display:flex;align-items:center;justify-content:center;padding:16px}#ua-pw form{background:#fff;color:#14182b;border-radius:16px;padding:22px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);font:inherit}#ua-pw h3{margin:0 0 6px;font-size:22px}#ua-pw p{margin:0 0 12px;font-size:14px;opacity:.8}#ua-pw input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #c5cad8;border-radius:10px;font:inherit;margin-bottom:10px}#ua-pw .r{display:flex;gap:8px;flex-wrap:wrap}#ua-pw .m{color:#b42318;font-size:14px;margin:0 0 8px}';document.head.append(st)})();
+function askPw(go){
+  const old=document.getElementById('ua-pw');if(old)old.remove();
+  const ov=document.createElement('div');ov.id='ua-pw';
+  ov.innerHTML='<form novalidate><h3>🔒 Şifre gerekli</h3><p>Laboratuvar ve simülasyonlar için Üye Alanı şifresini yaz.</p><input type="password" id="ua-pw-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" role="alert" hidden>Şifre yanlış.</p><div class="r"><button class="btn" type="submit">Aç</button><button class="btn line" type="button" data-x>Vazgeç</button></div></form>';
+  document.body.append(ov);
+  const inp=ov.querySelector('input'),m=ov.querySelector('.m');
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove()});
+  ov.querySelector('form').addEventListener('submit',e=>{e.preventDefault();
+    if(inp.value.trim()===pwCfg()){try{sessionStorage.setItem('eko_pw',pwCfg())}catch(x){}ov.remove();go()}else{m.hidden=false;inp.select()}});
+  setTimeout(()=>inp.focus(),30);
+}
+document.addEventListener('click',ev=>{
+  if(ev.defaultPrevented||ev.button||ev.ctrlKey||ev.metaKey||ev.shiftKey)return;
+  const a=ev.target.closest&&ev.target.closest('a[href]');if(!a)return;
+  const h=a.getAttribute('href')||'';if(!LOCKED.test(h))return;
+  const go=()=>{location.href=a.href};
+  if(!window.EKO_C){ev.preventDefault();let d=0;const run=()=>{if(d++)return;needPw()?askPw(go):go()};document.addEventListener('eko:ready',run,{once:true});setTimeout(run,3000);return}
+  if(needPw()){ev.preventDefault();askPw(go)}
+},true);
 })();
 </script>
-<script id="ekx2-host">window.EKX2_HOST={isMember:()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)&&!PWLOCK()}catch(e){return false}},isAdmin:()=>false};</script>
+<script id="ekx2-host">window.EKX2_HOST={isMember:()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}},isAdmin:()=>false};</script>
 <script id="ekx2-qr">
 (function(){var __m={},__c={};function __r(n){n=n.replace("./","");if(__c[n])return __c[n].exports;var m=__c[n]={exports:{}};__m[n](m,m.exports,__r);return m.exports}
 __m['QR8bitByte']=function(module,exports,require){var QRMode = require('./QRMode');
@@ -6027,7 +6045,7 @@ const live=fn=>{stopLive();liveT=setInterval(()=>{if(!document.hidden)fn()},3000
 function mkPage(id,title,sub,cols,render){
   const d=el('div',{class:'page xp2',id:'p-'+id},
     el('section',{class:'aurora banner',style:`--a1:${cols[0]};--a2:${cols[1]};--a3:${cols[2]}`},el('i'),el('i'),el('i'),
-      el('div',{class:'wrap'},el('span',{class:'crumb'},id.startsWith('x-v-')?[el('a',{href:'#/ekstra'},'Eko-Plus'),' / ',el('a',{href:'#/x-veri'},'Veri Analizi'),' / '+title]:[el('a',{href:'#/ekstra'},'Eko-Plus'),' / '+title]),el('h2',{text:title}),el('p',{text:sub}))),
+      el('div',{class:'wrap'},el('span',{class:'crumb'},id.startsWith('x-v-')?[el('a',{href:'#/ekstra'},'Üye Alanı'),' / ',el('a',{href:'#/x-veri'},'Veri Analizi'),' / '+title]:[el('a',{href:'#/ekstra'},'Üye Alanı'),' / '+title]),el('h2',{text:title}),el('p',{text:sub}))),
     (()=>{const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('class','wave');s.setAttribute('viewBox','0 0 1440 70');s.setAttribute('preserveAspectRatio','none');s.innerHTML='<path d="M0 30C240 70 480 0 720 25s480 45 720 5V70H0z"/>';return s})(),
     el('div',{class:'wrap content'},el('div',{class:'xbody'})));
   root.append(d);PAGES[id]={el:d,body:d.querySelector('.xbody'),render,title};
@@ -6083,7 +6101,7 @@ const CAR=[
   ['Mezuniyete doğru','Analiz örneklerinden oluşan bir portföy dosyası hazırla.']]},
  {id:'giris',e:'🚀',n:'Girişimci',d:'Kendi işini kur: fikir, ürün, müşteri, finansman.',steps:[
   ['Bu dönem','Çevrendeki üç gerçek problemi yaz; kimin için çözmek istediğini netleştir.'],
-  ['Bu dönem','Eko-Plus Girişimci simülasyonunu çöz; temel iş modeli kavramlarını öğren.'],
+  ['Bu dönem','Üye Alanı’ndaki Girişimci simülasyonunu çöz; temel iş modeli kavramlarını öğren.'],
   ['Önümüzdeki 1 yıl','Fikrini en küçük çalışan ürüne (MVP) indirge ve 10 potansiyel müşteriyle konuş.'],
   ['Önümüzdeki 1 yıl','Üniversite girişimcilik kulüpleri ve yarışmalarına katıl; bir etkinlik organize et.'],
   ['Mezuniyete doğru','Güncel girişimci destek ve hibe programlarını resmî kaynaklardan incele.'],
@@ -6110,7 +6128,7 @@ const CAR=[
   ['Mezuniyete doğru','Veri analisti stajı için başvur; iş ilanlarındaki ortak becerileri listele.'],
   ['Mezuniyete doğru','Bir panel (dashboard) örneği hazırla ve portföyüne ekle.']]},
  {id:'dan',e:'🧩',n:'Yönetim Danışmanı',d:'Şirketlere strateji, verimlilik ve dönüşüm danışmanlığı veren proje ekipleri.',steps:[
-  ['Bu dönem','Vaka analizi yöntemini öğren; Eko-Plus Vaka Analizi simülasyonlarını çöz.'],
+  ['Bu dönem','Vaka analizi yöntemini öğren; Üye Alanı’ndaki Vaka Analizi simülasyonlarını çöz.'],
   ['Bu dönem','Excel ve sunum (slayt) becerini güçlendir; bir konuyu tek sayfada özetlemeyi alıştır.'],
   ['Önümüzdeki 1 yıl','Üniversite vaka yarışmalarına katıl; ekip içinde sunum rolü üstlen.'],
   ['Önümüzdeki 1 yıl','Danışmanlık ve denetim firmalarının staj programlarının başvuru takvimini takip et.'],
@@ -6672,7 +6690,7 @@ function route(){
     if(!prev()){fill(PAGES[k].body,el('div',{class:'x2-empty',text:'Bu sayfa şu an kapalı. Daha sonra tekrar dene.'}));window.scrollTo(0,0);return}
     const wr2=PAGES[k].el.querySelector('.content');if(wr2)wr2.insertBefore(el('div',{class:'x2-msg x2-closednote',style:'margin-bottom:14px',text:'Bu sayfa sitede KAPALI; yalnızca yönetici olarak görüyorsun. Yönetim panelindeki Eko-Plus modülleri bölümünden açabilirsin.'}),wr2.firstChild);
   }
-  if(!isMember()){fill(PAGES[k].body,el('div',{class:'x2-empty',text:'Bu bölüm yalnızca onaylı Eko-Plus üyelerine açıktır. Giriş yap veya üye ol.'}));window.scrollTo(0,0);return}
+  if(!isMember()){fill(PAGES[k].body,el('div',{class:'x2-empty',text:'Bu bölüm yalnızca onaylı üyelere açıktır. Giriş yap veya üye ol.'}));window.scrollTo(0,0);return}
   PAGES[k].render(PAGES[k].body);
   window.scrollTo({top:0});
 }
@@ -7348,7 +7366,7 @@ function ay(){const bento=$('.bento');if(!bento||$('#pl-ay'))return;const L=thin
  a.append(ph,b);
  const cm=el('div');cm.id='pl-cmw';const row=el('div');row.id='pl-sr';bento.after(a,cm,row);cm2();sb()}
 
-const member=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)&&!PWLOCK()}catch(e){return false}};
+const member=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
 function sb(){const r=$('#pl-sr');if(!r)return;r.textContent='';r.className='';const a=sv();
  if(member()){const l=el('a','pl-sb');l.href='#/kaydedilenler';l.append(el('b','','🔖 Kaydettiklerim ('+a.length+')'),el('span','',a.length?a.slice(0,3).map(x=>x.t).join(' · '):'Henüz kayıt yok'));r.append(l)}
  else{r.className='pl-row';const l=el('a','btn','🔖 Kaydettiklerim');l.href='#/kaydedilenler';r.append(l)}}
