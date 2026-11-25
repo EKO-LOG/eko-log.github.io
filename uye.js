@@ -18,7 +18,6 @@
   var FEATURES = [
     ['🧪', 'Laboratuvar', ROOT + 'eko-plus/iibf-laboratuvar.html'],
     ['📜', 'Mevzuat', ROOT + 'mevzuat/'],
-    ['📊', 'Veri Analizi', ROOT + 'eko-plus/veri-analizi.html'],
     ['💬', 'Soru-Cevap', ROOT + 'eko-plus/#/forum'],
     ['🧰', 'Diğer üye araçları', ROOT + 'eko-plus/#/ekstra']
   ];
@@ -445,3 +444,147 @@
 
 /* Eko-Log Asistanı yükleyici */
 (function(){function g(){if(window.__ekoBot||document.querySelector('script[src$="eko-bot.js"]'))return;var s=document.createElement('script');s.src='/eko-bot.js';document.body.appendChild(s)}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',g):g()})();
+
+
+/* ===== Eko-Log ortak ek: menü temizliği + Eko Can tam sayfa ===== */
+/* Eko-Log · Çekmece menüsünden "Gündem" kutusunu ve "Veri Analizi" öğesini kaldırır.
+   Tüm sayfalarda çalışır; menü her açılışta yeniden kurulsa bile tekrar gizler.
+   Başka bir öğeyi kaldırmak için aşağıdaki GIZLE listesine küçük harfle ekle. */
+(function () {
+  var GIZLE = ['gündem', 'veri analizi'];
+  var MENU = '#dmenu,.dm,.dm-panel,.dm-list,header nav,#site-hd nav,nav[aria-label],' +
+    '[class*="drawer"],[class*="cekmece"],[class*="sidemenu"],[class*="offcanvas"],' +
+    '[id*="drawer"],[id*="dmenu"]';
+  var ADAY = 'a,button,[role="menuitem"],h2,h3,h4,b,strong,span';
+  var bekliyor = false;
+
+  function norm(s) { return (s || '').replace(/\s+/g, ' ').trim().toLocaleLowerCase('tr'); }
+
+  function kutu(el, kok) {
+    var t = el.closest('li') ||
+      el.closest('.dm-item,[class*="item"],[class*="card"],[class*="box"],[class*="kutu"]');
+    /* Menünün kendisini ya da koca bir listeyi yanlışlıkla gizleme */
+    if (!t || t === kok || t.contains(kok) || t.querySelectorAll('a').length > 12) t = el;
+    return t;
+  }
+
+  function gizle(t) {
+    if (t.getAttribute('data-eko-gizli')) return;
+    t.setAttribute('data-eko-gizli', '1');
+    t.hidden = true;
+    t.style.setProperty('display', 'none', 'important');
+  }
+
+  function tara() {
+    bekliyor = false;
+    var kokler = document.querySelectorAll(MENU);
+    for (var i = 0; i < kokler.length; i++) {
+      var kok = kokler[i], adaylar = kok.querySelectorAll(ADAY);
+      for (var j = 0; j < adaylar.length; j++) {
+        var el = adaylar[j];
+        if (el.closest('[data-eko-gizli]')) continue;
+        var href = (el.getAttribute('href') || '').toLowerCase();
+        var tx = norm(el.textContent);
+        if (GIZLE.indexOf(tx) > -1 || /^veri analizi(\s|$|[·(–-])/.test(tx) || /(^|[\/#-])gundem/.test(href) || /veri-analizi/.test(href)) {
+          gizle(kutu(el, kok));
+        }
+      }
+    }
+  }
+
+  function planla() {
+    if (bekliyor) return;
+    bekliyor = true;
+    (window.requestAnimationFrame || setTimeout)(tara);
+  }
+
+  function basla() {
+    tara();
+    try {
+      new MutationObserver(planla).observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    window.addEventListener('hashchange', planla);
+    document.addEventListener('click', function () { setTimeout(tara, 0); setTimeout(tara, 150); }, true);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla);
+  else basla();
+})();
+
+
+/* Eko-Log · Eko Can (yapay zekâ botu) baloncuğuna basınca TAM SAYFA açılır.
+   Tüm sayfalarda çalışır. Baloncuk ya da eko-bot.html bağlantısı tıklanınca
+   küçük sohbet penceresi yerine tam ekran katman açılır. */
+(function () {
+  /* Bot sayfasının kendi içinde (iframe ya da doğrudan) çalışma */
+  if (window.top !== window) return;
+  if (/(^|\/)eko-bot\.html$/.test(location.pathname)) return;
+
+  var D = document, ov = null, fr = null, prevF = null;
+  var BOT_URL = location.origin + '/eko-bot.html';   /* gerekirse değiştir */
+  var ETIKET = /(eko[-_ ]?(bot|can)|ekobot|chat|sohbet|asistan|(^|[-_ ])bot([-_ ]|$))/i;
+
+  function css() {
+    if (D.getElementById('ekobot-css')) return;
+    var st = D.createElement('style'); st.id = 'ekobot-css';
+    st.textContent = '#ekobot{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;background:#120c1a;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}#ekobot[hidden]{display:none}#ekobot .eb-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;background:#1c1328;color:#f6f0fb;font:700 15px "Instrument Sans",system-ui,sans-serif}#ekobot .eb-bar button{font:600 14px "Instrument Sans",system-ui,sans-serif;color:#f6f0fb;background:rgba(255,255,255,.14);border:0;border-radius:999px;padding:8px 16px;cursor:pointer}#ekobot iframe{flex:1 1 auto;width:100%;border:0;min-height:0;background:#120c1a}';
+    D.head.appendChild(st);
+  }
+
+  function kapat() {
+    if (!ov) return;
+    ov.hidden = true;
+    D.documentElement.style.overflow = ov._o || '';
+    if (prevF && prevF.focus) prevF.focus();
+  }
+
+  function ac(url) {
+    if (typeof window.EkoBotAc === 'function' && window.EkoBotAc !== ac) { window.EkoBotAc(url || BOT_URL); return; }
+    prevF = D.activeElement; css();
+    if (!ov) {
+      ov = D.createElement('div'); ov.id = 'ekobot';
+      ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Eko Can');
+      var bar = D.createElement('div'); bar.className = 'eb-bar';
+      var b = D.createElement('b'); b.textContent = 'Eko Can';
+      var x = D.createElement('button'); x.type = 'button'; x.textContent = '\u2715 Kapat';
+      x.addEventListener('click', kapat);
+      bar.appendChild(b); bar.appendChild(x);
+      fr = D.createElement('iframe'); fr.title = 'Eko Can';
+      fr.setAttribute('allow', 'clipboard-write; microphone');
+      ov.appendChild(bar); ov.appendChild(fr); D.body.appendChild(ov);
+      D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ov && !ov.hidden) kapat(); });
+    }
+    var u = url || BOT_URL;
+    if (fr.getAttribute('src') !== u) fr.src = u;
+    ov._o = D.documentElement.style.overflow; D.documentElement.style.overflow = 'hidden'; ov.hidden = false;
+  }
+  window.EkoCanTamSayfa = ac;
+
+  /* Sağ alttaki yuvarlak sohbet baloncuğu mu? (sabit konumlu, küçük, bot/sohbet etiketli) */
+  function baloncukMu(el) {
+    for (var n = el; n && n !== D.body && n.nodeType === 1; n = n.parentElement) {
+      if (n.closest('#ekobot')) return null;
+      var cs = getComputedStyle(n);
+      if (cs.position !== 'fixed') continue;
+      var r = n.getBoundingClientRect();
+      var kucuk = r.width <= 110 && r.height <= 110;
+      var sagAlt = r.right > innerWidth * 0.5 && r.bottom > innerHeight * 0.5;
+      var etiket = (n.id || '') + ' ' + (typeof n.className === 'string' ? n.className : '') + ' ' +
+        (n.getAttribute('aria-label') || '') + ' ' + (n.getAttribute('title') || '');
+      if (kucuk && sagAlt && ETIKET.test(etiket)) return n;
+    }
+    return null;
+  }
+
+  D.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var a = t.closest('a[href]');
+    if (a && a.target !== '_blank' && !a.closest('#ekobot') && /(^|\/)eko-bot\.html(#.*)?$/.test(a.getAttribute('href') || '')) {
+      e.preventDefault(); e.stopPropagation(); ac(a.href); return;
+    }
+    if (baloncukMu(t)) { e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); ac(BOT_URL); }
+  }, true);
+})();
+
