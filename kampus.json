@@ -1,0 +1,482 @@
+{
+ "_not": "Bu dosya botun bilgi kaynağıdır; eko-bot.js ile AYNI klasöre koy. Tarih, hat ya da duyuru değişince yalnızca burayı düzenle (JS'e dokunma). Alanlar: kampus = kf() başlıklı cevaplar (boş bırakılan başlıkta bot \"resmî kaynağa bak\" der); kurallar = soru kalıbı → cevap (en üstteki önce eşleşir); yer = yol tarifi konumları. kurallar içinde: re = düzenli ifade (aksan/büyük harf silinmiş metne uygulanır: ş→s, ı→i, ö→o, ü→u, ç→c, ğ→g) YA DA anahtar = [\"17a\",\"motas\"] gibi düz sözcük listesi (herhangi biri geçerse eşleşir); t = cevap (liste yazarsan rastgele biri seçilir); on = ikinci bir kalıp (ikisi de eşleşmeli, isteğe bağlı); genel:true = yalnız Genel modda. Dosyayı kaydettikten sonra JSON geçerli mi diye kontrol et: node test-bot.js",
+ "surum": "2026-11-25",
+ "kampus": {
+  "takvim": "📅 İnönü Üniversitesi 2026-2027 akademik takvimi yayımlandı (Öğrenci İşleri ve İİBF duyuruları). Öne çıkanlar:\n• Lisansüstü takvimde güz dersleri 21 Eylül 2026’da başladı; finaller 4–17 Ocak 2027, bütünleme 25–31 Ocak 2027\n• Lisans bahar: ders ekle-sil 1–2 Mart 2027; dersler 13 Haziran’da biter; finaller 14–27 Haziran; bütünleme 5–11 Temmuz 2027\nLisans güz finali ve bütünleme günü için bölüm/fakülte duyurusuna bak: inonu.edu.tr/ogrencidb",
+  "vize": "İnönü’de ara sınavlar ilgili birimin kararıyla bir hafta içinde yapılıyor; İİBF ve bölümün kendi vize programını duyurur (inonu.edu.tr/iibf). Ortak zorunlu derslerin (5i) bahar vizesi 12 Nisan 2027 Pazartesi 13:00–17:00. Güz vize programı için bölüm duyurusuna bak.",
+  "butunleme": "Lisans bahar bütünlemesi 5–11 Temmuz 2027 (5i dersleri 5 Temmuz Pazartesi). Lisansüstü güz bütünlemesi 25–31 Ocak 2027. Lisans güz bütünlemesinin günü için fakülte/bölüm duyurusuna bak.",
+  "devamsizlik": "Devam şartı yönetmelikte şöyle: teorik (ya da uygulaması da olan teorik) derslerin en az %70’ine, yalnızca uygulamalı derslerin en az %80’ine devam etmen gerekir; yoksa yarıyıl sonu sınavına giremezsin (devamsız: F3). Üniversiteyi bilimsel, kültürel, sportif etkinliklerde temsil eden öğrenciler için devam şartı aranmaz. Kural, Tıp ve Diş Hekimliği dışındaki lisans/önlisans programlarını kapsar; birimin duyurusu da geçerlidir.",
+  "yatay": "İnönü’de yatay geçiş ilanları Öğrenci İşleri ve fakülte sayfasında yayımlanıyor. 2026-27 güz için başarı durumuna göre yatay geçiş ilanı 9 Temmuz 2026’da, merkezi yerleştirme puanıyla (Ek Madde 1) başvuru duyurusu 3 Ağustos 2026’da çıktı. Şartlar her ilanda yazar; sonraki dönem için duyuruyu takip et.\n\nGenel şart (YÖK yönetmeliği; ilan metni esastır): kurumlar arası yatay geçişte bitirdiğin dönemlerin genel not ortalaması en az 100 üzerinden 60 (4’lükte 2,00) olmalı. Üniversite ve birim ek şart ve kontenjan koyabilir; hazırlık sınıfı notu hesaba girmez.",
+  "cift": "Çift anadal/yandal başvuruları ilanla yapılıyor; 2026-27 güz ilanı 28 Temmuz 2026’da İİBF sayfasında yayımlandı. Şartlar ilan ve yönergede yazar; sonraki dönem için duyuruyu bekle (inonu.edu.tr/iibf).\n\nGenel şart (YÖK yönetmeliği; ilan metni esastır): çift anadal için anadal genel not ortalaman en az 100 üzerinden 70 olmalı ve ilgili sınıfta başarı sıralamanın ilk %20’sinde olman gerekir; mezuniyette anadal ortalaman 70’in altında kalmamalı. Yandal için anadal ortalaman en az 65 olmalı ve başvuru yarıyılına kadar aldığın tüm kredili dersleri başarmış olmalısın.",
+  "mezuniyet": "Mezuniyet törenleri fakültelere göre ayrı yapılıyor (geçen yıl İletişim Fakültesi töreni Turgut Özal Kongre ve Kültür Merkezi’ndeydi). İİBF tarihini fakülte duyurusundan takip et.",
+  "erasmus": "",
+  "staj": "Staj, ilgili mevzuat ile YÖK ve Senato kararlarına göre yapılır; kamu kurumlarında ve eşdeğer özel kuruluşlarda yapılabilir. Zorunlu staj mezuniyet şartıdır; yaz stajı sonrası tek derse kalanlara tek ders sınavı açılır. Süre, dönem ve form bölümden bölüme değişir: bölümünün staj sorumlusuna ve birim duyurularına bak. Kariyer Merkezi de staj ilanı ve danışmanlık veriyor (inonu.edu.tr/kariyermerkezi).",
+  "aktsSart": "Mezuniyet şartları (Tıp ve Diş Hekimliği dışında):\n• Tamamlanması gereken AKTS: önlisans 120, 4 yıllık lisans 240, 5 yıllık lisans 300\n• Programdaki tüm zorunlu ders, uygulama, proje, bitirme çalışması ve zorunlu staj başarılmış olmalı\n• Hiçbir derste F1, F2, F3, YZ veya GR bulunmamalı\n• AGNO en az 2,00 (AGNO 2,00 ve üstüyse D1–D3 başarılı sayılır)\nAzami süre: önlisans 4, 4 yıllık lisans 7 yıl. Mezuniyete birim yönetim kurulu karar verir.",
+  "yemekhane": "",
+  "kutuphane": "",
+  "ulasim": "",
+  "dekan": ""
+ },
+ "kurallar": [
+  {
+   "re": "malatya ?kart|motas kart|ulasim kart|(ogrenci|indirimli) (ulasim )?kart|kart vize|vizele|otobus kart|bakiye yukle",
+   "t": "🚌 **MalatyaKart öğrenci kartı (indirimli tarife)**\n• Başvuru: MOTAŞ’ın online sistemi ya da MalatyaKart Başvuru ve Danışma Merkezi (Fuzuli Cd. Kapalı Çarşı No:7/3, Battalgazi). Kimlik ve öğrenci belgesi gerekiyor; kart ücreti teslimde ödeniyor.\n• Her akademik yıl **vize** ister (bu yıl son tarih 30 Eylül’dü); vizesiz kart tam tarifeden ücretlendirilir. Vize MOTAŞ mobil uygulamasından ücretsiz yapılabiliyor.\n• Dönem başında MOTAŞ kampüste de geçici kart noktası kuruyor (bu yıl Besyo trambüs durağı arkası, Merkezi Amfi Bloğu).\nGüncel ücret ve saatler için: motas.com.tr"
+  },
+  {
+   "re": "trambus|tramvay|troleybus|tarmbus|\\b80\\b.*(hat|nolu|numarali)|(hat|nolu|numarali).*\\b80\\b",
+   "t": "🚎 **Trambüs (80: Maşti – İnönü Üniv.)**\nMalatya’daki tek trambüs hattı; Yeşilyurt ve Battalgazi’den geçer. Başlıca duraklar:\nMaşti Otogar → Fahri Kayahan → Spor ve Yaşam Merkezi → Turgut Özal Mah. → Eğitim ve Araştırma Hastanesi → Dedekorkut → Büyükşehir Belediyesi/AVM → Sanayi → TSO → Çöşnük → Orduzu Pınarbaşı → Villakent → Turgut Özal Tıp Merkezi → Diş Hekimliği Fakültesi → Teknokent.\nHafta içi ilk sefer Maşti’den 05:20’de; yoğun saatlerde yaklaşık 10–12 dakikada bir.\nSaat ve durak değişebilir: [MOTAŞ hat sayfası](https://www.motas.com.tr/route/masti-inonu-uni.-trambus-hatti-43.html)"
+  },
+  {
+   "re": "\\b17\\s?a\\b|\\b17\\s?b\\b|\\b17\\s?c\\b|\\b16\\s?c\\b",
+   "t": "İnönü Üniversitesi hatları (MOTAŞ):\n• **17A:** Karakavak – İnönü Üniv.\n• **17B:** Güngör – Fahri Kayahan – Hasanbey – İnönü Üniv. (Malatya Lisesi, Tapu, Kernek Külliyesi, Mediko, BESYO, Spor Kompleksi, Stadyum, Teknokent)\n• **17C:** Şentepe – Tecde – Güney Kuşak – İnönü Üniv.\n• **16C:** İnönü Üniv. hattı\n• **80:** Maşti – İnönü Üniv. (trambüs)\nDurak ve saatler için: [MOTAŞ hat ve saatler](https://www.motas.com.tr)"
+  },
+  {
+   "re": "(inonu|universite|kampus|okul).*(hangi|hat\\b|hatlar|otobus|minibus|gidiyor|motas)|(otobus|hat\\b|hatlar|motas).*(inonu|universite|kampus)",
+   "t": "Kampüse giden başlıca MOTAŞ hatları 🚌\n• **80** Maşti – İnönü Üniv. (trambüs)\n• **17A** Karakavak – İnönü Üniv.\n• **17B** Güngör – Fahri Kayahan – Hasanbey – İnönü Üniv.\n• **17C** Şentepe – Tecde – Güney Kuşak – İnönü Üniv.\n• **16C** İnönü Üniv.\nHangisi sana uygun? Hangi semtten çıkacağını yaz, ona göre yön vereyim. Saatler için: [MOTAŞ hat ve saatler](https://www.motas.com.tr)"
+  },
+  {
+   "re": "(hastane|tip merkezi).*(hangi|hat\\b|hatlar|otobus|gidiyor|trambus|motas)|(hangi|otobus|hat\\b|motas).*(hastane|tip merkezi)",
+   "t": "Hastane ulaşımı 🏥\n• **Turgut Özal Tıp Merkezi:** 80 trambüsünün durağı var (Diş Hekimliği Fakültesi’nin yanı). Kampüse giden 17 serisi hatlarda da kampüs içi duraklar bulunuyor.\n• **Eğitim ve Araştırma Hastanesi:** 80 trambüsünün durağı var (Maşti tarafı).\n• Ayrıca 2D, 4H, 5A, 12V hatlarının güzergâhında “Hastane” durağı geçiyor; hangi hastane olduğunu hat sayfasından kontrol et.\nAcil durumda 112’yi ara. Hat ve saatler: [MOTAŞ hat ve saatler](https://www.motas.com.tr)"
+  },
+  {
+   "re": "(masti|otogar).*(hangi|hat\\b|hatlar|otobus|gidiyor|trambus|motas)|(hangi|otobus|hat\\b|motas).*(masti|otogar)",
+   "t": "Maşti (otogar) hatları 🚌 **80** trambüsü Maşti’den başlıyor ve İnönü Üniv.’ye gidiyor. Güzergâh adında Maşti geçen diğer MOTAŞ hatları: 2A, 2C, 2E, 13B. Kesin durak ve saatler için: [MOTAŞ hat ve saatler](https://www.motas.com.tr)"
+  },
+  {
+   "re": "motas|belediye otobus|otobus (hatlari|saatleri|ucret|tarife)|hangi (hat|otobus)|toplu tasima",
+   "t": "Malatya’da şehir içi toplu ulaşımı MOTAŞ (Büyükşehir Belediyesi) işletiyor. Hat numarası ve saatleri [MOTAŞ sitesinden](https://www.motas.com.tr) bakabilirsin.\nKampüse: 80 (trambüs), 17A, 17B, 17C, 16C. Hastane, Maşti ya da bir semt yazarsan hangi hattın geçtiğini söyleyeyim.\nℹ️ Hat ve saatler değişebilir; son hali için MOTAŞ’a bak."
+  },
+  {
+   "re": "tek dersim kaldi|tek ders (sinavi )?(sart|hak|nasil|kim)|mezun olmama (tek|bir) ders",
+   "t": "☝️ **Tek ders sınavı**\nMezun olmak için programındaki tek dersi (ya da tek ders + zorunlu ortak derslerden biri) kalan öğrenciye bütünleme sınavlarından sonra açılır. O dersin yarıyıl sonu sınavına girme şartını sağlamış olman gerekir. Geçene kadar sınırsız girebilirsin; girdiğin yarıyıl kayıt yenilemediysen katkı payını/öğrenim ücretini sınavdan önce ödersin."
+  },
+  {
+   "re": "tek ders",
+   "t": "Tek ders: lisans bahar için başvurular 16–23 Temmuz 2027, ortak zorunlu (5i) tek ders sınavı 30 Temmuz 2027 Cuma 15:00–17:00. Diğer dersler için birim duyurusuna bak; şartlar yönetmelikte yazar."
+  },
+  {
+   "re": "ders (ekle|ekleme|silme|sil|birak)|ekle sil",
+   "t": "Ders ekleme-silme: bahar dönemi için 1–2 Mart 2027 (öğrenci otomasyonu üzerinden). Güzün süresi geçti; sonraki dönemin tarihini akademik takvimden doğrula."
+  },
+  {
+   "re": "\\b5i\\b|ortak (zorunlu )?ders|\\busd\\b|universite secmeli",
+   "t": "Ortak zorunlu dersler (5i) merkezi sınav saati kullanıyor: bahar vizesi 12 Nisan 2027, finali 21 Haziran, bütünleme 5 Temmuz (Pazartesi 13:00–17:00). Üniversite seçmeli dersler (ÜSD): vize 14 Nisan, final 23 Haziran, bütünleme 7 Temmuz 2027 (Çarşamba 15:00–17:00)."
+  },
+  {
+   "re": "(inonu|universitemiz).*(ismi|adi|adini).*(nereden|kim)|neden inonu|inonu kim",
+   "t": "Üniversite, Türkiye Cumhuriyeti’nin ikinci cumhurbaşkanı İsmet İnönü’nün adını taşıyor."
+  },
+  {
+   "re": "inonu.*(ne zaman kuruldu|kurulus|kac yil)|kurulus yili",
+   "t": "İnönü Üniversitesi 1975’te kuruldu ve Malatya’nın en köklü üniversitesi."
+  },
+  {
+   "re": "acil (numara|telefon|durum)|\\b(112|155|156|110|183)\\b|polis|jandarma|itfaiye|kampus guvenlik|guvenlik (telefon|numara|amir)",
+   "t": "🚨 **Acil numaralar**\n• **112** Acil Çağrı (ambulans, polis, itfaiye, jandarma)\n• **155** Polis İmdat · **156** Jandarma · **110** İtfaiye\n• **183** Sosyal Destek Hattı (aile içi şiddet, çocuk, yaşlı, engelli destek)\n• **182** MHRS hastane randevusu\nKampüs güvenliğinin doğrudan numarasını doğrulayamadım; acil durumda 112 en hızlısı."
+  },
+  {
+   "re": "hastane|turgut ozal tip|doktora git|saglik merkezi",
+   "t": "Üniversite hastanesi Turgut Özal Tıp Merkezi. Randevu için MHRS (Alo 182) kullanılır; acil durumda 112’yi ara."
+  },
+  {
+   "re": "malatya.*(ne yenir|yemek|kayisi)|kayisi",
+   "t": "Malatya denince akla kayısı gelir 🍑 Taze, kuru, pestil ve ezmesiyle meşhur. Yemek mekânları için kampüsteki yerli arkadaşlarına sor, en iyi tavsiyeler onlardan."
+  },
+  {
+   "re": "malatya.*(gezilecek|gez|tarihi|turistik)|arslantepe",
+   "t": "Malatya’da: Arslantepe Höyüğü (UNESCO Dünya Mirası, 2021), Battalgazi’de Eski Malatya, tarihi çarşı ve hanlar. Hangi tür yerleri seversin, doğa mı tarih mi?"
+  },
+  {
+   "re": "malatya.*(nasil gel|otogar|havalimani|ucak|tren)",
+   "t": "Malatya’ya karayolu (otogar), havayolu (Malatya Erhaç Havalimanı) ve demiryoluyla ulaşabilirsin. Güncel sefer saatlerini ilgili firma/TCDD sitesinden doğrula."
+  },
+  {
+   "re": "(not|sinav|sonuc).*itiraz|itiraz.*(not|sinav|sonuc)|maddi hata|notuma itiraz|notum yanlis|notum\\w* yanlis|not\\w* yanlis gir|notu yanlis|notumu duzelt|not hatasi|hoca.*notu.*(yanlis|hata)",
+   "t": "📝 **Sınav sonucuna itiraz (lisans/önlisans)**\nSonuçların ilanından itibaren **5 iş günü** içinde, yazılı olarak ilgili dekanlık/müdürlüğe başvurulur. İtiraz **maddi hata** bakımından incelenir: bölüm başkanlığı dersin sorumlu öğretim elemanına gönderir; not değişirse birim yönetim kurulu görüşür. İtirazla değişen not, bağıl değerlendirme hesabına katılmaz.\n• Lisansüstünde süre 1 hafta ve başvuru enstitü müdürlüğüne yapılır.\n• Tıp ve Diş Hekimliği Fakültelerinin kendi yönetmeliği var.\nSüre değişmiş olabilir; güncel metin: inonu.edu.tr/ogrencidb",
+   "devam": [
+    {
+     "re": "lisansustu|yuksek lisans|doktora",
+     "t": "Lisansüstünde süre **1 hafta**; başvuru enstitü müdürlüğüne yazılı yapılır."
+    },
+    {
+     "re": "nereye|kime|nasil|dilekce",
+     "t": "Sonuçların ilanından sonraki 5 iş günü içinde, **yazılı dilekçeyle ilgili dekanlığa/müdürlüğe** başvur. Dilekçede dersin adını, sınav türünü ve itiraz nedenini (maddi hata) yaz."
+    },
+    {
+     "re": "sure|kac gun|ne zamana|son gun",
+     "t": "Süre, sonuçların ilanından itibaren **5 iş günü**. Kaçırırsan itiraz kabul edilmez."
+    }
+   ]
+  },
+  {
+   "re": "kayit dondur|dondurma|dondurmak|izinli say|donem dondur|okulu dondur|okula ara ver|ara vermek",
+   "t": "❄️ **Kayıt dondurma**\nHaklı ve geçerli bir neden (ör. sağlık raporu, doğum, doğal afet, askerlik) varsa ilgili yönetim kurulu kararıyla kaydın dondurulabilir. Bu sürede öğrenci izinli sayılır ve donduruş süresi öğrenim süresinden sayılmaz.\n• Süre **en fazla 1 yıl**; kanser, verem, akıl hastalığı gibi uzun tedavi gerektiren durumlarda sağlık raporuyla 2 yıla çıkabilir. (Lisansüstünde en çok 2 yıl.)\nBaşvuru zamanı ve belgeler için fakülte/yüksekokul öğrenci işleri ile akademik takvime bak: inonu.edu.tr/ogrencidb",
+   "devam": [
+    {
+     "re": "kac (yil|donem)|sure|ne kadar",
+     "t": "Kayıt dondurma süresi **en fazla 1 yıl**; kanser, verem, akıl hastalığı gibi uzun tedavi gerektiren durumlarda sağlık raporuyla **2 yıla** çıkabilir. Donduruş süresi öğrenim süresinden sayılmaz."
+    },
+    {
+     "re": "askerlik|hasta|rapor|belge|ekonomik|doğum|dogum|neden",
+     "t": "Kabul edilen nedenler arasında sağlık kurulu raporu, doğal afet, yakının ağır hastalığı, ekonomik sıkıntı (en büyük mülki amirce verilen belgeyle), askere alınma, tutukluluk ve Üniversite dışı burs/staj/yurt dışı dil eğitimi gibi imkânlar var. Belgeni fakülte öğrenci işlerine götür; karar ilgili yönetim kurulunda verilir."
+    },
+    {
+     "re": "nereye|kime|nasil|dilekce",
+     "t": "Mazeret belgenle birlikte yazılı dilekçeyle kayıtlı olduğun birimin öğrenci işlerine başvur; kayıt dondurmaya ilgili yönetim kurulu karar verir."
+    }
+   ]
+  },
+  {
+   "re": "akademik danisman|danismanim|danisman (kim|onay|bul)|ders kaydi onay",
+   "t": "👩‍🏫 **Akademik danışman**\nYönetmeliğe göre her dönem başında kaydını yenileyip ders kaydını yaptırmalı ve **danışmanına onaylatmalısın**; onaysız ders kaydı tamamlanmış sayılmaz. Danışmanının kim olduğunu öğrenci otomasyonundan ya da bölüm sekreterliğinden öğrenebilirsin."
+  },
+  {
+   "re": "wi.?fi|eduroam|kablosuz|parola|sifre|e.?posta|mail adres|microsoft 365|office 365|kampus disi|\\bvpn\\b|internet baglan",
+   "t": "📶 **Wi-Fi, e-posta ve parola**\nKullanıcı adı ve parolanı **pbs.inonu.edu.tr** adresinden (“Parola Sıfırla”) oluşturuyorsun. Aynı hesapla e-posta, Microsoft 365, uzaktan eğitim (LMS), kampüs Wi-Fi/**eduroam** ve kampüs dışı erişim kullanılıyor. Öğrenci e-postası genelde ogrno@ogr.inonu.edu.tr biçiminde.\nBağlantı ya da arıza sorunu için Bilgi İşlem’e: teknik.inonu.edu.tr (inonu.edu.tr/bidb)"
+  },
+  {
+   "re": "diploma|mezuniyet belgesi|mezuniyet islem",
+   "t": "🎓 **Mezuniyet ve diploma**\nMezuniyete, şartlarını tamamlayınca ilgili birimin yönetim kurulu karar verir (md. 31); durumunu e-Devlet’ten takip edebilirsin. Diploma ve belge işlemleri için Öğrenci İşleri’ne başvur: inonu.edu.tr/ogrencidb. Diploma teslim süreleri yıla göre değişir."
+  },
+  {
+   "re": "\\bburs|ogrenim kredisi|kyk kredi|kredi basvuru",
+   "t": "💸 **Burs ve kredi**\n• **KYK burs/kredi:** Başvurular e-Devlet üzerinden yapılıyor; takvim her yıl KYK duyurularında ilan edilir.\n• **Üniversite destekleri:** Sağlık, Kültür ve Spor Daire Başkanlığı’nın “Burs ve Destekler” bölümüne bak (inonu.edu.tr/sksdb). Başvuru şartları ve tarihleri ilanlarda yazar, yıldan yıla değişebilir.\nYurt başvurusu için “yurt” yazabilirsin."
+  },
+  {
+   "re": "kulup|topluluk|toplulugu|kampus lig",
+   "t": "🎭 **Öğrenci toplulukları**\nİnönü’de çok sayıda öğrenci topluluğu var (kültür, sanat, spor, bilim, girişimcilik…). Güncel topluluk listesi ve nasıl üye olunacağı ya da topluluk kurulacağı Sağlık, Kültür ve Spor Daire Başkanlığı’nın “Öğrenci Toplulukları” sayfasında: inonu.edu.tr/sksdb. Spor tarafı için “Kampüs Ligleri” bölümüne de bak."
+  },
+  {
+   "re": "psikolog|psikolojik|rehberlik|\\bpdr\\b|stres|kaygi|depresyon|anksiyete|bunaldim|moralim",
+   "t": "🧠 **Psikolojik destek**\nÜniversitenin Psikolojik Danışmanlık ve Rehberlik Birimi, Sağlık, Kültür ve Spor Daire Başkanlığı bünyesinde öğrencilere destek veriyor (bilgilendirmelere göre hafta içi 08.00–12.00 ve 13.00–17.00 arası; çevrimiçi görüşme de yapılabiliyor). Randevu ve güncel bilgi: inonu.edu.tr/sksdb.\nKendini çok kötü hissediyorsan beklemeden bir yakınınla ya da bir uzmanla konuş; acil bir durumda **112**’yi ara."
+  },
+  {
+   "re": "engelli|engelsiz|ozel gereksinim|erisilebilir",
+   "t": "♿ **Engelli öğrenci desteği**\nÜniversitelerde engelli öğrenciler için destek birimi bulunur; ders, sınav ve erişilebilirlik düzenlemeleri için bölüm başkanlığına ve Öğrenci İşleri’ne (inonu.edu.tr/ogrencidb) başvurabilirsin. Birimin güncel iletişim bilgisi için inonu.edu.tr’de “Engelli Öğrenci Birimi” sayfasına bak; kesin telefonunu doğrulayamadım."
+  },
+  {
+   "re": "spor (tesis|salon|kompleks|merkez)|hali ?saha|yuzme|havuz|fitness|kapali spor|sosyal tesis",
+   "t": "🏅 **Spor ve sosyal tesisler**\nKampüste Spor Kompleksi ve Sosyal Tesisler var; kullanım saatleri, ücretler ve “Kampüs Ligleri” bilgisi Sağlık, Kültür ve Spor Daire Başkanlığı’nda: inonu.edu.tr/sksdb.\n🚌 Ulaşım: 80 trambüsünün Spor ve Yaşam Merkezi durağı ve 17B hattının Spor Kompleksi durağı var."
+  },
+  {
+   "re": "telefon (numara|rehber)|santral|sekreterlik|dahili|iletisim bilgi|fakulte.*(telefon|ara\\b)|bolum.*(telefon|ara\\b)",
+   "t": "☎️ Telefon numaralarını yanlış vermemek için tahmin yürütmüyorum; her birimin kendi sayfasındaki “İletişim” bölümü en güncel kaynak.\n• Öğrenci İşleri: inonu.edu.tr/ogrencidb\n• İİBF: inonu.edu.tr/iibf\n• Bilgi İşlem: inonu.edu.tr/bidb (arıza: teknik.inonu.edu.tr)\n• Sağlık, Kültür ve Spor: inonu.edu.tr/sksdb\nFakülte/bölüm sekreterliği için ilgili birimin sayfasına bak."
+  },
+  {
+   "re": "yemek (menu|kart)|yemekhane (menu|kart)|\\bmenu\\b|bakiye|para yukle",
+   "t": "🍽️ Yemekhane menüsü, yemek kartına para yükleme ve bakiye sorgulama Sağlık, Kültür ve Spor Daire Başkanlığı sayfasında: inonu.edu.tr/sksdb (Menü ve Yemek Kartı bölümleri). Ücret ve saatler dönem içinde değişebilir."
+  },
+  {
+   "re": "harf not|not (tablosu|karsilik|araligi|cetveli|sistemi)|agno nasil|gno nasil|yno nasil|ortalama nasil|ortalama (hesaplan|formul)|a1 a2",
+   "t": "🔤 **Harf notları ve AGNO**\nA1 4,00 (95–100) · A2 3,75 (90–94) · A3 3,50 (85–89)\nB1 3,25 (80–84) · B2 3,00 (75–79) · B3 2,75 (70–74)\nC1 2,50 (65–69) · C2 2,25 (60–64) · C3 2,00 (55–59)\nD1 1,75 · D2 1,50 · D3 1,00 → şartlı başarılı\nF1 0,50 · F2 0,00 · F3 0,00 (devamsız) → başarısız\n**AGNO** = Σ(AKTS × katsayı) ÷ Σ AKTS (iki ondalık). AGNO 2,00 ve üstüyse D’li dersler de geçer. Ham not %40 ara sınav + %60 final; finalden en az 50 almak gerekir, harf bağıl değerlendirmeyle belirlenir.\nNotlarını yazarsan senin için hesaplarım: **“AGNO hesapla”**."
+  },
+  {
+   "re": "kac (akts|kredi) (alabil|alirim|alinir|alin)|akts (sinir|limit)|ders (yuku|alma sinir)|ustten ders|alttan ders|ders alma kural",
+   "t": "📚 **Dönemlik AKTS sınırı (AGNO’na göre)**\n• AGNO 2,00’nin altı: en çok 30 AKTS; alttan dersler zorunlu, üstten ders yok\n• 2,00–2,99: en çok 40 AKTS; alttan dersler öncelikli\n• 3,00–3,49 (onur): en çok 40 AKTS; başarısız dersi yoksa üstten ders alabilir\n• 3,50–4,00 (yüksek onur): en çok 45 AKTS; aynı şart\nAlttan ders: F1/F2/F3 ve hiç almadığın dersler zorunlu, D1–D3 isteğe bağlı. Üstten ders ikinci yarıyılın sonundan itibaren. Yıllık sistemde sınırlar 60/80/90."
+  },
+  {
+   "re": "butunleme.*(kim|girebil|sart|hangi not|not)|(kim|kimler|hangi).*butunleme",
+   "t": "🔁 **Bütünlemeye kimler girer?**\nYarıyıl sonu sınavında **D1, D2, D3, F1 ve F2** aldığın derslerin bütünlemesine girebilirsin (devamsız F3 hariç). Bütünleme notu final notunun yerine geçer; ara sınav ağırlığı aynı hesaplanır. Bütünlemeye giremezsen mazeret sınavı hakkı yoktur. Tarihler için akademik takvime bak."
+  },
+  {
+   "re": "mazeret (sinav|ara sinav)|sinava giremedim|sinavi kacirdim|rapor.*sinav|sinav.*rapor",
+   "t": "🩺 **Mazeret sınavı**\nHaklı ve geçerli nedenle **ara sınava** giremediysen, sınav tarihinden sonraki **5 iş günü** içinde belgelerinle yazılı olarak dekanlığa/müdürlüğe başvur; birim yönetim kurulu kararıyla mazeret ara sınavı açılır. Süre geçerse başvuru kabul edilmez.\n• Yarıyıl sonu sınavı için ayrıca mazeret sınavı yapılmaz.\n• Raporlu/izinli olduğun günlerde sınava girersen sonuç geçerli sayılmaz."
+  },
+  {
+   "re": "ders muafiyet|muaf (ol|say)|intibak|ders saydir|denklik|esdeger ders|daha once (aldigim|gectigim) ders",
+   "t": "📋 **Ders muafiyeti**\nBaşka bir yükseköğretim kurumunda başarmış olduğun eşdeğer dersler için, ilk kayıt tarihinden sonraki **ilk iki hafta** içinde muafiyet talep edebilirsin. Birim yönetim kurulu, ders ekle-sil tarihine kadar karar verir; değerlendirme öğrenme çıktıları, kredi/saat ve içeriğe bakılarak yapılır, notun harf karşılığı İnönü sistemine çevrilir. Yatay/dikey geçişte muafiyet ve intibak komisyonu devreye girer."
+  },
+  {
+   "re": "katki payi|ogrenim ucreti|\\bharc\\b|ucret (odeme|yatir)|ders kaydi.*(odeme|ucret)",
+   "t": "💳 **Katkı payı / öğrenim ücreti**\nDevlet üniversitesinde ücret durumu öğretime göre değişir (ör. ikinci öğretim ve normal süreyi aşanlar ödeyebilir); tutarlar her yıl Cumhurbaşkanı kararıyla belirlenir. Ödenmesi gereken öğrenci, akademik takvimdeki sürede ödemeden ders kaydı yaptıramaz. Dönem sıralamasında ilk %10’a giren öğrenciler indirim alabilir (birinci öğretimde katkı payının yarısı, ikinci öğretimde birinci öğretim katkı payı kadar). Kendi durumun ve güncel tutar için Öğrenci İşleri: inonu.edu.tr/ogrencidb"
+  },
+  {
+   "re": "ders kayd\\w*.*(yapamad|yaptiramad|kacird|unuttum|gec kal)|kayit yenileme.*(mazeret|gec|yapamadim)|gec kayit|ders secemedim|ders secimi yapamadim",
+   "t": "⏰ **Ders kaydını kaçırdım**\nGeçerli mazeretin varsa, mazeretini anlatan dilekçeyle başvur: ilgili yönetim kurulu kararıyla kaydın, eğitim-öğretimin başladığı tarihi izleyen **dördüncü haftanın sonuna kadar** yenilenebilir. Kaydı yenilemeyen dönem öğrenim süresinden sayılır; derslere devam edemez, sınavlara giremezsin."
+  },
+  {
+   "re": "kariyer (merkezi|danis)|is (ve )?staj ilan|staj ilani|ulusal staj|iskur staj",
+   "t": "💼 **Kariyer Merkezi ve staj ilanları**\nİnönü Üniversitesi Kariyer Merkezi: inonu.edu.tr/kariyermerkezi (duyurular için @inonukariyer). CV, kariyer danışmanlığı ve staj/iş ilanları orada.\n📢 Kariyer Merkezi’nin duyurusuna göre **Ulusal Staj Programı 2027** başvurusu açık; son başvuru **14 Aralık 2026**: ulusalstajprogrami.iskur.gov.tr"
+  },
+  {
+   "re": "kismi zamanli|yari zamanli|part time|kampuste calis|ogrenci (isci|calis)",
+   "t": "🧑‍💼 **Kısmi zamanlı öğrenci çalışması**\nÜniversiteler öğrencileri kendi birimlerinde kısmi zamanlı çalıştırabilir; ilanlar birimlerde ve Sağlık, Kültür ve Spor Daire Başkanlığı sayfasında yayımlanır (inonu.edu.tr/sksdb). Başvuru şartları ve ücret her dönem ilanda yazar; güncel ilanı ben göremiyorum, oradan takip et."
+  },
+  {
+   "re": "sosyal transkript",
+   "t": "🧾 **Sosyal transkript**\nSağlık, Kültür ve Spor Daire Başkanlığı sayfasında “Sosyal Transkript” bölümü var: topluluk ve etkinlik gibi faaliyetlerinin kayda geçtiği sistem. Nasıl kullanıldığı ve neleri saydığı için bak: inonu.edu.tr/sksdb"
+  },
+  {
+   "re": "(f2|f1|ff|fd|kaldim).*(ne yap|ne olur|sonra)|dersten kaldim|dersi gecemedim|dersten kalan|dersim kaldi",
+   "t": "📌 **Dersten kaldıysan (F1/F2)**\n1) Bütünlemeye girebilirsin; bütünleme notu final yerine geçer (D1–D3 ve F1/F2 notlular girer, devamsız F3 girmez).\n2) Bütünlemede de geçemezsen dersi tekrar almalısın; alttan ders zorunludur ve AKTS sınırından önce sayılır.\n3) AGNO’n 2,00 ve üstüyse D’li dersler başarılı sayılır, F’liler değil.\n4) Mezun olacak son dersin buysa tek ders sınavı hakkını kullanabilirsin.\nNotlarını yazarsan etkisini hesaplarım: “agno hesapla”.",
+   "devam": [
+    {
+     "re": "butunleme|ne zaman",
+     "t": "Bütünleme tarihleri akademik takvimde ilan edilir; bütünlemeye giremezsen mazeret sınavı hakkı yoktur."
+    },
+    {
+     "re": "tek ders",
+     "t": "Tek ders sınavı, mezun olmak için tek dersi kalan öğrenciye bütünlemeden sonra açılır; geçene kadar sınırsız girebilirsin."
+    }
+   ]
+  },
+  {
+   "re": "devamsizlik.*(kaldim|kalmak|f3)|devamsiz.*kaldim|devamsizliktan|yoklama.*kaldim",
+   "t": "🚫 **Devamsızlıktan kaldıysan (F3)**\nTeorik derslerde %70, yalnızca uygulamalı derslerde %80 devam gerekir; yoksa yarıyıl sonu sınavına giremezsin ve bütünlemeye de giremezsin. Dersi tekrar almalısın. Devamını aldığın ama başarısız olduğun derslerin tekrarında, birim aksini kararlaştırmadıkça devam zorunluluğu aranmaz. Mazeret raporun varsa dersin sorumlusuna ve bölüm başkanlığına bildir; kuralı bölümün duyurusundan da kontrol et."
+  },
+  {
+   "re": "agnom? (1|2|3)[.,]?\\d*.*(mezun|gecer|olur)|(mezun|mezuniyet).*(agno|ortalama).*(dusuk|yetmiyor|2)|agno.*(2|iki)['’ ]?(nin|nın|in) alt",
+   "t": "🎓 **AGNO 2,00’nin altındaysa mezuniyet**\nMezun olmak için AGNO en az 2,00 olmalı. Tüm derslerden geçer not aldığın halde AGNO 2,00’nin altında kaldıysan (ilişiğin kesilme durumuna gelen son dönem/sınıf öğrencisi için) not yükseltmek üzere istediğin derslerden açılan sınavlara **sınırsız girme hakkı** var. D1–D3’lü dersleri tekrar alarak son notu geçerli kıl; AGNO’n 2,00’ye ulaşınca mezun olursun. Etkisini görmek için “agno hesapla” yaz."
+  },
+  {
+   "re": "ders(im|ler|lerim)? cakis|cakisan ders|sinavlar cakis|ders cakismasi",
+   "t": "🗓️ **Dersler çakışıyorsa**\nÇakışan derslerin devamını, şubeliyse öncelikle diğer şubelerle; şubeli değilse ikinci/normal öğretim programından ya da başka fakülte/bölümden alman mümkündür. Bunu bölüm başkanlığının önerisiyle ilgili birimin yönetim kurulu karara bağlar. Sınava ise aldığın sınıflarla birlikte girersin. Önce danışmanına ve bölüm sekreterliğine git."
+  },
+  {
+   "re": "okuldan at|ilisigim kesil|ilisik kesil|uzaklastirma|kopya (cezasi|cekersem|ceza)",
+   "t": "⚠️ **İlişik kesilmesi ve kopya**\nİlişik kesilme durumları yönetmelikte sayılıdır: yükseköğretim kurumundan çıkarma cezası, başka bir yükseköğretim kurumunda kayıtlı olduğunun belirlenmesi, kesin kaydın usulüne uygun yapılmadığının anlaşılması ve azami öğrenim süresinin sonunda (ders sayısı şartları sağlanmazsa) kayıt silme. Azami süre: önlisans 4, 4 yıllık lisans 7 yıl. Kopya çektiği sabit olan öğrenci o dersten sıfır alır; disiplin süreci Yükseköğretim Kurumları Öğrenci Disiplin Yönetmeliğine göre yürür."
+  },
+  {
+   "re": "okulu birak|kaydimi sildir|kayit sildir|ilisik kesmek|okuldan ayril|kaydimi sil",
+   "t": "📤 **Kaydını sildirmek**\nKaydının silinmesini isteyen öğrenci dilekçeyle birimin öğrenci işleri bürosuna başvurur ve ilişik kesme belgesi işlemlerini tamamlar. Lise diplomanın aslı, fotokopisi alınarak sana verilir. Geri dönüşü zor bir karar: önce kayıt dondurma gibi seçenekleri düşünmek isteyebilirsin (“kayıt dondurma nasıl yapılır” yaz)."
+  },
+  {
+   "re": "deprem|afet|toplanma alani|artci|cok kapan|cok-kapan",
+   "t": "🌍 **Deprem ve afet**\n• **Sarsıntı anında:** ÇÖK–KAPAN–TUTUN: başını kollarınla koru, sağlam bir masa/sıra yanında ya da altında kal; camdan ve devrilecek eşyadan uzak dur; asansör kullanma.\n• **Sarsıntı bitince:** mümkünse doğalgaz ve elektriği kapat, merdivenle açık alana çık, hasarlı binaya geri girme.\n• **Toplanma alanını önceden öğren:** e-Devlet’te AFAD “Acil Toplanma Alanı Sorgulama” hizmetine adresini yazarak bak. Kampüsteki toplanma alanları için birimin ve Sağlık, Kültür ve Spor’un duyurularına bak.\n• Acil durumda **112**; resmî bilgi için afad.gov.tr"
+  },
+  {
+   "re": "saglik sigorta\\w*|\\bgss\\b|\\bsgk\\b|ogrenci sigorta\\w*|provizyon",
+   "t": "🏥 **Öğrenci sağlık sigortası (GSS)**\nSağlık yardımından yararlanma durumun öğrenci olarak kaydın ve yaşın gibi koşullara göre değişir. Kendi durumunu e-Devlet’te SGK’nın “Sağlık Provizyon Aktivasyon Sistemi”nden görebilirsin. Sorun görürsen Öğrenci İşleri’ne (inonu.edu.tr/ogrencidb) ya da SGK’ya başvur. Kesin kapsamı kendi durumun için SGK’dan teyit et."
+  },
+  {
+   "re": "ilk hafta|yeni (geldim|kayit|ogrenci)|malatyaya yeni|kayit (oldum|sonrasi).*ne yap|yeni basliyorum",
+   "t": "🧭 **Yeni öğrenci için ilk hafta**\n1) **Hesap:** pbs.inonu.edu.tr’den kullanıcı adı/parola; e-posta, Wi-Fi (eduroam) ve LMS bununla açılır.\n2) **Ders kaydı:** akademik takvimdeki sürede kaydını yenile, dersleri seç ve **danışmanına onaylat**.\n3) **Ulaşım:** MalatyaKart öğrenci kartı (yıllık vize unutma); kampüse 80 trambüsü, 17 serisi ve 16C.\n4) **Yurt/barınma:** KYK başvuru takvimi (e-Devlet) ya da kendi çözümün.\n5) **Sağlık:** SGK durumunu e-Devlet’ten kontrol et; acil **112**.\n6) **Sosyal:** topluluklar ve spor için Sağlık, Kültür ve Spor Daire Başkanlığı (inonu.edu.tr/sksdb).\n7) **Kariyer:** Kariyer Merkezi (inonu.edu.tr/kariyermerkezi).\nBir başlığı ayrıntılı sorabilirsin."
+  },
+  {
+   "re": "\\b(yurt|kyk|burs)\\b",
+   "t": "KYK yurt ve burs/kredi başvuruları e-Devlet ve KYK duyurularından yapılıyor; takvim her yıl KYK sayfasında ilan edilir. Özel yurt ya da ev tutarken sözleşmeyi dikkatle oku, depozito şartlarını yazılı al."
+  },
+  {
+   "re": "ogrenci belgesi|transkript|diploma|ogrenci kimlik",
+   "t": "Öğrenci belgesi e-Devlet’ten barkodlu alınabilir. Transkript ve ders kaydı için üniversitenin öğrenci otomasyon sistemine gir. Diploma işlemleri için mezuniyet sonrası Öğrenci İşleri’ne başvur."
+  },
+  {
+   "re": "ydyo|hazirlik|yabanci dil (muafiyet|sinav)|muafiyet",
+   "t": "Yabancı dil hazırlık ve muafiyet işleri YDYO’da. Takvim için inonu.edu.tr/ydyo adresindeki “Akademik Takvim” bölümüne bak; zorunlu olup olmadığı programa göre değişir."
+  },
+  {
+   "re": "yaz okulu",
+   "t": "Yaz okulu ilanları Öğrenci İşleri duyurularında yayımlanıyor. Açılacak dersler, ücret ve şartlar ilan metninde yazar; birimine göre değişebilir."
+  },
+  {
+   "re": "\\biibf\\b|iktisadi ve idari|fakulte (sayfasi|duyuru)|duyuru(lar)? (nereden|nerede)",
+   "t": "İİBF duyuruları: inonu.edu.tr/iibf. Üniversite geneli için Öğrenci İşleri: inonu.edu.tr/ogrencidb. Takvim, yatay geçiş ve çift anadal ilanları buralarda yayımlanıyor."
+  }
+ ],
+ "yer": [
+  {
+   "re": "kongre|kultur merkezi",
+   "ad": "Turgut Özal Kongre ve Kültür Merkezi",
+   "sorgu": "Turgut Özal Kongre ve Kültür Merkezi, Malatya",
+   "not": "Akademik yıl açılışı ve mezuniyet törenleri gibi etkinlikler burada yapılıyor."
+  },
+  {
+   "re": "egitim.*arastirma|arastirma hastane|egitim ve arastirma",
+   "ad": "Malatya Eğitim ve Araştırma Hastanesi",
+   "sorgu": "Malatya Eğitim ve Araştırma Hastanesi, Malatya",
+   "not": "🚎 Ulaşım: 80 trambüsü (Maşti – İnönü Üniv.) hastanenin durağından geçiyor; Maşti/otogar tarafından en kolay yol bu. Diğer hatlar için MOTAŞ hat sayfasına bak (motas.com.tr). Acil durumda 112’yi ara."
+  },
+  {
+   "re": "battalgazi.*(devlet|hastane)|(devlet|hastane).*battalgazi",
+   "ad": "Battalgazi Devlet Hastanesi",
+   "sorgu": "Battalgazi Devlet Hastanesi, Malatya",
+   "not": "🚌 Ulaşım: Yakınından geçen MOTAŞ hatları 11A, 11B, 17B, 401A, 401B, 4H ve 80 trambüsü (hat bilgisi toplu taşıma uygulamalarından derlendi, değişmiş olabilir; güncel durak ve saat için motas.com.tr’yi kontrol et). Acil durumda 112’yi ara."
+  },
+  {
+   "re": "beylerderesi.*(millet|bahce|park)|(millet|bahce|park).*beylerderesi",
+   "ad": "Beylerderesi Millet Bahçesi",
+   "sorgu": "Beylerderesi Millet Bahçesi, Malatya",
+   "not": "🚌 Maşti–Beylerderesi güzergâhından geçen MOTAŞ hatları var (Maliye–Maşti–Beylerderesi hattı gibi). Kesin hat numarasını doğrulayamadım. Hangi hattın uygun olduğu çıkış noktana göre değişiyor: “Toplu taşımayla” bağlantısı sana canlı hat ve saatleri gösterir; ayrıca motas.com.tr’den bak."
+  },
+  {
+   "re": "beydagi.*(millet|bahce|park)|(millet|bahce|park).*beydagi",
+   "ad": "Beydağı Millet Bahçesi",
+   "sorgu": "Beydağı Millet Bahçesi, Malatya",
+   "not": "🚌 Beydağı mahallesine giden hatlardan 302 (Akpınar–Fırıncı–Beydağı) ve 8D (Beydağı TOKİ) gibi hatlar var; parka en yakın durağı doğrulayamadım. Hangi hattın uygun olduğu çıkış noktana göre değişiyor: “Toplu taşımayla” bağlantısı sana canlı hat ve saatleri gösterir; ayrıca motas.com.tr’den bak."
+  },
+  {
+   "re": "battalgazi.*(millet|bahce)|(millet|bahce).*battalgazi",
+   "ad": "Battalgazi Millet Bahçesi",
+   "sorgu": "Battalgazi Millet Bahçesi, Malatya",
+   "not": "🚌 Battalgazi ilçesine 17B, 11A/11B, 401A/401B ve 80 trambüsü gidiyor; parka en yakın durağı doğrulayamadım. Hangi hattın uygun olduğu çıkış noktana göre değişiyor: “Toplu taşımayla” bağlantısı sana canlı hat ve saatleri gösterir; ayrıca motas.com.tr’den bak."
+  },
+  {
+   "re": "yuzuncu yil.*(park|bahce)|yuzuncu yil",
+   "ad": "Yüzüncü Yıl Parkı",
+   "sorgu": "Yüzüncü Yıl Parkı, Malatya",
+   "not": "🚌 Bu park için hat bilgisini doğrulayamadım. Hangi hattın uygun olduğu çıkış noktana göre değişiyor: “Toplu taşımayla” bağlantısı sana canlı hat ve saatleri gösterir; ayrıca motas.com.tr’den bak."
+  },
+  {
+   "re": "kirkgoz|sahil park",
+   "ad": "Kırkgöz Sahil Parkı",
+   "sorgu": "Kırkgöz Sahil Parkı, Battalgazi, Malatya",
+   "not": "🚌 Battalgazi’de, yaz aylarında kalabalık bir sahil parkı. Hat numarasını doğrulayamadım. Hangi hattın uygun olduğu çıkış noktana göre değişiyor: “Toplu taşımayla” bağlantısı sana canlı hat ve saatleri gösterir; ayrıca motas.com.tr’den bak."
+  },
+  {
+   "re": "malatya millet|millet bahcesi",
+   "ad": "Malatya Millet Bahçesi",
+   "sorgu": "Malatya Millet Bahçesi, Malatya",
+   "not": "🚌 Yakınından 11B, 12V, 17A, 17B, 401B hatları ve 80 trambüsü geçiyor (en yakın durak: Sivas Cd.). Bahçe yenileme çalışmasında olabilir, açık olup olmadığını kontrol et. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "malatyapark|malatya park|\\bavm\\b|alisveris merkezi",
+   "ad": "MalatyaPark AVM",
+   "sorgu": "MalatyaPark AVM, Malatya",
+   "not": "🚌 Yakınından 11B, 17A, 10Z, 2K hatları ve 80 trambüsü (Sanayi durağı, yaklaşık 4 dk yürüme) geçiyor. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "maliye|\\bcarsi\\b|sehir merkezi",
+   "ad": "Maliye durağı / Malatya şehir merkezi",
+   "sorgu": "Maliye, Malatya",
+   "not": "🚎 80 trambüsünün Maliye durağı var. Maliye çıkışlı hatlardan 2B, 20A, 150, 153A, 254 gibi hatlar çalışıyor; 16C hattı da Çarşı’ya gidiyor. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "kyk|^yurt$|yurtlar|yurdu|yurduna|yurda\\b",
+   "ad": "İnönü Üniversitesi çevresi yurtlar",
+   "sorgu": "KYK Yurdu, İnönü Üniversitesi, Malatya",
+   "not": "🏠 Hangi yurt olduğunu yazarsan haritada onun adını ararım. 16C hattı Turgut Özal Hastanesi ile Sağlık Bilimleri Yurdu arasında çalışıyor; kampüs yurtlarına 80 trambüsü ve 17 serisi hatlar da gidiyor. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "kutuphane",
+   "ad": "İnönü Üniversitesi Kütüphanesi",
+   "sorgu": "İnönü Üniversitesi Kütüphanesi, Malatya",
+   "not": "📚 Kampüse 80 trambüsü, 17A/17B/17C ve 16C hatları gidiyor. Kampüs içindeki kesin durağı doğrulayamadım; haritada binanın adını aratabilirsin. Açık olduğu saatler için kutuphane sayfasına bak."
+  },
+  {
+   "re": "yemekhane",
+   "ad": "İnönü Üniversitesi Yemekhane",
+   "sorgu": "İnönü Üniversitesi Yemekhane, Malatya",
+   "not": "🍽️ Kampüse 80 trambüsü, 17A/17B/17C ve 16C hatları gidiyor. Kampüs içindeki kesin durağı doğrulayamadım; haritada binanın adını aratabilirsin. "
+  },
+  {
+   "re": "ogrenci isleri",
+   "ad": "İnönü Üniversitesi Öğrenci İşleri Daire Başkanlığı",
+   "sorgu": "İnönü Üniversitesi Öğrenci İşleri Daire Başkanlığı, Malatya",
+   "not": "🎓 Kampüse 80 trambüsü, 17A/17B/17C ve 16C hatları gidiyor. Kampüs içindeki kesin durağı doğrulayamadım; haritada binanın adını aratabilirsin. Duyurular: inonu.edu.tr/ogrencidb"
+  },
+  {
+   "re": "teknokent|teknoloji gelistirme",
+   "ad": "İnönü Üniversitesi Teknokent",
+   "sorgu": "İnönü Teknokent, Malatya",
+   "not": "💻 80 trambüsünün Teknokent durağı (hattın son duraklarından) ve 17B hattı Teknokent’e gidiyor. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "stadyum|spor kompleksi|besyo|spor ve yasam",
+   "ad": "İnönü Üniversitesi Spor Kompleksi / Stadyum",
+   "sorgu": "İnönü Üniversitesi Spor Kompleksi, Malatya",
+   "not": "🏟️ 17B hattı BESYO, Spor Kompleksi ve Stadyum duraklarından geçiyor; 80 trambüsünde Spor ve Yaşam Merkezi durağı var. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "kernek",
+   "ad": "Kernek Şelalesi / Kernek Parkı",
+   "sorgu": "Kernek Şelalesi, Malatya",
+   "not": "🌿 17B hattı Kernek Külliyesi’nden geçiyor; bu durak şelaleye yakın bölgede ama yürüme mesafesini haritadan kontrol et. Başka hat bilgisini doğrulayamadım. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "tabiat park|turgut ozal tabiat|orduzu",
+   "ad": "Turgut Özal Tabiat Parkı (Orduzu)",
+   "sorgu": "Turgut Özal Tabiat Parkı, Orduzu, Malatya",
+   "not": "🌳 Battalgazi’ye bağlı Orduzu’nda. Orduzu Merkez’den geçen 401A/401B hatları bölgeye gidiyor; parka en yakın durağı doğrulayamadım. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "somuncu baba|somuncu|darende",
+   "ad": "Somuncu Baba Külliyesi (Darende)",
+   "sorgu": "Somuncu Baba Külliyesi, Darende, Malatya",
+   "not": "🕌 Darende ilçesinde, şehir merkezinden uzakta; şehir içi hatla değil, otogardan Darende seferleriyle gidilir. Firma ve sefer saatini otogardan teyit et."
+  },
+  {
+   "re": "yesilyurt",
+   "ad": "Yeşilyurt (ilçe merkezi)",
+   "sorgu": "Yeşilyurt, Malatya",
+   "not": "🚎 80 trambüsü Yeşilyurt’tan geçiyor; 18A (Yeşilyurt) ve 153A (Maliye–İsmetpaşa–Yeşilyurt) hatları da var. Çıkış noktana göre hat değişir: “Toplu taşımayla” bağlantısı canlı hat ve saatleri gösterir; ayrıca motas.com.tr’ye bak."
+  },
+  {
+   "re": "\\batm\\b|bankamatik|\\bbanka\\b|para cek",
+   "ad": "En yakın ATM / banka (kampüs çevresi)",
+   "sorgu": "ATM, İnönü Üniversitesi, Malatya",
+   "not": "🏧 Haritada kampüs çevresindeki ATM ve banka şubeleri açılır. Şehir merkezinde Maliye çevresinde ve MalatyaPark AVM’de de şubeler bulunur."
+  },
+  {
+   "re": "\\bptt\\b|kargo|posta",
+   "ad": "En yakın PTT / kargo (kampüs çevresi)",
+   "sorgu": "PTT, İnönü Üniversitesi, Malatya",
+   "not": "📦 Haritada kampüs çevresindeki PTT ve kargo şubeleri açılır; çalışma saatlerini şubeden/uygulamadan teyit et."
+  },
+  {
+   "re": "mediko",
+   "ad": "İnönü Üniversitesi Mediko Sosyal Merkezi",
+   "sorgu": "İnönü Üniversitesi Mediko Sosyal Merkezi, Malatya",
+   "not": "🩺 Kampüs içinde. 17B hattının Mediko durağı var; ayrıca 80 trambüsü ve 17 serisi kampüse gidiyor. Çalışma saatlerini doğrulayamadım, merkezin kendi duyurusuna bak. Acil durumda 112."
+  },
+  {
+   "re": "\\bkafe\\b|\\bcafe\\b|calisma mekani|ders calisilacak yer",
+   "ad": "Kafe / çalışma mekânı (kampüs çevresi)",
+   "sorgu": "kafe, İnönü Üniversitesi, Malatya",
+   "not": "☕ Haritada kampüs çevresindeki kafeler açılır; yorumlara ve çalışma saatlerine oradan bak."
+  },
+  {
+   "re": "kirtasiye|fotokopi|cikti al|baski al",
+   "ad": "Kırtasiye / fotokopi (kampüs çevresi)",
+   "sorgu": "kırtasiye, İnönü Üniversitesi, Malatya",
+   "not": "🖨️ Haritada kampüs çevresindeki kırtasiye ve fotokopi noktaları açılır; çalışma saatlerini şubeden teyit et."
+  },
+  {
+   "re": "hastane|tip merkezi|turgut ozal tip|saglik",
+   "ad": "İnönü Üniversitesi Turgut Özal Tıp Merkezi",
+   "sorgu": "İnönü Üniversitesi Turgut Özal Tıp Merkezi, Malatya",
+   "not": "🚎 Ulaşım: 80 trambüsünün durağı var (Diş Hekimliği Fakültesi’nin yanı); 17 serisi hatlar ve 16C de kampüs içinden geçiyor. Acil durumda 112’yi ara."
+  },
+  {
+   "re": "iibf|iktisadi|idari bilimler|fakulte",
+   "ad": "İnönü Üniversitesi İktisadi ve İdari Bilimler Fakültesi",
+   "sorgu": "İnönü Üniversitesi İktisadi ve İdari Bilimler Fakültesi, Malatya",
+   "not": "Fakülte duyuruları: inonu.edu.tr/iibf"
+  },
+  {
+   "re": "okul|kampus|universite|inonu",
+   "ad": "İnönü Üniversitesi Merkez Kampüsü",
+   "sorgu": "İnönü Üniversitesi Merkez Kampüsü, Battalgazi, Malatya",
+   "not": "Kampüs Battalgazi ilçesinde. Toplu taşıma için “okula hangi otobüs gidiyor” yaz (80 trambüsü, 17A/17B/17C)."
+  },
+  {
+   "re": "otogar|masti|otobus terminal|sehirlerarasi",
+   "ad": "Malatya Otogarı",
+   "sorgu": "Malatya Şehirlerarası Otobüs Terminali, Malatya",
+   "not": "🚌 Maşti’den 80 trambüsü kalkıyor (hafta içi ilk sefer 05:20); 2A, 2C, 2D, 2E, 13B, 21A, 21B, 25A, 152A, 152B, 2K gibi hatlar da otogara gidiyor. Şehirlerarası sefer saatlerini ilgili otobüs firmasından teyit et."
+  },
+  {
+   "re": "havalimani|havaalani|erhac|ucak",
+   "ad": "Malatya Erhaç Havalimanı",
+   "sorgu": "Malatya Erhaç Havalimanı",
+   "not": "Havalimanından şehre ulaşım seçeneklerini (servis, taksi) havayolu şirketi ve havalimanı duyurusundan teyit et."
+  },
+  {
+   "re": "\\b(gar|gari|gara|garin)\\b|tren istasyon",
+   "ad": "Malatya Garı",
+   "sorgu": "Malatya Garı, Malatya",
+   "not": "Tren seferlerini TCDD’den kontrol et."
+  },
+  {
+   "re": "arslantepe|aslantepe",
+   "ad": "Arslantepe Höyüğü",
+   "sorgu": "Arslantepe Höyüğü, Malatya",
+   "not": "UNESCO Dünya Mirası alanı; ziyaret saatlerini güncel kaynaktan doğrula."
+  },
+  {
+   "re": "eski malatya|battalgazi",
+   "ad": "Battalgazi (Eski Malatya)",
+   "sorgu": "Battalgazi Eski Malatya, Malatya",
+   "not": "Tarihî Eski Malatya kalıntıları bu bölgede."
+  }
+ ]
+}
