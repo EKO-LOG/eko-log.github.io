@@ -614,6 +614,7 @@ var XI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 1
 
 /* ---- Üyelik: sitedeki mevcut kuralla aynı (giriş yapılmış VE yönetici onaylı) ---- */
 function isMember(){
+  return true;   /* Üye Alanı giriş istemez */
   try{var s=JSON.parse(localStorage.getItem('eko_uye')||'null');
     if(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)return true}catch(e){}
   return !!(D.body&&D.body.classList.contains('uye-ok'));
@@ -4031,7 +4032,7 @@ const SIM={};
 const d=b=>new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0)));
 const brand=document.querySelector('header .brand'),bar=document.querySelector('header .bar');
 if(!brand||!bar)return;
-const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
+const isMember=()=>true;   /* Üye Alanı giriş istemez; içindeki sayfalarda şifre sorulur */
 const m=document.createElement('div');m.id='uyem';m.setAttribute('role','menu');
 m.innerHTML='<small>Üye Alanı</small><a role="menuitem" href="#/ekstra">⭐ Üye Alanı</a><a role="menuitem" href="iibf-laboratuvar.html">🧪 İİBF Laboratuvarı</a><a role="menuitem" href="../a-grubu/">🏛️ A Grubu Makam Simülasyonu</a><a role="menuitem" href="../mevzuat/">📚 Mevzuat</a><hr><a role="menuitem" href="#/">🏠 Ana sayfa</a>';
 bar.append(m);
@@ -4686,8 +4687,37 @@ const fillHub=()=>{try{const r=document.getElementById('p-ekstra'),h=r&&r.queryS
 /* Eko-Plus üyelik kapısı: onaylı üye değilse giriş sayfasına (#/lab) yollar, girişten sonra geri getirir */
 (()=>{
 const KEYS=["ekstra", "kavram", "ilanlar", "cv", "profil", "tahmin", "paylas", "x-yol", "x-takvim", "x-etkinlik", "x-yoklama", "x-notlar", "x-mentor", "x-panel", "x-bildirim"];
-const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
+const isMember=()=>true;   /* Üye Alanı giriş istemez; içindeki sayfalarda şifre sorulur */
 const cur=()=>location.hash.replace(/^#\/?/,'').split('/')[0]||'ekstra';
+
+/* ---- Üye Alanı içindeki Laboratuvar ve simülasyonlar için şifre ----
+   Giriş normal (e-posta + parola). Şifre yalnızca bu bağlantılar açılırken istenir;
+   yönetici panelindeki şifre ayarı (EKO_C.pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
+const LOCKED=/(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?|mevzuat\/?)(\?|#|$)/i;
+function pwCfg(){const q=window.EKO_C&&window.EKO_C.pw;return q&&q.on===true&&q.code?String(q.code):''}
+function needPw(){try{return !!pwCfg()&&sessionStorage.getItem('eko_pw')!==pwCfg()}catch(e){return false}}
+(()=>{const st=document.createElement('style');st.textContent='#ua-pw{position:fixed;inset:0;z-index:99999;background:#120c1a;display:flex;align-items:center;justify-content:center;padding:16px}#ua-pw form{background:#1c1328;color:#f6f0fb;border:1px solid #2f2340;border-radius:16px;padding:22px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);font:inherit}#ua-pw h3{margin:0 0 6px;font-size:22px}#ua-pw p{margin:0 0 12px;font-size:14px;opacity:.8}#ua-pw input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #3a2c4d;background:#120c1a;color:#f6f0fb;border-radius:10px;font:inherit;margin-bottom:10px}#ua-pw .r{display:flex;gap:8px;flex-wrap:wrap}#ua-pw .m{color:#ff8a94;font-size:14px;margin:0 0 8px}';document.head.append(st)})();
+function askPw(go,cancel){
+  const old=document.getElementById('ua-pw');if(old)old.remove();
+  const ov=document.createElement('div');ov.id='ua-pw';
+  ov.innerHTML='<form novalidate><h3>🔒 Şifre gerekli</h3><p>Bu bölüm için Üye Alanı şifresini yaz.</p><input type="password" id="ua-pw-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" role="alert" hidden>Şifre yanlış.</p><div class="r"><button class="btn" type="submit">Aç</button><button class="btn line" type="button" data-x>Vazgeç</button></div></form>';
+  document.body.append(ov);
+  const inp=ov.querySelector('input'),m=ov.querySelector('.m');
+  const no=()=>{ov.remove();if(cancel)cancel()};
+  ov.querySelector('[data-x]').onclick=no;
+  if(!cancel)ov.addEventListener('click',e=>{if(e.target===ov)no()});
+  ov.querySelector('form').addEventListener('submit',e=>{e.preventDefault();
+    if(inp.value.trim()===pwCfg()){try{sessionStorage.setItem('eko_pw',pwCfg())}catch(x){}ov.remove();go()}else{m.hidden=false;inp.select()}});
+  setTimeout(()=>inp.focus(),30);
+}
+document.addEventListener('click',ev=>{
+  if(ev.defaultPrevented||ev.button||ev.ctrlKey||ev.metaKey||ev.shiftKey)return;
+  const a=ev.target.closest&&ev.target.closest('a[href]');if(!a)return;
+  const h=a.getAttribute('href')||'';if(!LOCKED.test(h))return;
+  const go=()=>{location.href=a.href};
+  if(!window.EKO_C){ev.preventDefault();let d=0;const run=()=>{if(d++)return;needPw()?askPw(go):go()};document.addEventListener('eko:ready',run,{once:true});setTimeout(run,3000);return}
+  if(needPw()){ev.preventDefault();askPw(go)}
+},true);
 const sync=()=>{
   const on=isMember();
   document.body.classList.toggle('uye-ok',on);
@@ -4699,16 +4729,14 @@ const sync=()=>{
 const gate=()=>{
   if(cur()==='x-veri'||cur().startsWith('x-v-')){location.replace('veri-analizi.html#/'+cur());return}
   if(cur()==='uyeler'&&isMember()){location.replace('#/ekstra');return}
-  if(KEYS.includes(cur())&&!isMember()){
-    try{sessionStorage.setItem('eko_ret',location.hash||'#/ekstra')}catch(e){}
-    location.hash='#/lab';
-  }
+  if(KEYS.includes(cur())&&cur()!=='ekstra'&&needPw()&&!document.getElementById('ua-pw'))askPw(()=>gate(),()=>{location.hash='#/ekstra'});
   sync();
 };
 /* üye olmayanlara site içi aramada Eko-Plus sonuçları gösterilmez */
 const rs=document.querySelector('#sov .rs');
 if(rs)new MutationObserver(()=>{if(isMember())return;rs.querySelectorAll('a').forEach(a=>{const h=(a.getAttribute('href')||'').replace(/^#\/?/,'');if(KEYS.includes(h))a.remove()})}).observe(rs,{childList:true});
 addEventListener('hashchange',gate);
+document.addEventListener('eko:ready',gate);
 addEventListener('storage',sync);
 /* Üyelere Özel kutuları (Laboratuvar) Eko-Plus merkezine taşınır; eski #/uyeler sayfası kullanılmaz */
 const mv=()=>{
@@ -4730,36 +4758,9 @@ addEventListener('focus',sync);
 setInterval(sync,1500);
 gate();
 
-/* ---- Üye Alanı içindeki Laboratuvar ve simülasyonlar için şifre ----
-   Giriş normal (e-posta + parola). Şifre yalnızca bu bağlantılar açılırken istenir;
-   yönetici panelindeki şifre ayarı (EKO_C.pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
-const LOCKED=/(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?)(\?|#|$)/i;
-const pwCfg=()=>{const q=window.EKO_C&&window.EKO_C.pw;return q&&q.on===true&&q.code?String(q.code):''};
-const needPw=()=>{try{return !!pwCfg()&&sessionStorage.getItem('eko_pw')!==pwCfg()}catch(e){return false}};
-(()=>{const st=document.createElement('style');st.textContent='#ua-pw{position:fixed;inset:0;z-index:99999;background:rgba(10,14,30,.6);display:flex;align-items:center;justify-content:center;padding:16px}#ua-pw form{background:#fff;color:#14182b;border-radius:16px;padding:22px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);font:inherit}#ua-pw h3{margin:0 0 6px;font-size:22px}#ua-pw p{margin:0 0 12px;font-size:14px;opacity:.8}#ua-pw input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #c5cad8;border-radius:10px;font:inherit;margin-bottom:10px}#ua-pw .r{display:flex;gap:8px;flex-wrap:wrap}#ua-pw .m{color:#b42318;font-size:14px;margin:0 0 8px}';document.head.append(st)})();
-function askPw(go){
-  const old=document.getElementById('ua-pw');if(old)old.remove();
-  const ov=document.createElement('div');ov.id='ua-pw';
-  ov.innerHTML='<form novalidate><h3>🔒 Şifre gerekli</h3><p>Laboratuvar ve simülasyonlar için Üye Alanı şifresini yaz.</p><input type="password" id="ua-pw-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" role="alert" hidden>Şifre yanlış.</p><div class="r"><button class="btn" type="submit">Aç</button><button class="btn line" type="button" data-x>Vazgeç</button></div></form>';
-  document.body.append(ov);
-  const inp=ov.querySelector('input'),m=ov.querySelector('.m');
-  ov.querySelector('[data-x]').onclick=()=>ov.remove();
-  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove()});
-  ov.querySelector('form').addEventListener('submit',e=>{e.preventDefault();
-    if(inp.value.trim()===pwCfg()){try{sessionStorage.setItem('eko_pw',pwCfg())}catch(x){}ov.remove();go()}else{m.hidden=false;inp.select()}});
-  setTimeout(()=>inp.focus(),30);
-}
-document.addEventListener('click',ev=>{
-  if(ev.defaultPrevented||ev.button||ev.ctrlKey||ev.metaKey||ev.shiftKey)return;
-  const a=ev.target.closest&&ev.target.closest('a[href]');if(!a)return;
-  const h=a.getAttribute('href')||'';if(!LOCKED.test(h))return;
-  const go=()=>{location.href=a.href};
-  if(!window.EKO_C){ev.preventDefault();let d=0;const run=()=>{if(d++)return;needPw()?askPw(go):go()};document.addEventListener('eko:ready',run,{once:true});setTimeout(run,3000);return}
-  if(needPw()){ev.preventDefault();askPw(go)}
-},true);
 })();
 </script>
-<script id="ekx2-host">window.EKX2_HOST={isMember:()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}},isAdmin:()=>false};</script>
+<script id="ekx2-host">window.EKX2_HOST={isMember:()=>true,isAdmin:()=>false};</script>
 <script id="ekx2-qr">
 (function(){var __m={},__c={};function __r(n){n=n.replace("./","");if(__c[n])return __c[n].exports;var m=__c[n]={exports:{}};__m[n](m,m.exports,__r);return m.exports}
 __m['QR8bitByte']=function(module,exports,require){var QRMode = require('./QRMode');
