@@ -18,8 +18,7 @@
   var FEATURES = [
     ['🧪', 'Laboratuvar', ROOT + 'eko-plus/iibf-laboratuvar.html'],
     ['📜', 'Mevzuat', ROOT + 'mevzuat/'],
-    ['💬', 'Soru-Cevap', ROOT + 'eko-plus/#/forum'],
-    ['🧰', 'Diğer üye araçları', ROOT + 'eko-plus/#/ekstra']
+    ['💬', 'Soru-Cevap', ROOT + 'eko-plus/#/forum']
   ];
   var LOPT = [['isletme', 'İşletme & Finans', ['isletme']], ['iktisat', 'İktisat', ['iktisat']], ['ekonometri', 'Ekonometri', ['ekonometri']], ['maliye', 'Maliye & Vergi', ['maliye']], ['kamu', 'Kamu Yönetimi', ['kamu']], ['uluslararasi', 'Uluslararası İlişkiler', ['uluslararasi']], ['ceko', 'Çalışma Ekonomisi ve Endüstri İlişkileri', ['ceko']], ['siyaset-kamu', 'Siyaset Bilimi ve Kamu Yönetimi', ['kamu']], ['siyaset-ub', 'Siyaset Bilimi ve Uluslararası İlişkiler', ['uluslararasi']]];
   var lpick = function (k) { return LOPT.filter(function (x) { return x[0] === k; })[0] || ['', '', []]; };
