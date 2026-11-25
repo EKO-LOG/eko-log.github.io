@@ -223,6 +223,15 @@
                     <button onclick="selectSingleRole('DEFENDANT')" id="btn-role-defendant" class="px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm">
                         🛡️ Davalı Vekili (Savunma Makamı / Avukat)
                     </button>
+                    <button onclick="selectSingleRole('PLAINTIFF_PARTY')" id="btn-role-plaintiff_party" class="px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm">
+                        🧑 Davacı Taraf (Müvekkil: Saklayabilir, Yalan Söyleyebilir)
+                    </button>
+                    <button onclick="selectSingleRole('DEFENDANT_PARTY')" id="btn-role-defendant_party" class="px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm">
+                        🧑 Davalı Taraf (Müvekkil: Saklayabilir, Yalan Söyleyebilir)
+                    </button>
+                    <button onclick="selectSingleRole('MEMBER')" id="btn-role-member" class="px-5 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-800 text-slate-300 hover:border-amber-500 font-serif font-bold text-xs sm:text-sm">
+                        👨‍⚖️ Üye Hâkim (Heyet Üyesi: Çelişkileri Yakalar)
+                    </button>
                 </div>
             </div>
 
@@ -312,6 +321,7 @@
                             <button onclick="switchFileTab('evidence')" id="tab-btn-evidence" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Deliller</button>
                             <button onclick="switchFileTab('witness')" id="tab-btn-witness" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Tanıklar</button>
                             <button onclick="switchFileTab('expert')" id="tab-btn-expert" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Bilirkişi</button>
+                            <button onclick="switchFileTab('parties')" id="tab-btn-parties" class="flex-1 py-1 rounded text-slate-400 hover:text-amber-300">Taraflar</button>
                         </div>
 
                         <!-- Tab Content Scroll Box -->
@@ -836,6 +846,293 @@
             
             soundEnabled: true
         };
+const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor", "Tutanakları işçiye tebliğ ettiğini söylüyor", "Devamsız günlerde rakip firmayla iş görüşmesi yapmıştı", "P"], "2": ["Hiçbir performans uyarısı almadığını söylüyor", "İşçiye yazılı savunma hakkı tanıdığını söylüyor", "Fesihten önce işçiyi gizlice yerine yeni işe aldıkları ortaya çıkar", "D"], "3": ["Sendikaya üyeliğini işverenin bildiğini söylüyor", "Fesih sadece ekonomik daralmadan kaynaklı diyor", "Aynı gün sendika listesini yönetim kuruluna sızdıran kişi müdürdü", "D"], "4": ["Koruyucu bariyeri hiç görmediğini söylüyor", "Tüm iş güvenliği eğitimlerini verdiğini söylüyor", "İşçi kaza günü bariyeri kendisi söküp alkollü çalışmıştı", "P"], "5": ["İzin istediğini yazılı bildirdiğini söylüyor", "İzin talebinin hiç iletilmediğini söylüyor", "İşveren talep mailini okuyup sildirmişti", "D"], "6": ["Haftada 72 saat çalıştığını söylüyor", "Vardiya çizelgelerinde 45 saat yazdığını söylüyor", "Çizelgeler dava öncesi geriye dönük düzenlenmişti", "D"], "7": ["Tam 3 yıl hiç sigortasız çalıştığını söylüyor", "Çalışanın hiç işe girmediğini söylüyor", "İşçinin ilk yıl kısmi sigortalı olduğu SGK kaydında vardı", "P"], "8": ["Çalışanın sırları rakibe taşıdığını söylüyor", "Rakip firmayla temasın olmadığını söylüyor", "Çalışan rakiple sözleşmeyi işten ayrılmadan imzalamıştı", "D"], "9": ["Hedefi tamamen tutturduğunu söylüyor", "Prim sisteminin hiç yazılı olmadığını söylüyor", "Hedefler satışlar mevsimsel iken yönetimce sonradan değiştirilmişti", "D"], "10": ["Belediyeyle çalışma ilişkisi doğrudan sürdüğünü söylüyor", "Taşeronu gerçekten denetlediğini söylüyor", "Belediye denetim raporlarını imha etmişti", "D"], "11": ["Sebepsiz fesih yapıldığını söylüyor", "Öğretmenin ciddi disiplin ihlali yaptığını söylüyor", "Öğretmen veli şikâyeti üzerine gizli uyarı almıştı", "P"], "12": ["Atölyede maske verilmediğini söylüyor", "Her işçiye maske zimmetlendiğini söylüyor", "Maske zimmet imzaları kasa görevlisince topluca atılmıştı", "D"], "13": ["Tek mirasçı olduğunu söylüyor", "Ödemeyi eşe yaptığını söylüyor", "Ölen işçinin ayrı bir evlilikten çocuğu da vardı", "P"], "14": ["Maaşın 3 ay hiç ödenmediğini söylüyor", "Maaşları düzenli yatırdığını söylüyor", "İşçi 1 aylık maaşını nakit aldığını belgelemişti", "P"], "15": ["140 gün izin kullanmadığını söylüyor", "İzinlerin tamamını kullandırdığını söylüyor", "Kaptan izin formlarını tekne gezisinde imzalatmıştı", "P"], "16": ["Eski işverenin kıdemi kabul ettiğini söylüyor", "Devrin hiç gerçekleşmediğini söylüyor", "Devir sözleşmesi aynı gün şirket ortağı tarafından imzalanmıştı", "D"], "17": ["Müdürden sözlü izin aldığını söylüyor", "Hiçbir izin verilmediğini söylüyor", "Müdür kamera kaydında izin verirken görünüyor", "D"], "18": ["Ayıbı 8. günde ihbar ettiğini söylüyor", "Makinenin hasarsız teslim edildiğini söylüyor", "Alıcı makineyi kapasite üstünde çalıştırmıştı", "P"], "19": ["Çekin tamamen hatır çeki olduğunu söylüyor", "Çekin gerçek bir mal bedeli olduğunu söylüyor", "Hatır çeki yazısı davacının imza sirkülerinde mevcut", "P"], "20": ["Genel kurul çağrısı usulsüz yapıldı diyor", "Davetin herkese yazılı gittiğini söylüyor", "Davet postası azınlığa gönderilmemişti", "D"], "21": ["Borçlarını ödeyebilecek durumda olmadığını söylüyor", "Şirketin sahte iflas yaptığını söylüyor", "Yöneticiler malvarlığını kardeş şirkete kaydırmıştı", "P"], "22": ["Portföyü tek başına oluşturduğunu söylüyor", "Fesih için haklı neden olduğunu söylüyor", "Acentenin portföyü şirket tarafından sunulmuştu", "P"], "23": ["Konteyneri sağlam teslim ettiğini söylüyor", "Soğutucunun arızasız çalıştığını söylüyor", "Soğutucu arızası seferden önce kayıtlara geçmişti", "D"], "24": ["Markayı ilk kullanan kendisi diyor", "Tasarımın tamamen özgün olduğunu söylüyor", "Davalı tasarımı eski bir çalışanımızdan almıştı", "D"], "25": ["Müdürün hesaba para geçirdiğini söylüyor", "Aktarımların borç mahsubu olduğunu söylüyor", "Ortakların bir kısmı aktarımı onaylamıştı", "P"], "26": ["Yangının nakliyeci hatasından çıktığını söylüyor", "Yangının elektrik tesisatından kaynaklandığını söylüyor", "Sigortalı tesisatın bakımını yaptırmamıştı", "P"], "27": ["Mutabakatın yazılı yapıldığını söylüyor", "Mutabakatın sadece sözlü kaldığını söylüyor", "Mutabakat e-postasını davalı muhasebecisi onaylamıştı", "D"], "28": ["Reçeteyi birebir uyguladığını söylüyor", "Standartlara aykırılık olduğunu söylüyor", "Merkez, şubeyi bilerek kötü tedarikçiye yönlendirmişti", "D"], "29": ["Tohumların sertifikasız olduğunu söylüyor", "Tohumların laboratuvar onaylı olduğunu söylüyor", "Çiftçi tohumu yanlış nemde depolamıştı", "P"], "30": ["Sırların ortak tarafından sızdığını söylüyor", "Sızdırma olmadığını söylüyor", "Sızıntı aslında yönetim kurulu üyesinden gelmişti", "D"], "31": ["Ayrılma akçesi hiç sunulmadı diyor", "Adil değer hesabının yapıldığını söylüyor", "Değerleme raporu bilerek düşük hazırlanmıştı", "D"], "32": ["Takibin kötü niyetli olduğunu söylüyor", "Alacağın gerçek olduğunu söylüyor", "Alacak daha önce kısmen ödenmişti", "P"], "33": ["Temlikin yazılı bildirildiğini söylüyor", "Temlikten haberi olmadığını söylüyor", "Borçlu temlik yazısına itiraz etmeden imzalamıştı", "D"], "34": ["Belgelerin tam uyumlu olduğunu söylüyor", "Banka belgeleri usulünce incelediğini söylüyor", "Banka rezervi görmesine rağmen ödeme yapmıştı", "D"], "35": ["Paylaşımın kimliksiz kaldığını söylüyor", "Disiplin kuruluna savunma sunulduğunu söylüyor", "Memur daha önce aynı fiille uyarı almıştı", "P"], "36": ["Okul mesafesinin ruhsatta doğru olduğunu söylüyor", "Mesafenin yanlış hesaplanmadığını söylüyor", "Mesafe ölçümünü komşu rakip işletme yaptırmıştı", "D"], "37": ["Plan değişikliğinin ilan edilmediğini söylüyor", "Askı sürecinin eksiksiz yapıldığını söylüyor", "Askı ilanı başka bir tarihe düzenlenmişti", "D"], "38": ["Arsanın tamamının işgal edildiğini söylüyor", "Kamulaştırma bedelinin ödendiğini söylüyor", "Malik bir kısmı için önceden feragat etmişti", "P"], "39": ["Ameliyat öncesi bilgilendirilmediğini söylüyor", "Tüm gazlı bez sayımının yapıldığını söylüyor", "Sayım formu ameliyattan sonra düzenlenmişti", "D"], "40": ["Gecikmenin idareden kaynaklandığını söylüyor", "Şirketin ihale şartlarını ihlal ettiğini söylüyor", "İdare yer teslimini 3 ay geciktirmişti", "D"], "41": ["Koyda hiç canlı türü olmadığını söylüyor", "ÇED raporunun eksiksiz olduğunu söylüyor", "ÇED raporunu hazırlayan firma yatırımcıya bağlıydı", "D"], "42": ["Eşinin başka ilde çalıştığını söylüyor", "Mazeret belgesinin sunulmadığını söylüyor", "Belge idare kayıtlarında sunulmuş görünüyordu", "D"], "43": ["Gazetecilik faaliyeti yaptığını söylüyor", "Terör bağlantısı olduğunu söylüyor", "Bağlantı iddiası tek bir anonim ihbara dayanıyordu", "D"], "44": ["Faturaların gerçek işlemlere ait olduğunu söylüyor", "Faturaların sahte olduğunu söylüyor", "Şirket ortağı bazı faturaları gerçekten düzenletmemişti", "P"], "45": ["Otlakların yüzyıllardır ortak kullanıldığını söylüyor", "Sit kararının bilimsel rapora dayandığını söylüyor", "Rapor kurul üyesinin yazmadığı bir imzayı taşıyordu", "D"], "46": ["Hiçbir kaydı olmadığını söylüyor", "Güvenlik soruşturması kesin olumsuz diyor", "Soruşturma bir isim benzerliğine dayanıyordu", "D"], "47": ["Hastalığını okula bildirdiğini söylüyor", "Sağlık raporunun gizlendiğini söylüyor", "Öğrenci hastalığını giriş muayenesinde gizlemişti", "P"], "48": ["Yürüyüşte sadece izleyici olduğunu söylüyor", "Öğrencinin şiddet kullandığını söylüyor", "Disiplin kurulu başkanı olaydan etkilenen bir hocaydı", "D"], "49": ["Tartıların kalibreli olduğunu söylüyor", "Ölçümün usulüne uygun yapıldığını söylüyor", "Ölçüm yapan memurun tartısı kalibresizdi", "D"], "50": ["Yapı kayıt belgesinin tam alındığını söylüyor", "Belgenin sahte beyanla alındığını söylüyor", "Belge başvurusunda eksik belge idare tarafından tamamlanmıştı", "D"]};
+
+        const ROLE_ALIAS = { PLAINTIFF_PARTY: 'PLAINTIFF', DEFENDANT_PARTY: 'DEFENDANT', MEMBER: 'JUDGE' };
+        const ROLE_NAMES = { JUDGE: 'HÂKİM (BAŞKAN)', MEMBER: 'ÜYE HÂKİM', PLAINTIFF: 'DAVACI VEKİLİ', DEFENDANT: 'DAVALI VEKİLİ', PLAINTIFF_PARTY: 'DAVACI TARAF', DEFENDANT_PARTY: 'DAVALI TARAF' };
+        function freshPlotState() { return { kept: {}, fixed: {}, probed: {}, exposed: {}, ruled: {}, card: {} }; }
+        gameState.plot = freshPlotState();
+
+        // Her davaya yalan beyan + saklanan gerçek katmanı ve ek duruşma turları ekle
+        casesLibrary.forEach(c => {
+            const d = PLOTS[c.id]; if (!d) return;
+            c.plot = { pLie: d[0], dLie: d[1], hid: d[2], owner: d[3] };
+            const ownerName = d[3] === 'P' ? c.plaintiffName : c.defendantName;
+            const partyTurn = (role, side, lie) => ({
+                role, prompt: `${side === 'P' ? 'Davacı' : 'Davalı'} Taraf (Müvekkil): Hâkim sizi bizzat dinliyor (HMK m.169). Avukatınıza anlattığınız hikâyeye mi bağlı kalacaksınız?`,
+                choices: [
+                    { title: 'Anlatımda Israr Et', text: `Beyanım değişmez: ${lie}.`, shift: side === 'P' ? 6 : -6, patience: 0, keep: side },
+                    { title: 'Beyanı Kısmen Düzelt', text: 'Önceki anlatımımda eksik ve yanlış kısımlar oldu, düzeltmek isterim.', shift: side === 'P' ? -3 : 3, patience: 3, fix: side },
+                    { title: 'Hatırlamıyorum De', text: 'Aradan zaman geçti, ayrıntıları net hatırlamıyorum.', shift: 0, patience: -5 }
+                ] });
+            const probe = (role, side) => ({
+                role, prompt: `${side === 'P' ? 'Davacı' : 'Davalı'} Vekili: Müvekkilin anlatımında tutarsızlık sezdiniz. Ne yapacaksınız?`,
+                choices: [
+                    { title: 'Müvekkili Köşeye Sıkıştır', text: 'Müvekkille baş başa görüşüp bildiği her şeyi ve sakladıklarını istedim.', shift: 0, patience: 0, probe: side },
+                    { title: 'Müvekkile Güven', text: 'Müvekkilin anlatımı bizim için esastır, ek araştırma gerekmiyor.', shift: side === 'P' ? 4 : -4, patience: 0 },
+                    { title: 'Karşı Tarafın Beyanını Zayıflat', text: 'Karşı tarafın beyanı delillerle bağdaşmıyor, dosya buna göre incelenmeli.', shift: side === 'P' ? 3 : -3, patience: 0 }
+                ] });
+            const t = c.turns.TAHKIKAT;
+            t.push(probe('PLAINTIFF', 'P'), probe('DEFENDANT', 'D'), partyTurn('PLAINTIFF_PARTY', 'P', d[0]), partyTurn('DEFENDANT_PARTY', 'D', d[1]));
+            t.push({ role: 'MEMBER', prompt: 'Üye Hâkim: Heyetteki görüşünüz nedir? Çelişkileri başkana işaret edin.',
+                choices: [
+                    { title: 'Beyanlar Arası Çelişkiyi Not Et', text: 'Beyanları dikkatle dinleyelim, her anlatım dosya kayıtlarıyla karşılaştırılmalı.', shift: 0, patience: 0 },
+                    { title: 'Belge Kayıtlarını İncelet', text: 'Kayıtların kendi içinde tutarlı olup olmadığı ayrıca gözden geçirilebilir.', shift: 0, patience: -3 },
+                    { title: 'Karşı Oy Eğilimi Belirt', text: 'Şu aşamada dosya yeterince aydınlanmadı, henüz kanaat oluşturamıyorum.', shift: 0, patience: 0 }
+                ] });
+            // Delil havuzu: hukuka uygunluk ipuçları sadece açıklamanın içinde, etiket yok
+            const PL = [['Noter Onaylı İhtarname','Noter kanalıyla gönderilmiş ve tebliğ edilmiş ihtar örneği.'],['Banka Dekontları','Bankadan resmi yazıyla celp edilmiş hesap hareketleri.'],['Tarafın Kendi Yazışmaları','Tarafın kendi telefonundaki, karşı tarafla doğrudan yapılmış yazışma dökümü.'],['Keşif ve Tespit Tutanağı','Mahkeme kararıyla yapılan yerinde keşfin tutanağı.'],['Resmi Kurum Kaydı','İlgili kurumdan resmi yazıyla gelen kayıt örneği.']];
+            const IL = [['Ses Kaydı','Karşı tarafın haberi olmadan, üçüncü kişi olarak dinlenerek alınmış telefon görüşmesi kaydı.'],['E-Posta Yazışması','Şifresi ele geçirilerek girilen başkasının e-posta kutusundan alınmış yazışmalar.'],['Kamera Görüntüsü','Özel dinlenme odasına gizlice yerleştirilen kameradan alınmış görüntü.'],['Defter Fotokopisi','Karşı tarafın ofisine izinsiz girilerek çekilmiş iç yazışma fotokopisi.']];
+            const nIl = c.id % 3 === 0 ? 2 : 1, ev = [];
+            for (let k = 0; k < 4 - nIl; k++) ev.push({ title: PL[(c.id + k) % 5][0], desc: PL[(c.id + k) % 5][1], legal: true, by: (c.id + k) % 2 ? 'P' : 'D' });
+            for (let k = 0; k < nIl; k++) ev.push({ title: IL[(c.id + k) % 4][0], desc: IL[(c.id + k) % 4][1], legal: false, by: (c.id + k) % 2 ? 'D' : 'P' });
+            ev.sort((x, y) => ((x.title.length * c.id) % 7) - ((y.title.length * c.id) % 7));
+            c.evidence = ev.map(e => ({ ...e, type: 'İncelenmedi' }));
+            t.unshift({ role: 'JUDGE', kind: 'EVIDENCE', prompt: 'Başkan Hâkim: Dosyadaki delilleri hukuka uygunluk yönünden kendiniz değerlendirin.' });
+            t.push({ role: 'JUDGE', kind: 'WITNESS_Q', prompt: 'Başkan Hâkim: Tanığa hangi soruyu yönelteceksiniz?' });
+            t.push({ role: 'JUDGE', kind: 'DETECT', prompt: 'Başkan Hâkim: Dinlenen beyanlar arasında dosyayla çelişen bir nokta fark ettiniz mi? Hangisini sorgulayacaksınız?' });
+        });
+
+
+        function clampPat(d) { gameState.patience = Math.min(100, Math.max(0, gameState.patience + d)); }
+        function judgeIsHuman() { return gameState.mode !== 'SINGLE' || gameState.userRole === 'JUDGE'; }
+        function aiSpinner(msg) {
+            document.getElementById('container-action-cards').innerHTML = `<div class="col-span-full p-4 rounded-xl bg-slate-900 border border-slate-800 text-center text-xs text-amber-300 font-bold">🤖 ${msg}</div>`;
+        }
+        function _rst0(t) {
+            const c = getCurrentCase();
+            document.getElementById('action-panel-subtitle').innerText = t.prompt;
+            if (t.kind === 'EVIDENCE') {
+                gameState.plot.ruled = {};
+                if (judgeIsHuman()) return renderEvidencePanel();
+                aiSpinner('Hâkim delilleri değerlendiriyor...');
+                setTimeout(() => { c.evidence.forEach((e, i) => { gameState.plot.ruled[i] = ((Math.random() < 0.75) ? e.legal : !e.legal) ? 'ok' : 'no'; }); finishEvidence(); }, 1400);
+            } else if (t.kind === 'WITNESS_Q') {
+                if (!judgeIsHuman()) { aiSpinner('Hâkim tanığa soru soruyor...'); return setTimeout(() => askWitness(Math.floor(Math.random() * 3)), 1400); }
+                const qs = ['Olay günü ne gördünüz?', 'Taraflardan biriyle bağınız var mı?', 'Dosyadaki belgeler hakkında ne biliyorsunuz?'];
+                document.getElementById('container-action-cards').innerHTML = qs.map((q, k) => `<button onclick="askWitness(${k})" class="p-3.5 rounded-xl bg-slate-900 border border-amber-500/40 hover:border-amber-400 text-left text-xs text-amber-200 font-bold">Soru ${k + 1}: ${q}</button>`).join('');
+            } else if (t.kind === 'DETECT') {
+                if (!judgeIsHuman()) { aiSpinner('Hâkim beyanları karşılaştırıyor...'); return setTimeout(() => pickContradiction(Math.random() < 0.45 ? (c.plot.owner === 'P' ? 0 : 1) : Math.floor(Math.random() * 4)), 1600); }
+                const o = [['Davacının beyanı dosyayla çelişiyor', c.plot.pLie], ['Davalının beyanı dosyayla çelişiyor', c.plot.dLie], ['Tanığın sözü dosyayla çelişiyor', 'Tanığın anlatımı ile belgeler uyuşmuyor.'], ['Çelişki görmüyorum', 'Beyanlar zapta geçsin, tahkikat sürsün.']];
+                document.getElementById('container-action-cards').innerHTML = o.map((x, k) => `<button onclick="pickContradiction(${k})" class="p-3.5 rounded-xl bg-slate-900 border border-amber-500/40 hover:border-amber-400 text-left space-y-1"><div class="text-xs font-bold text-amber-300">${x[0]}</div><p class="text-[11px] text-slate-300">${x[1]}</p></button>`).join('');
+            }
+        }
+        function renderEvidencePanel() {
+            const c = getCurrentCase(), r = gameState.plot.ruled, on = 'px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-bold text-[11px]', off = 'px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 text-[11px]';
+            const done = c.evidence.every((e, i) => r[i]);
+            document.getElementById('container-action-cards').innerHTML = c.evidence.map((e, i) => `<div class="col-span-full p-3 rounded-xl bg-slate-900 border border-slate-700 space-y-1.5"><div class="text-xs font-bold text-amber-300">${e.title} <span class="text-[10px] text-slate-400">(${e.by === 'P' ? 'Davacı' : 'Davalı'} sundu)</span></div><p class="text-[11px] text-slate-300">${e.desc}</p><div class="flex gap-2"><button onclick="ruleEvidence(${i},'ok')" class="${r[i] === 'ok' ? on : off}">✅ Hukuka Uygun</button><button onclick="ruleEvidence(${i},'no')" class="${r[i] === 'no' ? on : off}">🚫 Hukuka Aykırı</button></div></div>`).join('') + (done ? `<button onclick="finishEvidence()" class="col-span-full p-3 rounded-xl bg-amber-500 text-slate-950 font-black text-xs">Delil Kararını Zapta Geçir</button>` : '');
+        }
+        function ruleEvidence(i, v) { gameState.plot.ruled[i] = v; renderEvidencePanel(); }
+        function finishEvidence() {
+            const c = getCurrentCase(), r = gameState.plot.ruled; let good = 0;
+            c.evidence.forEach((e, i) => {
+                const admitted = r[i] === 'ok', right = admitted === e.legal, side = e.by === 'P' ? 1 : -1;
+                if (right) { good++; clampPat(3); }
+                else if (admitted) { gameState.judgeInclination += 8 * side; clampPat(-6); }
+                else { gameState.judgeInclination -= 8 * side; clampPat(-4); }
+                e.type = admitted ? 'Kabul Edildi' : 'Dışlandı';
+                appendLog('JUDGE', `${e.title}: ${admitted ? 'dosyada kalmasına' : 'dosyadan çıkarılmasına'} karar verildi.`);
+            });
+            appendLog('SYSTEM', `📂 Delil değerlendirmesi zapta geçti. Karar sonrası inceleme: ${good}/${c.evidence.length} delil doğru değerlendirildi. ${good < c.evidence.length ? 'Hatalı karar istinafta bozma sebebi olabilir.' : ''}`);
+            gameState.plot.card.evid = good; gameState.plot.card.evidN = c.evidence.length;
+            updateGauges(); gameState.stepIndex++; processCurrentTurn();
+        }
+        function askWitness(k) {
+            const c = getCurrentCase(), w = c.witnesses[0], ownerName = c.plot.owner === 'P' ? c.plaintiffName : c.defendantName;
+            const qs = ['Olay günü ne gördünüz?', 'Taraflardan biriyle bağınız var mı?', 'Dosyadaki belgeler hakkında ne biliyorsunuz?'];
+            const ans = [w.claim, `${ownerName} ile uzaktan akrabalığım var, ama gördüğümü anlatıyorum.`, `Şey... ${c.plot.hid}. Ama bunu tam hatırlamıyorum.`];
+            appendLog('JUDGE', qs[k]); appendLog('SYSTEM', `🧑‍💼 ${w.name}: ${ans[k]}`);
+            gameState.stepIndex++; processCurrentTurn();
+        }
+        function pickContradiction(k) {
+            const c = getCurrentCase(), pl = gameState.plot, owner = c.plot.owner, key = ['P', 'D', 'W', 'N'][k];
+            const names = ['Davacının beyanı', 'Davalının beyanı', 'Tanığın sözü', 'Çelişki yok'];
+            pl.card.detect = key === owner ? 'ok' : (key === 'N' ? 'none' : 'wrong');
+            appendLog('JUDGE', k === 3 ? 'Beyanlar arasında çelişki görmüyorum.' : `${names[k]} dosya kayıtlarıyla bağdaşmıyor, açıklama isteniyor.`);
+            if (key === owner) {
+                if (pl.kept[owner]) {
+                    pl.exposed[owner] = true; pl.exposed.hid = true;
+                    gameState.judgeInclination += owner === 'P' ? -28 : 28;
+                    appendLog('SYSTEM', `⚠️ Çelişki doğrulandı: ${owner === 'P' ? 'Davacı' : 'Davalı'} taraf yalan beyanda bulundu: ${owner === 'P' ? c.plot.pLie : c.plot.dLie}. Ayrıca avukatından sakladığı husus da ortaya çıktı: ${c.plot.hid}.`);
+                } else if (pl.fixed[owner]) appendLog('SYSTEM', 'Taraf zaten beyanını düzeltmişti; çelişki giderildi, dürüstlüğü not edildi.');
+                else { gameState.judgeInclination += owner === 'P' ? -5 : 5; appendLog('SYSTEM', 'Taraf açıklama yapmaktan kaçındı; kuşku arttı ama kesin bir sonuç çıkmadı.'); }
+            } else if (key === 'P' || key === 'D') { clampPat(-8); appendLog('SYSTEM', 'Bu beyanı çürüten bir kayıt dosyada bulunamadı; iddia delilsiz kaldı ama çelişki kanıtlanamadı.'); }
+            else if (key === 'W') { clampPat(-5); appendLog('SYSTEM', 'Tanığın anlatımı genel olarak dosyayla uyumlu bulundu.'); }
+            updateGauges(); gameState.stepIndex++; processCurrentTurn();
+        }
+
+
+        // ===== Yeni modüller: çapraz sorgu, bilirkişi, baskı, sulh, gerekçe, istinaf, karne, sicil =====
+        casesLibrary.forEach(c => {
+            const t = c.turns.TAHKIKAT, owner = c.plot.owner;
+            c.lead = c.id % 2;
+            c.expertFlaw = c.id % 2 === 0;
+            c.expertReport += c.expertFlaw ? ` Keşif, ${owner === 'P' ? 'davalı' : 'davacı'} taraf çağrılmadan yapılmıştır.` : ' Keşif iki tarafın huzurunda yapılmıştır.';
+            const w = t.findIndex(x => x.kind === 'WITNESS_Q'); t.splice(w + 1, 0, { role: 'JUDGE', kind: 'CROSS', prompt: 'Başkan Hâkim: Tanığa yöneltilen soruya itiraz var.' });
+            const d = t.findIndex(x => x.kind === 'DETECT'); t.splice(d + 1, 0, { role: 'JUDGE', kind: 'EXPERT', prompt: 'Başkan Hâkim: Bilirkişi raporunu (Bilirkişi sekmesi) inceleyin.' });
+            t.push({ role: 'JUDGE', kind: 'PRESSURE', prompt: 'Başkan Hâkim: Dosyayla ilgili dış baskı var.' });
+            c.turns.FINAL_STATEMENTS.unshift({ role: 'JUDGE', kind: 'SETTLE', prompt: 'Başkan Hâkim: Sulh ya da arabuluculuk önerecek misiniz?' });
+        });
+        const PRESS = [
+            'Üst makamdan telefon geldi: "Bu dosyada hassas davranılması beklenir."',
+            'Basın dışarıda: dosya hakkında kamuoyu baskısı oluşturuluyor.',
+            'Taraf avukatlarından biri özel görüşme talep ediyor.',
+            'Eski bir meslektaşınız taraflardan birinin akrabası olduğunu hatırlatıyor.'
+        ];
+        const SP = {
+            CROSS: { info: c => c.lead ? 'Davacı vekili tanığa: "Davalının kasten hareket ettiğini açıkça gördünüz, değil mi?" Davalı vekili itiraz etti.' : 'Davalı vekili tanığa: "Olay günü işyerinde saat kaçta bulundunuz?" Davacı vekili itiraz etti.', opts: [['Soruya İtirazı Kabul Et', 'Soru iptal edildi, tanık cevap vermeyecek.'], ['İtirazı Reddet', 'Soru usule uygun, tanık cevaplasın.']] },
+            EXPERT: { info: c => 'Bilirkişi raporu: ' + c.expertReport, opts: [['Raporu Hükme Esas Al', 'Rapor yeterli, ek inceleme gerekmiyor.'], ['Ek Rapor / Yeniden İnceleme İste', 'Yeni bir inceleme için ek süre verilir.']] },
+            PRESSURE: { info: c => PRESS[c.id % 4], opts: [['Tarafsızlığı Koru', 'Durumu zapta geçir, dosyayı aynen yürüt.'], ['Esneklik Göster', 'Talebi dikkate alarak yaklaşımını yumuşat.']] },
+            SETTLE: { info: c => 'Davanın seyrine göre taraflar uzlaşabilir. Sulh önerirsen yargılama kısalır, ama taraflar kabul etmeyebilir.', opts: [['Sulh Öner', 'Taraflara sulh ve arabuluculuk önerildi.'], ['Yargılamaya Devam', 'Dava esastan karara bağlanacak.']] }
+        };
+        function renderSpecialTurn(t) {
+            const sp = SP[t.kind]; if (!sp) return _rst0(t);
+            const c = getCurrentCase(); document.getElementById('action-panel-subtitle').innerText = t.prompt;
+            if (!judgeIsHuman()) {
+                aiSpinner('Hâkim karar veriyor...');
+                const ok = { CROSS: c.lead ? 0 : 1, EXPERT: c.expertFlaw ? 1 : 0, PRESSURE: 0, SETTLE: Math.random() < 0.3 ? 0 : 1 }[t.kind];
+                return setTimeout(() => spPick(t.kind, Math.random() < 0.65 ? ok : 1 - ok), 1500);
+            }
+            document.getElementById('container-action-cards').innerHTML = `<div class="col-span-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-[11px] text-slate-300 leading-relaxed">${sp.info(c)}</div>` + sp.opts.map((o, k) => `<button onclick="spPick('${t.kind}',${k})" class="p-3.5 rounded-xl bg-slate-900 border border-amber-500/40 hover:border-amber-400 text-left space-y-1"><div class="text-xs font-bold text-amber-300">${o[0]}</div><p class="text-[11px] text-slate-300">${o[1]}</p></button>`).join('');
+        }
+        function spPick(kind, k) {
+            const c = getCurrentCase(), pl = gameState.plot, card = pl.card, sp = SP[kind];
+            appendLog('JUDGE', sp.opts[k][0] + ': ' + sp.opts[k][1]);
+            if (kind === 'CROSS') {
+                const ok = (k === 0) === !!c.lead; card.cross = ok ? 'ok' : 'bad'; clampPat(ok ? 3 : -6);
+                appendLog('SYSTEM', ok ? '✅ Soru türü doğru değerlendirildi.' : `⚠️ ${c.lead ? 'Yönlendirici soruya izin verildi, itiraz haklıydı.' : 'Usule uygun soruya itiraz kabul edildi, itiraz haksızdı.'}`);
+            } else if (kind === 'EXPERT') {
+                const right = (k === 1) === c.expertFlaw; card.expert = right ? 'ok' : (c.expertFlaw ? 'bad' : 'delay'); if (k === 1) card.ek = true;
+                if (!right) clampPat(c.expertFlaw ? -6 : -4);
+                appendLog('SYSTEM', right ? '✅ Rapor doğru değerlendirildi.' : (c.expertFlaw ? '⚠️ Rapordaki usul eksikliği (taraf çağrılmadan keşif) gözden kaçtı.' : '⚠️ Rapor usulüne uygundu, gereksiz süre kaybedildi.'));
+            } else if (kind === 'PRESSURE') {
+                card.press = k === 0 ? 'ok' : 'bad';
+                if (k === 1) { gameState.judgeInclination += (c.id % 2 ? 10 : -10); appendLog('SYSTEM', '⚠️ Dış baskıya esneklik gösterdin; kanaatin kaydı ve tarafsızlığın sorgulanabilir.'); }
+                else appendLog('SYSTEM', '✅ Tarafsızlık korundu, durum zapta geçirildi.');
+            } else if (kind === 'SETTLE') {
+                if (k === 0) {
+                    const lies = (pl.kept.P ? 1 : 0) + (pl.kept.D ? 1 : 0), prob = 0.8 - Math.abs(gameState.judgeInclination) / 150 - lies * 0.15;
+                    if (Math.random() < prob) {
+                        card.sulh = true; appendLog('SYSTEM', '🤝 Taraflar sulhu kabul etti. Dava sulhle sona erdi.');
+                        gameState.currentPhase = 'JUDGMENT'; updatePhaseUI(); updateGauges();
+                        return renderFinalUYAPVerdict({ id: 'SETTLE', title: 'SULH', clause: 'Taraflar sulh olmuş olup, davanın sulh sebebiyle sona ermesine, yargılama giderlerinin taraflarca karşılanmasına karar verildi.' });
+                    }
+                    appendLog('SYSTEM', '❌ Taraflar sulhu kabul etmedi; yargılama sürüyor.'); clampPat(-4);
+                }
+            }
+            updateGauges(); gameState.stepIndex++; processCurrentTurn();
+        }
+        // Gerekçe yazımı
+        function startReasoning(v) {
+            const c = getCurrentCase(); gameState.verdict = v; gameState.reason = {};
+            c.lawOpts = [c.lawArticles, casesLibrary[(c.id + 5) % casesLibrary.length].lawArticles, casesLibrary[(c.id + 11) % casesLibrary.length].lawArticles].map((x, i) => [x, (i * 7 + c.id) % 5]).sort((a, b) => a[1] - b[1]).map(x => x[0]);
+            if (!judgeIsHuman()) { gameState.plot.card.reason = Math.random() < 0.5 ? 3 : 2; return renderFinalUYAPVerdict(v); }
+            document.getElementById('action-panel-subtitle').innerText = 'Gerekçe yazımı: hükmünüzün dayanağını kendiniz kurun.';
+            renderReasoning();
+        }
+        function setReason(k, v) { gameState.reason[k] = v; renderReasoning(); }
+        function renderReasoning() {
+            const c = getCurrentCase(), r = gameState.reason, on = 'px-2.5 py-1.5 rounded bg-amber-500 text-slate-950 font-bold text-[11px] text-left', off = 'px-2.5 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 text-[11px] text-left';
+            const grp = (title, key, list) => `<div class="col-span-full p-3 rounded-xl bg-slate-900 border border-slate-700 space-y-1.5"><div class="text-xs font-bold text-amber-300">${title}</div><div class="flex flex-wrap gap-2">${list.map((x, i) => `<button onclick="setReason('${key}',${i})" class="${r[key] === i ? on : off}">${x}</button>`).join('')}</div></div>`;
+            const evs = c.evidence.map(e => e.title).concat(['Tanık beyanı']);
+            const done = r.ev !== undefined && r.law !== undefined && r.contra !== undefined;
+            document.getElementById('container-action-cards').innerHTML = grp('1. Hükme esas aldığınız delil', 'ev', evs) + grp('2. Dayandığınız mevzuat', 'law', c.lawOpts) + grp('3. Beyanlar arasındaki çelişki gerekçede ele alınsın mı?', 'contra', ['Evet, ele alınsın', 'Hayır, gerek yok']) + (done ? `<button onclick="finishReasoning()" class="col-span-full p-3 rounded-xl bg-amber-500 text-slate-950 font-black text-xs">Gerekçeyi Tamamla ve Hükmü Yaz</button>` : '');
+        }
+        function finishReasoning() {
+            const c = getCurrentCase(), r = gameState.reason, card = gameState.plot.card;
+            const e = c.evidence[r.ev], evOk = e ? (e.legal && e.type === 'Kabul Edildi') : true;
+            const lawOk = c.lawOpts[r.law] === c.lawArticles, contraOk = (r.contra === 0) === (card.detect === 'ok');
+            card.reason = (evOk ? 1 : 0) + (lawOk ? 1 : 0) + (contraOk ? 1 : 0);
+            r.text = `Hükme esas alınan delil: ${e ? e.title : 'tanık beyanı'}. Dayanılan mevzuat: ${c.lawOpts[r.law]}.${r.contra === 0 ? ' Taraf beyanları arasındaki çelişki gerekçede tartışılmıştır.' : ''}`;
+            appendLog('SYSTEM', `📝 Gerekçe tamamlandı (${card.reason}/3): ${evOk ? '' : 'delil seçimi hatalı; '}${lawOk ? '' : 'mevzuat yanlış; '}${contraOk ? '' : 'çelişki değerlendirmesi hatalı'}`);
+            renderFinalUYAPVerdict(gameState.verdict);
+        }
+        // İstinaf, karne ve sicil
+        function renderFinalUYAPVerdict(v) {
+            const c = getCurrentCase(), pl = gameState.plot, k = pl.card, inc = gameState.judgeInclination, own = c.plot.owner;
+            let risk = 0; const why = [];
+            if (v.id !== 'SETTLE') {
+                const wrong = (k.evidN || 0) - (k.evid || 0); if (wrong > 0) { risk += wrong * 15; why.push(wrong + ' delil hatalı değerlendirildi'); }
+                if (k.detect !== 'ok' && pl.kept[own]) { risk += 15; why.push('yalan beyan fark edilmedi'); }
+                if (k.expert === 'bad') { risk += 15; why.push('kusurlu bilirkişi raporu esas alındı'); }
+                if (k.cross === 'bad') { risk += 5; why.push('çapraz sorgu itirazı yanlış karara bağlandı'); }
+                const g = k.reason === undefined ? 2 : k.reason; if (g < 3) { risk += (3 - g) * 10; why.push('gerekçe eksik ya da hatalı'); }
+                if ((v.id === 'ACCEPT' && inc < 0) || (v.id === 'REJECT' && inc > 0)) { risk += 25; why.push('hüküm dosyadaki kanaat dengesiyle bağdaşmıyor'); }
+                if (v.id === 'PARTIAL') risk -= 5;
+                if (k.press === 'bad') { risk += 10; why.push('dış baskıya esneklik gösterildi'); }
+            }
+            risk = Math.min(90, Math.max(0, risk));
+            const roll = Math.random() * 100;
+            const outcome = v.id === 'SETTLE' ? 'KESİNLEŞTİ (SULH)' : roll < risk ? 'BOZULDU' : (risk >= 35 && roll < risk + 20 ? 'DÜZELTEREK ONANDI' : 'ONANDI');
+            let pts = (k.evid || 0) * 10 + (k.detect === 'ok' ? 25 : 0) + (k.cross === 'ok' ? 5 : 0) + (k.expert === 'ok' ? 10 : 0) + (k.press === 'ok' ? 10 : 0) + (k.reason || 0) * 10;
+            pts += outcome === 'ONANDI' ? 30 : outcome.startsWith('DÜZ') ? 15 : outcome.startsWith('KES') ? 25 : -20;
+            const hearings = 3 + (k.ek ? 1 : 0) - (k.sulh ? 1 : 0);
+            let sic = { n: 0, pts: 0, boz: 0 }; try { sic = JSON.parse(localStorage.getItem('hakimSicil')) || sic; } catch (e) {}
+            sic.n++; sic.pts += pts; if (outcome === 'BOZULDU') sic.boz++;
+            try { localStorage.setItem('hakimSicil', JSON.stringify(sic)); } catch (e) {}
+            _finalOrig(v);
+            const grade = pts >= 110 ? 'Üstün Hâkim' : pts >= 70 ? 'Başarılı' : pts >= 30 ? 'Gelişmeli' : 'Zayıf';
+            const old = document.getElementById('karne-box'); if (old) old.remove();
+            document.getElementById('score-inclination').parentElement.insertAdjacentHTML('afterend', `<div id="karne-box" class="mt-3 p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-xs text-slate-200 space-y-1.5"><p class="font-bold text-amber-300">⚖️ İstinaf Sonucu: ${outcome}${risk ? ' (bozma riski %' + risk + ')' : ''}</p>${why.length ? `<p class="text-[11px] text-slate-400">Zayıf noktalar: ${why.join('; ')}.</p>` : ''}<p>Gün sonu karnesi: <b>${pts} puan</b> (${grade}) • ${hearings} duruşma</p><p class="text-[11px] text-slate-400">Sicil: ${sic.n} dosya • ortalama ${Math.round(sic.pts / sic.n)} puan • ${sic.boz} bozma</p><div class="flex flex-wrap gap-2 pt-1"><button onclick="downloadVerdict('${outcome}')" class="px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-bold">Kararı İndir</button><button onclick="window.print()" class="px-3 py-1.5 rounded bg-slate-800 text-slate-200">Yazdır / PDF</button><button onclick="nextCase()" class="px-3 py-1.5 rounded bg-slate-800 text-amber-300">Sıradaki Dosya →</button></div></div>`);
+        }
+        function downloadVerdict(outcome) {
+            const g = id => document.getElementById(id).innerText, r = gameState.reason || {};
+            const txt = `${g('verdict-modal-court')}\n\nDavacı: ${g('verdict-plaintiff-name')}\nDavalı: ${g('verdict-defendant-name')}\n\nÖZET:\n${g('verdict-summary-text')}\n\nGEREKÇE:\n${g('verdict-reasoning-text')}\n${r.text || ''}\n\nHÜKÜM:\n${g('verdict-clause-text')}\n\nİSTİNAF: ${outcome}\n`;
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/plain;charset=utf-8' })); a.download = 'gerekceli-karar.txt'; a.click();
+        }
+        function nextCase() {
+            closeModal('modal-verdict'); document.getElementById('court-log-stream').innerHTML = '';
+            gameState.selectedCaseId = (gameState.selectedCaseId % casesLibrary.length) + 1; startTrial();
+        }
+
+        function applyPlotEffects(ch) {
+            const pl = gameState.plot, c = getCurrentCase();
+            if (ch.keep) pl.kept[ch.keep] = true;
+            if (ch.fix) pl.fixed[ch.fix] = true;
+            if (ch.probe) {
+                pl.probed[ch.probe] = true;
+                if (c.plot.owner === ch.probe) appendLog('SYSTEM', `🔎 Müvekkil itiraf etti: ${c.plot.hid}. Savunma stratejisi buna göre güncellenmeli.`);
+                else appendLog('SYSTEM', '🔎 Müvekkil sakladığı bir şey olmadığını söyledi; ancak karşı tarafın beyanı hâlâ şüpheli.');
+            }
+            if (ch.reveal) {
+                const sides = ch.reveal === 'H' ? [c.plot.owner] : [ch.reveal];
+                sides.forEach(side => {
+                    const lie = side === 'P' ? c.plot.pLie : c.plot.dLie;
+                    if (ch.reveal === 'H') {
+                        if (pl.exposed.hid) return;
+                        pl.exposed.hid = true;
+                        const softened = pl.probed[c.plot.owner] ? 10 : 20;
+                        gameState.judgeInclination += (c.plot.owner === 'P' ? -softened : softened);
+                        appendLog('SYSTEM', `🚨 SAKLANAN GERÇEK ORTAYA ÇIKTI (${c.plot.owner === 'P' ? 'Davacı' : 'Davalı'} tarafı avukatından gizlemişti): ${c.plot.hid}. ${pl.probed[c.plot.owner] ? 'Avukat önceden biliyordu, hasar sınırlı kaldı.' : 'Avukat habersiz yakalandı, hasar büyük.'}`);
+                    } else if (pl.kept[side] && !pl.exposed[side]) {
+                        pl.exposed[side] = true;
+                        gameState.judgeInclination += (side === 'P' ? -18 : 18);
+                        appendLog('SYSTEM', `⚠️ ${side === 'P' ? 'Davacı' : 'Davalı'} tarafın beyanı çürütüldü. Taraf şunu iddia etmişti: ${lie}. Hâkimin güveni sarsıldı.`);
+                    } else if (pl.fixed[side]) {
+                        appendLog('SYSTEM', `✅ ${side === 'P' ? 'Davacı' : 'Davalı'} taraf beyanını düzeltmişti; dürüstlüğü hâkimce not edildi.`);
+                    } else {
+                        appendLog('SYSTEM', 'Belge incelemesinde bu beyanla ilgili belirgin bir çelişki bulunamadı.');
+                    }
+                });
+                updateGauges();
+            }
+        }
+
+        function partiesTabHtml(c) {
+            const r = gameState.userRole, pl = gameState.plot, p = c.plot;
+            const box = (t, txt, cls) => `<div class="p-2 rounded bg-slate-900 border ${cls || 'border-slate-800'} space-y-0.5"><p class="font-bold text-amber-200 text-[11px]">${t}</p><p class="text-[10px] text-slate-300 leading-relaxed">${txt}</p></div>`;
+            let h = box('Davacı Beyanı (' + c.plaintiffName + ')', p.pLie) + box('Davalı Beyanı (' + c.defendantName + ')', p.dLie);
+            const mine = r.startsWith('PLAINTIFF') ? 'P' : r.startsWith('DEFENDANT') ? 'D' : null;
+            if (mine && r.endsWith('_PARTY')) {
+                h += box('SADECE SİZ BİLİYORSUNUZ', (p.owner === mine ? 'Avukatınıza söylemediğiniz gerçek: ' + p.hid : 'Karşı tarafın saklamış olabileceği bir şey var, ama sizin bilginiz yok.') + ' Beyanınızı sürdürmek ya da düzeltmek sizin elinizde.', 'border-red-800');
+            } else if (mine) {
+                h += box('Avukat Notu', 'Müvekkiliniz size yukarıdaki anlatımı yaptı; doğruluğunu henüz sınamadınız. Müvekkil bazı noktaları sizden saklamış olabilir.' + (pl.probed[mine] && p.owner === mine ? '<br><b class="text-red-300">İtiraf: ' + p.hid + '</b>' : ''), 'border-blue-800');
+            } else {
+                h += box('Heyet Notu', 'Beyanları ve delilleri kendiniz karşılaştırın. Yanlış bir beyanı ya da hukuka aykırı bir delili size kimse işaret etmeyecek.', 'border-amber-800');
+            }
+            if (pl.exposed.hid) h += box('ORTAYA ÇIKAN GERÇEK', p.hid, 'border-red-700');
+            return `<p class="font-bold text-amber-300 mb-1">Taraf Beyanları ve Gizli Hususlar:</p><div class="space-y-1.5">${h}</div>`;
+        }
 
         /* ==========================================================================
            3. WEB AUDIO SYNTHESIZER
@@ -1009,7 +1306,7 @@
 
         function selectSingleRole(role) {
             gameState.userRole = role;
-            ['JUDGE', 'PLAINTIFF', 'DEFENDANT'].forEach(r => {
+            ['JUDGE', 'MEMBER', 'PLAINTIFF', 'DEFENDANT', 'PLAINTIFF_PARTY', 'DEFENDANT_PARTY'].forEach(r => {
                 const btn = document.getElementById(`btn-role-${r.toLowerCase()}`);
                 if (r === role) {
                     btn.className = "px-5 py-2.5 rounded-xl bg-amber-500 border-2 border-amber-400 text-slate-950 font-serif font-black text-xs sm:text-sm shadow-lg";
@@ -1058,6 +1355,7 @@
             gameState.stepIndex = 0;
             gameState.judgeInclination = 0;
             gameState.patience = 100;
+            gameState.plot = freshPlotState();
 
             switchFileTab('summary');
 
@@ -1113,6 +1411,7 @@
 
             const currentTurnData = phaseMoves[gameState.stepIndex];
             gameState.activeTurnRole = currentTurnData.role;
+            if (currentTurnData.kind) { updateActiveRoleSeat(currentTurnData.role); document.getElementById('game-turn-indicator').innerText = getRoleTitle(currentTurnData.role); renderSpecialTurn(currentTurnData); return; }
 
             updateActiveRoleSeat(gameState.activeTurnRole);
             document.getElementById('game-turn-indicator').innerText = getRoleTitle(gameState.activeTurnRole);
@@ -1146,6 +1445,9 @@
         }
 
         function getRoleTitle(role) {
+            if (role === 'MEMBER') return '👨‍⚖️ Üye Hâkim';
+            if (role === 'PLAINTIFF_PARTY') return '🧑 Davacı Taraf (Müvekkil)';
+            if (role === 'DEFENDANT_PARTY') return '🧑 Davalı Taraf (Müvekkil)';
             if (role === 'JUDGE') return '👨‍⚖️ Hâkim Kürsüsü';
             if (role === 'PLAINTIFF') return '⚖️ Davacı Vekili';
             if (role === 'DEFENDANT') return '🛡️ Davalı Vekili';
@@ -1153,6 +1455,13 @@
         }
 
         function updateActiveRoleSeat(role) {
+            _origSeat(ROLE_ALIAS[role] || role);
+            const tb = document.getElementById('turn-badge'), tt = document.getElementById('turn-role-title'), td = document.getElementById('turn-role-desc');
+            if (role === 'MEMBER') { tb.innerText = 'ÜYE HÂKİM'; tt.innerText = 'Üye Hâkim Görüşü'; td.innerText = 'Heyet üyesi olarak çelişkileri başkana bildirin.'; }
+            if (role.endsWith('_PARTY')) { tb.innerText = 'TARAF'; tt.innerText = 'Taraf Beyanı (Müvekkil)'; td.innerText = 'Hikâyenize bağlı kalabilir, düzeltebilir ya da kaçınabilirsiniz.'; }
+        }
+
+        function _origSeat(role) {
             ['seat-judge', 'seat-plaintiff', 'seat-defendant'].forEach(id => {
                 document.getElementById(id).classList.remove('active-seat-glow', 'border-amber-500');
                 document.getElementById(id).classList.add('border-slate-800');
@@ -1231,6 +1540,7 @@
 
         function executeChoice(choiceObj) {
             playChime();
+            applyPlotEffects(choiceObj);
 
             gameState.judgeInclination += choiceObj.shift;
             gameState.patience = Math.min(100, Math.max(0, gameState.patience + choiceObj.patience));
@@ -1238,11 +1548,11 @@
             updateGauges();
             appendLog(gameState.activeTurnRole, choiceObj.text);
 
-            if (gameState.activeTurnRole === 'JUDGE') {
+            if (gameState.activeTurnRole === 'JUDGE' || gameState.activeTurnRole === 'MEMBER') {
                 document.getElementById('judge-status-text').innerText = `"${choiceObj.text.substring(0, 60)}..."`;
-            } else if (gameState.activeTurnRole === 'PLAINTIFF') {
+            } else if (gameState.activeTurnRole.startsWith('PLAINTIFF')) {
                 document.getElementById('plaintiff-status-text').innerText = `"${choiceObj.text.substring(0, 50)}..."`;
-            } else if (gameState.activeTurnRole === 'DEFENDANT') {
+            } else if (gameState.activeTurnRole.startsWith('DEFENDANT')) {
                 document.getElementById('defendant-status-text').innerText = `"${choiceObj.text.substring(0, 50)}..."`;
             }
 
@@ -1262,7 +1572,7 @@
             currentCase.verdicts.forEach((v, idx) => {
                 const card = document.createElement('button');
                 card.className = "p-4 rounded-xl bg-gradient-to-br from-amber-950/80 to-court-panel border-2 border-amber-500/60 hover:border-amber-400 text-left transition-all space-y-2 group shadow-xl";
-                card.onclick = () => renderFinalUYAPVerdict(v);
+                card.onclick = () => startReasoning(v);
 
                 card.innerHTML = `
                     <div class="flex items-center justify-between text-xs font-bold text-amber-300">
@@ -1299,7 +1609,10 @@
             let badgeClass = "bg-amber-500/20 text-amber-300 border-amber-500/40";
             let roleName = "HÂKİM KÜRSÜSÜ";
 
-            if (role === 'PLAINTIFF') {
+            if (role === 'MEMBER') { roleName = 'ÜYE HÂKİM'; }
+            else if (role === 'PLAINTIFF_PARTY') { badgeClass = "bg-sky-500/20 text-sky-300 border-sky-500/40"; roleName = 'DAVACI TARAF'; }
+            else if (role === 'DEFENDANT_PARTY') { badgeClass = "bg-rose-500/20 text-rose-300 border-rose-500/40"; roleName = 'DAVALI TARAF'; }
+            else if (role === 'PLAINTIFF') {
                 badgeClass = "bg-blue-500/20 text-blue-300 border-blue-500/40";
                 roleName = "DAVACI VEKİLİ";
             } else if (role === 'DEFENDANT') {
@@ -1334,7 +1647,7 @@
             const currentCase = getCurrentCase();
             const contentBox = document.getElementById('file-tab-content');
 
-            ['summary', 'evidence', 'witness', 'expert'].forEach(t => {
+            ['summary', 'evidence', 'witness', 'expert', 'parties'].forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`);
                 if (btn) {
                     if (t === tabName) {
@@ -1361,8 +1674,8 @@
                         ${currentCase.evidence.map(e => `
                             <div class="p-2 rounded bg-slate-900 border border-slate-800">
                                 <div class="flex justify-between font-bold text-[11px]">
-                                    <span class="text-amber-200">${e.title}</span>
-                                    <span class="text-[9px] px-1.5 py-0.5 rounded ${e.legal ? 'bg-green-950 text-green-300 border border-green-800' : 'bg-red-950 text-red-300 border border-red-800'}">${e.type}</span>
+                                    <span class="text-amber-200">${e.title} <span class="text-slate-500 font-normal">(${e.by === 'P' ? 'Davacı' : 'Davalı'})</span></span>
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">${e.type}</span>
                                 </div>
                                 <p class="text-[10px] text-slate-400 mt-0.5">${e.desc}</p>
                             </div>
@@ -1381,6 +1694,8 @@
                         `).join('') : '<p class="text-slate-500 italic">Dosyada dinlenecek tanık bulunmamaktadır.</p>'}
                     </div>
                 `;
+            } else if (tabName === 'parties') {
+                contentBox.innerHTML = partiesTabHtml(currentCase);
             } else if (tabName === 'expert') {
                 contentBox.innerHTML = `
                     <p class="font-bold text-amber-300 mb-1">Bilirkişi İnceleme Mütalaası:</p>
@@ -1482,7 +1797,9 @@
            8. FINAL REASONED VERDICT (UYAP FORMAT)
            ========================================================================== */
 
-        function renderFinalUYAPVerdict(verdictObj) {
+        function _finalOrig(verdictObj) {
+            const _c = getCurrentCase();
+            if (_c.plot && !gameState.plot.exposed.hid) appendLog('SYSTEM', `🗝️ Duruşma boyunca gizli kalan gerçek: ${_c.plot.hid} (${_c.plot.owner === 'P' ? 'davacı' : 'davalı'} tarafı avukatından saklamıştı).`);
             playGavelStrike();
             const currentCase = getCurrentCase();
             const modal = document.getElementById('modal-verdict');
@@ -1524,6 +1841,7 @@
         // INITIALIZE ON LOAD
         window.onload = function() {
             renderCasesGrid();
+            try { const sc = JSON.parse(localStorage.getItem('hakimSicil')); if (sc && sc.n) document.getElementById('screen-setup').insertAdjacentHTML('afterbegin', `<div class="text-center text-[11px] text-amber-400/90 font-mono">Hâkimlik Sicili: ${sc.n} dosya • ortalama ${Math.round(sc.pts / sc.n)} puan • ${sc.boz} bozma</div>`); } catch (e) {}
         };
     </script>
 </body>
