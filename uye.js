@@ -18,6 +18,8 @@
   var FEATURES = [
     ['🧪', 'Laboratuvar', ROOT + 'eko-plus/iibf-laboratuvar.html'],
     ['📜', 'Mevzuat', ROOT + 'mevzuat/'],
+    ['🏛️', 'Kariyer Simülasyonu', ROOT + 'simulasyon-merkezi.html#/kariyer'],
+    ['📈', 'Borsa Oyunu', ROOT + 'simulasyon-merkezi.html#/borsa-oyunu'],
     ['💬', 'Soru-Cevap', ROOT + 'eko-plus/#/forum']
   ];
   var LOPT = [['isletme', 'İşletme & Finans', ['isletme']], ['iktisat', 'İktisat', ['iktisat']], ['ekonometri', 'Ekonometri', ['ekonometri']], ['maliye', 'Maliye & Vergi', ['maliye']], ['kamu', 'Kamu Yönetimi', ['kamu']], ['uluslararasi', 'Uluslararası İlişkiler', ['uluslararasi']], ['ceko', 'Çalışma Ekonomisi ve Endüstri İlişkileri', ['ceko']], ['siyaset-kamu', 'Siyaset Bilimi ve Kamu Yönetimi', ['kamu']], ['siyaset-ub', 'Siyaset Bilimi ve Uluslararası İlişkiler', ['uluslararasi']]];
@@ -587,3 +589,29 @@
   }, true);
 })();
 
+/* Eko-Log · Çekmece menü: "Simülasyon Merkezi" altına Kariyer Simülasyonu ve Borsa Oyunu satırlarını ekler.
+   Sayfaların kendi menü listesine dokunmaz; uye.js yüklü her sayfada çalışır. */
+(function () {
+  var EK = [['kariyer', 'Kariyer Simülasyonu'], ['borsa-oyunu', 'Borsa Oyunu']];
+  function ekle() {
+    var ogeler = document.querySelectorAll('#dmenu .dm-item');
+    for (var i = 0; i < ogeler.length; i++) {
+      var li = ogeler[i], a = li.querySelector('.dm-row a'), sub = li.querySelector('.dm-sub');
+      if (!a || !sub || (a.textContent || '').trim() !== 'Simülasyon Merkezi') continue;
+      var base = (a.getAttribute('href') || '').split('#')[0];
+      EK.forEach(function (k) {
+        if (sub.querySelector('a[href$="#/' + k[0] + '"]')) return;
+        var l = document.createElement('li'), b = document.createElement('a');
+        b.href = base + '#/' + k[0]; b.textContent = k[1];
+        var hash = (location.hash || '').replace(/^#\/?/, '').split('/')[0];
+        if (hash === k[0] && location.pathname.split('/').pop() === base.split('/').pop()) { b.className = 'on'; b.setAttribute('aria-current', 'page'); }
+        l.appendChild(b); sub.appendChild(l);
+      });
+    }
+  }
+  function basla() {
+    ekle();
+    try { new MutationObserver(ekle).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();
+})();
