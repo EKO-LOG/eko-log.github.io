@@ -894,7 +894,7 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
         });
 
 
-        function clampPat(d) { gameState.patience = Math.min(100, Math.max(0, gameState.patience + d)); }
+        function clampPat(d) { if (d < 0) d = Math.round(d * ({ EASY: 0.5, NORMAL: 1, HARD: 1.5 }[gameState.diff || 'NORMAL'])); gameState.patience = Math.min(100, Math.max(0, gameState.patience + d)); }
         function judgeIsHuman() { return gameState.mode !== 'SINGLE' || gameState.userRole === 'JUDGE'; }
         function aiSpinner(msg) {
             document.getElementById('container-action-cards').innerHTML = `<div class="col-span-full p-4 rounded-xl bg-slate-900 border border-slate-800 text-center text-xs text-amber-300 font-bold">🤖 ${msg}</div>`;
@@ -985,13 +985,39 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
             PRESSURE: { info: c => PRESS[c.id % 4], opts: [['Tarafsızlığı Koru', 'Durumu zapta geçir, dosyayı aynen yürüt.'], ['Esneklik Göster', 'Talebi dikkate alarak yaklaşımını yumuşat.']] },
             SETTLE: { info: c => 'Davanın seyrine göre taraflar uzlaşabilir. Sulh önerirsen yargılama kısalır, ama taraflar kabul etmeyebilir.', opts: [['Sulh Öner', 'Taraflara sulh ve arabuluculuk önerildi.'], ['Yargılamaya Devam', 'Dava esastan karara bağlanacak.']] }
         };
+
+        // ===== Hukuk (iş/ticaret) ve idare yargısına özel turlar =====
+        const BS = [
+            ['Davacı, ödenmeyen alacağın varlığını iddia ediyor.', 0, 'Alacağın varlığını iddia eden taraf ispat yükü altındadır (TMK m.6).'],
+            ['Davalı, borcun ödendiğini savunuyor.', 1, 'Ödeme def’ini ileri süren taraf ödemeyi ispatlamalıdır.'],
+            ['Davacı, sözleşmenin haksız feshedildiğini iddia ediyor.', 0, 'Haksız fesih iddiasını ileri süren taraf ispatlamalıdır.'],
+            ['Davalı, zamanaşımı def’i ileri sürüyor.', 1, 'Def’i ileri süren taraf, def’in dayandığı vakıaları ispatlamalıdır.']
+        ];
+        const UNS = ['Yetki', 'Şekil', 'Sebep', 'Konu', 'Maksat'];
+        const UNS_OK = ['İşlem yetkili makam adına imzalanmış, yetki devri belgesi dosyada.', 'Tebligat ve savunma istemi usulüne uygun yapılmış.', 'İşlemin dayandığı olay belgelerle doğrulanıyor.', 'İşlemin sonucu kanundaki yaptırım sınırları içinde.', 'İşlem kamu yararı amacıyla tesis edilmiş görünüyor.'];
+        const UNS_BAD = ['İşlemi imzalayan kişinin bu konuda devredilmiş imza yetkisi dosyada yok.', 'İlgiliye savunma hakkı tanınmadan, tebliğ edilmeden işlem tesis edilmiş.', 'İşlemin dayandığı olay, dosyadaki belgelerle doğrulanamıyor.', 'İşlemin hukuki sonucu kanunun öngördüğü yaptırımı aşıyor.', 'İşlemin kamu yararı dışında bir amaçla tesis edildiği izlenimi var.'];
+        const defect = c => c.id % 7 === 0 ? 5 : c.id % 5;
+        const ydOk = c => c.id % 7 !== 0 && c.id % 3 !== 0;
+        Object.assign(SP, {
+            BURDEN: { info: c => 'Hâkim olarak ispat yükünün kime ait olduğunu belirleyin. ' + BS[c.id % 4][0], opts: [['İspat Yükü Davacıda', 'Davacı iddiasını ispat etmeli.'], ['İspat Yükü Davalıda', 'Davalı savunmasını ispat etmeli.']], ok: c => BS[c.id % 4][1], why: c => BS[c.id % 4][2] },
+            ISLAH: { info: c => c.id % 2 ? 'Davacı vekili ilk kez ıslah talebinde bulundu ve talebini artırıyor (HMK m.176-182).' : 'Davacı vekili aynı dava için ikinci kez ıslah talep ediyor.', opts: [['Islahı Kabul Et', 'Islah talebi işleme alınsın.'], ['Islahı Reddet', 'Islah talebi usulden reddedilsin.']], ok: c => c.id % 2 ? 0 : 1, why: c => c.id % 2 ? 'İlk ıslah, tahkikat sonuna kadar yapılabilir.' : 'Aynı işlem için ıslah yalnızca bir kez yapılabilir.' },
+            TEDBIR: { info: c => c.id % 3 === 0 ? 'Davacı ihtiyati tedbir istiyor, ancak yaklaşık ispat sunamadı ve hak kaybı iddiası soyut.' : 'Davacı yaklaşık ispat sundu ve gecikmenin telafisi güç zarar doğuracağını belgeledi (HMK m.389).', opts: [['Tedbir Kararı Ver', 'Tedbir talebi kabul edilsin.'], ['Tedbir Talebini Reddet', 'Tedbir talebi reddedilsin.']], ok: c => c.id % 3 === 0 ? 1 : 0, why: c => c.id % 3 === 0 ? 'Yaklaşık ispat ve telafisi güç zarar şartları yoktu.' : 'Tedbir şartları (yaklaşık ispat, gecikme zararı) vardı.' },
+            ADM_FILE: { info: c => c.id % 2 ? 'İdare işlem dosyasını gönderdi; karar öncesi hazırlık evrakı ve tebligat belgeleri dosyada görünmüyor.' : 'İdare işlem dosyasını süresinde ve eksiksiz gönderdi.', opts: [['Dosyayı Yeterli Say', 'Dosya incelemeye hazır.'], ['Eksik Belgeleri Yeniden İste', 'İdareden eksik evrak istensin.']], ok: c => c.id % 2 ? 1 : 0, why: c => c.id % 2 ? 'İdare, işlem dosyasını eksiksiz göndermekle yükümlüdür (İYUK m.20).' : 'Dosya eksiksizdi, ek talep gerekmiyordu.' },
+            ADM_UNSUR: { info: c => 'İdari işlemin unsurlarını kendiniz denetleyin:<br>' + UNS.map((u, i) => `<b>${u}:</b> ${i === defect(c) ? UNS_BAD[i] : UNS_OK[i]}`).join('<br>'), opts: UNS.map(u => [u + ' unsuru sakat', 'İşlem bu yönden hukuka aykırı.']).concat([['İşlem hukuka uygun', 'Hiçbir unsurda sakatlık yok.']]), ok: c => defect(c), why: c => defect(c) === 5 ? 'Beş unsurun hiçbirinde sakatlık yoktu.' : UNS[defect(c)] + ' unsuru sakattı: ' + UNS_BAD[defect(c)] },
+            ADM_YD: { info: c => 'Davacı yürütmenin durdurulmasını istiyor (İYUK m.27). Açıkça hukuka aykırılık ve telafisi güç zarar birlikte aranır. ' + (ydOk(c) ? 'Zararın giderilmesi güç, işlem belirgin biçimde sakat.' : 'Zarar parayla giderilebilir, aykırılık belirgin değil.'), opts: [['YD Kararı Ver', 'İşlemin yürütmesi durdurulsun.'], ['YD Talebini Reddet', 'İşlem uygulanmaya devam etsin.']], ok: c => ydOk(c) ? 0 : 1, why: c => ydOk(c) ? 'Her iki şart da gerçekleşmişti.' : 'Şartlar birlikte gerçekleşmediği için YD verilmemeliydi.' }
+        });
+        casesLibrary.forEach(c => {
+            const t = c.turns.TAHKIKAT, at = (kind, items, after) => { const i = t.findIndex(x => x.kind === kind); t.splice(after ? i + 1 : i, 0, ...items.map(k => ({ role: 'JUDGE', kind: k, prompt: 'Başkan Hâkim: ' + (k === 'BURDEN' ? 'İspat yükü kararı.' : k === 'ISLAH' ? 'Islah talebi.' : k === 'TEDBIR' ? 'İhtiyati tedbir talebi.' : k === 'ADM_FILE' ? 'İdarenin gönderdiği işlem dosyasını inceleyin.' : k === 'ADM_UNSUR' ? 'İdari işlemi unsurları yönünden denetleyin.' : 'Yürütmeyi durdurma talebi.') }))); };
+            if (c.category === 'IDARE') { at('EVIDENCE', ['ADM_FILE'], true); at('DETECT', ['ADM_UNSUR'], true); at('EXPERT', ['ADM_YD'], true); }
+            else { at('EVIDENCE', ['BURDEN'], true); at('EXPERT', ['ISLAH', 'TEDBIR'], true); }
+        });
         function renderSpecialTurn(t) {
             const sp = SP[t.kind]; if (!sp) return _rst0(t);
             const c = getCurrentCase(); document.getElementById('action-panel-subtitle').innerText = t.prompt;
             if (!judgeIsHuman()) {
                 aiSpinner('Hâkim karar veriyor...');
-                const ok = { CROSS: c.lead ? 0 : 1, EXPERT: c.expertFlaw ? 1 : 0, PRESSURE: 0, SETTLE: Math.random() < 0.3 ? 0 : 1 }[t.kind];
-                return setTimeout(() => spPick(t.kind, Math.random() < 0.65 ? ok : 1 - ok), 1500);
+                const ok = sp.ok ? sp.ok(c) : { CROSS: c.lead ? 0 : 1, EXPERT: c.expertFlaw ? 1 : 0, PRESSURE: 0, SETTLE: Math.random() < 0.3 ? 0 : 1 }[t.kind];
+                return setTimeout(() => spPick(t.kind, Math.random() < 0.65 ? ok : (sp.opts.length > 2 ? Math.floor(Math.random() * sp.opts.length) : 1 - ok)), 1500);
             }
             document.getElementById('container-action-cards').innerHTML = `<div class="col-span-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-[11px] text-slate-300 leading-relaxed">${sp.info(c)}</div>` + sp.opts.map((o, k) => `<button onclick="spPick('${t.kind}',${k})" class="p-3.5 rounded-xl bg-slate-900 border border-amber-500/40 hover:border-amber-400 text-left space-y-1"><div class="text-xs font-bold text-amber-300">${o[0]}</div><p class="text-[11px] text-slate-300">${o[1]}</p></button>`).join('');
         }
@@ -1002,7 +1028,7 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
                 const ok = (k === 0) === !!c.lead; card.cross = ok ? 'ok' : 'bad'; clampPat(ok ? 3 : -6);
                 appendLog('SYSTEM', ok ? '✅ Soru türü doğru değerlendirildi.' : `⚠️ ${c.lead ? 'Yönlendirici soruya izin verildi, itiraz haklıydı.' : 'Usule uygun soruya itiraz kabul edildi, itiraz haksızdı.'}`);
             } else if (kind === 'EXPERT') {
-                const right = (k === 1) === c.expertFlaw; card.expert = right ? 'ok' : (c.expertFlaw ? 'bad' : 'delay'); if (k === 1) card.ek = true;
+                const right = (k === 1) === c.expertFlaw; card.expert = right ? 'ok' : (c.expertFlaw ? 'bad' : 'delay'); if (k === 1) { card.ek = true; c.turns[gameState.currentPhase].splice(gameState.stepIndex + 1, 0, { role: 'JUDGE', kind: 'EXPERT2', prompt: 'Başkan Hâkim: Ek bilirkişi raporu dosyaya geldi.' }); }
                 if (!right) clampPat(c.expertFlaw ? -6 : -4);
                 appendLog('SYSTEM', right ? '✅ Rapor doğru değerlendirildi.' : (c.expertFlaw ? '⚠️ Rapordaki usul eksikliği (taraf çağrılmadan keşif) gözden kaçtı.' : '⚠️ Rapor usulüne uygundu, gereksiz süre kaybedildi.'));
             } else if (kind === 'PRESSURE') {
@@ -1019,6 +1045,9 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
                     }
                     appendLog('SYSTEM', '❌ Taraflar sulhu kabul etmedi; yargılama sürüyor.'); clampPat(-4);
                 }
+            } else if (sp.ok) {
+                const right = k === sp.ok(c); card.rightN = (card.rightN || 0) + (right ? 1 : 0); card.wrongN = (card.wrongN || 0) + (right ? 0 : 1); card[kind] = right ? 'ok' : 'bad'; clampPat(right ? 3 : -6);
+                appendLog('SYSTEM', (right ? '✅ Doğru karar. ' : '⚠️ Hatalı karar. ') + sp.why(c));
             }
             updateGauges(); gameState.stepIndex++; processCurrentTurn();
         }
@@ -1059,21 +1088,30 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
                 const g = k.reason === undefined ? 2 : k.reason; if (g < 3) { risk += (3 - g) * 10; why.push('gerekçe eksik ya da hatalı'); }
                 if ((v.id === 'ACCEPT' && inc < 0) || (v.id === 'REJECT' && inc > 0)) { risk += 25; why.push('hüküm dosyadaki kanaat dengesiyle bağdaşmıyor'); }
                 if (v.id === 'PARTIAL') risk -= 5;
+                if (k.wrongN) { risk += k.wrongN * 12; why.push(k.wrongN + ' usul/esas kararı hatalı'); }
                 if (k.press === 'bad') { risk += 10; why.push('dış baskıya esneklik gösterildi'); }
             }
+            risk = Math.round(risk * ({ EASY: 0.8, NORMAL: 1, HARD: 1 }[gameState.diff || 'NORMAL'])) + (gameState.diff === 'HARD' ? 10 : 0);
             risk = Math.min(90, Math.max(0, risk));
             const roll = Math.random() * 100;
             const outcome = v.id === 'SETTLE' ? 'KESİNLEŞTİ (SULH)' : roll < risk ? 'BOZULDU' : (risk >= 35 && roll < risk + 20 ? 'DÜZELTEREK ONANDI' : 'ONANDI');
             let pts = (k.evid || 0) * 10 + (k.detect === 'ok' ? 25 : 0) + (k.cross === 'ok' ? 5 : 0) + (k.expert === 'ok' ? 10 : 0) + (k.press === 'ok' ? 10 : 0) + (k.reason || 0) * 10;
+            pts += (k.rightN || 0) * 8;
             pts += outcome === 'ONANDI' ? 30 : outcome.startsWith('DÜZ') ? 15 : outcome.startsWith('KES') ? 25 : -20;
             const hearings = 3 + (k.ek ? 1 : 0) - (k.sulh ? 1 : 0);
+            const nt = (gameState.notes || '').toLowerCase(), kw = (c.plot.hid + ' ' + (own === 'P' ? c.plot.pLie : c.plot.dLie)).toLowerCase().split(/[^a-zçğıöşü]+/).filter(x => x.length > 5);
+            const noteOk = nt.length > 30 && kw.some(x => nt.includes(x)); if (noteOk) pts += 10;
+            const badges = [['🔍 Keskin Göz', k.detect === 'ok' && pl.kept[own]], ['📂 Delil Ustası', k.evidN > 0 && k.evid >= k.evidN], ['⚖️ Bozma Görmedi', outcome === 'ONANDI'], ['🛡️ Tarafsız', k.press === 'ok'], ['🤝 Sulh Ustası', !!k.sulh], ['📝 Titiz Gerekçe', k.reason === 3], ['🧮 Hesap Makinesi', k.CALC === 'ok'], ['👥 Tanık Yüzleştirme', k.CONFRONT === 'ok'], ['🗒️ Not Tutucu', noteOk]].filter(b => b[1]).map(b => b[0]);
+            let owned = []; try { owned = JSON.parse(localStorage.getItem('hakimRozet')) || []; } catch (e) {}
+            const fresh = badges.filter(b => !owned.includes(b)); try { localStorage.setItem('hakimRozet', JSON.stringify([...new Set([...owned, ...badges])])); } catch (e) {}
+            const badgeHtml = badges.length ? `<p class="text-[11px] text-amber-300">Rozetler: ${badges.map(b => b + (fresh.includes(b) ? ' (yeni!)' : '')).join(' • ')}</p>` : '';
             let sic = { n: 0, pts: 0, boz: 0 }; try { sic = JSON.parse(localStorage.getItem('hakimSicil')) || sic; } catch (e) {}
             sic.n++; sic.pts += pts; if (outcome === 'BOZULDU') sic.boz++;
             try { localStorage.setItem('hakimSicil', JSON.stringify(sic)); } catch (e) {}
             _finalOrig(v);
             const grade = pts >= 110 ? 'Üstün Hâkim' : pts >= 70 ? 'Başarılı' : pts >= 30 ? 'Gelişmeli' : 'Zayıf';
             const old = document.getElementById('karne-box'); if (old) old.remove();
-            document.getElementById('score-inclination').parentElement.insertAdjacentHTML('afterend', `<div id="karne-box" class="mt-3 p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-xs text-slate-200 space-y-1.5"><p class="font-bold text-amber-300">⚖️ İstinaf Sonucu: ${outcome}${risk ? ' (bozma riski %' + risk + ')' : ''}</p>${why.length ? `<p class="text-[11px] text-slate-400">Zayıf noktalar: ${why.join('; ')}.</p>` : ''}<p>Gün sonu karnesi: <b>${pts} puan</b> (${grade}) • ${hearings} duruşma</p><p class="text-[11px] text-slate-400">Sicil: ${sic.n} dosya • ortalama ${Math.round(sic.pts / sic.n)} puan • ${sic.boz} bozma</p><div class="flex flex-wrap gap-2 pt-1"><button onclick="downloadVerdict('${outcome}')" class="px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-bold">Kararı İndir</button><button onclick="window.print()" class="px-3 py-1.5 rounded bg-slate-800 text-slate-200">Yazdır / PDF</button><button onclick="nextCase()" class="px-3 py-1.5 rounded bg-slate-800 text-amber-300">Sıradaki Dosya →</button></div></div>`);
+            document.getElementById('score-inclination').parentElement.insertAdjacentHTML('afterend', `<div id="karne-box" class="mt-3 p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-xs text-slate-200 space-y-1.5"><p class="font-bold text-amber-300">⚖️ İstinaf Sonucu: ${outcome}${risk ? ' (bozma riski %' + risk + ')' : ''}</p>${why.length ? `<p class="text-[11px] text-slate-400">Zayıf noktalar: ${why.join('; ')}.</p>` : ''}${badgeHtml}<p>Gün sonu karnesi: <b>${pts} puan</b> (${grade}) • ${hearings} duruşma</p><p class="text-[11px] text-slate-400">Sicil: ${sic.n} dosya • ortalama ${Math.round(sic.pts / sic.n)} puan • ${sic.boz} bozma</p><div class="flex flex-wrap gap-2 pt-1"><button onclick="downloadVerdict('${outcome}')" class="px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-bold">Kararı İndir</button><button onclick="window.print()" class="px-3 py-1.5 rounded bg-slate-800 text-slate-200">Yazdır / PDF</button><button onclick="nextCase()" class="px-3 py-1.5 rounded bg-slate-800 text-amber-300">Sıradaki Dosya →</button></div></div>`);
         }
         function downloadVerdict(outcome) {
             const g = id => document.getElementById(id).innerText, r = gameState.reason || {};
@@ -1083,6 +1121,44 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
         function nextCase() {
             closeModal('modal-verdict'); document.getElementById('court-log-stream').innerHTML = '';
             gameState.selectedCaseId = (gameState.selectedCaseId % casesLibrary.length) + 1; startTrial();
+        }
+
+
+        // ===== Çoklu tanık, hesaplama, ek rapor, zorluk, not defteri, rozet, gizli ekran =====
+        casesLibrary.forEach(c => {
+            const m = c.id % 3, t = c.turns.TAHKIKAT, i = t.findIndex(x => x.kind === 'CROSS');
+            c.witnesses.push({ name: 'Saha Şahidi 2', claim: m === 0 ? 'Olay günü yanındaydım, davacı hiçbir şey yapmadı.' : m === 1 ? 'Olay saat 14:00 sularında gerçekleşti.' : 'Ben de tarafların beyanlarını aynen doğrularım.' });
+            t.splice(i + 1, 0, { role: 'JUDGE', kind: 'CONFRONT', prompt: 'Başkan Hâkim: İki tanığın anlatımını değerlendirin.' });
+            t.push({ role: 'JUDGE', kind: 'CALC', prompt: 'Başkan Hâkim: Hükümden önce bilirkişinin hesabını kontrol edin.' });
+        });
+        const calcOf = c => {
+            const w = 15000 + (c.id % 7) * 1000, y = 2 + c.id % 5, f = ((c.id * 7) % 5) < 2, n = v => v.toLocaleString('tr-TR');
+            if (c.category === 'IS') { const ok = w * y; return { txt: `Brüt ücret ${n(w)} TL, kıdem ${y} yıl; kıdem tazminatı = her tam yıl için 1 aylık ücret.`, rep: f ? ok + w : ok, ok, f, n }; }
+            if (c.category === 'TICARET') { const P = w * 10, r = 24 + c.id % 4, ok = Math.round(P * r / 100); return { txt: `Anapara ${n(P)} TL, yıllık faiz %${r}, süre 1 yıl; faiz = anapara × oran.`, rep: f ? Math.round(ok * 1.25) : ok, ok, f, n }; }
+            const mult = 2 + c.id % 3, ok = w * mult; return { txt: `İdari para cezası = ${n(w)} TL temel tutar × ${mult} kat.`, rep: f ? ok + w : ok, ok, f, n };
+        };
+        const wm = c => c.id % 3;
+        Object.assign(SP, {
+            CONFRONT: { info: c => `<b>${c.witnesses[0].name}:</b> "${c.witnesses[0].claim}"<br><b>${c.witnesses[1].name}:</b> "${c.witnesses[1].claim}"<br>` + ['Kayıt: Tanık 2, olay günü başka ilde görünüyor (otel kaydı).', 'Tanık 1 olayı saat 16:00 civarı, Tanık 2 ise 14:00 civarı anlattı; belgelerde saat bilgisi yok.', 'İki tanığın anlatımı birbiriyle uyumlu; kayıtlarda bir fark yok.'][wm(c)], opts: [['Tanıkları Yüzleştir', 'Aralarındaki farkı yüzleştirerek netleştir.'], ['Beyanları Aynen Zapta Geçir', 'Ek bir işlem yapmadan dinle.'], ['Yalan Tanıklık Uyarısı Yap', 'Tanığa yalan tanıklığın yaptırımını hatırlat.']], ok: c => [2, 0, 1][wm(c)], why: c => ['Tanık 2’nin olay günü orada olmadığı kayıtla görünüyordu; yalan tanıklık uyarısı gerekirdi.', 'Saat farkı yüzleştirmeyle giderilebilecek bir çelişkiydi.', 'Çelişki yoktu; ek işlem gereksizdi.'][wm(c)] },
+            CALC: { info: c => { const x = calcOf(c); return x.txt + ` Bilirkişi tutarı: <b>${x.n(x.rep)} TL</b>.`; }, opts: [['Rapordaki Tutarı Kabul Et', 'Hesap doğru, hükme esas alınsın.'], ['Hesap Hatalı, Düzeltme İste', 'Bilirkişiden yeni hesap istensin.']], ok: c => calcOf(c).f ? 1 : 0, why: c => { const x = calcOf(c); return x.f ? `Doğru tutar ${x.n(x.ok)} TL idi, rapor hatalıydı.` : 'Hesap doğruydu.'; } },
+            EXPERT2: { info: c => 'İlk rapor ile ek rapor arasında fark var. ' + (c.expertFlaw ? 'Ek rapor, ilk raporun taraf çağrılmadan yapılan keşfini iki tarafın huzurunda yenilemiştir.' : 'Ek rapor, tarafın sunduğu özel bir belgeye dayanıyor; belgenin kaynağı dosyada yok ve ilk rapor usulüne uygundu.'), opts: [['İlk Rapora İtibar Et', 'İlk rapor hükme esas alınsın.'], ['Ek Rapora İtibar Et', 'Ek rapor hükme esas alınsın.'], ['Üçüncü Heyet İste', 'Yeni bir bilirkişi heyeti görevlendirilsin.']], ok: c => c.expertFlaw ? 1 : 0, why: c => c.expertFlaw ? 'Usul eksikliği ek raporla giderilmişti.' : 'Ek rapor kaynağı belirsiz bir belgeye dayanıyordu.' }
+        });
+        function setDiff(d) {
+            gameState.diff = d;
+            ['EASY', 'NORMAL', 'HARD'].forEach(x => { const b = document.getElementById('diff-' + x); if (b) b.className = 'px-3 py-1 rounded ' + (x === d ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'); });
+        }
+        function dailyCase() {
+            gameState.userRole = gameState.userRole || 'JUDGE';
+            gameState.selectedCaseId = Math.floor(Date.now() / 86400000) % casesLibrary.length + 1; startTrial();
+        }
+        function showCover(role) {
+            document.body.insertAdjacentHTML('beforeend', `<div id="cover" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center gap-4 text-center p-6"><p class="text-amber-300 font-serif text-lg font-bold">Cihazı şimdi<br>${ROLE_NAMES[role]} oyuncusuna verin</p><p class="text-xs text-slate-400">Diğer oyuncular ekrana bakmasın.</p><button onclick="document.getElementById('cover').remove()" class="px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold">Hazırım</button></div>`);
+        }
+        function injectExtras() {
+            const su = document.getElementById('screen-setup');
+            su.insertAdjacentHTML('afterbegin', `<div class="flex flex-wrap justify-center gap-2 text-[11px]"><span class="text-slate-400 self-center">Zorluk:</span>${['EASY', 'NORMAL', 'HARD'].map(d => `<button id="diff-${d}" onclick="setDiff('${d}')">${{ EASY: 'Kolay', NORMAL: 'Normal', HARD: 'Zor' }[d]}</button>`).join('')}<button onclick="dailyCase()" class="px-3 py-1 rounded bg-amber-500 text-slate-950 font-bold">📅 Günün Dosyası</button></div>`);
+            setDiff('NORMAL');
+            document.body.insertAdjacentHTML('beforeend', `<button onclick="document.getElementById('notebook').classList.toggle('hidden')" class="fixed bottom-4 right-4 z-40 px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-bold shadow-lg">📝 Not Defteri</button><div id="notebook" class="hidden fixed bottom-16 right-4 z-40 w-72 p-2 rounded-xl bg-slate-900 border border-amber-500/40 shadow-xl"><textarea id="notebook-text" oninput="gameState.notes = this.value" rows="7" placeholder="Beyanları, çelişkileri, tarihleri buraya not alın..." class="w-full p-2 rounded bg-slate-950 text-slate-200 text-xs border border-slate-700"></textarea></div>`);
         }
 
         function applyPlotEffects(ch) {
@@ -1119,7 +1195,7 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
         }
 
         function partiesTabHtml(c) {
-            const r = gameState.userRole, pl = gameState.plot, p = c.plot;
+            const r = gameState.mode === 'LOCAL_3P' ? (gameState.activeTurnRole || 'JUDGE') : gameState.userRole, pl = gameState.plot, p = c.plot;
             const box = (t, txt, cls) => `<div class="p-2 rounded bg-slate-900 border ${cls || 'border-slate-800'} space-y-0.5"><p class="font-bold text-amber-200 text-[11px]">${t}</p><p class="text-[10px] text-slate-300 leading-relaxed">${txt}</p></div>`;
             let h = box('Davacı Beyanı (' + c.plaintiffName + ')', p.pLie) + box('Davalı Beyanı (' + c.defendantName + ')', p.dLie);
             const mine = r.startsWith('PLAINTIFF') ? 'P' : r.startsWith('DEFENDANT') ? 'D' : null;
@@ -1356,6 +1432,8 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
             gameState.judgeInclination = 0;
             gameState.patience = 100;
             gameState.plot = freshPlotState();
+            Object.values(getCurrentCase().turns).forEach(ph => { for (let i = ph.length - 1; i >= 0; i--) if (ph[i].kind === 'EXPERT2') ph.splice(i, 1); });
+            gameState.lastCover = null; gameState.notes = ''; { const nb = document.getElementById('notebook-text'); if (nb) nb.value = ''; }
 
             switchFileTab('summary');
 
@@ -1455,6 +1533,7 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
         }
 
         function updateActiveRoleSeat(role) {
+            if (gameState.mode === 'LOCAL_3P' && ROLE_NAMES[role] && gameState.lastCover !== role && !document.getElementById('cover')) { gameState.lastCover = role; showCover(role); }
             _origSeat(ROLE_ALIAS[role] || role);
             const tb = document.getElementById('turn-badge'), tt = document.getElementById('turn-role-title'), td = document.getElementById('turn-role-desc');
             if (role === 'MEMBER') { tb.innerText = 'ÜYE HÂKİM'; tt.innerText = 'Üye Hâkim Görüşü'; td.innerText = 'Heyet üyesi olarak çelişkileri başkana bildirin.'; }
@@ -1841,6 +1920,7 @@ const PLOTS = {"1": ["Devamsız günlerde hastalık raporu sunduğunu söylüyor
         // INITIALIZE ON LOAD
         window.onload = function() {
             renderCasesGrid();
+            injectExtras();
             try { const sc = JSON.parse(localStorage.getItem('hakimSicil')); if (sc && sc.n) document.getElementById('screen-setup').insertAdjacentHTML('afterbegin', `<div class="text-center text-[11px] text-amber-400/90 font-mono">Hâkimlik Sicili: ${sc.n} dosya • ortalama ${Math.round(sc.pts / sc.n)} puan • ${sc.boz} bozma</div>`); } catch (e) {}
         };
     </script>
