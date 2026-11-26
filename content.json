@@ -2109,7 +2109,7 @@
     "dergi": true,
     "makale": true,
     "arsiv": true,
-    "yazarlar": true
+    "yazarlar": false
   },
   "ft": {
     "ay": true,
