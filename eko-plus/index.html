@@ -614,7 +614,6 @@ var XI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 1
 
 /* ---- Üyelik: sitedeki mevcut kuralla aynı (giriş yapılmış VE yönetici onaylı) ---- */
 function isMember(){
-  return true;   /* Üye Alanı giriş istemez */
   try{var s=JSON.parse(localStorage.getItem('eko_uye')||'null');
     if(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)return true}catch(e){}
   return !!(D.body&&D.body.classList.contains('uye-ok'));
@@ -757,7 +756,7 @@ R.classList.add('dm-on');
 <a class="tile" href="iibf-laboratuvar.html" style="--bg1:#6d3fd8;--bg2:#1d4ed8"><span class="go">→</span><small data-k="pg_eplus_1">Üye Alanı</small><h3 data-k="ut1a">İİBF Laboratuvarı</h3><p data-k="ut1b">İşletme, iktisat, ekonometri, maliye, kamu yönetimi, uluslararası ilişkiler ve çalışma ekonomisi laboratuvarları tek çatı altında. Açarken şifre istenir.</p></a>
 </div><div class="next"><a class="btn" href="#/">← Ana sayfa</a></div></div></div>
 <div class="page" id="p-lab">
-<div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üye Alanı</span><h2 data-k="ul1">Üye Alanı</h2><p data-k="ul2">Üye Alanı yalnızca onaylı üyelere açıktır: giriş yap ya da üye ol, yönetici onayından sonra açılır. Laboratuvar ve simülasyonlar için ayrıca şifre istenir. Hocalar için ayrı bir giriş sekmesi vardır.</p></div></div>
+<div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üye Alanı</span><h2 data-k="ul1">Üye Alanı</h2><p data-k="ul2">Üye Alanı yalnızca onaylı üyelere açıktır: giriş yap ya da üye ol, yönetici onayından sonra açılır. Laboratuvar için ayrıca şifre istenir. Hocalar için ayrı bir giriş sekmesi vardır.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content"><div id="lab-gate"></div></div></div>
 <style id="lab-css">
@@ -788,6 +787,7 @@ document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.getAttri
 document.body.classList.toggle("ppkmode",k==="ppk");document.title="Eko-Log · "+T[k];window.scrollTo(0,0)}
 addEventListener("hashchange",route);route();
 document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));const f=c.dataset.f;document.querySelectorAll("#cases .case").forEach(k=>k.hidden=f!=="all"&&k.dataset.t!==f)});
+if($("#rg")){
 const rg=$("#rg");rg.oninput=()=>$("#rate").textContent="%"+String(rg.value).replace(".",",");const stp=d=>{rg.value=Math.min(100,Math.max(-10,+rg.value+d));rg.oninput()};$("#rm").onclick=()=>stp(-.5);$("#rp").onclick=()=>stp(.5);
 $("#vote").onclick=()=>{const em=$("#vmail").value.trim();if(document.body.classList.contains("adm"))return;if(!/^\S+@\S+\.\S+$/.test(em)){toast("Önce geçerli bir e-posta yaz");return}const r=+rg.value;const th=parseFloat(($("#fcur").textContent||"40").replace(",","."))||40;let a=r>th?52:r<th?20:15,b=r===th?55:25,c=100-a-b;
 const set=(i,v,t)=>{$("#b"+i).style.width=v+"%";$("#l"+i).textContent=t+" %"+v};$("#res").hidden=false;
@@ -806,14 +806,15 @@ const b=$("#send");b.disabled=true;let ok=false;let er="";
 try{if(window.EKO_DB){const r=await fetch(String(window.EKO_DB).replace(/\/+$/,"")+"/apps.json",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({g:"makale",n:nm.slice(0,80),c:ct.slice(0,120),t:f.t.value.trim(),st:"Yeni",dt:new Date().toLocaleDateString("tr-TR",{day:"numeric",month:"long",year:"numeric"}),no:("Kategori: "+f.c.value).slice(0,2000),tx:f.b.value,d:Date.now()})});ok=r.ok;if(!ok)er="Hata "+r.status}else er="EKO_DB tanımsız"}catch(e){er="Bağlantı hatası"}
 b.disabled=false;if(!ok&&LONG){try{await navigator.clipboard.writeText("Ad soyad: "+nm+"\nİletişim: "+ct+"\nKategori: "+f.c.value+"\n\n"+f.b.value)}catch(e){}}toast(ok?"Makalen kaydedildi. E-posta taslağı açılıyor, göndererek tamamla.":(LONG?"Kayıt yapılamadı ("+er+"). Makalenin tamamı panoya kopyalandı, e-postaya yapıştır.":"Admin kaydı yapılamadı ("+er+"). E-posta taslağı açılıyor."));
 setTimeout(()=>{location.href=mail},ok?600:200)};
+}
 </script>
 <style>.t5{grid-column:span 6;--bg1:#1d4ed8;--bg2:#06b6d4}#evl{display:grid;gap:16px;margin-bottom:24px}.evc{display:grid;gap:6px;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px 24px}.evc .edate{font-weight:700;color:var(--red);font-size:14px;background:var(--soft);border-radius:999px;padding:3px 12px;width:max-content}.evc h4{font-size:22px;margin:6px 0 0}.evc .eplace{color:var(--mut);font-size:15px;margin:0}.evc .etext{margin:4px 0 0}.t6,.t7,.t8{grid-column:span 2}.t6{--bg1:#065f46;--bg2:#34d399}.t7{--bg1:#9a3412;--bg2:#fbbf24}.t8{--bg1:#4c1d95;--bg2:#a78bfa}
 .cbox{display:grid;gap:16px;margin-bottom:24px}.cbox.gallery{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}.cbox.team{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .c-team .cimg{width:110px;height:110px;border-radius:50%;margin-bottom:6px}.c-gallery .cimg{max-height:220px;margin:0 0 6px}.pdfl{width:max-content;margin-top:8px}
 body:not(.adm) .evc h4:empty,body:not(.adm) .evc p:empty{display:none}
 #ann{position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(90deg,#c4202e,#ff5f8f);color:#fff;text-align:center;font:700 15px/24px system-ui;letter-spacing:.2px;padding:11px 12px;padding-top:calc(11px + env(safe-area-inset-top,0px));box-sizing:content-box}#ann.off{opacity:.45}
-#ann{overflow:hidden;white-space:nowrap}#ann>span{display:inline-block;animation:annm var(--d,20s) linear infinite;will-change:transform}#ann:hover>span,#ann:active>span{animation-play-state:paused}@keyframes annm{to{transform:translateX(-50%)}}body.adm #ann>span{animation:none}#ann b{font-weight:inherit}#ann .annsep{display:inline-block;width:9px;height:9px;margin:0 26px;vertical-align:middle;position:relative;top:-1px;background:linear-gradient(135deg,#fff3b0,#ffc83d);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 0 3px #ffffff33,0 0 10px #ffd166cc;animation:annp 1.8s ease-in-out infinite}@keyframes annp{50%{transform:rotate(225deg) scale(.8);box-shadow:0 0 0 5px #ffffff1a,0 0 14px #ffd166}}
-@media(prefers-reduced-motion:reduce){#ann{white-space:normal}#ann>span{animation:none}#ann .annclone{display:none}#ann .annsep{animation:none}}
+#ann{overflow:hidden;white-space:nowrap}#ann>span{display:inline-block;animation:annm var(--d,20s) linear infinite;will-change:transform}@media(hover:hover){#ann:hover>span{animation-play-state:paused}}@keyframes annm{to{transform:translateX(-50%)}}body.adm #ann>span{animation:none}#ann b{font-weight:inherit}#ann .annsep{display:inline-block;width:9px;height:9px;margin:0 26px;vertical-align:middle;position:relative;top:-1px;background:linear-gradient(135deg,#fff3b0,#ffc83d);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 0 3px #ffffff33,0 0 10px #ffd166cc;animation:annp 1.8s ease-in-out infinite}@keyframes annp{50%{transform:rotate(225deg) scale(.8);box-shadow:0 0 0 5px #ffffff1a,0 0 14px #ffd166}}
+@media(prefers-reduced-motion:reduce){body:not(.adm) #ann>span{animation:annm var(--d,20s) linear infinite!important}#ann .annsep{animation:none}}
 body.hasann header{top:calc(54px + env(safe-area-inset-top,0px))}body.hasann main{padding-top:0}body.hasann .page:not(.sim)>.aurora:first-child{border-top:44px solid transparent}body.hasann .page.sim{padding-top:36px}
 .t9{--bg1:#831843;--bg2:#ec4899}.t10{--bg1:#b45309;--bg2:#f59e0b}.t11{--bg1:#15803d;--bg2:#84cc16}.t12{--bg1:#1d4ed8;--bg2:#38bdf8}.t13{--bg1:#0e7490;--bg2:#34d399}.t14{--bg1:#a3162a;--bg2:#6d3fd8}.hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding-bottom:30px}.hub .tile{grid-column:auto!important;min-height:210px}.tile h3{font-size:clamp(19px,2.1vw,27px);overflow-wrap:anywhere}.bento{grid-template-columns:repeat(4,1fr)}.tile{grid-column:span 1!important;min-height:210px}
 @media(max-width:760px){.bento{grid-template-columns:repeat(2,1fr)}}@media(min-width:761px){.bento .tile h3{min-height:2.2em!important}}@media(min-width:761px) and (max-width:1100px){.bento{gap:12px}.bento .tile{padding:20px;min-height:200px}.bento .tile h3{font-size:clamp(17px,2.3vw,22px)}.bento .tile p{font-size:13.5px}}@media(max-width:760px){.tile .go{display:none}}
@@ -844,7 +845,7 @@ function cit(col,x){const a=document.createElement('article');a.className='evc c
 function addrow(r){const tr=document.createElement('tr');tr.innerHTML='<td></td><td></td><td></td><td></td><td class="rx"><button>✕</button></td>';r.forEach((v,i)=>tr.cells[i].textContent=v);$('#ftb tbody').append(tr)}
 function fcalc(){const rows=$$('#ftb tbody tr'),cur=parseFloat(($('#fcur').textContent||'').replace(',','.')),k=parseFloat(($('#fk').textContent||'').replace(',','.'));let sum=0,n=0;rows.forEach(t=>{const v=[1,2,3].map(i=>parseFloat((t.cells[i].textContent||'').replace(',','.')));if(v.every(x=>!isNaN(x))){sum+=v[2]/100*(v[0]-v[1]);n++}});
 $('#fempty').style.display=rows.length?'none':'';const e=$('#fres');e.textContent=(n&&!isNaN(cur)&&!isNaN(k))?'%'+(Math.round(Math.max(-10,Math.min(100,cur+k*sum))*2)/2).toFixed(1).replace('.',','):'—'}
-function frender(){const f=C.f||{};$('#fcur').textContent=f.cur||'40';$('#fk').textContent=f.k||'0.25';$('#ftb tbody').innerHTML='';(f.rows||[]).forEach(addrow);fcalc()}
+function frender(){if(!$('#fcur'))return;const f=C.f||{};$('#fcur').textContent=f.cur||'40';$('#fk').textContent=f.k||'0.25';$('#ftb tbody').innerHTML='';(f.rows||[]).forEach(addrow);fcalc()}
 document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#ftb,#fcur,#fk'))fcalc()});
 function waset(){const w=$('#wabtn');if(w)w.href=C.w||'#';soset()}
 const SL={ig:['igbtn','Instagram','instagram'],li:['libtn','LinkedIn','linkedin']},sol=k=>C[k]||(typeof SOSYAL!=='undefined'&&SOSYAL[SL[k][2]])||'';
@@ -862,12 +863,12 @@ const SAMPLE=['b8','b9','b10','g1','g2','g3','g4','g5','e1','e2','e3','e4','e5',
 function apply(){if(C.fb&&C.fb.db)window.EKO_DB=C.fb.db;window.EKO_C=C;setTimeout(()=>document.dispatchEvent(new Event('eko:ready')),0);$$('[data-k]').forEach(e=>{if(C.t[e.dataset.k]!=null)e.textContent=C.t[e.dataset.k]});
 (C.sd?C.d:[...C.d,...SAMPLE]).forEach(b=>{$$('article[data-b="'+b+'"]').forEach(e=>e.remove())});
 for(const b in C.i){const e=$('[data-b="'+b+'"]');if(e)img(e,C.i[b])}
-(C.e||[]).filter(okT).forEach(x=>evl.append(evc(x)));evup();
+if(evl)(C.e||[]).filter(okT).forEach(x=>evl.append(evc(x)));evup();
 Object.keys(COL).forEach(c=>{(C.c[c]||[]).filter(x=>c==='gallery'?(okT(x)||x.img):okT(x)).forEach(x=>{const b=$(c==='archive'&&x.tur==='etkinlik'?'#arce':c==='archive'&&x.tur==='dergi'?'#ardg':COL[c]);if(b)b.append(cit(c,x))})});cup();anr(false);waset();frender();
 if(mag){const c=$('.cover',mag),ref=c?c.nextSibling:mag.firstChild;C.n.filter(okT).forEach(x=>mag.insertBefore(news(x),ref))}gzup();const dgf=$('#dg-feed');if(dgf){const L=(C.dg||[]).filter(okT);L.forEach(x=>dgf.append(news(x,1)));const em=$('#dg-empty');if(em)em.style.display=L.length?'none':''}const k93=$('[data-k=k93]');if(k93&&/600\D+1200/.test(k93.textContent))k93.textContent='Kelime ya da harf sınırı yok, istediğin uzunlukta yazabilirsin. Kaynakçayı metnin sonuna ekle.'}
 function gzup(){const e=$('#gzempty');if(e)e.style.display=$$('#p-gazete .mag>article.story,#p-gazete .mag>article.cover').length?'none':''}
 apply();
-if(!/[?&]admin/.test(location.search))return;
+if(!$('#fcur')||!/[?&]admin/.test(location.search))return;
 let T=localStorage.getItem('eko_t')||prompt('GitHub erişim anahtarını yapıştır:');
 if(!T)return;localStorage.setItem('eko_t',T);
 document.body.classList.add('adm');
@@ -1422,7 +1423,7 @@ const f2=n=>String(n).padStart(2,'0'),ic=(d,time)=>time?d.getFullYear()+f2(d.get
 function ics(i){const p=pd(i.dt);if(!p){toast('Bu etkinliğin tarihi yazılmamış');return}const e=new Date(p.d.getTime()+(p.time?36e5:864e5));const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Eko-Log//TR','BEGIN:VEVENT','UID:'+Date.now()+'@eko-log','DTSTAMP:'+ic(new Date(),1)+'Z',p.time?'DTSTART:'+ic(p.d,1):'DTSTART;VALUE=DATE:'+ic(p.d),p.time?'DTEND:'+ic(e,1):'DTEND;VALUE=DATE:'+ic(e),'SUMMARY:'+i.t.replace(/[,;]/g,' '),'LOCATION:'+i.pl.replace(/[,;]/g,' '),'END:VEVENT','END:VCALENDAR'].join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L],{type:'text/calendar'}));a.download='etkinlik.ics';document.body.append(a);a.click();a.remove();toast('Takvim dosyası indirildi, açıp ekle')}
 function share(i){const u=location.href.split('#')[0]+'#/etkinlik',x=i.t+(i.dt?' · '+i.dt:'')+(i.pl?' · '+i.pl:'');if(navigator.share)navigator.share({title:i.t,text:x,url:u}).catch(()=>{});else window.open('https://wa.me/?text='+encodeURIComponent(x+' '+u),'_blank')}
 function deco(){$$('#p-etkinlik .story,#p-etkinlik .evc').forEach(c=>{if($(':scope>.ex',c))return;const r=document.createElement('div');r.className='ex';r.innerHTML='<button type="button">📅 Takvime ekle</button><button type="button">↗ Paylaş</button>';r.children[0].onclick=()=>ics(inf(c));r.children[1].onclick=()=>share(inf(c));c.append(r)})}
-function nxt(){let b=null;$$('#p-etkinlik .story,#p-etkinlik .evc').forEach(c=>{const i=inf(c),p=pd(i.dt);if(p&&p.d>new Date()&&(!b||p.d<b.p.d))b={i,p}});let n=$('#nxt');if(!n){n=document.createElement('div');n.id='nxt';const h=$('#p-home'),w=$('#hw',h)||$('svg.wave',h)||$('.aurora',h);if(!w)return;w.after(n)}if(!b){n.innerHTML='<div class="nb"><div><small>Yaklaşan etkinlik</small><b></b></div></div>';$('b',n).textContent='Şu an planlanmış etkinlik yok';n._d=null;return}n.innerHTML='<div class="nb"><div><small>Yaklaşan etkinlik</small><b></b><small></small></div><div class="cd"></div></div>';$('b',n).textContent=b.i.t;$$('small',n)[1].textContent=[b.i.dt,b.i.pl].filter(Boolean).join(' · ');n._d=b.p.d;tick()}
+function nxt(){let b=null;$$('#p-etkinlik .story,#p-etkinlik .evc').forEach(c=>{const i=inf(c),p=pd(i.dt);if(p&&p.d>new Date()&&(!b||p.d<b.p.d))b={i,p}});let n=$('#nxt');if(!n){if(!$('#p-home'))return;n=document.createElement('div');n.id='nxt';const h=$('#p-home'),w=$('#hw',h)||$('svg.wave',h)||$('.aurora',h);if(!w)return;w.after(n)}if(!b){n.innerHTML='<div class="nb"><div><small>Yaklaşan etkinlik</small><b></b></div></div>';$('b',n).textContent='Şu an planlanmış etkinlik yok';n._d=null;return}n.innerHTML='<div class="nb"><div><small>Yaklaşan etkinlik</small><b></b><small></small></div><div class="cd"></div></div>';$('b',n).textContent=b.i.t;$$('small',n)[1].textContent=[b.i.dt,b.i.pl].filter(Boolean).join(' · ');n._d=b.p.d;tick()}
 function tick(){const n=$('#nxt');if(!n||!n._d)return;let s=Math.max(0,n._d-new Date()),g=Math.floor(s/864e5),h=Math.floor(s%864e5/36e5),m=Math.floor(s%36e5/6e4);$('.cd',n).innerHTML=g+' gün '+h+' sa '+m+' dk'}setInterval(tick,3e4);
 const sb=document.createElement('button');sb.id='sbtn';sb.textContent='🔍';sb.setAttribute('aria-label','Ara');document.body.append(sb);
 const ov=document.createElement('div');ov.id='sov';ov.innerHTML='<input type="search" placeholder="Ara: makale, etkinlik, gazete, arşiv…"><div class="rs"></div><div class="bt"><button id="sinst" style="background:#ffd166;color:#111">📲 Ana ekrana ekle</button><button id="sx" style="background:#ffffff22;color:#fff">Kapat</button></div>';document.body.append(ov);
@@ -1430,7 +1431,7 @@ let idx=[];function build(){idx=[];$$('.page').forEach(pg=>{const id=pg.id.repla
 function find(q){const R=$('.rs',ov);q=tl(q).trim();R.innerHTML='';if(q.length<2)return;const seen={};idx.filter(x=>x.b.includes(q)&&!seen[x.id+x.t]&&(seen[x.id+x.t]=1)).slice(0,25).forEach(x=>{const a=document.createElement('a');a.href=x.id==='home'?'#/':'#/'+x.id;a.innerHTML='<b></b><small></small>';$('b',a).textContent=x.t;$('small',a).textContent=x.lb;a.onclick=()=>ov.classList.remove('on');R.append(a)});if(!R.children.length)R.textContent='Sonuç bulunamadı'}
 sb.onclick=()=>{build();ov.classList.add('on');const i=$('input',ov);i.value='';$('.rs',ov).innerHTML='';setTimeout(()=>i.focus(),50)};$('#sx').onclick=()=>ov.classList.remove('on');$('input',ov).oninput=e=>find(e.target.value);
 let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e});$('#sinst').onclick=()=>{if(dp){dp.prompt();dp=null}else toast('Tarayıcı menüsünden (⋮ ya da Paylaş) "Ana ekrana ekle"yi seç')};
-let T;const run=()=>{clearTimeout(T);T=setTimeout(()=>{deco();nxt()},150)};new MutationObserver(run).observe($('#p-etkinlik'),{childList:true,subtree:true});run();setTimeout(run,1500);
+let T;const run=()=>{clearTimeout(T);T=setTimeout(()=>{deco();nxt()},150)};if($('#p-etkinlik'))new MutationObserver(run).observe($('#p-etkinlik'),{childList:true,subtree:true});run();setTimeout(run,1500);
 })()</script><script id="x2-js">(()=>{
 const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)],DB=()=>String(window.EKO_DB||'').replace(/\/+$/,''),adm=()=>document.body.classList.contains('adm');
 const rd=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},wr=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
@@ -3878,7 +3879,7 @@ function showAuth(note,tab){
     }catch(e){say(out,e.message==='auth'?'Oturum açılamadı.':e.message)}
     btn.disabled=false});
   const tb=(k,t)=>el('button',{class:'btn line',type:'button','aria-pressed':String(tab===k),text:t,onclick:()=>showAuth('',k)});
-  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üye Alanı · giriş'}),el('p',{class:'lb-n',text:'Üye Alanı yalnızca onaylı üyelere açıktır. Laboratuvar ve simülasyonlar için ayrıca şifre istenir.'}),el('div',{class:'lb-tabs'},tb('in','Giriş yap'),tb('up','Üye ol'),tb('hoca','Hoca girişi')),f));
+  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üye Alanı · giriş'}),el('p',{class:'lb-n',text:'Üye Alanı yalnızca onaylı üyelere açıktır. Laboratuvar için ayrıca şifre istenir.'}),el('div',{class:'lb-tabs'},tb('in','Giriş yap'),tb('up','Üye ol'),tb('hoca','Hoca girişi')),f));
 }
 /* ---- üyelik durumu ---- */
 function showStatus(rec,ver){
@@ -4032,7 +4033,7 @@ const SIM={};
 const d=b=>new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0)));
 const brand=document.querySelector('header .brand'),bar=document.querySelector('header .bar');
 if(!brand||!bar)return;
-const isMember=()=>true;   /* Üye Alanı giriş istemez; içindeki sayfalarda şifre sorulur */
+const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
 const m=document.createElement('div');m.id='uyem';m.setAttribute('role','menu');
 m.innerHTML='<small>Üye Alanı</small><a role="menuitem" href="#/ekstra">⭐ Üye Alanı</a><a role="menuitem" href="iibf-laboratuvar.html">🧪 İİBF Laboratuvarı</a><a role="menuitem" href="../a-grubu/">🏛️ A Grubu Makam Simülasyonu</a><a role="menuitem" href="../mevzuat/">📚 Mevzuat</a><hr><a role="menuitem" href="#/">🏠 Ana sayfa</a>';
 bar.append(m);
@@ -4687,37 +4688,8 @@ const fillHub=()=>{try{const r=document.getElementById('p-ekstra'),h=r&&r.queryS
 /* Eko-Plus üyelik kapısı: onaylı üye değilse giriş sayfasına (#/lab) yollar, girişten sonra geri getirir */
 (()=>{
 const KEYS=["ekstra", "kavram", "ilanlar", "cv", "profil", "tahmin", "paylas", "x-yol", "x-takvim", "x-etkinlik", "x-yoklama", "x-notlar", "x-mentor", "x-panel", "x-bildirim"];
-const isMember=()=>true;   /* Üye Alanı giriş istemez; içindeki sayfalarda şifre sorulur */
+const isMember=()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}};
 const cur=()=>location.hash.replace(/^#\/?/,'').split('/')[0]||'ekstra';
-
-/* ---- Üye Alanı içindeki Laboratuvar ve simülasyonlar için şifre ----
-   Giriş normal (e-posta + parola). Şifre yalnızca bu bağlantılar açılırken istenir;
-   yönetici panelindeki şifre ayarı (EKO_C.pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
-const LOCKED=/(^|\/)(iibf-laboratuvar\.html|borsa-oyunu\.html|a-grubu\/?|mevzuat\/?)(\?|#|$)/i;
-function pwCfg(){const q=window.EKO_C&&window.EKO_C.pw;return q&&q.on===true&&q.code?String(q.code):''}
-function needPw(){try{return !!pwCfg()&&sessionStorage.getItem('eko_pw')!==pwCfg()}catch(e){return false}}
-(()=>{const st=document.createElement('style');st.textContent='#ua-pw{position:fixed;inset:0;z-index:99999;background:#120c1a;display:flex;align-items:center;justify-content:center;padding:16px}#ua-pw form{background:#1c1328;color:#f6f0fb;border:1px solid #2f2340;border-radius:16px;padding:22px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);font:inherit}#ua-pw h3{margin:0 0 6px;font-size:22px}#ua-pw p{margin:0 0 12px;font-size:14px;opacity:.8}#ua-pw input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #3a2c4d;background:#120c1a;color:#f6f0fb;border-radius:10px;font:inherit;margin-bottom:10px}#ua-pw .r{display:flex;gap:8px;flex-wrap:wrap}#ua-pw .m{color:#ff8a94;font-size:14px;margin:0 0 8px}';document.head.append(st)})();
-function askPw(go,cancel){
-  const old=document.getElementById('ua-pw');if(old)old.remove();
-  const ov=document.createElement('div');ov.id='ua-pw';
-  ov.innerHTML='<form novalidate><h3>🔒 Şifre gerekli</h3><p>Bu bölüm için Üye Alanı şifresini yaz.</p><input type="password" id="ua-pw-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" role="alert" hidden>Şifre yanlış.</p><div class="r"><button class="btn" type="submit">Aç</button><button class="btn line" type="button" data-x>Vazgeç</button></div></form>';
-  document.body.append(ov);
-  const inp=ov.querySelector('input'),m=ov.querySelector('.m');
-  const no=()=>{ov.remove();if(cancel)cancel()};
-  ov.querySelector('[data-x]').onclick=no;
-  if(!cancel)ov.addEventListener('click',e=>{if(e.target===ov)no()});
-  ov.querySelector('form').addEventListener('submit',e=>{e.preventDefault();
-    if(inp.value.trim()===pwCfg()){try{sessionStorage.setItem('eko_pw',pwCfg())}catch(x){}ov.remove();go()}else{m.hidden=false;inp.select()}});
-  setTimeout(()=>inp.focus(),30);
-}
-document.addEventListener('click',ev=>{
-  if(ev.defaultPrevented||ev.button||ev.ctrlKey||ev.metaKey||ev.shiftKey)return;
-  const a=ev.target.closest&&ev.target.closest('a[href]');if(!a)return;
-  const h=a.getAttribute('href')||'';if(!LOCKED.test(h))return;
-  const go=()=>{location.href=a.href};
-  if(!window.EKO_C){ev.preventDefault();let d=0;const run=()=>{if(d++)return;needPw()?askPw(go):go()};document.addEventListener('eko:ready',run,{once:true});setTimeout(run,3000);return}
-  if(needPw()){ev.preventDefault();askPw(go)}
-},true);
 const sync=()=>{
   const on=isMember();
   document.body.classList.toggle('uye-ok',on);
@@ -4729,14 +4701,16 @@ const sync=()=>{
 const gate=()=>{
   if(cur()==='x-veri'||cur().startsWith('x-v-')){location.replace('veri-analizi.html#/'+cur());return}
   if(cur()==='uyeler'&&isMember()){location.replace('#/ekstra');return}
-  if(KEYS.includes(cur())&&cur()!=='ekstra'&&needPw()&&!document.getElementById('ua-pw'))askPw(()=>gate(),()=>{location.hash='#/ekstra'});
+  if(KEYS.includes(cur())&&!isMember()){
+    try{sessionStorage.setItem('eko_ret',location.hash||'#/ekstra')}catch(e){}
+    location.hash='#/lab';
+  }
   sync();
 };
 /* üye olmayanlara site içi aramada Eko-Plus sonuçları gösterilmez */
 const rs=document.querySelector('#sov .rs');
 if(rs)new MutationObserver(()=>{if(isMember())return;rs.querySelectorAll('a').forEach(a=>{const h=(a.getAttribute('href')||'').replace(/^#\/?/,'');if(KEYS.includes(h))a.remove()})}).observe(rs,{childList:true});
 addEventListener('hashchange',gate);
-document.addEventListener('eko:ready',gate);
 addEventListener('storage',sync);
 /* Üyelere Özel kutuları (Laboratuvar) Eko-Plus merkezine taşınır; eski #/uyeler sayfası kullanılmaz */
 const mv=()=>{
@@ -4758,9 +4732,46 @@ addEventListener('focus',sync);
 setInterval(sync,1500);
 gate();
 
+/* ---- Üye Alanı içindeki Laboratuvar için şifre ----
+   Giriş normal (e-posta + parola). Şifre yalnızca Laboratuvar açılırken istenir;
+   yönetici panelindeki şifre ayarı (EKO_C.pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
+const LOCKED=/(^|\/)iibf-laboratuvar\.html(\?|#|$)/i;
+const pwCfg=()=>{const q=window.EKO_C&&window.EKO_C.pw;return q&&q.on===true&&q.code?String(q.code):''};
+const needPw=()=>{try{return !!pwCfg()&&sessionStorage.getItem('eko_pw')!==pwCfg()}catch(e){return false}};
+(()=>{const st=document.createElement('style');st.textContent='#ua-pw{position:fixed;inset:0;z-index:99999;background:rgba(10,14,30,.6);display:flex;align-items:center;justify-content:center;padding:16px}#ua-pw form{background:#fff;color:#14182b;border-radius:16px;padding:22px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);font:inherit}#ua-pw h3{margin:0 0 6px;font-size:22px}#ua-pw p{margin:0 0 12px;font-size:14px;opacity:.8}#ua-pw input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #c5cad8;border-radius:10px;font:inherit;margin-bottom:10px}#ua-pw .r{display:flex;gap:8px;flex-wrap:wrap}#ua-pw .m{color:#b42318;font-size:14px;margin:0 0 8px}';document.head.append(st)})();
+function askPw(go){
+  const old=document.getElementById('ua-pw');if(old)old.remove();
+  const ov=document.createElement('div');ov.id='ua-pw';
+  ov.innerHTML='<form novalidate><h3>🔒 Şifre gerekli</h3><p>Laboratuvar için Üye Alanı şifresini yaz.</p><input type="password" id="ua-pw-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" role="alert" hidden>Şifre yanlış.</p><div class="r"><button class="btn" type="submit">Aç</button><button class="btn line" type="button" data-x>Vazgeç</button></div></form>';
+  document.body.append(ov);
+  const inp=ov.querySelector('input'),m=ov.querySelector('.m');
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove()});
+  ov.querySelector('form').addEventListener('submit',e=>{e.preventDefault();
+    if(inp.value.trim()===pwCfg()){try{sessionStorage.setItem('eko_pw',pwCfg())}catch(x){}ov.remove();go()}else{m.hidden=false;inp.select()}});
+  setTimeout(()=>inp.focus(),30);
+}
+/* Borsa Oyunu: dosya bu klasörde, üst klasörde ya da kendi klasöründe olabilir; ilk bulunan açılır */
+const BORSA=/(^|\/)borsa-oyunu\.html(\?|#|$)/i;
+const BORSA_YOL=['borsa-oyunu.html','../borsa-oyunu.html','borsa-oyunu/','../borsa-oyunu/','borsa-simulasyonu.html','../borsa-simulasyonu.html','borsa/','../borsa/'];
+async function borsaAc(){
+  if(!/^https?:$/.test(location.protocol)){location.href=BORSA_YOL[0];return}
+  for(const u of BORSA_YOL){try{const r=await fetch(u,{method:'HEAD',cache:'no-store'});if(r.ok){location.href=u;return}}catch(e){}}
+  alert('Borsa Oyunu dosyası bulunamadı.\n\nDosyanın adı "borsa-oyunu.html" olmalı (tamamı küçük harf) ve şu adreste durmalı:\n'+new URL(BORSA_YOL[0],location.href).href);
+}
+document.addEventListener('click',ev=>{
+  if(ev.defaultPrevented||ev.button||ev.ctrlKey||ev.metaKey||ev.shiftKey)return;
+  const a=ev.target.closest&&ev.target.closest('a[href]');if(!a)return;
+  const h=a.getAttribute('href')||'';
+  if(BORSA.test(h)){ev.preventDefault();borsaAc();return}
+  if(!LOCKED.test(h))return;
+  const go=()=>{location.href=a.href};
+  if(!window.EKO_C){ev.preventDefault();let d=0;const run=()=>{if(d++)return;needPw()?askPw(go):go()};document.addEventListener('eko:ready',run,{once:true});setTimeout(run,3000);return}
+  if(needPw()){ev.preventDefault();askPw(go)}
+},true);
 })();
 </script>
-<script id="ekx2-host">window.EKX2_HOST={isMember:()=>true,isAdmin:()=>false};</script>
+<script id="ekx2-host">window.EKX2_HOST={isMember:()=>{try{const s=JSON.parse(localStorage.getItem('eko_uye')||'null');return !!(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)}catch(e){return false}},isAdmin:()=>false};</script>
 <script id="ekx2-qr">
 (function(){var __m={},__c={};function __r(n){n=n.replace("./","");if(__c[n])return __c[n].exports;var m=__c[n]={exports:{}};__m[n](m,m.exports,__r);return m.exports}
 __m['QR8bitByte']=function(module,exports,require){var QRMode = require('./QRMode');
