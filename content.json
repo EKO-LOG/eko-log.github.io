@@ -426,6 +426,10 @@
   ],
   "fme": [],
   "konf": [],
+  "yz": [],
+  "sayi": {
+    "gazete": "2"
+  },
   "c": {
     "team": [],
     "gallery": [],
@@ -2104,7 +2108,8 @@
     "gazete": true,
     "dergi": true,
     "makale": true,
-    "arsiv": true
+    "arsiv": true,
+    "yazarlar": true
   },
   "ft": {
     "ay": true,
@@ -3344,6 +3349,7 @@
     "ceviri",
     "arastirma",
     "arsiv",
+    "yazarlar",
     "yy1",
     "yy2",
     "yy3",
