@@ -5552,7 +5552,7 @@ const xdate=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?new Dat
 
 /* ---------- Etkinlik Araçları: QR üretimi ve QR yükleme ---------- */
 const xjoinBase=()=>{let v='';try{v=localStorage.getItem('ekx2_joinbase')||''}catch(e){}return v||(location.origin+location.pathname.replace(/[^/]*$/,''))};
-const xjoin=k=>xjoinBase().replace(/#.*$/,'')+'#/etkinlik/yoklama/'+k;
+const xjoin=k=>xjoinBase().replace(/#.*$/,'').replace(/\/?$/,'/')+'katilim.html?k='+k;
 const xqrOk=d=>/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(String(d||''));
 /* QR'ın içeriği: özel bağlantı varsa o, yoksa sitedeki yoklama bağlantısı */
 const xqrTarget=ev=>xurl(ev.qrUrl)||xjoin(ev.kod||'');
@@ -5678,6 +5678,7 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
       h('p',{class:'hint',text:'Yoklama bağlantısı: '+link}));
     const tabs=xtabs([['yoklama','Yoklama'],['soru','Sorular'],['oylama','Canlı oylama'],['geri','Geri bildirim']],st.tab,k=>{st.tab=k;drawBody()});
     const hasImg=xqrOk(ev.qrImg),target=xqrTarget(ev),qrCv=xqrNode(ev,300);
+    const katIn=h('input',{type:'text',value:ev.kat||'',maxlength:'80',placeholder:ev.ad||'Etkinlik adı'});
     const baseIn=h('input',{type:'text',value:xjoinBase(),placeholder:'https://eko-log.github.io/',inputmode:'url'});
     const qUrl=h('input',{type:'text',value:ev.qrUrl||'',placeholder:'https://forms.gle/… (boş bırakırsan site yoklaması)',inputmode:'url',maxlength:'300'});
     const upl=h('input',{type:'file',accept:'image/png,image/jpeg','aria-label':'Hazır QR görseli yükle',onchange:e=>{const f=e.target.files&&e.target.files[0];xqrRead(f,d=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{qrImg:d,id:undefined}));toast('QR görseli yüklendi. Sitede de bu görsel görünür.');load()}))}});
@@ -5717,7 +5718,11 @@ VIEWS.xpetk=()=>fbGate('Etkinlik Araçları','Eko-Plus Etkinlik Araçları sayfa
         h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Bağlantıyı kaydet',onclick:()=>xrun(async()=>{
           const v=qUrl.value.trim();if(v&&!xurl(v)){toast('Bağlantı https:// ile başlamalı.');return}
           await xput('events/'+ev.id,Object.assign({},ev,{qrUrl:v||undefined,id:undefined}));toast(v?'Bağlantı kaydedildi.':'Özel bağlantı kaldırıldı.');load()})}))),
-      xfld('Site adresi',baseIn,'Otomatik QR bu adresteki Etkinlikler sayfasına gider. Site farklı bir adresteyse buraya yaz.'),
+      xfld('QR sayfasında görünen etkinlik',katIn,'QR’ı okutan kişi “Katıldığın etkinlik” kutusunda bunu görür, yalnızca adını ve soyadını yazıp gönderir. Boş bırakırsan etkinlik adı görünür.'),
+      h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Etkinlik adını kaydet',onclick:()=>xrun(async()=>{const v=xclip(katIn.value,80);await xput('events/'+ev.id,Object.assign({},ev,{kat:v||undefined,id:undefined}));toast('QR sayfası etkinlik adı kaydedildi.');load()})})),
+      h('p',{class:'hint',text:'QR sayfasının aşaması: Yoklama (ad soyad), Anket (etkinlik sonunda 1–5 puan ve yorum) ya da Kapalı. Aynı QR hepsinde çalışır.'}),
+      h('div',{class:'row'},...[['yoklama','Yoklama'],['anket','Anket'],['kapali','Kapalı']].map(([k,tx])=>h('button',{class:'btn sm'+((ev.asama||'yoklama')===k?' solid':''),type:'button','aria-pressed':String((ev.asama||'yoklama')===k),text:tx,onclick:()=>xrun(async()=>{await xput('events/'+ev.id,Object.assign({},ev,{asama:k==='yoklama'?undefined:k,id:undefined}));toast('QR sayfası aşaması: '+tx);load()})}))),
+      xfld('Site adresi',baseIn,'Otomatik QR bu adresteki katilim.html sayfasına gider. Site farklı bir adresteyse buraya yaz.'),
       h('div',{class:'row'},h('button',{class:'btn sm',type:'button',text:'Adresi kaydet',onclick:()=>{const v=baseIn.value.trim();if(v&&!/^https?:\/\/\S+$/i.test(v)){toast('Adres https:// ile başlamalı.');return}try{if(v)localStorage.setItem('ekx2_joinbase',v);else localStorage.removeItem('ekx2_joinbase')}catch(e){}toast('Adres kaydedildi.');drawBody()}})));
     body.replaceChildren(edit,qrp,tabs,pane);
     ({yoklama:paneAtt,soru:paneSoru,oylama:panePoll,geri:paneFb})[st.tab](pane,ev);
