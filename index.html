@@ -2304,6 +2304,14 @@ if(!C.b||!String(C.b.text||'').trim())C.b={on:true,text:ANN_VARSAYILAN};
 const $=(s,p=document)=>p.querySelector(s),$$=(s,p=document)=>[...p.querySelectorAll(s)];
 function img(el,src){let m=$(':scope>img.cimg',el);if(!m){m=document.createElement('img');m.className='cimg';el.prepend(m)}m.src=src;m.dataset.p=src;return m}
 function news(n,dg){const a=document.createElement('article');a.className='story';if(dg)a.dataset.dg=n.id;else{a.dataset.n=n.id;a.dataset.b='n'+n.id}a.dataset.body=n.body||'';a.dataset.by=n.by||'';a.dataset.dt=n.dt||'';a.dataset.imgs=JSON.stringify((Array.isArray(n.imgs)?n.imgs:[]).filter(Boolean));a.dataset.vids=JSON.stringify((Array.isArray(n.vids)?n.vids:[]).map(String));a.dataset.hc=n.hideCover?'1':'';a.innerHTML='<span class="kick"></span><h4></h4><p></p>';$('.kick',a).textContent=n.kind||'';$('h4',a).textContent=n.title;$('p',a).textContent=n.text||'';if(n.img)img(a,n.img);return a}
+/* Sayı numarası: yönetim panelinden (content.json → sayi). Boşsa gazetede arşivdeki son sayıdan devam eder; dergi ve ek yayınlarda numara yazılmaz. */
+function sayiOf(k){const v=String((C.sayi&&C.sayi[k])||'').trim();return /^[1-9]\d{0,3}$/.test(v)?v:''}
+function sayiApply(){
+const L=((C.c&&C.c.archive)||[]).filter(x=>x&&x.tur==='gazete'&&!x.yy),g=sayiOf('gazete')||String(Math.max(L.length,...L.map(x=>+x.no||0))+1);
+const gm=$('#p-gazete .np-meta>span:last-child');if(gm)gm.textContent='Sayı '+g+' · Ücretsizdir';
+const gp=$('#p-gazete .banner p');if(gp)gp.textContent=gp.textContent.replace(/Sayı\s+\d+/,'Sayı '+g);
+const d=sayiOf('dergi'),dm=$('#p-dergi .np-meta>span:last-child');if(dm)dm.textContent='Dergi'+(d?' · Sayı '+d:'')+' · Ücretsizdir';
+}
 function yyApply(){
 const RN=[['#1d4ed8','#7c3aed','#0e9aa7'],['#c4202e','#ff5f8f','#1d4ed8'],['#0e7490','#10b981','#1d4ed8'],['#c2410c','#f59e0b','#c4202e'],['#6d3fd8','#e23fa5','#2a2d8f'],['#1e3a8a','#0e9aa7','#7c3aed']],
 CORE=['gazete','dergi','makale','ceviri','arastirma','arsiv','yazarlar'],
@@ -2328,7 +2336,7 @@ let last=dg;
  const bn=$('.banner',pg);bn.style.setProperty('--a1',c[0]);bn.style.setProperty('--a2',c[1]);bn.style.setProperty('--a3',c[2]);
  const wc=$('.wrap.content',pg);wc.style.setProperty('--g1',c[0]);wc.style.setProperty('--g2',c[1]);
  $('.yn',pg).textContent=ad;$('h2',pg).textContent=ad;$('.banner p',pg).textContent=slg||ac.slice(0,140)||(tur+' · '+ad);
- $('.yd',pg).textContent=today;$('.yt',pg).textContent=tur+' · Ücretsizdir';
+ $('.yd',pg).textContent=today;{const no=sayiOf(p.id);$('.yt',pg).textContent=tur+(no?' · Sayı '+no:'')+' · Ücretsizdir'}
  if(slg&&ac){const b=$('.yyab',pg);b.hidden=false;b.style.borderLeft='6px solid '+c[1];b.textContent=ac}
  const f=$('.yyfeed',pg);L.forEach((x,i)=>{const a=news(x,1);a.dataset.dg=p.id+'_'+String(x.id!=null&&x.id!==''?x.id:i).replace(/[^\w-]/g,'_');f.append(a)});
  last.after(pg);last=pg;
@@ -2363,7 +2371,7 @@ function apply(){if(C.fb&&C.fb.db)window.EKO_DB=C.fb.db;window.EKO_C=C;setTimeou
 for(const b in C.i){const e=$('[data-b="'+b+'"]');if(e)img(e,C.i[b])}
 (C.e||[]).filter(okT).forEach(x=>evl.append(evc(x)));evup();
 Object.keys(COL).forEach(c=>{(C.c[c]||[]).filter(x=>c==='gallery'?(okT(x)||x.img):okT(x)).forEach(x=>{const b=$(c==='archive'&&x.tur==='etkinlik'?'#arce':c==='archive'&&x.tur==='dergi'?'#ardg':COL[c]);if(b)b.append(cit(c,x))})});cup();anr(false);waset();frender();
-if(mag){const c=$('.cover',mag),ref=c?c.nextSibling:mag.firstChild;C.n.filter(okT).forEach(x=>mag.insertBefore(news(x),ref))}gzup();yyApply();const dgf=$('#dg-feed');if(dgf){const L=(C.dg||[]).filter(okT);L.forEach(x=>dgf.append(news(x,1)));const em=$('#dg-empty');if(em)em.style.display=L.length?'none':''}const k93=$('[data-k=k93]');if(k93&&/600\D+1200/.test(k93.textContent))k93.textContent='Kelime ya da harf sınırı yok, istediğin uzunlukta yazabilirsin. Kaynakçayı metnin sonuna ekle.'}
+if(mag){const c=$('.cover',mag),ref=c?c.nextSibling:mag.firstChild;C.n.filter(okT).forEach(x=>mag.insertBefore(news(x),ref))}gzup();yyApply();sayiApply();const dgf=$('#dg-feed');if(dgf){const L=(C.dg||[]).filter(okT);L.forEach(x=>dgf.append(news(x,1)));const em=$('#dg-empty');if(em)em.style.display=L.length?'none':''}const k93=$('[data-k=k93]');if(k93&&/600\D+1200/.test(k93.textContent))k93.textContent='Kelime ya da harf sınırı yok, istediğin uzunlukta yazabilirsin. Kaynakçayı metnin sonuna ekle.'}
 function gzup(){const e=$('#gzempty');if(e)e.style.display=$$('#p-gazete .mag>article.story,#p-gazete .mag>article.cover').length?'none':''}
 apply();
 if(!/[?&]admin/.test(location.search))return;
@@ -2403,7 +2411,7 @@ $$('[data-b]:not([data-n]):not([data-e]):not([data-c])').forEach(e=>{const m=$('
 o.b={on:!!C.b.on,text:$('#ann span').textContent};
 o.c=Object.assign({},C.c||{});Object.keys(COL).forEach(c=>{o.c[c]=$$('[data-c="'+c+'"],[data-c="archive-e"],[data-c="archive-d"]').filter(e=>e.classList.contains('c-'+c)).map(e=>{const m=$(':scope>img.cimg',e),old=((C.c&&C.c[c])||[]).find(z=>String(z.id)===String(e.dataset.i))||{};let s=$('.eplace',e).textContent;if(old.yer&&s.endsWith(' · '+old.yer))s=s.slice(0,-(old.yer.length+3));else if(old.yer&&s===old.yer)s='';const r={id:e.dataset.i,t:$('h4',e).textContent,s,x:$('.etext',e).textContent,img:m?m.dataset.p:''};['tur','no','yer'].forEach(k=>{if(old[k]!==undefined&&old[k]!=='')r[k]=old[k]});return r})});
 $$('[data-e]').forEach(e=>{const m=$(':scope>img.cimg',e);o.e.push({id:e.dataset.e,date:$('.edate',e).textContent,title:$('h4',e).textContent,place:$('.eplace',e).textContent,text:$('.etext',e).textContent,img:m?m.dataset.p:''})});
-$$('[data-n]').forEach(e=>{const m=$(':scope>img.cimg',e);o.n.push({id:e.dataset.n,kind:$('.kick',e).textContent,title:$('h4',e).textContent,text:$('p',e).textContent,img:m?m.dataset.p:'',body:e.dataset.body||'',by:e.dataset.by||'',dt:e.dataset.dt||'',...(e.dataset.imgs&&e.dataset.imgs!=='[]'?{imgs:JSON.parse(e.dataset.imgs)}:{}),...(e.dataset.vids&&e.dataset.vids!=='[]'?{vids:JSON.parse(e.dataset.vids)}:{}),...(e.dataset.hc==='1'?{hideCover:true}:{})})});o.dg=C.dg||[];['sz','ms','ex','gs','hk','ka','se','ki','kb','fm','fme','konf','yb','xp','xt','show','ks','mr','pa','pg','ft','yz'].forEach(k=>{if(C[k]!==undefined)o[k]=C[k]});
+$$('[data-n]').forEach(e=>{const m=$(':scope>img.cimg',e);o.n.push({id:e.dataset.n,kind:$('.kick',e).textContent,title:$('h4',e).textContent,text:$('p',e).textContent,img:m?m.dataset.p:'',body:e.dataset.body||'',by:e.dataset.by||'',dt:e.dataset.dt||'',...(e.dataset.imgs&&e.dataset.imgs!=='[]'?{imgs:JSON.parse(e.dataset.imgs)}:{}),...(e.dataset.vids&&e.dataset.vids!=='[]'?{vids:JSON.parse(e.dataset.vids)}:{}),...(e.dataset.hc==='1'?{hideCover:true}:{})})});o.dg=C.dg||[];['sz','ms','ex','gs','hk','ka','se','ki','kb','fm','fme','konf','yb','xp','xt','show','ks','mr','pa','pg','ft','yz','sayi'].forEach(k=>{if(C[k]!==undefined)o[k]=C[k]});
 C.n.filter(x=>!okT(x)).forEach(x=>o.n.push(x));(C.e||[]).filter(x=>!okT(x)).forEach(x=>o.e.push(x));
 let sha;const g=await gh('content.json?ref=main');if(g.status===401){localStorage.removeItem('eko_t');return status('Anahtar hatalı, yenile ve tekrar gir')}
 if(g.ok)sha=(await g.json()).sha;

@@ -1746,6 +1746,8 @@ const EV_NAME=Object.fromEntries(EVG.flatMap(g=>g.items.map(i=>[i[0],i[1]])));
 const YPG=[
   {g:'Gazete ve Dergi',items:[['gazete','Diyalog Gazetesi','Haberler ve üye yazıları. Kapatırsan Gazete ve Dergi sayfasındaki kutu kalkar. İçeriği “Haberler” bölümünden düzenlersin.'],['dergi','İktisadi Kalkınma Dergisi','Dergi yazıları. İçeriği “Dergi yazıları” bölümünden düzenlersin.'],['makale','Makale Yazımı','Ziyaretçilerin makale hazırlayıp gönderdiği sayfa. Kapatırsan yeni makale gönderilemez.'],['ceviri','Çeviri Köşesi','Çeviri sayfası. Açık/kapalı durumu Eko-Plus ve Etkinlikler’deki anahtarla ortaktır.'],['arastirma','Ortak Araştırma Projeleri','Ortak araştırma sayfası. Açık/kapalı durumu Etkinlikler’deki anahtarla ortaktır.'],['arsiv','Arşiv','Gazete sayıları ve PDF arşivi. İçeriği “Gazete arşivi” bölümünden düzenlersin.']]}
 ];
+YPG[0].items.push(['yazarlar','Yazarlar','Yazar profilleri, atıf sayıları ve yayınlar. Kapalıyken kutusu ve menü bağlantısı görünmez. İçeriği “Yazarlar” bölümünden düzenlersin.']);
+const PG_OFF=['yazarlar'];/* yeni sayfa: açıkça açılana kadar kapalı */
 const YP_ALL=YPG.flatMap(g=>g.items.map(i=>i[0]));
 const YP_PG=YP_ALL.filter(k=>!XP_SHARED.includes(k));
 const YP_NAME=Object.fromEntries(YPG.flatMap(g=>g.items.map(i=>[i[0],i[1]])));
@@ -1765,6 +1767,7 @@ function isBlank(k,x){
   if(k==='e')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.text)&&e(x.img);
   if(k==='konf')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.speaker)&&e(x.text)&&e(x.body)&&e(x.img)&&!(x.imgs&&x.imgs.length)&&!(x.vids&&x.vids.length);
   if(k==='fme')return e(x.title)&&e(x.date)&&e(x.place)&&e(x.text)&&e(x.body)&&e(x.img)&&!(x.imgs&&x.imgs.length);
+  if(k==='yz')return['ad','unvan','kurum','alan','bio','img','atif','hindex','i10','yayin','kaynak','tarih','yillik','eserler','scholar','orcid','web','linkedin','imza'].every(f=>e(x[f]));
   if(k==='archive')return e(x.t)&&e(x.s)&&e(x.x)&&e(x.img);
   return e(x.t)&&e(x.s)&&e(x.img);
 }
@@ -1787,14 +1790,18 @@ o.cards=Array.isArray(s.cards)?s.cards.filter(x=>x&&typeof x==='object').map((x,
 const c=s.cta&&typeof s.cta==='object'?s.cta:{};o.cta={};['h','p','b1t','b1h','b2t','b2h'].forEach(k=>o.cta[k]=ksStr(c[k],d.cta[k]));
 return o}
 const ksHrefOK=u=>{u=String(u||'').trim();return /^#\/[a-z0-9\-]*$/i.test(u)||/^https:\/\/\S+$/i.test(u)};
-const DEF=()=>({fb:{db:'https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app',key:'AIzaSyDNwfakrjOuMx0YlonGfOBvk1_hAWiUyk0'},f:{cur:'40',k:'0.25',rows:[]},w:'',ig:'',li:'',t:{},i:{},n:[],dg:[],d:[],e:[],fme:[],konf:[],c:{team:[],gallery:[],archive:[]},b:{on:false,text:''}});
+const DEF=()=>({fb:{db:'https://eko-log-b902a-default-rtdb.europe-west1.firebasedatabase.app',key:'AIzaSyDNwfakrjOuMx0YlonGfOBvk1_hAWiUyk0'},f:{cur:'40',k:'0.25',rows:[]},w:'',ig:'',li:'',t:{},i:{},n:[],dg:[],d:[],e:[],fme:[],konf:[],yz:[],sayi:{},c:{team:[],gallery:[],archive:[]},b:{on:false,text:''}});
 const YY_N=30,YY_KEYS=Array.from({length:YY_N},(_,i)=>'yy'+(i+1));
 const YY_RENK=[['Mavi · mor','#1d4ed8','#7c3aed','#0e9aa7'],['Kırmızı · pembe','#c4202e','#ff5f8f','#1d4ed8'],['Yeşil · mavi','#0e7490','#10b981','#1d4ed8'],['Turuncu · kırmızı','#c2410c','#f59e0b','#c4202e'],['Mor · pembe','#6d3fd8','#e23fa5','#2a2d8f'],['Lacivert · turkuaz','#1e3a8a','#0e9aa7','#7c3aed']];
 const yyName=(p,n)=>((p&&p.ad)||'').trim()||('Yayın '+n);
 /* Gazete ve Dergi sayfasındaki kutuların sırası (content.json → yo) */
-const YO_CORE=['gazete','dergi','makale','ceviri','arastirma','arsiv'];
+const YO_CORE=['gazete','dergi','makale','ceviri','arastirma','arsiv','yazarlar'];
 const YO_KEYS=[...YO_CORE,...YY_KEYS];
-function yoNorm(v){const a=[...new Set((Array.isArray(v)?v:[]).filter(k=>YO_KEYS.includes(k)))];return a.concat(YO_KEYS.filter(k=>!a.includes(k)))}
+function yoNorm(v){const a=[...new Set((Array.isArray(v)?v:[]).filter(k=>YO_KEYS.includes(k)))];if(a.length&&!a.includes('yazarlar')&&a.includes('arsiv'))a.splice(a.indexOf('arsiv')+1,0,'yazarlar');return a.concat(YO_KEYS.filter(k=>!a.includes(k)))}
+/* Sayı numaraları (content.json → sayi): yalnızca elle belirlenenler saklanır; boş olan otomatiktir. */
+const SAYI_KEYS=['gazete','dergi',...YY_KEYS];
+const sayiOK=v=>/^[1-9]\d{0,3}$/.test(String(v==null?'':v).trim());
+function sayiNorm(v){const o={};SAYI_KEYS.forEach(k=>{if(v&&sayiOK(v[k]))o[k]=String(v[k]).trim()});return o}
 function yyNorm(src){
   const a=Array.isArray(src)?src:[];
   return Array.from({length:YY_N},(_,i)=>{
@@ -1817,7 +1824,8 @@ function norm(src){
   x.show=Object.assign({ex:true,gs:true,kt:false},s.show);x.show.ex=x.show.ex!==false;x.show.gs=x.show.gs!==false;x.show.kt=x.show.kt===true;
   x.xt=(Array.isArray(s.xt)?s.xt:[]).filter(it=>it&&typeof it==='object').map(it=>({id:String(it.id||uid()),title:String(it.title||''),date:String(it.date||''),type:String(it.type||'diger'),link:String(it.link||''),note:String(it.note||'')}));
   x.xp={};XP_IDS.forEach(k=>{x.xp[k]=!(s.xp&&s.xp[k]===false)});
-  x.pg={};PG_IDS.forEach(k=>{x.pg[k]=!(s.pg&&s.pg[k]===false)});
+  x.pg={};PG_IDS.forEach(k=>{x.pg[k]=PG_OFF.includes(k)?!!(s.pg&&s.pg[k]===true):!(s.pg&&s.pg[k]===false)});
+  x.yz=(Array.isArray(s.yz)?s.yz:[]).filter(it=>it&&typeof it==='object');x.yz.forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
   x.xc=normXc(s.xc);
   x.b=Object.assign({on:false,text:''},s.b);x.b.on=!!x.b.on;x.b.text=String(x.b.text||'');
   ['sz','ms','ex','gs','hk','ka','se','fm','ki','kb'].forEach(k=>{
@@ -1836,6 +1844,7 @@ function norm(src){
   ['w','ig','li'].forEach(k=>x[k]=String(x[k]||''));
   x.c.archive.forEach(it=>{delete it.pdf});[...x.n,...x.dg,...x.e,...x.fme,...x.konf,...x.c.gallery,...x.c.archive].forEach(it=>{if(it.id==null||it.id==='')it.id=uid();it.id=String(it.id)});
   x.yy=yyNorm(s.yy);
+  x.sayi=sayiNorm(s.sayi);
   x.yo=yoNorm(s.yo);
   x.ks=ksNorm(s.ks,i=>'k'+uid()+i);
   return x;
@@ -1960,6 +1969,29 @@ const COLS={
     label:x=>x.t,sub:x=>(x.tur==='etkinlik'?'Etkinlik · ':x.tur==='gazete'?'Gazete · ':x.tur==='dergi'?'Dergi · ':'')+(x.s||''),img:1,
     empty:'Arşiv boş. Haftalık yayını ya da dergi sayısını bitirince sayı burada dijital olarak görünür.',
     note:'Sayılar PDF değil, sitede okunan dijital sayfalar olarak yayınlanır. Arşivdeki sayı, Gazete ve Dergi sayfasındaki görünümüyle aynı açılır: kartlar, kapak ve yazı içi fotoğraflar, videolar ve yorumlar yayındaki hâliyle gelir. Kapak fotoğrafı isteğe bağlıdır; yazılar “Haftalık yayın” ve “Dergi sayısı hazırla” ile sayıya girer.'},
+  yz:{title:'Yazarlar',noun:'Yazar',nav:'Yazarlar',get:w=>w.yz,
+    make:()=>({id:uid(),ad:'',unvan:'',kurum:'',alan:'',img:'',atif:'',hindex:'',i10:'',yayin:'',kaynak:'Google Akademik',tarih:'',yillik:'',bio:'',eserler:'',scholar:'',orcid:'',web:'',linkedin:'',imza:''}),
+    fields:[{k:'ad',l:'Ad Soyad',req:1,ph:'Ad Soyad',hint:'Unvanı buraya değil alttaki alana yaz.'},
+            {k:'unvan',l:'Unvan',ph:'Dr. Öğr. Üyesi, Araştırma Görevlisi, Lisans öğrencisi'},
+            {k:'kurum',l:'Kurum / bölüm',ph:'İnönü Üniversitesi, İktisat Bölümü'},
+            {k:'alan',l:'Çalışma alanları',ph:'Para politikası, Ekonometri',hint:'Virgülle ayır. Kartta ilk üçü görünür.'},
+            {k:'atif',l:'Atıf sayısı',ph:'125',hint:'Yalnızca rakam. Boş bırakırsan sitede “—” görünür.'},
+            {k:'hindex',l:'h-indeksi',ph:'6'},
+            {k:'i10',l:'i10-indeksi',ph:'3'},
+            {k:'yayin',l:'Yayın sayısı',ph:'14'},
+            {k:'kaynak',l:'Sayıların kaynağı',ph:'Google Akademik'},
+            {k:'tarih',l:'Sayıların güncellenme tarihi',ph:'Kasım 2026'},
+            {k:'yillik',l:'Yıllara göre atıf (isteğe bağlı)',area:1,rows:5,ph:'2024: 18\n2025: 31\n2026: 40',hint:'Her satıra “yıl: atıf”. Profilde sütun grafik olur.'},
+            {k:'eserler',l:'Seçilmiş yayınlar (isteğe bağlı)',area:1,rows:6,ph:'Yayın başlığı | 2025 | 12 | https://…',hint:'Her satıra bir yayın: Başlık | Yıl (ya da dergi, yıl) | Atıf | Bağlantı. Yalnızca başlık zorunlu; atlanan bölümün yerini boş bırak (Başlık | 2025 | | https://…).'},
+            {k:'bio',l:'Özgeçmiş',area:1,rows:6,hint:'Profil sayfasında görünür. Paragrafları boş satırla ayır.'},
+            {k:'scholar',l:'Google Akademik bağlantısı',ph:'https://scholar.google.com/citations?user=…'},
+            {k:'orcid',l:'ORCID',ph:'0000-0000-0000-0000 ya da https://orcid.org/…'},
+            {k:'web',l:'Web sayfası',ph:'https://…'},
+            {k:'linkedin',l:'LinkedIn',ph:'https://www.linkedin.com/in/…'},
+            {k:'imza',l:'Yazılarda kullandığı diğer imzalar (isteğe bağlı)',ph:'A. Yılmaz',hint:'Gazete, dergi ve ek yayın yazılarındaki “Yazar” alanı bu ada (ya da buradaki imzalara) uyuyorsa yazı profilde listelenir. Unvanlar dikkate alınmaz.'}],
+    label:x=>x.ad,sub:x=>[x.unvan,String(x.atif||'').trim()&&x.atif+' atıf'].filter(Boolean).join(' · '),img:1,
+    empty:'Henüz yazar yok. İlk yazar profilini ekle.',
+    note:'Gazete ve Dergi › Yazarlar. Atıf ve indeks sayıları elle girilir; kendiliğinden güncellenmez. Listedeki sıra sitede “Editör sıralaması” olarak görünür.'},
   gallery:{title:'Galeri',noun:'Fotoğraf',nav:'Galeri',get:w=>w.c.gallery,
     make:()=>({id:uid(),t:'',s:'',img:''}),
     fields:[{k:'t',l:'Etkinlik adı',req:1},{k:'s',l:'Tarih',ph:'Kasım 2026'}],
@@ -2001,7 +2033,7 @@ for(let n=1;n<=YY_N;n++){COLS['yy'+n]={
   label:x=>x.title,sub:x=>x.kind,img:1,imgs:1,blocks:1,hideCover:1,imgsLabel:'Yazı içi fotoğraflar',imgsHint:'Kartta görünmez; yazı açılınca içinde gösterilir. Metnin içinde “[foto 1]” yazan boş bir satır, o fotoğrafı tam o yere koyar.',
   empty:'Henüz yazı yok. Bu yayının sayfasında görünecek ilk yazıyı ekle.',
   note:'Yayın sitede kapalıysa bu yazılar ziyaretçilere görünmez. Yukarıdaki anahtarla yayını açınca kartlar sitede çıkar; karta basınca yazı tam sayfa açılır.'}}
-const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,konf:w=>w.konf,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],xptakvim:w=>w.xt,'xc-ulke':w=>w.xc.ulke,'xc-urun':w=>w.xc.urun,'xc-turkiye':w=>w.xc.turkiye,'xc-grafik':w=>w.xc.grafik,'xc-ceviri':w=>[w.xc.ceviri,w.xc.ceviri_t],'xc-arastirma':w=>[w.xc.arastirma,w.xc.arastirma_hide],'xc-arastirma2':w=>[w.xc.arastirma,w.xc.arastirma_hide],'xc-kalkinma':w=>w.xc.kalkinma,'xc-girisim':w=>[w.xc.gk,w.xc.gt,w.xc.gp,w.xc.gh],gborsa:w=>[],fm:w=>w.fm};
+const SEC={banner:w=>w.b,n:w=>w.n,dg:w=>w.dg,e:w=>w.e,fme:w=>w.fme,konf:w=>w.konf,yz:w=>w.yz,sayilar:w=>w.sayi,archive:w=>w.c.archive,gallery:w=>w.c.gallery,texts:w=>w.t,blocks:w=>[w.d,w.i],sozluk:w=>w.sz,meslek:w=>w.ms,pmeslek:w=>[w.show.kt],ex:w=>[w.ex,w.show.ex],gs:w=>[w.gs,w.show.gs],hk:w=>w.hk,ka:w=>w.ka,se:w=>w.se,ansiklopedi:w=>[w.sz,w.ka,w.se,w.ki,w.kb],ki:w=>w.ki,kb:w=>w.kb,yb:w=>w.yb,kesfet:w=>w.ks,sims:w=>Object.keys(w.i).filter(k=>k.startsWith('sim-')).sort().map(k=>[k,w.i[k]]),fb:w=>w.fb,links:w=>[w.w,w.ig,w.li],xplus:w=>w.xp,etkpg:w=>[w.pg,w.yb.on],xptakvim:w=>w.xt,'xc-ulke':w=>w.xc.ulke,'xc-urun':w=>w.xc.urun,'xc-turkiye':w=>w.xc.turkiye,'xc-grafik':w=>w.xc.grafik,'xc-ceviri':w=>[w.xc.ceviri,w.xc.ceviri_t],'xc-arastirma':w=>[w.xc.arastirma,w.xc.arastirma_hide],'xc-arastirma2':w=>[w.xc.arastirma,w.xc.arastirma_hide],'xc-kalkinma':w=>w.xc.kalkinma,'xc-girisim':w=>[w.xc.gk,w.xc.gt,w.xc.gp,w.xc.gh],gborsa:w=>[],fm:w=>w.fm};
 for(let n=1;n<=YY_N;n++)SEC['yy'+n]=w=>w.yy[n-1];
 function diffList(a,b){
   const am=new Map(a.map(x=>[String(x.id),x])),bm=new Map(b.map(x=>[String(x.id),x]));
@@ -2013,7 +2045,7 @@ function summarize(){
   if(!S.remote||!S.work)return[];
   const a=S.remote.data,b=S.work,out=[];
   const nm=(C,x)=>'“'+((C.label(x)||'').trim()||'başlıksız')+'”';
-  for(const k of['n','dg','e','fme','konf','archive','gallery',...YY_KEYS]){
+  for(const k of['n','dg','e','fme','konf','yz','archive','gallery',...YY_KEYS]){
     const C=COLS[k],d=diffList(C.get(a),C.get(b));
     const push=(arr,verb)=>{arr.slice(0,5).forEach(x=>out.push(`${C.noun} ${verb}: ${nm(C,x)}`));if(arr.length>5)out.push(`${C.noun} ${verb}: ${arr.length-5} kayıt daha`)};
     push(d.add,'eklendi');push(d.edit,'düzenlendi');push(d.del,'silindi');
@@ -2037,6 +2069,7 @@ function summarize(){
    d.add.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi eklendi: '+nm(x)));d.edit.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi düzenlendi: '+nm(x)));d.del.slice(0,5).forEach(x=>out.push('Resmî sınav tarihi silindi: '+nm(x)));}
   XP_IDS.forEach(k=>{if(a.xp[k]!==b.xp[k])out.push('Eko-Plus “'+XP_NAME[k]+'” sayfası '+(b.xp[k]?'sitede açılacak':'sitede kapatılacak'))});
   PG_IDS.forEach(k=>{if(a.pg[k]!==b.pg[k])out.push((YP_PG.includes(k)?'Gazete ve Dergi “'+YP_NAME[k]:'Etkinlikler “'+EV_NAME[k])+'” sayfası '+(b.pg[k]?'sitede açılacak':'sitede kapatılacak'))});
+  SAYI_KEYS.forEach(k=>{if(a.sayi[k]!==b.sayi[k])out.push(sayiAd(k,b)+' sayı numarası: '+(b.sayi[k]||'otomatik'))});
   if(!same(a.yo,b.yo))out.push('Gazete ve Dergi sayfasındaki kutu sırası değişti');
   XCK.forEach(k=>{if(!same(a.xc[k],b.xc[k]))out.push('“'+XCT[k]+'” içeriği değişti')});if(a.xc.arastirma_hide!==b.xc.arastirma_hide)out.push('Ortak Araştırma örnek ilanları '+(b.xc.arastirma_hide?'gizlenecek':'gösterilecek'));
   custDiff(out,'Fikir Muharebesi iddiası',a.fm,b.fm,x=>x.c);
@@ -2072,9 +2105,11 @@ function evStatus(t){const p=evParse(t);if(!p)return null;const n=new Date(),td=
   return df===1?{k:'soon',t:'Yarın'}:{k:'soon',t:df+' gün kaldı'}}
 const evShort=t=>{const p=evParse(t);return p?{day:String(p.day),mon:EVAY[p.mo]}:null};
 const httpsOK=s=>!s||/^https:\/\/\S+$/.test(s);
+const yzNumOK=v=>{const t=String(v==null?'':v).trim();return !t||/^(\d+|\d{1,3}([. ]\d{3})+)$/.test(t)};
+const yzLines=v=>String(v||'').split('\n').map(l=>l.trim()).filter(Boolean);
 function validate(){
   const w=S.work,p=[];
-  for(const k of['n','dg','e','fme','konf','archive','gallery',...YY_KEYS]){
+  for(const k of['n','dg','e','fme','konf','yz','archive','gallery',...YY_KEYS]){
     const C=COLS[k];
     C.get(w).forEach(x=>{
       if(isBlank(k,x))return;
@@ -2083,6 +2118,12 @@ function validate(){
       else if(C.imgReq&&!x.img)p.push({text:`“${C.label(x)}” için fotoğraf seçilmemiş`,view:k,id:x.id});
     });
   }
+  w.yz.forEach(x=>{if(isBlank('yz',x))return;const bad=m=>p.push({text:'Yazar “'+(String(x.ad||'').trim()||'başlıksız')+'”: '+m,view:'yz',id:x.id});
+    [['atif','Atıf sayısı'],['hindex','h-indeksi'],['i10','i10-indeksi'],['yayin','Yayın sayısı']].forEach(([k,n])=>{if(!yzNumOK(x[k]))bad(n+' yalnızca rakam olmalı')});
+    yzLines(x.yillik).forEach(l=>{if(!/^(19|20)\d\d\s*[:|=\s]\s*[\d. ]+$/.test(l)||!yzNumOK(l.replace(/^\d{4}\s*[:|=\s]\s*/,'')))bad('yıllık atıf satırı “2025: 31” biçiminde olmalı: '+l)});
+    yzLines(x.eserler).forEach(l=>{const q=l.split('|').map(z=>z.trim());if(!q[0])bad('yayın satırında başlık boş: '+l);else if(!yzNumOK(q[2]))bad('yayın satırında atıf yalnızca rakam olmalı: '+q[0]);else if(q[3]&&!httpsOK(q[3]))bad('yayın bağlantısı https:// ile başlamalı: '+q[0])});
+    [['scholar','Google Akademik'],['web','Web sayfası'],['linkedin','LinkedIn']].forEach(([k,n])=>{if(!httpsOK(String(x[k]||'').trim()))bad(n+' bağlantısı https:// ile başlamalı')});
+    const o=String(x.orcid||'').trim();if(o&&!httpsOK(o)&&!/^\d{4}-\d{4}-\d{4}-\d{3}[\dXx]$/.test(o))bad('ORCID 0000-0000-0000-0000 biçiminde ya da https:// bağlantısı olmalı')});
   if(w.fb.db&&!dbOK(w.fb.db))p.push({text:'Veritabanı adresi geçersiz görünüyor',view:'settings'});
   if(w.b.on&&!w.b.text.trim())p.push({text:'Duyuru şeridi açık ama metni boş',view:'banner'});
   w.sz.add.forEach(x=>{if(!String(x.t||'').trim()||!String(x.d||'').trim())p.push({text:'Sözlükte terimi ya da tanımı boş bir kayıt var',view:'sozluk'})});
@@ -2112,7 +2153,7 @@ function validate(){
 let NAV=[
   {g:'Gelenler',items:[['pmakale','Gelen makaleler'],['members','Üyelik başvuruları'],['comments','Yorumlar'],['itab','Gelen tablolar'],['joins','Katılımcılar']]},
   {g:'Ana sayfa',items:[['home','Genel bakış'],['kesfet','Keşfet sayfası'],['banner','Duyuru şeridi'],['poll','Anket']]},
-  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Dijital arşiv'],['parsiv','Arşiv sayfası'],['gallery','Galeri'],['xc-ceviri','Çeviri Köşesi'],['xc-arastirma','Ortak Araştırma Projeleri'],['yayinsira','Kutu sırası'],['yayinpg','Sayfa anahtarları']]},
+  {g:'Gazete ve Dergi',items:[['n','Haberler'],['dg','Dergi yazıları'],['archive','Dijital arşiv'],['parsiv','Arşiv sayfası'],['yz','Yazarlar'],['sayilar','Sayı numaraları'],['gallery','Galeri'],['xc-ceviri','Çeviri Köşesi'],['xc-arastirma','Ortak Araştırma Projeleri'],['yayinsira','Kutu sırası'],['yayinpg','Sayfa anahtarları']]},
   {g:'Ek Yayınlar',items:[['klup','Yayın yönetimi'],['kanket','Kulüp anketleri'],...YY_KEYS.map((k,i)=>[k,'Yayın '+(i+1)])]},
   {g:'Etkinlikler',items:[['e','Etkinlikler ve QR araçları'],['quota','Etkinlik kontenjanı'],['konf','Konferanslar'],['yb','Yatay Bakış'],['xc-arastirma2','Proje Araştırma Grupları'],['etkpg','Sayfa anahtarları']]},
   {g:'Fikir Muharebesi',items:[['fm','Fikir Muharebesi'],['fme','Muharebe etkinlikleri'],['canli','Canlı muharebe'],['fmarg','Muharebe argümanları']]},
@@ -2404,7 +2445,7 @@ function collView(key){
   const C=COLS[key],list=C.get(S.work);
   if(!list.some(x=>x.id===S.sel[key]))S.sel[key]=list[0]?list[0].id:null;
   const mode=S.mode[key]==='detail'&&S.sel[key]?'detail':'list';
-  const wrap=h('div',null,pageHead(C.title,C.note+(key==='gallery'?'':' Boş slotlar sitede görünmez; başlığı yazınca yayına girer.')));
+  const wrap=h('div',null,pageHead(C.title,C.note+(key==='gallery'?'':key==='yz'?' Adı boş kayıtlar sitede görünmez.':' Boş slotlar sitede görünmez; başlığı yazınca yayına girer.')));
   const root=h('div',{class:'split','data-mode':mode});
 
   const ul=h('ul',{class:'items'});
@@ -2423,7 +2464,7 @@ function collView(key){
   const detail=h('section',{class:'detail'});
   if(!item){detail.append(h('div',{class:'empty'},h('b',{text:'Henüz kayıt yok'}),h('span',{text:C.empty}),h('button',{class:'btn solid',type:'button',onclick:()=>addItem(key)},'+ Yeni '+C.noun.toLowerCase())))}
   else{
-    const idx=list.indexOf(item),panel=h('div',{class:'panel'}),pv=key==='e'?evPreview(item):null;
+    const idx=list.indexOf(item),panel=h('div',{class:'panel'}),pv=key==='e'?evPreview(item):key==='yz'?yzPreview(item):null;
     panel.append(h('div',{class:'dhead'},
       h('button',{class:'btn sm backbtn',type:'button',onclick:()=>{S.mode[key]='list';render()}},'← Liste'),
       h('span',{class:'hint',text:`${idx+1}. sırada, toplam ${list.length}`})));
@@ -2445,6 +2486,17 @@ function collView(key){
       panel.append(h('div',{class:'fld'},h('label',{for:id,text:f.l+(f.req?' *':'')}),el,f.hint?h('span',{class:'hint',text:f.hint}):null,extra));
       if(C.blocks&&f.k==='text')panel.append(h('div',{class:'fld'},h('span',{class:'lab',text:'Yazı, fotoğraf ve video akışı'}),blocksField(item)));
     });
+    if(key==='archive'&&item.tur!=='etkinlik'){
+      const id='f_archive_no',i=h('input',{id,type:'text',inputmode:'numeric',maxlength:'4',autocomplete:'off',value:sayiNo(item)||'',style:'max-width:180px'});
+      i.addEventListener('change',()=>{const v=i.value.trim();
+        if(v&&!sayiOK(v)){toast('Sayı numarası 1 ile 9999 arasında bir rakam olmalı.');i.value=sayiNo(item)||'';return}
+        const old=sayiNo(item);
+        if(!v){delete item.no}else{item.no=+v;
+          /* Başlık ve dönem içindeki eski numarayı da güncelle */
+          if(old)['t','s'].forEach(f=>{if(item[f])item[f]=String(item[f]).replace(new RegExp('(^|[^0-9])'+old+'(\\.\\s*Sayı)','i'),'$1'+v+'$2').replace(new RegExp('(Sayı\\s+)'+old+'(?![0-9])','i'),'$1'+v)})}
+        touch();render()});
+      panel.append(h('div',{class:'fld'},h('label',{for:id,text:'Sayı numarası'}),i,h('span',{class:'hint',text:'Numarayı değiştirirsen başlıkta ve dönemde geçen eski “Sayı” numarası da güncellenir.'})));
+    }
     if(C.img){
       const updThumb=()=>{const b=$(`.it[data-id="${CSS.escape(item.id)}"] .thumb`);if(!b)return;b.replaceChildren();
         if(item.img)b.append(h('img',{src:imgSrc(item.img),alt:''}));else b.textContent=((C.label(item)||'·')[0]).toUpperCase();if(pv)pv.draw()};
@@ -2476,6 +2528,29 @@ function collView(key){
   root.append(detail);wrap.append(root);return wrap;
 }
 ['n','dg','e','fme','konf','archive','gallery'].forEach(k=>VIEWS[k]=()=>collView(k));
+/* Yazarlar: üstte sayfa anahtarı, altta kayıt düzenleyici */
+VIEWS.yz=()=>{
+  const v=collView('yz'),hd=v.firstElementChild,w=S.work,on=w.pg.yazarlar===true;
+  const sw=h('input',{type:'checkbox',checked:on,'aria-label':'Yazarlar sayfasını sitede aç'}),st=h('span',{class:'xp-st '+(on?'on':'off'),text:on?'Açık':'Kapalı'});
+  sw.addEventListener('change',()=>{w.pg.yazarlar=sw.checked;st.textContent=sw.checked?'Açık':'Kapalı';st.className='xp-st '+(sw.checked?'on':'off');touch();toast(sw.checked?'Yazarlar sayfası açıldı. Yayınlayınca sitede görünür.':'Yazarlar sayfası kapatıldı. Yayınlayınca sitede gizlenir.')});
+  hd.after(h('div',{class:'panel'},h('div',{class:'xp-row'},h('div',{class:'xp-txt'},h('b',{text:'Sitede göster'}),h('small',{text:'Kapalıyken kutusu ve menü bağlantısı görünmez; doğrudan adrese giren “Bu sayfa şu an kapalı” iletisini görür. Kayıtların silinmez.'}),h('code',{text:'#/yazarlar'})),h('label',{class:'switch'},sw,h('span',{class:'tr'}),st))));
+  return v;
+};
+/* Yazar kartının küçük önizlemesi */
+function yzPreview(item){
+  const box=h('div',{class:'fld'});
+  const draw=()=>{
+    const v=k=>String(item[k]||'').trim();
+    box.replaceChildren(h('span',{class:'lab',text:'Kart önizlemesi'}),
+      h('div',{style:'border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:12px;max-width:420px'},
+        h('div',{style:'display:flex;gap:12px;align-items:center'},
+          item.img?h('img',{src:imgSrc(item.img),alt:'',style:'width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none'}):h('span',{style:'width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--soft);font-weight:700',text:(v('ad')[0]||'?').toLocaleUpperCase('tr')}),
+          h('div',{style:'min-width:0'},h('b',{text:v('ad')||'Ad Soyad'}),h('div',{class:'hint',text:[v('unvan'),v('kurum')].filter(Boolean).join(' · ')}))),
+        h('div',{style:'display:grid;grid-template-columns:repeat(4,minmax(0,1fr));text-align:center;border-top:1px solid var(--line);padding-top:10px'},
+          [['atif','Atıf'],['hindex','h-indeksi'],['i10','i10'],['yayin','Yayın']].map(([k,l])=>h('div',null,h('b',{text:v(k)||'—'}),h('div',{class:'hint',text:l}))))));
+  };
+  draw();return{box,draw};
+}
 YY_KEYS.forEach((k,i)=>{VIEWS[k]=()=>{
   const v=collView(k),hd=v.firstElementChild,p=S.work.yy[i],n=i+1;
   const fld=(lab,el,hint)=>h('div',{class:'fld'},h('span',{class:'lab',text:lab}),el,hint?h('span',{class:'hint',text:hint}):null);
@@ -2489,6 +2564,7 @@ YY_KEYS.forEach((k,i)=>{VIEWS[k]=()=>{
       h('label',{class:'switch'},sw,h('span',{class:'tr'}),st)),
     fld('Yayının adı',txt('ad','Örn. Kampüs Ekonomi Dergisi'),'Sayfa başlığı ve “Gazete ve Dergi” kutusunda görünür. Boş bırakırsan “Yayın '+n+'” yazar.'),
     fld('Tür',tur),
+    sayiField('yy'+n),
     fld('Kısa açıklama',txt('slogan','Kutuda görünen tek cümle'),'“Gazete ve Dergi” sayfasındaki kutuda görünür.'),
     fld('Sayfa açıklaması',txt('aciklama','Sayfanın üstünde görünen birkaç cümle',1)),
     fld('Renk',ren),
@@ -2521,7 +2597,7 @@ VIEWS.links=()=>{
 </script>
 <script>
 /* ---------- site dosyasını oku (metinler ve örnek içerikler için) ---------- */
-const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale yaz',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',katil:'Aramıza Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz ve Deneme',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',ulke:'Ülke Karşılaştırma',turkiye:'Türkiye Ekonomisi Dosyaları',grafikokuma:'Grafik Okuma Okulu',urun:'Bir Ürünün Hikâyesi',ceviri:'Çeviri Köşesi',arastirma:'Ortak Araştırma Projeleri',veri:'İktisat Grafikleri',parite:'Tüm Pariteler',pariteler:'Pariteler',piyasa:'Veri ve Pariteler',kesfet:'Eko-Log’u keşfet',meslekler:'Meslekler',meslek:'Meslek Tanıtımı',kadrolar:'Kariyer Kadroları',kadro:'Kariyer Kadroları',kaynak:'Resmî Kaynaklar',konferanslar:'Konferanslar',yatay:'Yatay Bakış',fikir:'Fikir Muharebesi','fikir-canli':'Canlı Muharebe','fikir-etkinlik':'Yapılan Etkinlikler','fikir-turler':'Münazara Çeşitleri','mulakat-bilgi':'Resmi / Özel Kurum Mülakatı','mulakat-basvuru':'Mülakat Simülasyonu Başvuruları','mulakat-yonetim':'Topluluk Yönetimi Mülakatı',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',girisimcilik:'Girişimcilik Atölyesi',ikalgoritma:'Algoritma ve Dikkat Ekonomisi',atolye:'Çeviri ve Terminoloji Atölyesi',manipulator:'Piyasa Manipülatörleri',ahi:'Ahi Dijital Müzesi',finans:'Finansal Okuryazarlık',tarih:'Ekonomi Tarihi Çizelgesi',sektor:'Sektör Dosyaları',kitaplik:'Kitaplık',_:'Menü ve alt bilgi'};
+const PAGE_NAMES={home:'Ana sayfa',merkez:'Simülasyon Merkezi',vaka:'Vaka Analizi',ppk:'Başkan Simülasyonu',borsa:'Borsa Simülasyonu',bakan:'Bakanlık Simülasyonu',girisim:'Girişimci',kur:'Dış Ticaret',burokrat:'Kamu Bürokratı',muzakere:'Müzakere Masası',ihale:'Kamu İhalesi',hakimlik:'Hâkimlik Simülasyonu',valilik:'Kaymakamlık ve Valilik',smmm:'Mali Müşavirlik',mulakat:'Mülakat',makale:'Makale yaz',gazete:'Diyalog Gazetesi',dergi:'İktisadi Kalkınma Dergisi',yayin:'Gazete ve Dergi',etkinlik:'Etkinlikler',arsiv:'Arşiv',yazarlar:'Yazarlar',katil:'Aramıza Katıl',ansiklopedi:'İktisadi Ansiklopedi',sozluk:'Ekonomi Sözlüğü',quiz:'Terim Quiz ve Deneme',kisiler:'İktisat Düşünürleri',anatomi:'Kavramın Anatomisi',efsane:'İktisadi Şehir Efsaneleri',hesap:'Hesaplayıcılar',ulke:'Ülke Karşılaştırma',turkiye:'Türkiye Ekonomisi Dosyaları',grafikokuma:'Grafik Okuma Okulu',urun:'Bir Ürünün Hikâyesi',ceviri:'Çeviri Köşesi',arastirma:'Ortak Araştırma Projeleri',veri:'İktisat Grafikleri',parite:'Tüm Pariteler',pariteler:'Pariteler',piyasa:'Veri ve Pariteler',kesfet:'Eko-Log’u keşfet',meslekler:'Meslekler',meslek:'Meslek Tanıtımı',kadrolar:'Kariyer Kadroları',kadro:'Kariyer Kadroları',kaynak:'Resmî Kaynaklar',konferanslar:'Konferanslar',yatay:'Yatay Bakış',fikir:'Fikir Muharebesi','fikir-canli':'Canlı Muharebe','fikir-etkinlik':'Yapılan Etkinlikler','fikir-turler':'Münazara Çeşitleri','mulakat-bilgi':'Resmi / Özel Kurum Mülakatı','mulakat-basvuru':'Mülakat Simülasyonu Başvuruları','mulakat-yonetim':'Topluluk Yönetimi Mülakatı',uyeler:'Üyelere Özel',lab:'Üyelere Özel (giriş)',girisimcilik:'Girişimcilik Atölyesi',ikalgoritma:'Algoritma ve Dikkat Ekonomisi',atolye:'Çeviri ve Terminoloji Atölyesi',manipulator:'Piyasa Manipülatörleri',ahi:'Ahi Dijital Müzesi',finans:'Finansal Okuryazarlık',tarih:'Ekonomi Tarihi Çizelgesi',sektor:'Sektör Dosyaları',kitaplik:'Kitaplık',_:'Menü ve alt bilgi'};
 const ENC_PAGES=['ansiklopedi','sozluk','anatomi','efsane','kisiler','kitaplik','tarih','sektor','olay','atolye','manipulator','ahi','finans'];
 const SIM_PAGES=['merkez','vaka','ppk','borsa','bakan','girisim','kur','burokrat','muzakere','ihale','hakimlik','valilik','smmm'];
 const siteUrl=p=>{const k=String(p).split('/')[0],S=window.EKO_SPLIT||{};return((ENC_PAGES.includes(k)&&S.ans)?'ansiklopedi.html':(SIM_PAGES.includes(k)&&S.sim)?(window.EKO_SIMF||'simulasyon-merkezi.html'):'index.html')+'#/'+p};
@@ -4558,6 +4634,47 @@ function showPanel(k,label){
   return h('div',{class:'panel'},h('label',{class:'switch'},sw,h('span',{class:'tr'}),h('span',{text:label+': '}),state),h('p',{class:'hint',text:'Kapatırsan bu bölüm sitede hiç görünmez; verilerin silinmez, tekrar açınca geri gelir.'}));
 }
 
+/* ---------- sayı numaraları ---------- */
+const sayiAd=(k,w=S.work)=>k==='gazete'?'Diyalog Gazetesi':k==='dergi'?'İktisadi Kalkınma Dergisi':yyName(w.yy[+k.slice(2)-1],+k.slice(2));
+const sayiArsiv=k=>S.work.c.archive.filter(x=>x&&(/^yy\d+$/.test(k)?x.yy===k:x.tur===k&&!x.yy));
+/* Arşiv kaydının numarası: “no” alanı, yoksa başlıktaki “3. Sayı” / “Sayı 3” */
+const sayiNo=x=>{if(+x.no>0)return +x.no;const m=String(x.t||'').match(/(\d+)\.\s*Sayı|Sayı\s+(\d+)/i);return m?+(m[1]||m[2]):0};
+const sayiOto=k=>{const L=sayiArsiv(k);return Math.max(L.length,...L.map(sayiNo))+1};
+const sayiSonraki=k=>+(S.work.sayi[k]||0)||sayiOto(k);
+function sayiSet(k,v){const o=Object.assign({},S.work.sayi);if(v)o[k]=String(v);else delete o[k];S.work.sayi=sayiNorm(o);touch()}
+/* Bir sayı arşive alındıktan sonra: numara elle belirlenmişse bir sonrakine geç (geriye dönük eski sayı eklemek güncel numarayı düşürmez) */
+function sayiIlerle(k,no){const c=+(S.work.sayi[k]||0);if(c&&no>=c)sayiSet(k,Math.min(9999,no+1))}
+/* Numara sor; iptalde 0 döner */
+function sayiSor(k){
+  let d=String(sayiSonraki(k));
+  for(;;){
+    const v=prompt(sayiAd(k)+': arşive alınacak sayının numarası kaç?',d);
+    if(v===null)return 0;
+    const t=v.trim()||d;
+    if(!sayiOK(t)){alert('Sayı numarası 1 ile 9999 arasında bir rakam olmalı.');continue}
+    if(sayiArsiv(k).some(x=>sayiNo(x)===+t)&&!confirm('Arşivde bu yayının '+t+'. sayısı zaten var. Yine de aynı numarayla eklensin mi?')){d=t;continue}
+    return +t;
+  }
+}
+let _sf=0;
+function sayiField(k,label){
+  const id='sayi_'+k+'_'+(++_sf),i=h('input',{id,type:'text',inputmode:'numeric',maxlength:'4',autocomplete:'off',value:S.work.sayi[k]||'',style:'max-width:180px'}),msg=h('span',{class:'hint',role:'status'});
+  const upd=()=>{const v=i.value.trim(),bad=v&&!sayiOK(v);i.classList.toggle('bad',!!bad);i.placeholder=k==='gazete'?'Otomatik: '+sayiOto(k):'Boş';
+    msg.style.color=bad?'var(--bad)':'';
+    msg.textContent=bad?'1 ile 9999 arasında bir rakam yaz. Bu hâliyle kaydedilmez.':v?'Sitede “Sayı '+v+'” yazar. Bu sayı arşive alınırken numara hazır gelir, sonra bir artar.':
+      k==='gazete'?'Boş: sitede “Sayı '+sayiOto(k)+'” yazar (arşivdeki son sayıdan devam eder).':'Boş: sayfada sayı numarası yazmaz. Arşive alırken '+sayiOto(k)+' önerilir.'};
+  i.addEventListener('input',()=>{const v=i.value.trim();if(!v||sayiOK(v))sayiSet(k,v);upd()});upd();
+  return h('div',{class:'fld'},h('label',{for:id,text:label||'Güncel sayı numarası'}),i,msg);
+}
+VIEWS.sayilar=()=>{
+  const w=S.work,root=h('div',{class:'stack'});
+  root.append(pageHead('Sayı numaraları','Gazete, dergi ve ek yayınların güncel sayı numarasını buradan belirle. “Yayınla” dediğinde sitede görünür. Arşivdeki eski bir sayının numarasını “Dijital arşiv” bölümünden düzeltebilirsin.'));
+  const used=YY_KEYS.filter((k,i)=>{const p=w.yy[i];return p.on||p.ad||p.yazilar.length||w.sayi[k]});
+  ['gazete','dergi',...used].forEach(k=>root.append(h('div',{class:'panel'},h('h3',{text:sayiAd(k)}),sayiField(k))));
+  root.append(h('p',{class:'hint',text:used.length?'Yalnızca kullanılan ek yayınlar listelenir.':'Ek yayın açtığında o da burada listelenir.'}));
+  return root;
+};
+
 /* ---------- haftalık dijital gazete ve etkinlik arşivi ---------- */
 function endEvent(item,idx){
   const w=S.work;if(!(item.title||'').trim()){toast('Başlıksız etkinlik arşive alınamaz.');return}
@@ -4578,7 +4695,7 @@ async function haftayiBitir(){
   if(!items.length){toast('Yayınlanacak haber yok.');return}
   if(!confirm(items.length+' haber dijital gazete sayısı olarak Dijital arşive eklenecek, haber listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
   const d=new Date(),fm={day:'numeric',month:'long'},son=d.toLocaleDateString('tr-TR',{...fm,year:'numeric'}),bas=new Date(d.getTime()-6*864e5).toLocaleDateString('tr-TR',fm),varsayilan=bas+' – '+son;
-  const gz=w.c.archive.filter(x=>x&&x.tur==='gazete'&&!x.yy),no=Math.max(gz.length,...gz.map(x=>+x.no||0))+1;
+  const no=sayiSor('gazete');if(!no)return;
   const ar=prompt('Diyalog Gazetesi '+no+'. Sayı hangi tarihler arası? İstersen düzenle:',varsayilan);
   if(ar===null)return;
   const aralik=(ar.trim()||varsayilan).slice(0,60),baslik=no+'. Sayı · '+aralik;
@@ -4587,18 +4704,18 @@ async function haftayiBitir(){
     a.download='gazete-yedek-'+d.toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();
     w.c.archive.unshift({id:uid(),tur:'gazete',no,t:'Diyalog Gazetesi · '+no+'. Sayı',s:aralik,yer:'',x:items.length+' haber: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',a:items.map(slimArt)});
     items.forEach(x=>{const i=w.n.indexOf(x);if(i>-1)w.n.splice(i,1)});
-    touch();render();toast('Diyalog Gazetesi '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
+    sayiIlerle('gazete',no);touch();render();toast('Diyalog Gazetesi '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
   }catch(e){toast('Sayı arşive eklenemedi. Tekrar dene.')}
 }
 {const f=VIEWS.n;VIEWS.n=()=>{const v=f(),hd=v.firstElementChild,
   p=h('div',{class:'panel'},h('h3',{text:'Haftalık yayın'}),h('p',{class:'hint',text:'Hafta sonunda bas: haberler dijital gazete sayısı olur, Dijital arşive eklenir, haber listesi temizlenir ve yedek dosyası iner. Sitede görünmesi için sonra Yayınla’ya bas.'}),
-    h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Haftalık yayını bitir',onclick:haftayiBitir})));
+    sayiField('gazete'),h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Haftalık yayını bitir',onclick:haftayiBitir})));
   if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p);return v}}
 async function yyBitir(n){
   const w=S.work,p=w.yy[n-1],ad=yyName(p,n),items=p.yazilar.filter(x=>!isBlank('yy'+n,x)&&(x.title||'').trim());
   if(!items.length){toast('Bu yayında arşive alınacak yazı yok.');return}
   if(!confirm(items.length+' yazı “'+ad+'” sayısı olarak Dijital arşive eklenecek, yazı listesi temizlenecek ve bir yedek dosyası inecek. Devam edilsin mi?'))return;
-  const d=new Date(),ar0=w.c.archive.filter(x=>x&&x.yy===p.id),no=Math.max(ar0.length,...ar0.map(x=>+x.no||0))+1;
+  const no=sayiSor(p.id);if(!no)return;const d=new Date();
   const d0=d.toLocaleDateString('tr-TR',{month:'long',year:'numeric'}),ar=prompt(ad+' '+no+'. Sayı hangi dönem ya da tarihler arası?',d0);
   if(ar===null)return;
   const donem=(ar.trim()||d0).slice(0,60),baslik=no+'. Sayı · '+donem;
@@ -4607,13 +4724,13 @@ async function yyBitir(n){
     a.download=p.id+'-yedek-'+d.toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();
     w.c.archive.unshift({id:uid(),tur:p.tur,no,yy:p.id,t:ad+' · '+no+'. Sayı',s:donem,yer:'',x:items.length+' yazı: '+items.slice(0,3).map(x=>x.title).join(', ')+(items.length>3?'…':''),img:(items.find(x=>x.img)||{}).img||'',a:items.map(slimArt)});
     items.forEach(x=>{const i=p.yazilar.indexOf(x);if(i>-1)p.yazilar.splice(i,1)});
-    touch();render();toast(ad+' '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
+    sayiIlerle(p.id,no);touch();render();toast(ad+' '+no+'. Sayı arşive eklendi. Yayınla’ya basınca sitede görünür.');
   }catch(e){toast('Sayı arşive eklenemedi. Tekrar dene.')}
 }
 function dergiyiBitir(){go('dgissue')}
 {const f=VIEWS.dg;VIEWS.dg=()=>{const v=f(),hd=v.firstElementChild,
   p=h('div',{class:'panel'},h('h3',{text:'Sayıyı hazırla'}),h('p',{class:'hint',text:'Sayıya girecek yazıları seçip sıralayabilir ve sayıyı dijital arşive alabilirsin. Sayı sitede okunur; PDF üretilmez.'}),
-    h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Dergi sayısını hazırla',onclick:dergiyiBitir})));
+    sayiField('dergi'),h('div',{class:'actions'},h('button',{class:'btn solid',type:'button',text:'Dergi sayısını hazırla',onclick:dergiyiBitir})));
   if(hd&&hd.classList.contains('pagehead'))hd.after(p);else v.prepend(p);return v}}
 /* ---------- dijital sayı okunma sayıları ---------- */
 const dlKey=id=>String(id).replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,40);
@@ -4654,7 +4771,7 @@ for(const [k,l] of [['ex','Sınav takvimi']]){
 /* ---------- yayınlama ---------- */
 function collectRefs(w){
   const s=new Set();
-  [...w.n,...(w.dg||[]),...(w.yy||[]),...(w.yy||[]).flatMap(p=>p.yazilar||[]),...w.e,...(w.fme||[]),...(w.konf||[]),...w.c.gallery,...w.c.archive,...w.c.team].forEach(x=>{if(x&&x.img)s.add(x.img);if(x&&Array.isArray(x.imgs))x.imgs.forEach(q=>q&&s.add(q));if(x&&Array.isArray(x.a))x.a.forEach(y=>{if(y&&y.img)s.add(y.img);if(y&&Array.isArray(y.imgs))y.imgs.forEach(q=>q&&s.add(q))})});
+  [...w.n,...(w.dg||[]),...(w.yy||[]),...(w.yy||[]).flatMap(p=>p.yazilar||[]),...w.e,...(w.fme||[]),...(w.konf||[]),...(w.yz||[]),...w.c.gallery,...w.c.archive,...w.c.team].forEach(x=>{if(x&&x.img)s.add(x.img);if(x&&Array.isArray(x.imgs))x.imgs.forEach(q=>q&&s.add(q));if(x&&Array.isArray(x.a))x.a.forEach(y=>{if(y&&y.img)s.add(y.img);if(y&&Array.isArray(y.imgs))y.imgs.forEach(q=>q&&s.add(q))})});
   if(w.yb){if(w.yb.img)s.add(w.yb.img);(w.yb.imgs||[]).forEach(q=>q&&s.add(q))}
   Object.values(w.i).forEach(p=>p&&s.add(p));
   return[...s].filter(isSafePath);
@@ -5014,15 +5131,17 @@ async function run(final){
   if(busy)return;
   const list=chosen();
   if(!list.length)return say('En az bir yazı seç.',1);
-  const m={name:meta.name.trim(),date:meta.date.trim(),desc:meta.desc.trim()};
-  if(!m.name)return say('Sayı adını yaz (ör. Sayı 1).',1);
+  const nos=meta.no.trim()||String(sayiSonraki('dergi'));
+  if(!sayiOK(nos))return say('Sayı numarası 1 ile 9999 arasında bir rakam olmalı.',1);
+  const no=+nos,m={name:meta.name.trim()||'Sayı '+no,date:meta.date.trim(),desc:meta.desc.trim()};
+  if(sayiArsiv('dergi').some(x=>sayiNo(x)===no)&&!await ask(no+'. sayı arşivde var','Arşivde derginin '+no+'. sayısı zaten var. Aynı numarayla bir sayı daha eklensin mi?','Yine de ekle'))return;
   if(!await ask('“'+m.name+'” dijital arşive alınsın mı?',list.length+' yazı dijital sayı olarak arşive eklenecek; seçilen yazılar Dergi yazıları listesinden kalkacak. Bunlar taslak olarak bekler, sitede görünmesi için ayrıca “Yayınla” dersin. İstersen “Değişiklikleri at” ile geri alabilirsin.','Arşive al'))return;
   busy=true;render();
   try{
     const w=S.work;
-    w.c.archive.unshift({id:uid(),t:MAG+' · '+m.name,s:[m.name,m.date].filter(Boolean).join(' · '),x:(m.desc||'İçindekiler: '+list.map(tit).join(' · ')).slice(0,240),img:(list.find(o=>o.img)||{}).img||'',tur:'dergi',a:list.map(slimArt)});
+    w.c.archive.unshift({id:uid(),no,t:MAG+' · '+m.name,s:[m.name,m.date].filter(Boolean).join(' · '),x:(m.desc||'İçindekiler: '+list.map(tit).join(' · ')).slice(0,240),img:(list.find(o=>o.img)||{}).img||'',tur:'dergi',a:list.map(slimArt)});
     const rm=new Set(list);w.dg=w.dg.filter(x=>!rm.has(x));
-    list.forEach(o=>on.delete(o));meta.name='Sayı '+(w.c.archive.filter(x=>x.tur==='dergi').length+1);
+    list.forEach(o=>on.delete(o));sayiIlerle('dergi',no);meta.no='';meta.name='';
     say('');touch();
     toast('“'+m.name+'” dijital arşive eklendi (taslak). Sitede görünmesi için Yayınla de.',{label:'Yayınla',fn:startPublish});
   }catch(e){say('Hata: '+(e&&e.message||e),1)}
@@ -5030,11 +5149,13 @@ async function run(final){
 }
 VIEWS.dgissue=()=>{
   const w=S.work;w.c=w.c||{};w.c.archive=w.c.archive||[];w.dg=w.dg||[];sync();
-  if(!meta)meta={name:'Sayı '+(w.c.archive.filter(x=>x.tur==='dergi').length+1),date:AY[new Date().getMonth()]+' '+new Date().getFullYear(),desc:''};
+  if(!meta)meta={no:'',name:'',date:AY[new Date().getMonth()]+' '+new Date().getFullYear(),desc:''};
   const root=h('div',{class:'stack'});
   root.append(pageHead('Dergi sayısı hazırla','Sayıya girecek yazıları seç ve sırala. “Sayıyı dijital arşive al” dersen sayı arşive eklenir ve seçilen yazılar Dergi yazıları listesinden kalkar; seçmediklerin sonraki sayıya kalır. Her şey taslak olarak bekler, sitede görünmesi için ayrıca “Yayınla” dersin.'));
   const fi=(k,ph)=>h('input',{type:'text',value:meta[k],placeholder:ph,oninput:e=>{meta[k]=e.target.value}});
-  root.append(h('div',{class:'panel'},h('h3',{text:'Sayı bilgisi'}),h('div',{class:'grid2'},xf('Sayı adı',fi('name','Sayı 1')),xf('Dönem',fi('date','Kasım 2026'))),xf('Kısa açıklama (kapakta ve arşivde görünür, isteğe bağlı)',fi('desc','Merakla başlayan, veriyle büyüyen yazılar.'))));
+  const next=String(sayiSonraki('dergi')),nameIn=fi('name','Sayı '+(meta.no.trim()||next));
+  const noIn=h('input',{type:'text',inputmode:'numeric',maxlength:'4',value:meta.no,placeholder:next,oninput:e=>{meta.no=e.target.value;nameIn.placeholder='Sayı '+(meta.no.trim()||next)}});
+  root.append(h('div',{class:'panel'},h('h3',{text:'Sayı bilgisi'}),h('div',{class:'grid2'},xf('Sayı numarası',noIn),xf('Sayı adı (boşsa “Sayı + numara”)',nameIn),xf('Dönem',fi('date','Kasım 2026'))),xf('Kısa açıklama (kapakta ve arşivde görünür, isteğe bağlı)',fi('desc','Merakla başlayan, veriyle büyüyen yazılar.'))));
   const lp=h('div',{class:'panel'},h('h3',{text:'Sayıya girecek yazılar'}));
   const cnt=h('p',{class:'hint'});
   const draw=()=>{
@@ -5460,7 +5581,7 @@ VIEWS['xc-sektor']=()=>xcPage('Sektör Dosyaları','İktisadi Ansiklopedi › Se
 /* ---- Etkinlikler: her sayfa için aç/kapa anahtarı ---- */
 function pgSwitchView(o){return()=>{
   const w=S.work;if(!w.pg)w.pg={};if(!w.xp)w.xp={};
-  PG_IDS.forEach(k=>{if(typeof w.pg[k]!=='boolean')w.pg[k]=true});
+  PG_IDS.forEach(k=>{if(typeof w.pg[k]!=='boolean')w.pg[k]=!PG_OFF.includes(k)});
   const get=k=>k==='yatay'?w.yb.on!==false:XP_SHARED.includes(k)?w.xp[k]!==false:w.pg[k];
   const put=(k,v)=>{if(k==='yatay')w.yb.on=v;else if(XP_SHARED.includes(k))w.xp[k]=v;else w.pg[k]=v};
   const root=h('div',{class:'stack'});
@@ -6116,7 +6237,7 @@ render=function(){_render1();if(!_vtPoll&&FB.sess()){_vtPoll=true;pollVt();setIn
 /* ---------- Keşfet sayfası ---------- */
 (()=>{
 const KS_TARGETS=[
- ['Ana sayfalar',[['#/','Ana sayfa'],['#/merkez','Simülasyon Merkezi'],['#/meslekler','Meslekler'],['#/ansiklopedi','İktisadi Ansiklopedi'],['#/piyasa','Veri ve Pariteler'],['#/yayin','Gazete ve Dergi'],['#/etkinlik','Etkinlikler'],['#/katil','Aramıza Katıl'],['#/ulke','Ülke Karşılaştırma'],['#/turkiye','Türkiye Ekonomisi Dosyaları'],['#/grafikokuma','Grafik Okuma Okulu'],['#/urun','Bir Ürünün Hikâyesi'],['#/ceviri','Çeviri Köşesi'],['#/arastirma','Ortak Araştırma Projeleri'],['#/girisimcilik','Girişimcilik Atölyesi']]],
+ ['Ana sayfalar',[['#/','Ana sayfa'],['#/merkez','Simülasyon Merkezi'],['#/meslekler','Meslekler'],['#/ansiklopedi','İktisadi Ansiklopedi'],['#/piyasa','Veri ve Pariteler'],['#/yayin','Gazete ve Dergi'],['#/etkinlik','Etkinlikler'],['#/katil','Aramıza Katıl'],['#/ulke','Ülke Karşılaştırma'],['#/turkiye','Türkiye Ekonomisi Dosyaları'],['#/grafikokuma','Grafik Okuma Okulu'],['#/urun','Bir Ürünün Hikâyesi'],['#/ceviri','Çeviri Köşesi'],['#/arastirma','Ortak Araştırma Projeleri'],['#/yazarlar','Yazarlar'],['#/girisimcilik','Girişimcilik Atölyesi']]],
  ['Alt sayfalar',[['#/mulakat','Mülakat'],['#/mulakat-bilgi','Resmi / Özel Kurum Mülakatı'],['#/mulakat-basvuru','Mülakat Simülasyonu Başvuruları'],['#/mulakat-yonetim','Topluluk Yönetimi Mülakatı'],['#/kadrolar','Kariyer Kadroları'],['#/meslek','Meslek Tanıtımı'],['#/quiz','Terim Quiz ve Deneme'],['#/sozluk','Ekonomi Sözlüğü'],['#/anatomi','Kavramın Anatomisi'],['#/efsane','Şehir Efsaneleri'],['#/kisiler','İktisat Düşünürleri'],['#/kitaplik','Kitaplık'],['#/atolye','Çeviri ve Terminoloji Atölyesi'],['#/manipulator','Piyasa Manipülatörleri'],['#/ahi','Ahi Dijital Müzesi'],['#/finans','Finansal Okuryazarlık'],['#/tarih','Ekonomi Tarihi Çizelgesi'],['#/sektor','Sektör Dosyaları'],['#/pariteler','Pariteler'],['#/parite','Tüm Pariteler'],['#/veri','İktisat Grafikleri'],['#/hesap','Hesaplayıcılar'],['#/kaynak','Resmî Kaynaklar'],['#/gazete','Diyalog Gazetesi'],['#/dergi','İktisadi Kalkınma Dergisi'],['#/makale','Makale yaz'],['#/arsiv','Arşiv'],['#/fikir','Fikir Muharebesi'],['#/fikir-canli','Canlı Muharebe'],['#/fikir-etkinlik','Yapılan Etkinlikler'],['#/fikir-turler','Münazara Çeşitleri'],['#/konferanslar','Konferanslar'],['#/yatay','Yatay Bakış'],['#/yarisma','Bilgi Yarışması']]],
  ['Simülasyonlar',[['#/vaka','Vaka Analizi'],['#/ppk','Başkan Simülasyonu'],['#/borsa','Borsa Simülasyonu'],['#/bakan','Bakanlık Simülasyonu'],['#/girisim','Girişimci'],['#/kur','Dış Ticaret'],['#/burokrat','Kamu Bürokratı'],['#/muzakere','Müzakere Masası'],['#/ihale','Kamu İhalesi'],['#/hakimlik','Hâkimlik Simülasyonu'],['#/valilik','Kaymakamlık ve Valilik'],['#/smmm','Mali Müşavirlik']]],
  ['Ayrı sayfalar',[['eko-plus/','Eko-Plus'],['eko-plus/#/forum','Soru-Cevap (Eko-Plus)'],['eko-plus/#/kavram','Günün Kavramı (Eko-Plus)'],['eko-plus/#/ilanlar','Staj ve Burs Panosu (Eko-Plus)'],['eko-plus/#/cv','CV ve Niyet Mektubu (Eko-Plus)'],['eko-plus/#/tahmin','Haftalık Tahmin (Eko-Plus)'],['eko-plus/#/profil','Üye Profili (Eko-Plus)'],['a-grubu/','A Grubu Makam Simülasyonu'],['mevzuat/','Mevzuat'],['kalkinma/','Kalkınma'],['kuresel-gundem/','Küresel Gündem']]]
