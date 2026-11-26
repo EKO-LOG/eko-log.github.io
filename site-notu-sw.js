@@ -1,13 +1,11 @@
 /*!
  * site-notu-sw.js — TEK DOSYA, TUM SAYFALAR.
  *
- * Kurulum (bir kerelik):
- *   1) Bu dosyayi site kokune (sw.js'in yanina) yukle.
- *   2) sw.js'in EN USTUNE su satiri ekle:
- *        importScripts('site-notu-sw.js');
+ * Kurulum: bu dosyayi site kokune (sw.js'in yanina) yukle; sw.js zaten buna baglanacak sekilde
+ * hazirlandi (importScripts + sayfa cevabini self.siteNotuEkle'den gecirme).
  *
- * Bundan sonra sitedeki HER HTML sayfasi (simdiki ve ileride eklenecek olanlar dahil)
- * tarayiciya giderken notu otomatik olarak icine alir. Sayfalara dokunmak gerekmez.
+ * Sitedeki HER HTML sayfasi (simdiki ve ileride eklenecek olanlar dahil) tarayiciya giderken
+ * notu otomatik olarak icine alir. Sayfalara dokunmak gerekmez.
  * Metni degistirmek icin sadece asagidaki METIN'i duzenle.
  */
 var METIN = '© 2026 Eko-Log | Bu web sitesi Ekonomi ve Diyalog Topluluğu öğrencilerinin ' +
@@ -87,34 +85,22 @@ function sayfaNotu(METIN) {
     return i;
   }
 
-  self.addEventListener('install', function () { self.skipWaiting(); });
-  self.addEventListener('activate', function (e) { e.waitUntil(self.clients.claim()); });
-
-  self.addEventListener('fetch', function (e) {
-    var r = e.request;
-    if (r.mode !== 'navigate' || r.method !== 'GET') return;
-    e.stopImmediatePropagation();           // sw.js'teki diger fetch dinleyicileriyle cakismasin
-    e.respondWith(isle(r));
-  });
-
-  async function isle(r) {
-    var res;
-    try { res = await fetch(r); }
-    catch (err) {                           // cevrimdisi: onbellekteki sayfayi kullan
-      res = await caches.match(r, { ignoreSearch: true });
-      if (!res) throw err;
-    }
-    var tur = res.headers.get('content-type') || '';
-    if (res.status !== 200 || tur.toLowerCase().indexOf('text/html') === -1) return res;
-
-    var metin = await res.text();
-    if (metin.indexOf('site-notu-js') === -1) {
-      var i = sonBody(metin);
-      metin = i === -1 ? metin + '\n' + ETIKET : metin.slice(0, i) + ETIKET + metin.slice(i);
-    }
-    var h = new Headers(res.headers);
-    h.delete('content-length');             // govde degisti
-    h.delete('content-encoding');           // fetch govdeyi zaten acti
-    return new Response(metin, { status: res.status, statusText: res.statusText, headers: h });
-  }
+  // sw.js, sayfa cevabini kullaniciya vermeden once buradan gecirir:
+  //   self.siteNotuEkle(istek, cevap)  ->  notu eklenmis cevap (HTML sayfasi degilse aynisi)
+  self.siteNotuEkle = async function (r, res) {
+    try {
+      if (!res || r.mode !== 'navigate' || r.method !== 'GET') return res;
+      var tur = res.headers.get('content-type') || '';
+      if (res.status !== 200 || tur.toLowerCase().indexOf('text/html') === -1) return res;
+      var metin = await res.text();
+      if (metin.indexOf('site-notu-js') === -1) {
+        var i = sonBody(metin);
+        metin = i === -1 ? metin + '\n' + ETIKET : metin.slice(0, i) + ETIKET + metin.slice(i);
+      }
+      var h = new Headers(res.headers);
+      h.delete('content-length');             // govde degisti
+      h.delete('content-encoding');           // fetch govdeyi zaten acti
+      return new Response(metin, { status: res.status, statusText: res.statusText, headers: h });
+    } catch (err) { return res; }
+  };
 })();

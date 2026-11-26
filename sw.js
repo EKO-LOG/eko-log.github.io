@@ -1,3 +1,4 @@
+importScripts('site-notu-sw.js'); /* her sayfaya "resmi site degildir" notunu ekler */
 /* Eko-Log service worker. Sürümü değiştirirsen eski önbellek silinir. */
 const V='eko-v2',STATIC=V+'-static',PAGES=V+'-pages';
 const PRE=['./','index.html','ansiklopedi.html','simulasyon-merkezi.html','eko-plus/','offline.html','manifest.webmanifest','favicon.png','icon-192.png'];
@@ -22,5 +23,5 @@ self.addEventListener('fetch',e=>{
     e.respondWith(caches.match(req).then(c=>{const n=fetch(req).then(r=>{if(r&&(r.ok||r.type==='opaque'))caches.open(STATIC).then(x=>x.put(req,r.clone()));return r}).catch(()=>c);return c||n}));return;
   }
   /* sayfalar ve content.json: önce ağ (4 sn), olmazsa önbellek, o da yoksa çevrimdışı sayfası */
-  e.respondWith(fresh(req,PAGES,4000).catch(()=>caches.match(req,{ignoreSearch:true}).then(c=>c||(req.mode==='navigate'?caches.match('offline.html'):Response.error()))));
+  e.respondWith(fresh(req,PAGES,4000).catch(()=>caches.match(req,{ignoreSearch:true}).then(c=>c||(req.mode==='navigate'?caches.match('offline.html'):Response.error()))).then(r=>self.siteNotuEkle(req,r)));
 });
