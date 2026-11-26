@@ -1,31 +1,5 @@
 <!DOCTYPE html>
 <html lang="tr"><head><meta charset="utf-8">
-<script id="eko-pwgate">/* Sifre kapisi: yonetim panelindeki sifre (content.json -> pw {on, code}) aciksa, sayfa acilirken sifre istenir. Oturum basina bir kez. */
-(function(){
-var R=document.documentElement;
-function ok(c){try{return sessionStorage.getItem('eko_pw')===c}catch(e){return false}}
-var st=document.createElement('style');st.id='eko-pw-css';
-st.textContent='html.pwl-hold body{visibility:hidden!important}#pwl-ov{visibility:visible;position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483600;background:#120c1a;display:flex;align-items:center;justify-content:center;padding:16px;font:16px/1.5 system-ui,sans-serif}#pwl-ov form{background:#1c1328;color:#f6f0fb;border:1px solid #2f2340;border-radius:22px;padding:26px 22px;max-width:380px;width:100%;box-sizing:border-box}#pwl-ov h2{margin:0 0 6px;font-size:24px}#pwl-ov p{margin:0 0 14px;color:#b6a8c8;font-size:15px}#pwl-ov input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #3a2c4d;border-radius:14px;background:#120c1a;color:#f6f0fb;font:inherit;margin-bottom:12px}#pwl-ov button,#pwl-ov a{display:block;width:100%;box-sizing:border-box;padding:13px;border-radius:999px;border:0;font:700 16px system-ui,sans-serif;text-align:center;text-decoration:none;cursor:pointer;color:#fff;background:linear-gradient(120deg,#c4202e,#ff7a45)}#pwl-ov a{margin-top:10px;background:transparent;border:1px solid #3a2c4d;font-weight:600;font-size:15px}#pwl-ov .m{color:#ff8a94;font-size:14px;margin:0 0 10px}';
-(document.head||R).appendChild(st);
-R.classList.add('pwl-hold');
-var done=false;
-function release(){done=true;R.classList.remove('pwl-hold');var o=document.getElementById('pwl-ov');if(o)o.parentNode.removeChild(o)}
-function show(code){
-  done=true;
-  var o=document.createElement('div');o.id='pwl-ov';
-  o.innerHTML='<form novalidate><h2>🔒 Şifre gerekli</h2><p>Bu sayfa için Üye Alanı şifresini yaz.</p><input type="password" id="pwl-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" hidden>Şifre yanlış.</p><button type="submit">Aç</button><a href="../eko-plus/">Üye Alanı’na dön</a></form>';
-  R.appendChild(o);
-  var i=o.querySelector('input'),m=o.querySelector('.m');
-  o.querySelector('form').addEventListener('submit',function(e){e.preventDefault();
-    if(i.value.trim()===code){try{sessionStorage.setItem('eko_pw',code)}catch(x){}release()}else{m.hidden=false;i.select()}});
-  setTimeout(function(){i.focus()},50);
-}
-fetch('../content.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():{}}).catch(function(){return {}}).then(function(c){
-  if(done)return;var q=c&&c.pw,code=q&&q.on===true&&q.code?String(q.code):'';
-  if(!code||ok(code))release();else show(code)});
-setTimeout(function(){if(!done)release()},6000);
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>İİBF Laboratuvarı · Eko-Log</title>
 <meta name="theme-color" content="#6d3fd8">
@@ -164,7 +138,7 @@ var XI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 1
 
 /* ---- Üyelik: sitedeki kuralla aynı (giriş yapılmış VE yönetici onaylı) ---- */
 var flag=false;
-function isMember(){return true;/* Üye Alanı giriş istemez */
+function isMember(){
   try{var s=JSON.parse(localStorage.getItem('eko_uye')||'null');
     if(s&&s.uid&&localStorage.getItem('eko_uye_ok')===s.uid)return true}catch(e){}
   return flag;
@@ -503,9 +477,42 @@ function profMenu(rec,who){
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.hidden=true;b.setAttribute('aria-expanded','false')}});
   return w;
 }
+/* ---- Laboratuvar şifresi ----
+   Giriş normal (e-posta + parola). Şifre yalnızca laboratuvar açılırken istenir;
+   yönetici panelindeki şifre ayarı (content.json içinde pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
+let pwOk=false;
+async function pwCode(){
+  for(const u of ['../content.json','content.json']){
+    try{const r=await fetch(u+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)continue;const j=await r.json(),q=j&&j.pw;return q&&q.on===true&&q.code?String(q.code):''}catch(e){}
+  }
+  return '';
+}
+function showPw(code,go){
+  const out=el('p',{class:'lb-m',role:'alert',hidden:true});
+  const inp=el('input',{id:'lb-pw',type:'password',required:true,autocomplete:'off',placeholder:'Şifre'});
+  const f=el('form',{novalidate:true},
+    el('label',{class:'lb-f','for':'lb-pw'},'Laboratuvar şifresi',inp),
+    el('div',{class:'lb-row'},el('button',{class:'btn',type:'submit',text:'Aç'}),el('a',{class:'btn line',href:BACK,text:'Üye Alanı’na dön'})),out);
+  f.addEventListener('submit',ev=>{ev.preventDefault();
+    if(inp.value.trim()===code){pwOk=true;try{sessionStorage.setItem('eko_pw',code)}catch(x){}go()}
+    else{say(out,'Şifre yanlış.');inp.select()}});
+  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'🔒 Şifre gerekli'}),el('p',{class:'lb-n',text:'Laboratuvar şifresini yaz.'}),f));
+  setTimeout(()=>inp.focus(),30);
+}
+async function labPw(go){
+  if(pwOk){go();return}
+  const code=await pwCode();
+  let ok=!code;
+  if(!ok){try{ok=sessionStorage.getItem('eko_pw')===code}catch(e){}}
+  if(ok){pwOk=true;go();return}
+  showPw(code,go);
+}
 function mount(rec){
   if(!allow(rec))return;
   try{localStorage.setItem('eko_uye_ok',S.uid)}catch(e){}
+  labPw(()=>openLab(rec)).catch(showErr);
+}
+function openLab(rec){
   gate.replaceChildren();box.hidden=false;
   if(fr){send();full();return}
   fr=document.createElement('iframe');fr.title='İİBF Laboratuvarı';fr.srcdoc=lbSrc(rec);

@@ -753,10 +753,10 @@ R.classList.add('dm-on');
 <div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üyelere Özel</span><h2 data-k="uo1">Üyelere Özel</h2><p data-k="uo2">Yalnızca onaylı üyelerin kullanabildiği simülasyonlar. Giriş yap ya da üye ol, yönetici onayından sonra hepsi açılır.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px">
-<a class="tile" href="iibf-laboratuvar.html" style="--bg1:#6d3fd8;--bg2:#1d4ed8"><span class="go">→</span><small data-k="pg_eplus_1">Üye Alanı</small><h3 data-k="ut1a">İİBF Laboratuvarı</h3><p data-k="ut1b">İşletme, iktisat, ekonometri, maliye, kamu yönetimi, uluslararası ilişkiler ve çalışma ekonomisi laboratuvarları tek çatı altında. Açarken şifre istenir.</p></a>
+<a class="tile" href="iibf-laboratuvar.html" style="--bg1:#6d3fd8;--bg2:#1d4ed8"><span class="go">→</span><small data-k="pg_eplus_1">Üye Alanı</small><h3 data-k="ut1a">İİBF Laboratuvarı</h3><p data-k="ut1b">İşletme, iktisat, ekonometri, maliye, kamu yönetimi, uluslararası ilişkiler ve çalışma ekonomisi laboratuvarları tek çatı altında.</p></a>
 </div><div class="next"><a class="btn" href="#/">← Ana sayfa</a></div></div></div>
 <div class="page" id="p-lab">
-<div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üye Alanı</span><h2 data-k="ul1">Üye Alanı</h2><p data-k="ul2">Üye Alanı yalnızca onaylı üyelere açıktır: giriş yap ya da üye ol, yönetici onayından sonra açılır. Laboratuvar için ayrıca şifre istenir. Hocalar için ayrı bir giriş sekmesi vardır.</p></div></div>
+<div class="aurora banner" style="--a1:#6d3fd8;--a2:#0e9aa7;--a3:#1d4ed8"><i></i><i></i><i></i><div class="wrap"><span class="crumb"><a href="#/">Ana sayfa</a> / Üye Alanı</span><h2 data-k="ul1">Üye Alanı</h2><p data-k="ul2">Üye Alanı yalnızca onaylı üyelere açıktır: giriş yap ya da üye ol, yönetici onayından sonra açılır. Hocalar için ayrı bir giriş sekmesi vardır.</p></div></div>
 <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V30C150 0 300 60 480 35S800 0 1000 30 1150 55 1200 40V70Z"/></svg>
 <div class="wrap content"><div id="lab-gate"></div></div></div>
 <style id="lab-css">
@@ -860,7 +860,7 @@ function annfill(adm){const sp=$('span',an),t=(C.b&&C.b.text)||'Duyuru metni bur
 function anr(adm){const on=C.b&&C.b.on;an.style.display=(on||adm)?'':'none';an.classList.toggle('off',!on);document.body.classList.toggle('hasann',!!on||!!adm);annfill(adm)}
 let annT;addEventListener('resize',()=>{clearTimeout(annT);annT=setTimeout(()=>{if(!document.body.classList.contains('adm')&&C.b&&C.b.on)annfill(false)},200)});
 const SAMPLE=['b8','b9','b10','g1','g2','g3','g4','g5','e1','e2','e3','e4','e5','e6','a1','a2','a3','a4','a5','a6'];const okT=x=>String(x&&(x.title||x.t)||'').trim()!=='';
-function apply(){if(C.fb&&C.fb.db)window.EKO_DB=C.fb.db;window.EKO_LABPW=C.pw;delete C.pw;window.EKO_C=C;setTimeout(()=>document.dispatchEvent(new Event('eko:ready')),0);$$('[data-k]').forEach(e=>{if(C.t[e.dataset.k]!=null)e.textContent=C.t[e.dataset.k]});
+function apply(){if(C.fb&&C.fb.db)window.EKO_DB=C.fb.db;delete C.pw;window.EKO_C=C;setTimeout(()=>document.dispatchEvent(new Event('eko:ready')),0);$$('[data-k]').forEach(e=>{if(C.t[e.dataset.k]!=null)e.textContent=C.t[e.dataset.k]});
 (C.sd?C.d:[...C.d,...SAMPLE]).forEach(b=>{$$('article[data-b="'+b+'"]').forEach(e=>e.remove())});
 for(const b in C.i){const e=$('[data-b="'+b+'"]');if(e)img(e,C.i[b])}
 if(evl)(C.e||[]).filter(okT).forEach(x=>evl.append(evc(x)));evup();
@@ -3879,7 +3879,7 @@ function showAuth(note,tab){
     }catch(e){say(out,e.message==='auth'?'Oturum açılamadı.':e.message)}
     btn.disabled=false});
   const tb=(k,t)=>el('button',{class:'btn line',type:'button','aria-pressed':String(tab===k),text:t,onclick:()=>showAuth('',k)});
-  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üye Alanı · giriş'}),el('p',{class:'lb-n',text:'Üye Alanı yalnızca onaylı üyelere açıktır. Laboratuvar için ayrıca şifre istenir.'}),el('div',{class:'lb-tabs'},tb('in','Giriş yap'),tb('up','Üye ol'),tb('hoca','Hoca girişi')),f));
+  gate.replaceChildren(el('div',{class:'card lb-card'},el('h3',{text:'Üye Alanı · giriş'}),el('p',{class:'lb-n',text:'Üye Alanı yalnızca onaylı üyelere açıktır.'}),el('div',{class:'lb-tabs'},tb('in','Giriş yap'),tb('up','Üye ol'),tb('hoca','Hoca girişi')),f));
 }
 /* ---- üyelik durumu ---- */
 function showStatus(rec,ver){
@@ -4732,25 +4732,6 @@ addEventListener('focus',sync);
 setInterval(sync,1500);
 gate();
 
-/* ---- Üye Alanı içindeki Laboratuvar için şifre ----
-   Giriş normal (e-posta + parola). Şifre yalnızca Laboratuvar açılırken istenir;
-   yönetici panelindeki şifre ayarı (EKO_C.pw: on + code) kullanılır, bir oturumda bir kez sorulur. */
-const LOCKED=/(^|\/)iibf-laboratuvar\.html(\?|#|$)/i;
-const pwCfg=()=>{const q=window.EKO_LABPW;return q&&q.on===true&&q.code?String(q.code):''};
-const needPw=()=>{try{return !!pwCfg()&&sessionStorage.getItem('eko_pw')!==pwCfg()}catch(e){return false}};
-(()=>{const st=document.createElement('style');st.textContent='#ua-pw{position:fixed;inset:0;z-index:99999;background:rgba(10,14,30,.6);display:flex;align-items:center;justify-content:center;padding:16px}#ua-pw form{background:#fff;color:#14182b;border-radius:16px;padding:22px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);font:inherit}#ua-pw h3{margin:0 0 6px;font-size:22px}#ua-pw p{margin:0 0 12px;font-size:14px;opacity:.8}#ua-pw input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #c5cad8;border-radius:10px;font:inherit;margin-bottom:10px}#ua-pw .r{display:flex;gap:8px;flex-wrap:wrap}#ua-pw .m{color:#b42318;font-size:14px;margin:0 0 8px}';document.head.append(st)})();
-function askPw(go){
-  const old=document.getElementById('ua-pw');if(old)old.remove();
-  const ov=document.createElement('div');ov.id='ua-pw';
-  ov.innerHTML='<form novalidate><h3>🔒 Şifre gerekli</h3><p>Laboratuvar şifresini yaz.</p><input type="password" id="ua-pw-i" autocomplete="off" placeholder="Şifre" aria-label="Şifre"><p class="m" role="alert" hidden>Şifre yanlış.</p><div class="r"><button class="btn" type="submit">Aç</button><button class="btn line" type="button" data-x>Vazgeç</button></div></form>';
-  document.body.append(ov);
-  const inp=ov.querySelector('input'),m=ov.querySelector('.m');
-  ov.querySelector('[data-x]').onclick=()=>ov.remove();
-  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove()});
-  ov.querySelector('form').addEventListener('submit',e=>{e.preventDefault();
-    if(inp.value.trim()===pwCfg()){try{sessionStorage.setItem('eko_pw',pwCfg())}catch(x){}ov.remove();go()}else{m.hidden=false;inp.select()}});
-  setTimeout(()=>inp.focus(),30);
-}
 /* Borsa Oyunu: dosya bu klasörde, üst klasörde ya da kendi klasöründe olabilir; ilk bulunan açılır */
 const BORSA=/(^|\/)borsa-oyunu\.html(\?|#|$)/i;
 const BORSA_YOL=['borsa-oyunu.html','../borsa-oyunu.html','borsa-oyunu/','../borsa-oyunu/','borsa-simulasyonu.html','../borsa-simulasyonu.html','borsa/','../borsa/'];
@@ -4764,10 +4745,6 @@ document.addEventListener('click',ev=>{
   const a=ev.target.closest&&ev.target.closest('a[href]');if(!a)return;
   const h=a.getAttribute('href')||'';
   if(BORSA.test(h)){ev.preventDefault();borsaAc();return}
-  if(!LOCKED.test(h))return;
-  const go=()=>{location.href=a.href};
-  if(!window.EKO_C){ev.preventDefault();let d=0;const run=()=>{if(d++)return;needPw()?askPw(go):go()};document.addEventListener('eko:ready',run,{once:true});setTimeout(run,3000);return}
-  if(needPw()){ev.preventDefault();askPw(go)}
 },true);
 })();
 </script>
