@@ -33,7 +33,8 @@
         if (ic.indexOf('site-notu') !== -1) { atlanan++; return; }
         var rel = path.relative(path.dirname(yol), betik).split(path.sep).join('/');
         var etiket = '<script src="' + rel + '" defer></script>\n';
-        var i = ic.toLowerCase().lastIndexOf('</body>');
+        var i = -1, x, re = /<\/body\s*>/gi;
+        while ((x = re.exec(ic))) i = x.index;   // toLowerCase kullanma: 'İ' konumu kaydirir
         fs.writeFileSync(yol, i === -1 ? ic + '\n' + etiket : ic.slice(0, i) + etiket + ic.slice(i));
         eklenen++;
         console.log('eklendi: ' + path.relative(kok, yol));
@@ -55,11 +56,19 @@
 
     // Footer'i olmayan sayfalarda ayni gorunumde bir footer olustur
     if (!footer) {
+      var cs = getComputedStyle(document.body);
+      // Sabit yukseklikli uygulama ekranlarinda (ornegin sohbet) sayfa sonu gorunmez; dokunma
+      if (cs.overflowY === 'hidden') return;
+      // Govdesi flex/grid olan sayfalarda footer yan yana dizilir; ince sabit serit kullan
+      var sabit = cs.display === 'flex' || cs.display === 'inline-flex' || cs.display === 'grid';
       var st = document.createElement('style');
       st.textContent =
         'footer.site-notu-footer{background:#1a0b1f;color:#cdbfe0;padding:28px 0 calc(34px + env(safe-area-inset-bottom,0px));font:15px/1.6 "Instrument Sans",system-ui,sans-serif}' +
-        'footer.site-notu-footer .wrap{max-width:1100px;margin:0 auto;padding:0 22px}';
+        'footer.site-notu-footer .wrap{max-width:1100px;margin:0 auto;padding:0 22px}' +
+        (sabit ? 'footer.site-notu-footer{position:fixed;left:0;right:0;bottom:0;z-index:5;font-size:12px;line-height:1.45;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}' +
+                 'footer.site-notu-footer .wrap{padding:0 14px}' : '');
       document.head.appendChild(st);
+      if (sabit) document.body.style.paddingBottom = 'calc(64px + env(safe-area-inset-bottom,0px))';
       footer = document.createElement('footer');
       footer.className = 'site-notu-footer';
       var w = document.createElement('div');
@@ -89,6 +98,7 @@
 
   function basla() {
     uygula();
+    if (!document.querySelector('footer')) return;
     try {
       new MutationObserver(function () {
         var s = document.querySelector('footer [data-site-notu]');
